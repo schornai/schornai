@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nom",
+      "labelFirstName": "Prénom",
+      "labelLastName": "Nom de famille",
+      "buttonSave": "Enregistrer",
+      "buttonReset": "Réinitialiser"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Supprimer l’image",
+      "alertDelete": "Supprimer l’image",
+      "alertDeleteExplainer": "Voulez-vous vraiment supprimer votre image ?",
+      "alertDeleteCancel": "Annuler"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Importer une image"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Autorisations",
+      "tableColumnName": "Nom",
+      "tableColumnPermission": "Autorisation",
+      "tableColumnDescription": "Description",
+      "infoEmpty": "Aucune autorisation",
+      "infoEmptyDescription": "Aucune fonction de la box schorn.ai n’est disponible.",
+      "infoEmptyAdminDescription": "En tant qu’administrateur, vous pouvez créer le premier espace de travail.",
+      "infoEmptyAdminAction": "Créer le premier espace de travail",
+      "infoUser": "Peut consulter le contenu de l’organisation (agents conversationnels, transcripteurs, documents, bases documentaires, etc.), mais ne peut pas le modifier.",
+      "infoEditor": "Peut consulter et modifier le contenu de l’organisation (créer des agents conversationnels, modifier ou supprimer des documents, etc.).",
+      "infoAdmin": "Peut lire et écrire dans toutes les organisations, gérer les paramètres système (importer des XRAG, modifier les couleurs, etc.) et administrer les utilisateurs."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Personnaliser",
+    "infoPersonalizeDescription": "Vous pouvez importer votre photo de profil et modifier votre nom ici."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nouveau mot de passe défini",
+    "description": "Le nouveau mot de passe a été défini. Vous êtes maintenant connecté avec ce mot de passe.",
+    "buttonBackToDashboard": "Accéder au tableau de bord"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Connexions",
+      "descriptionConnections": "Vos connexions OAuth personnelles aux serveurs MCP. La déconnexion supprime les identifiants enregistrés ici. Les appels en cours peuvent se terminer ; révoquez les autorisations auprès du fournisseur directement.",
+      "labelDisconnect": "Déconnecter",
+      "descriptionEmpty": "Connectez votre compte dans la conversation lorsqu’un outil MCP vous demande de vous identifier.",
+      "labelEmpty": "Aucune connexion pour le moment",
+      "labelInfo": "À propos des connexions",
+      "errorDisconnect": "Impossible de déconnecter cette connexion. Veuillez réessayer."
+    }
+  }
+}

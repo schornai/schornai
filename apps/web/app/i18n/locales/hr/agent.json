@@ -1,0 +1,519 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Odustani",
+      "errorCancel": "Generiranje nije moguće zaustaviti. Pokušajte ponovno."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Nemate pristup ovom agentu."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Nepoznat model",
+      "labelThinkingOptionalOn": "Razmišljanje",
+      "labelThinkingOptionalOff": "Obavezno razmišljanje",
+      "labelThinkingMandatoryOn": "Bez razmišljanja",
+      "labelThinkingMandatoryOff": "Razmišljanje uvijek isključeno",
+      "descriptionFeatureVision": "Dublje razumijevanje slika",
+      "labelModelSize": "Veličina konteksta: {{size}}k",
+      "labelNotFound": "Model nije pronađen",
+      "labelChanged": "Promijenjeno"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Alat: Kalkulator",
+      "description": "Agent može koristiti kalkulator umjesto da sam izvodi izračune. Tako se bolje snalazi sa složenijim brojevima."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Uputa",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Prazno",
+      "labelChanged": "Promijenjeno"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Spremišta dokumenata",
+      "labelUnknownRepository": "Nepoznato spremište dokumenata",
+      "descriptionRepositoryNotFound": "Spremište dokumenata ne postoji ili nemate potrebne dozvole.",
+      "labelConfirmWrite": "Čitanje i pisanje (zatraži potvrdu)",
+      "labelReadOnly": "Samo čitanje",
+      "labelWrite": "Čitanje i pisanje (automatski)",
+      "labelGoToRepository": "Idi u spremište",
+      "labelChanged": "Promijenjeno"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Uputa za odabir uloge",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Odaberite prikladan naziv agenta. Možete spremiti i kratak opis.",
+      "labelName": "Naziv",
+      "labelDescription": "Opis"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Radni prostor",
+      "description": "Odaberite radni prostor u kojem želite stvoriti agenta.",
+      "labelName": "Radni prostor",
+      "errorNoPermissions": "Nemate dozvolu za stvaranje agenata",
+      "errorNoWorkspaceSelected": "Niste odabrali radni prostor",
+      "labelSelectWorkspace": "Odaberite radni prostor."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Dodatne funkcije",
+      "description": "Proširite agenta korisnim funkcijama koje će dodatno olakšati rad.",
+      "labelFileUpload": "Prijenos datoteka",
+      "descriptionFileUpload": "Korisnici mogu prenijeti datoteke čiji je sadržaj agentu dostupan kao tekst.",
+      "labelBatch": "Skupna obrada",
+      "descriptionBatch": "Korisnici mogu automatski obraditi datoteke za svaku poruku.",
+      "labelPursueGoal": "Ostvarivanje cilja",
+      "descriptionPursueGoal": "Korisnici mogu definirati cilj, a agent će raditi u petlji dok ga ne ostvari.",
+      "labelDisappearingChats": "Nestajući razgovori",
+      "descriptionDisappearingChats": "Razgovori se mogu automatski izbrisati nakon 12 sati. To mora postaviti korisnik.",
+      "labelNightshift": "Noćna smjena",
+      "descriptionNightshift": "Agente koji dugo rade moguće je premjestiti u noćnu smjenu kako bi se danju štedjeli resursi.",
+      "labelTranscriber": "Transkriptor",
+      "labelNoTranscriber": "Bez automatske transkripcije",
+      "descriptionTranscriber": "Automatski transkribiraj prenesene audio i videodatoteke ovim transkriptorom."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Dodatne funkcije",
+      "labelFileUpload": "Prijenos datoteka",
+      "descriptionFileUpload": "Korisnici mogu prenijeti datoteke čiji je sadržaj agentu dostupan kao tekst.",
+      "labelBatch": "Skupna obrada",
+      "descriptionBatch": "Korisnici mogu automatski obraditi datoteke za svaku poruku.",
+      "labelPursueGoal": "Ostvarivanje cilja",
+      "descriptionPursueGoal": "Korisnici mogu definirati cilj, a agent će raditi u petlji dok ga ne ostvari.",
+      "labelDisappearingChats": "Nestajući razgovori",
+      "descriptionDisappearingChats": "Razgovori se mogu automatski izbrisati nakon 12 sati. To mora postaviti korisnik.",
+      "labelNightshift": "Noćna smjena",
+      "descriptionNightshift": "Agente koji dugo rade moguće je premjestiti u noćnu smjenu kako bi se danju štedjeli resursi."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Prijedlozi"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentacija"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Radni prostor",
+      "labelUnknownWorkspace": "Nepoznat radni prostor",
+      "labelGoToWorkspace": "Idi u radni prostor"
+    },
+    "AgentInfo": {
+      "labelRole": "Uloga: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Pretraži...",
+      "tableColumnName": "Naziv",
+      "tableColumnCapablilities": "Mogućnosti",
+      "tableColumnNameActions": "Radnje",
+      "labelOtherAgents": "Ostali agenti",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Bez grupiranja",
+      "labelUnknownModel": "Nepoznat model „{{id}}”",
+      "labelNoRepositories": "Nema spremišta dokumenata",
+      "labelUnknownRepository": "Nepoznato spremište dokumenata „{{id}}”",
+      "labelRoleCount_other": "{{count}} uloga",
+      "labelRoleCount_zero": "Nema uloga",
+      "labelRoleCount_one": "{{count}} uloga",
+      "labelRoleCount_few": "{{count}} uloge"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Mogućnosti",
+      "labelView": "Prikaz",
+      "labelSort": "Sortiranje",
+      "labelNameAsc": "Naziv od A do Z",
+      "labelNameDesc": "Naziv od Z do A",
+      "labelGroup": "Grupiraj prema",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "Prvo slovo",
+      "labelWorkspaces": "Radni prostori",
+      "labelModel": "Model",
+      "labelRepositories": "Spremišta dokumenata",
+      "labelRoleCount": "Broj uloga",
+      "labelCards": "Kartice",
+      "labelTable": "Tablica",
+      "labelSaveView": "Spremi prikaz",
+      "labelReset": "Vrati zadano",
+      "labelAgents": "Agenti",
+      "labelNewAgent": "Novi agent",
+      "labelNoGroup": "Bez grupiranja"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Izgled",
+      "description": "Odaberite boju i ikonu koje najbolje predstavljaju agenta.",
+      "labelIcon": "Ikona",
+      "labelColor": "Boja"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ukloni iz favorita",
+      "tooltipAddFavorite": "Dodaj u favorite"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije",
+      "tooltipNewChat": "Novi razgovor"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Nepoznat radni prostor",
+      "labelModelUnknown": "Nepoznat model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Pristup webu",
+      "labelGeneralAccess": "Opći pristup, pretraživanje weba",
+      "descriptionFetch": "Dohvat s weba preuzima sadržaj URL-a u pohranu razgovora ili u povezano spremište dokumenata s dozvolom pisanja. Nakon obrade datoteke agent može pročitati izdvojeni tekst i upotrijebiti ga u odgovoru.",
+      "descriptionSearch": "Pretraživanje weba pomaže agentu pronaći stranice relevantne za upit. Pružatelj pretraživanja vraća naslove, poveznice i kratke isječke. Popis domena dopuštenih za dohvat ne ograničava pretraživanje weba.",
+      "labelChanged": "Promijenjeno",
+      "labelFetch": "Dohvat",
+      "labelSearch": "Pretraži",
+      "labelOn": "Uključeno",
+      "labelOff": "Isključeno",
+      "labelAsk": "Prvo pitaj",
+      "labelWhitelist": "Dohvat ograničen na popis dopuštenih domena",
+      "labelAll": "Dohvat sa svih web-mjesta",
+      "labelEmptyWhitelist": "Nema dopuštenih domena",
+      "labelEdit": "Uredi pristup webu",
+      "labelDetails": "Prikaži pojedinosti"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Alat: Proširenja razgovora",
+      "labelFeatures": "Predlaganje sljedeće poruke, promjena naziva razgovora",
+      "description": "Agent može predložiti sljedeće korisničke poruke kako bi korisnik jednostavno kliknuo odgovarajuću poruku i nastavio razgovor. <br /> Agent može korisniku promijeniti naziv razgovora kako bi ga lakše pronašao u povijesti."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Opis uloge",
+      "description": "Opis uloge koristi se pri primitku nove korisničke poruke za odabir uloge koja će na nju odgovoriti",
+      "labelName": "Naziv",
+      "labelSelectionHint": "Uputa za odabir uloge",
+      "labelDeleteRole": "Izbriši ulogu ",
+      "labelDoNotOverride": "Ne zamjenjuj",
+      "labelOverrideModel": "Zamijeni model",
+      "descriptionOverrideModel": "Za ovu ulogu možete odabrati drukčiji model od onoga koji agent općenito koristi.",
+      "confirmDeleteDescription": "Želite li zaista izbrisati ulogu „{{name}}”? Ovu radnju nije moguće poništiti.",
+      "labelCancel": "Odustani",
+      "labelThinking": "Razmišljanje"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Jezični model koji agent koristi, osim ako je zamijenjen postavkama uloge.",
+      "labelName": "Model",
+      "labelThinking": "Razmišljanje",
+      "labelThinking_optionalOn": "Razmišljanje",
+      "labelThinking_mandatoryOn": "Obavezno razmišljanje",
+      "labelThinking_optionalOff": "Bez razmišljanja",
+      "labelThinking_mandatoryOff": "Razmišljanje uvijek isključeno",
+      "labelSelectModel": "Odaberite model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Spremište dokumenata",
+      "labelPathAgent": "Putanja za agenta",
+      "labelPathRepository": "Putanja u spremištu dokumenata",
+      "labelPermission": "Dozvola",
+      "labelDeleteConnection": "Izbriši vezu",
+      "confirmDeleteTitle": "Izbriši vezu",
+      "confirmDeleteDescription": "Želite li zaista izbrisati ovu vezu sa spremištem dokumenata „{{name}}”?",
+      "labelCancel": "Odustani",
+      "labelAddConnection": "Dodatna veza",
+      "labelUnknownRepository": "Nepoznato spremište dokumenata",
+      "labelConfirmWrite": "Čitanje i pisanje (zatraži potvrdu)",
+      "labelReadOnly": "Samo čitanje",
+      "labelWrite": "Čitanje i pisanje (automatski)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Naziv",
+      "labelMessage": "Poruka",
+      "labelClose": "Zatvori"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Naziv",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP zaglavlja",
+      "labelHeaderName": "Naziv",
+      "labelHeaderValue": "Vrijednost",
+      "labelAddHeader": "Dodaj HTTP zaglavlje",
+      "labelDeleteConnection": "Izbriši vezu",
+      "confirmDeleteTitle": "Izbriši MCP",
+      "confirmDeleteDescription": "Želite li zaista izbrisati MCP konfiguraciju „{{name}}”?",
+      "labelCancel": "Odustani",
+      "labelDeleteMCP": "Izbriši MCP",
+      "labelAddMCP": "Još jedan MCP",
+      "errorInvalidUrl": "URL mora biti valjan",
+      "labelOAuthApp": "OAuth aplikacija"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Podaci",
+      "labelConnectRepository": "Poveži spremište dokumenata",
+      "labelToolWebAccess": "Alat: Pristup webu",
+      "labelConnectMCP": "Poveži vanjski alat (MCP)",
+      "labelSupport": "Podrška",
+      "labelToolChatExtensions": "Alat: Proširenja razgovora",
+      "labelToolCalculator": "Alat: Kalkulator",
+      "labelSystem": "Sustav",
+      "labelToolPlatformAccess": "Alat: Pristup platformi schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Novi agent",
+      "emptyDescription": "Odredite ponašanje, pristup podacima, izgled agenta i još mnogo toga.",
+      "labelDefinePrompt": "Napišite uputu",
+      "descriptionDefinePrompt": "Agent je onoliko dobar koliko su dobre njegove upute. Jasne definicije uloga smanjuju halucinacije i povećavaju dosljednost.",
+      "labelConnectTools": "Povežite alate",
+      "descriptionConnectTools": "Primjerice, povežite spremišta dokumenata kako bi se agent temeljio na činjenicama i koristio znanje specifično za tvrtku.",
+      "labelWriteDocs": "Napišite dokumentaciju",
+      "descriptionWriteDocs": "Pomozite korisnicima razumjeti mogućnosti ovog agenta.",
+      "infoRoleDefinition": "Uloga određuje kako se agent ponaša i koji su mu alati dostupni za obavljanje zadatka.",
+      "infoDocsDescription": "Dokumentacija može sadržavati tekst (podržano je Markdown oblikovanje) i prijedloge poruka za slanje agentu.",
+      "infoAppearanceDescription": "Naziv, opis i boja pomažu korisnicima u snalaženju među dostupnim agentima."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Predložene poruke",
+      "descriptionRecommendedMessages": "Pomozite korisnicima prijedlozima poruka koje pokazuju kako najbolje koristiti agenta.",
+      "labelAddMessage": "Dodaj poruku ",
+      "labelDocumentation": "Dokumentacija",
+      "descriptionDocumentation": "Ovdje podijelite s korisnicima dodatne informacije o ovom agentu",
+      "labelShowPreview": "Prikaži pretpregled",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentacija pomaže korisnicima koristiti agenta. Prikazuje se kada korisnik započne novi razgovor.",
+      "descriptionMarkdownHelp": "Markdown je jednostavan označni jezik za brzo i lako oblikovanje teksta.\n\n* **Struktura:** Naslovi (`#`), popisi (numerirani `1.` i nenumerirani `-`), vodoravne crte.\n* **Stil teksta:** **Podebljano** `**Podebljano**`, *Kurziv* `*Kurziv*`, ~~Precrtano~~ `~~Precrtano~~`.\n* **Kod:** Kod unutar teksta (`code`) i blokovi koda s isticanjem sintakse.\n* **Organizacija:** Citati (`>`), kontrolni popisi (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Nema uloga",
+      "descriptionNoRoles": "Za agenta nisu definirane uloge. Bez uloge agent neće raditi.",
+      "labelAddRole": "Dodaj ulogu ",
+      "infoMultipleRoles": "Agenti mogu imati više uloga. Svaka se uloga može bolje usredotočiti na dio zadatka.",
+      "infoTools": "Agenti mogu koristiti alate za bolje odgovaranje na korisničke zahtjeve (pretraživanje dokumenata, stvaranje dokumenata itd.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Novi agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Stvori agenta",
+      "labelSaveAgent": "Spremi agenta",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Uputa",
+      "tabDocs": "Podrška",
+      "tabRoles": "Uloge",
+      "tabSettings": "Postavke",
+      "btnCreate": "Stvori",
+      "btnSave": "Spremi",
+      "labelEditAgent": "Uredi agenta",
+      "labelCloneAgent": "Spremi kao novog agenta",
+      "labelDeleteAgent": "Izbriši agenta",
+      "confirmDeleteTitle": "Izbriši agenta",
+      "confirmDeleteDescription": "Želite li zaista izbrisati agenta „{{name}}”? Ovu radnju nije moguće poništiti.",
+      "labelCancel": "Odustani"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Uloga ",
+      "description": "Određuje ponašanje agenta i alate koje agent smije koristiti u ovom kontekstu.",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Uputa",
+      "tabDocumentRepositoryMounts": "Spremišta dokumenata",
+      "tabMCPs": "Vanjski alati (MCP)",
+      "tabWeb": "Pristup internetu",
+      "tabChat": "Proširenja razgovora",
+      "tabCalc": "Kalkulator",
+      "tabTools": "Alati",
+      "tabSettings": "Postavke",
+      "toolWebAccess": "Pristup internetu",
+      "chatExtensions": "Proširenja razgovora",
+      "calculator": "Kalkulator",
+      "externalToolsMCP": "Vanjski alati (MCP)",
+      "labelPrompt": "Uputa"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Odbaci promjene",
+      "labelDiscardConfirm": "Želite li zaista odbaciti sve nespremljene promjene ovog agenta?",
+      "labelCancel": "Odustani",
+      "labelDiscard": "Odbaci promjene"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Vanjski alati (MCP)",
+      "changedBadge": "Promijenjeno",
+      "unknownMcp": "Nepoznat MCP",
+      "invalidUrl": "Nevaljan URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantičko pretraživanje",
+      "labelChanged": "Promijenjeno",
+      "labelActive": "Aktivno",
+      "labelInactive": "Neaktivno",
+      "description": "Kada je važnije značenje podataka od točnog teksta. (Potreban je model vektorskih ugradnji)",
+      "labelUnknownModel": "Nepoznat model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Pretraživanje po ključnim riječima",
+      "labelChanged": "Promijenjeno",
+      "labelActive": "Aktivno",
+      "labelInactive": "Neaktivno",
+      "description": "Za traženje točnih izraza i rečenica. (Imena, nazivi itd.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transkriptor",
+      "labelChanged": "Promijenjeno",
+      "labelUnknownTranscriber": "Nepoznat transkriptor",
+      "labelGoToTranscriber": "Idi na transkriptor"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Nova poruka"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Čeka obradu",
+      "tooltipPaused": "Pauzirano"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Razmišljanje uključeno",
+      "labelThinkingOff": "Razmišljanje isključeno",
+      "labelMessageStack": "Stog poruka",
+      "placeholderMessage": "Poruka...",
+      "tooltipUploadFiles": "Prijenos datoteka",
+      "buttonPause": "Pauziraj",
+      "buttonStartBatch": "Pokreni skupnu obradu",
+      "buttonSend": "Pošalji",
+      "descriptionFilesPending": "Datoteke se prenose ili obrađuju …",
+      "labelAttachFiles": "Priloži datoteke",
+      "labelUploadFiles": "Prijenos datoteka",
+      "labelSelectFile": "Odaberi postojeću datoteku"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Dopustiti ovu radnju?",
+      "descriptionAction": "Agent treba vaše odobrenje za nastavak.",
+      "labelApprove": "Dopusti",
+      "labelReject": "Odbij",
+      "labelRetry": "Pokušaj ponovno",
+      "labelSubmitting": "Obrada …",
+      "errorSubmit": "Vašu odluku nije bilo moguće poslati. Pokušajte ponovno.",
+      "labelMCP": "Povežite svoj račun",
+      "descriptionMCP": "Ovaj MCP alat zahtijeva prijavu. Poziv na čekanju automatski se nastavlja nakon povezivanja računa."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Spremiti dokument?",
+      "descriptionWriteFile": "Agent želi spremiti ovaj dokument. Postojeći sadržaj bit će zamijenjen.",
+      "labelShowContent": "Prikaži sadržaj",
+      "labelHideContent": "Sakrij sadržaj",
+      "descriptionEmptyFile": "Dokument će se spremiti s praznim sadržajem."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Dohvat s weba",
+      "description": "Postavite pristup webu za ovu ulogu. Dohvat i pretraživanje mogu se uključiti neovisno.",
+      "labelFetch": "Uključi dohvat s weba",
+      "labelAskFetch": "Pitaj prije dohvaćanja stranice",
+      "labelAccess": "Dopuštena web-mjesta",
+      "labelAll": "Sva web-mjesta",
+      "labelWhitelist": "Popis dopuštenih domena",
+      "descriptionAccess": "HTTP(S) datoteke i web-stranice, uključujući lokalnu mrežu. Preusmjeravanja slijede ista pravila pristupa.",
+      "labelDomains": "Dopuštene domene",
+      "descriptionDomains": "Jedan naziv poslužitelja po retku, primjerice example.com. Za poddomene koristite *.example.com; to ne uključuje samu domenu example.com.",
+      "errorDomains": "Unesite nazive poslužitelja ili *.example.com bez protokola, putanje i priključka.",
+      "descriptionEmptyWhitelist": "Prazan popis dopuštenih domena blokira sve stranice.",
+      "labelSearchTitle": "Pretraživanje weba",
+      "labelSearch": "Uključi pretraživanje weba",
+      "labelAskSearch": "Pitaj prije pretraživanja weba",
+      "labelProvider": "Pružatelj pretraživanja",
+      "labelProviderDocs": "Dokumentacija pružatelja",
+      "labelApiKey": "API ključ",
+      "errorApiKey": "Unesite API ključ za odabranog pružatelja.",
+      "labelMarket": "Staan jezik i regija",
+      "descriptionMarket": "Primjerice de-de ili en-us. Zadano je en-us.",
+      "labelRemoveTool": "Ukloni alat",
+      "labelConfirmRemoveTool": "Ukloniti web-alat?",
+      "descriptionRemoveTool": "Postavke dohvata s weba i pretraživanja weba, uključujući popis dopuštenih domena i API ključ, bit će uklonjene iz ove uloge.",
+      "labelCancel": "Odustani"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Dohvati web-stranicu",
+      "descriptionFetch": "Dopustiti agentu preuzimanje, spremanje i obradu sadržaja ovog URL-a?",
+      "labelDestination": "Odredište"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Pretraži web",
+      "descriptionSearch": "Dopustiti agentu slanje ovog upita postavljenom pružatelju pretraživanja?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Zatvori",
+      "labelPending": "U tijeku",
+      "labelApproval": "Čeka odobrenje",
+      "labelDenied": "Odbijeno",
+      "labelDone": "Dovršeno",
+      "errorRequest": "Zahtjev nije uspio"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Pretraživanje weba",
+      "labelQuery": "Upit za pretraživanje",
+      "labelEmptyResults": "Nema rezultata."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Web-stranica",
+      "labelUrl": "URL",
+      "labelRange": "Znakovi {{start}}–{{end}} od {{total}}",
+      "descriptionTruncated": "Dodatni sadržaj dostupan je u sljedećem odjeljku.",
+      "labelEmptyPage": "Ova stranica ne sadrži čitljiv tekst.",
+      "labelSource": "Otvori izvor",
+      "descriptionFileReady": "Datoteka je spremljena i obrađena. Izdvojeni tekst izravno je dostupan agentu.",
+      "descriptionProcessingUnavailable": "Datoteka je spremljena. Nema izdvojenog teksta; za audio i video potreban je postavljen transkriptor.",
+      "descriptionProcessingFailed": "Datoteka je spremljena, ali obrada nije uspjela ili je isteklo vrijeme. Obrada se može ponovno pokrenuti u pohrani."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopiraj datoteku",
+      "labelMove": "Premjesti datoteku",
+      "descriptionSuccess": "Datoteka je prenesena. Potrebni indeks pretraživanja ponovno se gradi u pozadini.",
+      "descriptionPending": "Priprema prijenosa datoteke…",
+      "descriptionProcessingError": "Datoteka je prenesena, ali obradu treba ponovno pokrenuti na odredištu.",
+      "errorTransfer": "Prijenos datoteke nije moguće dovršiti.",
+      "labelOpenFile": "Otvori odredišnu datoteku",
+      "descriptionDenied": "Prijenos datoteke odbijen. Nijedna datoteka nije prenesena.",
+      "descriptionApproval": "Čeka se vaše odobrenje.",
+      "descriptionRunning": "Prijenos datoteke…",
+      "labelClose": "Zatvori",
+      "labelSource": "Izvor",
+      "labelTarget": "Odredište"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Dopustiti kopiranje ove datoteke?",
+      "labelMove": "Dopustiti premještanje ove datoteke?",
+      "descriptionCopy": "Agent želi kopirati ovu datoteku i njezin obrađeni sadržaj. Postojeće odredišne datoteke nikad se ne prepisuju.",
+      "descriptionMove": "Agent želi premjestiti ovu datoteku i njezin obrađeni sadržaj. Izvor će se ukloniti nakon uspješnog kopiranja.",
+      "labelSource": "Izvor",
+      "labelTarget": "Odredište"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Ovaj MCP alat zahtijeva prijavu. Poziv na čekanju automatski se nastavlja nakon povezivanja računa.",
+      "labelConnect": "Poveži moj račun"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP alat",
+      "labelDiscover": "Otkrij dostupne alate",
+      "labelPending": "U tijeku",
+      "labelDone": "Dovršeno",
+      "labelApproval": "Potrebna je prijava",
+      "labelDenied": "Odbijeno",
+      "errorRequest": "Zahtjev nije uspio",
+      "labelArguments": "Ulaz",
+      "labelResult": "Rezultat",
+      "labelClose": "Zatvori"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth aplikacija",
+      "labelSearch": "Pretraži vezu",
+      "labelAutomatic": "Nema postavljene OAuth aplikacije",
+      "labelNone": "Nije odabrana veza",
+      "labelMissing": "Veza nije dostupna",
+      "descriptionOAuth": "Neobavezno: Odaberite registriranu OAuth aplikaciju za ovaj MCP poslužitelj. Njegov URL postavite zasebno u ovom agentu.",
+      "descriptionSearch": "Vjerodajnicama za Staan i Brave upravlja se središnje u Postavke → Veze.",
+      "errorMissing": "Ova veza više nije dostupna. Odaberite drugu vezu.",
+      "descriptionEmpty": "Nije postavljena odgovarajuća veza. Upravljajte vezama u Postavke → Veze."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenti",
+    "emptyTitle": "Nema agenata",
+    "emptyDescription": "Još nije stvoren nijedan agent.",
+    "labelNewAgent": "Novi agent",
+    "helpSearchTitle": "Pretraži",
+    "helpSearchDescription": "Možete pretraživati agente. Pretraživanje obuhvaća, među ostalim, naziv i opis agenta te njegov model.",
+    "helpSortTitle": "Sortiranje i grupiranje",
+    "helpSortDescription": "Agenti se mogu sortirati po nazivu i rasporediti u različite grupe. Mogu se prikazati kao pločice ili tablica."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Ovaj MCP pružatelj zahtijeva registriranu OAuth aplikaciju. Zamolite administratora da u Postavke → Veze stvori OAuth aplikaciju s ID-jem klijenta i tajnom klijenta te je odaberite u MCP postavkama agenta. Zatim se ponovno povežite iz razgovora.",
+    "errorStart": "MCP autorizaciju nije moguće pokrenuti.",
+    "errorCallback": "MCP autorizacija nije uspjela ili je istekla. Vratite se u razgovor i pokušajte ponovno."
+  }
+}

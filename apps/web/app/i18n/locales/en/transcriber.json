@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transcription",
+    "description": "Transcribers make spoken content such as meetings, interviews, or calls structured and searchable for AI."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transcriber"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Search..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "View",
+      "labelSort": "Sort",
+      "labelNameAsc": "Name A to Z",
+      "labelNameDesc": "Name Z to A",
+      "labelGroup": "Group by",
+      "labelNoGroup": "No group",
+      "labelFavorites": "Favorites",
+      "labelFirstLetter": "First letter",
+      "labelWorkspaces": "Workspaces",
+      "labelModel": "Model",
+      "labelCards": "Cards",
+      "labelTable": "Table",
+      "labelSaveView": "Save view",
+      "labelReset": "Reset",
+      "labelTranscribers": "Transcribers",
+      "labelNewTranscriber": "New transcriber"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Other transcribers",
+      "labelFavorites": "Favorites",
+      "labelNoGroup": "No group",
+      "labelUnknownModel": "Unknown model \"{{id}}\""
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Name",
+      "tableColumnCapablilities": "Capabilities",
+      "tableColumnNameActions": "Actions",
+      "emptyTitle": "No transcribers",
+      "emptyDescription": "No transcribers have been created yet.",
+      "labelOtherTranscribers": "Other transcribers",
+      "labelFavorites": "Favorites",
+      "labelNoGroup": "No group",
+      "labelUnknownModel": "Unknown model \"{{id}}\""
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Unknown model",
+      "labelUnknownWorkspace": "Unknown workspace"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Edit",
+      "tooltipInfo": "Info",
+      "tooltipNewTranscription": "New transcription",
+      "tooltipRecord": "Record audio"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Remove favorite",
+      "tooltipAddFavorite": "Add to favorites"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Changed",
+      "labelEmpty": "Empty"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "New transcriber",
+      "labelTranscriber": "Transcriber",
+      "labelCreateTranscriber": "Create transcriber",
+      "labelSaveTranscriber": "Save transcriber",
+      "labelCloneTranscriber": "Save as new transcriber",
+      "labelDeleteTranscriber": "Delete transcriber",
+      "confirmDeleteTitle": "Delete transcriber",
+      "confirmDeleteDescription": "Are you sure you want to delete transcriber \"{{name}}\"? This action cannot be undone.",
+      "labelCancel": "Cancel",
+      "tabOverview": "Overview",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Settings",
+      "btnCreate": "Create",
+      "btnSave": "Save"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Discard changes",
+      "labelDiscardConfirm": "Do you really want to discard all unsaved changes to this transcriber?",
+      "labelCancel": "Cancel",
+      "labelDiscard": "Discard changes"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "New Transcriber",
+      "emptyDescription": "Define the behavior and appearance of the transcriber.",
+      "labelDefinePrompt": "Define a prompt",
+      "descriptionDefinePrompt": "A short prompt helps the transcriber understand and correctly write names, technical terms, and product names the way you expect them.",
+      "helpTitle": "Help",
+      "helpPromptDescription": "With a prompt, the transcript needs less correction afterwards and you get a more consistent result for longer or topic-specific recordings."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "The prompt is passed to the transcription model (Whisper) to help it understand domain-specific terms."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Appearance",
+      "description": "Determine a color and an icon that best represents the transcriber.",
+      "labelIcon": "Icon",
+      "labelColor": "Color"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Description",
+      "description": "Choose a suitable name for the transcriber. Additionally, a short description can also be saved.",
+      "labelName": "Name",
+      "labelDescription": "Description"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "The transcription model the transcriber uses.",
+      "labelName": "Model",
+      "labelSelectModel": "Select a model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Workspace",
+      "description": "Select the workspace in which the transcriber should be created.",
+      "labelName": "Workspace",
+      "labelSelectWorkspace": "Select a workspace."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Files",
+      "tabInfo": "Info"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Record audio",
+      "labelReady": "Ready",
+      "labelRequesting": "Connecting microphone",
+      "labelRecording": "Recording",
+      "labelStopping": "Finishing recording",
+      "labelRecorded": "Recording ready",
+      "labelUploading": "Saving",
+      "labelSaved": "Saved",
+      "labelDuration": "Recording duration",
+      "labelStart": "Start recording",
+      "labelStop": "Stop recording",
+      "labelRecordAgain": "Record again",
+      "labelCancel": "Cancel",
+      "labelTranscribe": "Save and transcribe",
+      "labelDiscard": "Discard recording",
+      "labelPreview": "Recording preview",
+      "descriptionSaved": "Recording saved. Transcription will start automatically.",
+      "errorUnsupported": "Audio recording requires a supported browser and a secure connection (HTTPS or localhost).",
+      "errorPermission": "Microphone access was denied. Allow microphone access in your browser and try again.",
+      "errorRecording": "The microphone could not record audio. Check your device and try again.",
+      "errorEmpty": "The recording contains no audio. Please record again.",
+      "errorUpload": "The recording could not be saved. You can listen to it and retry the upload.",
+      "descriptionScreenAwake": "The screen stays awake while recording.",
+      "descriptionScreenSleep": "The screen cannot be kept awake. Keep this page open and prevent the screen from locking automatically.",
+      "descriptionCloseBlocked": "Stop the recording and save or discard it before closing. Wait for any upload to finish.",
+      "labelClose": "Close"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatic retries",
+      "labelLevel": "Level",
+      "description": "When results are uncertain or highly repetitive, the transcriber can try recognizing an audio section again. More attempts may improve recognition and take longer.",
+      "labelFast": "Fast",
+      "labelBalanced": "Balanced",
+      "labelThorough": "Thorough",
+      "descriptionFast": "One attempt per audio section, without automatic retries.",
+      "descriptionBalanced": "Up to 3 attempts per audio section.",
+      "descriptionThorough": "Up to 6 attempts per audio section.",
+      "errorLevel": "Please select one of the three levels."
+    }
+  },
+  "page": {
+    "labelTitle": "Transcription",
+    "emptyTitle": "No transcribers",
+    "emptyDescription": "No transcribers have been created yet.",
+    "labelNewTranscriber": "New transcriber",
+    "helpTitle": "Help",
+    "helpSearchDescription": "You can search for transcribers. The search includes, among other things, the name and description of the transcriber, as well as its model.",
+    "helpSortDescription": "Transcribers can be sorted by name. They can be sorted into different groups. Transcribers can be displayed as cards or as a table."
+  }
+}

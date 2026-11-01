@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Leírás",
+      "description": "Válasszon megfelelő nevet a munkaterületnek. Emellett rövid leírást is menthet.",
+      "labelName": "Név",
+      "labelDescription": "Leírás",
+      "buttonSave": "Mentés",
+      "buttonReset": "Visszaállítás"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentáció",
+      "description": "Itt oszthat meg további információkat erről a munkaterületről a felhasználókkal.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Mentés",
+      "buttonReset": "Visszaállítás"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO-hozzárendelések",
+      "description": "Válassza ki, melyik SSO-csoport milyen jogosultsággal fér hozzá a munkaterülethez.",
+      "labelRoleUser": "Felhasználói csoport",
+      "labelRoleEditor": "Szerkesztői csoport",
+      "labelRoleWorkspaceAdmin": "Munkaterület-rendszergazdai csoport",
+      "placeholderNoGroup": "Nincs hozzárendelt csoport",
+      "descriptionRoleUser": "Megtekintheti a munkaterület tartalmait (ügynökök, átírók, dokumentumtárak stb.), de nem szerkesztheti azokat.",
+      "descriptionRoleEditor": "Megtekintheti és szerkesztheti a munkaterület tartalmait.",
+      "descriptionRoleWorkspaceAdmin": "Kezelheti a munkaterületet, valamint létrehozhat, szerkeszthet és törölhet ügynököket, átírókat, dokumentumtárakat stb.",
+      "buttonSave": "Mentés",
+      "buttonReset": "Visszaállítás"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatikus felhasználó",
+      "description": "Az „Automatikus felhasználó” engedélyezésekor mindenki, aki be tud jelentkezni a boxba, automatikusan felhasználói jogosultságot kap ebben a szervezetben.",
+      "labelActive": "Automatikus felhasználó engedélyezve",
+      "labelInactive": "Automatikus felhasználó letiltva"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Új munkaterület",
+      "descriptionWorkspace": "Válasszon nevet, és opcionálisan adjon meg leírást. További beállításokat a munkaterület létrehozása után adhat meg.",
+      "labelName": "Név",
+      "labelDescription": "Leírás",
+      "labelCreate": "Munkaterület létrehozása",
+      "labelCancel": "Mégse",
+      "errorCreate": "A munkaterületet nem sikerült létrehozni. Próbálja újra."
+    },
+    "WorkspaceCard": {
+      "labelType": "Munkaterület"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Munkaterület szerkesztése",
+      "tooltipInfo": "Munkaterület megnyitása"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Hozzáadás a kedvencekhez",
+      "tooltipRemoveFavorite": "Eltávolítás a kedvencek közül"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Munkaterületek keresése",
+      "labelName": "Név",
+      "labelDescription": "Leírás",
+      "labelRole": "Az Ön szerepe",
+      "labelActions": "Műveletek",
+      "labelFavorites": "Kedvencek",
+      "labelOtherWorkspaces": "További munkaterületek",
+      "labelEmpty": "Nincsenek munkaterületek",
+      "descriptionEmpty": "Még nincs hozzáférése munkaterülethez.",
+      "labelNoResults": "Nincs találat",
+      "descriptionNoResults": "Próbáljon másik keresőkifejezést."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelNameAsc": "Név A–Z",
+      "labelNameDesc": "Név Z–A",
+      "labelGroup": "Csoportosítás alapja",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelFavorites": "Kedvencek",
+      "labelFirstLetter": "Kezdőbetű",
+      "labelCards": "Kártyák",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Munkaterület létrehozása"
+    }
+  },
+  "page": {
+    "labelYourRole": "Az Ön szerepe",
+    "labelEmpty": "Még nincs tartalom",
+    "descriptionEmpty": "Ebben a munkaterületben még nincsenek elérhető ügynökök, dokumentumtárak vagy átírók.",
+    "labelTitle": "Munkaterületek"
+  }
+}

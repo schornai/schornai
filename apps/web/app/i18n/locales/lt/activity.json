@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Istorija"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Klaida",
+      "idle": "Laukia",
+      "running": "Vykdoma",
+      "success": "Pavyko"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Prisegti",
+      "actionUnpin": "Atsegti",
+      "actionDelete": "Ištrinti"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Ieškoti…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelLabelAsc": "Pavadinimas nuo A iki Z",
+      "labelLabelDesc": "Pavadinimas nuo Z iki A",
+      "labelCreatedAsc": "Sukūrimo data mažėjančiai",
+      "labelCreatedDesc": "Sukūrimo data didėjančiai",
+      "labelUpdatedAsc": "Atnaujinimo data mažėjančiai",
+      "labelUpdatedDesc": "Atnaujinimo data didėjančiai",
+      "labelGroup": "Grupavimas",
+      "labelPinned": "Prisegti",
+      "labelState": "Būsena",
+      "labelType": "Tipas",
+      "labelCreated": "Sukūrimo data",
+      "labelUpdated": "Atnaujinimo data",
+      "labelList": "Sąrašas",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti",
+      "labelNoGroup": "Negrupuoti"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Veiklos nėra",
+      "emptyDescription": "Čia bus rodomi ankstesni jūsų pokalbiai ir transkripcijos.",
+      "emptyLabelAgents": "Agentai"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Šiandien",
+      "groupTimeLast7Days": "Pastarosios 7 dienos",
+      "groupTimeLast30Days": "Pastarosios 30 dienų",
+      "groupTimeOther": "Kita",
+      "groupPinned": "Prisegti",
+      "groupNotPinned": "Neprisegti",
+      "groupUnknown": "Nežinoma",
+      "groupChat": "Pokalbis",
+      "groupTranscription": "Transkripcija",
+      "groupReindex": "Indeksuoti iš naujo",
+      "labelReindex": "Indeksuoti iš naujo",
+      "labelPinned": "Prisegti"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Pavadinimas",
+      "tableColumnType": "Tipas",
+      "tableColumnState": "Būsena",
+      "tableColumnCreated": "Sukurta",
+      "tableColumnUpdated": "Atnaujinta",
+      "tableColumnPinned": "Prisegti",
+      "tableColumnNameActions": "Veiksmai",
+      "groupTimeToday": "Šiandien",
+      "groupTimeLast7Days": "Pastarosios 7 dienos",
+      "groupTimeLast30Days": "Pastarosios 30 dienų",
+      "groupTimeOther": "Kita",
+      "groupPinned": "Prisegti",
+      "groupNotPinned": "Neprisegti",
+      "groupUnknown": "Nežinoma",
+      "groupChat": "Pokalbis",
+      "groupTranscription": "Transkripcija",
+      "groupReindex": "Indeksuoti iš naujo",
+      "labelReindex": "Indeksuoti iš naujo",
+      "labelPinned": "Prisegti"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Istorija",
+      "labelPinned": "Prisegti",
+      "labelToday": "Šiandien",
+      "labelLast7Days": "Pastarosios 7 dienos",
+      "labelLast30Days": "Pastarosios 30 dienų",
+      "labelEmpty": "Tuščia"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Veikla",
+      "actionPin": "Prisegti",
+      "actionUnpin": "Atsegti",
+      "actionDelete": "Ištrinti",
+      "labelAgent": "Agentas – {{name}}",
+      "actionNewChat": "Naujas pokalbis",
+      "labelInfo": "Informacija"
+    }
+  }
+}

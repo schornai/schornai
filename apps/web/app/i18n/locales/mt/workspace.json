@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Deskrizzjoni",
+      "description": "Agħżel isem adattat għall-ispazju tax-xogħol. Tista’ wkoll tissejvja deskrizzjoni qasira.",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni",
+      "buttonSave": "Issejvja",
+      "buttonReset": "Irrisettja"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentazzjoni",
+      "description": "Aqsam hawn informazzjoni addizzjonali dwar dan l-ispazju tax-xogħol mal-utenti tiegħek.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Issejvja",
+      "buttonReset": "Irrisettja"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Immappjar SSO",
+      "description": "Agħżel liema grupp SSO għandu aċċess għall-ispazju tax-xogħol u b’liema permessi.",
+      "labelRoleUser": "Grupp ta’ utenti",
+      "labelRoleEditor": "Grupp ta’ edituri",
+      "labelRoleWorkspaceAdmin": "Grupp ta’ amministraturi tal-ispazju tax-xogħol",
+      "placeholderNoGroup": "Ebda grupp assenjat",
+      "descriptionRoleUser": "Jista’ jara l-kontenut tal-ispazju tax-xogħol (aġenti, traskritturi, repożitorji tad-dokumenti, eċċ.), iżda ma jistax jeditjah.",
+      "descriptionRoleEditor": "Jista’ jara l-kontenut tal-ispazju tax-xogħol u wkoll jeditjah.",
+      "descriptionRoleWorkspaceAdmin": "Jista’ jimmaniġġja l-ispazju tax-xogħol u joħloq, jeditja u jħassar aġenti, traskritturi, repożitorji tad-dokumenti, eċċ.",
+      "buttonSave": "Issejvja",
+      "buttonReset": "Irrisettja"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Utent awtomatiku",
+      "description": "Meta \"Utent awtomatiku\" ikun attivat, kull min jista’ jidħol fil-box jiġi awtorizzat awtomatikament bħala utent f’din l-organizzazzjoni.",
+      "labelActive": "Utent awtomatiku attivat",
+      "labelInactive": "Utent awtomatiku diżattivat"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Spazju tax-xogħol ġdid",
+      "descriptionWorkspace": "Agħżel isem u deskrizzjoni fakultattiva. Tista’ tikkonfigura aktar settings wara li toħloq l-ispazju tax-xogħol.",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni",
+      "labelCreate": "Oħloq spazju tax-xogħol",
+      "labelCancel": "Ikkanċella",
+      "errorCreate": "L-ispazju tax-xogħol ma setax jinħoloq. Erġa’ pprova."
+    },
+    "WorkspaceCard": {
+      "labelType": "Spazju tax-xogħol"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Editja spazju tax-xogħol",
+      "tooltipInfo": "Iftaħ spazju tax-xogħol"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Żid mal-favoriti",
+      "tooltipRemoveFavorite": "Neħħi mill-favoriti"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Fittex spazji tax-xogħol",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni",
+      "labelRole": "Ir-rwol tiegħek",
+      "labelActions": "Azzjonijiet",
+      "labelFavorites": "Favoriti",
+      "labelOtherWorkspaces": "Spazji tax-xogħol oħra",
+      "labelEmpty": "Ebda spazju tax-xogħol",
+      "descriptionEmpty": "Għad m’għandekx aċċess għal spazju tax-xogħol.",
+      "labelNoResults": "Ebda riżultat",
+      "descriptionNoResults": "Ipprova terminu ieħor ta’ tfittxija."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelNameAsc": "Isem minn A sa Z",
+      "labelNameDesc": "Isem minn Z sa A",
+      "labelGroup": "Iġbor skont",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "L-ewwel ittra",
+      "labelCards": "Kards",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Oħloq spazju tax-xogħol"
+    }
+  },
+  "page": {
+    "labelYourRole": "Ir-rwol tiegħek",
+    "labelEmpty": "Għad m’hemmx kontenut",
+    "descriptionEmpty": "Għad m’hemmx aġenti, repożitorji tad-dokumenti jew traskritturi disponibbli f’dan l-ispazju tax-xogħol.",
+    "labelTitle": "Spazji tax-xogħol"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Asiakirjavarastot",
+    "description": "Asiakirjavarastot muodostavat tekoälylle keskitetyn, jäsennellyn ja luotettavan tietopohjan, jota mallit voivat käyttää asiayhteyden mukaan."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Asiakirjavarasto"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Hae..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelNameAsc": "Nimi A–Ö",
+      "labelNameDesc": "Nimi Ö–A",
+      "labelGroup": "Ryhmittele",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelFavorites": "Suosikit",
+      "labelFirstLetter": "Alkukirjain",
+      "labelWorkspaces": "Työtilat",
+      "labelModel": "Litteroija",
+      "labelCards": "Kortit",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta",
+      "labelDocumentRepositories": "Asiakirjavarastot",
+      "labelNewDocumentRepository": "Uusi asiakirjavarasto"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Muut asiakirjavarastot",
+      "labelFavorites": "Suosikit",
+      "labelOtherTranscribers": "Muut litteroijat",
+      "labelUnknownTranscriber": "Tuntematon litteroija ”{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Ominaisuudet",
+      "tableColumnNameActions": "Toiminnot",
+      "emptyTitle": "Ei asiakirjavarastoja",
+      "emptyDescription": "Asiakirjavarastoja ei ole vielä luotu.",
+      "labelOtherDocumentRepositories": "Muut asiakirjavarastot",
+      "labelFavorites": "Suosikit",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelUnknownTranscriber": "Tuntematon litteroija ”{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Tuntematon työtila"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Muokkaa",
+      "tooltipInfo": "Tiedot"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Poista suosikeista",
+      "tooltipAddFavorite": "Lisää suosikkeihin"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Uusi asiakirjavarasto",
+      "labelDocumentRepository": "Asiakirjavarasto",
+      "labelDocumentRepositoryDropdown": "Asiakirjavarasto",
+      "labelCreateDocumentRepository": "Luo asiakirjavarasto",
+      "labelSaveDocumentRepository": "Tallenna asiakirjavarasto",
+      "labelCloneDocumentRepository": "Tallenna uutena asiakirjavarastona",
+      "labelDeleteDocumentRepository": "Poista asiakirjavarasto",
+      "confirmDeleteTitle": "Poista asiakirjavarasto",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa asiakirjavaraston ”{{name}}”? Tätä toimintoa ei voi perua.",
+      "labelCancel": "Peruuta",
+      "tabOverview": "Yleiskatsaus",
+      "tabFeatures": "Toiminnot",
+      "tabSettings": "Asetukset",
+      "btnCreate": "Luo",
+      "btnSave": "Tallenna"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Hylkää muutokset",
+      "labelDiscardConfirm": "Haluatko varmasti hylätä kaikki tämän asiakirjavaraston tallentamattomat muutokset?",
+      "labelCancel": "Peruuta",
+      "labelDiscard": "Hylkää muutokset"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Uusi asiakirjavarasto",
+      "emptyDescription": "Määritä asiakirjavaraston toiminta ja ulkoasu.",
+      "checklistSemanticSearchTitle": "Ota semanttinen haku käyttöön",
+      "checklistSemanticSearchDescription": "Ota semanttinen haku käyttöön. Se voi parantaa hakutulosten laatua.",
+      "checklistTranscriberTitle": "Valitse litteroija",
+      "checklistTranscriberDescription": "Valitse litteroija, joka litteroi automaattisesti kaikki ladatut video- ja äänitiedostot.",
+      "helpTitle": "Ohje",
+      "helpKeywordSearch": "Tavallinen avainsanahaku. Sopii parhaiten tuotemerkkien, henkilöiden ja muiden nimien hakuun.",
+      "helpEmbeddingDescription": "Lisää upotusmalli ottaaksesi semanttisen haun käyttöön. Se löytää samankaltaisia asiakirjoja niiden merkityksen perusteella.",
+      "helpTranscriberDescription": "Lisää asiakirjavarastoon litteroija, niin kaikki video- ja äänitiedostot litteroidaan automaattisesti lataamisen jälkeen."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Hakuindeksi",
+      "description": "Hakuindeksistä riippuen käytetään eri menetelmiä parhaiden tulosten löytämiseksi hakukyselylle.",
+      "labelKeyword": "Avainsanahaku",
+      "descriptionKeyword": "Tarkkojen ilmausten ja lauseiden hakuun. (Nimet, nimitykset jne.)",
+      "labelSemantic": "Semanttinen haku",
+      "descriptionSemantic": "Kun tietojen merkitys on tärkeämpi kuin tarkka sanamuoto. (Vaatii upotusmallin)",
+      "labelEmbeddingModel": "Upotusmalli",
+      "descriptionEmbeddingModel": "Upotusmalli on semanttisen haun perusta."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Ei litteroijaa",
+      "labelLegend": "Litteroija",
+      "description": "Video- ja äänitiedostot litteroidaan automaattisesti lataamisen jälkeen.",
+      "labelTranscriber": "Litteroija"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Kuvaus",
+      "description": "Valitse asiakirjavarastolle sopiva nimi. Voit tallentaa myös lyhyen kuvauksen.",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Ulkoasu",
+      "description": "Valitse asiakirjavarastoa parhaiten kuvaava väri ja kuvake.",
+      "labelIcon": "Kuvake",
+      "labelColor": "Väri"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Työtila",
+      "description": "Valitse työtila, johon asiakirjavarasto luodaan.",
+      "labelName": "Työtila",
+      "labelSelectWorkspace": "Valitse työtila."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Tiedostot",
+      "tabSearch": "Kokotekstihaku",
+      "tabInfo": "Tiedot"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Hae...",
+      "labelSearch": "Hae"
+    },
+    "Search": {
+      "emptyTitle": "Kokotekstihaku",
+      "emptyDescription": "Hae tekstiä tämän asiakirjavaraston kaikista tiedostoista."
+    }
+  },
+  "page": {
+    "labelTitle": "Asiakirjavarastot",
+    "emptyTitle": "Ei asiakirjavarastoja",
+    "emptyDescription": "Asiakirjavarastoja ei ole vielä luotu.",
+    "labelNewDocumentRepository": "Uusi asiakirjavarasto",
+    "helpTitle": "Ohje",
+    "helpSearchDescription": "Voit hakea asiakirjavarastoja. Haku kattaa muun muassa asiakirjavaraston nimen, kuvauksen ja litteroijan.",
+    "helpSortDescription": "Asiakirjavarastot voidaan lajitella nimen mukaan ja jakaa eri ryhmiin. Ne voidaan näyttää kortteina tai taulukkona.",
+    "helpTranscriberDescription": "Voit valita asiakirjavarastoille litteroijan. Varastoon ladatut ääni- ja videotiedostot litteroidaan tällöin automaattisesti."
+  }
+}

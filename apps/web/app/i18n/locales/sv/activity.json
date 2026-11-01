@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historik"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Fel",
+      "idle": "Inaktiv",
+      "running": "Körs",
+      "success": "Lyckades"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Fäst",
+      "actionUnpin": "Lossa",
+      "actionDelete": "Ta bort"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Sök…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelLabelAsc": "Etikett A till Ö",
+      "labelLabelDesc": "Etikett Ö till A",
+      "labelCreatedAsc": "Skapandedatum fallande",
+      "labelCreatedDesc": "Skapandedatum stigande",
+      "labelUpdatedAsc": "Uppdateringsdatum fallande",
+      "labelUpdatedDesc": "Uppdateringsdatum stigande",
+      "labelGroup": "Gruppera",
+      "labelPinned": "Fästa",
+      "labelState": "Status",
+      "labelType": "Typ",
+      "labelCreated": "Skapandedatum",
+      "labelUpdated": "Uppdateringsdatum",
+      "labelList": "Lista",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ",
+      "labelNoGroup": "Ingen grupp"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Inga aktiviteter",
+      "emptyDescription": "Dina tidigare chattar och transkriptioner visas här.",
+      "emptyLabelAgents": "Agenter"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Senaste 7 dagarna",
+      "groupTimeLast30Days": "Senaste 30 dagarna",
+      "groupTimeOther": "Övrigt",
+      "groupPinned": "Fästa",
+      "groupNotPinned": "Inte fästa",
+      "groupUnknown": "Okänd",
+      "groupChat": "Chatt",
+      "groupTranscription": "Transkription",
+      "groupReindex": "Omindexering",
+      "labelReindex": "Omindexering",
+      "labelPinned": "Fästa"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Etikett",
+      "tableColumnType": "Typ",
+      "tableColumnState": "Status",
+      "tableColumnCreated": "Skapad",
+      "tableColumnUpdated": "Uppdaterad",
+      "tableColumnPinned": "Fästa",
+      "tableColumnNameActions": "Åtgärder",
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Senaste 7 dagarna",
+      "groupTimeLast30Days": "Senaste 30 dagarna",
+      "groupTimeOther": "Övrigt",
+      "groupPinned": "Fästa",
+      "groupNotPinned": "Inte fästa",
+      "groupUnknown": "Okänd",
+      "groupChat": "Chatt",
+      "groupTranscription": "Transkription",
+      "groupReindex": "Omindexering",
+      "labelReindex": "Omindexering",
+      "labelPinned": "Fästa"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historik",
+      "labelPinned": "Fästa",
+      "labelToday": "I dag",
+      "labelLast7Days": "Senaste 7 dagarna",
+      "labelLast30Days": "Senaste 30 dagarna",
+      "labelEmpty": "Tom"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Aktivitet",
+      "actionPin": "Fäst",
+      "actionUnpin": "Lossa",
+      "actionDelete": "Ta bort",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Ny chatt",
+      "labelInfo": "Information"
+    }
+  }
+}

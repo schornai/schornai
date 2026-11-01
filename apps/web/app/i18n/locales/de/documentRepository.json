@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentenablagen",
+    "description": "Dokumentenablagen schaffen für die KI eine zentrale, strukturierte und verlässliche Wissensbasis, auf die Modelle kontextbezogen zugreifen können."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentenablage"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Suchen..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Optionen",
+      "labelView": "Ansicht",
+      "labelSort": "Sortieren",
+      "labelNameAsc": "Name A bis Z",
+      "labelNameDesc": "Name Z bis A",
+      "labelGroup": "Gruppieren",
+      "labelNoGroup": "Keine Gruppe",
+      "labelFavorites": "Favoriten",
+      "labelFirstLetter": "Anfangsbuchstaben",
+      "labelWorkspaces": "Arbeitsplätze",
+      "labelModel": "Transkriptor",
+      "labelCards": "Kacheln",
+      "labelTable": "Tabelle",
+      "labelSaveView": "Ansicht speichern",
+      "labelReset": "Zurücksetzen",
+      "labelDocumentRepositories": "Dokumentenablagen",
+      "labelNewDocumentRepository": "Neue Dokumentenablage"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Weitere Dokumentenablagen",
+      "labelFavorites": "Favoriten",
+      "labelOtherTranscribers": "Andere Transkriptoren",
+      "labelUnknownTranscriber": "Unbekannter Transkriptor \"{{id}}\""
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Name",
+      "tableColumnCapablilities": "Fähigkeiten",
+      "tableColumnNameActions": "Aktionen",
+      "emptyTitle": "Keine Dokumentenablagen",
+      "emptyDescription": "Es wurden noch keine Dokumentenablagen angelegt.",
+      "labelOtherDocumentRepositories": "Weitere Dokumentenablagen",
+      "labelFavorites": "Favoriten",
+      "labelNoGroup": "Keine Gruppe",
+      "labelUnknownTranscriber": "Unbekannter Transkriptor \"{{id}}\""
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Unbekannter Arbeitsplatz"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Bearbeiten",
+      "tooltipInfo": "Infos"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Favorit entfernen",
+      "tooltipAddFavorite": "Als Favorit"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Neue Dokumentenablage",
+      "labelDocumentRepository": "Dokumentenablage",
+      "labelDocumentRepositoryDropdown": "Dokumentenablage",
+      "labelCreateDocumentRepository": "Dokumentenablage erstellen",
+      "labelSaveDocumentRepository": "Dokumentenablage speichern",
+      "labelCloneDocumentRepository": "Als neue Dokumentenablage speichern",
+      "labelDeleteDocumentRepository": "Dokumentenablage löschen",
+      "confirmDeleteTitle": "Dokumentenablage löschen",
+      "confirmDeleteDescription": "Wollen Sie wirklich die Dokumentenablage \"{{name}}\" löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "labelCancel": "Abbrechen",
+      "tabOverview": "Übersicht",
+      "tabFeatures": "Funktionen",
+      "tabSettings": "Einstellungen",
+      "btnCreate": "Erstellen",
+      "btnSave": "Speichern"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Änderungen verwerfen",
+      "labelDiscardConfirm": "Wollen Sie wirklich alle nicht gespeicherten Änderungen an dieser Dokumentenablage verwerfen?",
+      "labelCancel": "Abbrechen",
+      "labelDiscard": "Änderungen verwerfen"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Neue Dokumentenablage",
+      "emptyDescription": "Definieren Sie das Verhalten und das Aussehen der Dokumentenablage.",
+      "checklistSemanticSearchTitle": "Semantische Suche aktivieren",
+      "checklistSemanticSearchDescription": "Aktivieren Sie die semantische Suche. Dadurch kann sich die Qualität der Suchergebnisse verbessern.",
+      "checklistTranscriberTitle": "Transkriptor auswählen",
+      "checklistTranscriberDescription": "Wählen Sie einen Transkriptor aus, der automatisch alle hochgeladenen Video- und Audiodateien transkribiert.",
+      "helpTitle": "Hilfe",
+      "helpKeywordSearch": "Klassische Schlüsselwort-Suche. Am besten geeignet für Suchen nach Marken-, Personen- und sonstigen Namen.",
+      "helpEmbeddingDescription": "Fügen Sie ein Embedding-Modell hinzu, um die semantische Suche zu aktivieren. Diese findet ähnliche Dokumente aufgrund ihrer Semantik.",
+      "helpTranscriberDescription": "Fügen Sie einen Transkriptor zur Dokumentenablage hinzu und alle Video- und Audiodateien werden nach dem Upload automatisch damit transkribiert."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Suchindex",
+      "description": "Je nach Suchindex werden unterschiedliche Verfahren eingesetzt, um aufgrund der Suchanfrage die besten Ergebnisse zu liefern.",
+      "labelKeyword": "Schlüsselwortsuche",
+      "descriptionKeyword": "Wenn nach präzisen Ausdrücken und Sätzen gesucht werden soll. (Namen, Bezeichnungen, etc.)",
+      "labelSemantic": "Semantische Suche",
+      "descriptionSemantic": "Wenn die Semantik der Daten im Vordergrund steht und nicht der genaue Wortlaut. (Benötigt ein Embedding-Modell)",
+      "labelEmbeddingModel": "Embedding-Modell",
+      "descriptionEmbeddingModel": "Das Embedding-Modell ist die Basis für die semantische Suche."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Kein Transkriptor",
+      "labelLegend": "Transkriptor",
+      "description": "Video- und Audiodateien werden nach dem Upload automatisch transkribiert.",
+      "labelTranscriber": "Transkriptor"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Beschreibung",
+      "description": "Wählen Sie einen passenden Namen für die Dokumentenablage. Darüber hinaus kann auch noch eine kurze Beschreibung dazu gespeichert werden.",
+      "labelName": "Name",
+      "labelDescription": "Beschreibung"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Aussehen",
+      "description": "Bestimmen Sie eine Farbe und ein Icon, welches die Dokumentenablage am besten repräsentiert.",
+      "labelIcon": "Icon",
+      "labelColor": "Farbe"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Arbeitsplatz",
+      "description": "Wählen Sie den Arbeitsplatz aus, in dem die Dokumentenablage erstellt werden soll.",
+      "labelName": "Arbeitsplatz",
+      "labelSelectWorkspace": "Wählen Sie einen Arbeitsplatz."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Dateien",
+      "tabSearch": "Volltextsuche",
+      "tabInfo": "Info"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Suchen...",
+      "labelSearch": "Suchen"
+    },
+    "Search": {
+      "emptyTitle": "Volltextsuche",
+      "emptyDescription": "Text innerhalb aller Dateien in dieser Dokumentenablage suchen."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentenablagen",
+    "emptyTitle": "Keine Dokumentenablagen",
+    "emptyDescription": "Es wurden noch keine Dokumentenablagen angelegt.",
+    "labelNewDocumentRepository": "Neue Dokumentenablage",
+    "helpTitle": "Hilfe",
+    "helpSearchDescription": "Sie können nach Dokumentenablagen suchen. In die Suche einbezogen werden, unter anderem, Name und Beschreibung der Dokumentenablage, so wie der Transkriptor der Dokumentenablage.",
+    "helpSortDescription": "Dokumentenablagen können nach Namen sortiert werden. Können in verschiedene Gruppen sortiert werden. Dokumentenablagen können als Kacheln oder als Tabelle angezeigt werden.",
+    "helpTranscriberDescription": "Es können für Dokumentenablagen ein Transkriptor ausgewählt werden. Werden dann Audio- oder Video-Dateien in die Dokumentenablage hochgeladen, werden sie automatisch transkribiert."
+  }
+}

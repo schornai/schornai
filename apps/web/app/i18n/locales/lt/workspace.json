@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Aprašymas",
+      "description": "Pasirinkite tinkamą darbo srities pavadinimą. Taip pat galite išsaugoti trumpą aprašymą.",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas",
+      "buttonSave": "Išsaugoti",
+      "buttonReset": "Atkurti"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentacija",
+      "description": "Čia pasidalykite su naudotojais papildoma informacija apie šią darbo sritį.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Išsaugoti",
+      "buttonReset": "Atkurti"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO susiejimai",
+      "description": "Pasirinkite, kuri SSO grupė turi prieigą prie darbo srities ir kokiomis teisėmis.",
+      "labelRoleUser": "Naudotojų grupė",
+      "labelRoleEditor": "Redaktorių grupė",
+      "labelRoleWorkspaceAdmin": "Darbo srities administratorių grupė",
+      "placeholderNoGroup": "Grupė nepriskirta",
+      "descriptionRoleUser": "Gali peržiūrėti darbo srities turinį (agentus, transkribuotojus, dokumentų saugyklas ir kt.), bet negali jo redaguoti.",
+      "descriptionRoleEditor": "Gali peržiūrėti darbo srities turinį ir jį redaguoti.",
+      "descriptionRoleWorkspaceAdmin": "Gali tvarkyti darbo sritį ir kurti, redaguoti bei trinti agentus, transkribuotojus, dokumentų saugyklas ir kt.",
+      "buttonSave": "Išsaugoti",
+      "buttonReset": "Atkurti"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatinis naudotojas",
+      "description": "Kai įjungta parinktis „Automatinis naudotojas“, kiekvienas, galintis prisijungti prie box, automatiškai gauna naudotojo teises šioje organizacijoje.",
+      "labelActive": "Automatinis naudotojas įjungtas",
+      "labelInactive": "Automatinis naudotojas išjungtas"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nauja darbo sritis",
+      "descriptionWorkspace": "Pasirinkite pavadinimą ir, jei norite, aprašymą. Kitas nuostatas galėsite nustatyti sukūrę darbo sritį.",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas",
+      "labelCreate": "Sukurti darbo sritį",
+      "labelCancel": "Atšaukti",
+      "errorCreate": "Nepavyko sukurti darbo srities. Bandykite dar kartą."
+    },
+    "WorkspaceCard": {
+      "labelType": "Darbo sritis"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Redaguoti darbo sritį",
+      "tooltipInfo": "Atverti darbo sritį"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Pridėti prie mėgstamiausių",
+      "tooltipRemoveFavorite": "Pašalinti iš mėgstamiausių"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Ieškoti darbo sričių",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas",
+      "labelRole": "Jūsų vaidmuo",
+      "labelActions": "Veiksmai",
+      "labelFavorites": "Mėgstamiausi",
+      "labelOtherWorkspaces": "Kitos darbo sritys",
+      "labelEmpty": "Darbo sričių nėra",
+      "descriptionEmpty": "Dar neturite prieigos prie darbo srities.",
+      "labelNoResults": "Rezultatų nėra",
+      "descriptionNoResults": "Pabandykite kitą paieškos žodį."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelNameAsc": "Pavadinimas nuo A iki Z",
+      "labelNameDesc": "Pavadinimas nuo Z iki A",
+      "labelGroup": "Grupuoti pagal",
+      "labelNoGroup": "Negrupuoti",
+      "labelFavorites": "Mėgstamiausi",
+      "labelFirstLetter": "Pirmoji raidė",
+      "labelCards": "Kortelės",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Sukurti darbo sritį"
+    }
+  },
+  "page": {
+    "labelYourRole": "Jūsų vaidmuo",
+    "labelEmpty": "Turinio dar nėra",
+    "descriptionEmpty": "Šioje darbo srityje dar nėra agentų, dokumentų saugyklų ar transkribuotojų.",
+    "labelTitle": "Darbo sritys"
+  }
+}

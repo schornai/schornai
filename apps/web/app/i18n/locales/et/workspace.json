@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Kirjeldus",
+      "description": "Vali tööruumile sobiv nimi. Lisaks saad salvestada lühikese kirjelduse.",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus",
+      "buttonSave": "Salvesta",
+      "buttonReset": "Lähtesta"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentatsioon",
+      "description": "Jaga siin kasutajatega selle tööruumi kohta lisateavet.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Salvesta",
+      "buttonReset": "Lähtesta"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO vastendused",
+      "description": "Vali, millisel SSO-rühmal on tööruumile juurdepääs ja milliste õigustega.",
+      "labelRoleUser": "Kasutajate rühm",
+      "labelRoleEditor": "Toimetajate rühm",
+      "labelRoleWorkspaceAdmin": "Tööruumi administraatorite rühm",
+      "placeholderNoGroup": "Rühma pole määratud",
+      "descriptionRoleUser": "Saab vaadata tööruumi sisu (agente, transkribeerijaid, dokumendihoidlaid jne), kuid ei saa seda muuta.",
+      "descriptionRoleEditor": "Saab vaadata tööruumi sisu ja lisaks seda muuta.",
+      "descriptionRoleWorkspaceAdmin": "Saab hallata tööruumi ning luua, muuta ja kustutada agente, transkribeerijaid, dokumendihoidlaid jne.",
+      "buttonSave": "Salvesta",
+      "buttonReset": "Lähtesta"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automaatne kasutaja",
+      "description": "Kui „Automaatne kasutaja“ on lubatud, saab igaüks, kes boxi sisse logida saab, selles organisatsioonis automaatselt kasutaja õigused.",
+      "labelActive": "Automaatne kasutaja lubatud",
+      "labelInactive": "Automaatne kasutaja keelatud"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Uus tööruum",
+      "descriptionWorkspace": "Vali nimi ja soovi korral kirjeldus. Täiendavad seaded saad määrata pärast tööruumi loomist.",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus",
+      "labelCreate": "Loo tööruum",
+      "labelCancel": "Tühista",
+      "errorCreate": "Tööruumi ei õnnestunud luua. Proovi uuesti."
+    },
+    "WorkspaceCard": {
+      "labelType": "Tööruum"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Muuda tööruumi",
+      "tooltipInfo": "Ava tööruum"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Lisa lemmikutesse",
+      "tooltipRemoveFavorite": "Eemalda lemmikutest"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Otsi tööruume",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus",
+      "labelRole": "Sinu roll",
+      "labelActions": "Toimingud",
+      "labelFavorites": "Lemmikud",
+      "labelOtherWorkspaces": "Teised tööruumid",
+      "labelEmpty": "Tööruume pole",
+      "descriptionEmpty": "Sul pole veel juurdepääsu ühelegi tööruumile.",
+      "labelNoResults": "Tulemusi pole",
+      "descriptionNoResults": "Proovi teist otsingusõna."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelNameAsc": "Nimi A–Z",
+      "labelNameDesc": "Nimi Z–A",
+      "labelGroup": "Rühmita alusel",
+      "labelNoGroup": "Rühmitamata",
+      "labelFavorites": "Lemmikud",
+      "labelFirstLetter": "Esitäht",
+      "labelCards": "Kaardid",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Loo tööruum"
+    }
+  },
+  "page": {
+    "labelYourRole": "Sinu roll",
+    "labelEmpty": "Sisu veel pole",
+    "descriptionEmpty": "Selles tööruumis pole veel agente, dokumendihoidlaid ega transkribeerijaid.",
+    "labelTitle": "Tööruumid"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Сховища документів",
+    "description": "Сховища документів створюють централізовану, структуровану й надійну базу знань для ШІ, до якої моделі можуть звертатися відповідно до контексту."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Сховище документів"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Пошук..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelNameAsc": "Ім’я від А до Я",
+      "labelNameDesc": "Ім’я від Я до А",
+      "labelGroup": "Групувати за",
+      "labelNoGroup": "Без групування",
+      "labelFavorites": "Обране",
+      "labelFirstLetter": "Перша літера",
+      "labelWorkspaces": "Робочі простори",
+      "labelModel": "Транскрибатор",
+      "labelCards": "Картки",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути",
+      "labelDocumentRepositories": "Сховища документів",
+      "labelNewDocumentRepository": "Нове сховище документів"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Інші сховища документів",
+      "labelFavorites": "Обране",
+      "labelOtherTranscribers": "Інші транскрибатори",
+      "labelUnknownTranscriber": "Невідомий транскрибатор «{{id}}»"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Ім’я",
+      "tableColumnCapablilities": "Можливості",
+      "tableColumnNameActions": "Дії",
+      "emptyTitle": "Немає сховищ документів",
+      "emptyDescription": "Ще не створено жодного сховища документів.",
+      "labelOtherDocumentRepositories": "Інші сховища документів",
+      "labelFavorites": "Обране",
+      "labelNoGroup": "Без групування",
+      "labelUnknownTranscriber": "Невідомий транскрибатор «{{id}}»"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Невідомий робочий простір"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Редагувати",
+      "tooltipInfo": "Інформація"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Вилучити з обраного",
+      "tooltipAddFavorite": "Додати до обраного"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Нове сховище документів",
+      "labelDocumentRepository": "Сховище документів",
+      "labelDocumentRepositoryDropdown": "Сховище документів",
+      "labelCreateDocumentRepository": "Створити сховище документів",
+      "labelSaveDocumentRepository": "Зберегти сховище документів",
+      "labelCloneDocumentRepository": "Зберегти як нове сховище документів",
+      "labelDeleteDocumentRepository": "Видалити сховище документів",
+      "confirmDeleteTitle": "Видалити сховище документів",
+      "confirmDeleteDescription": "Ви впевнені, що хочете видалити сховище документів «{{name}}»? Цю дію неможливо скасувати.",
+      "labelCancel": "Скасувати",
+      "tabOverview": "Огляд",
+      "tabFeatures": "Функції",
+      "tabSettings": "Налаштування",
+      "btnCreate": "Створити",
+      "btnSave": "Зберегти"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Скасувати зміни",
+      "labelDiscardConfirm": "Ви дійсно хочете скасувати всі незбережені зміни цього сховища документів?",
+      "labelCancel": "Скасувати",
+      "labelDiscard": "Скасувати зміни"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Нове сховище документів",
+      "emptyDescription": "Визначте поведінку й зовнішній вигляд сховища документів.",
+      "checklistSemanticSearchTitle": "Увімкнути семантичний пошук",
+      "checklistSemanticSearchDescription": "Увімкніть семантичний пошук. Це може підвищити якість результатів пошуку.",
+      "checklistTranscriberTitle": "Виберіть транскрибатор",
+      "checklistTranscriberDescription": "Виберіть транскрибатор, який автоматично транскрибуватиме всі завантажені відео- й аудіофайли.",
+      "helpTitle": "Довідка",
+      "helpKeywordSearch": "Класичний пошук за ключовими словами. Найкраще підходить для пошуку брендів, імен та інших назв.",
+      "helpEmbeddingDescription": "Додайте модель ембедингів, щоб увімкнути семантичний пошук. Він знаходить схожі документи за змістом.",
+      "helpTranscriberDescription": "Додайте транскрибатор до сховища документів, і всі відео- й аудіофайли автоматично транскрибуватимуться після завантаження."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Пошуковий індекс",
+      "description": "Залежно від пошукового індексу застосовуються різні методи для надання найкращих результатів за запитом.",
+      "labelKeyword": "Пошук за ключовими словами",
+      "descriptionKeyword": "Для пошуку точних виразів і речень: імен, назв тощо.",
+      "labelSemantic": "Семантичний пошук",
+      "descriptionSemantic": "Коли важливий зміст даних, а не точне формулювання. Потребує моделі ембедингів.",
+      "labelEmbeddingModel": "Модель ембедингів",
+      "descriptionEmbeddingModel": "Модель ембедингів є основою семантичного пошуку."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Без транскрибатора",
+      "labelLegend": "Транскрибатор",
+      "description": "Відео- й аудіофайли автоматично транскрибуються після завантаження.",
+      "labelTranscriber": "Транскрибатор"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Опис",
+      "description": "Виберіть відповідну назву для сховища документів. Також можна зберегти короткий опис.",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Зовнішній вигляд",
+      "description": "Виберіть колір і піктограму, які найкраще представляють сховище документів.",
+      "labelIcon": "Піктограма",
+      "labelColor": "Колір"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Робочий простір",
+      "description": "Виберіть робочий простір, у якому потрібно створити сховище документів.",
+      "labelName": "Робочий простір",
+      "labelSelectWorkspace": "Виберіть робочий простір."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Файли",
+      "tabSearch": "Повнотекстовий пошук",
+      "tabInfo": "Інформація"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Пошук...",
+      "labelSearch": "Пошук"
+    },
+    "Search": {
+      "emptyTitle": "Повнотекстовий пошук",
+      "emptyDescription": "Шукайте текст у всіх файлах цього сховища документів."
+    }
+  },
+  "page": {
+    "labelTitle": "Сховища документів",
+    "emptyTitle": "Немає сховищ документів",
+    "emptyDescription": "Ще не створено жодного сховища документів.",
+    "labelNewDocumentRepository": "Нове сховище документів",
+    "helpTitle": "Довідка",
+    "helpSearchDescription": "Ви можете шукати сховища документів. Пошук охоплює, зокрема, назву, опис і транскрибатор сховища.",
+    "helpSortDescription": "Сховища документів можна сортувати за назвою та розподіляти на групи. Їх можна відображати картками або таблицею.",
+    "helpTranscriberDescription": "Для сховищ документів можна вибрати транскрибатор. Завантажені до сховища аудіо- й відеофайли транскрибуються автоматично."
+  }
+}

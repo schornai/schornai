@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Név",
+      "labelFirstName": "Utónév",
+      "labelLastName": "Vezetéknév",
+      "buttonSave": "Mentés",
+      "buttonReset": "Visszaállítás"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilkép"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Kép eltávolítása",
+      "alertDelete": "Kép eltávolítása",
+      "alertDeleteExplainer": "Biztosan eltávolítja a képét?",
+      "alertDeleteCancel": "Mégse"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Kép feltöltése"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Jogosultságok",
+      "tableColumnName": "Név",
+      "tableColumnPermission": "Jogosultság",
+      "tableColumnDescription": "Leírás",
+      "infoEmpty": "Nincsenek jogosultságok",
+      "infoEmptyDescription": "A schorn.ai box egyetlen funkciója sem érhető el.",
+      "infoEmptyAdminDescription": "Rendszergazdaként létrehozhatja az első munkaterületet.",
+      "infoEmptyAdminAction": "Első munkaterület létrehozása",
+      "infoUser": "Megtekintheti a szervezet tartalmait (chatbotok, átírók, dokumentumok, tárak stb.), de nem szerkesztheti azokat.",
+      "infoEditor": "Megtekintheti és szerkesztheti a szervezet tartalmait (új chatbotok létrehozása, dokumentumok szerkesztése, törlése stb.).",
+      "infoAdmin": "Minden szervezetben olvashat és írhat, valamint kezelheti a rendszerbeállításokat (XRAG feltöltése, színek módosítása stb.) és a felhasználókat."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Személyre szabás",
+    "infoPersonalizeDescription": "Itt feltöltheti a profilképét és módosíthatja a nevét."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Új jelszó beállítva",
+    "description": "Az új jelszó beállítása sikeres volt. Most az új jelszóval van bejelentkezve.",
+    "buttonBackToDashboard": "Tovább az irányítópultra"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Kapcsolatok",
+      "descriptionConnections": "Az Ön személyes OAuth-kapcsolatai MCP-kiszolgálókhoz. A kapcsolat bontásával az itt tárolt hitelesítési adatok törlődnek. A már futó hívások még befejeződhetnek; a szolgáltatói jogosultságokat közvetlenül a szolgáltatónál vonja vissza.",
+      "labelDisconnect": "Kapcsolat bontása",
+      "descriptionEmpty": "Kapcsolja össze a fiókját a beszélgetésben, amikor egy MCP-eszköz bejelentkezést igényel.",
+      "labelEmpty": "Még nincsenek kapcsolatok",
+      "labelInfo": "A kapcsolatokról",
+      "errorDisconnect": "A kapcsolatot nem sikerült bontani. Próbálja újra."
+    }
+  }
+}

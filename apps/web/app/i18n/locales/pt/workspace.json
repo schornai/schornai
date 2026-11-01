@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Descrição",
+      "description": "Escolha um nome adequado para o espaço de trabalho. Também pode guardar uma breve descrição.",
+      "labelName": "Nome",
+      "labelDescription": "Descrição",
+      "buttonSave": "Guardar",
+      "buttonReset": "Repor"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentação",
+      "description": "Partilhe aqui com os utilizadores informações adicionais sobre este espaço de trabalho.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Guardar",
+      "buttonReset": "Repor"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapeamentos SSO",
+      "description": "Selecione o grupo SSO que tem acesso ao espaço de trabalho e as respetivas permissões.",
+      "labelRoleUser": "Grupo de utilizadores",
+      "labelRoleEditor": "Grupo de editores",
+      "labelRoleWorkspaceAdmin": "Grupo de administradores do espaço de trabalho",
+      "placeholderNoGroup": "Nenhum grupo atribuído",
+      "descriptionRoleUser": "Pode ver o conteúdo do espaço de trabalho, como agentes, transcritores e repositórios de documentos, mas não o pode editar.",
+      "descriptionRoleEditor": "Pode ver e editar o conteúdo do espaço de trabalho.",
+      "descriptionRoleWorkspaceAdmin": "Pode gerir o espaço de trabalho e criar, editar e eliminar agentes, transcritores, repositórios de documentos e outros recursos.",
+      "buttonSave": "Guardar",
+      "buttonReset": "Repor"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Utilizador automático",
+      "description": "Quando «Utilizador automático» está ativado, qualquer pessoa que possa iniciar sessão no sistema recebe automaticamente autorização de utilizador nesta organização.",
+      "labelActive": "Utilizador automático ativado",
+      "labelInactive": "Utilizador automático desativado"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Novo espaço de trabalho",
+      "descriptionWorkspace": "Escolha um nome e uma descrição opcional. Pode configurar outras definições após criar o espaço de trabalho.",
+      "labelName": "Nome",
+      "labelDescription": "Descrição",
+      "labelCreate": "Criar espaço de trabalho",
+      "labelCancel": "Cancelar",
+      "errorCreate": "Não foi possível criar o espaço de trabalho. Tente novamente."
+    },
+    "WorkspaceCard": {
+      "labelType": "Espaço de trabalho"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Editar espaço de trabalho",
+      "tooltipInfo": "Abrir espaço de trabalho"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Adicionar aos favoritos",
+      "tooltipRemoveFavorite": "Remover dos favoritos"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Pesquisar espaços de trabalho",
+      "labelName": "Nome",
+      "labelDescription": "Descrição",
+      "labelRole": "A sua função",
+      "labelActions": "Ações",
+      "labelFavorites": "Favoritos",
+      "labelOtherWorkspaces": "Outros espaços de trabalho",
+      "labelEmpty": "Sem espaços de trabalho",
+      "descriptionEmpty": "Ainda não tem acesso a um espaço de trabalho.",
+      "labelNoResults": "Sem resultados",
+      "descriptionNoResults": "Tente outro termo de pesquisa."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opções",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nome de A a Z",
+      "labelNameDesc": "Nome de Z a A",
+      "labelGroup": "Agrupar por",
+      "labelNoGroup": "Sem grupo",
+      "labelFavorites": "Favoritos",
+      "labelFirstLetter": "Primeira letra",
+      "labelCards": "Cartões",
+      "labelTable": "Tabela",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Repor"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Criar espaço de trabalho"
+    }
+  },
+  "page": {
+    "labelYourRole": "A sua função",
+    "labelEmpty": "Ainda sem conteúdo",
+    "descriptionEmpty": "Ainda não existem agentes, repositórios de documentos ou transcritores disponíveis neste espaço de trabalho.",
+    "labelTitle": "Espaços de trabalho"
+  }
+}

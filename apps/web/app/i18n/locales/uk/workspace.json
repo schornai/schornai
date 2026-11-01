@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Опис",
+      "description": "Виберіть відповідну назву для робочого простору. Також можна зберегти короткий опис.",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис",
+      "buttonSave": "Зберегти",
+      "buttonReset": "Скинути"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Документація",
+      "description": "Поділіться тут із користувачами додатковою інформацією про цей робочий простір.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Зберегти",
+      "buttonReset": "Скинути"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Зіставлення SSO",
+      "description": "Виберіть, яка група SSO має доступ до робочого простору та з якими дозволами.",
+      "labelRoleUser": "Група користувачів",
+      "labelRoleEditor": "Група редакторів",
+      "labelRoleWorkspaceAdmin": "Група адміністраторів робочого простору",
+      "placeholderNoGroup": "Групу не призначено",
+      "descriptionRoleUser": "Може переглядати вміст робочого простору (агентів, транскрибатори, сховища документів тощо), але не може редагувати його.",
+      "descriptionRoleEditor": "Може переглядати й редагувати вміст робочого простору.",
+      "descriptionRoleWorkspaceAdmin": "Може керувати робочим простором, а також створювати, редагувати й видаляти агентів, транскрибатори, сховища документів тощо.",
+      "buttonSave": "Зберегти",
+      "buttonReset": "Скинути"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Автоматичний користувач",
+      "description": "Коли ввімкнено «Автоматичний користувач», кожен, хто може ввійти в систему, автоматично отримує права користувача в цій організації.",
+      "labelActive": "Автоматичного користувача ввімкнено",
+      "labelInactive": "Автоматичного користувача вимкнено"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Новий робочий простір",
+      "descriptionWorkspace": "Виберіть назву й необов’язковий опис. Інші параметри можна налаштувати після створення робочого простору.",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис",
+      "labelCreate": "Створити робочий простір",
+      "labelCancel": "Скасувати",
+      "errorCreate": "Не вдалося створити робочий простір. Спробуйте ще раз."
+    },
+    "WorkspaceCard": {
+      "labelType": "Робочий простір"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Редагувати робочий простір",
+      "tooltipInfo": "Відкрити робочий простір"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Додати до обраного",
+      "tooltipRemoveFavorite": "Вилучити з обраного"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Пошук робочих просторів",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис",
+      "labelRole": "Ваша роль",
+      "labelActions": "Дії",
+      "labelFavorites": "Обране",
+      "labelOtherWorkspaces": "Інші робочі простори",
+      "labelEmpty": "Немає робочих просторів",
+      "descriptionEmpty": "У вас ще немає доступу до робочого простору.",
+      "labelNoResults": "Немає результатів",
+      "descriptionNoResults": "Спробуйте інший пошуковий термін."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelNameAsc": "Ім’я від А до Я",
+      "labelNameDesc": "Ім’я від Я до А",
+      "labelGroup": "Групувати за",
+      "labelNoGroup": "Без групування",
+      "labelFavorites": "Обране",
+      "labelFirstLetter": "Перша літера",
+      "labelCards": "Картки",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Створити робочий простір"
+    }
+  },
+  "page": {
+    "labelYourRole": "Ваша роль",
+    "labelEmpty": "Вмісту ще немає",
+    "descriptionEmpty": "У цьому робочому просторі ще немає доступних агентів, сховищ документів або транскрибаторів.",
+    "labelTitle": "Робочі простори"
+  }
+}

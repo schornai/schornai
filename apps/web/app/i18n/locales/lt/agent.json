@@ -1,0 +1,520 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Atšaukti",
+      "errorCancel": "Nepavyko sustabdyti generavimo. Bandykite dar kartą."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Neturite prieigos prie šio agento."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Modelis",
+      "labelUnknownModel": "Nežinomas modelis",
+      "labelThinkingOptionalOn": "Samprotavimas",
+      "labelThinkingOptionalOff": "Privalomas samprotavimas",
+      "labelThinkingMandatoryOn": "Be samprotavimo",
+      "labelThinkingMandatoryOff": "Samprotavimas visada išjungtas",
+      "descriptionFeatureVision": "Išsamesnis vaizdų supratimas",
+      "labelModelSize": "Konteksto dydis: {{size}}k",
+      "labelNotFound": "Modelis nerastas",
+      "labelChanged": "Pakeista"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Įrankis: Skaičiuotuvas",
+      "description": "Agentas gali naudoti skaičiuotuvą, užuot pats atlikęs skaičiavimus. Taip agentas geriau susidoroja su sudėtingesniais skaičiavimais."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Užklausa",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tuščia",
+      "labelChanged": "Pakeista"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumentų saugyklos",
+      "labelUnknownRepository": "Nežinoma dokumentų saugykla",
+      "descriptionRepositoryNotFound": "Dokumentų saugyklos nėra arba neturite reikiamų teisių.",
+      "labelConfirmWrite": "Skaitymas ir rašymas (prašyti patvirtinimo)",
+      "labelReadOnly": "Tik skaitymas",
+      "labelWrite": "Skaitymas ir rašymas (automatiškai)",
+      "labelGoToRepository": "Eiti į saugyklą",
+      "labelChanged": "Pakeista"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Vaidmens pasirinkimo užuomina",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Aprašymas",
+      "description": "Pasirinkite tinkamą agento pavadinimą. Taip pat galite išsaugoti trumpą aprašymą.",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Darbo sritis",
+      "description": "Pasirinkite darbo sritį, kurioje norite sukurti agentą.",
+      "labelName": "Darbo sritis",
+      "errorNoPermissions": "Neturite teisės kurti agentų",
+      "errorNoWorkspaceSelected": "Nepasirinkote darbo srities",
+      "labelSelectWorkspace": "Pasirinkite darbo sritį."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Papildomos funkcijos",
+      "description": "Papildykite agentą naudingomis funkcijomis, kad dirbti būtų dar lengviau.",
+      "labelFileUpload": "Failų įkėlimas",
+      "descriptionFileUpload": "Naudotojai gali įkelti failus, kurių turinys agentui prieinamas kaip tekstas.",
+      "labelBatch": "Paketinis apdorojimas",
+      "descriptionBatch": "Naudotojai gali automatiškai apdoroti failus pagal kiekvieną pranešimą.",
+      "labelPursueGoal": "Tikslo siekimas",
+      "descriptionPursueGoal": "Naudotojai gali nustatyti tikslą, o agentas veiks ciklu, kol jį pasieks.",
+      "labelDisappearingChats": "Išnykstantys pokalbiai",
+      "descriptionDisappearingChats": "Pokalbiai gali automatiškai išsitrinti po 12 valandų. Šią parinktį turi nustatyti naudotojas.",
+      "labelNightshift": "Naktinė pamaina",
+      "descriptionNightshift": "Ilgai veikiančius agentus galima perkelti į naktinę pamainą, kad dieną būtų taupomi ištekliai.",
+      "labelTranscriber": "Transkribuotojas",
+      "labelNoTranscriber": "Be automatinio transkribavimo",
+      "descriptionTranscriber": "Automatiškai transkribuoti įkeltus garso ir vaizdo failus šiuo transkribuotoju."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Papildomos funkcijos",
+      "labelFileUpload": "Failų įkėlimas",
+      "descriptionFileUpload": "Naudotojai gali įkelti failus, kurių turinys agentui prieinamas kaip tekstas.",
+      "labelBatch": "Paketinis apdorojimas",
+      "descriptionBatch": "Naudotojai gali automatiškai apdoroti failus pagal kiekvieną pranešimą.",
+      "labelPursueGoal": "Tikslo siekimas",
+      "descriptionPursueGoal": "Naudotojai gali nustatyti tikslą, o agentas veiks ciklu, kol jį pasieks.",
+      "labelDisappearingChats": "Išnykstantys pokalbiai",
+      "descriptionDisappearingChats": "Pokalbiai gali automatiškai išsitrinti po 12 valandų. Šią parinktį turi nustatyti naudotojas.",
+      "labelNightshift": "Naktinė pamaina",
+      "descriptionNightshift": "Ilgai veikiančius agentus galima perkelti į naktinę pamainą, kad dieną būtų taupomi ištekliai."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Pasiūlymai"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentacija"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Darbo sritis",
+      "labelUnknownWorkspace": "Nežinoma darbo sritis",
+      "labelGoToWorkspace": "Eiti į darbo sritį"
+    },
+    "AgentInfo": {
+      "labelRole": "Vaidmuo: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Ieškoti...",
+      "tableColumnName": "Pavadinimas",
+      "tableColumnCapablilities": "Galimybės",
+      "tableColumnNameActions": "Veiksmai",
+      "labelOtherAgents": "Kiti agentai",
+      "labelFavorites": "Mėgstamiausi",
+      "labelNoGroup": "Negrupuoti",
+      "labelUnknownModel": "Nežinomas modelis „{{id}}“",
+      "labelNoRepositories": "Dokumentų saugyklų nėra",
+      "labelUnknownRepository": "Nežinoma dokumentų saugykla „{{id}}“",
+      "labelRoleCount_other": "{{count}} vaidmenų",
+      "labelRoleCount_zero": "Vaidmenų nėra",
+      "labelRoleCount_one": "{{count}} vaidmuo",
+      "labelRoleCount_few": "{{count}} vaidmenys",
+      "labelRoleCount_many": "{{count}} vaidmens"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelNameAsc": "Pavadinimas nuo A iki Z",
+      "labelNameDesc": "Pavadinimas nuo Z iki A",
+      "labelGroup": "Grupuoti pagal",
+      "labelFavorites": "Mėgstamiausi",
+      "labelFirstLetter": "Pirmoji raidė",
+      "labelWorkspaces": "Darbo sritys",
+      "labelModel": "Modelis",
+      "labelRepositories": "Dokumentų saugyklos",
+      "labelRoleCount": "Vaidmenų skaičius",
+      "labelCards": "Kortelės",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti",
+      "labelAgents": "Agentai",
+      "labelNewAgent": "Naujas agentas",
+      "labelNoGroup": "Negrupuoti"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Išvaizda",
+      "description": "Pasirinkite spalvą ir piktogramą, geriausiai apibūdinančias agentą.",
+      "labelIcon": "Piktograma",
+      "labelColor": "Spalva"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Pašalinti iš mėgstamiausių",
+      "tooltipAddFavorite": "Pridėti prie mėgstamiausių"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Redaguoti",
+      "tooltipInfo": "Informacija",
+      "tooltipNewChat": "Naujas pokalbis"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Nežinoma darbo sritis",
+      "labelModelUnknown": "Nežinomas modelis"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Prieiga prie žiniatinklio",
+      "labelGeneralAccess": "Bendra prieiga, paieška žiniatinklyje",
+      "descriptionFetch": "Gavimas iš žiniatinklio atsisiunčia URL turinį į pokalbio saugyklą arba prijungtą dokumentų saugyklą su rašymo teise. Apdorojus failą, agentas gali perskaityti išskirtą tekstą ir panaudoti jį atsakyme.",
+      "descriptionSearch": "Paieška žiniatinklyje padeda agentui rasti paieškos užklausą atitinkančius puslapius. Paieškos paslaugos teikėjas grąžina pavadinimus, nuorodas ir trumpas ištraukas. Gavimui leidžiamų domenų sąrašas neriboja paieškos žiniatinklyje.",
+      "labelChanged": "Pakeista",
+      "labelFetch": "Gavimas",
+      "labelSearch": "Ieškoti",
+      "labelOn": "Įjungta",
+      "labelOff": "Išjungta",
+      "labelAsk": "Pirmiausia paklausti",
+      "labelWhitelist": "Gavimas tik iš leidžiamų domenų sąrašo",
+      "labelAll": "Gavimas iš visų svetainių",
+      "labelEmptyWhitelist": "Leidžiamų domenų nėra",
+      "labelEdit": "Redaguoti prieigą prie žiniatinklio",
+      "labelDetails": "Rodyti išsamią informaciją"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Įrankis: Pokalbio plėtiniai",
+      "labelFeatures": "Kito pranešimo siūlymas, pokalbio pavadinimo keitimas",
+      "description": "Agentas gali siūlyti kitą naudotojo pranešimą, kad naudotojas galėtų tęsti pokalbį tiesiog spustelėjęs tinkamą pranešimą. <br /> Agentas gali pakeisti pokalbio pavadinimą naudotojo vardu, kad pokalbį būtų lengviau rasti istorijoje."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Vaidmens aprašymas",
+      "description": "Vaidmens aprašymas naudojamas gavus naują naudotojo pranešimą, kad būtų pasirinktas į jį atsakantis vaidmuo",
+      "labelName": "Pavadinimas",
+      "labelSelectionHint": "Vaidmens pasirinkimo užuomina",
+      "labelDeleteRole": "Ištrinti vaidmenį ",
+      "labelDoNotOverride": "Nekeisti",
+      "labelOverrideModel": "Pakeisti modelį",
+      "descriptionOverrideModel": "Šiam vaidmeniui galite pasirinkti kitą modelį nei tas, kurį agentas naudoja bendrai.",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti vaidmenį „{{name}}“? Šio veiksmo negalima atšaukti.",
+      "labelCancel": "Atšaukti",
+      "labelThinking": "Samprotavimas"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Modelis",
+      "description": "Agento naudojamas kalbos modelis, nebent jį pakeičia vaidmens nuostatos.",
+      "labelName": "Modelis",
+      "labelThinking": "Samprotavimas",
+      "labelThinking_optionalOn": "Samprotavimas",
+      "labelThinking_mandatoryOn": "Privalomas samprotavimas",
+      "labelThinking_optionalOff": "Be samprotavimo",
+      "labelThinking_mandatoryOff": "Samprotavimas visada išjungtas",
+      "labelSelectModel": "Pasirinkite modelį"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumentų saugykla",
+      "labelPathAgent": "Kelias agentui",
+      "labelPathRepository": "Kelias dokumentų saugykloje",
+      "labelPermission": "Teisė",
+      "labelDeleteConnection": "Ištrinti ryšį",
+      "confirmDeleteTitle": "Ištrinti ryšį",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti šį ryšį su dokumentų saugykla „{{name}}“?",
+      "labelCancel": "Atšaukti",
+      "labelAddConnection": "Papildomas ryšys",
+      "labelUnknownRepository": "Nežinoma dokumentų saugykla",
+      "labelConfirmWrite": "Skaitymas ir rašymas (prašyti patvirtinimo)",
+      "labelReadOnly": "Tik skaitymas",
+      "labelWrite": "Skaitymas ir rašymas (automatiškai)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Pavadinimas",
+      "labelMessage": "Pranešimas",
+      "labelClose": "Užverti"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Pavadinimas",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP antraštės",
+      "labelHeaderName": "Pavadinimas",
+      "labelHeaderValue": "Reikšmė",
+      "labelAddHeader": "Pridėti HTTP antraštę",
+      "labelDeleteConnection": "Ištrinti ryšį",
+      "confirmDeleteTitle": "Ištrinti MCP",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti MCP konfigūraciją „{{name}}“?",
+      "labelCancel": "Atšaukti",
+      "labelDeleteMCP": "Ištrinti MCP",
+      "labelAddMCP": "Dar vienas MCP",
+      "errorInvalidUrl": "URL turi būti galiojantis",
+      "labelOAuthApp": "OAuth programa"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Duomenys",
+      "labelConnectRepository": "Prijungti dokumentų saugyklą",
+      "labelToolWebAccess": "Įrankis: Prieiga prie žiniatinklio",
+      "labelConnectMCP": "Prijungti išorinį įrankį (MCP)",
+      "labelSupport": "Pagalba",
+      "labelToolChatExtensions": "Įrankis: Pokalbio plėtiniai",
+      "labelToolCalculator": "Įrankis: Skaičiuotuvas",
+      "labelSystem": "Sistema",
+      "labelToolPlatformAccess": "Įrankis: Prieiga prie schorn.ai platformos"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Naujas agentas",
+      "emptyDescription": "Nustatykite agento elgseną, prieigą prie duomenų, išvaizdą ir daug daugiau.",
+      "labelDefinePrompt": "Parašykite užklausą",
+      "descriptionDefinePrompt": "Agento kokybė priklauso nuo jo instrukcijų. Aiškūs vaidmenų apibrėžimai mažina haliucinacijas ir didina nuoseklumą.",
+      "labelConnectTools": "Prijunkite įrankius",
+      "descriptionConnectTools": "Pavyzdžiui, prijunkite dokumentų saugyklas, kad agentas remtųsi faktais ir naudotų įmonės žinias.",
+      "labelWriteDocs": "Parašykite dokumentaciją",
+      "descriptionWriteDocs": "Padėkite naudotojams suprasti šio agento galimybes.",
+      "infoRoleDefinition": "Vaidmuo nustato agento elgseną ir užduočiai atlikti prieinamus įrankius.",
+      "infoDocsDescription": "Dokumentacijoje gali būti tekstas (palaikomas Markdown formatavimas) ir agentui siunčiamų pranešimų pasiūlymai.",
+      "infoAppearanceDescription": "Pavadinimas, aprašymas ir spalva padeda naudotojams orientuotis tarp prieinamų agentų."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Siūlomi pranešimai",
+      "descriptionRecommendedMessages": "Padėkite naudotojams siūlydami pranešimus, parodančius, kaip geriausiai naudoti agentą.",
+      "labelAddMessage": "Pridėti pranešimą ",
+      "labelDocumentation": "Dokumentacija",
+      "descriptionDocumentation": "Čia pasidalykite su naudotojais papildoma informacija apie šį agentą",
+      "labelShowPreview": "Rodyti peržiūrą",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentacija padeda naudotojams naudotis agentu. Ji rodoma naudotojui pradėjus naują pokalbį.",
+      "descriptionMarkdownHelp": "Markdown yra paprasta žymėjimo kalba, skirta greitai ir lengvai formatuoti tekstą.\n\n* **Struktūra:** Antraštės (`#`), sąrašai (numeruoti `1.` ir nenumeruoti `-`), horizontalios linijos.\n* **Teksto stilius:** **Pusjuodis** `**Pusjuodis**`, *Kursyvas* `*Kursyvas*`, ~~Perbrauktas~~ `~~Perbrauktas~~`.\n* **Kodas:** Kodas tekste (`code`) ir kodo blokai su sintaksės paryškinimu.\n* **Tvarkymas:** Citatos (`>`), kontroliniai sąrašai (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Vaidmenų nėra",
+      "descriptionNoRoles": "Agentui neapibrėžtas nė vienas vaidmuo. Be vaidmens agentas neveiks.",
+      "labelAddRole": "Pridėti vaidmenį ",
+      "infoMultipleRoles": "Agentai gali turėti kelis vaidmenis. Kiekvienas vaidmuo gali geriau sutelkti dėmesį į užduoties dalį.",
+      "infoTools": "Agentai gali naudoti įrankius, kad geriau atsakytų į naudotojų prašymus (ieškoti dokumentų, kurti dokumentus ir kt.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Naujas agentas",
+      "labelAgent": "Agentas",
+      "labelCreateAgent": "Sukurti agentą",
+      "labelSaveAgent": "Išsaugoti agentą",
+      "tabOverview": "Apžvalga",
+      "tabPrompt": "Užklausa",
+      "tabDocs": "Pagalba",
+      "tabRoles": "Vaidmenys",
+      "tabSettings": "Nuostatos",
+      "btnCreate": "Sukurti",
+      "btnSave": "Išsaugoti",
+      "labelEditAgent": "Redaguoti agentą",
+      "labelCloneAgent": "Išsaugoti kaip naują agentą",
+      "labelDeleteAgent": "Ištrinti agentą",
+      "confirmDeleteTitle": "Ištrinti agentą",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti agentą „{{name}}“? Šio veiksmo negalima atšaukti.",
+      "labelCancel": "Atšaukti"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Vaidmuo ",
+      "description": "Nustato agento elgseną ir įrankius, kuriuos agentui leidžiama naudoti šiame kontekste.",
+      "tabOverview": "Apžvalga",
+      "tabPrompt": "Užklausa",
+      "tabDocumentRepositoryMounts": "Dokumentų saugyklos",
+      "tabMCPs": "Išoriniai įrankiai (MCP)",
+      "tabWeb": "Prieiga prie interneto",
+      "tabChat": "Pokalbio plėtiniai",
+      "tabCalc": "Skaičiuotuvas",
+      "tabTools": "Įrankiai",
+      "tabSettings": "Nuostatos",
+      "toolWebAccess": "Prieiga prie interneto",
+      "chatExtensions": "Pokalbio plėtiniai",
+      "calculator": "Skaičiuotuvas",
+      "externalToolsMCP": "Išoriniai įrankiai (MCP)",
+      "labelPrompt": "Užklausa"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmesti pakeitimus",
+      "labelDiscardConfirm": "Ar tikrai norite atmesti visus neišsaugotus šio agento pakeitimus?",
+      "labelCancel": "Atšaukti",
+      "labelDiscard": "Atmesti pakeitimus"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Išoriniai įrankiai (MCP)",
+      "changedBadge": "Pakeista",
+      "unknownMcp": "Nežinomas MCP",
+      "invalidUrl": "Netinkamas URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantinė paieška",
+      "labelChanged": "Pakeista",
+      "labelActive": "Aktyvu",
+      "labelInactive": "Neaktyvu",
+      "description": "Kai svarbi duomenų prasmė, o ne tiksli formuluotė. (Reikalingas įterpinių modelis)",
+      "labelUnknownModel": "Nežinomas modelis"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Paieška pagal raktažodžius",
+      "labelChanged": "Pakeista",
+      "labelActive": "Aktyvu",
+      "labelInactive": "Neaktyvu",
+      "description": "Tikslių posakių ir sakinių paieškai. (Vardai, pavadinimai ir kt.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transkribuotojas",
+      "labelChanged": "Pakeista",
+      "labelUnknownTranscriber": "Nežinomas transkribuotojas",
+      "labelGoToTranscriber": "Eiti prie transkribuotojo"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Naujas pranešimas"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Laukiama apdorojimo",
+      "tooltipPaused": "Pristabdyta"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Samprotavimas įjungtas",
+      "labelThinkingOff": "Samprotavimas išjungtas",
+      "labelMessageStack": "Pranešimų dėklas",
+      "placeholderMessage": "Pranešimas...",
+      "tooltipUploadFiles": "Failų įkėlimas",
+      "buttonPause": "Pristabdyti",
+      "buttonStartBatch": "Pradėti paketinį apdorojimą",
+      "buttonSend": "Siųsti",
+      "descriptionFilesPending": "Failai įkeliami arba apdorojami …",
+      "labelAttachFiles": "Pridėti failus",
+      "labelUploadFiles": "Failų įkėlimas",
+      "labelSelectFile": "Pasirinkti esamą failą"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Ar leisti šį veiksmą?",
+      "descriptionAction": "Agentui reikia jūsų leidimo tęsti.",
+      "labelApprove": "Leisti",
+      "labelReject": "Atmesti",
+      "labelRetry": "Bandyti dar kartą",
+      "labelSubmitting": "Apdorojama …",
+      "errorSubmit": "Nepavyko pateikti jūsų sprendimo. Bandykite dar kartą.",
+      "labelMCP": "Prijunkite savo paskyrą",
+      "descriptionMCP": "Šis MCP įrankis reikalauja prisijungti. Laukiantis iškvietimas automatiškai tęsis prijungus paskyrą."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Ar išsaugoti dokumentą?",
+      "descriptionWriteFile": "Agentas nori išsaugoti šį dokumentą. Esamas turinys bus pakeistas.",
+      "labelShowContent": "Rodyti turinį",
+      "labelHideContent": "Slėpti turinį",
+      "descriptionEmptyFile": "Dokumentas bus išsaugotas su tuščiu turiniu."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Gavimas iš žiniatinklio",
+      "description": "Nustatykite šio vaidmens prieigą prie žiniatinklio. Gavimą ir paiešką galima įjungti atskirai.",
+      "labelFetch": "Įjungti gavimą iš žiniatinklio",
+      "labelAskFetch": "Klausti prieš gaunant puslapį",
+      "labelAccess": "Leidžiamos svetainės",
+      "labelAll": "Visos svetainės",
+      "labelWhitelist": "Leidžiamų domenų sąrašas",
+      "descriptionAccess": "HTTP(S) failai ir tinklalapiai, įskaitant vietinį tinklą. Peradresavimams taikomos tos pačios prieigos taisyklės.",
+      "labelDomains": "Leidžiami domenai",
+      "descriptionDomains": "Vienas serverio vardas eilutėje, pavyzdžiui, example.com. Padomeniams naudokite *.example.com; tai neapima paties example.com.",
+      "errorDomains": "Įveskite serverių vardus arba *.example.com be protokolo, kelio ir prievado.",
+      "descriptionEmptyWhitelist": "Tuščias leidžiamų domenų sąrašas blokuoja visus puslapius.",
+      "labelSearchTitle": "Paieška žiniatinklyje",
+      "labelSearch": "Įjungti paiešką žiniatinklyje",
+      "labelAskSearch": "Klausti prieš ieškant žiniatinklyje",
+      "labelProvider": "Paieškos paslaugos teikėjas",
+      "labelProviderDocs": "Paslaugos teikėjo dokumentacija",
+      "labelApiKey": "API raktas",
+      "errorApiKey": "Įveskite pasirinkto paslaugos teikėjo API raktą.",
+      "labelMarket": "Staan kalba ir regionas",
+      "descriptionMarket": "Pavyzdžiui, de-de arba en-us. Numatytoji reikšmė – en-us.",
+      "labelRemoveTool": "Pašalinti įrankį",
+      "labelConfirmRemoveTool": "Ar pašalinti žiniatinklio įrankį?",
+      "descriptionRemoveTool": "Iš šio vaidmens bus pašalintos gavimo ir paieškos žiniatinklyje nuostatos, įskaitant leidžiamų domenų sąrašą ir API raktą.",
+      "labelCancel": "Atšaukti"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Gauti tinklalapį",
+      "descriptionFetch": "Ar leisti agentui atsisiųsti, išsaugoti ir apdoroti šio URL turinį?",
+      "labelDestination": "Paskirties vieta"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Ieškoti žiniatinklyje",
+      "descriptionSearch": "Ar leisti agentui siųsti šią užklausą nustatytam paieškos paslaugos teikėjui?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Užverti",
+      "labelPending": "Vykdoma",
+      "labelApproval": "Laukiama patvirtinimo",
+      "labelDenied": "Atmesta",
+      "labelDone": "Baigta",
+      "errorRequest": "Užklausa nepavyko"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Paieška žiniatinklyje",
+      "labelQuery": "Paieškos užklausa",
+      "labelEmptyResults": "Rezultatų nerasta."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Tinklalapis",
+      "labelUrl": "URL",
+      "labelRange": "Simboliai {{start}}–{{end}} iš {{total}}",
+      "descriptionTruncated": "Daugiau turinio rasite kitoje dalyje.",
+      "labelEmptyPage": "Šiame puslapyje nėra skaitomo teksto.",
+      "labelSource": "Atverti šaltinį",
+      "descriptionFileReady": "Failas išsaugotas ir apdorotas. Išskirtas tekstas tiesiogiai prieinamas agentui.",
+      "descriptionProcessingUnavailable": "Failas išsaugotas. Išskirto teksto nėra; garsui ir vaizdui reikia nustatyto transkribuotojo.",
+      "descriptionProcessingFailed": "Failas išsaugotas, bet apdorojimas nepavyko arba baigėsi jo laikas. Apdorojimą galima paleisti iš naujo saugykloje."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopijuoti failą",
+      "labelMove": "Perkelti failą",
+      "descriptionSuccess": "Failas perduotas. Reikiamas paieškos indeksas atkuriamas fone.",
+      "descriptionPending": "Ruošiamasi perduoti failą…",
+      "descriptionProcessingError": "Failas perduotas, bet apdorojimą reikia paleisti iš naujo paskirties vietoje.",
+      "errorTransfer": "Nepavyko baigti failo perdavimo.",
+      "labelOpenFile": "Atverti paskirties failą",
+      "descriptionDenied": "Failo perdavimas atmestas. Joks failas nebuvo perduotas.",
+      "descriptionApproval": "Laukiama jūsų leidimo.",
+      "descriptionRunning": "Perduodamas failas…",
+      "labelClose": "Užverti",
+      "labelSource": "Šaltinis",
+      "labelTarget": "Paskirties vieta"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Ar leisti kopijuoti šį failą?",
+      "labelMove": "Ar leisti perkelti šį failą?",
+      "descriptionCopy": "Agentas nori nukopijuoti šį failą ir jo apdorotą turinį. Esami paskirties failai niekada neperrašomi.",
+      "descriptionMove": "Agentas nori perkelti šį failą ir jo apdorotą turinį. Šaltinis bus pašalintas sėkmingai nukopijavus.",
+      "labelSource": "Šaltinis",
+      "labelTarget": "Paskirties vieta"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Šis MCP įrankis reikalauja prisijungti. Laukiantis iškvietimas automatiškai tęsis prijungus paskyrą.",
+      "labelConnect": "Prijungti mano paskyrą"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP įrankis",
+      "labelDiscover": "Aptikti prieinamus įrankius",
+      "labelPending": "Vykdoma",
+      "labelDone": "Baigta",
+      "labelApproval": "Reikia prisijungti",
+      "labelDenied": "Neleista",
+      "errorRequest": "Užklausa nepavyko",
+      "labelArguments": "Įvestis",
+      "labelResult": "Rezultatas",
+      "labelClose": "Užverti"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth programa",
+      "labelSearch": "Ieškoti ryšio",
+      "labelAutomatic": "Nėra nustatytos OAuth programos",
+      "labelNone": "Ryšys nepasirinktas",
+      "labelMissing": "Ryšys neprieinamas",
+      "descriptionOAuth": "Nebūtina: Pasirinkite šiam MCP serveriui registruotą OAuth programą. Jos URL šiame agente nustatykite atskirai.",
+      "descriptionSearch": "Staan ir Brave prisijungimo duomenys tvarkomi centralizuotai skiltyje Nuostatos → Ryšiai.",
+      "errorMissing": "Šis ryšys nebeprieinamas. Pasirinkite kitą ryšį.",
+      "descriptionEmpty": "Nėra nustatyto tinkamo ryšio. Tvarkykite ryšius skiltyje Nuostatos → Ryšiai."
+    }
+  },
+  "page": {
+    "labelTitle": "Agentai",
+    "emptyTitle": "Agentų nėra",
+    "emptyDescription": "Dar nesukurtas nė vienas agentas.",
+    "labelNewAgent": "Naujas agentas",
+    "helpSearchTitle": "Ieškoti",
+    "helpSearchDescription": "Galite ieškoti agentų. Paieška apima, be kita ko, agento pavadinimą, aprašymą ir modelį.",
+    "helpSortTitle": "Rikiavimas ir grupavimas",
+    "helpSortDescription": "Agentus galima rikiuoti pagal pavadinimą ir skirstyti į skirtingas grupes. Juos galima rodyti plytelėmis arba lentelėje."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Šis MCP paslaugos teikėjas reikalauja registruotos OAuth programos. Paprašykite administratoriaus skiltyje Nuostatos → Ryšiai sukurti OAuth programą su kliento ID ir kliento paslaptimi, tada pasirinkite ją agento MCP nuostatose. Po to prisijunkite iš pokalbio iš naujo.",
+    "errorStart": "Nepavyko pradėti MCP autorizavimo.",
+    "errorCallback": "MCP autorizavimas nepavyko arba baigėsi jo galiojimas. Grįžkite į pokalbį ir bandykite dar kartą."
+  }
+}

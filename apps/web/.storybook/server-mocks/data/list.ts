@@ -1,0 +1,21 @@
+import { getServiceFixture } from "../../service-fixtures";
+import { adaptFixture, scenarioState } from "../../scenario";
+export const list = async () =>
+  getServiceFixture(
+    "list",
+    adaptFixture(
+      [
+        {
+          name: "Beispiel",
+          path: "/beispiel.txt",
+          createdAtISO: "2026-01-15T12:00:00.000Z",
+          file: true,
+          readableContent: "transcript",
+          size: 1,
+          type: "text",
+          updatedAtISO: "2026-01-15T12:00:00.000Z",
+        },
+      ],
+      scenarioState.current,
+    ),
+  );

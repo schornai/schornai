@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Nova conversa",
+        "mainLabelAgents": "Agentes",
+        "mainLabelApps": "Aplicações",
+        "mainLabelWorkspaces": "Espaços de trabalho",
+        "history": "Histórico"
+      },
+      "SidebarFavorites": {
+        "label": "Favoritos",
+        "empty": "Ainda não adicionou favoritos."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Sem favoritos",
+        "descriptionNoFavorites": "Pode adicionar <agents>agentes</agents>, <documents>repositórios de documentos</documents> e <transcribers>transcritores</transcribers> aos favoritos."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Nova conversa"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Boa noite];(5-11)[Bom dia];(12-17)[Boa tarde];(18-inf)[Boa noite];",
+      "labelAllAgents": "Todos os agentes",
+      "labelToApps": "Ir para as aplicações"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Perfil",
+        "labelFavorites": "Favoritos",
+        "labelPermissions": "Permissões",
+        "labelModels": "Modelos",
+        "labelTaskQueue": "Fila de tarefas",
+        "labelSettings": "Definições",
+        "labelUsers": "Utilizadores",
+        "labelWorkspaces": "Espaços de trabalho",
+        "labelSSOProvider": "Fornecedor SSO",
+        "labelXRAGUpload": "Carregar XRAG",
+        "labelSystemModel": "Modelo do sistema",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Voltar ao painel",
+        "labelConnections": "Ligações",
+        "labelProviderConnections": "Ligações",
+        "labelService": "Serviço",
+        "labelArtifacts": "Artefactos",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Selecionar ícone",
+      "buttonMoreIcons": "Mais ícones",
+      "textLucideInfo": "Ícones de <0>Lucide</0>",
+      "placeholderSearchIcons": "Pesquisar ícones...",
+      "buttonCancel": "Cancelar"
+    },
+    "FileUploadDropZone": {
+      "drop": "Largue o ficheiro aqui para o carregar"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Alterado"
+    },
+    "Pagination": {
+      "labelPrev": "Anterior",
+      "labelNext": "Seguinte"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "A minha conta",
+      "labelSystem": "Sistema",
+      "labelModels": "Modelos",
+      "labelCluster": "Cluster",
+      "labelSettings": "Definições",
+      "labelDashboard": "Painel",
+      "labelProfile": "Perfil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Terminar sessão"
+    },
+    "UserRoleText": {
+      "admin": "Administrador",
+      "workspace-admin": "Administrador do espaço de trabalho",
+      "editor": "Editor",
+      "user": "Utilizador",
+      "none": "Não autorizado"
+    },
+    "StorageView": {
+      "placeholderSearch": "Pesquisar nesta pasta…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nome",
+      "tableColumnType": "Tipo",
+      "tableColumnSize": "Tamanho",
+      "tableColumnCreated": "Criado",
+      "tableColumnUpdated": "Atualizado",
+      "tableColumnNameActions": "Ações",
+      "groupTimeToday": "Hoje",
+      "groupTimeLast7Days": "Últimos 7 dias",
+      "groupTimeLast30Days": "Últimos 30 dias",
+      "groupTimeOther": "Outros",
+      "labelFolder": "Pasta",
+      "descriptionProcessing": "O ficheiro está a ser processado"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Nova pasta",
+      "placeholderFolderName": "Nome da pasta...",
+      "labelCancel": "Cancelar",
+      "labelCreate": "Criar"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Remover",
+      "labelDescription": "Tem a certeza de que pretende remover «{{name}}»? Esta ação não pode ser anulada.",
+      "labelCancel": "Cancelar",
+      "labelRemove": "Remover"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Pasta principal"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Sem ficheiros",
+      "labelDescription": "A pasta atual não contém ficheiros. Arraste ficheiros para aqui para os carregar.",
+      "labelUploadFile": "Carregar ficheiro",
+      "labelCreateFile": "Criar ficheiro"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Opções",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nome de A a Z",
+      "labelNameDesc": "Nome de Z a A",
+      "labelSizeAsc": "Tamanho crescente",
+      "labelSizeDesc": "Tamanho decrescente",
+      "labelCreatedAsc": "Data de criação crescente",
+      "labelCreatedDesc": "Data de criação decrescente",
+      "labelUpdatedAsc": "Data de atualização crescente",
+      "labelUpdatedDesc": "Data de atualização decrescente",
+      "labelGroup": "Agrupar",
+      "labelNoGroup": "Sem grupo",
+      "labelFirstLetter": "Primeira letra",
+      "labelFileType": "Tipo de ficheiro",
+      "labelCreated": "Data de criação",
+      "labelUpdated": "Data de atualização",
+      "labelTilesSmall": "Mosaicos pequenos",
+      "labelTilesMedium": "Mosaicos médios",
+      "labelTilesLarge": "Mosaicos grandes",
+      "labelTable": "Tabela",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Repor",
+      "labelNewFolder": "Nova pasta",
+      "labelThisFolder": "Esta pasta",
+      "labelUploadFile": "Carregar ficheiro",
+      "labelNew": "Novo",
+      "labelDeleteFolder": "Eliminar pasta",
+      "labelNewRecording": "Nova gravação",
+      "labelColumns": "Vista em colunas",
+      "labelNewTextFile": "Novo ficheiro"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Sem resultados",
+      "descriptionNoResults": "A sua pesquisa não devolveu resultados. Reformule a consulta.",
+      "labelCharacters": "caracteres"
+    },
+    "Transcription": {
+      "labelTitle": "Transcrição",
+      "labelLoadingMedia": "A carregar multimédia…",
+      "labelBuffering": "A preparar a reprodução…",
+      "labelSeeking": "A carregar posição…",
+      "labelPlayer": "Leitor multimédia",
+      "labelPlay": "Reproduzir",
+      "labelPause": "Pausar",
+      "labelSeek": "Posição de reprodução",
+      "labelBack": "Recuar 10 segundos",
+      "labelForward": "Avançar 10 segundos",
+      "labelSpeed": "Velocidade de reprodução",
+      "labelUnmute": "Ativar som",
+      "labelMute": "Silenciar",
+      "labelVolume": "Volume",
+      "labelHideVideo": "Ocultar vídeo",
+      "labelShowVideo": "Mostrar vídeo",
+      "labelPlaySegment": "Reproduzir segmento {{number}}",
+      "labelReviewed": "Revisto",
+      "labelSegments": "Segmentos",
+      "labelWords": "Palavras",
+      "descriptionEmpty": "Não foram encontrados resultados de transcrição.",
+      "descriptionConfidence": "Confiança: {{percent}}%",
+      "errorPlayback": "A reprodução falhou. Verifique se o ficheiro multimédia está disponível e tente novamente.",
+      "labelEditSegment": "Editar segmento {{number}}",
+      "labelSegmentText": "Texto do segmento",
+      "labelSave": "Guardar",
+      "labelSaving": "A guardar…",
+      "labelSaveReviewed": "Guardar e marcar como revisto",
+      "labelCancel": "Cancelar",
+      "labelRestoreOriginal": "Restaurar texto original",
+      "descriptionUnsaved": "As alterações só são aplicadas quando guardar.",
+      "errorSave": "Não foi possível guardar. O seu texto foi mantido. Tente novamente.",
+      "errorConflict": "Este segmento foi alterado. Copie o seu rascunho e recarregue a vista antes de voltar a guardar.",
+      "labelDownloadSrt": "Descarregar SRT",
+      "descriptionSaveBeforeDownload": "Guarde ou cancele as alterações antes de descarregar o ficheiro SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Vista em colunas",
+      "labelRoot": "Documentos",
+      "labelDetails": "Detalhes do ficheiro",
+      "labelType": "Tipo",
+      "labelSize": "Tamanho",
+      "labelUpdated": "Atualizado",
+      "labelOpen": "Abrir ficheiro"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Novo ficheiro",
+      "labelName": "Nome do ficheiro",
+      "labelCreate": "Criar ficheiro",
+      "labelCancel": "Cancelar",
+      "errorCreate": "Não foi possível criar o ficheiro. Verifique o nome e as suas permissões de escrita."
+    },
+    "StorageFileActions": {
+      "labelActions": "Ações para {{name}}",
+      "labelDownloadOriginal": "Descarregar original",
+      "labelDownloadProcessed": "Descarregar texto processado",
+      "labelRename": "Mudar o nome",
+      "labelProcess": "Reprocessar",
+      "labelDelete": "Eliminar ficheiro",
+      "labelName": "Novo nome do ficheiro",
+      "labelCancel": "Cancelar",
+      "labelConfirm": "Confirmar",
+      "descriptionDelete": "Eliminar definitivamente «{{name}}», o conteúdo processado e as entradas do índice de pesquisa?",
+      "descriptionProcess": "Reprocessar «{{name}}»? As alterações manuais serão substituídas.",
+      "descriptionQueued": "O processamento está em fila ou já está em curso. Verifique o estado na lista de ficheiros.",
+      "descriptionUnsupported": "Não é possível processar este ficheiro de momento. O áudio e o vídeo exigem um transcritor configurado.",
+      "errorAction": "A ação falhou. Verifique as permissões de escrita, os conflitos de nomes e o processamento em curso. Uma mudança de nome falhada pode deixar ambos os nomes; verifique a lista antes de tentar novamente.",
+      "labelOptions": "Opções",
+      "labelEdit": "Editar",
+      "descriptionRename": "Mude o nome de «{{name}}». Mantenha a extensão do ficheiro. O original, o conteúdo processado e o índice de pesquisa são atualizados em conjunto. Os nomes existentes nunca são substituídos.",
+      "labelCopy": "Copiar para…",
+      "labelMove": "Mover para…",
+      "descriptionCopy": "Copie «{{name}}», incluindo o conteúdo processado. A origem será mantida.",
+      "descriptionMove": "Mova «{{name}}», incluindo o conteúdo processado. A origem será removida após a cópia ser concluída com sucesso.",
+      "descriptionTransferred": "O ficheiro foi transferido. Os índices de pesquisa do destino são reconstruídos em segundo plano.",
+      "descriptionTransferProcessingError": "O ficheiro foi transferido, mas não foi possível iniciar o processamento. Abra o ficheiro de destino e escolha «Reprocessar». Não repita a transferência."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Ações para {{name}}",
+      "labelDelete": "Eliminar pasta"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Conteúdo",
+      "labelSave": "Guardar",
+      "labelCancel": "Cancelar",
+      "errorSave": "Não foi possível guardar. Tente novamente.",
+      "errorConflict": "O conteúdo foi alterado. Recarregue antes de guardar.",
+      "errorIndex": "Guardado, mas não foi possível atualizar o índice de pesquisa. Guarde novamente."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Escolher pasta de destino",
+      "labelSelectFile": "Escolha um ficheiro existente",
+      "descriptionFolder": "Escolha uma pasta existente. Será transferido um ficheiro; os nomes existentes nunca são substituídos.",
+      "descriptionFile": "Escolha um ficheiro desta conversa ou de um repositório acessível. Os documentos e as gravações têm de estar já processados.",
+      "labelStorage": "Armazenamento",
+      "labelCurrentStorage": "Armazenamento atual",
+      "labelUp": "Pasta superior",
+      "descriptionLoading": "A carregar ficheiros…",
+      "descriptionEmpty": "Não existem entradas correspondentes nesta pasta.",
+      "descriptionNoStorages": "Não existem repositórios acessíveis disponíveis.",
+      "descriptionPending": "A transferir o ficheiro. Aguarde pelo resultado.",
+      "labelCancel": "Cancelar",
+      "labelUseFolder": "Usar esta pasta",
+      "labelUseFile": "Anexar ficheiro",
+      "labelRetry": "Recarregar",
+      "errorLoad": "Não foi possível carregar esta pasta. Verifique o acesso e tente novamente.",
+      "errorCollision": "O destino já contém um ficheiro ou conteúdo processado com este nome. Escolha outra pasta; nada foi substituído.",
+      "errorSameTarget": "A origem e o destino são iguais. Escolha outra pasta.",
+      "errorSourceChanged": "A origem foi alterada durante a cópia. A cópia incompleta no destino foi removida. Tente novamente.",
+      "errorBusy": "Este ficheiro está a ser processado. Aguarde até terminar.",
+      "errorPermission": "Não tem as permissões necessárias na origem ou no destino.",
+      "errorSourceDelete": "O ficheiro de destino completo foi criado, mas não foi possível remover a origem. Verifique ambas as localizações antes de repetir a operação.",
+      "errorCleanup": "A cópia falhou. A origem foi mantida, mas podem ter ficado ficheiros incompletos no destino. Verifique-o antes de tentar novamente.",
+      "errorAction": "A operação falhou. Verifique as permissões, os nomes dos ficheiros e ambas as localizações antes de tentar novamente.",
+      "errorNotProcessed": "Este ficheiro ainda não foi processado. Processe-o primeiro e volte a selecioná-lo."
+    }
+  },
+  "_welcomeMessage": "Bem-vindo ao\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Documentação",
+    "feedback": "Comentários",
+    "help": "Ajuda",
+    "labelThemeLight": "Claro",
+    "labelThemeDark": "Escuro",
+    "labelThemeSystem": "Sistema operativo",
+    "labelLanguage": "Idioma"
+  }
+}

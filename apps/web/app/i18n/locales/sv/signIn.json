@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Du är redan inloggad",
+      "backToDashboard": "Tillbaka till översikten",
+      "signOut": "Logga ut"
+    },
+    "PasswordSignIn": {
+      "header": "E-post",
+      "headerSub": "Logga in med e-post och lösenord",
+      "inputEmailLabel": "E-post",
+      "inputPasswordLabel": "Lösenord",
+      "buttonSignIn": "Logga in med e-post",
+      "buttonReset": "Återställ lösenord"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Logga in med SSO-leverantör",
+      "buttonSignIn": "Logga in med {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Återställ lösenord",
+      "descriptionKey": "Ange din e-postadress och återställningsnyckeln från administratören. Nyckeln kan användas en gång och gäller i 7 dagar.",
+      "labelEmail": "E-post",
+      "labelKey": "Nyckel för lösenordsåterställning",
+      "labelPassword": "Nytt lösenord",
+      "labelPasswordAgain": "Upprepa nytt lösenord",
+      "descriptionPassword": "Använd minst 6 tecken och följ organisationens lösenordskrav.",
+      "errorEmail": "Ange en giltig e-postadress.",
+      "errorKey": "Ange din återställningsnyckel.",
+      "errorPassword": "Lösenordet måste innehålla minst 6 tecken.",
+      "errorPasswordAgain": "Lösenorden matchar inte.",
+      "errorReset": "Lösenordet kunde inte ändras. Kontrollera e-postadressen, nyckeln och lösenordskraven. Utgångna eller tidigare använda nycklar är ogiltiga.",
+      "descriptionSuccess": "Ditt lösenord har ändrats. Du kan nu logga in med ditt nya lösenord.",
+      "labelReset": "Spara lösenord",
+      "labelSignIn": "Tillbaka till inloggning"
+    }
+  }
+}

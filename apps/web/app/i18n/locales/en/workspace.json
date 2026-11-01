@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Description",
+      "description": "Choose a suitable name for the workspace. Additionally, a short description can also be saved.",
+      "labelName": "Name",
+      "labelDescription": "Description",
+      "buttonSave": "Save",
+      "buttonReset": "Reset"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentation",
+      "description": "Share additional information about this workspace with your users here.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Save",
+      "buttonReset": "Reset"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO mappings",
+      "description": "Select which SSO group has access to the workspace with which permission.",
+      "labelRoleUser": "User group",
+      "labelRoleEditor": "Editor group",
+      "labelRoleWorkspaceAdmin": "Workspace admin group",
+      "placeholderNoGroup": "No group assigned",
+      "descriptionRoleUser": "Can view workspace content (agents, transcribers, document repositories, etc.), but cannot edit it.",
+      "descriptionRoleEditor": "Can view workspace content and additionally edit it.",
+      "descriptionRoleWorkspaceAdmin": "Can manage the workspace and create, edit and delete agents, transcribers, document repositories, etc.",
+      "buttonSave": "Save",
+      "buttonReset": "Reset"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatic user",
+      "description": "When “Automatic user” is enabled, everyone who can sign in to the box is automatically authorized as a user in this organization.",
+      "labelActive": "Automatic user enabled",
+      "labelInactive": "Automatic user disabled"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "New workspace",
+      "descriptionWorkspace": "Choose a name and an optional description. You can configure further settings after creating the workspace.",
+      "labelName": "Name",
+      "labelDescription": "Description",
+      "labelCreate": "Create workspace",
+      "labelCancel": "Cancel",
+      "errorCreate": "The workspace could not be created. Please try again."
+    },
+    "WorkspaceCard": {
+      "labelType": "Workspace"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Edit workspace",
+      "tooltipInfo": "Open workspace"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Add to favorites",
+      "tooltipRemoveFavorite": "Remove from favorites"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Search workspaces",
+      "labelName": "Name",
+      "labelDescription": "Description",
+      "labelRole": "Your role",
+      "labelActions": "Actions",
+      "labelFavorites": "Favorites",
+      "labelOtherWorkspaces": "Other workspaces",
+      "labelEmpty": "No workspaces",
+      "descriptionEmpty": "You do not have access to a workspace yet.",
+      "labelNoResults": "No results",
+      "descriptionNoResults": "Try another search term."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "View",
+      "labelSort": "Sort",
+      "labelNameAsc": "Name A to Z",
+      "labelNameDesc": "Name Z to A",
+      "labelGroup": "Group by",
+      "labelNoGroup": "No group",
+      "labelFavorites": "Favorites",
+      "labelFirstLetter": "First letter",
+      "labelCards": "Cards",
+      "labelTable": "Table",
+      "labelSaveView": "Save view",
+      "labelReset": "Reset"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Create workspace"
+    }
+  },
+  "page": {
+    "labelYourRole": "Your role",
+    "labelEmpty": "No content yet",
+    "descriptionEmpty": "There are no agents, document repositories or transcribers available in this workspace yet.",
+    "labelTitle": "Workspaces"
+  }
+}

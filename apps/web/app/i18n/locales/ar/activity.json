@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "السجل"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "خطأ",
+      "idle": "خامل",
+      "running": "قيد التشغيل",
+      "success": "نجاح"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "تثبيت",
+      "actionUnpin": "إلغاء التثبيت",
+      "actionDelete": "حذف"
+    },
+    "ActivityList": {
+      "placeholderSearch": "بحث…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelLabelAsc": "التسمية من أ إلى ي",
+      "labelLabelDesc": "التسمية من ي إلى أ",
+      "labelCreatedAsc": "تاريخ الإنشاء تنازليًا",
+      "labelCreatedDesc": "تاريخ الإنشاء تصاعديًا",
+      "labelUpdatedAsc": "تاريخ التحديث تنازليًا",
+      "labelUpdatedDesc": "تاريخ التحديث تصاعديًا",
+      "labelGroup": "التجميع",
+      "labelPinned": "المثبتة",
+      "labelState": "الحالة",
+      "labelType": "النوع",
+      "labelCreated": "تاريخ الإنشاء",
+      "labelUpdated": "تاريخ التحديث",
+      "labelList": "قائمة",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين",
+      "labelNoGroup": "دون مجموعة"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "لا توجد أنشطة",
+      "emptyDescription": "تظهر هنا محادثاتك ونصوصك المفرغة السابقة.",
+      "emptyLabelAgents": "الوكلاء"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "اليوم",
+      "groupTimeLast7Days": "آخر 7 أيام",
+      "groupTimeLast30Days": "آخر 30 يومًا",
+      "groupTimeOther": "أخرى",
+      "groupPinned": "المثبتة",
+      "groupNotPinned": "غير مثبتة",
+      "groupUnknown": "غير معروف",
+      "groupChat": "محادثة",
+      "groupTranscription": "تفريغ صوتي",
+      "groupReindex": "إعادة الفهرسة",
+      "labelReindex": "إعادة الفهرسة",
+      "labelPinned": "المثبتة"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "التسمية",
+      "tableColumnType": "النوع",
+      "tableColumnState": "الحالة",
+      "tableColumnCreated": "أُنشئ",
+      "tableColumnUpdated": "حُدّث",
+      "tableColumnPinned": "المثبتة",
+      "tableColumnNameActions": "الإجراءات",
+      "groupTimeToday": "اليوم",
+      "groupTimeLast7Days": "آخر 7 أيام",
+      "groupTimeLast30Days": "آخر 30 يومًا",
+      "groupTimeOther": "أخرى",
+      "groupPinned": "المثبتة",
+      "groupNotPinned": "غير مثبتة",
+      "groupUnknown": "غير معروف",
+      "groupChat": "محادثة",
+      "groupTranscription": "تفريغ صوتي",
+      "groupReindex": "إعادة الفهرسة",
+      "labelReindex": "إعادة الفهرسة",
+      "labelPinned": "المثبتة"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "السجل",
+      "labelPinned": "المثبتة",
+      "labelToday": "اليوم",
+      "labelLast7Days": "آخر 7 أيام",
+      "labelLast30Days": "آخر 30 يومًا",
+      "labelEmpty": "فارغ"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "النشاط",
+      "actionPin": "تثبيت",
+      "actionUnpin": "إلغاء التثبيت",
+      "actionDelete": "حذف",
+      "labelAgent": "الوكيل — {{name}}",
+      "actionNewChat": "محادثة جديدة",
+      "labelInfo": "معلومات"
+    }
+  }
+}

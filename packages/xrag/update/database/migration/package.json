@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "migrate": "supabase db push --include-all"
+  },
+  "dependencies": {
+    "supabase": "^2.121.0"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "packages/xrag/update/database/migration"
+  }
+}

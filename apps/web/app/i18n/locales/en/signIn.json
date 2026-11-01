@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "You are already signed in",
+      "backToDashboard": "Back to Dashboard",
+      "signOut": "Sign out"
+    },
+    "PasswordSignIn": {
+      "header": "Email",
+      "headerSub": "Sign in with email and password",
+      "inputEmailLabel": "Email",
+      "inputPasswordLabel": "Password",
+      "buttonSignIn": "Sign in with email",
+      "buttonReset": "Reset password"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Sign in with SSO provider",
+      "buttonSignIn": "Sign in with {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Reset password",
+      "descriptionKey": "Enter your email address and the reset key provided by your administrator. The key can be used once and is valid for 7 days.",
+      "labelEmail": "Email",
+      "labelKey": "Password reset key",
+      "labelPassword": "New password",
+      "labelPasswordAgain": "Repeat new password",
+      "descriptionPassword": "Use at least 6 characters and follow your organization’s password requirements.",
+      "errorEmail": "Enter a valid email address.",
+      "errorKey": "Enter your reset key.",
+      "errorPassword": "The password must contain at least 6 characters.",
+      "errorPasswordAgain": "The passwords do not match.",
+      "errorReset": "The password could not be changed. Check your email address, key and password requirements. Expired or previously used keys are invalid.",
+      "descriptionSuccess": "Your password has been changed. You can now sign in with your new password.",
+      "labelReset": "Save password",
+      "labelSignIn": "Back to sign in"
+    }
+  }
+}

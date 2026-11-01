@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Ainm",
+      "labelFirstName": "Ainm baiste",
+      "labelLastName": "Sloinne",
+      "buttonSave": "Sábháil",
+      "buttonReset": "Athshocraigh"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Abhatár"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Bain an íomhá",
+      "alertDelete": "Bain an íomhá",
+      "alertDeleteExplainer": "An bhfuil tú cinnte gur mhaith leat d’íomhá a bhaint?",
+      "alertDeleteCancel": "Cealaigh"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Uaslódáil íomhá"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Ceadanna",
+      "tableColumnName": "Ainm",
+      "tableColumnPermission": "Cead",
+      "tableColumnDescription": "Cur síos",
+      "infoEmpty": "Gan ceadanna",
+      "infoEmptyDescription": "Níl aon fheidhm de chuid schorn.ai box ar fáil.",
+      "infoEmptyAdminDescription": "Mar riarthóir, is féidir leat an chéad spás oibre a chruthú.",
+      "infoEmptyAdminAction": "Cruthaigh an chéad spás oibre",
+      "infoUser": "Is féidir leis ábhar na heagraíochta a fheiceáil (botaí comhrá, tras-scríobhaithe, doiciméid, stórais, srl.), ach ní féidir leis é a chur in eagar.",
+      "infoEditor": "Is féidir leis ábhar na heagraíochta a fheiceáil agus é a chur in eagar freisin (botaí comhrá nua a chruthú, doiciméid a chur in eagar, scriosadh, srl.).",
+      "infoAdmin": "Is féidir leis léamh agus scríobh i ngach eagraíocht agus socruithe córais a bhainistiú freisin (XRAG a uaslódáil, dathanna a athrú, srl.), chomh maith le húsáideoirí a bhainistiú."
+    }
+  },
+  "page": {
+    "title": "Próifíl",
+    "infoPersonalize": "Pearsantaigh",
+    "infoPersonalizeDescription": "Is féidir leat do phictiúr próifíle a uaslódáil agus d’ainm a shaincheapadh anseo."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Pasfhocal nua socraithe",
+    "description": "Socraíodh an pasfhocal nua go rathúil. Tá tú sínithe isteach anois leis an bpasfhocal nua.",
+    "buttonBackToDashboard": "Chuig an deais"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Naisc",
+      "descriptionConnections": "Do naisc phearsanta OAuth le freastalaithe MCP. Má dhícheanglaíonn tú, bainfear na dintiúir atá stóráilte anseo. D’fhéadfadh glaonna atá ar siúl cheana críochnú; cúlghair ceadanna an tsoláthraí go díreach leis an soláthraí.",
+      "labelDisconnect": "Dícheangail",
+      "descriptionEmpty": "Ceangail do chuntas sa chomhrá nuair a éilíonn uirlis MCP ort síniú isteach.",
+      "labelEmpty": "Níl aon nasc ann fós",
+      "labelInfo": "Maidir le naisc",
+      "errorDisconnect": "Níorbh fhéidir an nasc a dhícheangal. Bain triail eile as."
+    }
+  }
+}

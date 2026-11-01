@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Описание",
+      "description": "Изберете подходящо име за работното пространство. Можете да запазите и кратко описание.",
+      "labelName": "Име",
+      "labelDescription": "Описание",
+      "buttonSave": "Запазване",
+      "buttonReset": "Нулиране"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Документация",
+      "description": "Тук споделете допълнителна информация за това работно пространство с потребителите си.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Запазване",
+      "buttonReset": "Нулиране"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO съпоставяния",
+      "description": "Изберете коя SSO група има достъп до работното пространство и с какви права.",
+      "labelRoleUser": "Потребителска група",
+      "labelRoleEditor": "Редакторска група",
+      "labelRoleWorkspaceAdmin": "Група администратори на работното пространство",
+      "placeholderNoGroup": "Няма зададена група",
+      "descriptionRoleUser": "Може да разглежда съдържанието на работното пространство (агенти, транскрибатори, хранилища за документи и др.), но не може да го редактира.",
+      "descriptionRoleEditor": "Може да разглежда съдържанието на работното пространство и допълнително да го редактира.",
+      "descriptionRoleWorkspaceAdmin": "Може да управлява работното пространство и да създава, редактира и изтрива агенти, транскрибатори, хранилища за документи и др.",
+      "buttonSave": "Запазване",
+      "buttonReset": "Нулиране"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Автоматичен потребител",
+      "description": "Когато „Автоматичен потребител“ е включено, всеки, който може да влезе в box, автоматично получава права на потребител в тази организация.",
+      "labelActive": "Автоматичният потребител е включен",
+      "labelInactive": "Автоматичният потребител е изключен"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Ново работно пространство",
+      "descriptionWorkspace": "Изберете име и описание по избор. Можете да зададете допълнителни настройки след създаването на работното пространство.",
+      "labelName": "Име",
+      "labelDescription": "Описание",
+      "labelCreate": "Създаване на работно пространство",
+      "labelCancel": "Отказ",
+      "errorCreate": "Работното пространство не можа да бъде създадено. Опитайте отново."
+    },
+    "WorkspaceCard": {
+      "labelType": "Работно пространство"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Редактиране на работно пространство",
+      "tooltipInfo": "Отваряне на работното пространство"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Добавяне в любими",
+      "tooltipRemoveFavorite": "Премахване от любими"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Търсене на работни пространства",
+      "labelName": "Име",
+      "labelDescription": "Описание",
+      "labelRole": "Вашата роля",
+      "labelActions": "Действия",
+      "labelFavorites": "Любими",
+      "labelOtherWorkspaces": "Други работни пространства",
+      "labelEmpty": "Няма работни пространства",
+      "descriptionEmpty": "Все още нямате достъп до работно пространство.",
+      "labelNoResults": "Няма резултати",
+      "descriptionNoResults": "Опитайте друга дума за търсене."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Опции",
+      "labelView": "Изглед",
+      "labelSort": "Сортиране",
+      "labelNameAsc": "Име от А до Я",
+      "labelNameDesc": "Име от Я до А",
+      "labelGroup": "Групиране по",
+      "labelNoGroup": "Без група",
+      "labelFavorites": "Любими",
+      "labelFirstLetter": "Първа буква",
+      "labelCards": "Карти",
+      "labelTable": "Таблица",
+      "labelSaveView": "Запазване на изгледа",
+      "labelReset": "Нулиране"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Създаване на работно пространство"
+    }
+  },
+  "page": {
+    "labelYourRole": "Вашата роля",
+    "labelEmpty": "Все още няма съдържание",
+    "descriptionEmpty": "В това работно пространство все още няма достъпни агенти, хранилища за документи или транскрибатори.",
+    "labelTitle": "Работни пространства"
+  }
+}

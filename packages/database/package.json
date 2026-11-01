@@ -1,0 +1,31 @@
+{
+  "name": "@schornio/aibox-package-database",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "devDependencies": {
+    "@schornio/aibox-eslint-config": "*",
+    "@supabase/supabase-js": "2.118.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.13.0",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "xrag": "*",
+    "@schornio/aibox-package-markdown-changelog": "*",
+    "@schornio/aibox-package-utils": "*",
+    "ai": "^7.0.143",
+    "jose": "^6.2.12"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "packages/database"
+  }
+}

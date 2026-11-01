@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkriptsioon",
+    "description": "Transkribeerijad muudavad suulise sisu, näiteks koosolekud, intervjuud või kõned, struktureerituks ja tehisintellektile otsitavaks."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkribeerija"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Otsi..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelNameAsc": "Nimi A–Z",
+      "labelNameDesc": "Nimi Z–A",
+      "labelGroup": "Rühmita alusel",
+      "labelNoGroup": "Rühmitamata",
+      "labelFavorites": "Lemmikud",
+      "labelFirstLetter": "Esitäht",
+      "labelWorkspaces": "Tööruumid",
+      "labelModel": "Mudel",
+      "labelCards": "Kaardid",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta",
+      "labelTranscribers": "Transkribeerijad",
+      "labelNewTranscriber": "Uus transkribeerija"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Teised transkribeerijad",
+      "labelFavorites": "Lemmikud",
+      "labelNoGroup": "Rühmitamata",
+      "labelUnknownModel": "Tundmatu mudel „{{id}}“"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Võimalused",
+      "tableColumnNameActions": "Toimingud",
+      "emptyTitle": "Transkribeerijaid pole",
+      "emptyDescription": "Ühtegi transkribeerijat pole veel loodud.",
+      "labelOtherTranscribers": "Teised transkribeerijad",
+      "labelFavorites": "Lemmikud",
+      "labelNoGroup": "Rühmitamata",
+      "labelUnknownModel": "Tundmatu mudel „{{id}}“"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Tundmatu mudel",
+      "labelUnknownWorkspace": "Tundmatu tööruum"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Muuda",
+      "tooltipInfo": "Teave",
+      "tooltipNewTranscription": "Uus transkriptsioon",
+      "tooltipRecord": "Salvesta heli"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eemalda lemmikutest",
+      "tooltipAddFavorite": "Lisa lemmikutesse"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Viip",
+      "labelChanged": "Muudetud",
+      "labelEmpty": "Tühi"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Uus transkribeerija",
+      "labelTranscriber": "Transkribeerija",
+      "labelCreateTranscriber": "Loo transkribeerija",
+      "labelSaveTranscriber": "Salvesta transkribeerija",
+      "labelCloneTranscriber": "Salvesta uue transkribeerijana",
+      "labelDeleteTranscriber": "Kustuta transkribeerija",
+      "confirmDeleteTitle": "Kustuta transkribeerija",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada transkribeerija „{{name}}“? Seda toimingut ei saa tagasi võtta.",
+      "labelCancel": "Tühista",
+      "tabOverview": "Ülevaade",
+      "tabPrompt": "Viip",
+      "tabSettings": "Seaded",
+      "btnCreate": "Loo",
+      "btnSave": "Salvesta"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Loobu muudatustest",
+      "labelDiscardConfirm": "Kas soovid kindlasti loobuda kõigist selle transkribeerija salvestamata muudatustest?",
+      "labelCancel": "Tühista",
+      "labelDiscard": "Loobu muudatustest"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Uus transkribeerija",
+      "emptyDescription": "Määra transkribeerija käitumine ja välimus.",
+      "labelDefinePrompt": "Kirjuta viip",
+      "descriptionDefinePrompt": "Lühike viip aitab transkribeerijal mõista ja õigesti kirjutada nimesid, erialatermineid ning tootenimesid nii, nagu eeldad.",
+      "helpTitle": "Abi",
+      "helpPromptDescription": "Viiba abil vajab transkriptsioon hiljem vähem parandusi ning pikemate või kindla teemaga salvestiste tulemus on ühtlasem."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Viip",
+      "descriptionWhisperPrompt": "Viip edastatakse transkribeerimismudelile (Whisper), et aidata sellel mõista valdkonnaspetsiifilisi termineid."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Välimus",
+      "description": "Vali värv ja ikoon, mis transkribeerijat kõige paremini iseloomustavad.",
+      "labelIcon": "Ikoon",
+      "labelColor": "Värv"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Kirjeldus",
+      "description": "Vali transkribeerijale sobiv nimi. Lisaks saad salvestada lühikese kirjelduse.",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Mudel",
+      "description": "Transkribeerija kasutatav transkribeerimismudel.",
+      "labelName": "Mudel",
+      "labelSelectModel": "Vali mudel"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Tööruum",
+      "description": "Vali tööruum, kuhu transkribeerija luua.",
+      "labelName": "Tööruum",
+      "labelSelectWorkspace": "Vali tööruum."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Failid",
+      "tabInfo": "Teave"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Salvesta heli",
+      "labelReady": "Valmis",
+      "labelRequesting": "Mikrofoni ühendamine",
+      "labelRecording": "Salvestamine",
+      "labelStopping": "Salvestamise lõpetamine",
+      "labelRecorded": "Salvestis on valmis",
+      "labelUploading": "Salvestamine",
+      "labelSaved": "Salvestatud",
+      "labelDuration": "Salvestise kestus",
+      "labelStart": "Alusta salvestamist",
+      "labelStop": "Peata salvestamine",
+      "labelRecordAgain": "Salvesta uuesti",
+      "labelCancel": "Tühista",
+      "labelTranscribe": "Salvesta ja transkribeeri",
+      "labelDiscard": "Loobu salvestisest",
+      "labelPreview": "Salvestise eelvaade",
+      "descriptionSaved": "Salvestis salvestati. Transkribeerimine algab automaatselt.",
+      "errorUnsupported": "Heli salvestamine nõuab toetatud brauserit ja turvalist ühendust (HTTPS või localhost).",
+      "errorPermission": "Juurdepääs mikrofonile keelati. Luba brauseris juurdepääs mikrofonile ja proovi uuesti.",
+      "errorRecording": "Mikrofon ei saanud heli salvestada. Kontrolli oma seadet ja proovi uuesti.",
+      "errorEmpty": "Salvestis ei sisalda heli. Salvesta uuesti.",
+      "errorUpload": "Salvestist ei õnnestunud salvestada. Saad seda kuulata ja uuesti üles laadida.",
+      "descriptionScreenAwake": "Ekraan püsib salvestamise ajal aktiivne.",
+      "descriptionScreenSleep": "Ekraani ei saa aktiivsena hoida. Hoia see leht avatuna ja takista ekraani automaatset lukustumist.",
+      "descriptionCloseBlocked": "Enne sulgemist peata salvestamine ning salvesta salvestis või loobu sellest. Oota, kuni üleslaadimine lõpeb.",
+      "labelClose": "Sulge"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automaatsed korduskatsed",
+      "labelLevel": "Tase",
+      "description": "Kui tulemused on ebakindlad või sisaldavad palju kordusi, võib transkribeerija proovida helilõiku uuesti tuvastada. Rohkem katseid võib tuvastamist parandada, kuid võtab kauem aega.",
+      "labelFast": "Kiire",
+      "labelBalanced": "Tasakaalus",
+      "labelThorough": "Põhjalik",
+      "descriptionFast": "Üks katse helilõigu kohta, ilma automaatse korduseta.",
+      "descriptionBalanced": "Kuni 3 katset helilõigu kohta.",
+      "descriptionThorough": "Kuni 6 katset helilõigu kohta.",
+      "errorLevel": "Vali üks kolmest tasemest."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkriptsioon",
+    "emptyTitle": "Transkribeerijaid pole",
+    "emptyDescription": "Ühtegi transkribeerijat pole veel loodud.",
+    "labelNewTranscriber": "Uus transkribeerija",
+    "helpTitle": "Abi",
+    "helpSearchDescription": "Saad transkribeerijaid otsida. Otsing hõlmab muu hulgas transkribeerija nime, kirjeldust ja mudelit.",
+    "helpSortDescription": "Transkribeerijaid saab sortida nime järgi ja jagada erinevatesse rühmadesse. Neid saab kuvada kaartidena või tabelina."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@schornio/aibox-package-service",
+  "private": true,
+  "version": "0.1.0",
+  "description": "schorn.ai machine service",
+  "type": "module",
+  "files": [
+    "dist",
+    "config.example.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc --noEmit && rollup --config rollup.config.mjs",
+    "prepack": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "xrag": "*",
+    "zod": "^4.6.7"
+  },
+  "dependencies": {
+    "@schornio/aibox-package-utils": "*",
+    "@schornio/aibox-realtime": "*",
+    "@hocuspocus/provider": "^4.7.1",
+    "yjs": "^13.6.33"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "packages/service"
+  }
+}

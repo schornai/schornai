@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Beskrivelse",
+      "description": "Vælg et passende navn til arbejdsområdet. Du kan også gemme en kort beskrivelse.",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse",
+      "buttonSave": "Gem",
+      "buttonReset": "Nulstil"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentation",
+      "description": "Del yderligere oplysninger om dette arbejdsområde med brugerne her.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Gem",
+      "buttonReset": "Nulstil"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO-tilknytninger",
+      "description": "Vælg, hvilken SSO-gruppe der har adgang til arbejdsområdet og med hvilke rettigheder.",
+      "labelRoleUser": "Brugergruppe",
+      "labelRoleEditor": "Redaktørgruppe",
+      "labelRoleWorkspaceAdmin": "Gruppe for arbejdsområdeadministratorer",
+      "placeholderNoGroup": "Ingen gruppe tildelt",
+      "descriptionRoleUser": "Kan se arbejdsområdets indhold, som agenter, transskriberingsværktøjer og dokumentarkiver, men ikke redigere det.",
+      "descriptionRoleEditor": "Kan se og redigere arbejdsområdets indhold.",
+      "descriptionRoleWorkspaceAdmin": "Kan administrere arbejdsområdet og oprette, redigere og slette agenter, transskriberingsværktøjer, dokumentarkiver og andre ressourcer.",
+      "buttonSave": "Gem",
+      "buttonReset": "Nulstil"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatisk bruger",
+      "description": "Når »Automatisk bruger« er aktiveret, får alle, der kan logge ind i systemet, automatisk brugeradgang i denne organisation.",
+      "labelActive": "Automatisk bruger aktiveret",
+      "labelInactive": "Automatisk bruger deaktiveret"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nyt arbejdsområde",
+      "descriptionWorkspace": "Vælg et navn og en valgfri beskrivelse. Du kan konfigurere yderligere indstillinger, efter at arbejdsområdet er oprettet.",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse",
+      "labelCreate": "Opret arbejdsområde",
+      "labelCancel": "Annuller",
+      "errorCreate": "Arbejdsområdet kunne ikke oprettes. Prøv igen."
+    },
+    "WorkspaceCard": {
+      "labelType": "Arbejdsområde"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Rediger arbejdsområde",
+      "tooltipInfo": "Åbn arbejdsområde"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Føj til favoritter",
+      "tooltipRemoveFavorite": "Fjern fra favoritter"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Søg efter arbejdsområder",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse",
+      "labelRole": "Din rolle",
+      "labelActions": "Handlinger",
+      "labelFavorites": "Favoritter",
+      "labelOtherWorkspaces": "Andre arbejdsområder",
+      "labelEmpty": "Ingen arbejdsområder",
+      "descriptionEmpty": "Du har endnu ikke adgang til et arbejdsområde.",
+      "labelNoResults": "Ingen resultater",
+      "descriptionNoResults": "Prøv et andet søgeord."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelNameAsc": "Navn A til Å",
+      "labelNameDesc": "Navn Å til A",
+      "labelGroup": "Gruppér efter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelFavorites": "Favoritter",
+      "labelFirstLetter": "Første bogstav",
+      "labelCards": "Kort",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Opret arbejdsområde"
+    }
+  },
+  "page": {
+    "labelYourRole": "Din rolle",
+    "labelEmpty": "Intet indhold endnu",
+    "descriptionEmpty": "Der er endnu ingen tilgængelige agenter, dokumentarkiver eller transskriberingsværktøjer i dette arbejdsområde.",
+    "labelTitle": "Arbejdsområder"
+  }
+}

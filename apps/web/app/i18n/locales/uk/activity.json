@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Історія"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Помилка",
+      "idle": "Очікування",
+      "running": "Виконується",
+      "success": "Успішно"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Закріпити",
+      "actionUnpin": "Відкріпити",
+      "actionDelete": "Видалити"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Пошук…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelLabelAsc": "Назва від А до Я",
+      "labelLabelDesc": "Назва від Я до А",
+      "labelCreatedAsc": "Дата створення за спаданням",
+      "labelCreatedDesc": "Дата створення за зростанням",
+      "labelUpdatedAsc": "Дата оновлення за спаданням",
+      "labelUpdatedDesc": "Дата оновлення за зростанням",
+      "labelGroup": "Групування",
+      "labelPinned": "Закріплені",
+      "labelState": "Стан",
+      "labelType": "Тип",
+      "labelCreated": "Дата створення",
+      "labelUpdated": "Дата оновлення",
+      "labelList": "Список",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути",
+      "labelNoGroup": "Без групування"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Немає активностей",
+      "emptyDescription": "Тут з’являтимуться ваші попередні чати й транскрипції.",
+      "emptyLabelAgents": "Агенти"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Сьогодні",
+      "groupTimeLast7Days": "Останні 7 днів",
+      "groupTimeLast30Days": "Останні 30 днів",
+      "groupTimeOther": "Інше",
+      "groupPinned": "Закріплені",
+      "groupNotPinned": "Не закріплено",
+      "groupUnknown": "Невідомо",
+      "groupChat": "Чат",
+      "groupTranscription": "Транскрипція",
+      "groupReindex": "Переіндексація",
+      "labelReindex": "Переіндексація",
+      "labelPinned": "Закріплені"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Назва",
+      "tableColumnType": "Тип",
+      "tableColumnState": "Стан",
+      "tableColumnCreated": "Створено",
+      "tableColumnUpdated": "Оновлено",
+      "tableColumnPinned": "Закріплені",
+      "tableColumnNameActions": "Дії",
+      "groupTimeToday": "Сьогодні",
+      "groupTimeLast7Days": "Останні 7 днів",
+      "groupTimeLast30Days": "Останні 30 днів",
+      "groupTimeOther": "Інше",
+      "groupPinned": "Закріплені",
+      "groupNotPinned": "Не закріплено",
+      "groupUnknown": "Невідомо",
+      "groupChat": "Чат",
+      "groupTranscription": "Транскрипція",
+      "groupReindex": "Переіндексація",
+      "labelReindex": "Переіндексація",
+      "labelPinned": "Закріплені"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Історія",
+      "labelPinned": "Закріплені",
+      "labelToday": "Сьогодні",
+      "labelLast7Days": "Останні 7 днів",
+      "labelLast30Days": "Останні 30 днів",
+      "labelEmpty": "Порожньо"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Активність",
+      "actionPin": "Закріпити",
+      "actionUnpin": "Відкріпити",
+      "actionDelete": "Видалити",
+      "labelAgent": "Агент — {{name}}",
+      "actionNewChat": "Новий чат",
+      "labelInfo": "Інформація"
+    }
+  }
+}

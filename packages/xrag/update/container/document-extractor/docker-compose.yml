@@ -1,0 +1,12 @@
+# Independently selectable document extraction service, currently backed by Apache Tika.
+name: schornai-document-extractor
+services:
+  document-extractor:
+    image: apache/tika:4.1.0-1-full
+    restart: on-failure
+    ports:
+      - ${DOCUMENT_EXTRACTOR_BIND_ADDRESS:-127.0.0.1}:${DOCUMENT_EXTRACTOR_PORT:-9998}:9998
+networks:
+  default:
+    external: true
+    name: ${SERVICE_DOCKER_NETWORK:-schornai}

@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible problem in schorn.ai.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        English and German are welcome. For vulnerabilities, follow [SECURITY.md](https://github.com/schornai/schornai/blob/HEAD/SECURITY.md). Remove secrets and personal data from all examples.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the actual result and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal example using synthetic data.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Commit or version, operating system and architecture, browser, and installation method. Include relevant service roles or model names.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs or screenshots
+      description: Optional. Redact credentials, private URLs, and personal data.

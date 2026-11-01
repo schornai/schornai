@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["vite/client", "node"],
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../stories/**/*.tsx",
+    "../context.d.ts"
+  ],
+  "exclude": ["../storybook-static", "../node_modules"]
+}

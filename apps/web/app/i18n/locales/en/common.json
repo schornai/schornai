@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "New Chat",
+        "mainLabelAgents": "Agents",
+        "mainLabelApps": "Apps",
+        "mainLabelWorkspaces": "Workspaces",
+        "history": "History"
+      },
+      "SidebarFavorites": {
+        "label": "Favorites",
+        "empty": "No favorites added yet."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "No favorites",
+        "descriptionNoFavorites": "You can add <agents>agents</agents>, <documents>document repositories</documents> and <transcribers>transcribers</transcribers> as favorites."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "New Chat"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Good night];(5-11)[Good morning];(12-17)[Good afternoon];(18-inf)[Good evening];",
+      "labelAllAgents": "All agents",
+      "labelToApps": "To the apps"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profile",
+        "labelFavorites": "Favorites",
+        "labelPermissions": "Permissions",
+        "labelModels": "Models",
+        "labelTaskQueue": "Task queue",
+        "labelSettings": "Settings",
+        "labelUsers": "Users",
+        "labelWorkspaces": "Workspaces",
+        "labelSSOProvider": "SSO Provider",
+        "labelXRAGUpload": "Upload XRAG",
+        "labelSystemModel": "System model",
+        "labelTheme": "Theme",
+        "labelBackToDashboard": "Back to dashboard",
+        "labelConnections": "Connections",
+        "labelProviderConnections": "Connections",
+        "labelService": "Service",
+        "labelArtifacts": "Artifacts",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Select icon",
+      "buttonMoreIcons": "More icons",
+      "textLucideInfo": "Icons by <0>Lucide</0>",
+      "placeholderSearchIcons": "Search icons...",
+      "buttonCancel": "Cancel"
+    },
+    "FileUploadDropZone": {
+      "drop": "Drop file here to upload"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Changed"
+    },
+    "Pagination": {
+      "labelPrev": "Previous",
+      "labelNext": "Next"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "My Account",
+      "labelSystem": "System",
+      "labelModels": "Models",
+      "labelCluster": "Cluster",
+      "labelSettings": "Settings",
+      "labelDashboard": "Dashboard",
+      "labelProfile": "Profile"
+    },
+    "SidebarUserSignOut": {
+      "label": "Sign out"
+    },
+    "UserRoleText": {
+      "admin": "Admin",
+      "workspace-admin": "Workspace administrator",
+      "editor": "Editor",
+      "user": "User",
+      "none": "Not authorized"
+    },
+    "StorageView": {
+      "placeholderSearch": "Search in this folder…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Name",
+      "tableColumnType": "Type",
+      "tableColumnSize": "Size",
+      "tableColumnCreated": "Created",
+      "tableColumnUpdated": "Updated",
+      "tableColumnNameActions": "Actions",
+      "groupTimeToday": "Today",
+      "groupTimeLast7Days": "Last 7 days",
+      "groupTimeLast30Days": "Last 30 days",
+      "groupTimeOther": "Other",
+      "labelFolder": "Folder",
+      "descriptionProcessing": "File is being processed"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "New folder",
+      "placeholderFolderName": "Folder name...",
+      "labelCancel": "Cancel",
+      "labelCreate": "Create"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Remove",
+      "labelDescription": "Are you sure you want to remove \"{{name}}\"? This cannot be undone.",
+      "labelCancel": "Cancel",
+      "labelRemove": "Remove"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Home directory"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "No files",
+      "labelDescription": "The current folder contains no files. Simply drag files here to upload them.",
+      "labelUploadFile": "Upload file",
+      "labelCreateFile": "Create file"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "View",
+      "labelSort": "Sort",
+      "labelNameAsc": "Name A to Z",
+      "labelNameDesc": "Name Z to A",
+      "labelSizeAsc": "Size ascending",
+      "labelSizeDesc": "Size descending",
+      "labelCreatedAsc": "Creation date ascending",
+      "labelCreatedDesc": "Creation date descending",
+      "labelUpdatedAsc": "Update date ascending",
+      "labelUpdatedDesc": "Update date descending",
+      "labelGroup": "Group",
+      "labelNoGroup": "No group",
+      "labelFirstLetter": "First letter",
+      "labelFileType": "File type",
+      "labelCreated": "Creation date",
+      "labelUpdated": "Update date",
+      "labelTilesSmall": "Tiles (small)",
+      "labelTilesMedium": "Tiles (medium)",
+      "labelTilesLarge": "Tiles (large)",
+      "labelTable": "Table",
+      "labelSaveView": "Save view",
+      "labelReset": "Reset",
+      "labelNewFolder": "New folder",
+      "labelThisFolder": "This folder",
+      "labelUploadFile": "Upload file",
+      "labelNew": "New",
+      "labelDeleteFolder": "Delete folder",
+      "labelNewRecording": "New recording",
+      "labelColumns": "Column view",
+      "labelNewTextFile": "New file"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "No results",
+      "descriptionNoResults": "Your search returned no results. Please rephrase your query.",
+      "labelCharacters": "characters"
+    },
+    "Transcription": {
+      "labelTitle": "Transcript",
+      "labelLoadingMedia": "Loading media…",
+      "labelBuffering": "Buffering playback…",
+      "labelSeeking": "Loading position…",
+      "labelPlayer": "Media player",
+      "labelPlay": "Play",
+      "labelPause": "Pause",
+      "labelSeek": "Playback position",
+      "labelBack": "Back 10 seconds",
+      "labelForward": "Forward 10 seconds",
+      "labelSpeed": "Playback speed",
+      "labelUnmute": "Unmute",
+      "labelMute": "Mute",
+      "labelVolume": "Volume",
+      "labelHideVideo": "Hide video",
+      "labelShowVideo": "Show video",
+      "labelPlaySegment": "Play segment {{number}}",
+      "labelReviewed": "Reviewed",
+      "labelSegments": "Segments",
+      "labelWords": "Words",
+      "descriptionEmpty": "No transcription results found.",
+      "descriptionConfidence": "Confidence: {{percent}}%",
+      "errorPlayback": "Playback failed. Check that the media file is available and try again.",
+      "labelEditSegment": "Edit segment {{number}}",
+      "labelSegmentText": "Segment text",
+      "labelSave": "Save",
+      "labelSaving": "Saving…",
+      "labelSaveReviewed": "Save & mark as reviewed",
+      "labelCancel": "Cancel",
+      "labelRestoreOriginal": "Restore original text",
+      "descriptionUnsaved": "Changes are only applied when you save.",
+      "errorSave": "Saving failed. Your text has been kept. Please try again.",
+      "errorConflict": "This segment has changed. Copy your draft and reload the view before saving again.",
+      "labelDownloadSrt": "Download SRT",
+      "descriptionSaveBeforeDownload": "Save or cancel your edits before downloading the SRT file."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Column view",
+      "labelRoot": "Documents",
+      "labelDetails": "File details",
+      "labelType": "Type",
+      "labelSize": "Size",
+      "labelUpdated": "Updated",
+      "labelOpen": "Open file"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "New file",
+      "labelName": "Filename",
+      "labelCreate": "Create file",
+      "labelCancel": "Cancel",
+      "errorCreate": "The file could not be created. Check the filename and your write permissions."
+    },
+    "StorageFileActions": {
+      "labelActions": "Actions for {{name}}",
+      "labelDownloadOriginal": "Download original",
+      "labelDownloadProcessed": "Download processed text",
+      "labelRename": "Rename",
+      "labelProcess": "Reprocess",
+      "labelDelete": "Delete file",
+      "labelName": "New filename",
+      "labelCancel": "Cancel",
+      "labelConfirm": "Confirm",
+      "descriptionDelete": "Permanently delete “{{name}}”, its processed content and search index entries?",
+      "descriptionProcess": "Reprocess “{{name}}”? Manual changes will be overwritten.",
+      "descriptionQueued": "Processing is queued or already running. Check its status in the file list.",
+      "descriptionUnsupported": "This file cannot currently be processed. Audio and video require a configured transcriber.",
+      "errorAction": "The action failed. Check write permissions, name collisions and running processing. A failed rename may leave both filenames; check the list before retrying.",
+      "labelOptions": "Options",
+      "labelEdit": "Edit",
+      "descriptionRename": "Rename “{{name}}”. Keep the file extension. The original, processed content and search index are updated together. Existing names are never overwritten.",
+      "labelCopy": "Copy to…",
+      "labelMove": "Move to…",
+      "descriptionCopy": "Copy “{{name}}” including its processed content. The source will be retained.",
+      "descriptionMove": "Move “{{name}}” including its processed content. The source will be removed after copying succeeds.",
+      "descriptionTransferred": "The file was transferred. Destination search indices are rebuilt in the background.",
+      "descriptionTransferProcessingError": "The file was transferred, but processing could not be started. Open the destination file and choose “Reprocess”. Do not repeat the transfer."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Actions for {{name}}",
+      "labelDelete": "Delete folder"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Content",
+      "labelSave": "Save",
+      "labelCancel": "Cancel",
+      "errorSave": "Saving failed. Please try again.",
+      "errorConflict": "The content has changed. Reload before saving.",
+      "errorIndex": "Saved, but the search index could not be updated. Please save again."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Choose destination folder",
+      "labelSelectFile": "Choose an existing file",
+      "descriptionFolder": "Choose an existing folder. One file will be transferred; existing names are never overwritten.",
+      "descriptionFile": "Choose a file from this chat or an accessible repository. Documents and recordings must already be processed.",
+      "labelStorage": "Storage",
+      "labelCurrentStorage": "Current storage",
+      "labelUp": "Parent folder",
+      "descriptionLoading": "Loading files…",
+      "descriptionEmpty": "No matching entries in this folder.",
+      "descriptionNoStorages": "No accessible repositories available.",
+      "descriptionPending": "Transferring the file. Please wait for the result.",
+      "labelCancel": "Cancel",
+      "labelUseFolder": "Use this folder",
+      "labelUseFile": "Attach file",
+      "labelRetry": "Reload",
+      "errorLoad": "This folder could not be loaded. Check access and try again.",
+      "errorCollision": "The destination already contains a file or processed content with this name. Choose another folder; nothing was overwritten.",
+      "errorSameTarget": "Source and destination are identical. Choose another folder.",
+      "errorSourceChanged": "The source changed while copying. The incomplete destination was removed. Try again.",
+      "errorBusy": "This file is currently being processed. Wait until it finishes.",
+      "errorPermission": "You do not have the required source or destination permissions.",
+      "errorSourceDelete": "The complete destination file was created, but the source could not be removed. Check both locations before repeating the operation.",
+      "errorCleanup": "Copying failed. The source was retained, but incomplete files may remain at the destination. Check it before retrying.",
+      "errorAction": "The operation failed. Check permissions, filenames and both locations before retrying.",
+      "errorNotProcessed": "This file has not been processed yet. Process it first, then select it again."
+    }
+  },
+  "_welcomeMessage": "Welcome to\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Documentation",
+    "feedback": "Feedback",
+    "help": "Help",
+    "labelThemeLight": "Light",
+    "labelThemeDark": "Dark",
+    "labelThemeSystem": "Operating system",
+    "labelLanguage": "Language"
+  }
+}

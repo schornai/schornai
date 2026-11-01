@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Opis",
+      "description": "Wybierz odpowiednią nazwę obszaru roboczego. Możesz też zapisać krótki opis.",
+      "labelName": "Nazwa",
+      "labelDescription": "Opis",
+      "buttonSave": "Zapisz",
+      "buttonReset": "Resetuj"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentacja",
+      "description": "Udostępnij tutaj użytkownikom dodatkowe informacje o tym obszarze roboczym.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Zapisz",
+      "buttonReset": "Resetuj"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapowania SSO",
+      "description": "Wybierz, która grupa SSO ma dostęp do obszaru roboczego i z jakimi uprawnieniami.",
+      "labelRoleUser": "Grupa użytkowników",
+      "labelRoleEditor": "Grupa edytorów",
+      "labelRoleWorkspaceAdmin": "Grupa administratorów obszaru roboczego",
+      "placeholderNoGroup": "Nie przypisano grupy",
+      "descriptionRoleUser": "Może przeglądać zawartość obszaru roboczego (agentów, transkrybentów, repozytoria dokumentów itp.), ale nie może jej edytować.",
+      "descriptionRoleEditor": "Może przeglądać zawartość obszaru roboczego i dodatkowo ją edytować.",
+      "descriptionRoleWorkspaceAdmin": "Może zarządzać obszarem roboczym oraz tworzyć, edytować i usuwać agentów, transkrybentów, repozytoria dokumentów itp.",
+      "buttonSave": "Zapisz",
+      "buttonReset": "Resetuj"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatyczny użytkownik",
+      "description": "Gdy opcja „Automatyczny użytkownik” jest włączona, każda osoba mogąca zalogować się do boxa automatycznie otrzymuje uprawnienia użytkownika w tej organizacji.",
+      "labelActive": "Automatyczny użytkownik włączony",
+      "labelInactive": "Automatyczny użytkownik wyłączony"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nowy obszar roboczy",
+      "descriptionWorkspace": "Wybierz nazwę i opcjonalny opis. Dalsze ustawienia możesz skonfigurować po utworzeniu obszaru roboczego.",
+      "labelName": "Nazwa",
+      "labelDescription": "Opis",
+      "labelCreate": "Utwórz obszar roboczy",
+      "labelCancel": "Anuluj",
+      "errorCreate": "Nie udało się utworzyć obszaru roboczego. Spróbuj ponownie."
+    },
+    "WorkspaceCard": {
+      "labelType": "Obszar roboczy"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Edytuj obszar roboczy",
+      "tooltipInfo": "Otwórz obszar roboczy"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Dodaj do ulubionych",
+      "tooltipRemoveFavorite": "Usuń z ulubionych"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Szukaj obszarów roboczych",
+      "labelName": "Nazwa",
+      "labelDescription": "Opis",
+      "labelRole": "Twoja rola",
+      "labelActions": "Działania",
+      "labelFavorites": "Ulubione",
+      "labelOtherWorkspaces": "Inne obszary robocze",
+      "labelEmpty": "Brak obszarów roboczych",
+      "descriptionEmpty": "Nie masz jeszcze dostępu do żadnego obszaru roboczego.",
+      "labelNoResults": "Brak wyników",
+      "descriptionNoResults": "Spróbuj innego hasła wyszukiwania."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opcje",
+      "labelView": "Widok",
+      "labelSort": "Sortowanie",
+      "labelNameAsc": "Nazwa od A do Z",
+      "labelNameDesc": "Nazwa od Z do A",
+      "labelGroup": "Grupuj według",
+      "labelNoGroup": "Bez grupowania",
+      "labelFavorites": "Ulubione",
+      "labelFirstLetter": "Pierwsza litera",
+      "labelCards": "Karty",
+      "labelTable": "Tabela",
+      "labelSaveView": "Zapisz widok",
+      "labelReset": "Resetuj"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Utwórz obszar roboczy"
+    }
+  },
+  "page": {
+    "labelYourRole": "Twoja rola",
+    "labelEmpty": "Brak zawartości",
+    "descriptionEmpty": "W tym obszarze roboczym nie ma jeszcze dostępnych agentów, repozytoriów dokumentów ani transkrybentów.",
+    "labelTitle": "Obszary robocze"
+  }
+}

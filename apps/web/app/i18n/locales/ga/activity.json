@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Stair"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Earráid",
+      "idle": "Díomhaoin",
+      "running": "Ag rith",
+      "success": "Rath"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Pionnáil",
+      "actionUnpin": "Díphionnáil",
+      "actionDelete": "Scrios"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Cuardaigh…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelLabelAsc": "Lipéad ó A go Z",
+      "labelLabelDesc": "Lipéad ó Z go A",
+      "labelCreatedAsc": "Dáta cruthaithe, íslitheach",
+      "labelCreatedDesc": "Dáta cruthaithe, ardaitheach",
+      "labelUpdatedAsc": "Dáta nuashonraithe, íslitheach",
+      "labelUpdatedDesc": "Dáta nuashonraithe, ardaitheach",
+      "labelGroup": "Grúpáil",
+      "labelPinned": "Pionnáilte",
+      "labelState": "Staid",
+      "labelType": "Cineál",
+      "labelCreated": "Dáta cruthaithe",
+      "labelUpdated": "Dáta nuashonraithe",
+      "labelList": "Liosta",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh",
+      "labelNoGroup": "Gan grúpa"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Níl aon ghníomhaíocht ann",
+      "emptyDescription": "Taispeántar do chomhráite agus do thras-scríbhinní roimhe seo anseo.",
+      "emptyLabelAgents": "Gníomhairí"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Inniu",
+      "groupTimeLast7Days": "Na 7 lá seo caite",
+      "groupTimeLast30Days": "Na 30 lá seo caite",
+      "groupTimeOther": "Eile",
+      "groupPinned": "Pionnáilte",
+      "groupNotPinned": "Gan phionnáil",
+      "groupUnknown": "Anaithnid",
+      "groupChat": "Comhrá",
+      "groupTranscription": "Tras-scríobh",
+      "groupReindex": "Athinnéacsú",
+      "labelReindex": "Athinnéacsú",
+      "labelPinned": "Pionnáilte"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Lipéad",
+      "tableColumnType": "Cineál",
+      "tableColumnState": "Staid",
+      "tableColumnCreated": "Cruthaithe",
+      "tableColumnUpdated": "Nuashonraithe",
+      "tableColumnPinned": "Pionnáilte",
+      "tableColumnNameActions": "Gníomhartha",
+      "groupTimeToday": "Inniu",
+      "groupTimeLast7Days": "Na 7 lá seo caite",
+      "groupTimeLast30Days": "Na 30 lá seo caite",
+      "groupTimeOther": "Eile",
+      "groupPinned": "Pionnáilte",
+      "groupNotPinned": "Gan phionnáil",
+      "groupUnknown": "Anaithnid",
+      "groupChat": "Comhrá",
+      "groupTranscription": "Tras-scríobh",
+      "groupReindex": "Athinnéacsú",
+      "labelReindex": "Athinnéacsú",
+      "labelPinned": "Pionnáilte"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Stair",
+      "labelPinned": "Pionnáilte",
+      "labelToday": "Inniu",
+      "labelLast7Days": "Na 7 lá seo caite",
+      "labelLast30Days": "Na 30 lá seo caite",
+      "labelEmpty": "Folamh"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Gníomhaíocht",
+      "actionPin": "Pionnáil",
+      "actionUnpin": "Díphionnáil",
+      "actionDelete": "Scrios",
+      "labelAgent": "Gníomhaire — {{name}}",
+      "actionNewChat": "Comhrá nua",
+      "labelInfo": "Eolas"
+    }
+  }
+}

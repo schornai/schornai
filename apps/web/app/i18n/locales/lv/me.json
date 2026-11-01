@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nosaukums",
+      "labelFirstName": "Vārds",
+      "labelLastName": "Uzvārds",
+      "buttonSave": "Saglabāt",
+      "buttonReset": "Atiestatīt"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profila attēls"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Noņemt attēlu",
+      "alertDelete": "Noņemt attēlu",
+      "alertDeleteExplainer": "Vai tiešām vēlaties noņemt savu attēlu?",
+      "alertDeleteCancel": "Atcelt"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Augšupielādēt attēlu"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Atļaujas",
+      "tableColumnName": "Nosaukums",
+      "tableColumnPermission": "Atļauja",
+      "tableColumnDescription": "Apraksts",
+      "infoEmpty": "Nav atļauju",
+      "infoEmptyDescription": "Nav pieejama neviena schorn.ai box funkcija.",
+      "infoEmptyAdminDescription": "Kā administrators varat izveidot pirmo darbvietu.",
+      "infoEmptyAdminAction": "Izveidot pirmo darbvietu",
+      "infoUser": "Var skatīt organizācijas saturu (tērzēšanas robotus, transkribētājus, dokumentus, krātuves utt.), bet nevar to rediģēt.",
+      "infoEditor": "Var skatīt organizācijas saturu un arī to rediģēt (izveidot jaunus tērzēšanas robotus, rediģēt un dzēst dokumentus utt.).",
+      "infoAdmin": "Var lasīt un rakstīt visās organizācijās, kā arī pārvaldīt sistēmas iestatījumus (augšupielādēt XRAG, mainīt krāsas utt.) un lietotājus."
+    }
+  },
+  "page": {
+    "title": "Profils",
+    "infoPersonalize": "Personalizēt",
+    "infoPersonalizeDescription": "Šeit varat augšupielādēt profila attēlu un mainīt savu vārdu."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Jauna parole iestatīta",
+    "description": "Jaunā parole ir veiksmīgi iestatīta. Tagad esat pierakstījies ar jauno paroli.",
+    "buttonBackToDashboard": "Doties uz informācijas paneli"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Savienojumi",
+      "descriptionConnections": "Jūsu personiskie OAuth savienojumi ar MCP serveriem. Atvienošana noņem šeit saglabātos piekļuves datus. Jau palaistie izsaukumi var tikt pabeigti; atļaujas pie pakalpojuma sniedzēja atsauciet tieši pie tā.",
+      "labelDisconnect": "Atvienot",
+      "descriptionEmpty": "Pievienojiet savu kontu sarunā, kad MCP rīks pieprasa pierakstīties.",
+      "labelEmpty": "Vēl nav savienojumu",
+      "labelInfo": "Par savienojumiem",
+      "errorDisconnect": "Neizdevās atvienot savienojumu. Mēģiniet vēlreiz."
+    }
+  }
+}

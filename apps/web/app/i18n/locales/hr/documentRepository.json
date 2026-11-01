@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Spremišta dokumenata",
+    "description": "Spremišta dokumenata stvaraju središnju, strukturiranu i pouzdanu bazu znanja za umjetnu inteligenciju kojoj modeli mogu pristupati prema kontekstu."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Spremište dokumenata"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Pretraži..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Mogućnosti",
+      "labelView": "Prikaz",
+      "labelSort": "Sortiranje",
+      "labelNameAsc": "Naziv od A do Z",
+      "labelNameDesc": "Naziv od Z do A",
+      "labelGroup": "Grupiraj prema",
+      "labelNoGroup": "Bez grupiranja",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "Prvo slovo",
+      "labelWorkspaces": "Radni prostori",
+      "labelModel": "Transkriptor",
+      "labelCards": "Kartice",
+      "labelTable": "Tablica",
+      "labelSaveView": "Spremi prikaz",
+      "labelReset": "Vrati zadano",
+      "labelDocumentRepositories": "Spremišta dokumenata",
+      "labelNewDocumentRepository": "Novo spremište dokumenata"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Ostala spremišta dokumenata",
+      "labelFavorites": "Favoriti",
+      "labelOtherTranscribers": "Ostali transkriptori",
+      "labelUnknownTranscriber": "Nepoznat transkriptor „{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Naziv",
+      "tableColumnCapablilities": "Mogućnosti",
+      "tableColumnNameActions": "Radnje",
+      "emptyTitle": "Nema spremišta dokumenata",
+      "emptyDescription": "Još nije stvoreno nijedno spremište dokumenata.",
+      "labelOtherDocumentRepositories": "Ostala spremišta dokumenata",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Bez grupiranja",
+      "labelUnknownTranscriber": "Nepoznat transkriptor „{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Nepoznat radni prostor"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ukloni iz favorita",
+      "tooltipAddFavorite": "Dodaj u favorite"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Novo spremište dokumenata",
+      "labelDocumentRepository": "Spremište dokumenata",
+      "labelDocumentRepositoryDropdown": "Spremište dokumenata",
+      "labelCreateDocumentRepository": "Stvori spremište dokumenata",
+      "labelSaveDocumentRepository": "Spremi spremište dokumenata",
+      "labelCloneDocumentRepository": "Spremi kao novo spremište dokumenata",
+      "labelDeleteDocumentRepository": "Izbriši spremište dokumenata",
+      "confirmDeleteTitle": "Izbriši spremište dokumenata",
+      "confirmDeleteDescription": "Želite li zaista izbrisati spremište dokumenata „{{name}}”? Ovu radnju nije moguće poništiti.",
+      "labelCancel": "Odustani",
+      "tabOverview": "Pregled",
+      "tabFeatures": "Funkcije",
+      "tabSettings": "Postavke",
+      "btnCreate": "Stvori",
+      "btnSave": "Spremi"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Odbaci promjene",
+      "labelDiscardConfirm": "Želite li zaista odbaciti sve nespremljene promjene ovog spremišta dokumenata?",
+      "labelCancel": "Odustani",
+      "labelDiscard": "Odbaci promjene"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Novo spremište dokumenata",
+      "emptyDescription": "Odredite ponašanje i izgled spremišta dokumenata.",
+      "checklistSemanticSearchTitle": "Uključi semantičko pretraživanje",
+      "checklistSemanticSearchDescription": "Uključite semantičko pretraživanje. To može poboljšati kvalitetu rezultata pretraživanja.",
+      "checklistTranscriberTitle": "Odaberi transkriptor",
+      "checklistTranscriberDescription": "Odaberite transkriptor koji automatski transkribira sve prenesene video i audiodatoteke.",
+      "helpTitle": "Pomoć",
+      "helpKeywordSearch": "Klasično pretraživanje po ključnim riječima. Najprikladnije za traženje robnih marki, osobnih imena i drugih naziva.",
+      "helpEmbeddingDescription": "Dodajte model vektorskih ugradnji za uključivanje semantičkog pretraživanja. Pronalazi slične dokumente prema njihovu značenju.",
+      "helpTranscriberDescription": "Dodajte transkriptor u spremište dokumenata i sve video i audiodatoteke automatski će se transkribirati nakon prijenosa."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Indeks pretraživanja",
+      "description": "Ovisno o indeksu pretraživanja koriste se različite metode za pružanje najboljih rezultata prema upitu.",
+      "labelKeyword": "Pretraživanje po ključnim riječima",
+      "descriptionKeyword": "Za traženje točnih izraza i rečenica. (Imena, nazivi itd.)",
+      "labelSemantic": "Semantičko pretraživanje",
+      "descriptionSemantic": "Kada je važnije značenje podataka od točnog teksta. (Potreban je model vektorskih ugradnji)",
+      "labelEmbeddingModel": "Model vektorskih ugradnji",
+      "descriptionEmbeddingModel": "Model vektorskih ugradnji temelj je semantičkog pretraživanja."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Bez transkriptora",
+      "labelLegend": "Transkriptor",
+      "description": "Video i audiodatoteke automatski se transkribiraju nakon prijenosa.",
+      "labelTranscriber": "Transkriptor"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Odaberite prikladan naziv spremišta dokumenata. Možete spremiti i kratak opis.",
+      "labelName": "Naziv",
+      "labelDescription": "Opis"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Izgled",
+      "description": "Odaberite boju i ikonu koje najbolje predstavljaju spremište dokumenata.",
+      "labelIcon": "Ikona",
+      "labelColor": "Boja"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Radni prostor",
+      "description": "Odaberite radni prostor u kojem želite stvoriti spremište dokumenata.",
+      "labelName": "Radni prostor",
+      "labelSelectWorkspace": "Odaberite radni prostor."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Datoteke",
+      "tabSearch": "Pretraživanje punog teksta",
+      "tabInfo": "Informacije"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Pretraži...",
+      "labelSearch": "Pretraži"
+    },
+    "Search": {
+      "emptyTitle": "Pretraživanje punog teksta",
+      "emptyDescription": "Pretražite tekst u svim datotekama ovog spremišta dokumenata."
+    }
+  },
+  "page": {
+    "labelTitle": "Spremišta dokumenata",
+    "emptyTitle": "Nema spremišta dokumenata",
+    "emptyDescription": "Još nije stvoreno nijedno spremište dokumenata.",
+    "labelNewDocumentRepository": "Novo spremište dokumenata",
+    "helpTitle": "Pomoć",
+    "helpSearchDescription": "Možete pretraživati spremišta dokumenata. Pretraživanje obuhvaća, među ostalim, naziv i opis spremišta te njegov transkriptor.",
+    "helpSortDescription": "Spremišta dokumenata mogu se sortirati po nazivu i rasporediti u različite grupe. Mogu se prikazati kao kartice ili tablica.",
+    "helpTranscriberDescription": "Za spremišta dokumenata možete odabrati transkriptor. Kada se audio ili videodatoteke prenesu u spremište, automatski se transkribiraju."
+  }
+}

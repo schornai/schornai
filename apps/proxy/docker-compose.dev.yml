@@ -1,0 +1,24 @@
+services:
+  web-app-dev:
+    build: .
+    ports:
+      - "127.0.0.1:3000:443"
+    environment:
+      WEB_ENV_URL: "http://${AIBOX_DOCKER_HOST:-host.docker.internal}:3003"
+      SUPABASE_ENV_HOST: "${AIBOX_SUPABASE_PROXY_URL:-http://${AIBOX_DOCKER_HOST:-host.docker.internal}:54321}"
+      REALTIME_ENV_URL: "http://${AIBOX_DOCKER_HOST:-host.docker.internal}:9000"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - type: bind
+        source: ${AIBOX_CERT_DIR:-${HOME}/.aibox/docker/volumes/api/cert}/fullkey.pem
+        target: /app/cert/fullkey.pem
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${AIBOX_CERT_DIR:-${HOME}/.aibox/docker/volumes/api/cert}/privkey.pem
+        target: /app/cert/privkey.pem
+        read_only: true
+        bind:
+          create_host_path: false

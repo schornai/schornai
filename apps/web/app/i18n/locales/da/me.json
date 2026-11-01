@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Navn",
+      "labelFirstName": "Fornavn",
+      "labelLastName": "Efternavn",
+      "buttonSave": "Gem",
+      "buttonReset": "Nulstil"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilbillede"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Fjern billede",
+      "alertDelete": "Fjern billede",
+      "alertDeleteExplainer": "Er du sikker på, at du vil fjerne dit billede?",
+      "alertDeleteCancel": "Annuller"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Upload billede"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Rettigheder",
+      "tableColumnName": "Navn",
+      "tableColumnPermission": "Rettighed",
+      "tableColumnDescription": "Beskrivelse",
+      "infoEmpty": "Ingen rettigheder",
+      "infoEmptyDescription": "Ingen funktioner i schorn.ai box er tilgængelige.",
+      "infoEmptyAdminDescription": "Som administrator kan du oprette det første arbejdsområde.",
+      "infoEmptyAdminAction": "Opret første arbejdsområde",
+      "infoUser": "Kan se organisationens indhold, for eksempel chatbots, transskriberingsværktøjer, dokumenter og arkiver, men ikke redigere det.",
+      "infoEditor": "Kan se og redigere organisationens indhold, for eksempel oprette chatbots samt redigere og slette dokumenter.",
+      "infoAdmin": "Kan læse og skrive på tværs af alle organisationer samt administrere systemindstillinger, som upload af XRAG og ændring af farver, og administrere brugere."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Tilpas",
+    "infoPersonalizeDescription": "Du kan uploade dit profilbillede og tilpasse dit navn her."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Ny adgangskode angivet",
+    "description": "Den nye adgangskode er angivet. Du er nu logget ind med den nye adgangskode.",
+    "buttonBackToDashboard": "Til oversigten"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Forbindelser",
+      "descriptionConnections": "Dine personlige OAuth-forbindelser til MCP-servere. Når du afbryder forbindelsen, fjernes de loginoplysninger, der er gemt her. Igangværende kald kan blive fuldført; tilbagekald rettigheder direkte hos udbyderen.",
+      "labelDisconnect": "Afbryd forbindelse",
+      "descriptionEmpty": "Tilslut din konto i chatten, når et MCP-værktøj kræver, at du logger ind.",
+      "labelEmpty": "Ingen forbindelser endnu",
+      "labelInfo": "Om forbindelser",
+      "errorDisconnect": "Forbindelsen kunne ikke afbrydes. Prøv igen."
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Ім’я",
+      "labelFirstName": "Ім’я",
+      "labelLastName": "Прізвище",
+      "buttonSave": "Зберегти",
+      "buttonReset": "Скинути"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Аватар"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Видалити зображення",
+      "alertDelete": "Видалити зображення",
+      "alertDeleteExplainer": "Ви впевнені, що хочете видалити своє зображення?",
+      "alertDeleteCancel": "Скасувати"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Завантажити зображення"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Дозволи",
+      "tableColumnName": "Ім’я",
+      "tableColumnPermission": "Дозвіл",
+      "tableColumnDescription": "Опис",
+      "infoEmpty": "Немає дозволів",
+      "infoEmptyDescription": "Жодна функція schorn.ai box недоступна.",
+      "infoEmptyAdminDescription": "Як адміністратор ви можете створити перший робочий простір.",
+      "infoEmptyAdminAction": "Створити перший робочий простір",
+      "infoUser": "Може переглядати вміст організації (чатботів, транскрибатори, документи, сховища тощо), але не може редагувати його.",
+      "infoEditor": "Може переглядати й редагувати вміст організації: створювати нових чатботів, редагувати й видаляти документи тощо.",
+      "infoAdmin": "Може читати й змінювати дані в усіх організаціях, а також керувати системними налаштуваннями (завантажувати XRAG, змінювати кольори тощо) та користувачами."
+    }
+  },
+  "page": {
+    "title": "Профіль",
+    "infoPersonalize": "Персоналізація",
+    "infoPersonalizeDescription": "Тут можна завантажити зображення профілю й змінити своє ім’я."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Новий пароль установлено",
+    "description": "Новий пароль успішно встановлено. Ви ввійшли з новим паролем.",
+    "buttonBackToDashboard": "До панелі керування"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Підключення",
+      "descriptionConnections": "Ваші особисті OAuth-підключення до серверів MCP. Відключення видаляє збережені тут облікові дані. Уже запущені виклики можуть завершитися; відкличте дозволи безпосередньо в постачальника.",
+      "labelDisconnect": "Відключити",
+      "descriptionEmpty": "Підключіть свій обліковий запис у чаті, коли інструмент MCP попросить увійти.",
+      "labelEmpty": "Підключень ще немає",
+      "labelInfo": "Про підключення",
+      "errorDisconnect": "Не вдалося відключити підключення. Спробуйте ще раз."
+    }
+  }
+}

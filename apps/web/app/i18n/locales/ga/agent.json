@@ -1,0 +1,521 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Cealaigh",
+      "errorCancel": "Níorbh fhéidir an ghiniúint a stopadh. Bain triail eile as."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Níl rochtain agat ar an ngníomhaire seo."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Samhail",
+      "labelUnknownModel": "Samhail anaithnid",
+      "labelThinkingOptionalOn": "Réasúnaíocht",
+      "labelThinkingOptionalOff": "Réasúnaíocht éigeantach",
+      "labelThinkingMandatoryOn": "Gan réasúnaíocht",
+      "labelThinkingMandatoryOff": "Gan réasúnaíocht, go héigeantach",
+      "descriptionFeatureVision": "Tuiscint níos doimhne ar íomhánna",
+      "labelModelSize": "Méid an chomhthéacs: {{size}}k",
+      "labelNotFound": "Níor aimsíodh an tsamhail",
+      "labelChanged": "Athraithe"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Uirlis: Áireamhán",
+      "description": "In ionad ríomhanna a dhéanamh é féin, is féidir leis an ngníomhaire an t-áireamhán a úsáid. Ligeann sé seo don ghníomhaire déileáil níos fearr le huimhreacha níos casta."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Leid",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Folamh",
+      "labelChanged": "Athraithe"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Stórais doiciméad",
+      "labelUnknownRepository": "Stór doiciméad anaithnid",
+      "descriptionRepositoryNotFound": "Níl an stór doiciméad ann, nó níl na ceadanna riachtanacha agat.",
+      "labelConfirmWrite": "Léamh agus scríobh (iarr deimhniú)",
+      "labelReadOnly": "Léamh amháin",
+      "labelWrite": "Léamh agus scríobh (go huathoibríoch)",
+      "labelGoToRepository": "Téigh go dtí an stór",
+      "labelChanged": "Athraithe"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Leid maidir le roghnú róil",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Cur síos",
+      "description": "Roghnaigh ainm oiriúnach don ghníomhaire. Is féidir cur síos gairid a shábháil freisin.",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Spás oibre",
+      "description": "Roghnaigh an spás oibre ina gcruthófar an gníomhaire.",
+      "labelName": "Spás oibre",
+      "errorNoPermissions": "Níl cead agat gníomhairí a chruthú",
+      "errorNoWorkspaceSelected": "Níl spás oibre roghnaithe agat",
+      "labelSelectWorkspace": "Roghnaigh spás oibre."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Feidhmeanna breise",
+      "description": "Cuir feidhmeanna úsáideacha leis an ngníomhaire chun an obair a dhéanamh níos éasca fós.",
+      "labelFileUpload": "Uaslódáil comhaid",
+      "descriptionFileUpload": "Is féidir le húsáideoirí comhaid a uaslódáil a mbeidh a n-ábhar ar fáil don ghníomhaire mar théacs.",
+      "labelBatch": "Próiseáil bhaisc",
+      "descriptionBatch": "Is féidir le húsáideoirí comhaid a phróiseáil go huathoibríoch in aghaidh na teachtaireachta.",
+      "labelPursueGoal": "Saothraigh sprioc",
+      "descriptionPursueGoal": "Is féidir le húsáideoirí sprioc a shainiú agus rithfidh an gníomhaire i lúb go dtí go mbainfear an sprioc amach.",
+      "labelDisappearingChats": "Comhráite a imíonn",
+      "descriptionDisappearingChats": "Is féidir le comhráite iad féin a scriosadh go huathoibríoch tar éis 12 uair an chloig. Ní mór don úsáideoir é seo a shocrú.",
+      "labelNightshift": "Seal oíche",
+      "descriptionNightshift": "Is féidir gníomhairí a ritheann ar feadh i bhfad a aistriú go dtí an seal oíche chun acmhainní a shábháil i rith an lae.",
+      "labelTranscriber": "Tras-scríobhaí",
+      "labelNoTranscriber": "Gan tras-scríobh uathoibríoch",
+      "descriptionTranscriber": "Déan comhaid fuaime agus físe uaslódáilte a thras-scríobh go huathoibríoch leis an tras-scríobhaí seo."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Feidhmeanna breise",
+      "labelFileUpload": "Uaslódáil comhaid",
+      "descriptionFileUpload": "Is féidir le húsáideoirí comhaid a uaslódáil a mbeidh a n-ábhar ar fáil don ghníomhaire mar théacs.",
+      "labelBatch": "Próiseáil bhaisc",
+      "descriptionBatch": "Is féidir le húsáideoirí comhaid a phróiseáil go huathoibríoch in aghaidh na teachtaireachta.",
+      "labelPursueGoal": "Saothraigh sprioc",
+      "descriptionPursueGoal": "Is féidir le húsáideoirí sprioc a shainiú agus rithfidh an gníomhaire i lúb go dtí go mbainfear an sprioc amach.",
+      "labelDisappearingChats": "Comhráite a imíonn",
+      "descriptionDisappearingChats": "Is féidir le comhráite iad féin a scriosadh go huathoibríoch tar éis 12 uair an chloig. Ní mór don úsáideoir é seo a shocrú.",
+      "labelNightshift": "Seal oíche",
+      "descriptionNightshift": "Is féidir gníomhairí a ritheann ar feadh i bhfad a aistriú go dtí an seal oíche chun acmhainní a shábháil i rith an lae."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Moltaí"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Doiciméadú"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Spás oibre",
+      "labelUnknownWorkspace": "Spás oibre anaithnid",
+      "labelGoToWorkspace": "Téigh go dtí an spás oibre"
+    },
+    "AgentInfo": {
+      "labelRole": "Ról: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Cuardaigh...",
+      "tableColumnName": "Ainm",
+      "tableColumnCapablilities": "Cumais",
+      "tableColumnNameActions": "Gníomhartha",
+      "labelOtherAgents": "Gníomhairí eile",
+      "labelFavorites": "Ceanáin",
+      "labelNoGroup": "Gan grúpa",
+      "labelUnknownModel": "Samhail anaithnid \"{{id}}\"",
+      "labelNoRepositories": "Níl aon stór doiciméad ann",
+      "labelUnknownRepository": "Stór doiciméad anaithnid \"{{id}}\"",
+      "labelRoleCount_other": "{{count}} ról",
+      "labelRoleCount_zero": "Níl aon ról ann",
+      "labelRoleCount_one": "{{count}} ról",
+      "labelRoleCount_two": "{{count}} ról",
+      "labelRoleCount_few": "{{count}} ról",
+      "labelRoleCount_many": "{{count}} ról"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelNameAsc": "Ainm ó A go Z",
+      "labelNameDesc": "Ainm ó Z go A",
+      "labelGroup": "Grúpáil de réir",
+      "labelFavorites": "Ceanáin",
+      "labelFirstLetter": "An chéad litir",
+      "labelWorkspaces": "Spásanna oibre",
+      "labelModel": "Samhail",
+      "labelRepositories": "Stórais doiciméad",
+      "labelRoleCount": "Líon na ról",
+      "labelCards": "Cártaí",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh",
+      "labelAgents": "Gníomhairí",
+      "labelNewAgent": "Gníomhaire nua",
+      "labelNoGroup": "Gan grúpa"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Cuma",
+      "description": "Roghnaigh dath agus deilbhín a léiríonn an gníomhaire is fearr.",
+      "labelIcon": "Deilbhín",
+      "labelColor": "Dath"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Bain de na ceanáin",
+      "tooltipAddFavorite": "Cuir leis na ceanáin"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Cuir in eagar",
+      "tooltipInfo": "Eolas",
+      "tooltipNewChat": "Comhrá nua"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Spás oibre anaithnid",
+      "labelModelUnknown": "Samhail anaithnid"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Rochtain ar an ngréasán",
+      "labelGeneralAccess": "Rochtain ghinearálta, cuardach gréasáin",
+      "descriptionFetch": "Íoslódálann Fáil ón ngréasán URL chuig stóras an chomhrá nó chuig stór doiciméad gléasta ar féidir scríobh ann. Tar éis an comhad a phróiseáil, is féidir leis an ngníomhaire an téacs bainte a léamh agus a úsáid ina fhreagra.",
+      "descriptionSearch": "Cabhraíonn cuardach gréasáin leis an ngníomhaire leathanaigh ábhartha a aimsiú le haghaidh iarratais cuardaigh. Seolann an soláthraí cuardaigh teidil, naisc agus sleachta gairide ar ais. Ní chuireann an liosta ceadaithe don fháil srian ar chuardaigh ghréasáin.",
+      "labelChanged": "Athraithe",
+      "labelFetch": "Faigh",
+      "labelSearch": "Cuardaigh",
+      "labelOn": "Ar siúl",
+      "labelOff": "Múchta",
+      "labelAsk": "Fiafraigh ar dtús",
+      "labelWhitelist": "Fáil teoranta do liosta na bhfearann ceadaithe",
+      "labelAll": "Faigh ó gach suíomh gréasáin",
+      "labelEmptyWhitelist": "Níl aon fhearainn ceadaithe",
+      "labelEdit": "Cuir rochtain ar an ngréasán in eagar",
+      "labelDetails": "Taispeáin sonraí"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Uirlis: Eisínteachtaí comhrá",
+      "labelFeatures": "Mol an chéad teachtaireacht eile, athraigh lipéad an chomhrá",
+      "description": "Is féidir leis an ngníomhaire moltaí a ghiniúint don chéad teachtaireacht eile ón úsáideoir, ionas gur féidir leis an úsáideoir cliceáil ar an teachtaireacht chuí chun leanúint leis an gcomhrá. <br /> Is féidir leis an ngníomhaire lipéad an chomhrá a athrú don úsáideoir ionas gur fusa an comhrá a aimsiú sa stair."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Cur síos ar an ról",
+      "description": "Úsáidtear cur síos an róil nuair a fhaightear teachtaireacht nua ón úsáideoir chun cinneadh a dhéanamh faoin ról a fhreagróidh an teachtaireacht",
+      "labelName": "Ainm",
+      "labelSelectionHint": "Leid maidir le roghnú róil",
+      "labelDeleteRole": "Scrios ról ",
+      "labelDoNotOverride": "Ná sáraigh",
+      "labelOverrideModel": "Sáraigh an tsamhail",
+      "descriptionOverrideModel": "Is féidir leat samhail a roghnú don ról seo atá difriúil ó ghnáthshamhail an ghníomhaire.",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an ról \"{{name}}\" a scriosadh? Ní féidir an gníomh seo a chealú.",
+      "labelCancel": "Cealaigh",
+      "labelThinking": "Réasúnaíocht"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Samhail",
+      "description": "An tsamhail teanga a úsáideann an gníomhaire, mura sáraíonn ról í.",
+      "labelName": "Samhail",
+      "labelThinking": "Réasúnaíocht",
+      "labelThinking_optionalOn": "Réasúnaíocht",
+      "labelThinking_mandatoryOn": "Réasúnaíocht éigeantach",
+      "labelThinking_optionalOff": "Gan réasúnaíocht",
+      "labelThinking_mandatoryOff": "Gan réasúnaíocht, go héigeantach",
+      "labelSelectModel": "Roghnaigh samhail"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Stór doiciméad",
+      "labelPathAgent": "Conair don ghníomhaire",
+      "labelPathRepository": "Conair sa stór doiciméad",
+      "labelPermission": "Cead",
+      "labelDeleteConnection": "Scrios nasc",
+      "confirmDeleteTitle": "Scrios nasc",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an nasc seo leis an stór doiciméad \"{{name}}\" a scriosadh?",
+      "labelCancel": "Cealaigh",
+      "labelAddConnection": "Nasc breise",
+      "labelUnknownRepository": "Stór doiciméad anaithnid",
+      "labelConfirmWrite": "Léamh agus scríobh (iarr deimhniú)",
+      "labelReadOnly": "Léamh amháin",
+      "labelWrite": "Léamh agus scríobh (go huathoibríoch)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Lipéad",
+      "labelMessage": "Teachtaireacht",
+      "labelClose": "Dún"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Ainm",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Ceanntásca HTTP",
+      "labelHeaderName": "Ainm",
+      "labelHeaderValue": "Luach",
+      "labelAddHeader": "Cuir ceanntásc HTTP leis",
+      "labelDeleteConnection": "Scrios nasc",
+      "confirmDeleteTitle": "Scrios MCP",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an chumraíocht MCP \"{{name}}\" a scriosadh?",
+      "labelCancel": "Cealaigh",
+      "labelDeleteMCP": "Scrios MCP",
+      "labelAddMCP": "MCP eile",
+      "errorInvalidUrl": "Ní mór don URL a bheith bailí",
+      "labelOAuthApp": "Aip OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Sonraí",
+      "labelConnectRepository": "Ceangail stór doiciméad",
+      "labelToolWebAccess": "Uirlis: Rochtain ar an ngréasán",
+      "labelConnectMCP": "Ceangail uirlis sheachtrach (MCP)",
+      "labelSupport": "Tacaíocht",
+      "labelToolChatExtensions": "Uirlis: Eisínteachtaí comhrá",
+      "labelToolCalculator": "Uirlis: Áireamhán",
+      "labelSystem": "Córas",
+      "labelToolPlatformAccess": "Uirlis: Rochtain ar ardán schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Gníomhaire nua",
+      "emptyDescription": "Sainigh iompar, rochtain ar shonraí, cuma an ghníomhaire agus go leor eile.",
+      "labelDefinePrompt": "Sainigh leid",
+      "descriptionDefinePrompt": "Braitheann cáilíocht gníomhaire ar a threoracha. Laghdaíonn sainmhínithe soiléire ar róil siabhránachtaí agus méadaíonn siad comhsheasmhacht.",
+      "labelConnectTools": "Ceangail uirlisí",
+      "descriptionConnectTools": "Mar shampla, ceangail le stórais doiciméad ionas go mbeidh an gníomhaire bunaithe ar fhíricí agus go n-úsáidfidh sé eolas a bhaineann go sonrach leis an gcuideachta.",
+      "labelWriteDocs": "Scríobh doiciméadú",
+      "descriptionWriteDocs": "Cabhraigh le húsáideoirí cumais an ghníomhaire seo a thuiscint.",
+      "infoRoleDefinition": "Sainíonn an ról iompar an ghníomhaire agus na huirlisí a chuirtear ar fáil chun an tasc a chur i gcrích.",
+      "infoDocsDescription": "Is féidir téacs (tacaítear le formáidiú Markdown) agus moltaí do theachtaireachtaí le seoladh chuig an ngníomhaire a bheith sa doiciméadú.",
+      "infoAppearanceDescription": "Cabhraíonn an t-ainm, an cur síos agus an dath le húsáideoirí a mbealach a dhéanamh trí na gníomhairí atá ar fáil."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Teachtaireachtaí molta",
+      "descriptionRecommendedMessages": "Cabhraigh le húsáideoirí trí theachtaireachtaí a mholadh maidir leis an úsáid is fearr a bhaint as an ngníomhaire.",
+      "labelAddMessage": "Cuir teachtaireacht leis ",
+      "labelDocumentation": "Doiciméadú",
+      "descriptionDocumentation": "Roinn eolas breise faoin ngníomhaire seo le d’úsáideoirí anseo",
+      "labelShowPreview": "Taispeáin réamhamharc",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Cabhraíonn an doiciméadú le húsáideoirí an gníomhaire a úsáid. Taispeántar an doiciméadú nuair a thosaíonn an t-úsáideoir comhrá nua.",
+      "descriptionMarkdownHelp": "Is teanga mharcála éadrom é Markdown chun téacs a fhormáidiú go tapa agus go héasca.\n\n* **Struchtúr:** Ceannteidil (`#`), liostaí (ordaithe `1.` agus neamhordaithe `-`), línte cothrománacha.\n* **Stíl téacs:** **Trom** `**Trom**`, *Cló iodálach* `*Cló iodálach*`, ~~Líne tríd~~ `~~Líne tríd~~`.\n* **Cód:** Cód inlíne (`code`) agus bloic chóid le haibhsiú comhréire.\n* **Eagrú:** Sleachta (`>`), seicliostaí (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Níl aon ról ann",
+      "descriptionNoRoles": "Níl aon ról sainithe don ghníomhaire. Ní oibreoidh an gníomhaire gan ról.",
+      "labelAddRole": "Cuir ról leis ",
+      "infoMultipleRoles": "Is féidir le gníomhairí roinnt ról a ghlacadh. Is féidir le ról díriú níos fearr ar chuid den tasc.",
+      "infoTools": "Is féidir le gníomhairí uirlisí a úsáid chun freagraí níos fearr a thabhairt ar iarratais úsáideoirí (doiciméid a chuardach, doiciméid a chruthú, srl.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Gníomhaire nua",
+      "labelAgent": "Gníomhaire",
+      "labelCreateAgent": "Cruthaigh gníomhaire",
+      "labelSaveAgent": "Sábháil gníomhaire",
+      "tabOverview": "Forbhreathnú",
+      "tabPrompt": "Leid",
+      "tabDocs": "Tacaíocht",
+      "tabRoles": "Róil",
+      "tabSettings": "Socruithe",
+      "btnCreate": "Cruthaigh",
+      "btnSave": "Sábháil",
+      "labelEditAgent": "Cuir gníomhaire in eagar",
+      "labelCloneAgent": "Sábháil mar ghníomhaire nua",
+      "labelDeleteAgent": "Scrios gníomhaire",
+      "confirmDeleteTitle": "Scrios gníomhaire",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an gníomhaire \"{{name}}\" a scriosadh? Ní féidir an gníomh seo a chealú.",
+      "labelCancel": "Cealaigh"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Ról ",
+      "description": "Socraíonn sé iompar an ghníomhaire agus na huirlisí a bhfuil cead aige a úsáid sa chomhthéacs seo.",
+      "tabOverview": "Forbhreathnú",
+      "tabPrompt": "Leid",
+      "tabDocumentRepositoryMounts": "Stórais doiciméad",
+      "tabMCPs": "Uirlisí seachtracha (MCP)",
+      "tabWeb": "Rochtain ar an idirlíon",
+      "tabChat": "Eisínteachtaí comhrá",
+      "tabCalc": "Áireamhán",
+      "tabTools": "Uirlisí",
+      "tabSettings": "Socruithe",
+      "toolWebAccess": "Rochtain ar an idirlíon",
+      "chatExtensions": "Eisínteachtaí comhrá",
+      "calculator": "Áireamhán",
+      "externalToolsMCP": "Uirlisí seachtracha (MCP)",
+      "labelPrompt": "Leid"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Caith na hathruithe i leataobh",
+      "labelDiscardConfirm": "An bhfuil tú cinnte gur mhaith leat gach athrú gan sábháil ar an ngníomhaire seo a chaitheamh i leataobh?",
+      "labelCancel": "Cealaigh",
+      "labelDiscard": "Caith na hathruithe i leataobh"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Uirlisí seachtracha (MCP)",
+      "changedBadge": "Athraithe",
+      "unknownMcp": "MCP anaithnid",
+      "invalidUrl": "URL neamhbhailí"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Cuardach séimeantach",
+      "labelChanged": "Athraithe",
+      "labelActive": "Gníomhach",
+      "labelInactive": "Neamhghníomhach",
+      "description": "Nuair is é brí na sonraí is tábhachtaí seachas an fhoclaíocht bheacht. (Teastaíonn samhail leabaithe)",
+      "labelUnknownModel": "Samhail anaithnid"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Cuardach eochairfhocal",
+      "labelChanged": "Athraithe",
+      "labelActive": "Gníomhach",
+      "labelInactive": "Neamhghníomhach",
+      "description": "Agus nathanna agus abairtí beachta á gcuardach. (Ainmneacha, teidil, srl.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Tras-scríobhaí",
+      "labelChanged": "Athraithe",
+      "labelUnknownTranscriber": "Tras-scríobhaí anaithnid",
+      "labelGoToTranscriber": "Téigh go dtí an tras-scríobhaí"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Teachtaireacht nua"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Ag fanacht le próiseáil",
+      "tooltipPaused": "Ar sos"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Réasúnaíocht cumasaithe",
+      "labelThinkingOff": "Réasúnaíocht díchumasaithe",
+      "labelMessageStack": "Cruach teachtaireachtaí",
+      "placeholderMessage": "Teachtaireacht...",
+      "tooltipUploadFiles": "Uaslódáil comhaid",
+      "buttonPause": "Cuir ar sos",
+      "buttonStartBatch": "Tosaigh an bhaisc",
+      "buttonSend": "Seol",
+      "descriptionFilesPending": "Tá comhaid á n-uaslódáil nó á bpróiseáil …",
+      "labelAttachFiles": "Ceangail comhaid",
+      "labelUploadFiles": "Uaslódáil comhaid",
+      "labelSelectFile": "Roghnaigh comhad atá ann cheana"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "An gceadófar an gníomh seo?",
+      "descriptionAction": "Teastaíonn do chead ón ngníomhaire chun leanúint ar aghaidh.",
+      "labelApprove": "Ceadaigh",
+      "labelReject": "Diúltaigh",
+      "labelRetry": "Bain triail eile as",
+      "labelSubmitting": "Á phróiseáil …",
+      "errorSubmit": "Níorbh fhéidir do chinneadh a chur isteach. Bain triail eile as.",
+      "labelMCP": "Ceangail do chuntas",
+      "descriptionMCP": "Éilíonn an uirlis MCP seo ort síniú isteach. Leanann an glao atá ar feitheamh go huathoibríoch tar éis duit ceangal."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "An sábhálfar an doiciméad?",
+      "descriptionWriteFile": "Tá an gníomhaire ag iarraidh an doiciméad seo a shábháil. Cuirfear an t-ábhar nua in áit an ábhair atá ann cheana.",
+      "labelShowContent": "Taispeáin an t-ábhar",
+      "labelHideContent": "Folaigh an t-ábhar",
+      "descriptionEmptyFile": "Sábhálfar an doiciméad gan aon ábhar."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Fáil ón ngréasán",
+      "description": "Cumraigh rochtain ar an ngréasán don ról seo. Is féidir fáil agus cuardach a chumasú go neamhspleách.",
+      "labelFetch": "Cumasaigh fáil ón ngréasán",
+      "labelAskFetch": "Fiafraigh sula bhfaightear leathanach",
+      "labelAccess": "Suíomhanna gréasáin ceadaithe",
+      "labelAll": "Gach suíomh gréasáin",
+      "labelWhitelist": "Liosta fearann ceadaithe",
+      "descriptionAccess": "Comhaid HTTP(S) agus leathanaigh ghréasáin, an líonra áitiúil san áireamh. Leanann atreoruithe na rialacha rochtana céanna.",
+      "labelDomains": "Fearainn cheadaithe",
+      "descriptionDomains": "Óstainm amháin in aghaidh na líne, mar shampla example.com. Úsáid *.example.com le haghaidh fofhearann; ní áirítear example.com féin leis seo.",
+      "errorDomains": "Cuir óstainmneacha nó *.example.com isteach gan prótacal, conair ná port.",
+      "descriptionEmptyWhitelist": "Cuireann liosta ceadaithe folamh bac ar gach leathanach.",
+      "labelSearchTitle": "Cuardach gréasáin",
+      "labelSearch": "Cumasaigh cuardach gréasáin",
+      "labelAskSearch": "Fiafraigh sula gcuardaítear an gréasán",
+      "labelProvider": "Soláthraí cuardaigh",
+      "labelProviderDocs": "Doiciméadú an tsoláthraí",
+      "labelApiKey": "Eochair API",
+      "errorApiKey": "Cuir eochair API isteach don soláthraí roghnaithe.",
+      "labelMarket": "Teanga agus réigiún Staan",
+      "descriptionMarket": "Mar shampla de-de nó en-us. Is é en-us an réamhshocrú.",
+      "labelRemoveTool": "Bain uirlis",
+      "labelConfirmRemoveTool": "An mbainfear an uirlis ghréasáin?",
+      "descriptionRemoveTool": "Bainfear na socruithe d’fháil ón ngréasán agus do chuardach gréasáin, an liosta ceadaithe agus an eochair API san áireamh, den ról seo.",
+      "labelCancel": "Cealaigh"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Faigh leathanach gréasáin",
+      "descriptionFetch": "An gceadófar don ghníomhaire an URL seo a íoslódáil, a shábháil agus a phróiseáil?",
+      "labelDestination": "Ceann scríbe"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Cuardaigh an gréasán",
+      "descriptionSearch": "An gceadófar don ghníomhaire an t-iarratas seo a sheoladh chuig an soláthraí cuardaigh cumraithe?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Dún",
+      "labelPending": "Ag rith",
+      "labelApproval": "Ag fanacht le ceadú",
+      "labelDenied": "Diúltaithe",
+      "labelDone": "Críochnaithe",
+      "errorRequest": "Theip ar an iarratas"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Cuardach gréasáin",
+      "labelQuery": "Iarratas cuardaigh",
+      "labelEmptyResults": "Níor aimsíodh aon toradh."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Leathanach gréasáin",
+      "labelUrl": "URL",
+      "labelRange": "Carachtair {{start}}–{{end}} as {{total}}",
+      "descriptionTruncated": "Tá tuilleadh ábhair ar fáil sa chéad rannán eile.",
+      "labelEmptyPage": "Níl aon téacs inléite ar an leathanach seo.",
+      "labelSource": "Oscail an fhoinse",
+      "descriptionFileReady": "Comhad sábháilte agus próiseáilte. Tá an téacs bainte ar fáil go díreach don ghníomhaire.",
+      "descriptionProcessingUnavailable": "Comhad sábháilte. Níl aon téacs bainte ar fáil; teastaíonn tras-scríobhaí cumraithe le haghaidh fuaime/físe.",
+      "descriptionProcessingFailed": "Comhad sábháilte, ach theip ar an bpróiseáil nó chuaigh sí thar an teorainn ama. Is féidir an phróiseáil a atosú sa stóras."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Cóipeáil comhad",
+      "labelMove": "Bog comhad",
+      "descriptionSuccess": "Aistríodh an comhad. Atógtar aon innéacs cuardaigh riachtanach sa chúlra.",
+      "descriptionPending": "Aistriú an chomhaid á ullmhú…",
+      "descriptionProcessingError": "Aistríodh an comhad, ach ní mór an phróiseáil a atosú ag an gceann scríbe.",
+      "errorTransfer": "Níorbh fhéidir aistriú an chomhaid a chur i gcrích.",
+      "labelOpenFile": "Oscail an comhad cinn scríbe",
+      "descriptionDenied": "Diúltaíodh d’aistriú an chomhaid. Níor aistríodh aon chomhad.",
+      "descriptionApproval": "Ag fanacht le do cheadú.",
+      "descriptionRunning": "Comhad á aistriú…",
+      "labelClose": "Dún",
+      "labelSource": "Foinse",
+      "labelTarget": "Ceann scríbe"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "An gceadófar an comhad seo a chóipeáil?",
+      "labelMove": "An gceadófar an comhad seo a bhogadh?",
+      "descriptionCopy": "Tá an gníomhaire ag iarraidh an comhad seo agus a ábhar próiseáilte a chóipeáil. Ní fhorscríobhtar comhaid atá ann cheana ag an gceann scríbe riamh.",
+      "descriptionMove": "Tá an gníomhaire ag iarraidh an comhad seo agus a ábhar próiseáilte a bhogadh. Bainfear an fhoinse tar éis cóipeáil rathúil.",
+      "labelSource": "Foinse",
+      "labelTarget": "Ceann scríbe"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Éilíonn an uirlis MCP seo ort síniú isteach. Leanann an glao atá ar feitheamh go huathoibríoch tar éis duit ceangal.",
+      "labelConnect": "Ceangail mo chuntas"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Uirlis MCP",
+      "labelDiscover": "Aimsigh na huirlisí atá ar fáil",
+      "labelPending": "Ag rith",
+      "labelDone": "Críochnaithe",
+      "labelApproval": "Ní mór síniú isteach",
+      "labelDenied": "Diúltaithe",
+      "errorRequest": "Theip ar an iarratas",
+      "labelArguments": "Ionchur",
+      "labelResult": "Toradh",
+      "labelClose": "Dún"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Aip OAuth",
+      "labelSearch": "Nasc cuardaigh",
+      "labelAutomatic": "Níl aon aip OAuth cumraithe",
+      "labelNone": "Níl aon nasc roghnaithe",
+      "labelMissing": "Níl an nasc ar fáil",
+      "descriptionOAuth": "Roghnach: Roghnaigh aip OAuth chláraithe don fhreastalaí MCP seo. Cumraigh a URL go neamhspleách sa ghníomhaire seo.",
+      "descriptionSearch": "Bainistítear dintiúir Staan agus Brave go lárnach faoi Socruithe → Naisc.",
+      "errorMissing": "Níl an nasc seo ar fáil a thuilleadh. Roghnaigh nasc eile.",
+      "descriptionEmpty": "Níl aon nasc oiriúnach cumraithe. Bainistigh naisc faoi Socruithe → Naisc."
+    }
+  },
+  "page": {
+    "labelTitle": "Gníomhairí",
+    "emptyTitle": "Níl aon ghníomhaire ann",
+    "emptyDescription": "Níor cruthaíodh aon ghníomhaire fós.",
+    "labelNewAgent": "Gníomhaire nua",
+    "helpSearchTitle": "Cuardaigh",
+    "helpSearchDescription": "Is féidir leat gníomhairí a chuardach. Áirítear sa chuardach, i measc rudaí eile, ainm agus cur síos an ghníomhaire, chomh maith lena shamhail.",
+    "helpSortTitle": "Sórtáil agus grúpáil",
+    "helpSortDescription": "Is féidir gníomhairí a shórtáil de réir ainm agus a roinnt i ngrúpaí éagsúla. Is féidir iad a thaispeáint mar thíleanna nó mar thábla."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Éilíonn an soláthraí MCP seo aip OAuth chláraithe. Iarr ar riarthóir aip OAuth a chruthú le Client ID agus Client Secret faoi Socruithe → Naisc agus roghnaigh í i socruithe MCP an ghníomhaire. Ansin ceangail arís ón gcomhrá.",
+    "errorStart": "Níorbh fhéidir údarú MCP a thosú.",
+    "errorCallback": "Theip ar údarú MCP nó chuaigh sé in éag. Fill ar an gcomhrá agus bain triail eile as."
+  }
+}

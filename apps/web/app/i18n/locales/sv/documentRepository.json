@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentarkiv",
+    "description": "Dokumentarkiv skapar en central, strukturerad och tillförlitlig kunskapsbas för AI som modeller kan använda utifrån sammanhanget."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentarkiv"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Sök..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelNameAsc": "Namn A till Ö",
+      "labelNameDesc": "Namn Ö till A",
+      "labelGroup": "Gruppera efter",
+      "labelNoGroup": "Ingen grupp",
+      "labelFavorites": "Favoriter",
+      "labelFirstLetter": "Första bokstaven",
+      "labelWorkspaces": "Arbetsytor",
+      "labelModel": "Transkriberare",
+      "labelCards": "Kort",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ",
+      "labelDocumentRepositories": "Dokumentarkiv",
+      "labelNewDocumentRepository": "Nytt dokumentarkiv"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Andra dokumentarkiv",
+      "labelFavorites": "Favoriter",
+      "labelOtherTranscribers": "Andra transkriberare",
+      "labelUnknownTranscriber": "Okänd transkriberare ”{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Namn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Åtgärder",
+      "emptyTitle": "Inga dokumentarkiv",
+      "emptyDescription": "Inga dokumentarkiv har skapats ännu.",
+      "labelOtherDocumentRepositories": "Andra dokumentarkiv",
+      "labelFavorites": "Favoriter",
+      "labelNoGroup": "Ingen grupp",
+      "labelUnknownTranscriber": "Okänd transkriberare ”{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Okänd arbetsyta"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Redigera",
+      "tooltipInfo": "Information"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ta bort från favoriter",
+      "tooltipAddFavorite": "Lägg till i favoriter"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nytt dokumentarkiv",
+      "labelDocumentRepository": "Dokumentarkiv",
+      "labelDocumentRepositoryDropdown": "Dokumentarkiv",
+      "labelCreateDocumentRepository": "Skapa dokumentarkiv",
+      "labelSaveDocumentRepository": "Spara dokumentarkiv",
+      "labelCloneDocumentRepository": "Spara som nytt dokumentarkiv",
+      "labelDeleteDocumentRepository": "Ta bort dokumentarkiv",
+      "confirmDeleteTitle": "Ta bort dokumentarkiv",
+      "confirmDeleteDescription": "Vill du verkligen ta bort dokumentarkivet ”{{name}}”? Åtgärden kan inte ångras.",
+      "labelCancel": "Avbryt",
+      "tabOverview": "Översikt",
+      "tabFeatures": "Funktioner",
+      "tabSettings": "Inställningar",
+      "btnCreate": "Skapa",
+      "btnSave": "Spara"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kasta ändringar",
+      "labelDiscardConfirm": "Vill du verkligen kasta alla osparade ändringar av det här dokumentarkivet?",
+      "labelCancel": "Avbryt",
+      "labelDiscard": "Kasta ändringar"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nytt dokumentarkiv",
+      "emptyDescription": "Ange dokumentarkivets beteende och utseende.",
+      "checklistSemanticSearchTitle": "Aktivera semantisk sökning",
+      "checklistSemanticSearchDescription": "Aktivera semantisk sökning. Det kan förbättra sökresultatens kvalitet.",
+      "checklistTranscriberTitle": "Välj transkriberare",
+      "checklistTranscriberDescription": "Välj en transkriberare som automatiskt transkriberar alla uppladdade video- och ljudfiler.",
+      "helpTitle": "Hjälp",
+      "helpKeywordSearch": "Klassisk nyckelordssökning. Passar bäst för sökning efter varumärken, personnamn och andra namn.",
+      "helpEmbeddingDescription": "Lägg till en inbäddningsmodell för att aktivera semantisk sökning. Den hittar liknande dokument utifrån deras betydelse.",
+      "helpTranscriberDescription": "Lägg till en transkriberare i dokumentarkivet så transkriberas alla video- och ljudfiler automatiskt efter uppladdning."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Sökindex",
+      "description": "Beroende på sökindex används olika metoder för att ge de bästa resultaten för sökfrågan.",
+      "labelKeyword": "Nyckelordssökning",
+      "descriptionKeyword": "För sökning efter exakta uttryck och meningar, som namn och beteckningar.",
+      "labelSemantic": "Semantisk sökning",
+      "descriptionSemantic": "När uppgifternas betydelse är viktigare än den exakta ordalydelsen. Kräver en inbäddningsmodell.",
+      "labelEmbeddingModel": "Inbäddningsmodell",
+      "descriptionEmbeddingModel": "Inbäddningsmodellen är grunden för semantisk sökning."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Ingen transkriberare",
+      "labelLegend": "Transkriberare",
+      "description": "Video- och ljudfiler transkriberas automatiskt efter uppladdning.",
+      "labelTranscriber": "Transkriberare"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Beskrivning",
+      "description": "Välj ett lämpligt namn för dokumentarkivet. Du kan även spara en kort beskrivning.",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Utseende",
+      "description": "Välj en färg och en ikon som bäst representerar dokumentarkivet.",
+      "labelIcon": "Ikon",
+      "labelColor": "Färg"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Arbetsyta",
+      "description": "Välj den arbetsyta där dokumentarkivet ska skapas.",
+      "labelName": "Arbetsyta",
+      "labelSelectWorkspace": "Välj en arbetsyta."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Filer",
+      "tabSearch": "Fulltextsökning",
+      "tabInfo": "Information"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Sök...",
+      "labelSearch": "Sökning"
+    },
+    "Search": {
+      "emptyTitle": "Fulltextsökning",
+      "emptyDescription": "Sök efter text i alla filer i det här dokumentarkivet."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentarkiv",
+    "emptyTitle": "Inga dokumentarkiv",
+    "emptyDescription": "Inga dokumentarkiv har skapats ännu.",
+    "labelNewDocumentRepository": "Nytt dokumentarkiv",
+    "helpTitle": "Hjälp",
+    "helpSearchDescription": "Du kan söka efter dokumentarkiv. Sökningen omfattar bland annat arkivets namn, beskrivning och transkriberare.",
+    "helpSortDescription": "Dokumentarkiv kan sorteras efter namn och delas in i olika grupper. De kan visas som kort eller som en tabell.",
+    "helpTranscriberDescription": "Du kan välja en transkriberare för dokumentarkiv. När ljud- eller videofiler laddas upp till arkivet transkriberas de automatiskt."
+  }
+}

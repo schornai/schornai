@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Транскрипция",
+    "description": "Транскрибаторите правят устното съдържание, като срещи, интервюта или обаждания, структурирано и достъпно за търсене от изкуствения интелект."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Транскрибатор"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Търсене..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Опции",
+      "labelView": "Изглед",
+      "labelSort": "Сортиране",
+      "labelNameAsc": "Име от А до Я",
+      "labelNameDesc": "Име от Я до А",
+      "labelGroup": "Групиране по",
+      "labelNoGroup": "Без група",
+      "labelFavorites": "Любими",
+      "labelFirstLetter": "Първа буква",
+      "labelWorkspaces": "Работни пространства",
+      "labelModel": "Модел",
+      "labelCards": "Карти",
+      "labelTable": "Таблица",
+      "labelSaveView": "Запазване на изгледа",
+      "labelReset": "Нулиране",
+      "labelTranscribers": "Транскрибатори",
+      "labelNewTranscriber": "Нов транскрибатор"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Други транскрибатори",
+      "labelFavorites": "Любими",
+      "labelNoGroup": "Без група",
+      "labelUnknownModel": "Неизвестен модел „{{id}}“"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Име",
+      "tableColumnCapablilities": "Възможности",
+      "tableColumnNameActions": "Действия",
+      "emptyTitle": "Няма транскрибатори",
+      "emptyDescription": "Все още няма създадени транскрибатори.",
+      "labelOtherTranscribers": "Други транскрибатори",
+      "labelFavorites": "Любими",
+      "labelNoGroup": "Без група",
+      "labelUnknownModel": "Неизвестен модел „{{id}}“"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Неизвестен модел",
+      "labelUnknownWorkspace": "Неизвестно работно пространство"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Редактиране",
+      "tooltipInfo": "Информация",
+      "tooltipNewTranscription": "Нова транскрипция",
+      "tooltipRecord": "Запис на аудио"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Премахване от любими",
+      "tooltipAddFavorite": "Добавяне в любими"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Инструкция",
+      "labelChanged": "Променено",
+      "labelEmpty": "Празно"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Нов транскрибатор",
+      "labelTranscriber": "Транскрибатор",
+      "labelCreateTranscriber": "Създаване на транскрибатор",
+      "labelSaveTranscriber": "Запазване на транскрибатор",
+      "labelCloneTranscriber": "Запазване като нов транскрибатор",
+      "labelDeleteTranscriber": "Изтриване на транскрибатор",
+      "confirmDeleteTitle": "Изтриване на транскрибатор",
+      "confirmDeleteDescription": "Сигурни ли сте, че искате да изтриете транскрибатора „{{name}}“? Това действие не може да бъде отменено.",
+      "labelCancel": "Отказ",
+      "tabOverview": "Общ преглед",
+      "tabPrompt": "Инструкция",
+      "tabSettings": "Настройки",
+      "btnCreate": "Създаване",
+      "btnSave": "Запазване"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Отхвърляне на промените",
+      "labelDiscardConfirm": "Наистина ли искате да отхвърлите всички незапазени промени по този транскрибатор?",
+      "labelCancel": "Отказ",
+      "labelDiscard": "Отхвърляне на промените"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Нов транскрибатор",
+      "emptyDescription": "Задайте поведението и външния вид на транскрибатора.",
+      "labelDefinePrompt": "Задайте инструкция",
+      "descriptionDefinePrompt": "Кратка инструкция помага на транскрибатора да разбира и изписва правилно имена, технически термини и имена на продукти по очаквания от вас начин.",
+      "helpTitle": "Помощ",
+      "helpPromptDescription": "С инструкция транскриптът изисква по-малко последващи поправки и получавате по-последователен резултат при по-дълги или тематично специфични записи."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Инструкция",
+      "descriptionWhisperPrompt": "Инструкцията се подава на модела за транскрипция (Whisper), за да му помогне да разбира специализирани термини."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Външен вид",
+      "description": "Изберете цвят и икона, които най-добре представят транскрибатора.",
+      "labelIcon": "Икона",
+      "labelColor": "Цвят"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Описание",
+      "description": "Изберете подходящо име за транскрибатора. Можете да запазите и кратко описание.",
+      "labelName": "Име",
+      "labelDescription": "Описание"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Модел",
+      "description": "Моделът за транскрипция, който транскрибаторът използва.",
+      "labelName": "Модел",
+      "labelSelectModel": "Избор на модел"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Работно пространство",
+      "description": "Изберете работното пространство, в което да бъде създаден транскрибаторът.",
+      "labelName": "Работно пространство",
+      "labelSelectWorkspace": "Изберете работно пространство."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Файлове",
+      "tabInfo": "Информация"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Запис на аудио",
+      "labelReady": "Готово",
+      "labelRequesting": "Свързване на микрофона",
+      "labelRecording": "Записване",
+      "labelStopping": "Завършване на записа",
+      "labelRecorded": "Записът е готов",
+      "labelUploading": "Запазване",
+      "labelSaved": "Запазено",
+      "labelDuration": "Продължителност на записа",
+      "labelStart": "Стартиране на запис",
+      "labelStop": "Спиране на записа",
+      "labelRecordAgain": "Повторно записване",
+      "labelCancel": "Отказ",
+      "labelTranscribe": "Запазване и транскрибиране",
+      "labelDiscard": "Отхвърляне на записа",
+      "labelPreview": "Преглед на записа",
+      "descriptionSaved": "Записът е запазен. Транскрипцията ще започне автоматично.",
+      "errorUnsupported": "Записването на аудио изисква поддържан браузър и защитена връзка (HTTPS или localhost).",
+      "errorPermission": "Достъпът до микрофона е отказан. Разрешете достъпа до микрофона в браузъра си и опитайте отново.",
+      "errorRecording": "Микрофонът не можа да запише аудио. Проверете устройството си и опитайте отново.",
+      "errorEmpty": "Записът не съдържа аудио. Запишете отново.",
+      "errorUpload": "Записът не можа да бъде запазен. Можете да го прослушате и да опитате да го качите отново.",
+      "descriptionScreenAwake": "Екранът остава включен по време на запис.",
+      "descriptionScreenSleep": "Екранът не може да бъде поддържан включен. Оставете тази страница отворена и предотвратете автоматичното заключване на екрана.",
+      "descriptionCloseBlocked": "Спрете записа и го запазете или отхвърлете преди затваряне. Изчакайте всяко качване да завърши.",
+      "labelClose": "Затваряне"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Автоматични повторни опити",
+      "labelLevel": "Ниво",
+      "description": "При несигурни резултати или много повторения транскрибаторът може да опита отново да разпознае аудиооткъса. Повече опити могат да подобрят разпознаването, но отнемат повече време.",
+      "labelFast": "Бързо",
+      "labelBalanced": "Балансирано",
+      "labelThorough": "Задълбочено",
+      "descriptionFast": "Един опит за всеки аудиооткъс, без автоматично повторение.",
+      "descriptionBalanced": "До 3 опита за всеки аудиооткъс.",
+      "descriptionThorough": "До 6 опита за всеки аудиооткъс.",
+      "errorLevel": "Изберете едно от трите нива."
+    }
+  },
+  "page": {
+    "labelTitle": "Транскрипция",
+    "emptyTitle": "Няма транскрибатори",
+    "emptyDescription": "Все още няма създадени транскрибатори.",
+    "labelNewTranscriber": "Нов транскрибатор",
+    "helpTitle": "Помощ",
+    "helpSearchDescription": "Можете да търсите транскрибатори. Търсенето включва, наред с друго, името и описанието на транскрибатора, както и неговия модел.",
+    "helpSortDescription": "Транскрибаторите могат да се сортират по име и да се разпределят в различни групи. Могат да се показват като карти или като таблица."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@schornio/aibox-package-ui/components",
+    "utils": "@schornio/aibox-package-ui/lib/utils",
+    "hooks": "@schornio/aibox-package-ui/hooks",
+    "lib": "@schornio/aibox-package-ui/lib",
+    "ui": "@schornio/aibox-package-ui/components"
+  },
+  "rtl": true,
+  "menuColor": "default-translucent",
+  "menuAccent": "subtle"
+}

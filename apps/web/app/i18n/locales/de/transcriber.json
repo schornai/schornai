@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkription",
+    "description": "Transkriptoren machen gesprochene Inhalte wie Meetings, Interviews oder Calls für AI strukturiert und durchsuchbar."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkriptor"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Suchen..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Optionen",
+      "labelView": "Ansicht",
+      "labelSort": "Sortieren",
+      "labelNameAsc": "Name A bis Z",
+      "labelNameDesc": "Name Z bis A",
+      "labelGroup": "Gruppieren",
+      "labelNoGroup": "Keine Gruppe",
+      "labelFavorites": "Favoriten",
+      "labelFirstLetter": "Anfangsbuchstaben",
+      "labelWorkspaces": "Arbeitsplätze",
+      "labelModel": "Modell",
+      "labelCards": "Kacheln",
+      "labelTable": "Tabelle",
+      "labelSaveView": "Ansicht speichern",
+      "labelReset": "Zurücksetzen",
+      "labelTranscribers": "Transkriptoren",
+      "labelNewTranscriber": "Neuer Transkriptor"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Andere Transkriptoren",
+      "labelFavorites": "Favoriten",
+      "labelNoGroup": "Keine Gruppe",
+      "labelUnknownModel": "Unbekanntes Modell \"{{id}}\""
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Name",
+      "tableColumnCapablilities": "Fähigkeiten",
+      "tableColumnNameActions": "Aktionen",
+      "emptyTitle": "Keine Transkriptoren",
+      "emptyDescription": "Es wurden noch keine Transkriptoren angelegt.",
+      "labelOtherTranscribers": "Andere Transkriptoren",
+      "labelFavorites": "Favoriten",
+      "labelNoGroup": "Keine Gruppe",
+      "labelUnknownModel": "Unbekanntes Modell \"{{id}}\""
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Unbekanntes Modell",
+      "labelUnknownWorkspace": "Unbekannter Arbeitsplatz"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Bearbeiten",
+      "tooltipInfo": "Infos",
+      "tooltipNewTranscription": "Neue Transkription",
+      "tooltipRecord": "Audio aufnehmen"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Favorit entfernen",
+      "tooltipAddFavorite": "Als Favorit"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Geändert",
+      "labelEmpty": "Leer"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Neuer Transkriptor",
+      "labelTranscriber": "Transkriptor",
+      "labelCreateTranscriber": "Transkriptor erstellen",
+      "labelSaveTranscriber": "Transkriptor speichern",
+      "labelCloneTranscriber": "Als neuen Transkriptor speichern",
+      "labelDeleteTranscriber": "Transkriptor löschen",
+      "confirmDeleteTitle": "Transkriptor löschen",
+      "confirmDeleteDescription": "Wollen Sie wirklich den Transkriptor \"{{name}}\" löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "labelCancel": "Abbrechen",
+      "tabOverview": "Übersicht",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Einstellungen",
+      "btnCreate": "Erstellen",
+      "btnSave": "Speichern"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Änderungen verwerfen",
+      "labelDiscardConfirm": "Wollen Sie wirklich alle nicht gespeicherten Änderungen an diesem Transkriptor verwerfen?",
+      "labelCancel": "Abbrechen",
+      "labelDiscard": "Änderungen verwerfen"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Neuer Transkriptor",
+      "emptyDescription": "Definieren Sie das Verhalten und das Aussehen des Transkriptors.",
+      "labelDefinePrompt": "Einen Prompt definieren",
+      "descriptionDefinePrompt": "Ein kurzer Prompt hilft dem Transkriptor, Namen, Fachbegriffe und Produktbezeichnungen eher korrekt zu verstehen und genau so zu schreiben, wie Sie sie erwarten.",
+      "helpTitle": "Hilfe",
+      "helpPromptDescription": "Durch einen Prompt muss das Transkript danach weniger korrigiert werden und Sie bekommen bei längeren oder themenspezifischen Aufnahmen ein einheitlicheres Ergebnis."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Der Prompt wird dem Transkriptionsmodell (Whisper) übergeben, damit es fachspezifische Begriffe besser versteht."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Aussehen",
+      "description": "Bestimmen Sie eine Farbe und ein Icon, welches den Transkriptor am besten representiert.",
+      "labelIcon": "Icon",
+      "labelColor": "Farbe"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Beschreibung",
+      "description": "Wählen Sie einen passenden Namen für den Transkriptor. Darüber hinaus kann auch noch eine kurze Beschreibung dazu gespeichert werden.",
+      "labelName": "Name",
+      "labelDescription": "Beschreibung"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modell",
+      "description": "Das Transkriptionsmodell, welches der Transkriptor verwendet.",
+      "labelName": "Modell",
+      "labelSelectModel": "Wählen Sie ein Modell"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Arbeitsplatz",
+      "description": "Wählen Sie den Arbeitsplatz aus, in dem der Transkriptor erstellt werden soll.",
+      "labelName": "Arbeitsplatz",
+      "labelSelectWorkspace": "Wählen Sie einen Arbeitsplatz."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Dateien",
+      "tabInfo": "Info"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Audio aufnehmen",
+      "labelReady": "Bereit",
+      "labelRequesting": "Mikrofon verbinden",
+      "labelRecording": "Aufnahme läuft",
+      "labelStopping": "Aufnahme abschließen",
+      "labelRecorded": "Aufnahme bereit",
+      "labelUploading": "Wird gespeichert",
+      "labelSaved": "Gespeichert",
+      "labelDuration": "Aufnahmedauer",
+      "labelStart": "Aufnahme starten",
+      "labelStop": "Aufnahme stoppen",
+      "labelRecordAgain": "Erneut aufnehmen",
+      "labelCancel": "Abbrechen",
+      "labelTranscribe": "Speichern und transkribieren",
+      "labelDiscard": "Aufnahme verwerfen",
+      "labelPreview": "Aufnahme anhören",
+      "descriptionSaved": "Aufnahme gespeichert. Die Transkription startet automatisch.",
+      "errorUnsupported": "Audioaufnahmen benötigen einen unterstützten Browser und eine sichere Verbindung (HTTPS oder localhost).",
+      "errorPermission": "Der Mikrofonzugriff wurde verweigert. Erlaube den Zugriff im Browser und versuche es erneut.",
+      "errorRecording": "Mit dem Mikrofon konnte kein Audio aufgenommen werden. Prüfe dein Gerät und versuche es erneut.",
+      "errorEmpty": "Die Aufnahme enthält kein Audio. Bitte nimm erneut auf.",
+      "errorUpload": "Die Aufnahme konnte nicht gespeichert werden. Du kannst sie anhören und den Upload erneut versuchen.",
+      "descriptionScreenAwake": "Der Bildschirm bleibt während der Aufnahme eingeschaltet.",
+      "descriptionScreenSleep": "Der Bildschirm kann nicht wach gehalten werden. Bitte lasse diese Seite geöffnet und verhindere die automatische Bildschirmsperre.",
+      "descriptionCloseBlocked": "Bitte stoppe die Aufnahme und speichere oder verwirf sie vor dem Schließen. Ein laufender Upload muss zuerst abgeschlossen werden.",
+      "labelClose": "Schließen"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatische Wiederholungsversuche",
+      "labelLevel": "Stufe",
+      "description": "Bei unsicheren oder stark wiederholten Ergebnissen kann der Transkriptor einen Audioabschnitt erneut erkennen. Mehr Versuche können die Erkennung verbessern und dauern länger.",
+      "labelFast": "Schnell",
+      "labelBalanced": "Ausgewogen",
+      "labelThorough": "Gründlich",
+      "descriptionFast": "Ein Versuch pro Audioabschnitt, ohne automatische Wiederholung.",
+      "descriptionBalanced": "Bis zu 3 Versuche pro Audioabschnitt.",
+      "descriptionThorough": "Bis zu 6 Versuche pro Audioabschnitt.",
+      "errorLevel": "Bitte eine der drei Stufen wählen."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkription",
+    "emptyTitle": "Keine Transkriptoren",
+    "emptyDescription": "Es wurden noch keine Transkriptoren angelegt.",
+    "labelNewTranscriber": "Neuer Transkriptor",
+    "helpTitle": "Hilfe",
+    "helpSearchDescription": "Sie können nach Transkriptoren suchen. In die Suche einbezogen werden, unter anderem, Name und Beschreibung des Transkriptors, so wie das Modell des Transkriptors.",
+    "helpSortDescription": "Transkriptoren können nach Namen sortiert werden. Können in verschiedene Gruppen sortiert werden. Transkriptoren können als Kacheln oder als Tabelle angezeigt werden."
+  }
+}

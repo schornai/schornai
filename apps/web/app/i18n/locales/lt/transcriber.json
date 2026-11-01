@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkripcija",
+    "description": "Transkribuotojai paverčia sakytinį turinį, pavyzdžiui, susitikimus, interviu ar skambučius, struktūruotu ir dirbtinio intelekto paieškai tinkamu turiniu."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkribuotojas"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Ieškoti..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelNameAsc": "Pavadinimas nuo A iki Z",
+      "labelNameDesc": "Pavadinimas nuo Z iki A",
+      "labelGroup": "Grupuoti pagal",
+      "labelNoGroup": "Negrupuoti",
+      "labelFavorites": "Mėgstamiausi",
+      "labelFirstLetter": "Pirmoji raidė",
+      "labelWorkspaces": "Darbo sritys",
+      "labelModel": "Modelis",
+      "labelCards": "Kortelės",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti",
+      "labelTranscribers": "Transkribuotojai",
+      "labelNewTranscriber": "Naujas transkribuotojas"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Kiti transkribuotojai",
+      "labelFavorites": "Mėgstamiausi",
+      "labelNoGroup": "Negrupuoti",
+      "labelUnknownModel": "Nežinomas modelis „{{id}}“"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Pavadinimas",
+      "tableColumnCapablilities": "Galimybės",
+      "tableColumnNameActions": "Veiksmai",
+      "emptyTitle": "Transkribuotojų nėra",
+      "emptyDescription": "Dar nesukurtas nė vienas transkribuotojas.",
+      "labelOtherTranscribers": "Kiti transkribuotojai",
+      "labelFavorites": "Mėgstamiausi",
+      "labelNoGroup": "Negrupuoti",
+      "labelUnknownModel": "Nežinomas modelis „{{id}}“"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Nežinomas modelis",
+      "labelUnknownWorkspace": "Nežinoma darbo sritis"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Redaguoti",
+      "tooltipInfo": "Informacija",
+      "tooltipNewTranscription": "Nauja transkripcija",
+      "tooltipRecord": "Įrašyti garsą"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Pašalinti iš mėgstamiausių",
+      "tooltipAddFavorite": "Pridėti prie mėgstamiausių"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Užklausa",
+      "labelChanged": "Pakeista",
+      "labelEmpty": "Tuščia"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Naujas transkribuotojas",
+      "labelTranscriber": "Transkribuotojas",
+      "labelCreateTranscriber": "Sukurti transkribuotoją",
+      "labelSaveTranscriber": "Išsaugoti transkribuotoją",
+      "labelCloneTranscriber": "Išsaugoti kaip naują transkribuotoją",
+      "labelDeleteTranscriber": "Ištrinti transkribuotoją",
+      "confirmDeleteTitle": "Ištrinti transkribuotoją",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti transkribuotoją „{{name}}“? Šio veiksmo negalima atšaukti.",
+      "labelCancel": "Atšaukti",
+      "tabOverview": "Apžvalga",
+      "tabPrompt": "Užklausa",
+      "tabSettings": "Nuostatos",
+      "btnCreate": "Sukurti",
+      "btnSave": "Išsaugoti"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmesti pakeitimus",
+      "labelDiscardConfirm": "Ar tikrai norite atmesti visus neišsaugotus šio transkribuotojo pakeitimus?",
+      "labelCancel": "Atšaukti",
+      "labelDiscard": "Atmesti pakeitimus"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Naujas transkribuotojas",
+      "emptyDescription": "Nustatykite transkribuotojo elgseną ir išvaizdą.",
+      "labelDefinePrompt": "Parašykite užklausą",
+      "descriptionDefinePrompt": "Trumpa užklausa padeda transkribuotojui suprasti ir teisingai užrašyti vardus, specialiuosius terminus bei produktų pavadinimus taip, kaip tikitės.",
+      "helpTitle": "Pagalba",
+      "helpPromptDescription": "Naudojant užklausą transkripciją vėliau reikia mažiau taisyti, o ilgesnių ar konkrečios temos įrašų rezultatai tampa nuoseklesni."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Užklausa",
+      "descriptionWhisperPrompt": "Užklausa perduodama transkribavimo modeliui (Whisper), kad jis geriau suprastų srities terminus."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Išvaizda",
+      "description": "Pasirinkite spalvą ir piktogramą, geriausiai apibūdinančias transkribuotoją.",
+      "labelIcon": "Piktograma",
+      "labelColor": "Spalva"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Aprašymas",
+      "description": "Pasirinkite tinkamą transkribuotojo pavadinimą. Taip pat galite išsaugoti trumpą aprašymą.",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modelis",
+      "description": "Transkribuotojo naudojamas transkribavimo modelis.",
+      "labelName": "Modelis",
+      "labelSelectModel": "Pasirinkite modelį"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Darbo sritis",
+      "description": "Pasirinkite darbo sritį, kurioje norite sukurti transkribuotoją.",
+      "labelName": "Darbo sritis",
+      "labelSelectWorkspace": "Pasirinkite darbo sritį."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Failai",
+      "tabInfo": "Informacija"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Įrašyti garsą",
+      "labelReady": "Paruošta",
+      "labelRequesting": "Prijungiamas mikrofonas",
+      "labelRecording": "Įrašoma",
+      "labelStopping": "Baigiamas įrašymas",
+      "labelRecorded": "Įrašas paruoštas",
+      "labelUploading": "Išsaugoma",
+      "labelSaved": "Išsaugota",
+      "labelDuration": "Įrašo trukmė",
+      "labelStart": "Pradėti įrašymą",
+      "labelStop": "Sustabdyti įrašymą",
+      "labelRecordAgain": "Įrašyti dar kartą",
+      "labelCancel": "Atšaukti",
+      "labelTranscribe": "Išsaugoti ir transkribuoti",
+      "labelDiscard": "Atmesti įrašą",
+      "labelPreview": "Įrašo peržiūra",
+      "descriptionSaved": "Įrašas išsaugotas. Transkribavimas prasidės automatiškai.",
+      "errorUnsupported": "Garso įrašymui reikia palaikomos naršyklės ir saugaus ryšio (HTTPS arba localhost).",
+      "errorPermission": "Prieiga prie mikrofono uždrausta. Leiskite naršyklei naudoti mikrofoną ir bandykite dar kartą.",
+      "errorRecording": "Mikrofonas negalėjo įrašyti garso. Patikrinkite įrenginį ir bandykite dar kartą.",
+      "errorEmpty": "Įraše nėra garso. Įrašykite dar kartą.",
+      "errorUpload": "Nepavyko išsaugoti įrašo. Galite jo pasiklausyti ir pakartoti įkėlimą.",
+      "descriptionScreenAwake": "Įrašymo metu ekranas lieka aktyvus.",
+      "descriptionScreenSleep": "Nepavyksta išlaikyti ekrano aktyvaus. Palikite šį puslapį atvertą ir neleiskite ekranui automatiškai užsirakinti.",
+      "descriptionCloseBlocked": "Prieš užverdami sustabdykite įrašymą ir išsaugokite arba atmeskite įrašą. Palaukite, kol baigsis įkėlimas.",
+      "labelClose": "Užverti"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatiniai pakartotiniai bandymai",
+      "labelLevel": "Lygis",
+      "description": "Jei rezultatai nepatikimi arba juose daug pasikartojimų, transkribuotojas gali dar kartą pabandyti atpažinti garso atkarpą. Daugiau bandymų gali pagerinti atpažinimą, tačiau užtrunka ilgiau.",
+      "labelFast": "Greitai",
+      "labelBalanced": "Subalansuotai",
+      "labelThorough": "Kruopščiai",
+      "descriptionFast": "Vienas bandymas kiekvienai garso atkarpai, be automatinio kartojimo.",
+      "descriptionBalanced": "Iki 3 bandymų kiekvienai garso atkarpai.",
+      "descriptionThorough": "Iki 6 bandymų kiekvienai garso atkarpai.",
+      "errorLevel": "Pasirinkite vieną iš trijų lygių."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkripcija",
+    "emptyTitle": "Transkribuotojų nėra",
+    "emptyDescription": "Dar nesukurtas nė vienas transkribuotojas.",
+    "labelNewTranscriber": "Naujas transkribuotojas",
+    "helpTitle": "Pagalba",
+    "helpSearchDescription": "Galite ieškoti transkribuotojų. Paieška apima, be kita ko, transkribuotojo pavadinimą, aprašymą ir modelį.",
+    "helpSortDescription": "Transkribuotojus galima rikiuoti pagal pavadinimą ir skirstyti į skirtingas grupes. Juos galima rodyti kortelėmis arba lentelėje."
+  }
+}

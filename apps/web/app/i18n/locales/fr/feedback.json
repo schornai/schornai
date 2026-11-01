@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copier le texte de l’avis dans le presse-papiers",
+      "feedbackText": "Texte de l’avis",
+      "feedbackTextRecommendation": "Envoyez-nous simplement ce texte à ",
+      "sendFeedback": "Envoyer un avis par e-mail",
+      "showFeedbackText": "Afficher le texte de l’avis",
+      "thankYou": "Merci d’avoir pris le temps de donner votre avis"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Supprimer tous les messages d’erreur",
+      "actionDeleteAllCancel": "Annuler",
+      "actionDeleteAllExplainer": "Voulez-vous vraiment supprimer tous les messages d’erreur collectés ? Cette action est irréversible.",
+      "actionDeleteAllShort": "Supprimer les messages d’erreur",
+      "actionDeselectAll": "Désélectionner tous les messages d’erreur",
+      "actionSelectAll": "Sélectionner tous les messages d’erreur",
+      "explainer": "Les messages d’erreur font également partie de l’avis. Certains problèmes sont résolus automatiquement par le système sans interrompre vos opérations. Il nous est toutefois utile d’en être informés pour pouvoir les corriger.",
+      "explainerSecrecy": "Assurez-vous que les messages d’erreur ne contiennent aucune donnée confidentielle ou personnelle. Le système est conçu pour exclure ces données, mais les erreurs concernent des situations imprévues. Veuillez donc vérifier vous-même le contenu de votre avis par mesure de sécurité.",
+      "explainerSecrecyHeading": "Aucune donnée confidentielle",
+      "heading": "Erreurs",
+      "tableColumnPartOfFeedback": "Inclus dans l’avis",
+      "tableColumnDate": "Date",
+      "tableColumnErrorMessage": "Message d’erreur"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Aucune note attribuée",
+      "starRating": "{{stars}} étoiles sur 5"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Abandonner l’avis",
+      "discardFeedbackSub": "Voulez-vous vraiment abandonner votre avis ? Cette action est irréversible.",
+      "discardFeedbackCancel": "Annuler",
+      "infoSecrecy": "Assurez-vous que l’avis envoyé ne contient aucune donnée confidentielle ou personnelle.",
+      "writeFeedback": "Rédiger un avis",
+      "writeFeedbackSub": "Tous vos avis, positifs ou négatifs, sont les bienvenus."
+    }
+  },
+  "page": {
+    "headingLine1": "Aidez-nous à améliorer schorn.ai in a Box,",
+    "headingLine2": "donnez-nous votre avis",
+    "headingMain": "Avis"
+  }
+}

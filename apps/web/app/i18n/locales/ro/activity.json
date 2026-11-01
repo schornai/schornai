@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Istoric"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Eroare",
+      "idle": "Inactiv",
+      "running": "În execuție",
+      "success": "Reușită"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Fixează",
+      "actionUnpin": "Anulează fixarea",
+      "actionDelete": "Șterge"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Caută…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelLabelAsc": "Etichetă de la A la Z",
+      "labelLabelDesc": "Etichetă de la Z la A",
+      "labelCreatedAsc": "Data creării descrescător",
+      "labelCreatedDesc": "Data creării crescător",
+      "labelUpdatedAsc": "Data actualizării descrescător",
+      "labelUpdatedDesc": "Data actualizării crescător",
+      "labelGroup": "Grupare",
+      "labelPinned": "Fixate",
+      "labelState": "Stare",
+      "labelType": "Tip",
+      "labelCreated": "Data creării",
+      "labelUpdated": "Data actualizării",
+      "labelList": "Listă",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează",
+      "labelNoGroup": "Fără grup"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Nicio activitate",
+      "emptyDescription": "Conversațiile și transcrierile anterioare apar aici.",
+      "emptyLabelAgents": "Agenți"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Astăzi",
+      "groupTimeLast7Days": "Ultimele 7 zile",
+      "groupTimeLast30Days": "Ultimele 30 de zile",
+      "groupTimeOther": "Altele",
+      "groupPinned": "Fixate",
+      "groupNotPinned": "Nefixate",
+      "groupUnknown": "Necunoscut",
+      "groupChat": "Conversație",
+      "groupTranscription": "Transcriere",
+      "groupReindex": "Reindexare",
+      "labelReindex": "Reindexare",
+      "labelPinned": "Fixate"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Etichetă",
+      "tableColumnType": "Tip",
+      "tableColumnState": "Stare",
+      "tableColumnCreated": "Creat",
+      "tableColumnUpdated": "Actualizat",
+      "tableColumnPinned": "Fixate",
+      "tableColumnNameActions": "Acțiuni",
+      "groupTimeToday": "Astăzi",
+      "groupTimeLast7Days": "Ultimele 7 zile",
+      "groupTimeLast30Days": "Ultimele 30 de zile",
+      "groupTimeOther": "Altele",
+      "groupPinned": "Fixate",
+      "groupNotPinned": "Nefixate",
+      "groupUnknown": "Necunoscut",
+      "groupChat": "Conversație",
+      "groupTranscription": "Transcriere",
+      "groupReindex": "Reindexare",
+      "labelReindex": "Reindexare",
+      "labelPinned": "Fixate"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Istoric",
+      "labelPinned": "Fixate",
+      "labelToday": "Astăzi",
+      "labelLast7Days": "Ultimele 7 zile",
+      "labelLast30Days": "Ultimele 30 de zile",
+      "labelEmpty": "Gol"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Activitate",
+      "actionPin": "Fixează",
+      "actionUnpin": "Anulează fixarea",
+      "actionDelete": "Șterge",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Conversație nouă",
+      "labelInfo": "Informații"
+    }
+  }
+}

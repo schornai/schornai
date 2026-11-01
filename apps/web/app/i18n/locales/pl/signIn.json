@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Jesteś już zalogowany",
+      "backToDashboard": "Wróć do pulpitu",
+      "signOut": "Wyloguj się"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Zaloguj się za pomocą e-maila i hasła",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Hasło",
+      "buttonSignIn": "Zaloguj się za pomocą e-maila",
+      "buttonReset": "Zresetuj hasło"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Zaloguj się przez dostawcę SSO",
+      "buttonSignIn": "Zaloguj się przez {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Zresetuj hasło",
+      "descriptionKey": "Wpisz adres e-mail i klucz resetowania otrzymany od administratora. Klucza można użyć raz i jest ważny przez 7 dni.",
+      "labelEmail": "E-mail",
+      "labelKey": "Klucz resetowania hasła",
+      "labelPassword": "Nowe hasło",
+      "labelPasswordAgain": "Powtórz nowe hasło",
+      "descriptionPassword": "Użyj co najmniej 6 znaków i przestrzegaj wymagań organizacji dotyczących haseł.",
+      "errorEmail": "Wpisz prawidłowy adres e-mail.",
+      "errorKey": "Wpisz klucz resetowania.",
+      "errorPassword": "Hasło musi zawierać co najmniej 6 znaków.",
+      "errorPasswordAgain": "Hasła nie są identyczne.",
+      "errorReset": "Nie udało się zmienić hasła. Sprawdź adres e-mail, klucz i wymagania dotyczące hasła. Klucze wygasłe lub wcześniej użyte są nieważne.",
+      "descriptionSuccess": "Twoje hasło zostało zmienione. Możesz teraz zalogować się nowym hasłem.",
+      "labelReset": "Zapisz hasło",
+      "labelSignIn": "Wróć do logowania"
+    }
+  }
+}

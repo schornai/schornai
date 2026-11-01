@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Hai già effettuato l’accesso",
+      "backToDashboard": "Torna alla dashboard",
+      "signOut": "Esci"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Accedi con e-mail e password",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Password",
+      "buttonSignIn": "Accedi con e-mail",
+      "buttonReset": "Reimposta password"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Accedi con fornitore SSO",
+      "buttonSignIn": "Accedi con {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Reimposta password",
+      "descriptionKey": "Inserisci l’indirizzo e-mail e la chiave di reimpostazione fornita dall’amministratore. La chiave può essere usata una volta ed è valida per 7 giorni.",
+      "labelEmail": "E-mail",
+      "labelKey": "Chiave di reimpostazione della password",
+      "labelPassword": "Nuova password",
+      "labelPasswordAgain": "Ripeti nuova password",
+      "descriptionPassword": "Usa almeno 6 caratteri e rispetta i requisiti per le password della tua organizzazione.",
+      "errorEmail": "Inserisci un indirizzo e-mail valido.",
+      "errorKey": "Inserisci la chiave di reimpostazione.",
+      "errorPassword": "La password deve contenere almeno 6 caratteri.",
+      "errorPasswordAgain": "Le password non coincidono.",
+      "errorReset": "Impossibile cambiare la password. Controlla indirizzo e-mail, chiave e requisiti della password. Le chiavi scadute o già usate non sono valide.",
+      "descriptionSuccess": "La password è stata cambiata. Ora puoi accedere con la nuova password.",
+      "labelReset": "Salva password",
+      "labelSignIn": "Torna all’accesso"
+    }
+  }
+}

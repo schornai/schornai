@@ -1,0 +1,100 @@
+{
+ "page": {
+  "titleHistory": "Verlauf"
+ },
+ "_components": {
+  "ActivityStateBadge": {
+   "error": "Fehler",
+   "idle": "Wartend",
+   "running": "Läuft",
+   "success": "Erfolg"
+  },
+  "ActivityIconGroupActions": {
+   "actionPin": "Anheften",
+   "actionUnpin": "Lösen",
+   "actionDelete": "Löschen"
+  },
+  "ActivityList": {
+   "placeholderSearch": "Suchen…"
+  },
+  "ActivityListOptionsDropdown": {
+   "labelOptions": "Optionen",
+   "labelView": "Ansicht",
+   "labelSort": "Sortieren",
+   "labelLabelAsc": "Bezeichnung A bis Z",
+   "labelLabelDesc": "Bezeichnung Z bis A",
+   "labelCreatedAsc": "Erstellungsdatum absteigend",
+   "labelCreatedDesc": "Erstellungsdatum aufsteigend",
+   "labelUpdatedAsc": "Änderungsdatum absteigend",
+   "labelUpdatedDesc": "Änderungsdatum aufsteigend",
+   "labelGroup": "Gruppieren",
+   "labelPinned": "Angeheftet",
+   "labelState": "Status",
+   "labelType": "Typ",
+   "labelCreated": "Erstellungsdatum",
+   "labelUpdated": "Änderungsdatum",
+   "labelList": "Liste",
+   "labelTable": "Tabelle",
+   "labelSaveView": "Ansicht speichern",
+   "labelReset": "Zurücksetzen",
+   "labelNoGroup": "Keine Gruppe"
+  },
+    "ActivityListEmpty": {
+     "emptyTitle": "Keine Aktivitäten",
+     "emptyDescription": "Deine vergangenen Chats und Transkriptionen erscheinen hier.",
+     "emptyLabelAgents": "Agenten"
+    },
+    "ActivityListList": {
+     "groupTimeToday": "Heute",
+     "groupTimeLast7Days": "Letzte 7 Tage",
+     "groupTimeLast30Days": "Letzte 30 Tage",
+     "groupTimeOther": "Andere",
+     "groupPinned": "Angeheftet",
+     "groupNotPinned": "Nicht angeheftet",
+     "groupUnknown": "Unbekannt",
+     "groupChat": "Chat",
+     "groupTranscription": "Transkription",
+     "groupReindex": "Neu indexieren",
+     "labelReindex": "Neu indexieren",
+     "labelPinned": "Angeheftet"
+    },
+    "ActivityListTable": {
+     "tableColumnLabel": "Bezeichnung",
+     "tableColumnType": "Typ",
+     "tableColumnState": "Status",
+     "tableColumnCreated": "Erstellt am",
+     "tableColumnUpdated": "Geändert am",
+     "tableColumnPinned": "Angeheftet",
+     "tableColumnNameActions": "Aktionen",
+     "groupTimeToday": "Heute",
+     "groupTimeLast7Days": "Letzte 7 Tage",
+     "groupTimeLast30Days": "Letzte 30 Tage",
+     "groupTimeOther": "Andere",
+     "groupPinned": "Angeheftet",
+     "groupNotPinned": "Nicht angeheftet",
+     "groupUnknown": "Unbekannt",
+     "groupChat": "Chat",
+     "groupTranscription": "Transkription",
+     "groupReindex": "Neu indexieren",
+     "labelReindex": "Neu indexieren",
+     "labelPinned": "Angeheftet"
+    },
+  "SidebarActivitesRealtime": {
+   "labelHistory": "Verlauf",
+   "labelPinned": "Angeheftet",
+   "labelToday": "Heute",
+   "labelLast7Days": "Letzte 7 Tage",
+   "labelLast30Days": "Letzte 30 Tage",
+   "labelEmpty": "Leer"
+  },
+  "SidebarActivitesMenuItem": {
+   "labelActivity": "Aktivität",
+   "actionPin": "Anheften",
+   "actionUnpin": "Lösen",
+   "actionDelete": "Löschen",
+   "labelAgent": "Agent - {{name}}",
+   "actionNewChat": "Neuer Chat",
+   "labelInfo": "Info"
+  }
+ }
+}

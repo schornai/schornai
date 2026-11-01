@@ -1,0 +1,34 @@
+{
+  "_components": {
+    "ServiceView": {
+      "labelAdmin": "Admin",
+      "labelRelease": "Release: {{name}}",
+      "labelTitle": "Service",
+      "descriptionService": "Dienste auf diesem Mac starten und ihre Protokolle einsehen.",
+      "labelStarting": "Startet",
+      "labelRunning": "Läuft",
+      "labelStopped": "Gestoppt",
+      "labelStopping": "Stoppt",
+      "labelError": "Fehler",
+      "labelStart": "Starten",
+      "labelStop": "Stoppen",
+      "descriptionBackground": "Der Service läuft weiter, wenn du die App schließt.",
+      "errorCommand": "Service nicht erreichbar oder Aktion fehlgeschlagen",
+      "labelLogs": "Protokolle",
+      "descriptionLogs": "Neueste Meldungen zuerst. Bis zu 1.000 Meldungen pro Absender.",
+      "labelShowLogs": "Protokolle anzeigen",
+      "labelHideLogs": "Protokolle ausblenden",
+      "labelSearch": "Protokolle durchsuchen",
+      "labelResetFilters": "Filter zurücksetzen",
+      "labelSenders": "Absender",
+      "labelUnknownSender": "Unbekannt",
+      "labelLevel": "Ausgabe",
+      "labelTime": "Zeit",
+      "labelMessage": "Meldung",
+      "labelEmpty": "Noch keine Protokolle",
+      "descriptionEmpty": "Neue Meldungen erscheinen automatisch hier.",
+      "labelNoMatches": "Keine passenden Meldungen",
+      "descriptionNoMatches": "Passe die Suche oder Absender-Auswahl an oder setze beides zurück."
+    }
+  }
+}

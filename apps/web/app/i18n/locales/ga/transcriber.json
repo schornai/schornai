@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Tras-scríobh",
+    "description": "Déanann tras-scríobhaithe ábhar labhartha, amhail cruinnithe, agallaimh nó glaonna, a struchtúrú agus a dhéanamh inchuardaithe don intleacht shaorga."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Tras-scríobhaí"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Cuardaigh..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelNameAsc": "Ainm ó A go Z",
+      "labelNameDesc": "Ainm ó Z go A",
+      "labelGroup": "Grúpáil de réir",
+      "labelNoGroup": "Gan grúpa",
+      "labelFavorites": "Ceanáin",
+      "labelFirstLetter": "An chéad litir",
+      "labelWorkspaces": "Spásanna oibre",
+      "labelModel": "Samhail",
+      "labelCards": "Cártaí",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh",
+      "labelTranscribers": "Tras-scríobhaithe",
+      "labelNewTranscriber": "Tras-scríobhaí nua"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Tras-scríobhaithe eile",
+      "labelFavorites": "Ceanáin",
+      "labelNoGroup": "Gan grúpa",
+      "labelUnknownModel": "Samhail anaithnid \"{{id}}\""
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Ainm",
+      "tableColumnCapablilities": "Cumais",
+      "tableColumnNameActions": "Gníomhartha",
+      "emptyTitle": "Níl aon tras-scríobhaí ann",
+      "emptyDescription": "Níor cruthaíodh aon tras-scríobhaí fós.",
+      "labelOtherTranscribers": "Tras-scríobhaithe eile",
+      "labelFavorites": "Ceanáin",
+      "labelNoGroup": "Gan grúpa",
+      "labelUnknownModel": "Samhail anaithnid \"{{id}}\""
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Samhail anaithnid",
+      "labelUnknownWorkspace": "Spás oibre anaithnid"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Cuir in eagar",
+      "tooltipInfo": "Eolas",
+      "tooltipNewTranscription": "Tras-scríbhinn nua",
+      "tooltipRecord": "Taifead fuaim"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Bain de na ceanáin",
+      "tooltipAddFavorite": "Cuir leis na ceanáin"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Leid",
+      "labelChanged": "Athraithe",
+      "labelEmpty": "Folamh"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Tras-scríobhaí nua",
+      "labelTranscriber": "Tras-scríobhaí",
+      "labelCreateTranscriber": "Cruthaigh tras-scríobhaí",
+      "labelSaveTranscriber": "Sábháil tras-scríobhaí",
+      "labelCloneTranscriber": "Sábháil mar thras-scríobhaí nua",
+      "labelDeleteTranscriber": "Scrios tras-scríobhaí",
+      "confirmDeleteTitle": "Scrios tras-scríobhaí",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an tras-scríobhaí \"{{name}}\" a scriosadh? Ní féidir an gníomh seo a chealú.",
+      "labelCancel": "Cealaigh",
+      "tabOverview": "Forbhreathnú",
+      "tabPrompt": "Leid",
+      "tabSettings": "Socruithe",
+      "btnCreate": "Cruthaigh",
+      "btnSave": "Sábháil"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Caith na hathruithe i leataobh",
+      "labelDiscardConfirm": "An bhfuil tú cinnte gur mhaith leat gach athrú gan sábháil ar an tras-scríobhaí seo a chaitheamh i leataobh?",
+      "labelCancel": "Cealaigh",
+      "labelDiscard": "Caith na hathruithe i leataobh"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Tras-scríobhaí nua",
+      "emptyDescription": "Sainigh iompar agus cuma an tras-scríobhaí.",
+      "labelDefinePrompt": "Sainigh leid",
+      "descriptionDefinePrompt": "Cabhraíonn leid ghairid leis an tras-scríobhaí ainmneacha, téarmaí teicniúla agus ainmneacha táirgí a thuiscint agus a scríobh i gceart mar a bheifeá ag súil leis.",
+      "helpTitle": "Cabhair",
+      "helpPromptDescription": "Le leid, bíonn níos lú ceartúchán de dhíth ar an tras-scríbhinn ina dhiaidh sin agus faigheann tú toradh níos comhsheasmhaí le taifeadtaí níos faide nó a bhaineann le hábhar ar leith."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Leid",
+      "descriptionWhisperPrompt": "Tugtar an leid don tsamhail tras-scríofa (Whisper) chun cabhrú léi téarmaí speisialaithe a thuiscint."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Cuma",
+      "description": "Roghnaigh dath agus deilbhín a léiríonn an tras-scríobhaí is fearr.",
+      "labelIcon": "Deilbhín",
+      "labelColor": "Dath"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Cur síos",
+      "description": "Roghnaigh ainm oiriúnach don tras-scríobhaí. Is féidir cur síos gairid a shábháil freisin.",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Samhail",
+      "description": "An tsamhail tras-scríofa a úsáideann an tras-scríobhaí.",
+      "labelName": "Samhail",
+      "labelSelectModel": "Roghnaigh samhail"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Spás oibre",
+      "description": "Roghnaigh an spás oibre ina gcruthófar an tras-scríobhaí.",
+      "labelName": "Spás oibre",
+      "labelSelectWorkspace": "Roghnaigh spás oibre."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Comhaid",
+      "tabInfo": "Eolas"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Taifead fuaim",
+      "labelReady": "Réidh",
+      "labelRequesting": "Micreafón á cheangal",
+      "labelRecording": "Ag taifeadadh",
+      "labelStopping": "An taifeadadh á chríochnú",
+      "labelRecorded": "Taifeadadh réidh",
+      "labelUploading": "Á shábháil",
+      "labelSaved": "Sábháilte",
+      "labelDuration": "Fad an taifeadta",
+      "labelStart": "Tosaigh taifeadadh",
+      "labelStop": "Stop an taifeadadh",
+      "labelRecordAgain": "Taifead arís",
+      "labelCancel": "Cealaigh",
+      "labelTranscribe": "Sábháil agus tras-scríobh",
+      "labelDiscard": "Caith an taifeadadh i leataobh",
+      "labelPreview": "Réamhamharc ar an taifeadadh",
+      "descriptionSaved": "Taifeadadh sábháilte. Tosóidh an tras-scríobh go huathoibríoch.",
+      "errorUnsupported": "Teastaíonn brabhsálaí tacaithe agus nasc slán (HTTPS nó localhost) chun fuaim a thaifeadadh.",
+      "errorPermission": "Diúltaíodh do rochtain ar an micreafón. Ceadaigh rochtain ar an micreafón i do bhrabhsálaí agus bain triail eile as.",
+      "errorRecording": "Níorbh fhéidir leis an micreafón fuaim a thaifeadadh. Seiceáil do ghléas agus bain triail eile as.",
+      "errorEmpty": "Níl aon fhuaim sa taifeadadh. Taifead arís.",
+      "errorUpload": "Níorbh fhéidir an taifeadadh a shábháil. Is féidir leat éisteacht leis agus iarracht eile a dhéanamh é a uaslódáil.",
+      "descriptionScreenAwake": "Fanann an scáileán dúisithe le linn taifeadta.",
+      "descriptionScreenSleep": "Ní féidir an scáileán a choinneáil dúisithe. Coinnigh an leathanach seo ar oscailt agus cuir cosc ar an scáileán glasáil go huathoibríoch.",
+      "descriptionCloseBlocked": "Stop an taifeadadh agus sábháil é nó caith i leataobh é sula ndúnann tú. Fan go gcríochnóidh aon uaslódáil.",
+      "labelClose": "Dún"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Atrialacha uathoibríocha",
+      "labelLevel": "Leibhéal",
+      "description": "Má tá na torthaí éiginnte nó má tá go leor athrá iontu, is féidir leis an tras-scríobhaí iarracht eile a dhéanamh ar chuid den fhuaim a aithint. D’fhéadfadh níos mó iarrachtaí feabhas a chur ar an aithint, ach tógann siad níos mó ama.",
+      "labelFast": "Tapa",
+      "labelBalanced": "Cothrom",
+      "labelThorough": "Críochnúil",
+      "descriptionFast": "Iarracht amháin ar gach cuid fuaime, gan atriail uathoibríoch.",
+      "descriptionBalanced": "Suas le 3 iarracht ar gach cuid fuaime.",
+      "descriptionThorough": "Suas le 6 iarracht ar gach cuid fuaime.",
+      "errorLevel": "Roghnaigh ceann de na trí leibhéal."
+    }
+  },
+  "page": {
+    "labelTitle": "Tras-scríobh",
+    "emptyTitle": "Níl aon tras-scríobhaí ann",
+    "emptyDescription": "Níor cruthaíodh aon tras-scríobhaí fós.",
+    "labelNewTranscriber": "Tras-scríobhaí nua",
+    "helpTitle": "Cabhair",
+    "helpSearchDescription": "Is féidir leat tras-scríobhaithe a chuardach. Áirítear sa chuardach, i measc rudaí eile, ainm agus cur síos an tras-scríobhaí, chomh maith lena shamhail.",
+    "helpSortDescription": "Is féidir tras-scríobhaithe a shórtáil de réir ainm agus a roinnt i ngrúpaí éagsúla. Is féidir iad a thaispeáint mar chártaí nó mar thábla."
+  }
+}

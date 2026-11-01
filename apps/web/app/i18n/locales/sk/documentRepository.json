@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Úložiská dokumentov",
+    "description": "Úložiská dokumentov vytvárajú centralizovanú, štruktúrovanú a spoľahlivú vedomostnú základňu pre AI, ku ktorej môžu modely pristupovať podľa kontextu."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Úložisko dokumentov"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Hľadať..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazenie",
+      "labelSort": "Zoradenie",
+      "labelNameAsc": "Názov od A po Z",
+      "labelNameDesc": "Názov od Z po A",
+      "labelGroup": "Zoskupiť podľa",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelFavorites": "Obľúbené",
+      "labelFirstLetter": "Prvé písmeno",
+      "labelWorkspaces": "Pracovné priestory",
+      "labelModel": "Prepisovač",
+      "labelCards": "Karty",
+      "labelTable": "Tabuľka",
+      "labelSaveView": "Uložiť zobrazenie",
+      "labelReset": "Obnoviť",
+      "labelDocumentRepositories": "Úložiská dokumentov",
+      "labelNewDocumentRepository": "Nové úložisko dokumentov"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Ďalšie úložiská dokumentov",
+      "labelFavorites": "Obľúbené",
+      "labelOtherTranscribers": "Ďalšie prepisovače",
+      "labelUnknownTranscriber": "Neznámy prepisovač „{{id}}“"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Názov",
+      "tableColumnCapablilities": "Schopnosti",
+      "tableColumnNameActions": "Akcie",
+      "emptyTitle": "Žiadne úložiská dokumentov",
+      "emptyDescription": "Zatiaľ neboli vytvorené žiadne úložiská dokumentov.",
+      "labelOtherDocumentRepositories": "Ďalšie úložiská dokumentov",
+      "labelFavorites": "Obľúbené",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelUnknownTranscriber": "Neznámy prepisovač „{{id}}“"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Neznámy pracovný priestor"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Upraviť",
+      "tooltipInfo": "Informácie"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odobrať z obľúbených",
+      "tooltipAddFavorite": "Pridať medzi obľúbené"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nové úložisko dokumentov",
+      "labelDocumentRepository": "Úložisko dokumentov",
+      "labelDocumentRepositoryDropdown": "Úložisko dokumentov",
+      "labelCreateDocumentRepository": "Vytvoriť úložisko dokumentov",
+      "labelSaveDocumentRepository": "Uložiť úložisko dokumentov",
+      "labelCloneDocumentRepository": "Uložiť ako nové úložisko dokumentov",
+      "labelDeleteDocumentRepository": "Vymazať úložisko dokumentov",
+      "confirmDeleteTitle": "Vymazať úložisko dokumentov",
+      "confirmDeleteDescription": "Naozaj chcete vymazať úložisko dokumentov „{{name}}“? Túto akciu nemožno vrátiť späť.",
+      "labelCancel": "Zrušiť",
+      "tabOverview": "Prehľad",
+      "tabFeatures": "Funkcie",
+      "tabSettings": "Nastavenia",
+      "btnCreate": "Vytvoriť",
+      "btnSave": "Uložiť"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zahodiť zmeny",
+      "labelDiscardConfirm": "Naozaj chcete zahodiť všetky neuložené zmeny tohto úložiska dokumentov?",
+      "labelCancel": "Zrušiť",
+      "labelDiscard": "Zahodiť zmeny"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nové úložisko dokumentov",
+      "emptyDescription": "Nastavte správanie a vzhľad úložiska dokumentov.",
+      "checklistSemanticSearchTitle": "Zapnúť sémantické vyhľadávanie",
+      "checklistSemanticSearchDescription": "Zapnite sémantické vyhľadávanie. Môže zlepšiť kvalitu výsledkov vyhľadávania.",
+      "checklistTranscriberTitle": "Vybrať prepisovač",
+      "checklistTranscriberDescription": "Vyberte prepisovač, ktorý automaticky prepíše všetky nahrané video a zvukové súbory.",
+      "helpTitle": "Pomoc",
+      "helpKeywordSearch": "Klasické vyhľadávanie podľa kľúčových slov. Najvhodnejšie na vyhľadávanie značiek, mien osôb a ďalších názvov.",
+      "helpEmbeddingDescription": "Pridajte embeddingový model na zapnutie sémantického vyhľadávania. Vyhľadáva podobné dokumenty podľa ich významu.",
+      "helpTranscriberDescription": "Pridajte prepisovač do úložiska dokumentov a všetky video a zvukové súbory sa po nahraní automaticky prepíšu."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Vyhľadávací index",
+      "description": "Podľa vyhľadávacieho indexu sa používajú rôzne metódy, ktoré pre daný dopyt poskytujú najlepšie výsledky.",
+      "labelKeyword": "Vyhľadávanie podľa kľúčových slov",
+      "descriptionKeyword": "Na vyhľadávanie presných výrazov a viet. (Mená, označenia atď.)",
+      "labelSemantic": "Sémantické vyhľadávanie",
+      "descriptionSemantic": "Keď je dôležitý význam údajov, nie ich presné znenie. (Vyžaduje embeddingový model)",
+      "labelEmbeddingModel": "Embeddingový model",
+      "descriptionEmbeddingModel": "Embeddingový model je základom sémantického vyhľadávania."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Bez prepisovača",
+      "labelLegend": "Prepisovač",
+      "description": "Video a zvukové súbory sa po nahraní automaticky prepíšu.",
+      "labelTranscriber": "Prepisovač"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Popis",
+      "description": "Vyberte vhodný názov úložiska dokumentov. Môžete uložiť aj krátky popis.",
+      "labelName": "Názov",
+      "labelDescription": "Popis"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Vzhľad",
+      "description": "Vyberte farbu a ikonu, ktoré úložisko dokumentov najlepšie vystihujú.",
+      "labelIcon": "Ikona",
+      "labelColor": "Farba"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Pracovný priestor",
+      "description": "Vyberte pracovný priestor, v ktorom sa má úložisko dokumentov vytvoriť.",
+      "labelName": "Pracovný priestor",
+      "labelSelectWorkspace": "Vyberte pracovný priestor."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Súbory",
+      "tabSearch": "Fulltextové vyhľadávanie",
+      "tabInfo": "Informácie"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Hľadať...",
+      "labelSearch": "Hľadať"
+    },
+    "Search": {
+      "emptyTitle": "Fulltextové vyhľadávanie",
+      "emptyDescription": "Hľadajte text vo všetkých súboroch tohto úložiska dokumentov."
+    }
+  },
+  "page": {
+    "labelTitle": "Úložiská dokumentov",
+    "emptyTitle": "Žiadne úložiská dokumentov",
+    "emptyDescription": "Zatiaľ neboli vytvorené žiadne úložiská dokumentov.",
+    "labelNewDocumentRepository": "Nové úložisko dokumentov",
+    "helpTitle": "Pomoc",
+    "helpSearchDescription": "Úložiská dokumentov môžete vyhľadávať. Vyhľadávanie zahŕňa okrem iného názov a popis úložiska aj jeho prepisovač.",
+    "helpSortDescription": "Úložiská dokumentov možno zoradiť podľa názvu a rozdeliť do rôznych skupín. Možno ich zobraziť ako karty alebo v tabuľke.",
+    "helpTranscriberDescription": "Pre úložiská dokumentov môžete vybrať prepisovač. Zvukové a video súbory nahrané do úložiska sa potom automaticky prepíšu."
+  }
+}

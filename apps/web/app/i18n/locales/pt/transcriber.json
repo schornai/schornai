@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transcrição",
+    "description": "Os transcritores tornam o conteúdo falado, como reuniões, entrevistas ou chamadas, estruturado e pesquisável pela IA."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transcritor"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Pesquisar..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Opções",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nome de A a Z",
+      "labelNameDesc": "Nome de Z a A",
+      "labelGroup": "Agrupar por",
+      "labelNoGroup": "Sem grupo",
+      "labelFavorites": "Favoritos",
+      "labelFirstLetter": "Primeira letra",
+      "labelWorkspaces": "Espaços de trabalho",
+      "labelModel": "Modelo",
+      "labelCards": "Cartões",
+      "labelTable": "Tabela",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Repor",
+      "labelTranscribers": "Transcritores",
+      "labelNewTranscriber": "Novo transcritor"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Outros transcritores",
+      "labelFavorites": "Favoritos",
+      "labelNoGroup": "Sem grupo",
+      "labelUnknownModel": "Modelo desconhecido «{{id}}»"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nome",
+      "tableColumnCapablilities": "Capacidades",
+      "tableColumnNameActions": "Ações",
+      "emptyTitle": "Sem transcritores",
+      "emptyDescription": "Ainda não foram criados transcritores.",
+      "labelOtherTranscribers": "Outros transcritores",
+      "labelFavorites": "Favoritos",
+      "labelNoGroup": "Sem grupo",
+      "labelUnknownModel": "Modelo desconhecido «{{id}}»"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Modelo desconhecido",
+      "labelUnknownWorkspace": "Espaço de trabalho desconhecido"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Editar",
+      "tooltipInfo": "Informações",
+      "tooltipNewTranscription": "Nova transcrição",
+      "tooltipRecord": "Gravar áudio"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Remover dos favoritos",
+      "tooltipAddFavorite": "Adicionar aos favoritos"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Instruções",
+      "labelChanged": "Alterado",
+      "labelEmpty": "Vazio"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Novo transcritor",
+      "labelTranscriber": "Transcritor",
+      "labelCreateTranscriber": "Criar transcritor",
+      "labelSaveTranscriber": "Guardar transcritor",
+      "labelCloneTranscriber": "Guardar como novo transcritor",
+      "labelDeleteTranscriber": "Eliminar transcritor",
+      "confirmDeleteTitle": "Eliminar transcritor",
+      "confirmDeleteDescription": "Tem a certeza de que pretende eliminar o transcritor «{{name}}»? Esta ação não pode ser anulada.",
+      "labelCancel": "Cancelar",
+      "tabOverview": "Visão geral",
+      "tabPrompt": "Instruções",
+      "tabSettings": "Definições",
+      "btnCreate": "Criar",
+      "btnSave": "Guardar"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Descartar alterações",
+      "labelDiscardConfirm": "Pretende mesmo descartar todas as alterações não guardadas deste transcritor?",
+      "labelCancel": "Cancelar",
+      "labelDiscard": "Descartar alterações"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Novo transcritor",
+      "emptyDescription": "Defina o comportamento e o aspeto do transcritor.",
+      "labelDefinePrompt": "Definir instruções",
+      "descriptionDefinePrompt": "Um conjunto curto de instruções ajuda o transcritor a compreender e escrever corretamente nomes, termos técnicos e nomes de produtos da forma esperada.",
+      "helpTitle": "Ajuda",
+      "helpPromptDescription": "Com instruções, a transcrição exige menos correções posteriores e produz resultados mais consistentes em gravações longas ou especializadas."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Instruções",
+      "descriptionWhisperPrompt": "As instruções são transmitidas ao modelo de transcrição Whisper para o ajudar a compreender termos específicos da área."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Aspeto",
+      "description": "Escolha uma cor e um ícone que melhor representem o transcritor.",
+      "labelIcon": "Ícone",
+      "labelColor": "Cor"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Descrição",
+      "description": "Escolha um nome adequado para o transcritor. Também pode guardar uma breve descrição.",
+      "labelName": "Nome",
+      "labelDescription": "Descrição"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modelo",
+      "description": "O modelo de transcrição utilizado pelo transcritor.",
+      "labelName": "Modelo",
+      "labelSelectModel": "Selecione um modelo"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Espaço de trabalho",
+      "description": "Selecione o espaço de trabalho onde pretende criar o transcritor.",
+      "labelName": "Espaço de trabalho",
+      "labelSelectWorkspace": "Selecione um espaço de trabalho."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Ficheiros",
+      "tabInfo": "Informações"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Gravar áudio",
+      "labelReady": "Pronto",
+      "labelRequesting": "A ligar o microfone",
+      "labelRecording": "A gravar",
+      "labelStopping": "A terminar a gravação",
+      "labelRecorded": "Gravação pronta",
+      "labelUploading": "A guardar",
+      "labelSaved": "Guardado",
+      "labelDuration": "Duração da gravação",
+      "labelStart": "Iniciar gravação",
+      "labelStop": "Parar gravação",
+      "labelRecordAgain": "Gravar novamente",
+      "labelCancel": "Cancelar",
+      "labelTranscribe": "Guardar e transcrever",
+      "labelDiscard": "Descartar gravação",
+      "labelPreview": "Pré-visualização da gravação",
+      "descriptionSaved": "Gravação guardada. A transcrição começa automaticamente.",
+      "errorUnsupported": "A gravação de áudio exige um navegador compatível e uma ligação segura (HTTPS ou localhost).",
+      "errorPermission": "O acesso ao microfone foi recusado. Permita o acesso no navegador e tente novamente.",
+      "errorRecording": "O microfone não conseguiu gravar áudio. Verifique o dispositivo e tente novamente.",
+      "errorEmpty": "A gravação não contém áudio. Grave novamente.",
+      "errorUpload": "Não foi possível guardar a gravação. Pode ouvi-la e voltar a tentar o carregamento.",
+      "descriptionScreenAwake": "O ecrã mantém-se ativo durante a gravação.",
+      "descriptionScreenSleep": "Não é possível manter o ecrã ativo. Mantenha esta página aberta e impeça o bloqueio automático do ecrã.",
+      "descriptionCloseBlocked": "Pare a gravação e guarde-a ou descarte-a antes de fechar. Aguarde que qualquer carregamento termine.",
+      "labelClose": "Fechar"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Novas tentativas automáticas",
+      "labelLevel": "Nível",
+      "description": "Se os resultados forem incertos ou contiverem muitas repetições, o transcritor pode tentar reconhecer novamente um segmento de áudio. Mais tentativas podem melhorar o reconhecimento, mas demoram mais tempo.",
+      "labelFast": "Rápido",
+      "labelBalanced": "Equilibrado",
+      "labelThorough": "Minucioso",
+      "descriptionFast": "Uma tentativa por segmento de áudio, sem repetição automática.",
+      "descriptionBalanced": "Até 3 tentativas por segmento de áudio.",
+      "descriptionThorough": "Até 6 tentativas por segmento de áudio.",
+      "errorLevel": "Selecione um dos três níveis."
+    }
+  },
+  "page": {
+    "labelTitle": "Transcrição",
+    "emptyTitle": "Sem transcritores",
+    "emptyDescription": "Ainda não foram criados transcritores.",
+    "labelNewTranscriber": "Novo transcritor",
+    "helpTitle": "Ajuda",
+    "helpSearchDescription": "Pode pesquisar transcritores. A pesquisa inclui, entre outros elementos, o nome, a descrição e o modelo do transcritor.",
+    "helpSortDescription": "Os transcritores podem ser ordenados por nome e distribuídos por diferentes grupos. Podem ser apresentados em cartões ou numa tabela."
+  }
+}

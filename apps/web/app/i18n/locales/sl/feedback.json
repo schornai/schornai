@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopiraj besedilo povratnih informacij v odložišče",
+      "feedbackText": "Besedilo povratnih informacij",
+      "feedbackTextRecommendation": "Hvala, pošljite nam to besedilo na ",
+      "sendFeedback": "Pošlji povratne informacije po e-pošti",
+      "showFeedbackText": "Prikaži besedilo povratnih informacij",
+      "thankYou": "Hvala, ker ste si vzeli čas za povratne informacije"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Izbriši vsa sporočila o napakah",
+      "actionDeleteAllCancel": "Prekliči",
+      "actionDeleteAllExplainer": "Ali res želite izbrisati vsa zbrana sporočila o napakah? Tega dejanja ni mogoče razveljaviti.",
+      "actionDeleteAllShort": "Izbriši sporočila o napakah",
+      "actionDeselectAll": "Počisti izbor vseh sporočil o napakah",
+      "actionSelectAll": "Izberi vsa sporočila o napakah",
+      "explainer": "Tudi sporočila o napakah so del povratnih informacij. Nekatere težave sistem odpravi samodejno, vaše delo pa se nadaljuje brez prekinitev. Vseeno je koristno, da za te napake izvemo tudi mi, da jih lahko odpravimo.",
+      "explainerSecrecy": "Preverite, da sporočila o napakah ne vsebujejo zaupnih ali osebnih podatkov. Sistem je načeloma zasnovan tako, da takšni podatki ne pridejo v sporočila o napakah. Vendar so napake po naravi povezane z nepredvidenimi okoliščinami. Zato zaradi varnosti sami preglejte povratne informacije.",
+      "explainerSecrecyHeading": "Brez zaupnih podatkov",
+      "heading": "Napake",
+      "tableColumnPartOfFeedback": "Del povratnih informacij",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Sporočilo o napaki"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Ocena z zvezdicami ni podana",
+      "starRating": "{{stars}} od 5 zvezdic"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Zavrzi povratne informacije",
+      "discardFeedbackSub": "Ali res želite zavreči svoje povratne informacije? Tega dejanja ni mogoče razveljaviti.",
+      "discardFeedbackCancel": "Prekliči",
+      "infoSecrecy": "Preverite, da poslane povratne informacije ne vsebujejo zaupnih ali osebnih podatkov.",
+      "writeFeedback": "Napiši povratne informacije",
+      "writeFeedbackSub": "Veseli smo vseh povratnih informacij, pozitivnih in negativnih."
+    }
+  },
+  "page": {
+    "headingLine1": "Pomagajte nam izboljšati schorn.ai in a Box,",
+    "headingLine2": "podajte nam povratne informacije",
+    "headingMain": "Povratne informacije"
+  }
+}

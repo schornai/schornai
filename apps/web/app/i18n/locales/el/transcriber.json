@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Απομαγνητοφώνηση",
+    "description": "Οι απομαγνητοφωνητές μετατρέπουν το προφορικό περιεχόμενο, όπως συσκέψεις, συνεντεύξεις ή κλήσεις, σε δομημένα και αναζητήσιμα δεδομένα για την τεχνητή νοημοσύνη."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Απομαγνητοφωνητής"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Αναζήτηση..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelNameAsc": "Όνομα από Α έως Ω",
+      "labelNameDesc": "Όνομα από Ω έως Α",
+      "labelGroup": "Ομαδοποίηση κατά",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelFavorites": "Αγαπημένα",
+      "labelFirstLetter": "Πρώτο γράμμα",
+      "labelWorkspaces": "Χώροι εργασίας",
+      "labelModel": "Μοντέλο",
+      "labelCards": "Κάρτες",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά",
+      "labelTranscribers": "Απομαγνητοφωνητές",
+      "labelNewTranscriber": "Νέος απομαγνητοφωνητής"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Άλλοι απομαγνητοφωνητές",
+      "labelFavorites": "Αγαπημένα",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelUnknownModel": "Άγνωστο μοντέλο «{{id}}»"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Όνομα",
+      "tableColumnCapablilities": "Δυνατότητες",
+      "tableColumnNameActions": "Ενέργειες",
+      "emptyTitle": "Δεν υπάρχουν απομαγνητοφωνητές",
+      "emptyDescription": "Δεν έχουν δημιουργηθεί ακόμη απομαγνητοφωνητές.",
+      "labelOtherTranscribers": "Άλλοι απομαγνητοφωνητές",
+      "labelFavorites": "Αγαπημένα",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelUnknownModel": "Άγνωστο μοντέλο «{{id}}»"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Άγνωστο μοντέλο",
+      "labelUnknownWorkspace": "Άγνωστος χώρος εργασίας"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Επεξεργασία",
+      "tooltipInfo": "Πληροφορίες",
+      "tooltipNewTranscription": "Νέα απομαγνητοφώνηση",
+      "tooltipRecord": "Εγγραφή ήχου"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Αφαίρεση από τα αγαπημένα",
+      "tooltipAddFavorite": "Προσθήκη στα αγαπημένα"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Προτροπή",
+      "labelChanged": "Τροποποιήθηκε",
+      "labelEmpty": "Κενό"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Νέος απομαγνητοφωνητής",
+      "labelTranscriber": "Απομαγνητοφωνητής",
+      "labelCreateTranscriber": "Δημιουργία απομαγνητοφωνητή",
+      "labelSaveTranscriber": "Αποθήκευση απομαγνητοφωνητή",
+      "labelCloneTranscriber": "Αποθήκευση ως νέος απομαγνητοφωνητής",
+      "labelDeleteTranscriber": "Διαγραφή απομαγνητοφωνητή",
+      "confirmDeleteTitle": "Διαγραφή απομαγνητοφωνητή",
+      "confirmDeleteDescription": "Είστε βέβαιοι ότι θέλετε να διαγράψετε τον απομαγνητοφωνητή «{{name}}»; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+      "labelCancel": "Ακύρωση",
+      "tabOverview": "Επισκόπηση",
+      "tabPrompt": "Προτροπή",
+      "tabSettings": "Ρυθμίσεις",
+      "btnCreate": "Δημιουργία",
+      "btnSave": "Αποθήκευση"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Απόρριψη αλλαγών",
+      "labelDiscardConfirm": "Θέλετε πραγματικά να απορρίψετε όλες τις μη αποθηκευμένες αλλαγές σε αυτόν τον απομαγνητοφωνητή;",
+      "labelCancel": "Ακύρωση",
+      "labelDiscard": "Απόρριψη αλλαγών"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Νέος απομαγνητοφωνητής",
+      "emptyDescription": "Ορίστε τη συμπεριφορά και την εμφάνιση του απομαγνητοφωνητή.",
+      "labelDefinePrompt": "Ορίστε μια προτροπή",
+      "descriptionDefinePrompt": "Μια σύντομη προτροπή βοηθά τον απομαγνητοφωνητή να κατανοεί και να γράφει σωστά ονόματα, τεχνικούς όρους και ονόματα προϊόντων με τον τρόπο που περιμένετε.",
+      "helpTitle": "Βοήθεια",
+      "helpPromptDescription": "Με μια προτροπή, το απομαγνητοφωνημένο κείμενο χρειάζεται λιγότερες διορθώσεις στη συνέχεια και έχετε πιο συνεπή αποτελέσματα σε μεγαλύτερες ή θεματικά εξειδικευμένες εγγραφές."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Προτροπή",
+      "descriptionWhisperPrompt": "Η προτροπή διαβιβάζεται στο μοντέλο απομαγνητοφώνησης (Whisper) για να το βοηθήσει να κατανοήσει εξειδικευμένους όρους."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Εμφάνιση",
+      "description": "Επιλέξτε ένα χρώμα και ένα εικονίδιο που αντιπροσωπεύουν καλύτερα τον απομαγνητοφωνητή.",
+      "labelIcon": "Εικονίδιο",
+      "labelColor": "Χρώμα"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Περιγραφή",
+      "description": "Επιλέξτε ένα κατάλληλο όνομα για τον απομαγνητοφωνητή. Μπορείτε επίσης να αποθηκεύσετε μια σύντομη περιγραφή.",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Μοντέλο",
+      "description": "Το μοντέλο απομαγνητοφώνησης που χρησιμοποιεί ο απομαγνητοφωνητής.",
+      "labelName": "Μοντέλο",
+      "labelSelectModel": "Επιλογή μοντέλου"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Χώρος εργασίας",
+      "description": "Επιλέξτε τον χώρο εργασίας όπου θα δημιουργηθεί ο απομαγνητοφωνητής.",
+      "labelName": "Χώρος εργασίας",
+      "labelSelectWorkspace": "Επιλέξτε έναν χώρο εργασίας."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Αρχεία",
+      "tabInfo": "Πληροφορίες"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Εγγραφή ήχου",
+      "labelReady": "Έτοιμο",
+      "labelRequesting": "Σύνδεση μικροφώνου",
+      "labelRecording": "Εγγραφή",
+      "labelStopping": "Ολοκλήρωση εγγραφής",
+      "labelRecorded": "Η εγγραφή είναι έτοιμη",
+      "labelUploading": "Αποθήκευση",
+      "labelSaved": "Αποθηκεύτηκε",
+      "labelDuration": "Διάρκεια εγγραφής",
+      "labelStart": "Έναρξη εγγραφής",
+      "labelStop": "Διακοπή εγγραφής",
+      "labelRecordAgain": "Νέα εγγραφή",
+      "labelCancel": "Ακύρωση",
+      "labelTranscribe": "Αποθήκευση και απομαγνητοφώνηση",
+      "labelDiscard": "Απόρριψη εγγραφής",
+      "labelPreview": "Προεπισκόπηση εγγραφής",
+      "descriptionSaved": "Η εγγραφή αποθηκεύτηκε. Η απομαγνητοφώνηση θα ξεκινήσει αυτόματα.",
+      "errorUnsupported": "Η εγγραφή ήχου απαιτεί υποστηριζόμενο πρόγραμμα περιήγησης και ασφαλή σύνδεση (HTTPS ή localhost).",
+      "errorPermission": "Η πρόσβαση στο μικρόφωνο απορρίφθηκε. Επιτρέψτε την πρόσβαση στο μικρόφωνο στο πρόγραμμα περιήγησής σας και δοκιμάστε ξανά.",
+      "errorRecording": "Το μικρόφωνο δεν μπόρεσε να καταγράψει ήχο. Ελέγξτε τη συσκευή σας και δοκιμάστε ξανά.",
+      "errorEmpty": "Η εγγραφή δεν περιέχει ήχο. Κάντε νέα εγγραφή.",
+      "errorUpload": "Δεν ήταν δυνατή η αποθήκευση της εγγραφής. Μπορείτε να την ακούσετε και να δοκιμάσετε ξανά τη μεταφόρτωση.",
+      "descriptionScreenAwake": "Η οθόνη παραμένει ενεργή κατά την εγγραφή.",
+      "descriptionScreenSleep": "Δεν είναι δυνατή η διατήρηση της οθόνης ενεργής. Κρατήστε αυτή τη σελίδα ανοιχτή και αποτρέψτε το αυτόματο κλείδωμα της οθόνης.",
+      "descriptionCloseBlocked": "Σταματήστε την εγγραφή και αποθηκεύστε ή απορρίψτε την πριν κλείσετε. Περιμένετε να ολοκληρωθεί κάθε μεταφόρτωση.",
+      "labelClose": "Κλείσιμο"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Αυτόματες επαναληπτικές προσπάθειες",
+      "labelLevel": "Επίπεδο",
+      "description": "Όταν τα αποτελέσματα είναι αβέβαια ή περιέχουν πολλές επαναλήψεις, το εργαλείο απομαγνητοφώνησης μπορεί να προσπαθήσει ξανά να αναγνωρίσει ένα τμήμα ήχου. Περισσότερες προσπάθειες μπορεί να βελτιώσουν την αναγνώριση, αλλά απαιτούν περισσότερο χρόνο.",
+      "labelFast": "Γρήγορα",
+      "labelBalanced": "Ισορροπημένα",
+      "labelThorough": "Διεξοδικά",
+      "descriptionFast": "Μία προσπάθεια ανά τμήμα ήχου, χωρίς αυτόματη επανάληψη.",
+      "descriptionBalanced": "Έως 3 προσπάθειες ανά τμήμα ήχου.",
+      "descriptionThorough": "Έως 6 προσπάθειες ανά τμήμα ήχου.",
+      "errorLevel": "Επιλέξτε ένα από τα τρία επίπεδα."
+    }
+  },
+  "page": {
+    "labelTitle": "Απομαγνητοφώνηση",
+    "emptyTitle": "Δεν υπάρχουν απομαγνητοφωνητές",
+    "emptyDescription": "Δεν έχουν δημιουργηθεί ακόμη απομαγνητοφωνητές.",
+    "labelNewTranscriber": "Νέος απομαγνητοφωνητής",
+    "helpTitle": "Βοήθεια",
+    "helpSearchDescription": "Μπορείτε να αναζητήσετε απομαγνητοφωνητές. Η αναζήτηση περιλαμβάνει, μεταξύ άλλων, το όνομα και την περιγραφή του απομαγνητοφωνητή, καθώς και το μοντέλο του.",
+    "helpSortDescription": "Οι απομαγνητοφωνητές μπορούν να ταξινομηθούν κατά όνομα και να κατανεμηθούν σε διαφορετικές ομάδες. Μπορούν να εμφανίζονται ως κάρτες ή ως πίνακας."
+  }
+}

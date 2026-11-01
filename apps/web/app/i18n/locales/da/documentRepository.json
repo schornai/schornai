@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentarkiver",
+    "description": "Dokumentarkiver skaber en central, struktureret og pålidelig vidensbase til AI, som modeller kan tilgå ud fra sammenhængen."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentarkiv"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Søg..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelNameAsc": "Navn A til Å",
+      "labelNameDesc": "Navn Å til A",
+      "labelGroup": "Gruppér efter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelFavorites": "Favoritter",
+      "labelFirstLetter": "Første bogstav",
+      "labelWorkspaces": "Arbejdsområder",
+      "labelModel": "Transskriberingsværktøj",
+      "labelCards": "Kort",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil",
+      "labelDocumentRepositories": "Dokumentarkiver",
+      "labelNewDocumentRepository": "Nyt dokumentarkiv"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Andre dokumentarkiver",
+      "labelFavorites": "Favoritter",
+      "labelOtherTranscribers": "Andre transskriberingsværktøjer",
+      "labelUnknownTranscriber": "Ukendt transskriberingsværktøj »{{id}}«"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Navn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Handlinger",
+      "emptyTitle": "Ingen dokumentarkiver",
+      "emptyDescription": "Der er endnu ikke oprettet dokumentarkiver.",
+      "labelOtherDocumentRepositories": "Andre dokumentarkiver",
+      "labelFavorites": "Favoritter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelUnknownTranscriber": "Ukendt transskriberingsværktøj »{{id}}«"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Ukendt arbejdsområde"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Rediger",
+      "tooltipInfo": "Information"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Fjern fra favoritter",
+      "tooltipAddFavorite": "Føj til favoritter"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nyt dokumentarkiv",
+      "labelDocumentRepository": "Dokumentarkiv",
+      "labelDocumentRepositoryDropdown": "Dokumentarkiv",
+      "labelCreateDocumentRepository": "Opret dokumentarkiv",
+      "labelSaveDocumentRepository": "Gem dokumentarkiv",
+      "labelCloneDocumentRepository": "Gem som nyt dokumentarkiv",
+      "labelDeleteDocumentRepository": "Slet dokumentarkiv",
+      "confirmDeleteTitle": "Slet dokumentarkiv",
+      "confirmDeleteDescription": "Er du sikker på, at du vil slette dokumentarkivet »{{name}}«? Denne handling kan ikke fortrydes.",
+      "labelCancel": "Annuller",
+      "tabOverview": "Oversigt",
+      "tabFeatures": "Funktioner",
+      "tabSettings": "Indstillinger",
+      "btnCreate": "Opret",
+      "btnSave": "Gem"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kassér ændringer",
+      "labelDiscardConfirm": "Vil du virkelig kassere alle ikke-gemte ændringer af dette dokumentarkiv?",
+      "labelCancel": "Annuller",
+      "labelDiscard": "Kassér ændringer"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nyt dokumentarkiv",
+      "emptyDescription": "Definer dokumentarkivets adfærd og udseende.",
+      "checklistSemanticSearchTitle": "Aktivér semantisk søgning",
+      "checklistSemanticSearchDescription": "Aktivér semantisk søgning. Det kan forbedre kvaliteten af søgeresultaterne.",
+      "checklistTranscriberTitle": "Vælg transskriberingsværktøj",
+      "checklistTranscriberDescription": "Vælg et transskriberingsværktøj, der automatisk transskriberer alle uploadede video- og lydfiler.",
+      "helpTitle": "Hjælp",
+      "helpKeywordSearch": "Klassisk søgning efter nøgleord. Bedst egnet til at søge efter mærker, personnavne og andre navne.",
+      "helpEmbeddingDescription": "Tilføj en indlejringsmodel for at aktivere semantisk søgning. Den finder lignende dokumenter ud fra deres betydning.",
+      "helpTranscriberDescription": "Tilføj et transskriberingsværktøj til dokumentarkivet, så transskriberes alle video- og lydfiler automatisk efter upload."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Søgeindeks",
+      "description": "Afhængigt af søgeindekset bruges forskellige metoder til at give de bedste resultater for søgeforespørgslen.",
+      "labelKeyword": "Søgning efter nøgleord",
+      "descriptionKeyword": "Til søgning efter præcise udtryk og sætninger, som navne og betegnelser.",
+      "labelSemantic": "Semantisk søgning",
+      "descriptionSemantic": "Når dataenes betydning er vigtigere end den præcise ordlyd. Kræver en indlejringsmodel.",
+      "labelEmbeddingModel": "Indlejringsmodel",
+      "descriptionEmbeddingModel": "Indlejringsmodellen er grundlaget for semantisk søgning."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Intet transskriberingsværktøj",
+      "labelLegend": "Transskriberingsværktøj",
+      "description": "Video- og lydfiler transskriberes automatisk efter upload.",
+      "labelTranscriber": "Transskriberingsværktøj"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Beskrivelse",
+      "description": "Vælg et passende navn til dokumentarkivet. Du kan også gemme en kort beskrivelse.",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Udseende",
+      "description": "Vælg en farve og et ikon, der bedst repræsenterer dokumentarkivet.",
+      "labelIcon": "Ikon",
+      "labelColor": "Farve"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Arbejdsområde",
+      "description": "Vælg det arbejdsområde, hvor dokumentarkivet skal oprettes.",
+      "labelName": "Arbejdsområde",
+      "labelSelectWorkspace": "Vælg et arbejdsområde."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Filer",
+      "tabSearch": "Fuldtekstsøgning",
+      "tabInfo": "Information"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Søg...",
+      "labelSearch": "Søgning"
+    },
+    "Search": {
+      "emptyTitle": "Fuldtekstsøgning",
+      "emptyDescription": "Søg efter tekst i alle filer i dette dokumentarkiv."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentarkiver",
+    "emptyTitle": "Ingen dokumentarkiver",
+    "emptyDescription": "Der er endnu ikke oprettet dokumentarkiver.",
+    "labelNewDocumentRepository": "Nyt dokumentarkiv",
+    "helpTitle": "Hjælp",
+    "helpSearchDescription": "Du kan søge efter dokumentarkiver. Søgningen omfatter blandt andet arkivets navn, beskrivelse og transskriberingsværktøj.",
+    "helpSortDescription": "Dokumentarkiver kan sorteres efter navn og inddeles i forskellige grupper. De kan vises som kort eller som en tabel.",
+    "helpTranscriberDescription": "Du kan vælge et transskriberingsværktøj til dokumentarkiver. Når lyd- eller videofiler uploades til arkivet, transskriberes de automatisk."
+  }
+}

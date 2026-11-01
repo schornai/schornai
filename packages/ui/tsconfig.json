@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "exclude": ["postcss.config.mjs", "src/**/*.stories.tsx"],
+  "extends": "../../tsconfig.base.json",
+  "include": ["src", "eslint.config.ts", "types.d.ts"]
+}

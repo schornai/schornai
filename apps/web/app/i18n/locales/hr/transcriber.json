@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkripcija",
+    "description": "Transkriptori pretvaraju govorni sadržaj poput sastanaka, intervjua ili poziva u strukturiran sadržaj koji umjetna inteligencija može pretraživati."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkriptor"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Pretraži..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Mogućnosti",
+      "labelView": "Prikaz",
+      "labelSort": "Sortiranje",
+      "labelNameAsc": "Naziv od A do Z",
+      "labelNameDesc": "Naziv od Z do A",
+      "labelGroup": "Grupiraj prema",
+      "labelNoGroup": "Bez grupiranja",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "Prvo slovo",
+      "labelWorkspaces": "Radni prostori",
+      "labelModel": "Model",
+      "labelCards": "Kartice",
+      "labelTable": "Tablica",
+      "labelSaveView": "Spremi prikaz",
+      "labelReset": "Vrati zadano",
+      "labelTranscribers": "Transkriptori",
+      "labelNewTranscriber": "Novi transkriptor"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Ostali transkriptori",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Bez grupiranja",
+      "labelUnknownModel": "Nepoznat model „{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Naziv",
+      "tableColumnCapablilities": "Mogućnosti",
+      "tableColumnNameActions": "Radnje",
+      "emptyTitle": "Nema transkriptora",
+      "emptyDescription": "Još nije stvoren nijedan transkriptor.",
+      "labelOtherTranscribers": "Ostali transkriptori",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Bez grupiranja",
+      "labelUnknownModel": "Nepoznat model „{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Nepoznat model",
+      "labelUnknownWorkspace": "Nepoznat radni prostor"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije",
+      "tooltipNewTranscription": "Nova transkripcija",
+      "tooltipRecord": "Snimi zvuk"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ukloni iz favorita",
+      "tooltipAddFavorite": "Dodaj u favorite"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Uputa",
+      "labelChanged": "Promijenjeno",
+      "labelEmpty": "Prazno"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Novi transkriptor",
+      "labelTranscriber": "Transkriptor",
+      "labelCreateTranscriber": "Stvori transkriptor",
+      "labelSaveTranscriber": "Spremi transkriptor",
+      "labelCloneTranscriber": "Spremi kao novi transkriptor",
+      "labelDeleteTranscriber": "Izbriši transkriptor",
+      "confirmDeleteTitle": "Izbriši transkriptor",
+      "confirmDeleteDescription": "Želite li zaista izbrisati transkriptor „{{name}}”? Ovu radnju nije moguće poništiti.",
+      "labelCancel": "Odustani",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Uputa",
+      "tabSettings": "Postavke",
+      "btnCreate": "Stvori",
+      "btnSave": "Spremi"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Odbaci promjene",
+      "labelDiscardConfirm": "Želite li zaista odbaciti sve nespremljene promjene ovog transkriptora?",
+      "labelCancel": "Odustani",
+      "labelDiscard": "Odbaci promjene"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Novi transkriptor",
+      "emptyDescription": "Odredite ponašanje i izgled transkriptora.",
+      "labelDefinePrompt": "Napišite uputu",
+      "descriptionDefinePrompt": "Kratka uputa pomaže transkriptoru razumjeti i pravilno zapisati imena, stručne izraze i nazive proizvoda onako kako očekujete.",
+      "helpTitle": "Pomoć",
+      "helpPromptDescription": "Uz uputu transkript zahtijeva manje naknadnih ispravaka, a dulje ili tematski specifične snimke daju dosljedniji rezultat."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Uputa",
+      "descriptionWhisperPrompt": "Uputa se prosljeđuje modelu transkripcije (Whisper) kako bi lakše razumio stručne izraze."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Izgled",
+      "description": "Odaberite boju i ikonu koje najbolje predstavljaju transkriptor.",
+      "labelIcon": "Ikona",
+      "labelColor": "Boja"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Odaberite prikladan naziv transkriptora. Možete spremiti i kratak opis.",
+      "labelName": "Naziv",
+      "labelDescription": "Opis"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Model transkripcije koji transkriptor koristi.",
+      "labelName": "Model",
+      "labelSelectModel": "Odaberite model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Radni prostor",
+      "description": "Odaberite radni prostor u kojem želite stvoriti transkriptor.",
+      "labelName": "Radni prostor",
+      "labelSelectWorkspace": "Odaberite radni prostor."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Datoteke",
+      "tabInfo": "Informacije"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Snimi zvuk",
+      "labelReady": "Spremno",
+      "labelRequesting": "Povezivanje mikrofona",
+      "labelRecording": "Snimanje",
+      "labelStopping": "Završavanje snimanja",
+      "labelRecorded": "Snimka spremna",
+      "labelUploading": "Spremanje",
+      "labelSaved": "Spremljeno",
+      "labelDuration": "Trajanje snimke",
+      "labelStart": "Započni snimanje",
+      "labelStop": "Zaustavi snimanje",
+      "labelRecordAgain": "Snimi ponovno",
+      "labelCancel": "Odustani",
+      "labelTranscribe": "Spremi i transkribiraj",
+      "labelDiscard": "Odbaci snimku",
+      "labelPreview": "Pretpregled snimke",
+      "descriptionSaved": "Snimka je spremljena. Transkripcija će početi automatski.",
+      "errorUnsupported": "Snimanje zvuka zahtijeva podržan preglednik i sigurnu vezu (HTTPS ili localhost).",
+      "errorPermission": "Pristup mikrofonu je odbijen. Dopustite pristup mikrofonu u pregledniku i pokušajte ponovno.",
+      "errorRecording": "Mikrofon nije mogao snimiti zvuk. Provjerite uređaj i pokušajte ponovno.",
+      "errorEmpty": "Snimka ne sadrži zvuk. Snimite ponovno.",
+      "errorUpload": "Snimku nije moguće spremiti. Možete je poslušati i ponovno pokušati prijenos.",
+      "descriptionScreenAwake": "Zaslon ostaje uključen tijekom snimanja.",
+      "descriptionScreenSleep": "Zaslon nije moguće zadržati uključenim. Ostavite ovu stranicu otvorenom i spriječite automatsko zaključavanje zaslona.",
+      "descriptionCloseBlocked": "Prije zatvaranja zaustavite snimanje i spremite ili odbacite snimku. Pričekajte završetak prijenosa.",
+      "labelClose": "Zatvori"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatski ponovni pokušaji",
+      "labelLevel": "Razina",
+      "description": "Ako su rezultati nesigurni ili sadrže mnogo ponavljanja, transkriptor može ponovno pokušati prepoznati dio zvučnog zapisa. Više pokušaja može poboljšati prepoznavanje, ali traje dulje.",
+      "labelFast": "Brzo",
+      "labelBalanced": "Uravnoteženo",
+      "labelThorough": "Temeljito",
+      "descriptionFast": "Jedan pokušaj po dijelu zvučnog zapisa, bez automatskog ponavljanja.",
+      "descriptionBalanced": "Do 3 pokušaja po dijelu zvučnog zapisa.",
+      "descriptionThorough": "Do 6 pokušaja po dijelu zvučnog zapisa.",
+      "errorLevel": "Odaberite jednu od triju razina."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkripcija",
+    "emptyTitle": "Nema transkriptora",
+    "emptyDescription": "Još nije stvoren nijedan transkriptor.",
+    "labelNewTranscriber": "Novi transkriptor",
+    "helpTitle": "Pomoć",
+    "helpSearchDescription": "Možete pretraživati transkriptore. Pretraživanje obuhvaća, među ostalim, naziv i opis transkriptora te njegov model.",
+    "helpSortDescription": "Transkriptori se mogu sortirati po nazivu i rasporediti u različite grupe. Mogu se prikazati kao kartice ili tablica."
+  }
+}

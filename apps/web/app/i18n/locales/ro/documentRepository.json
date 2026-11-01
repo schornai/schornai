@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Depozite de documente",
+    "description": "Depozitele de documente creează o bază de cunoștințe centralizată, structurată și fiabilă pentru IA, pe care modelele o pot accesa în funcție de context."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Depozit de documente"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Caută..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelNameAsc": "Nume de la A la Z",
+      "labelNameDesc": "Nume de la Z la A",
+      "labelGroup": "Grupează după",
+      "labelNoGroup": "Fără grup",
+      "labelFavorites": "Favorite",
+      "labelFirstLetter": "Prima literă",
+      "labelWorkspaces": "Spații de lucru",
+      "labelModel": "Transcriptor",
+      "labelCards": "Carduri",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează",
+      "labelDocumentRepositories": "Depozite de documente",
+      "labelNewDocumentRepository": "Depozit de documente nou"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Alte depozite de documente",
+      "labelFavorites": "Favorite",
+      "labelOtherTranscribers": "Alți transcriptori",
+      "labelUnknownTranscriber": "Transcriptor necunoscut „{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nume",
+      "tableColumnCapablilities": "Capabilități",
+      "tableColumnNameActions": "Acțiuni",
+      "emptyTitle": "Niciun depozit de documente",
+      "emptyDescription": "Nu au fost create depozite de documente încă.",
+      "labelOtherDocumentRepositories": "Alte depozite de documente",
+      "labelFavorites": "Favorite",
+      "labelNoGroup": "Fără grup",
+      "labelUnknownTranscriber": "Transcriptor necunoscut „{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Spațiu de lucru necunoscut"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Editează",
+      "tooltipInfo": "Informații"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Elimină din favorite",
+      "tooltipAddFavorite": "Adaugă la favorite"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Depozit de documente nou",
+      "labelDocumentRepository": "Depozit de documente",
+      "labelDocumentRepositoryDropdown": "Depozit de documente",
+      "labelCreateDocumentRepository": "Creează depozit de documente",
+      "labelSaveDocumentRepository": "Salvează depozitul de documente",
+      "labelCloneDocumentRepository": "Salvează ca depozit de documente nou",
+      "labelDeleteDocumentRepository": "Șterge depozitul de documente",
+      "confirmDeleteTitle": "Șterge depozitul de documente",
+      "confirmDeleteDescription": "Sigur vrei să ștergi depozitul de documente „{{name}}”? Această acțiune nu poate fi anulată.",
+      "labelCancel": "Anulează",
+      "tabOverview": "Prezentare generală",
+      "tabFeatures": "Funcții",
+      "tabSettings": "Setări",
+      "btnCreate": "Creează",
+      "btnSave": "Salvează"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Renunță la modificări",
+      "labelDiscardConfirm": "Sigur vrei să renunți la toate modificările nesalvate ale acestui depozit de documente?",
+      "labelCancel": "Anulează",
+      "labelDiscard": "Renunță la modificări"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Depozit de documente nou",
+      "emptyDescription": "Definește comportamentul și aspectul depozitului de documente.",
+      "checklistSemanticSearchTitle": "Activează căutarea semantică",
+      "checklistSemanticSearchDescription": "Activează căutarea semantică. Aceasta poate îmbunătăți calitatea rezultatelor.",
+      "checklistTranscriberTitle": "Selectează transcriptorul",
+      "checklistTranscriberDescription": "Selectează un transcriptor care transcrie automat toate fișierele video și audio încărcate.",
+      "helpTitle": "Ajutor",
+      "helpKeywordSearch": "Căutare clasică după cuvinte-cheie. Potrivită pentru căutarea mărcilor, numelor de persoane și altor denumiri.",
+      "helpEmbeddingDescription": "Adaugă un model de embeddings pentru a activa căutarea semantică. Aceasta găsește documente similare pe baza semnificației lor.",
+      "helpTranscriberDescription": "Adaugă un transcriptor la depozitul de documente, iar toate fișierele video și audio vor fi transcrise automat după încărcare."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Index de căutare",
+      "description": "În funcție de indexul de căutare, se folosesc metode diferite pentru a oferi cele mai bune rezultate pentru interogare.",
+      "labelKeyword": "Căutare după cuvinte-cheie",
+      "descriptionKeyword": "Pentru căutarea expresiilor și propozițiilor exacte, precum nume și denumiri.",
+      "labelSemantic": "Căutare semantică",
+      "descriptionSemantic": "Când sensul datelor este mai important decât formularea exactă. Necesită un model de embeddings.",
+      "labelEmbeddingModel": "Model de embeddings",
+      "descriptionEmbeddingModel": "Modelul de embeddings reprezintă baza căutării semantice."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Fără transcriptor",
+      "labelLegend": "Transcriptor",
+      "description": "Fișierele video și audio sunt transcrise automat după încărcare.",
+      "labelTranscriber": "Transcriptor"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Descriere",
+      "description": "Alege un nume potrivit pentru depozitul de documente. Poți salva și o scurtă descriere.",
+      "labelName": "Nume",
+      "labelDescription": "Descriere"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Aspect",
+      "description": "Alege o culoare și o pictogramă care reprezintă cel mai bine depozitul de documente.",
+      "labelIcon": "Pictogramă",
+      "labelColor": "Culoare"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Spațiu de lucru",
+      "description": "Selectează spațiul de lucru în care vrei să creezi depozitul de documente.",
+      "labelName": "Spațiu de lucru",
+      "labelSelectWorkspace": "Selectează un spațiu de lucru."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Fișiere",
+      "tabSearch": "Căutare în textul integral",
+      "tabInfo": "Informații"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Caută...",
+      "labelSearch": "Căutare"
+    },
+    "Search": {
+      "emptyTitle": "Căutare în textul integral",
+      "emptyDescription": "Caută text în toate fișierele din acest depozit de documente."
+    }
+  },
+  "page": {
+    "labelTitle": "Depozite de documente",
+    "emptyTitle": "Niciun depozit de documente",
+    "emptyDescription": "Nu au fost create depozite de documente încă.",
+    "labelNewDocumentRepository": "Depozit de documente nou",
+    "helpTitle": "Ajutor",
+    "helpSearchDescription": "Poți căuta depozite de documente. Căutarea include, printre altele, numele, descrierea și transcriptorul depozitului.",
+    "helpSortDescription": "Depozitele de documente pot fi sortate după nume și împărțite în grupuri diferite. Pot fi afișate ca carduri sau ca tabel.",
+    "helpTranscriberDescription": "Poți selecta un transcriptor pentru depozitele de documente. Fișierele audio sau video încărcate în depozit sunt transcrise automat."
+  }
+}

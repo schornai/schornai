@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "مستودعات المستندات",
+    "description": "توفّر مستودعات المستندات قاعدة معارف مركزية ومنظمة وموثوقة للذكاء الاصطناعي، يمكن للنماذج الوصول إليها بحسب السياق."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "مستودع المستندات"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "بحث..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelNameAsc": "الاسم من أ إلى ي",
+      "labelNameDesc": "الاسم من ي إلى أ",
+      "labelGroup": "التجميع حسب",
+      "labelNoGroup": "دون مجموعة",
+      "labelFavorites": "المفضلة",
+      "labelFirstLetter": "الحرف الأول",
+      "labelWorkspaces": "مساحات العمل",
+      "labelModel": "أداة التفريغ الصوتي",
+      "labelCards": "بطاقات",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين",
+      "labelDocumentRepositories": "مستودعات المستندات",
+      "labelNewDocumentRepository": "مستودع مستندات جديد"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "مستودعات مستندات أخرى",
+      "labelFavorites": "المفضلة",
+      "labelOtherTranscribers": "أدوات تفريغ صوتي أخرى",
+      "labelUnknownTranscriber": "أداة تفريغ صوتي غير معروفة «{{id}}»"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "الاسم",
+      "tableColumnCapablilities": "الإمكانات",
+      "tableColumnNameActions": "الإجراءات",
+      "emptyTitle": "لا توجد مستودعات مستندات",
+      "emptyDescription": "لم يُنشأ أي مستودع مستندات بعد.",
+      "labelOtherDocumentRepositories": "مستودعات مستندات أخرى",
+      "labelFavorites": "المفضلة",
+      "labelNoGroup": "دون مجموعة",
+      "labelUnknownTranscriber": "أداة تفريغ صوتي غير معروفة «{{id}}»"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "مساحة عمل غير معروفة"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "تعديل",
+      "tooltipInfo": "معلومات"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "إزالة من المفضلة",
+      "tooltipAddFavorite": "إضافة إلى المفضلة"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "مستودع مستندات جديد",
+      "labelDocumentRepository": "مستودع المستندات",
+      "labelDocumentRepositoryDropdown": "مستودع المستندات",
+      "labelCreateDocumentRepository": "إنشاء مستودع مستندات",
+      "labelSaveDocumentRepository": "حفظ مستودع المستندات",
+      "labelCloneDocumentRepository": "حفظ كمستودع مستندات جديد",
+      "labelDeleteDocumentRepository": "حذف مستودع المستندات",
+      "confirmDeleteTitle": "حذف مستودع المستندات",
+      "confirmDeleteDescription": "هل أنت متأكد من حذف مستودع المستندات «{{name}}»؟ لا يمكن التراجع عن هذا الإجراء.",
+      "labelCancel": "إلغاء",
+      "tabOverview": "نظرة عامة",
+      "tabFeatures": "الوظائف",
+      "tabSettings": "الإعدادات",
+      "btnCreate": "إنشاء",
+      "btnSave": "حفظ"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "تجاهل التغييرات",
+      "labelDiscardConfirm": "هل تريد فعلًا تجاهل جميع التغييرات غير المحفوظة على مستودع المستندات هذا؟",
+      "labelCancel": "إلغاء",
+      "labelDiscard": "تجاهل التغييرات"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "مستودع مستندات جديد",
+      "emptyDescription": "حدد سلوك مستودع المستندات ومظهره.",
+      "checklistSemanticSearchTitle": "تفعيل البحث الدلالي",
+      "checklistSemanticSearchDescription": "فعّل البحث الدلالي لتحسين جودة نتائج البحث.",
+      "checklistTranscriberTitle": "اختر أداة تفريغ صوتي",
+      "checklistTranscriberDescription": "اختر أداة تفريغ صوتي تفرّغ تلقائيًا جميع ملفات الفيديو والصوت المرفوعة.",
+      "helpTitle": "المساعدة",
+      "helpKeywordSearch": "بحث تقليدي بالكلمات المفتاحية. يناسب البحث عن العلامات التجارية وأسماء الأشخاص والأسماء الأخرى.",
+      "helpEmbeddingDescription": "أضف نموذج تضمين لتفعيل البحث الدلالي. فهو يجد مستندات متشابهة بناءً على معناها.",
+      "helpTranscriberDescription": "أضف أداة تفريغ صوتي إلى مستودع المستندات، وستُفرّغ جميع ملفات الفيديو والصوت تلقائيًا بعد رفعها."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "فهرس البحث",
+      "description": "تُستخدم أساليب مختلفة بحسب فهرس البحث لتقديم أفضل النتائج المناسبة للاستعلام.",
+      "labelKeyword": "البحث بالكلمات المفتاحية",
+      "descriptionKeyword": "للبحث عن عبارات وجمل محددة، مثل الأسماء والتسميات.",
+      "labelSemantic": "البحث الدلالي",
+      "descriptionSemantic": "عندما يكون معنى البيانات أهم من صياغتها الدقيقة. يتطلب نموذج تضمين.",
+      "labelEmbeddingModel": "نموذج التضمين",
+      "descriptionEmbeddingModel": "نموذج التضمين هو أساس البحث الدلالي."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "دون أداة تفريغ صوتي",
+      "labelLegend": "أداة التفريغ الصوتي",
+      "description": "تُفرّغ ملفات الفيديو والصوت تلقائيًا بعد رفعها.",
+      "labelTranscriber": "أداة التفريغ الصوتي"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "الوصف",
+      "description": "اختر اسمًا مناسبًا لمستودع المستندات. يمكنك أيضًا حفظ وصف قصير.",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "المظهر",
+      "description": "حدد لونًا وأيقونة يمثلان مستودع المستندات بأفضل شكل.",
+      "labelIcon": "الأيقونة",
+      "labelColor": "اللون"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "مساحة العمل",
+      "description": "اختر مساحة العمل التي تريد إنشاء مستودع المستندات فيها.",
+      "labelName": "مساحة العمل",
+      "labelSelectWorkspace": "اختر مساحة عمل."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "الملفات",
+      "tabSearch": "البحث في النص الكامل",
+      "tabInfo": "معلومات"
+    },
+    "InputQuery": {
+      "placeholderSearch": "بحث...",
+      "labelSearch": "بحث"
+    },
+    "Search": {
+      "emptyTitle": "البحث في النص الكامل",
+      "emptyDescription": "ابحث عن نص في جميع ملفات مستودع المستندات هذا."
+    }
+  },
+  "page": {
+    "labelTitle": "مستودعات المستندات",
+    "emptyTitle": "لا توجد مستودعات مستندات",
+    "emptyDescription": "لم يُنشأ أي مستودع مستندات بعد.",
+    "labelNewDocumentRepository": "مستودع مستندات جديد",
+    "helpTitle": "المساعدة",
+    "helpSearchDescription": "يمكنك البحث عن مستودعات المستندات. يشمل البحث اسم المستودع ووصفه وأداة التفريغ الصوتي الخاصة به، من بين أمور أخرى.",
+    "helpSortDescription": "يمكن فرز مستودعات المستندات حسب الاسم وتقسيمها إلى مجموعات مختلفة. ويمكن عرضها كبطاقات أو جدول.",
+    "helpTranscriberDescription": "يمكنك اختيار أداة تفريغ صوتي لمستودعات المستندات. عند رفع ملفات صوت أو فيديو إلى المستودع، تُفرّغ تلقائيًا."
+  }
+}

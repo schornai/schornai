@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historia"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Błąd",
+      "idle": "Bezczynny",
+      "running": "W trakcie",
+      "success": "Sukces"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Przypnij",
+      "actionUnpin": "Odepnij",
+      "actionDelete": "Usuń"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Szukaj…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Opcje",
+      "labelView": "Widok",
+      "labelSort": "Sortowanie",
+      "labelLabelAsc": "Nazwa od A do Z",
+      "labelLabelDesc": "Nazwa od Z do A",
+      "labelCreatedAsc": "Data utworzenia malejąco",
+      "labelCreatedDesc": "Data utworzenia rosnąco",
+      "labelUpdatedAsc": "Data aktualizacji malejąco",
+      "labelUpdatedDesc": "Data aktualizacji rosnąco",
+      "labelGroup": "Grupowanie",
+      "labelPinned": "Przypięte",
+      "labelState": "Stan",
+      "labelType": "Typ",
+      "labelCreated": "Data utworzenia",
+      "labelUpdated": "Data aktualizacji",
+      "labelList": "Lista",
+      "labelTable": "Tabela",
+      "labelSaveView": "Zapisz widok",
+      "labelReset": "Resetuj",
+      "labelNoGroup": "Bez grupowania"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Brak aktywności",
+      "emptyDescription": "Tutaj pojawią się Twoje wcześniejsze czaty i transkrypcje.",
+      "emptyLabelAgents": "Agenci"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Dzisiaj",
+      "groupTimeLast7Days": "Ostatnie 7 dni",
+      "groupTimeLast30Days": "Ostatnie 30 dni",
+      "groupTimeOther": "Inne",
+      "groupPinned": "Przypięte",
+      "groupNotPinned": "Nieprzypięte",
+      "groupUnknown": "Nieznane",
+      "groupChat": "Czat",
+      "groupTranscription": "Transkrypcja",
+      "groupReindex": "Indeksuj ponownie",
+      "labelReindex": "Indeksuj ponownie",
+      "labelPinned": "Przypięte"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Nazwa",
+      "tableColumnType": "Typ",
+      "tableColumnState": "Stan",
+      "tableColumnCreated": "Utworzono",
+      "tableColumnUpdated": "Zaktualizowano",
+      "tableColumnPinned": "Przypięte",
+      "tableColumnNameActions": "Działania",
+      "groupTimeToday": "Dzisiaj",
+      "groupTimeLast7Days": "Ostatnie 7 dni",
+      "groupTimeLast30Days": "Ostatnie 30 dni",
+      "groupTimeOther": "Inne",
+      "groupPinned": "Przypięte",
+      "groupNotPinned": "Nieprzypięte",
+      "groupUnknown": "Nieznane",
+      "groupChat": "Czat",
+      "groupTranscription": "Transkrypcja",
+      "groupReindex": "Indeksuj ponownie",
+      "labelReindex": "Indeksuj ponownie",
+      "labelPinned": "Przypięte"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historia",
+      "labelPinned": "Przypięte",
+      "labelToday": "Dzisiaj",
+      "labelLast7Days": "Ostatnie 7 dni",
+      "labelLast30Days": "Ostatnie 30 dni",
+      "labelEmpty": "Puste"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Aktywność",
+      "actionPin": "Przypnij",
+      "actionUnpin": "Odepnij",
+      "actionDelete": "Usuń",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Nowy czat",
+      "labelInfo": "Informacje"
+    }
+  }
+}

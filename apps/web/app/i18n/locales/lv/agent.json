@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Atcelt",
+      "errorCancel": "Neizdevās apturēt ģenerēšanu. Mēģiniet vēlreiz."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Jums nav piekļuves šim aģentam."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Modelis",
+      "labelUnknownModel": "Nezināms modelis",
+      "labelThinkingOptionalOn": "Spriešana",
+      "labelThinkingOptionalOff": "Obligāta spriešana",
+      "labelThinkingMandatoryOn": "Bez spriešanas",
+      "labelThinkingMandatoryOff": "Spriešana vienmēr izslēgta",
+      "descriptionFeatureVision": "Padziļināta attēlu izpratne",
+      "labelModelSize": "Konteksta lielums: {{size}}k",
+      "labelNotFound": "Modelis nav atrasts",
+      "labelChanged": "Mainīts"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Rīks: Kalkulators",
+      "description": "Aģents var izmantot kalkulatoru, nevis pats veikt aprēķinus. Tas palīdz aģentam labāk tikt galā ar sarežģītākiem aprēķiniem."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Uzvedne",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tukšs",
+      "labelChanged": "Mainīts"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumentu krātuves",
+      "labelUnknownRepository": "Nezināma dokumentu krātuve",
+      "descriptionRepositoryNotFound": "Dokumentu krātuve neeksistē vai jums nav nepieciešamo atļauju.",
+      "labelConfirmWrite": "Lasīšana un rakstīšana (prasīt apstiprinājumu)",
+      "labelReadOnly": "Tikai lasīšana",
+      "labelWrite": "Lasīšana un rakstīšana (automātiski)",
+      "labelGoToRepository": "Doties uz krātuvi",
+      "labelChanged": "Mainīts"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Norāde lomas izvēlei",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Apraksts",
+      "description": "Izvēlieties aģentam piemērotu nosaukumu. Varat saglabāt arī īsu aprakstu.",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Darbvieta",
+      "description": "Izvēlieties darbvietu, kurā izveidot aģentu.",
+      "labelName": "Darbvieta",
+      "errorNoPermissions": "Jums nav atļaujas izveidot aģentus",
+      "errorNoWorkspaceSelected": "Nav izvēlēta darbvieta",
+      "labelSelectWorkspace": "Izvēlieties darbvietu."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Papildu funkcijas",
+      "description": "Papildiniet aģentu ar noderīgām funkcijām, lai darbu padarītu vēl vienkāršāku.",
+      "labelFileUpload": "Failu augšupielāde",
+      "descriptionFileUpload": "Lietotāji var augšupielādēt failus, kuru saturs aģentam ir pieejams kā teksts.",
+      "labelBatch": "Pakešapstrāde",
+      "descriptionBatch": "Lietotāji var automātiski apstrādāt failus katram ziņojumam.",
+      "labelPursueGoal": "Mērķa sasniegšana",
+      "descriptionPursueGoal": "Lietotāji var noteikt mērķi, un aģents darbosies ciklā, līdz tas būs sasniegts.",
+      "labelDisappearingChats": "Pazūdošās sarunas",
+      "descriptionDisappearingChats": "Sarunas var automātiski dzēsties pēc 12 stundām. Šī iespēja jāiestata lietotājam.",
+      "labelNightshift": "Nakts maiņa",
+      "descriptionNightshift": "Ilgstoši darbojošos aģentus var pārcelt uz nakts maiņu, lai dienā taupītu resursus.",
+      "labelTranscriber": "Transkribētājs",
+      "labelNoTranscriber": "Bez automātiskas transkribēšanas",
+      "descriptionTranscriber": "Automātiski transkribēt augšupielādētos audio un video failus ar šo transkribētāju."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Papildu funkcijas",
+      "labelFileUpload": "Failu augšupielāde",
+      "descriptionFileUpload": "Lietotāji var augšupielādēt failus, kuru saturs aģentam ir pieejams kā teksts.",
+      "labelBatch": "Pakešapstrāde",
+      "descriptionBatch": "Lietotāji var automātiski apstrādāt failus katram ziņojumam.",
+      "labelPursueGoal": "Mērķa sasniegšana",
+      "descriptionPursueGoal": "Lietotāji var noteikt mērķi, un aģents darbosies ciklā, līdz tas būs sasniegts.",
+      "labelDisappearingChats": "Pazūdošās sarunas",
+      "descriptionDisappearingChats": "Sarunas var automātiski dzēsties pēc 12 stundām. Šī iespēja jāiestata lietotājam.",
+      "labelNightshift": "Nakts maiņa",
+      "descriptionNightshift": "Ilgstoši darbojošos aģentus var pārcelt uz nakts maiņu, lai dienā taupītu resursus."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Ieteikumi"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentācija"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Darbvieta",
+      "labelUnknownWorkspace": "Nezināma darbvieta",
+      "labelGoToWorkspace": "Doties uz darbvietu"
+    },
+    "AgentInfo": {
+      "labelRole": "Loma: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Meklēt...",
+      "tableColumnName": "Nosaukums",
+      "tableColumnCapablilities": "Iespējas",
+      "tableColumnNameActions": "Darbības",
+      "labelOtherAgents": "Citi aģenti",
+      "labelFavorites": "Izlase",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelUnknownModel": "Nezināms modelis “{{id}}”",
+      "labelNoRepositories": "Nav dokumentu krātuvju",
+      "labelUnknownRepository": "Nezināma dokumentu krātuve “{{id}}”",
+      "labelRoleCount_other": "{{count}} lomas",
+      "labelRoleCount_zero": "{{count}} lomu",
+      "labelRoleCount_one": "{{count}} loma"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelNameAsc": "Nosaukums no A līdz Z",
+      "labelNameDesc": "Nosaukums no Z līdz A",
+      "labelGroup": "Grupēt pēc",
+      "labelFavorites": "Izlase",
+      "labelFirstLetter": "Pirmais burts",
+      "labelWorkspaces": "Darbvietas",
+      "labelModel": "Modelis",
+      "labelRepositories": "Dokumentu krātuves",
+      "labelRoleCount": "Lomu skaits",
+      "labelCards": "Kartītes",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt",
+      "labelAgents": "Aģenti",
+      "labelNewAgent": "Jauns aģents",
+      "labelNoGroup": "Bez grupēšanas"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Izskats",
+      "description": "Izvēlieties krāsu un ikonu, kas vislabāk raksturo aģentu.",
+      "labelIcon": "Ikona",
+      "labelColor": "Krāsa"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Noņemt no izlases",
+      "tooltipAddFavorite": "Pievienot izlasei"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Rediģēt",
+      "tooltipInfo": "Informācija",
+      "tooltipNewChat": "Jauna saruna"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Nezināma darbvieta",
+      "labelModelUnknown": "Nezināms modelis"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Piekļuve tīmeklim",
+      "labelGeneralAccess": "Vispārēja piekļuve, meklēšana tīmeklī",
+      "descriptionFetch": "Iegūšana no tīmekļa lejupielādē URL saturu sarunas krātuvē vai pievienotā dokumentu krātuvē ar rakstīšanas atļauju. Pēc faila apstrādes aģents var lasīt iegūto tekstu un izmantot to savā atbildē.",
+      "descriptionSearch": "Meklēšana tīmeklī palīdz aģentam atrast meklēšanas vaicājumam atbilstošas lapas. Meklēšanas pakalpojuma sniedzējs atgriež virsrakstus, saites un īsus fragmentus. Iegūšanai atļauto domēnu saraksts neierobežo meklēšanu tīmeklī.",
+      "labelChanged": "Mainīts",
+      "labelFetch": "Iegūšana",
+      "labelSearch": "Meklēt",
+      "labelOn": "Ieslēgts",
+      "labelOff": "Izslēgts",
+      "labelAsk": "Vispirms jautāt",
+      "labelWhitelist": "Iegūšana tikai no atļauto domēnu saraksta",
+      "labelAll": "Iegūšana no visām vietnēm",
+      "labelEmptyWhitelist": "Nav atļautu domēnu",
+      "labelEdit": "Rediģēt piekļuvi tīmeklim",
+      "labelDetails": "Rādīt informāciju"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Rīks: Sarunas paplašinājumi",
+      "labelFeatures": "Nākamā ziņojuma ieteikšana, sarunas nosaukuma maiņa",
+      "description": "Aģents var ieteikt lietotāja nākamo ziņojumu, lai lietotājs varētu turpināt sarunu, vienkārši noklikšķinot uz atbilstošā ziņojuma. <br /> Aģents lietotāja vietā var mainīt sarunas nosaukumu, lai to būtu vieglāk atrast vēsturē."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Lomas apraksts",
+      "description": "Lomas apraksts tiek izmantots, saņemot jaunu lietotāja ziņojumu, lai izvēlētos lomu, kas uz to atbildēs",
+      "labelName": "Nosaukums",
+      "labelSelectionHint": "Norāde lomas izvēlei",
+      "labelDeleteRole": "Dzēst lomu ",
+      "labelDoNotOverride": "Neaizstāt",
+      "labelOverrideModel": "Aizstāt modeli",
+      "descriptionOverrideModel": "Šai lomai varat izvēlēties citu modeli nekā tas, ko aģents izmanto kopumā.",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst lomu “{{name}}”? Šo darbību nevar atsaukt.",
+      "labelCancel": "Atcelt",
+      "labelThinking": "Spriešana"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Modelis",
+      "description": "Aģenta izmantotais valodas modelis, ja vien tas nav aizstāts lomas iestatījumos.",
+      "labelName": "Modelis",
+      "labelThinking": "Spriešana",
+      "labelThinking_optionalOn": "Spriešana",
+      "labelThinking_mandatoryOn": "Obligāta spriešana",
+      "labelThinking_optionalOff": "Bez spriešanas",
+      "labelThinking_mandatoryOff": "Spriešana vienmēr izslēgta",
+      "labelSelectModel": "Izvēlieties modeli"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumentu krātuve",
+      "labelPathAgent": "Ceļš aģentam",
+      "labelPathRepository": "Ceļš dokumentu krātuvē",
+      "labelPermission": "Atļauja",
+      "labelDeleteConnection": "Dzēst savienojumu",
+      "confirmDeleteTitle": "Dzēst savienojumu",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst šo savienojumu ar dokumentu krātuvi “{{name}}”?",
+      "labelCancel": "Atcelt",
+      "labelAddConnection": "Papildu savienojums",
+      "labelUnknownRepository": "Nezināma dokumentu krātuve",
+      "labelConfirmWrite": "Lasīšana un rakstīšana (prasīt apstiprinājumu)",
+      "labelReadOnly": "Tikai lasīšana",
+      "labelWrite": "Lasīšana un rakstīšana (automātiski)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Nosaukums",
+      "labelMessage": "Ziņojums",
+      "labelClose": "Aizvērt"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Nosaukums",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP galvenes",
+      "labelHeaderName": "Nosaukums",
+      "labelHeaderValue": "Vērtība",
+      "labelAddHeader": "Pievienot HTTP galveni",
+      "labelDeleteConnection": "Dzēst savienojumu",
+      "confirmDeleteTitle": "Dzēst MCP",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst MCP konfigurāciju “{{name}}”?",
+      "labelCancel": "Atcelt",
+      "labelDeleteMCP": "Dzēst MCP",
+      "labelAddMCP": "Vēl viens MCP",
+      "errorInvalidUrl": "URL jābūt derīgam",
+      "labelOAuthApp": "OAuth lietotne"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Dati",
+      "labelConnectRepository": "Pievienot dokumentu krātuvi",
+      "labelToolWebAccess": "Rīks: Piekļuve tīmeklim",
+      "labelConnectMCP": "Pievienot ārēju rīku (MCP)",
+      "labelSupport": "Atbalsts",
+      "labelToolChatExtensions": "Rīks: Sarunas paplašinājumi",
+      "labelToolCalculator": "Rīks: Kalkulators",
+      "labelSystem": "Sistēma",
+      "labelToolPlatformAccess": "Rīks: Piekļuve schorn.ai platformai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Jauns aģents",
+      "emptyDescription": "Nosakiet aģenta darbību, piekļuvi datiem, izskatu un daudz ko citu.",
+      "labelDefinePrompt": "Uzrakstiet uzvedni",
+      "descriptionDefinePrompt": "Aģenta kvalitāte ir atkarīga no tā norādījumiem. Skaidras lomu definīcijas samazina halucinācijas un uzlabo konsekvenci.",
+      "labelConnectTools": "Pievienojiet rīkus",
+      "descriptionConnectTools": "Piemēram, pievienojiet dokumentu krātuves, lai aģents balstītos uz faktiem un izmantotu uzņēmuma specifiskās zināšanas.",
+      "labelWriteDocs": "Uzrakstiet dokumentāciju",
+      "descriptionWriteDocs": "Palīdziet lietotājiem izprast šī aģenta iespējas.",
+      "infoRoleDefinition": "Loma nosaka aģenta darbību un uzdevuma izpildei pieejamos rīkus.",
+      "infoDocsDescription": "Dokumentācija var ietvert tekstu (tiek atbalstīta Markdown formatēšana) un ieteikumus aģentam nosūtāmajiem ziņojumiem.",
+      "infoAppearanceDescription": "Nosaukums, apraksts un krāsa palīdz lietotājiem orientēties pieejamajos aģentos."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Ieteiktie ziņojumi",
+      "descriptionRecommendedMessages": "Palīdziet lietotājiem ar ziņojumu ieteikumiem, kas parāda, kā vislabāk izmantot aģentu.",
+      "labelAddMessage": "Pievienot ziņojumu ",
+      "labelDocumentation": "Dokumentācija",
+      "descriptionDocumentation": "Kopīgojiet šeit ar lietotājiem papildu informāciju par šo aģentu",
+      "labelShowPreview": "Rādīt priekšskatījumu",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentācija palīdz lietotājiem izmantot aģentu. Tā tiek rādīta, kad lietotājs sāk jaunu sarunu.",
+      "descriptionMarkdownHelp": "Markdown ir vienkārša iezīmēšanas valoda ātrai un ērtai teksta formatēšanai.\n\n* **Struktūra:** Virsraksti (`#`), saraksti (numurēti `1.` un nenumurēti `-`), horizontālas līnijas.\n* **Teksta stils:** **Treknraksts** `**Treknraksts**`, *Slīpraksts* `*Slīpraksts*`, ~~Pārsvītrojums~~ `~~Pārsvītrojums~~`.\n* **Kods:** Iekļauts kods (`code`) un koda bloki ar sintakses izcelšanu.\n* **Organizācija:** Citāti (`>`), kontrolsaraksti (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Nav lomu",
+      "descriptionNoRoles": "Aģentam nav definēta neviena loma. Bez lomas aģents nedarbosies.",
+      "labelAddRole": "Pievienot lomu ",
+      "infoMultipleRoles": "Aģentiem var būt vairākas lomas. Katra loma var labāk koncentrēties uz uzdevuma daļu.",
+      "infoTools": "Aģenti var izmantot rīkus, lai labāk atbildētu uz lietotāju pieprasījumiem (meklēt dokumentus, izveidot dokumentus utt.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Jauns aģents",
+      "labelAgent": "Aģents",
+      "labelCreateAgent": "Izveidot aģentu",
+      "labelSaveAgent": "Saglabāt aģentu",
+      "tabOverview": "Pārskats",
+      "tabPrompt": "Uzvedne",
+      "tabDocs": "Atbalsts",
+      "tabRoles": "Lomas",
+      "tabSettings": "Iestatījumi",
+      "btnCreate": "Izveidot",
+      "btnSave": "Saglabāt",
+      "labelEditAgent": "Rediģēt aģentu",
+      "labelCloneAgent": "Saglabāt kā jaunu aģentu",
+      "labelDeleteAgent": "Dzēst aģentu",
+      "confirmDeleteTitle": "Dzēst aģentu",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst aģentu “{{name}}”? Šo darbību nevar atsaukt.",
+      "labelCancel": "Atcelt"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Loma ",
+      "description": "Nosaka aģenta darbību un rīkus, kurus aģents drīkst izmantot šajā kontekstā.",
+      "tabOverview": "Pārskats",
+      "tabPrompt": "Uzvedne",
+      "tabDocumentRepositoryMounts": "Dokumentu krātuves",
+      "tabMCPs": "Ārējie rīki (MCP)",
+      "tabWeb": "Piekļuve internetam",
+      "tabChat": "Sarunas paplašinājumi",
+      "tabCalc": "Kalkulators",
+      "tabTools": "Rīki",
+      "tabSettings": "Iestatījumi",
+      "toolWebAccess": "Piekļuve internetam",
+      "chatExtensions": "Sarunas paplašinājumi",
+      "calculator": "Kalkulators",
+      "externalToolsMCP": "Ārējie rīki (MCP)",
+      "labelPrompt": "Uzvedne"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmest izmaiņas",
+      "labelDiscardConfirm": "Vai tiešām vēlaties atmest visas šī aģenta nesaglabātās izmaiņas?",
+      "labelCancel": "Atcelt",
+      "labelDiscard": "Atmest izmaiņas"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Ārējie rīki (MCP)",
+      "changedBadge": "Mainīts",
+      "unknownMcp": "Nezināms MCP",
+      "invalidUrl": "Nederīgs URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantiskā meklēšana",
+      "labelChanged": "Mainīts",
+      "labelActive": "Aktīvs",
+      "labelInactive": "Neaktīvs",
+      "description": "Kad svarīga ir datu nozīme, nevis precīzs formulējums. (Nepieciešams iegulumu modelis)",
+      "labelUnknownModel": "Nezināms modelis"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Meklēšana pēc atslēgvārdiem",
+      "labelChanged": "Mainīts",
+      "labelActive": "Aktīvs",
+      "labelInactive": "Neaktīvs",
+      "description": "Precīzu izteicienu un teikumu meklēšanai. (Vārdi, nosaukumi utt.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transkribētājs",
+      "labelChanged": "Mainīts",
+      "labelUnknownTranscriber": "Nezināms transkribētājs",
+      "labelGoToTranscriber": "Doties uz transkribētāju"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Jauns ziņojums"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Gaida apstrādi",
+      "tooltipPaused": "Pauzēts"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Spriešana ieslēgta",
+      "labelThinkingOff": "Spriešana izslēgta",
+      "labelMessageStack": "Ziņojumu steks",
+      "placeholderMessage": "Ziņojums...",
+      "tooltipUploadFiles": "Failu augšupielāde",
+      "buttonPause": "Pauzēt",
+      "buttonStartBatch": "Sākt pakešapstrādi",
+      "buttonSend": "Sūtīt",
+      "descriptionFilesPending": "Faili tiek augšupielādēti vai apstrādāti …",
+      "labelAttachFiles": "Pievienot failus",
+      "labelUploadFiles": "Failu augšupielāde",
+      "labelSelectFile": "Izvēlēties esošu failu"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Vai atļaut šo darbību?",
+      "descriptionAction": "Aģentam nepieciešama jūsu piekrišana, lai turpinātu.",
+      "labelApprove": "Atļaut",
+      "labelReject": "Noraidīt",
+      "labelRetry": "Mēģināt vēlreiz",
+      "labelSubmitting": "Apstrāde …",
+      "errorSubmit": "Neizdevās nosūtīt jūsu lēmumu. Mēģiniet vēlreiz.",
+      "labelMCP": "Pievienojiet savu kontu",
+      "descriptionMCP": "Šim MCP rīkam nepieciešama pierakstīšanās. Gaidošais izsaukums automātiski turpināsies pēc konta pievienošanas."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Vai saglabāt dokumentu?",
+      "descriptionWriteFile": "Aģents vēlas saglabāt šo dokumentu. Esošais saturs tiks aizstāts.",
+      "labelShowContent": "Rādīt saturu",
+      "labelHideContent": "Paslēpt saturu",
+      "descriptionEmptyFile": "Dokuments tiks saglabāts ar tukšu saturu."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Iegūšana no tīmekļa",
+      "description": "Konfigurējiet šīs lomas piekļuvi tīmeklim. Iegūšanu un meklēšanu var ieslēgt neatkarīgi.",
+      "labelFetch": "Ieslēgt iegūšanu no tīmekļa",
+      "labelAskFetch": "Jautāt pirms lapas iegūšanas",
+      "labelAccess": "Atļautās vietnes",
+      "labelAll": "Visas vietnes",
+      "labelWhitelist": "Atļauto domēnu saraksts",
+      "descriptionAccess": "HTTP(S) faili un tīmekļa lapas, arī lokālajā tīklā. Pārvirzīšanām piemēro tos pašus piekļuves noteikumus.",
+      "labelDomains": "Atļautie domēni",
+      "descriptionDomains": "Viens resursdatora nosaukums katrā rindā, piemēram, example.com. Apakšdomēniem izmantojiet *.example.com; tas neietver pašu example.com.",
+      "errorDomains": "Ievadiet resursdatoru nosaukumus vai *.example.com bez protokola, ceļa un porta.",
+      "descriptionEmptyWhitelist": "Tukšs atļauto domēnu saraksts bloķē visas lapas.",
+      "labelSearchTitle": "Meklēšana tīmeklī",
+      "labelSearch": "Ieslēgt meklēšanu tīmeklī",
+      "labelAskSearch": "Jautāt pirms meklēšanas tīmeklī",
+      "labelProvider": "Meklēšanas pakalpojuma sniedzējs",
+      "labelProviderDocs": "Pakalpojuma sniedzēja dokumentācija",
+      "labelApiKey": "API atslēga",
+      "errorApiKey": "Ievadiet izvēlētā pakalpojuma sniedzēja API atslēgu.",
+      "labelMarket": "Staan valoda un reģions",
+      "descriptionMarket": "Piemēram, de-de vai en-us. Noklusējums ir en-us.",
+      "labelRemoveTool": "Noņemt rīku",
+      "labelConfirmRemoveTool": "Vai noņemt tīmekļa rīku?",
+      "descriptionRemoveTool": "No šīs lomas tiks noņemti iegūšanas un meklēšanas tīmeklī iestatījumi, tostarp atļauto domēnu saraksts un API atslēga.",
+      "labelCancel": "Atcelt"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Iegūt tīmekļa lapu",
+      "descriptionFetch": "Vai atļaut aģentam lejupielādēt, saglabāt un apstrādāt šī URL saturu?",
+      "labelDestination": "Galamērķis"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Meklēt tīmeklī",
+      "descriptionSearch": "Vai atļaut aģentam nosūtīt šo vaicājumu konfigurētajam meklēšanas pakalpojuma sniedzējam?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Aizvērt",
+      "labelPending": "Darbojas",
+      "labelApproval": "Gaida apstiprinājumu",
+      "labelDenied": "Noraidīts",
+      "labelDone": "Pabeigts",
+      "errorRequest": "Pieprasījums neizdevās"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Meklēšana tīmeklī",
+      "labelQuery": "Meklēšanas vaicājums",
+      "labelEmptyResults": "Nav atrasts neviens rezultāts."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Tīmekļa lapa",
+      "labelUrl": "URL",
+      "labelRange": "Rakstzīmes {{start}}–{{end}} no {{total}}",
+      "descriptionTruncated": "Papildu saturs ir pieejams nākamajā sadaļā.",
+      "labelEmptyPage": "Šajā lapā nav lasāma teksta.",
+      "labelSource": "Atvērt avotu",
+      "descriptionFileReady": "Fails ir saglabāts un apstrādāts. Iegūtais teksts ir tieši pieejams aģentam.",
+      "descriptionProcessingUnavailable": "Fails ir saglabāts. Nav pieejama iegūta teksta; audio un video nepieciešams konfigurēts transkribētājs.",
+      "descriptionProcessingFailed": "Fails ir saglabāts, taču apstrāde neizdevās vai pārsniedza laika ierobežojumu. Apstrādi var atkārtoti palaist krātuvē."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopēt failu",
+      "labelMove": "Pārvietot failu",
+      "descriptionSuccess": "Fails tika pārsūtīts. Nepieciešamais meklēšanas indekss tiek atjaunots fonā.",
+      "descriptionPending": "Faila pārsūtīšanas sagatavošana…",
+      "descriptionProcessingError": "Fails tika pārsūtīts, taču apstrāde galamērķī jāsāk no jauna.",
+      "errorTransfer": "Neizdevās pabeigt faila pārsūtīšanu.",
+      "labelOpenFile": "Atvērt galamērķa failu",
+      "descriptionDenied": "Faila pārsūtīšana noraidīta. Neviens fails netika pārsūtīts.",
+      "descriptionApproval": "Gaida jūsu piekrišanu.",
+      "descriptionRunning": "Faila pārsūtīšana…",
+      "labelClose": "Aizvērt",
+      "labelSource": "Avots",
+      "labelTarget": "Galamērķis"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Vai atļaut šī faila kopēšanu?",
+      "labelMove": "Vai atļaut šī faila pārvietošanu?",
+      "descriptionCopy": "Aģents vēlas kopēt šo failu un tā apstrādāto saturu. Esošie galamērķa faili nekad netiek pārrakstīti.",
+      "descriptionMove": "Aģents vēlas pārvietot šo failu un tā apstrādāto saturu. Avots tiks noņemts pēc veiksmīgas kopēšanas.",
+      "labelSource": "Avots",
+      "labelTarget": "Galamērķis"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Šim MCP rīkam nepieciešama pierakstīšanās. Gaidošais izsaukums automātiski turpināsies pēc konta pievienošanas.",
+      "labelConnect": "Pievienot manu kontu"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP rīks",
+      "labelDiscover": "Atklāt pieejamos rīkus",
+      "labelPending": "Darbojas",
+      "labelDone": "Pabeigts",
+      "labelApproval": "Nepieciešama pierakstīšanās",
+      "labelDenied": "Noraidīts",
+      "errorRequest": "Pieprasījums neizdevās",
+      "labelArguments": "Ievade",
+      "labelResult": "Rezultāts",
+      "labelClose": "Aizvērt"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth lietotne",
+      "labelSearch": "Meklēt savienojumu",
+      "labelAutomatic": "Nav konfigurētas OAuth lietotnes",
+      "labelNone": "Nav izvēlēts savienojums",
+      "labelMissing": "Savienojums nav pieejams",
+      "descriptionOAuth": "Neobligāti: Izvēlieties šim MCP serverim reģistrētu OAuth lietotni. Tās URL šajā aģentā konfigurējiet atsevišķi.",
+      "descriptionSearch": "Staan un Brave piekļuves dati tiek pārvaldīti centralizēti sadaļā Iestatījumi → Savienojumi.",
+      "errorMissing": "Šis savienojums vairs nav pieejams. Izvēlieties citu savienojumu.",
+      "descriptionEmpty": "Nav konfigurēts atbilstošs savienojums. Pārvaldiet savienojumus sadaļā Iestatījumi → Savienojumi."
+    }
+  },
+  "page": {
+    "labelTitle": "Aģenti",
+    "emptyTitle": "Nav aģentu",
+    "emptyDescription": "Vēl nav izveidots neviens aģents.",
+    "labelNewAgent": "Jauns aģents",
+    "helpSearchTitle": "Meklēt",
+    "helpSearchDescription": "Varat meklēt aģentus. Meklēšana cita starpā ietver aģenta nosaukumu, aprakstu un modeli.",
+    "helpSortTitle": "Kārtošana un grupēšana",
+    "helpSortDescription": "Aģentus var kārtot pēc nosaukuma un sadalīt dažādās grupās. Tos var attēlot kā flīzes vai tabulu."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Šim MCP pakalpojuma sniedzējam nepieciešama reģistrēta OAuth lietotne. Lūdziet administratoram sadaļā Iestatījumi → Savienojumi izveidot OAuth lietotni ar klienta ID un klienta noslēpumu un izvēlieties to aģenta MCP iestatījumos. Pēc tam atkārtoti izveidojiet savienojumu sarunā.",
+    "errorStart": "Neizdevās sākt MCP autorizāciju.",
+    "errorCallback": "MCP autorizācija neizdevās vai beidzās tās derīgums. Atgriezieties sarunā un mēģiniet vēlreiz."
+  }
+}

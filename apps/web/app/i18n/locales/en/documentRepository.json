@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Document repositories",
+    "description": "Document repositories create a central, structured, and reliable knowledge base for the AI that models can access contextually."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Document repository"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Search..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "View",
+      "labelSort": "Sort",
+      "labelNameAsc": "Name A to Z",
+      "labelNameDesc": "Name Z to A",
+      "labelGroup": "Group by",
+      "labelNoGroup": "No group",
+      "labelFavorites": "Favorites",
+      "labelFirstLetter": "First letter",
+      "labelWorkspaces": "Workspaces",
+      "labelModel": "Transcriber",
+      "labelCards": "Cards",
+      "labelTable": "Table",
+      "labelSaveView": "Save view",
+      "labelReset": "Reset",
+      "labelDocumentRepositories": "Document repositories",
+      "labelNewDocumentRepository": "New document repository"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Other document repositories",
+      "labelFavorites": "Favorites",
+      "labelOtherTranscribers": "Other transcribers",
+      "labelUnknownTranscriber": "Unknown transcriber \"{{id}}\""
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Name",
+      "tableColumnCapablilities": "Capabilities",
+      "tableColumnNameActions": "Actions",
+      "emptyTitle": "No document repositories",
+      "emptyDescription": "No document repositories have been created yet.",
+      "labelOtherDocumentRepositories": "Other document repositories",
+      "labelFavorites": "Favorites",
+      "labelNoGroup": "No group",
+      "labelUnknownTranscriber": "Unknown transcriber \"{{id}}\""
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Unknown workspace"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Edit",
+      "tooltipInfo": "Info"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Remove favorite",
+      "tooltipAddFavorite": "Add to favorites"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "New document repository",
+      "labelDocumentRepository": "Document repository",
+      "labelDocumentRepositoryDropdown": "Document repository",
+      "labelCreateDocumentRepository": "Create document repository",
+      "labelSaveDocumentRepository": "Save document repository",
+      "labelCloneDocumentRepository": "Save as new document repository",
+      "labelDeleteDocumentRepository": "Delete document repository",
+      "confirmDeleteTitle": "Delete document repository",
+      "confirmDeleteDescription": "Are you sure you want to delete the document repository \"{{name}}\"? This action cannot be undone.",
+      "labelCancel": "Cancel",
+      "tabOverview": "Overview",
+      "tabFeatures": "Functions",
+      "tabSettings": "Settings",
+      "btnCreate": "Create",
+      "btnSave": "Save"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Discard changes",
+      "labelDiscardConfirm": "Do you really want to discard all unsaved changes to this document repository?",
+      "labelCancel": "Cancel",
+      "labelDiscard": "Discard changes"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "New document repository",
+      "emptyDescription": "Define the behavior and appearance of the document repository.",
+      "checklistSemanticSearchTitle": "Enable semantic search",
+      "checklistSemanticSearchDescription": "Enable semantic search. This can improve the quality of search results.",
+      "checklistTranscriberTitle": "Select transcriber",
+      "checklistTranscriberDescription": "Select a transcriber that automatically transcribes all uploaded video and audio files.",
+      "helpTitle": "Help",
+      "helpKeywordSearch": "Classic keyword search. Best suited for searching brand, person, and other names.",
+      "helpEmbeddingDescription": "Add an embedding model to enable semantic search. It finds similar documents based on their semantics.",
+      "helpTranscriberDescription": "Add a transcriber to the document repository and all video and audio files are transcribed automatically after upload."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Search index",
+      "description": "Depending on the search index, different methods are used to provide the best results based on the search query.",
+      "labelKeyword": "Keyword search",
+      "descriptionKeyword": "When searching for precise expressions and sentences. (Names, designations, etc.)",
+      "labelSemantic": "Semantic search",
+      "descriptionSemantic": "When the semantics of the data are in the foreground and not the exact wording. (Requires an embedding model)",
+      "labelEmbeddingModel": "Embedding model",
+      "descriptionEmbeddingModel": "The embedding model is the basis for semantic search."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "No transcriber",
+      "labelLegend": "Transcriber",
+      "description": "Video and audio files are transcribed automatically after upload.",
+      "labelTranscriber": "Transcriber"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Description",
+      "description": "Choose a suitable name for the document repository. In addition, a short description can also be saved.",
+      "labelName": "Name",
+      "labelDescription": "Description"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Appearance",
+      "description": "Determine a color and an icon that best represent the document repository.",
+      "labelIcon": "Icon",
+      "labelColor": "Color"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Workspace",
+      "description": "Select the workspace in which the document repository should be created.",
+      "labelName": "Workspace",
+      "labelSelectWorkspace": "Select a workspace."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Files",
+      "tabSearch": "Full-text search",
+      "tabInfo": "Info"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Search...",
+      "labelSearch": "Search"
+    },
+    "Search": {
+      "emptyTitle": "Full-text search",
+      "emptyDescription": "Search text within all files in this document repository."
+    }
+  },
+  "page": {
+    "labelTitle": "Document repositories",
+    "emptyTitle": "No document repositories",
+    "emptyDescription": "No document repositories have been created yet.",
+    "labelNewDocumentRepository": "New document repository",
+    "helpTitle": "Help",
+    "helpSearchDescription": "You can search for document repositories. The search includes, among other things, the name and description of the document repository, as well as its transcriber.",
+    "helpSortDescription": "Document repositories can be sorted by name. They can be sorted into different groups. Document repositories can be displayed as cards or as a table.",
+    "helpTranscriberDescription": "You can select a transcriber for document repositories. When audio or video files are uploaded to the document repository, they are transcribed automatically."
+  }
+}

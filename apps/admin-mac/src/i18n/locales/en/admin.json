@@ -1,0 +1,34 @@
+{
+  "_components": {
+    "ServiceView": {
+      "labelAdmin": "Admin",
+      "labelRelease": "Release: {{name}}",
+      "labelTitle": "Service",
+      "descriptionService": "Start services on this Mac and inspect their logs.",
+      "labelStarting": "Starting",
+      "labelRunning": "Running",
+      "labelStopped": "Stopped",
+      "labelStopping": "Stopping",
+      "labelError": "Error",
+      "labelStart": "Start",
+      "labelStop": "Stop",
+      "descriptionBackground": "The service keeps running when you close the app.",
+      "errorCommand": "Service unavailable or action failed",
+      "labelLogs": "Logs",
+      "descriptionLogs": "Newest messages first. Up to 1,000 messages per sender.",
+      "labelShowLogs": "Show logs",
+      "labelHideLogs": "Hide logs",
+      "labelSearch": "Search logs",
+      "labelResetFilters": "Reset filters",
+      "labelSenders": "Senders",
+      "labelUnknownSender": "Unknown",
+      "labelLevel": "Output",
+      "labelTime": "Time",
+      "labelMessage": "Message",
+      "labelEmpty": "No logs yet",
+      "descriptionEmpty": "New messages will appear here automatically.",
+      "labelNoMatches": "No matching messages",
+      "descriptionNoMatches": "Adjust the search or sender selection, or reset both."
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Pavadinimas",
+      "labelFirstName": "Vardas",
+      "labelLastName": "Pavardė",
+      "buttonSave": "Išsaugoti",
+      "buttonReset": "Atkurti"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilio paveikslėlis"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Pašalinti paveikslėlį",
+      "alertDelete": "Pašalinti paveikslėlį",
+      "alertDeleteExplainer": "Ar tikrai norite pašalinti savo paveikslėlį?",
+      "alertDeleteCancel": "Atšaukti"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Įkelti paveikslėlį"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Teisės",
+      "tableColumnName": "Pavadinimas",
+      "tableColumnPermission": "Teisė",
+      "tableColumnDescription": "Aprašymas",
+      "infoEmpty": "Teisių nėra",
+      "infoEmptyDescription": "Nė viena schorn.ai box funkcija neprieinama.",
+      "infoEmptyAdminDescription": "Kaip administratorius galite sukurti pirmąją darbo sritį.",
+      "infoEmptyAdminAction": "Sukurti pirmąją darbo sritį",
+      "infoUser": "Gali peržiūrėti organizacijos turinį (pokalbių robotus, transkribuotojus, dokumentus, saugyklas ir kt.), bet negali jo redaguoti.",
+      "infoEditor": "Gali peržiūrėti organizacijos turinį ir jį redaguoti (kurti naujus pokalbių robotus, redaguoti ir trinti dokumentus ir kt.).",
+      "infoAdmin": "Gali skaityti ir rašyti visose organizacijose, taip pat tvarkyti sistemos nuostatas (įkelti XRAG, keisti spalvas ir kt.) ir naudotojus."
+    }
+  },
+  "page": {
+    "title": "Profilis",
+    "infoPersonalize": "Suasmeninti",
+    "infoPersonalizeDescription": "Čia galite įkelti savo profilio paveikslėlį ir pakeisti vardą."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Naujas slaptažodis nustatytas",
+    "description": "Naujas slaptažodis sėkmingai nustatytas. Dabar esate prisijungę su nauju slaptažodžiu.",
+    "buttonBackToDashboard": "Eiti į skydelį"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Ryšiai",
+      "descriptionConnections": "Jūsų asmeniniai OAuth ryšiai su MCP serveriais. Atjungus pašalinami čia saugomi prisijungimo duomenys. Jau vykdomi iškvietimai gali būti baigti; teises paslaugos teikėjo pusėje atšaukite tiesiogiai pas jį.",
+      "labelDisconnect": "Atjungti",
+      "descriptionEmpty": "Prijunkite savo paskyrą pokalbyje, kai MCP įrankis prašo prisijungti.",
+      "labelEmpty": "Ryšių dar nėra",
+      "labelInfo": "Apie ryšius",
+      "errorDisconnect": "Nepavyko atjungti ryšio. Bandykite dar kartą."
+    }
+  }
+}

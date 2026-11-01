@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Ime",
+      "labelFirstName": "Ime",
+      "labelLastName": "Priimek",
+      "buttonSave": "Shrani",
+      "buttonReset": "Ponastavi"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilna slika"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Odstrani sliko",
+      "alertDelete": "Odstrani sliko",
+      "alertDeleteExplainer": "Ali res želite odstraniti svojo sliko?",
+      "alertDeleteCancel": "Prekliči"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Naloži sliko"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Dovoljenja",
+      "tableColumnName": "Ime",
+      "tableColumnPermission": "Dovoljenje",
+      "tableColumnDescription": "Opis",
+      "infoEmpty": "Ni dovoljenj",
+      "infoEmptyDescription": "Nobena funkcija schorn.ai boxa ni na voljo.",
+      "infoEmptyAdminDescription": "Kot skrbnik lahko ustvarite prvi delovni prostor.",
+      "infoEmptyAdminAction": "Ustvari prvi delovni prostor",
+      "infoUser": "Lahko si ogleda vsebino organizacije (klepetalne bote, prepisovalnike, dokumente, shrambe itd.), ne more pa je urejati.",
+      "infoEditor": "Lahko si ogleda vsebino organizacije in jo tudi ureja (ustvarja nove klepetalne bote, ureja in briše dokumente itd.).",
+      "infoAdmin": "Lahko bere in piše v vseh organizacijah ter dodatno upravlja sistemske nastavitve (nalaganje XRAG, spreminjanje barv itd.) in uporabnike."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Prilagodi",
+    "infoPersonalizeDescription": "Tukaj lahko naložite profilno sliko in prilagodite svoje ime."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Novo geslo je nastavljeno",
+    "description": "Novo geslo je bilo uspešno nastavljeno. Zdaj ste prijavljeni z novim geslom.",
+    "buttonBackToDashboard": "Pojdi na nadzorno ploščo"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Povezave",
+      "descriptionConnections": "Vaše osebne povezave OAuth s strežniki MCP. Prekinitev povezave odstrani tukaj shranjene poverilnice. Klici, ki že potekajo, se lahko končajo; dovoljenja pri ponudniku prekličite neposredno pri njem.",
+      "labelDisconnect": "Prekini povezavo",
+      "descriptionEmpty": "Povežite svoj račun v pogovoru, ko orodje MCP zahteva prijavo.",
+      "labelEmpty": "Še ni povezav",
+      "labelInfo": "O povezavah",
+      "errorDisconnect": "Povezave ni bilo mogoče prekiniti. Poskusite znova."
+    }
+  }
+}

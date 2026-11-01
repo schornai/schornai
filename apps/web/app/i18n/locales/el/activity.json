@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Ιστορικό"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Σφάλμα",
+      "idle": "Σε αναμονή",
+      "running": "Εκτελείται",
+      "success": "Επιτυχία"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Καρφίτσωμα",
+      "actionUnpin": "Ξεκαρφίτσωμα",
+      "actionDelete": "Διαγραφή"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Αναζήτηση…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelLabelAsc": "Ετικέτα από Α έως Ω",
+      "labelLabelDesc": "Ετικέτα από Ω έως Α",
+      "labelCreatedAsc": "Ημερομηνία δημιουργίας, φθίνουσα",
+      "labelCreatedDesc": "Ημερομηνία δημιουργίας, αύξουσα",
+      "labelUpdatedAsc": "Ημερομηνία ενημέρωσης, φθίνουσα",
+      "labelUpdatedDesc": "Ημερομηνία ενημέρωσης, αύξουσα",
+      "labelGroup": "Ομαδοποίηση",
+      "labelPinned": "Καρφιτσωμένα",
+      "labelState": "Κατάσταση",
+      "labelType": "Τύπος",
+      "labelCreated": "Ημερομηνία δημιουργίας",
+      "labelUpdated": "Ημερομηνία ενημέρωσης",
+      "labelList": "Λίστα",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά",
+      "labelNoGroup": "Χωρίς ομάδα"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Δεν υπάρχουν δραστηριότητες",
+      "emptyDescription": "Οι προηγούμενες συνομιλίες και απομαγνητοφωνήσεις σας εμφανίζονται εδώ.",
+      "emptyLabelAgents": "Πράκτορες"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Σήμερα",
+      "groupTimeLast7Days": "Τελευταίες 7 ημέρες",
+      "groupTimeLast30Days": "Τελευταίες 30 ημέρες",
+      "groupTimeOther": "Άλλα",
+      "groupPinned": "Καρφιτσωμένα",
+      "groupNotPinned": "Μη καρφιτσωμένα",
+      "groupUnknown": "Άγνωστο",
+      "groupChat": "Συνομιλία",
+      "groupTranscription": "Απομαγνητοφώνηση",
+      "groupReindex": "Εκ νέου ευρετηρίαση",
+      "labelReindex": "Εκ νέου ευρετηρίαση",
+      "labelPinned": "Καρφιτσωμένα"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Ετικέτα",
+      "tableColumnType": "Τύπος",
+      "tableColumnState": "Κατάσταση",
+      "tableColumnCreated": "Δημιουργήθηκε",
+      "tableColumnUpdated": "Ενημερώθηκε",
+      "tableColumnPinned": "Καρφιτσωμένα",
+      "tableColumnNameActions": "Ενέργειες",
+      "groupTimeToday": "Σήμερα",
+      "groupTimeLast7Days": "Τελευταίες 7 ημέρες",
+      "groupTimeLast30Days": "Τελευταίες 30 ημέρες",
+      "groupTimeOther": "Άλλα",
+      "groupPinned": "Καρφιτσωμένα",
+      "groupNotPinned": "Μη καρφιτσωμένα",
+      "groupUnknown": "Άγνωστο",
+      "groupChat": "Συνομιλία",
+      "groupTranscription": "Απομαγνητοφώνηση",
+      "groupReindex": "Εκ νέου ευρετηρίαση",
+      "labelReindex": "Εκ νέου ευρετηρίαση",
+      "labelPinned": "Καρφιτσωμένα"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Ιστορικό",
+      "labelPinned": "Καρφιτσωμένα",
+      "labelToday": "Σήμερα",
+      "labelLast7Days": "Τελευταίες 7 ημέρες",
+      "labelLast30Days": "Τελευταίες 30 ημέρες",
+      "labelEmpty": "Κενό"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Δραστηριότητα",
+      "actionPin": "Καρφίτσωμα",
+      "actionUnpin": "Ξεκαρφίτσωμα",
+      "actionDelete": "Διαγραφή",
+      "labelAgent": "Πράκτορας — {{name}}",
+      "actionNewChat": "Νέα συνομιλία",
+      "labelInfo": "Πληροφορίες"
+    }
+  }
+}

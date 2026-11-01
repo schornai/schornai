@@ -1,0 +1,70 @@
+# Application services. Supabase is managed as a separate Compose project.
+name: schornai-app
+services:
+  web:
+    container_name: aibox-web
+    image: aibox-web:latest
+    restart: on-failure
+    ports:
+      - 127.0.0.1:3001:3000
+    environment:
+      REALTIME_SERVER_URL: ${REALTIME_SERVER_URL:-http://realtimeyjs:9000/v2/realtime}
+      REALTIME_SERVER_SECRET: ${REALTIME_SERVER_SECRET:?Realtime server secret is required}
+      SUPABASE_AUTH_HOOK_SECRET: ${SUPABASE_AUTH_HOOK_SECRET:?Auth hook signing secret is required}
+      SITE_URL: ${SITE_URL}
+      SUPABASE_URL: ${SUPABASE_URL:?Supabase API endpoint is required}
+      SUPABASE_PUBLIC_ANON_KEY: ${SUPABASE_PUBLISHABLE_KEY:?Supabase publishable or anon key is required}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SECRET_KEY:?Supabase secret or service_role key is required}
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      BOX_SERVICES_URL: http://host.docker.internal:5050
+      DOCUMENT_EXTRACTOR_URL: ${DOCUMENT_EXTRACTOR_URL:-http://document-extractor:9998}
+      SERVICE_API_TOKEN: ${SERVICE_API_TOKEN:?Service sharing token is required}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  realtimeyjs:
+    container_name: aibox-realtime
+    image: aibox-realtime:latest
+    restart: on-failure
+    ports:
+      - 127.0.0.1:${SERVICE_REALTIME_PORT:-9001}:9000
+    depends_on:
+      web:
+        condition: service_started
+    volumes:
+      - ../ollama/models:/ollama/models:ro
+    environment:
+      OLLAMA_MODELS: /ollama/models
+      DOCUMENT_EXTRACTOR_URL: ${DOCUMENT_EXTRACTOR_URL:-http://document-extractor:9998}
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      REALTIME_SERVER_URL: http://localhost:9000
+      SERVICE_API_TOKEN: ${SERVICE_API_TOKEN:?Service sharing token is required}
+      REALTIME_SERVER_SECRET: ${REALTIME_SERVER_SECRET:?Realtime server secret is required}
+      SUPABASE_URL: ${SUPABASE_URL:?Supabase API endpoint is required}
+      SUPABASE_ANON_KEY: ${SUPABASE_PUBLISHABLE_KEY:?Supabase publishable or anon key is required}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SECRET_KEY:?Supabase secret or service_role key is required}
+      SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET:-${JWT_SECRET:-}}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  proxy:
+    container_name: aibox-proxy
+    image: aibox-proxy:latest
+    restart: on-failure
+    depends_on:
+      web:
+        condition: service_started
+    environment:
+      WEB_ENV_URL: http://web:3000
+      SUPABASE_ENV_HOST: ${SUPABASE_URL:?Supabase API endpoint is required}
+      REALTIME_ENV_URL: ${REALTIME_PROXY_URL:-http://realtimeyjs:9000}
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ./volumes/api/cert/fullkey.pem:/app/cert/fullkey.pem:ro,z
+      - ./volumes/api/cert/privkey.pem:/app/cert/privkey.pem:ro,z
+    extra_hosts:
+      - host.docker.internal:host-gateway
+networks:
+  default:
+    external: true
+    name: ${SERVICE_DOCKER_NETWORK:-schornai}

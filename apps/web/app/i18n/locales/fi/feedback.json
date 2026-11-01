@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopioi palauteteksti leikepöydälle",
+      "feedbackText": "Palauteteksti",
+      "feedbackTextRecommendation": "Kiitos, lähetä meille tämä teksti osoitteeseen ",
+      "sendFeedback": "Lähetä palautetta sähköpostitse",
+      "showFeedbackText": "Näytä palauteteksti",
+      "thankYou": "Kiitos, että käytät aikaasi palautteen antamiseen"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Poista kaikki virheilmoitukset",
+      "actionDeleteAllCancel": "Peruuta",
+      "actionDeleteAllExplainer": "Haluatko varmasti poistaa kaikki kerätyt virheilmoitukset? Tätä toimintoa ei voi perua.",
+      "actionDeleteAllShort": "Poista virheilmoitukset",
+      "actionDeselectAll": "Poista kaikkien virheilmoitusten valinta",
+      "actionSelectAll": "Valitse kaikki virheilmoitukset",
+      "explainer": "Myös virheilmoitukset ovat osa palautetta. Järjestelmä ratkaisee jotkin ongelmat automaattisesti, jolloin toimintasi jatkuvat keskeytyksettä. Meidän on silti hyödyllistä saada tietää näistä virheistä, jotta voimme korjata ne.",
+      "explainerSecrecy": "Varmista, etteivät virheilmoitukset sisällä luottamuksellisia tietoja tai henkilötietoja. Järjestelmä on lähtökohtaisesti suunniteltu estämään tällaisten tietojen päätyminen virheilmoituksiin. Virheet liittyvät kuitenkin luonteeltaan ennakoimattomiin tilanteisiin. Tarkista siksi palaute itse turvallisuussyistä.",
+      "explainerSecrecyHeading": "Ei luottamuksellisia tietoja",
+      "heading": "Virheet",
+      "tableColumnPartOfFeedback": "Osa palautetta",
+      "tableColumnDate": "Päivämäärä",
+      "tableColumnErrorMessage": "Virheilmoitus"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Tähtiarviota ei annettu",
+      "starRating": "{{stars}} / 5 tähteä"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Hylkää palaute",
+      "discardFeedbackSub": "Haluatko varmasti hylätä palautteesi? Tätä toimintoa ei voi perua.",
+      "discardFeedbackCancel": "Peruuta",
+      "infoSecrecy": "Varmista, ettei lähettämäsi palaute sisällä luottamuksellisia tietoja tai henkilötietoja.",
+      "writeFeedback": "Kirjoita palautetta",
+      "writeFeedbackSub": "Arvostamme kaikkea palautetta, sekä myönteistä että kielteistä."
+    }
+  },
+  "page": {
+    "headingLine1": "Auta meitä kehittämään schorn.ai in a Boxia,",
+    "headingLine2": "anna meille palautetta",
+    "headingMain": "Palaute"
+  }
+}

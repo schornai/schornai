@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Skopiuj treść opinii do schowka",
+      "feedbackText": "Treść opinii",
+      "feedbackTextRecommendation": "Dziękujemy, wyślij nam ten tekst na ",
+      "sendFeedback": "Wyślij opinię e-mailem",
+      "showFeedbackText": "Pokaż treść opinii",
+      "thankYou": "Dziękujemy za poświęcenie czasu na przekazanie opinii"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Usuń wszystkie komunikaty o błędach",
+      "actionDeleteAllCancel": "Anuluj",
+      "actionDeleteAllExplainer": "Czy na pewno chcesz usunąć wszystkie zebrane komunikaty o błędach? Tej operacji nie można cofnąć.",
+      "actionDeleteAllShort": "Usuń komunikaty o błędach",
+      "actionDeselectAll": "Odznacz wszystkie komunikaty o błędach",
+      "actionSelectAll": "Zaznacz wszystkie komunikaty o błędach",
+      "explainer": "Komunikaty o błędach również są częścią opinii. Niektóre problemy system rozwiązuje automatycznie, a Twoje operacje są kontynuowane bez przerw. Warto jednak poinformować nas o tych błędach, abyśmy mogli je usunąć.",
+      "explainerSecrecy": "Upewnij się, że komunikaty o błędach nie zawierają danych poufnych ani osobowych. System został zaprojektowany tak, aby takie dane nie pojawiały się w komunikatach o błędach. Błędy dotyczą jednak z natury nieprzewidzianych okoliczności. Dlatego ze względów bezpieczeństwa osobiście sprawdź przesyłaną opinię.",
+      "explainerSecrecyHeading": "Brak danych poufnych",
+      "heading": "Błędy",
+      "tableColumnPartOfFeedback": "Część opinii",
+      "tableColumnDate": "Data",
+      "tableColumnErrorMessage": "Komunikat o błędzie"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nie podano oceny w gwiazdkach",
+      "starRating": "{{stars}} z 5 gwiazdek"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Odrzuć opinię",
+      "discardFeedbackSub": "Czy na pewno chcesz odrzucić swoją opinię? Tej operacji nie można cofnąć.",
+      "discardFeedbackCancel": "Anuluj",
+      "infoSecrecy": "Upewnij się, że przesyłana opinia nie zawiera danych poufnych ani osobowych.",
+      "writeFeedback": "Napisz opinię",
+      "writeFeedbackSub": "Doceniamy każdą opinię, zarówno pozytywną, jak i negatywną."
+    }
+  },
+  "page": {
+    "headingLine1": "Pomóż nam ulepszać schorn.ai in a Box,",
+    "headingLine2": "przekaż nam swoją opinię",
+    "headingMain": "Opinie"
+  }
+}

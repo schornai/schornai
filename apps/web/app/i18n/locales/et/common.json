@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Uus vestlus",
+        "mainLabelAgents": "Agendid",
+        "mainLabelApps": "Rakendused",
+        "mainLabelWorkspaces": "Tööruumid",
+        "history": "Ajalugu"
+      },
+      "SidebarFavorites": {
+        "label": "Lemmikud",
+        "empty": "Lemmikuid pole veel lisatud."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Lemmikuid pole",
+        "descriptionNoFavorites": "Saad lisada lemmikutesse <agents>agente</agents>, <documents>dokumendihoidlaid</documents> ja <transcribers>transkribeerijaid</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Uus vestlus"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Head ööd];(5-11)[Tere hommikust];(12-17)[Tere päevast];(18-inf)[Tere õhtust];",
+      "labelAllAgents": "Kõik agendid",
+      "labelToApps": "Mine rakenduste juurde"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profiil",
+        "labelFavorites": "Lemmikud",
+        "labelPermissions": "Õigused",
+        "labelModels": "Mudelid",
+        "labelTaskQueue": "Ülesannete järjekord",
+        "labelSettings": "Seaded",
+        "labelUsers": "Kasutajad",
+        "labelWorkspaces": "Tööruumid",
+        "labelSSOProvider": "SSO-teenuse pakkuja",
+        "labelXRAGUpload": "Laadi XRAG üles",
+        "labelSystemModel": "Süsteemimudel",
+        "labelTheme": "Kujundus",
+        "labelBackToDashboard": "Tagasi töölauale",
+        "labelConnections": "Ühendused",
+        "labelProviderConnections": "Ühendused",
+        "labelService": "Teenus",
+        "labelArtifacts": "Artefaktid",
+        "labelCluster": "Klaster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Vali ikoon",
+      "buttonMoreIcons": "Rohkem ikoone",
+      "textLucideInfo": "Ikoonid: <0>Lucide</0>",
+      "placeholderSearchIcons": "Otsi ikoone...",
+      "buttonCancel": "Tühista"
+    },
+    "FileUploadDropZone": {
+      "drop": "Üleslaadimiseks lohista fail siia"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Muudetud"
+    },
+    "Pagination": {
+      "labelPrev": "Eelmine",
+      "labelNext": "Järgmine"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Minu konto",
+      "labelSystem": "Süsteem",
+      "labelModels": "Mudelid",
+      "labelCluster": "Klaster",
+      "labelSettings": "Seaded",
+      "labelDashboard": "Töölaud",
+      "labelProfile": "Profiil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Logi välja"
+    },
+    "UserRoleText": {
+      "admin": "Administraator",
+      "workspace-admin": "Tööruumi administraator",
+      "editor": "Toimetaja",
+      "user": "Kasutaja",
+      "none": "Õigus puudub"
+    },
+    "StorageView": {
+      "placeholderSearch": "Otsi sellest kaustast…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnType": "Tüüp",
+      "tableColumnSize": "Suurus",
+      "tableColumnCreated": "Loodud",
+      "tableColumnUpdated": "Muudetud",
+      "tableColumnNameActions": "Toimingud",
+      "groupTimeToday": "Täna",
+      "groupTimeLast7Days": "Viimased 7 päeva",
+      "groupTimeLast30Days": "Viimased 30 päeva",
+      "groupTimeOther": "Muu",
+      "labelFolder": "Kaust",
+      "descriptionProcessing": "Faili töödeldakse"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Uus kaust",
+      "placeholderFolderName": "Kausta nimi...",
+      "labelCancel": "Tühista",
+      "labelCreate": "Loo"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Eemalda",
+      "labelDescription": "Kas soovid kindlasti eemaldada „{{name}}“? Seda toimingut ei saa tagasi võtta.",
+      "labelCancel": "Tühista",
+      "labelRemove": "Eemalda"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Kodukataloog"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Faile pole",
+      "labelDescription": "Praegune kaust ei sisalda faile. Üleslaadimiseks lohista failid siia.",
+      "labelUploadFile": "Laadi fail üles",
+      "labelCreateFile": "Loo fail"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelNameAsc": "Nimi A–Z",
+      "labelNameDesc": "Nimi Z–A",
+      "labelSizeAsc": "Suurus kasvavalt",
+      "labelSizeDesc": "Suurus kahanevalt",
+      "labelCreatedAsc": "Loomiskuupäev kasvavalt",
+      "labelCreatedDesc": "Loomiskuupäev kahanevalt",
+      "labelUpdatedAsc": "Muutmiskuupäev kasvavalt",
+      "labelUpdatedDesc": "Muutmiskuupäev kahanevalt",
+      "labelGroup": "Rühmitamine",
+      "labelNoGroup": "Rühmitamata",
+      "labelFirstLetter": "Esitäht",
+      "labelFileType": "Failitüüp",
+      "labelCreated": "Loomiskuupäev",
+      "labelUpdated": "Muutmiskuupäev",
+      "labelTilesSmall": "Paanid (väikesed)",
+      "labelTilesMedium": "Paanid (keskmised)",
+      "labelTilesLarge": "Paanid (suured)",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta",
+      "labelNewFolder": "Uus kaust",
+      "labelThisFolder": "See kaust",
+      "labelUploadFile": "Laadi fail üles",
+      "labelNew": "Uus",
+      "labelDeleteFolder": "Kustuta kaust",
+      "labelNewRecording": "Uus salvestis",
+      "labelColumns": "Veeruvaade",
+      "labelNewTextFile": "Uus fail"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Tulemusi pole",
+      "descriptionNoResults": "Otsing ei andnud tulemusi. Sõnasta päring ümber.",
+      "labelCharacters": "märki"
+    },
+    "Transcription": {
+      "labelTitle": "Transkriptsioon",
+      "labelLoadingMedia": "Meediumi laadimine…",
+      "labelBuffering": "Taasesituse puhverdamine…",
+      "labelSeeking": "Asukoha laadimine…",
+      "labelPlayer": "Meediumipleier",
+      "labelPlay": "Esita",
+      "labelPause": "Peata",
+      "labelSeek": "Taasesituse asukoht",
+      "labelBack": "10 sekundit tagasi",
+      "labelForward": "10 sekundit edasi",
+      "labelSpeed": "Taasesituse kiirus",
+      "labelUnmute": "Lülita heli sisse",
+      "labelMute": "Vaigista",
+      "labelVolume": "Helitugevus",
+      "labelHideVideo": "Peida video",
+      "labelShowVideo": "Näita videot",
+      "labelPlaySegment": "Esita lõik {{number}}",
+      "labelReviewed": "Kontrollitud",
+      "labelSegments": "Lõigud",
+      "labelWords": "Sõnad",
+      "descriptionEmpty": "Transkribeerimise tulemusi ei leitud.",
+      "descriptionConfidence": "Kindlus: {{percent}}%",
+      "errorPlayback": "Taasesitus ebaõnnestus. Kontrolli, kas meediumifail on saadaval, ja proovi uuesti.",
+      "labelEditSegment": "Muuda lõiku {{number}}",
+      "labelSegmentText": "Lõigu tekst",
+      "labelSave": "Salvesta",
+      "labelSaving": "Salvestamine…",
+      "labelSaveReviewed": "Salvesta ja märgi kontrollituks",
+      "labelCancel": "Tühista",
+      "labelRestoreOriginal": "Taasta algne tekst",
+      "descriptionUnsaved": "Muudatused rakenduvad alles salvestamisel.",
+      "errorSave": "Salvestamine ebaõnnestus. Sinu tekst säilitati. Proovi uuesti.",
+      "errorConflict": "See lõik on muutunud. Kopeeri oma mustand ja laadi vaade enne uuesti salvestamist uuesti.",
+      "labelDownloadSrt": "Laadi SRT alla",
+      "descriptionSaveBeforeDownload": "Enne SRT-faili allalaadimist salvesta või tühista muudatused."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Veeruvaade",
+      "labelRoot": "Dokumendid",
+      "labelDetails": "Faili üksikasjad",
+      "labelType": "Tüüp",
+      "labelSize": "Suurus",
+      "labelUpdated": "Muudetud",
+      "labelOpen": "Ava fail"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Uus fail",
+      "labelName": "Failinimi",
+      "labelCreate": "Loo fail",
+      "labelCancel": "Tühista",
+      "errorCreate": "Faili ei õnnestunud luua. Kontrolli failinime ja oma kirjutusõigusi."
+    },
+    "StorageFileActions": {
+      "labelActions": "Toimingud failiga {{name}}",
+      "labelDownloadOriginal": "Laadi originaal alla",
+      "labelDownloadProcessed": "Laadi töödeldud tekst alla",
+      "labelRename": "Nimeta ümber",
+      "labelProcess": "Töötle uuesti",
+      "labelDelete": "Kustuta fail",
+      "labelName": "Uus failinimi",
+      "labelCancel": "Tühista",
+      "labelConfirm": "Kinnita",
+      "descriptionDelete": "Kas kustutada „{{name}}“, selle töödeldud sisu ja otsinguindeksi kirjed jäädavalt?",
+      "descriptionProcess": "Kas töödelda „{{name}}“ uuesti? Käsitsi tehtud muudatused kirjutatakse üle.",
+      "descriptionQueued": "Töötlemine on järjekorras või juba käimas. Kontrolli selle olekut faililoendist.",
+      "descriptionUnsupported": "Seda faili ei saa praegu töödelda. Heli ja video nõuavad seadistatud transkribeerijat.",
+      "errorAction": "Toiming ebaõnnestus. Kontrolli kirjutusõigusi, nimekonflikte ja käimasolevat töötlemist. Ebaõnnestunud ümbernimetamine võib jätta alles mõlemad failinimed; kontrolli loendit enne uut katset.",
+      "labelOptions": "Valikud",
+      "labelEdit": "Muuda",
+      "descriptionRename": "Nimeta „{{name}}“ ümber. Säilita faililaiend. Algfail, töödeldud sisu ja otsinguindeks uuendatakse koos. Olemasolevaid nimesid ei kirjutata kunagi üle.",
+      "labelCopy": "Kopeeri asukohta…",
+      "labelMove": "Teisalda asukohta…",
+      "descriptionCopy": "Kopeeri „{{name}}“ koos töödeldud sisuga. Lähtefail säilitatakse.",
+      "descriptionMove": "Teisalda „{{name}}“ koos töödeldud sisuga. Lähtefail eemaldatakse pärast edukat kopeerimist.",
+      "descriptionTransferred": "Fail edastati. Sihtkoha otsinguindeksid luuakse taustal uuesti.",
+      "descriptionTransferProcessingError": "Fail edastati, kuid töötlemist ei õnnestunud käivitada. Ava sihtfail ja vali „Töötle uuesti“. Ära korda edastust."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Toimingud failiga {{name}}",
+      "labelDelete": "Kustuta kaust"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Sisu",
+      "labelSave": "Salvesta",
+      "labelCancel": "Tühista",
+      "errorSave": "Salvestamine ebaõnnestus. Proovi uuesti.",
+      "errorConflict": "Sisu on muutunud. Laadi see enne salvestamist uuesti.",
+      "errorIndex": "Salvestatud, kuid otsinguindeksit ei õnnestunud uuendada. Salvesta uuesti."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Vali sihtkaust",
+      "labelSelectFile": "Vali olemasolev fail",
+      "descriptionFolder": "Vali olemasolev kaust. Edastatakse üks fail; olemasolevaid nimesid ei kirjutata kunagi üle.",
+      "descriptionFile": "Vali fail sellest vestlusest või juurdepääsetavast hoidlast. Dokumendid ja salvestised peavad olema juba töödeldud.",
+      "labelStorage": "Salvestusruum",
+      "labelCurrentStorage": "Praegune salvestusruum",
+      "labelUp": "Ülemkaust",
+      "descriptionLoading": "Failide laadimine…",
+      "descriptionEmpty": "Selles kaustas pole sobivaid kirjeid.",
+      "descriptionNoStorages": "Juurdepääsetavaid hoidlaid pole saadaval.",
+      "descriptionPending": "Faili edastatakse. Palun oota tulemust.",
+      "labelCancel": "Tühista",
+      "labelUseFolder": "Kasuta seda kausta",
+      "labelUseFile": "Manusta fail",
+      "labelRetry": "Laadi uuesti",
+      "errorLoad": "Seda kausta ei õnnestunud laadida. Kontrolli juurdepääsu ja proovi uuesti.",
+      "errorCollision": "Sihtkohas on juba selle nimega fail või töödeldud sisu. Vali teine kaust; midagi ei kirjutatud üle.",
+      "errorSameTarget": "Lähte- ja sihtkoht on samad. Vali teine kaust.",
+      "errorSourceChanged": "Lähtefail muutus kopeerimise ajal. Mittetäielik sihtfail eemaldati. Proovi uuesti.",
+      "errorBusy": "Seda faili töödeldakse praegu. Oota, kuni töötlemine lõpeb.",
+      "errorPermission": "Sul pole vajalikke lähte- või sihtkoha õigusi.",
+      "errorSourceDelete": "Täielik sihtfail loodi, kuid lähtefaili ei õnnestunud eemaldada. Kontrolli mõlemat asukohta enne toimingu kordamist.",
+      "errorCleanup": "Kopeerimine ebaõnnestus. Lähtefail säilitati, kuid sihtkohta võivad jääda mittetäielikud failid. Kontrolli sihtkohta enne uut katset.",
+      "errorAction": "Toiming ebaõnnestus. Kontrolli õigusi, failinimesid ja mõlemat asukohta enne uut katset.",
+      "errorNotProcessed": "Seda faili pole veel töödeldud. Töötle see kõigepealt ja vali seejärel uuesti."
+    }
+  },
+  "_welcomeMessage": "Tere tulemast\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentatsioon",
+    "feedback": "Tagasiside",
+    "help": "Abi",
+    "labelThemeLight": "Hele",
+    "labelThemeDark": "Tume",
+    "labelThemeSystem": "Operatsioonisüsteem",
+    "labelLanguage": "Keel"
+  }
+}

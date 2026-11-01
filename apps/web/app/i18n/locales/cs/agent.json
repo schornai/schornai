@@ -1,0 +1,520 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Zrušit",
+      "errorCancel": "Generování se nepodařilo zastavit. Zkuste to znovu."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "K tomuto agentovi nemáte přístup."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Neznámý model",
+      "labelThinkingOptionalOn": "Přemýšlení",
+      "labelThinkingOptionalOff": "Povinné přemýšlení",
+      "labelThinkingMandatoryOn": "Nepřemýšlet",
+      "labelThinkingMandatoryOff": "Povinně bez přemýšlení",
+      "descriptionFeatureVision": "Hlubší porozumění obrázkům",
+      "labelModelSize": "Velikost kontextu: {{size}}k",
+      "labelNotFound": "Model nenalezen",
+      "labelChanged": "Změněno"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Nástroj: Kalkulačka",
+      "description": "Agent může místo vlastních výpočtů používat kalkulačku. Díky tomu lépe zvládá složitější číselné operace."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Prázdné",
+      "labelChanged": "Změněno"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Úložiště dokumentů",
+      "labelUnknownRepository": "Neznámé úložiště dokumentů",
+      "descriptionRepositoryNotFound": "Úložiště dokumentů neexistuje nebo nemáte potřebná oprávnění.",
+      "labelConfirmWrite": "Čtení a zápis (vyžádat potvrzení)",
+      "labelReadOnly": "Pouze čtení",
+      "labelWrite": "Čtení a zápis (automaticky)",
+      "labelGoToRepository": "Přejít do úložiště",
+      "labelChanged": "Změněno"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Nápověda pro výběr role",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Popis",
+      "description": "Zvolte vhodný název agenta. Můžete také uložit krátký popis.",
+      "labelName": "Název",
+      "labelDescription": "Popis"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Pracovní prostor",
+      "description": "Vyberte pracovní prostor, ve kterém má být agent vytvořen.",
+      "labelName": "Pracovní prostor",
+      "errorNoPermissions": "Nemáte oprávnění vytvářet agenty",
+      "errorNoWorkspaceSelected": "Nevybrali jste pracovní prostor",
+      "labelSelectWorkspace": "Vyberte pracovní prostor."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Další funkce",
+      "description": "Rozšiřte agenta o užitečné funkce, které vám ještě více usnadní práci.",
+      "labelFileUpload": "Nahrávání souborů",
+      "descriptionFileUpload": "Uživatelé mohou nahrávat soubory, jejichž obsah je agentovi dostupný jako text.",
+      "labelBatch": "Dávkové zpracování",
+      "descriptionBatch": "Uživatelé mohou nechat automaticky zpracovat soubory pro každou zprávu.",
+      "labelPursueGoal": "Plnění cíle",
+      "descriptionPursueGoal": "Uživatelé mohou stanovit cíl a agent bude pracovat ve smyčce, dokud jej nesplní.",
+      "labelDisappearingChats": "Mizející chaty",
+      "descriptionDisappearingChats": "Chaty se mohou po 12 hodinách automaticky smazat. Tuto možnost musí nastavit uživatel.",
+      "labelNightshift": "Noční směna",
+      "descriptionNightshift": "Dlouho běžící agenty lze přesunout na noční směnu, aby se během dne šetřily prostředky.",
+      "labelTranscriber": "Přepisovač",
+      "labelNoTranscriber": "Bez automatického přepisu",
+      "descriptionTranscriber": "Automaticky přepisovat nahrané zvukové a video soubory pomocí tohoto přepisovače."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Další funkce",
+      "labelFileUpload": "Nahrávání souborů",
+      "descriptionFileUpload": "Uživatelé mohou nahrávat soubory, jejichž obsah je agentovi dostupný jako text.",
+      "labelBatch": "Dávkové zpracování",
+      "descriptionBatch": "Uživatelé mohou nechat automaticky zpracovat soubory pro každou zprávu.",
+      "labelPursueGoal": "Plnění cíle",
+      "descriptionPursueGoal": "Uživatelé mohou stanovit cíl a agent bude pracovat ve smyčce, dokud jej nesplní.",
+      "labelDisappearingChats": "Mizející chaty",
+      "descriptionDisappearingChats": "Chaty se mohou po 12 hodinách automaticky smazat. Tuto možnost musí nastavit uživatel.",
+      "labelNightshift": "Noční směna",
+      "descriptionNightshift": "Dlouho běžící agenty lze přesunout na noční směnu, aby se během dne šetřily prostředky."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Návrhy"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentace"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Pracovní prostor",
+      "labelUnknownWorkspace": "Neznámý pracovní prostor",
+      "labelGoToWorkspace": "Přejít do pracovního prostoru"
+    },
+    "AgentInfo": {
+      "labelRole": "Role: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Hledat...",
+      "tableColumnName": "Název",
+      "tableColumnCapablilities": "Schopnosti",
+      "tableColumnNameActions": "Akce",
+      "labelOtherAgents": "Další agenti",
+      "labelFavorites": "Oblíbené",
+      "labelNoGroup": "Bez seskupení",
+      "labelUnknownModel": "Neznámý model „{{id}}“",
+      "labelNoRepositories": "Žádná úložiště dokumentů",
+      "labelUnknownRepository": "Neznámé úložiště dokumentů „{{id}}“",
+      "labelRoleCount_other": "{{count}} rolí",
+      "labelRoleCount_zero": "Žádné role",
+      "labelRoleCount_one": "{{count}} role",
+      "labelRoleCount_few": "{{count}} role",
+      "labelRoleCount_many": "{{count}} role"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazení",
+      "labelSort": "Řazení",
+      "labelNameAsc": "Název od A do Z",
+      "labelNameDesc": "Název od Z do A",
+      "labelGroup": "Seskupit podle",
+      "labelFavorites": "Oblíbené",
+      "labelFirstLetter": "První písmeno",
+      "labelWorkspaces": "Pracovní prostory",
+      "labelModel": "Model",
+      "labelRepositories": "Úložiště dokumentů",
+      "labelRoleCount": "Počet rolí",
+      "labelCards": "Karty",
+      "labelTable": "Tabulka",
+      "labelSaveView": "Uložit zobrazení",
+      "labelReset": "Obnovit",
+      "labelAgents": "Agenti",
+      "labelNewAgent": "Nový agent",
+      "labelNoGroup": "Bez seskupení"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Vzhled",
+      "description": "Vyberte barvu a ikonu, které agenta nejlépe vystihují.",
+      "labelIcon": "Ikona",
+      "labelColor": "Barva"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odebrat z oblíbených",
+      "tooltipAddFavorite": "Přidat do oblíbených"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Upravit",
+      "tooltipInfo": "Informace",
+      "tooltipNewChat": "Nový chat"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Neznámý pracovní prostor",
+      "labelModelUnknown": "Neznámý model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Přístup na web",
+      "labelGeneralAccess": "Obecný přístup, vyhledávání na webu",
+      "descriptionFetch": "Načítání webu stáhne obsah z URL do úložiště chatu nebo do připojeného úložiště dokumentů s oprávněním k zápisu. Po zpracování souboru může agent přečíst extrahovaný text a použít jej ve své odpovědi.",
+      "descriptionSearch": "Vyhledávání na webu pomáhá agentovi najít stránky odpovídající vyhledávacímu dotazu. Poskytovatel vyhledávání vrací názvy, odkazy a krátké úryvky. Seznam domén povolených pro načítání neomezuje vyhledávání na webu.",
+      "labelChanged": "Změněno",
+      "labelFetch": "Načítání",
+      "labelSearch": "Hledat",
+      "labelOn": "Zapnuto",
+      "labelOff": "Vypnuto",
+      "labelAsk": "Nejprve se zeptat",
+      "labelWhitelist": "Načítání omezené na seznam povolených domén",
+      "labelAll": "Načítání ze všech webů",
+      "labelEmptyWhitelist": "Žádné povolené domény",
+      "labelEdit": "Upravit přístup na web",
+      "labelDetails": "Zobrazit podrobnosti"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Nástroj: Rozšíření chatu",
+      "labelFeatures": "Navrhnout další zprávu, změnit název chatu",
+      "description": "Agent může navrhovat další zprávy uživatele, takže uživatel může v chatu pokračovat pouhým kliknutím na příslušnou zprávu. <br /> Agent může uživateli změnit název chatu, aby jej v historii snáze našel."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Popis role",
+      "description": "Popis role se při přijetí nové zprávy uživatele používá k rozhodnutí, která role na zprávu odpoví",
+      "labelName": "Název",
+      "labelSelectionHint": "Nápověda pro výběr role",
+      "labelDeleteRole": "Smazat roli ",
+      "labelDoNotOverride": "Nepřepisovat",
+      "labelOverrideModel": "Přepsat model",
+      "descriptionOverrideModel": "Pro tuto roli můžete vybrat jiný model, než který agent používá obecně.",
+      "confirmDeleteDescription": "Opravdu chcete smazat roli „{{name}}“? Tuto akci nelze vrátit zpět.",
+      "labelCancel": "Zrušit",
+      "labelThinking": "Přemýšlení"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "LLM, který agent používá, pokud jej nepřepíše nastavení role.",
+      "labelName": "Model",
+      "labelThinking": "Přemýšlení",
+      "labelThinking_optionalOn": "Přemýšlení",
+      "labelThinking_mandatoryOn": "Povinné přemýšlení",
+      "labelThinking_optionalOff": "Nepřemýšlet",
+      "labelThinking_mandatoryOff": "Povinně bez přemýšlení",
+      "labelSelectModel": "Vyberte model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Úložiště dokumentů",
+      "labelPathAgent": "Cesta pro agenta",
+      "labelPathRepository": "Cesta v úložišti dokumentů",
+      "labelPermission": "Oprávnění",
+      "labelDeleteConnection": "Smazat připojení",
+      "confirmDeleteTitle": "Smazat připojení",
+      "confirmDeleteDescription": "Opravdu chcete smazat toto připojení k úložišti dokumentů „{{name}}“?",
+      "labelCancel": "Zrušit",
+      "labelAddConnection": "Další připojení",
+      "labelUnknownRepository": "Neznámé úložiště dokumentů",
+      "labelConfirmWrite": "Čtení a zápis (vyžádat potvrzení)",
+      "labelReadOnly": "Pouze čtení",
+      "labelWrite": "Čtení a zápis (automaticky)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Název",
+      "labelMessage": "Zpráva",
+      "labelClose": "Zavřít"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Název",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Hlavičky HTTP",
+      "labelHeaderName": "Název",
+      "labelHeaderValue": "Hodnota",
+      "labelAddHeader": "Přidat hlavičku HTTP",
+      "labelDeleteConnection": "Smazat připojení",
+      "confirmDeleteTitle": "Smazat MCP",
+      "confirmDeleteDescription": "Opravdu chcete smazat konfiguraci MCP „{{name}}“?",
+      "labelCancel": "Zrušit",
+      "labelDeleteMCP": "Smazat MCP",
+      "labelAddMCP": "Další MCP",
+      "errorInvalidUrl": "URL musí být platná",
+      "labelOAuthApp": "Aplikace OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Data",
+      "labelConnectRepository": "Připojit úložiště dokumentů",
+      "labelToolWebAccess": "Nástroj: Přístup na web",
+      "labelConnectMCP": "Připojit externí nástroj (MCP)",
+      "labelSupport": "Podpora",
+      "labelToolChatExtensions": "Nástroj: Rozšíření chatu",
+      "labelToolCalculator": "Nástroj: Kalkulačka",
+      "labelSystem": "Systém",
+      "labelToolPlatformAccess": "Nástroj: Přístup k platformě schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Nový agent",
+      "emptyDescription": "Nastavte chování, přístup k datům, vzhled agenta a mnoho dalšího.",
+      "labelDefinePrompt": "Napište prompt",
+      "descriptionDefinePrompt": "Agent je jen tak dobrý, jak dobré jsou jeho instrukce. Jasně definované role omezují halucinace a zvyšují konzistenci.",
+      "labelConnectTools": "Připojte nástroje",
+      "descriptionConnectTools": "Připojte například úložiště dokumentů, aby agent vycházel z faktů a používal znalosti specifické pro vaši společnost.",
+      "labelWriteDocs": "Napište dokumentaci",
+      "descriptionWriteDocs": "Pomozte uživatelům pochopit schopnosti tohoto agenta.",
+      "infoRoleDefinition": "Role určuje, jak se agent chová a jaké nástroje má k dispozici pro splnění úkolu.",
+      "infoDocsDescription": "Dokumentace může obsahovat text (podporováno je formátování Markdown) i návrhy zpráv, které lze agentovi odeslat.",
+      "infoAppearanceDescription": "Název, popis a barva pomáhají uživatelům orientovat se mezi dostupnými agenty."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Navrhované zprávy",
+      "descriptionRecommendedMessages": "Pomozte uživatelům návrhy zpráv, které ukážou, jak agenta nejlépe používat.",
+      "labelAddMessage": "Přidat zprávu ",
+      "labelDocumentation": "Dokumentace",
+      "descriptionDocumentation": "Zde sdílejte s uživateli další informace o tomto agentovi",
+      "labelShowPreview": "Zobrazit náhled",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentace pomáhá uživatelům používat agenta. Zobrazí se při zahájení nového chatu.",
+      "descriptionMarkdownHelp": "Markdown je jednoduchý značkovací jazyk pro rychlé a snadné formátování textu.\n\n* **Struktura:** Nadpisy (`#`), seznamy (číslované `1.` a nečíslované `-`), vodorovné čáry.\n* **Styl textu:** **Tučně** `**Tučně**`, *Kurzíva* `*Kurzíva*`, ~~Přeškrtnuté~~ `~~Přeškrtnuté~~`.\n* **Kód:** Kód v textu (`code`) a bloky kódu se zvýrazněním syntaxe.\n* **Uspořádání:** Citace (`>`), seznamy úkolů (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Žádné role",
+      "descriptionNoRoles": "Pro agenta nebyly definovány žádné role. Bez role agent nebude fungovat.",
+      "labelAddRole": "Přidat roli ",
+      "infoMultipleRoles": "Agenti mohou zastávat více rolí. Každá role se může lépe soustředit na dílčí úkol.",
+      "infoTools": "Agenti mohou používat nástroje, aby lépe odpovídali na požadavky uživatelů (vyhledávání dokumentů, vytváření dokumentů atd.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Nový agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Vytvořit agenta",
+      "labelSaveAgent": "Uložit agenta",
+      "tabOverview": "Přehled",
+      "tabPrompt": "Prompt",
+      "tabDocs": "Podpora",
+      "tabRoles": "Role",
+      "tabSettings": "Nastavení",
+      "btnCreate": "Vytvořit",
+      "btnSave": "Uložit",
+      "labelEditAgent": "Upravit agenta",
+      "labelCloneAgent": "Uložit jako nového agenta",
+      "labelDeleteAgent": "Smazat agenta",
+      "confirmDeleteTitle": "Smazat agenta",
+      "confirmDeleteDescription": "Opravdu chcete smazat agenta „{{name}}“? Tuto akci nelze vrátit zpět.",
+      "labelCancel": "Zrušit"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Role ",
+      "description": "Určuje chování agenta a nástroje, které smí v tomto kontextu používat.",
+      "tabOverview": "Přehled",
+      "tabPrompt": "Prompt",
+      "tabDocumentRepositoryMounts": "Úložiště dokumentů",
+      "tabMCPs": "Externí nástroje (MCP)",
+      "tabWeb": "Přístup k internetu",
+      "tabChat": "Rozšíření chatu",
+      "tabCalc": "Kalkulačka",
+      "tabTools": "Nástroje",
+      "tabSettings": "Nastavení",
+      "toolWebAccess": "Přístup k internetu",
+      "chatExtensions": "Rozšíření chatu",
+      "calculator": "Kalkulačka",
+      "externalToolsMCP": "Externí nástroje (MCP)",
+      "labelPrompt": "Prompt"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zahodit změny",
+      "labelDiscardConfirm": "Opravdu chcete zahodit všechny neuložené změny tohoto agenta?",
+      "labelCancel": "Zrušit",
+      "labelDiscard": "Zahodit změny"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Externí nástroje (MCP)",
+      "changedBadge": "Změněno",
+      "unknownMcp": "Neznámé MCP",
+      "invalidUrl": "Neplatná URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Sémantické vyhledávání",
+      "labelChanged": "Změněno",
+      "labelActive": "Aktivní",
+      "labelInactive": "Neaktivní",
+      "description": "Když je důležitý význam dat, nikoli jejich přesné znění. (Vyžaduje embeddingový model)",
+      "labelUnknownModel": "Neznámý model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Vyhledávání podle klíčových slov",
+      "labelChanged": "Změněno",
+      "labelActive": "Aktivní",
+      "labelInactive": "Neaktivní",
+      "description": "Pro vyhledávání přesných výrazů a vět. (Jména, označení atd.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Přepisovač",
+      "labelChanged": "Změněno",
+      "labelUnknownTranscriber": "Neznámý přepisovač",
+      "labelGoToTranscriber": "Přejít k přepisovači"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Nová zpráva"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Čeká na zpracování",
+      "tooltipPaused": "Pozastaveno"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Přemýšlení zapnuto",
+      "labelThinkingOff": "Přemýšlení vypnuto",
+      "labelMessageStack": "Zásobník zpráv",
+      "placeholderMessage": "Zpráva...",
+      "tooltipUploadFiles": "Nahrávání souborů",
+      "buttonPause": "Pozastavit",
+      "buttonStartBatch": "Spustit dávku",
+      "buttonSend": "Odeslat",
+      "descriptionFilesPending": "Soubory se nahrávají nebo zpracovávají …",
+      "labelAttachFiles": "Připojit soubory",
+      "labelUploadFiles": "Nahrávání souborů",
+      "labelSelectFile": "Vybrat existující soubor"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Povolit tuto akci?",
+      "descriptionAction": "Agent potřebuje k pokračování váš souhlas.",
+      "labelApprove": "Povolit",
+      "labelReject": "Zamítnout",
+      "labelRetry": "Zkusit znovu",
+      "labelSubmitting": "Zpracovává se …",
+      "errorSubmit": "Vaše rozhodnutí se nepodařilo odeslat. Zkuste to znovu.",
+      "labelMCP": "Připojte svůj účet",
+      "descriptionMCP": "Tento nástroj MCP vyžaduje přihlášení. Čekající volání bude po připojení automaticky pokračovat."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Uložit dokument?",
+      "descriptionWriteFile": "Agent chce uložit tento dokument. Stávající obsah bude nahrazen.",
+      "labelShowContent": "Zobrazit obsah",
+      "labelHideContent": "Skrýt obsah",
+      "descriptionEmptyFile": "Dokument bude uložen s prázdným obsahem."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Načítání webu",
+      "description": "Nastavte přístup na web pro tuto roli. Načítání a vyhledávání lze zapnout nezávisle na sobě.",
+      "labelFetch": "Zapnout načítání webu",
+      "labelAskFetch": "Před načtením stránky se zeptat",
+      "labelAccess": "Povolené weby",
+      "labelAll": "Všechny weby",
+      "labelWhitelist": "Seznam povolených domén",
+      "descriptionAccess": "Soubory a webové stránky HTTP(S), včetně místní sítě. Přesměrování podléhají stejným pravidlům přístupu.",
+      "labelDomains": "Povolené domény",
+      "descriptionDomains": "Jeden název hostitele na řádek, například example.com. Pro subdomény použijte *.example.com; tento zápis nezahrnuje samotnou doménu example.com.",
+      "errorDomains": "Zadejte názvy hostitelů nebo *.example.com bez protokolu, cesty či portu.",
+      "descriptionEmptyWhitelist": "Prázdný seznam povolených domén blokuje všechny stránky.",
+      "labelSearchTitle": "Vyhledávání na webu",
+      "labelSearch": "Zapnout vyhledávání na webu",
+      "labelAskSearch": "Před vyhledáváním na webu se zeptat",
+      "labelProvider": "Poskytovatel vyhledávání",
+      "labelProviderDocs": "Dokumentace poskytovatele",
+      "labelApiKey": "Klíč API",
+      "errorApiKey": "Zadejte klíč API pro vybraného poskytovatele.",
+      "labelMarket": "Jazyk a oblast Staan",
+      "descriptionMarket": "Například de-de nebo en-us. Výchozí hodnota je en-us.",
+      "labelRemoveTool": "Odebrat nástroj",
+      "labelConfirmRemoveTool": "Odebrat webový nástroj?",
+      "descriptionRemoveTool": "Nastavení načítání a vyhledávání na webu, včetně seznamu povolených domén a klíče API, budou z této role odstraněna.",
+      "labelCancel": "Zrušit"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Načíst webovou stránku",
+      "descriptionFetch": "Povolit agentovi stáhnout, uložit a zpracovat tuto URL?",
+      "labelDestination": "Cíl"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Prohledat web",
+      "descriptionSearch": "Povolit agentovi odeslat tento dotaz nastavenému poskytovateli vyhledávání?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Zavřít",
+      "labelPending": "Probíhá",
+      "labelApproval": "Čeká na schválení",
+      "labelDenied": "Odmítnuto",
+      "labelDone": "Dokončeno",
+      "errorRequest": "Požadavek selhal"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Vyhledávání na webu",
+      "labelQuery": "Vyhledávací dotaz",
+      "labelEmptyResults": "Nebyly nalezeny žádné výsledky."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Webová stránka",
+      "labelUrl": "URL",
+      "labelRange": "Znaky {{start}}–{{end}} z {{total}}",
+      "descriptionTruncated": "Další obsah je k dispozici v následující části.",
+      "labelEmptyPage": "Tato stránka neobsahuje žádný čitelný text.",
+      "labelSource": "Otevřít zdroj",
+      "descriptionFileReady": "Soubor byl uložen a zpracován. Extrahovaný text je agentovi přímo dostupný.",
+      "descriptionProcessingUnavailable": "Soubor byl uložen. Není dostupný žádný extrahovaný text; zvuk a video vyžadují nastavený přepisovač.",
+      "descriptionProcessingFailed": "Soubor byl uložen, ale zpracování selhalo nebo vypršel časový limit. Zpracování lze znovu spustit v úložišti."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopírovat soubor",
+      "labelMove": "Přesunout soubor",
+      "descriptionSuccess": "Soubor byl přenesen. Potřebný vyhledávací index se znovu sestaví na pozadí.",
+      "descriptionPending": "Připravuje se přenos souboru…",
+      "descriptionProcessingError": "Soubor byl přenesen, ale zpracování je nutné znovu spustit v cílovém umístění.",
+      "errorTransfer": "Přenos souboru se nepodařilo dokončit.",
+      "labelOpenFile": "Otevřít cílový soubor",
+      "descriptionDenied": "Přenos souboru byl zamítnut. Žádný soubor nebyl přenesen.",
+      "descriptionApproval": "Čeká se na váš souhlas.",
+      "descriptionRunning": "Přenáší se soubor…",
+      "labelClose": "Zavřít",
+      "labelSource": "Zdroj",
+      "labelTarget": "Cíl"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Povolit kopírování tohoto souboru?",
+      "labelMove": "Povolit přesun tohoto souboru?",
+      "descriptionCopy": "Agent chce zkopírovat tento soubor i jeho zpracovaný obsah. Existující cílové soubory nebudou nikdy přepsány.",
+      "descriptionMove": "Agent chce přesunout tento soubor i jeho zpracovaný obsah. Zdroj bude po úspěšném zkopírování odstraněn.",
+      "labelSource": "Zdroj",
+      "labelTarget": "Cíl"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Tento nástroj MCP vyžaduje přihlášení. Čekající volání bude po připojení automaticky pokračovat.",
+      "labelConnect": "Připojit můj účet"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Nástroj MCP",
+      "labelDiscover": "Zjistit dostupné nástroje",
+      "labelPending": "Probíhá",
+      "labelDone": "Dokončeno",
+      "labelApproval": "Je vyžadováno přihlášení",
+      "labelDenied": "Zamítnuto",
+      "errorRequest": "Požadavek selhal",
+      "labelArguments": "Vstup",
+      "labelResult": "Výsledek",
+      "labelClose": "Zavřít"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Aplikace OAuth",
+      "labelSearch": "Hledat připojení",
+      "labelAutomatic": "Žádná nastavená aplikace OAuth",
+      "labelNone": "Není vybráno připojení",
+      "labelMissing": "Připojení není dostupné",
+      "descriptionOAuth": "Volitelné: Vyberte zaregistrovanou aplikaci OAuth pro tento server MCP. Jeho URL nastavte samostatně v tomto agentovi.",
+      "descriptionSearch": "Přihlašovací údaje Staan a Brave se spravují centrálně v Nastavení → Připojení.",
+      "errorMissing": "Toto připojení již není dostupné. Vyberte jiné připojení.",
+      "descriptionEmpty": "Není nastaveno žádné odpovídající připojení. Připojení spravujte v Nastavení → Připojení."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenti",
+    "emptyTitle": "Žádní agenti",
+    "emptyDescription": "Zatím nebyli vytvořeni žádní agenti.",
+    "labelNewAgent": "Nový agent",
+    "helpSearchTitle": "Hledat",
+    "helpSearchDescription": "Agenty můžete vyhledávat. Vyhledávání zahrnuje mimo jiné název a popis agenta i jeho model.",
+    "helpSortTitle": "Řazení a seskupování",
+    "helpSortDescription": "Agenty lze řadit podle názvu a rozdělit do různých skupin. Lze je zobrazit jako dlaždice nebo v tabulce."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Tento poskytovatel MCP vyžaduje zaregistrovanou aplikaci OAuth. Požádejte správce, aby v Nastavení → Připojení vytvořil aplikaci OAuth s ID klienta a tajným klíčem klienta, a vyberte ji v nastavení MCP agenta. Poté se znovu připojte z chatu.",
+    "errorStart": "Autorizaci MCP se nepodařilo zahájit.",
+    "errorCallback": "Autorizace MCP selhala nebo vypršela. Vraťte se do chatu a zkuste to znovu."
+  }
+}

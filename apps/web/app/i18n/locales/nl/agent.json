@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Annuleren",
+      "errorCancel": "Het genereren kon niet worden gestopt. Probeer het opnieuw."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Je hebt geen toegang tot deze agent."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Onbekend model",
+      "labelThinkingOptionalOn": "Redeneren",
+      "labelThinkingOptionalOff": "Verplicht redeneren",
+      "labelThinkingMandatoryOn": "Niet redeneren",
+      "labelThinkingMandatoryOff": "Verplicht niet redeneren",
+      "descriptionFeatureVision": "Dieper begrip van afbeeldingen",
+      "labelModelSize": "Contextgrootte: {{size}}k",
+      "labelNotFound": "Model niet gevonden",
+      "labelChanged": "Gewijzigd"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Tool: rekenmachine",
+      "description": "In plaats van zelf berekeningen uit te voeren, kan de agent de rekenmachine gebruiken. Zo kan de agent beter omgaan met complexere getallen."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Leeg",
+      "labelChanged": "Gewijzigd"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Documentopslagplaatsen",
+      "labelUnknownRepository": "Onbekende documentopslagplaats",
+      "descriptionRepositoryNotFound": "De documentopslagplaats bestaat niet of je hebt niet de benodigde rechten.",
+      "labelConfirmWrite": "Lezen en schrijven (om bevestiging vragen)",
+      "labelReadOnly": "Alleen lezen",
+      "labelWrite": "Lezen en schrijven (automatisch)",
+      "labelGoToRepository": "Naar opslagplaats",
+      "labelChanged": "Gewijzigd"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Aanwijzing voor rolkeuze",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Beschrijving",
+      "description": "Kies een geschikte naam voor de agent. Je kunt ook een korte beschrijving opslaan.",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Werkruimte",
+      "description": "Selecteer de werkruimte waarin je de agent wilt aanmaken.",
+      "labelName": "Werkruimte",
+      "errorNoPermissions": "Je hebt geen rechten om agenten aan te maken",
+      "errorNoWorkspaceSelected": "Je hebt geen werkruimte geselecteerd",
+      "labelSelectWorkspace": "Selecteer een werkruimte."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Extra functies",
+      "description": "Breid de agent uit met handige functies om het werken nog eenvoudiger te maken.",
+      "labelFileUpload": "Bestanden uploaden",
+      "descriptionFileUpload": "Gebruikers kunnen bestanden uploaden waarvan de inhoud als tekst beschikbaar is voor de agent.",
+      "labelBatch": "Batchverwerking",
+      "descriptionBatch": "Gebruikers kunnen bestanden automatisch per bericht laten verwerken.",
+      "labelPursueGoal": "Doel nastreven",
+      "descriptionPursueGoal": "Gebruikers kunnen een doel bepalen. De agent blijft in een lus werken totdat het doel is bereikt.",
+      "labelDisappearingChats": "Verdwijnende chats",
+      "descriptionDisappearingChats": "Chats kunnen zichzelf na 12 uur automatisch verwijderen. De gebruiker moet dit instellen.",
+      "labelNightshift": "Nachtdienst",
+      "descriptionNightshift": "Agenten die lang bezig zijn, kunnen naar de nachtdienst worden verplaatst om overdag middelen te besparen.",
+      "labelTranscriber": "Transcriptor",
+      "labelNoTranscriber": "Geen automatische transcriptie",
+      "descriptionTranscriber": "Transcribeer geüploade audio- en videobestanden automatisch met deze transcriptor."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Extra functies",
+      "labelFileUpload": "Bestanden uploaden",
+      "descriptionFileUpload": "Gebruikers kunnen bestanden uploaden waarvan de inhoud als tekst beschikbaar is voor de agent.",
+      "labelBatch": "Batchverwerking",
+      "descriptionBatch": "Gebruikers kunnen bestanden automatisch per bericht laten verwerken.",
+      "labelPursueGoal": "Doel nastreven",
+      "descriptionPursueGoal": "Gebruikers kunnen een doel bepalen. De agent blijft in een lus werken totdat het doel is bereikt.",
+      "labelDisappearingChats": "Verdwijnende chats",
+      "descriptionDisappearingChats": "Chats kunnen zichzelf na 12 uur automatisch verwijderen. De gebruiker moet dit instellen.",
+      "labelNightshift": "Nachtdienst",
+      "descriptionNightshift": "Agenten die lang bezig zijn, kunnen naar de nachtdienst worden verplaatst om overdag middelen te besparen."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Suggesties"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Documentatie"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Werkruimte",
+      "labelUnknownWorkspace": "Onbekende werkruimte",
+      "labelGoToWorkspace": "Naar werkruimte"
+    },
+    "AgentInfo": {
+      "labelRole": "Rol: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Zoeken...",
+      "tableColumnName": "Naam",
+      "tableColumnCapablilities": "Mogelijkheden",
+      "tableColumnNameActions": "Acties",
+      "labelOtherAgents": "Andere agenten",
+      "labelFavorites": "Favorieten",
+      "labelNoGroup": "Geen groep",
+      "labelUnknownModel": "Onbekend model ‘{{id}}’",
+      "labelNoRepositories": "Geen documentopslagplaatsen",
+      "labelUnknownRepository": "Onbekende documentopslagplaats ‘{{id}}’",
+      "labelRoleCount_other": "{{count}} rollen",
+      "labelRoleCount_zero": "Geen rollen",
+      "labelRoleCount_one": "{{count}} rol"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelNameAsc": "Naam van A tot Z",
+      "labelNameDesc": "Naam van Z tot A",
+      "labelGroup": "Groeperen op",
+      "labelFavorites": "Favorieten",
+      "labelFirstLetter": "Eerste letter",
+      "labelWorkspaces": "Werkruimten",
+      "labelModel": "Model",
+      "labelRepositories": "Documentopslagplaatsen",
+      "labelRoleCount": "Aantal rollen",
+      "labelCards": "Kaarten",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten",
+      "labelAgents": "Agenten",
+      "labelNewAgent": "Nieuwe agent",
+      "labelNoGroup": "Geen groep"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Uiterlijk",
+      "description": "Kies een kleur en een pictogram die de agent het best weergeven.",
+      "labelIcon": "Pictogram",
+      "labelColor": "Kleur"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Uit favorieten verwijderen",
+      "tooltipAddFavorite": "Aan favorieten toevoegen"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Bewerken",
+      "tooltipInfo": "Informatie",
+      "tooltipNewChat": "Nieuwe chat"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Onbekende werkruimte",
+      "labelModelUnknown": "Onbekend model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Webtoegang",
+      "labelGeneralAccess": "Algemene toegang, zoeken op het web",
+      "descriptionFetch": "Web ophalen downloadt de inhoud van een URL naar de chatopslag of een gekoppelde documentopslagplaats met schrijfrechten. Na verwerking van het bestand kan de agent de geëxtraheerde tekst lezen en gebruiken in het antwoord.",
+      "descriptionSearch": "Zoeken op het web helpt de agent relevante pagina’s te vinden voor een zoekopdracht. De zoekdienst geeft titels, links en korte fragmenten terug. De lijst met toegestane domeinen voor ophalen beperkt zoekopdrachten niet.",
+      "labelChanged": "Gewijzigd",
+      "labelFetch": "Ophalen",
+      "labelSearch": "Zoeken",
+      "labelOn": "Aan",
+      "labelOff": "Uit",
+      "labelAsk": "Eerst vragen",
+      "labelWhitelist": "Ophalen beperkt tot toegestane domeinen",
+      "labelAll": "Ophalen van alle websites",
+      "labelEmptyWhitelist": "Geen domeinen toegestaan",
+      "labelEdit": "Webtoegang bewerken",
+      "labelDetails": "Details tonen"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Tool: chatuitbreidingen",
+      "labelFeatures": "Volgend bericht voorstellen, chatnaam wijzigen",
+      "description": "De agent kan suggesties doen voor het volgende gebruikersbericht, zodat de gebruiker op het gewenste bericht kan klikken om de chat voort te zetten. <br /> De agent kan de chatnaam voor de gebruiker wijzigen, zodat de chat eenvoudiger terug te vinden is in de geschiedenis."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Rolbeschrijving",
+      "description": "De rolbeschrijving wordt bij een nieuw gebruikersbericht gebruikt om te bepalen welke rol het bericht beantwoordt",
+      "labelName": "Naam",
+      "labelSelectionHint": "Aanwijzing voor rolkeuze",
+      "labelDeleteRole": "Rol verwijderen ",
+      "labelDoNotOverride": "Niet overschrijven",
+      "labelOverrideModel": "Model vervangen",
+      "descriptionOverrideModel": "Je kunt voor deze rol een ander model kiezen dan het algemene model van de agent.",
+      "confirmDeleteDescription": "Weet je zeker dat je de rol ‘{{name}}’ wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "labelCancel": "Annuleren",
+      "labelThinking": "Redeneren"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Het grote taalmodel dat de agent gebruikt, tenzij een rol een ander model voorschrijft.",
+      "labelName": "Model",
+      "labelThinking": "Redeneren",
+      "labelThinking_optionalOn": "Redeneren",
+      "labelThinking_mandatoryOn": "Verplicht redeneren",
+      "labelThinking_optionalOff": "Niet redeneren",
+      "labelThinking_mandatoryOff": "Verplicht niet redeneren",
+      "labelSelectModel": "Selecteer een model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Documentopslagplaats",
+      "labelPathAgent": "Pad voor de agent",
+      "labelPathRepository": "Pad in de documentopslagplaats",
+      "labelPermission": "Recht",
+      "labelDeleteConnection": "Verbinding verwijderen",
+      "confirmDeleteTitle": "Verbinding verwijderen",
+      "confirmDeleteDescription": "Wil je deze verbinding met de documentopslagplaats ‘{{name}}’ echt verwijderen?",
+      "labelCancel": "Annuleren",
+      "labelAddConnection": "Extra verbinding",
+      "labelUnknownRepository": "Onbekende documentopslagplaats",
+      "labelConfirmWrite": "Lezen en schrijven (om bevestiging vragen)",
+      "labelReadOnly": "Alleen lezen",
+      "labelWrite": "Lezen en schrijven (automatisch)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Label",
+      "labelMessage": "Bericht",
+      "labelClose": "Sluiten"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Naam",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-headers",
+      "labelHeaderName": "Naam",
+      "labelHeaderValue": "Waarde",
+      "labelAddHeader": "HTTP-header toevoegen",
+      "labelDeleteConnection": "Verbinding verwijderen",
+      "confirmDeleteTitle": "MCP verwijderen",
+      "confirmDeleteDescription": "Weet je zeker dat je de MCP-configuratie ‘{{name}}’ wilt verwijderen?",
+      "labelCancel": "Annuleren",
+      "labelDeleteMCP": "MCP verwijderen",
+      "labelAddMCP": "Nog een MCP",
+      "errorInvalidUrl": "De URL moet geldig zijn",
+      "labelOAuthApp": "OAuth-app"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Gegevens",
+      "labelConnectRepository": "Documentopslagplaats koppelen",
+      "labelToolWebAccess": "Tool: webtoegang",
+      "labelConnectMCP": "Externe tool koppelen (MCP)",
+      "labelSupport": "Ondersteuning",
+      "labelToolChatExtensions": "Tool: chatuitbreidingen",
+      "labelToolCalculator": "Tool: rekenmachine",
+      "labelSystem": "Systeem",
+      "labelToolPlatformAccess": "Tool: toegang tot het schorn.ai-platform"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Nieuwe agent",
+      "emptyDescription": "Bepaal het gedrag, de gegevenstoegang, het uiterlijk van de agent en nog veel meer.",
+      "labelDefinePrompt": "Prompt opstellen",
+      "descriptionDefinePrompt": "Een agent is zo goed als zijn instructies. Duidelijke roldefinities beperken hallucinaties en verbeteren de consistentie.",
+      "labelConnectTools": "Tools koppelen",
+      "descriptionConnectTools": "Koppel bijvoorbeeld documentopslagplaatsen, zodat de agent zich op feiten baseert en bedrijfsspecifieke kennis gebruikt.",
+      "labelWriteDocs": "Documentatie schrijven",
+      "descriptionWriteDocs": "Help gebruikers te begrijpen wat deze agent kan.",
+      "infoRoleDefinition": "De rol bepaalt hoe de agent zich gedraagt en welke tools beschikbaar zijn om de taak uit te voeren.",
+      "infoDocsDescription": "Documentatie kan bestaan uit tekst met Markdown-opmaak en uit suggesties voor berichten aan de agent.",
+      "infoAppearanceDescription": "Naam, beschrijving en kleur helpen gebruikers hun weg te vinden tussen de beschikbare agenten."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Voorgestelde berichten",
+      "descriptionRecommendedMessages": "Help gebruikers door berichten voor te stellen waarmee ze de agent optimaal gebruiken.",
+      "labelAddMessage": "Bericht toevoegen ",
+      "labelDocumentation": "Documentatie",
+      "descriptionDocumentation": "Deel hier aanvullende informatie over deze agent met je gebruikers",
+      "labelShowPreview": "Voorbeeld tonen",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Documentatie helpt gebruikers de agent te gebruiken. Ze wordt weergegeven wanneer de gebruiker een nieuwe chat begint.",
+      "descriptionMarkdownHelp": "Markdown is een eenvoudige opmaaktaal om tekst snel en gemakkelijk te formatteren.\n\n* **Structuur:** koppen (`#`), lijsten (genummerd `1.` en ongenummerd `-`), horizontale lijnen.\n* **Tekststijl:** **vet** `**vet**`, *cursief* `*cursief*`, ~~doorgestreept~~ `~~doorgestreept~~`.\n* **Code:** inline code (`code`) en codeblokken met syntaxiskleuring.\n* **Indeling:** citaten (`>`) en controlelijsten (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Geen rollen",
+      "descriptionNoRoles": "Er zijn geen rollen voor de agent gedefinieerd. Zonder rol werkt de agent niet.",
+      "labelAddRole": "Rol toevoegen ",
+      "infoMultipleRoles": "Agenten kunnen meerdere rollen aannemen. Een rol kan zich beter concentreren op een deel van de taak.",
+      "infoTools": "Agenten kunnen tools gebruiken om gebruikersverzoeken beter te beantwoorden, zoals documenten zoeken en aanmaken."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Nieuwe agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Agent aanmaken",
+      "labelSaveAgent": "Agent opslaan",
+      "tabOverview": "Overzicht",
+      "tabPrompt": "Prompt",
+      "tabDocs": "Ondersteuning",
+      "tabRoles": "Rollen",
+      "tabSettings": "Instellingen",
+      "btnCreate": "Aanmaken",
+      "btnSave": "Opslaan",
+      "labelEditAgent": "Agent bewerken",
+      "labelCloneAgent": "Opslaan als nieuwe agent",
+      "labelDeleteAgent": "Agent verwijderen",
+      "confirmDeleteTitle": "Agent verwijderen",
+      "confirmDeleteDescription": "Weet je zeker dat je de agent ‘{{name}}’ wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "labelCancel": "Annuleren"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Rol ",
+      "description": "Bepaalt het gedrag van de agent en welke tools de agent in deze context mag gebruiken.",
+      "tabOverview": "Overzicht",
+      "tabPrompt": "Prompt",
+      "tabDocumentRepositoryMounts": "Documentopslagplaatsen",
+      "tabMCPs": "Externe tools (MCP)",
+      "tabWeb": "Internettoegang",
+      "tabChat": "Chatuitbreidingen",
+      "tabCalc": "Rekenmachine",
+      "tabTools": "Tools",
+      "tabSettings": "Instellingen",
+      "toolWebAccess": "Internettoegang",
+      "chatExtensions": "Chatuitbreidingen",
+      "calculator": "Rekenmachine",
+      "externalToolsMCP": "Externe tools (MCP)",
+      "labelPrompt": "Prompt"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Wijzigingen verwerpen",
+      "labelDiscardConfirm": "Wil je echt alle niet-opgeslagen wijzigingen aan deze agent verwerpen?",
+      "labelCancel": "Annuleren",
+      "labelDiscard": "Wijzigingen verwerpen"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Externe tools (MCP)",
+      "changedBadge": "Gewijzigd",
+      "unknownMcp": "Onbekende MCP",
+      "invalidUrl": "Ongeldige URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantisch zoeken",
+      "labelChanged": "Gewijzigd",
+      "labelActive": "Actief",
+      "labelInactive": "Inactief",
+      "description": "Wanneer de betekenis van de gegevens belangrijker is dan de exacte formulering. Vereist een embeddingmodel.",
+      "labelUnknownModel": "Onbekend model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Zoeken op trefwoorden",
+      "labelChanged": "Gewijzigd",
+      "labelActive": "Actief",
+      "labelInactive": "Inactief",
+      "description": "Voor het zoeken naar exacte uitdrukkingen en zinnen, zoals namen en aanduidingen."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transcriptor",
+      "labelChanged": "Gewijzigd",
+      "labelUnknownTranscriber": "Onbekende transcriptor",
+      "labelGoToTranscriber": "Naar transcriptor"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Nieuw bericht"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Wachten op verwerking",
+      "tooltipPaused": "Gepauzeerd"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Redeneren ingeschakeld",
+      "labelThinkingOff": "Redeneren uitgeschakeld",
+      "labelMessageStack": "Berichtenwachtrij",
+      "placeholderMessage": "Bericht...",
+      "tooltipUploadFiles": "Bestanden uploaden",
+      "buttonPause": "Pauzeren",
+      "buttonStartBatch": "Batch starten",
+      "buttonSend": "Verzenden",
+      "descriptionFilesPending": "Bestanden worden geüpload of verwerkt…",
+      "labelAttachFiles": "Bestanden bijvoegen",
+      "labelUploadFiles": "Bestanden uploaden",
+      "labelSelectFile": "Kies een bestaand bestand"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Deze actie toestaan?",
+      "descriptionAction": "De agent heeft je goedkeuring nodig om door te gaan.",
+      "labelApprove": "Toestaan",
+      "labelReject": "Weigeren",
+      "labelRetry": "Opnieuw proberen",
+      "labelSubmitting": "Verwerken…",
+      "errorSubmit": "Je beslissing kon niet worden verzonden. Probeer het opnieuw.",
+      "labelMCP": "Koppel je account",
+      "descriptionMCP": "Voor deze MCP-tool moet je je aanmelden. De wachtende aanroep wordt automatisch hervat nadat je je account hebt gekoppeld."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Document opslaan?",
+      "descriptionWriteFile": "De agent wil dit document opslaan. Bestaande inhoud wordt vervangen.",
+      "labelShowContent": "Inhoud tonen",
+      "labelHideContent": "Inhoud verbergen",
+      "descriptionEmptyFile": "Het document wordt met lege inhoud opgeslagen."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Web ophalen",
+      "description": "Configureer webtoegang voor deze rol. Ophalen en zoeken kunnen afzonderlijk worden ingeschakeld.",
+      "labelFetch": "Web ophalen inschakelen",
+      "labelAskFetch": "Vragen voordat een pagina wordt opgehaald",
+      "labelAccess": "Toegestane websites",
+      "labelAll": "Alle websites",
+      "labelWhitelist": "Lijst met toegestane domeinen",
+      "descriptionAccess": "HTTP(S)-bestanden en webpagina’s, inclusief het lokale netwerk. Voor omleidingen gelden dezelfde toegangsregels.",
+      "labelDomains": "Toegestane domeinen",
+      "descriptionDomains": "Eén hostnaam per regel, bijvoorbeeld example.com. Gebruik *.example.com voor subdomeinen; dit omvat niet example.com zelf.",
+      "errorDomains": "Voer hostnamen of *.example.com in zonder protocol, pad of poort.",
+      "descriptionEmptyWhitelist": "Een lege lijst blokkeert alle pagina’s.",
+      "labelSearchTitle": "Zoeken op het web",
+      "labelSearch": "Zoeken op het web inschakelen",
+      "labelAskSearch": "Vragen voordat op het web wordt gezocht",
+      "labelProvider": "Zoekdienst",
+      "labelProviderDocs": "Documentatie van de dienst",
+      "labelApiKey": "API-sleutel",
+      "errorApiKey": "Voer een API-sleutel in voor de geselecteerde dienst.",
+      "labelMarket": "Taal en regio voor Staan",
+      "descriptionMarket": "Bijvoorbeeld de-de of en-us. Standaard is en-us.",
+      "labelRemoveTool": "Tool verwijderen",
+      "labelConfirmRemoveTool": "Webtool verwijderen?",
+      "descriptionRemoveTool": "De instellingen voor ophalen en zoeken op het web, inclusief de lijst met toegestane domeinen en de API-sleutel, worden uit deze rol verwijderd.",
+      "labelCancel": "Annuleren"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Webpagina ophalen",
+      "descriptionFetch": "Mag de agent deze URL downloaden, opslaan en verwerken?",
+      "labelDestination": "Bestemming"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Op het web zoeken",
+      "descriptionSearch": "Mag de agent deze zoekopdracht naar de ingestelde zoekdienst sturen?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Sluiten",
+      "labelPending": "Actief",
+      "labelApproval": "Wacht op goedkeuring",
+      "labelDenied": "Afgewezen",
+      "labelDone": "Voltooid",
+      "errorRequest": "Verzoek mislukt"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Zoeken op het web",
+      "labelQuery": "Zoekopdracht",
+      "labelEmptyResults": "Geen resultaten gevonden."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Webpagina",
+      "labelUrl": "URL",
+      "labelRange": "Tekens {{start}}–{{end}} van {{total}}",
+      "descriptionTruncated": "Meer inhoud is beschikbaar in het volgende gedeelte.",
+      "labelEmptyPage": "Deze pagina bevat geen leesbare tekst.",
+      "labelSource": "Bron openen",
+      "descriptionFileReady": "Bestand opgeslagen en verwerkt. De geëxtraheerde tekst is direct beschikbaar voor de agent.",
+      "descriptionProcessingUnavailable": "Bestand opgeslagen. Er is geen geëxtraheerde tekst beschikbaar; voor audio en video is een ingestelde transcriptor nodig.",
+      "descriptionProcessingFailed": "Bestand opgeslagen, maar de verwerking is mislukt of duurde te lang. De verwerking kan in de opslag opnieuw worden gestart."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Bestand kopiëren",
+      "labelMove": "Bestand verplaatsen",
+      "descriptionSuccess": "Het bestand is overgebracht. Eventueel benodigde zoekindexen worden op de achtergrond opnieuw opgebouwd.",
+      "descriptionPending": "Bestandsoverdracht voorbereiden…",
+      "descriptionProcessingError": "Het bestand is overgebracht, maar de verwerking moet op de bestemming opnieuw worden gestart.",
+      "errorTransfer": "De bestandsoverdracht kon niet worden voltooid.",
+      "labelOpenFile": "Doelbestand openen",
+      "descriptionDenied": "Bestandsoverdracht geweigerd. Er is geen bestand overgebracht.",
+      "descriptionApproval": "Wachten op je goedkeuring.",
+      "descriptionRunning": "Bestand overbrengen…",
+      "labelClose": "Sluiten",
+      "labelSource": "Bron",
+      "labelTarget": "Bestemming"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Kopiëren van dit bestand toestaan?",
+      "labelMove": "Verplaatsen van dit bestand toestaan?",
+      "descriptionCopy": "De agent wil dit bestand en de verwerkte inhoud kopiëren. Bestaande bestanden op de bestemming worden nooit overschreven.",
+      "descriptionMove": "De agent wil dit bestand en de verwerkte inhoud verplaatsen. De bron wordt verwijderd nadat het kopiëren is geslaagd.",
+      "labelSource": "Bron",
+      "labelTarget": "Bestemming"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Voor deze MCP-tool moet je je aanmelden. De wachtende aanroep wordt automatisch hervat nadat je je account hebt gekoppeld.",
+      "labelConnect": "Mijn account koppelen"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-tool",
+      "labelDiscover": "Beschikbare tools ontdekken",
+      "labelPending": "Actief",
+      "labelDone": "Voltooid",
+      "labelApproval": "Aanmelden vereist",
+      "labelDenied": "Geweigerd",
+      "errorRequest": "Verzoek mislukt",
+      "labelArguments": "Invoer",
+      "labelResult": "Resultaat",
+      "labelClose": "Sluiten"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-app",
+      "labelSearch": "Zoekverbinding",
+      "labelAutomatic": "Geen ingestelde OAuth-app",
+      "labelNone": "Geen verbinding geselecteerd",
+      "labelMissing": "Verbinding niet beschikbaar",
+      "descriptionOAuth": "Optioneel: kies een geregistreerde OAuth-app voor deze MCP-server. Stel de URL afzonderlijk in deze agent in.",
+      "descriptionSearch": "Inloggegevens voor Staan en Brave worden centraal beheerd onder Instellingen → Verbindingen.",
+      "errorMissing": "Deze verbinding is niet meer beschikbaar. Selecteer een andere verbinding.",
+      "descriptionEmpty": "Er is geen passende verbinding ingesteld. Beheer verbindingen onder Instellingen → Verbindingen."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenten",
+    "emptyTitle": "Geen agenten",
+    "emptyDescription": "Er zijn nog geen agenten aangemaakt.",
+    "labelNewAgent": "Nieuwe agent",
+    "helpSearchTitle": "Zoeken",
+    "helpSearchDescription": "Je kunt naar agenten zoeken. De zoekopdracht omvat onder andere de naam, beschrijving en het model van de agent.",
+    "helpSortTitle": "Sorteren en groeperen",
+    "helpSortDescription": "Agenten kunnen op naam worden gesorteerd en in verschillende groepen worden ingedeeld. Je kunt ze als tegels of als tabel weergeven."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Deze MCP-aanbieder vereist een geregistreerde OAuth-app. Vraag een beheerder om onder Instellingen → Verbindingen een OAuth-app met Client ID en Client Secret aan te maken en selecteer deze in de MCP-instellingen van de agent. Maak daarna vanuit de chat opnieuw verbinding.",
+    "errorStart": "MCP-autorisatie kon niet worden gestart.",
+    "errorCallback": "MCP-autorisatie is mislukt of verlopen. Ga terug naar de chat en probeer het opnieuw."
+  }
+}

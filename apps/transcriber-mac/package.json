@@ -1,0 +1,27 @@
+{
+  "name": "@schornio/aibox-app-transcriber-mac",
+  "type": "module",
+  "scripts": {
+    "python:install": "npm run python:install:environment && npm run python:install:requirements",
+    "python:install:environment": "python3.13 -m venv ./venv",
+    "python:install:requirements": "./venv/bin/python -m pip install --upgrade pip==26.2.1 && ./venv/bin/python -m pip install --upgrade --upgrade-strategy eager --requirement ./requirements.txt",
+    "python:build": "node ./src/bundlePython.ts",
+    "build": "npm run python:build",
+    "dev": "node --watch --env-file-if-exists .env ./server.ts"
+  },
+  "devDependencies": {
+    "@schornio/aibox-eslint-config": "*",
+    "eslint": "^10.13.0"
+  },
+  "dependencies": {
+    "@schornio/aibox-database": "*",
+    "@schornio/aibox-package-utils": "*",
+    "@schornio/aibox-realtime": "*"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "apps/transcriber-mac"
+  }
+}

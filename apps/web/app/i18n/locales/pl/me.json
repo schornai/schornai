@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nazwa",
+      "labelFirstName": "Imię",
+      "labelLastName": "Nazwisko",
+      "buttonSave": "Zapisz",
+      "buttonReset": "Resetuj"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Awatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Usuń obraz",
+      "alertDelete": "Usuń obraz",
+      "alertDeleteExplainer": "Czy na pewno chcesz usunąć swój obraz?",
+      "alertDeleteCancel": "Anuluj"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Prześlij obraz"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Uprawnienia",
+      "tableColumnName": "Nazwa",
+      "tableColumnPermission": "Uprawnienie",
+      "tableColumnDescription": "Opis",
+      "infoEmpty": "Brak uprawnień",
+      "infoEmptyDescription": "Żadne funkcje schorn.ai box nie są dostępne.",
+      "infoEmptyAdminDescription": "Jako administrator możesz utworzyć pierwszy obszar roboczy.",
+      "infoEmptyAdminAction": "Utwórz pierwszy obszar roboczy",
+      "infoUser": "Może przeglądać zawartość organizacji (chatboty, transkrybentów, dokumenty, repozytoria itp.), ale nie może jej edytować.",
+      "infoEditor": "Może przeglądać zawartość organizacji i dodatkowo ją edytować (tworzyć nowe chatboty, edytować i usuwać dokumenty itp.).",
+      "infoAdmin": "Może odczytywać i zapisywać dane we wszystkich organizacjach, a także zarządzać ustawieniami systemu (przesyłać XRAG, zmieniać kolory itp.) i użytkownikami."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Personalizacja",
+    "infoPersonalizeDescription": "Tutaj możesz przesłać zdjęcie profilowe i zmienić swoje imię i nazwisko."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Ustawiono nowe hasło",
+    "description": "Nowe hasło zostało pomyślnie ustawione. Jesteś teraz zalogowany przy użyciu nowego hasła.",
+    "buttonBackToDashboard": "Przejdź do pulpitu"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Połączenia",
+      "descriptionConnections": "Twoje osobiste połączenia OAuth z serwerami MCP. Rozłączenie usuwa zapisane tutaj dane uwierzytelniające. Już uruchomione wywołania mogą się zakończyć; uprawnienia u dostawcy odwołaj bezpośrednio u niego.",
+      "labelDisconnect": "Rozłącz",
+      "descriptionEmpty": "Połącz swoje konto w czacie, gdy narzędzie MCP wymaga zalogowania.",
+      "labelEmpty": "Brak połączeń",
+      "labelInfo": "O połączeniach",
+      "errorDisconnect": "Nie udało się rozłączyć połączenia. Spróbuj ponownie."
+    }
+  }
+}

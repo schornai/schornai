@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Comhrá nua",
+        "mainLabelAgents": "Gníomhairí",
+        "mainLabelApps": "Aipeanna",
+        "mainLabelWorkspaces": "Spásanna oibre",
+        "history": "Stair"
+      },
+      "SidebarFavorites": {
+        "label": "Ceanáin",
+        "empty": "Níor cuireadh aon cheanán leis fós."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Níl aon cheanán ann",
+        "descriptionNoFavorites": "Is féidir leat <agents>gníomhairí</agents>, <documents>stórais doiciméad</documents> agus <transcribers>tras-scríobhaithe</transcribers> a chur leis na ceanáin."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Comhrá nua"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Oíche mhaith];(5-11)[Maidin mhaith];(12-17)[Tráthnóna maith];(18-inf)[Tráthnóna maith];",
+      "labelAllAgents": "Gach gníomhaire",
+      "labelToApps": "Chuig na haipeanna"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Próifíl",
+        "labelFavorites": "Ceanáin",
+        "labelPermissions": "Ceadanna",
+        "labelModels": "Samhlacha",
+        "labelTaskQueue": "Scuaine tascanna",
+        "labelSettings": "Socruithe",
+        "labelUsers": "Úsáideoirí",
+        "labelWorkspaces": "Spásanna oibre",
+        "labelSSOProvider": "Soláthraí SSO",
+        "labelXRAGUpload": "Uaslódáil XRAG",
+        "labelSystemModel": "Samhail chórais",
+        "labelTheme": "Téama",
+        "labelBackToDashboard": "Ar ais go dtí an deais",
+        "labelConnections": "Naisc",
+        "labelProviderConnections": "Naisc",
+        "labelService": "Seirbhís",
+        "labelArtifacts": "Déantáin",
+        "labelCluster": "Braisle"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Roghnaigh deilbhín",
+      "buttonMoreIcons": "Tuilleadh deilbhíní",
+      "textLucideInfo": "Deilbhíní ó <0>Lucide</0>",
+      "placeholderSearchIcons": "Cuardaigh deilbhíní...",
+      "buttonCancel": "Cealaigh"
+    },
+    "FileUploadDropZone": {
+      "drop": "Scaoil comhad anseo chun é a uaslódáil"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Athraithe"
+    },
+    "Pagination": {
+      "labelPrev": "Roimhe seo",
+      "labelNext": "Ar aghaidh"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mo chuntas",
+      "labelSystem": "Córas",
+      "labelModels": "Samhlacha",
+      "labelCluster": "Braisle",
+      "labelSettings": "Socruithe",
+      "labelDashboard": "Deais",
+      "labelProfile": "Próifíl"
+    },
+    "SidebarUserSignOut": {
+      "label": "Sínigh amach"
+    },
+    "UserRoleText": {
+      "admin": "Riarthóir",
+      "workspace-admin": "Riarthóir spáis oibre",
+      "editor": "Eagarthóir",
+      "user": "Úsáideoir",
+      "none": "Gan údarú"
+    },
+    "StorageView": {
+      "placeholderSearch": "Cuardaigh san fhillteán seo…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Ainm",
+      "tableColumnType": "Cineál",
+      "tableColumnSize": "Méid",
+      "tableColumnCreated": "Cruthaithe",
+      "tableColumnUpdated": "Nuashonraithe",
+      "tableColumnNameActions": "Gníomhartha",
+      "groupTimeToday": "Inniu",
+      "groupTimeLast7Days": "Na 7 lá seo caite",
+      "groupTimeLast30Days": "Na 30 lá seo caite",
+      "groupTimeOther": "Eile",
+      "labelFolder": "Fillteán",
+      "descriptionProcessing": "Tá an comhad á phróiseáil"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Fillteán nua",
+      "placeholderFolderName": "Ainm an fhillteáin...",
+      "labelCancel": "Cealaigh",
+      "labelCreate": "Cruthaigh"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Bain",
+      "labelDescription": "An bhfuil tú cinnte gur mhaith leat \"{{name}}\" a bhaint? Ní féidir é seo a chealú.",
+      "labelCancel": "Cealaigh",
+      "labelRemove": "Bain"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Comhadlann bhaile"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Níl aon chomhad ann",
+      "labelDescription": "Níl aon chomhad san fhillteán reatha. Tarraing comhaid anseo chun iad a uaslódáil.",
+      "labelUploadFile": "Uaslódáil comhad",
+      "labelCreateFile": "Cruthaigh comhad"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelNameAsc": "Ainm ó A go Z",
+      "labelNameDesc": "Ainm ó Z go A",
+      "labelSizeAsc": "Méid, ardaitheach",
+      "labelSizeDesc": "Méid, íslitheach",
+      "labelCreatedAsc": "Dáta cruthaithe, ardaitheach",
+      "labelCreatedDesc": "Dáta cruthaithe, íslitheach",
+      "labelUpdatedAsc": "Dáta nuashonraithe, ardaitheach",
+      "labelUpdatedDesc": "Dáta nuashonraithe, íslitheach",
+      "labelGroup": "Grúpáil",
+      "labelNoGroup": "Gan grúpa",
+      "labelFirstLetter": "An chéad litir",
+      "labelFileType": "Cineál comhaid",
+      "labelCreated": "Dáta cruthaithe",
+      "labelUpdated": "Dáta nuashonraithe",
+      "labelTilesSmall": "Tíleanna (beaga)",
+      "labelTilesMedium": "Tíleanna (meánacha)",
+      "labelTilesLarge": "Tíleanna (móra)",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh",
+      "labelNewFolder": "Fillteán nua",
+      "labelThisFolder": "An fillteán seo",
+      "labelUploadFile": "Uaslódáil comhad",
+      "labelNew": "Nua",
+      "labelDeleteFolder": "Scrios fillteán",
+      "labelNewRecording": "Taifeadadh nua",
+      "labelColumns": "Amharc colún",
+      "labelNewTextFile": "Comhad nua"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Níl aon toradh ann",
+      "descriptionNoResults": "Níor thug do chuardach aon toradh ar ais. Cuir d’iarratas i bhfocail eile.",
+      "labelCharacters": "carachtar"
+    },
+    "Transcription": {
+      "labelTitle": "Tras-scríbhinn",
+      "labelLoadingMedia": "Meáin á lódáil…",
+      "labelBuffering": "Athsheinm á mhaolánú…",
+      "labelSeeking": "Suíomh á lódáil…",
+      "labelPlayer": "Seinnteoir meán",
+      "labelPlay": "Seinn",
+      "labelPause": "Cuir ar sos",
+      "labelSeek": "Suíomh athsheinm",
+      "labelBack": "Siar 10 soicind",
+      "labelForward": "Ar aghaidh 10 soicind",
+      "labelSpeed": "Luas athsheinm",
+      "labelUnmute": "Díbhalbhaigh",
+      "labelMute": "Balbhaigh",
+      "labelVolume": "Airde fuaime",
+      "labelHideVideo": "Folaigh físeán",
+      "labelShowVideo": "Taispeáin físeán",
+      "labelPlaySegment": "Seinn mír {{number}}",
+      "labelReviewed": "Athbhreithnithe",
+      "labelSegments": "Míreanna",
+      "labelWords": "Focail",
+      "descriptionEmpty": "Níor aimsíodh aon toradh tras-scríofa.",
+      "descriptionConfidence": "Muinín: {{percent}}%",
+      "errorPlayback": "Theip ar an athsheinm. Seiceáil go bhfuil an comhad meán ar fáil agus bain triail eile as.",
+      "labelEditSegment": "Cuir mír {{number}} in eagar",
+      "labelSegmentText": "Téacs na míre",
+      "labelSave": "Sábháil",
+      "labelSaving": "Á shábháil…",
+      "labelSaveReviewed": "Sábháil agus marcáil mar athbhreithnithe",
+      "labelCancel": "Cealaigh",
+      "labelRestoreOriginal": "Athchóirigh an téacs bunaidh",
+      "descriptionUnsaved": "Ní chuirtear na hathruithe i bhfeidhm ach nuair a shábhálann tú.",
+      "errorSave": "Theip ar an sábháil. Coinníodh do théacs. Bain triail eile as.",
+      "errorConflict": "Tá an mhír seo athraithe. Cóipeáil do dhréacht agus athlódáil an t-amharc sula sábhálann tú arís.",
+      "labelDownloadSrt": "Íoslódáil SRT",
+      "descriptionSaveBeforeDownload": "Sábháil nó cealaigh d’athruithe sula n-íoslódálann tú an comhad SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Amharc colún",
+      "labelRoot": "Doiciméid",
+      "labelDetails": "Sonraí an chomhaid",
+      "labelType": "Cineál",
+      "labelSize": "Méid",
+      "labelUpdated": "Nuashonraithe",
+      "labelOpen": "Oscail comhad"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Comhad nua",
+      "labelName": "Ainm comhaid",
+      "labelCreate": "Cruthaigh comhad",
+      "labelCancel": "Cealaigh",
+      "errorCreate": "Níorbh fhéidir an comhad a chruthú. Seiceáil ainm an chomhaid agus do cheadanna scríofa."
+    },
+    "StorageFileActions": {
+      "labelActions": "Gníomhartha le haghaidh {{name}}",
+      "labelDownloadOriginal": "Íoslódáil an bunleagan",
+      "labelDownloadProcessed": "Íoslódáil an téacs próiseáilte",
+      "labelRename": "Athainmnigh",
+      "labelProcess": "Athphróiseáil",
+      "labelDelete": "Scrios comhad",
+      "labelName": "Ainm nua comhaid",
+      "labelCancel": "Cealaigh",
+      "labelConfirm": "Deimhnigh",
+      "descriptionDelete": "An scriosfar \"{{name}}\", a ábhar próiseáilte agus a iontrálacha innéacs cuardaigh go buan?",
+      "descriptionProcess": "An ndéanfar \"{{name}}\" a athphróiseáil? Forscríobhfar athruithe láimhe.",
+      "descriptionQueued": "Tá an phróiseáil sa scuaine nó ar siúl cheana. Seiceáil a stádas sa liosta comhad.",
+      "descriptionUnsupported": "Ní féidir an comhad seo a phróiseáil faoi láthair. Teastaíonn tras-scríobhaí cumraithe le haghaidh fuaime agus físe.",
+      "errorAction": "Theip ar an ngníomh. Seiceáil ceadanna scríofa, coinbhleachtaí ainmneacha agus próiseáil atá ar siúl. D’fhéadfadh an dá ainm comhaid fanacht tar éis athainmniú teipthe; seiceáil an liosta sula ndéanann tú iarracht eile.",
+      "labelOptions": "Roghanna",
+      "labelEdit": "Cuir in eagar",
+      "descriptionRename": "Athainmnigh \"{{name}}\". Coinnigh iarmhír an chomhaid. Nuashonraítear an bunleagan, an t-ábhar próiseáilte agus an t-innéacs cuardaigh le chéile. Ní fhorscríobhtar ainmneacha atá ann cheana riamh.",
+      "labelCopy": "Cóipeáil chuig…",
+      "labelMove": "Bog chuig…",
+      "descriptionCopy": "Cóipeáil \"{{name}}\" lena ábhar próiseáilte san áireamh. Coinneofar an fhoinse.",
+      "descriptionMove": "Bog \"{{name}}\" lena ábhar próiseáilte san áireamh. Bainfear an fhoinse tar éis cóipeáil rathúil.",
+      "descriptionTransferred": "Aistríodh an comhad. Atógtar innéacsanna cuardaigh an chinn scríbe sa chúlra.",
+      "descriptionTransferProcessingError": "Aistríodh an comhad, ach níorbh fhéidir an phróiseáil a thosú. Oscail an comhad cinn scríbe agus roghnaigh \"Athphróiseáil\". Ná déan an t-aistriú arís."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Gníomhartha le haghaidh {{name}}",
+      "labelDelete": "Scrios fillteán"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Ábhar",
+      "labelSave": "Sábháil",
+      "labelCancel": "Cealaigh",
+      "errorSave": "Theip ar an sábháil. Bain triail eile as.",
+      "errorConflict": "Tá an t-ábhar athraithe. Athlódáil sula sábhálann tú.",
+      "errorIndex": "Sábháilte, ach níorbh fhéidir an t-innéacs cuardaigh a nuashonrú. Sábháil arís."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Roghnaigh fillteán cinn scríbe",
+      "labelSelectFile": "Roghnaigh comhad atá ann cheana",
+      "descriptionFolder": "Roghnaigh fillteán atá ann cheana. Aistreofar comhad amháin; ní fhorscríobhtar ainmneacha atá ann cheana riamh.",
+      "descriptionFile": "Roghnaigh comhad ón gcomhrá seo nó ó stór inrochtana. Ní mór do na doiciméid agus na taifeadtaí a bheith próiseáilte cheana.",
+      "labelStorage": "Stóras",
+      "labelCurrentStorage": "Stóras reatha",
+      "labelUp": "Máthairfhillteán",
+      "descriptionLoading": "Comhaid á lódáil…",
+      "descriptionEmpty": "Níl aon iontráil mheaitseála san fhillteán seo.",
+      "descriptionNoStorages": "Níl aon stór inrochtana ar fáil.",
+      "descriptionPending": "Tá an comhad á aistriú. Fan leis an toradh.",
+      "labelCancel": "Cealaigh",
+      "labelUseFolder": "Úsáid an fillteán seo",
+      "labelUseFile": "Ceangail comhad",
+      "labelRetry": "Athlódáil",
+      "errorLoad": "Níorbh fhéidir an fillteán seo a lódáil. Seiceáil an rochtain agus bain triail eile as.",
+      "errorCollision": "Tá comhad nó ábhar próiseáilte leis an ainm seo ag an gceann scríbe cheana. Roghnaigh fillteán eile; níor forscríobhadh aon rud.",
+      "errorSameTarget": "Is ionann an fhoinse agus an ceann scríbe. Roghnaigh fillteán eile.",
+      "errorSourceChanged": "D’athraigh an fhoinse le linn na cóipeála. Baineadh an comhad neamhiomlán ag an gceann scríbe. Bain triail eile as.",
+      "errorBusy": "Tá an comhad seo á phróiseáil faoi láthair. Fan go mbeidh sé críochnaithe.",
+      "errorPermission": "Níl na ceadanna riachtanacha agat don fhoinse nó don cheann scríbe.",
+      "errorSourceDelete": "Cruthaíodh an comhad iomlán ag an gceann scríbe, ach níorbh fhéidir an fhoinse a bhaint. Seiceáil an dá shuíomh sula ndéanann tú an oibríocht arís.",
+      "errorCleanup": "Theip ar an gcóipeáil. Coinníodh an fhoinse, ach d’fhéadfadh comhaid neamhiomlána a bheith fágtha ag an gceann scríbe. Seiceáil é sula ndéanann tú iarracht eile.",
+      "errorAction": "Theip ar an oibríocht. Seiceáil ceadanna, ainmneacha comhaid agus an dá shuíomh sula ndéanann tú iarracht eile.",
+      "errorNotProcessed": "Níor próiseáladh an comhad seo fós. Próiseáil é ar dtús, ansin roghnaigh arís é."
+    }
+  },
+  "_welcomeMessage": "Fáilte go\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Doiciméadú",
+    "feedback": "Aiseolas",
+    "help": "Cabhair",
+    "labelThemeLight": "Geal",
+    "labelThemeDark": "Dorcha",
+    "labelThemeSystem": "Córas oibriúcháin",
+    "labelLanguage": "Teanga"
+  }
+}

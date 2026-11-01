@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Cronologia"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Errore",
+      "idle": "Inattivo",
+      "running": "In esecuzione",
+      "success": "Operazione riuscita"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Fissa",
+      "actionUnpin": "Rimuovi dai fissati",
+      "actionDelete": "Elimina"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Cerca…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Opzioni",
+      "labelView": "Visualizzazione",
+      "labelSort": "Ordinamento",
+      "labelLabelAsc": "Etichetta dalla A alla Z",
+      "labelLabelDesc": "Etichetta dalla Z alla A",
+      "labelCreatedAsc": "Data di creazione decrescente",
+      "labelCreatedDesc": "Data di creazione crescente",
+      "labelUpdatedAsc": "Data di aggiornamento decrescente",
+      "labelUpdatedDesc": "Data di aggiornamento crescente",
+      "labelGroup": "Raggruppamento",
+      "labelPinned": "Fissati",
+      "labelState": "Stato",
+      "labelType": "Tipo",
+      "labelCreated": "Data di creazione",
+      "labelUpdated": "Data di aggiornamento",
+      "labelList": "Elenco",
+      "labelTable": "Tabella",
+      "labelSaveView": "Salva visualizzazione",
+      "labelReset": "Reimposta",
+      "labelNoGroup": "Nessun gruppo"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Nessuna attività",
+      "emptyDescription": "Le tue chat e trascrizioni precedenti compaiono qui.",
+      "emptyLabelAgents": "Agenti"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Oggi",
+      "groupTimeLast7Days": "Ultimi 7 giorni",
+      "groupTimeLast30Days": "Ultimi 30 giorni",
+      "groupTimeOther": "Altro",
+      "groupPinned": "Fissati",
+      "groupNotPinned": "Non fissati",
+      "groupUnknown": "Sconosciuto",
+      "groupChat": "Chat",
+      "groupTranscription": "Trascrizione",
+      "groupReindex": "Reindicizzazione",
+      "labelReindex": "Reindicizzazione",
+      "labelPinned": "Fissati"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Etichetta",
+      "tableColumnType": "Tipo",
+      "tableColumnState": "Stato",
+      "tableColumnCreated": "Creato",
+      "tableColumnUpdated": "Aggiornato",
+      "tableColumnPinned": "Fissati",
+      "tableColumnNameActions": "Azioni",
+      "groupTimeToday": "Oggi",
+      "groupTimeLast7Days": "Ultimi 7 giorni",
+      "groupTimeLast30Days": "Ultimi 30 giorni",
+      "groupTimeOther": "Altro",
+      "groupPinned": "Fissati",
+      "groupNotPinned": "Non fissati",
+      "groupUnknown": "Sconosciuto",
+      "groupChat": "Chat",
+      "groupTranscription": "Trascrizione",
+      "groupReindex": "Reindicizzazione",
+      "labelReindex": "Reindicizzazione",
+      "labelPinned": "Fissati"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Cronologia",
+      "labelPinned": "Fissati",
+      "labelToday": "Oggi",
+      "labelLast7Days": "Ultimi 7 giorni",
+      "labelLast30Days": "Ultimi 30 giorni",
+      "labelEmpty": "Vuoto"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Attività",
+      "actionPin": "Fissa",
+      "actionUnpin": "Rimuovi dai fissati",
+      "actionDelete": "Elimina",
+      "labelAgent": "Agente - {{name}}",
+      "actionNewChat": "Nuova chat",
+      "labelInfo": "Informazioni"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+ "page": {
+  "titleHistory": "History"
+ },
+ "_components": {
+  "ActivityStateBadge": {
+   "error": "Error",
+   "idle": "Idle",
+   "running": "Running",
+   "success": "Success"
+  },
+  "ActivityIconGroupActions": {
+   "actionPin": "Pin",
+   "actionUnpin": "Unpin",
+   "actionDelete": "Delete"
+  },
+  "ActivityList": {
+   "placeholderSearch": "Search…"
+  },
+  "ActivityListOptionsDropdown": {
+   "labelOptions": "Options",
+   "labelView": "View",
+   "labelSort": "Sort",
+   "labelLabelAsc": "Label A to Z",
+   "labelLabelDesc": "Label Z to A",
+   "labelCreatedAsc": "Creation date descending",
+   "labelCreatedDesc": "Creation date ascending",
+   "labelUpdatedAsc": "Update date descending",
+   "labelUpdatedDesc": "Update date ascending",
+   "labelGroup": "Group",
+   "labelPinned": "Pinned",
+   "labelState": "State",
+   "labelType": "Type",
+   "labelCreated": "Creation date",
+   "labelUpdated": "Update date",
+   "labelList": "List",
+   "labelTable": "Table",
+   "labelSaveView": "Save view",
+   "labelReset": "Reset",
+   "labelNoGroup": "No group"
+  },
+     "ActivityListEmpty": {
+      "emptyTitle": "No activities",
+      "emptyDescription": "Your past chats and transcriptions appear here.",
+      "emptyLabelAgents": "Agents"
+     },
+     "ActivityListList": {
+      "groupTimeToday": "Today",
+      "groupTimeLast7Days": "Last 7 days",
+      "groupTimeLast30Days": "Last 30 days",
+      "groupTimeOther": "Other",
+      "groupPinned": "Pinned",
+      "groupNotPinned": "Not pinned",
+      "groupUnknown": "Unknown",
+      "groupChat": "Chat",
+      "groupTranscription": "Transcription",
+      "groupReindex": "Reindex",
+      "labelReindex": "Reindex",
+      "labelPinned": "Pinned"
+     },
+     "ActivityListTable": {
+      "tableColumnLabel": "Label",
+      "tableColumnType": "Type",
+      "tableColumnState": "State",
+      "tableColumnCreated": "Created",
+      "tableColumnUpdated": "Updated",
+      "tableColumnPinned": "Pinned",
+      "tableColumnNameActions": "Actions",
+      "groupTimeToday": "Today",
+      "groupTimeLast7Days": "Last 7 days",
+      "groupTimeLast30Days": "Last 30 days",
+      "groupTimeOther": "Other",
+      "groupPinned": "Pinned",
+      "groupNotPinned": "Not pinned",
+      "groupUnknown": "Unknown",
+      "groupChat": "Chat",
+      "groupTranscription": "Transcription",
+      "groupReindex": "Reindex",
+      "labelReindex": "Reindex",
+      "labelPinned": "Pinned"
+     },
+  "SidebarActivitesRealtime": {
+   "labelHistory": "History",
+   "labelPinned": "Pinned",
+   "labelToday": "Today",
+   "labelLast7Days": "Last 7 days",
+   "labelLast30Days": "Last 30 days",
+   "labelEmpty": "Empty"
+  },
+  "SidebarActivitesMenuItem": {
+   "labelActivity": "Activity",
+   "actionPin": "Pin",
+   "actionUnpin": "Unpin",
+   "actionDelete": "Delete",
+   "labelAgent": "Agent - {{name}}",
+   "actionNewChat": "New Chat",
+   "labelInfo": "Info"
+  }
+ }
+}

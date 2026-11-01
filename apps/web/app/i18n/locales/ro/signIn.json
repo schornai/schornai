@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Ești deja autentificat",
+      "backToDashboard": "Înapoi la panoul de control",
+      "signOut": "Deconectare"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Autentificare cu e-mail și parolă",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Parolă",
+      "buttonSignIn": "Autentificare cu e-mail",
+      "buttonReset": "Resetează parola"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Autentificare prin furnizor SSO",
+      "buttonSignIn": "Autentificare prin {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Resetează parola",
+      "descriptionKey": "Introdu adresa de e-mail și cheia de resetare primită de la administrator. Cheia poate fi folosită o singură dată și este valabilă 7 zile.",
+      "labelEmail": "E-mail",
+      "labelKey": "Cheie de resetare a parolei",
+      "labelPassword": "Parolă nouă",
+      "labelPasswordAgain": "Repetă parola nouă",
+      "descriptionPassword": "Folosește cel puțin 6 caractere și respectă cerințele organizației privind parolele.",
+      "errorEmail": "Introdu o adresă de e-mail validă.",
+      "errorKey": "Introdu cheia de resetare.",
+      "errorPassword": "Parola trebuie să conțină cel puțin 6 caractere.",
+      "errorPasswordAgain": "Parolele nu coincid.",
+      "errorReset": "Parola nu a putut fi schimbată. Verifică adresa de e-mail, cheia și cerințele privind parola. Cheile expirate sau deja folosite sunt invalide.",
+      "descriptionSuccess": "Parola ta a fost schimbată. Acum te poți autentifica folosind noua parolă.",
+      "labelReset": "Salvează parola",
+      "labelSignIn": "Înapoi la autentificare"
+    }
+  }
+}

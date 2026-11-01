@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historique"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Erreur",
+      "idle": "Inactif",
+      "running": "En cours",
+      "success": "Réussite"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Épingler",
+      "actionUnpin": "Désépingler",
+      "actionDelete": "Supprimer"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Rechercher…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "Affichage",
+      "labelSort": "Trier",
+      "labelLabelAsc": "Libellé de A à Z",
+      "labelLabelDesc": "Libellé de Z à A",
+      "labelCreatedAsc": "Date de création décroissante",
+      "labelCreatedDesc": "Date de création croissante",
+      "labelUpdatedAsc": "Date de modification décroissante",
+      "labelUpdatedDesc": "Date de modification croissante",
+      "labelGroup": "Regrouper",
+      "labelPinned": "Épinglés",
+      "labelState": "État",
+      "labelType": "Type",
+      "labelCreated": "Date de création",
+      "labelUpdated": "Date de modification",
+      "labelList": "Liste",
+      "labelTable": "Tableau",
+      "labelSaveView": "Enregistrer la vue",
+      "labelReset": "Réinitialiser",
+      "labelNoGroup": "Aucun groupe"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Aucune activité",
+      "emptyDescription": "Vos conversations et transcriptions précédentes s’affichent ici.",
+      "emptyLabelAgents": "Agents"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Aujourd’hui",
+      "groupTimeLast7Days": "Les 7 derniers jours",
+      "groupTimeLast30Days": "Les 30 derniers jours",
+      "groupTimeOther": "Autres",
+      "groupPinned": "Épinglés",
+      "groupNotPinned": "Non épinglés",
+      "groupUnknown": "Inconnu",
+      "groupChat": "Conversation",
+      "groupTranscription": "Transcription",
+      "groupReindex": "Réindexer",
+      "labelReindex": "Réindexer",
+      "labelPinned": "Épinglés"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Libellé",
+      "tableColumnType": "Type",
+      "tableColumnState": "État",
+      "tableColumnCreated": "Créé",
+      "tableColumnUpdated": "Modifié",
+      "tableColumnPinned": "Épinglés",
+      "tableColumnNameActions": "Actions",
+      "groupTimeToday": "Aujourd’hui",
+      "groupTimeLast7Days": "Les 7 derniers jours",
+      "groupTimeLast30Days": "Les 30 derniers jours",
+      "groupTimeOther": "Autres",
+      "groupPinned": "Épinglés",
+      "groupNotPinned": "Non épinglés",
+      "groupUnknown": "Inconnu",
+      "groupChat": "Conversation",
+      "groupTranscription": "Transcription",
+      "groupReindex": "Réindexer",
+      "labelReindex": "Réindexer",
+      "labelPinned": "Épinglés"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historique",
+      "labelPinned": "Épinglés",
+      "labelToday": "Aujourd’hui",
+      "labelLast7Days": "Les 7 derniers jours",
+      "labelLast30Days": "Les 30 derniers jours",
+      "labelEmpty": "Vide"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Activité",
+      "actionPin": "Épingler",
+      "actionUnpin": "Désépingler",
+      "actionDelete": "Supprimer",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Nouvelle conversation",
+      "labelInfo": "Informations"
+    }
+  }
+}

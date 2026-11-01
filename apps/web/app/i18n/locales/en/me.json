@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Name",
+      "labelFirstName": "Given name",
+      "labelLastName": "Family name",
+      "buttonSave": "Save",
+      "buttonReset": "Reset"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Remove image",
+      "alertDelete": "Remove image",
+      "alertDeleteExplainer": "Are you sure you want to remove your image?",
+      "alertDeleteCancel": "Cancel"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Upload image"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Permissions",
+      "tableColumnName": "Name",
+      "tableColumnPermission": "Permission",
+      "tableColumnDescription": "Description",
+      "infoEmpty": "No permissions",
+      "infoEmptyDescription": "No functions of the schorn.ai box are available.",
+      "infoEmptyAdminDescription": "As an admin you can create the first workspace.",
+      "infoEmptyAdminAction": "Create first workspace",
+      "infoUser": "Can view organization content (chatbots, transcribers, documents, repositories, etc.), but cannot edit it.",
+      "infoEditor": "Can view organization content and additionally edit it (create new chatbots, edit documents, delete, etc.).",
+      "infoAdmin": "Can read and write across all organizations and additionally manage system settings (upload XRAG, change colors, etc.) and manage users."
+    }
+  },
+  "page": {
+    "title": "Profile",
+    "infoPersonalize": "Personalize",
+    "infoPersonalizeDescription": "You can upload your profile picture and customize your name here."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "New password set",
+    "description": "Setting the new password was successful. You are now signed in with the new password.",
+    "buttonBackToDashboard": "To the dashboard"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Connections",
+      "descriptionConnections": "Your personal OAuth connections to MCP servers. Disconnecting removes credentials stored here. Calls already running may finish; revoke provider permissions directly with the provider.",
+      "labelDisconnect": "Disconnect",
+      "descriptionEmpty": "Connect your account in chat when an MCP tool needs you to sign in.",
+      "labelEmpty": "No connections yet",
+      "labelInfo": "About connections",
+      "errorDisconnect": "The connection could not be disconnected. Please try again."
+    }
+  }
+}

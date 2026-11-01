@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Jau esate prisijungę",
+      "backToDashboard": "Grįžti į skydelį",
+      "signOut": "Atsijungti"
+    },
+    "PasswordSignIn": {
+      "header": "El. paštas",
+      "headerSub": "Prisijungti su el. paštu ir slaptažodžiu",
+      "inputEmailLabel": "El. paštas",
+      "inputPasswordLabel": "Slaptažodis",
+      "buttonSignIn": "Prisijungti su el. paštu",
+      "buttonReset": "Atkurti slaptažodį"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Prisijungti per SSO teikėją",
+      "buttonSignIn": "Prisijungti per {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Atkurti slaptažodį",
+      "descriptionKey": "Įveskite savo el. pašto adresą ir administratoriaus suteiktą atkūrimo raktą. Raktą galima panaudoti vieną kartą, jis galioja 7 dienas.",
+      "labelEmail": "El. paštas",
+      "labelKey": "Slaptažodžio atkūrimo raktas",
+      "labelPassword": "Naujas slaptažodis",
+      "labelPasswordAgain": "Pakartokite naują slaptažodį",
+      "descriptionPassword": "Naudokite bent 6 simbolius ir laikykitės savo organizacijos slaptažodžių reikalavimų.",
+      "errorEmail": "Įveskite galiojantį el. pašto adresą.",
+      "errorKey": "Įveskite atkūrimo raktą.",
+      "errorPassword": "Slaptažodį turi sudaryti bent 6 simboliai.",
+      "errorPasswordAgain": "Slaptažodžiai nesutampa.",
+      "errorReset": "Nepavyko pakeisti slaptažodžio. Patikrinkite el. pašto adresą, raktą ir slaptažodžio reikalavimus. Pasibaigusio galiojimo arba jau panaudoti raktai netinka.",
+      "descriptionSuccess": "Jūsų slaptažodis pakeistas. Dabar galite prisijungti su nauju slaptažodžiu.",
+      "labelReset": "Išsaugoti slaptažodį",
+      "labelSignIn": "Grįžti į prisijungimą"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "نسخ نص الملاحظات إلى الحافظة",
+      "feedbackText": "نص الملاحظات",
+      "feedbackTextRecommendation": "شكرًا لك، أرسل لنا هذا النص على ",
+      "sendFeedback": "إرسال الملاحظات بالبريد الإلكتروني",
+      "showFeedbackText": "إظهار نص الملاحظات",
+      "thankYou": "شكرًا لتخصيص وقت لإرسال ملاحظاتك"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "حذف جميع رسائل الخطأ",
+      "actionDeleteAllCancel": "إلغاء",
+      "actionDeleteAllExplainer": "هل أنت متأكد من حذف جميع رسائل الخطأ المجمّعة؟ لا يمكن التراجع عن هذا الإجراء.",
+      "actionDeleteAllShort": "حذف رسائل الخطأ",
+      "actionDeselectAll": "إلغاء تحديد جميع رسائل الخطأ",
+      "actionSelectAll": "تحديد جميع رسائل الخطأ",
+      "explainer": "رسائل الخطأ جزء من الملاحظات أيضًا. يعالج النظام بعض المشكلات تلقائيًا وتستمر عملياتك دون انقطاع. ومع ذلك، يفيدنا الاطلاع على هذه الأخطاء حتى نتمكن من إصلاحها.",
+      "explainerSecrecy": "تأكد من أن رسائل الخطأ لا تحتوي على بيانات سرية أو شخصية. صُمم النظام أساسًا لمنع تضمين هذه البيانات في رسائل الخطأ. لكن الأخطاء ترتبط بظروف غير متوقعة، لذا يُرجى مراجعة الملاحظات بنفسك لأسباب أمنية.",
+      "explainerSecrecyHeading": "دون بيانات سرية",
+      "heading": "الأخطاء",
+      "tableColumnPartOfFeedback": "جزء من الملاحظات",
+      "tableColumnDate": "التاريخ",
+      "tableColumnErrorMessage": "رسالة الخطأ"
+    },
+    "StarRatingCard": {
+      "noStarRating": "لم يُقدّم تقييم بالنجوم",
+      "starRating": "{{stars}} من 5 نجوم"
+    },
+    "TextFeedback": {
+      "discardFeedback": "تجاهل الملاحظات",
+      "discardFeedbackSub": "هل أنت متأكد من تجاهل ملاحظاتك؟ لا يمكن التراجع عن هذا الإجراء.",
+      "discardFeedbackCancel": "إلغاء",
+      "infoSecrecy": "تأكد من أن الملاحظات التي ترسلها لا تحتوي على بيانات سرية أو شخصية.",
+      "writeFeedback": "كتابة ملاحظات",
+      "writeFeedbackSub": "نقدّر جميع الملاحظات، الإيجابية والسلبية."
+    }
+  },
+  "page": {
+    "headingLine1": "ساعدنا على تحسين schorn.ai in a Box،",
+    "headingLine2": "أرسل لنا ملاحظاتك",
+    "headingMain": "الملاحظات"
+  }
+}

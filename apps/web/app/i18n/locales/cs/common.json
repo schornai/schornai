@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Nový chat",
+        "mainLabelAgents": "Agenti",
+        "mainLabelApps": "Aplikace",
+        "mainLabelWorkspaces": "Pracovní prostory",
+        "history": "Historie"
+      },
+      "SidebarFavorites": {
+        "label": "Oblíbené",
+        "empty": "Zatím nebyly přidány žádné oblíbené položky."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Žádné oblíbené položky",
+        "descriptionNoFavorites": "Do oblíbených můžete přidat <agents>agenty</agents>, <documents>úložiště dokumentů</documents> a <transcribers>přepisovače</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Nový chat"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Dobrou noc];(5-11)[Dobré ráno];(12-17)[Dobré odpoledne];(18-inf)[Dobrý večer];",
+      "labelAllAgents": "Všichni agenti",
+      "labelToApps": "Přejít k aplikacím"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Oblíbené",
+        "labelPermissions": "Oprávnění",
+        "labelModels": "Modely",
+        "labelTaskQueue": "Fronta úloh",
+        "labelSettings": "Nastavení",
+        "labelUsers": "Uživatelé",
+        "labelWorkspaces": "Pracovní prostory",
+        "labelSSOProvider": "Poskytovatel SSO",
+        "labelXRAGUpload": "Nahrát XRAG",
+        "labelSystemModel": "Systémový model",
+        "labelTheme": "Motiv",
+        "labelBackToDashboard": "Zpět na přehled",
+        "labelConnections": "Připojení",
+        "labelProviderConnections": "Připojení",
+        "labelService": "Služba",
+        "labelArtifacts": "Artefakty",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Vybrat ikonu",
+      "buttonMoreIcons": "Další ikony",
+      "textLucideInfo": "Ikony od <0>Lucide</0>",
+      "placeholderSearchIcons": "Hledat ikony...",
+      "buttonCancel": "Zrušit"
+    },
+    "FileUploadDropZone": {
+      "drop": "Přetažením sem nahrajte soubor"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Změněno"
+    },
+    "Pagination": {
+      "labelPrev": "Předchozí",
+      "labelNext": "Další"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Můj účet",
+      "labelSystem": "Systém",
+      "labelModels": "Modely",
+      "labelCluster": "Cluster",
+      "labelSettings": "Nastavení",
+      "labelDashboard": "Přehled",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Odhlásit se"
+    },
+    "UserRoleText": {
+      "admin": "Správce",
+      "workspace-admin": "Správce pracovního prostoru",
+      "editor": "Editor",
+      "user": "Uživatel",
+      "none": "Nemáte oprávnění"
+    },
+    "StorageView": {
+      "placeholderSearch": "Hledat v této složce…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Název",
+      "tableColumnType": "Typ",
+      "tableColumnSize": "Velikost",
+      "tableColumnCreated": "Vytvořeno",
+      "tableColumnUpdated": "Aktualizováno",
+      "tableColumnNameActions": "Akce",
+      "groupTimeToday": "Dnes",
+      "groupTimeLast7Days": "Posledních 7 dní",
+      "groupTimeLast30Days": "Posledních 30 dní",
+      "groupTimeOther": "Ostatní",
+      "labelFolder": "Složka",
+      "descriptionProcessing": "Soubor se zpracovává"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Nová složka",
+      "placeholderFolderName": "Název složky...",
+      "labelCancel": "Zrušit",
+      "labelCreate": "Vytvořit"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Odebrat",
+      "labelDescription": "Opravdu chcete odstranit „{{name}}“? Tuto akci nelze vrátit zpět.",
+      "labelCancel": "Zrušit",
+      "labelRemove": "Odebrat"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Domovský adresář"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Žádné soubory",
+      "labelDescription": "Aktuální složka neobsahuje žádné soubory. Jednoduše sem soubory přetáhněte a nahrajte je.",
+      "labelUploadFile": "Nahrát soubor",
+      "labelCreateFile": "Vytvořit soubor"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazení",
+      "labelSort": "Řazení",
+      "labelNameAsc": "Název od A do Z",
+      "labelNameDesc": "Název od Z do A",
+      "labelSizeAsc": "Velikost vzestupně",
+      "labelSizeDesc": "Velikost sestupně",
+      "labelCreatedAsc": "Datum vytvoření vzestupně",
+      "labelCreatedDesc": "Datum vytvoření sestupně",
+      "labelUpdatedAsc": "Datum aktualizace vzestupně",
+      "labelUpdatedDesc": "Datum aktualizace sestupně",
+      "labelGroup": "Seskupení",
+      "labelNoGroup": "Bez seskupení",
+      "labelFirstLetter": "První písmeno",
+      "labelFileType": "Typ souboru",
+      "labelCreated": "Datum vytvoření",
+      "labelUpdated": "Datum aktualizace",
+      "labelTilesSmall": "Dlaždice (malé)",
+      "labelTilesMedium": "Dlaždice (střední)",
+      "labelTilesLarge": "Dlaždice (velké)",
+      "labelTable": "Tabulka",
+      "labelSaveView": "Uložit zobrazení",
+      "labelReset": "Obnovit",
+      "labelNewFolder": "Nová složka",
+      "labelThisFolder": "Tato složka",
+      "labelUploadFile": "Nahrát soubor",
+      "labelNew": "Nové",
+      "labelDeleteFolder": "Smazat složku",
+      "labelNewRecording": "Nová nahrávka",
+      "labelColumns": "Sloupcové zobrazení",
+      "labelNewTextFile": "Nový soubor"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Žádné výsledky",
+      "descriptionNoResults": "Vaše hledání nevrátilo žádné výsledky. Zkuste dotaz přeformulovat.",
+      "labelCharacters": "znaků"
+    },
+    "Transcription": {
+      "labelTitle": "Přepis",
+      "labelLoadingMedia": "Načítají se média…",
+      "labelBuffering": "Načítá se vyrovnávací paměť přehrávání…",
+      "labelSeeking": "Načítá se pozice…",
+      "labelPlayer": "Přehrávač médií",
+      "labelPlay": "Přehrát",
+      "labelPause": "Pozastavit",
+      "labelSeek": "Pozice přehrávání",
+      "labelBack": "Zpět o 10 sekund",
+      "labelForward": "Vpřed o 10 sekund",
+      "labelSpeed": "Rychlost přehrávání",
+      "labelUnmute": "Zapnout zvuk",
+      "labelMute": "Ztlumit",
+      "labelVolume": "Hlasitost",
+      "labelHideVideo": "Skrýt video",
+      "labelShowVideo": "Zobrazit video",
+      "labelPlaySegment": "Přehrát úsek {{number}}",
+      "labelReviewed": "Zkontrolováno",
+      "labelSegments": "Úseky",
+      "labelWords": "Slova",
+      "descriptionEmpty": "Nebyly nalezeny žádné výsledky přepisu.",
+      "descriptionConfidence": "Jistota: {{percent}} %",
+      "errorPlayback": "Přehrávání selhalo. Ověřte, že je mediální soubor dostupný, a zkuste to znovu.",
+      "labelEditSegment": "Upravit úsek {{number}}",
+      "labelSegmentText": "Text úseku",
+      "labelSave": "Uložit",
+      "labelSaving": "Ukládá se…",
+      "labelSaveReviewed": "Uložit a označit jako zkontrolované",
+      "labelCancel": "Zrušit",
+      "labelRestoreOriginal": "Obnovit původní text",
+      "descriptionUnsaved": "Změny se projeví až po uložení.",
+      "errorSave": "Uložení selhalo. Váš text zůstal zachován. Zkuste to znovu.",
+      "errorConflict": "Tento úsek se změnil. Zkopírujte svůj návrh a před dalším uložením znovu načtěte zobrazení.",
+      "labelDownloadSrt": "Stáhnout SRT",
+      "descriptionSaveBeforeDownload": "Před stažením souboru SRT uložte nebo zrušte své úpravy."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Sloupcové zobrazení",
+      "labelRoot": "Dokumenty",
+      "labelDetails": "Podrobnosti souboru",
+      "labelType": "Typ",
+      "labelSize": "Velikost",
+      "labelUpdated": "Aktualizováno",
+      "labelOpen": "Otevřít soubor"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Nový soubor",
+      "labelName": "Název souboru",
+      "labelCreate": "Vytvořit soubor",
+      "labelCancel": "Zrušit",
+      "errorCreate": "Soubor se nepodařilo vytvořit. Zkontrolujte název souboru a oprávnění k zápisu."
+    },
+    "StorageFileActions": {
+      "labelActions": "Akce pro {{name}}",
+      "labelDownloadOriginal": "Stáhnout originál",
+      "labelDownloadProcessed": "Stáhnout zpracovaný text",
+      "labelRename": "Přejmenovat",
+      "labelProcess": "Znovu zpracovat",
+      "labelDelete": "Smazat soubor",
+      "labelName": "Nový název souboru",
+      "labelCancel": "Zrušit",
+      "labelConfirm": "Potvrdit",
+      "descriptionDelete": "Trvale smazat „{{name}}“, jeho zpracovaný obsah a záznamy ve vyhledávacím indexu?",
+      "descriptionProcess": "Znovu zpracovat „{{name}}“? Ruční změny budou přepsány.",
+      "descriptionQueued": "Zpracování je ve frontě nebo již probíhá. Jeho stav najdete v seznamu souborů.",
+      "descriptionUnsupported": "Tento soubor nyní nelze zpracovat. Zvuk a video vyžadují nastavený přepisovač.",
+      "errorAction": "Akce selhala. Zkontrolujte oprávnění k zápisu, shodné názvy a probíhající zpracování. Po neúspěšném přejmenování mohou zůstat oba názvy souboru; před dalším pokusem zkontrolujte seznam.",
+      "labelOptions": "Možnosti",
+      "labelEdit": "Upravit",
+      "descriptionRename": "Přejmenujte „{{name}}“. Zachovejte příponu souboru. Originál, zpracovaný obsah a vyhledávací index se aktualizují společně. Existující názvy nebudou nikdy přepsány.",
+      "labelCopy": "Kopírovat do…",
+      "labelMove": "Přesunout do…",
+      "descriptionCopy": "Zkopírovat „{{name}}“ včetně zpracovaného obsahu. Zdroj zůstane zachován.",
+      "descriptionMove": "Přesunout „{{name}}“ včetně zpracovaného obsahu. Zdroj bude po úspěšném zkopírování odstraněn.",
+      "descriptionTransferred": "Soubor byl přenesen. Cílové vyhledávací indexy se znovu sestaví na pozadí.",
+      "descriptionTransferProcessingError": "Soubor byl přenesen, ale zpracování se nepodařilo spustit. Otevřete cílový soubor a zvolte „Znovu zpracovat“. Přenos neopakujte."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Akce pro {{name}}",
+      "labelDelete": "Smazat složku"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Obsah",
+      "labelSave": "Uložit",
+      "labelCancel": "Zrušit",
+      "errorSave": "Uložení selhalo. Zkuste to znovu.",
+      "errorConflict": "Obsah se změnil. Před uložením jej znovu načtěte.",
+      "errorIndex": "Uloženo, ale vyhledávací index se nepodařilo aktualizovat. Uložte znovu."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Vybrat cílovou složku",
+      "labelSelectFile": "Vybrat existující soubor",
+      "descriptionFolder": "Vyberte existující složku. Bude přenesen jeden soubor; existující názvy nebudou nikdy přepsány.",
+      "descriptionFile": "Vyberte soubor z tohoto chatu nebo z dostupného úložiště. Dokumenty a nahrávky musí být již zpracované.",
+      "labelStorage": "Úložiště",
+      "labelCurrentStorage": "Aktuální úložiště",
+      "labelUp": "Nadřazená složka",
+      "descriptionLoading": "Načítají se soubory…",
+      "descriptionEmpty": "V této složce nejsou žádné odpovídající položky.",
+      "descriptionNoStorages": "Nejsou k dispozici žádná přístupná úložiště.",
+      "descriptionPending": "Soubor se přenáší. Počkejte na výsledek.",
+      "labelCancel": "Zrušit",
+      "labelUseFolder": "Použít tuto složku",
+      "labelUseFile": "Připojit soubor",
+      "labelRetry": "Znovu načíst",
+      "errorLoad": "Tuto složku se nepodařilo načíst. Zkontrolujte přístup a zkuste to znovu.",
+      "errorCollision": "Cílové umístění již obsahuje soubor nebo zpracovaný obsah s tímto názvem. Vyberte jinou složku; nic nebylo přepsáno.",
+      "errorSameTarget": "Zdroj a cíl jsou totožné. Vyberte jinou složku.",
+      "errorSourceChanged": "Zdroj se během kopírování změnil. Neúplný cílový soubor byl odstraněn. Zkuste to znovu.",
+      "errorBusy": "Tento soubor se právě zpracovává. Počkejte na dokončení.",
+      "errorPermission": "Nemáte potřebná oprávnění ke zdroji nebo cíli.",
+      "errorSourceDelete": "Úplný cílový soubor byl vytvořen, ale zdroj se nepodařilo odstranit. Před opakováním operace zkontrolujte obě umístění.",
+      "errorCleanup": "Kopírování selhalo. Zdroj zůstal zachován, ale v cílovém umístění mohou být neúplné soubory. Před dalším pokusem jej zkontrolujte.",
+      "errorAction": "Operace selhala. Před dalším pokusem zkontrolujte oprávnění, názvy souborů a obě umístění.",
+      "errorNotProcessed": "Tento soubor ještě nebyl zpracován. Nejprve jej zpracujte a poté znovu vyberte."
+    }
+  },
+  "_welcomeMessage": "Vítejte v\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentace",
+    "feedback": "Zpětná vazba",
+    "help": "Nápověda",
+    "labelThemeLight": "Světlý",
+    "labelThemeDark": "Tmavý",
+    "labelThemeSystem": "Operační systém",
+    "labelLanguage": "Jazyk"
+  }
+}

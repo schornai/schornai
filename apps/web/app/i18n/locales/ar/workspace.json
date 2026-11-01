@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "الوصف",
+      "description": "اختر اسمًا مناسبًا لمساحة العمل. يمكنك أيضًا حفظ وصف قصير.",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف",
+      "buttonSave": "حفظ",
+      "buttonReset": "إعادة تعيين"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "التوثيق",
+      "description": "شارك هنا معلومات إضافية عن مساحة العمل هذه مع المستخدمين.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "حفظ",
+      "buttonReset": "إعادة تعيين"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "تعيينات الدخول الموحّد",
+      "description": "حدد مجموعة SSO التي يمكنها الوصول إلى مساحة العمل وأذوناتها.",
+      "labelRoleUser": "مجموعة المستخدمين",
+      "labelRoleEditor": "مجموعة المحررين",
+      "labelRoleWorkspaceAdmin": "مجموعة مسؤولي مساحة العمل",
+      "placeholderNoGroup": "لم تُعيّن مجموعة",
+      "descriptionRoleUser": "يمكنه عرض محتوى مساحة العمل، مثل الوكلاء وأدوات التفريغ الصوتي ومستودعات المستندات، لكن لا يمكنه تعديله.",
+      "descriptionRoleEditor": "يمكنه عرض محتوى مساحة العمل وتعديله.",
+      "descriptionRoleWorkspaceAdmin": "يمكنه إدارة مساحة العمل وإنشاء الوكلاء وأدوات التفريغ الصوتي ومستودعات المستندات وتعديلها وحذفها.",
+      "buttonSave": "حفظ",
+      "buttonReset": "إعادة تعيين"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "مستخدم تلقائي",
+      "description": "عند تفعيل «مستخدم تلقائي»، يُمنح كل من يستطيع تسجيل الدخول إلى النظام صلاحية مستخدم في هذه المؤسسة تلقائيًا.",
+      "labelActive": "المستخدم التلقائي مفعّل",
+      "labelInactive": "المستخدم التلقائي معطّل"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "مساحة عمل جديدة",
+      "descriptionWorkspace": "اختر اسمًا ووصفًا اختياريًا. يمكنك ضبط الإعدادات الأخرى بعد إنشاء مساحة العمل.",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف",
+      "labelCreate": "إنشاء مساحة عمل",
+      "labelCancel": "إلغاء",
+      "errorCreate": "تعذر إنشاء مساحة العمل. يُرجى المحاولة مجددًا."
+    },
+    "WorkspaceCard": {
+      "labelType": "مساحة العمل"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "تعديل مساحة العمل",
+      "tooltipInfo": "فتح مساحة العمل"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "إضافة إلى المفضلة",
+      "tooltipRemoveFavorite": "إزالة من المفضلة"
+    },
+    "WorkspaceList": {
+      "labelSearch": "البحث عن مساحات عمل",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف",
+      "labelRole": "دورك",
+      "labelActions": "الإجراءات",
+      "labelFavorites": "المفضلة",
+      "labelOtherWorkspaces": "مساحات عمل أخرى",
+      "labelEmpty": "لا توجد مساحات عمل",
+      "descriptionEmpty": "ليس لديك وصول إلى مساحة عمل بعد.",
+      "labelNoResults": "لا توجد نتائج",
+      "descriptionNoResults": "جرّب عبارة بحث أخرى."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelNameAsc": "الاسم من أ إلى ي",
+      "labelNameDesc": "الاسم من ي إلى أ",
+      "labelGroup": "التجميع حسب",
+      "labelNoGroup": "دون مجموعة",
+      "labelFavorites": "المفضلة",
+      "labelFirstLetter": "الحرف الأول",
+      "labelCards": "بطاقات",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "إنشاء مساحة عمل"
+    }
+  },
+  "page": {
+    "labelYourRole": "دورك",
+    "labelEmpty": "لا يوجد محتوى بعد",
+    "descriptionEmpty": "لا توجد وكلاء أو مستودعات مستندات أو أدوات تفريغ صوتي متاحة في مساحة العمل هذه بعد.",
+    "labelTitle": "مساحات العمل"
+  }
+}

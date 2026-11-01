@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkrypcja",
+    "description": "Transkrybenci nadają treściom mówionym, takim jak spotkania, wywiady czy rozmowy, uporządkowaną formę, którą AI może przeszukiwać."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkrybent"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Szukaj..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Opcje",
+      "labelView": "Widok",
+      "labelSort": "Sortowanie",
+      "labelNameAsc": "Nazwa od A do Z",
+      "labelNameDesc": "Nazwa od Z do A",
+      "labelGroup": "Grupuj według",
+      "labelNoGroup": "Bez grupowania",
+      "labelFavorites": "Ulubione",
+      "labelFirstLetter": "Pierwsza litera",
+      "labelWorkspaces": "Obszary robocze",
+      "labelModel": "Model",
+      "labelCards": "Karty",
+      "labelTable": "Tabela",
+      "labelSaveView": "Zapisz widok",
+      "labelReset": "Resetuj",
+      "labelTranscribers": "Transkrybenci",
+      "labelNewTranscriber": "Nowy transkrybent"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Inni transkrybenci",
+      "labelFavorites": "Ulubione",
+      "labelNoGroup": "Bez grupowania",
+      "labelUnknownModel": "Nieznany model „{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nazwa",
+      "tableColumnCapablilities": "Możliwości",
+      "tableColumnNameActions": "Działania",
+      "emptyTitle": "Brak transkrybentów",
+      "emptyDescription": "Nie utworzono jeszcze żadnych transkrybentów.",
+      "labelOtherTranscribers": "Inni transkrybenci",
+      "labelFavorites": "Ulubione",
+      "labelNoGroup": "Bez grupowania",
+      "labelUnknownModel": "Nieznany model „{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Nieznany model",
+      "labelUnknownWorkspace": "Nieznany obszar roboczy"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Edytuj",
+      "tooltipInfo": "Informacje",
+      "tooltipNewTranscription": "Nowa transkrypcja",
+      "tooltipRecord": "Nagraj dźwięk"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Usuń z ulubionych",
+      "tooltipAddFavorite": "Dodaj do ulubionych"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Zmieniono",
+      "labelEmpty": "Puste"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nowy transkrybent",
+      "labelTranscriber": "Transkrybent",
+      "labelCreateTranscriber": "Utwórz transkrybenta",
+      "labelSaveTranscriber": "Zapisz transkrybenta",
+      "labelCloneTranscriber": "Zapisz jako nowego transkrybenta",
+      "labelDeleteTranscriber": "Usuń transkrybenta",
+      "confirmDeleteTitle": "Usuń transkrybenta",
+      "confirmDeleteDescription": "Czy na pewno chcesz usunąć transkrybenta „{{name}}”? Tej operacji nie można cofnąć.",
+      "labelCancel": "Anuluj",
+      "tabOverview": "Przegląd",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Ustawienia",
+      "btnCreate": "Utwórz",
+      "btnSave": "Zapisz"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Odrzuć zmiany",
+      "labelDiscardConfirm": "Czy na pewno chcesz odrzucić wszystkie niezapisane zmiany tego transkrybenta?",
+      "labelCancel": "Anuluj",
+      "labelDiscard": "Odrzuć zmiany"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nowy transkrybent",
+      "emptyDescription": "Określ zachowanie i wygląd transkrybenta.",
+      "labelDefinePrompt": "Napisz prompt",
+      "descriptionDefinePrompt": "Krótki prompt pomaga transkrybentowi rozumieć i poprawnie zapisywać imiona, terminy specjalistyczne oraz nazwy produktów zgodnie z Twoimi oczekiwaniami.",
+      "helpTitle": "Pomoc",
+      "helpPromptDescription": "Dzięki promptowi transkrypcja wymaga mniej późniejszych poprawek, a dłuższe lub tematyczne nagrania dają bardziej spójny wynik."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Prompt jest przekazywany do modelu transkrypcji (Whisper), aby pomóc mu zrozumieć terminy specjalistyczne."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Wygląd",
+      "description": "Wybierz kolor i ikonę, które najlepiej reprezentują transkrybenta.",
+      "labelIcon": "Ikona",
+      "labelColor": "Kolor"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Wybierz odpowiednią nazwę transkrybenta. Możesz też zapisać krótki opis.",
+      "labelName": "Nazwa",
+      "labelDescription": "Opis"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Model transkrypcji używany przez transkrybenta.",
+      "labelName": "Model",
+      "labelSelectModel": "Wybierz model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Obszar roboczy",
+      "description": "Wybierz obszar roboczy, w którym ma zostać utworzony transkrybent.",
+      "labelName": "Obszar roboczy",
+      "labelSelectWorkspace": "Wybierz obszar roboczy."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Pliki",
+      "tabInfo": "Informacje"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Nagraj dźwięk",
+      "labelReady": "Gotowe",
+      "labelRequesting": "Łączenie mikrofonu",
+      "labelRecording": "Nagrywanie",
+      "labelStopping": "Kończenie nagrywania",
+      "labelRecorded": "Nagranie gotowe",
+      "labelUploading": "Zapisywanie",
+      "labelSaved": "Zapisano",
+      "labelDuration": "Czas trwania nagrania",
+      "labelStart": "Rozpocznij nagrywanie",
+      "labelStop": "Zatrzymaj nagrywanie",
+      "labelRecordAgain": "Nagraj ponownie",
+      "labelCancel": "Anuluj",
+      "labelTranscribe": "Zapisz i transkrybuj",
+      "labelDiscard": "Odrzuć nagranie",
+      "labelPreview": "Podgląd nagrania",
+      "descriptionSaved": "Nagranie zostało zapisane. Transkrypcja rozpocznie się automatycznie.",
+      "errorUnsupported": "Nagrywanie dźwięku wymaga obsługiwanej przeglądarki i bezpiecznego połączenia (HTTPS lub localhost).",
+      "errorPermission": "Odmówiono dostępu do mikrofonu. Zezwól na dostęp do mikrofonu w przeglądarce i spróbuj ponownie.",
+      "errorRecording": "Mikrofon nie mógł nagrać dźwięku. Sprawdź urządzenie i spróbuj ponownie.",
+      "errorEmpty": "Nagranie nie zawiera dźwięku. Nagraj ponownie.",
+      "errorUpload": "Nie udało się zapisać nagrania. Możesz go odsłuchać i ponowić przesyłanie.",
+      "descriptionScreenAwake": "Ekran pozostaje aktywny podczas nagrywania.",
+      "descriptionScreenSleep": "Nie można utrzymać aktywnego ekranu. Pozostaw tę stronę otwartą i zapobiegaj automatycznemu blokowaniu ekranu.",
+      "descriptionCloseBlocked": "Przed zamknięciem zatrzymaj nagrywanie i zapisz lub odrzuć nagranie. Poczekaj na zakończenie przesyłania.",
+      "labelClose": "Zamknij"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatyczne ponowne próby",
+      "labelLevel": "Poziom",
+      "description": "Jeśli wyniki są niepewne lub zawierają wiele powtórzeń, transkrybent może ponownie spróbować rozpoznać fragment audio. Więcej prób może poprawić rozpoznawanie, ale zajmuje więcej czasu.",
+      "labelFast": "Szybki",
+      "labelBalanced": "Zrównoważony",
+      "labelThorough": "Dokładny",
+      "descriptionFast": "Jedna próba na fragment audio, bez automatycznego ponawiania.",
+      "descriptionBalanced": "Do 3 prób na fragment audio.",
+      "descriptionThorough": "Do 6 prób na fragment audio.",
+      "errorLevel": "Wybierz jeden z trzech poziomów."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkrypcja",
+    "emptyTitle": "Brak transkrybentów",
+    "emptyDescription": "Nie utworzono jeszcze żadnych transkrybentów.",
+    "labelNewTranscriber": "Nowy transkrybent",
+    "helpTitle": "Pomoc",
+    "helpSearchDescription": "Możesz wyszukiwać transkrybentów. Wyszukiwanie obejmuje między innymi nazwę i opis transkrybenta oraz jego model.",
+    "helpSortDescription": "Transkrybentów można sortować według nazwy i dzielić na różne grupy. Można ich wyświetlać jako karty lub w tabeli."
+  }
+}

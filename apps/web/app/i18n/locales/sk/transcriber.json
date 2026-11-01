@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Prepis",
+    "description": "Prepisovače prevádzajú hovorený obsah, napríklad stretnutia, rozhovory alebo hovory, do štruktúrovanej podoby, v ktorej môže AI vyhľadávať."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Prepisovač"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Hľadať..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazenie",
+      "labelSort": "Zoradenie",
+      "labelNameAsc": "Názov od A po Z",
+      "labelNameDesc": "Názov od Z po A",
+      "labelGroup": "Zoskupiť podľa",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelFavorites": "Obľúbené",
+      "labelFirstLetter": "Prvé písmeno",
+      "labelWorkspaces": "Pracovné priestory",
+      "labelModel": "Model",
+      "labelCards": "Karty",
+      "labelTable": "Tabuľka",
+      "labelSaveView": "Uložiť zobrazenie",
+      "labelReset": "Obnoviť",
+      "labelTranscribers": "Prepisovače",
+      "labelNewTranscriber": "Nový prepisovač"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Ďalšie prepisovače",
+      "labelFavorites": "Obľúbené",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelUnknownModel": "Neznámy model „{{id}}“"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Názov",
+      "tableColumnCapablilities": "Schopnosti",
+      "tableColumnNameActions": "Akcie",
+      "emptyTitle": "Žiadne prepisovače",
+      "emptyDescription": "Zatiaľ neboli vytvorené žiadne prepisovače.",
+      "labelOtherTranscribers": "Ďalšie prepisovače",
+      "labelFavorites": "Obľúbené",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelUnknownModel": "Neznámy model „{{id}}“"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Neznámy model",
+      "labelUnknownWorkspace": "Neznámy pracovný priestor"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Upraviť",
+      "tooltipInfo": "Informácie",
+      "tooltipNewTranscription": "Nový prepis",
+      "tooltipRecord": "Nahrať zvuk"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odobrať z obľúbených",
+      "tooltipAddFavorite": "Pridať medzi obľúbené"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Zmenené",
+      "labelEmpty": "Prázdne"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nový prepisovač",
+      "labelTranscriber": "Prepisovač",
+      "labelCreateTranscriber": "Vytvoriť prepisovač",
+      "labelSaveTranscriber": "Uložiť prepisovač",
+      "labelCloneTranscriber": "Uložiť ako nový prepisovač",
+      "labelDeleteTranscriber": "Vymazať prepisovač",
+      "confirmDeleteTitle": "Vymazať prepisovač",
+      "confirmDeleteDescription": "Naozaj chcete vymazať prepisovač „{{name}}“? Túto akciu nemožno vrátiť späť.",
+      "labelCancel": "Zrušiť",
+      "tabOverview": "Prehľad",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Nastavenia",
+      "btnCreate": "Vytvoriť",
+      "btnSave": "Uložiť"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zahodiť zmeny",
+      "labelDiscardConfirm": "Naozaj chcete zahodiť všetky neuložené zmeny tohto prepisovača?",
+      "labelCancel": "Zrušiť",
+      "labelDiscard": "Zahodiť zmeny"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nový prepisovač",
+      "emptyDescription": "Nastavte správanie a vzhľad prepisovača.",
+      "labelDefinePrompt": "Napíšte prompt",
+      "descriptionDefinePrompt": "Krátky prompt pomáha prepisovaču porozumieť menám, odborným výrazom a názvom produktov a zapísať ich správne podľa vašich očakávaní.",
+      "helpTitle": "Pomoc",
+      "helpPromptDescription": "Vďaka promptu potrebuje prepis menej následných opráv a pri dlhších alebo tematicky zameraných nahrávkach získate konzistentnejší výsledok."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Prompt sa odovzdá modelu na prepis (Whisper), aby lepšie porozumel odborným výrazom."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Vzhľad",
+      "description": "Vyberte farbu a ikonu, ktoré prepisovač najlepšie vystihujú.",
+      "labelIcon": "Ikona",
+      "labelColor": "Farba"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Popis",
+      "description": "Vyberte vhodný názov prepisovača. Môžete uložiť aj krátky popis.",
+      "labelName": "Názov",
+      "labelDescription": "Popis"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Model na prepis, ktorý prepisovač používa.",
+      "labelName": "Model",
+      "labelSelectModel": "Vyberte model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Pracovný priestor",
+      "description": "Vyberte pracovný priestor, v ktorom sa má prepisovač vytvoriť.",
+      "labelName": "Pracovný priestor",
+      "labelSelectWorkspace": "Vyberte pracovný priestor."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Súbory",
+      "tabInfo": "Informácie"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Nahrať zvuk",
+      "labelReady": "Pripravené",
+      "labelRequesting": "Pripája sa mikrofón",
+      "labelRecording": "Nahráva sa",
+      "labelStopping": "Dokončuje sa nahrávanie",
+      "labelRecorded": "Nahrávka pripravená",
+      "labelUploading": "Ukladá sa",
+      "labelSaved": "Uložené",
+      "labelDuration": "Dĺžka nahrávky",
+      "labelStart": "Spustiť nahrávanie",
+      "labelStop": "Zastaviť nahrávanie",
+      "labelRecordAgain": "Nahrať znova",
+      "labelCancel": "Zrušiť",
+      "labelTranscribe": "Uložiť a prepísať",
+      "labelDiscard": "Zahodiť nahrávku",
+      "labelPreview": "Náhľad nahrávky",
+      "descriptionSaved": "Nahrávka sa uložila. Prepis sa spustí automaticky.",
+      "errorUnsupported": "Nahrávanie zvuku vyžaduje podporovaný prehliadač a zabezpečené pripojenie (HTTPS alebo localhost).",
+      "errorPermission": "Prístup k mikrofónu bol zamietnutý. Povoľte ho v prehliadači a skúste to znova.",
+      "errorRecording": "Mikrofón nemohol zaznamenať zvuk. Skontrolujte zariadenie a skúste to znova.",
+      "errorEmpty": "Nahrávka neobsahuje žiadny zvuk. Nahrajte ju znova.",
+      "errorUpload": "Nahrávku sa nepodarilo uložiť. Môžete si ju vypočuť a znova skúsiť nahranie na server.",
+      "descriptionScreenAwake": "Počas nahrávania zostáva obrazovka zapnutá.",
+      "descriptionScreenSleep": "Obrazovku nemožno udržať zapnutú. Ponechajte túto stránku otvorenú a zabráňte automatickému uzamknutiu obrazovky.",
+      "descriptionCloseBlocked": "Pred zatvorením zastavte nahrávanie a nahrávku uložte alebo zahoďte. Počkajte na dokončenie prípadného nahrávania na server.",
+      "labelClose": "Zavrieť"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatické opakované pokusy",
+      "labelLevel": "Úroveň",
+      "description": "Ak sú výsledky neisté alebo obsahujú veľa opakovaní, prepisovač sa môže pokúsiť rozpoznať zvukový úsek znova. Viac pokusov môže zlepšiť rozpoznávanie, ale zaberie viac času.",
+      "labelFast": "Rýchlo",
+      "labelBalanced": "Vyvážene",
+      "labelThorough": "Dôkladne",
+      "descriptionFast": "Jeden pokus na zvukový úsek, bez automatického opakovania.",
+      "descriptionBalanced": "Až 3 pokusy na zvukový úsek.",
+      "descriptionThorough": "Až 6 pokusov na zvukový úsek.",
+      "errorLevel": "Vyberte jednu z troch úrovní."
+    }
+  },
+  "page": {
+    "labelTitle": "Prepis",
+    "emptyTitle": "Žiadne prepisovače",
+    "emptyDescription": "Zatiaľ neboli vytvorené žiadne prepisovače.",
+    "labelNewTranscriber": "Nový prepisovač",
+    "helpTitle": "Pomoc",
+    "helpSearchDescription": "Prepisovače môžete vyhľadávať. Vyhľadávanie zahŕňa okrem iného názov a popis prepisovača aj jeho model.",
+    "helpSortDescription": "Prepisovače možno zoradiť podľa názvu a rozdeliť do rôznych skupín. Možno ich zobraziť ako karty alebo v tabuľke."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Namn",
+      "labelFirstName": "Förnamn",
+      "labelLastName": "Efternamn",
+      "buttonSave": "Spara",
+      "buttonReset": "Återställ"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilbild"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Ta bort bild",
+      "alertDelete": "Ta bort bild",
+      "alertDeleteExplainer": "Vill du verkligen ta bort din bild?",
+      "alertDeleteCancel": "Avbryt"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Ladda upp bild"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Behörigheter",
+      "tableColumnName": "Namn",
+      "tableColumnPermission": "Behörighet",
+      "tableColumnDescription": "Beskrivning",
+      "infoEmpty": "Inga behörigheter",
+      "infoEmptyDescription": "Inga funktioner i schorn.ai box är tillgängliga.",
+      "infoEmptyAdminDescription": "Som administratör kan du skapa den första arbetsytan.",
+      "infoEmptyAdminAction": "Skapa första arbetsytan",
+      "infoUser": "Kan visa organisationens innehåll, som chattbotar, transkriberare, dokument och arkiv, men inte redigera det.",
+      "infoEditor": "Kan visa och redigera organisationens innehåll, till exempel skapa chattbotar samt redigera och ta bort dokument.",
+      "infoAdmin": "Kan läsa och skriva i alla organisationer samt hantera systeminställningar, som att ladda upp XRAG och ändra färger, och hantera användare."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Anpassa",
+    "infoPersonalizeDescription": "Här kan du ladda upp din profilbild och ändra ditt namn."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nytt lösenord har angetts",
+    "description": "Det nya lösenordet har angetts. Du är nu inloggad med det nya lösenordet.",
+    "buttonBackToDashboard": "Till översikten"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Anslutningar",
+      "descriptionConnections": "Dina personliga OAuth-anslutningar till MCP-servrar. När du kopplar från tas inloggningsuppgifterna som lagras här bort. Pågående anrop kan slutföras; återkalla behörigheter direkt hos leverantören.",
+      "labelDisconnect": "Koppla från",
+      "descriptionEmpty": "Anslut ditt konto i chatten när ett MCP-verktyg kräver inloggning.",
+      "labelEmpty": "Inga anslutningar ännu",
+      "labelInfo": "Om anslutningar",
+      "errorDisconnect": "Det gick inte att koppla från anslutningen. Försök igen."
+    }
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Nieuwe chat",
+        "mainLabelAgents": "Agenten",
+        "mainLabelApps": "Apps",
+        "mainLabelWorkspaces": "Werkruimten",
+        "history": "Geschiedenis"
+      },
+      "SidebarFavorites": {
+        "label": "Favorieten",
+        "empty": "Er zijn nog geen favorieten toegevoegd."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Geen favorieten",
+        "descriptionNoFavorites": "Je kunt <agents>agenten</agents>, <documents>documentopslagplaatsen</documents> en <transcribers>transcriptoren</transcribers> aan je favorieten toevoegen."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Nieuwe chat"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Goedenacht];(5-11)[Goedemorgen];(12-17)[Goedemiddag];(18-inf)[Goedenavond];",
+      "labelAllAgents": "Alle agenten",
+      "labelToApps": "Naar de apps"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profiel",
+        "labelFavorites": "Favorieten",
+        "labelPermissions": "Rechten",
+        "labelModels": "Modellen",
+        "labelTaskQueue": "Taakwachtrij",
+        "labelSettings": "Instellingen",
+        "labelUsers": "Gebruikers",
+        "labelWorkspaces": "Werkruimten",
+        "labelSSOProvider": "SSO-aanbieder",
+        "labelXRAGUpload": "XRAG uploaden",
+        "labelSystemModel": "Systeemmodel",
+        "labelTheme": "Thema",
+        "labelBackToDashboard": "Terug naar dashboard",
+        "labelConnections": "Verbindingen",
+        "labelProviderConnections": "Verbindingen",
+        "labelService": "Service",
+        "labelArtifacts": "Artefacten",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Pictogram selecteren",
+      "buttonMoreIcons": "Meer pictogrammen",
+      "textLucideInfo": "Pictogrammen van <0>Lucide</0>",
+      "placeholderSearchIcons": "Pictogrammen zoeken...",
+      "buttonCancel": "Annuleren"
+    },
+    "FileUploadDropZone": {
+      "drop": "Sleep een bestand hierheen om het te uploaden"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Gewijzigd"
+    },
+    "Pagination": {
+      "labelPrev": "Vorige",
+      "labelNext": "Volgende"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mijn account",
+      "labelSystem": "Systeem",
+      "labelModels": "Modellen",
+      "labelCluster": "Cluster",
+      "labelSettings": "Instellingen",
+      "labelDashboard": "Dashboard",
+      "labelProfile": "Profiel"
+    },
+    "SidebarUserSignOut": {
+      "label": "Afmelden"
+    },
+    "UserRoleText": {
+      "admin": "Beheerder",
+      "workspace-admin": "Werkruimtebeheerder",
+      "editor": "Bewerker",
+      "user": "Gebruiker",
+      "none": "Niet bevoegd"
+    },
+    "StorageView": {
+      "placeholderSearch": "In deze map zoeken…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Naam",
+      "tableColumnType": "Type",
+      "tableColumnSize": "Grootte",
+      "tableColumnCreated": "Aangemaakt",
+      "tableColumnUpdated": "Bijgewerkt",
+      "tableColumnNameActions": "Acties",
+      "groupTimeToday": "Vandaag",
+      "groupTimeLast7Days": "Afgelopen 7 dagen",
+      "groupTimeLast30Days": "Afgelopen 30 dagen",
+      "groupTimeOther": "Overige",
+      "labelFolder": "Map",
+      "descriptionProcessing": "Bestand wordt verwerkt"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Nieuwe map",
+      "placeholderFolderName": "Mapnaam...",
+      "labelCancel": "Annuleren",
+      "labelCreate": "Aanmaken"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Verwijderen",
+      "labelDescription": "Weet je zeker dat je ‘{{name}}’ wilt verwijderen? Dit kan niet ongedaan worden gemaakt.",
+      "labelCancel": "Annuleren",
+      "labelRemove": "Verwijderen"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Hoofdmap"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Geen bestanden",
+      "labelDescription": "De huidige map bevat geen bestanden. Sleep bestanden hierheen om ze te uploaden.",
+      "labelUploadFile": "Bestand uploaden",
+      "labelCreateFile": "Bestand aanmaken"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelNameAsc": "Naam van A tot Z",
+      "labelNameDesc": "Naam van Z tot A",
+      "labelSizeAsc": "Grootte oplopend",
+      "labelSizeDesc": "Grootte aflopend",
+      "labelCreatedAsc": "Aanmaakdatum oplopend",
+      "labelCreatedDesc": "Aanmaakdatum aflopend",
+      "labelUpdatedAsc": "Wijzigingsdatum oplopend",
+      "labelUpdatedDesc": "Wijzigingsdatum aflopend",
+      "labelGroup": "Groeperen",
+      "labelNoGroup": "Geen groep",
+      "labelFirstLetter": "Eerste letter",
+      "labelFileType": "Bestandstype",
+      "labelCreated": "Aanmaakdatum",
+      "labelUpdated": "Wijzigingsdatum",
+      "labelTilesSmall": "Tegels klein",
+      "labelTilesMedium": "Tegels middelgroot",
+      "labelTilesLarge": "Tegels groot",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten",
+      "labelNewFolder": "Nieuwe map",
+      "labelThisFolder": "Deze map",
+      "labelUploadFile": "Bestand uploaden",
+      "labelNew": "Nieuw",
+      "labelDeleteFolder": "Map verwijderen",
+      "labelNewRecording": "Nieuwe opname",
+      "labelColumns": "Kolomweergave",
+      "labelNewTextFile": "Nieuw bestand"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Geen resultaten",
+      "descriptionNoResults": "Je zoekopdracht heeft geen resultaten opgeleverd. Formuleer je zoekopdracht anders.",
+      "labelCharacters": "tekens"
+    },
+    "Transcription": {
+      "labelTitle": "Transcript",
+      "labelLoadingMedia": "Media laden…",
+      "labelBuffering": "Afspelen bufferen…",
+      "labelSeeking": "Positie laden…",
+      "labelPlayer": "Mediaspeler",
+      "labelPlay": "Afspelen",
+      "labelPause": "Pauzeren",
+      "labelSeek": "Afspeelpositie",
+      "labelBack": "10 seconden terug",
+      "labelForward": "10 seconden vooruit",
+      "labelSpeed": "Afspeelsnelheid",
+      "labelUnmute": "Geluid inschakelen",
+      "labelMute": "Geluid dempen",
+      "labelVolume": "Volume",
+      "labelHideVideo": "Video verbergen",
+      "labelShowVideo": "Video tonen",
+      "labelPlaySegment": "Segment {{number}} afspelen",
+      "labelReviewed": "Gecontroleerd",
+      "labelSegments": "Segmenten",
+      "labelWords": "Woorden",
+      "descriptionEmpty": "Geen transcriptieresultaten gevonden.",
+      "descriptionConfidence": "Betrouwbaarheid: {{percent}}%",
+      "errorPlayback": "Afspelen mislukt. Controleer of het mediabestand beschikbaar is en probeer het opnieuw.",
+      "labelEditSegment": "Segment {{number}} bewerken",
+      "labelSegmentText": "Segmenttekst",
+      "labelSave": "Opslaan",
+      "labelSaving": "Opslaan…",
+      "labelSaveReviewed": "Opslaan en als gecontroleerd markeren",
+      "labelCancel": "Annuleren",
+      "labelRestoreOriginal": "Oorspronkelijke tekst herstellen",
+      "descriptionUnsaved": "Wijzigingen worden pas toegepast als je opslaat.",
+      "errorSave": "Opslaan mislukt. Je tekst is behouden. Probeer het opnieuw.",
+      "errorConflict": "Dit segment is gewijzigd. Kopieer je concept en laad de weergave opnieuw voordat je weer opslaat.",
+      "labelDownloadSrt": "SRT downloaden",
+      "descriptionSaveBeforeDownload": "Sla je bewerkingen op of annuleer ze voordat je het SRT-bestand downloadt."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Kolomweergave",
+      "labelRoot": "Documenten",
+      "labelDetails": "Bestandsgegevens",
+      "labelType": "Type",
+      "labelSize": "Grootte",
+      "labelUpdated": "Bijgewerkt",
+      "labelOpen": "Bestand openen"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Nieuw bestand",
+      "labelName": "Bestandsnaam",
+      "labelCreate": "Bestand aanmaken",
+      "labelCancel": "Annuleren",
+      "errorCreate": "Het bestand kon niet worden aangemaakt. Controleer de bestandsnaam en je schrijfrechten."
+    },
+    "StorageFileActions": {
+      "labelActions": "Acties voor {{name}}",
+      "labelDownloadOriginal": "Origineel downloaden",
+      "labelDownloadProcessed": "Verwerkte tekst downloaden",
+      "labelRename": "Hernoemen",
+      "labelProcess": "Opnieuw verwerken",
+      "labelDelete": "Bestand verwijderen",
+      "labelName": "Nieuwe bestandsnaam",
+      "labelCancel": "Annuleren",
+      "labelConfirm": "Bevestigen",
+      "descriptionDelete": "‘{{name}}’, de verwerkte inhoud en de bijbehorende zoekindexgegevens definitief verwijderen?",
+      "descriptionProcess": "‘{{name}}’ opnieuw verwerken? Handmatige wijzigingen worden overschreven.",
+      "descriptionQueued": "De verwerking staat in de wachtrij of is al bezig. Controleer de status in de bestandslijst.",
+      "descriptionUnsupported": "Dit bestand kan momenteel niet worden verwerkt. Audio en video vereisen een ingestelde transcriptor.",
+      "errorAction": "De actie is mislukt. Controleer schrijfrechten, naamconflicten en lopende verwerking. Na een mislukte hernoeming kunnen beide bestandsnamen blijven bestaan; controleer de lijst voordat je het opnieuw probeert.",
+      "labelOptions": "Opties",
+      "labelEdit": "Bewerken",
+      "descriptionRename": "Hernoem ‘{{name}}’. Behoud de bestandsextensie. Het origineel, de verwerkte inhoud en de zoekindex worden samen bijgewerkt. Bestaande namen worden nooit overschreven.",
+      "labelCopy": "Kopiëren naar…",
+      "labelMove": "Verplaatsen naar…",
+      "descriptionCopy": "Kopieer ‘{{name}}’ inclusief de verwerkte inhoud. De bron blijft behouden.",
+      "descriptionMove": "Verplaats ‘{{name}}’ inclusief de verwerkte inhoud. De bron wordt verwijderd nadat het kopiëren is geslaagd.",
+      "descriptionTransferred": "Het bestand is overgebracht. De zoekindexen van de bestemming worden op de achtergrond opnieuw opgebouwd.",
+      "descriptionTransferProcessingError": "Het bestand is overgebracht, maar de verwerking kon niet worden gestart. Open het doelbestand en kies ‘Opnieuw verwerken’. Herhaal de overdracht niet."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Acties voor {{name}}",
+      "labelDelete": "Map verwijderen"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Inhoud",
+      "labelSave": "Opslaan",
+      "labelCancel": "Annuleren",
+      "errorSave": "Opslaan mislukt. Probeer het opnieuw.",
+      "errorConflict": "De inhoud is gewijzigd. Laad opnieuw voordat je opslaat.",
+      "errorIndex": "Opgeslagen, maar de zoekindex kon niet worden bijgewerkt. Sla opnieuw op."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Doelmap kiezen",
+      "labelSelectFile": "Kies een bestaand bestand",
+      "descriptionFolder": "Kies een bestaande map. Er wordt één bestand overgebracht; bestaande namen worden nooit overschreven.",
+      "descriptionFile": "Kies een bestand uit deze chat of een toegankelijke opslagplaats. Documenten en opnamen moeten al verwerkt zijn.",
+      "labelStorage": "Opslag",
+      "labelCurrentStorage": "Huidige opslag",
+      "labelUp": "Bovenliggende map",
+      "descriptionLoading": "Bestanden laden…",
+      "descriptionEmpty": "Geen overeenkomende items in deze map.",
+      "descriptionNoStorages": "Geen toegankelijke opslagplaatsen beschikbaar.",
+      "descriptionPending": "Het bestand wordt overgebracht. Wacht op het resultaat.",
+      "labelCancel": "Annuleren",
+      "labelUseFolder": "Deze map gebruiken",
+      "labelUseFile": "Bestand bijvoegen",
+      "labelRetry": "Opnieuw laden",
+      "errorLoad": "Deze map kon niet worden geladen. Controleer de toegang en probeer het opnieuw.",
+      "errorCollision": "De bestemming bevat al een bestand of verwerkte inhoud met deze naam. Kies een andere map; er is niets overschreven.",
+      "errorSameTarget": "Bron en bestemming zijn gelijk. Kies een andere map.",
+      "errorSourceChanged": "De bron is tijdens het kopiëren gewijzigd. De onvolledige kopie is verwijderd. Probeer het opnieuw.",
+      "errorBusy": "Dit bestand wordt momenteel verwerkt. Wacht tot dit klaar is.",
+      "errorPermission": "Je hebt niet de vereiste rechten voor de bron of bestemming.",
+      "errorSourceDelete": "Het volledige doelbestand is aangemaakt, maar de bron kon niet worden verwijderd. Controleer beide locaties voordat je de bewerking herhaalt.",
+      "errorCleanup": "Kopiëren mislukt. De bron is behouden, maar er kunnen onvolledige bestanden op de bestemming achterblijven. Controleer dit voordat je het opnieuw probeert.",
+      "errorAction": "De bewerking is mislukt. Controleer rechten, bestandsnamen en beide locaties voordat je het opnieuw probeert.",
+      "errorNotProcessed": "Dit bestand is nog niet verwerkt. Verwerk het eerst en selecteer het daarna opnieuw."
+    }
+  },
+  "_welcomeMessage": "Welkom bij\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Documentatie",
+    "feedback": "Feedback",
+    "help": "Hulp",
+    "labelThemeLight": "Licht",
+    "labelThemeDark": "Donker",
+    "labelThemeSystem": "Besturingssysteem",
+    "labelLanguage": "Taal"
+  }
+}

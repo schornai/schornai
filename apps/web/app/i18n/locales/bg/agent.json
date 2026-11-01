@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Отказ",
+      "errorCancel": "Генерирането не можа да бъде спряно. Опитайте отново."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Нямате достъп до този агент."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Модел",
+      "labelUnknownModel": "Неизвестен модел",
+      "labelThinkingOptionalOn": "Разсъждение",
+      "labelThinkingOptionalOff": "Задължително разсъждение",
+      "labelThinkingMandatoryOn": "Без разсъждение",
+      "labelThinkingMandatoryOff": "Задължително без разсъждение",
+      "descriptionFeatureVision": "По-задълбочено разбиране на изображенията",
+      "labelModelSize": "Размер на контекста: {{size}}k",
+      "labelNotFound": "Моделът не е намерен",
+      "labelChanged": "Променено"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Инструмент: Калкулатор",
+      "description": "Вместо да извършва изчисленията сам, агентът може да използва калкулатора. Това му позволява да работи по-добре с по-сложни числа."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Инструкция",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Празно",
+      "labelChanged": "Променено"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Хранилища за документи",
+      "labelUnknownRepository": "Неизвестно хранилище за документи",
+      "descriptionRepositoryNotFound": "Хранилището за документи не съществува или нямате необходимите права.",
+      "labelConfirmWrite": "Четене и запис (с потвърждение)",
+      "labelReadOnly": "Само четене",
+      "labelWrite": "Четене и запис (автоматично)",
+      "labelGoToRepository": "Към хранилището",
+      "labelChanged": "Променено"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Подсказка за избор на роля",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Описание",
+      "description": "Изберете подходящо име за агента. Можете да запазите и кратко описание.",
+      "labelName": "Име",
+      "labelDescription": "Описание"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Работно пространство",
+      "description": "Изберете работното пространство, в което да бъде създаден агентът.",
+      "labelName": "Работно пространство",
+      "errorNoPermissions": "Нямате права за създаване на агенти",
+      "errorNoWorkspaceSelected": "Не сте избрали работно пространство",
+      "labelSelectWorkspace": "Изберете работно пространство."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Допълнителни функции",
+      "description": "Разширете агента с полезни функции, за да улесните работата още повече.",
+      "labelFileUpload": "Качване на файлове",
+      "descriptionFileUpload": "Потребителите могат да качват файлове, чието съдържание е достъпно за агента като текст.",
+      "labelBatch": "Пакетна обработка",
+      "descriptionBatch": "Потребителите могат да обработват файлове автоматично за всяко съобщение.",
+      "labelPursueGoal": "Преследване на цел",
+      "descriptionPursueGoal": "Потребителите могат да зададат цел и агентът ще работи в цикъл, докато тя бъде постигната.",
+      "labelDisappearingChats": "Изчезващи разговори",
+      "descriptionDisappearingChats": "Разговорите могат да се изтриват автоматично след 12 часа. Това трябва да бъде зададено от потребителя.",
+      "labelNightshift": "Нощна смяна",
+      "descriptionNightshift": "Продължително работещите агенти могат да бъдат преместени на нощна смяна, за да се пестят ресурси през деня.",
+      "labelTranscriber": "Транскрибатор",
+      "labelNoTranscriber": "Без автоматична транскрипция",
+      "descriptionTranscriber": "Автоматично транскрибиране на качените аудио- и видеофайлове с този транскрибатор."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Допълнителни функции",
+      "labelFileUpload": "Качване на файлове",
+      "descriptionFileUpload": "Потребителите могат да качват файлове, чието съдържание е достъпно за агента като текст.",
+      "labelBatch": "Пакетна обработка",
+      "descriptionBatch": "Потребителите могат да обработват файлове автоматично за всяко съобщение.",
+      "labelPursueGoal": "Преследване на цел",
+      "descriptionPursueGoal": "Потребителите могат да зададат цел и агентът ще работи в цикъл, докато тя бъде постигната.",
+      "labelDisappearingChats": "Изчезващи разговори",
+      "descriptionDisappearingChats": "Разговорите могат да се изтриват автоматично след 12 часа. Това трябва да бъде зададено от потребителя.",
+      "labelNightshift": "Нощна смяна",
+      "descriptionNightshift": "Продължително работещите агенти могат да бъдат преместени на нощна смяна, за да се пестят ресурси през деня."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Предложения"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Документация"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Работно пространство",
+      "labelUnknownWorkspace": "Неизвестно работно пространство",
+      "labelGoToWorkspace": "Към работното пространство"
+    },
+    "AgentInfo": {
+      "labelRole": "Роля: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Търсене...",
+      "tableColumnName": "Име",
+      "tableColumnCapablilities": "Възможности",
+      "tableColumnNameActions": "Действия",
+      "labelOtherAgents": "Други агенти",
+      "labelFavorites": "Любими",
+      "labelNoGroup": "Без група",
+      "labelUnknownModel": "Неизвестен модел „{{id}}“",
+      "labelNoRepositories": "Няма хранилища за документи",
+      "labelUnknownRepository": "Неизвестно хранилище за документи „{{id}}“",
+      "labelRoleCount_other": "{{count}} роли",
+      "labelRoleCount_zero": "Няма роли",
+      "labelRoleCount_one": "{{count}} роля"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Опции",
+      "labelView": "Изглед",
+      "labelSort": "Сортиране",
+      "labelNameAsc": "Име от А до Я",
+      "labelNameDesc": "Име от Я до А",
+      "labelGroup": "Групиране по",
+      "labelFavorites": "Любими",
+      "labelFirstLetter": "Първа буква",
+      "labelWorkspaces": "Работни пространства",
+      "labelModel": "Модел",
+      "labelRepositories": "Хранилища за документи",
+      "labelRoleCount": "Брой роли",
+      "labelCards": "Карти",
+      "labelTable": "Таблица",
+      "labelSaveView": "Запазване на изгледа",
+      "labelReset": "Нулиране",
+      "labelAgents": "Агенти",
+      "labelNewAgent": "Нов агент",
+      "labelNoGroup": "Без група"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Външен вид",
+      "description": "Изберете цвят и икона, които най-добре представят агента.",
+      "labelIcon": "Икона",
+      "labelColor": "Цвят"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Премахване от любими",
+      "tooltipAddFavorite": "Добавяне в любими"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Редактиране",
+      "tooltipInfo": "Информация",
+      "tooltipNewChat": "Нов разговор"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Неизвестно работно пространство",
+      "labelModelUnknown": "Неизвестен модел"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Уеб достъп",
+      "labelGeneralAccess": "Общ достъп, уеб търсене",
+      "descriptionFetch": "Уеб изтеглянето записва URL в хранилището на разговора или в свързано хранилище за документи с права за запис. След обработката на файла агентът може да прочете извлечения текст и да го използва в отговора си.",
+      "descriptionSearch": "Уеб търсенето помага на агента да намира подходящи страници по заявка за търсене. Доставчикът на търсене връща заглавия, връзки и кратки откъси. Списъкът с разрешени адреси за изтегляне не ограничава уеб търсенията.",
+      "labelChanged": "Променено",
+      "labelFetch": "Изтегляне",
+      "labelSearch": "Търсене",
+      "labelOn": "Включено",
+      "labelOff": "Изключено",
+      "labelAsk": "Първо питай",
+      "labelWhitelist": "Изтеглянето е ограничено до разрешените домейни",
+      "labelAll": "Изтегляне от всички уебсайтове",
+      "labelEmptyWhitelist": "Няма разрешени домейни",
+      "labelEdit": "Редактиране на уеб достъпа",
+      "labelDetails": "Показване на подробности"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Инструмент: Разширения за разговор",
+      "labelFeatures": "Предлагане на следващо съобщение, промяна на етикета на разговора",
+      "description": "Агентът може да генерира предложения за следващото потребителско съобщение, така че потребителят да продължи разговора, като просто щракне върху съответното съобщение. <br /> Агентът може да променя етикета на разговора за потребителя, за да бъде разговорът по-лесно откриваем в историята."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Описание на ролята",
+      "description": "Описанието на ролята се използва при получаване на ново потребителско съобщение, за да се реши коя роля да отговори на съобщението",
+      "labelName": "Име",
+      "labelSelectionHint": "Подсказка за избор на роля",
+      "labelDeleteRole": "Изтриване на роля ",
+      "labelDoNotOverride": "Без замяна",
+      "labelOverrideModel": "Замяна на модела",
+      "descriptionOverrideModel": "Можете да изберете модел за тази роля, различен от общия модел на агента.",
+      "confirmDeleteDescription": "Сигурни ли сте, че искате да изтриете ролята „{{name}}“? Това действие не може да бъде отменено.",
+      "labelCancel": "Отказ",
+      "labelThinking": "Разсъждение"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Модел",
+      "description": "Езиковият модел, който агентът използва, освен ако не е заменен от роля.",
+      "labelName": "Модел",
+      "labelThinking": "Разсъждение",
+      "labelThinking_optionalOn": "Разсъждение",
+      "labelThinking_mandatoryOn": "Задължително разсъждение",
+      "labelThinking_optionalOff": "Без разсъждение",
+      "labelThinking_mandatoryOff": "Задължително без разсъждение",
+      "labelSelectModel": "Избор на модел"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Хранилище за документи",
+      "labelPathAgent": "Път за агента",
+      "labelPathRepository": "Път в хранилището за документи",
+      "labelPermission": "Право за достъп",
+      "labelDeleteConnection": "Изтриване на връзка",
+      "confirmDeleteTitle": "Изтриване на връзка",
+      "confirmDeleteDescription": "Наистина ли искате да изтриете тази връзка към хранилището за документи „{{name}}“?",
+      "labelCancel": "Отказ",
+      "labelAddConnection": "Допълнителна връзка",
+      "labelUnknownRepository": "Неизвестно хранилище за документи",
+      "labelConfirmWrite": "Четене и запис (с потвърждение)",
+      "labelReadOnly": "Само четене",
+      "labelWrite": "Четене и запис (автоматично)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Етикет",
+      "labelMessage": "Съобщение",
+      "labelClose": "Затваряне"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Име",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP заглавки",
+      "labelHeaderName": "Име",
+      "labelHeaderValue": "Стойност",
+      "labelAddHeader": "Добавяне на HTTP заглавка",
+      "labelDeleteConnection": "Изтриване на връзка",
+      "confirmDeleteTitle": "Изтриване на MCP",
+      "confirmDeleteDescription": "Сигурни ли сте, че искате да изтриете MCP конфигурацията „{{name}}“?",
+      "labelCancel": "Отказ",
+      "labelDeleteMCP": "Изтриване на MCP",
+      "labelAddMCP": "Друг MCP",
+      "errorInvalidUrl": "URL адресът трябва да е валиден",
+      "labelOAuthApp": "OAuth приложение"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Данни",
+      "labelConnectRepository": "Свързване на хранилище за документи",
+      "labelToolWebAccess": "Инструмент: Уеб достъп",
+      "labelConnectMCP": "Свързване на външен инструмент (MCP)",
+      "labelSupport": "Поддръжка",
+      "labelToolChatExtensions": "Инструмент: Разширения за разговор",
+      "labelToolCalculator": "Инструмент: Калкулатор",
+      "labelSystem": "Система",
+      "labelToolPlatformAccess": "Инструмент: Достъп до платформата schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Нов агент",
+      "emptyDescription": "Задайте поведението, достъпа до данни, външния вид на агента и много други.",
+      "labelDefinePrompt": "Задайте инструкция",
+      "descriptionDefinePrompt": "Качеството на агента зависи от инструкциите му. Ясните определения на ролите намаляват халюцинациите и повишават последователността.",
+      "labelConnectTools": "Свържете инструменти",
+      "descriptionConnectTools": "Например свържете хранилища за документи, за да може агентът да се основава на факти и да използва знания, специфични за компанията.",
+      "labelWriteDocs": "Напишете документация",
+      "descriptionWriteDocs": "Помогнете на потребителите да разберат възможностите на този агент.",
+      "infoRoleDefinition": "Ролята определя как се държи агентът и с кои инструменти разполага за изпълнение на задачата.",
+      "infoDocsDescription": "Документацията може да бъде както текст (поддържа се форматиране с Markdown), така и предложения за съобщения, които да бъдат изпратени на агента.",
+      "infoAppearanceDescription": "Името, описанието и цветът помагат на потребителите да се ориентират сред наличните агенти."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Предложени съобщения",
+      "descriptionRecommendedMessages": "Помогнете на потребителите с предложения за съобщения, които показват как най-добре да използват агента.",
+      "labelAddMessage": "Добавяне на съобщение ",
+      "labelDocumentation": "Документация",
+      "descriptionDocumentation": "Тук споделете допълнителна информация за този агент с потребителите си",
+      "labelShowPreview": "Показване на преглед",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Документацията помага на потребителите да използват агента. Тя се показва, когато потребителят започне нов разговор.",
+      "descriptionMarkdownHelp": "Markdown е лек език за маркиране за бързо и лесно форматиране на текст.\n\n* **Структура:** Заглавия (`#`), списъци (номерирани `1.` и неномерирани `-`), хоризонтални линии.\n* **Стил на текста:** **Удебелен** `**Удебелен**`, *Курсив* `*Курсив*`, ~~Зачеркнат~~ `~~Зачеркнат~~`.\n* **Код:** Код в текста (`code`) и блокове с код с оцветяване на синтаксиса.\n* **Организация:** Цитати (`>`), контролни списъци (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Няма роли",
+      "descriptionNoRoles": "Няма зададени роли за агента. Без роля агентът няма да работи.",
+      "labelAddRole": "Добавяне на роля ",
+      "infoMultipleRoles": "Агентите могат да поемат няколко роли. Всяка роля може да се съсредоточи по-добре върху отделна част от задачата.",
+      "infoTools": "Агентите могат да използват инструменти, за да отговарят по-добре на потребителските заявки (търсене в документи, създаване на документи и др.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Нов агент",
+      "labelAgent": "Агент",
+      "labelCreateAgent": "Създаване на агент",
+      "labelSaveAgent": "Запазване на агент",
+      "tabOverview": "Общ преглед",
+      "tabPrompt": "Инструкция",
+      "tabDocs": "Поддръжка",
+      "tabRoles": "Роли",
+      "tabSettings": "Настройки",
+      "btnCreate": "Създаване",
+      "btnSave": "Запазване",
+      "labelEditAgent": "Редактиране на агент",
+      "labelCloneAgent": "Запазване като нов агент",
+      "labelDeleteAgent": "Изтриване на агент",
+      "confirmDeleteTitle": "Изтриване на агент",
+      "confirmDeleteDescription": "Сигурни ли сте, че искате да изтриете агента „{{name}}“? Това действие не може да бъде отменено.",
+      "labelCancel": "Отказ"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Роля ",
+      "description": "Определя поведението на агента и кои инструменти може да използва в този контекст.",
+      "tabOverview": "Общ преглед",
+      "tabPrompt": "Инструкция",
+      "tabDocumentRepositoryMounts": "Хранилища за документи",
+      "tabMCPs": "Външни инструменти (MCP)",
+      "tabWeb": "Достъп до интернет",
+      "tabChat": "Разширения за разговор",
+      "tabCalc": "Калкулатор",
+      "tabTools": "Инструменти",
+      "tabSettings": "Настройки",
+      "toolWebAccess": "Достъп до интернет",
+      "chatExtensions": "Разширения за разговор",
+      "calculator": "Калкулатор",
+      "externalToolsMCP": "Външни инструменти (MCP)",
+      "labelPrompt": "Инструкция"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Отхвърляне на промените",
+      "labelDiscardConfirm": "Наистина ли искате да отхвърлите всички незапазени промени по този агент?",
+      "labelCancel": "Отказ",
+      "labelDiscard": "Отхвърляне на промените"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Външни инструменти (MCP)",
+      "changedBadge": "Променено",
+      "unknownMcp": "Неизвестен MCP",
+      "invalidUrl": "Невалиден URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Семантично търсене",
+      "labelChanged": "Променено",
+      "labelActive": "Активно",
+      "labelInactive": "Неактивно",
+      "description": "Когато е важно значението на данните, а не точната формулировка. (Изисква модел за векторно представяне)",
+      "labelUnknownModel": "Неизвестен модел"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Търсене по ключови думи",
+      "labelChanged": "Променено",
+      "labelActive": "Активно",
+      "labelInactive": "Неактивно",
+      "description": "При търсене на точни изрази и изречения. (Имена, наименования и др.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Транскрибатор",
+      "labelChanged": "Променено",
+      "labelUnknownTranscriber": "Неизвестен транскрибатор",
+      "labelGoToTranscriber": "Към транскрибатора"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Ново съобщение"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Изчакване на обработка",
+      "tooltipPaused": "На пауза"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Разсъждението е включено",
+      "labelThinkingOff": "Разсъждението е изключено",
+      "labelMessageStack": "Опашка от съобщения",
+      "placeholderMessage": "Съобщение...",
+      "tooltipUploadFiles": "Качване на файлове",
+      "buttonPause": "Пауза",
+      "buttonStartBatch": "Стартиране на пакета",
+      "buttonSend": "Изпращане",
+      "descriptionFilesPending": "Файловете се качват или обработват …",
+      "labelAttachFiles": "Прикачване на файлове",
+      "labelUploadFiles": "Качване на файлове",
+      "labelSelectFile": "Избор на съществуващ файл"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Разрешавате ли това действие?",
+      "descriptionAction": "Агентът се нуждае от одобрението ви, за да продължи.",
+      "labelApprove": "Разрешаване",
+      "labelReject": "Отказване",
+      "labelRetry": "Опитайте отново",
+      "labelSubmitting": "Обработва се …",
+      "errorSubmit": "Решението ви не можа да бъде изпратено. Опитайте отново.",
+      "labelMCP": "Свържете акаунта си",
+      "descriptionMCP": "Този MCP инструмент изисква да влезете в акаунта си. Изчакващото извикване ще продължи автоматично след свързването."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Запазване на документа?",
+      "descriptionWriteFile": "Агентът иска да запази този документ. Съществуващото съдържание ще бъде заменено.",
+      "labelShowContent": "Показване на съдържанието",
+      "labelHideContent": "Скриване на съдържанието",
+      "descriptionEmptyFile": "Документът ще бъде запазен с празно съдържание."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Уеб изтегляне",
+      "description": "Настройте уеб достъпа за тази роля. Изтеглянето и търсенето могат да се включват независимо.",
+      "labelFetch": "Включване на уеб изтеглянето",
+      "labelAskFetch": "Искане на потвърждение преди изтегляне на страница",
+      "labelAccess": "Разрешени уебсайтове",
+      "labelAll": "Всички уебсайтове",
+      "labelWhitelist": "Списък с разрешени домейни",
+      "descriptionAccess": "HTTP(S) файлове и уебстраници, включително в локалната мрежа. Пренасочванията следват същите правила за достъп.",
+      "labelDomains": "Разрешени домейни",
+      "descriptionDomains": "По едно име на хост на ред, например example.com. Използвайте *.example.com за поддомейни; това не включва самия example.com.",
+      "errorDomains": "Въведете имена на хостове или *.example.com без протокол, път или порт.",
+      "descriptionEmptyWhitelist": "Празният списък с разрешени домейни блокира всяка страница.",
+      "labelSearchTitle": "Уеб търсене",
+      "labelSearch": "Включване на уеб търсенето",
+      "labelAskSearch": "Искане на потвърждение преди уеб търсене",
+      "labelProvider": "Доставчик на търсене",
+      "labelProviderDocs": "Документация на доставчика",
+      "labelApiKey": "API ключ",
+      "errorApiKey": "Въведете API ключ за избрания доставчик.",
+      "labelMarket": "Език и регион за Staan",
+      "descriptionMarket": "Например de-de или en-us. По подразбиране е en-us.",
+      "labelRemoveTool": "Премахване на инструмент",
+      "labelConfirmRemoveTool": "Премахване на уеб инструмента?",
+      "descriptionRemoveTool": "Настройките за уеб изтегляне и уеб търсене, включително списъкът с разрешени домейни и API ключът, ще бъдат премахнати от тази роля.",
+      "labelCancel": "Отказ"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Изтегляне на уебстраница",
+      "descriptionFetch": "Разрешавате ли на агента да изтегли, запази и обработи този URL?",
+      "labelDestination": "Местоназначение"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Търсене в интернет",
+      "descriptionSearch": "Разрешавате ли на агента да изпрати тази заявка до настроения доставчик на търсене?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Затваряне",
+      "labelPending": "Изпълнява се",
+      "labelApproval": "Очаква одобрение",
+      "labelDenied": "Отказано",
+      "labelDone": "Завършено",
+      "errorRequest": "Заявката е неуспешна"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Уеб търсене",
+      "labelQuery": "Заявка за търсене",
+      "labelEmptyResults": "Няма намерени резултати."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Уебстраница",
+      "labelUrl": "URL",
+      "labelRange": "Символи {{start}}–{{end}} от {{total}}",
+      "descriptionTruncated": "В следващия раздел има още съдържание.",
+      "labelEmptyPage": "Тази страница не съдържа четим текст.",
+      "labelSource": "Отваряне на източника",
+      "descriptionFileReady": "Файлът е запазен и обработен. Извлеченият текст е достъпен директно за агента.",
+      "descriptionProcessingUnavailable": "Файлът е запазен. Няма извлечен текст; за аудио/видео е необходим настроен транскрибатор.",
+      "descriptionProcessingFailed": "Файлът е запазен, но обработката е неуспешна или времето за нея е изтекло. Обработката може да бъде стартирана отново в хранилището."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Копиране на файл",
+      "labelMove": "Преместване на файл",
+      "descriptionSuccess": "Файлът е прехвърлен. Необходимите индекси за търсене се изграждат отново във фонов режим.",
+      "descriptionPending": "Подготовка за прехвърляне на файла…",
+      "descriptionProcessingError": "Файлът е прехвърлен, но обработката трябва да бъде стартирана отново на местоназначението.",
+      "errorTransfer": "Прехвърлянето на файла не можа да бъде завършено.",
+      "labelOpenFile": "Отваряне на целевия файл",
+      "descriptionDenied": "Прехвърлянето на файла е отказано. Не е прехвърлен файл.",
+      "descriptionApproval": "Очаква вашето одобрение.",
+      "descriptionRunning": "Прехвърляне на файл…",
+      "labelClose": "Затваряне",
+      "labelSource": "Източник",
+      "labelTarget": "Местоназначение"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Разрешавате ли копирането на този файл?",
+      "labelMove": "Разрешавате ли преместването на този файл?",
+      "descriptionCopy": "Агентът иска да копира този файл и обработеното му съдържание. Съществуващите целеви файлове никога не се презаписват.",
+      "descriptionMove": "Агентът иска да премести този файл и обработеното му съдържание. Източникът ще бъде премахнат след успешно копиране.",
+      "labelSource": "Източник",
+      "labelTarget": "Местоназначение"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Този MCP инструмент изисква да влезете в акаунта си. Изчакващото извикване ще продължи автоматично след свързването.",
+      "labelConnect": "Свързване на моя акаунт"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP инструмент",
+      "labelDiscover": "Откриване на наличните инструменти",
+      "labelPending": "Изпълнява се",
+      "labelDone": "Завършено",
+      "labelApproval": "Изисква се вход",
+      "labelDenied": "Отказано",
+      "errorRequest": "Заявката е неуспешна",
+      "labelArguments": "Входни данни",
+      "labelResult": "Резултат",
+      "labelClose": "Затваряне"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth приложение",
+      "labelSearch": "Връзка за търсене",
+      "labelAutomatic": "Няма настроено OAuth приложение",
+      "labelNone": "Няма избрана връзка",
+      "labelMissing": "Връзката не е достъпна",
+      "descriptionOAuth": "По избор: Изберете регистрирано OAuth приложение за този MCP сървър. Настройте URL адреса му отделно в този агент.",
+      "descriptionSearch": "Данните за достъп до Staan и Brave се управляват централизирано в Настройки → Връзки.",
+      "errorMissing": "Тази връзка вече не е достъпна. Изберете друга връзка.",
+      "descriptionEmpty": "Не е настроена подходяща връзка. Управлявайте връзките в Настройки → Връзки."
+    }
+  },
+  "page": {
+    "labelTitle": "Агенти",
+    "emptyTitle": "Няма агенти",
+    "emptyDescription": "Все още няма създадени агенти.",
+    "labelNewAgent": "Нов агент",
+    "helpSearchTitle": "Търсене",
+    "helpSearchDescription": "Можете да търсите агенти. Търсенето включва, наред с друго, името и описанието на агента, както и неговия модел.",
+    "helpSortTitle": "Сортиране и групиране",
+    "helpSortDescription": "Агентите могат да се сортират по име и да се разпределят в различни групи. Могат да се показват като плочки или като таблица."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Този MCP доставчик изисква регистрирано OAuth приложение. Помолете администратор да създаде OAuth приложение с Client ID и Client Secret в Настройки → Връзки и го изберете в MCP настройките на агента. След това се свържете отново от разговора.",
+    "errorStart": "MCP оторизацията не можа да бъде стартирана.",
+    "errorCallback": "MCP оторизацията е неуспешна или е изтекла. Върнете се към разговора и опитайте отново."
+  }
+}

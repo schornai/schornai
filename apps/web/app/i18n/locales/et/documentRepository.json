@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumendihoidlad",
+    "description": "Dokumendihoidlad loovad tehisintellektile keskse, struktureeritud ja usaldusväärse teadmusbaasi, mida mudelid saavad kontekstipõhiselt kasutada."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumendihoidla"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Otsi..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelNameAsc": "Nimi A–Z",
+      "labelNameDesc": "Nimi Z–A",
+      "labelGroup": "Rühmita alusel",
+      "labelNoGroup": "Rühmitamata",
+      "labelFavorites": "Lemmikud",
+      "labelFirstLetter": "Esitäht",
+      "labelWorkspaces": "Tööruumid",
+      "labelModel": "Transkribeerija",
+      "labelCards": "Kaardid",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta",
+      "labelDocumentRepositories": "Dokumendihoidlad",
+      "labelNewDocumentRepository": "Uus dokumendihoidla"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Teised dokumendihoidlad",
+      "labelFavorites": "Lemmikud",
+      "labelOtherTranscribers": "Teised transkribeerijad",
+      "labelUnknownTranscriber": "Tundmatu transkribeerija „{{id}}“"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Võimalused",
+      "tableColumnNameActions": "Toimingud",
+      "emptyTitle": "Dokumendihoidlaid pole",
+      "emptyDescription": "Ühtegi dokumendihoidlat pole veel loodud.",
+      "labelOtherDocumentRepositories": "Teised dokumendihoidlad",
+      "labelFavorites": "Lemmikud",
+      "labelNoGroup": "Rühmitamata",
+      "labelUnknownTranscriber": "Tundmatu transkribeerija „{{id}}“"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Tundmatu tööruum"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Muuda",
+      "tooltipInfo": "Teave"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eemalda lemmikutest",
+      "tooltipAddFavorite": "Lisa lemmikutesse"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Uus dokumendihoidla",
+      "labelDocumentRepository": "Dokumendihoidla",
+      "labelDocumentRepositoryDropdown": "Dokumendihoidla",
+      "labelCreateDocumentRepository": "Loo dokumendihoidla",
+      "labelSaveDocumentRepository": "Salvesta dokumendihoidla",
+      "labelCloneDocumentRepository": "Salvesta uue dokumendihoidlana",
+      "labelDeleteDocumentRepository": "Kustuta dokumendihoidla",
+      "confirmDeleteTitle": "Kustuta dokumendihoidla",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada dokumendihoidla „{{name}}“? Seda toimingut ei saa tagasi võtta.",
+      "labelCancel": "Tühista",
+      "tabOverview": "Ülevaade",
+      "tabFeatures": "Funktsioonid",
+      "tabSettings": "Seaded",
+      "btnCreate": "Loo",
+      "btnSave": "Salvesta"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Loobu muudatustest",
+      "labelDiscardConfirm": "Kas soovid kindlasti loobuda kõigist selle dokumendihoidla salvestamata muudatustest?",
+      "labelCancel": "Tühista",
+      "labelDiscard": "Loobu muudatustest"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Uus dokumendihoidla",
+      "emptyDescription": "Määra dokumendihoidla käitumine ja välimus.",
+      "checklistSemanticSearchTitle": "Luba semantiline otsing",
+      "checklistSemanticSearchDescription": "Luba semantiline otsing. See võib parandada otsingutulemuste kvaliteeti.",
+      "checklistTranscriberTitle": "Vali transkribeerija",
+      "checklistTranscriberDescription": "Vali transkribeerija, mis transkribeerib kõik üles laaditud video- ja helifailid automaatselt.",
+      "helpTitle": "Abi",
+      "helpKeywordSearch": "Tavaline märksõnaotsing. Sobib kõige paremini kaubamärkide, inimeste ja muude nimede otsimiseks.",
+      "helpEmbeddingDescription": "Lisa vektormudel semantilise otsingu lubamiseks. See leiab sarnaseid dokumente nende tähenduse põhjal.",
+      "helpTranscriberDescription": "Lisa dokumendihoidlale transkribeerija ja kõik video- ning helifailid transkribeeritakse pärast üleslaadimist automaatselt."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Otsinguindeks",
+      "description": "Olenevalt otsinguindeksist kasutatakse erinevaid meetodeid, et anda otsingupäringule parimad tulemused.",
+      "labelKeyword": "Märksõnaotsing",
+      "descriptionKeyword": "Täpsete väljendite ja lausete otsimiseks. (Nimed, nimetused jne)",
+      "labelSemantic": "Semantiline otsing",
+      "descriptionSemantic": "Kui oluline on andmete tähendus, mitte täpne sõnastus. (Nõuab vektormudelit)",
+      "labelEmbeddingModel": "Vektormudel",
+      "descriptionEmbeddingModel": "Vektormudel on semantilise otsingu alus."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Transkribeerija puudub",
+      "labelLegend": "Transkribeerija",
+      "description": "Video- ja helifailid transkribeeritakse pärast üleslaadimist automaatselt.",
+      "labelTranscriber": "Transkribeerija"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Kirjeldus",
+      "description": "Vali dokumendihoidlale sobiv nimi. Lisaks saad salvestada lühikese kirjelduse.",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Välimus",
+      "description": "Vali värv ja ikoon, mis dokumendihoidlat kõige paremini iseloomustavad.",
+      "labelIcon": "Ikoon",
+      "labelColor": "Värv"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Tööruum",
+      "description": "Vali tööruum, kuhu dokumendihoidla luua.",
+      "labelName": "Tööruum",
+      "labelSelectWorkspace": "Vali tööruum."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Failid",
+      "tabSearch": "Täistekstiotsing",
+      "tabInfo": "Teave"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Otsi...",
+      "labelSearch": "Otsi"
+    },
+    "Search": {
+      "emptyTitle": "Täistekstiotsing",
+      "emptyDescription": "Otsi teksti selle dokumendihoidla kõigist failidest."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumendihoidlad",
+    "emptyTitle": "Dokumendihoidlaid pole",
+    "emptyDescription": "Ühtegi dokumendihoidlat pole veel loodud.",
+    "labelNewDocumentRepository": "Uus dokumendihoidla",
+    "helpTitle": "Abi",
+    "helpSearchDescription": "Saad dokumendihoidlaid otsida. Otsing hõlmab muu hulgas hoidla nime, kirjeldust ja transkribeerijat.",
+    "helpSortDescription": "Dokumendihoidlaid saab sortida nime järgi ja jagada erinevatesse rühmadesse. Neid saab kuvada kaartidena või tabelina.",
+    "helpTranscriberDescription": "Saad dokumendihoidlale transkribeerija valida. Kui hoidlasse laaditakse heli- või videofaile, transkribeeritakse need automaatselt."
+  }
+}

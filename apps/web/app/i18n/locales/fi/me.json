@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nimi",
+      "labelFirstName": "Etunimi",
+      "labelLastName": "Sukunimi",
+      "buttonSave": "Tallenna",
+      "buttonReset": "Palauta"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profiilikuva"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Poista kuva",
+      "alertDelete": "Poista kuva",
+      "alertDeleteExplainer": "Haluatko varmasti poistaa kuvasi?",
+      "alertDeleteCancel": "Peruuta"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Lataa kuva"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Oikeudet",
+      "tableColumnName": "Nimi",
+      "tableColumnPermission": "Oikeus",
+      "tableColumnDescription": "Kuvaus",
+      "infoEmpty": "Ei oikeuksia",
+      "infoEmptyDescription": "Mikään schorn.ai boxin toiminto ei ole käytettävissä.",
+      "infoEmptyAdminDescription": "Ylläpitäjänä voit luoda ensimmäisen työtilan.",
+      "infoEmptyAdminAction": "Luo ensimmäinen työtila",
+      "infoUser": "Voi tarkastella organisaation sisältöä (keskustelubotteja, litteroijia, asiakirjoja, varastoja jne.), mutta ei muokata sitä.",
+      "infoEditor": "Voi tarkastella organisaation sisältöä ja lisäksi muokata sitä (luoda uusia keskustelubotteja, muokata ja poistaa asiakirjoja jne.).",
+      "infoAdmin": "Voi lukea ja kirjoittaa kaikissa organisaatioissa sekä hallita järjestelmäasetuksia (ladata XRAG-paketteja, vaihtaa värejä jne.) ja käyttäjiä."
+    }
+  },
+  "page": {
+    "title": "Profiili",
+    "infoPersonalize": "Mukauta",
+    "infoPersonalizeDescription": "Voit ladata profiilikuvasi ja muokata nimeäsi tässä."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Uusi salasana asetettu",
+    "description": "Uuden salasanan asettaminen onnistui. Olet nyt kirjautunut sisään uudella salasanalla.",
+    "buttonBackToDashboard": "Siirry aloitusnäkymään"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Yhteydet",
+      "descriptionConnections": "Henkilökohtaiset OAuth-yhteytesi MCP-palvelimiin. Yhteyden katkaisu poistaa tänne tallennetut tunnistetiedot. Jo käynnissä olevat kutsut voivat valmistua; peru palveluntarjoajan oikeudet suoraan palveluntarjoajalta.",
+      "labelDisconnect": "Katkaise yhteys",
+      "descriptionEmpty": "Yhdistä tilisi keskustelussa, kun MCP-työkalu pyytää kirjautumaan sisään.",
+      "labelEmpty": "Ei vielä yhteyksiä",
+      "labelInfo": "Tietoja yhteyksistä",
+      "errorDisconnect": "Yhteyttä ei voitu katkaista. Yritä uudelleen."
+    }
+  }
+}

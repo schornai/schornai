@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Ya has iniciado sesión",
+      "backToDashboard": "Volver al panel",
+      "signOut": "Cerrar sesión"
+    },
+    "PasswordSignIn": {
+      "header": "Correo electrónico",
+      "headerSub": "Iniciar sesión con correo electrónico y contraseña",
+      "inputEmailLabel": "Correo electrónico",
+      "inputPasswordLabel": "Contraseña",
+      "buttonSignIn": "Iniciar sesión con correo electrónico",
+      "buttonReset": "Restablecer contraseña"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Iniciar sesión con un proveedor SSO",
+      "buttonSignIn": "Iniciar sesión con {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Restablecer contraseña",
+      "descriptionKey": "Introduce tu dirección de correo y la clave de restablecimiento proporcionada por tu administrador. La clave solo se puede usar una vez y es válida durante 7 días.",
+      "labelEmail": "Correo electrónico",
+      "labelKey": "Clave de restablecimiento de contraseña",
+      "labelPassword": "Nueva contraseña",
+      "labelPasswordAgain": "Repetir nueva contraseña",
+      "descriptionPassword": "Usa al menos 6 caracteres y respeta los requisitos de contraseña de tu organización.",
+      "errorEmail": "Introduce una dirección de correo electrónico válida.",
+      "errorKey": "Introduce tu clave de restablecimiento.",
+      "errorPassword": "La contraseña debe contener al menos 6 caracteres.",
+      "errorPasswordAgain": "Las contraseñas no coinciden.",
+      "errorReset": "No se ha podido cambiar la contraseña. Comprueba la dirección de correo, la clave y los requisitos de contraseña. Las claves caducadas o ya utilizadas no son válidas.",
+      "descriptionSuccess": "Tu contraseña se ha cambiado. Ahora puedes iniciar sesión con la nueva contraseña.",
+      "labelReset": "Guardar contraseña",
+      "labelSignIn": "Volver al inicio de sesión"
+    }
+  }
+}

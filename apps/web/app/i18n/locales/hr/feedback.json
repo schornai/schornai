@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopiraj tekst povratnih informacija u međuspremnik",
+      "feedbackText": "Tekst povratnih informacija",
+      "feedbackTextRecommendation": "Hvala, pošaljite nam ovaj tekst na ",
+      "sendFeedback": "Pošalji povratne informacije e-poštom",
+      "showFeedbackText": "Prikaži tekst povratnih informacija",
+      "thankYou": "Hvala što ste odvojili vrijeme za povratne informacije"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Izbriši sve poruke o pogreškama",
+      "actionDeleteAllCancel": "Odustani",
+      "actionDeleteAllExplainer": "Želite li zaista izbrisati sve prikupljene poruke o pogreškama? Ovu radnju nije moguće poništiti.",
+      "actionDeleteAllShort": "Izbriši poruke o pogreškama",
+      "actionDeselectAll": "Poništi odabir svih poruka o pogreškama",
+      "actionSelectAll": "Odaberi sve poruke o pogreškama",
+      "explainer": "Poruke o pogreškama također su dio povratnih informacija. Neke probleme sustav automatski rješava, a vaše se radnje nastavljaju bez prekida. Ipak, korisno je da i mi saznamo za te pogreške kako bismo ih mogli ukloniti.",
+      "explainerSecrecy": "Provjerite da poruke o pogreškama ne sadrže povjerljive ili osobne podatke. Sustav je u načelu osmišljen tako da takvi podaci ne budu u porukama o pogreškama. Međutim, pogreške su po svojoj prirodi povezane s nepredviđenim okolnostima. Zato iz sigurnosnih razloga osobno pregledajte povratne informacije.",
+      "explainerSecrecyHeading": "Bez povjerljivih podataka",
+      "heading": "Pogreške",
+      "tableColumnPartOfFeedback": "Dio povratnih informacija",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Poruka o pogrešci"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nije dana ocjena zvjezdicama",
+      "starRating": "{{stars}} od 5 zvjezdica"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Odbaci povratne informacije",
+      "discardFeedbackSub": "Želite li zaista odbaciti svoje povratne informacije? Ovu radnju nije moguće poništiti.",
+      "discardFeedbackCancel": "Odustani",
+      "infoSecrecy": "Provjerite da povratne informacije koje šaljete ne sadrže povjerljive ili osobne podatke.",
+      "writeFeedback": "Napiši povratne informacije",
+      "writeFeedbackSub": "Cijenimo sve povratne informacije, pozitivne i negativne."
+    }
+  },
+  "page": {
+    "headingLine1": "Pomozite nam poboljšati schorn.ai in a Box,",
+    "headingLine2": "dajte nam povratne informacije",
+    "headingMain": "Povratne informacije"
+  }
+}

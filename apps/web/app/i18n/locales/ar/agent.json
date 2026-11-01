@@ -1,0 +1,521 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "إلغاء",
+      "errorCancel": "تعذر إيقاف التوليد. يُرجى المحاولة مجددًا."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "ليس لديك حق الوصول إلى هذا الوكيل."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "النموذج",
+      "labelUnknownModel": "نموذج غير معروف",
+      "labelThinkingOptionalOn": "التفكير",
+      "labelThinkingOptionalOff": "التفكير إلزامي",
+      "labelThinkingMandatoryOn": "دون تفكير",
+      "labelThinkingMandatoryOff": "تعطيل التفكير إلزامي",
+      "descriptionFeatureVision": "فهم أعمق للصور",
+      "labelModelSize": "حجم السياق: {{size}} ألف",
+      "labelNotFound": "لم يُعثر على النموذج",
+      "labelChanged": "معدّل"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "الأداة: الحاسبة",
+      "description": "يمكن للوكيل استخدام الحاسبة بدلًا من إجراء العمليات الحسابية بنفسه. ويتيح له ذلك التعامل بشكل أفضل مع الأعداد الأكثر تعقيدًا."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "التعليمات",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "فارغ",
+      "labelChanged": "معدّل"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "مستودعات المستندات",
+      "labelUnknownRepository": "مستودع مستندات غير معروف",
+      "descriptionRepositoryNotFound": "مستودع المستندات غير موجود، أو ليست لديك الأذونات اللازمة.",
+      "labelConfirmWrite": "قراءة وكتابة (مع طلب التأكيد)",
+      "labelReadOnly": "قراءة فقط",
+      "labelWrite": "قراءة وكتابة (تلقائيًا)",
+      "labelGoToRepository": "الانتقال إلى المستودع",
+      "labelChanged": "معدّل"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "إرشادات اختيار الدور",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "الوصف",
+      "description": "اختر اسمًا مناسبًا للوكيل. يمكنك أيضًا حفظ وصف قصير.",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "مساحة العمل",
+      "description": "اختر مساحة العمل التي تريد إنشاء الوكيل فيها.",
+      "labelName": "مساحة العمل",
+      "errorNoPermissions": "ليست لديك أذونات لإنشاء الوكلاء",
+      "errorNoWorkspaceSelected": "لم تختر مساحة عمل",
+      "labelSelectWorkspace": "اختر مساحة عمل."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "وظائف إضافية",
+      "description": "أضف وظائف مفيدة إلى الوكيل لتسهيل العمل أكثر.",
+      "labelFileUpload": "رفع الملفات",
+      "descriptionFileUpload": "يمكن للمستخدمين رفع ملفات يتاح محتواها للوكيل كنص.",
+      "labelBatch": "المعالجة على دفعات",
+      "descriptionBatch": "يمكن للمستخدمين معالجة الملفات تلقائيًا لكل رسالة.",
+      "labelPursueGoal": "السعي لتحقيق هدف",
+      "descriptionPursueGoal": "يمكن للمستخدمين تحديد هدف، ويعمل الوكيل في حلقة حتى يتحقق الهدف.",
+      "labelDisappearingChats": "محادثات تختفي تلقائيًا",
+      "descriptionDisappearingChats": "يمكن حذف المحادثات تلقائيًا بعد 12 ساعة. يجب أن يفعّل المستخدم هذا الخيار.",
+      "labelNightshift": "الوردية الليلية",
+      "descriptionNightshift": "يمكن نقل الوكلاء الذين يعملون لفترة طويلة إلى الوردية الليلية لتوفير الموارد نهارًا.",
+      "labelTranscriber": "أداة التفريغ الصوتي",
+      "labelNoTranscriber": "دون تفريغ صوتي تلقائي",
+      "descriptionTranscriber": "فرّغ تلقائيًا ملفات الصوت والفيديو المرفوعة باستخدام أداة التفريغ هذه."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "وظائف إضافية",
+      "labelFileUpload": "رفع الملفات",
+      "descriptionFileUpload": "يمكن للمستخدمين رفع ملفات يتاح محتواها للوكيل كنص.",
+      "labelBatch": "المعالجة على دفعات",
+      "descriptionBatch": "يمكن للمستخدمين معالجة الملفات تلقائيًا لكل رسالة.",
+      "labelPursueGoal": "السعي لتحقيق هدف",
+      "descriptionPursueGoal": "يمكن للمستخدمين تحديد هدف، ويعمل الوكيل في حلقة حتى يتحقق الهدف.",
+      "labelDisappearingChats": "محادثات تختفي تلقائيًا",
+      "descriptionDisappearingChats": "يمكن حذف المحادثات تلقائيًا بعد 12 ساعة. يجب أن يفعّل المستخدم هذا الخيار.",
+      "labelNightshift": "الوردية الليلية",
+      "descriptionNightshift": "يمكن نقل الوكلاء الذين يعملون لفترة طويلة إلى الوردية الليلية لتوفير الموارد نهارًا."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "الاقتراحات"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "التوثيق"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "مساحة العمل",
+      "labelUnknownWorkspace": "مساحة عمل غير معروفة",
+      "labelGoToWorkspace": "الانتقال إلى مساحة العمل"
+    },
+    "AgentInfo": {
+      "labelRole": "الدور: "
+    },
+    "AgentList": {
+      "placeholderSearch": "بحث...",
+      "tableColumnName": "الاسم",
+      "tableColumnCapablilities": "الإمكانات",
+      "tableColumnNameActions": "الإجراءات",
+      "labelOtherAgents": "وكلاء آخرون",
+      "labelFavorites": "المفضلة",
+      "labelNoGroup": "دون مجموعة",
+      "labelUnknownModel": "نموذج غير معروف «{{id}}»",
+      "labelNoRepositories": "لا توجد مستودعات مستندات",
+      "labelUnknownRepository": "مستودع مستندات غير معروف «{{id}}»",
+      "labelRoleCount_other": "{{count}} دور",
+      "labelRoleCount_zero": "لا توجد أدوار",
+      "labelRoleCount_one": "دور واحد ({{count}})",
+      "labelRoleCount_two": "دوران ({{count}})",
+      "labelRoleCount_few": "{{count}} أدوار",
+      "labelRoleCount_many": "{{count}} دورًا"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelNameAsc": "الاسم من أ إلى ي",
+      "labelNameDesc": "الاسم من ي إلى أ",
+      "labelGroup": "التجميع حسب",
+      "labelFavorites": "المفضلة",
+      "labelFirstLetter": "الحرف الأول",
+      "labelWorkspaces": "مساحات العمل",
+      "labelModel": "النموذج",
+      "labelRepositories": "مستودعات المستندات",
+      "labelRoleCount": "عدد الأدوار",
+      "labelCards": "بطاقات",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين",
+      "labelAgents": "الوكلاء",
+      "labelNewAgent": "وكيل جديد",
+      "labelNoGroup": "دون مجموعة"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "المظهر",
+      "description": "حدد لونًا وأيقونة يمثلان الوكيل بأفضل شكل.",
+      "labelIcon": "الأيقونة",
+      "labelColor": "اللون"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "إزالة من المفضلة",
+      "tooltipAddFavorite": "إضافة إلى المفضلة"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "تعديل",
+      "tooltipInfo": "معلومات",
+      "tooltipNewChat": "محادثة جديدة"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "مساحة عمل غير معروفة",
+      "labelModelUnknown": "نموذج غير معروف"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "الوصول إلى الويب",
+      "labelGeneralAccess": "وصول عام، بحث في الويب",
+      "descriptionFetch": "يجلب تنزيل الويب محتوى عنوان URL إلى تخزين المحادثة أو إلى مستودع مستندات موصول يمكن الكتابة فيه. وبعد معالجة الملف، يمكن للوكيل قراءة النص المستخرج واستخدامه في إجابته.",
+      "descriptionSearch": "يساعد البحث في الويب الوكيل على إيجاد صفحات ملائمة لاستعلام البحث. يعيد موفر البحث عناوين وروابط ومقتطفات قصيرة. ولا تقيّد قائمة السماح الخاصة بالتنزيل عمليات البحث في الويب.",
+      "labelChanged": "معدّل",
+      "labelFetch": "تنزيل",
+      "labelSearch": "بحث",
+      "labelOn": "مفعّل",
+      "labelOff": "معطّل",
+      "labelAsk": "السؤال أولًا",
+      "labelWhitelist": "التنزيل مقصور على قائمة النطاقات المسموح بها",
+      "labelAll": "التنزيل من جميع المواقع",
+      "labelEmptyWhitelist": "لا توجد نطاقات مسموح بها",
+      "labelEdit": "تعديل الوصول إلى الويب",
+      "labelDetails": "إظهار التفاصيل"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "الأداة: إضافات المحادثة",
+      "labelFeatures": "اقتراح الرسالة التالية وتغيير تسمية المحادثة",
+      "description": "يمكن للوكيل اقتراح رسائل المستخدم التالية، بحيث يضغط المستخدم على الرسالة المناسبة لمتابعة المحادثة. <br /> يمكن للوكيل تغيير تسمية المحادثة للمستخدم لتسهيل العثور عليها في السجل."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "وصف الدور",
+      "description": "يُستخدم وصف الدور عند وصول رسالة مستخدم جديدة لتحديد الدور الذي سيجيب عنها",
+      "labelName": "الاسم",
+      "labelSelectionHint": "إرشادات اختيار الدور",
+      "labelDeleteRole": "حذف الدور ",
+      "labelDoNotOverride": "دون تجاوز",
+      "labelOverrideModel": "تجاوز النموذج",
+      "descriptionOverrideModel": "يمكنك اختيار نموذج لهذا الدور يختلف عن النموذج العام للوكيل.",
+      "confirmDeleteDescription": "هل أنت متأكد من حذف الدور «{{name}}»؟ لا يمكن التراجع عن هذا الإجراء.",
+      "labelCancel": "إلغاء",
+      "labelThinking": "التفكير"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "النموذج",
+      "description": "نموذج اللغة الكبير الذي يستخدمه الوكيل، ما لم يتجاوزه دور.",
+      "labelName": "النموذج",
+      "labelThinking": "التفكير",
+      "labelThinking_optionalOn": "التفكير",
+      "labelThinking_mandatoryOn": "التفكير إلزامي",
+      "labelThinking_optionalOff": "دون تفكير",
+      "labelThinking_mandatoryOff": "تعطيل التفكير إلزامي",
+      "labelSelectModel": "اختر نموذجًا"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "مستودع المستندات",
+      "labelPathAgent": "المسار للوكيل",
+      "labelPathRepository": "المسار في مستودع المستندات",
+      "labelPermission": "الإذن",
+      "labelDeleteConnection": "حذف الاتصال",
+      "confirmDeleteTitle": "حذف الاتصال",
+      "confirmDeleteDescription": "هل تريد فعلًا حذف هذا الاتصال بمستودع المستندات «{{name}}»؟",
+      "labelCancel": "إلغاء",
+      "labelAddConnection": "اتصال إضافي",
+      "labelUnknownRepository": "مستودع مستندات غير معروف",
+      "labelConfirmWrite": "قراءة وكتابة (مع طلب التأكيد)",
+      "labelReadOnly": "قراءة فقط",
+      "labelWrite": "قراءة وكتابة (تلقائيًا)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "التسمية",
+      "labelMessage": "الرسالة",
+      "labelClose": "إغلاق"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "الاسم",
+      "labelUrl": "عنوان URL",
+      "labelHTTPHeaders": "ترويسات HTTP",
+      "labelHeaderName": "الاسم",
+      "labelHeaderValue": "القيمة",
+      "labelAddHeader": "إضافة ترويسة HTTP",
+      "labelDeleteConnection": "حذف الاتصال",
+      "confirmDeleteTitle": "حذف MCP",
+      "confirmDeleteDescription": "هل أنت متأكد من حذف إعداد MCP المسمى «{{name}}»؟",
+      "labelCancel": "إلغاء",
+      "labelDeleteMCP": "حذف MCP",
+      "labelAddMCP": "MCP آخر",
+      "errorInvalidUrl": "يجب أن يكون عنوان URL صالحًا",
+      "labelOAuthApp": "تطبيق OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "البيانات",
+      "labelConnectRepository": "ربط مستودع مستندات",
+      "labelToolWebAccess": "الأداة: الوصول إلى الويب",
+      "labelConnectMCP": "ربط أداة خارجية (MCP)",
+      "labelSupport": "الدعم",
+      "labelToolChatExtensions": "الأداة: إضافات المحادثة",
+      "labelToolCalculator": "الأداة: الحاسبة",
+      "labelSystem": "النظام",
+      "labelToolPlatformAccess": "الأداة: الوصول إلى منصة schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "وكيل جديد",
+      "emptyDescription": "حدد سلوك الوكيل ووصوله إلى البيانات ومظهره وغير ذلك الكثير.",
+      "labelDefinePrompt": "حدد التعليمات",
+      "descriptionDefinePrompt": "تعتمد جودة الوكيل على تعليماته. تقلل تعريفات الأدوار الواضحة من الهلوسة وتزيد الاتساق.",
+      "labelConnectTools": "اربط الأدوات",
+      "descriptionConnectTools": "اربط مستودعات مستندات مثلًا ليعتمد الوكيل على الحقائق ويستخدم معارف خاصة بالشركة.",
+      "labelWriteDocs": "اكتب التوثيق",
+      "descriptionWriteDocs": "ساعد المستخدمين على فهم إمكانات هذا الوكيل.",
+      "infoRoleDefinition": "يحدد الدور سلوك الوكيل والأدوات المتاحة لإنجاز المهمة.",
+      "infoDocsDescription": "يمكن أن يتضمن التوثيق نصًا بتنسيق Markdown واقتراحات لرسائل تُرسل إلى الوكيل.",
+      "infoAppearanceDescription": "يساعد الاسم والوصف واللون المستخدمين على التنقل بين الوكلاء المتاحين."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "رسائل مقترحة",
+      "descriptionRecommendedMessages": "ساعد المستخدمين باقتراح رسائل توضّح أفضل طريقة لاستخدام الوكيل.",
+      "labelAddMessage": "إضافة رسالة ",
+      "labelDocumentation": "التوثيق",
+      "descriptionDocumentation": "شارك هنا معلومات إضافية عن هذا الوكيل مع المستخدمين",
+      "labelShowPreview": "إظهار المعاينة",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "يساعد التوثيق المستخدمين على استخدام الوكيل. ويظهر عند بدء محادثة جديدة.",
+      "descriptionMarkdownHelp": "Markdown هي لغة ترميز خفيفة لتنسيق النص بسرعة وسهولة.\n\n* **البنية:** عناوين (`#`)، قوائم مرتبة (`1.`) وغير مرتبة (`-`)، وخطوط أفقية.\n* **نمط النص:** **عريض** `**عريض**`، *مائل* `*مائل*`، ~~مشطوب~~ `~~مشطوب~~`.\n* **الكود:** كود ضمن السطر (`code`) وكتل كود مع تمييز الصياغة.\n* **التنظيم:** اقتباسات (`>`) وقوائم تحقق (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "لا توجد أدوار",
+      "descriptionNoRoles": "لم تُحدد أدوار للوكيل. لن يعمل الوكيل دون دور.",
+      "labelAddRole": "إضافة دور ",
+      "infoMultipleRoles": "يمكن للوكلاء تولي عدة أدوار. ويستطيع كل دور التركيز بشكل أفضل على جزء من المهمة.",
+      "infoTools": "يمكن للوكلاء استخدام أدوات للإجابة بشكل أفضل عن طلبات المستخدمين، مثل البحث عن المستندات وإنشائها."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "وكيل جديد",
+      "labelAgent": "الوكيل",
+      "labelCreateAgent": "إنشاء الوكيل",
+      "labelSaveAgent": "حفظ الوكيل",
+      "tabOverview": "نظرة عامة",
+      "tabPrompt": "التعليمات",
+      "tabDocs": "الدعم",
+      "tabRoles": "الأدوار",
+      "tabSettings": "الإعدادات",
+      "btnCreate": "إنشاء",
+      "btnSave": "حفظ",
+      "labelEditAgent": "تعديل الوكيل",
+      "labelCloneAgent": "حفظ كوكيل جديد",
+      "labelDeleteAgent": "حذف الوكيل",
+      "confirmDeleteTitle": "حذف الوكيل",
+      "confirmDeleteDescription": "هل أنت متأكد من حذف الوكيل «{{name}}»؟ لا يمكن التراجع عن هذا الإجراء.",
+      "labelCancel": "إلغاء"
+    },
+    "AgentEditorRole": {
+      "labelRole": "الدور ",
+      "description": "يحدد سلوك الوكيل والأدوات التي يُسمح له باستخدامها في هذا السياق.",
+      "tabOverview": "نظرة عامة",
+      "tabPrompt": "التعليمات",
+      "tabDocumentRepositoryMounts": "مستودعات المستندات",
+      "tabMCPs": "أدوات خارجية (MCP)",
+      "tabWeb": "الوصول إلى الإنترنت",
+      "tabChat": "إضافات المحادثة",
+      "tabCalc": "الحاسبة",
+      "tabTools": "الأدوات",
+      "tabSettings": "الإعدادات",
+      "toolWebAccess": "الوصول إلى الإنترنت",
+      "chatExtensions": "إضافات المحادثة",
+      "calculator": "الحاسبة",
+      "externalToolsMCP": "أدوات خارجية (MCP)",
+      "labelPrompt": "التعليمات"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "تجاهل التغييرات",
+      "labelDiscardConfirm": "هل تريد فعلًا تجاهل جميع التغييرات غير المحفوظة على هذا الوكيل؟",
+      "labelCancel": "إلغاء",
+      "labelDiscard": "تجاهل التغييرات"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "أدوات خارجية (MCP)",
+      "changedBadge": "معدّل",
+      "unknownMcp": "MCP غير معروف",
+      "invalidUrl": "عنوان URL غير صالح"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "البحث الدلالي",
+      "labelChanged": "معدّل",
+      "labelActive": "نشط",
+      "labelInactive": "غير نشط",
+      "description": "عندما يكون معنى البيانات أهم من صياغتها الدقيقة. يتطلب نموذج تضمين.",
+      "labelUnknownModel": "نموذج غير معروف"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "البحث بالكلمات المفتاحية",
+      "labelChanged": "معدّل",
+      "labelActive": "نشط",
+      "labelInactive": "غير نشط",
+      "description": "للبحث عن عبارات وجمل محددة، مثل الأسماء والتسميات."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "أداة التفريغ الصوتي",
+      "labelChanged": "معدّل",
+      "labelUnknownTranscriber": "أداة تفريغ صوتي غير معروفة",
+      "labelGoToTranscriber": "الانتقال إلى أداة التفريغ الصوتي"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "رسالة جديدة"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "في انتظار المعالجة",
+      "tooltipPaused": "متوقف مؤقتًا"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "التفكير مفعّل",
+      "labelThinkingOff": "التفكير معطّل",
+      "labelMessageStack": "طابور الرسائل",
+      "placeholderMessage": "رسالة...",
+      "tooltipUploadFiles": "رفع الملفات",
+      "buttonPause": "إيقاف مؤقت",
+      "buttonStartBatch": "بدء الدفعة",
+      "buttonSend": "إرسال",
+      "descriptionFilesPending": "يجري رفع الملفات أو معالجتها…",
+      "labelAttachFiles": "إرفاق ملفات",
+      "labelUploadFiles": "رفع الملفات",
+      "labelSelectFile": "اختر ملفًا موجودًا"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "هل تسمح بهذا الإجراء؟",
+      "descriptionAction": "يحتاج الوكيل إلى موافقتك للمتابعة.",
+      "labelApprove": "سماح",
+      "labelReject": "رفض",
+      "labelRetry": "المحاولة مجددًا",
+      "labelSubmitting": "جارٍ المعالجة…",
+      "errorSubmit": "تعذر إرسال قرارك. يُرجى المحاولة مجددًا.",
+      "labelMCP": "اربط حسابك",
+      "descriptionMCP": "تتطلب أداة MCP هذه تسجيل الدخول. ستستأنف العملية المعلقة تلقائيًا بعد ربط الحساب."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "هل تريد حفظ المستند؟",
+      "descriptionWriteFile": "يريد الوكيل حفظ هذا المستند. سيُستبدل المحتوى الموجود.",
+      "labelShowContent": "إظهار المحتوى",
+      "labelHideContent": "إخفاء المحتوى",
+      "descriptionEmptyFile": "سيُحفظ المستند بمحتوى فارغ."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "تنزيل الويب",
+      "description": "اضبط الوصول إلى الويب لهذا الدور. يمكن تفعيل التنزيل والبحث كلٌّ على حدة.",
+      "labelFetch": "تفعيل تنزيل الويب",
+      "labelAskFetch": "السؤال قبل تنزيل صفحة",
+      "labelAccess": "المواقع المسموح بها",
+      "labelAll": "جميع المواقع",
+      "labelWhitelist": "قائمة النطاقات المسموح بها",
+      "descriptionAccess": "ملفات وصفحات ويب HTTP(S)، بما فيها الشبكة المحلية. تخضع عمليات إعادة التوجيه لقواعد الوصول نفسها.",
+      "labelDomains": "النطاقات المسموح بها",
+      "descriptionDomains": "اسم مضيف واحد في كل سطر، مثل example.com. استخدم *.example.com للنطاقات الفرعية؛ ولا يشمل ذلك example.com نفسه.",
+      "errorDomains": "أدخل أسماء المضيفين أو *.example.com دون بروتوكول أو مسار أو منفذ.",
+      "descriptionEmptyWhitelist": "تمنع قائمة السماح الفارغة الوصول إلى جميع الصفحات.",
+      "labelSearchTitle": "البحث في الويب",
+      "labelSearch": "تفعيل البحث في الويب",
+      "labelAskSearch": "السؤال قبل البحث في الويب",
+      "labelProvider": "موفر البحث",
+      "labelProviderDocs": "توثيق الموفر",
+      "labelApiKey": "مفتاح API",
+      "errorApiKey": "أدخل مفتاح API للموفر المحدد.",
+      "labelMarket": "لغة Staan والمنطقة",
+      "descriptionMarket": "مثل de-de أو en-us. القيمة الافتراضية هي en-us.",
+      "labelRemoveTool": "إزالة الأداة",
+      "labelConfirmRemoveTool": "هل تريد إزالة أداة الويب؟",
+      "descriptionRemoveTool": "ستُحذف من هذا الدور إعدادات تنزيل الويب والبحث فيه، بما فيها قائمة السماح ومفتاح API.",
+      "labelCancel": "إلغاء"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "تنزيل صفحة ويب",
+      "descriptionFetch": "هل تسمح للوكيل بتنزيل عنوان URL هذا وحفظه ومعالجته؟",
+      "labelDestination": "الوجهة"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "البحث في الويب",
+      "descriptionSearch": "هل تسمح للوكيل بإرسال هذا الاستعلام إلى موفر البحث المُعدّ؟"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "إغلاق",
+      "labelPending": "قيد التشغيل",
+      "labelApproval": "في انتظار الموافقة",
+      "labelDenied": "مرفوض",
+      "labelDone": "مكتمل",
+      "errorRequest": "فشل الطلب"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "بحث الويب",
+      "labelQuery": "استعلام البحث",
+      "labelEmptyResults": "لم يُعثر على نتائج."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "صفحة ويب",
+      "labelUrl": "عنوان URL",
+      "labelRange": "الأحرف {{start}}–{{end}} من {{total}}",
+      "descriptionTruncated": "يتوفر مزيد من المحتوى في القسم التالي.",
+      "labelEmptyPage": "لا تحتوي هذه الصفحة على نص قابل للقراءة.",
+      "labelSource": "فتح المصدر",
+      "descriptionFileReady": "حُفظ الملف وعولج. النص المستخرج متاح للوكيل مباشرة.",
+      "descriptionProcessingUnavailable": "حُفظ الملف. لا يوجد نص مستخرج؛ يتطلب الصوت والفيديو أداة تفريغ صوتي مُعدّة.",
+      "descriptionProcessingFailed": "حُفظ الملف، لكن المعالجة فشلت أو انتهت مهلتها. يمكن إعادة تشغيل المعالجة من التخزين."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "نسخ الملف",
+      "labelMove": "نقل الملف",
+      "descriptionSuccess": "تم نقل الملف. يُعاد إنشاء أي فهرس بحث مطلوب في الخلفية.",
+      "descriptionPending": "جارٍ التحضير لنقل الملف…",
+      "descriptionProcessingError": "تم نقل الملف، لكن يجب إعادة تشغيل المعالجة في الوجهة.",
+      "errorTransfer": "تعذر إكمال نقل الملف.",
+      "labelOpenFile": "فتح ملف الوجهة",
+      "descriptionDenied": "رُفض نقل الملف. لم يُنقل أي ملف.",
+      "descriptionApproval": "في انتظار موافقتك.",
+      "descriptionRunning": "جارٍ نقل الملف…",
+      "labelClose": "إغلاق",
+      "labelSource": "المصدر",
+      "labelTarget": "الوجهة"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "هل تسمح بنسخ هذا الملف؟",
+      "labelMove": "هل تسمح بنقل هذا الملف؟",
+      "descriptionCopy": "يريد الوكيل نسخ هذا الملف ومحتواه المعالج. لا تُستبدل الملفات الموجودة في الوجهة أبدًا.",
+      "descriptionMove": "يريد الوكيل نقل هذا الملف ومحتواه المعالج. سيُحذف المصدر بعد نجاح النسخ.",
+      "labelSource": "المصدر",
+      "labelTarget": "الوجهة"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "تتطلب أداة MCP هذه تسجيل الدخول. ستستأنف العملية المعلقة تلقائيًا بعد ربط الحساب.",
+      "labelConnect": "ربط حسابي"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "أداة MCP",
+      "labelDiscover": "اكتشاف الأدوات المتاحة",
+      "labelPending": "قيد التشغيل",
+      "labelDone": "مكتمل",
+      "labelApproval": "يلزم تسجيل الدخول",
+      "labelDenied": "مرفوض",
+      "errorRequest": "فشل الطلب",
+      "labelArguments": "المدخلات",
+      "labelResult": "النتيجة",
+      "labelClose": "إغلاق"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "تطبيق OAuth",
+      "labelSearch": "اتصال البحث",
+      "labelAutomatic": "لا يوجد تطبيق OAuth مُعدّ",
+      "labelNone": "لم يُحدد اتصال",
+      "labelMissing": "الاتصال غير متاح",
+      "descriptionOAuth": "اختياري: اختر تطبيق OAuth مسجلًا لخادم MCP هذا. واضبط عنوان URL الخاص به بشكل مستقل في هذا الوكيل.",
+      "descriptionSearch": "تُدار بيانات اعتماد Staan وBrave مركزيًا ضمن الإعدادات ← الاتصالات.",
+      "errorMissing": "لم يعد هذا الاتصال متاحًا. اختر اتصالًا آخر.",
+      "descriptionEmpty": "لم يُعدّ اتصال مطابق. يمكنك إدارة الاتصالات ضمن الإعدادات ← الاتصالات."
+    }
+  },
+  "page": {
+    "labelTitle": "الوكلاء",
+    "emptyTitle": "لا يوجد وكلاء",
+    "emptyDescription": "لم يُنشأ أي وكيل بعد.",
+    "labelNewAgent": "وكيل جديد",
+    "helpSearchTitle": "بحث",
+    "helpSearchDescription": "يمكنك البحث عن الوكلاء. يشمل البحث اسم الوكيل ووصفه ونموذجه، من بين أمور أخرى.",
+    "helpSortTitle": "الفرز والتجميع",
+    "helpSortDescription": "يمكن فرز الوكلاء حسب الاسم وتقسيمهم إلى مجموعات مختلفة. ويمكن عرضهم كبلاطات أو جدول."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "يتطلب موفر MCP هذا تطبيق OAuth مسجلًا. اطلب من المسؤول إنشاء تطبيق OAuth بمعرّف العميل وسر العميل ضمن الإعدادات ← الاتصالات، ثم اختره في إعدادات MCP للوكيل. بعد ذلك أعد الاتصال من المحادثة.",
+    "errorStart": "تعذر بدء تفويض MCP.",
+    "errorCallback": "فشل تفويض MCP أو انتهت صلاحيته. عُد إلى المحادثة وحاول مجددًا."
+  }
+}

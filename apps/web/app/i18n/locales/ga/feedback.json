@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Cóipeáil téacs an aiseolais chuig an ngearrthaisce",
+      "feedbackText": "Téacs an aiseolais",
+      "feedbackTextRecommendation": "Go raibh maith agat, seol an téacs seo chugainn ag ",
+      "sendFeedback": "Seol aiseolas trí ríomhphost",
+      "showFeedbackText": "Taispeáin téacs an aiseolais",
+      "thankYou": "Go raibh maith agat as am a ghlacadh chun aiseolas a thabhairt"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Scrios gach teachtaireacht earráide",
+      "actionDeleteAllCancel": "Cealaigh",
+      "actionDeleteAllExplainer": "An bhfuil tú cinnte gur mhaith leat gach teachtaireacht earráide a bailíodh a scriosadh? Ní féidir an gníomh seo a chealú.",
+      "actionDeleteAllShort": "Scrios teachtaireachtaí earráide",
+      "actionDeselectAll": "Díroghnaigh gach teachtaireacht earráide",
+      "actionSelectAll": "Roghnaigh gach teachtaireacht earráide",
+      "explainer": "Tá teachtaireachtaí earráide mar chuid den aiseolas freisin. Réitíonn an córas roinnt fadhbanna go huathoibríoch agus leanann d’oibríochtaí ar aghaidh gan bhriseadh. Mar sin féin, is mór an chabhair dúinn eolas a fháil faoi na hearráidí seo ionas gur féidir linn iad a réiteach.",
+      "explainerSecrecy": "Cinntigh nach bhfuil sonraí rúnda agus/nó pearsanta sna teachtaireachtaí earráide. Tá an córas deartha i bprionsabal chun a chinntiú nach mbíonn sonraí den sórt sin i dteachtaireachtaí earráide. Baineann teachtaireachtaí earráide le cúinsí gan choinne, áfach. Mar sin, déan athbhreithniú pearsanta ar an aiseolas ar mhaithe le slándáil.",
+      "explainerSecrecyHeading": "Gan sonraí rúnda",
+      "heading": "Earráidí",
+      "tableColumnPartOfFeedback": "Mar chuid den aiseolas",
+      "tableColumnDate": "Dáta",
+      "tableColumnErrorMessage": "Teachtaireacht earráide"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Níor tugadh rátáil réaltaí",
+      "starRating": "{{stars}} as 5 réalta"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Caith an t-aiseolas i leataobh",
+      "discardFeedbackSub": "An bhfuil tú cinnte gur mhaith leat d’aiseolas a chaitheamh i leataobh? Ní féidir an gníomh seo a chealú.",
+      "discardFeedbackCancel": "Cealaigh",
+      "infoSecrecy": "Cinntigh nach bhfuil sonraí rúnda agus/nó pearsanta san aiseolas a chuireann tú isteach.",
+      "writeFeedback": "Scríobh aiseolas",
+      "writeFeedbackSub": "Cuirimid fáilte roimh gach aiseolas, idir dhearfach agus dhiúltach."
+    }
+  },
+  "page": {
+    "headingLine1": "Cabhraigh linn schorn.ai in a Box a fheabhsú,",
+    "headingLine2": "tabhair d’aiseolas dúinn",
+    "headingMain": "Aiseolas"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Bases documentaires",
+    "description": "Les bases documentaires constituent une source de connaissances centralisée, structurée et fiable, accessible aux modèles d’IA selon le contexte."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Base documentaire"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Rechercher..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "Affichage",
+      "labelSort": "Trier",
+      "labelNameAsc": "Nom de A à Z",
+      "labelNameDesc": "Nom de Z à A",
+      "labelGroup": "Regrouper par",
+      "labelNoGroup": "Aucun groupe",
+      "labelFavorites": "Favoris",
+      "labelFirstLetter": "Première lettre",
+      "labelWorkspaces": "Espaces de travail",
+      "labelModel": "Transcripteur",
+      "labelCards": "Cartes",
+      "labelTable": "Tableau",
+      "labelSaveView": "Enregistrer la vue",
+      "labelReset": "Réinitialiser",
+      "labelDocumentRepositories": "Bases documentaires",
+      "labelNewDocumentRepository": "Nouvelle base documentaire"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Autres bases documentaires",
+      "labelFavorites": "Favoris",
+      "labelOtherTranscribers": "Autres transcripteurs",
+      "labelUnknownTranscriber": "Transcripteur inconnu « {{id}} »"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nom",
+      "tableColumnCapablilities": "Capacités",
+      "tableColumnNameActions": "Actions",
+      "emptyTitle": "Aucune base documentaire",
+      "emptyDescription": "Aucune base documentaire n’a encore été créée.",
+      "labelOtherDocumentRepositories": "Autres bases documentaires",
+      "labelFavorites": "Favoris",
+      "labelNoGroup": "Aucun groupe",
+      "labelUnknownTranscriber": "Transcripteur inconnu « {{id}} »"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Espace de travail inconnu"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Modifier",
+      "tooltipInfo": "Informations"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Retirer des favoris",
+      "tooltipAddFavorite": "Ajouter aux favoris"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nouvelle base documentaire",
+      "labelDocumentRepository": "Base documentaire",
+      "labelDocumentRepositoryDropdown": "Base documentaire",
+      "labelCreateDocumentRepository": "Créer la base documentaire",
+      "labelSaveDocumentRepository": "Enregistrer la base documentaire",
+      "labelCloneDocumentRepository": "Enregistrer comme nouvelle base documentaire",
+      "labelDeleteDocumentRepository": "Supprimer la base documentaire",
+      "confirmDeleteTitle": "Supprimer la base documentaire",
+      "confirmDeleteDescription": "Voulez-vous vraiment supprimer la base documentaire « {{name}} » ? Cette action est irréversible.",
+      "labelCancel": "Annuler",
+      "tabOverview": "Vue d’ensemble",
+      "tabFeatures": "Fonctions",
+      "tabSettings": "Paramètres",
+      "btnCreate": "Créer",
+      "btnSave": "Enregistrer"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Abandonner les modifications",
+      "labelDiscardConfirm": "Voulez-vous vraiment abandonner toutes les modifications non enregistrées de cette base documentaire ?",
+      "labelCancel": "Annuler",
+      "labelDiscard": "Abandonner les modifications"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nouvelle base documentaire",
+      "emptyDescription": "Définissez le comportement et l’apparence de la base documentaire.",
+      "checklistSemanticSearchTitle": "Activer la recherche sémantique",
+      "checklistSemanticSearchDescription": "Activez la recherche sémantique pour améliorer la qualité des résultats.",
+      "checklistTranscriberTitle": "Sélectionner un transcripteur",
+      "checklistTranscriberDescription": "Sélectionnez un transcripteur qui transcrit automatiquement tous les fichiers audio et vidéo importés.",
+      "helpTitle": "Aide",
+      "helpKeywordSearch": "Recherche classique par mots-clés. Convient particulièrement aux noms de marques, de personnes et autres noms propres.",
+      "helpEmbeddingDescription": "Ajoutez un modèle de plongement vectoriel pour activer la recherche sémantique. Elle trouve des documents similaires selon leur sens.",
+      "helpTranscriberDescription": "Ajoutez un transcripteur à la base documentaire pour transcrire automatiquement les fichiers audio et vidéo après leur importation."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Index de recherche",
+      "description": "Selon l’index, différentes méthodes sont utilisées pour fournir les meilleurs résultats pour la requête.",
+      "labelKeyword": "Recherche par mots-clés",
+      "descriptionKeyword": "Pour rechercher des expressions et des phrases précises. (Noms, désignations, etc.)",
+      "labelSemantic": "Recherche sémantique",
+      "descriptionSemantic": "Lorsque le sens des données prime sur leur formulation exacte. (Nécessite un modèle de plongement vectoriel)",
+      "labelEmbeddingModel": "Modèle de plongement vectoriel",
+      "descriptionEmbeddingModel": "Le modèle de plongement vectoriel est la base de la recherche sémantique."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Aucun transcripteur",
+      "labelLegend": "Transcripteur",
+      "description": "Les fichiers audio et vidéo sont transcrits automatiquement après leur importation.",
+      "labelTranscriber": "Transcripteur"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Description",
+      "description": "Choisissez un nom adapté à la base documentaire. Vous pouvez également enregistrer une courte description.",
+      "labelName": "Nom",
+      "labelDescription": "Description"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Apparence",
+      "description": "Choisissez une couleur et une icône qui représentent au mieux la base documentaire.",
+      "labelIcon": "Icône",
+      "labelColor": "Couleur"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Espace de travail",
+      "description": "Sélectionnez l’espace de travail dans lequel créer la base documentaire.",
+      "labelName": "Espace de travail",
+      "labelSelectWorkspace": "Sélectionnez un espace de travail."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Fichiers",
+      "tabSearch": "Recherche en texte intégral",
+      "tabInfo": "Informations"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Rechercher...",
+      "labelSearch": "Rechercher"
+    },
+    "Search": {
+      "emptyTitle": "Recherche en texte intégral",
+      "emptyDescription": "Recherchez du texte dans tous les fichiers de cette base documentaire."
+    }
+  },
+  "page": {
+    "labelTitle": "Bases documentaires",
+    "emptyTitle": "Aucune base documentaire",
+    "emptyDescription": "Aucune base documentaire n’a encore été créée.",
+    "labelNewDocumentRepository": "Nouvelle base documentaire",
+    "helpTitle": "Aide",
+    "helpSearchDescription": "Vous pouvez rechercher des bases documentaires. La recherche porte notamment sur leur nom, leur description et leur transcripteur.",
+    "helpSortDescription": "Les bases documentaires peuvent être triées par nom, réparties en groupes et affichées sous forme de cartes ou de tableau.",
+    "helpTranscriberDescription": "Vous pouvez choisir un transcripteur pour les bases documentaires. Les fichiers audio et vidéo qui y sont importés sont alors transcrits automatiquement."
+  }
+}

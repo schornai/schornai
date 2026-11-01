@@ -1,0 +1,1 @@
+export const resetPassword = async () => ({});

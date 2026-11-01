@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copy feedback text to clipboard",
+      "feedbackText": "Feedback text",
+      "feedbackTextRecommendation": "Best of luck, just send us this text at ",
+      "sendFeedback": "Send feedback via email",
+      "showFeedbackText": "Show feedback text",
+      "thankYou": "Thank you for taking the time to provide feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Delete all error messages",
+      "actionDeleteAllCancel": "Cancel",
+      "actionDeleteAllExplainer": "Are you sure you want to delete all collected error messages? This action cannot be undone.",
+      "actionDeleteAllShort": "Delete error messages",
+      "actionDeselectAll": "Deselect all error messages",
+      "actionSelectAll": "Select all error messages",
+      "explainer": "Error messages are also part of the feedback. Some issues are automatically resolved by the system, and your operations continue uninterrupted. However, it is helpful for us to be informed about these errors ourselves so we can resolve them.",
+      "explainerSecrecy": "Please ensure that error messages do not contain confidential and/or personal data. The system is designed in principle to ensure that error messages do not include such data. However, the nature of error messages relates to unforeseen circumstances. Therefore, please personally review the feedback for security reasons.",
+      "explainerSecrecyHeading": "No confidential data",
+      "heading": "Errors",
+      "tableColumnPartOfFeedback": "Part of feedback",
+      "tableColumnDate": "Date",
+      "tableColumnErrorMessage": "Error message"
+    },
+    "StarRatingCard": {
+      "noStarRating": "No star rating provided",
+      "starRating": "{{stars}} out of 5 stars"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Discard feedback",
+      "discardFeedbackSub": "Are you sure you want to discard your feedback? This action cannot be undone.",
+      "discardFeedbackCancel": "Cancel",
+      "infoSecrecy": "Please ensure that the feedback you submit does not contain confidential and/or personal data.",
+      "writeFeedback": "Write feedback",
+      "writeFeedbackSub": "We appreciate any feedback, whether positive or negative."
+    }
+  },
+  "page": {
+    "headingLine1": "Help us improve schorn.ai in a Box,",
+    "headingLine2": "give us your feedback",
+    "headingMain": "Feedback"
+  }
+}

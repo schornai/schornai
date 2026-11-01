@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopiera återkopplingstext till urklipp",
+      "feedbackText": "Återkopplingstext",
+      "feedbackTextRecommendation": "Tack! Skicka den här texten till oss på ",
+      "sendFeedback": "Skicka återkoppling via e-post",
+      "showFeedbackText": "Visa återkopplingstext",
+      "thankYou": "Tack för att du tar dig tid att ge återkoppling"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Ta bort alla felmeddelanden",
+      "actionDeleteAllCancel": "Avbryt",
+      "actionDeleteAllExplainer": "Vill du verkligen ta bort alla insamlade felmeddelanden? Åtgärden kan inte ångras.",
+      "actionDeleteAllShort": "Ta bort felmeddelanden",
+      "actionDeselectAll": "Avmarkera alla felmeddelanden",
+      "actionSelectAll": "Markera alla felmeddelanden",
+      "explainer": "Felmeddelanden ingår också i återkopplingen. Vissa problem löses automatiskt av systemet så att arbetet fortsätter utan avbrott. Det är ändå värdefullt för oss att få veta om felen så att vi kan åtgärda dem.",
+      "explainerSecrecy": "Kontrollera att felmeddelandena inte innehåller konfidentiella uppgifter eller personuppgifter. Systemet är i grunden utformat för att inte ta med sådana uppgifter i felmeddelanden. Fel uppstår dock under oförutsedda omständigheter. Granska därför återkopplingen själv av säkerhetsskäl.",
+      "explainerSecrecyHeading": "Inga konfidentiella uppgifter",
+      "heading": "Fel",
+      "tableColumnPartOfFeedback": "Del av återkopplingen",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Felmeddelande"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Inget stjärnbetyg angivet",
+      "starRating": "{{stars}} av 5 stjärnor"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Kasta återkoppling",
+      "discardFeedbackSub": "Vill du verkligen kasta din återkoppling? Åtgärden kan inte ångras.",
+      "discardFeedbackCancel": "Avbryt",
+      "infoSecrecy": "Kontrollera att återkopplingen du skickar inte innehåller konfidentiella uppgifter eller personuppgifter.",
+      "writeFeedback": "Skriv återkoppling",
+      "writeFeedbackSub": "Vi uppskattar all återkoppling, både positiv och negativ."
+    }
+  },
+  "page": {
+    "headingLine1": "Hjälp oss att förbättra schorn.ai in a Box,",
+    "headingLine2": "ge oss din återkoppling",
+    "headingMain": "Återkoppling"
+  }
+}

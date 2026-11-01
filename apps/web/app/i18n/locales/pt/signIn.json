@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Já tem sessão iniciada",
+      "backToDashboard": "Voltar ao painel",
+      "signOut": "Terminar sessão"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Iniciar sessão com e-mail e palavra-passe",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Palavra-passe",
+      "buttonSignIn": "Iniciar sessão com e-mail",
+      "buttonReset": "Repor palavra-passe"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Iniciar sessão com fornecedor SSO",
+      "buttonSignIn": "Iniciar sessão com {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Repor palavra-passe",
+      "descriptionKey": "Introduza o endereço de e-mail e a chave de reposição fornecida pelo administrador. A chave só pode ser utilizada uma vez e é válida durante 7 dias.",
+      "labelEmail": "E-mail",
+      "labelKey": "Chave de reposição da palavra-passe",
+      "labelPassword": "Nova palavra-passe",
+      "labelPasswordAgain": "Repetir nova palavra-passe",
+      "descriptionPassword": "Utilize pelo menos 6 caracteres e cumpra os requisitos de palavras-passe da sua organização.",
+      "errorEmail": "Introduza um endereço de e-mail válido.",
+      "errorKey": "Introduza a chave de reposição.",
+      "errorPassword": "A palavra-passe tem de conter pelo menos 6 caracteres.",
+      "errorPasswordAgain": "As palavras-passe não coincidem.",
+      "errorReset": "Não foi possível alterar a palavra-passe. Verifique o endereço de e-mail, a chave e os requisitos de palavras-passe. As chaves expiradas ou já utilizadas são inválidas.",
+      "descriptionSuccess": "A sua palavra-passe foi alterada. Pode agora iniciar sessão com a nova palavra-passe.",
+      "labelReset": "Guardar palavra-passe",
+      "labelSignIn": "Voltar ao início de sessão"
+    }
+  }
+}

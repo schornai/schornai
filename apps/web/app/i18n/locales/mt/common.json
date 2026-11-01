@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Konversazzjoni ġdida",
+        "mainLabelAgents": "Aġenti",
+        "mainLabelApps": "Apps",
+        "mainLabelWorkspaces": "Spazji tax-xogħol",
+        "history": "Storja"
+      },
+      "SidebarFavorites": {
+        "label": "Favoriti",
+        "empty": "Għadu ma żdied ebda favorit."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Ebda favorit",
+        "descriptionNoFavorites": "Tista’ żżid <agents>aġenti</agents>, <documents>repożitorji tad-dokumenti</documents> u <transcribers>traskritturi</transcribers> mal-favoriti."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Konversazzjoni ġdida"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Il-lejl it-tajjeb];(5-11)[L-għodwa t-tajba];(12-17)[Wara nofsinhar it-tajjeb];(18-inf)[Il-lejla t-tajba];",
+      "labelAllAgents": "L-aġenti kollha",
+      "labelToApps": "Lejn l-apps"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favoriti",
+        "labelPermissions": "Permessi",
+        "labelModels": "Mudelli",
+        "labelTaskQueue": "Kju tal-kompiti",
+        "labelSettings": "Settings",
+        "labelUsers": "Utenti",
+        "labelWorkspaces": "Spazji tax-xogħol",
+        "labelSSOProvider": "Fornitur SSO",
+        "labelXRAGUpload": "Tella’ XRAG",
+        "labelSystemModel": "Mudell tas-sistema",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Lura għad-dashboard",
+        "labelConnections": "Konnessjonijiet",
+        "labelProviderConnections": "Konnessjonijiet",
+        "labelService": "Servizz",
+        "labelArtifacts": "Artefatti",
+        "labelCluster": "Raggruppament"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Agħżel ikona",
+      "buttonMoreIcons": "Aktar ikoni",
+      "textLucideInfo": "Ikoni minn <0>Lucide</0>",
+      "placeholderSearchIcons": "Fittex ikoni...",
+      "buttonCancel": "Ikkanċella"
+    },
+    "FileUploadDropZone": {
+      "drop": "Waqqa’ fajl hawn biex ittellgħu"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Mibdul"
+    },
+    "Pagination": {
+      "labelPrev": "Preċedenti",
+      "labelNext": "Li jmiss"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Il-kont tiegħi",
+      "labelSystem": "Sistema",
+      "labelModels": "Mudelli",
+      "labelCluster": "Raggruppament",
+      "labelSettings": "Settings",
+      "labelDashboard": "Dashboard",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Oħroġ mill-kont"
+    },
+    "UserRoleText": {
+      "admin": "Amministratur",
+      "workspace-admin": "Amministratur tal-ispazju tax-xogħol",
+      "editor": "Editur",
+      "user": "Utent",
+      "none": "Mhux awtorizzat"
+    },
+    "StorageView": {
+      "placeholderSearch": "Fittex f’dan il-folder…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Isem",
+      "tableColumnType": "Tip",
+      "tableColumnSize": "Daqs",
+      "tableColumnCreated": "Maħluq",
+      "tableColumnUpdated": "Aġġornat",
+      "tableColumnNameActions": "Azzjonijiet",
+      "groupTimeToday": "Illum",
+      "groupTimeLast7Days": "L-aħħar 7 ijiem",
+      "groupTimeLast30Days": "L-aħħar 30 jum",
+      "groupTimeOther": "Oħrajn",
+      "labelFolder": "Folder",
+      "descriptionProcessing": "Il-fajl qed jiġi pproċessat"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Folder ġdid",
+      "placeholderFolderName": "Isem il-folder...",
+      "labelCancel": "Ikkanċella",
+      "labelCreate": "Oħloq"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Neħħi",
+      "labelDescription": "Żgur li trid tneħħi \"{{name}}\"? Dan ma jistax jitreġġa’ lura.",
+      "labelCancel": "Ikkanċella",
+      "labelRemove": "Neħħi"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Direttorju ewlieni"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Ebda fajl",
+      "labelDescription": "Il-folder attwali ma fih ebda fajl. Sempliċement ġib il-fajls hawn biex ittellagħhom.",
+      "labelUploadFile": "Tella’ fajl",
+      "labelCreateFile": "Oħloq fajl"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelNameAsc": "Isem minn A sa Z",
+      "labelNameDesc": "Isem minn Z sa A",
+      "labelSizeAsc": "Daqs, axxendenti",
+      "labelSizeDesc": "Daqs, dixxendenti",
+      "labelCreatedAsc": "Data tal-ħolqien, axxendenti",
+      "labelCreatedDesc": "Data tal-ħolqien, dixxendenti",
+      "labelUpdatedAsc": "Data tal-aġġornament, axxendenti",
+      "labelUpdatedDesc": "Data tal-aġġornament, dixxendenti",
+      "labelGroup": "Iġbor fi gruppi",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelFirstLetter": "L-ewwel ittra",
+      "labelFileType": "Tip ta’ fajl",
+      "labelCreated": "Data tal-ħolqien",
+      "labelUpdated": "Data tal-aġġornament",
+      "labelTilesSmall": "Madum (żgħir)",
+      "labelTilesMedium": "Madum (medju)",
+      "labelTilesLarge": "Madum (kbir)",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja",
+      "labelNewFolder": "Folder ġdid",
+      "labelThisFolder": "Dan il-folder",
+      "labelUploadFile": "Tella’ fajl",
+      "labelNew": "Ġdid",
+      "labelDeleteFolder": "Ħassar folder",
+      "labelNewRecording": "Reġistrazzjoni ġdida",
+      "labelColumns": "Dehra f’kolonni",
+      "labelNewTextFile": "Fajl ġdid"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Ebda riżultat",
+      "descriptionNoResults": "It-tfittxija tiegħek ma tat ebda riżultat. Erġa’ fformula l-mistoqsija tiegħek.",
+      "labelCharacters": "karattri"
+    },
+    "Transcription": {
+      "labelTitle": "Traskrizzjoni",
+      "labelLoadingMedia": "Qed titgħabba l-midja…",
+      "labelBuffering": "Qed jinħażen buffer għad-daqq…",
+      "labelSeeking": "Qed titgħabba l-pożizzjoni…",
+      "labelPlayer": "Plejer tal-midja",
+      "labelPlay": "Daqq",
+      "labelPause": "Issospendi",
+      "labelSeek": "Pożizzjoni tad-daqq",
+      "labelBack": "Lura 10 sekondi",
+      "labelForward": "’Il quddiem 10 sekondi",
+      "labelSpeed": "Veloċità tad-daqq",
+      "labelUnmute": "Ixgħel il-ħoss",
+      "labelMute": "Itfi l-ħoss",
+      "labelVolume": "Volum",
+      "labelHideVideo": "Aħbi l-vidjo",
+      "labelShowVideo": "Uri l-vidjo",
+      "labelPlaySegment": "Daqq is-segment {{number}}",
+      "labelReviewed": "Rivedut",
+      "labelSegments": "Segmenti",
+      "labelWords": "Kliem",
+      "descriptionEmpty": "Ma nstab ebda riżultat ta’ traskrizzjoni.",
+      "descriptionConfidence": "Kunfidenza: {{percent}}%",
+      "errorPlayback": "Id-daqq falla. Iċċekkja li l-fajl tal-midja huwa disponibbli u erġa’ pprova.",
+      "labelEditSegment": "Editja s-segment {{number}}",
+      "labelSegmentText": "Test tas-segment",
+      "labelSave": "Issejvja",
+      "labelSaving": "Qed jiġi ssejvjat…",
+      "labelSaveReviewed": "Issejvja u mmarka bħala rivedut",
+      "labelCancel": "Ikkanċella",
+      "labelRestoreOriginal": "Irrestawra t-test oriġinali",
+      "descriptionUnsaved": "Il-bidliet jiġu applikati biss meta tissejvja.",
+      "errorSave": "Is-sejvjar falla. It-test tiegħek inżamm. Erġa’ pprova.",
+      "errorConflict": "Dan is-segment inbidel. Ikkopja l-abbozz tiegħek u erġa’ għabbi d-dehra qabel terġa’ tissejvja.",
+      "labelDownloadSrt": "Niżżel SRT",
+      "descriptionSaveBeforeDownload": "Issejvja jew ikkanċella l-bidliet tiegħek qabel tniżżel il-fajl SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Dehra f’kolonni",
+      "labelRoot": "Dokumenti",
+      "labelDetails": "Dettalji tal-fajl",
+      "labelType": "Tip",
+      "labelSize": "Daqs",
+      "labelUpdated": "Aġġornat",
+      "labelOpen": "Iftaħ fajl"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Fajl ġdid",
+      "labelName": "Isem il-fajl",
+      "labelCreate": "Oħloq fajl",
+      "labelCancel": "Ikkanċella",
+      "errorCreate": "Il-fajl ma setax jinħoloq. Iċċekkja isem il-fajl u l-permessi tiegħek għall-kitba."
+    },
+    "StorageFileActions": {
+      "labelActions": "Azzjonijiet għal {{name}}",
+      "labelDownloadOriginal": "Niżżel l-oriġinal",
+      "labelDownloadProcessed": "Niżżel it-test ipproċessat",
+      "labelRename": "Ibdel l-isem",
+      "labelProcess": "Erġa’ pproċessa",
+      "labelDelete": "Ħassar fajl",
+      "labelName": "Isem ġdid tal-fajl",
+      "labelCancel": "Ikkanċella",
+      "labelConfirm": "Ikkonferma",
+      "descriptionDelete": "Tħassar b’mod permanenti \"{{name}}\", il-kontenut ipproċessat tiegħu u l-entrati fl-indiċi tat-tfittxija?",
+      "descriptionProcess": "Terġa’ tipproċessa \"{{name}}\"? Il-bidliet manwali se jiġu sostitwiti.",
+      "descriptionQueued": "L-ipproċessar jinsab fil-kju jew diġà għaddej. Iċċekkja l-istatus tiegħu fil-lista tal-fajls.",
+      "descriptionUnsupported": "Dan il-fajl bħalissa ma jistax jiġi pproċessat. L-awdjo u l-vidjo jeħtieġu traskrittur ikkonfigurat.",
+      "errorAction": "L-azzjoni falliet. Iċċekkja l-permessi tal-kitba, kunflitti fl-ismijiet u l-ipproċessar li għaddej. Bidla fl-isem li tfalli tista’ tħalli ż-żewġ ismijiet tal-fajl; iċċekkja l-lista qabel terġa’ tipprova.",
+      "labelOptions": "Għażliet",
+      "labelEdit": "Editja",
+      "descriptionRename": "Ibdel l-isem ta’ \"{{name}}\". Żomm l-estensjoni tal-fajl. L-oriġinal, il-kontenut ipproċessat u l-indiċi tat-tfittxija jiġu aġġornati flimkien. L-ismijiet eżistenti qatt ma jinkitbu fuqhom.",
+      "labelCopy": "Ikkopja lejn…",
+      "labelMove": "Mexxi lejn…",
+      "descriptionCopy": "Ikkopja \"{{name}}\" inkluż il-kontenut ipproċessat tiegħu. Is-sors jinżamm.",
+      "descriptionMove": "Mexxi \"{{name}}\" inkluż il-kontenut ipproċessat tiegħu. Is-sors jitneħħa wara li l-ikkupjar jirnexxi.",
+      "descriptionTransferred": "Il-fajl ġie ttrasferit. L-indiċijiet tat-tfittxija fid-destinazzjoni jinbnew mill-ġdid fl-isfond.",
+      "descriptionTransferProcessingError": "Il-fajl ġie ttrasferit, iżda l-ipproċessar ma setax jinbeda. Iftaħ il-fajl tad-destinazzjoni u agħżel \"Erġa’ pproċessa\". Tirrepetix it-trasferiment."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Azzjonijiet għal {{name}}",
+      "labelDelete": "Ħassar folder"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Kontenut",
+      "labelSave": "Issejvja",
+      "labelCancel": "Ikkanċella",
+      "errorSave": "Is-sejvjar falla. Erġa’ pprova.",
+      "errorConflict": "Il-kontenut inbidel. Erġa’ għabbi qabel tissejvja.",
+      "errorIndex": "Ġie ssejvjat, iżda l-indiċi tat-tfittxija ma setax jiġi aġġornat. Erġa’ ssejvja."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Agħżel il-folder tad-destinazzjoni",
+      "labelSelectFile": "Agħżel fajl eżistenti",
+      "descriptionFolder": "Agħżel folder eżistenti. Fajl wieħed se jiġi ttrasferit; l-ismijiet eżistenti qatt ma jinkitbu fuqhom.",
+      "descriptionFile": "Agħżel fajl minn din il-konversazzjoni jew minn repożitorju aċċessibbli. Id-dokumenti u r-reġistrazzjonijiet iridu jkunu diġà pproċessati.",
+      "labelStorage": "Ħażna",
+      "labelCurrentStorage": "Ħażna attwali",
+      "labelUp": "Folder ġenitur",
+      "descriptionLoading": "Qed jitgħabbew il-fajls…",
+      "descriptionEmpty": "Ebda entrata li taqbel f’dan il-folder.",
+      "descriptionNoStorages": "M’hemm ebda repożitorju aċċessibbli disponibbli.",
+      "descriptionPending": "Qed jiġi ttrasferit il-fajl. Stenna r-riżultat.",
+      "labelCancel": "Ikkanċella",
+      "labelUseFolder": "Uża dan il-folder",
+      "labelUseFile": "Ehmeż fajl",
+      "labelRetry": "Erġa’ għabbi",
+      "errorLoad": "Dan il-folder ma setax jitgħabba. Iċċekkja l-aċċess u erġa’ pprova.",
+      "errorCollision": "Id-destinazzjoni diġà fiha fajl jew kontenut ipproċessat b’dan l-isem. Agħżel folder ieħor; ma nkiteb fuq xejn.",
+      "errorSameTarget": "Is-sors u d-destinazzjoni huma l-istess. Agħżel folder ieħor.",
+      "errorSourceChanged": "Is-sors inbidel waqt l-ikkupjar. Il-fajl mhux komplut fid-destinazzjoni tneħħa. Erġa’ pprova.",
+      "errorBusy": "Dan il-fajl bħalissa qed jiġi pproċessat. Stenna sakemm jitlesta.",
+      "errorPermission": "M’għandekx il-permessi meħtieġa għas-sors jew għad-destinazzjoni.",
+      "errorSourceDelete": "Il-fajl sħiħ tad-destinazzjoni nħoloq, iżda s-sors ma setax jitneħħa. Iċċekkja ż-żewġ postijiet qabel tirrepeti l-operazzjoni.",
+      "errorCleanup": "L-ikkupjar falla. Is-sors inżamm, iżda jistgħu jibqgħu fajls mhux kompluti fid-destinazzjoni. Iċċekkjaha qabel terġa’ tipprova.",
+      "errorAction": "L-operazzjoni falliet. Iċċekkja l-permessi, l-ismijiet tal-fajls u ż-żewġ postijiet qabel terġa’ tipprova.",
+      "errorNotProcessed": "Dan il-fajl għadu ma ġiex ipproċessat. Ipproċessah l-ewwel, imbagħad erġa’ agħżlu."
+    }
+  },
+  "_welcomeMessage": "Merħba f’\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentazzjoni",
+    "feedback": "Feedback",
+    "help": "Għajnuna",
+    "labelThemeLight": "Ċar",
+    "labelThemeDark": "Skur",
+    "labelThemeSystem": "Sistema operattiva",
+    "labelLanguage": "Lingwa"
+  }
+}

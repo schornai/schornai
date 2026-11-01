@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentumtárak",
+    "description": "A dokumentumtárak központi, strukturált és megbízható tudásbázist hoznak létre a mesterséges intelligencia számára, amelyhez a modellek a kontextusnak megfelelően férhetnek hozzá."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentumtár"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Keresés..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelNameAsc": "Név A–Z",
+      "labelNameDesc": "Név Z–A",
+      "labelGroup": "Csoportosítás alapja",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelFavorites": "Kedvencek",
+      "labelFirstLetter": "Kezdőbetű",
+      "labelWorkspaces": "Munkaterületek",
+      "labelModel": "Átíró",
+      "labelCards": "Kártyák",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás",
+      "labelDocumentRepositories": "Dokumentumtárak",
+      "labelNewDocumentRepository": "Új dokumentumtár"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "További dokumentumtárak",
+      "labelFavorites": "Kedvencek",
+      "labelOtherTranscribers": "További átírók",
+      "labelUnknownTranscriber": "Ismeretlen átíró: „{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Név",
+      "tableColumnCapablilities": "Képességek",
+      "tableColumnNameActions": "Műveletek",
+      "emptyTitle": "Nincsenek dokumentumtárak",
+      "emptyDescription": "Még nem hoztak létre dokumentumtárakat.",
+      "labelOtherDocumentRepositories": "További dokumentumtárak",
+      "labelFavorites": "Kedvencek",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelUnknownTranscriber": "Ismeretlen átíró: „{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Ismeretlen munkaterület"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Szerkesztés",
+      "tooltipInfo": "Információ"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eltávolítás a kedvencekből",
+      "tooltipAddFavorite": "Hozzáadás a kedvencekhez"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Új dokumentumtár",
+      "labelDocumentRepository": "Dokumentumtár",
+      "labelDocumentRepositoryDropdown": "Dokumentumtár",
+      "labelCreateDocumentRepository": "Dokumentumtár létrehozása",
+      "labelSaveDocumentRepository": "Dokumentumtár mentése",
+      "labelCloneDocumentRepository": "Mentés új dokumentumtárként",
+      "labelDeleteDocumentRepository": "Dokumentumtár törlése",
+      "confirmDeleteTitle": "Dokumentumtár törlése",
+      "confirmDeleteDescription": "Biztosan törli a(z) „{{name}}” dokumentumtárat? Ez a művelet nem vonható vissza.",
+      "labelCancel": "Mégse",
+      "tabOverview": "Áttekintés",
+      "tabFeatures": "Funkciók",
+      "tabSettings": "Beállítások",
+      "btnCreate": "Létrehozás",
+      "btnSave": "Mentés"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Módosítások elvetése",
+      "labelDiscardConfirm": "Valóban elveti a dokumentumtár összes nem mentett módosítását?",
+      "labelCancel": "Mégse",
+      "labelDiscard": "Módosítások elvetése"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Új dokumentumtár",
+      "emptyDescription": "Határozza meg a dokumentumtár működését és megjelenését.",
+      "checklistSemanticSearchTitle": "Szemantikus keresés engedélyezése",
+      "checklistSemanticSearchDescription": "Engedélyezze a szemantikus keresést. Ez javíthatja a keresési eredmények minőségét.",
+      "checklistTranscriberTitle": "Átíró kiválasztása",
+      "checklistTranscriberDescription": "Válasszon egy átírót, amely automatikusan átírja az összes feltöltött videó- és hangfájlt.",
+      "helpTitle": "Súgó",
+      "helpKeywordSearch": "Hagyományos kulcsszavas keresés. Leginkább márka-, személy- és egyéb nevek keresésére alkalmas.",
+      "helpEmbeddingDescription": "Adjon hozzá egy beágyazási modellt a szemantikus keresés engedélyezéséhez. A dokumentumok jelentése alapján talál hasonló dokumentumokat.",
+      "helpTranscriberDescription": "Adjon átírót a dokumentumtárhoz, és a feltöltés után minden videó- és hangfájl automatikusan átírásra kerül."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Keresési index",
+      "description": "A keresési indextől függően különböző módszerek biztosítják a keresőkifejezéshez leginkább megfelelő eredményeket.",
+      "labelKeyword": "Kulcsszavas keresés",
+      "descriptionKeyword": "Pontos kifejezések és mondatok kereséséhez. (Nevek, megnevezések stb.)",
+      "labelSemantic": "Szemantikus keresés",
+      "descriptionSemantic": "Amikor az adatok jelentése a fontos, nem a pontos megfogalmazás. (Beágyazási modellt igényel)",
+      "labelEmbeddingModel": "Beágyazási modell",
+      "descriptionEmbeddingModel": "A beágyazási modell a szemantikus keresés alapja."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Nincs átíró",
+      "labelLegend": "Átíró",
+      "description": "A videó- és hangfájlok feltöltés után automatikusan átírásra kerülnek.",
+      "labelTranscriber": "Átíró"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Leírás",
+      "description": "Válasszon megfelelő nevet a dokumentumtárnak. Emellett rövid leírást is menthet.",
+      "labelName": "Név",
+      "labelDescription": "Leírás"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Megjelenés",
+      "description": "Válasszon olyan színt és ikont, amely a legjobban jellemzi a dokumentumtárat.",
+      "labelIcon": "Ikon",
+      "labelColor": "Szín"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Munkaterület",
+      "description": "Válassza ki a munkaterületet, amelyen a dokumentumtárat létre szeretné hozni.",
+      "labelName": "Munkaterület",
+      "labelSelectWorkspace": "Válasszon munkaterületet."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Fájlok",
+      "tabSearch": "Teljes szöveges keresés",
+      "tabInfo": "Információ"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Keresés...",
+      "labelSearch": "Keresés"
+    },
+    "Search": {
+      "emptyTitle": "Teljes szöveges keresés",
+      "emptyDescription": "Keressen szöveget a dokumentumtár összes fájljában."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentumtárak",
+    "emptyTitle": "Nincsenek dokumentumtárak",
+    "emptyDescription": "Még nem hoztak létre dokumentumtárakat.",
+    "labelNewDocumentRepository": "Új dokumentumtár",
+    "helpTitle": "Súgó",
+    "helpSearchDescription": "Kereshet dokumentumtárak között. A keresés többek között a dokumentumtár nevére és leírására, valamint az átírójára terjed ki.",
+    "helpSortDescription": "A dokumentumtárak név szerint rendezhetők, és különböző csoportokba sorolhatók. Kártyákként vagy táblázatként jeleníthetők meg.",
+    "helpTranscriberDescription": "A dokumentumtárakhoz átírót választhat. A dokumentumtárba feltöltött hang- vagy videófájlok automatikusan átírásra kerülnek."
+  }
+}

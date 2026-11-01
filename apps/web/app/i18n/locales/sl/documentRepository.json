@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Shrambe dokumentov",
+    "description": "Shrambe dokumentov ustvarijo osrednjo, strukturirano in zanesljivo zbirko znanja za umetno inteligenco, do katere lahko modeli dostopajo glede na kontekst."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Shramba dokumentov"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Išči..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Pogled",
+      "labelSort": "Razvrščanje",
+      "labelNameAsc": "Ime od A do Ž",
+      "labelNameDesc": "Ime od Ž do A",
+      "labelGroup": "Združi po",
+      "labelNoGroup": "Brez združevanja",
+      "labelFavorites": "Priljubljeno",
+      "labelFirstLetter": "Prva črka",
+      "labelWorkspaces": "Delovni prostori",
+      "labelModel": "Prepisovalnik",
+      "labelCards": "Kartice",
+      "labelTable": "Tabela",
+      "labelSaveView": "Shrani pogled",
+      "labelReset": "Ponastavi",
+      "labelDocumentRepositories": "Shrambe dokumentov",
+      "labelNewDocumentRepository": "Nova shramba dokumentov"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Druge shrambe dokumentov",
+      "labelFavorites": "Priljubljeno",
+      "labelOtherTranscribers": "Drugi prepisovalniki",
+      "labelUnknownTranscriber": "Neznan prepisovalnik »{{id}}«"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Ime",
+      "tableColumnCapablilities": "Zmožnosti",
+      "tableColumnNameActions": "Dejanja",
+      "emptyTitle": "Ni shramb dokumentov",
+      "emptyDescription": "Ustvarjena ni še nobena shramba dokumentov.",
+      "labelOtherDocumentRepositories": "Druge shrambe dokumentov",
+      "labelFavorites": "Priljubljeno",
+      "labelNoGroup": "Brez združevanja",
+      "labelUnknownTranscriber": "Neznan prepisovalnik »{{id}}«"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Neznan delovni prostor"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odstrani iz priljubljenih",
+      "tooltipAddFavorite": "Dodaj med priljubljene"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nova shramba dokumentov",
+      "labelDocumentRepository": "Shramba dokumentov",
+      "labelDocumentRepositoryDropdown": "Shramba dokumentov",
+      "labelCreateDocumentRepository": "Ustvari shrambo dokumentov",
+      "labelSaveDocumentRepository": "Shrani shrambo dokumentov",
+      "labelCloneDocumentRepository": "Shrani kot novo shrambo dokumentov",
+      "labelDeleteDocumentRepository": "Izbriši shrambo dokumentov",
+      "confirmDeleteTitle": "Izbriši shrambo dokumentov",
+      "confirmDeleteDescription": "Ali res želite izbrisati shrambo dokumentov »{{name}}«? Tega dejanja ni mogoče razveljaviti.",
+      "labelCancel": "Prekliči",
+      "tabOverview": "Pregled",
+      "tabFeatures": "Funkcije",
+      "tabSettings": "Nastavitve",
+      "btnCreate": "Ustvari",
+      "btnSave": "Shrani"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zavrzi spremembe",
+      "labelDiscardConfirm": "Ali res želite zavreči vse neshranjene spremembe te shrambe dokumentov?",
+      "labelCancel": "Prekliči",
+      "labelDiscard": "Zavrzi spremembe"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nova shramba dokumentov",
+      "emptyDescription": "Določite vedenje in videz shrambe dokumentov.",
+      "checklistSemanticSearchTitle": "Vklopi semantično iskanje",
+      "checklistSemanticSearchDescription": "Vklopite semantično iskanje. To lahko izboljša kakovost rezultatov iskanja.",
+      "checklistTranscriberTitle": "Izberi prepisovalnik",
+      "checklistTranscriberDescription": "Izberite prepisovalnik, ki samodejno prepiše vse naložene video- in zvočne datoteke.",
+      "helpTitle": "Pomoč",
+      "helpKeywordSearch": "Klasično iskanje po ključnih besedah. Najprimernejše za iskanje blagovnih znamk, osebnih imen in drugih nazivov.",
+      "helpEmbeddingDescription": "Dodajte model vektorskih vložitev za vklop semantičnega iskanja. Poišče podobne dokumente glede na njihov pomen.",
+      "helpTranscriberDescription": "Dodajte prepisovalnik v shrambo dokumentov in vse video- ter zvočne datoteke se bodo po nalaganju samodejno prepisale."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Iskalni indeks",
+      "description": "Glede na iskalni indeks se uporabljajo različne metode za najboljše rezultate glede na poizvedbo.",
+      "labelKeyword": "Iskanje po ključnih besedah",
+      "descriptionKeyword": "Za iskanje natančnih izrazov in stavkov. (Imena, poimenovanja itd.)",
+      "labelSemantic": "Semantično iskanje",
+      "descriptionSemantic": "Ko je pomemben pomen podatkov in ne njihovo natančno besedilo. (Zahteva model vektorskih vložitev)",
+      "labelEmbeddingModel": "Model vektorskih vložitev",
+      "descriptionEmbeddingModel": "Model vektorskih vložitev je osnova semantičnega iskanja."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Brez prepisovalnika",
+      "labelLegend": "Prepisovalnik",
+      "description": "Video- in zvočne datoteke se po nalaganju samodejno prepišejo.",
+      "labelTranscriber": "Prepisovalnik"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Izberite primerno ime shrambe dokumentov. Shranite lahko tudi kratek opis.",
+      "labelName": "Ime",
+      "labelDescription": "Opis"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Videz",
+      "description": "Izberite barvo in ikono, ki najbolje predstavljata shrambo dokumentov.",
+      "labelIcon": "Ikona",
+      "labelColor": "Barva"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Delovni prostor",
+      "description": "Izberite delovni prostor, v katerem želite ustvariti shrambo dokumentov.",
+      "labelName": "Delovni prostor",
+      "labelSelectWorkspace": "Izberite delovni prostor."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Datoteke",
+      "tabSearch": "Iskanje po celotnem besedilu",
+      "tabInfo": "Informacije"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Išči...",
+      "labelSearch": "Išči"
+    },
+    "Search": {
+      "emptyTitle": "Iskanje po celotnem besedilu",
+      "emptyDescription": "Iščite besedilo v vseh datotekah te shrambe dokumentov."
+    }
+  },
+  "page": {
+    "labelTitle": "Shrambe dokumentov",
+    "emptyTitle": "Ni shramb dokumentov",
+    "emptyDescription": "Ustvarjena ni še nobena shramba dokumentov.",
+    "labelNewDocumentRepository": "Nova shramba dokumentov",
+    "helpTitle": "Pomoč",
+    "helpSearchDescription": "Shrambe dokumentov lahko iščete. Iskanje med drugim vključuje ime in opis shrambe ter njen prepisovalnik.",
+    "helpSortDescription": "Shrambe dokumentov lahko razvrstite po imenu in razdelite v različne skupine. Prikazane so lahko kot kartice ali tabela.",
+    "helpTranscriberDescription": "Za shrambe dokumentov lahko izberete prepisovalnik. Ko v shrambo naložite zvočne ali videodatoteke, se samodejno prepišejo."
+  }
+}

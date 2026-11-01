@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Tühista",
+      "errorCancel": "Genereerimist ei õnnestunud peatada. Proovi uuesti."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Sul pole sellele agendile juurdepääsu."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Mudel",
+      "labelUnknownModel": "Tundmatu mudel",
+      "labelThinkingOptionalOn": "Arutlemine",
+      "labelThinkingOptionalOff": "Kohustuslik arutlemine",
+      "labelThinkingMandatoryOn": "Ilma arutlemiseta",
+      "labelThinkingMandatoryOff": "Arutlemine alati keelatud",
+      "descriptionFeatureVision": "Piltide sügavam mõistmine",
+      "labelModelSize": "Konteksti suurus: {{size}}k",
+      "labelNotFound": "Mudelit ei leitud",
+      "labelChanged": "Muudetud"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Tööriist: Kalkulaator",
+      "description": "Agent saab ise arvutamise asemel kasutada kalkulaatorit. See aitab agendil keerukamate arvutustega paremini toime tulla."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Viip",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tühi",
+      "labelChanged": "Muudetud"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumendihoidlad",
+      "labelUnknownRepository": "Tundmatu dokumendihoidla",
+      "descriptionRepositoryNotFound": "Dokumendihoidlat pole olemas või sul puuduvad vajalikud õigused.",
+      "labelConfirmWrite": "Lugemine ja kirjutamine (küsi kinnitust)",
+      "labelReadOnly": "Ainult lugemine",
+      "labelWrite": "Lugemine ja kirjutamine (automaatselt)",
+      "labelGoToRepository": "Mine hoidlasse",
+      "labelChanged": "Muudetud"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Rolli valimise vihje",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Kirjeldus",
+      "description": "Vali agendile sobiv nimi. Lisaks saad salvestada lühikese kirjelduse.",
+      "labelName": "Nimi",
+      "labelDescription": "Kirjeldus"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Tööruum",
+      "description": "Vali tööruum, kuhu agent luua.",
+      "labelName": "Tööruum",
+      "errorNoPermissions": "Sul pole õigust agente luua",
+      "errorNoWorkspaceSelected": "Sa pole tööruumi valinud",
+      "labelSelectWorkspace": "Vali tööruum."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Lisafunktsioonid",
+      "description": "Lisa agendile kasulikke funktsioone, et töötamine oleks veelgi lihtsam.",
+      "labelFileUpload": "Failide üleslaadimine",
+      "descriptionFileUpload": "Kasutajad saavad üles laadida faile, mille sisu on agendile tekstina kättesaadav.",
+      "labelBatch": "Pakktöötlus",
+      "descriptionBatch": "Kasutajad saavad lasta faile iga sõnumi jaoks automaatselt töödelda.",
+      "labelPursueGoal": "Eesmärgi täitmine",
+      "descriptionPursueGoal": "Kasutajad saavad määrata eesmärgi ja agent töötab tsüklis, kuni eesmärk on täidetud.",
+      "labelDisappearingChats": "Kaduvad vestlused",
+      "descriptionDisappearingChats": "Vestlused võivad 12 tunni pärast automaatselt kustuda. Kasutaja peab selle ise seadistama.",
+      "labelNightshift": "Öövahetus",
+      "descriptionNightshift": "Pikalt töötavad agendid saab viia öövahetusse, et säästa päeval ressursse.",
+      "labelTranscriber": "Transkribeerija",
+      "labelNoTranscriber": "Automaatse transkribeerimiseta",
+      "descriptionTranscriber": "Transkribeeri üles laaditud heli- ja videofailid selle transkribeerijaga automaatselt."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Lisafunktsioonid",
+      "labelFileUpload": "Failide üleslaadimine",
+      "descriptionFileUpload": "Kasutajad saavad üles laadida faile, mille sisu on agendile tekstina kättesaadav.",
+      "labelBatch": "Pakktöötlus",
+      "descriptionBatch": "Kasutajad saavad lasta faile iga sõnumi jaoks automaatselt töödelda.",
+      "labelPursueGoal": "Eesmärgi täitmine",
+      "descriptionPursueGoal": "Kasutajad saavad määrata eesmärgi ja agent töötab tsüklis, kuni eesmärk on täidetud.",
+      "labelDisappearingChats": "Kaduvad vestlused",
+      "descriptionDisappearingChats": "Vestlused võivad 12 tunni pärast automaatselt kustuda. Kasutaja peab selle ise seadistama.",
+      "labelNightshift": "Öövahetus",
+      "descriptionNightshift": "Pikalt töötavad agendid saab viia öövahetusse, et säästa päeval ressursse."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Soovitused"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentatsioon"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Tööruum",
+      "labelUnknownWorkspace": "Tundmatu tööruum",
+      "labelGoToWorkspace": "Mine tööruumi"
+    },
+    "AgentInfo": {
+      "labelRole": "Roll: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Otsi...",
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Võimalused",
+      "tableColumnNameActions": "Toimingud",
+      "labelOtherAgents": "Teised agendid",
+      "labelFavorites": "Lemmikud",
+      "labelNoGroup": "Rühmitamata",
+      "labelUnknownModel": "Tundmatu mudel „{{id}}“",
+      "labelNoRepositories": "Dokumendihoidlaid pole",
+      "labelUnknownRepository": "Tundmatu dokumendihoidla „{{id}}“",
+      "labelRoleCount_other": "{{count}} rolli",
+      "labelRoleCount_zero": "Rolle pole",
+      "labelRoleCount_one": "{{count}} roll"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelNameAsc": "Nimi A–Z",
+      "labelNameDesc": "Nimi Z–A",
+      "labelGroup": "Rühmita alusel",
+      "labelFavorites": "Lemmikud",
+      "labelFirstLetter": "Esitäht",
+      "labelWorkspaces": "Tööruumid",
+      "labelModel": "Mudel",
+      "labelRepositories": "Dokumendihoidlad",
+      "labelRoleCount": "Rollide arv",
+      "labelCards": "Kaardid",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta",
+      "labelAgents": "Agendid",
+      "labelNewAgent": "Uus agent",
+      "labelNoGroup": "Rühmitamata"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Välimus",
+      "description": "Vali värv ja ikoon, mis agenti kõige paremini iseloomustavad.",
+      "labelIcon": "Ikoon",
+      "labelColor": "Värv"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eemalda lemmikutest",
+      "tooltipAddFavorite": "Lisa lemmikutesse"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Muuda",
+      "tooltipInfo": "Teave",
+      "tooltipNewChat": "Uus vestlus"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Tundmatu tööruum",
+      "labelModelUnknown": "Tundmatu mudel"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Veebijuurdepääs",
+      "labelGeneralAccess": "Üldine juurdepääs, veebiotsing",
+      "descriptionFetch": "Veebist toomine laadib URL-i sisu vestluse salvestusruumi või ühendatud kirjutusõigusega dokumendihoidlasse. Pärast faili töötlemist saab agent lugeda eraldatud teksti ja kasutada seda oma vastuses.",
+      "descriptionSearch": "Veebiotsing aitab agendil leida otsingupäringule vastavaid lehti. Otsinguteenuse pakkuja tagastab pealkirjad, lingid ja lühikesed katkendid. Toomise lubatud domeenide loend ei piira veebiotsinguid.",
+      "labelChanged": "Muudetud",
+      "labelFetch": "Toomine",
+      "labelSearch": "Otsi",
+      "labelOn": "Sees",
+      "labelOff": "Väljas",
+      "labelAsk": "Küsi kõigepealt",
+      "labelWhitelist": "Toomine on piiratud lubatud domeenide loendiga",
+      "labelAll": "Toomine kõigilt veebisaitidelt",
+      "labelEmptyWhitelist": "Lubatud domeene pole",
+      "labelEdit": "Muuda veebijuurdepääsu",
+      "labelDetails": "Näita üksikasju"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Tööriist: Vestluse laiendused",
+      "labelFeatures": "Järgmise sõnumi soovitamine, vestluse nime muutmine",
+      "description": "Agent saab soovitada kasutaja järgmist sõnumit, nii et kasutaja saab vestlust jätkata lihtsalt sobival sõnumil klõpsates. <br /> Agent saab kasutaja eest vestluse nime muuta, et vestlust oleks ajaloost lihtsam leida."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Rolli kirjeldus",
+      "description": "Rolli kirjeldust kasutatakse uue kasutajasõnumi saabumisel, et otsustada, milline roll sellele vastab",
+      "labelName": "Nimi",
+      "labelSelectionHint": "Rolli valimise vihje",
+      "labelDeleteRole": "Kustuta roll ",
+      "labelDoNotOverride": "Ära asenda",
+      "labelOverrideModel": "Asenda mudel",
+      "descriptionOverrideModel": "Selle rolli jaoks saad valida teise mudeli kui see, mida agent üldiselt kasutab.",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada rolli „{{name}}“? Seda toimingut ei saa tagasi võtta.",
+      "labelCancel": "Tühista",
+      "labelThinking": "Arutlemine"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Mudel",
+      "description": "Agendi kasutatav keelemudel, kui seda pole rolli seadetes asendatud.",
+      "labelName": "Mudel",
+      "labelThinking": "Arutlemine",
+      "labelThinking_optionalOn": "Arutlemine",
+      "labelThinking_mandatoryOn": "Kohustuslik arutlemine",
+      "labelThinking_optionalOff": "Ilma arutlemiseta",
+      "labelThinking_mandatoryOff": "Arutlemine alati keelatud",
+      "labelSelectModel": "Vali mudel"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumendihoidla",
+      "labelPathAgent": "Tee agendi jaoks",
+      "labelPathRepository": "Tee dokumendihoidlas",
+      "labelPermission": "Õigus",
+      "labelDeleteConnection": "Kustuta ühendus",
+      "confirmDeleteTitle": "Kustuta ühendus",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada selle ühenduse dokumendihoidlaga „{{name}}“?",
+      "labelCancel": "Tühista",
+      "labelAddConnection": "Lisaühendus",
+      "labelUnknownRepository": "Tundmatu dokumendihoidla",
+      "labelConfirmWrite": "Lugemine ja kirjutamine (küsi kinnitust)",
+      "labelReadOnly": "Ainult lugemine",
+      "labelWrite": "Lugemine ja kirjutamine (automaatselt)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Nimi",
+      "labelMessage": "Sõnum",
+      "labelClose": "Sulge"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Nimi",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-päised",
+      "labelHeaderName": "Nimi",
+      "labelHeaderValue": "Väärtus",
+      "labelAddHeader": "Lisa HTTP-päis",
+      "labelDeleteConnection": "Kustuta ühendus",
+      "confirmDeleteTitle": "Kustuta MCP",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada MCP seadistuse „{{name}}“?",
+      "labelCancel": "Tühista",
+      "labelDeleteMCP": "Kustuta MCP",
+      "labelAddMCP": "Veel üks MCP",
+      "errorInvalidUrl": "URL peab olema kehtiv",
+      "labelOAuthApp": "OAuthi rakendus"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Andmed",
+      "labelConnectRepository": "Ühenda dokumendihoidla",
+      "labelToolWebAccess": "Tööriist: Veebijuurdepääs",
+      "labelConnectMCP": "Ühenda väline tööriist (MCP)",
+      "labelSupport": "Tugi",
+      "labelToolChatExtensions": "Tööriist: Vestluse laiendused",
+      "labelToolCalculator": "Tööriist: Kalkulaator",
+      "labelSystem": "Süsteem",
+      "labelToolPlatformAccess": "Tööriist: Juurdepääs schorn.ai platvormile"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Uus agent",
+      "emptyDescription": "Määra agendi käitumine, juurdepääs andmetele, välimus ja palju muud.",
+      "labelDefinePrompt": "Kirjuta viip",
+      "descriptionDefinePrompt": "Agendi headus sõltub tema juhistest. Selged rollimääratlused vähendavad hallutsinatsioone ja suurendavad järjepidevust.",
+      "labelConnectTools": "Ühenda tööriistad",
+      "descriptionConnectTools": "Ühenda näiteks dokumendihoidlad, et agent tugineks faktidele ja kasutaks ettevõttepõhiseid teadmisi.",
+      "labelWriteDocs": "Kirjuta dokumentatsioon",
+      "descriptionWriteDocs": "Aita kasutajatel mõista selle agendi võimalusi.",
+      "infoRoleDefinition": "Roll määrab agendi käitumise ja ülesande täitmiseks saadaolevad tööriistad.",
+      "infoDocsDescription": "Dokumentatsioon võib sisaldada teksti (toetatud on Markdown-vormindus) ja soovitusi agendile saadetavate sõnumite jaoks.",
+      "infoAppearanceDescription": "Nimi, kirjeldus ja värv aitavad kasutajatel saadaolevate agentide seas orienteeruda."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Soovitatud sõnumid",
+      "descriptionRecommendedMessages": "Aita kasutajaid sõnumisoovitustega, mis näitavad, kuidas agenti kõige paremini kasutada.",
+      "labelAddMessage": "Lisa sõnum ",
+      "labelDocumentation": "Dokumentatsioon",
+      "descriptionDocumentation": "Jaga siin kasutajatega selle agendi kohta lisateavet",
+      "labelShowPreview": "Näita eelvaadet",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentatsioon aitab kasutajatel agenti kasutada. See kuvatakse, kui kasutaja alustab uut vestlust.",
+      "descriptionMarkdownHelp": "Markdown on lihtne märgistuskeel teksti kiireks ja hõlpsaks vormindamiseks.\n\n* **Struktuur:** Pealkirjad (`#`), loendid (nummerdatud `1.` ja nummerdamata `-`), horisontaaljooned.\n* **Teksti laad:** **Paks kiri** `**Paks kiri**`, *Kaldkiri* `*Kaldkiri*`, ~~Läbikriipsutus~~ `~~Läbikriipsutus~~`.\n* **Kood:** Reasisene kood (`code`) ja süntaksi esiletõstmisega koodiplokid.\n* **Korraldus:** Tsitaadid (`>`), kontroll-loendid (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Rolle pole",
+      "descriptionNoRoles": "Agendile pole rolle määratud. Ilma rollita agent ei tööta.",
+      "labelAddRole": "Lisa roll ",
+      "infoMultipleRoles": "Agentidel võib olla mitu rolli. Iga roll saab paremini keskenduda osalisele ülesandele.",
+      "infoTools": "Agendid saavad kasutada tööriistu, et kasutajate päringutele paremini vastata (dokumentide otsimine, dokumentide loomine jne)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Uus agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Loo agent",
+      "labelSaveAgent": "Salvesta agent",
+      "tabOverview": "Ülevaade",
+      "tabPrompt": "Viip",
+      "tabDocs": "Tugi",
+      "tabRoles": "Rollid",
+      "tabSettings": "Seaded",
+      "btnCreate": "Loo",
+      "btnSave": "Salvesta",
+      "labelEditAgent": "Muuda agenti",
+      "labelCloneAgent": "Salvesta uue agendina",
+      "labelDeleteAgent": "Kustuta agent",
+      "confirmDeleteTitle": "Kustuta agent",
+      "confirmDeleteDescription": "Kas soovid kindlasti kustutada agendi „{{name}}“? Seda toimingut ei saa tagasi võtta.",
+      "labelCancel": "Tühista"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Roll ",
+      "description": "Määrab agendi käitumise ja tööriistad, mida agent selles kontekstis kasutada tohib.",
+      "tabOverview": "Ülevaade",
+      "tabPrompt": "Viip",
+      "tabDocumentRepositoryMounts": "Dokumendihoidlad",
+      "tabMCPs": "Välised tööriistad (MCP)",
+      "tabWeb": "Internetiühendus",
+      "tabChat": "Vestluse laiendused",
+      "tabCalc": "Kalkulaator",
+      "tabTools": "Tööriistad",
+      "tabSettings": "Seaded",
+      "toolWebAccess": "Internetiühendus",
+      "chatExtensions": "Vestluse laiendused",
+      "calculator": "Kalkulaator",
+      "externalToolsMCP": "Välised tööriistad (MCP)",
+      "labelPrompt": "Viip"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Loobu muudatustest",
+      "labelDiscardConfirm": "Kas soovid kindlasti loobuda kõigist selle agendi salvestamata muudatustest?",
+      "labelCancel": "Tühista",
+      "labelDiscard": "Loobu muudatustest"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Välised tööriistad (MCP)",
+      "changedBadge": "Muudetud",
+      "unknownMcp": "Tundmatu MCP",
+      "invalidUrl": "Vigane URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantiline otsing",
+      "labelChanged": "Muudetud",
+      "labelActive": "Aktiivne",
+      "labelInactive": "Mitteaktiivne",
+      "description": "Kui oluline on andmete tähendus, mitte täpne sõnastus. (Nõuab vektormudelit)",
+      "labelUnknownModel": "Tundmatu mudel"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Märksõnaotsing",
+      "labelChanged": "Muudetud",
+      "labelActive": "Aktiivne",
+      "labelInactive": "Mitteaktiivne",
+      "description": "Täpsete väljendite ja lausete otsimiseks. (Nimed, nimetused jne)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transkribeerija",
+      "labelChanged": "Muudetud",
+      "labelUnknownTranscriber": "Tundmatu transkribeerija",
+      "labelGoToTranscriber": "Mine transkribeerija juurde"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Uus sõnum"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Ootab töötlemist",
+      "tooltipPaused": "Peatatud"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Arutlemine lubatud",
+      "labelThinkingOff": "Arutlemine keelatud",
+      "labelMessageStack": "Sõnumipinu",
+      "placeholderMessage": "Sõnum...",
+      "tooltipUploadFiles": "Failide üleslaadimine",
+      "buttonPause": "Peata",
+      "buttonStartBatch": "Käivita pakktöötlus",
+      "buttonSend": "Saada",
+      "descriptionFilesPending": "Faile laaditakse üles või töödeldakse …",
+      "labelAttachFiles": "Manusta failid",
+      "labelUploadFiles": "Failide üleslaadimine",
+      "labelSelectFile": "Vali olemasolev fail"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Kas lubada see toiming?",
+      "descriptionAction": "Agent vajab jätkamiseks sinu nõusolekut.",
+      "labelApprove": "Luba",
+      "labelReject": "Keela",
+      "labelRetry": "Proovi uuesti",
+      "labelSubmitting": "Töötlemine …",
+      "errorSubmit": "Sinu otsust ei õnnestunud saata. Proovi uuesti.",
+      "labelMCP": "Ühenda oma konto",
+      "descriptionMCP": "See MCP-tööriist nõuab sisselogimist. Ootel kutse jätkub pärast konto ühendamist automaatselt."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Kas salvestada dokument?",
+      "descriptionWriteFile": "Agent soovib selle dokumendi salvestada. Olemasolev sisu asendatakse.",
+      "labelShowContent": "Näita sisu",
+      "labelHideContent": "Peida sisu",
+      "descriptionEmptyFile": "Dokument salvestatakse tühja sisuga."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Veebist toomine",
+      "description": "Seadista selle rolli veebijuurdepääs. Toomise ja otsingu saab lubada teineteisest sõltumatult.",
+      "labelFetch": "Luba veebist toomine",
+      "labelAskFetch": "Küsi enne lehe toomist",
+      "labelAccess": "Lubatud veebisaidid",
+      "labelAll": "Kõik veebisaidid",
+      "labelWhitelist": "Lubatud domeenide loend",
+      "descriptionAccess": "HTTP(S)-failid ja veebilehed, sealhulgas kohtvõrgus. Ümbersuunamistele kehtivad samad juurdepääsureeglid.",
+      "labelDomains": "Lubatud domeenid",
+      "descriptionDomains": "Üks hostinimi rea kohta, näiteks example.com. Alamdomeenide jaoks kasuta *.example.com; see ei hõlma domeeni example.com ennast.",
+      "errorDomains": "Sisesta hostinimed või *.example.com ilma protokolli, tee ja pordita.",
+      "descriptionEmptyWhitelist": "Tühi lubatud domeenide loend blokeerib kõik lehed.",
+      "labelSearchTitle": "Veebiotsing",
+      "labelSearch": "Luba veebiotsing",
+      "labelAskSearch": "Küsi enne veebiotsingut",
+      "labelProvider": "Otsinguteenuse pakkuja",
+      "labelProviderDocs": "Teenusepakkuja dokumentatsioon",
+      "labelApiKey": "API-võti",
+      "errorApiKey": "Sisesta valitud teenusepakkuja API-võti.",
+      "labelMarket": "Staani keel ja piirkond",
+      "descriptionMarket": "Näiteks de-de või en-us. Vaikimisi en-us.",
+      "labelRemoveTool": "Eemalda tööriist",
+      "labelConfirmRemoveTool": "Kas eemaldada veebitööriist?",
+      "descriptionRemoveTool": "Veebist toomise ja veebiotsingu seaded, sealhulgas lubatud domeenide loend ja API-võti, eemaldatakse sellest rollist.",
+      "labelCancel": "Tühista"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Too veebileht",
+      "descriptionFetch": "Kas lubada agendil selle URL-i sisu alla laadida, salvestada ja töödelda?",
+      "labelDestination": "Sihtkoht"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Otsi veebist",
+      "descriptionSearch": "Kas lubada agendil saata see päring seadistatud otsinguteenuse pakkujale?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Sulge",
+      "labelPending": "Töötab",
+      "labelApproval": "Ootab kinnitust",
+      "labelDenied": "Tagasi lükatud",
+      "labelDone": "Lõpetatud",
+      "errorRequest": "Päring ebaõnnestus"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Veebiotsing",
+      "labelQuery": "Otsingupäring",
+      "labelEmptyResults": "Tulemusi ei leitud."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Veebileht",
+      "labelUrl": "URL",
+      "labelRange": "Märgid {{start}}–{{end}} / {{total}}",
+      "descriptionTruncated": "Rohkem sisu on saadaval järgmises jaotises.",
+      "labelEmptyPage": "See leht ei sisalda loetavat teksti.",
+      "labelSource": "Ava allikas",
+      "descriptionFileReady": "Fail salvestati ja töödeldi. Eraldatud tekst on agendile otse kättesaadav.",
+      "descriptionProcessingUnavailable": "Fail salvestati. Eraldatud teksti pole saadaval; heli ja video nõuavad seadistatud transkribeerijat.",
+      "descriptionProcessingFailed": "Fail salvestati, kuid töötlemine ebaõnnestus või aegus. Töötlemise saab salvestusruumis uuesti käivitada."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopeeri fail",
+      "labelMove": "Teisalda fail",
+      "descriptionSuccess": "Fail edastati. Vajalik otsinguindeks luuakse taustal uuesti.",
+      "descriptionPending": "Failiedastuse ettevalmistamine…",
+      "descriptionProcessingError": "Fail edastati, kuid töötlemine tuleb sihtkohas uuesti käivitada.",
+      "errorTransfer": "Failiedastust ei õnnestunud lõpetada.",
+      "labelOpenFile": "Ava sihtfail",
+      "descriptionDenied": "Failiedastus keelati. Ühtegi faili ei edastatud.",
+      "descriptionApproval": "Sinu nõusoleku ootamine.",
+      "descriptionRunning": "Faili edastamine…",
+      "labelClose": "Sulge",
+      "labelSource": "Lähtekoht",
+      "labelTarget": "Sihtkoht"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Kas lubada selle faili kopeerimine?",
+      "labelMove": "Kas lubada selle faili teisaldamine?",
+      "descriptionCopy": "Agent soovib kopeerida selle faili ja selle töödeldud sisu. Olemasolevaid sihtfaile ei kirjutata kunagi üle.",
+      "descriptionMove": "Agent soovib teisaldada selle faili ja selle töödeldud sisu. Lähtefail eemaldatakse pärast edukat kopeerimist.",
+      "labelSource": "Lähtekoht",
+      "labelTarget": "Sihtkoht"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "See MCP-tööriist nõuab sisselogimist. Ootel kutse jätkub pärast konto ühendamist automaatselt.",
+      "labelConnect": "Ühenda minu konto"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-tööriist",
+      "labelDiscover": "Leia saadaolevad tööriistad",
+      "labelPending": "Töötab",
+      "labelDone": "Lõpetatud",
+      "labelApproval": "Sisselogimine on nõutav",
+      "labelDenied": "Keelatud",
+      "errorRequest": "Päring ebaõnnestus",
+      "labelArguments": "Sisend",
+      "labelResult": "Tulemus",
+      "labelClose": "Sulge"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuthi rakendus",
+      "labelSearch": "Otsi ühendust",
+      "labelAutomatic": "Seadistatud OAuthi rakendust pole",
+      "labelNone": "Ühendust pole valitud",
+      "labelMissing": "Ühendus pole saadaval",
+      "descriptionOAuth": "Valikuline: Vali selle MCP-serveri jaoks registreeritud OAuthi rakendus. Seadista selle URL selles agendis eraldi.",
+      "descriptionSearch": "Staani ja Brave'i autentimisandmeid hallatakse keskselt jaotises Seaded → Ühendused.",
+      "errorMissing": "See ühendus pole enam saadaval. Vali teine ühendus.",
+      "descriptionEmpty": "Sobivat ühendust pole seadistatud. Halda ühendusi jaotises Seaded → Ühendused."
+    }
+  },
+  "page": {
+    "labelTitle": "Agendid",
+    "emptyTitle": "Agente pole",
+    "emptyDescription": "Ühtegi agenti pole veel loodud.",
+    "labelNewAgent": "Uus agent",
+    "helpSearchTitle": "Otsi",
+    "helpSearchDescription": "Saad agente otsida. Otsing hõlmab muu hulgas agendi nime, kirjeldust ja mudelit.",
+    "helpSortTitle": "Sortimine ja rühmitamine",
+    "helpSortDescription": "Agente saab sortida nime järgi ja jagada erinevatesse rühmadesse. Neid saab kuvada paanidena või tabelina."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "See MCP-teenuse pakkuja nõuab registreeritud OAuthi rakendust. Palu administraatoril luua jaotises Seaded → Ühendused kliendi ID ja kliendisaladusega OAuthi rakendus ning vali see agendi MCP seadetes. Seejärel ühenda vestluses uuesti.",
+    "errorStart": "MCP autoriseerimist ei õnnestunud alustada.",
+    "errorCallback": "MCP autoriseerimine ebaõnnestus või aegus. Naase vestlusse ja proovi uuesti."
+  }
+}

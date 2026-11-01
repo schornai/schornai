@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Přepis",
+    "description": "Přepisovače převádějí mluvený obsah, například schůzky, rozhovory nebo hovory, do strukturované podoby, ve které může AI vyhledávat."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Přepisovač"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Hledat..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazení",
+      "labelSort": "Řazení",
+      "labelNameAsc": "Název od A do Z",
+      "labelNameDesc": "Název od Z do A",
+      "labelGroup": "Seskupit podle",
+      "labelNoGroup": "Bez seskupení",
+      "labelFavorites": "Oblíbené",
+      "labelFirstLetter": "První písmeno",
+      "labelWorkspaces": "Pracovní prostory",
+      "labelModel": "Model",
+      "labelCards": "Karty",
+      "labelTable": "Tabulka",
+      "labelSaveView": "Uložit zobrazení",
+      "labelReset": "Obnovit",
+      "labelTranscribers": "Přepisovače",
+      "labelNewTranscriber": "Nový přepisovač"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Další přepisovače",
+      "labelFavorites": "Oblíbené",
+      "labelNoGroup": "Bez seskupení",
+      "labelUnknownModel": "Neznámý model „{{id}}“"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Název",
+      "tableColumnCapablilities": "Schopnosti",
+      "tableColumnNameActions": "Akce",
+      "emptyTitle": "Žádné přepisovače",
+      "emptyDescription": "Zatím nebyly vytvořeny žádné přepisovače.",
+      "labelOtherTranscribers": "Další přepisovače",
+      "labelFavorites": "Oblíbené",
+      "labelNoGroup": "Bez seskupení",
+      "labelUnknownModel": "Neznámý model „{{id}}“"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Neznámý model",
+      "labelUnknownWorkspace": "Neznámý pracovní prostor"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Upravit",
+      "tooltipInfo": "Informace",
+      "tooltipNewTranscription": "Nový přepis",
+      "tooltipRecord": "Nahrát zvuk"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odebrat z oblíbených",
+      "tooltipAddFavorite": "Přidat do oblíbených"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Změněno",
+      "labelEmpty": "Prázdné"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nový přepisovač",
+      "labelTranscriber": "Přepisovač",
+      "labelCreateTranscriber": "Vytvořit přepisovač",
+      "labelSaveTranscriber": "Uložit přepisovač",
+      "labelCloneTranscriber": "Uložit jako nový přepisovač",
+      "labelDeleteTranscriber": "Smazat přepisovač",
+      "confirmDeleteTitle": "Smazat přepisovač",
+      "confirmDeleteDescription": "Opravdu chcete smazat přepisovač „{{name}}“? Tuto akci nelze vrátit zpět.",
+      "labelCancel": "Zrušit",
+      "tabOverview": "Přehled",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Nastavení",
+      "btnCreate": "Vytvořit",
+      "btnSave": "Uložit"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zahodit změny",
+      "labelDiscardConfirm": "Opravdu chcete zahodit všechny neuložené změny tohoto přepisovače?",
+      "labelCancel": "Zrušit",
+      "labelDiscard": "Zahodit změny"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nový přepisovač",
+      "emptyDescription": "Nastavte chování a vzhled přepisovače.",
+      "labelDefinePrompt": "Napište prompt",
+      "descriptionDefinePrompt": "Krátký prompt pomáhá přepisovači porozumět jménům, odborným výrazům a názvům produktů a zapsat je správně podle vašich očekávání.",
+      "helpTitle": "Nápověda",
+      "helpPromptDescription": "Díky promptu potřebuje přepis méně následných oprav a u delších nebo tematicky zaměřených nahrávek získáte konzistentnější výsledek."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Prompt se předá modelu pro přepis (Whisper), aby lépe porozuměl odborným výrazům."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Vzhled",
+      "description": "Vyberte barvu a ikonu, které přepisovač nejlépe vystihují.",
+      "labelIcon": "Ikona",
+      "labelColor": "Barva"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Popis",
+      "description": "Zvolte vhodný název přepisovače. Můžete také uložit krátký popis.",
+      "labelName": "Název",
+      "labelDescription": "Popis"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Model pro přepis, který přepisovač používá.",
+      "labelName": "Model",
+      "labelSelectModel": "Vyberte model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Pracovní prostor",
+      "description": "Vyberte pracovní prostor, ve kterém má být přepisovač vytvořen.",
+      "labelName": "Pracovní prostor",
+      "labelSelectWorkspace": "Vyberte pracovní prostor."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Soubory",
+      "tabInfo": "Informace"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Nahrát zvuk",
+      "labelReady": "Připraveno",
+      "labelRequesting": "Připojuje se mikrofon",
+      "labelRecording": "Nahrává se",
+      "labelStopping": "Dokončuje se nahrávání",
+      "labelRecorded": "Nahrávka připravena",
+      "labelUploading": "Ukládá se",
+      "labelSaved": "Uloženo",
+      "labelDuration": "Délka nahrávky",
+      "labelStart": "Zahájit nahrávání",
+      "labelStop": "Zastavit nahrávání",
+      "labelRecordAgain": "Nahrát znovu",
+      "labelCancel": "Zrušit",
+      "labelTranscribe": "Uložit a přepsat",
+      "labelDiscard": "Zahodit nahrávku",
+      "labelPreview": "Náhled nahrávky",
+      "descriptionSaved": "Nahrávka byla uložena. Přepis se spustí automaticky.",
+      "errorUnsupported": "Nahrávání zvuku vyžaduje podporovaný prohlížeč a zabezpečené připojení (HTTPS nebo localhost).",
+      "errorPermission": "Přístup k mikrofonu byl zamítnut. Povolte jej v prohlížeči a zkuste to znovu.",
+      "errorRecording": "Mikrofon nemohl zaznamenat zvuk. Zkontrolujte zařízení a zkuste to znovu.",
+      "errorEmpty": "Nahrávka neobsahuje žádný zvuk. Nahrajte ji znovu.",
+      "errorUpload": "Nahrávku se nepodařilo uložit. Můžete si ji poslechnout a znovu zkusit nahrání na server.",
+      "descriptionScreenAwake": "Během nahrávání zůstává obrazovka zapnutá.",
+      "descriptionScreenSleep": "Obrazovku nelze udržet zapnutou. Ponechte tuto stránku otevřenou a zabraňte automatickému uzamčení obrazovky.",
+      "descriptionCloseBlocked": "Před zavřením zastavte nahrávání a nahrávku uložte nebo zahoďte. Počkejte na dokončení případného nahrávání na server.",
+      "labelClose": "Zavřít"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatické opakované pokusy",
+      "labelLevel": "Úroveň",
+      "description": "Pokud jsou výsledky nejisté nebo obsahují mnoho opakování, může přepisovač zkusit zvukový úsek rozpoznat znovu. Více pokusů může zlepšit rozpoznávání, ale zabere více času.",
+      "labelFast": "Rychle",
+      "labelBalanced": "Vyváženě",
+      "labelThorough": "Důkladně",
+      "descriptionFast": "Jeden pokus na zvukový úsek, bez automatického opakování.",
+      "descriptionBalanced": "Až 3 pokusy na zvukový úsek.",
+      "descriptionThorough": "Až 6 pokusů na zvukový úsek.",
+      "errorLevel": "Vyberte jednu ze tří úrovní."
+    }
+  },
+  "page": {
+    "labelTitle": "Přepis",
+    "emptyTitle": "Žádné přepisovače",
+    "emptyDescription": "Zatím nebyly vytvořeny žádné přepisovače.",
+    "labelNewTranscriber": "Nový přepisovač",
+    "helpTitle": "Nápověda",
+    "helpSearchDescription": "Přepisovače můžete vyhledávat. Vyhledávání zahrnuje mimo jiné název a popis přepisovače i jeho model.",
+    "helpSortDescription": "Přepisovače lze řadit podle názvu a rozdělit do různých skupin. Lze je zobrazit jako karty nebo v tabulce."
+  }
+}

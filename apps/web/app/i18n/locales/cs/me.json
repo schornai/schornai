@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Název",
+      "labelFirstName": "Jméno",
+      "labelLastName": "Příjmení",
+      "buttonSave": "Uložit",
+      "buttonReset": "Obnovit"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Odstranit obrázek",
+      "alertDelete": "Odstranit obrázek",
+      "alertDeleteExplainer": "Opravdu chcete odstranit svůj obrázek?",
+      "alertDeleteCancel": "Zrušit"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Nahrát obrázek"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Oprávnění",
+      "tableColumnName": "Název",
+      "tableColumnPermission": "Oprávnění",
+      "tableColumnDescription": "Popis",
+      "infoEmpty": "Žádná oprávnění",
+      "infoEmptyDescription": "Nejsou dostupné žádné funkce schorn.ai box.",
+      "infoEmptyAdminDescription": "Jako správce můžete vytvořit první pracovní prostor.",
+      "infoEmptyAdminAction": "Vytvořit první pracovní prostor",
+      "infoUser": "Může zobrazovat obsah organizace (chatboty, přepisovače, dokumenty, úložiště atd.), ale nemůže jej upravovat.",
+      "infoEditor": "Může zobrazovat obsah organizace a také jej upravovat (vytvářet nové chatboty, upravovat a mazat dokumenty atd.).",
+      "infoAdmin": "Může číst a zapisovat ve všech organizacích a navíc spravovat systémová nastavení (nahrávat XRAG, měnit barvy atd.) a uživatele."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Přizpůsobení",
+    "infoPersonalizeDescription": "Zde můžete nahrát svůj profilový obrázek a upravit své jméno."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nové heslo nastaveno",
+    "description": "Nové heslo bylo úspěšně nastaveno. Nyní jste přihlášeni s novým heslem.",
+    "buttonBackToDashboard": "Přejít na přehled"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Připojení",
+      "descriptionConnections": "Vaše osobní připojení OAuth k serverům MCP. Odpojením se odstraní zde uložené přihlašovací údaje. Již spuštěná volání mohou doběhnout; oprávnění u poskytovatele odvolejte přímo u něj.",
+      "labelDisconnect": "Odpojit",
+      "descriptionEmpty": "Pokud nástroj MCP vyžaduje přihlášení, připojte svůj účet v chatu.",
+      "labelEmpty": "Zatím žádná připojení",
+      "labelInfo": "O připojeních",
+      "errorDisconnect": "Připojení se nepodařilo odpojit. Zkuste to znovu."
+    }
+  }
+}

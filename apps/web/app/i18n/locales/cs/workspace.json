@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Popis",
+      "description": "Zvolte vhodný název pracovního prostoru. Můžete také uložit krátký popis.",
+      "labelName": "Název",
+      "labelDescription": "Popis",
+      "buttonSave": "Uložit",
+      "buttonReset": "Obnovit"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentace",
+      "description": "Zde sdílejte s uživateli další informace o tomto pracovním prostoru.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Uložit",
+      "buttonReset": "Obnovit"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapování SSO",
+      "description": "Vyberte, která skupina SSO má přístup do pracovního prostoru a s jakým oprávněním.",
+      "labelRoleUser": "Skupina uživatelů",
+      "labelRoleEditor": "Skupina editorů",
+      "labelRoleWorkspaceAdmin": "Skupina správců pracovního prostoru",
+      "placeholderNoGroup": "Není přiřazena žádná skupina",
+      "descriptionRoleUser": "Může zobrazovat obsah pracovního prostoru (agenty, přepisovače, úložiště dokumentů atd.), ale nemůže jej upravovat.",
+      "descriptionRoleEditor": "Může zobrazovat obsah pracovního prostoru a také jej upravovat.",
+      "descriptionRoleWorkspaceAdmin": "Může spravovat pracovní prostor a vytvářet, upravovat a mazat agenty, přepisovače, úložiště dokumentů atd.",
+      "buttonSave": "Uložit",
+      "buttonReset": "Obnovit"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatický uživatel",
+      "description": "Pokud je zapnutá možnost „Automatický uživatel“, každý, kdo se může přihlásit do boxu, automaticky získá v této organizaci oprávnění uživatele.",
+      "labelActive": "Automatický uživatel zapnut",
+      "labelInactive": "Automatický uživatel vypnut"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nový pracovní prostor",
+      "descriptionWorkspace": "Zvolte název a volitelný popis. Další nastavení můžete upravit po vytvoření pracovního prostoru.",
+      "labelName": "Název",
+      "labelDescription": "Popis",
+      "labelCreate": "Vytvořit pracovní prostor",
+      "labelCancel": "Zrušit",
+      "errorCreate": "Pracovní prostor se nepodařilo vytvořit. Zkuste to znovu."
+    },
+    "WorkspaceCard": {
+      "labelType": "Pracovní prostor"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Upravit pracovní prostor",
+      "tooltipInfo": "Otevřít pracovní prostor"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Přidat do oblíbených",
+      "tooltipRemoveFavorite": "Odebrat z oblíbených"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Hledat pracovní prostory",
+      "labelName": "Název",
+      "labelDescription": "Popis",
+      "labelRole": "Vaše role",
+      "labelActions": "Akce",
+      "labelFavorites": "Oblíbené",
+      "labelOtherWorkspaces": "Další pracovní prostory",
+      "labelEmpty": "Žádné pracovní prostory",
+      "descriptionEmpty": "Zatím nemáte přístup k žádnému pracovnímu prostoru.",
+      "labelNoResults": "Žádné výsledky",
+      "descriptionNoResults": "Zkuste jiný hledaný výraz."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazení",
+      "labelSort": "Řazení",
+      "labelNameAsc": "Název od A do Z",
+      "labelNameDesc": "Název od Z do A",
+      "labelGroup": "Seskupit podle",
+      "labelNoGroup": "Bez seskupení",
+      "labelFavorites": "Oblíbené",
+      "labelFirstLetter": "První písmeno",
+      "labelCards": "Karty",
+      "labelTable": "Tabulka",
+      "labelSaveView": "Uložit zobrazení",
+      "labelReset": "Obnovit"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Vytvořit pracovní prostor"
+    }
+  },
+  "page": {
+    "labelYourRole": "Vaše role",
+    "labelEmpty": "Zatím žádný obsah",
+    "descriptionEmpty": "V tomto pracovním prostoru zatím nejsou dostupní žádní agenti, úložiště dokumentů ani přepisovače.",
+    "labelTitle": "Pracovní prostory"
+  }
+}

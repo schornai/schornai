@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Jauna saruna",
+        "mainLabelAgents": "Aģenti",
+        "mainLabelApps": "Lietotnes",
+        "mainLabelWorkspaces": "Darbvietas",
+        "history": "Vēsture"
+      },
+      "SidebarFavorites": {
+        "label": "Izlase",
+        "empty": "Izlasei vēl nekas nav pievienots."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Izlase ir tukša",
+        "descriptionNoFavorites": "Izlasei varat pievienot <agents>aģentus</agents>, <documents>dokumentu krātuves</documents> un <transcribers>transkribētājus</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Jauna saruna"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Ar labu nakti];(5-11)[Labrīt];(12-17)[Labdien];(18-inf)[Labvakar];",
+      "labelAllAgents": "Visi aģenti",
+      "labelToApps": "Doties uz lietotnēm"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profils",
+        "labelFavorites": "Izlase",
+        "labelPermissions": "Atļaujas",
+        "labelModels": "Modeļi",
+        "labelTaskQueue": "Uzdevumu rinda",
+        "labelSettings": "Iestatījumi",
+        "labelUsers": "Lietotāji",
+        "labelWorkspaces": "Darbvietas",
+        "labelSSOProvider": "SSO pakalpojuma sniedzējs",
+        "labelXRAGUpload": "Augšupielādēt XRAG",
+        "labelSystemModel": "Sistēmas modelis",
+        "labelTheme": "Dizains",
+        "labelBackToDashboard": "Atpakaļ uz informācijas paneli",
+        "labelConnections": "Savienojumi",
+        "labelProviderConnections": "Savienojumi",
+        "labelService": "Pakalpojums",
+        "labelArtifacts": "Artefakti",
+        "labelCluster": "Klasteris"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Izvēlēties ikonu",
+      "buttonMoreIcons": "Vairāk ikonu",
+      "textLucideInfo": "Ikonas: <0>Lucide</0>",
+      "placeholderSearchIcons": "Meklēt ikonas...",
+      "buttonCancel": "Atcelt"
+    },
+    "FileUploadDropZone": {
+      "drop": "Nometiet failu šeit, lai to augšupielādētu"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Mainīts"
+    },
+    "Pagination": {
+      "labelPrev": "Iepriekšējais",
+      "labelNext": "Nākamais"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mans konts",
+      "labelSystem": "Sistēma",
+      "labelModels": "Modeļi",
+      "labelCluster": "Klasteris",
+      "labelSettings": "Iestatījumi",
+      "labelDashboard": "Informācijas panelis",
+      "labelProfile": "Profils"
+    },
+    "SidebarUserSignOut": {
+      "label": "Izrakstīties"
+    },
+    "UserRoleText": {
+      "admin": "Administrators",
+      "workspace-admin": "Darbvietas administrators",
+      "editor": "Redaktors",
+      "user": "Lietotājs",
+      "none": "Nav atļaujas"
+    },
+    "StorageView": {
+      "placeholderSearch": "Meklēt šajā mapē…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nosaukums",
+      "tableColumnType": "Tips",
+      "tableColumnSize": "Lielums",
+      "tableColumnCreated": "Izveidots",
+      "tableColumnUpdated": "Atjaunināts",
+      "tableColumnNameActions": "Darbības",
+      "groupTimeToday": "Šodien",
+      "groupTimeLast7Days": "Pēdējās 7 dienas",
+      "groupTimeLast30Days": "Pēdējās 30 dienas",
+      "groupTimeOther": "Citi",
+      "labelFolder": "Mape",
+      "descriptionProcessing": "Fails tiek apstrādāts"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Jauna mape",
+      "placeholderFolderName": "Mapes nosaukums...",
+      "labelCancel": "Atcelt",
+      "labelCreate": "Izveidot"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Noņemt",
+      "labelDescription": "Vai tiešām vēlaties noņemt “{{name}}”? Šo darbību nevar atsaukt.",
+      "labelCancel": "Atcelt",
+      "labelRemove": "Noņemt"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Mājas direktorijs"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Nav failu",
+      "labelDescription": "Pašreizējā mapē nav failu. Vienkārši ievelciet failus šeit, lai tos augšupielādētu.",
+      "labelUploadFile": "Augšupielādēt failu",
+      "labelCreateFile": "Izveidot failu"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelNameAsc": "Nosaukums no A līdz Z",
+      "labelNameDesc": "Nosaukums no Z līdz A",
+      "labelSizeAsc": "Lielums augoši",
+      "labelSizeDesc": "Lielums dilstoši",
+      "labelCreatedAsc": "Izveides datums augoši",
+      "labelCreatedDesc": "Izveides datums dilstoši",
+      "labelUpdatedAsc": "Atjaunināšanas datums augoši",
+      "labelUpdatedDesc": "Atjaunināšanas datums dilstoši",
+      "labelGroup": "Grupēšana",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelFirstLetter": "Pirmais burts",
+      "labelFileType": "Faila tips",
+      "labelCreated": "Izveides datums",
+      "labelUpdated": "Atjaunināšanas datums",
+      "labelTilesSmall": "Flīzes (mazas)",
+      "labelTilesMedium": "Flīzes (vidējas)",
+      "labelTilesLarge": "Flīzes (lielas)",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt",
+      "labelNewFolder": "Jauna mape",
+      "labelThisFolder": "Šī mape",
+      "labelUploadFile": "Augšupielādēt failu",
+      "labelNew": "Jauns",
+      "labelDeleteFolder": "Dzēst mapi",
+      "labelNewRecording": "Jauns ieraksts",
+      "labelColumns": "Kolonnu skats",
+      "labelNewTextFile": "Jauns fails"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Nav rezultātu",
+      "descriptionNoResults": "Meklēšana nedeva rezultātus. Pārformulējiet vaicājumu.",
+      "labelCharacters": "rakstzīmes"
+    },
+    "Transcription": {
+      "labelTitle": "Transkripcija",
+      "labelLoadingMedia": "Multivides ielāde…",
+      "labelBuffering": "Atskaņošanas buferēšana…",
+      "labelSeeking": "Pozīcijas ielāde…",
+      "labelPlayer": "Multivides atskaņotājs",
+      "labelPlay": "Atskaņot",
+      "labelPause": "Pauzēt",
+      "labelSeek": "Atskaņošanas pozīcija",
+      "labelBack": "10 sekundes atpakaļ",
+      "labelForward": "10 sekundes uz priekšu",
+      "labelSpeed": "Atskaņošanas ātrums",
+      "labelUnmute": "Ieslēgt skaņu",
+      "labelMute": "Izslēgt skaņu",
+      "labelVolume": "Skaļums",
+      "labelHideVideo": "Paslēpt video",
+      "labelShowVideo": "Rādīt video",
+      "labelPlaySegment": "Atskaņot segmentu {{number}}",
+      "labelReviewed": "Pārbaudīts",
+      "labelSegments": "Segmenti",
+      "labelWords": "Vārdi",
+      "descriptionEmpty": "Nav atrasti transkribēšanas rezultāti.",
+      "descriptionConfidence": "Ticamība: {{percent}}%",
+      "errorPlayback": "Atskaņošana neizdevās. Pārbaudiet, vai multivides fails ir pieejams, un mēģiniet vēlreiz.",
+      "labelEditSegment": "Rediģēt segmentu {{number}}",
+      "labelSegmentText": "Segmenta teksts",
+      "labelSave": "Saglabāt",
+      "labelSaving": "Saglabāšana…",
+      "labelSaveReviewed": "Saglabāt un atzīmēt kā pārbaudītu",
+      "labelCancel": "Atcelt",
+      "labelRestoreOriginal": "Atjaunot sākotnējo tekstu",
+      "descriptionUnsaved": "Izmaiņas tiks lietotas tikai pēc saglabāšanas.",
+      "errorSave": "Saglabāšana neizdevās. Jūsu teksts ir saglabāts ievades laukā. Mēģiniet vēlreiz.",
+      "errorConflict": "Šis segments ir mainījies. Kopējiet savu melnrakstu un pārlādējiet skatu pirms atkārtotas saglabāšanas.",
+      "labelDownloadSrt": "Lejupielādēt SRT",
+      "descriptionSaveBeforeDownload": "Pirms SRT faila lejupielādes saglabājiet vai atceliet labojumus."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Kolonnu skats",
+      "labelRoot": "Dokumenti",
+      "labelDetails": "Faila informācija",
+      "labelType": "Tips",
+      "labelSize": "Lielums",
+      "labelUpdated": "Atjaunināts",
+      "labelOpen": "Atvērt failu"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Jauns fails",
+      "labelName": "Faila nosaukums",
+      "labelCreate": "Izveidot failu",
+      "labelCancel": "Atcelt",
+      "errorCreate": "Neizdevās izveidot failu. Pārbaudiet faila nosaukumu un rakstīšanas atļaujas."
+    },
+    "StorageFileActions": {
+      "labelActions": "Darbības ar {{name}}",
+      "labelDownloadOriginal": "Lejupielādēt oriģinālu",
+      "labelDownloadProcessed": "Lejupielādēt apstrādāto tekstu",
+      "labelRename": "Pārdēvēt",
+      "labelProcess": "Apstrādāt atkārtoti",
+      "labelDelete": "Dzēst failu",
+      "labelName": "Jaunais faila nosaukums",
+      "labelCancel": "Atcelt",
+      "labelConfirm": "Apstiprināt",
+      "descriptionDelete": "Vai neatgriezeniski dzēst “{{name}}”, tā apstrādāto saturu un meklēšanas indeksa ierakstus?",
+      "descriptionProcess": "Vai atkārtoti apstrādāt “{{name}}”? Manuālās izmaiņas tiks pārrakstītas.",
+      "descriptionQueued": "Apstrāde ir rindā vai jau notiek. Pārbaudiet tās statusu failu sarakstā.",
+      "descriptionUnsupported": "Šo failu pašlaik nevar apstrādāt. Audio un video nepieciešams konfigurēts transkribētājs.",
+      "errorAction": "Darbība neizdevās. Pārbaudiet rakstīšanas atļaujas, nosaukumu konfliktus un notiekošo apstrādi. Neveiksmīga pārdēvēšana var atstāt abus failu nosaukumus; pirms atkārtota mēģinājuma pārbaudiet sarakstu.",
+      "labelOptions": "Opcijas",
+      "labelEdit": "Rediģēt",
+      "descriptionRename": "Pārdēvējiet “{{name}}”. Saglabājiet faila paplašinājumu. Oriģināls, apstrādātais saturs un meklēšanas indekss tiek atjaunināti kopā. Esošie nosaukumi nekad netiek pārrakstīti.",
+      "labelCopy": "Kopēt uz…",
+      "labelMove": "Pārvietot uz…",
+      "descriptionCopy": "Kopēt “{{name}}” kopā ar apstrādāto saturu. Avots tiks saglabāts.",
+      "descriptionMove": "Pārvietot “{{name}}” kopā ar apstrādāto saturu. Avots tiks noņemts pēc veiksmīgas kopēšanas.",
+      "descriptionTransferred": "Fails tika pārsūtīts. Galamērķa meklēšanas indeksi tiek atjaunoti fonā.",
+      "descriptionTransferProcessingError": "Fails tika pārsūtīts, taču neizdevās sākt apstrādi. Atveriet galamērķa failu un izvēlieties “Apstrādāt atkārtoti”. Neatkārtojiet pārsūtīšanu."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Darbības ar {{name}}",
+      "labelDelete": "Dzēst mapi"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Saturs",
+      "labelSave": "Saglabāt",
+      "labelCancel": "Atcelt",
+      "errorSave": "Saglabāšana neizdevās. Mēģiniet vēlreiz.",
+      "errorConflict": "Saturs ir mainījies. Pārlādējiet to pirms saglabāšanas.",
+      "errorIndex": "Saglabāts, taču neizdevās atjaunināt meklēšanas indeksu. Saglabājiet vēlreiz."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Izvēlēties galamērķa mapi",
+      "labelSelectFile": "Izvēlēties esošu failu",
+      "descriptionFolder": "Izvēlieties esošu mapi. Tiks pārsūtīts viens fails; esošie nosaukumi nekad netiek pārrakstīti.",
+      "descriptionFile": "Izvēlieties failu no šīs sarunas vai pieejamas krātuves. Dokumentiem un ierakstiem jau jābūt apstrādātiem.",
+      "labelStorage": "Krātuve",
+      "labelCurrentStorage": "Pašreizējā krātuve",
+      "labelUp": "Vecākmape",
+      "descriptionLoading": "Failu ielāde…",
+      "descriptionEmpty": "Šajā mapē nav atbilstošu ierakstu.",
+      "descriptionNoStorages": "Nav pieejamu krātuvju.",
+      "descriptionPending": "Notiek faila pārsūtīšana. Lūdzu, uzgaidiet rezultātu.",
+      "labelCancel": "Atcelt",
+      "labelUseFolder": "Izmantot šo mapi",
+      "labelUseFile": "Pievienot failu",
+      "labelRetry": "Pārlādēt",
+      "errorLoad": "Neizdevās ielādēt šo mapi. Pārbaudiet piekļuvi un mēģiniet vēlreiz.",
+      "errorCollision": "Galamērķī jau ir fails vai apstrādāts saturs ar šo nosaukumu. Izvēlieties citu mapi; nekas netika pārrakstīts.",
+      "errorSameTarget": "Avots un galamērķis ir vienādi. Izvēlieties citu mapi.",
+      "errorSourceChanged": "Avots kopēšanas laikā mainījās. Nepilnīgais galamērķa fails tika noņemts. Mēģiniet vēlreiz.",
+      "errorBusy": "Šis fails pašlaik tiek apstrādāts. Uzgaidiet, līdz apstrāde beidzas.",
+      "errorPermission": "Jums nav nepieciešamo avota vai galamērķa atļauju.",
+      "errorSourceDelete": "Pilnīgs galamērķa fails tika izveidots, taču neizdevās noņemt avotu. Pirms darbības atkārtošanas pārbaudiet abas vietas.",
+      "errorCleanup": "Kopēšana neizdevās. Avots tika saglabāts, taču galamērķī var palikt nepilnīgi faili. Pārbaudiet to pirms atkārtota mēģinājuma.",
+      "errorAction": "Darbība neizdevās. Pirms atkārtota mēģinājuma pārbaudiet atļaujas, failu nosaukumus un abas vietas.",
+      "errorNotProcessed": "Šis fails vēl nav apstrādāts. Vispirms apstrādājiet to un pēc tam izvēlieties vēlreiz."
+    }
+  },
+  "_welcomeMessage": "Laipni lūdzam\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentācija",
+    "feedback": "Atsauksmes",
+    "help": "Palīdzība",
+    "labelThemeLight": "Gaišs",
+    "labelThemeDark": "Tumšs",
+    "labelThemeSystem": "Operētājsistēma",
+    "labelLanguage": "Valoda"
+  }
+}

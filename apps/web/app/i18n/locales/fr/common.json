@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Nouvelle conversation",
+        "mainLabelAgents": "Agents",
+        "mainLabelApps": "Applications",
+        "mainLabelWorkspaces": "Espaces de travail",
+        "history": "Historique"
+      },
+      "SidebarFavorites": {
+        "label": "Favoris",
+        "empty": "Aucun favori ajouté pour le moment."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Aucun favori",
+        "descriptionNoFavorites": "Vous pouvez ajouter des <agents>agents</agents>, des <documents>bases documentaires</documents> et des <transcribers>transcripteurs</transcribers> aux favoris."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Nouvelle conversation"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Bonne nuit];(5-11)[Bonjour];(12-17)[Bon après-midi];(18-inf)[Bonsoir];",
+      "labelAllAgents": "Tous les agents",
+      "labelToApps": "Accéder aux applications"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favoris",
+        "labelPermissions": "Autorisations",
+        "labelModels": "Modèles",
+        "labelTaskQueue": "File des tâches",
+        "labelSettings": "Paramètres",
+        "labelUsers": "Utilisateurs",
+        "labelWorkspaces": "Espaces de travail",
+        "labelSSOProvider": "Fournisseur SSO",
+        "labelXRAGUpload": "Importer un XRAG",
+        "labelSystemModel": "Modèle système",
+        "labelTheme": "Thème",
+        "labelBackToDashboard": "Retour au tableau de bord",
+        "labelConnections": "Connexions",
+        "labelProviderConnections": "Connexions",
+        "labelService": "Service",
+        "labelArtifacts": "Artefacts",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Sélectionner une icône",
+      "buttonMoreIcons": "Plus d’icônes",
+      "textLucideInfo": "Icônes de <0>Lucide</0>",
+      "placeholderSearchIcons": "Rechercher des icônes...",
+      "buttonCancel": "Annuler"
+    },
+    "FileUploadDropZone": {
+      "drop": "Déposez le fichier ici pour l’importer"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Modifié"
+    },
+    "Pagination": {
+      "labelPrev": "Précédent",
+      "labelNext": "Suivant"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mon compte",
+      "labelSystem": "Système",
+      "labelModels": "Modèles",
+      "labelCluster": "Cluster",
+      "labelSettings": "Paramètres",
+      "labelDashboard": "Tableau de bord",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Se déconnecter"
+    },
+    "UserRoleText": {
+      "admin": "Administrateur",
+      "workspace-admin": "Administrateur de l’espace de travail",
+      "editor": "Éditeur",
+      "user": "Utilisateur",
+      "none": "Non autorisé"
+    },
+    "StorageView": {
+      "placeholderSearch": "Rechercher dans ce dossier…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nom",
+      "tableColumnType": "Type",
+      "tableColumnSize": "Taille",
+      "tableColumnCreated": "Créé",
+      "tableColumnUpdated": "Modifié",
+      "tableColumnNameActions": "Actions",
+      "groupTimeToday": "Aujourd’hui",
+      "groupTimeLast7Days": "Les 7 derniers jours",
+      "groupTimeLast30Days": "Les 30 derniers jours",
+      "groupTimeOther": "Autres",
+      "labelFolder": "Dossier",
+      "descriptionProcessing": "Le fichier est en cours de traitement"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Nouveau dossier",
+      "placeholderFolderName": "Nom du dossier...",
+      "labelCancel": "Annuler",
+      "labelCreate": "Créer"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Retirer",
+      "labelDescription": "Voulez-vous vraiment supprimer « {{name}} » ? Cette action est irréversible.",
+      "labelCancel": "Annuler",
+      "labelRemove": "Retirer"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Dossier racine"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Aucun fichier",
+      "labelDescription": "Le dossier actuel ne contient aucun fichier. Glissez simplement des fichiers ici pour les importer.",
+      "labelUploadFile": "Importer un fichier",
+      "labelCreateFile": "Créer un fichier"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "Affichage",
+      "labelSort": "Trier",
+      "labelNameAsc": "Nom de A à Z",
+      "labelNameDesc": "Nom de Z à A",
+      "labelSizeAsc": "Taille croissante",
+      "labelSizeDesc": "Taille décroissante",
+      "labelCreatedAsc": "Date de création croissante",
+      "labelCreatedDesc": "Date de création décroissante",
+      "labelUpdatedAsc": "Date de modification croissante",
+      "labelUpdatedDesc": "Date de modification décroissante",
+      "labelGroup": "Regrouper",
+      "labelNoGroup": "Aucun groupe",
+      "labelFirstLetter": "Première lettre",
+      "labelFileType": "Type de fichier",
+      "labelCreated": "Date de création",
+      "labelUpdated": "Date de modification",
+      "labelTilesSmall": "Vignettes (petites)",
+      "labelTilesMedium": "Vignettes (moyennes)",
+      "labelTilesLarge": "Vignettes (grandes)",
+      "labelTable": "Tableau",
+      "labelSaveView": "Enregistrer la vue",
+      "labelReset": "Réinitialiser",
+      "labelNewFolder": "Nouveau dossier",
+      "labelThisFolder": "Ce dossier",
+      "labelUploadFile": "Importer un fichier",
+      "labelNew": "Nouveau",
+      "labelDeleteFolder": "Supprimer le dossier",
+      "labelNewRecording": "Nouvel enregistrement",
+      "labelColumns": "Vue en colonnes",
+      "labelNewTextFile": "Nouveau fichier"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Aucun résultat",
+      "descriptionNoResults": "Votre recherche n’a donné aucun résultat. Veuillez reformuler votre requête.",
+      "labelCharacters": "caractères"
+    },
+    "Transcription": {
+      "labelTitle": "Transcription",
+      "labelLoadingMedia": "Chargement du média…",
+      "labelBuffering": "Mise en mémoire tampon…",
+      "labelSeeking": "Chargement de la position…",
+      "labelPlayer": "Lecteur multimédia",
+      "labelPlay": "Lire",
+      "labelPause": "Mettre en pause",
+      "labelSeek": "Position de lecture",
+      "labelBack": "Reculer de 10 secondes",
+      "labelForward": "Avancer de 10 secondes",
+      "labelSpeed": "Vitesse de lecture",
+      "labelUnmute": "Rétablir le son",
+      "labelMute": "Couper le son",
+      "labelVolume": "Volume",
+      "labelHideVideo": "Masquer la vidéo",
+      "labelShowVideo": "Afficher la vidéo",
+      "labelPlaySegment": "Lire le segment {{number}}",
+      "labelReviewed": "Vérifié",
+      "labelSegments": "Segments",
+      "labelWords": "Mots",
+      "descriptionEmpty": "Aucun résultat de transcription trouvé.",
+      "descriptionConfidence": "Fiabilité : {{percent}} %",
+      "errorPlayback": "La lecture a échoué. Vérifiez que le fichier multimédia est disponible et réessayez.",
+      "labelEditSegment": "Modifier le segment {{number}}",
+      "labelSegmentText": "Texte du segment",
+      "labelSave": "Enregistrer",
+      "labelSaving": "Enregistrement…",
+      "labelSaveReviewed": "Enregistrer et marquer comme vérifié",
+      "labelCancel": "Annuler",
+      "labelRestoreOriginal": "Rétablir le texte d’origine",
+      "descriptionUnsaved": "Les modifications ne sont appliquées qu’à l’enregistrement.",
+      "errorSave": "L’enregistrement a échoué. Votre texte a été conservé. Veuillez réessayer.",
+      "errorConflict": "Ce segment a été modifié. Copiez votre brouillon et rechargez la vue avant d’enregistrer à nouveau.",
+      "labelDownloadSrt": "Télécharger le SRT",
+      "descriptionSaveBeforeDownload": "Enregistrez ou annulez vos modifications avant de télécharger le fichier SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Vue en colonnes",
+      "labelRoot": "Documents",
+      "labelDetails": "Détails du fichier",
+      "labelType": "Type",
+      "labelSize": "Taille",
+      "labelUpdated": "Modifié",
+      "labelOpen": "Ouvrir le fichier"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Nouveau fichier",
+      "labelName": "Nom du fichier",
+      "labelCreate": "Créer un fichier",
+      "labelCancel": "Annuler",
+      "errorCreate": "Le fichier n’a pas pu être créé. Vérifiez son nom et vos droits d’écriture."
+    },
+    "StorageFileActions": {
+      "labelActions": "Actions pour {{name}}",
+      "labelDownloadOriginal": "Télécharger l’original",
+      "labelDownloadProcessed": "Télécharger le texte traité",
+      "labelRename": "Renommer",
+      "labelProcess": "Retraiter",
+      "labelDelete": "Supprimer le fichier",
+      "labelName": "Nouveau nom du fichier",
+      "labelCancel": "Annuler",
+      "labelConfirm": "Confirmer",
+      "descriptionDelete": "Supprimer définitivement « {{name}} », son contenu traité et ses entrées dans les index de recherche ?",
+      "descriptionProcess": "Retraiter « {{name}} » ? Les modifications manuelles seront écrasées.",
+      "descriptionQueued": "Le traitement est en attente ou déjà en cours. Consultez son état dans la liste des fichiers.",
+      "descriptionUnsupported": "Ce fichier ne peut pas être traité actuellement. Les fichiers audio et vidéo nécessitent un transcripteur configuré.",
+      "errorAction": "L’action a échoué. Vérifiez les droits d’écriture, les conflits de noms et les traitements en cours. Un renommage échoué peut laisser les deux noms de fichier ; vérifiez la liste avant de réessayer.",
+      "labelOptions": "Options",
+      "labelEdit": "Modifier",
+      "descriptionRename": "Renommer « {{name}} ». Conservez l’extension. L’original, le contenu traité et l’index de recherche sont mis à jour ensemble. Les noms existants ne sont jamais écrasés.",
+      "labelCopy": "Copier vers…",
+      "labelMove": "Déplacer vers…",
+      "descriptionCopy": "Copier « {{name}} » et son contenu traité. La source sera conservée.",
+      "descriptionMove": "Déplacer « {{name}} » et son contenu traité. La source sera supprimée après la réussite de la copie.",
+      "descriptionTransferred": "Le fichier a été transféré. Les index de recherche de destination sont reconstruits en arrière-plan.",
+      "descriptionTransferProcessingError": "Le fichier a été transféré, mais le traitement n’a pas pu démarrer. Ouvrez le fichier de destination et choisissez « Retraiter ». Ne répétez pas le transfert."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Actions pour {{name}}",
+      "labelDelete": "Supprimer le dossier"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Contenu",
+      "labelSave": "Enregistrer",
+      "labelCancel": "Annuler",
+      "errorSave": "L’enregistrement a échoué. Veuillez réessayer.",
+      "errorConflict": "Le contenu a changé. Rechargez-le avant d’enregistrer.",
+      "errorIndex": "Enregistré, mais l’index de recherche n’a pas pu être mis à jour. Veuillez enregistrer à nouveau."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Choisir le dossier de destination",
+      "labelSelectFile": "Choisir un fichier existant",
+      "descriptionFolder": "Choisissez un dossier existant. Un seul fichier sera transféré ; les noms existants ne sont jamais écrasés.",
+      "descriptionFile": "Choisissez un fichier de cette conversation ou d’une base accessible. Les documents et les enregistrements doivent déjà avoir été traités.",
+      "labelStorage": "Stockage",
+      "labelCurrentStorage": "Stockage actuel",
+      "labelUp": "Dossier parent",
+      "descriptionLoading": "Chargement des fichiers…",
+      "descriptionEmpty": "Aucune entrée correspondante dans ce dossier.",
+      "descriptionNoStorages": "Aucune base documentaire accessible.",
+      "descriptionPending": "Transfert du fichier. Veuillez attendre le résultat.",
+      "labelCancel": "Annuler",
+      "labelUseFolder": "Utiliser ce dossier",
+      "labelUseFile": "Joindre le fichier",
+      "labelRetry": "Recharger",
+      "errorLoad": "Impossible de charger ce dossier. Vérifiez l’accès et réessayez.",
+      "errorCollision": "La destination contient déjà un fichier ou un contenu traité portant ce nom. Choisissez un autre dossier ; rien n’a été écrasé.",
+      "errorSameTarget": "La source et la destination sont identiques. Choisissez un autre dossier.",
+      "errorSourceChanged": "La source a changé pendant la copie. La destination incomplète a été supprimée. Réessayez.",
+      "errorBusy": "Ce fichier est en cours de traitement. Attendez la fin de l’opération.",
+      "errorPermission": "Vous n’avez pas les autorisations requises sur la source ou la destination.",
+      "errorSourceDelete": "Le fichier de destination complet a été créé, mais la source n’a pas pu être supprimée. Vérifiez les deux emplacements avant de répéter l’opération.",
+      "errorCleanup": "La copie a échoué. La source a été conservée, mais des fichiers incomplets peuvent subsister à la destination. Vérifiez-la avant de réessayer.",
+      "errorAction": "L’opération a échoué. Vérifiez les autorisations, les noms de fichiers et les deux emplacements avant de réessayer.",
+      "errorNotProcessed": "Ce fichier n’a pas encore été traité. Traitez-le d’abord, puis sélectionnez-le à nouveau."
+    }
+  },
+  "_welcomeMessage": "Bienvenue dans\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Documentation",
+    "feedback": "Avis",
+    "help": "Aide",
+    "labelThemeLight": "Clair",
+    "labelThemeDark": "Sombre",
+    "labelThemeSystem": "Système d’exploitation",
+    "labelLanguage": "Langue"
+  }
+}

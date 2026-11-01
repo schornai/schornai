@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopiér feedbacktekst til udklipsholderen",
+      "feedbackText": "Feedbacktekst",
+      "feedbackTextRecommendation": "Tak! Send os denne tekst på ",
+      "sendFeedback": "Send feedback via e-mail",
+      "showFeedbackText": "Vis feedbacktekst",
+      "thankYou": "Tak, fordi du tager dig tid til at give feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Slet alle fejlmeddelelser",
+      "actionDeleteAllCancel": "Annuller",
+      "actionDeleteAllExplainer": "Er du sikker på, at du vil slette alle indsamlede fejlmeddelelser? Denne handling kan ikke fortrydes.",
+      "actionDeleteAllShort": "Slet fejlmeddelelser",
+      "actionDeselectAll": "Fravælg alle fejlmeddelelser",
+      "actionSelectAll": "Vælg alle fejlmeddelelser",
+      "explainer": "Fejlmeddelelser er også en del af feedbacken. Nogle problemer løses automatisk af systemet, så arbejdet fortsætter uden afbrydelser. Det er dog nyttigt for os at kende fejlene, så vi kan rette dem.",
+      "explainerSecrecy": "Kontrollér, at fejlmeddelelserne ikke indeholder fortrolige oplysninger eller personoplysninger. Systemet er grundlæggende designet til at holde sådanne oplysninger ude af fejlmeddelelser. Fejl vedrører dog uforudsete situationer. Gennemgå derfor selv feedbacken af sikkerhedshensyn.",
+      "explainerSecrecyHeading": "Ingen fortrolige oplysninger",
+      "heading": "Fejl",
+      "tableColumnPartOfFeedback": "Del af feedback",
+      "tableColumnDate": "Dato",
+      "tableColumnErrorMessage": "Fejlmeddelelse"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Ingen stjernebedømmelse angivet",
+      "starRating": "{{stars}} ud af 5 stjerner"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Kassér feedback",
+      "discardFeedbackSub": "Er du sikker på, at du vil kassere din feedback? Denne handling kan ikke fortrydes.",
+      "discardFeedbackCancel": "Annuller",
+      "infoSecrecy": "Kontrollér, at den feedback, du sender, ikke indeholder fortrolige oplysninger eller personoplysninger.",
+      "writeFeedback": "Skriv feedback",
+      "writeFeedbackSub": "Vi sætter pris på al feedback, både positiv og negativ."
+    }
+  },
+  "page": {
+    "headingLine1": "Hjælp os med at forbedre schorn.ai in a Box,",
+    "headingLine2": "giv os din feedback",
+    "headingMain": "Feedback"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Olet jo kirjautunut sisään",
+      "backToDashboard": "Takaisin aloitusnäkymään",
+      "signOut": "Kirjaudu ulos"
+    },
+    "PasswordSignIn": {
+      "header": "Sähköposti",
+      "headerSub": "Kirjaudu sähköpostilla ja salasanalla",
+      "inputEmailLabel": "Sähköposti",
+      "inputPasswordLabel": "Salasana",
+      "buttonSignIn": "Kirjaudu sähköpostilla",
+      "buttonReset": "Palauta salasana"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Kirjaudu SSO-palveluntarjoajan kautta",
+      "buttonSignIn": "Kirjaudu palvelulla {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Palauta salasana",
+      "descriptionKey": "Anna sähköpostiosoitteesi ja ylläpitäjän antama palautusavain. Avainta voi käyttää kerran, ja se on voimassa 7 päivää.",
+      "labelEmail": "Sähköposti",
+      "labelKey": "Salasanan palautusavain",
+      "labelPassword": "Uusi salasana",
+      "labelPasswordAgain": "Toista uusi salasana",
+      "descriptionPassword": "Käytä vähintään 6 merkkiä ja noudata organisaatiosi salasanavaatimuksia.",
+      "errorEmail": "Anna kelvollinen sähköpostiosoite.",
+      "errorKey": "Anna palautusavain.",
+      "errorPassword": "Salasanassa on oltava vähintään 6 merkkiä.",
+      "errorPasswordAgain": "Salasanat eivät täsmää.",
+      "errorReset": "Salasanaa ei voitu vaihtaa. Tarkista sähköpostiosoitteesi, avain ja salasanavaatimukset. Vanhentuneet tai aiemmin käytetyt avaimet eivät kelpaa.",
+      "descriptionSuccess": "Salasanasi on vaihdettu. Voit nyt kirjautua uudella salasanallasi.",
+      "labelReset": "Tallenna salasana",
+      "labelSignIn": "Takaisin kirjautumiseen"
+    }
+  }
+}

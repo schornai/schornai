@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Zkopírovat text zpětné vazby do schránky",
+      "feedbackText": "Text zpětné vazby",
+      "feedbackTextRecommendation": "Děkujeme, pošlete nám tento text na ",
+      "sendFeedback": "Odeslat zpětnou vazbu e-mailem",
+      "showFeedbackText": "Zobrazit text zpětné vazby",
+      "thankYou": "Děkujeme, že jste si našli čas na zpětnou vazbu"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Smazat všechny chybové zprávy",
+      "actionDeleteAllCancel": "Zrušit",
+      "actionDeleteAllExplainer": "Opravdu chcete smazat všechny shromážděné chybové zprávy? Tuto akci nelze vrátit zpět.",
+      "actionDeleteAllShort": "Smazat chybové zprávy",
+      "actionDeselectAll": "Zrušit výběr všech chybových zpráv",
+      "actionSelectAll": "Vybrat všechny chybové zprávy",
+      "explainer": "Součástí zpětné vazby jsou také chybové zprávy. Některé problémy systém vyřeší automaticky a vaše operace pokračují bez přerušení. Je však užitečné, když se o těchto chybách dozvíme i my, abychom je mohli odstranit.",
+      "explainerSecrecy": "Ujistěte se, že chybové zprávy neobsahují důvěrné ani osobní údaje. Systém je zásadně navržen tak, aby chybové zprávy tyto údaje neobsahovaly. Chyby se však ze své podstaty týkají nepředvídaných okolností. Z bezpečnostních důvodů proto zpětnou vazbu osobně zkontrolujte.",
+      "explainerSecrecyHeading": "Žádné důvěrné údaje",
+      "heading": "Chyby",
+      "tableColumnPartOfFeedback": "Součást zpětné vazby",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Chybová zpráva"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Hvězdičkové hodnocení nebylo zadáno",
+      "starRating": "{{stars}} z 5 hvězdiček"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Zahodit zpětnou vazbu",
+      "discardFeedbackSub": "Opravdu chcete zahodit svou zpětnou vazbu? Tuto akci nelze vrátit zpět.",
+      "discardFeedbackCancel": "Zrušit",
+      "infoSecrecy": "Ujistěte se, že odesílaná zpětná vazba neobsahuje důvěrné ani osobní údaje.",
+      "writeFeedback": "Napsat zpětnou vazbu",
+      "writeFeedbackSub": "Uvítáme jakoukoli zpětnou vazbu, pozitivní i negativní."
+    }
+  },
+  "page": {
+    "headingLine1": "Pomozte nám zlepšovat schorn.ai in a Box,",
+    "headingLine2": "podělte se o svou zpětnou vazbu",
+    "headingMain": "Zpětná vazba"
+  }
+}

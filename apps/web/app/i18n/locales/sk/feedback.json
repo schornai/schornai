@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Skopírovať text spätnej väzby do schránky",
+      "feedbackText": "Text spätnej väzby",
+      "feedbackTextRecommendation": "Ďakujeme, pošlite nám tento text na ",
+      "sendFeedback": "Odoslať spätnú väzbu e-mailom",
+      "showFeedbackText": "Zobraziť text spätnej väzby",
+      "thankYou": "Ďakujeme, že ste si našli čas na spätnú väzbu"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Vymazať všetky chybové hlásenia",
+      "actionDeleteAllCancel": "Zrušiť",
+      "actionDeleteAllExplainer": "Naozaj chcete vymazať všetky zhromaždené chybové hlásenia? Túto akciu nemožno vrátiť späť.",
+      "actionDeleteAllShort": "Vymazať chybové hlásenia",
+      "actionDeselectAll": "Zrušiť výber všetkých chybových hlásení",
+      "actionSelectAll": "Vybrať všetky chybové hlásenia",
+      "explainer": "Súčasťou spätnej väzby sú aj chybové hlásenia. Niektoré problémy systém vyrieši automaticky a vaše operácie pokračujú bez prerušenia. Je však užitočné, keď sa o týchto chybách dozvieme aj my, aby sme ich mohli odstrániť.",
+      "explainerSecrecy": "Uistite sa, že chybové hlásenia neobsahujú dôverné ani osobné údaje. Systém je zásadne navrhnutý tak, aby chybové hlásenia tieto údaje neobsahovali. Chyby sa však zo svojej podstaty týkajú nepredvídaných okolností. Z bezpečnostných dôvodov preto spätnú väzbu osobne skontrolujte.",
+      "explainerSecrecyHeading": "Žiadne dôverné údaje",
+      "heading": "Chyby",
+      "tableColumnPartOfFeedback": "Súčasť spätnej väzby",
+      "tableColumnDate": "Dátum",
+      "tableColumnErrorMessage": "Chybové hlásenie"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Hodnotenie hviezdičkami nebolo zadané",
+      "starRating": "{{stars}} z 5 hviezdičiek"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Zahodiť spätnú väzbu",
+      "discardFeedbackSub": "Naozaj chcete zahodiť svoju spätnú väzbu? Túto akciu nemožno vrátiť späť.",
+      "discardFeedbackCancel": "Zrušiť",
+      "infoSecrecy": "Uistite sa, že odosielaná spätná väzba neobsahuje dôverné ani osobné údaje.",
+      "writeFeedback": "Napísať spätnú väzbu",
+      "writeFeedbackSub": "Uvítame akúkoľvek spätnú väzbu, pozitívnu aj negatívnu."
+    }
+  },
+  "page": {
+    "headingLine1": "Pomôžte nám zlepšovať schorn.ai in a Box,",
+    "headingLine2": "podeľte sa o svoju spätnú väzbu",
+    "headingMain": "Spätná väzba"
+  }
+}

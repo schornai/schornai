@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Ny chatt",
+        "mainLabelAgents": "Agenter",
+        "mainLabelApps": "Appar",
+        "mainLabelWorkspaces": "Arbetsytor",
+        "history": "Historik"
+      },
+      "SidebarFavorites": {
+        "label": "Favoriter",
+        "empty": "Inga favoriter har lagts till ännu."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Inga favoriter",
+        "descriptionNoFavorites": "Du kan lägga till <agents>agenter</agents>, <documents>dokumentarkiv</documents> och <transcribers>transkriberare</transcribers> som favoriter."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Ny chatt"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[God natt];(5-11)[God morgon];(12-17)[God eftermiddag];(18-inf)[God kväll];",
+      "labelAllAgents": "Alla agenter",
+      "labelToApps": "Till apparna"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favoriter",
+        "labelPermissions": "Behörigheter",
+        "labelModels": "Modeller",
+        "labelTaskQueue": "Uppgiftskö",
+        "labelSettings": "Inställningar",
+        "labelUsers": "Användare",
+        "labelWorkspaces": "Arbetsytor",
+        "labelSSOProvider": "SSO-leverantör",
+        "labelXRAGUpload": "Ladda upp XRAG",
+        "labelSystemModel": "Systemmodell",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Tillbaka till översikten",
+        "labelConnections": "Anslutningar",
+        "labelProviderConnections": "Anslutningar",
+        "labelService": "Tjänst",
+        "labelArtifacts": "Artefakter",
+        "labelCluster": "Kluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Välj ikon",
+      "buttonMoreIcons": "Fler ikoner",
+      "textLucideInfo": "Ikoner från <0>Lucide</0>",
+      "placeholderSearchIcons": "Sök ikoner...",
+      "buttonCancel": "Avbryt"
+    },
+    "FileUploadDropZone": {
+      "drop": "Släpp filen här för att ladda upp"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Ändrad"
+    },
+    "Pagination": {
+      "labelPrev": "Föregående",
+      "labelNext": "Nästa"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mitt konto",
+      "labelSystem": "System",
+      "labelModels": "Modeller",
+      "labelCluster": "Kluster",
+      "labelSettings": "Inställningar",
+      "labelDashboard": "Översikt",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Logga ut"
+    },
+    "UserRoleText": {
+      "admin": "Administratör",
+      "workspace-admin": "Arbetsyteadministratör",
+      "editor": "Redaktör",
+      "user": "Användare",
+      "none": "Inte behörig"
+    },
+    "StorageView": {
+      "placeholderSearch": "Sök i den här mappen…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Namn",
+      "tableColumnType": "Typ",
+      "tableColumnSize": "Storlek",
+      "tableColumnCreated": "Skapad",
+      "tableColumnUpdated": "Uppdaterad",
+      "tableColumnNameActions": "Åtgärder",
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Senaste 7 dagarna",
+      "groupTimeLast30Days": "Senaste 30 dagarna",
+      "groupTimeOther": "Övrigt",
+      "labelFolder": "Mapp",
+      "descriptionProcessing": "Filen bearbetas"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Ny mapp",
+      "placeholderFolderName": "Mappnamn...",
+      "labelCancel": "Avbryt",
+      "labelCreate": "Skapa"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Ta bort",
+      "labelDescription": "Vill du verkligen ta bort ”{{name}}”? Detta kan inte ångras.",
+      "labelCancel": "Avbryt",
+      "labelRemove": "Ta bort"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Hemkatalog"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Inga filer",
+      "labelDescription": "Den aktuella mappen innehåller inga filer. Dra filer hit för att ladda upp dem.",
+      "labelUploadFile": "Ladda upp fil",
+      "labelCreateFile": "Skapa fil"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelNameAsc": "Namn A till Ö",
+      "labelNameDesc": "Namn Ö till A",
+      "labelSizeAsc": "Storlek stigande",
+      "labelSizeDesc": "Storlek fallande",
+      "labelCreatedAsc": "Skapandedatum stigande",
+      "labelCreatedDesc": "Skapandedatum fallande",
+      "labelUpdatedAsc": "Uppdateringsdatum stigande",
+      "labelUpdatedDesc": "Uppdateringsdatum fallande",
+      "labelGroup": "Gruppera",
+      "labelNoGroup": "Ingen grupp",
+      "labelFirstLetter": "Första bokstaven",
+      "labelFileType": "Filtyp",
+      "labelCreated": "Skapandedatum",
+      "labelUpdated": "Uppdateringsdatum",
+      "labelTilesSmall": "Små paneler",
+      "labelTilesMedium": "Medelstora paneler",
+      "labelTilesLarge": "Stora paneler",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ",
+      "labelNewFolder": "Ny mapp",
+      "labelThisFolder": "Den här mappen",
+      "labelUploadFile": "Ladda upp fil",
+      "labelNew": "Nytt",
+      "labelDeleteFolder": "Ta bort mapp",
+      "labelNewRecording": "Ny inspelning",
+      "labelColumns": "Kolumnvy",
+      "labelNewTextFile": "Ny fil"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Inga resultat",
+      "descriptionNoResults": "Din sökning gav inga resultat. Formulera om din sökfråga.",
+      "labelCharacters": "tecken"
+    },
+    "Transcription": {
+      "labelTitle": "Transkript",
+      "labelLoadingMedia": "Laddar media…",
+      "labelBuffering": "Buffrar uppspelning…",
+      "labelSeeking": "Laddar position…",
+      "labelPlayer": "Mediespelare",
+      "labelPlay": "Spela upp",
+      "labelPause": "Pausa",
+      "labelSeek": "Uppspelningsposition",
+      "labelBack": "Bakåt 10 sekunder",
+      "labelForward": "Framåt 10 sekunder",
+      "labelSpeed": "Uppspelningshastighet",
+      "labelUnmute": "Slå på ljud",
+      "labelMute": "Stäng av ljud",
+      "labelVolume": "Volym",
+      "labelHideVideo": "Dölj video",
+      "labelShowVideo": "Visa video",
+      "labelPlaySegment": "Spela upp segment {{number}}",
+      "labelReviewed": "Granskad",
+      "labelSegments": "Segment",
+      "labelWords": "Ord",
+      "descriptionEmpty": "Inga transkriptionsresultat hittades.",
+      "descriptionConfidence": "Tillförlitlighet: {{percent}}%",
+      "errorPlayback": "Uppspelningen misslyckades. Kontrollera att mediefilen är tillgänglig och försök igen.",
+      "labelEditSegment": "Redigera segment {{number}}",
+      "labelSegmentText": "Segmenttext",
+      "labelSave": "Spara",
+      "labelSaving": "Sparar…",
+      "labelSaveReviewed": "Spara och markera som granskad",
+      "labelCancel": "Avbryt",
+      "labelRestoreOriginal": "Återställ originaltext",
+      "descriptionUnsaved": "Ändringarna tillämpas först när du sparar.",
+      "errorSave": "Det gick inte att spara. Din text finns kvar. Försök igen.",
+      "errorConflict": "Det här segmentet har ändrats. Kopiera ditt utkast och ladda om vyn innan du sparar igen.",
+      "labelDownloadSrt": "Ladda ned SRT",
+      "descriptionSaveBeforeDownload": "Spara eller avbryt dina ändringar innan du laddar ned SRT-filen."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Kolumnvy",
+      "labelRoot": "Dokument",
+      "labelDetails": "Filinformation",
+      "labelType": "Typ",
+      "labelSize": "Storlek",
+      "labelUpdated": "Uppdaterad",
+      "labelOpen": "Öppna fil"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Ny fil",
+      "labelName": "Filnamn",
+      "labelCreate": "Skapa fil",
+      "labelCancel": "Avbryt",
+      "errorCreate": "Filen kunde inte skapas. Kontrollera filnamnet och din skrivbehörighet."
+    },
+    "StorageFileActions": {
+      "labelActions": "Åtgärder för {{name}}",
+      "labelDownloadOriginal": "Ladda ned original",
+      "labelDownloadProcessed": "Ladda ned bearbetad text",
+      "labelRename": "Byt namn",
+      "labelProcess": "Bearbeta igen",
+      "labelDelete": "Ta bort fil",
+      "labelName": "Nytt filnamn",
+      "labelCancel": "Avbryt",
+      "labelConfirm": "Bekräfta",
+      "descriptionDelete": "Ta bort ”{{name}}”, dess bearbetade innehåll och sökindexposter permanent?",
+      "descriptionProcess": "Bearbeta ”{{name}}” igen? Manuella ändringar skrivs över.",
+      "descriptionQueued": "Bearbetningen står i kö eller pågår redan. Kontrollera statusen i fillistan.",
+      "descriptionUnsupported": "Filen kan inte bearbetas just nu. Ljud och video kräver en konfigurerad transkriberare.",
+      "errorAction": "Åtgärden misslyckades. Kontrollera skrivbehörighet, namnkonflikter och pågående bearbetning. Ett misslyckat namnbyte kan lämna kvar båda filnamnen; kontrollera listan innan du försöker igen.",
+      "labelOptions": "Alternativ",
+      "labelEdit": "Redigera",
+      "descriptionRename": "Byt namn på ”{{name}}”. Behåll filändelsen. Originalet, det bearbetade innehållet och sökindexet uppdateras tillsammans. Befintliga namn skrivs aldrig över.",
+      "labelCopy": "Kopiera till…",
+      "labelMove": "Flytta till…",
+      "descriptionCopy": "Kopiera ”{{name}}” inklusive det bearbetade innehållet. Källan behålls.",
+      "descriptionMove": "Flytta ”{{name}}” inklusive det bearbetade innehållet. Källan tas bort när kopieringen har lyckats.",
+      "descriptionTransferred": "Filen har överförts. Målplatsens sökindex byggs om i bakgrunden.",
+      "descriptionTransferProcessingError": "Filen har överförts, men bearbetningen kunde inte startas. Öppna målfilen och välj ”Bearbeta igen”. Upprepa inte överföringen."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Åtgärder för {{name}}",
+      "labelDelete": "Ta bort mapp"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Innehåll",
+      "labelSave": "Spara",
+      "labelCancel": "Avbryt",
+      "errorSave": "Det gick inte att spara. Försök igen.",
+      "errorConflict": "Innehållet har ändrats. Ladda om innan du sparar.",
+      "errorIndex": "Sparat, men sökindexet kunde inte uppdateras. Spara igen."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Välj målmapp",
+      "labelSelectFile": "Välj en befintlig fil",
+      "descriptionFolder": "Välj en befintlig mapp. En fil överförs; befintliga namn skrivs aldrig över.",
+      "descriptionFile": "Välj en fil från den här chatten eller ett tillgängligt arkiv. Dokument och inspelningar måste redan vara bearbetade.",
+      "labelStorage": "Lagring",
+      "labelCurrentStorage": "Aktuell lagring",
+      "labelUp": "Överordnad mapp",
+      "descriptionLoading": "Laddar filer…",
+      "descriptionEmpty": "Inga matchande poster i den här mappen.",
+      "descriptionNoStorages": "Inga åtkomliga arkiv finns.",
+      "descriptionPending": "Överför filen. Vänta på resultatet.",
+      "labelCancel": "Avbryt",
+      "labelUseFolder": "Använd den här mappen",
+      "labelUseFile": "Bifoga fil",
+      "labelRetry": "Ladda om",
+      "errorLoad": "Mappen kunde inte laddas. Kontrollera åtkomsten och försök igen.",
+      "errorCollision": "Målplatsen innehåller redan en fil eller bearbetat innehåll med det här namnet. Välj en annan mapp; inget skrevs över.",
+      "errorSameTarget": "Källa och mål är samma. Välj en annan mapp.",
+      "errorSourceChanged": "Källan ändrades under kopieringen. Den ofullständiga kopian togs bort. Försök igen.",
+      "errorBusy": "Filen bearbetas just nu. Vänta tills det är klart.",
+      "errorPermission": "Du saknar nödvändig behörighet för källan eller målplatsen.",
+      "errorSourceDelete": "Den fullständiga målfilen skapades, men källan kunde inte tas bort. Kontrollera båda platserna innan du upprepar åtgärden.",
+      "errorCleanup": "Kopieringen misslyckades. Källan behölls, men ofullständiga filer kan finnas kvar på målplatsen. Kontrollera den innan du försöker igen.",
+      "errorAction": "Åtgärden misslyckades. Kontrollera behörigheter, filnamn och båda platserna innan du försöker igen.",
+      "errorNotProcessed": "Filen har inte bearbetats ännu. Bearbeta den först och välj den sedan igen."
+    }
+  },
+  "_welcomeMessage": "Välkommen till\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentation",
+    "feedback": "Återkoppling",
+    "help": "Hjälp",
+    "labelThemeLight": "Ljust",
+    "labelThemeDark": "Mörkt",
+    "labelThemeSystem": "Operativsystem",
+    "labelLanguage": "Språk"
+  }
+}

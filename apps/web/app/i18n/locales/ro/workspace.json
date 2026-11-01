@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Descriere",
+      "description": "Alege un nume potrivit pentru spațiul de lucru. Poți salva și o scurtă descriere.",
+      "labelName": "Nume",
+      "labelDescription": "Descriere",
+      "buttonSave": "Salvează",
+      "buttonReset": "Resetează"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentație",
+      "description": "Oferă aici utilizatorilor informații suplimentare despre acest spațiu de lucru.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Salvează",
+      "buttonReset": "Resetează"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapări SSO",
+      "description": "Selectează grupul SSO care are acces la spațiul de lucru și permisiunile sale.",
+      "labelRoleUser": "Grup de utilizatori",
+      "labelRoleEditor": "Grup de editori",
+      "labelRoleWorkspaceAdmin": "Grup de administratori ai spațiului de lucru",
+      "placeholderNoGroup": "Niciun grup atribuit",
+      "descriptionRoleUser": "Poate vizualiza conținutul spațiului de lucru, precum agenți, transcriptori și depozite de documente, dar nu îl poate edita.",
+      "descriptionRoleEditor": "Poate vizualiza și edita conținutul spațiului de lucru.",
+      "descriptionRoleWorkspaceAdmin": "Poate gestiona spațiul de lucru și crea, edita sau șterge agenți, transcriptori, depozite de documente și alte resurse.",
+      "buttonSave": "Salvează",
+      "buttonReset": "Resetează"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Utilizator automat",
+      "description": "Când „Utilizator automat” este activat, oricine se poate autentifica în sistem primește automat drepturi de utilizator în această organizație.",
+      "labelActive": "Utilizator automat activat",
+      "labelInactive": "Utilizator automat dezactivat"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Spațiu de lucru nou",
+      "descriptionWorkspace": "Alege un nume și o descriere opțională. Poți configura alte setări după crearea spațiului de lucru.",
+      "labelName": "Nume",
+      "labelDescription": "Descriere",
+      "labelCreate": "Creează spațiu de lucru",
+      "labelCancel": "Anulează",
+      "errorCreate": "Spațiul de lucru nu a putut fi creat. Încearcă din nou."
+    },
+    "WorkspaceCard": {
+      "labelType": "Spațiu de lucru"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Editează spațiul de lucru",
+      "tooltipInfo": "Deschide spațiul de lucru"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Adaugă la favorite",
+      "tooltipRemoveFavorite": "Elimină din favorite"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Caută spații de lucru",
+      "labelName": "Nume",
+      "labelDescription": "Descriere",
+      "labelRole": "Rolul tău",
+      "labelActions": "Acțiuni",
+      "labelFavorites": "Favorite",
+      "labelOtherWorkspaces": "Alte spații de lucru",
+      "labelEmpty": "Niciun spațiu de lucru",
+      "descriptionEmpty": "Nu ai încă acces la un spațiu de lucru.",
+      "labelNoResults": "Niciun rezultat",
+      "descriptionNoResults": "Încearcă alt termen de căutare."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelNameAsc": "Nume de la A la Z",
+      "labelNameDesc": "Nume de la Z la A",
+      "labelGroup": "Grupează după",
+      "labelNoGroup": "Fără grup",
+      "labelFavorites": "Favorite",
+      "labelFirstLetter": "Prima literă",
+      "labelCards": "Carduri",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Creează spațiu de lucru"
+    }
+  },
+  "page": {
+    "labelYourRole": "Rolul tău",
+    "labelEmpty": "Încă nu există conținut",
+    "descriptionEmpty": "Nu există încă agenți, depozite de documente sau transcriptori disponibili în acest spațiu de lucru.",
+    "labelTitle": "Spații de lucru"
+  }
+}

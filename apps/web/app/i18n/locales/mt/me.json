@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Isem",
+      "labelFirstName": "Isem",
+      "labelLastName": "Kunjom",
+      "buttonSave": "Issejvja",
+      "buttonReset": "Irrisettja"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Neħħi l-immaġni",
+      "alertDelete": "Neħħi l-immaġni",
+      "alertDeleteExplainer": "Żgur li trid tneħħi l-immaġni tiegħek?",
+      "alertDeleteCancel": "Ikkanċella"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Tella’ immaġni"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Permessi",
+      "tableColumnName": "Isem",
+      "tableColumnPermission": "Permess",
+      "tableColumnDescription": "Deskrizzjoni",
+      "infoEmpty": "Ebda permess",
+      "infoEmptyDescription": "Ebda funzjoni ta’ schorn.ai box ma hija disponibbli.",
+      "infoEmptyAdminDescription": "Bħala amministratur tista’ toħloq l-ewwel spazju tax-xogħol.",
+      "infoEmptyAdminAction": "Oħloq l-ewwel spazju tax-xogħol",
+      "infoUser": "Jista’ jara l-kontenut tal-organizzazzjoni (chatbots, traskritturi, dokumenti, repożitorji, eċċ.), iżda ma jistax jeditjah.",
+      "infoEditor": "Jista’ jara l-kontenut tal-organizzazzjoni u wkoll jeditjah (joħloq chatbots ġodda, jeditja dokumenti, iħassar, eċċ.).",
+      "infoAdmin": "Jista’ jaqra u jikteb fl-organizzazzjonijiet kollha u wkoll jimmaniġġja s-settings tas-sistema (itella’ XRAG, ibiddel il-kuluri, eċċ.) u l-utenti."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Ippersonalizza",
+    "infoPersonalizeDescription": "Tista’ ttella’ l-istampa tal-profil tiegħek u tippersonalizza ismek hawn."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Password ġdida ssettjata",
+    "description": "Il-password il-ġdida ġiet issettjata b’suċċess. Issa dħalt bil-password il-ġdida.",
+    "buttonBackToDashboard": "Lejn id-dashboard"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Konnessjonijiet",
+      "descriptionConnections": "Il-konnessjonijiet personali OAuth tiegħek mas-servers MCP. Meta tiskonnettja, jitneħħew il-kredenzjali maħżuna hawn. Is-sejħiet li diġà għaddejjin jistgħu jitlestew; irrevoka l-permessi tal-fornitur direttament għand il-fornitur.",
+      "labelDisconnect": "Skonnettja",
+      "descriptionEmpty": "Qabbad il-kont tiegħek fil-konversazzjoni meta għodda MCP teħtieġ li tidħol.",
+      "labelEmpty": "Għad m’hemmx konnessjonijiet",
+      "labelInfo": "Dwar il-konnessjonijiet",
+      "errorDisconnect": "Il-konnessjoni ma setgħetx tiġi skonnettjata. Erġa’ pprova."
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Descrizione",
+      "description": "Scegli un nome adatto per lo spazio di lavoro. Puoi anche salvare una breve descrizione.",
+      "labelName": "Nome",
+      "labelDescription": "Descrizione",
+      "buttonSave": "Salva",
+      "buttonReset": "Reimposta"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentazione",
+      "description": "Condividi qui con gli utenti ulteriori informazioni su questo spazio di lavoro.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Salva",
+      "buttonReset": "Reimposta"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mappature SSO",
+      "description": "Seleziona quale gruppo SSO ha accesso allo spazio di lavoro e con quali autorizzazioni.",
+      "labelRoleUser": "Gruppo utenti",
+      "labelRoleEditor": "Gruppo editor",
+      "labelRoleWorkspaceAdmin": "Gruppo amministratori dello spazio di lavoro",
+      "placeholderNoGroup": "Nessun gruppo assegnato",
+      "descriptionRoleUser": "Può visualizzare i contenuti dello spazio di lavoro, come agenti, trascrittori e archivi di documenti, ma non modificarli.",
+      "descriptionRoleEditor": "Può visualizzare e modificare i contenuti dello spazio di lavoro.",
+      "descriptionRoleWorkspaceAdmin": "Può gestire lo spazio di lavoro e creare, modificare ed eliminare agenti, trascrittori, archivi di documenti e altre risorse.",
+      "buttonSave": "Salva",
+      "buttonReset": "Reimposta"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Utente automatico",
+      "description": "Quando «Utente automatico» è attivo, chiunque possa accedere al sistema viene automaticamente autorizzato come utente di questa organizzazione.",
+      "labelActive": "Utente automatico attivo",
+      "labelInactive": "Utente automatico disattivo"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nuovo spazio di lavoro",
+      "descriptionWorkspace": "Scegli un nome e una descrizione facoltativa. Puoi configurare le altre impostazioni dopo aver creato lo spazio di lavoro.",
+      "labelName": "Nome",
+      "labelDescription": "Descrizione",
+      "labelCreate": "Crea spazio di lavoro",
+      "labelCancel": "Annulla",
+      "errorCreate": "Impossibile creare lo spazio di lavoro. Riprova."
+    },
+    "WorkspaceCard": {
+      "labelType": "Spazio di lavoro"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Modifica spazio di lavoro",
+      "tooltipInfo": "Apri spazio di lavoro"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Aggiungi ai preferiti",
+      "tooltipRemoveFavorite": "Rimuovi dai preferiti"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Cerca spazi di lavoro",
+      "labelName": "Nome",
+      "labelDescription": "Descrizione",
+      "labelRole": "Il tuo ruolo",
+      "labelActions": "Azioni",
+      "labelFavorites": "Preferiti",
+      "labelOtherWorkspaces": "Altri spazi di lavoro",
+      "labelEmpty": "Nessuno spazio di lavoro",
+      "descriptionEmpty": "Non hai ancora accesso a uno spazio di lavoro.",
+      "labelNoResults": "Nessun risultato",
+      "descriptionNoResults": "Prova un altro termine di ricerca."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opzioni",
+      "labelView": "Visualizzazione",
+      "labelSort": "Ordinamento",
+      "labelNameAsc": "Nome dalla A alla Z",
+      "labelNameDesc": "Nome dalla Z alla A",
+      "labelGroup": "Raggruppa per",
+      "labelNoGroup": "Nessun gruppo",
+      "labelFavorites": "Preferiti",
+      "labelFirstLetter": "Lettera iniziale",
+      "labelCards": "Schede",
+      "labelTable": "Tabella",
+      "labelSaveView": "Salva visualizzazione",
+      "labelReset": "Reimposta"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Crea spazio di lavoro"
+    }
+  },
+  "page": {
+    "labelYourRole": "Il tuo ruolo",
+    "labelEmpty": "Nessun contenuto ancora",
+    "descriptionEmpty": "In questo spazio di lavoro non sono ancora disponibili agenti, archivi di documenti o trascrittori.",
+    "labelTitle": "Spazi di lavoro"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Beschreibung",
+      "description": "Wählen Sie einen passenden Namen für den Arbeitsplatz. Darüber hinaus kann auch noch eine kurze Beschreibung dazu gespeichert werden.",
+      "labelName": "Name",
+      "labelDescription": "Beschreibung",
+      "buttonSave": "Speichern",
+      "buttonReset": "Zurücksetzen"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentation",
+      "description": "Teilen Sie hier zusätzliche Informationen zu diesem Arbeitsplatz mit den Benutzer:innen.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Speichern",
+      "buttonReset": "Zurücksetzen"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO Zuweisungen",
+      "description": "Wählen Sie, welche SSO-Gruppe mit welcher Berechtigung auf den Arbeitsplatz zugreift.",
+      "labelRoleUser": "Gruppe Benutzer:innen",
+      "labelRoleEditor": "Gruppe Bearbeiter:innen",
+      "labelRoleWorkspaceAdmin": "Gruppe Arbeitsplatzadministrator:innen",
+      "placeholderNoGroup": "Keine Gruppe zugewiesen",
+      "descriptionRoleUser": "Können Inhalte des Arbeitsplatzes sehen (Agenten, Transkriptoren, Dokumentenablagen, etc.), jedoch nicht bearbeiten.",
+      "descriptionRoleEditor": "Können Inhalte des Arbeitsplatzes sehen und darüber hinaus auch bearbeiten.",
+      "descriptionRoleWorkspaceAdmin": "Können den Arbeitsplatz verwalten und Agenten, Transkriptoren, Dokumentenablagen, etc. anlegen, bearbeiten und löschen.",
+      "buttonSave": "Speichern",
+      "buttonReset": "Zurücksetzen"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatisch Benutzer:in",
+      "description": "Ist „Automatisch Benutzer:in“ aktiv, dann sind alle, die sich auf der Box anmelden können, automatisch als Benutzer:in in dieser Organisation berechtigt.",
+      "labelActive": "Automatisch Benutzer:in aktiv",
+      "labelInactive": "Automatisch Benutzer:in deaktiviert"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Neuer Workspace",
+      "descriptionWorkspace": "Wähle einen Namen und optional eine Beschreibung. Weitere Einstellungen kannst du nach dem Anlegen bearbeiten.",
+      "labelName": "Name",
+      "labelDescription": "Beschreibung",
+      "labelCreate": "Workspace anlegen",
+      "labelCancel": "Abbrechen",
+      "errorCreate": "Der Workspace konnte nicht angelegt werden. Bitte versuche es erneut."
+    },
+    "WorkspaceCard": {
+      "labelType": "Arbeitsplatz"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Arbeitsplatz bearbeiten",
+      "tooltipInfo": "Arbeitsplatz öffnen"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Zu Favoriten hinzufügen",
+      "tooltipRemoveFavorite": "Aus Favoriten entfernen"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Arbeitsplätze suchen",
+      "labelName": "Name",
+      "labelDescription": "Beschreibung",
+      "labelRole": "Deine Rolle",
+      "labelActions": "Aktionen",
+      "labelFavorites": "Favoriten",
+      "labelOtherWorkspaces": "Weitere Arbeitsplätze",
+      "labelEmpty": "Keine Arbeitsplätze",
+      "descriptionEmpty": "Du hast noch keinen Zugriff auf einen Arbeitsplatz.",
+      "labelNoResults": "Keine Treffer",
+      "descriptionNoResults": "Versuche einen anderen Suchbegriff."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Optionen",
+      "labelView": "Ansicht",
+      "labelSort": "Sortieren",
+      "labelNameAsc": "Name A bis Z",
+      "labelNameDesc": "Name Z bis A",
+      "labelGroup": "Gruppieren",
+      "labelNoGroup": "Keine Gruppe",
+      "labelFavorites": "Favoriten",
+      "labelFirstLetter": "Anfangsbuchstaben",
+      "labelCards": "Kacheln",
+      "labelTable": "Tabelle",
+      "labelSaveView": "Ansicht speichern",
+      "labelReset": "Zurücksetzen"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Workspace anlegen"
+    }
+  },
+  "page": {
+    "labelYourRole": "Deine Rolle",
+    "labelEmpty": "Noch keine Inhalte",
+    "descriptionEmpty": "In diesem Arbeitsplatz sind noch keine Agenten, Dokumentenablagen oder Transkriptoren verfügbar.",
+    "labelTitle": "Arbeitsplätze"
+  }
+}

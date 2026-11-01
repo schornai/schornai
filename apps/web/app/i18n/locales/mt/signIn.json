@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Diġà dħalt fil-kont",
+      "backToDashboard": "Lura għad-dashboard",
+      "signOut": "Oħroġ mill-kont"
+    },
+    "PasswordSignIn": {
+      "header": "Email",
+      "headerSub": "Idħol bl-email u l-password",
+      "inputEmailLabel": "Email",
+      "inputPasswordLabel": "Password",
+      "buttonSignIn": "Idħol bl-email",
+      "buttonReset": "Irrisettja l-password"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Idħol ma’ fornitur SSO",
+      "buttonSignIn": "Idħol ma’ {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Irrisettja l-password",
+      "descriptionKey": "Daħħal l-indirizz tal-email tiegħek u ċ-ċavetta għar-risettjar mogħtija mill-amministratur tiegħek. Iċ-ċavetta tista’ tintuża darba u hija valida għal 7 ijiem.",
+      "labelEmail": "Email",
+      "labelKey": "Ċavetta għar-risettjar tal-password",
+      "labelPassword": "Password ġdida",
+      "labelPasswordAgain": "Irrepeti l-password il-ġdida",
+      "descriptionPassword": "Uża mill-inqas 6 karattri u segwi r-rekwiżiti tal-passwords tal-organizzazzjoni tiegħek.",
+      "errorEmail": "Daħħal indirizz tal-email validu.",
+      "errorKey": "Daħħal iċ-ċavetta tiegħek għar-risettjar.",
+      "errorPassword": "Il-password trid tinkludi mill-inqas 6 karattri.",
+      "errorPasswordAgain": "Il-passwords ma jaqblux.",
+      "errorReset": "Il-password ma setgħetx tinbidel. Iċċekkja l-indirizz tal-email tiegħek, iċ-ċavetta u r-rekwiżiti tal-password. Ċwievet skaduti jew li ntużaw qabel huma invalidi.",
+      "descriptionSuccess": "Il-password tiegħek inbidlet. Issa tista’ tidħol bil-password il-ġdida tiegħek.",
+      "labelReset": "Issejvja l-password",
+      "labelSignIn": "Lura għad-dħul"
+    }
+  }
+}

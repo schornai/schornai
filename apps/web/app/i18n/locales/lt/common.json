@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Naujas pokalbis",
+        "mainLabelAgents": "Agentai",
+        "mainLabelApps": "Programos",
+        "mainLabelWorkspaces": "Darbo sritys",
+        "history": "Istorija"
+      },
+      "SidebarFavorites": {
+        "label": "Mėgstamiausi",
+        "empty": "Mėgstamiausių dar nepridėta."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Mėgstamiausių nėra",
+        "descriptionNoFavorites": "Prie mėgstamiausių galite pridėti <agents>agentus</agents>, <documents>dokumentų saugyklas</documents> ir <transcribers>transkribuotojus</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Naujas pokalbis"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Labos nakties];(5-11)[Labas rytas];(12-17)[Laba diena];(18-inf)[Labas vakaras];",
+      "labelAllAgents": "Visi agentai",
+      "labelToApps": "Eiti į programas"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profilis",
+        "labelFavorites": "Mėgstamiausi",
+        "labelPermissions": "Teisės",
+        "labelModels": "Modeliai",
+        "labelTaskQueue": "Užduočių eilė",
+        "labelSettings": "Nuostatos",
+        "labelUsers": "Naudotojai",
+        "labelWorkspaces": "Darbo sritys",
+        "labelSSOProvider": "SSO paslaugos teikėjas",
+        "labelXRAGUpload": "Įkelti XRAG",
+        "labelSystemModel": "Sistemos modelis",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Grįžti į skydelį",
+        "labelConnections": "Ryšiai",
+        "labelProviderConnections": "Ryšiai",
+        "labelService": "Paslauga",
+        "labelArtifacts": "Artefaktai",
+        "labelCluster": "Klasteris"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Pasirinkti piktogramą",
+      "buttonMoreIcons": "Daugiau piktogramų",
+      "textLucideInfo": "Piktogramos: <0>Lucide</0>",
+      "placeholderSearchIcons": "Ieškoti piktogramų...",
+      "buttonCancel": "Atšaukti"
+    },
+    "FileUploadDropZone": {
+      "drop": "Nutempkite failą čia, kad jį įkeltumėte"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Pakeista"
+    },
+    "Pagination": {
+      "labelPrev": "Ankstesnis",
+      "labelNext": "Kitas"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mano paskyra",
+      "labelSystem": "Sistema",
+      "labelModels": "Modeliai",
+      "labelCluster": "Klasteris",
+      "labelSettings": "Nuostatos",
+      "labelDashboard": "Skydelis",
+      "labelProfile": "Profilis"
+    },
+    "SidebarUserSignOut": {
+      "label": "Atsijungti"
+    },
+    "UserRoleText": {
+      "admin": "Administratorius",
+      "workspace-admin": "Darbo srities administratorius",
+      "editor": "Redaktorius",
+      "user": "Naudotojas",
+      "none": "Nėra teisės"
+    },
+    "StorageView": {
+      "placeholderSearch": "Ieškoti šiame aplanke…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Pavadinimas",
+      "tableColumnType": "Tipas",
+      "tableColumnSize": "Dydis",
+      "tableColumnCreated": "Sukurta",
+      "tableColumnUpdated": "Atnaujinta",
+      "tableColumnNameActions": "Veiksmai",
+      "groupTimeToday": "Šiandien",
+      "groupTimeLast7Days": "Pastarosios 7 dienos",
+      "groupTimeLast30Days": "Pastarosios 30 dienų",
+      "groupTimeOther": "Kita",
+      "labelFolder": "Aplankas",
+      "descriptionProcessing": "Failas apdorojamas"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Naujas aplankas",
+      "placeholderFolderName": "Aplanko pavadinimas...",
+      "labelCancel": "Atšaukti",
+      "labelCreate": "Sukurti"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Pašalinti",
+      "labelDescription": "Ar tikrai norite pašalinti „{{name}}“? Šio veiksmo negalima atšaukti.",
+      "labelCancel": "Atšaukti",
+      "labelRemove": "Pašalinti"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Namų katalogas"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Failų nėra",
+      "labelDescription": "Dabartiniame aplanke nėra failų. Tiesiog nutempkite failus čia, kad juos įkeltumėte.",
+      "labelUploadFile": "Įkelti failą",
+      "labelCreateFile": "Sukurti failą"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelNameAsc": "Pavadinimas nuo A iki Z",
+      "labelNameDesc": "Pavadinimas nuo Z iki A",
+      "labelSizeAsc": "Dydis didėjančiai",
+      "labelSizeDesc": "Dydis mažėjančiai",
+      "labelCreatedAsc": "Sukūrimo data didėjančiai",
+      "labelCreatedDesc": "Sukūrimo data mažėjančiai",
+      "labelUpdatedAsc": "Atnaujinimo data didėjančiai",
+      "labelUpdatedDesc": "Atnaujinimo data mažėjančiai",
+      "labelGroup": "Grupavimas",
+      "labelNoGroup": "Negrupuoti",
+      "labelFirstLetter": "Pirmoji raidė",
+      "labelFileType": "Failo tipas",
+      "labelCreated": "Sukūrimo data",
+      "labelUpdated": "Atnaujinimo data",
+      "labelTilesSmall": "Plytelės (mažos)",
+      "labelTilesMedium": "Plytelės (vidutinės)",
+      "labelTilesLarge": "Plytelės (didelės)",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti",
+      "labelNewFolder": "Naujas aplankas",
+      "labelThisFolder": "Šis aplankas",
+      "labelUploadFile": "Įkelti failą",
+      "labelNew": "Naujas",
+      "labelDeleteFolder": "Ištrinti aplanką",
+      "labelNewRecording": "Naujas įrašas",
+      "labelColumns": "Stulpelių rodinys",
+      "labelNewTextFile": "Naujas failas"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Rezultatų nėra",
+      "descriptionNoResults": "Paieška nedavė rezultatų. Pabandykite kitaip suformuluoti užklausą.",
+      "labelCharacters": "simbolių"
+    },
+    "Transcription": {
+      "labelTitle": "Transkripcija",
+      "labelLoadingMedia": "Įkeliama medija…",
+      "labelBuffering": "Atkūrimas buferizuojamas…",
+      "labelSeeking": "Įkeliama pozicija…",
+      "labelPlayer": "Medijos leistuvas",
+      "labelPlay": "Leisti",
+      "labelPause": "Pristabdyti",
+      "labelSeek": "Atkūrimo pozicija",
+      "labelBack": "10 sekundžių atgal",
+      "labelForward": "10 sekundžių pirmyn",
+      "labelSpeed": "Atkūrimo greitis",
+      "labelUnmute": "Įjungti garsą",
+      "labelMute": "Nutildyti",
+      "labelVolume": "Garsumas",
+      "labelHideVideo": "Slėpti vaizdą",
+      "labelShowVideo": "Rodyti vaizdą",
+      "labelPlaySegment": "Leisti segmentą {{number}}",
+      "labelReviewed": "Patikrinta",
+      "labelSegments": "Segmentai",
+      "labelWords": "Žodžiai",
+      "descriptionEmpty": "Transkribavimo rezultatų nerasta.",
+      "descriptionConfidence": "Patikimumas: {{percent}} %",
+      "errorPlayback": "Atkūrimas nepavyko. Patikrinkite, ar medijos failas prieinamas, ir bandykite dar kartą.",
+      "labelEditSegment": "Redaguoti segmentą {{number}}",
+      "labelSegmentText": "Segmento tekstas",
+      "labelSave": "Išsaugoti",
+      "labelSaving": "Išsaugoma…",
+      "labelSaveReviewed": "Išsaugoti ir pažymėti kaip patikrintą",
+      "labelCancel": "Atšaukti",
+      "labelRestoreOriginal": "Atkurti pradinį tekstą",
+      "descriptionUnsaved": "Pakeitimai pritaikomi tik išsaugojus.",
+      "errorSave": "Išsaugoti nepavyko. Jūsų tekstas išliko. Bandykite dar kartą.",
+      "errorConflict": "Šis segmentas pasikeitė. Nukopijuokite savo juodraštį ir prieš vėl išsaugodami įkelkite rodinį iš naujo.",
+      "labelDownloadSrt": "Atsisiųsti SRT",
+      "descriptionSaveBeforeDownload": "Prieš atsisiųsdami SRT failą išsaugokite arba atšaukite pakeitimus."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Stulpelių rodinys",
+      "labelRoot": "Dokumentai",
+      "labelDetails": "Failo informacija",
+      "labelType": "Tipas",
+      "labelSize": "Dydis",
+      "labelUpdated": "Atnaujinta",
+      "labelOpen": "Atverti failą"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Naujas failas",
+      "labelName": "Failo pavadinimas",
+      "labelCreate": "Sukurti failą",
+      "labelCancel": "Atšaukti",
+      "errorCreate": "Nepavyko sukurti failo. Patikrinkite failo pavadinimą ir rašymo teises."
+    },
+    "StorageFileActions": {
+      "labelActions": "Veiksmai su {{name}}",
+      "labelDownloadOriginal": "Atsisiųsti originalą",
+      "labelDownloadProcessed": "Atsisiųsti apdorotą tekstą",
+      "labelRename": "Pervadinti",
+      "labelProcess": "Apdoroti iš naujo",
+      "labelDelete": "Ištrinti failą",
+      "labelName": "Naujas failo pavadinimas",
+      "labelCancel": "Atšaukti",
+      "labelConfirm": "Patvirtinti",
+      "descriptionDelete": "Ar visam laikui ištrinti „{{name}}“, jo apdorotą turinį ir paieškos indekso įrašus?",
+      "descriptionProcess": "Ar apdoroti „{{name}}“ iš naujo? Rankiniai pakeitimai bus perrašyti.",
+      "descriptionQueued": "Apdorojimas laukia eilėje arba jau vyksta. Patikrinkite jo būseną failų sąraše.",
+      "descriptionUnsupported": "Šio failo šiuo metu negalima apdoroti. Garsui ir vaizdui reikia nustatyto transkribuotojo.",
+      "errorAction": "Veiksmas nepavyko. Patikrinkite rašymo teises, pavadinimų konfliktus ir vykstantį apdorojimą. Nepavykus pervadinti gali likti abu failų pavadinimai; prieš bandydami dar kartą patikrinkite sąrašą.",
+      "labelOptions": "Parinktys",
+      "labelEdit": "Redaguoti",
+      "descriptionRename": "Pervadinkite „{{name}}“. Išsaugokite failo plėtinį. Originalas, apdorotas turinys ir paieškos indeksas atnaujinami kartu. Esami pavadinimai niekada neperrašomi.",
+      "labelCopy": "Kopijuoti į…",
+      "labelMove": "Perkelti į…",
+      "descriptionCopy": "Kopijuoti „{{name}}“ kartu su apdorotu turiniu. Šaltinis bus išsaugotas.",
+      "descriptionMove": "Perkelti „{{name}}“ kartu su apdorotu turiniu. Šaltinis bus pašalintas sėkmingai nukopijavus.",
+      "descriptionTransferred": "Failas perduotas. Paskirties paieškos indeksai atkuriami fone.",
+      "descriptionTransferProcessingError": "Failas perduotas, bet nepavyko pradėti apdorojimo. Atverkite paskirties failą ir pasirinkite „Apdoroti iš naujo“. Nekartokite perdavimo."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Veiksmai su {{name}}",
+      "labelDelete": "Ištrinti aplanką"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Turinys",
+      "labelSave": "Išsaugoti",
+      "labelCancel": "Atšaukti",
+      "errorSave": "Išsaugoti nepavyko. Bandykite dar kartą.",
+      "errorConflict": "Turinys pasikeitė. Prieš išsaugodami įkelkite jį iš naujo.",
+      "errorIndex": "Išsaugota, bet nepavyko atnaujinti paieškos indekso. Išsaugokite dar kartą."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Pasirinkti paskirties aplanką",
+      "labelSelectFile": "Pasirinkti esamą failą",
+      "descriptionFolder": "Pasirinkite esamą aplanką. Bus perduotas vienas failas; esami pavadinimai niekada neperrašomi.",
+      "descriptionFile": "Pasirinkite failą iš šio pokalbio arba prieinamos saugyklos. Dokumentai ir įrašai jau turi būti apdoroti.",
+      "labelStorage": "Saugykla",
+      "labelCurrentStorage": "Dabartinė saugykla",
+      "labelUp": "Pirminis aplankas",
+      "descriptionLoading": "Įkeliami failai…",
+      "descriptionEmpty": "Šiame aplanke nėra atitinkančių įrašų.",
+      "descriptionNoStorages": "Prieinamų saugyklų nėra.",
+      "descriptionPending": "Failas perduodamas. Palaukite rezultato.",
+      "labelCancel": "Atšaukti",
+      "labelUseFolder": "Naudoti šį aplanką",
+      "labelUseFile": "Pridėti failą",
+      "labelRetry": "Įkelti iš naujo",
+      "errorLoad": "Nepavyko įkelti šio aplanko. Patikrinkite prieigą ir bandykite dar kartą.",
+      "errorCollision": "Paskirties vietoje jau yra failas arba apdorotas turinys tokiu pavadinimu. Pasirinkite kitą aplanką; niekas nebuvo perrašyta.",
+      "errorSameTarget": "Šaltinio ir paskirties vietos sutampa. Pasirinkite kitą aplanką.",
+      "errorSourceChanged": "Šaltinis kopijuojant pasikeitė. Nebaigtas paskirties failas pašalintas. Bandykite dar kartą.",
+      "errorBusy": "Šis failas šiuo metu apdorojamas. Palaukite, kol apdorojimas baigsis.",
+      "errorPermission": "Neturite reikiamų šaltinio arba paskirties vietos teisių.",
+      "errorSourceDelete": "Visas paskirties failas sukurtas, bet nepavyko pašalinti šaltinio. Prieš kartodami veiksmą patikrinkite abi vietas.",
+      "errorCleanup": "Kopijuoti nepavyko. Šaltinis išsaugotas, bet paskirties vietoje gali likti nebaigtų failų. Patikrinkite ją prieš bandydami dar kartą.",
+      "errorAction": "Veiksmas nepavyko. Prieš bandydami dar kartą patikrinkite teises, failų pavadinimus ir abi vietas.",
+      "errorNotProcessed": "Šis failas dar neapdorotas. Pirmiausia jį apdorokite, tada pasirinkite dar kartą."
+    }
+  },
+  "_welcomeMessage": "Sveiki atvykę į\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentacija",
+    "feedback": "Atsiliepimai",
+    "help": "Pagalba",
+    "labelThemeLight": "Šviesi",
+    "labelThemeDark": "Tamsi",
+    "labelThemeSystem": "Operacinė sistema",
+    "labelLanguage": "Kalba"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copiază textul feedbackului în clipboard",
+      "feedbackText": "Textul feedbackului",
+      "feedbackTextRecommendation": "Mulțumim! Trimite-ne acest text la ",
+      "sendFeedback": "Trimite feedback prin e-mail",
+      "showFeedbackText": "Arată textul feedbackului",
+      "thankYou": "Îți mulțumim că îți faci timp să oferi feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Șterge toate mesajele de eroare",
+      "actionDeleteAllCancel": "Anulează",
+      "actionDeleteAllExplainer": "Sigur vrei să ștergi toate mesajele de eroare colectate? Această acțiune nu poate fi anulată.",
+      "actionDeleteAllShort": "Șterge mesajele de eroare",
+      "actionDeselectAll": "Deselectează toate mesajele de eroare",
+      "actionSelectAll": "Selectează toate mesajele de eroare",
+      "explainer": "Mesajele de eroare fac parte din feedback. Unele probleme sunt rezolvate automat de sistem, iar operațiile tale continuă fără întreruperi. Totuși, ne este util să aflăm despre aceste erori pentru a le putea remedia.",
+      "explainerSecrecy": "Asigură-te că mesajele de eroare nu conțin date confidențiale sau personale. Sistemul este conceput pentru a exclude astfel de date din mesajele de eroare. Totuși, erorile sunt legate de situații neprevăzute. Din motive de securitate, verifică personal feedbackul.",
+      "explainerSecrecyHeading": "Fără date confidențiale",
+      "heading": "Erori",
+      "tableColumnPartOfFeedback": "Parte din feedback",
+      "tableColumnDate": "Dată",
+      "tableColumnErrorMessage": "Mesaj de eroare"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nu a fost oferită o evaluare cu stele",
+      "starRating": "{{stars}} din 5 stele"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Renunță la feedback",
+      "discardFeedbackSub": "Sigur vrei să renunți la feedback? Această acțiune nu poate fi anulată.",
+      "discardFeedbackCancel": "Anulează",
+      "infoSecrecy": "Asigură-te că feedbackul trimis nu conține date confidențiale sau personale.",
+      "writeFeedback": "Scrie feedback",
+      "writeFeedbackSub": "Apreciem orice feedback, pozitiv sau negativ."
+    }
+  },
+  "page": {
+    "headingLine1": "Ajută-ne să îmbunătățim schorn.ai in a Box,",
+    "headingLine2": "oferă-ne feedbackul tău",
+    "headingMain": "Feedback"
+  }
+}

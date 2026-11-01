@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Vēsture"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Kļūda",
+      "idle": "Dīkstāvē",
+      "running": "Darbojas",
+      "success": "Izdevās"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Piespraust",
+      "actionUnpin": "Atspraust",
+      "actionDelete": "Dzēst"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Meklēt…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelLabelAsc": "Nosaukums no A līdz Z",
+      "labelLabelDesc": "Nosaukums no Z līdz A",
+      "labelCreatedAsc": "Izveides datums dilstoši",
+      "labelCreatedDesc": "Izveides datums augoši",
+      "labelUpdatedAsc": "Atjaunināšanas datums dilstoši",
+      "labelUpdatedDesc": "Atjaunināšanas datums augoši",
+      "labelGroup": "Grupēšana",
+      "labelPinned": "Piespraustie",
+      "labelState": "Stāvoklis",
+      "labelType": "Tips",
+      "labelCreated": "Izveides datums",
+      "labelUpdated": "Atjaunināšanas datums",
+      "labelList": "Saraksts",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt",
+      "labelNoGroup": "Bez grupēšanas"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Nav darbību",
+      "emptyDescription": "Šeit būs redzamas jūsu iepriekšējās sarunas un transkripcijas.",
+      "emptyLabelAgents": "Aģenti"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Šodien",
+      "groupTimeLast7Days": "Pēdējās 7 dienas",
+      "groupTimeLast30Days": "Pēdējās 30 dienas",
+      "groupTimeOther": "Citi",
+      "groupPinned": "Piespraustie",
+      "groupNotPinned": "Nepiespraustie",
+      "groupUnknown": "Nezināms",
+      "groupChat": "Saruna",
+      "groupTranscription": "Transkripcija",
+      "groupReindex": "Indeksēt atkārtoti",
+      "labelReindex": "Indeksēt atkārtoti",
+      "labelPinned": "Piespraustie"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Nosaukums",
+      "tableColumnType": "Tips",
+      "tableColumnState": "Stāvoklis",
+      "tableColumnCreated": "Izveidots",
+      "tableColumnUpdated": "Atjaunināts",
+      "tableColumnPinned": "Piespraustie",
+      "tableColumnNameActions": "Darbības",
+      "groupTimeToday": "Šodien",
+      "groupTimeLast7Days": "Pēdējās 7 dienas",
+      "groupTimeLast30Days": "Pēdējās 30 dienas",
+      "groupTimeOther": "Citi",
+      "groupPinned": "Piespraustie",
+      "groupNotPinned": "Nepiespraustie",
+      "groupUnknown": "Nezināms",
+      "groupChat": "Saruna",
+      "groupTranscription": "Transkripcija",
+      "groupReindex": "Indeksēt atkārtoti",
+      "labelReindex": "Indeksēt atkārtoti",
+      "labelPinned": "Piespraustie"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Vēsture",
+      "labelPinned": "Piespraustie",
+      "labelToday": "Šodien",
+      "labelLast7Days": "Pēdējās 7 dienas",
+      "labelLast30Days": "Pēdējās 30 dienas",
+      "labelEmpty": "Tukšs"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Darbība",
+      "actionPin": "Piespraust",
+      "actionUnpin": "Atspraust",
+      "actionDelete": "Dzēst",
+      "labelAgent": "Aģents — {{name}}",
+      "actionNewChat": "Jauna saruna",
+      "labelInfo": "Informācija"
+    }
+  }
+}

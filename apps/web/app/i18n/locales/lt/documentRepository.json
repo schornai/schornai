@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentų saugyklos",
+    "description": "Dokumentų saugyklos sukuria centralizuotą, struktūruotą ir patikimą žinių bazę dirbtiniam intelektui, kuria modeliai gali naudotis pagal kontekstą."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentų saugykla"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Ieškoti..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Parinktys",
+      "labelView": "Rodinys",
+      "labelSort": "Rikiavimas",
+      "labelNameAsc": "Pavadinimas nuo A iki Z",
+      "labelNameDesc": "Pavadinimas nuo Z iki A",
+      "labelGroup": "Grupuoti pagal",
+      "labelNoGroup": "Negrupuoti",
+      "labelFavorites": "Mėgstamiausi",
+      "labelFirstLetter": "Pirmoji raidė",
+      "labelWorkspaces": "Darbo sritys",
+      "labelModel": "Transkribuotojas",
+      "labelCards": "Kortelės",
+      "labelTable": "Lentelė",
+      "labelSaveView": "Išsaugoti rodinį",
+      "labelReset": "Atkurti",
+      "labelDocumentRepositories": "Dokumentų saugyklos",
+      "labelNewDocumentRepository": "Nauja dokumentų saugykla"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Kitos dokumentų saugyklos",
+      "labelFavorites": "Mėgstamiausi",
+      "labelOtherTranscribers": "Kiti transkribuotojai",
+      "labelUnknownTranscriber": "Nežinomas transkribuotojas „{{id}}“"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Pavadinimas",
+      "tableColumnCapablilities": "Galimybės",
+      "tableColumnNameActions": "Veiksmai",
+      "emptyTitle": "Dokumentų saugyklų nėra",
+      "emptyDescription": "Dar nesukurta nė viena dokumentų saugykla.",
+      "labelOtherDocumentRepositories": "Kitos dokumentų saugyklos",
+      "labelFavorites": "Mėgstamiausi",
+      "labelNoGroup": "Negrupuoti",
+      "labelUnknownTranscriber": "Nežinomas transkribuotojas „{{id}}“"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Nežinoma darbo sritis"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Redaguoti",
+      "tooltipInfo": "Informacija"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Pašalinti iš mėgstamiausių",
+      "tooltipAddFavorite": "Pridėti prie mėgstamiausių"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nauja dokumentų saugykla",
+      "labelDocumentRepository": "Dokumentų saugykla",
+      "labelDocumentRepositoryDropdown": "Dokumentų saugykla",
+      "labelCreateDocumentRepository": "Sukurti dokumentų saugyklą",
+      "labelSaveDocumentRepository": "Išsaugoti dokumentų saugyklą",
+      "labelCloneDocumentRepository": "Išsaugoti kaip naują dokumentų saugyklą",
+      "labelDeleteDocumentRepository": "Ištrinti dokumentų saugyklą",
+      "confirmDeleteTitle": "Ištrinti dokumentų saugyklą",
+      "confirmDeleteDescription": "Ar tikrai norite ištrinti dokumentų saugyklą „{{name}}“? Šio veiksmo negalima atšaukti.",
+      "labelCancel": "Atšaukti",
+      "tabOverview": "Apžvalga",
+      "tabFeatures": "Funkcijos",
+      "tabSettings": "Nuostatos",
+      "btnCreate": "Sukurti",
+      "btnSave": "Išsaugoti"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmesti pakeitimus",
+      "labelDiscardConfirm": "Ar tikrai norite atmesti visus neišsaugotus šios dokumentų saugyklos pakeitimus?",
+      "labelCancel": "Atšaukti",
+      "labelDiscard": "Atmesti pakeitimus"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nauja dokumentų saugykla",
+      "emptyDescription": "Nustatykite dokumentų saugyklos elgseną ir išvaizdą.",
+      "checklistSemanticSearchTitle": "Įjungti semantinę paiešką",
+      "checklistSemanticSearchDescription": "Įjunkite semantinę paiešką. Ji gali pagerinti paieškos rezultatų kokybę.",
+      "checklistTranscriberTitle": "Pasirinkti transkribuotoją",
+      "checklistTranscriberDescription": "Pasirinkite transkribuotoją, kuris automatiškai transkribuoja visus įkeltus vaizdo ir garso failus.",
+      "helpTitle": "Pagalba",
+      "helpKeywordSearch": "Įprasta paieška pagal raktažodžius. Geriausiai tinka prekių ženklams, asmenvardžiams ir kitiems pavadinimams ieškoti.",
+      "helpEmbeddingDescription": "Pridėkite įterpinių modelį, kad įjungtumėte semantinę paiešką. Jis randa panašius dokumentus pagal jų prasmę.",
+      "helpTranscriberDescription": "Pridėkite transkribuotoją prie dokumentų saugyklos, ir visi vaizdo bei garso failai bus automatiškai transkribuojami po įkėlimo."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Paieškos indeksas",
+      "description": "Priklausomai nuo paieškos indekso, naudojami skirtingi metodai, kad pagal užklausą būtų pateikti geriausi rezultatai.",
+      "labelKeyword": "Paieška pagal raktažodžius",
+      "descriptionKeyword": "Tikslių posakių ir sakinių paieškai. (Vardai, pavadinimai ir kt.)",
+      "labelSemantic": "Semantinė paieška",
+      "descriptionSemantic": "Kai svarbi duomenų prasmė, o ne tiksli formuluotė. (Reikalingas įterpinių modelis)",
+      "labelEmbeddingModel": "Įterpinių modelis",
+      "descriptionEmbeddingModel": "Įterpinių modelis yra semantinės paieškos pagrindas."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Transkribuotojo nėra",
+      "labelLegend": "Transkribuotojas",
+      "description": "Vaizdo ir garso failai automatiškai transkribuojami po įkėlimo.",
+      "labelTranscriber": "Transkribuotojas"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Aprašymas",
+      "description": "Pasirinkite tinkamą dokumentų saugyklos pavadinimą. Taip pat galite išsaugoti trumpą aprašymą.",
+      "labelName": "Pavadinimas",
+      "labelDescription": "Aprašymas"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Išvaizda",
+      "description": "Pasirinkite spalvą ir piktogramą, geriausiai apibūdinančias dokumentų saugyklą.",
+      "labelIcon": "Piktograma",
+      "labelColor": "Spalva"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Darbo sritis",
+      "description": "Pasirinkite darbo sritį, kurioje norite sukurti dokumentų saugyklą.",
+      "labelName": "Darbo sritis",
+      "labelSelectWorkspace": "Pasirinkite darbo sritį."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Failai",
+      "tabSearch": "Viso teksto paieška",
+      "tabInfo": "Informacija"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Ieškoti...",
+      "labelSearch": "Ieškoti"
+    },
+    "Search": {
+      "emptyTitle": "Viso teksto paieška",
+      "emptyDescription": "Ieškokite teksto visuose šios dokumentų saugyklos failuose."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentų saugyklos",
+    "emptyTitle": "Dokumentų saugyklų nėra",
+    "emptyDescription": "Dar nesukurta nė viena dokumentų saugykla.",
+    "labelNewDocumentRepository": "Nauja dokumentų saugykla",
+    "helpTitle": "Pagalba",
+    "helpSearchDescription": "Galite ieškoti dokumentų saugyklų. Paieška apima, be kita ko, saugyklos pavadinimą, aprašymą ir transkribuotoją.",
+    "helpSortDescription": "Dokumentų saugyklas galima rikiuoti pagal pavadinimą ir skirstyti į skirtingas grupes. Jas galima rodyti kortelėmis arba lentelėje.",
+    "helpTranscriberDescription": "Dokumentų saugykloms galite pasirinkti transkribuotoją. Į saugyklą įkelti garso ar vaizdo failai bus automatiškai transkribuojami."
+  }
+}

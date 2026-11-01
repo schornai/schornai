@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "محادثة جديدة",
+        "mainLabelAgents": "الوكلاء",
+        "mainLabelApps": "التطبيقات",
+        "mainLabelWorkspaces": "مساحات العمل",
+        "history": "السجل"
+      },
+      "SidebarFavorites": {
+        "label": "المفضلة",
+        "empty": "لم تُضف أي عناصر إلى المفضلة بعد."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "لا توجد مفضلة",
+        "descriptionNoFavorites": "يمكنك إضافة <agents>الوكلاء</agents> و<documents>مستودعات المستندات</documents> و<transcribers>أدوات التفريغ الصوتي</transcribers> إلى المفضلة."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "محادثة جديدة"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[ليلة طيبة];(5-11)[صباح الخير];(12-17)[طاب نهارك];(18-inf)[مساء الخير];",
+      "labelAllAgents": "جميع الوكلاء",
+      "labelToApps": "الانتقال إلى التطبيقات"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "الملف الشخصي",
+        "labelFavorites": "المفضلة",
+        "labelPermissions": "الأذونات",
+        "labelModels": "النماذج",
+        "labelTaskQueue": "طابور المهام",
+        "labelSettings": "الإعدادات",
+        "labelUsers": "المستخدمون",
+        "labelWorkspaces": "مساحات العمل",
+        "labelSSOProvider": "موفر الدخول الموحّد",
+        "labelXRAGUpload": "رفع XRAG",
+        "labelSystemModel": "نموذج النظام",
+        "labelTheme": "السمة",
+        "labelBackToDashboard": "العودة إلى لوحة التحكم",
+        "labelConnections": "الاتصالات",
+        "labelProviderConnections": "الاتصالات",
+        "labelService": "الخدمة",
+        "labelArtifacts": "المخرجات",
+        "labelCluster": "العنقود"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "اختر أيقونة",
+      "buttonMoreIcons": "مزيد من الأيقونات",
+      "textLucideInfo": "أيقونات من <0>Lucide</0>",
+      "placeholderSearchIcons": "البحث عن أيقونات...",
+      "buttonCancel": "إلغاء"
+    },
+    "FileUploadDropZone": {
+      "drop": "أفلت الملف هنا لرفعه"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "معدّل"
+    },
+    "Pagination": {
+      "labelPrev": "السابق",
+      "labelNext": "التالي"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "حسابي",
+      "labelSystem": "النظام",
+      "labelModels": "النماذج",
+      "labelCluster": "العنقود",
+      "labelSettings": "الإعدادات",
+      "labelDashboard": "لوحة التحكم",
+      "labelProfile": "الملف الشخصي"
+    },
+    "SidebarUserSignOut": {
+      "label": "تسجيل الخروج"
+    },
+    "UserRoleText": {
+      "admin": "مسؤول",
+      "workspace-admin": "مسؤول مساحة العمل",
+      "editor": "محرر",
+      "user": "مستخدم",
+      "none": "غير مصرح"
+    },
+    "StorageView": {
+      "placeholderSearch": "البحث في هذا المجلد…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "الاسم",
+      "tableColumnType": "النوع",
+      "tableColumnSize": "الحجم",
+      "tableColumnCreated": "أُنشئ",
+      "tableColumnUpdated": "حُدّث",
+      "tableColumnNameActions": "الإجراءات",
+      "groupTimeToday": "اليوم",
+      "groupTimeLast7Days": "آخر 7 أيام",
+      "groupTimeLast30Days": "آخر 30 يومًا",
+      "groupTimeOther": "أخرى",
+      "labelFolder": "المجلد",
+      "descriptionProcessing": "الملف قيد المعالجة"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "مجلد جديد",
+      "placeholderFolderName": "اسم المجلد...",
+      "labelCancel": "إلغاء",
+      "labelCreate": "إنشاء"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "إزالة",
+      "labelDescription": "هل أنت متأكد من إزالة «{{name}}»؟ لا يمكن التراجع عن ذلك.",
+      "labelCancel": "إلغاء",
+      "labelRemove": "إزالة"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "المجلد الرئيسي"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "لا توجد ملفات",
+      "labelDescription": "لا يحتوي المجلد الحالي على ملفات. اسحب الملفات إلى هنا لرفعها.",
+      "labelUploadFile": "رفع ملف",
+      "labelCreateFile": "إنشاء ملف"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelNameAsc": "الاسم من أ إلى ي",
+      "labelNameDesc": "الاسم من ي إلى أ",
+      "labelSizeAsc": "الحجم تصاعديًا",
+      "labelSizeDesc": "الحجم تنازليًا",
+      "labelCreatedAsc": "تاريخ الإنشاء تصاعديًا",
+      "labelCreatedDesc": "تاريخ الإنشاء تنازليًا",
+      "labelUpdatedAsc": "تاريخ التحديث تصاعديًا",
+      "labelUpdatedDesc": "تاريخ التحديث تنازليًا",
+      "labelGroup": "التجميع",
+      "labelNoGroup": "دون مجموعة",
+      "labelFirstLetter": "الحرف الأول",
+      "labelFileType": "نوع الملف",
+      "labelCreated": "تاريخ الإنشاء",
+      "labelUpdated": "تاريخ التحديث",
+      "labelTilesSmall": "بلاطات صغيرة",
+      "labelTilesMedium": "بلاطات متوسطة",
+      "labelTilesLarge": "بلاطات كبيرة",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين",
+      "labelNewFolder": "مجلد جديد",
+      "labelThisFolder": "هذا المجلد",
+      "labelUploadFile": "رفع ملف",
+      "labelNew": "جديد",
+      "labelDeleteFolder": "حذف المجلد",
+      "labelNewRecording": "تسجيل جديد",
+      "labelColumns": "عرض الأعمدة",
+      "labelNewTextFile": "ملف جديد"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "لا توجد نتائج",
+      "descriptionNoResults": "لم يُرجع بحثك أي نتائج. يُرجى إعادة صياغة الاستعلام.",
+      "labelCharacters": "حرف"
+    },
+    "Transcription": {
+      "labelTitle": "النص المفرغ",
+      "labelLoadingMedia": "جارٍ تحميل الوسائط…",
+      "labelBuffering": "جارٍ التخزين المؤقت للتشغيل…",
+      "labelSeeking": "جارٍ تحميل الموضع…",
+      "labelPlayer": "مشغّل الوسائط",
+      "labelPlay": "تشغيل",
+      "labelPause": "إيقاف مؤقت",
+      "labelSeek": "موضع التشغيل",
+      "labelBack": "رجوع 10 ثوانٍ",
+      "labelForward": "تقديم 10 ثوانٍ",
+      "labelSpeed": "سرعة التشغيل",
+      "labelUnmute": "إلغاء كتم الصوت",
+      "labelMute": "كتم الصوت",
+      "labelVolume": "مستوى الصوت",
+      "labelHideVideo": "إخفاء الفيديو",
+      "labelShowVideo": "إظهار الفيديو",
+      "labelPlaySegment": "تشغيل المقطع {{number}}",
+      "labelReviewed": "تمت المراجعة",
+      "labelSegments": "المقاطع",
+      "labelWords": "الكلمات",
+      "descriptionEmpty": "لم يُعثر على نتائج تفريغ صوتي.",
+      "descriptionConfidence": "الثقة: {{percent}}%",
+      "errorPlayback": "فشل التشغيل. تحقق من توفر ملف الوسائط وحاول مجددًا.",
+      "labelEditSegment": "تعديل المقطع {{number}}",
+      "labelSegmentText": "نص المقطع",
+      "labelSave": "حفظ",
+      "labelSaving": "جارٍ الحفظ…",
+      "labelSaveReviewed": "حفظ ووضع علامة تمت المراجعة",
+      "labelCancel": "إلغاء",
+      "labelRestoreOriginal": "استعادة النص الأصلي",
+      "descriptionUnsaved": "لا تُطبّق التغييرات إلا عند الحفظ.",
+      "errorSave": "فشل الحفظ. تم الاحتفاظ بنصك. يُرجى المحاولة مجددًا.",
+      "errorConflict": "تغيّر هذا المقطع. انسخ مسودتك وأعد تحميل العرض قبل الحفظ مجددًا.",
+      "labelDownloadSrt": "تنزيل SRT",
+      "descriptionSaveBeforeDownload": "احفظ تعديلاتك أو ألغها قبل تنزيل ملف SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "عرض الأعمدة",
+      "labelRoot": "المستندات",
+      "labelDetails": "تفاصيل الملف",
+      "labelType": "النوع",
+      "labelSize": "الحجم",
+      "labelUpdated": "حُدّث",
+      "labelOpen": "فتح الملف"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "ملف جديد",
+      "labelName": "اسم الملف",
+      "labelCreate": "إنشاء ملف",
+      "labelCancel": "إلغاء",
+      "errorCreate": "تعذر إنشاء الملف. تحقق من اسم الملف وأذونات الكتابة لديك."
+    },
+    "StorageFileActions": {
+      "labelActions": "إجراءات {{name}}",
+      "labelDownloadOriginal": "تنزيل الأصل",
+      "labelDownloadProcessed": "تنزيل النص المعالج",
+      "labelRename": "إعادة تسمية",
+      "labelProcess": "إعادة معالجة",
+      "labelDelete": "حذف الملف",
+      "labelName": "اسم الملف الجديد",
+      "labelCancel": "إلغاء",
+      "labelConfirm": "تأكيد",
+      "descriptionDelete": "هل تريد حذف «{{name}}» ومحتواه المعالج ومدخلات فهرس البحث نهائيًا؟",
+      "descriptionProcess": "هل تريد إعادة معالجة «{{name}}»؟ ستُستبدل التغييرات اليدوية.",
+      "descriptionQueued": "المعالجة في الطابور أو قيد التشغيل بالفعل. تحقق من حالتها في قائمة الملفات.",
+      "descriptionUnsupported": "لا يمكن معالجة هذا الملف حاليًا. يتطلب الصوت والفيديو أداة تفريغ صوتي مُعدّة.",
+      "errorAction": "فشل الإجراء. تحقق من أذونات الكتابة وتعارض الأسماء والمعالجة الجارية. قد تترك إعادة التسمية الفاشلة كلا الاسمين؛ تحقق من القائمة قبل المحاولة مجددًا.",
+      "labelOptions": "الخيارات",
+      "labelEdit": "تعديل",
+      "descriptionRename": "أعد تسمية «{{name}}» مع الاحتفاظ بامتداد الملف. يُحدّث الأصل والمحتوى المعالج وفهرس البحث معًا. ولا تُستبدل الأسماء الموجودة أبدًا.",
+      "labelCopy": "نسخ إلى…",
+      "labelMove": "نقل إلى…",
+      "descriptionCopy": "انسخ «{{name}}» مع محتواه المعالج. سيُحتفظ بالمصدر.",
+      "descriptionMove": "انقل «{{name}}» مع محتواه المعالج. سيُحذف المصدر بعد نجاح النسخ.",
+      "descriptionTransferred": "تم نقل الملف. تُعاد فهرسة البحث في الوجهة في الخلفية.",
+      "descriptionTransferProcessingError": "تم نقل الملف، لكن تعذر بدء المعالجة. افتح ملف الوجهة واختر «إعادة معالجة». لا تكرر النقل."
+    },
+    "StorageObjectActions": {
+      "labelActions": "إجراءات {{name}}",
+      "labelDelete": "حذف المجلد"
+    },
+    "StorageFileEditor": {
+      "labelContent": "المحتوى",
+      "labelSave": "حفظ",
+      "labelCancel": "إلغاء",
+      "errorSave": "فشل الحفظ. يُرجى المحاولة مجددًا.",
+      "errorConflict": "تغيّر المحتوى. أعد التحميل قبل الحفظ.",
+      "errorIndex": "تم الحفظ، لكن تعذر تحديث فهرس البحث. يُرجى الحفظ مجددًا."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "اختر مجلد الوجهة",
+      "labelSelectFile": "اختر ملفًا موجودًا",
+      "descriptionFolder": "اختر مجلدًا موجودًا. سيُنقل ملف واحد؛ ولا تُستبدل الأسماء الموجودة أبدًا.",
+      "descriptionFile": "اختر ملفًا من هذه المحادثة أو من مستودع يمكنك الوصول إليه. يجب أن تكون المستندات والتسجيلات قد عولجت مسبقًا.",
+      "labelStorage": "التخزين",
+      "labelCurrentStorage": "التخزين الحالي",
+      "labelUp": "المجلد الأب",
+      "descriptionLoading": "جارٍ تحميل الملفات…",
+      "descriptionEmpty": "لا توجد عناصر مطابقة في هذا المجلد.",
+      "descriptionNoStorages": "لا توجد مستودعات يمكن الوصول إليها.",
+      "descriptionPending": "جارٍ نقل الملف. يُرجى انتظار النتيجة.",
+      "labelCancel": "إلغاء",
+      "labelUseFolder": "استخدام هذا المجلد",
+      "labelUseFile": "إرفاق ملف",
+      "labelRetry": "إعادة تحميل",
+      "errorLoad": "تعذر تحميل هذا المجلد. تحقق من صلاحية الوصول وحاول مجددًا.",
+      "errorCollision": "تحتوي الوجهة بالفعل على ملف أو محتوى معالج بهذا الاسم. اختر مجلدًا آخر؛ لم يُستبدل أي شيء.",
+      "errorSameTarget": "المصدر والوجهة متطابقان. اختر مجلدًا آخر.",
+      "errorSourceChanged": "تغيّر المصدر أثناء النسخ. حُذفت النسخة غير المكتملة من الوجهة. حاول مجددًا.",
+      "errorBusy": "هذا الملف قيد المعالجة حاليًا. انتظر حتى تنتهي.",
+      "errorPermission": "ليست لديك أذونات المصدر أو الوجهة المطلوبة.",
+      "errorSourceDelete": "أُنشئ ملف الوجهة كاملًا، لكن تعذر حذف المصدر. تحقق من الموقعين قبل تكرار العملية.",
+      "errorCleanup": "فشل النسخ. تم الاحتفاظ بالمصدر، لكن قد تبقى ملفات غير مكتملة في الوجهة. تحقق منها قبل المحاولة مجددًا.",
+      "errorAction": "فشلت العملية. تحقق من الأذونات وأسماء الملفات والموقعين قبل المحاولة مجددًا.",
+      "errorNotProcessed": "لم يُعالج هذا الملف بعد. عالجه أولًا، ثم اختره مجددًا."
+    }
+  },
+  "_welcomeMessage": "مرحبًا بك في\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "التوثيق",
+    "feedback": "الملاحظات",
+    "help": "المساعدة",
+    "labelThemeLight": "فاتح",
+    "labelThemeDark": "داكن",
+    "labelThemeSystem": "نظام التشغيل",
+    "labelLanguage": "اللغة"
+  }
+}

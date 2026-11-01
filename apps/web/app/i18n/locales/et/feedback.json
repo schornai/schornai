@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopeeri tagasiside tekst lõikelauale",
+      "feedbackText": "Tagasiside tekst",
+      "feedbackTextRecommendation": "Aitäh, saada meile see tekst aadressile ",
+      "sendFeedback": "Saada tagasiside e-postiga",
+      "showFeedbackText": "Näita tagasiside teksti",
+      "thankYou": "Aitäh, et leidsid aega tagasiside andmiseks"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Kustuta kõik veateated",
+      "actionDeleteAllCancel": "Tühista",
+      "actionDeleteAllExplainer": "Kas soovid kindlasti kustutada kõik kogutud veateated? Seda toimingut ei saa tagasi võtta.",
+      "actionDeleteAllShort": "Kustuta veateated",
+      "actionDeselectAll": "Tühista kõigi veateadete valik",
+      "actionSelectAll": "Vali kõik veateated",
+      "explainer": "Ka veateated on tagasiside osa. Süsteem lahendab mõned probleemid automaatselt ja sinu toimingud jätkuvad katkestusteta. Siiski on meile kasulik nendest vigadest teada saada, et saaksime need kõrvaldada.",
+      "explainerSecrecy": "Veendu, et veateated ei sisalda konfidentsiaalseid ega isikuandmeid. Süsteem on põhimõtteliselt loodud vältima selliste andmete sattumist veateadetesse. Vead puudutavad aga oma olemuselt ettenägematuid olukordi. Seetõttu kontrolli tagasiside turvalisuse huvides ise üle.",
+      "explainerSecrecyHeading": "Konfidentsiaalseid andmeid pole",
+      "heading": "Vead",
+      "tableColumnPartOfFeedback": "Tagasiside osa",
+      "tableColumnDate": "Kuupäev",
+      "tableColumnErrorMessage": "Veateade"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Tärnihinnangut pole antud",
+      "starRating": "{{stars}} tärni 5-st"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Loobu tagasisidest",
+      "discardFeedbackSub": "Kas soovid kindlasti oma tagasisidest loobuda? Seda toimingut ei saa tagasi võtta.",
+      "discardFeedbackCancel": "Tühista",
+      "infoSecrecy": "Veendu, et saadetav tagasiside ei sisalda konfidentsiaalseid ega isikuandmeid.",
+      "writeFeedback": "Kirjuta tagasiside",
+      "writeFeedbackSub": "Hindame igasugust tagasisidet, nii positiivset kui ka negatiivset."
+    }
+  },
+  "page": {
+    "headingLine1": "Aita meil schorn.ai in a Boxi paremaks muuta,",
+    "headingLine2": "anna meile tagasisidet",
+    "headingMain": "Tagasiside"
+  }
+}

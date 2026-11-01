@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Repożitorji tad-dokumenti",
+    "description": "Ir-repożitorji tad-dokumenti joħolqu bażi ta’ għarfien ċentrali, strutturata u affidabbli għall-intelliġenza artifiċjali li l-mudelli jistgħu jaċċessaw skont il-kuntest."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Repożitorju tad-dokumenti"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Fittex..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelNameAsc": "Isem minn A sa Z",
+      "labelNameDesc": "Isem minn Z sa A",
+      "labelGroup": "Iġbor skont",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "L-ewwel ittra",
+      "labelWorkspaces": "Spazji tax-xogħol",
+      "labelModel": "Traskrittur",
+      "labelCards": "Kards",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja",
+      "labelDocumentRepositories": "Repożitorji tad-dokumenti",
+      "labelNewDocumentRepository": "Repożitorju tad-dokumenti ġdid"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Repożitorji tad-dokumenti oħra",
+      "labelFavorites": "Favoriti",
+      "labelOtherTranscribers": "Traskritturi oħra",
+      "labelUnknownTranscriber": "Traskrittur mhux magħruf \"{{id}}\""
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Isem",
+      "tableColumnCapablilities": "Kapaċitajiet",
+      "tableColumnNameActions": "Azzjonijiet",
+      "emptyTitle": "Ebda repożitorju tad-dokumenti",
+      "emptyDescription": "Għadu ma nħoloq ebda repożitorju tad-dokumenti.",
+      "labelOtherDocumentRepositories": "Repożitorji tad-dokumenti oħra",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelUnknownTranscriber": "Traskrittur mhux magħruf \"{{id}}\""
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Spazju tax-xogħol mhux magħruf"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Editja",
+      "tooltipInfo": "Informazzjoni"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Neħħi mill-favoriti",
+      "tooltipAddFavorite": "Żid mal-favoriti"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Repożitorju tad-dokumenti ġdid",
+      "labelDocumentRepository": "Repożitorju tad-dokumenti",
+      "labelDocumentRepositoryDropdown": "Repożitorju tad-dokumenti",
+      "labelCreateDocumentRepository": "Oħloq repożitorju tad-dokumenti",
+      "labelSaveDocumentRepository": "Issejvja repożitorju tad-dokumenti",
+      "labelCloneDocumentRepository": "Issejvja bħala repożitorju tad-dokumenti ġdid",
+      "labelDeleteDocumentRepository": "Ħassar repożitorju tad-dokumenti",
+      "confirmDeleteTitle": "Ħassar repożitorju tad-dokumenti",
+      "confirmDeleteDescription": "Żgur li trid tħassar ir-repożitorju tad-dokumenti \"{{name}}\"? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "labelCancel": "Ikkanċella",
+      "tabOverview": "Ħarsa ġenerali",
+      "tabFeatures": "Funzjonijiet",
+      "tabSettings": "Settings",
+      "btnCreate": "Oħloq",
+      "btnSave": "Issejvja"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Armi l-bidliet",
+      "labelDiscardConfirm": "Verament trid tarmi l-bidliet kollha mhux issejvjati għal dan ir-repożitorju tad-dokumenti?",
+      "labelCancel": "Ikkanċella",
+      "labelDiscard": "Armi l-bidliet"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Repożitorju tad-dokumenti ġdid",
+      "emptyDescription": "Iddefinixxi l-imġiba u d-dehra tar-repożitorju tad-dokumenti.",
+      "checklistSemanticSearchTitle": "Attiva t-tfittxija semantika",
+      "checklistSemanticSearchDescription": "Attiva t-tfittxija semantika. Dan jista’ jtejjeb il-kwalità tar-riżultati tat-tfittxija.",
+      "checklistTranscriberTitle": "Agħżel traskrittur",
+      "checklistTranscriberDescription": "Agħżel traskrittur li jittraskrivi awtomatikament il-fajls kollha tal-vidjo u tal-awdjo li jittellgħu.",
+      "helpTitle": "Għajnuna",
+      "helpKeywordSearch": "Tfittxija klassika bil-kliem kjavi. L-aktar adattata biex tfittex ismijiet ta’ ditti, persuni u ismijiet oħra.",
+      "helpEmbeddingDescription": "Żid mudell ta’ inkorporazzjoni biex tattiva t-tfittxija semantika. Din issib dokumenti simili abbażi tat-tifsira tagħhom.",
+      "helpTranscriberDescription": "Żid traskrittur mar-repożitorju tad-dokumenti u l-fajls kollha tal-vidjo u tal-awdjo jiġu traskritti awtomatikament wara li jittellgħu."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Indiċi tat-tfittxija",
+      "description": "Skont l-indiċi tat-tfittxija, jintużaw metodi differenti biex jingħataw l-aħjar riżultati abbażi tal-mistoqsija ta’ tfittxija.",
+      "labelKeyword": "Tfittxija bil-kliem kjavi",
+      "descriptionKeyword": "Meta tfittex espressjonijiet u sentenzi preċiżi. (Ismijiet, denominazzjonijiet, eċċ.)",
+      "labelSemantic": "Tfittxija semantika",
+      "descriptionSemantic": "Meta t-tifsira tad-data tkun aktar importanti mill-kliem eżatt. (Jeħtieġ mudell ta’ inkorporazzjoni)",
+      "labelEmbeddingModel": "Mudell ta’ inkorporazzjoni",
+      "descriptionEmbeddingModel": "Il-mudell ta’ inkorporazzjoni huwa l-bażi tat-tfittxija semantika."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Ebda traskrittur",
+      "labelLegend": "Traskrittur",
+      "description": "Il-fajls tal-vidjo u tal-awdjo jiġu traskritti awtomatikament wara li jittellgħu.",
+      "labelTranscriber": "Traskrittur"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Deskrizzjoni",
+      "description": "Agħżel isem adattat għar-repożitorju tad-dokumenti. Tista’ wkoll tissejvja deskrizzjoni qasira.",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Dehra",
+      "description": "Agħżel kulur u ikona li jirrappreżentaw ir-repożitorju tad-dokumenti bl-aħjar mod.",
+      "labelIcon": "Ikona",
+      "labelColor": "Kulur"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Spazju tax-xogħol",
+      "description": "Agħżel l-ispazju tax-xogħol fejn għandu jinħoloq ir-repożitorju tad-dokumenti.",
+      "labelName": "Spazju tax-xogħol",
+      "labelSelectWorkspace": "Agħżel spazju tax-xogħol."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Fajls",
+      "tabSearch": "Tfittxija fit-test sħiħ",
+      "tabInfo": "Informazzjoni"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Fittex...",
+      "labelSearch": "Fittex"
+    },
+    "Search": {
+      "emptyTitle": "Tfittxija fit-test sħiħ",
+      "emptyDescription": "Fittex test fil-fajls kollha f’dan ir-repożitorju tad-dokumenti."
+    }
+  },
+  "page": {
+    "labelTitle": "Repożitorji tad-dokumenti",
+    "emptyTitle": "Ebda repożitorju tad-dokumenti",
+    "emptyDescription": "Għadu ma nħoloq ebda repożitorju tad-dokumenti.",
+    "labelNewDocumentRepository": "Repożitorju tad-dokumenti ġdid",
+    "helpTitle": "Għajnuna",
+    "helpSearchDescription": "Tista’ tfittex repożitorji tad-dokumenti. It-tfittxija tinkludi, fost affarijiet oħra, l-isem u d-deskrizzjoni tar-repożitorju tad-dokumenti, kif ukoll it-traskrittur tiegħu.",
+    "helpSortDescription": "Ir-repożitorji tad-dokumenti jistgħu jiġu ssortjati skont l-isem u mqassma fi gruppi differenti. Jistgħu jintwerew bħala kards jew bħala tabella.",
+    "helpTranscriberDescription": "Tista’ tagħżel traskrittur għar-repożitorji tad-dokumenti. Meta jittellgħu fajls tal-awdjo jew tal-vidjo fir-repożitorju tad-dokumenti, dawn jiġu traskritti awtomatikament."
+  }
+}

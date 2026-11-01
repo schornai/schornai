@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Storja"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Żball",
+      "idle": "Inattiv",
+      "running": "Għaddej",
+      "success": "Suċċess"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Ippinja",
+      "actionUnpin": "Neħħi l-pin",
+      "actionDelete": "Ħassar"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Fittex…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelLabelAsc": "Tikketta minn A sa Z",
+      "labelLabelDesc": "Tikketta minn Z sa A",
+      "labelCreatedAsc": "Data tal-ħolqien, dixxendenti",
+      "labelCreatedDesc": "Data tal-ħolqien, axxendenti",
+      "labelUpdatedAsc": "Data tal-aġġornament, dixxendenti",
+      "labelUpdatedDesc": "Data tal-aġġornament, axxendenti",
+      "labelGroup": "Iġbor fi gruppi",
+      "labelPinned": "Ippinjati",
+      "labelState": "Stat",
+      "labelType": "Tip",
+      "labelCreated": "Data tal-ħolqien",
+      "labelUpdated": "Data tal-aġġornament",
+      "labelList": "Lista",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja",
+      "labelNoGroup": "Mingħajr grupp"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Ebda attività",
+      "emptyDescription": "Il-konversazzjonijiet u t-traskrizzjonijiet preċedenti tiegħek jidhru hawn.",
+      "emptyLabelAgents": "Aġenti"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Illum",
+      "groupTimeLast7Days": "L-aħħar 7 ijiem",
+      "groupTimeLast30Days": "L-aħħar 30 jum",
+      "groupTimeOther": "Oħrajn",
+      "groupPinned": "Ippinjati",
+      "groupNotPinned": "Mhux ippinjati",
+      "groupUnknown": "Mhux magħruf",
+      "groupChat": "Konversazzjoni",
+      "groupTranscription": "Traskrizzjoni",
+      "groupReindex": "Indiċjar mill-ġdid",
+      "labelReindex": "Indiċjar mill-ġdid",
+      "labelPinned": "Ippinjati"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Tikketta",
+      "tableColumnType": "Tip",
+      "tableColumnState": "Stat",
+      "tableColumnCreated": "Maħluq",
+      "tableColumnUpdated": "Aġġornat",
+      "tableColumnPinned": "Ippinjati",
+      "tableColumnNameActions": "Azzjonijiet",
+      "groupTimeToday": "Illum",
+      "groupTimeLast7Days": "L-aħħar 7 ijiem",
+      "groupTimeLast30Days": "L-aħħar 30 jum",
+      "groupTimeOther": "Oħrajn",
+      "groupPinned": "Ippinjati",
+      "groupNotPinned": "Mhux ippinjati",
+      "groupUnknown": "Mhux magħruf",
+      "groupChat": "Konversazzjoni",
+      "groupTranscription": "Traskrizzjoni",
+      "groupReindex": "Indiċjar mill-ġdid",
+      "labelReindex": "Indiċjar mill-ġdid",
+      "labelPinned": "Ippinjati"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Storja",
+      "labelPinned": "Ippinjati",
+      "labelToday": "Illum",
+      "labelLast7Days": "L-aħħar 7 ijiem",
+      "labelLast30Days": "L-aħħar 30 jum",
+      "labelEmpty": "Vojt"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Attività",
+      "actionPin": "Ippinja",
+      "actionUnpin": "Neħħi l-pin",
+      "actionDelete": "Ħassar",
+      "labelAgent": "Aġent — {{name}}",
+      "actionNewChat": "Konversazzjoni ġdida",
+      "labelInfo": "Informazzjoni"
+    }
+  }
+}

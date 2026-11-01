@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nome",
+      "labelFirstName": "Nome",
+      "labelLastName": "Cognome",
+      "buttonSave": "Salva",
+      "buttonReset": "Reimposta"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Rimuovi immagine",
+      "alertDelete": "Rimuovi immagine",
+      "alertDeleteExplainer": "Vuoi davvero rimuovere la tua immagine?",
+      "alertDeleteCancel": "Annulla"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Carica immagine"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Autorizzazioni",
+      "tableColumnName": "Nome",
+      "tableColumnPermission": "Autorizzazione",
+      "tableColumnDescription": "Descrizione",
+      "infoEmpty": "Nessuna autorizzazione",
+      "infoEmptyDescription": "Nessuna funzione di schorn.ai box è disponibile.",
+      "infoEmptyAdminDescription": "Come amministratore, puoi creare il primo spazio di lavoro.",
+      "infoEmptyAdminAction": "Crea il primo spazio di lavoro",
+      "infoUser": "Può visualizzare i contenuti dell’organizzazione, come chatbot, trascrittori, documenti e archivi, ma non modificarli.",
+      "infoEditor": "Può visualizzare e modificare i contenuti dell’organizzazione, ad esempio creando chatbot, modificando o eliminando documenti.",
+      "infoAdmin": "Può leggere e scrivere in tutte le organizzazioni, gestire le impostazioni di sistema, come il caricamento di XRAG o i colori, e amministrare gli utenti."
+    }
+  },
+  "page": {
+    "title": "Profilo",
+    "infoPersonalize": "Personalizza",
+    "infoPersonalizeDescription": "Qui puoi caricare la tua immagine del profilo e modificare il tuo nome."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nuova password impostata",
+    "description": "La nuova password è stata impostata correttamente. Ora hai effettuato l’accesso con la nuova password.",
+    "buttonBackToDashboard": "Vai alla dashboard"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Connessioni",
+      "descriptionConnections": "Le tue connessioni OAuth personali ai server MCP. La disconnessione rimuove le credenziali memorizzate qui. Le chiamate già in corso possono terminare; revoca le autorizzazioni direttamente presso il fornitore.",
+      "labelDisconnect": "Disconnetti",
+      "descriptionEmpty": "Collega il tuo account dalla chat quando uno strumento MCP richiede l’accesso.",
+      "labelEmpty": "Nessuna connessione ancora",
+      "labelInfo": "Informazioni sulle connessioni",
+      "errorDisconnect": "Impossibile disconnettere la connessione. Riprova."
+    }
+  }
+}

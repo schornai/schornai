@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Zgodovina"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Napaka",
+      "idle": "Nedejaven",
+      "running": "V teku",
+      "success": "Uspešno"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Pripni",
+      "actionUnpin": "Odpni",
+      "actionDelete": "Izbriši"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Išči…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Pogled",
+      "labelSort": "Razvrščanje",
+      "labelLabelAsc": "Naziv od A do Ž",
+      "labelLabelDesc": "Naziv od Ž do A",
+      "labelCreatedAsc": "Datum nastanka padajoče",
+      "labelCreatedDesc": "Datum nastanka naraščajoče",
+      "labelUpdatedAsc": "Datum posodobitve padajoče",
+      "labelUpdatedDesc": "Datum posodobitve naraščajoče",
+      "labelGroup": "Združevanje",
+      "labelPinned": "Pripeto",
+      "labelState": "Stanje",
+      "labelType": "Vrsta",
+      "labelCreated": "Datum nastanka",
+      "labelUpdated": "Datum posodobitve",
+      "labelList": "Seznam",
+      "labelTable": "Tabela",
+      "labelSaveView": "Shrani pogled",
+      "labelReset": "Ponastavi",
+      "labelNoGroup": "Brez združevanja"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Ni dejavnosti",
+      "emptyDescription": "Tukaj so prikazani vaši pretekli pogovori in prepisi.",
+      "emptyLabelAgents": "Agenti"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Danes",
+      "groupTimeLast7Days": "Zadnjih 7 dni",
+      "groupTimeLast30Days": "Zadnjih 30 dni",
+      "groupTimeOther": "Drugo",
+      "groupPinned": "Pripeto",
+      "groupNotPinned": "Ni pripeto",
+      "groupUnknown": "Neznano",
+      "groupChat": "Pogovor",
+      "groupTranscription": "Prepis",
+      "groupReindex": "Ponovno indeksiraj",
+      "labelReindex": "Ponovno indeksiraj",
+      "labelPinned": "Pripeto"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Naziv",
+      "tableColumnType": "Vrsta",
+      "tableColumnState": "Stanje",
+      "tableColumnCreated": "Ustvarjeno",
+      "tableColumnUpdated": "Posodobljeno",
+      "tableColumnPinned": "Pripeto",
+      "tableColumnNameActions": "Dejanja",
+      "groupTimeToday": "Danes",
+      "groupTimeLast7Days": "Zadnjih 7 dni",
+      "groupTimeLast30Days": "Zadnjih 30 dni",
+      "groupTimeOther": "Drugo",
+      "groupPinned": "Pripeto",
+      "groupNotPinned": "Ni pripeto",
+      "groupUnknown": "Neznano",
+      "groupChat": "Pogovor",
+      "groupTranscription": "Prepis",
+      "groupReindex": "Ponovno indeksiraj",
+      "labelReindex": "Ponovno indeksiraj",
+      "labelPinned": "Pripeto"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Zgodovina",
+      "labelPinned": "Pripeto",
+      "labelToday": "Danes",
+      "labelLast7Days": "Zadnjih 7 dni",
+      "labelLast30Days": "Zadnjih 30 dni",
+      "labelEmpty": "Prazno"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Dejavnost",
+      "actionPin": "Pripni",
+      "actionUnpin": "Odpni",
+      "actionDelete": "Izbriši",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Nov pogovor",
+      "labelInfo": "Informacije"
+    }
+  }
+}

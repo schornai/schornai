@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nombre",
+      "labelFirstName": "Nombre",
+      "labelLastName": "Apellidos",
+      "buttonSave": "Guardar",
+      "buttonReset": "Restablecer"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Eliminar imagen",
+      "alertDelete": "Eliminar imagen",
+      "alertDeleteExplainer": "¿Seguro que quieres eliminar tu imagen?",
+      "alertDeleteCancel": "Cancelar"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Subir imagen"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Permisos",
+      "tableColumnName": "Nombre",
+      "tableColumnPermission": "Permiso",
+      "tableColumnDescription": "Descripción",
+      "infoEmpty": "Sin permisos",
+      "infoEmptyDescription": "No hay funciones de la box schorn.ai disponibles.",
+      "infoEmptyAdminDescription": "Como administrador, puedes crear el primer espacio de trabajo.",
+      "infoEmptyAdminAction": "Crear el primer espacio de trabajo",
+      "infoUser": "Puede consultar el contenido de la organización (agentes conversacionales, transcriptores, documentos, repositorios, etc.), pero no modificarlo.",
+      "infoEditor": "Puede consultar y modificar el contenido de la organización (crear agentes conversacionales, editar o eliminar documentos, etc.).",
+      "infoAdmin": "Puede leer y escribir en todas las organizaciones, gestionar los ajustes del sistema (subir XRAG, cambiar colores, etc.) y administrar usuarios."
+    }
+  },
+  "page": {
+    "title": "Perfil",
+    "infoPersonalize": "Personalizar",
+    "infoPersonalizeDescription": "Aquí puedes subir tu foto de perfil y personalizar tu nombre."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nueva contraseña establecida",
+    "description": "La nueva contraseña se ha establecido correctamente. Has iniciado sesión con ella.",
+    "buttonBackToDashboard": "Ir al panel"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Conexiones",
+      "descriptionConnections": "Tus conexiones OAuth personales con servidores MCP. Al desconectar, se eliminan las credenciales guardadas aquí. Las llamadas ya iniciadas pueden terminar; revoca los permisos del proveedor directamente con él.",
+      "labelDisconnect": "Desconectar",
+      "descriptionEmpty": "Conecta tu cuenta en la conversación cuando una herramienta MCP te pida iniciar sesión.",
+      "labelEmpty": "Todavía no hay conexiones",
+      "labelInfo": "Acerca de las conexiones",
+      "errorDisconnect": "No se ha podido desconectar la conexión. Inténtalo de nuevo."
+    }
+  }
+}

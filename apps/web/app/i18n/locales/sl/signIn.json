@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Ste že prijavljeni",
+      "backToDashboard": "Nazaj na nadzorno ploščo",
+      "signOut": "Odjava"
+    },
+    "PasswordSignIn": {
+      "header": "E-pošta",
+      "headerSub": "Prijava z e-pošto in geslom",
+      "inputEmailLabel": "E-pošta",
+      "inputPasswordLabel": "Geslo",
+      "buttonSignIn": "Prijava z e-pošto",
+      "buttonReset": "Ponastavi geslo"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Prijava prek ponudnika SSO",
+      "buttonSignIn": "Prijava prek {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Ponastavi geslo",
+      "descriptionKey": "Vnesite svoj e-poštni naslov in ključ za ponastavitev, ki vam ga je dal skrbnik. Ključ lahko uporabite enkrat in velja 7 dni.",
+      "labelEmail": "E-pošta",
+      "labelKey": "Ključ za ponastavitev gesla",
+      "labelPassword": "Novo geslo",
+      "labelPasswordAgain": "Ponovite novo geslo",
+      "descriptionPassword": "Uporabite vsaj 6 znakov in upoštevajte zahteve svoje organizacije za gesla.",
+      "errorEmail": "Vnesite veljaven e-poštni naslov.",
+      "errorKey": "Vnesite ključ za ponastavitev.",
+      "errorPassword": "Geslo mora vsebovati vsaj 6 znakov.",
+      "errorPasswordAgain": "Gesli se ne ujemata.",
+      "errorReset": "Gesla ni bilo mogoče spremeniti. Preverite e-poštni naslov, ključ in zahteve za geslo. Potekli ali že uporabljeni ključi niso veljavni.",
+      "descriptionSuccess": "Vaše geslo je spremenjeno. Zdaj se lahko prijavite z novim geslom.",
+      "labelReset": "Shrani geslo",
+      "labelSignIn": "Nazaj na prijavo"
+    }
+  }
+}

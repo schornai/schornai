@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Naam",
+      "labelFirstName": "Voornaam",
+      "labelLastName": "Achternaam",
+      "buttonSave": "Opslaan",
+      "buttonReset": "Resetten"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Afbeelding verwijderen",
+      "alertDelete": "Afbeelding verwijderen",
+      "alertDeleteExplainer": "Weet je zeker dat je je afbeelding wilt verwijderen?",
+      "alertDeleteCancel": "Annuleren"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Afbeelding uploaden"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Rechten",
+      "tableColumnName": "Naam",
+      "tableColumnPermission": "Recht",
+      "tableColumnDescription": "Beschrijving",
+      "infoEmpty": "Geen rechten",
+      "infoEmptyDescription": "Er zijn geen functies van schorn.ai box beschikbaar.",
+      "infoEmptyAdminDescription": "Als beheerder kun je de eerste werkruimte aanmaken.",
+      "infoEmptyAdminAction": "Eerste werkruimte aanmaken",
+      "infoUser": "Kan inhoud van de organisatie bekijken, zoals chatbots, transcriptoren, documenten en opslagplaatsen, maar niet bewerken.",
+      "infoEditor": "Kan inhoud van de organisatie bekijken en bewerken, bijvoorbeeld nieuwe chatbots aanmaken en documenten wijzigen of verwijderen.",
+      "infoAdmin": "Kan in alle organisaties lezen en schrijven, systeeminstellingen beheren, zoals XRAG uploaden en kleuren wijzigen, en gebruikers beheren."
+    }
+  },
+  "page": {
+    "title": "Profiel",
+    "infoPersonalize": "Personaliseren",
+    "infoPersonalizeDescription": "Hier kun je je profielfoto uploaden en je naam aanpassen."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nieuw wachtwoord ingesteld",
+    "description": "Het nieuwe wachtwoord is ingesteld. Je bent nu aangemeld met je nieuwe wachtwoord.",
+    "buttonBackToDashboard": "Naar dashboard"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Verbindingen",
+      "descriptionConnections": "Je persoonlijke OAuth-verbindingen met MCP-servers. Bij het verbreken van een verbinding worden de hier opgeslagen inloggegevens verwijderd. Lopende aanroepen kunnen nog worden voltooid; trek rechten rechtstreeks bij de aanbieder in.",
+      "labelDisconnect": "Verbinding verbreken",
+      "descriptionEmpty": "Koppel je account in de chat wanneer een MCP-tool vraagt om je aan te melden.",
+      "labelEmpty": "Nog geen verbindingen",
+      "labelInfo": "Over verbindingen",
+      "errorDisconnect": "De verbinding kon niet worden verbroken. Probeer het opnieuw."
+    }
+  }
+}

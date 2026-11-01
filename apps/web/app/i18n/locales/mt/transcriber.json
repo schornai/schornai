@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Traskrizzjoni",
+    "description": "It-traskritturi jagħmlu l-kontenut mitkellem, bħal laqgħat, intervisti jew telefonati, strutturat u li jista’ jitfittex mill-intelliġenza artifiċjali."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Traskrittur"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Fittex..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelNameAsc": "Isem minn A sa Z",
+      "labelNameDesc": "Isem minn Z sa A",
+      "labelGroup": "Iġbor skont",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "L-ewwel ittra",
+      "labelWorkspaces": "Spazji tax-xogħol",
+      "labelModel": "Mudell",
+      "labelCards": "Kards",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja",
+      "labelTranscribers": "Traskritturi",
+      "labelNewTranscriber": "Traskrittur ġdid"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Traskritturi oħra",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelUnknownModel": "Mudell mhux magħruf \"{{id}}\""
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Isem",
+      "tableColumnCapablilities": "Kapaċitajiet",
+      "tableColumnNameActions": "Azzjonijiet",
+      "emptyTitle": "Ebda traskrittur",
+      "emptyDescription": "Għadu ma nħoloq ebda traskrittur.",
+      "labelOtherTranscribers": "Traskritturi oħra",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelUnknownModel": "Mudell mhux magħruf \"{{id}}\""
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Mudell mhux magħruf",
+      "labelUnknownWorkspace": "Spazju tax-xogħol mhux magħruf"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Editja",
+      "tooltipInfo": "Informazzjoni",
+      "tooltipNewTranscription": "Traskrizzjoni ġdida",
+      "tooltipRecord": "Irreġistra awdjo"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Neħħi mill-favoriti",
+      "tooltipAddFavorite": "Żid mal-favoriti"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Istruzzjoni",
+      "labelChanged": "Mibdul",
+      "labelEmpty": "Vojt"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Traskrittur ġdid",
+      "labelTranscriber": "Traskrittur",
+      "labelCreateTranscriber": "Oħloq traskrittur",
+      "labelSaveTranscriber": "Issejvja traskrittur",
+      "labelCloneTranscriber": "Issejvja bħala traskrittur ġdid",
+      "labelDeleteTranscriber": "Ħassar traskrittur",
+      "confirmDeleteTitle": "Ħassar traskrittur",
+      "confirmDeleteDescription": "Żgur li trid tħassar it-traskrittur \"{{name}}\"? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "labelCancel": "Ikkanċella",
+      "tabOverview": "Ħarsa ġenerali",
+      "tabPrompt": "Istruzzjoni",
+      "tabSettings": "Settings",
+      "btnCreate": "Oħloq",
+      "btnSave": "Issejvja"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Armi l-bidliet",
+      "labelDiscardConfirm": "Verament trid tarmi l-bidliet kollha mhux issejvjati għal dan it-traskrittur?",
+      "labelCancel": "Ikkanċella",
+      "labelDiscard": "Armi l-bidliet"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Traskrittur ġdid",
+      "emptyDescription": "Iddefinixxi l-imġiba u d-dehra tat-traskrittur.",
+      "labelDefinePrompt": "Iddefinixxi istruzzjoni",
+      "descriptionDefinePrompt": "Istruzzjoni qasira tgħin lit-traskrittur jifhem u jikteb sewwa ismijiet, termini tekniċi u ismijiet ta’ prodotti kif tistenniehom.",
+      "helpTitle": "Għajnuna",
+      "helpPromptDescription": "B’istruzzjoni, it-traskrizzjoni teħtieġ inqas korrezzjonijiet wara u tikseb riżultat aktar konsistenti għal reġistrazzjonijiet itwal jew dwar suġġett speċifiku."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Istruzzjoni",
+      "descriptionWhisperPrompt": "L-istruzzjoni tingħata lill-mudell tat-traskrizzjoni (Whisper) biex tgħinu jifhem termini speċifiċi għall-qasam."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Dehra",
+      "description": "Agħżel kulur u ikona li jirrappreżentaw it-traskrittur bl-aħjar mod.",
+      "labelIcon": "Ikona",
+      "labelColor": "Kulur"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Deskrizzjoni",
+      "description": "Agħżel isem adattat għat-traskrittur. Tista’ wkoll tissejvja deskrizzjoni qasira.",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Mudell",
+      "description": "Il-mudell tat-traskrizzjoni li juża t-traskrittur.",
+      "labelName": "Mudell",
+      "labelSelectModel": "Agħżel mudell"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Spazju tax-xogħol",
+      "description": "Agħżel l-ispazju tax-xogħol fejn għandu jinħoloq it-traskrittur.",
+      "labelName": "Spazju tax-xogħol",
+      "labelSelectWorkspace": "Agħżel spazju tax-xogħol."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Fajls",
+      "tabInfo": "Informazzjoni"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Irreġistra awdjo",
+      "labelReady": "Lest",
+      "labelRequesting": "Qed jitqabbad il-mikrofonu",
+      "labelRecording": "Qed jirreġistra",
+      "labelStopping": "Qed titlesta r-reġistrazzjoni",
+      "labelRecorded": "Reġistrazzjoni lesta",
+      "labelUploading": "Qed jiġi ssejvjat",
+      "labelSaved": "Issejvjat",
+      "labelDuration": "Tul tar-reġistrazzjoni",
+      "labelStart": "Ibda r-reġistrazzjoni",
+      "labelStop": "Waqqaf ir-reġistrazzjoni",
+      "labelRecordAgain": "Erġa’ rreġistra",
+      "labelCancel": "Ikkanċella",
+      "labelTranscribe": "Issejvja u traskrivi",
+      "labelDiscard": "Armi r-reġistrazzjoni",
+      "labelPreview": "Previżjoni tar-reġistrazzjoni",
+      "descriptionSaved": "Ir-reġistrazzjoni ġiet issejvjata. It-traskrizzjoni tibda awtomatikament.",
+      "errorUnsupported": "Ir-reġistrazzjoni tal-awdjo teħtieġ browser appoġġjat u konnessjoni sigura (HTTPS jew localhost).",
+      "errorPermission": "L-aċċess għall-mikrofonu ġie miċħud. Ippermetti l-aċċess għall-mikrofonu fil-browser tiegħek u erġa’ pprova.",
+      "errorRecording": "Il-mikrofonu ma setax jirreġistra awdjo. Iċċekkja t-tagħmir tiegħek u erġa’ pprova.",
+      "errorEmpty": "Ir-reġistrazzjoni ma fiha ebda awdjo. Erġa’ rreġistra.",
+      "errorUpload": "Ir-reġistrazzjoni ma setgħetx tiġi ssejvjata. Tista’ tismagħha u terġa’ tipprova ttellagħha.",
+      "descriptionScreenAwake": "L-iskrin jibqa’ mixgħul waqt ir-reġistrazzjoni.",
+      "descriptionScreenSleep": "L-iskrin ma jistax jinżamm mixgħul. Żomm din il-paġna miftuħa u evita li l-iskrin jissakkar awtomatikament.",
+      "descriptionCloseBlocked": "Waqqaf ir-reġistrazzjoni u ssejvjaha jew armiha qabel tagħlaq. Stenna li jitlesta kull tlugħ.",
+      "labelClose": "Agħlaq"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Tentattivi awtomatiċi mill-ġdid",
+      "labelLevel": "Livell",
+      "description": "Meta r-riżultati ma jkunux ċerti jew ikun fihom ħafna ripetizzjoni, it-traskrittur jista’ jerġa’ jipprova jagħraf parti mill-awdjo. Aktar tentattivi jistgħu jtejbu r-rikonoxximent, iżda jieħdu aktar ħin.",
+      "labelFast": "Malajr",
+      "labelBalanced": "Ibbilanċjat",
+      "labelThorough": "Bir-reqqa",
+      "descriptionFast": "Tentattiv wieħed għal kull parti mill-awdjo, mingħajr ripetizzjoni awtomatika.",
+      "descriptionBalanced": "Sa 3 tentattivi għal kull parti mill-awdjo.",
+      "descriptionThorough": "Sa 6 tentattivi għal kull parti mill-awdjo.",
+      "errorLevel": "Agħżel wieħed mit-tliet livelli."
+    }
+  },
+  "page": {
+    "labelTitle": "Traskrizzjoni",
+    "emptyTitle": "Ebda traskrittur",
+    "emptyDescription": "Għadu ma nħoloq ebda traskrittur.",
+    "labelNewTranscriber": "Traskrittur ġdid",
+    "helpTitle": "Għajnuna",
+    "helpSearchDescription": "Tista’ tfittex traskritturi. It-tfittxija tinkludi, fost affarijiet oħra, l-isem u d-deskrizzjoni tat-traskrittur, kif ukoll il-mudell tiegħu.",
+    "helpSortDescription": "It-traskritturi jistgħu jiġu ssortjati skont l-isem u mqassma fi gruppi differenti. Jistgħu jintwerew bħala kards jew bħala tabella."
+  }
+}

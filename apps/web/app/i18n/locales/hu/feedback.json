@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Visszajelzés szövegének másolása a vágólapra",
+      "feedbackText": "Visszajelzés szövege",
+      "feedbackTextRecommendation": "Köszönjük, egyszerűen küldje el ezt a szöveget a következő címre: ",
+      "sendFeedback": "Visszajelzés küldése e-mailben",
+      "showFeedbackText": "Visszajelzés szövegének megjelenítése",
+      "thankYou": "Köszönjük, hogy időt szán a visszajelzésre"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Összes hibaüzenet törlése",
+      "actionDeleteAllCancel": "Mégse",
+      "actionDeleteAllExplainer": "Biztosan törli az összes összegyűjtött hibaüzenetet? Ez a művelet nem vonható vissza.",
+      "actionDeleteAllShort": "Hibaüzenetek törlése",
+      "actionDeselectAll": "Összes hibaüzenet kijelölésének megszüntetése",
+      "actionSelectAll": "Összes hibaüzenet kijelölése",
+      "explainer": "A hibaüzenetek is a visszajelzés részét képezik. Egyes problémákat a rendszer automatikusan megold, és a műveletek zavartalanul folytatódnak. Számunkra azonban hasznos, ha értesülünk ezekről a hibákról, hogy kijavíthassuk őket.",
+      "explainerSecrecy": "Győződjön meg arról, hogy a hibaüzenetek nem tartalmaznak bizalmas és/vagy személyes adatokat. A rendszer alapvetően úgy van kialakítva, hogy a hibaüzenetek ne tartalmazzanak ilyen adatokat. A hibaüzenetek azonban előre nem látható körülményekhez kapcsolódnak. Ezért biztonsági okokból személyesen ellenőrizze a visszajelzést.",
+      "explainerSecrecyHeading": "Nincsenek bizalmas adatok",
+      "heading": "Hibák",
+      "tableColumnPartOfFeedback": "Visszajelzés része",
+      "tableColumnDate": "Dátum",
+      "tableColumnErrorMessage": "Hibaüzenet"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nincs csillagos értékelés",
+      "starRating": "{{stars}} csillag az 5-ből"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Visszajelzés elvetése",
+      "discardFeedbackSub": "Biztosan elveti a visszajelzését? Ez a művelet nem vonható vissza.",
+      "discardFeedbackCancel": "Mégse",
+      "infoSecrecy": "Győződjön meg arról, hogy az elküldött visszajelzés nem tartalmaz bizalmas és/vagy személyes adatokat.",
+      "writeFeedback": "Visszajelzés írása",
+      "writeFeedbackSub": "Minden visszajelzést szívesen fogadunk, legyen az pozitív vagy negatív."
+    }
+  },
+  "page": {
+    "headingLine1": "Segítsen jobbá tenni a schorn.ai in a Box alkalmazást,",
+    "headingLine2": "ossza meg velünk a véleményét",
+    "headingMain": "Visszajelzés"
+  }
+}

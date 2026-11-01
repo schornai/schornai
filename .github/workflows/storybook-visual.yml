@@ -1,0 +1,45 @@
+name: Storybook visual regression
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: storybook-visual-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    env:
+      STORYBOOK_VISUAL_WORKERS: 4
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run storybook:typecheck
+      - run: npm run storybook:check
+      - run: npm run storybook:visual -- --shard=${{ matrix.shard }}/4
+      - name: Upload visual test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: storybook-visual-report-${{ matrix.shard }}
+          path: |
+            playwright-report/storybook-visual
+            test-results/storybook-visual
+          retention-days: 14
+          if-no-files-found: ignore

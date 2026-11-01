@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/schornai/schornai/blob/HEAD/SECURITY.md
+    about: Use the private contact in our security policy instead of a public issue.

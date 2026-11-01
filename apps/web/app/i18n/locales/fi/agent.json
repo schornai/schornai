@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Peruuta",
+      "errorCancel": "Luontia ei voitu pysäyttää. Yritä uudelleen."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Sinulla ei ole tämän agentin käyttöoikeutta."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Malli",
+      "labelUnknownModel": "Tuntematon malli",
+      "labelThinkingOptionalOn": "Päättely",
+      "labelThinkingOptionalOff": "Pakollinen päättely",
+      "labelThinkingMandatoryOn": "Ei päättelyä",
+      "labelThinkingMandatoryOff": "Päättely aina pois käytöstä",
+      "descriptionFeatureVision": "Kuvien syvällisempi ymmärtäminen",
+      "labelModelSize": "Kontekstin koko: {{size}}k",
+      "labelNotFound": "Mallia ei löytynyt",
+      "labelChanged": "Muutettu"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Työkalu: Laskin",
+      "description": "Agentti voi käyttää laskinta sen sijaan, että tekisi laskutoimitukset itse. Näin se selviytyy paremmin monimutkaisista laskutoimituksista."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Kehote",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tyhjä",
+      "labelChanged": "Muutettu"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Asiakirjavarastot",
+      "labelUnknownRepository": "Tuntematon asiakirjavarasto",
+      "descriptionRepositoryNotFound": "Asiakirjavarastoa ei ole olemassa tai sinulla ei ole tarvittavia oikeuksia.",
+      "labelConfirmWrite": "Luku ja kirjoitus (pyydä vahvistus)",
+      "labelReadOnly": "Vain luku",
+      "labelWrite": "Luku ja kirjoitus (automaattisesti)",
+      "labelGoToRepository": "Siirry varastoon",
+      "labelChanged": "Muutettu"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Roolin valinnan ohje",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Kuvaus",
+      "description": "Valitse agentille sopiva nimi. Voit tallentaa myös lyhyen kuvauksen.",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Työtila",
+      "description": "Valitse työtila, johon agentti luodaan.",
+      "labelName": "Työtila",
+      "errorNoPermissions": "Sinulla ei ole oikeutta luoda agentteja",
+      "errorNoWorkspaceSelected": "Et ole valinnut työtilaa",
+      "labelSelectWorkspace": "Valitse työtila."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Lisätoiminnot",
+      "description": "Laajenna agenttia hyödyllisillä toiminnoilla, jotka helpottavat työskentelyä entisestään.",
+      "labelFileUpload": "Tiedostojen lataaminen",
+      "descriptionFileUpload": "Käyttäjät voivat ladata tiedostoja, joiden sisältö on agentin käytettävissä tekstinä.",
+      "labelBatch": "Eräkäsittely",
+      "descriptionBatch": "Käyttäjät voivat käsitellä tiedostoja automaattisesti viestikohtaisesti.",
+      "labelPursueGoal": "Tavoitteen saavuttaminen",
+      "descriptionPursueGoal": "Käyttäjät voivat määrittää tavoitteen, ja agentti jatkaa toistuvasti työskentelyä, kunnes tavoite on saavutettu.",
+      "labelDisappearingChats": "Katoavat keskustelut",
+      "descriptionDisappearingChats": "Keskustelut voivat poistua automaattisesti 12 tunnin kuluttua. Käyttäjän on otettava toiminto käyttöön.",
+      "labelNightshift": "Yövuoro",
+      "descriptionNightshift": "Pitkään työskentelevät agentit voidaan siirtää yövuoroon, jotta resursseja säästyy päivällä.",
+      "labelTranscriber": "Litteroija",
+      "labelNoTranscriber": "Ei automaattista litterointia",
+      "descriptionTranscriber": "Litteroi ladatut ääni- ja videotiedostot automaattisesti tällä litteroijalla."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Lisätoiminnot",
+      "labelFileUpload": "Tiedostojen lataaminen",
+      "descriptionFileUpload": "Käyttäjät voivat ladata tiedostoja, joiden sisältö on agentin käytettävissä tekstinä.",
+      "labelBatch": "Eräkäsittely",
+      "descriptionBatch": "Käyttäjät voivat käsitellä tiedostoja automaattisesti viestikohtaisesti.",
+      "labelPursueGoal": "Tavoitteen saavuttaminen",
+      "descriptionPursueGoal": "Käyttäjät voivat määrittää tavoitteen, ja agentti jatkaa toistuvasti työskentelyä, kunnes tavoite on saavutettu.",
+      "labelDisappearingChats": "Katoavat keskustelut",
+      "descriptionDisappearingChats": "Keskustelut voivat poistua automaattisesti 12 tunnin kuluttua. Käyttäjän on otettava toiminto käyttöön.",
+      "labelNightshift": "Yövuoro",
+      "descriptionNightshift": "Pitkään työskentelevät agentit voidaan siirtää yövuoroon, jotta resursseja säästyy päivällä."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Ehdotukset"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Ohjeet"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Työtila",
+      "labelUnknownWorkspace": "Tuntematon työtila",
+      "labelGoToWorkspace": "Siirry työtilaan"
+    },
+    "AgentInfo": {
+      "labelRole": "Rooli: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Hae...",
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Ominaisuudet",
+      "tableColumnNameActions": "Toiminnot",
+      "labelOtherAgents": "Muut agentit",
+      "labelFavorites": "Suosikit",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelUnknownModel": "Tuntematon malli ”{{id}}”",
+      "labelNoRepositories": "Ei asiakirjavarastoja",
+      "labelUnknownRepository": "Tuntematon asiakirjavarasto ”{{id}}”",
+      "labelRoleCount_other": "{{count}} roolia",
+      "labelRoleCount_zero": "Ei rooleja",
+      "labelRoleCount_one": "{{count}} rooli"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelNameAsc": "Nimi A–Ö",
+      "labelNameDesc": "Nimi Ö–A",
+      "labelGroup": "Ryhmittele",
+      "labelFavorites": "Suosikit",
+      "labelFirstLetter": "Alkukirjain",
+      "labelWorkspaces": "Työtilat",
+      "labelModel": "Malli",
+      "labelRepositories": "Asiakirjavarastot",
+      "labelRoleCount": "Roolien määrä",
+      "labelCards": "Kortit",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta",
+      "labelAgents": "Agentit",
+      "labelNewAgent": "Uusi agentti",
+      "labelNoGroup": "Ei ryhmittelyä"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Ulkoasu",
+      "description": "Valitse agenttia parhaiten kuvaava väri ja kuvake.",
+      "labelIcon": "Kuvake",
+      "labelColor": "Väri"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Poista suosikeista",
+      "tooltipAddFavorite": "Lisää suosikkeihin"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Muokkaa",
+      "tooltipInfo": "Tiedot",
+      "tooltipNewChat": "Uusi keskustelu"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Tuntematon työtila",
+      "labelModelUnknown": "Tuntematon malli"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Verkkoyhteys",
+      "labelGeneralAccess": "Yleinen käyttö, verkkohaku",
+      "descriptionFetch": "Verkkonouto lataa URL-osoitteen sisällön keskustelun tallennustilaan tai liitettyyn asiakirjavarastoon, johon on kirjoitusoikeus. Tiedoston käsittelyn jälkeen agentti voi lukea poimitun tekstin ja käyttää sitä vastauksessaan.",
+      "descriptionSearch": "Verkkohaku auttaa agenttia löytämään hakukyselyä vastaavia sivuja. Hakupalveluntarjoaja palauttaa otsikoita, linkkejä ja lyhyitä katkelmia. Noudon sallittujen verkkotunnusten luettelo ei rajoita verkkohakuja.",
+      "labelChanged": "Muutettu",
+      "labelFetch": "Nouto",
+      "labelSearch": "Hae",
+      "labelOn": "Käytössä",
+      "labelOff": "Pois käytöstä",
+      "labelAsk": "Kysy ensin",
+      "labelWhitelist": "Nouto rajoitettu sallittuihin verkkotunnuksiin",
+      "labelAll": "Nouto kaikilta verkkosivustoilta",
+      "labelEmptyWhitelist": "Ei sallittuja verkkotunnuksia",
+      "labelEdit": "Muokkaa verkkoyhteyttä",
+      "labelDetails": "Näytä tiedot"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Työkalu: Keskustelulaajennukset",
+      "labelFeatures": "Seuraavan viestin ehdottaminen, keskustelun nimen muuttaminen",
+      "description": "Agentti voi ehdottaa käyttäjän seuraavia viestejä, jolloin käyttäjä voi jatkaa keskustelua napsauttamalla sopivaa viestiä. <br /> Agentti voi muuttaa keskustelun nimeä käyttäjän puolesta, jotta keskustelu löytyy helpommin historiasta."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Roolin kuvaus",
+      "description": "Roolin kuvauksen avulla valitaan rooli, joka vastaa käyttäjän uuteen viestiin",
+      "labelName": "Nimi",
+      "labelSelectionHint": "Roolin valinnan ohje",
+      "labelDeleteRole": "Poista rooli ",
+      "labelDoNotOverride": "Älä korvaa",
+      "labelOverrideModel": "Korvaa malli",
+      "descriptionOverrideModel": "Voit valita tälle roolille eri mallin kuin agentin yleisesti käyttämä malli.",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa roolin ”{{name}}”? Tätä toimintoa ei voi perua.",
+      "labelCancel": "Peruuta",
+      "labelThinking": "Päättely"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Malli",
+      "description": "Agentin käyttämä kielimalli, ellei sitä korvata roolin asetuksissa.",
+      "labelName": "Malli",
+      "labelThinking": "Päättely",
+      "labelThinking_optionalOn": "Päättely",
+      "labelThinking_mandatoryOn": "Pakollinen päättely",
+      "labelThinking_optionalOff": "Ei päättelyä",
+      "labelThinking_mandatoryOff": "Päättely aina pois käytöstä",
+      "labelSelectModel": "Valitse malli"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Asiakirjavarasto",
+      "labelPathAgent": "Polku agentille",
+      "labelPathRepository": "Polku asiakirjavarastossa",
+      "labelPermission": "Oikeus",
+      "labelDeleteConnection": "Poista yhteys",
+      "confirmDeleteTitle": "Poista yhteys",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa tämän yhteyden asiakirjavarastoon ”{{name}}”?",
+      "labelCancel": "Peruuta",
+      "labelAddConnection": "Lisäyhteys",
+      "labelUnknownRepository": "Tuntematon asiakirjavarasto",
+      "labelConfirmWrite": "Luku ja kirjoitus (pyydä vahvistus)",
+      "labelReadOnly": "Vain luku",
+      "labelWrite": "Luku ja kirjoitus (automaattisesti)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Nimi",
+      "labelMessage": "Viesti",
+      "labelClose": "Sulje"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Nimi",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-otsakkeet",
+      "labelHeaderName": "Nimi",
+      "labelHeaderValue": "Arvo",
+      "labelAddHeader": "Lisää HTTP-otsake",
+      "labelDeleteConnection": "Poista yhteys",
+      "confirmDeleteTitle": "Poista MCP",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa MCP-määrityksen ”{{name}}”?",
+      "labelCancel": "Peruuta",
+      "labelDeleteMCP": "Poista MCP",
+      "labelAddMCP": "Toinen MCP",
+      "errorInvalidUrl": "URL-osoitteen on oltava kelvollinen",
+      "labelOAuthApp": "OAuth-sovellus"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Tiedot",
+      "labelConnectRepository": "Yhdistä asiakirjavarasto",
+      "labelToolWebAccess": "Työkalu: Verkkoyhteys",
+      "labelConnectMCP": "Yhdistä ulkoinen työkalu (MCP)",
+      "labelSupport": "Tuki",
+      "labelToolChatExtensions": "Työkalu: Keskustelulaajennukset",
+      "labelToolCalculator": "Työkalu: Laskin",
+      "labelSystem": "Järjestelmä",
+      "labelToolPlatformAccess": "Työkalu: schorn.ai-alustan käyttö"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Uusi agentti",
+      "emptyDescription": "Määritä agentin toiminta, tietojen käyttöoikeudet, ulkoasu ja paljon muuta.",
+      "labelDefinePrompt": "Kirjoita kehote",
+      "descriptionDefinePrompt": "Agentin laatu riippuu sen ohjeista. Selkeät roolimäärittelyt vähentävät hallusinaatioita ja parantavat johdonmukaisuutta.",
+      "labelConnectTools": "Yhdistä työkalut",
+      "descriptionConnectTools": "Yhdistä esimerkiksi asiakirjavarastoja, jotta agentti perustaa vastauksensa tosiasioihin ja käyttää yrityskohtaista tietoa.",
+      "labelWriteDocs": "Kirjoita ohjeet",
+      "descriptionWriteDocs": "Auta käyttäjiä ymmärtämään tämän agentin ominaisuudet.",
+      "infoRoleDefinition": "Rooli määrittää agentin toiminnan ja työkalut, jotka ovat käytettävissä tehtävän suorittamiseen.",
+      "infoDocsDescription": "Ohjeet voivat sisältää tekstiä (Markdown-muotoilua tuetaan) sekä ehdotuksia agentille lähetettävistä viesteistä.",
+      "infoAppearanceDescription": "Nimi, kuvaus ja väri auttavat käyttäjiä löytämään sopivan agentin."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Ehdotetut viestit",
+      "descriptionRecommendedMessages": "Auta käyttäjiä ehdottamalla viestejä, jotka näyttävät, miten agenttia kannattaa käyttää.",
+      "labelAddMessage": "Lisää viesti ",
+      "labelDocumentation": "Ohjeet",
+      "descriptionDocumentation": "Jaa tässä käyttäjillesi lisätietoja tästä agentista",
+      "labelShowPreview": "Näytä esikatselu",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Ohjeet auttavat käyttäjiä käyttämään agenttia. Ne näytetään käyttäjän aloittaessa uuden keskustelun.",
+      "descriptionMarkdownHelp": "Markdown on kevyt merkintäkieli tekstin nopeaan ja helppoon muotoiluun.\n\n* **Rakenne:** Otsikot (`#`), luettelot (numeroidut `1.` ja numeroimattomat `-`), vaakaviivat.\n* **Tekstin tyyli:** **Lihavointi** `**Lihavointi**`, *Kursivointi* `*Kursivointi*`, ~~Yliviivaus~~ `~~Yliviivaus~~`.\n* **Koodi:** Tekstinsisäinen koodi (`code`) ja koodilohkot syntaksin korostuksella.\n* **Jäsentely:** Lainaukset (`>`), tarkistuslistat (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Ei rooleja",
+      "descriptionNoRoles": "Agentille ei ole määritetty rooleja. Agentti ei toimi ilman roolia.",
+      "labelAddRole": "Lisää rooli ",
+      "infoMultipleRoles": "Agenteilla voi olla useita rooleja. Kukin rooli voi keskittyä paremmin osatehtävään.",
+      "infoTools": "Agentit voivat käyttää työkaluja vastatakseen paremmin käyttäjien pyyntöihin (asiakirjojen haku, asiakirjojen luonti jne.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Uusi agentti",
+      "labelAgent": "Agentti",
+      "labelCreateAgent": "Luo agentti",
+      "labelSaveAgent": "Tallenna agentti",
+      "tabOverview": "Yleiskatsaus",
+      "tabPrompt": "Kehote",
+      "tabDocs": "Tuki",
+      "tabRoles": "Roolit",
+      "tabSettings": "Asetukset",
+      "btnCreate": "Luo",
+      "btnSave": "Tallenna",
+      "labelEditAgent": "Muokkaa agenttia",
+      "labelCloneAgent": "Tallenna uutena agenttina",
+      "labelDeleteAgent": "Poista agentti",
+      "confirmDeleteTitle": "Poista agentti",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa agentin ”{{name}}”? Tätä toimintoa ei voi perua.",
+      "labelCancel": "Peruuta"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Rooli ",
+      "description": "Määrittää agentin toiminnan ja työkalut, joita agentti saa käyttää tässä yhteydessä.",
+      "tabOverview": "Yleiskatsaus",
+      "tabPrompt": "Kehote",
+      "tabDocumentRepositoryMounts": "Asiakirjavarastot",
+      "tabMCPs": "Ulkoiset työkalut (MCP)",
+      "tabWeb": "Internetyhteys",
+      "tabChat": "Keskustelulaajennukset",
+      "tabCalc": "Laskin",
+      "tabTools": "Työkalut",
+      "tabSettings": "Asetukset",
+      "toolWebAccess": "Internetyhteys",
+      "chatExtensions": "Keskustelulaajennukset",
+      "calculator": "Laskin",
+      "externalToolsMCP": "Ulkoiset työkalut (MCP)",
+      "labelPrompt": "Kehote"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Hylkää muutokset",
+      "labelDiscardConfirm": "Haluatko varmasti hylätä kaikki tämän agentin tallentamattomat muutokset?",
+      "labelCancel": "Peruuta",
+      "labelDiscard": "Hylkää muutokset"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Ulkoiset työkalut (MCP)",
+      "changedBadge": "Muutettu",
+      "unknownMcp": "Tuntematon MCP",
+      "invalidUrl": "Virheellinen URL-osoite"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semanttinen haku",
+      "labelChanged": "Muutettu",
+      "labelActive": "Aktiivinen",
+      "labelInactive": "Ei aktiivinen",
+      "description": "Kun tietojen merkitys on tärkeämpi kuin tarkka sanamuoto. (Vaatii upotusmallin)",
+      "labelUnknownModel": "Tuntematon malli"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Avainsanahaku",
+      "labelChanged": "Muutettu",
+      "labelActive": "Aktiivinen",
+      "labelInactive": "Ei aktiivinen",
+      "description": "Tarkkojen ilmausten ja lauseiden hakuun. (Nimet, nimitykset jne.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Litteroija",
+      "labelChanged": "Muutettu",
+      "labelUnknownTranscriber": "Tuntematon litteroija",
+      "labelGoToTranscriber": "Siirry litteroijaan"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Uusi viesti"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Odottaa käsittelyä",
+      "tooltipPaused": "Keskeytetty"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Päättely käytössä",
+      "labelThinkingOff": "Päättely pois käytöstä",
+      "labelMessageStack": "Viestipino",
+      "placeholderMessage": "Viesti...",
+      "tooltipUploadFiles": "Tiedostojen lataaminen",
+      "buttonPause": "Keskeytä",
+      "buttonStartBatch": "Käynnistä erä",
+      "buttonSend": "Lähetä",
+      "descriptionFilesPending": "Tiedostoja ladataan tai käsitellään …",
+      "labelAttachFiles": "Liitä tiedostoja",
+      "labelUploadFiles": "Tiedostojen lataaminen",
+      "labelSelectFile": "Valitse olemassa oleva tiedosto"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Sallitaanko tämä toiminto?",
+      "descriptionAction": "Agentti tarvitsee hyväksyntäsi jatkaakseen.",
+      "labelApprove": "Salli",
+      "labelReject": "Estä",
+      "labelRetry": "Yritä uudelleen",
+      "labelSubmitting": "Käsitellään …",
+      "errorSubmit": "Päätöstäsi ei voitu lähettää. Yritä uudelleen.",
+      "labelMCP": "Yhdistä tilisi",
+      "descriptionMCP": "Tämä MCP-työkalu edellyttää kirjautumista. Odottava kutsu jatkuu automaattisesti tilin yhdistämisen jälkeen."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Tallennetaanko asiakirja?",
+      "descriptionWriteFile": "Agentti haluaa tallentaa tämän asiakirjan. Nykyinen sisältö korvataan.",
+      "labelShowContent": "Näytä sisältö",
+      "labelHideContent": "Piilota sisältö",
+      "descriptionEmptyFile": "Asiakirja tallennetaan tyhjänä."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Verkkonouto",
+      "description": "Määritä tämän roolin verkkoyhteys. Noudon ja haun voi ottaa käyttöön toisistaan riippumatta.",
+      "labelFetch": "Ota verkkonouto käyttöön",
+      "labelAskFetch": "Kysy ennen sivun noutamista",
+      "labelAccess": "Sallitut verkkosivustot",
+      "labelAll": "Kaikki verkkosivustot",
+      "labelWhitelist": "Sallittujen verkkotunnusten luettelo",
+      "descriptionAccess": "HTTP(S)-tiedostot ja verkkosivut, myös paikallisverkossa. Uudelleenohjaukset noudattavat samoja pääsysääntöjä.",
+      "labelDomains": "Sallitut verkkotunnukset",
+      "descriptionDomains": "Yksi palvelinnimi riville, esimerkiksi example.com. Käytä aliverkkotunnuksille muotoa *.example.com; se ei kata itse example.com-verkkotunnusta.",
+      "errorDomains": "Anna palvelinnimet tai *.example.com ilman protokollaa, polkua tai porttia.",
+      "descriptionEmptyWhitelist": "Tyhjä sallittujen luettelo estää kaikki sivut.",
+      "labelSearchTitle": "Verkkohaku",
+      "labelSearch": "Ota verkkohaku käyttöön",
+      "labelAskSearch": "Kysy ennen verkkohakua",
+      "labelProvider": "Hakupalveluntarjoaja",
+      "labelProviderDocs": "Palveluntarjoajan ohjeet",
+      "labelApiKey": "API-avain",
+      "errorApiKey": "Anna valitun palveluntarjoajan API-avain.",
+      "labelMarket": "Staanin kieli ja alue",
+      "descriptionMarket": "Esimerkiksi de-de tai en-us. Oletus on en-us.",
+      "labelRemoveTool": "Poista työkalu",
+      "labelConfirmRemoveTool": "Poistetaanko verkkotyökalu?",
+      "descriptionRemoveTool": "Verkkonoudon ja verkkohaun asetukset, mukaan lukien sallittujen luettelo ja API-avain, poistetaan tästä roolista.",
+      "labelCancel": "Peruuta"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Nouda verkkosivu",
+      "descriptionFetch": "Sallitaanko agentin ladata, tallentaa ja käsitellä tämän URL-osoitteen sisältö?",
+      "labelDestination": "Kohde"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Hae verkosta",
+      "descriptionSearch": "Sallitaanko agentin lähettää tämä kysely määritetylle hakupalveluntarjoajalle?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Sulje",
+      "labelPending": "Käynnissä",
+      "labelApproval": "Odottaa hyväksyntää",
+      "labelDenied": "Hylätty",
+      "labelDone": "Valmis",
+      "errorRequest": "Pyyntö epäonnistui"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Verkkohaku",
+      "labelQuery": "Hakukysely",
+      "labelEmptyResults": "Tuloksia ei löytynyt."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Verkkosivu",
+      "labelUrl": "URL",
+      "labelRange": "Merkit {{start}}–{{end}} / {{total}}",
+      "descriptionTruncated": "Lisää sisältöä on saatavilla seuraavassa osassa.",
+      "labelEmptyPage": "Tällä sivulla ei ole luettavaa tekstiä.",
+      "labelSource": "Avaa lähde",
+      "descriptionFileReady": "Tiedosto on tallennettu ja käsitelty. Poimittu teksti on suoraan agentin käytettävissä.",
+      "descriptionProcessingUnavailable": "Tiedosto on tallennettu. Poimittua tekstiä ei ole saatavilla; ääni ja video vaativat määritetyn litteroijan.",
+      "descriptionProcessingFailed": "Tiedosto on tallennettu, mutta käsittely epäonnistui tai aikakatkaistiin. Käsittelyn voi käynnistää uudelleen tallennustilassa."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopioi tiedosto",
+      "labelMove": "Siirrä tiedosto",
+      "descriptionSuccess": "Tiedosto siirrettiin. Tarvittava hakuindeksi muodostetaan uudelleen taustalla.",
+      "descriptionPending": "Valmistellaan tiedostonsiirtoa…",
+      "descriptionProcessingError": "Tiedosto siirrettiin, mutta käsittely on käynnistettävä uudelleen kohteessa.",
+      "errorTransfer": "Tiedostonsiirtoa ei voitu viimeistellä.",
+      "labelOpenFile": "Avaa kohdetiedosto",
+      "descriptionDenied": "Tiedostonsiirto estettiin. Tiedostoa ei siirretty.",
+      "descriptionApproval": "Odotetaan hyväksyntääsi.",
+      "descriptionRunning": "Siirretään tiedostoa…",
+      "labelClose": "Sulje",
+      "labelSource": "Lähde",
+      "labelTarget": "Kohde"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Sallitaanko tämän tiedoston kopiointi?",
+      "labelMove": "Sallitaanko tämän tiedoston siirto?",
+      "descriptionCopy": "Agentti haluaa kopioida tämän tiedoston ja sen käsitellyn sisällön. Olemassa olevia kohdetiedostoja ei koskaan korvata.",
+      "descriptionMove": "Agentti haluaa siirtää tämän tiedoston ja sen käsitellyn sisällön. Lähde poistetaan onnistuneen kopioinnin jälkeen.",
+      "labelSource": "Lähde",
+      "labelTarget": "Kohde"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Tämä MCP-työkalu edellyttää kirjautumista. Odottava kutsu jatkuu automaattisesti tilin yhdistämisen jälkeen.",
+      "labelConnect": "Yhdistä tilini"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-työkalu",
+      "labelDiscover": "Etsi käytettävissä olevat työkalut",
+      "labelPending": "Käynnissä",
+      "labelDone": "Valmis",
+      "labelApproval": "Kirjautuminen vaaditaan",
+      "labelDenied": "Estetty",
+      "errorRequest": "Pyyntö epäonnistui",
+      "labelArguments": "Syöte",
+      "labelResult": "Tulos",
+      "labelClose": "Sulje"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-sovellus",
+      "labelSearch": "Hae yhteyttä",
+      "labelAutomatic": "Ei määritettyä OAuth-sovellusta",
+      "labelNone": "Yhteyttä ei ole valittu",
+      "labelMissing": "Yhteys ei ole käytettävissä",
+      "descriptionOAuth": "Valinnainen: Valitse rekisteröity OAuth-sovellus tälle MCP-palvelimelle. Määritä sen URL-osoite erikseen tässä agentissa.",
+      "descriptionSearch": "Staanin ja Braven tunnistetietoja hallitaan keskitetysti kohdassa Asetukset → Yhteydet.",
+      "errorMissing": "Tämä yhteys ei ole enää käytettävissä. Valitse toinen yhteys.",
+      "descriptionEmpty": "Sopivaa yhteyttä ei ole määritetty. Hallitse yhteyksiä kohdassa Asetukset → Yhteydet."
+    }
+  },
+  "page": {
+    "labelTitle": "Agentit",
+    "emptyTitle": "Ei agentteja",
+    "emptyDescription": "Agentteja ei ole vielä luotu.",
+    "labelNewAgent": "Uusi agentti",
+    "helpSearchTitle": "Hae",
+    "helpSearchDescription": "Voit hakea agentteja. Haku kattaa muun muassa agentin nimen, kuvauksen ja mallin.",
+    "helpSortTitle": "Lajittelu ja ryhmittely",
+    "helpSortDescription": "Agentit voidaan lajitella nimen mukaan ja jakaa eri ryhmiin. Ne voidaan näyttää ruutuina tai taulukkona."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Tämä MCP-palveluntarjoaja edellyttää rekisteröityä OAuth-sovellusta. Pyydä ylläpitäjää luomaan OAuth-sovellus asiakastunnuksella ja asiakassalaisuudella kohdassa Asetukset → Yhteydet ja valitse se agentin MCP-asetuksissa. Yhdistä sen jälkeen uudelleen keskustelusta.",
+    "errorStart": "MCP-valtuutusta ei voitu aloittaa.",
+    "errorCallback": "MCP-valtuutus epäonnistui tai vanheni. Palaa keskusteluun ja yritä uudelleen."
+  }
+}

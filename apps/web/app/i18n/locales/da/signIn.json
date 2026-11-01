@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Du er allerede logget ind",
+      "backToDashboard": "Tilbage til oversigten",
+      "signOut": "Log ud"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Log ind med e-mail og adgangskode",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Adgangskode",
+      "buttonSignIn": "Log ind med e-mail",
+      "buttonReset": "Nulstil adgangskode"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Log ind med SSO-udbyder",
+      "buttonSignIn": "Log ind med {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Nulstil adgangskode",
+      "descriptionKey": "Indtast din e-mailadresse og den nulstillingsnøgle, du har fået af administratoren. Nøglen kan bruges én gang og er gyldig i 7 dage.",
+      "labelEmail": "E-mail",
+      "labelKey": "Nøgle til nulstilling af adgangskode",
+      "labelPassword": "Ny adgangskode",
+      "labelPasswordAgain": "Gentag ny adgangskode",
+      "descriptionPassword": "Brug mindst 6 tegn, og følg organisationens krav til adgangskoder.",
+      "errorEmail": "Indtast en gyldig e-mailadresse.",
+      "errorKey": "Indtast din nulstillingsnøgle.",
+      "errorPassword": "Adgangskoden skal indeholde mindst 6 tegn.",
+      "errorPasswordAgain": "Adgangskoderne stemmer ikke overens.",
+      "errorReset": "Adgangskoden kunne ikke ændres. Kontrollér e-mailadressen, nøglen og kravene til adgangskoder. Udløbne eller tidligere brugte nøgler er ugyldige.",
+      "descriptionSuccess": "Din adgangskode er ændret. Du kan nu logge ind med den nye adgangskode.",
+      "labelReset": "Gem adgangskode",
+      "labelSignIn": "Tilbage til login"
+    }
+  }
+}

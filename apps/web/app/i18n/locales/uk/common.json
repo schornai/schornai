@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Новий чат",
+        "mainLabelAgents": "Агенти",
+        "mainLabelApps": "Застосунки",
+        "mainLabelWorkspaces": "Робочі простори",
+        "history": "Історія"
+      },
+      "SidebarFavorites": {
+        "label": "Обране",
+        "empty": "Ви ще нічого не додали до обраного."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Обране порожнє",
+        "descriptionNoFavorites": "Ви можете додати до обраного <agents>агентів</agents>, <documents>сховища документів</documents> і <transcribers>транскрибатори</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Новий чат"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Доброї ночі];(5-11)[Доброго ранку];(12-17)[Добрий день];(18-inf)[Добрий вечір];",
+      "labelAllAgents": "Усі агенти",
+      "labelToApps": "До застосунків"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Профіль",
+        "labelFavorites": "Обране",
+        "labelPermissions": "Дозволи",
+        "labelModels": "Моделі",
+        "labelTaskQueue": "Черга завдань",
+        "labelSettings": "Налаштування",
+        "labelUsers": "Користувачі",
+        "labelWorkspaces": "Робочі простори",
+        "labelSSOProvider": "Постачальник SSO",
+        "labelXRAGUpload": "Завантажити XRAG",
+        "labelSystemModel": "Системна модель",
+        "labelTheme": "Тема",
+        "labelBackToDashboard": "Назад до панелі керування",
+        "labelConnections": "Підключення",
+        "labelProviderConnections": "Підключення",
+        "labelService": "Сервіс",
+        "labelArtifacts": "Артефакти",
+        "labelCluster": "Кластер"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Виберіть піктограму",
+      "buttonMoreIcons": "Більше піктограм",
+      "textLucideInfo": "Піктограми від <0>Lucide</0>",
+      "placeholderSearchIcons": "Пошук піктограм...",
+      "buttonCancel": "Скасувати"
+    },
+    "FileUploadDropZone": {
+      "drop": "Перетягніть файл сюди, щоб завантажити"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Змінено"
+    },
+    "Pagination": {
+      "labelPrev": "Назад",
+      "labelNext": "Далі"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Мій обліковий запис",
+      "labelSystem": "Система",
+      "labelModels": "Моделі",
+      "labelCluster": "Кластер",
+      "labelSettings": "Налаштування",
+      "labelDashboard": "Панель керування",
+      "labelProfile": "Профіль"
+    },
+    "SidebarUserSignOut": {
+      "label": "Вийти"
+    },
+    "UserRoleText": {
+      "admin": "Адміністратор",
+      "workspace-admin": "Адміністратор робочого простору",
+      "editor": "Редактор",
+      "user": "Користувач",
+      "none": "Доступ заборонено"
+    },
+    "StorageView": {
+      "placeholderSearch": "Пошук у цій папці…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Ім’я",
+      "tableColumnType": "Тип",
+      "tableColumnSize": "Розмір",
+      "tableColumnCreated": "Створено",
+      "tableColumnUpdated": "Оновлено",
+      "tableColumnNameActions": "Дії",
+      "groupTimeToday": "Сьогодні",
+      "groupTimeLast7Days": "Останні 7 днів",
+      "groupTimeLast30Days": "Останні 30 днів",
+      "groupTimeOther": "Інше",
+      "labelFolder": "Папка",
+      "descriptionProcessing": "Файл обробляється"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Нова папка",
+      "placeholderFolderName": "Назва папки...",
+      "labelCancel": "Скасувати",
+      "labelCreate": "Створити"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Видалити",
+      "labelDescription": "Ви впевнені, що хочете видалити «{{name}}»? Цю дію неможливо скасувати.",
+      "labelCancel": "Скасувати",
+      "labelRemove": "Видалити"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Домашній каталог"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Немає файлів",
+      "labelDescription": "У поточній папці немає файлів. Просто перетягніть файли сюди, щоб завантажити їх.",
+      "labelUploadFile": "Завантажити файл",
+      "labelCreateFile": "Створити файл"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelNameAsc": "Ім’я від А до Я",
+      "labelNameDesc": "Ім’я від Я до А",
+      "labelSizeAsc": "Розмір за зростанням",
+      "labelSizeDesc": "Розмір за спаданням",
+      "labelCreatedAsc": "Дата створення за зростанням",
+      "labelCreatedDesc": "Дата створення за спаданням",
+      "labelUpdatedAsc": "Дата оновлення за зростанням",
+      "labelUpdatedDesc": "Дата оновлення за спаданням",
+      "labelGroup": "Групування",
+      "labelNoGroup": "Без групування",
+      "labelFirstLetter": "Перша літера",
+      "labelFileType": "Тип файлу",
+      "labelCreated": "Дата створення",
+      "labelUpdated": "Дата оновлення",
+      "labelTilesSmall": "Плитки (малі)",
+      "labelTilesMedium": "Плитки (середні)",
+      "labelTilesLarge": "Плитки (великі)",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути",
+      "labelNewFolder": "Нова папка",
+      "labelThisFolder": "Ця папка",
+      "labelUploadFile": "Завантажити файл",
+      "labelNew": "Нове",
+      "labelDeleteFolder": "Видалити папку",
+      "labelNewRecording": "Новий запис",
+      "labelColumns": "Вигляд стовпцями",
+      "labelNewTextFile": "Новий файл"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Немає результатів",
+      "descriptionNoResults": "За вашим запитом нічого не знайдено. Спробуйте сформулювати його інакше.",
+      "labelCharacters": "символів"
+    },
+    "Transcription": {
+      "labelTitle": "Текст транскрипції",
+      "labelLoadingMedia": "Завантаження медіа…",
+      "labelBuffering": "Буферизація відтворення…",
+      "labelSeeking": "Завантаження позиції…",
+      "labelPlayer": "Медіапрогравач",
+      "labelPlay": "Відтворити",
+      "labelPause": "Призупинити",
+      "labelSeek": "Позиція відтворення",
+      "labelBack": "Назад на 10 секунд",
+      "labelForward": "Вперед на 10 секунд",
+      "labelSpeed": "Швидкість відтворення",
+      "labelUnmute": "Увімкнути звук",
+      "labelMute": "Вимкнути звук",
+      "labelVolume": "Гучність",
+      "labelHideVideo": "Приховати відео",
+      "labelShowVideo": "Показати відео",
+      "labelPlaySegment": "Відтворити сегмент {{number}}",
+      "labelReviewed": "Перевірено",
+      "labelSegments": "Сегменти",
+      "labelWords": "Слова",
+      "descriptionEmpty": "Результатів транскрипції не знайдено.",
+      "descriptionConfidence": "Достовірність: {{percent}}%",
+      "errorPlayback": "Помилка відтворення. Перевірте доступність медіафайлу та спробуйте ще раз.",
+      "labelEditSegment": "Редагувати сегмент {{number}}",
+      "labelSegmentText": "Текст сегмента",
+      "labelSave": "Зберегти",
+      "labelSaving": "Збереження…",
+      "labelSaveReviewed": "Зберегти й позначити як перевірене",
+      "labelCancel": "Скасувати",
+      "labelRestoreOriginal": "Відновити початковий текст",
+      "descriptionUnsaved": "Зміни застосовуються лише після збереження.",
+      "errorSave": "Не вдалося зберегти. Ваш текст залишився. Спробуйте ще раз.",
+      "errorConflict": "Цей сегмент змінився. Скопіюйте свою чернетку й оновіть вигляд, перш ніж зберігати знову.",
+      "labelDownloadSrt": "Завантажити SRT",
+      "descriptionSaveBeforeDownload": "Збережіть або скасуйте зміни перед завантаженням файлу SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Вигляд стовпцями",
+      "labelRoot": "Документи",
+      "labelDetails": "Відомості про файл",
+      "labelType": "Тип",
+      "labelSize": "Розмір",
+      "labelUpdated": "Оновлено",
+      "labelOpen": "Відкрити файл"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Новий файл",
+      "labelName": "Ім’я файлу",
+      "labelCreate": "Створити файл",
+      "labelCancel": "Скасувати",
+      "errorCreate": "Не вдалося створити файл. Перевірте його ім’я та свої дозволи на запис."
+    },
+    "StorageFileActions": {
+      "labelActions": "Дії для {{name}}",
+      "labelDownloadOriginal": "Завантажити оригінал",
+      "labelDownloadProcessed": "Завантажити оброблений текст",
+      "labelRename": "Перейменувати",
+      "labelProcess": "Обробити повторно",
+      "labelDelete": "Видалити файл",
+      "labelName": "Нове ім’я файлу",
+      "labelCancel": "Скасувати",
+      "labelConfirm": "Підтвердити",
+      "descriptionDelete": "Назавжди видалити «{{name}}», його оброблений вміст і записи пошукового індексу?",
+      "descriptionProcess": "Повторно обробити «{{name}}»? Зміни, внесені вручну, буде перезаписано.",
+      "descriptionQueued": "Обробка в черзі або вже виконується. Перевірте її стан у списку файлів.",
+      "descriptionUnsupported": "Зараз цей файл неможливо обробити. Для аудіо й відео потрібен налаштований транскрибатор.",
+      "errorAction": "Дія завершилася помилкою. Перевірте дозволи на запис, конфлікти імен і поточну обробку. Після невдалого перейменування можуть залишитися обидва імені файлу; перевірте список перед повторною спробою.",
+      "labelOptions": "Параметри",
+      "labelEdit": "Редагувати",
+      "descriptionRename": "Перейменувати «{{name}}». Збережіть розширення файлу. Оригінал, оброблений вміст і пошуковий індекс оновлюються разом. Наявні імена ніколи не перезаписуються.",
+      "labelCopy": "Копіювати до…",
+      "labelMove": "Перемістити до…",
+      "descriptionCopy": "Копіювати «{{name}}» разом з обробленим вмістом. Оригінал залишиться.",
+      "descriptionMove": "Перемістити «{{name}}» разом з обробленим вмістом. Оригінал буде видалено після успішного копіювання.",
+      "descriptionTransferred": "Файл перенесено. Пошукові індекси в місці призначення перебудовуються у фоновому режимі.",
+      "descriptionTransferProcessingError": "Файл перенесено, але не вдалося запустити обробку. Відкрийте файл у місці призначення й виберіть «Обробити повторно». Не повторюйте перенесення."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Дії для {{name}}",
+      "labelDelete": "Видалити папку"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Вміст",
+      "labelSave": "Зберегти",
+      "labelCancel": "Скасувати",
+      "errorSave": "Не вдалося зберегти. Спробуйте ще раз.",
+      "errorConflict": "Вміст змінився. Оновіть сторінку перед збереженням.",
+      "errorIndex": "Збережено, але не вдалося оновити пошуковий індекс. Збережіть ще раз."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Виберіть папку призначення",
+      "labelSelectFile": "Виберіть наявний файл",
+      "descriptionFolder": "Виберіть наявну папку. Буде перенесено один файл; наявні імена ніколи не перезаписуються.",
+      "descriptionFile": "Виберіть файл із цього чату або доступного сховища. Документи й записи мають бути вже оброблені.",
+      "labelStorage": "Сховище",
+      "labelCurrentStorage": "Поточне сховище",
+      "labelUp": "Батьківська папка",
+      "descriptionLoading": "Завантаження файлів…",
+      "descriptionEmpty": "У цій папці немає відповідних записів.",
+      "descriptionNoStorages": "Немає доступних сховищ.",
+      "descriptionPending": "Файл переноситься. Дочекайтеся результату.",
+      "labelCancel": "Скасувати",
+      "labelUseFolder": "Використати цю папку",
+      "labelUseFile": "Прикріпити файл",
+      "labelRetry": "Оновити",
+      "errorLoad": "Не вдалося завантажити цю папку. Перевірте доступ і спробуйте ще раз.",
+      "errorCollision": "У місці призначення вже є файл або оброблений вміст із таким ім’ям. Виберіть іншу папку; нічого не було перезаписано.",
+      "errorSameTarget": "Джерело й місце призначення збігаються. Виберіть іншу папку.",
+      "errorSourceChanged": "Джерело змінилося під час копіювання. Неповну копію видалено. Спробуйте ще раз.",
+      "errorBusy": "Цей файл зараз обробляється. Дочекайтеся завершення.",
+      "errorPermission": "У вас немає потрібних дозволів для джерела або місця призначення.",
+      "errorSourceDelete": "Повний файл у місці призначення створено, але не вдалося видалити оригінал. Перевірте обидва місця перед повторенням операції.",
+      "errorCleanup": "Помилка копіювання. Оригінал збережено, але в місці призначення могли залишитися неповні файли. Перевірте його перед повторною спробою.",
+      "errorAction": "Операція завершилася помилкою. Перевірте дозволи, імена файлів і обидва місця перед повторною спробою.",
+      "errorNotProcessed": "Цей файл ще не оброблено. Спочатку обробіть його, а потім виберіть знову."
+    }
+  },
+  "_welcomeMessage": "Ласкаво просимо до\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Документація",
+    "feedback": "Відгук",
+    "help": "Довідка",
+    "labelThemeLight": "Світла",
+    "labelThemeDark": "Темна",
+    "labelThemeSystem": "Операційна система",
+    "labelLanguage": "Мова"
+  }
+}

@@ -1,0 +1,2 @@
+# Preserve the official Supabase source verbatim for reproducible upstream comparisons.
+packages/xrag/update/container/supabase/docker-compose.yml

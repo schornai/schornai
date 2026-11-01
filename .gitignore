@@ -1,0 +1,34 @@
+node_modules
+coverage/
+.test-venv/
+.coverage
+__pycache__/
+# Keep environment variables out of version control
+.env*
+
+.DS_Store
+.rollup.cache
+*.tsbuildinfo
+
+.turbo
+.service-dev/
+
+certificates
+
+_bonanza
+
+dist
+
+# Generated from the root license by the CLI build.
+/apps/cli/LICENSE
+
+# XRAG archives
+*.xrag.tar
+.xrag-build/
+
+# Storybook build output
+**/storybook-static/
+test-results/
+playwright-report/
+
+.supervisor-dev/

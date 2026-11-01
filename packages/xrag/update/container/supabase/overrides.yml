@@ -1,0 +1,337 @@
+# schorn.ai overlay; official upstream file is kept verbatim. Requires Docker Compose >= 2.24.4.
+# Pin the existing PostgreSQL 15 image: changing the upstream major requires a separate data migration.
+name: supabase
+services:
+  api-gw:
+    container_name: supabase-kong
+    image: kong/kong:3.9.4
+    restart: on-failure
+    entrypoint: !override
+      - /bin/sh
+      - /home/kong/kong-entrypoint.sh
+    command: !override
+      - kong
+      - docker-start
+    ports: !override
+      - ${SUPABASE_BIND_ADDRESS:-127.0.0.1}:${SUPABASE_PORT:-8085}:8000
+    depends_on: !override
+      rest:
+        condition: service_healthy
+    environment: !override
+      KONG_DATABASE: off
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth,request-termination,ip-restriction,post-function
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      KONG_PROXY_ACCESS_LOG: /dev/stdout combined
+      KONG_SSL_CERT: /home/kong/cert/fullkey.pem
+      KONG_SSL_CERT_KEY: /home/kong/cert/privkey.pem
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+    volumes: !override
+      - ./volumes/api/kong.yml:/home/kong/temp.yml:ro,z
+      - ./volumes/api/kong-entrypoint.sh:/home/kong/kong-entrypoint.sh:ro,z
+      - ./volumes/api/cert/fullkey.pem:/home/kong/cert/fullkey.pem:ro,z
+      - ./volumes/api/cert/privkey.pem:/home/kong/cert/privkey.pem:ro,z
+    networks: !override
+      default:
+        aliases:
+          - kong
+    healthcheck: !override
+      test:
+        - CMD
+        - kong
+        - health
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  auth:
+    container_name: supabase-auth
+    image: supabase/gotrue:v2.197.0
+    depends_on: !override
+      db:
+        condition: service_healthy
+    healthcheck: !override
+      test:
+        - CMD
+        - wget
+        - --no-verbose
+        - --tries=1
+        - --spider
+        - http://localhost:9999/health
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    restart: on-failure
+    environment: !override
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: ${API_EXTERNAL_URL}
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      GOTRUE_SITE_URL: ${SITE_URL}
+      GOTRUE_URI_ALLOW_LIST: ${ADDITIONAL_REDIRECT_URLS}
+      GOTRUE_DISABLE_SIGNUP: ${DISABLE_SIGNUP}
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_EXP: ${JWT_EXPIRY}
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: ${ENABLE_EMAIL_SIGNUP}
+      GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED: ${ENABLE_ANONYMOUS_USERS}
+      GOTRUE_MAILER_AUTOCONFIRM: ${ENABLE_EMAIL_AUTOCONFIRM}
+      GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
+      GOTRUE_SMTP_HOST: ${SMTP_HOST}
+      GOTRUE_SMTP_PORT: ${SMTP_PORT}
+      GOTRUE_SMTP_USER: ${SMTP_USER}
+      GOTRUE_SMTP_PASS: ${SMTP_PASS}
+      GOTRUE_SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
+      GOTRUE_MAILER_URLPATHS_INVITE: ${MAILER_URLPATHS_INVITE}
+      GOTRUE_MAILER_URLPATHS_CONFIRMATION: ${MAILER_URLPATHS_CONFIRMATION}
+      GOTRUE_MAILER_URLPATHS_RECOVERY: ${MAILER_URLPATHS_RECOVERY}
+      GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE: ${MAILER_URLPATHS_EMAIL_CHANGE}
+      GOTRUE_EXTERNAL_PHONE_ENABLED: ${ENABLE_PHONE_SIGNUP}
+      GOTRUE_SMS_AUTOCONFIRM: ${ENABLE_PHONE_AUTOCONFIRM}
+      GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_ENABLED: "true"
+      GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_URI: http://127.0.0.1:9998/api/auth/access-token
+      GOTRUE_HOOK_CUSTOM_ACCESS_TOKEN_SECRETS: ${SUPABASE_AUTH_HOOK_SECRET:?Auth hook signing secret is required}
+      GOTRUE_MAILER_EXTERNAL_HOSTS: ${AUTH_EXTERNAL_HOSTS:-kong}
+      GOTRUE_SAML_ENABLED: true
+      GOTRUE_SAML_PRIVATE_KEY: ${SAML_PRIVATE_KEY}
+  auth-hook:
+    image: aibox-proxy:latest
+    restart: on-failure
+    network_mode: service:auth
+    entrypoint:
+      - /bin/sh
+      - -c
+      - envsubst '$$AUTH_HOOK_URL' < /etc/nginx/auth-hook.conf >
+        /tmp/auth-hook.conf && exec nginx -c /tmp/auth-hook.conf -g "daemon
+        off;"
+    depends_on:
+      auth:
+        condition: service_started
+    volumes:
+      - ./volumes/api/auth-hook.conf:/etc/nginx/auth-hook.conf:ro,z
+    environment:
+      AUTH_HOOK_URL: ${AUTH_HOOK_URL:-http://web:3000}
+  rest:
+    container_name: supabase-rest
+    image: postgrest/postgrest:v16.4
+    restart: unless-stopped
+    depends_on: !override
+      db:
+        condition: service_healthy
+    healthcheck: !override
+      test:
+        - CMD
+        - postgrest
+        - --ready
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    environment: !override
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      PGRST_DB_SCHEMAS: public,storage,graphql_public
+      PGRST_DB_MAX_ROWS: ${PGRST_DB_MAX_ROWS:-1000}
+      PGRST_DB_EXTRA_SEARCH_PATH: ${PGRST_DB_EXTRA_SEARCH_PATH:-public}
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_ADMIN_SERVER_PORT: 3001
+      PGRST_ADMIN_SERVER_HOST: localhost
+      PGRST_JWT_SECRET: ${JWT_JWKS:-${JWT_SECRET}}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_EXP: ${JWT_EXPIRY}
+    command: !override
+      - postgrest
+  storage:
+    container_name: supabase-storage
+    image: supabase/storage-api:v1.83.5
+    depends_on: !override
+      db:
+        condition: service_healthy
+      rest:
+        condition: service_started
+      imgproxy:
+        condition: service_started
+    healthcheck: !override
+      test:
+        - CMD
+        - wget
+        - --no-verbose
+        - --tries=1
+        - --spider
+        - http://storage:5000/status
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    restart: on-failure
+    environment: !override
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      POSTGREST_URL: http://rest:3000
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      FILE_SIZE_LIMIT: 214748364800
+      STORAGE_BACKEND: file
+      FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+      TENANT_ID: stub
+      REGION: stub
+      GLOBAL_S3_BUCKET: stub
+      ENABLE_IMAGE_TRANSFORMATION: "true"
+      IMGPROXY_URL: http://imgproxy:5001
+    volumes: !override
+      - ./volumes/storage:/var/lib/storage:z
+  imgproxy:
+    container_name: supabase-imgproxy
+    image: darthsim/imgproxy:v4.0.18
+    restart: on-failure
+    healthcheck: !override
+      test:
+        - CMD
+        - imgproxy
+        - health
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    environment: !override
+      IMGPROXY_BIND: :5001
+      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /
+      IMGPROXY_USE_ETAG: "true"
+      IMGPROXY_ENABLE_WEBP_DETECTION: ${IMGPROXY_ENABLE_WEBP_DETECTION}
+    volumes: !override
+      - ./volumes/storage:/var/lib/storage:z
+  db-config-init:
+    image: supabase/postgres:15.19.0.004
+    user: root
+    network_mode: none
+    entrypoint:
+      - /bin/sh
+      - /prepare-config.sh
+    volumes:
+      - db-config:/config
+      - ./volumes/db/prepare-config.sh:/prepare-config.sh:ro,z
+  db:
+    depends_on: !override
+      db-config-init:
+        condition: service_completed_successfully
+    container_name: supabase-db
+    image: supabase/postgres:15.19.0.004
+    healthcheck: !override
+      test:
+        - CMD
+        - pg_isready
+        - -U
+        - postgres
+        - -h
+        - localhost
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: on-failure
+    command: !override
+      - postgres
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+      - -c
+      - log_min_messages=fatal
+    environment: !override
+      POSTGRES_HOST: /var/run/postgresql
+      PGPORT: ${POSTGRES_PORT}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB}
+      POSTGRES_DB: ${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXP: ${JWT_EXPIRY}
+    volumes: !override
+      - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
+      - ./volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z
+      - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
+      - ./volumes/db/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
+      - ./volumes/db/data:/var/lib/postgresql/data:Z
+      - ./volumes/db/_supabase.sql:/docker-entrypoint-initdb.d/migrations/97-_supabase.sql:Z
+      - ./volumes/db/logs.sql:/docker-entrypoint-initdb.d/migrations/99-logs.sql:Z
+      - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
+      - db-config:/etc/postgresql-custom
+    ports: !override
+      - ${POSTGRES_BIND_ADDRESS:-127.0.0.1}:${POSTGRES_DIRECT_PORT:-5433}:5432
+  supavisor:
+    container_name: supabase-pooler
+    image: supabase/supavisor:2.9.13
+    restart: on-failure
+    ports: !override
+      - ${POSTGRES_BIND_ADDRESS:-127.0.0.1}:${POSTGRES_PORT}:5432
+      - ${POSTGRES_BIND_ADDRESS:-127.0.0.1}:${POOLER_PROXY_PORT_TRANSACTION}:6543
+    volumes: !override
+      - ./volumes/pooler/pooler.exs:/etc/pooler/pooler.exs:ro,z
+    healthcheck: !override
+      test:
+        - CMD
+        - curl
+        - -sSfL
+        - --head
+        - -o
+        - /dev/null
+        - http://127.0.0.1:4000/api/health
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on: !override
+      db:
+        condition: service_healthy
+    environment: !override
+      PORT: 4000
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_URL: ecto://supabase_admin:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/_supabase
+      CLUSTER_POSTGRES: true
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      VAULT_ENC_KEY: ${VAULT_ENC_KEY}
+      API_JWT_SECRET: ${JWT_SECRET}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
+      REGION: local
+      ERL_AFLAGS: -proto_dist inet_tcp
+      POOLER_TENANT_ID: ${POOLER_TENANT_ID}
+      POOLER_DEFAULT_POOL_SIZE: ${POOLER_DEFAULT_POOL_SIZE}
+      POOLER_MAX_CLIENT_CONN: ${POOLER_MAX_CLIENT_CONN}
+      POOLER_POOL_MODE: transaction
+    command: !override
+      - /bin/sh
+      - -c
+      - /app/bin/migrate && /app/bin/supavisor eval "$$(cat
+        /etc/pooler/pooler.exs)" && /app/bin/server
+  migrate:
+    container_name: aibox-db-migrate
+    image: aibox-db-migrate:latest
+    environment:
+      POSTGRES_DSN: postgres://postgres:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/postgres?sslmode=disable
+    depends_on:
+      supavisor:
+        condition: service_healthy
+      storage:
+        condition: service_healthy
+    profiles:
+      - migration
+  studio:
+    profiles:
+      - disabled
+  meta:
+    profiles:
+      - disabled
+  functions:
+    profiles:
+      - disabled
+  realtime:
+    profiles:
+      - disabled
+volumes:
+  db-config:
+    name: supabase_db-config
+networks:
+  default:
+    external: true
+    name: ${SERVICE_DOCKER_NETWORK:-schornai}

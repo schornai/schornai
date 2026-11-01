@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopijuoti atsiliepimo tekstą į iškarpinę",
+      "feedbackText": "Atsiliepimo tekstas",
+      "feedbackTextRecommendation": "Ačiū, atsiųskite mums šį tekstą adresu ",
+      "sendFeedback": "Siųsti atsiliepimą el. paštu",
+      "showFeedbackText": "Rodyti atsiliepimo tekstą",
+      "thankYou": "Ačiū, kad skyrėte laiko atsiliepimui"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Ištrinti visus klaidų pranešimus",
+      "actionDeleteAllCancel": "Atšaukti",
+      "actionDeleteAllExplainer": "Ar tikrai norite ištrinti visus surinktus klaidų pranešimus? Šio veiksmo negalima atšaukti.",
+      "actionDeleteAllShort": "Ištrinti klaidų pranešimus",
+      "actionDeselectAll": "Atžymėti visus klaidų pranešimus",
+      "actionSelectAll": "Pažymėti visus klaidų pranešimus",
+      "explainer": "Klaidų pranešimai taip pat yra atsiliepimo dalis. Kai kurias problemas sistema išsprendžia automatiškai, o jūsų veiksmai tęsiasi be pertrūkių. Vis dėlto mums naudinga sužinoti apie šias klaidas, kad galėtume jas pašalinti.",
+      "explainerSecrecy": "Įsitikinkite, kad klaidų pranešimuose nėra konfidencialių ar asmens duomenų. Sistema iš esmės sukurta taip, kad tokie duomenys nepatektų į klaidų pranešimus. Tačiau klaidos pagal savo pobūdį susijusios su nenumatytomis aplinkybėmis. Todėl saugumo sumetimais patys patikrinkite atsiliepimą.",
+      "explainerSecrecyHeading": "Konfidencialių duomenų nėra",
+      "heading": "Klaidos",
+      "tableColumnPartOfFeedback": "Atsiliepimo dalis",
+      "tableColumnDate": "Data",
+      "tableColumnErrorMessage": "Klaidos pranešimas"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Įvertinimas žvaigždutėmis nepateiktas",
+      "starRating": "{{stars}} iš 5 žvaigždučių"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Atmesti atsiliepimą",
+      "discardFeedbackSub": "Ar tikrai norite atmesti savo atsiliepimą? Šio veiksmo negalima atšaukti.",
+      "discardFeedbackCancel": "Atšaukti",
+      "infoSecrecy": "Įsitikinkite, kad siunčiamame atsiliepime nėra konfidencialių ar asmens duomenų.",
+      "writeFeedback": "Rašyti atsiliepimą",
+      "writeFeedbackSub": "Vertiname visus atsiliepimus – ir teigiamus, ir neigiamus."
+    }
+  },
+  "page": {
+    "headingLine1": "Padėkite mums tobulinti schorn.ai in a Box,",
+    "headingLine2": "pateikite atsiliepimą",
+    "headingMain": "Atsiliepimai"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Je bent al aangemeld",
+      "backToDashboard": "Terug naar dashboard",
+      "signOut": "Afmelden"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Aanmelden met e-mail en wachtwoord",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Wachtwoord",
+      "buttonSignIn": "Aanmelden met e-mail",
+      "buttonReset": "Wachtwoord resetten"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Aanmelden met SSO-aanbieder",
+      "buttonSignIn": "Aanmelden met {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Wachtwoord resetten",
+      "descriptionKey": "Voer je e-mailadres en de resetsleutel van je beheerder in. De sleutel kan één keer worden gebruikt en is 7 dagen geldig.",
+      "labelEmail": "E-mail",
+      "labelKey": "Wachtwoordresetsleutel",
+      "labelPassword": "Nieuw wachtwoord",
+      "labelPasswordAgain": "Nieuw wachtwoord herhalen",
+      "descriptionPassword": "Gebruik minstens 6 tekens en volg de wachtwoordvereisten van je organisatie.",
+      "errorEmail": "Voer een geldig e-mailadres in.",
+      "errorKey": "Voer je resetsleutel in.",
+      "errorPassword": "Het wachtwoord moet minstens 6 tekens bevatten.",
+      "errorPasswordAgain": "De wachtwoorden komen niet overeen.",
+      "errorReset": "Het wachtwoord kon niet worden gewijzigd. Controleer je e-mailadres, sleutel en wachtwoordvereisten. Verlopen of al gebruikte sleutels zijn ongeldig.",
+      "descriptionSuccess": "Je wachtwoord is gewijzigd. Je kunt je nu aanmelden met het nieuwe wachtwoord.",
+      "labelReset": "Wachtwoord opslaan",
+      "labelSignIn": "Terug naar aanmelden"
+    }
+  }
+}

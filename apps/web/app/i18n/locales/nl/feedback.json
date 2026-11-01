@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Feedbacktekst naar klembord kopiëren",
+      "feedbackText": "Feedbacktekst",
+      "feedbackTextRecommendation": "Bedankt! Stuur ons deze tekst op ",
+      "sendFeedback": "Feedback per e-mail verzenden",
+      "showFeedbackText": "Feedbacktekst tonen",
+      "thankYou": "Bedankt dat je de tijd neemt om feedback te geven"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Alle foutmeldingen verwijderen",
+      "actionDeleteAllCancel": "Annuleren",
+      "actionDeleteAllExplainer": "Weet je zeker dat je alle verzamelde foutmeldingen wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "actionDeleteAllShort": "Foutmeldingen verwijderen",
+      "actionDeselectAll": "Alle foutmeldingen deselecteren",
+      "actionSelectAll": "Alle foutmeldingen selecteren",
+      "explainer": "Foutmeldingen maken ook deel uit van de feedback. Sommige problemen worden automatisch opgelost, zodat je werkzaamheden ononderbroken doorgaan. Toch helpt het ons om deze fouten te kennen, zodat we ze kunnen verhelpen.",
+      "explainerSecrecy": "Controleer of foutmeldingen geen vertrouwelijke of persoonlijke gegevens bevatten. Het systeem is in principe ontworpen om zulke gegevens buiten foutmeldingen te houden. Fouten hebben echter betrekking op onvoorziene omstandigheden. Controleer de feedback daarom zelf om veiligheidsredenen.",
+      "explainerSecrecyHeading": "Geen vertrouwelijke gegevens",
+      "heading": "Fouten",
+      "tableColumnPartOfFeedback": "Onderdeel van feedback",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Foutmelding"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Geen sterrenbeoordeling gegeven",
+      "starRating": "{{stars}} van 5 sterren"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Feedback verwerpen",
+      "discardFeedbackSub": "Weet je zeker dat je je feedback wilt verwerpen? Deze actie kan niet ongedaan worden gemaakt.",
+      "discardFeedbackCancel": "Annuleren",
+      "infoSecrecy": "Controleer of de feedback die je verstuurt geen vertrouwelijke of persoonlijke gegevens bevat.",
+      "writeFeedback": "Feedback schrijven",
+      "writeFeedbackSub": "We waarderen alle feedback, positief en negatief."
+    }
+  },
+  "page": {
+    "headingLine1": "Help ons schorn.ai in a Box te verbeteren,",
+    "headingLine2": "geef ons je feedback",
+    "headingMain": "Feedback"
+  }
+}

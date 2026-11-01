@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Oled juba sisse logitud",
+      "backToDashboard": "Tagasi töölauale",
+      "signOut": "Logi välja"
+    },
+    "PasswordSignIn": {
+      "header": "E-post",
+      "headerSub": "Logi sisse e-posti ja parooliga",
+      "inputEmailLabel": "E-post",
+      "inputPasswordLabel": "Parool",
+      "buttonSignIn": "Logi sisse e-postiga",
+      "buttonReset": "Lähtesta parool"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Logi sisse SSO-teenuse pakkuja kaudu",
+      "buttonSignIn": "Logi sisse teenusega {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Lähtesta parool",
+      "descriptionKey": "Sisesta oma e-posti aadress ja administraatorilt saadud lähtestamisvõti. Võtit saab kasutada ühe korra ja see kehtib 7 päeva.",
+      "labelEmail": "E-post",
+      "labelKey": "Parooli lähtestamise võti",
+      "labelPassword": "Uus parool",
+      "labelPasswordAgain": "Korda uut parooli",
+      "descriptionPassword": "Kasuta vähemalt 6 märki ja järgi oma organisatsiooni paroolinõudeid.",
+      "errorEmail": "Sisesta kehtiv e-posti aadress.",
+      "errorKey": "Sisesta lähtestamisvõti.",
+      "errorPassword": "Parool peab sisaldama vähemalt 6 märki.",
+      "errorPasswordAgain": "Paroolid ei ühti.",
+      "errorReset": "Parooli ei õnnestunud muuta. Kontrolli oma e-posti aadressi, võtit ja paroolinõudeid. Aegunud või varem kasutatud võtmed on kehtetud.",
+      "descriptionSuccess": "Sinu parool on muudetud. Nüüd saad uue parooliga sisse logida.",
+      "labelReset": "Salvesta parool",
+      "labelSignIn": "Tagasi sisselogimise juurde"
+    }
+  }
+}

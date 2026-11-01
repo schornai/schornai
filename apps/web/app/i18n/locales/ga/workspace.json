@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Cur síos",
+      "description": "Roghnaigh ainm oiriúnach don spás oibre. Is féidir cur síos gairid a shábháil freisin.",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos",
+      "buttonSave": "Sábháil",
+      "buttonReset": "Athshocraigh"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Doiciméadú",
+      "description": "Roinn eolas breise faoin spás oibre seo le d’úsáideoirí anseo.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Sábháil",
+      "buttonReset": "Athshocraigh"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapálacha SSO",
+      "description": "Roghnaigh cén grúpa SSO a bhfuil rochtain aige ar an spás oibre agus na ceadanna a bheidh aige.",
+      "labelRoleUser": "Grúpa úsáideoirí",
+      "labelRoleEditor": "Grúpa eagarthóirí",
+      "labelRoleWorkspaceAdmin": "Grúpa riarthóirí spáis oibre",
+      "placeholderNoGroup": "Níl aon ghrúpa sannta",
+      "descriptionRoleUser": "Is féidir leis ábhar an spáis oibre a fheiceáil (gníomhairí, tras-scríobhaithe, stórais doiciméad, srl.), ach ní féidir leis é a chur in eagar.",
+      "descriptionRoleEditor": "Is féidir leis ábhar an spáis oibre a fheiceáil agus é a chur in eagar freisin.",
+      "descriptionRoleWorkspaceAdmin": "Is féidir leis an spás oibre a bhainistiú agus gníomhairí, tras-scríobhaithe, stórais doiciméad, srl. a chruthú, a chur in eagar agus a scriosadh.",
+      "buttonSave": "Sábháil",
+      "buttonReset": "Athshocraigh"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Úsáideoir uathoibríoch",
+      "description": "Nuair atá \"Úsáideoir uathoibríoch\" cumasaithe, tugtar cead úsáideora san eagraíocht seo go huathoibríoch do gach duine ar féidir leis síniú isteach sa box.",
+      "labelActive": "Úsáideoir uathoibríoch cumasaithe",
+      "labelInactive": "Úsáideoir uathoibríoch díchumasaithe"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Spás oibre nua",
+      "descriptionWorkspace": "Roghnaigh ainm agus cur síos roghnach. Is féidir leat tuilleadh socruithe a chumrú tar éis an spás oibre a chruthú.",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos",
+      "labelCreate": "Cruthaigh spás oibre",
+      "labelCancel": "Cealaigh",
+      "errorCreate": "Níorbh fhéidir an spás oibre a chruthú. Bain triail eile as."
+    },
+    "WorkspaceCard": {
+      "labelType": "Spás oibre"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Cuir spás oibre in eagar",
+      "tooltipInfo": "Oscail spás oibre"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Cuir leis na ceanáin",
+      "tooltipRemoveFavorite": "Bain de na ceanáin"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Cuardaigh spásanna oibre",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos",
+      "labelRole": "Do ról",
+      "labelActions": "Gníomhartha",
+      "labelFavorites": "Ceanáin",
+      "labelOtherWorkspaces": "Spásanna oibre eile",
+      "labelEmpty": "Níl aon spás oibre ann",
+      "descriptionEmpty": "Níl rochtain agat ar spás oibre fós.",
+      "labelNoResults": "Níl aon toradh ann",
+      "descriptionNoResults": "Bain triail as téarma cuardaigh eile."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelNameAsc": "Ainm ó A go Z",
+      "labelNameDesc": "Ainm ó Z go A",
+      "labelGroup": "Grúpáil de réir",
+      "labelNoGroup": "Gan grúpa",
+      "labelFavorites": "Ceanáin",
+      "labelFirstLetter": "An chéad litir",
+      "labelCards": "Cártaí",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Cruthaigh spás oibre"
+    }
+  },
+  "page": {
+    "labelYourRole": "Do ról",
+    "labelEmpty": "Níl aon ábhar ann fós",
+    "descriptionEmpty": "Níl aon ghníomhaire, stór doiciméad ná tras-scríobhaí ar fáil sa spás oibre seo fós.",
+    "labelTitle": "Spásanna oibre"
+  }
+}

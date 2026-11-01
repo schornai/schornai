@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Vous êtes déjà connecté",
+      "backToDashboard": "Retour au tableau de bord",
+      "signOut": "Se déconnecter"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Se connecter avec un e-mail et un mot de passe",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Mot de passe",
+      "buttonSignIn": "Se connecter par e-mail",
+      "buttonReset": "Réinitialiser le mot de passe"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Se connecter avec un fournisseur SSO",
+      "buttonSignIn": "Se connecter avec {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Réinitialiser le mot de passe",
+      "descriptionKey": "Saisissez votre adresse e-mail et la clé de réinitialisation fournie par votre administrateur. La clé est à usage unique et valable 7 jours.",
+      "labelEmail": "E-mail",
+      "labelKey": "Clé de réinitialisation du mot de passe",
+      "labelPassword": "Nouveau mot de passe",
+      "labelPasswordAgain": "Répéter le nouveau mot de passe",
+      "descriptionPassword": "Utilisez au moins 6 caractères et respectez les exigences de votre organisation.",
+      "errorEmail": "Saisissez une adresse e-mail valide.",
+      "errorKey": "Saisissez votre clé de réinitialisation.",
+      "errorPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "errorPasswordAgain": "Les mots de passe ne correspondent pas.",
+      "errorReset": "Le mot de passe n’a pas pu être modifié. Vérifiez l’adresse e-mail, la clé et les exigences relatives au mot de passe. Les clés expirées ou déjà utilisées ne sont plus valables.",
+      "descriptionSuccess": "Votre mot de passe a été modifié. Vous pouvez maintenant vous connecter avec le nouveau mot de passe.",
+      "labelReset": "Enregistrer le mot de passe",
+      "labelSignIn": "Retour à la connexion"
+    }
+  }
+}

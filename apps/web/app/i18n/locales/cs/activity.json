@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historie"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Chyba",
+      "idle": "Nečinný",
+      "running": "Probíhá",
+      "success": "Úspěch"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Připnout",
+      "actionUnpin": "Odepnout",
+      "actionDelete": "Smazat"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Hledat…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazení",
+      "labelSort": "Řazení",
+      "labelLabelAsc": "Název od A do Z",
+      "labelLabelDesc": "Název od Z do A",
+      "labelCreatedAsc": "Datum vytvoření sestupně",
+      "labelCreatedDesc": "Datum vytvoření vzestupně",
+      "labelUpdatedAsc": "Datum aktualizace sestupně",
+      "labelUpdatedDesc": "Datum aktualizace vzestupně",
+      "labelGroup": "Seskupení",
+      "labelPinned": "Připnuté",
+      "labelState": "Stav",
+      "labelType": "Typ",
+      "labelCreated": "Datum vytvoření",
+      "labelUpdated": "Datum aktualizace",
+      "labelList": "Seznam",
+      "labelTable": "Tabulka",
+      "labelSaveView": "Uložit zobrazení",
+      "labelReset": "Obnovit",
+      "labelNoGroup": "Bez seskupení"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Žádné aktivity",
+      "emptyDescription": "Zde se zobrazí vaše předchozí chaty a přepisy.",
+      "emptyLabelAgents": "Agenti"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Dnes",
+      "groupTimeLast7Days": "Posledních 7 dní",
+      "groupTimeLast30Days": "Posledních 30 dní",
+      "groupTimeOther": "Ostatní",
+      "groupPinned": "Připnuté",
+      "groupNotPinned": "Nepřipnuté",
+      "groupUnknown": "Neznámé",
+      "groupChat": "Chat",
+      "groupTranscription": "Přepis",
+      "groupReindex": "Přeindexovat",
+      "labelReindex": "Přeindexovat",
+      "labelPinned": "Připnuté"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Název",
+      "tableColumnType": "Typ",
+      "tableColumnState": "Stav",
+      "tableColumnCreated": "Vytvořeno",
+      "tableColumnUpdated": "Aktualizováno",
+      "tableColumnPinned": "Připnuté",
+      "tableColumnNameActions": "Akce",
+      "groupTimeToday": "Dnes",
+      "groupTimeLast7Days": "Posledních 7 dní",
+      "groupTimeLast30Days": "Posledních 30 dní",
+      "groupTimeOther": "Ostatní",
+      "groupPinned": "Připnuté",
+      "groupNotPinned": "Nepřipnuté",
+      "groupUnknown": "Neznámé",
+      "groupChat": "Chat",
+      "groupTranscription": "Přepis",
+      "groupReindex": "Přeindexovat",
+      "labelReindex": "Přeindexovat",
+      "labelPinned": "Připnuté"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historie",
+      "labelPinned": "Připnuté",
+      "labelToday": "Dnes",
+      "labelLast7Days": "Posledních 7 dní",
+      "labelLast30Days": "Posledních 30 dní",
+      "labelEmpty": "Prázdné"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Aktivita",
+      "actionPin": "Připnout",
+      "actionUnpin": "Odepnout",
+      "actionDelete": "Smazat",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Nový chat",
+      "labelInfo": "Informace"
+    }
+  }
+}

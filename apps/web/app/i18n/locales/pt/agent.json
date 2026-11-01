@@ -1,0 +1,519 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Cancelar",
+      "errorCancel": "Não foi possível parar a geração. Tente novamente."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Não tem acesso a este agente."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Modelo",
+      "labelUnknownModel": "Modelo desconhecido",
+      "labelThinkingOptionalOn": "Raciocínio",
+      "labelThinkingOptionalOff": "Raciocínio obrigatório",
+      "labelThinkingMandatoryOn": "Sem raciocínio",
+      "labelThinkingMandatoryOff": "Raciocínio obrigatoriamente desativado",
+      "descriptionFeatureVision": "Compreensão aprofundada de imagens",
+      "labelModelSize": "Tamanho do contexto: {{size}} mil",
+      "labelNotFound": "Modelo não encontrado",
+      "labelChanged": "Alterado"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Ferramenta: calculadora",
+      "description": "Em vez de efetuar os cálculos por si próprio, o agente pode utilizar a calculadora. Isto permite-lhe lidar melhor com números mais complexos."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Instruções",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Vazio",
+      "labelChanged": "Alterado"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Repositórios de documentos",
+      "labelUnknownRepository": "Repositório de documentos desconhecido",
+      "descriptionRepositoryNotFound": "O repositório de documentos não existe ou não tem as permissões necessárias.",
+      "labelConfirmWrite": "Leitura e escrita (pedir confirmação)",
+      "labelReadOnly": "Só de leitura",
+      "labelWrite": "Leitura e escrita (automática)",
+      "labelGoToRepository": "Ir para o repositório",
+      "labelChanged": "Alterado"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Orientação para a seleção de funções",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Descrição",
+      "description": "Escolha um nome adequado para o agente. Também pode guardar uma breve descrição.",
+      "labelName": "Nome",
+      "labelDescription": "Descrição"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Espaço de trabalho",
+      "description": "Selecione o espaço de trabalho onde pretende criar o agente.",
+      "labelName": "Espaço de trabalho",
+      "errorNoPermissions": "Não tem permissões para criar agentes",
+      "errorNoWorkspaceSelected": "Não selecionou um espaço de trabalho",
+      "labelSelectWorkspace": "Selecione um espaço de trabalho."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Funcionalidades adicionais",
+      "description": "Adicione funcionalidades úteis ao agente para facilitar ainda mais o trabalho.",
+      "labelFileUpload": "Carregar ficheiros",
+      "descriptionFileUpload": "Os utilizadores podem carregar ficheiros cujo conteúdo fica disponível para o agente como texto.",
+      "labelBatch": "Processamento em lote",
+      "descriptionBatch": "Os utilizadores podem processar ficheiros automaticamente por mensagem.",
+      "labelPursueGoal": "Prosseguir um objetivo",
+      "descriptionPursueGoal": "Os utilizadores podem definir um objetivo e o agente continuará a trabalhar num ciclo até o atingir.",
+      "labelDisappearingChats": "Conversas temporárias",
+      "descriptionDisappearingChats": "As conversas podem eliminar-se automaticamente após 12 horas. Esta opção tem de ser ativada pelo utilizador.",
+      "labelNightshift": "Turno noturno",
+      "descriptionNightshift": "Os agentes de longa duração podem ser transferidos para o turno noturno para poupar recursos durante o dia.",
+      "labelTranscriber": "Transcritor",
+      "labelNoTranscriber": "Sem transcrição automática",
+      "descriptionTranscriber": "Transcreva automaticamente os ficheiros de áudio e vídeo carregados com este transcritor."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Funcionalidades adicionais",
+      "labelFileUpload": "Carregar ficheiros",
+      "descriptionFileUpload": "Os utilizadores podem carregar ficheiros cujo conteúdo fica disponível para o agente como texto.",
+      "labelBatch": "Processamento em lote",
+      "descriptionBatch": "Os utilizadores podem processar ficheiros automaticamente por mensagem.",
+      "labelPursueGoal": "Prosseguir um objetivo",
+      "descriptionPursueGoal": "Os utilizadores podem definir um objetivo e o agente continuará a trabalhar num ciclo até o atingir.",
+      "labelDisappearingChats": "Conversas temporárias",
+      "descriptionDisappearingChats": "As conversas podem eliminar-se automaticamente após 12 horas. Esta opção tem de ser ativada pelo utilizador.",
+      "labelNightshift": "Turno noturno",
+      "descriptionNightshift": "Os agentes de longa duração podem ser transferidos para o turno noturno para poupar recursos durante o dia."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Sugestões"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Documentação"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Espaço de trabalho",
+      "labelUnknownWorkspace": "Espaço de trabalho desconhecido",
+      "labelGoToWorkspace": "Ir para o espaço de trabalho"
+    },
+    "AgentInfo": {
+      "labelRole": "Função: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Pesquisar...",
+      "tableColumnName": "Nome",
+      "tableColumnCapablilities": "Capacidades",
+      "tableColumnNameActions": "Ações",
+      "labelOtherAgents": "Outros agentes",
+      "labelFavorites": "Favoritos",
+      "labelNoGroup": "Sem grupo",
+      "labelUnknownModel": "Modelo desconhecido «{{id}}»",
+      "labelNoRepositories": "Sem repositórios de documentos",
+      "labelUnknownRepository": "Repositório de documentos desconhecido «{{id}}»",
+      "labelRoleCount_other": "{{count}} funções",
+      "labelRoleCount_zero": "Sem funções",
+      "labelRoleCount_one": "{{count}} função",
+      "labelRoleCount_many": "{{count}} funções"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Opções",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nome de A a Z",
+      "labelNameDesc": "Nome de Z a A",
+      "labelGroup": "Agrupar por",
+      "labelFavorites": "Favoritos",
+      "labelFirstLetter": "Primeira letra",
+      "labelWorkspaces": "Espaços de trabalho",
+      "labelModel": "Modelo",
+      "labelRepositories": "Repositórios de documentos",
+      "labelRoleCount": "Número de funções",
+      "labelCards": "Cartões",
+      "labelTable": "Tabela",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Repor",
+      "labelAgents": "Agentes",
+      "labelNewAgent": "Novo agente",
+      "labelNoGroup": "Sem grupo"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Aspeto",
+      "description": "Escolha uma cor e um ícone que melhor representem o agente.",
+      "labelIcon": "Ícone",
+      "labelColor": "Cor"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Remover dos favoritos",
+      "tooltipAddFavorite": "Adicionar aos favoritos"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Editar",
+      "tooltipInfo": "Informações",
+      "tooltipNewChat": "Nova conversa"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Espaço de trabalho desconhecido",
+      "labelModelUnknown": "Modelo desconhecido"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Acesso à Web",
+      "labelGeneralAccess": "Acesso geral, pesquisa na Web",
+      "descriptionFetch": "A obtenção de conteúdo da Web descarrega um URL para o armazenamento da conversa ou para um repositório de documentos associado com permissão de escrita. Após o processamento do ficheiro, o agente pode ler o texto extraído e utilizá-lo na resposta.",
+      "descriptionSearch": "A pesquisa na Web ajuda o agente a encontrar páginas relevantes para uma consulta. O fornecedor de pesquisa devolve títulos, ligações e pequenos excertos. A lista de domínios permitidos para obtenção não limita as pesquisas na Web.",
+      "labelChanged": "Alterado",
+      "labelFetch": "Obtenção",
+      "labelSearch": "Pesquisa",
+      "labelOn": "Ativado",
+      "labelOff": "Desativado",
+      "labelAsk": "Perguntar primeiro",
+      "labelWhitelist": "Obtenção limitada aos domínios permitidos",
+      "labelAll": "Obtenção a partir de todos os sites",
+      "labelEmptyWhitelist": "Nenhum domínio permitido",
+      "labelEdit": "Editar acesso à Web",
+      "labelDetails": "Mostrar detalhes"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Ferramenta: extensões de conversa",
+      "labelFeatures": "Sugerir a próxima mensagem, alterar o nome da conversa",
+      "description": "O agente pode sugerir as próximas mensagens do utilizador, permitindo-lhe continuar a conversa com um clique na mensagem pretendida. <br /> O agente pode alterar o nome da conversa para o utilizador, facilitando a sua localização no histórico."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Descrição da função",
+      "description": "A descrição da função é utilizada quando chega uma nova mensagem do utilizador para decidir qual a função que lhe deve responder",
+      "labelName": "Nome",
+      "labelSelectionHint": "Orientação para a seleção de funções",
+      "labelDeleteRole": "Eliminar função ",
+      "labelDoNotOverride": "Não substituir",
+      "labelOverrideModel": "Substituir modelo",
+      "descriptionOverrideModel": "Pode escolher para esta função um modelo diferente do modelo geral do agente.",
+      "confirmDeleteDescription": "Tem a certeza de que pretende eliminar a função «{{name}}»? Esta ação não pode ser anulada.",
+      "labelCancel": "Cancelar",
+      "labelThinking": "Raciocínio"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Modelo",
+      "description": "O modelo de linguagem de grande dimensão utilizado pelo agente, salvo se uma função o substituir.",
+      "labelName": "Modelo",
+      "labelThinking": "Raciocínio",
+      "labelThinking_optionalOn": "Raciocínio",
+      "labelThinking_mandatoryOn": "Raciocínio obrigatório",
+      "labelThinking_optionalOff": "Sem raciocínio",
+      "labelThinking_mandatoryOff": "Raciocínio obrigatoriamente desativado",
+      "labelSelectModel": "Selecione um modelo"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Repositório de documentos",
+      "labelPathAgent": "Caminho para o agente",
+      "labelPathRepository": "Caminho no repositório de documentos",
+      "labelPermission": "Permissão",
+      "labelDeleteConnection": "Eliminar ligação",
+      "confirmDeleteTitle": "Eliminar ligação",
+      "confirmDeleteDescription": "Pretende mesmo eliminar esta ligação ao repositório de documentos «{{name}}»?",
+      "labelCancel": "Cancelar",
+      "labelAddConnection": "Ligação adicional",
+      "labelUnknownRepository": "Repositório de documentos desconhecido",
+      "labelConfirmWrite": "Leitura e escrita (pedir confirmação)",
+      "labelReadOnly": "Só de leitura",
+      "labelWrite": "Leitura e escrita (automática)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Designação",
+      "labelMessage": "Mensagem",
+      "labelClose": "Fechar"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Nome",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Cabeçalhos HTTP",
+      "labelHeaderName": "Nome",
+      "labelHeaderValue": "Valor",
+      "labelAddHeader": "Adicionar cabeçalho HTTP",
+      "labelDeleteConnection": "Eliminar ligação",
+      "confirmDeleteTitle": "Eliminar MCP",
+      "confirmDeleteDescription": "Tem a certeza de que pretende eliminar a configuração MCP «{{name}}»?",
+      "labelCancel": "Cancelar",
+      "labelDeleteMCP": "Eliminar MCP",
+      "labelAddMCP": "Outro MCP",
+      "errorInvalidUrl": "O URL tem de ser válido",
+      "labelOAuthApp": "Aplicação OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Dados",
+      "labelConnectRepository": "Ligar repositório de documentos",
+      "labelToolWebAccess": "Ferramenta: acesso à Web",
+      "labelConnectMCP": "Ligar ferramenta externa (MCP)",
+      "labelSupport": "Apoio",
+      "labelToolChatExtensions": "Ferramenta: extensões de conversa",
+      "labelToolCalculator": "Ferramenta: calculadora",
+      "labelSystem": "Sistema",
+      "labelToolPlatformAccess": "Ferramenta: acesso à plataforma schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Novo agente",
+      "emptyDescription": "Defina o comportamento, o acesso aos dados, o aspeto do agente e muito mais.",
+      "labelDefinePrompt": "Definir instruções",
+      "descriptionDefinePrompt": "A qualidade de um agente depende das suas instruções. Definições claras das funções minimizam as alucinações e aumentam a consistência.",
+      "labelConnectTools": "Ligar ferramentas",
+      "descriptionConnectTools": "Ligue, por exemplo, repositórios de documentos para que o agente se baseie em factos e utilize conhecimentos específicos da empresa.",
+      "labelWriteDocs": "Escrever documentação",
+      "descriptionWriteDocs": "Ajude os utilizadores a compreender as capacidades deste agente.",
+      "infoRoleDefinition": "A função define o comportamento do agente e as ferramentas disponíveis para concluir a tarefa.",
+      "infoDocsDescription": "A documentação pode incluir texto com formatação Markdown e sugestões de mensagens a enviar ao agente.",
+      "infoAppearanceDescription": "O nome, a descrição e a cor ajudam os utilizadores a orientar-se entre os agentes disponíveis."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Mensagens sugeridas",
+      "descriptionRecommendedMessages": "Ajude os utilizadores sugerindo mensagens para tirar o melhor partido do agente.",
+      "labelAddMessage": "Adicionar mensagem ",
+      "labelDocumentation": "Documentação",
+      "descriptionDocumentation": "Partilhe aqui com os utilizadores informações adicionais sobre este agente",
+      "labelShowPreview": "Mostrar pré-visualização",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "A documentação ajuda os utilizadores a utilizar o agente. É apresentada quando o utilizador inicia uma nova conversa.",
+      "descriptionMarkdownHelp": "Markdown é uma linguagem de marcação simples para formatar texto de forma rápida e fácil.\n\n* **Estrutura:** títulos (`#`), listas numeradas (`1.`) e não numeradas (`-`), linhas horizontais.\n* **Estilo do texto:** **negrito** `**negrito**`, *itálico* `*itálico*`, ~~rasurado~~ `~~rasurado~~`.\n* **Código:** código em linha (`code`) e blocos de código com realce de sintaxe.\n* **Organização:** citações (`>`) e listas de verificação (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Sem funções",
+      "descriptionNoRoles": "Não foram definidas funções para o agente. Sem uma função, o agente não funciona.",
+      "labelAddRole": "Adicionar função ",
+      "infoMultipleRoles": "Os agentes podem assumir várias funções. Cada função pode concentrar-se melhor numa parte da tarefa.",
+      "infoTools": "Os agentes podem utilizar ferramentas para responder melhor aos pedidos dos utilizadores, como pesquisar e criar documentos."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Novo agente",
+      "labelAgent": "Agente",
+      "labelCreateAgent": "Criar agente",
+      "labelSaveAgent": "Guardar agente",
+      "tabOverview": "Visão geral",
+      "tabPrompt": "Instruções",
+      "tabDocs": "Apoio",
+      "tabRoles": "Funções",
+      "tabSettings": "Definições",
+      "btnCreate": "Criar",
+      "btnSave": "Guardar",
+      "labelEditAgent": "Editar agente",
+      "labelCloneAgent": "Guardar como novo agente",
+      "labelDeleteAgent": "Eliminar agente",
+      "confirmDeleteTitle": "Eliminar agente",
+      "confirmDeleteDescription": "Tem a certeza de que pretende eliminar o agente «{{name}}»? Esta ação não pode ser anulada.",
+      "labelCancel": "Cancelar"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Função ",
+      "description": "Determina o comportamento do agente e as ferramentas que pode utilizar neste contexto.",
+      "tabOverview": "Visão geral",
+      "tabPrompt": "Instruções",
+      "tabDocumentRepositoryMounts": "Repositórios de documentos",
+      "tabMCPs": "Ferramentas externas (MCP)",
+      "tabWeb": "Acesso à Internet",
+      "tabChat": "Extensões de conversa",
+      "tabCalc": "Calculadora",
+      "tabTools": "Ferramentas",
+      "tabSettings": "Definições",
+      "toolWebAccess": "Acesso à Internet",
+      "chatExtensions": "Extensões de conversa",
+      "calculator": "Calculadora",
+      "externalToolsMCP": "Ferramentas externas (MCP)",
+      "labelPrompt": "Instruções"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Descartar alterações",
+      "labelDiscardConfirm": "Pretende mesmo descartar todas as alterações não guardadas deste agente?",
+      "labelCancel": "Cancelar",
+      "labelDiscard": "Descartar alterações"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Ferramentas externas (MCP)",
+      "changedBadge": "Alterado",
+      "unknownMcp": "MCP desconhecido",
+      "invalidUrl": "URL inválido"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Pesquisa semântica",
+      "labelChanged": "Alterado",
+      "labelActive": "Ativa",
+      "labelInactive": "Inativa",
+      "description": "Quando o significado dos dados é mais importante do que a formulação exata. Requer um modelo de embeddings.",
+      "labelUnknownModel": "Modelo desconhecido"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Pesquisa por palavras-chave",
+      "labelChanged": "Alterado",
+      "labelActive": "Ativa",
+      "labelInactive": "Inativa",
+      "description": "Para pesquisar expressões e frases exatas, como nomes e designações."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transcritor",
+      "labelChanged": "Alterado",
+      "labelUnknownTranscriber": "Transcritor desconhecido",
+      "labelGoToTranscriber": "Ir para o transcritor"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Nova mensagem"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "A aguardar processamento",
+      "tooltipPaused": "Em pausa"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Raciocínio ativado",
+      "labelThinkingOff": "Raciocínio desativado",
+      "labelMessageStack": "Fila de mensagens",
+      "placeholderMessage": "Mensagem...",
+      "tooltipUploadFiles": "Carregar ficheiros",
+      "buttonPause": "Pausar",
+      "buttonStartBatch": "Iniciar lote",
+      "buttonSend": "Enviar",
+      "descriptionFilesPending": "Os ficheiros estão a ser carregados ou processados…",
+      "labelAttachFiles": "Anexar ficheiros",
+      "labelUploadFiles": "Carregar ficheiros",
+      "labelSelectFile": "Escolha um ficheiro existente"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Permitir esta ação?",
+      "descriptionAction": "O agente precisa da sua aprovação para continuar.",
+      "labelApprove": "Permitir",
+      "labelReject": "Recusar",
+      "labelRetry": "Tentar novamente",
+      "labelSubmitting": "A processar…",
+      "errorSubmit": "Não foi possível enviar a sua decisão. Tente novamente.",
+      "labelMCP": "Ligue a sua conta",
+      "descriptionMCP": "Esta ferramenta MCP exige que inicie sessão. A chamada pendente será retomada automaticamente após ligar a conta."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Guardar documento?",
+      "descriptionWriteFile": "O agente pretende guardar este documento. O conteúdo existente será substituído.",
+      "labelShowContent": "Mostrar conteúdo",
+      "labelHideContent": "Ocultar conteúdo",
+      "descriptionEmptyFile": "O documento será guardado com conteúdo vazio."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Obtenção de conteúdo da Web",
+      "description": "Configure o acesso à Web para esta função. A obtenção e a pesquisa podem ser ativadas independentemente.",
+      "labelFetch": "Ativar obtenção de conteúdo da Web",
+      "labelAskFetch": "Perguntar antes de obter uma página",
+      "labelAccess": "Sites permitidos",
+      "labelAll": "Todos os sites",
+      "labelWhitelist": "Lista de domínios permitidos",
+      "descriptionAccess": "Ficheiros e páginas HTTP(S), incluindo a rede local. Os redirecionamentos seguem as mesmas regras de acesso.",
+      "labelDomains": "Domínios permitidos",
+      "descriptionDomains": "Um nome de anfitrião por linha, por exemplo example.com. Utilize *.example.com para subdomínios; isto não inclui o próprio example.com.",
+      "errorDomains": "Introduza nomes de anfitrião ou *.example.com sem protocolo, caminho ou porta.",
+      "descriptionEmptyWhitelist": "Uma lista vazia bloqueia todas as páginas.",
+      "labelSearchTitle": "Pesquisa na Web",
+      "labelSearch": "Ativar pesquisa na Web",
+      "labelAskSearch": "Perguntar antes de pesquisar na Web",
+      "labelProvider": "Fornecedor de pesquisa",
+      "labelProviderDocs": "Documentação do fornecedor",
+      "labelApiKey": "Chave API",
+      "errorApiKey": "Introduza uma chave API para o fornecedor selecionado.",
+      "labelMarket": "Idioma e região do Staan",
+      "descriptionMarket": "Por exemplo, de-de ou en-us. O valor predefinido é en-us.",
+      "labelRemoveTool": "Remover ferramenta",
+      "labelConfirmRemoveTool": "Remover ferramenta Web?",
+      "descriptionRemoveTool": "As definições de obtenção e pesquisa na Web, incluindo a lista de domínios permitidos e a chave API, serão removidas desta função.",
+      "labelCancel": "Cancelar"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Obter página Web",
+      "descriptionFetch": "Permitir que o agente descarregue, guarde e processe este URL?",
+      "labelDestination": "Destino"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Pesquisar na Web",
+      "descriptionSearch": "Permitir que o agente envie esta consulta ao fornecedor de pesquisa configurado?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Fechar",
+      "labelPending": "Em execução",
+      "labelApproval": "A aguardar aprovação",
+      "labelDenied": "Recusado",
+      "labelDone": "Concluído",
+      "errorRequest": "Pedido falhado"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Pesquisa na Web",
+      "labelQuery": "Consulta de pesquisa",
+      "labelEmptyResults": "Não foram encontrados resultados."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Página Web",
+      "labelUrl": "URL",
+      "labelRange": "Caracteres {{start}}–{{end}} de {{total}}",
+      "descriptionTruncated": "Existe mais conteúdo na secção seguinte.",
+      "labelEmptyPage": "Esta página não contém texto legível.",
+      "labelSource": "Abrir fonte",
+      "descriptionFileReady": "Ficheiro guardado e processado. O texto extraído está diretamente disponível para o agente.",
+      "descriptionProcessingUnavailable": "Ficheiro guardado. Não existe texto extraído; o áudio e o vídeo exigem um transcritor configurado.",
+      "descriptionProcessingFailed": "Ficheiro guardado, mas o processamento falhou ou excedeu o tempo limite. Pode reiniciar o processamento no armazenamento."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Copiar ficheiro",
+      "labelMove": "Mover ficheiro",
+      "descriptionSuccess": "O ficheiro foi transferido. Qualquer índice de pesquisa necessário é reconstruído em segundo plano.",
+      "descriptionPending": "A preparar a transferência do ficheiro…",
+      "descriptionProcessingError": "O ficheiro foi transferido, mas o processamento tem de ser reiniciado no destino.",
+      "errorTransfer": "Não foi possível concluir a transferência do ficheiro.",
+      "labelOpenFile": "Abrir ficheiro de destino",
+      "descriptionDenied": "Transferência recusada. Nenhum ficheiro foi transferido.",
+      "descriptionApproval": "A aguardar a sua aprovação.",
+      "descriptionRunning": "A transferir ficheiro…",
+      "labelClose": "Fechar",
+      "labelSource": "Origem",
+      "labelTarget": "Destino"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Permitir a cópia deste ficheiro?",
+      "labelMove": "Permitir a movimentação deste ficheiro?",
+      "descriptionCopy": "O agente pretende copiar este ficheiro e o seu conteúdo processado. Os ficheiros existentes no destino nunca são substituídos.",
+      "descriptionMove": "O agente pretende mover este ficheiro e o seu conteúdo processado. A origem será removida após a cópia ser concluída com sucesso.",
+      "labelSource": "Origem",
+      "labelTarget": "Destino"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Esta ferramenta MCP exige que inicie sessão. A chamada pendente será retomada automaticamente após ligar a conta.",
+      "labelConnect": "Ligar a minha conta"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Ferramenta MCP",
+      "labelDiscover": "Descobrir ferramentas disponíveis",
+      "labelPending": "Em execução",
+      "labelDone": "Concluído",
+      "labelApproval": "É necessário iniciar sessão",
+      "labelDenied": "Recusado",
+      "errorRequest": "Pedido falhado",
+      "labelArguments": "Entrada",
+      "labelResult": "Resultado",
+      "labelClose": "Fechar"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Aplicação OAuth",
+      "labelSearch": "Ligação de pesquisa",
+      "labelAutomatic": "Sem aplicação OAuth configurada",
+      "labelNone": "Nenhuma ligação selecionada",
+      "labelMissing": "Ligação indisponível",
+      "descriptionOAuth": "Opcional: escolha uma aplicação OAuth registada para este servidor MCP. Configure o respetivo URL separadamente neste agente.",
+      "descriptionSearch": "As credenciais do Staan e do Brave são geridas centralmente em Definições → Ligações.",
+      "errorMissing": "Esta ligação já não está disponível. Selecione outra ligação.",
+      "descriptionEmpty": "Não foi configurada uma ligação correspondente. Faça a gestão das ligações em Definições → Ligações."
+    }
+  },
+  "page": {
+    "labelTitle": "Agentes",
+    "emptyTitle": "Sem agentes",
+    "emptyDescription": "Ainda não foram criados agentes.",
+    "labelNewAgent": "Novo agente",
+    "helpSearchTitle": "Pesquisa",
+    "helpSearchDescription": "Pode pesquisar agentes. A pesquisa inclui, entre outros elementos, o nome, a descrição e o modelo do agente.",
+    "helpSortTitle": "Ordenação e agrupamento",
+    "helpSortDescription": "Os agentes podem ser ordenados por nome e distribuídos por diferentes grupos. Podem ser apresentados em mosaicos ou numa tabela."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Este fornecedor MCP exige uma aplicação OAuth registada. Peça a um administrador para criar uma aplicação OAuth com Client ID e Client Secret em Definições → Ligações e selecione-a nas definições MCP do agente. Depois, volte a ligar a partir da conversa.",
+    "errorStart": "Não foi possível iniciar a autorização MCP.",
+    "errorCallback": "A autorização MCP falhou ou expirou. Volte à conversa e tente novamente."
+  }
+}

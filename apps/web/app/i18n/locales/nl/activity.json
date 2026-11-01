@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Geschiedenis"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Fout",
+      "idle": "Inactief",
+      "running": "Actief",
+      "success": "Geslaagd"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Vastzetten",
+      "actionUnpin": "Losmaken",
+      "actionDelete": "Verwijderen"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Zoeken…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelLabelAsc": "Label van A tot Z",
+      "labelLabelDesc": "Label van Z tot A",
+      "labelCreatedAsc": "Aanmaakdatum aflopend",
+      "labelCreatedDesc": "Aanmaakdatum oplopend",
+      "labelUpdatedAsc": "Wijzigingsdatum aflopend",
+      "labelUpdatedDesc": "Wijzigingsdatum oplopend",
+      "labelGroup": "Groeperen",
+      "labelPinned": "Vastgezet",
+      "labelState": "Status",
+      "labelType": "Type",
+      "labelCreated": "Aanmaakdatum",
+      "labelUpdated": "Wijzigingsdatum",
+      "labelList": "Lijst",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten",
+      "labelNoGroup": "Geen groep"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Geen activiteiten",
+      "emptyDescription": "Je eerdere chats en transcripties verschijnen hier.",
+      "emptyLabelAgents": "Agenten"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Vandaag",
+      "groupTimeLast7Days": "Afgelopen 7 dagen",
+      "groupTimeLast30Days": "Afgelopen 30 dagen",
+      "groupTimeOther": "Overige",
+      "groupPinned": "Vastgezet",
+      "groupNotPinned": "Niet vastgezet",
+      "groupUnknown": "Onbekend",
+      "groupChat": "Chat",
+      "groupTranscription": "Transcriptie",
+      "groupReindex": "Opnieuw indexeren",
+      "labelReindex": "Opnieuw indexeren",
+      "labelPinned": "Vastgezet"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Label",
+      "tableColumnType": "Type",
+      "tableColumnState": "Status",
+      "tableColumnCreated": "Aangemaakt",
+      "tableColumnUpdated": "Bijgewerkt",
+      "tableColumnPinned": "Vastgezet",
+      "tableColumnNameActions": "Acties",
+      "groupTimeToday": "Vandaag",
+      "groupTimeLast7Days": "Afgelopen 7 dagen",
+      "groupTimeLast30Days": "Afgelopen 30 dagen",
+      "groupTimeOther": "Overige",
+      "groupPinned": "Vastgezet",
+      "groupNotPinned": "Niet vastgezet",
+      "groupUnknown": "Onbekend",
+      "groupChat": "Chat",
+      "groupTranscription": "Transcriptie",
+      "groupReindex": "Opnieuw indexeren",
+      "labelReindex": "Opnieuw indexeren",
+      "labelPinned": "Vastgezet"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Geschiedenis",
+      "labelPinned": "Vastgezet",
+      "labelToday": "Vandaag",
+      "labelLast7Days": "Afgelopen 7 dagen",
+      "labelLast30Days": "Afgelopen 30 dagen",
+      "labelEmpty": "Leeg"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Activiteit",
+      "actionPin": "Vastzetten",
+      "actionUnpin": "Losmaken",
+      "actionDelete": "Verwijderen",
+      "labelAgent": "Agent - {{name}}",
+      "actionNewChat": "Nieuwe chat",
+      "labelInfo": "Informatie"
+    }
+  }
+}

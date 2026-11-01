@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "src",
+    "eslint.config.ts",
+    "../box-web/lib/convertToModelMessage.ts"
+  ]
+}

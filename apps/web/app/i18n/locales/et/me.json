@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nimi",
+      "labelFirstName": "Eesnimi",
+      "labelLastName": "Perekonnanimi",
+      "buttonSave": "Salvesta",
+      "buttonReset": "Lähtesta"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profiilipilt"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Eemalda pilt",
+      "alertDelete": "Eemalda pilt",
+      "alertDeleteExplainer": "Kas soovid kindlasti oma pildi eemaldada?",
+      "alertDeleteCancel": "Tühista"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Laadi pilt üles"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Õigused",
+      "tableColumnName": "Nimi",
+      "tableColumnPermission": "Õigus",
+      "tableColumnDescription": "Kirjeldus",
+      "infoEmpty": "Õigused puuduvad",
+      "infoEmptyDescription": "Ükski schorn.ai boxi funktsioon pole saadaval.",
+      "infoEmptyAdminDescription": "Administraatorina saad luua esimese tööruumi.",
+      "infoEmptyAdminAction": "Loo esimene tööruum",
+      "infoUser": "Saab vaadata organisatsiooni sisu (vestlusroboteid, transkribeerijaid, dokumente, hoidlaid jne), kuid ei saa seda muuta.",
+      "infoEditor": "Saab vaadata organisatsiooni sisu ja lisaks seda muuta (luua uusi vestlusroboteid, muuta ja kustutada dokumente jne).",
+      "infoAdmin": "Saab lugeda ja kirjutada kõigis organisatsioonides ning lisaks hallata süsteemi seadeid (laadida XRAG-i üles, muuta värve jne) ja kasutajaid."
+    }
+  },
+  "page": {
+    "title": "Profiil",
+    "infoPersonalize": "Isikupärasta",
+    "infoPersonalizeDescription": "Siin saad oma profiilipildi üles laadida ja nime muuta."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Uus parool määratud",
+    "description": "Uue parooli määramine õnnestus. Oled nüüd uue parooliga sisse logitud.",
+    "buttonBackToDashboard": "Mine töölauale"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Ühendused",
+      "descriptionConnections": "Sinu isiklikud OAuthi ühendused MCP-serveritega. Ühenduse katkestamine eemaldab siia salvestatud autentimisandmed. Juba käimasolevad kutsed võivad lõpule jõuda; teenusepakkuja õigused tühista otse teenusepakkuja juures.",
+      "labelDisconnect": "Katkesta ühendus",
+      "descriptionEmpty": "Ühenda oma konto vestluses, kui MCP-tööriist nõuab sisselogimist.",
+      "labelEmpty": "Ühendusi veel pole",
+      "labelInfo": "Teave ühenduste kohta",
+      "errorDisconnect": "Ühendust ei õnnestunud katkestada. Proovi uuesti."
+    }
+  }
+}

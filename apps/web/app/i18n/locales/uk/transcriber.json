@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Транскрипція",
+    "description": "Транскрибатори перетворюють усний вміст, наприклад зустрічі, інтерв’ю чи дзвінки, на структурований матеріал, придатний для пошуку ШІ."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Транскрибатор"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Пошук..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelNameAsc": "Ім’я від А до Я",
+      "labelNameDesc": "Ім’я від Я до А",
+      "labelGroup": "Групувати за",
+      "labelNoGroup": "Без групування",
+      "labelFavorites": "Обране",
+      "labelFirstLetter": "Перша літера",
+      "labelWorkspaces": "Робочі простори",
+      "labelModel": "Модель",
+      "labelCards": "Картки",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути",
+      "labelTranscribers": "Транскрибатори",
+      "labelNewTranscriber": "Новий транскрибатор"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Інші транскрибатори",
+      "labelFavorites": "Обране",
+      "labelNoGroup": "Без групування",
+      "labelUnknownModel": "Невідома модель «{{id}}»"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Ім’я",
+      "tableColumnCapablilities": "Можливості",
+      "tableColumnNameActions": "Дії",
+      "emptyTitle": "Немає транскрибаторів",
+      "emptyDescription": "Ще не створено жодного транскрибатора.",
+      "labelOtherTranscribers": "Інші транскрибатори",
+      "labelFavorites": "Обране",
+      "labelNoGroup": "Без групування",
+      "labelUnknownModel": "Невідома модель «{{id}}»"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Невідома модель",
+      "labelUnknownWorkspace": "Невідомий робочий простір"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Редагувати",
+      "tooltipInfo": "Інформація",
+      "tooltipNewTranscription": "Нова транскрипція",
+      "tooltipRecord": "Записати аудіо"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Вилучити з обраного",
+      "tooltipAddFavorite": "Додати до обраного"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Промпт",
+      "labelChanged": "Змінено",
+      "labelEmpty": "Порожньо"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Новий транскрибатор",
+      "labelTranscriber": "Транскрибатор",
+      "labelCreateTranscriber": "Створити транскрибатор",
+      "labelSaveTranscriber": "Зберегти транскрибатор",
+      "labelCloneTranscriber": "Зберегти як новий транскрибатор",
+      "labelDeleteTranscriber": "Видалити транскрибатор",
+      "confirmDeleteTitle": "Видалити транскрибатор",
+      "confirmDeleteDescription": "Ви впевнені, що хочете видалити транскрибатор «{{name}}»? Цю дію неможливо скасувати.",
+      "labelCancel": "Скасувати",
+      "tabOverview": "Огляд",
+      "tabPrompt": "Промпт",
+      "tabSettings": "Налаштування",
+      "btnCreate": "Створити",
+      "btnSave": "Зберегти"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Скасувати зміни",
+      "labelDiscardConfirm": "Ви дійсно хочете скасувати всі незбережені зміни цього транскрибатора?",
+      "labelCancel": "Скасувати",
+      "labelDiscard": "Скасувати зміни"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Новий транскрибатор",
+      "emptyDescription": "Визначте поведінку й зовнішній вигляд транскрибатора.",
+      "labelDefinePrompt": "Визначте промпт",
+      "descriptionDefinePrompt": "Короткий промпт допомагає транскрибатору розуміти й правильно записувати імена, спеціальні терміни та назви продуктів так, як ви очікуєте.",
+      "helpTitle": "Довідка",
+      "helpPromptDescription": "Завдяки промпту текст транскрипції потребує менше виправлень, а довгі або тематичні записи дають послідовніший результат."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Промпт",
+      "descriptionWhisperPrompt": "Промпт передається моделі транскрипції Whisper, щоб допомогти їй розуміти спеціалізовані терміни."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Зовнішній вигляд",
+      "description": "Виберіть колір і піктограму, які найкраще представляють транскрибатор.",
+      "labelIcon": "Піктограма",
+      "labelColor": "Колір"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Опис",
+      "description": "Виберіть відповідну назву для транскрибатора. Також можна зберегти короткий опис.",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Модель",
+      "description": "Модель транскрипції, яку використовує транскрибатор.",
+      "labelName": "Модель",
+      "labelSelectModel": "Виберіть модель"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Робочий простір",
+      "description": "Виберіть робочий простір, у якому потрібно створити транскрибатор.",
+      "labelName": "Робочий простір",
+      "labelSelectWorkspace": "Виберіть робочий простір."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Файли",
+      "tabInfo": "Інформація"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Записати аудіо",
+      "labelReady": "Готово",
+      "labelRequesting": "Підключення мікрофона",
+      "labelRecording": "Запис",
+      "labelStopping": "Завершення запису",
+      "labelRecorded": "Запис готовий",
+      "labelUploading": "Збереження",
+      "labelSaved": "Збережено",
+      "labelDuration": "Тривалість запису",
+      "labelStart": "Почати запис",
+      "labelStop": "Зупинити запис",
+      "labelRecordAgain": "Записати знову",
+      "labelCancel": "Скасувати",
+      "labelTranscribe": "Зберегти й транскрибувати",
+      "labelDiscard": "Відкинути запис",
+      "labelPreview": "Попереднє прослуховування запису",
+      "descriptionSaved": "Запис збережено. Транскрипція почнеться автоматично.",
+      "errorUnsupported": "Для запису аудіо потрібні підтримуваний браузер і захищене з’єднання (HTTPS або localhost).",
+      "errorPermission": "Доступ до мікрофона відхилено. Дозвольте доступ до мікрофона в браузері та спробуйте ще раз.",
+      "errorRecording": "Не вдалося записати звук із мікрофона. Перевірте пристрій і спробуйте ще раз.",
+      "errorEmpty": "Запис не містить звуку. Запишіть знову.",
+      "errorUpload": "Не вдалося зберегти запис. Ви можете прослухати його та повторити завантаження.",
+      "descriptionScreenAwake": "Під час запису екран не вимикається.",
+      "descriptionScreenSleep": "Не вдалося запобігти вимкненню екрана. Залиште цю сторінку відкритою та вимкніть автоматичне блокування екрана.",
+      "descriptionCloseBlocked": "Перед закриттям зупиніть запис і збережіть або відкиньте його. Дочекайтеся завершення завантаження.",
+      "labelClose": "Закрити"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Автоматичні повторні спроби",
+      "labelLevel": "Рівень",
+      "description": "Якщо результати непевні або містять багато повторень, транскрибатор може ще раз спробувати розпізнати аудіофрагмент. Більша кількість спроб може покращити розпізнавання, але потребує більше часу.",
+      "labelFast": "Швидко",
+      "labelBalanced": "Збалансовано",
+      "labelThorough": "Ретельно",
+      "descriptionFast": "Одна спроба на аудіофрагмент, без автоматичного повторення.",
+      "descriptionBalanced": "До 3 спроб на аудіофрагмент.",
+      "descriptionThorough": "До 6 спроб на аудіофрагмент.",
+      "errorLevel": "Виберіть один із трьох рівнів."
+    }
+  },
+  "page": {
+    "labelTitle": "Транскрипція",
+    "emptyTitle": "Немає транскрибаторів",
+    "emptyDescription": "Ще не створено жодного транскрибатора.",
+    "labelNewTranscriber": "Новий транскрибатор",
+    "helpTitle": "Довідка",
+    "helpSearchDescription": "Ви можете шукати транскрибатори. Пошук охоплює, зокрема, назву, опис і модель транскрибатора.",
+    "helpSortDescription": "Транскрибатори можна сортувати за назвою та розподіляти на групи. Їх можна відображати картками або таблицею."
+  }
+}

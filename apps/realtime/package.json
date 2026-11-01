@@ -1,0 +1,24 @@
+{
+  "name": "@schornio/aibox-app-realtime",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists .env ./server.ts",
+    "start": "node ./server.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/mcp": "^2.0.78",
+    "@ai-sdk/openai-compatible": "3.0.71",
+    "@hocuspocus/server": "^4.7.1",
+    "@schornio/aibox-database": "*",
+    "@schornio/aibox-realtime": "*",
+    "@supabase/supabase-js": "2.118.0",
+    "ai": "^7.0.143",
+    "ai-sdk-ollama": "^4.5.1"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "apps/realtime"
+  }
+}

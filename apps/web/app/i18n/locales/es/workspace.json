@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Descripción",
+      "description": "Elige un nombre adecuado para el espacio de trabajo. También puedes guardar una breve descripción.",
+      "labelName": "Nombre",
+      "labelDescription": "Descripción",
+      "buttonSave": "Guardar",
+      "buttonReset": "Restablecer"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentación",
+      "description": "Comparte aquí información adicional sobre este espacio de trabajo con tus usuarios.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Guardar",
+      "buttonReset": "Restablecer"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Asignaciones SSO",
+      "description": "Selecciona qué grupo SSO puede acceder al espacio de trabajo y con qué permisos.",
+      "labelRoleUser": "Grupo de usuarios",
+      "labelRoleEditor": "Grupo de editores",
+      "labelRoleWorkspaceAdmin": "Grupo de administradores del espacio de trabajo",
+      "placeholderNoGroup": "Ningún grupo asignado",
+      "descriptionRoleUser": "Puede consultar el contenido del espacio de trabajo (agentes, transcriptores, repositorios de documentos, etc.), pero no modificarlo.",
+      "descriptionRoleEditor": "Puede consultar y modificar el contenido del espacio de trabajo.",
+      "descriptionRoleWorkspaceAdmin": "Puede gestionar el espacio de trabajo y crear, editar o eliminar agentes, transcriptores, repositorios de documentos, etc.",
+      "buttonSave": "Guardar",
+      "buttonReset": "Restablecer"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Usuario automático",
+      "description": "Cuando «Usuario automático» está activado, todas las personas que pueden iniciar sesión en la box reciben automáticamente permisos de usuario en esta organización.",
+      "labelActive": "Usuario automático activado",
+      "labelInactive": "Usuario automático desactivado"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nuevo espacio de trabajo",
+      "descriptionWorkspace": "Elige un nombre y una descripción opcional. Podrás configurar más ajustes después de crear el espacio de trabajo.",
+      "labelName": "Nombre",
+      "labelDescription": "Descripción",
+      "labelCreate": "Crear espacio de trabajo",
+      "labelCancel": "Cancelar",
+      "errorCreate": "No se ha podido crear el espacio de trabajo. Inténtalo de nuevo."
+    },
+    "WorkspaceCard": {
+      "labelType": "Espacio de trabajo"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Editar espacio de trabajo",
+      "tooltipInfo": "Abrir espacio de trabajo"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Añadir a favoritos",
+      "tooltipRemoveFavorite": "Quitar de favoritos"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Buscar espacios de trabajo",
+      "labelName": "Nombre",
+      "labelDescription": "Descripción",
+      "labelRole": "Tu rol",
+      "labelActions": "Acciones",
+      "labelFavorites": "Favoritos",
+      "labelOtherWorkspaces": "Otros espacios de trabajo",
+      "labelEmpty": "Sin espacios de trabajo",
+      "descriptionEmpty": "Todavía no tienes acceso a ningún espacio de trabajo.",
+      "labelNoResults": "Sin resultados",
+      "descriptionNoResults": "Prueba otro término de búsqueda."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opciones",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nombre de A a Z",
+      "labelNameDesc": "Nombre de Z a A",
+      "labelGroup": "Agrupar por",
+      "labelNoGroup": "Sin grupo",
+      "labelFavorites": "Favoritos",
+      "labelFirstLetter": "Primera letra",
+      "labelCards": "Tarjetas",
+      "labelTable": "Tabla",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Restablecer"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Crear espacio de trabajo"
+    }
+  },
+  "page": {
+    "labelYourRole": "Tu rol",
+    "labelEmpty": "Todavía no hay contenido",
+    "descriptionEmpty": "Todavía no hay agentes, repositorios de documentos ni transcriptores disponibles en este espacio de trabajo.",
+    "labelTitle": "Espacios de trabajo"
+  }
+}

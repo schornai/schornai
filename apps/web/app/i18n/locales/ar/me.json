@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "الاسم",
+      "labelFirstName": "الاسم الأول",
+      "labelLastName": "اسم العائلة",
+      "buttonSave": "حفظ",
+      "buttonReset": "إعادة تعيين"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "الصورة الشخصية"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "إزالة الصورة",
+      "alertDelete": "إزالة الصورة",
+      "alertDeleteExplainer": "هل أنت متأكد من إزالة صورتك؟",
+      "alertDeleteCancel": "إلغاء"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "رفع صورة"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "الأذونات",
+      "tableColumnName": "الاسم",
+      "tableColumnPermission": "الإذن",
+      "tableColumnDescription": "الوصف",
+      "infoEmpty": "لا توجد أذونات",
+      "infoEmptyDescription": "لا تتوفر أي وظائف من schorn.ai box.",
+      "infoEmptyAdminDescription": "بصفتك مسؤولًا، يمكنك إنشاء مساحة العمل الأولى.",
+      "infoEmptyAdminAction": "إنشاء مساحة العمل الأولى",
+      "infoUser": "يمكنه عرض محتوى المؤسسة، مثل روبوتات المحادثة وأدوات التفريغ الصوتي والمستندات والمستودعات، لكن لا يمكنه تعديله.",
+      "infoEditor": "يمكنه عرض محتوى المؤسسة وتعديله، مثل إنشاء روبوتات محادثة جديدة وتعديل المستندات وحذفها.",
+      "infoAdmin": "يمكنه القراءة والكتابة في جميع المؤسسات، إضافة إلى إدارة إعدادات النظام، مثل رفع XRAG وتغيير الألوان، وإدارة المستخدمين."
+    }
+  },
+  "page": {
+    "title": "الملف الشخصي",
+    "infoPersonalize": "تخصيص",
+    "infoPersonalizeDescription": "يمكنك هنا رفع صورة ملفك الشخصي وتعديل اسمك."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "تم تعيين كلمة مرور جديدة",
+    "description": "تم تعيين كلمة المرور الجديدة بنجاح. أنت الآن مسجل الدخول باستخدامها.",
+    "buttonBackToDashboard": "الانتقال إلى لوحة التحكم"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "الاتصالات",
+      "descriptionConnections": "اتصالات OAuth الشخصية بخوادم MCP. يؤدي قطع الاتصال إلى إزالة بيانات الاعتماد المخزنة هنا. قد تكتمل الاستدعاءات الجارية؛ اسحب أذونات الموفر من موقعه مباشرة.",
+      "labelDisconnect": "قطع الاتصال",
+      "descriptionEmpty": "اربط حسابك في المحادثة عندما تطلب أداة MCP تسجيل الدخول.",
+      "labelEmpty": "لا توجد اتصالات بعد",
+      "labelInfo": "حول الاتصالات",
+      "errorDisconnect": "تعذر قطع الاتصال. يُرجى المحاولة مجددًا."
+    }
+  }
+}

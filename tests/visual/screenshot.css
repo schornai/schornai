@@ -1,0 +1,8 @@
+/* Keep pending indicators visible, but freeze their position during captures. */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition-duration: 0s !important;
+  caret-color: transparent !important;
+}

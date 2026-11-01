@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkripcija",
+    "description": "Transkribētāji pārvērš runāto saturu, piemēram, sapulces, intervijas vai zvanus, strukturētā un mākslīgajam intelektam pārmeklējamā formā."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkribētājs"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Meklēt..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelNameAsc": "Nosaukums no A līdz Z",
+      "labelNameDesc": "Nosaukums no Z līdz A",
+      "labelGroup": "Grupēt pēc",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelFavorites": "Izlase",
+      "labelFirstLetter": "Pirmais burts",
+      "labelWorkspaces": "Darbvietas",
+      "labelModel": "Modelis",
+      "labelCards": "Kartītes",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt",
+      "labelTranscribers": "Transkribētāji",
+      "labelNewTranscriber": "Jauns transkribētājs"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Citi transkribētāji",
+      "labelFavorites": "Izlase",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelUnknownModel": "Nezināms modelis “{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nosaukums",
+      "tableColumnCapablilities": "Iespējas",
+      "tableColumnNameActions": "Darbības",
+      "emptyTitle": "Nav transkribētāju",
+      "emptyDescription": "Vēl nav izveidots neviens transkribētājs.",
+      "labelOtherTranscribers": "Citi transkribētāji",
+      "labelFavorites": "Izlase",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelUnknownModel": "Nezināms modelis “{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Nezināms modelis",
+      "labelUnknownWorkspace": "Nezināma darbvieta"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Rediģēt",
+      "tooltipInfo": "Informācija",
+      "tooltipNewTranscription": "Jauna transkripcija",
+      "tooltipRecord": "Ierakstīt audio"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Noņemt no izlases",
+      "tooltipAddFavorite": "Pievienot izlasei"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Uzvedne",
+      "labelChanged": "Mainīts",
+      "labelEmpty": "Tukšs"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Jauns transkribētājs",
+      "labelTranscriber": "Transkribētājs",
+      "labelCreateTranscriber": "Izveidot transkribētāju",
+      "labelSaveTranscriber": "Saglabāt transkribētāju",
+      "labelCloneTranscriber": "Saglabāt kā jaunu transkribētāju",
+      "labelDeleteTranscriber": "Dzēst transkribētāju",
+      "confirmDeleteTitle": "Dzēst transkribētāju",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst transkribētāju “{{name}}”? Šo darbību nevar atsaukt.",
+      "labelCancel": "Atcelt",
+      "tabOverview": "Pārskats",
+      "tabPrompt": "Uzvedne",
+      "tabSettings": "Iestatījumi",
+      "btnCreate": "Izveidot",
+      "btnSave": "Saglabāt"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmest izmaiņas",
+      "labelDiscardConfirm": "Vai tiešām vēlaties atmest visas šī transkribētāja nesaglabātās izmaiņas?",
+      "labelCancel": "Atcelt",
+      "labelDiscard": "Atmest izmaiņas"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Jauns transkribētājs",
+      "emptyDescription": "Nosakiet transkribētāja darbību un izskatu.",
+      "labelDefinePrompt": "Uzrakstiet uzvedni",
+      "descriptionDefinePrompt": "Īsa uzvedne palīdz transkribētājam izprast un pareizi pierakstīt vārdus, tehniskos terminus un produktu nosaukumus tā, kā jūs sagaidāt.",
+      "helpTitle": "Palīdzība",
+      "helpPromptDescription": "Ar uzvedni transkripcijai pēc tam nepieciešams mazāk labojumu, un garākiem vai tematiskajiem ierakstiem iegūstat konsekventāku rezultātu."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Uzvedne",
+      "descriptionWhisperPrompt": "Uzvedne tiek nodota transkribēšanas modelim (Whisper), lai palīdzētu tam saprast nozares terminus."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Izskats",
+      "description": "Izvēlieties krāsu un ikonu, kas vislabāk raksturo transkribētāju.",
+      "labelIcon": "Ikona",
+      "labelColor": "Krāsa"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Apraksts",
+      "description": "Izvēlieties transkribētājam piemērotu nosaukumu. Varat saglabāt arī īsu aprakstu.",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modelis",
+      "description": "Transkribētāja izmantotais transkribēšanas modelis.",
+      "labelName": "Modelis",
+      "labelSelectModel": "Izvēlieties modeli"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Darbvieta",
+      "description": "Izvēlieties darbvietu, kurā izveidot transkribētāju.",
+      "labelName": "Darbvieta",
+      "labelSelectWorkspace": "Izvēlieties darbvietu."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Faili",
+      "tabInfo": "Informācija"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Ierakstīt audio",
+      "labelReady": "Gatavs",
+      "labelRequesting": "Mikrofona pievienošana",
+      "labelRecording": "Ierakstīšana",
+      "labelStopping": "Ierakstīšanas pabeigšana",
+      "labelRecorded": "Ieraksts gatavs",
+      "labelUploading": "Saglabāšana",
+      "labelSaved": "Saglabāts",
+      "labelDuration": "Ieraksta ilgums",
+      "labelStart": "Sākt ierakstīšanu",
+      "labelStop": "Apturēt ierakstīšanu",
+      "labelRecordAgain": "Ierakstīt vēlreiz",
+      "labelCancel": "Atcelt",
+      "labelTranscribe": "Saglabāt un transkribēt",
+      "labelDiscard": "Atmest ierakstu",
+      "labelPreview": "Ieraksta priekšskatījums",
+      "descriptionSaved": "Ieraksts saglabāts. Transkribēšana sāksies automātiski.",
+      "errorUnsupported": "Audio ierakstīšanai nepieciešama atbalstīta pārlūkprogramma un drošs savienojums (HTTPS vai localhost).",
+      "errorPermission": "Piekļuve mikrofonam ir liegta. Atļaujiet mikrofonu savā pārlūkprogrammā un mēģiniet vēlreiz.",
+      "errorRecording": "Mikrofons nevarēja ierakstīt audio. Pārbaudiet ierīci un mēģiniet vēlreiz.",
+      "errorEmpty": "Ierakstā nav audio. Ierakstiet vēlreiz.",
+      "errorUpload": "Neizdevās saglabāt ierakstu. Varat to noklausīties un atkārtot augšupielādi.",
+      "descriptionScreenAwake": "Ierakstīšanas laikā ekrāns paliek aktīvs.",
+      "descriptionScreenSleep": "Nevar uzturēt ekrānu aktīvu. Turiet šo lapu atvērtu un neļaujiet ekrānam automātiski bloķēties.",
+      "descriptionCloseBlocked": "Pirms aizvēršanas apturiet ierakstīšanu un saglabājiet vai atmetiet ierakstu. Uzgaidiet, līdz augšupielāde ir pabeigta.",
+      "labelClose": "Aizvērt"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automātiski atkārtoti mēģinājumi",
+      "labelLevel": "Līmenis",
+      "description": "Ja rezultāti ir neskaidri vai tajos ir daudz atkārtojumu, transkribētājs var vēlreiz mēģināt atpazīt audio fragmentu. Vairāk mēģinājumu var uzlabot atpazīšanu, taču aizņem vairāk laika.",
+      "labelFast": "Ātri",
+      "labelBalanced": "Līdzsvaroti",
+      "labelThorough": "Rūpīgi",
+      "descriptionFast": "Viens mēģinājums katram audio fragmentam, bez automātiskas atkārtošanas.",
+      "descriptionBalanced": "Līdz 3 mēģinājumiem katram audio fragmentam.",
+      "descriptionThorough": "Līdz 6 mēģinājumiem katram audio fragmentam.",
+      "errorLevel": "Izvēlieties vienu no trim līmeņiem."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkripcija",
+    "emptyTitle": "Nav transkribētāju",
+    "emptyDescription": "Vēl nav izveidots neviens transkribētājs.",
+    "labelNewTranscriber": "Jauns transkribētājs",
+    "helpTitle": "Palīdzība",
+    "helpSearchDescription": "Varat meklēt transkribētājus. Meklēšana cita starpā ietver transkribētāja nosaukumu, aprakstu un modeli.",
+    "helpSortDescription": "Transkribētājus var kārtot pēc nosaukuma un sadalīt dažādās grupās. Tos var attēlot kā kartītes vai tabulu."
+  }
+}

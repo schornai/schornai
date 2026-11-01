@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copiar comentários para a área de transferência",
+      "feedbackText": "Texto dos comentários",
+      "feedbackTextRecommendation": "Obrigado! Envie-nos este texto para ",
+      "sendFeedback": "Enviar comentários por e-mail",
+      "showFeedbackText": "Mostrar texto dos comentários",
+      "thankYou": "Obrigado por dedicar algum tempo a enviar comentários"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Eliminar todas as mensagens de erro",
+      "actionDeleteAllCancel": "Cancelar",
+      "actionDeleteAllExplainer": "Tem a certeza de que pretende eliminar todas as mensagens de erro recolhidas? Esta ação não pode ser anulada.",
+      "actionDeleteAllShort": "Eliminar mensagens de erro",
+      "actionDeselectAll": "Desmarcar todas as mensagens de erro",
+      "actionSelectAll": "Selecionar todas as mensagens de erro",
+      "explainer": "As mensagens de erro também fazem parte dos comentários. Alguns problemas são resolvidos automaticamente pelo sistema e as operações continuam sem interrupções. Mesmo assim, é útil conhecermos esses erros para os podermos corrigir.",
+      "explainerSecrecy": "Certifique-se de que as mensagens de erro não contêm dados confidenciais ou pessoais. O sistema foi concebido para excluir esses dados das mensagens de erro. No entanto, os erros estão associados a circunstâncias imprevistas. Por motivos de segurança, reveja pessoalmente os comentários.",
+      "explainerSecrecyHeading": "Sem dados confidenciais",
+      "heading": "Erros",
+      "tableColumnPartOfFeedback": "Parte dos comentários",
+      "tableColumnDate": "Data",
+      "tableColumnErrorMessage": "Mensagem de erro"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nenhuma avaliação por estrelas",
+      "starRating": "{{stars}} de 5 estrelas"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Descartar comentários",
+      "discardFeedbackSub": "Tem a certeza de que pretende descartar os seus comentários? Esta ação não pode ser anulada.",
+      "discardFeedbackCancel": "Cancelar",
+      "infoSecrecy": "Certifique-se de que os comentários enviados não contêm dados confidenciais ou pessoais.",
+      "writeFeedback": "Escrever comentários",
+      "writeFeedbackSub": "Agradecemos todos os comentários, positivos ou negativos."
+    }
+  },
+  "page": {
+    "headingLine1": "Ajude-nos a melhorar o schorn.ai in a Box,",
+    "headingLine2": "envie-nos os seus comentários",
+    "headingMain": "Comentários"
+  }
+}

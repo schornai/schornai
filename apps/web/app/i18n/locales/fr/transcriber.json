@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transcription",
+    "description": "Les transcripteurs structurent les contenus parlés, comme les réunions, entretiens ou appels, pour permettre à l’IA d’y effectuer des recherches."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transcripteur"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Rechercher..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "Affichage",
+      "labelSort": "Trier",
+      "labelNameAsc": "Nom de A à Z",
+      "labelNameDesc": "Nom de Z à A",
+      "labelGroup": "Regrouper par",
+      "labelNoGroup": "Aucun groupe",
+      "labelFavorites": "Favoris",
+      "labelFirstLetter": "Première lettre",
+      "labelWorkspaces": "Espaces de travail",
+      "labelModel": "Modèle",
+      "labelCards": "Cartes",
+      "labelTable": "Tableau",
+      "labelSaveView": "Enregistrer la vue",
+      "labelReset": "Réinitialiser",
+      "labelTranscribers": "Transcripteurs",
+      "labelNewTranscriber": "Nouveau transcripteur"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Autres transcripteurs",
+      "labelFavorites": "Favoris",
+      "labelNoGroup": "Aucun groupe",
+      "labelUnknownModel": "Modèle inconnu « {{id}} »"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nom",
+      "tableColumnCapablilities": "Capacités",
+      "tableColumnNameActions": "Actions",
+      "emptyTitle": "Aucun transcripteur",
+      "emptyDescription": "Aucun transcripteur n’a encore été créé.",
+      "labelOtherTranscribers": "Autres transcripteurs",
+      "labelFavorites": "Favoris",
+      "labelNoGroup": "Aucun groupe",
+      "labelUnknownModel": "Modèle inconnu « {{id}} »"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Modèle inconnu",
+      "labelUnknownWorkspace": "Espace de travail inconnu"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Modifier",
+      "tooltipInfo": "Informations",
+      "tooltipNewTranscription": "Nouvelle transcription",
+      "tooltipRecord": "Enregistrer de l’audio"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Retirer des favoris",
+      "tooltipAddFavorite": "Ajouter aux favoris"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Consigne",
+      "labelChanged": "Modifié",
+      "labelEmpty": "Vide"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nouveau transcripteur",
+      "labelTranscriber": "Transcripteur",
+      "labelCreateTranscriber": "Créer le transcripteur",
+      "labelSaveTranscriber": "Enregistrer le transcripteur",
+      "labelCloneTranscriber": "Enregistrer comme nouveau transcripteur",
+      "labelDeleteTranscriber": "Supprimer le transcripteur",
+      "confirmDeleteTitle": "Supprimer le transcripteur",
+      "confirmDeleteDescription": "Voulez-vous vraiment supprimer le transcripteur « {{name}} » ? Cette action est irréversible.",
+      "labelCancel": "Annuler",
+      "tabOverview": "Vue d’ensemble",
+      "tabPrompt": "Consigne",
+      "tabSettings": "Paramètres",
+      "btnCreate": "Créer",
+      "btnSave": "Enregistrer"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Abandonner les modifications",
+      "labelDiscardConfirm": "Voulez-vous vraiment abandonner toutes les modifications non enregistrées de ce transcripteur ?",
+      "labelCancel": "Annuler",
+      "labelDiscard": "Abandonner les modifications"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nouveau transcripteur",
+      "emptyDescription": "Définissez le comportement et l’apparence du transcripteur.",
+      "labelDefinePrompt": "Définir une consigne",
+      "descriptionDefinePrompt": "Une courte consigne aide le transcripteur à comprendre et à écrire correctement les noms, termes techniques et noms de produits selon vos attentes.",
+      "helpTitle": "Aide",
+      "helpPromptDescription": "Avec une consigne, la transcription nécessite moins de corrections et les résultats sont plus cohérents pour les enregistrements longs ou spécialisés."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Consigne",
+      "descriptionWhisperPrompt": "La consigne est transmise au modèle de transcription (Whisper) pour l’aider à comprendre les termes spécialisés."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Apparence",
+      "description": "Choisissez une couleur et une icône qui représentent au mieux le transcripteur.",
+      "labelIcon": "Icône",
+      "labelColor": "Couleur"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Description",
+      "description": "Choisissez un nom adapté au transcripteur. Vous pouvez également enregistrer une courte description.",
+      "labelName": "Nom",
+      "labelDescription": "Description"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modèle",
+      "description": "Le modèle de transcription utilisé par le transcripteur.",
+      "labelName": "Modèle",
+      "labelSelectModel": "Sélectionner un modèle"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Espace de travail",
+      "description": "Sélectionnez l’espace de travail dans lequel créer le transcripteur.",
+      "labelName": "Espace de travail",
+      "labelSelectWorkspace": "Sélectionnez un espace de travail."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Fichiers",
+      "tabInfo": "Informations"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Enregistrer de l’audio",
+      "labelReady": "Prêt",
+      "labelRequesting": "Connexion au microphone",
+      "labelRecording": "Enregistrement en cours",
+      "labelStopping": "Finalisation de l’enregistrement",
+      "labelRecorded": "Enregistrement prêt",
+      "labelUploading": "Enregistrement",
+      "labelSaved": "Enregistré",
+      "labelDuration": "Durée de l’enregistrement",
+      "labelStart": "Démarrer l’enregistrement",
+      "labelStop": "Arrêter l’enregistrement",
+      "labelRecordAgain": "Enregistrer à nouveau",
+      "labelCancel": "Annuler",
+      "labelTranscribe": "Enregistrer et transcrire",
+      "labelDiscard": "Abandonner l’enregistrement",
+      "labelPreview": "Aperçu de l’enregistrement",
+      "descriptionSaved": "Enregistrement sauvegardé. La transcription démarrera automatiquement.",
+      "errorUnsupported": "L’enregistrement audio nécessite un navigateur compatible et une connexion sécurisée (HTTPS ou localhost).",
+      "errorPermission": "L’accès au microphone a été refusé. Autorisez-le dans votre navigateur et réessayez.",
+      "errorRecording": "Le microphone n’a pas pu enregistrer de son. Vérifiez votre appareil et réessayez.",
+      "errorEmpty": "L’enregistrement ne contient aucun son. Veuillez recommencer.",
+      "errorUpload": "L’enregistrement n’a pas pu être sauvegardé. Vous pouvez l’écouter et réessayer de l’importer.",
+      "descriptionScreenAwake": "L’écran reste allumé pendant l’enregistrement.",
+      "descriptionScreenSleep": "Impossible de maintenir l’écran allumé. Gardez cette page ouverte et empêchez le verrouillage automatique de l’écran.",
+      "descriptionCloseBlocked": "Arrêtez l’enregistrement, puis sauvegardez-le ou abandonnez-le avant de fermer. Attendez la fin des importations en cours.",
+      "labelClose": "Fermer"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Nouvelles tentatives automatiques",
+      "labelLevel": "Niveau",
+      "description": "Si les résultats sont incertains ou comportent de nombreuses répétitions, le transcripteur peut tenter à nouveau de reconnaître un segment audio. Davantage de tentatives peuvent améliorer la reconnaissance, mais prennent plus de temps.",
+      "labelFast": "Rapide",
+      "labelBalanced": "Équilibré",
+      "labelThorough": "Approfondi",
+      "descriptionFast": "Une tentative par segment audio, sans nouvelle tentative automatique.",
+      "descriptionBalanced": "Jusqu’à 3 tentatives par segment audio.",
+      "descriptionThorough": "Jusqu’à 6 tentatives par segment audio.",
+      "errorLevel": "Veuillez choisir l’un des trois niveaux."
+    }
+  },
+  "page": {
+    "labelTitle": "Transcription",
+    "emptyTitle": "Aucun transcripteur",
+    "emptyDescription": "Aucun transcripteur n’a encore été créé.",
+    "labelNewTranscriber": "Nouveau transcripteur",
+    "helpTitle": "Aide",
+    "helpSearchDescription": "Vous pouvez rechercher des transcripteurs. La recherche porte notamment sur leur nom, leur description et leur modèle.",
+    "helpSortDescription": "Les transcripteurs peuvent être triés par nom, répartis en groupes et affichés sous forme de cartes ou de tableau."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.workingDirectories": [
+    {
+      "directory": "./packages/box-web",
+      "changeProcessCWD": true
+    }
+  ],
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
+}

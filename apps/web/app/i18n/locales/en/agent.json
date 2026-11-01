@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Cancel",
+      "errorCancel": "Generation could not be stopped. Please try again."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "You do not have access to this agent."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Unknown model",
+      "labelThinkingOptionalOn": "Thinking",
+      "labelThinkingOptionalOff": "Mandatory thinking",
+      "labelThinkingMandatoryOn": "Do not think",
+      "labelThinkingMandatoryOff": "Mandatory do not think",
+      "descriptionFeatureVision": "Deeper understanding of images",
+      "labelModelSize": "Context size: {{size}}k",
+      "labelNotFound": "Model not found",
+      "labelChanged": "Changed"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Tool: Calculator",
+      "description": "Instead of the agent having to perform calculations itself, it can use the calculator. This allows the agent to better handle more complex numbers."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Empty",
+      "labelChanged": "Changed"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Document Repositories",
+      "labelUnknownRepository": "Unknown document repository",
+      "descriptionRepositoryNotFound": "The document repository does not exist, or you do not have the necessary permissions.",
+      "labelConfirmWrite": "Read and Write (ask for confirmation)",
+      "labelReadOnly": "Read only",
+      "labelWrite": "Read and Write (automatic)",
+      "labelGoToRepository": "Go to repository",
+      "labelChanged": "Changed"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Role selection hint",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Description",
+      "description": "Choose a suitable name for the agent. Additionally, a short description can also be saved.",
+      "labelName": "Name",
+      "labelDescription": "Description"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Workspace",
+      "description": "Select the workspace where the agent should be created.",
+      "labelName": "Workspace",
+      "errorNoPermissions": "You do not have permissions to create agents",
+      "errorNoWorkspaceSelected": "You have not selected a workspace",
+      "labelSelectWorkspace": "Select a workspace."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Additional Functions",
+      "description": "Extend the agent with useful functions to make working even easier.",
+      "labelFileUpload": "Upload files",
+      "descriptionFileUpload": "Users can upload files whose content is available to the agent as text.",
+      "labelBatch": "Batch processing",
+      "descriptionBatch": "Users can have files processed automatically per message.",
+      "labelPursueGoal": "Pursue goal",
+      "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
+      "labelDisappearingChats": "Disappearing chats",
+      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "labelNightshift": "Night shift",
+      "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day.",
+      "labelTranscriber": "Transcriber",
+      "labelNoTranscriber": "No automatic transcription",
+      "descriptionTranscriber": "Automatically transcribe uploaded audio and video files with this transcriber."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Additional Functions",
+      "labelFileUpload": "Upload files",
+      "descriptionFileUpload": "Users can upload files whose content is available to the agent as text.",
+      "labelBatch": "Batch processing",
+      "descriptionBatch": "Users can have files processed automatically per message.",
+      "labelPursueGoal": "Pursue goal",
+      "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
+      "labelDisappearingChats": "Disappearing chats",
+      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "labelNightshift": "Night shift",
+      "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Suggestions"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Documentation"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Workspace",
+      "labelUnknownWorkspace": "Unknown workspace",
+      "labelGoToWorkspace": "Go to workspace"
+    },
+    "AgentInfo": {
+      "labelRole": "Role: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Search...",
+      "tableColumnName": "Name",
+      "tableColumnCapablilities": "Capabilities",
+      "tableColumnNameActions": "Actions",
+      "labelOtherAgents": "Other agents",
+      "labelFavorites": "Favorites",
+      "labelNoGroup": "No group",
+      "labelUnknownModel": "Unknown model \"{{id}}\"",
+      "labelNoRepositories": "No document repositories",
+      "labelUnknownRepository": "Unknown document repository \"{{id}}\"",
+      "labelRoleCount_other": "{{count}} roles",
+      "labelRoleCount_zero": "No roles",
+      "labelRoleCount_one": "{{count}} role"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "View",
+      "labelSort": "Sort",
+      "labelNameAsc": "Name A to Z",
+      "labelNameDesc": "Name Z to A",
+      "labelGroup": "Group by",
+      "labelFavorites": "Favorites",
+      "labelFirstLetter": "First letter",
+      "labelWorkspaces": "Workspaces",
+      "labelModel": "Model",
+      "labelRepositories": "Document repositories",
+      "labelRoleCount": "Number of roles",
+      "labelCards": "Cards",
+      "labelTable": "Table",
+      "labelSaveView": "Save view",
+      "labelReset": "Reset",
+      "labelAgents": "Agents",
+      "labelNewAgent": "New agent",
+      "labelNoGroup": "No group"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Appearance",
+      "description": "Determine a color and an icon that best represents the agent.",
+      "labelIcon": "Icon",
+      "labelColor": "Color"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Remove favorite",
+      "tooltipAddFavorite": "Add to favorites"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Edit",
+      "tooltipInfo": "Info",
+      "tooltipNewChat": "New chat"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Unknown workspace",
+      "labelModelUnknown": "Unknown model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Web access",
+      "labelGeneralAccess": "General access, web search",
+      "descriptionFetch": "Web Fetch downloads a URL into chat storage or a writable mounted document repository. After file processing, the agent can read the extracted text and use it in its answer.",
+      "descriptionSearch": "Web search helps the agent find relevant pages for a search query. The search provider returns titles, links and short snippets. The Fetch whitelist does not restrict web searches.",
+      "labelChanged": "Changed",
+      "labelFetch": "Fetch",
+      "labelSearch": "Search",
+      "labelOn": "On",
+      "labelOff": "Off",
+      "labelAsk": "Ask first",
+      "labelWhitelist": "Fetch restricted to the domain whitelist",
+      "labelAll": "Fetch from all websites",
+      "labelEmptyWhitelist": "No domains allowed",
+      "labelEdit": "Edit web access",
+      "labelDetails": "Show details"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Tool: Chat Extensions",
+      "labelFeatures": "Suggest next message, change chat label",
+      "description": "The agent can generate suggestions for the next user message so that the user can simply click on the respective message to continue the chat. <br /> Agent can change the chat label for the user so that the chat can be better found in the history."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Role description",
+      "description": "The role description is used when a new user message is received to decide which role is used to answer the message",
+      "labelName": "Name",
+      "labelSelectionHint": "Role selection hint",
+      "labelDeleteRole": "Delete role ",
+      "labelDoNotOverride": "Do not override",
+      "labelOverrideModel": "Override model",
+      "descriptionOverrideModel": "You can choose a different model for this role than the one the agent has in general.",
+      "confirmDeleteDescription": "Are you sure you want to delete the role \"{{name}}\"? This action cannot be undone.",
+      "labelCancel": "Cancel",
+      "labelThinking": "Thinking"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "The LLM that the agent uses, unless it is overridden by a role.",
+      "labelName": "Model",
+      "labelThinking": "Thinking",
+      "labelThinking_optionalOn": "Thinking",
+      "labelThinking_mandatoryOn": "Mandatory thinking",
+      "labelThinking_optionalOff": "Do not think",
+      "labelThinking_mandatoryOff": "Mandatory do not think",
+      "labelSelectModel": "Select a model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Document repository",
+      "labelPathAgent": "Path for the agent",
+      "labelPathRepository": "Path in the document repository",
+      "labelPermission": "Permission",
+      "labelDeleteConnection": "Delete connection",
+      "confirmDeleteTitle": "Delete connection",
+      "confirmDeleteDescription": "Do you really want to delete this connection to the document repository \"{{name}}\"?",
+      "labelCancel": "Cancel",
+      "labelAddConnection": "Additional connection",
+      "labelUnknownRepository": "Unknown document repository",
+      "labelConfirmWrite": "Read and Write (ask for confirmation)",
+      "labelReadOnly": "Read only",
+      "labelWrite": "Read and Write (automatic)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Label",
+      "labelMessage": "Message",
+      "labelClose": "Close"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Name",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP Headers",
+      "labelHeaderName": "Name",
+      "labelHeaderValue": "Value",
+      "labelAddHeader": "Add HTTP header",
+      "labelDeleteConnection": "Delete connection",
+      "confirmDeleteTitle": "Delete MCP",
+      "confirmDeleteDescription": "Are you sure you want to delete the MCP configuration \"{{name}}\"?",
+      "labelCancel": "Cancel",
+      "labelDeleteMCP": "Delete MCP",
+      "labelAddMCP": "Another MCP",
+      "errorInvalidUrl": "URL must be valid",
+      "labelOAuthApp": "OAuth-App"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Data",
+      "labelConnectRepository": "Connect document repository",
+      "labelToolWebAccess": "Tool: Web Access",
+      "labelConnectMCP": "Connect external tool (MCP)",
+      "labelSupport": "Support",
+      "labelToolChatExtensions": "Tool: Chat Extensions",
+      "labelToolCalculator": "Tool: Calculator",
+      "labelSystem": "System",
+      "labelToolPlatformAccess": "Tool: schorn.ai platform access"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "New Agent",
+      "emptyDescription": "Define the behavior, data access, appearance of the agent and much more.",
+      "labelDefinePrompt": "Define a prompt",
+      "descriptionDefinePrompt": "An agent is only as good as its instructions. Clear role definitions minimize hallucinations and increase consistency.",
+      "labelConnectTools": "Connect tools",
+      "descriptionConnectTools": "For example, connect to document repositories so that the agent is based on facts and uses company-specific knowledge.",
+      "labelWriteDocs": "Write documentation",
+      "descriptionWriteDocs": "Help users understand what this agent's capabilities are.",
+      "infoRoleDefinition": "The role defines how the agent behaves and which tools are provided to complete the task.",
+      "infoDocsDescription": "Documentation can be both text (Markdown formatting is supported) and suggestions for messages to be sent to the agent.",
+      "infoAppearanceDescription": "Name, description, and color help users navigate through the available agents."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Suggested messages",
+      "descriptionRecommendedMessages": "Help users by suggesting messages on how best to use the agent.",
+      "labelAddMessage": "Add message ",
+      "labelDocumentation": "Documentation",
+      "descriptionDocumentation": "Share additional information about this agent with your users here",
+      "labelShowPreview": "Show preview",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Documentation helps users use the agent. The documentation is displayed when the user starts a new chat.",
+      "descriptionMarkdownHelp": "Markdown is a lightweight markup language for formatting text quickly and easily.\n\n* **Structure:** Headers (`#`), lists (ordered `1.` and unordered `-`), horizontal rules.\n* **Text Style:** **Bold** `**Bold**`, *Italic* `*Italic*`, ~~Strikethrough~~ `~~Strikethrough~~`.\n* **Code:** Inline code (`code`) and code blocks with syntax highlighting.\n* **Organization:** Quotes (`>`), checklists (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "No roles",
+      "descriptionNoRoles": "No roles have been defined for the agent, without a role the agent will not work.",
+      "labelAddRole": "Add role ",
+      "infoMultipleRoles": "Agents can take on multiple roles. A role can concentrate better on a partial task.",
+      "infoTools": "Agents can use tools to better answer user requests (search documents, create documents, etc.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "New Agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Create agent",
+      "labelSaveAgent": "Save agent",
+      "tabOverview": "Overview",
+      "tabPrompt": "Prompt",
+      "tabDocs": "Support",
+      "tabRoles": "Roles",
+      "tabSettings": "Settings",
+      "btnCreate": "Create",
+      "btnSave": "Save",
+      "labelEditAgent": "Edit agent",
+      "labelCloneAgent": "Save as new agent",
+      "labelDeleteAgent": "Delete agent",
+      "confirmDeleteTitle": "Delete agent",
+      "confirmDeleteDescription": "Are you sure you want to delete agent \"{{name}}\"? This action cannot be undone.",
+      "labelCancel": "Cancel"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Role ",
+      "description": "Determines the behavior of the agent and which tools the agent is allowed to use in this context.",
+      "tabOverview": "Overview",
+      "tabPrompt": "Prompt",
+      "tabDocumentRepositoryMounts": "Document repositories",
+      "tabMCPs": "External Tools (MCP)",
+      "tabWeb": "Internet Access",
+      "tabChat": "Chat Extensions",
+      "tabCalc": "Calculator",
+      "tabTools": "Tools",
+      "tabSettings": "Settings",
+      "toolWebAccess": "Internet Access",
+      "chatExtensions": "Chat Extensions",
+      "calculator": "Calculator",
+      "externalToolsMCP": "External Tools (MCP)",
+      "labelPrompt": "Prompt"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Discard changes",
+      "labelDiscardConfirm": "Do you really want to discard all unsaved changes to this agent?",
+      "labelCancel": "Cancel",
+      "labelDiscard": "Discard changes"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "External Tools (MCP)",
+      "changedBadge": "Changed",
+      "unknownMcp": "Unknown MCP",
+      "invalidUrl": "Not a valid URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantic search",
+      "labelChanged": "Changed",
+      "labelActive": "Active",
+      "labelInactive": "Inactive",
+      "description": "When the semantics of the data are in the foreground and not the exact wording. (Requires an embedding model)",
+      "labelUnknownModel": "Unknown model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Keyword search",
+      "labelChanged": "Changed",
+      "labelActive": "Active",
+      "labelInactive": "Inactive",
+      "description": "When searching for precise expressions and sentences. (Names, designations, etc.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transcriber",
+      "labelChanged": "Changed",
+      "labelUnknownTranscriber": "Unknown transcriber",
+      "labelGoToTranscriber": "Go to transcriber"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "New message"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Waiting for processing",
+      "tooltipPaused": "Paused"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Thinking enabled",
+      "labelThinkingOff": "Thinking disabled",
+      "labelMessageStack": "Message stack",
+      "placeholderMessage": "Message...",
+      "tooltipUploadFiles": "Upload files",
+      "buttonPause": "Pause",
+      "buttonStartBatch": "Start batch",
+      "buttonSend": "Send",
+      "descriptionFilesPending": "Files are uploading or being processed …",
+      "labelAttachFiles": "Attach files",
+      "labelUploadFiles": "Upload files",
+      "labelSelectFile": "Choose an existing file"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Allow this action?",
+      "descriptionAction": "The agent needs your approval to continue.",
+      "labelApprove": "Allow",
+      "labelReject": "Deny",
+      "labelRetry": "Try again",
+      "labelSubmitting": "Processing …",
+      "errorSubmit": "Could not submit your decision. Please try again.",
+      "labelMCP": "Connect your account",
+      "descriptionMCP": "This MCP tool needs you to sign in. The pending call continues automatically after you connect."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Save document?",
+      "descriptionWriteFile": "The agent wants to save this document. Existing content will be replaced.",
+      "labelShowContent": "Show content",
+      "labelHideContent": "Hide content",
+      "descriptionEmptyFile": "The document will be saved with empty content."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Web Fetch",
+      "description": "Configure web access for this role. Fetch and search can be enabled independently.",
+      "labelFetch": "Enable Web Fetch",
+      "labelAskFetch": "Ask before fetching a page",
+      "labelAccess": "Allowed websites",
+      "labelAll": "All websites",
+      "labelWhitelist": "Domain whitelist",
+      "descriptionAccess": "HTTP(S) files and web pages, including the local network. Redirects follow the same access rules.",
+      "labelDomains": "Allowed domains",
+      "descriptionDomains": "One hostname per line, for example example.com. Use *.example.com for subdomains; this does not include example.com itself.",
+      "errorDomains": "Enter hostnames or *.example.com without a protocol, path or port.",
+      "descriptionEmptyWhitelist": "An empty whitelist blocks every page.",
+      "labelSearchTitle": "Web Search",
+      "labelSearch": "Enable Web Search",
+      "labelAskSearch": "Ask before searching the web",
+      "labelProvider": "Search provider",
+      "labelProviderDocs": "Provider documentation",
+      "labelApiKey": "API key",
+      "errorApiKey": "Enter an API key for the selected provider.",
+      "labelMarket": "Staan language and region",
+      "descriptionMarket": "For example de-de or en-us. Defaults to en-us.",
+      "labelRemoveTool": "Remove tool",
+      "labelConfirmRemoveTool": "Remove web tool?",
+      "descriptionRemoveTool": "The settings for Web Fetch and Web Search, including the whitelist and API key, will be removed from this role.",
+      "labelCancel": "Cancel"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Fetch web page",
+      "descriptionFetch": "Allow the agent to download, save and process this URL?",
+      "labelDestination": "Destination"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Search the web",
+      "descriptionSearch": "Allow the agent to send this query to the configured search provider?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Close",
+      "labelPending": "Running",
+      "labelApproval": "Awaiting approval",
+      "labelDenied": "Declined",
+      "labelDone": "Completed",
+      "errorRequest": "Request failed"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Web search",
+      "labelQuery": "Search query",
+      "labelEmptyResults": "No results found."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Web page",
+      "labelUrl": "URL",
+      "labelRange": "Characters {{start}}–{{end}} of {{total}}",
+      "descriptionTruncated": "More content is available in the next section.",
+      "labelEmptyPage": "This page contains no readable text.",
+      "labelSource": "Open source",
+      "descriptionFileReady": "File saved and processed. The extracted text is available to the agent directly.",
+      "descriptionProcessingUnavailable": "File saved. No extracted text is available; audio/video requires a configured transcriber.",
+      "descriptionProcessingFailed": "File saved, but processing failed or timed out. Processing can be restarted in storage."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Copy file",
+      "labelMove": "Move file",
+      "descriptionSuccess": "The file was transferred. Any required search index is rebuilt in the background.",
+      "descriptionPending": "Preparing the file transfer…",
+      "descriptionProcessingError": "The file was transferred, but processing must be restarted at the destination.",
+      "errorTransfer": "The file transfer could not be completed.",
+      "labelOpenFile": "Open destination file",
+      "descriptionDenied": "File transfer denied. No file was transferred.",
+      "descriptionApproval": "Waiting for your approval.",
+      "descriptionRunning": "Transferring file…",
+      "labelClose": "Close",
+      "labelSource": "Source",
+      "labelTarget": "Destination"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Allow copying this file?",
+      "labelMove": "Allow moving this file?",
+      "descriptionCopy": "The agent wants to copy this file and its processed content. Existing destination files are never overwritten.",
+      "descriptionMove": "The agent wants to move this file and its processed content. The source will be removed after copying succeeds.",
+      "labelSource": "Source",
+      "labelTarget": "Destination"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "This MCP tool needs you to sign in. The pending call continues automatically after you connect.",
+      "labelConnect": "Connect my account"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP tool",
+      "labelDiscover": "Discover available tools",
+      "labelPending": "Running",
+      "labelDone": "Completed",
+      "labelApproval": "Sign-in required",
+      "labelDenied": "Denied",
+      "errorRequest": "Request failed",
+      "labelArguments": "Input",
+      "labelResult": "Result",
+      "labelClose": "Close"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-App",
+      "labelSearch": "Search connection",
+      "labelAutomatic": "No configured OAuth app",
+      "labelNone": "No connection selected",
+      "labelMissing": "Connection unavailable",
+      "descriptionOAuth": "Optional: Choose a registered OAuth app for this MCP server. Configure its URL independently in this agent.",
+      "descriptionSearch": "Staan and Brave credentials are managed centrally under Settings → Connections.",
+      "errorMissing": "This connection is no longer available. Select another connection.",
+      "descriptionEmpty": "No matching connection has been configured. Manage connections under Settings → Connections."
+    }
+  },
+  "page": {
+    "labelTitle": "Agents",
+    "emptyTitle": "No agents",
+    "emptyDescription": "No agents have been created yet.",
+    "labelNewAgent": "New agent",
+    "helpSearchTitle": "Search",
+    "helpSearchDescription": "You can search for agents. The search includes, among other things, the name and description of the agent, as well as the model of the agent.",
+    "helpSortTitle": "Sorting & Grouping",
+    "helpSortDescription": "Agents can be sorted by name. They can be sorted into different groups. Agents can be displayed as tiles or as a table."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "This MCP provider requires a registered OAuth app. Ask an administrator to create an OAuth app with Client ID and Client Secret under Settings → Connections and select it in the agent’s MCP settings. Then reconnect from the chat.",
+    "errorStart": "MCP authorization could not be started.",
+    "errorCallback": "MCP authorization failed or expired. Return to the chat and try again."
+  }
+}

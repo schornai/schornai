@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transskription",
+    "description": "Transskriberingsværktøjer gør talt indhold, som møder, interviews og opkald, struktureret og søgbart for AI."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transskriberingsværktøj"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Søg..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelNameAsc": "Navn A til Å",
+      "labelNameDesc": "Navn Å til A",
+      "labelGroup": "Gruppér efter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelFavorites": "Favoritter",
+      "labelFirstLetter": "Første bogstav",
+      "labelWorkspaces": "Arbejdsområder",
+      "labelModel": "Model",
+      "labelCards": "Kort",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil",
+      "labelTranscribers": "Transskriberingsværktøjer",
+      "labelNewTranscriber": "Nyt transskriberingsværktøj"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Andre transskriberingsværktøjer",
+      "labelFavorites": "Favoritter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelUnknownModel": "Ukendt model »{{id}}«"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Navn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Handlinger",
+      "emptyTitle": "Ingen transskriberingsværktøjer",
+      "emptyDescription": "Der er endnu ikke oprettet transskriberingsværktøjer.",
+      "labelOtherTranscribers": "Andre transskriberingsværktøjer",
+      "labelFavorites": "Favoritter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelUnknownModel": "Ukendt model »{{id}}«"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Ukendt model",
+      "labelUnknownWorkspace": "Ukendt arbejdsområde"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Rediger",
+      "tooltipInfo": "Information",
+      "tooltipNewTranscription": "Ny transskription",
+      "tooltipRecord": "Optag lyd"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Fjern fra favoritter",
+      "tooltipAddFavorite": "Føj til favoritter"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Ændret",
+      "labelEmpty": "Tom"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nyt transskriberingsværktøj",
+      "labelTranscriber": "Transskriberingsværktøj",
+      "labelCreateTranscriber": "Opret transskriberingsværktøj",
+      "labelSaveTranscriber": "Gem transskriberingsværktøj",
+      "labelCloneTranscriber": "Gem som nyt transskriberingsværktøj",
+      "labelDeleteTranscriber": "Slet transskriberingsværktøj",
+      "confirmDeleteTitle": "Slet transskriberingsværktøj",
+      "confirmDeleteDescription": "Er du sikker på, at du vil slette transskriberingsværktøjet »{{name}}«? Denne handling kan ikke fortrydes.",
+      "labelCancel": "Annuller",
+      "tabOverview": "Oversigt",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Indstillinger",
+      "btnCreate": "Opret",
+      "btnSave": "Gem"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kassér ændringer",
+      "labelDiscardConfirm": "Vil du virkelig kassere alle ikke-gemte ændringer af dette transskriberingsværktøj?",
+      "labelCancel": "Annuller",
+      "labelDiscard": "Kassér ændringer"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nyt transskriberingsværktøj",
+      "emptyDescription": "Definer transskriberingsværktøjets adfærd og udseende.",
+      "labelDefinePrompt": "Definer en prompt",
+      "descriptionDefinePrompt": "En kort prompt hjælper transskriberingsværktøjet med at forstå og skrive navne, fagudtryk og produktnavne korrekt, som du forventer.",
+      "helpTitle": "Hjælp",
+      "helpPromptDescription": "Med en prompt kræver transskriptionen færre rettelser bagefter, og du får mere ensartede resultater ved lange eller emnespecifikke optagelser."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Prompten sendes til transskriptionsmodellen Whisper for at hjælpe den med at forstå fagspecifikke udtryk."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Udseende",
+      "description": "Vælg en farve og et ikon, der bedst repræsenterer transskriberingsværktøjet.",
+      "labelIcon": "Ikon",
+      "labelColor": "Farve"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Beskrivelse",
+      "description": "Vælg et passende navn til transskriberingsværktøjet. Du kan også gemme en kort beskrivelse.",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Den transskriptionsmodel, som værktøjet bruger.",
+      "labelName": "Model",
+      "labelSelectModel": "Vælg en model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Arbejdsområde",
+      "description": "Vælg det arbejdsområde, hvor transskriberingsværktøjet skal oprettes.",
+      "labelName": "Arbejdsområde",
+      "labelSelectWorkspace": "Vælg et arbejdsområde."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Filer",
+      "tabInfo": "Information"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Optag lyd",
+      "labelReady": "Klar",
+      "labelRequesting": "Tilslutter mikrofon",
+      "labelRecording": "Optager",
+      "labelStopping": "Afslutter optagelse",
+      "labelRecorded": "Optagelse klar",
+      "labelUploading": "Gemmer",
+      "labelSaved": "Gemt",
+      "labelDuration": "Optagelsens varighed",
+      "labelStart": "Start optagelse",
+      "labelStop": "Stop optagelse",
+      "labelRecordAgain": "Optag igen",
+      "labelCancel": "Annuller",
+      "labelTranscribe": "Gem og transskriber",
+      "labelDiscard": "Kassér optagelse",
+      "labelPreview": "Forhåndsvisning af optagelse",
+      "descriptionSaved": "Optagelsen er gemt. Transskriptionen starter automatisk.",
+      "errorUnsupported": "Lydoptagelse kræver en understøttet browser og en sikker forbindelse (HTTPS eller localhost).",
+      "errorPermission": "Adgang til mikrofonen blev afvist. Tillad mikrofonadgang i browseren, og prøv igen.",
+      "errorRecording": "Mikrofonen kunne ikke optage lyd. Kontrollér enheden, og prøv igen.",
+      "errorEmpty": "Optagelsen indeholder ingen lyd. Optag igen.",
+      "errorUpload": "Optagelsen kunne ikke gemmes. Du kan lytte til den og prøve at uploade igen.",
+      "descriptionScreenAwake": "Skærmen holdes aktiv under optagelsen.",
+      "descriptionScreenSleep": "Skærmen kan ikke holdes aktiv. Hold denne side åben, og sørg for, at skærmen ikke låser automatisk.",
+      "descriptionCloseBlocked": "Stop optagelsen, og gem eller kassér den, før du lukker. Vent på, at eventuelle uploads er færdige.",
+      "labelClose": "Luk"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatiske genforsøg",
+      "labelLevel": "Niveau",
+      "description": "Ved usikre resultater eller mange gentagelser kan transskriptionsværktøjet forsøge at genkende et lydafsnit igen. Flere forsøg kan forbedre genkendelsen, men tager længere tid.",
+      "labelFast": "Hurtig",
+      "labelBalanced": "Balanceret",
+      "labelThorough": "Grundig",
+      "descriptionFast": "Ét forsøg pr. lydafsnit uden automatiske genforsøg.",
+      "descriptionBalanced": "Op til 3 forsøg pr. lydafsnit.",
+      "descriptionThorough": "Op til 6 forsøg pr. lydafsnit.",
+      "errorLevel": "Vælg et af de tre niveauer."
+    }
+  },
+  "page": {
+    "labelTitle": "Transskription",
+    "emptyTitle": "Ingen transskriberingsværktøjer",
+    "emptyDescription": "Der er endnu ikke oprettet transskriberingsværktøjer.",
+    "labelNewTranscriber": "Nyt transskriberingsværktøj",
+    "helpTitle": "Hjælp",
+    "helpSearchDescription": "Du kan søge efter transskriberingsværktøjer. Søgningen omfatter blandt andet værktøjets navn, beskrivelse og model.",
+    "helpSortDescription": "Transskriberingsværktøjer kan sorteres efter navn og inddeles i forskellige grupper. De kan vises som kort eller som en tabel."
+  }
+}

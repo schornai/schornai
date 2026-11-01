@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Uusi keskustelu",
+        "mainLabelAgents": "Agentit",
+        "mainLabelApps": "Sovellukset",
+        "mainLabelWorkspaces": "Työtilat",
+        "history": "Historia"
+      },
+      "SidebarFavorites": {
+        "label": "Suosikit",
+        "empty": "Suosikkeja ei ole vielä lisätty."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Ei suosikkeja",
+        "descriptionNoFavorites": "Voit lisätä <agents>agentteja</agents>, <documents>asiakirjavarastoja</documents> ja <transcribers>litteroijia</transcribers> suosikeiksi."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Uusi keskustelu"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Hyvää yötä];(5-11)[Hyvää huomenta];(12-17)[Hyvää iltapäivää];(18-inf)[Hyvää iltaa];",
+      "labelAllAgents": "Kaikki agentit",
+      "labelToApps": "Siirry sovelluksiin"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profiili",
+        "labelFavorites": "Suosikit",
+        "labelPermissions": "Oikeudet",
+        "labelModels": "Mallit",
+        "labelTaskQueue": "Tehtäväjono",
+        "labelSettings": "Asetukset",
+        "labelUsers": "Käyttäjät",
+        "labelWorkspaces": "Työtilat",
+        "labelSSOProvider": "SSO-palveluntarjoaja",
+        "labelXRAGUpload": "Lataa XRAG",
+        "labelSystemModel": "Järjestelmämalli",
+        "labelTheme": "Teema",
+        "labelBackToDashboard": "Takaisin aloitusnäkymään",
+        "labelConnections": "Yhteydet",
+        "labelProviderConnections": "Yhteydet",
+        "labelService": "Palvelu",
+        "labelArtifacts": "Artefaktit",
+        "labelCluster": "Klusteri"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Valitse kuvake",
+      "buttonMoreIcons": "Lisää kuvakkeita",
+      "textLucideInfo": "Kuvakkeet: <0>Lucide</0>",
+      "placeholderSearchIcons": "Hae kuvakkeita...",
+      "buttonCancel": "Peruuta"
+    },
+    "FileUploadDropZone": {
+      "drop": "Pudota tiedosto tähän ladataksesi sen"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Muutettu"
+    },
+    "Pagination": {
+      "labelPrev": "Edellinen",
+      "labelNext": "Seuraava"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Oma tili",
+      "labelSystem": "Järjestelmä",
+      "labelModels": "Mallit",
+      "labelCluster": "Klusteri",
+      "labelSettings": "Asetukset",
+      "labelDashboard": "Aloitusnäkymä",
+      "labelProfile": "Profiili"
+    },
+    "SidebarUserSignOut": {
+      "label": "Kirjaudu ulos"
+    },
+    "UserRoleText": {
+      "admin": "Ylläpitäjä",
+      "workspace-admin": "Työtilan ylläpitäjä",
+      "editor": "Muokkaaja",
+      "user": "Käyttäjä",
+      "none": "Ei käyttöoikeutta"
+    },
+    "StorageView": {
+      "placeholderSearch": "Hae tästä kansiosta…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnType": "Tyyppi",
+      "tableColumnSize": "Koko",
+      "tableColumnCreated": "Luotu",
+      "tableColumnUpdated": "Päivitetty",
+      "tableColumnNameActions": "Toiminnot",
+      "groupTimeToday": "Tänään",
+      "groupTimeLast7Days": "Viimeiset 7 päivää",
+      "groupTimeLast30Days": "Viimeiset 30 päivää",
+      "groupTimeOther": "Muut",
+      "labelFolder": "Kansio",
+      "descriptionProcessing": "Tiedostoa käsitellään"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Uusi kansio",
+      "placeholderFolderName": "Kansion nimi...",
+      "labelCancel": "Peruuta",
+      "labelCreate": "Luo"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Poista",
+      "labelDescription": "Haluatko varmasti poistaa kohteen ”{{name}}”? Tätä ei voi perua.",
+      "labelCancel": "Peruuta",
+      "labelRemove": "Poista"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Kotihakemisto"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Ei tiedostoja",
+      "labelDescription": "Nykyinen kansio ei sisällä tiedostoja. Vedä tiedostot tähän ladataksesi ne.",
+      "labelUploadFile": "Lataa tiedosto",
+      "labelCreateFile": "Luo tiedosto"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelNameAsc": "Nimi A–Ö",
+      "labelNameDesc": "Nimi Ö–A",
+      "labelSizeAsc": "Koko nousevasti",
+      "labelSizeDesc": "Koko laskevasti",
+      "labelCreatedAsc": "Luontipäivä nousevasti",
+      "labelCreatedDesc": "Luontipäivä laskevasti",
+      "labelUpdatedAsc": "Päivityspäivä nousevasti",
+      "labelUpdatedDesc": "Päivityspäivä laskevasti",
+      "labelGroup": "Ryhmittely",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelFirstLetter": "Alkukirjain",
+      "labelFileType": "Tiedostotyyppi",
+      "labelCreated": "Luontipäivä",
+      "labelUpdated": "Päivityspäivä",
+      "labelTilesSmall": "Ruudut (pienet)",
+      "labelTilesMedium": "Ruudut (keskikokoiset)",
+      "labelTilesLarge": "Ruudut (suuret)",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta",
+      "labelNewFolder": "Uusi kansio",
+      "labelThisFolder": "Tämä kansio",
+      "labelUploadFile": "Lataa tiedosto",
+      "labelNew": "Uusi",
+      "labelDeleteFolder": "Poista kansio",
+      "labelNewRecording": "Uusi tallenne",
+      "labelColumns": "Sarakenäkymä",
+      "labelNewTextFile": "Uusi tiedosto"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Ei tuloksia",
+      "descriptionNoResults": "Haku ei tuottanut tuloksia. Muotoile kysely uudelleen.",
+      "labelCharacters": "merkkiä"
+    },
+    "Transcription": {
+      "labelTitle": "Litterointi",
+      "labelLoadingMedia": "Ladataan mediaa…",
+      "labelBuffering": "Puskuroidaan toistoa…",
+      "labelSeeking": "Ladataan kohtaa…",
+      "labelPlayer": "Mediasoitin",
+      "labelPlay": "Toista",
+      "labelPause": "Keskeytä",
+      "labelSeek": "Toistokohta",
+      "labelBack": "Taaksepäin 10 sekuntia",
+      "labelForward": "Eteenpäin 10 sekuntia",
+      "labelSpeed": "Toistonopeus",
+      "labelUnmute": "Poista mykistys",
+      "labelMute": "Mykistä",
+      "labelVolume": "Äänenvoimakkuus",
+      "labelHideVideo": "Piilota video",
+      "labelShowVideo": "Näytä video",
+      "labelPlaySegment": "Toista jakso {{number}}",
+      "labelReviewed": "Tarkistettu",
+      "labelSegments": "Jaksot",
+      "labelWords": "Sanat",
+      "descriptionEmpty": "Litterointituloksia ei löytynyt.",
+      "descriptionConfidence": "Varmuus: {{percent}} %",
+      "errorPlayback": "Toisto epäonnistui. Tarkista, että mediatiedosto on käytettävissä, ja yritä uudelleen.",
+      "labelEditSegment": "Muokkaa jaksoa {{number}}",
+      "labelSegmentText": "Jakson teksti",
+      "labelSave": "Tallenna",
+      "labelSaving": "Tallennetaan…",
+      "labelSaveReviewed": "Tallenna ja merkitse tarkistetuksi",
+      "labelCancel": "Peruuta",
+      "labelRestoreOriginal": "Palauta alkuperäinen teksti",
+      "descriptionUnsaved": "Muutokset tulevat voimaan vasta tallennettaessa.",
+      "errorSave": "Tallennus epäonnistui. Tekstisi säilytettiin. Yritä uudelleen.",
+      "errorConflict": "Tämä jakso on muuttunut. Kopioi luonnoksesi ja lataa näkymä uudelleen ennen uutta tallennusta.",
+      "labelDownloadSrt": "Lataa SRT",
+      "descriptionSaveBeforeDownload": "Tallenna tai peruuta muutoksesi ennen SRT-tiedoston lataamista."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Sarakenäkymä",
+      "labelRoot": "Asiakirjat",
+      "labelDetails": "Tiedoston tiedot",
+      "labelType": "Tyyppi",
+      "labelSize": "Koko",
+      "labelUpdated": "Päivitetty",
+      "labelOpen": "Avaa tiedosto"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Uusi tiedosto",
+      "labelName": "Tiedostonimi",
+      "labelCreate": "Luo tiedosto",
+      "labelCancel": "Peruuta",
+      "errorCreate": "Tiedostoa ei voitu luoda. Tarkista tiedostonimi ja kirjoitusoikeutesi."
+    },
+    "StorageFileActions": {
+      "labelActions": "Kohteen {{name}} toiminnot",
+      "labelDownloadOriginal": "Lataa alkuperäinen",
+      "labelDownloadProcessed": "Lataa käsitelty teksti",
+      "labelRename": "Nimeä uudelleen",
+      "labelProcess": "Käsittele uudelleen",
+      "labelDelete": "Poista tiedosto",
+      "labelName": "Uusi tiedostonimi",
+      "labelCancel": "Peruuta",
+      "labelConfirm": "Vahvista",
+      "descriptionDelete": "Poistetaanko ”{{name}}”, sen käsitelty sisältö ja hakuindeksin merkinnät pysyvästi?",
+      "descriptionProcess": "Käsitelläänkö ”{{name}}” uudelleen? Manuaaliset muutokset korvataan.",
+      "descriptionQueued": "Käsittely on jonossa tai jo käynnissä. Tarkista sen tila tiedostoluettelosta.",
+      "descriptionUnsupported": "Tätä tiedostoa ei voida tällä hetkellä käsitellä. Ääni ja video vaativat määritetyn litteroijan.",
+      "errorAction": "Toiminto epäonnistui. Tarkista kirjoitusoikeudet, nimiristiriidat ja käynnissä oleva käsittely. Epäonnistunut uudelleennimeäminen voi jättää molemmat tiedostonimet; tarkista luettelo ennen uutta yritystä.",
+      "labelOptions": "Asetukset",
+      "labelEdit": "Muokkaa",
+      "descriptionRename": "Nimeä ”{{name}}” uudelleen. Säilytä tiedostopääte. Alkuperäinen tiedosto, käsitelty sisältö ja hakuindeksi päivitetään yhdessä. Olemassa olevia nimiä ei koskaan korvata.",
+      "labelCopy": "Kopioi kohteeseen…",
+      "labelMove": "Siirrä kohteeseen…",
+      "descriptionCopy": "Kopioi ”{{name}}” ja sen käsitelty sisältö. Lähde säilytetään.",
+      "descriptionMove": "Siirrä ”{{name}}” ja sen käsitelty sisältö. Lähde poistetaan onnistuneen kopioinnin jälkeen.",
+      "descriptionTransferred": "Tiedosto siirrettiin. Kohteen hakuindeksit muodostetaan uudelleen taustalla.",
+      "descriptionTransferProcessingError": "Tiedosto siirrettiin, mutta käsittelyä ei voitu käynnistää. Avaa kohdetiedosto ja valitse ”Käsittele uudelleen”. Älä toista siirtoa."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Kohteen {{name}} toiminnot",
+      "labelDelete": "Poista kansio"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Sisältö",
+      "labelSave": "Tallenna",
+      "labelCancel": "Peruuta",
+      "errorSave": "Tallennus epäonnistui. Yritä uudelleen.",
+      "errorConflict": "Sisältö on muuttunut. Lataa se uudelleen ennen tallennusta.",
+      "errorIndex": "Tallennettu, mutta hakuindeksiä ei voitu päivittää. Tallenna uudelleen."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Valitse kohdekansio",
+      "labelSelectFile": "Valitse olemassa oleva tiedosto",
+      "descriptionFolder": "Valitse olemassa oleva kansio. Yksi tiedosto siirretään; olemassa olevia nimiä ei koskaan korvata.",
+      "descriptionFile": "Valitse tiedosto tästä keskustelusta tai käytettävissä olevasta varastosta. Asiakirjojen ja tallenteiden on oltava valmiiksi käsiteltyjä.",
+      "labelStorage": "Tallennustila",
+      "labelCurrentStorage": "Nykyinen tallennustila",
+      "labelUp": "Yläkansio",
+      "descriptionLoading": "Ladataan tiedostoja…",
+      "descriptionEmpty": "Tässä kansiossa ei ole vastaavia kohteita.",
+      "descriptionNoStorages": "Käytettävissä olevia varastoja ei ole.",
+      "descriptionPending": "Tiedostoa siirretään. Odota tulosta.",
+      "labelCancel": "Peruuta",
+      "labelUseFolder": "Käytä tätä kansiota",
+      "labelUseFile": "Liitä tiedosto",
+      "labelRetry": "Lataa uudelleen",
+      "errorLoad": "Tätä kansiota ei voitu ladata. Tarkista käyttöoikeus ja yritä uudelleen.",
+      "errorCollision": "Kohteessa on jo samanniminen tiedosto tai käsitelty sisältö. Valitse toinen kansio; mitään ei korvattu.",
+      "errorSameTarget": "Lähde ja kohde ovat samat. Valitse toinen kansio.",
+      "errorSourceChanged": "Lähde muuttui kopioinnin aikana. Keskeneräinen kohdetiedosto poistettiin. Yritä uudelleen.",
+      "errorBusy": "Tätä tiedostoa käsitellään parhaillaan. Odota käsittelyn valmistumista.",
+      "errorPermission": "Sinulla ei ole tarvittavia lähteen tai kohteen oikeuksia.",
+      "errorSourceDelete": "Täydellinen kohdetiedosto luotiin, mutta lähdettä ei voitu poistaa. Tarkista molemmat sijainnit ennen toiminnon toistamista.",
+      "errorCleanup": "Kopiointi epäonnistui. Lähde säilytettiin, mutta kohteeseen saattaa jäädä keskeneräisiä tiedostoja. Tarkista kohde ennen uutta yritystä.",
+      "errorAction": "Toiminto epäonnistui. Tarkista oikeudet, tiedostonimet ja molemmat sijainnit ennen uutta yritystä.",
+      "errorNotProcessed": "Tätä tiedostoa ei ole vielä käsitelty. Käsittele se ensin ja valitse sitten uudelleen."
+    }
+  },
+  "_welcomeMessage": "Tervetuloa\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Ohjeet",
+    "feedback": "Palaute",
+    "help": "Ohje",
+    "labelThemeLight": "Vaalea",
+    "labelThemeDark": "Tumma",
+    "labelThemeSystem": "Käyttöjärjestelmä",
+    "labelLanguage": "Kieli"
+  }
+}

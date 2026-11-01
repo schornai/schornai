@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historik"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Fejl",
+      "idle": "Inaktiv",
+      "running": "Kører",
+      "success": "Lykkedes"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Fastgør",
+      "actionUnpin": "Frigør",
+      "actionDelete": "Slet"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Søg…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelLabelAsc": "Etiket A til Å",
+      "labelLabelDesc": "Etiket Å til A",
+      "labelCreatedAsc": "Oprettelsesdato faldende",
+      "labelCreatedDesc": "Oprettelsesdato stigende",
+      "labelUpdatedAsc": "Opdateringsdato faldende",
+      "labelUpdatedDesc": "Opdateringsdato stigende",
+      "labelGroup": "Gruppér",
+      "labelPinned": "Fastgjorte",
+      "labelState": "Status",
+      "labelType": "Type",
+      "labelCreated": "Oprettelsesdato",
+      "labelUpdated": "Opdateringsdato",
+      "labelList": "Liste",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil",
+      "labelNoGroup": "Ingen gruppe"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Ingen aktiviteter",
+      "emptyDescription": "Dine tidligere chats og transskriptioner vises her.",
+      "emptyLabelAgents": "Agenter"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Seneste 7 dage",
+      "groupTimeLast30Days": "Seneste 30 dage",
+      "groupTimeOther": "Andre",
+      "groupPinned": "Fastgjorte",
+      "groupNotPinned": "Ikke fastgjort",
+      "groupUnknown": "Ukendt",
+      "groupChat": "Chat",
+      "groupTranscription": "Transskription",
+      "groupReindex": "Genindeksering",
+      "labelReindex": "Genindeksering",
+      "labelPinned": "Fastgjorte"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Etiket",
+      "tableColumnType": "Type",
+      "tableColumnState": "Status",
+      "tableColumnCreated": "Oprettet",
+      "tableColumnUpdated": "Opdateret",
+      "tableColumnPinned": "Fastgjorte",
+      "tableColumnNameActions": "Handlinger",
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Seneste 7 dage",
+      "groupTimeLast30Days": "Seneste 30 dage",
+      "groupTimeOther": "Andre",
+      "groupPinned": "Fastgjorte",
+      "groupNotPinned": "Ikke fastgjort",
+      "groupUnknown": "Ukendt",
+      "groupChat": "Chat",
+      "groupTranscription": "Transskription",
+      "groupReindex": "Genindeksering",
+      "labelReindex": "Genindeksering",
+      "labelPinned": "Fastgjorte"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historik",
+      "labelPinned": "Fastgjorte",
+      "labelToday": "I dag",
+      "labelLast7Days": "Seneste 7 dage",
+      "labelLast30Days": "Seneste 30 dage",
+      "labelEmpty": "Tom"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Aktivitet",
+      "actionPin": "Fastgør",
+      "actionUnpin": "Frigør",
+      "actionDelete": "Slet",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Ny chat",
+      "labelInfo": "Information"
+    }
+  }
+}

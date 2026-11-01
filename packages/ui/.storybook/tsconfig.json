@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "incremental": false,
+    "types": ["vite/client", "node"],
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": [
+    "../.storybook/**/*.ts",
+    "../.storybook/**/*.tsx",
+    "../src/**/*.stories.tsx"
+  ],
+  "exclude": ["../storybook-static", "../node_modules"]
+}

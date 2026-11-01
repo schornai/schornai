@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Kopēt atsauksmes tekstu starpliktuvē",
+      "feedbackText": "Atsauksmes teksts",
+      "feedbackTextRecommendation": "Paldies, nosūtiet mums šo tekstu uz ",
+      "sendFeedback": "Nosūtīt atsauksmi e-pastā",
+      "showFeedbackText": "Rādīt atsauksmes tekstu",
+      "thankYou": "Paldies, ka veltījāt laiku atsauksmes sniegšanai"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Dzēst visus kļūdu ziņojumus",
+      "actionDeleteAllCancel": "Atcelt",
+      "actionDeleteAllExplainer": "Vai tiešām vēlaties dzēst visus apkopotos kļūdu ziņojumus? Šo darbību nevar atsaukt.",
+      "actionDeleteAllShort": "Dzēst kļūdu ziņojumus",
+      "actionDeselectAll": "Noņemt atlasi visiem kļūdu ziņojumiem",
+      "actionSelectAll": "Atlasīt visus kļūdu ziņojumus",
+      "explainer": "Arī kļūdu ziņojumi ir atsauksmes daļa. Dažas problēmas sistēma atrisina automātiski, un jūsu darbības turpinās bez pārtraukuma. Tomēr mums ir noderīgi uzzināt par šīm kļūdām, lai tās novērstu.",
+      "explainerSecrecy": "Pārliecinieties, ka kļūdu ziņojumos nav konfidenciālu vai personas datu. Sistēma principā ir veidota tā, lai šādi dati nenonāktu kļūdu ziņojumos. Tomēr kļūdas pēc būtības ir saistītas ar neparedzētiem apstākļiem. Tāpēc drošības nolūkos pārbaudiet atsauksmi personīgi.",
+      "explainerSecrecyHeading": "Nav konfidenciālu datu",
+      "heading": "Kļūdas",
+      "tableColumnPartOfFeedback": "Atsauksmes daļa",
+      "tableColumnDate": "Datums",
+      "tableColumnErrorMessage": "Kļūdas ziņojums"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nav sniegts vērtējums zvaigznēs",
+      "starRating": "{{stars}} no 5 zvaigznēm"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Atmest atsauksmi",
+      "discardFeedbackSub": "Vai tiešām vēlaties atmest savu atsauksmi? Šo darbību nevar atsaukt.",
+      "discardFeedbackCancel": "Atcelt",
+      "infoSecrecy": "Pārliecinieties, ka nosūtāmajā atsauksmē nav konfidenciālu vai personas datu.",
+      "writeFeedback": "Rakstīt atsauksmi",
+      "writeFeedbackSub": "Novērtējam jebkuru atsauksmi — gan pozitīvu, gan negatīvu."
+    }
+  },
+  "page": {
+    "headingLine1": "Palīdziet mums uzlabot schorn.ai in a Box,",
+    "headingLine2": "sniedziet mums atsauksmi",
+    "headingMain": "Atsauksmes"
+  }
+}

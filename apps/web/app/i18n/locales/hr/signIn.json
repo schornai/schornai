@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Već ste prijavljeni",
+      "backToDashboard": "Natrag na nadzornu ploču",
+      "signOut": "Odjavi se"
+    },
+    "PasswordSignIn": {
+      "header": "E-pošta",
+      "headerSub": "Prijavi se e-poštom i lozinkom",
+      "inputEmailLabel": "E-pošta",
+      "inputPasswordLabel": "Lozinka",
+      "buttonSignIn": "Prijavi se e-poštom",
+      "buttonReset": "Ponovno postavi lozinku"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Prijavi se putem SSO pružatelja",
+      "buttonSignIn": "Prijavi se putem {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Ponovno postavi lozinku",
+      "descriptionKey": "Unesite adresu e-pošte i ključ za ponovno postavljanje koji vam je dao administrator. Ključ se može upotrijebiti jednom i vrijedi 7 dana.",
+      "labelEmail": "E-pošta",
+      "labelKey": "Ključ za ponovno postavljanje lozinke",
+      "labelPassword": "Nova lozinka",
+      "labelPasswordAgain": "Ponovi novu lozinku",
+      "descriptionPassword": "Koristite najmanje 6 znakova i slijedite pravila svoje organizacije za lozinke.",
+      "errorEmail": "Unesite valjanu adresu e-pošte.",
+      "errorKey": "Unesite ključ za ponovno postavljanje.",
+      "errorPassword": "Lozinka mora sadržavati najmanje 6 znakova.",
+      "errorPasswordAgain": "Lozinke se ne podudaraju.",
+      "errorReset": "Lozinku nije moguće promijeniti. Provjerite adresu e-pošte, ključ i pravila za lozinku. Istekli ili već upotrijebljeni ključevi nisu valjani.",
+      "descriptionSuccess": "Vaša je lozinka promijenjena. Sada se možete prijaviti novom lozinkom.",
+      "labelReset": "Spremi lozinku",
+      "labelSignIn": "Natrag na prijavu"
+    }
+  }
+}

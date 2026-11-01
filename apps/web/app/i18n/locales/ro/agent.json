@@ -1,0 +1,519 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Anulează",
+      "errorCancel": "Generarea nu a putut fi oprită. Încearcă din nou."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Nu ai acces la acest agent."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Model necunoscut",
+      "labelThinkingOptionalOn": "Raționament",
+      "labelThinkingOptionalOff": "Raționament obligatoriu",
+      "labelThinkingMandatoryOn": "Fără raționament",
+      "labelThinkingMandatoryOff": "Fără raționament, obligatoriu",
+      "descriptionFeatureVision": "Înțelegere aprofundată a imaginilor",
+      "labelModelSize": "Dimensiunea contextului: {{size}} mii",
+      "labelNotFound": "Modelul nu a fost găsit",
+      "labelChanged": "Modificat"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Instrument: calculator",
+      "description": "Agentul poate folosi calculatorul în loc să efectueze singur calculele. Astfel poate gestiona mai bine numere mai complexe."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Instrucțiuni",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Gol",
+      "labelChanged": "Modificat"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Depozite de documente",
+      "labelUnknownRepository": "Depozit de documente necunoscut",
+      "descriptionRepositoryNotFound": "Depozitul de documente nu există sau nu ai permisiunile necesare.",
+      "labelConfirmWrite": "Citire și scriere (cu confirmare)",
+      "labelReadOnly": "Doar citire",
+      "labelWrite": "Citire și scriere (automat)",
+      "labelGoToRepository": "Deschide depozitul",
+      "labelChanged": "Modificat"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Indicații pentru alegerea rolului",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Descriere",
+      "description": "Alege un nume potrivit pentru agent. Poți salva și o scurtă descriere.",
+      "labelName": "Nume",
+      "labelDescription": "Descriere"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Spațiu de lucru",
+      "description": "Selectează spațiul de lucru în care vrei să creezi agentul.",
+      "labelName": "Spațiu de lucru",
+      "errorNoPermissions": "Nu ai permisiuni pentru a crea agenți",
+      "errorNoWorkspaceSelected": "Nu ai selectat un spațiu de lucru",
+      "labelSelectWorkspace": "Selectează un spațiu de lucru."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Funcții suplimentare",
+      "description": "Adaugă funcții utile agentului pentru a simplifica și mai mult lucrul.",
+      "labelFileUpload": "Încărcare de fișiere",
+      "descriptionFileUpload": "Utilizatorii pot încărca fișiere al căror conținut este disponibil agentului ca text.",
+      "labelBatch": "Procesare în lot",
+      "descriptionBatch": "Utilizatorii pot procesa automat fișiere pentru fiecare mesaj.",
+      "labelPursueGoal": "Urmărirea unui obiectiv",
+      "descriptionPursueGoal": "Utilizatorii pot defini un obiectiv, iar agentul va lucra în buclă până când acesta este atins.",
+      "labelDisappearingChats": "Conversații temporare",
+      "descriptionDisappearingChats": "Conversațiile se pot șterge automat după 12 ore. Utilizatorul trebuie să activeze opțiunea.",
+      "labelNightshift": "Tura de noapte",
+      "descriptionNightshift": "Agenții care rulează mult timp pot fi mutați în tura de noapte pentru a economisi resurse în timpul zilei.",
+      "labelTranscriber": "Transcriptor",
+      "labelNoTranscriber": "Fără transcriere automată",
+      "descriptionTranscriber": "Transcrie automat fișierele audio și video încărcate folosind acest transcriptor."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Funcții suplimentare",
+      "labelFileUpload": "Încărcare de fișiere",
+      "descriptionFileUpload": "Utilizatorii pot încărca fișiere al căror conținut este disponibil agentului ca text.",
+      "labelBatch": "Procesare în lot",
+      "descriptionBatch": "Utilizatorii pot procesa automat fișiere pentru fiecare mesaj.",
+      "labelPursueGoal": "Urmărirea unui obiectiv",
+      "descriptionPursueGoal": "Utilizatorii pot defini un obiectiv, iar agentul va lucra în buclă până când acesta este atins.",
+      "labelDisappearingChats": "Conversații temporare",
+      "descriptionDisappearingChats": "Conversațiile se pot șterge automat după 12 ore. Utilizatorul trebuie să activeze opțiunea.",
+      "labelNightshift": "Tura de noapte",
+      "descriptionNightshift": "Agenții care rulează mult timp pot fi mutați în tura de noapte pentru a economisi resurse în timpul zilei."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Sugestii"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Documentație"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Spațiu de lucru",
+      "labelUnknownWorkspace": "Spațiu de lucru necunoscut",
+      "labelGoToWorkspace": "Deschide spațiul de lucru"
+    },
+    "AgentInfo": {
+      "labelRole": "Rol: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Caută...",
+      "tableColumnName": "Nume",
+      "tableColumnCapablilities": "Capabilități",
+      "tableColumnNameActions": "Acțiuni",
+      "labelOtherAgents": "Alți agenți",
+      "labelFavorites": "Favorite",
+      "labelNoGroup": "Fără grup",
+      "labelUnknownModel": "Model necunoscut „{{id}}”",
+      "labelNoRepositories": "Niciun depozit de documente",
+      "labelUnknownRepository": "Depozit de documente necunoscut „{{id}}”",
+      "labelRoleCount_other": "{{count}} de roluri",
+      "labelRoleCount_zero": "Niciun rol",
+      "labelRoleCount_one": "{{count}} rol",
+      "labelRoleCount_few": "{{count}} roluri"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelNameAsc": "Nume de la A la Z",
+      "labelNameDesc": "Nume de la Z la A",
+      "labelGroup": "Grupează după",
+      "labelFavorites": "Favorite",
+      "labelFirstLetter": "Prima literă",
+      "labelWorkspaces": "Spații de lucru",
+      "labelModel": "Model",
+      "labelRepositories": "Depozite de documente",
+      "labelRoleCount": "Număr de roluri",
+      "labelCards": "Carduri",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează",
+      "labelAgents": "Agenți",
+      "labelNewAgent": "Agent nou",
+      "labelNoGroup": "Fără grup"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Aspect",
+      "description": "Alege o culoare și o pictogramă care reprezintă cel mai bine agentul.",
+      "labelIcon": "Pictogramă",
+      "labelColor": "Culoare"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Elimină din favorite",
+      "tooltipAddFavorite": "Adaugă la favorite"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Editează",
+      "tooltipInfo": "Informații",
+      "tooltipNewChat": "Conversație nouă"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Spațiu de lucru necunoscut",
+      "labelModelUnknown": "Model necunoscut"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Acces web",
+      "labelGeneralAccess": "Acces general, căutare web",
+      "descriptionFetch": "Preluarea web descarcă conținutul unui URL în spațiul de stocare al conversației sau într-un depozit de documente conectat, cu drept de scriere. După procesarea fișierului, agentul poate citi textul extras și îl poate folosi în răspuns.",
+      "descriptionSearch": "Căutarea web ajută agentul să găsească pagini relevante pentru o interogare. Furnizorul de căutare returnează titluri, linkuri și fragmente scurte. Lista domeniilor permise pentru preluare nu limitează căutările web.",
+      "labelChanged": "Modificat",
+      "labelFetch": "Preluare",
+      "labelSearch": "Căutare",
+      "labelOn": "Activat",
+      "labelOff": "Dezactivat",
+      "labelAsk": "Întreabă mai întâi",
+      "labelWhitelist": "Preluare limitată la domeniile permise",
+      "labelAll": "Preluare de pe toate site-urile",
+      "labelEmptyWhitelist": "Niciun domeniu permis",
+      "labelEdit": "Editează accesul web",
+      "labelDetails": "Arată detalii"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Instrument: extensii de conversație",
+      "labelFeatures": "Sugerează mesajul următor, schimbă numele conversației",
+      "description": "Agentul poate sugera următoarele mesaje ale utilizatorului, astfel încât acesta să poată continua conversația apăsând pe mesajul dorit. <br /> Agentul poate schimba numele conversației pentru utilizator, ca aceasta să fie mai ușor de găsit în istoric."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Descrierea rolului",
+      "description": "Descrierea rolului este folosită la primirea unui mesaj nou pentru a decide ce rol va răspunde",
+      "labelName": "Nume",
+      "labelSelectionHint": "Indicații pentru alegerea rolului",
+      "labelDeleteRole": "Șterge rolul ",
+      "labelDoNotOverride": "Nu suprascrie",
+      "labelOverrideModel": "Înlocuiește modelul",
+      "descriptionOverrideModel": "Poți alege pentru acest rol un model diferit de modelul general al agentului.",
+      "confirmDeleteDescription": "Sigur vrei să ștergi rolul „{{name}}”? Această acțiune nu poate fi anulată.",
+      "labelCancel": "Anulează",
+      "labelThinking": "Raționament"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Modelul lingvistic mare folosit de agent, dacă nu este înlocuit de un rol.",
+      "labelName": "Model",
+      "labelThinking": "Raționament",
+      "labelThinking_optionalOn": "Raționament",
+      "labelThinking_mandatoryOn": "Raționament obligatoriu",
+      "labelThinking_optionalOff": "Fără raționament",
+      "labelThinking_mandatoryOff": "Fără raționament, obligatoriu",
+      "labelSelectModel": "Selectează un model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Depozit de documente",
+      "labelPathAgent": "Cale pentru agent",
+      "labelPathRepository": "Cale în depozitul de documente",
+      "labelPermission": "Permisiune",
+      "labelDeleteConnection": "Șterge conexiunea",
+      "confirmDeleteTitle": "Șterge conexiunea",
+      "confirmDeleteDescription": "Sigur vrei să ștergi această conexiune la depozitul de documente „{{name}}”?",
+      "labelCancel": "Anulează",
+      "labelAddConnection": "Conexiune suplimentară",
+      "labelUnknownRepository": "Depozit de documente necunoscut",
+      "labelConfirmWrite": "Citire și scriere (cu confirmare)",
+      "labelReadOnly": "Doar citire",
+      "labelWrite": "Citire și scriere (automat)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Etichetă",
+      "labelMessage": "Mesaj",
+      "labelClose": "Închide"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Nume",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Antete HTTP",
+      "labelHeaderName": "Nume",
+      "labelHeaderValue": "Valoare",
+      "labelAddHeader": "Adaugă antet HTTP",
+      "labelDeleteConnection": "Șterge conexiunea",
+      "confirmDeleteTitle": "Șterge MCP",
+      "confirmDeleteDescription": "Sigur vrei să ștergi configurația MCP „{{name}}”?",
+      "labelCancel": "Anulează",
+      "labelDeleteMCP": "Șterge MCP",
+      "labelAddMCP": "Încă un MCP",
+      "errorInvalidUrl": "URL-ul trebuie să fie valid",
+      "labelOAuthApp": "Aplicație OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Date",
+      "labelConnectRepository": "Conectează un depozit de documente",
+      "labelToolWebAccess": "Instrument: acces web",
+      "labelConnectMCP": "Conectează un instrument extern (MCP)",
+      "labelSupport": "Asistență",
+      "labelToolChatExtensions": "Instrument: extensii de conversație",
+      "labelToolCalculator": "Instrument: calculator",
+      "labelSystem": "Sistem",
+      "labelToolPlatformAccess": "Instrument: acces la platforma schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Agent nou",
+      "emptyDescription": "Definește comportamentul, accesul la date, aspectul agentului și multe altele.",
+      "labelDefinePrompt": "Definește instrucțiunile",
+      "descriptionDefinePrompt": "Calitatea unui agent depinde de instrucțiunile sale. Definirea clară a rolurilor reduce halucinațiile și crește consecvența.",
+      "labelConnectTools": "Conectează instrumente",
+      "descriptionConnectTools": "Conectează, de exemplu, depozite de documente, pentru ca agentul să se bazeze pe fapte și să folosească informații specifice companiei.",
+      "labelWriteDocs": "Scrie documentația",
+      "descriptionWriteDocs": "Ajută utilizatorii să înțeleagă capabilitățile acestui agent.",
+      "infoRoleDefinition": "Rolul definește comportamentul agentului și instrumentele disponibile pentru îndeplinirea sarcinii.",
+      "infoDocsDescription": "Documentația poate conține text cu formatare Markdown și sugestii de mesaje care pot fi trimise agentului.",
+      "infoAppearanceDescription": "Numele, descrierea și culoarea îi ajută pe utilizatori să se orienteze printre agenții disponibili."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Mesaje sugerate",
+      "descriptionRecommendedMessages": "Ajută utilizatorii sugerând mesaje pentru a folosi cât mai bine agentul.",
+      "labelAddMessage": "Adaugă mesaj ",
+      "labelDocumentation": "Documentație",
+      "descriptionDocumentation": "Oferă aici utilizatorilor informații suplimentare despre acest agent",
+      "labelShowPreview": "Arată previzualizarea",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Documentația îi ajută pe utilizatori să folosească agentul. Ea este afișată când utilizatorul începe o conversație nouă.",
+      "descriptionMarkdownHelp": "Markdown este un limbaj simplu de marcare pentru formatarea rapidă și ușoară a textului.\n\n* **Structură:** titluri (`#`), liste numerotate (`1.`) și nenumerotate (`-`), linii orizontale.\n* **Stilul textului:** **aldin** `**aldin**`, *cursiv* `*cursiv*`, ~~tăiat~~ `~~tăiat~~`.\n* **Cod:** cod în linie (`code`) și blocuri de cod cu evidențierea sintaxei.\n* **Organizare:** citate (`>`) și liste de verificare (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Niciun rol",
+      "descriptionNoRoles": "Nu au fost definite roluri pentru agent. Fără un rol, agentul nu va funcționa.",
+      "labelAddRole": "Adaugă rol ",
+      "infoMultipleRoles": "Agenții pot avea mai multe roluri. Un rol se poate concentra mai bine pe o parte a sarcinii.",
+      "infoTools": "Agenții pot folosi instrumente pentru a răspunde mai bine solicitărilor utilizatorilor, de exemplu căutând sau creând documente."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Agent nou",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Creează agent",
+      "labelSaveAgent": "Salvează agentul",
+      "tabOverview": "Prezentare generală",
+      "tabPrompt": "Instrucțiuni",
+      "tabDocs": "Asistență",
+      "tabRoles": "Roluri",
+      "tabSettings": "Setări",
+      "btnCreate": "Creează",
+      "btnSave": "Salvează",
+      "labelEditAgent": "Editează agentul",
+      "labelCloneAgent": "Salvează ca agent nou",
+      "labelDeleteAgent": "Șterge agentul",
+      "confirmDeleteTitle": "Șterge agentul",
+      "confirmDeleteDescription": "Sigur vrei să ștergi agentul „{{name}}”? Această acțiune nu poate fi anulată.",
+      "labelCancel": "Anulează"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Rol ",
+      "description": "Determină comportamentul agentului și instrumentele pe care le poate folosi în acest context.",
+      "tabOverview": "Prezentare generală",
+      "tabPrompt": "Instrucțiuni",
+      "tabDocumentRepositoryMounts": "Depozite de documente",
+      "tabMCPs": "Instrumente externe (MCP)",
+      "tabWeb": "Acces la internet",
+      "tabChat": "Extensii de conversație",
+      "tabCalc": "Calculator",
+      "tabTools": "Instrumente",
+      "tabSettings": "Setări",
+      "toolWebAccess": "Acces la internet",
+      "chatExtensions": "Extensii de conversație",
+      "calculator": "Calculator",
+      "externalToolsMCP": "Instrumente externe (MCP)",
+      "labelPrompt": "Instrucțiuni"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Renunță la modificări",
+      "labelDiscardConfirm": "Sigur vrei să renunți la toate modificările nesalvate ale acestui agent?",
+      "labelCancel": "Anulează",
+      "labelDiscard": "Renunță la modificări"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Instrumente externe (MCP)",
+      "changedBadge": "Modificat",
+      "unknownMcp": "MCP necunoscut",
+      "invalidUrl": "URL invalid"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Căutare semantică",
+      "labelChanged": "Modificat",
+      "labelActive": "Activă",
+      "labelInactive": "Inactivă",
+      "description": "Când sensul datelor este mai important decât formularea exactă. Necesită un model de embeddings.",
+      "labelUnknownModel": "Model necunoscut"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Căutare după cuvinte-cheie",
+      "labelChanged": "Modificat",
+      "labelActive": "Activă",
+      "labelInactive": "Inactivă",
+      "description": "Pentru căutarea expresiilor și propozițiilor exacte, precum nume și denumiri."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transcriptor",
+      "labelChanged": "Modificat",
+      "labelUnknownTranscriber": "Transcriptor necunoscut",
+      "labelGoToTranscriber": "Deschide transcriptorul"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Mesaj nou"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "În așteptarea procesării",
+      "tooltipPaused": "În pauză"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Raționament activat",
+      "labelThinkingOff": "Raționament dezactivat",
+      "labelMessageStack": "Coada de mesaje",
+      "placeholderMessage": "Mesaj...",
+      "tooltipUploadFiles": "Încărcare de fișiere",
+      "buttonPause": "Pauză",
+      "buttonStartBatch": "Pornește lotul",
+      "buttonSend": "Trimite",
+      "descriptionFilesPending": "Fișierele se încarcă sau se procesează…",
+      "labelAttachFiles": "Atașează fișiere",
+      "labelUploadFiles": "Încărcare de fișiere",
+      "labelSelectFile": "Alege un fișier existent"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Permiți această acțiune?",
+      "descriptionAction": "Agentul are nevoie de aprobarea ta pentru a continua.",
+      "labelApprove": "Permite",
+      "labelReject": "Refuză",
+      "labelRetry": "Încearcă din nou",
+      "labelSubmitting": "Se procesează…",
+      "errorSubmit": "Decizia ta nu a putut fi trimisă. Încearcă din nou.",
+      "labelMCP": "Conectează-ți contul",
+      "descriptionMCP": "Acest instrument MCP necesită autentificare. Apelul în așteptare va continua automat după conectarea contului."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Salvezi documentul?",
+      "descriptionWriteFile": "Agentul vrea să salveze acest document. Conținutul existent va fi înlocuit.",
+      "labelShowContent": "Arată conținutul",
+      "labelHideContent": "Ascunde conținutul",
+      "descriptionEmptyFile": "Documentul va fi salvat fără conținut."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Preluare web",
+      "description": "Configurează accesul web pentru acest rol. Preluarea și căutarea pot fi activate independent.",
+      "labelFetch": "Activează preluarea web",
+      "labelAskFetch": "Întreabă înainte de preluarea unei pagini",
+      "labelAccess": "Site-uri permise",
+      "labelAll": "Toate site-urile",
+      "labelWhitelist": "Lista domeniilor permise",
+      "descriptionAccess": "Fișiere și pagini web HTTP(S), inclusiv din rețeaua locală. Redirecționările respectă aceleași reguli de acces.",
+      "labelDomains": "Domenii permise",
+      "descriptionDomains": "Un nume de gazdă pe linie, de exemplu example.com. Folosește *.example.com pentru subdomenii; acesta nu include example.com în sine.",
+      "errorDomains": "Introdu nume de gazdă sau *.example.com fără protocol, cale sau port.",
+      "descriptionEmptyWhitelist": "O listă goală blochează toate paginile.",
+      "labelSearchTitle": "Căutare web",
+      "labelSearch": "Activează căutarea web",
+      "labelAskSearch": "Întreabă înainte de căutarea pe web",
+      "labelProvider": "Furnizor de căutare",
+      "labelProviderDocs": "Documentația furnizorului",
+      "labelApiKey": "Cheie API",
+      "errorApiKey": "Introdu o cheie API pentru furnizorul selectat.",
+      "labelMarket": "Limba și regiunea Staan",
+      "descriptionMarket": "De exemplu de-de sau en-us. Valoarea implicită este en-us.",
+      "labelRemoveTool": "Elimină instrumentul",
+      "labelConfirmRemoveTool": "Elimini instrumentul web?",
+      "descriptionRemoveTool": "Setările de preluare și căutare web, inclusiv lista domeniilor permise și cheia API, vor fi eliminate din acest rol.",
+      "labelCancel": "Anulează"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Preia pagina web",
+      "descriptionFetch": "Permiți agentului să descarce, să salveze și să proceseze acest URL?",
+      "labelDestination": "Destinație"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Caută pe web",
+      "descriptionSearch": "Permiți agentului să trimită această interogare furnizorului de căutare configurat?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Închide",
+      "labelPending": "În execuție",
+      "labelApproval": "Așteaptă aprobarea",
+      "labelDenied": "Respins",
+      "labelDone": "Finalizat",
+      "errorRequest": "Solicitarea a eșuat"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Căutare web",
+      "labelQuery": "Interogare de căutare",
+      "labelEmptyResults": "Nu s-au găsit rezultate."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Pagină web",
+      "labelUrl": "URL",
+      "labelRange": "Caracterele {{start}}–{{end}} din {{total}}",
+      "descriptionTruncated": "Mai mult conținut este disponibil în secțiunea următoare.",
+      "labelEmptyPage": "Această pagină nu conține text lizibil.",
+      "labelSource": "Deschide sursa",
+      "descriptionFileReady": "Fișier salvat și procesat. Textul extras este disponibil direct agentului.",
+      "descriptionProcessingUnavailable": "Fișier salvat. Nu există text extras; fișierele audio și video necesită un transcriptor configurat.",
+      "descriptionProcessingFailed": "Fișier salvat, dar procesarea a eșuat sau a depășit timpul limită. Procesarea poate fi repornită din stocare."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Copiază fișierul",
+      "labelMove": "Mută fișierul",
+      "descriptionSuccess": "Fișierul a fost transferat. Orice index de căutare necesar este reconstruit în fundal.",
+      "descriptionPending": "Se pregătește transferul fișierului…",
+      "descriptionProcessingError": "Fișierul a fost transferat, dar procesarea trebuie repornită la destinație.",
+      "errorTransfer": "Transferul fișierului nu a putut fi finalizat.",
+      "labelOpenFile": "Deschide fișierul de la destinație",
+      "descriptionDenied": "Transfer refuzat. Niciun fișier nu a fost transferat.",
+      "descriptionApproval": "Se așteaptă aprobarea ta.",
+      "descriptionRunning": "Se transferă fișierul…",
+      "labelClose": "Închide",
+      "labelSource": "Sursă",
+      "labelTarget": "Destinație"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Permiți copierea acestui fișier?",
+      "labelMove": "Permiți mutarea acestui fișier?",
+      "descriptionCopy": "Agentul vrea să copieze acest fișier și conținutul său procesat. Fișierele existente la destinație nu sunt niciodată suprascrise.",
+      "descriptionMove": "Agentul vrea să mute acest fișier și conținutul său procesat. Sursa va fi eliminată după finalizarea cu succes a copierii.",
+      "labelSource": "Sursă",
+      "labelTarget": "Destinație"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Acest instrument MCP necesită autentificare. Apelul în așteptare va continua automat după conectarea contului.",
+      "labelConnect": "Conectează contul meu"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Instrument MCP",
+      "labelDiscover": "Descoperă instrumentele disponibile",
+      "labelPending": "În execuție",
+      "labelDone": "Finalizat",
+      "labelApproval": "Autentificare necesară",
+      "labelDenied": "Refuzat",
+      "errorRequest": "Solicitarea a eșuat",
+      "labelArguments": "Date de intrare",
+      "labelResult": "Rezultat",
+      "labelClose": "Închide"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Aplicație OAuth",
+      "labelSearch": "Conexiune de căutare",
+      "labelAutomatic": "Nicio aplicație OAuth configurată",
+      "labelNone": "Nicio conexiune selectată",
+      "labelMissing": "Conexiune indisponibilă",
+      "descriptionOAuth": "Opțional: alege o aplicație OAuth înregistrată pentru acest server MCP. Configurează-i URL-ul separat în acest agent.",
+      "descriptionSearch": "Datele de autentificare Staan și Brave sunt gestionate central în Setări → Conexiuni.",
+      "errorMissing": "Această conexiune nu mai este disponibilă. Selectează alta.",
+      "descriptionEmpty": "Nu a fost configurată o conexiune potrivită. Gestionează conexiunile în Setări → Conexiuni."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenți",
+    "emptyTitle": "Niciun agent",
+    "emptyDescription": "Nu au fost creați agenți încă.",
+    "labelNewAgent": "Agent nou",
+    "helpSearchTitle": "Căutare",
+    "helpSearchDescription": "Poți căuta agenți. Căutarea include, printre altele, numele, descrierea și modelul agentului.",
+    "helpSortTitle": "Sortare și grupare",
+    "helpSortDescription": "Agenții pot fi sortați după nume și împărțiți în grupuri diferite. Pot fi afișați ca dale sau ca tabel."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Acest furnizor MCP necesită o aplicație OAuth înregistrată. Cere unui administrator să creeze o aplicație OAuth cu Client ID și Client Secret în Setări → Conexiuni și selecteaz-o în setările MCP ale agentului. Apoi reconectează-te din conversație.",
+    "errorStart": "Autorizarea MCP nu a putut fi pornită.",
+    "errorCallback": "Autorizarea MCP a eșuat sau a expirat. Revino la conversație și încearcă din nou."
+  }
+}

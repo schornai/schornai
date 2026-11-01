@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Új beszélgetés",
+        "mainLabelAgents": "Ügynökök",
+        "mainLabelApps": "Alkalmazások",
+        "mainLabelWorkspaces": "Munkaterületek",
+        "history": "Előzmények"
+      },
+      "SidebarFavorites": {
+        "label": "Kedvencek",
+        "empty": "Még nincsenek hozzáadott kedvencek."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Nincsenek kedvencek",
+        "descriptionNoFavorites": "<agents>Ügynököket</agents>, <documents>dokumentumtárakat</documents> és <transcribers>átírókat</transcribers> adhat a kedvencekhez."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Új beszélgetés"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Jó éjszakát];(5-11)[Jó reggelt];(12-17)[Jó napot];(18-inf)[Jó estét];",
+      "labelAllAgents": "Összes ügynök",
+      "labelToApps": "Tovább az alkalmazásokhoz"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Kedvencek",
+        "labelPermissions": "Jogosultságok",
+        "labelModels": "Modellek",
+        "labelTaskQueue": "Feladatsor",
+        "labelSettings": "Beállítások",
+        "labelUsers": "Felhasználók",
+        "labelWorkspaces": "Munkaterületek",
+        "labelSSOProvider": "SSO-szolgáltató",
+        "labelXRAGUpload": "XRAG feltöltése",
+        "labelSystemModel": "Rendszermodell",
+        "labelTheme": "Téma",
+        "labelBackToDashboard": "Vissza az irányítópultra",
+        "labelConnections": "Kapcsolatok",
+        "labelProviderConnections": "Kapcsolatok",
+        "labelService": "Szolgáltatás",
+        "labelArtifacts": "Alkotások",
+        "labelCluster": "Fürt"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Ikon kiválasztása",
+      "buttonMoreIcons": "További ikonok",
+      "textLucideInfo": "Ikonok: <0>Lucide</0>",
+      "placeholderSearchIcons": "Ikonok keresése...",
+      "buttonCancel": "Mégse"
+    },
+    "FileUploadDropZone": {
+      "drop": "Húzza ide a fájlt a feltöltéshez"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Módosítva"
+    },
+    "Pagination": {
+      "labelPrev": "Előző",
+      "labelNext": "Következő"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Saját fiók",
+      "labelSystem": "Rendszer",
+      "labelModels": "Modellek",
+      "labelCluster": "Fürt",
+      "labelSettings": "Beállítások",
+      "labelDashboard": "Irányítópult",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Kijelentkezés"
+    },
+    "UserRoleText": {
+      "admin": "Rendszergazda",
+      "workspace-admin": "Munkaterület-rendszergazda",
+      "editor": "Szerkesztő",
+      "user": "Felhasználó",
+      "none": "Nincs jogosultsága"
+    },
+    "StorageView": {
+      "placeholderSearch": "Keresés ebben a mappában…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Név",
+      "tableColumnType": "Típus",
+      "tableColumnSize": "Méret",
+      "tableColumnCreated": "Létrehozva",
+      "tableColumnUpdated": "Frissítve",
+      "tableColumnNameActions": "Műveletek",
+      "groupTimeToday": "Ma",
+      "groupTimeLast7Days": "Elmúlt 7 nap",
+      "groupTimeLast30Days": "Elmúlt 30 nap",
+      "groupTimeOther": "Egyéb",
+      "labelFolder": "Mappa",
+      "descriptionProcessing": "A fájl feldolgozás alatt áll"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Új mappa",
+      "placeholderFolderName": "Mappa neve...",
+      "labelCancel": "Mégse",
+      "labelCreate": "Létrehozás"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Eltávolítás",
+      "labelDescription": "Biztosan eltávolítja a következőt: „{{name}}”? Ez nem vonható vissza.",
+      "labelCancel": "Mégse",
+      "labelRemove": "Eltávolítás"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Kezdőkönyvtár"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Nincsenek fájlok",
+      "labelDescription": "Az aktuális mappa nem tartalmaz fájlokat. A feltöltéshez egyszerűen húzza ide a fájlokat.",
+      "labelUploadFile": "Fájl feltöltése",
+      "labelCreateFile": "Fájl létrehozása"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelNameAsc": "Név A–Z",
+      "labelNameDesc": "Név Z–A",
+      "labelSizeAsc": "Méret szerint növekvő",
+      "labelSizeDesc": "Méret szerint csökkenő",
+      "labelCreatedAsc": "Létrehozás dátuma növekvő",
+      "labelCreatedDesc": "Létrehozás dátuma csökkenő",
+      "labelUpdatedAsc": "Frissítés dátuma növekvő",
+      "labelUpdatedDesc": "Frissítés dátuma csökkenő",
+      "labelGroup": "Csoportosítás",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelFirstLetter": "Kezdőbetű",
+      "labelFileType": "Fájltípus",
+      "labelCreated": "Létrehozás dátuma",
+      "labelUpdated": "Frissítés dátuma",
+      "labelTilesSmall": "Csempék (kicsi)",
+      "labelTilesMedium": "Csempék (közepes)",
+      "labelTilesLarge": "Csempék (nagy)",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás",
+      "labelNewFolder": "Új mappa",
+      "labelThisFolder": "Ez a mappa",
+      "labelUploadFile": "Fájl feltöltése",
+      "labelNew": "Új",
+      "labelDeleteFolder": "Mappa törlése",
+      "labelNewRecording": "Új felvétel",
+      "labelColumns": "Oszlopnézet",
+      "labelNewTextFile": "Új fájl"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Nincs találat",
+      "descriptionNoResults": "A keresés nem adott találatot. Fogalmazza át a keresőkifejezést.",
+      "labelCharacters": "karakter"
+    },
+    "Transcription": {
+      "labelTitle": "Átirat",
+      "labelLoadingMedia": "Média betöltése…",
+      "labelBuffering": "Lejátszás pufferelése…",
+      "labelSeeking": "Pozíció betöltése…",
+      "labelPlayer": "Médialejátszó",
+      "labelPlay": "Lejátszás",
+      "labelPause": "Szüneteltetés",
+      "labelSeek": "Lejátszási pozíció",
+      "labelBack": "Vissza 10 másodperccel",
+      "labelForward": "Előre 10 másodperccel",
+      "labelSpeed": "Lejátszási sebesség",
+      "labelUnmute": "Némítás feloldása",
+      "labelMute": "Némítás",
+      "labelVolume": "Hangerő",
+      "labelHideVideo": "Videó elrejtése",
+      "labelShowVideo": "Videó megjelenítése",
+      "labelPlaySegment": "{{number}}. szegmens lejátszása",
+      "labelReviewed": "Ellenőrizve",
+      "labelSegments": "Szegmensek",
+      "labelWords": "Szavak",
+      "descriptionEmpty": "Nem találhatók átírási eredmények.",
+      "descriptionConfidence": "Megbízhatóság: {{percent}}%",
+      "errorPlayback": "A lejátszás sikertelen. Ellenőrizze, hogy a médiafájl elérhető-e, és próbálja újra.",
+      "labelEditSegment": "{{number}}. szegmens szerkesztése",
+      "labelSegmentText": "Szegmens szövege",
+      "labelSave": "Mentés",
+      "labelSaving": "Mentés…",
+      "labelSaveReviewed": "Mentés és megjelölés ellenőrzöttként",
+      "labelCancel": "Mégse",
+      "labelRestoreOriginal": "Eredeti szöveg visszaállítása",
+      "descriptionUnsaved": "A módosítások csak mentéskor lépnek érvénybe.",
+      "errorSave": "A mentés sikertelen. A szövege megmaradt. Próbálja újra.",
+      "errorConflict": "Ez a szegmens megváltozott. Másolja ki a piszkozatát, és töltse újra a nézetet, mielőtt ismét mentene.",
+      "labelDownloadSrt": "SRT letöltése",
+      "descriptionSaveBeforeDownload": "Az SRT-fájl letöltése előtt mentse vagy vesse el a módosításokat."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Oszlopnézet",
+      "labelRoot": "Dokumentumok",
+      "labelDetails": "Fájl részletei",
+      "labelType": "Típus",
+      "labelSize": "Méret",
+      "labelUpdated": "Frissítve",
+      "labelOpen": "Fájl megnyitása"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Új fájl",
+      "labelName": "Fájlnév",
+      "labelCreate": "Fájl létrehozása",
+      "labelCancel": "Mégse",
+      "errorCreate": "A fájlt nem sikerült létrehozni. Ellenőrizze a fájlnevet és az írási jogosultságait."
+    },
+    "StorageFileActions": {
+      "labelActions": "Műveletek: {{name}}",
+      "labelDownloadOriginal": "Eredeti letöltése",
+      "labelDownloadProcessed": "Feldolgozott szöveg letöltése",
+      "labelRename": "Átnevezés",
+      "labelProcess": "Újrafeldolgozás",
+      "labelDelete": "Fájl törlése",
+      "labelName": "Új fájlnév",
+      "labelCancel": "Mégse",
+      "labelConfirm": "Megerősítés",
+      "descriptionDelete": "Véglegesen törli a(z) „{{name}}” fájlt, annak feldolgozott tartalmát és keresési indexbejegyzéseit?",
+      "descriptionProcess": "Újra feldolgozza a(z) „{{name}}” fájlt? A kézi módosítások felülíródnak.",
+      "descriptionQueued": "A feldolgozás várakozik vagy már folyamatban van. Ellenőrizze az állapotát a fájllistában.",
+      "descriptionUnsupported": "Ez a fájl jelenleg nem dolgozható fel. A hang- és videófájlokhoz beállított átíró szükséges.",
+      "errorAction": "A művelet sikertelen. Ellenőrizze az írási jogosultságokat, a névütközéseket és a folyamatban lévő feldolgozásokat. Sikertelen átnevezés után mindkét fájlnév megmaradhat; az újrapróbálkozás előtt ellenőrizze a listát.",
+      "labelOptions": "Beállítások",
+      "labelEdit": "Szerkesztés",
+      "descriptionRename": "A(z) „{{name}}” átnevezése. Tartsa meg a fájlkiterjesztést. Az eredeti fájl, a feldolgozott tartalom és a keresési index együtt frissül. A meglévő nevek soha nem íródnak felül.",
+      "labelCopy": "Másolás ide…",
+      "labelMove": "Áthelyezés ide…",
+      "descriptionCopy": "A(z) „{{name}}” másolása a feldolgozott tartalmával együtt. A forrás megmarad.",
+      "descriptionMove": "A(z) „{{name}}” áthelyezése a feldolgozott tartalmával együtt. A forrás a sikeres másolás után törlődik.",
+      "descriptionTransferred": "A fájl átvitele sikeres. A cél keresési indexei a háttérben épülnek újra.",
+      "descriptionTransferProcessingError": "A fájl átvitele sikeres, de a feldolgozást nem sikerült elindítani. Nyissa meg a célfájlt, és válassza az „Újrafeldolgozás” lehetőséget. Ne ismételje meg az átvitelt."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Műveletek: {{name}}",
+      "labelDelete": "Mappa törlése"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Tartalom",
+      "labelSave": "Mentés",
+      "labelCancel": "Mégse",
+      "errorSave": "A mentés sikertelen. Próbálja újra.",
+      "errorConflict": "A tartalom megváltozott. Mentés előtt töltse újra.",
+      "errorIndex": "A mentés sikeres, de a keresési indexet nem sikerült frissíteni. Mentse újra."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Célmappa kiválasztása",
+      "labelSelectFile": "Meglévő fájl kiválasztása",
+      "descriptionFolder": "Válasszon egy meglévő mappát. Egy fájl kerül átvitelre; a meglévő nevek soha nem íródnak felül.",
+      "descriptionFile": "Válasszon fájlt ebből a beszélgetésből vagy egy elérhető tárból. A dokumentumoknak és felvételeknek már feldolgozottnak kell lenniük.",
+      "labelStorage": "Tárhely",
+      "labelCurrentStorage": "Aktuális tárhely",
+      "labelUp": "Szülőmappa",
+      "descriptionLoading": "Fájlok betöltése…",
+      "descriptionEmpty": "Nincsenek megfelelő bejegyzések ebben a mappában.",
+      "descriptionNoStorages": "Nincsenek elérhető tárak.",
+      "descriptionPending": "A fájl átvitele folyamatban. Várja meg az eredményt.",
+      "labelCancel": "Mégse",
+      "labelUseFolder": "E mappa használata",
+      "labelUseFile": "Fájl csatolása",
+      "labelRetry": "Újratöltés",
+      "errorLoad": "Ezt a mappát nem sikerült betölteni. Ellenőrizze a hozzáférést, és próbálja újra.",
+      "errorCollision": "A cél már tartalmaz ilyen nevű fájlt vagy feldolgozott tartalmat. Válasszon másik mappát; semmi nem íródott felül.",
+      "errorSameTarget": "A forrás és a cél azonos. Válasszon másik mappát.",
+      "errorSourceChanged": "A forrás megváltozott a másolás során. A hiányos célfájl eltávolításra került. Próbálja újra.",
+      "errorBusy": "Ez a fájl jelenleg feldolgozás alatt áll. Várja meg, amíg befejeződik.",
+      "errorPermission": "Nem rendelkezik a szükséges forrás- vagy céljogosultságokkal.",
+      "errorSourceDelete": "A teljes célfájl létrejött, de a forrást nem sikerült eltávolítani. A művelet megismétlése előtt ellenőrizze mindkét helyet.",
+      "errorCleanup": "A másolás sikertelen. A forrás megmaradt, de hiányos fájlok maradhattak a célhelyen. Az újrapróbálkozás előtt ellenőrizze azt.",
+      "errorAction": "A művelet sikertelen. Az újrapróbálkozás előtt ellenőrizze a jogosultságokat, a fájlneveket és mindkét helyet.",
+      "errorNotProcessed": "Ez a fájl még nincs feldolgozva. Először dolgozza fel, majd válassza ki újra."
+    }
+  },
+  "_welcomeMessage": "Üdvözöljük!\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentáció",
+    "feedback": "Visszajelzés",
+    "help": "Súgó",
+    "labelThemeLight": "Világos",
+    "labelThemeDark": "Sötét",
+    "labelThemeSystem": "Operációs rendszer",
+    "labelLanguage": "Nyelv"
+  }
+}

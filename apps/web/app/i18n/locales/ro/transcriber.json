@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transcriere",
+    "description": "Transcriptorii transformă conținutul vorbit, precum întâlniri, interviuri sau apeluri, în conținut structurat și căutabil de către IA."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transcriptor"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Caută..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelNameAsc": "Nume de la A la Z",
+      "labelNameDesc": "Nume de la Z la A",
+      "labelGroup": "Grupează după",
+      "labelNoGroup": "Fără grup",
+      "labelFavorites": "Favorite",
+      "labelFirstLetter": "Prima literă",
+      "labelWorkspaces": "Spații de lucru",
+      "labelModel": "Model",
+      "labelCards": "Carduri",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează",
+      "labelTranscribers": "Transcriptori",
+      "labelNewTranscriber": "Transcriptor nou"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Alți transcriptori",
+      "labelFavorites": "Favorite",
+      "labelNoGroup": "Fără grup",
+      "labelUnknownModel": "Model necunoscut „{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nume",
+      "tableColumnCapablilities": "Capabilități",
+      "tableColumnNameActions": "Acțiuni",
+      "emptyTitle": "Niciun transcriptor",
+      "emptyDescription": "Nu au fost creați transcriptori încă.",
+      "labelOtherTranscribers": "Alți transcriptori",
+      "labelFavorites": "Favorite",
+      "labelNoGroup": "Fără grup",
+      "labelUnknownModel": "Model necunoscut „{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Model necunoscut",
+      "labelUnknownWorkspace": "Spațiu de lucru necunoscut"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Editează",
+      "tooltipInfo": "Informații",
+      "tooltipNewTranscription": "Transcriere nouă",
+      "tooltipRecord": "Înregistrează audio"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Elimină din favorite",
+      "tooltipAddFavorite": "Adaugă la favorite"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Instrucțiuni",
+      "labelChanged": "Modificat",
+      "labelEmpty": "Gol"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Transcriptor nou",
+      "labelTranscriber": "Transcriptor",
+      "labelCreateTranscriber": "Creează transcriptor",
+      "labelSaveTranscriber": "Salvează transcriptorul",
+      "labelCloneTranscriber": "Salvează ca transcriptor nou",
+      "labelDeleteTranscriber": "Șterge transcriptorul",
+      "confirmDeleteTitle": "Șterge transcriptorul",
+      "confirmDeleteDescription": "Sigur vrei să ștergi transcriptorul „{{name}}”? Această acțiune nu poate fi anulată.",
+      "labelCancel": "Anulează",
+      "tabOverview": "Prezentare generală",
+      "tabPrompt": "Instrucțiuni",
+      "tabSettings": "Setări",
+      "btnCreate": "Creează",
+      "btnSave": "Salvează"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Renunță la modificări",
+      "labelDiscardConfirm": "Sigur vrei să renunți la toate modificările nesalvate ale acestui transcriptor?",
+      "labelCancel": "Anulează",
+      "labelDiscard": "Renunță la modificări"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Transcriptor nou",
+      "emptyDescription": "Definește comportamentul și aspectul transcriptorului.",
+      "labelDefinePrompt": "Definește instrucțiunile",
+      "descriptionDefinePrompt": "Instrucțiunile scurte ajută transcriptorul să înțeleagă și să scrie corect nume, termeni tehnici și denumiri de produse, așa cum te aștepți.",
+      "helpTitle": "Ajutor",
+      "helpPromptDescription": "Cu instrucțiuni, transcrierea necesită mai puține corecturi ulterioare și oferă rezultate mai consecvente pentru înregistrări lungi sau specializate."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Instrucțiuni",
+      "descriptionWhisperPrompt": "Instrucțiunile sunt transmise modelului de transcriere Whisper pentru a-l ajuta să înțeleagă termenii specifici domeniului."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Aspect",
+      "description": "Alege o culoare și o pictogramă care reprezintă cel mai bine transcriptorul.",
+      "labelIcon": "Pictogramă",
+      "labelColor": "Culoare"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Descriere",
+      "description": "Alege un nume potrivit pentru transcriptor. Poți salva și o scurtă descriere.",
+      "labelName": "Nume",
+      "labelDescription": "Descriere"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Modelul de transcriere folosit de transcriptor.",
+      "labelName": "Model",
+      "labelSelectModel": "Selectează un model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Spațiu de lucru",
+      "description": "Selectează spațiul de lucru în care vrei să creezi transcriptorul.",
+      "labelName": "Spațiu de lucru",
+      "labelSelectWorkspace": "Selectează un spațiu de lucru."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Fișiere",
+      "tabInfo": "Informații"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Înregistrează audio",
+      "labelReady": "Pregătit",
+      "labelRequesting": "Se conectează microfonul",
+      "labelRecording": "Se înregistrează",
+      "labelStopping": "Se încheie înregistrarea",
+      "labelRecorded": "Înregistrare pregătită",
+      "labelUploading": "Se salvează",
+      "labelSaved": "Salvat",
+      "labelDuration": "Durata înregistrării",
+      "labelStart": "Pornește înregistrarea",
+      "labelStop": "Oprește înregistrarea",
+      "labelRecordAgain": "Înregistrează din nou",
+      "labelCancel": "Anulează",
+      "labelTranscribe": "Salvează și transcrie",
+      "labelDiscard": "Renunță la înregistrare",
+      "labelPreview": "Previzualizarea înregistrării",
+      "descriptionSaved": "Înregistrare salvată. Transcrierea va începe automat.",
+      "errorUnsupported": "Înregistrarea audio necesită un browser compatibil și o conexiune sigură (HTTPS sau localhost).",
+      "errorPermission": "Accesul la microfon a fost refuzat. Permite accesul în browser și încearcă din nou.",
+      "errorRecording": "Microfonul nu a putut înregistra audio. Verifică dispozitivul și încearcă din nou.",
+      "errorEmpty": "Înregistrarea nu conține audio. Înregistrează din nou.",
+      "errorUpload": "Înregistrarea nu a putut fi salvată. O poți asculta și poți reîncerca încărcarea.",
+      "descriptionScreenAwake": "Ecranul rămâne activ în timpul înregistrării.",
+      "descriptionScreenSleep": "Ecranul nu poate fi menținut activ. Lasă această pagină deschisă și împiedică blocarea automată a ecranului.",
+      "descriptionCloseBlocked": "Oprește înregistrarea și salveaz-o sau renunță la ea înainte de închidere. Așteaptă finalizarea oricărei încărcări.",
+      "labelClose": "Închide"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Reîncercări automate",
+      "labelLevel": "Nivel",
+      "description": "Dacă rezultatele sunt incerte sau conțin multe repetări, transcriptorul poate încerca din nou să recunoască un segment audio. Mai multe încercări pot îmbunătăți recunoașterea, dar durează mai mult.",
+      "labelFast": "Rapid",
+      "labelBalanced": "Echilibrat",
+      "labelThorough": "Aprofundat",
+      "descriptionFast": "O încercare pe segment audio, fără reîncercări automate.",
+      "descriptionBalanced": "Până la 3 încercări pe segment audio.",
+      "descriptionThorough": "Până la 6 încercări pe segment audio.",
+      "errorLevel": "Selectează unul dintre cele trei niveluri."
+    }
+  },
+  "page": {
+    "labelTitle": "Transcriere",
+    "emptyTitle": "Niciun transcriptor",
+    "emptyDescription": "Nu au fost creați transcriptori încă.",
+    "labelNewTranscriber": "Transcriptor nou",
+    "helpTitle": "Ajutor",
+    "helpSearchDescription": "Poți căuta transcriptori. Căutarea include, printre altele, numele, descrierea și modelul transcriptorului.",
+    "helpSortDescription": "Transcriptorii pot fi sortați după nume și împărțiți în grupuri diferite. Pot fi afișați ca carduri sau ca tabel."
+  }
+}

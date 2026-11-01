@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Neuer Chat",
+        "mainLabelAgents": "Agenten",
+        "mainLabelApps": "Apps",
+        "mainLabelWorkspaces": "Arbeitsplätze",
+        "history": "Verlauf"
+      },
+      "SidebarFavorites": {
+        "label": "Favoriten",
+        "empty": "Keine Favoriten hinzugefügt."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Keine Favoriten",
+        "descriptionNoFavorites": "Sie können <agents>Agenten</agents>, <documents>Dokumentenablagen</documents> und <transcribers>Transkriptoren</transcribers> als Favorit hinzufügen."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Neuer Chat"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Gute Nacht];(5-10)[Guten Morgen];(11-12)[Mahlzeit];(13-17)[Guten Tag];(18-inf)[Guten Abend];",
+      "labelAllAgents": "Alle Agenten",
+      "labelToApps": "Zu den Apps"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favoriten",
+        "labelPermissions": "Berechtigungen",
+        "labelModels": "Modelle",
+        "labelTaskQueue": "Aufgabenstapel",
+        "labelSettings": "Einstellungen",
+        "labelUsers": "Benutzer:innen",
+        "labelWorkspaces": "Arbeitsplätze",
+        "labelSSOProvider": "SSO Anbieter",
+        "labelXRAGUpload": "XRAG hochladen",
+        "labelSystemModel": "System-Modell",
+        "labelTheme": "Darstellung",
+        "labelBackToDashboard": "Zum Dashboard",
+        "labelConnections": "Verbindungen",
+        "labelProviderConnections": "Verbindungen",
+        "labelService": "Service",
+        "labelArtifacts": "Artefakte",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Icon auswählen",
+      "buttonMoreIcons": "Weitere Icons",
+      "textLucideInfo": "Icons von <0>Lucide</0>",
+      "placeholderSearchIcons": "Icons suchen...",
+      "buttonCancel": "Abbrechen"
+    },
+    "FileUploadDropZone": {
+      "drop": "Hier loslassen um Datei hochzuladen"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Bearbeitet"
+    },
+    "Pagination": {
+      "labelPrev": "Zurück",
+      "labelNext": "Weiter"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Mein Konto",
+      "labelSystem": "System",
+      "labelModels": "Modelle",
+      "labelCluster": "Cluster",
+      "labelSettings": "Einstellungen",
+      "labelDashboard": "Dashboard",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Abmelden"
+    },
+    "UserRoleText": {
+      "admin": "Administrator:in",
+      "workspace-admin": "Arbeitsplatzadministrator:in",
+      "editor": "Bearbeiter:in",
+      "user": "Benutzer:in",
+      "none": "Nicht berechtigt"
+    },
+    "StorageView": {
+      "placeholderSearch": "In diesem Ordner suchen…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Name",
+      "tableColumnType": "Typ",
+      "tableColumnSize": "Größe",
+      "tableColumnCreated": "Erstellt am",
+      "tableColumnUpdated": "Geändert am",
+      "tableColumnNameActions": "Aktionen",
+      "groupTimeToday": "Heute",
+      "groupTimeLast7Days": "Letzte 7 Tage",
+      "groupTimeLast30Days": "Letzte 30 Tage",
+      "groupTimeOther": "Andere",
+      "labelFolder": "Ordner",
+      "descriptionProcessing": "Datei wird verarbeitet"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Neuer Ordner",
+      "placeholderFolderName": "Name des Ordners...",
+      "labelCancel": "Abbrechen",
+      "labelCreate": "Erstellen"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Entfernen",
+      "labelDescription": "Möchten Sie \"{{name}}\" wirklich entfernen? Dies kann nicht rückgängig gemacht werden.",
+      "labelCancel": "Abbrechen",
+      "labelRemove": "Entfernen"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Hauptverzeichnis"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Keine Dateien",
+      "labelDescription": "Der aktuelle Ordner enthält keine Dateien. Einfach Dateien hier herziehen um sie hochzuladen.",
+      "labelUploadFile": "Datei hochladen",
+      "labelCreateFile": "Datei erstellen"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Optionen",
+      "labelView": "Ansicht",
+      "labelSort": "Sortieren",
+      "labelNameAsc": "Name A bis Z",
+      "labelNameDesc": "Name Z bis A",
+      "labelSizeAsc": "Größe aufsteigend",
+      "labelSizeDesc": "Größe absteigend",
+      "labelCreatedAsc": "Erstellungsdatum aufsteigend",
+      "labelCreatedDesc": "Erstellungsdatum absteigend",
+      "labelUpdatedAsc": "Änderungsdatum aufsteigend",
+      "labelUpdatedDesc": "Änderungsdatum absteigend",
+      "labelGroup": "Gruppieren",
+      "labelNoGroup": "Keine Gruppe",
+      "labelFirstLetter": "Erster Buchstabe",
+      "labelFileType": "Dateityp",
+      "labelCreated": "Erstellungsdatum",
+      "labelUpdated": "Änderungsdatum",
+      "labelTilesSmall": "Kacheln (klein)",
+      "labelTilesMedium": "Kacheln (mittel)",
+      "labelTilesLarge": "Kacheln (groß)",
+      "labelTable": "Tabelle",
+      "labelSaveView": "Ansicht speichern",
+      "labelReset": "Zurücksetzen",
+      "labelNewFolder": "Neuer Ordner",
+      "labelThisFolder": "Dieser Ordner",
+      "labelUploadFile": "Datei hochladen",
+      "labelNew": "Neu",
+      "labelDeleteFolder": "Ordner löschen",
+      "labelNewRecording": "Neue Aufnahme",
+      "labelColumns": "Spaltenansicht",
+      "labelNewTextFile": "Neue Datei"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Keine Ergebnisse",
+      "descriptionNoResults": "Ihre Suche lieferte keine Ergebnisse. Bitte formulieren Sie die Anfrage neu.",
+      "labelCharacters": "Zeichen"
+    },
+    "Transcription": {
+      "labelTitle": "Transkription",
+      "labelLoadingMedia": "Medium wird geladen …",
+      "labelBuffering": "Wiedergabe wird gepuffert …",
+      "labelSeeking": "Position wird geladen …",
+      "labelPlayer": "Mediaplayer",
+      "labelPlay": "Abspielen",
+      "labelPause": "Pausieren",
+      "labelSeek": "Wiedergabeposition",
+      "labelBack": "10 Sekunden zurück",
+      "labelForward": "10 Sekunden vor",
+      "labelSpeed": "Wiedergabegeschwindigkeit",
+      "labelUnmute": "Ton einschalten",
+      "labelMute": "Stummschalten",
+      "labelVolume": "Lautstärke",
+      "labelHideVideo": "Video ausblenden",
+      "labelShowVideo": "Video einblenden",
+      "labelPlaySegment": "Abschnitt {{number}} abspielen",
+      "labelReviewed": "Geprüft",
+      "labelSegments": "Abschnitte",
+      "labelWords": "Wörter",
+      "descriptionEmpty": "Keine Transkriptionsergebnisse gefunden.",
+      "descriptionConfidence": "Sicherheit: {{percent}} %",
+      "errorPlayback": "Wiedergabe fehlgeschlagen. Prüfe, ob die Mediendatei verfügbar ist, und versuche es erneut.",
+      "labelEditSegment": "Abschnitt {{number}} bearbeiten",
+      "labelSegmentText": "Text des Abschnitts",
+      "labelSave": "Speichern",
+      "labelSaving": "Wird gespeichert …",
+      "labelSaveReviewed": "Speichern & als geprüft markieren",
+      "labelCancel": "Abbrechen",
+      "labelRestoreOriginal": "Originaltext wiederherstellen",
+      "descriptionUnsaved": "Änderungen werden erst beim Speichern übernommen.",
+      "errorSave": "Speichern fehlgeschlagen. Dein Text bleibt erhalten. Bitte versuche es erneut.",
+      "errorConflict": "Dieser Abschnitt wurde inzwischen geändert. Kopiere deinen Entwurf und lade die Ansicht neu, bevor du erneut speicherst.",
+      "labelDownloadSrt": "Als SRT herunterladen",
+      "descriptionSaveBeforeDownload": "Speichere oder verwirf die Bearbeitung, bevor du die SRT-Datei herunterlädst."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Spaltenansicht",
+      "labelRoot": "Dokumente",
+      "labelDetails": "Dateidetails",
+      "labelType": "Typ",
+      "labelSize": "Größe",
+      "labelUpdated": "Geändert",
+      "labelOpen": "Datei öffnen"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Neue Datei",
+      "labelName": "Dateiname",
+      "labelCreate": "Datei anlegen",
+      "labelCancel": "Abbrechen",
+      "errorCreate": "Die Datei konnte nicht angelegt werden. Prüfe den Namen und deine Schreibrechte."
+    },
+    "StorageFileActions": {
+      "labelActions": "Aktionen für {{name}}",
+      "labelDownloadOriginal": "Original herunterladen",
+      "labelDownloadProcessed": "Verarbeiteten Text herunterladen",
+      "labelRename": "Umbenennen",
+      "labelProcess": "Erneut verarbeiten",
+      "labelDelete": "Datei löschen",
+      "labelName": "Neuer Dateiname",
+      "labelCancel": "Abbrechen",
+      "labelConfirm": "Bestätigen",
+      "descriptionDelete": "„{{name}}“ mit den verarbeiteten Inhalten und Suchindexeinträgen endgültig löschen?",
+      "descriptionProcess": "„{{name}}“ erneut verarbeiten? Manuelle Änderungen werden überschrieben.",
+      "descriptionQueued": "Die Verarbeitung ist eingereiht oder läuft bereits. Den Status siehst du in der Dateiliste.",
+      "descriptionUnsupported": "Die Datei kann derzeit nicht verarbeitet werden. Für Audio und Video muss ein Transkriptor konfiguriert sein.",
+      "errorAction": "Die Aktion ist fehlgeschlagen. Prüfe Schreibrechte, Namenskollisionen und laufende Verarbeitung. Bei einem Fehler beim Umbenennen können beide Dateinamen vorhanden sein; prüfe die Liste vor dem nächsten Versuch.",
+      "labelOptions": "Optionen",
+      "labelEdit": "Bearbeiten",
+      "descriptionRename": "Benenne „{{name}}“ um. Die Dateiendung bleibt erhalten. Original, verarbeitete Inhalte und Suchindex werden gemeinsam angepasst. Vorhandene Namen werden nicht überschrieben.",
+      "labelCopy": "Kopieren nach…",
+      "labelMove": "Verschieben nach…",
+      "descriptionCopy": "Kopiere „{{name}}“ mit ihren verarbeiteten Inhalten. Die Quelle bleibt erhalten.",
+      "descriptionMove": "Verschiebe „{{name}}“ mit ihren verarbeiteten Inhalten. Nach erfolgreichem Kopieren wird die Quelle entfernt.",
+      "descriptionTransferred": "Die Datei wurde übertragen. Suchindizes der Zielablage werden im Hintergrund aufgebaut.",
+      "descriptionTransferProcessingError": "Die Datei wurde übertragen, ihre Verarbeitung konnte aber nicht gestartet werden. Öffne die Zieldatei und wähle „Erneut verarbeiten“. Wiederhole den Transfer nicht."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Aktionen für {{name}}",
+      "labelDelete": "Ordner löschen"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Inhalt",
+      "labelSave": "Speichern",
+      "labelCancel": "Abbrechen",
+      "errorSave": "Speichern fehlgeschlagen. Bitte erneut versuchen.",
+      "errorConflict": "Der Inhalt wurde inzwischen geändert. Bitte neu laden, bevor du speicherst.",
+      "errorIndex": "Gespeichert, aber der Suchindex konnte nicht aktualisiert werden. Bitte erneut speichern."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Zielordner auswählen",
+      "labelSelectFile": "Vorhandene Datei auswählen",
+      "descriptionFolder": "Wähle einen vorhandenen Ordner. Es wird eine einzelne Datei übertragen; vorhandene Namen werden nicht überschrieben.",
+      "descriptionFile": "Wähle eine Datei aus diesem Chat oder einer zugänglichen Ablage. Dokumente und Aufnahmen müssen bereits verarbeitet sein.",
+      "labelStorage": "Ablage",
+      "labelCurrentStorage": "Aktueller Bereich",
+      "labelUp": "Übergeordneter Ordner",
+      "descriptionLoading": "Dateien werden geladen…",
+      "descriptionEmpty": "Keine passenden Einträge in diesem Ordner.",
+      "descriptionNoStorages": "Keine zugänglichen Ablagen verfügbar.",
+      "descriptionPending": "Datei wird übertragen. Bitte warte auf das Ergebnis.",
+      "labelCancel": "Abbrechen",
+      "labelUseFolder": "Diesen Ordner verwenden",
+      "labelUseFile": "Datei anhängen",
+      "labelRetry": "Erneut laden",
+      "errorLoad": "Der Ordner konnte nicht geladen werden. Prüfe deine Zugriffsrechte und versuche es erneut.",
+      "errorCollision": "Am Ziel existiert bereits eine Datei oder ein verarbeiteter Inhalt mit diesem Namen. Wähle einen anderen Ordner; nichts wurde überschrieben.",
+      "errorSameTarget": "Quelle und Ziel sind identisch. Wähle einen anderen Ordner.",
+      "errorSourceChanged": "Die Quelle wurde während des Kopierens geändert. Die unvollständige Zielkopie wurde entfernt. Versuche es erneut.",
+      "errorBusy": "Die Datei wird gerade verarbeitet. Warte bis zum Abschluss.",
+      "errorPermission": "Du hast nicht die erforderlichen Rechte für Quelle oder Ziel.",
+      "errorSourceDelete": "Die vollständige Zieldatei wurde erstellt, aber die Quelle konnte nicht entfernt werden. Prüfe beide Orte, bevor du die Aktion wiederholst.",
+      "errorCleanup": "Der Kopiervorgang wurde abgebrochen. Die Quelle bleibt erhalten, am Ziel können unvollständige Dateien liegen. Prüfe das Ziel vor einem erneuten Versuch.",
+      "errorAction": "Die Aktion ist fehlgeschlagen. Prüfe Rechte, Dateinamen und beide Speicherorte vor einem erneuten Versuch.",
+      "errorNotProcessed": "Diese Datei ist noch nicht verarbeitet. Verarbeite sie zuerst und wähle sie danach erneut aus."
+    }
+  },
+  "_welcomeMessage": "Willkommen bei\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentation",
+    "feedback": "Feedback",
+    "help": "Hilfe",
+    "labelThemeLight": "Hell",
+    "labelThemeDark": "Dunkel",
+    "labelThemeSystem": "Betriebsystem",
+    "labelLanguage": "Sprache"
+  }
+}

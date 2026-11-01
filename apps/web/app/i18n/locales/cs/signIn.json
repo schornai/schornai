@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Již jste přihlášeni",
+      "backToDashboard": "Zpět na přehled",
+      "signOut": "Odhlásit se"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Přihlásit se e-mailem a heslem",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Heslo",
+      "buttonSignIn": "Přihlásit se e-mailem",
+      "buttonReset": "Obnovit heslo"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Přihlásit se přes poskytovatele SSO",
+      "buttonSignIn": "Přihlásit se pomocí {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Obnovit heslo",
+      "descriptionKey": "Zadejte svou e-mailovou adresu a klíč pro obnovení, který vám poskytl správce. Klíč lze použít jednou a platí 7 dní.",
+      "labelEmail": "E-mail",
+      "labelKey": "Klíč pro obnovení hesla",
+      "labelPassword": "Nové heslo",
+      "labelPasswordAgain": "Zopakovat nové heslo",
+      "descriptionPassword": "Použijte alespoň 6 znaků a dodržte požadavky vaší organizace na hesla.",
+      "errorEmail": "Zadejte platnou e-mailovou adresu.",
+      "errorKey": "Zadejte klíč pro obnovení.",
+      "errorPassword": "Heslo musí obsahovat alespoň 6 znaků.",
+      "errorPasswordAgain": "Hesla se neshodují.",
+      "errorReset": "Heslo se nepodařilo změnit. Zkontrolujte e-mailovou adresu, klíč a požadavky na heslo. Klíče s prošlou platností nebo již použité klíče jsou neplatné.",
+      "descriptionSuccess": "Vaše heslo bylo změněno. Nyní se můžete přihlásit novým heslem.",
+      "labelReset": "Uložit heslo",
+      "labelSignIn": "Zpět na přihlášení"
+    }
+  }
+}

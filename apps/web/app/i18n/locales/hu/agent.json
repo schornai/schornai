@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Mégse",
+      "errorCancel": "A generálást nem sikerült leállítani. Próbálja újra."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Nincs hozzáférése ehhez az ügynökhöz."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Modell",
+      "labelUnknownModel": "Ismeretlen modell",
+      "labelThinkingOptionalOn": "Gondolkodás",
+      "labelThinkingOptionalOff": "Kötelező gondolkodás",
+      "labelThinkingMandatoryOn": "Gondolkodás nélkül",
+      "labelThinkingMandatoryOff": "Gondolkodás mindig kikapcsolva",
+      "descriptionFeatureVision": "Képek mélyebb megértése",
+      "labelModelSize": "Kontextusméret: {{size}}k",
+      "labelNotFound": "A modell nem található",
+      "labelChanged": "Módosítva"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Eszköz: Számológép",
+      "description": "Az ügynök számológépet használhat ahelyett, hogy maga végezné a számításokat. Így az összetettebb számításokkal is jobban boldogul."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Utasítás",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Üres",
+      "labelChanged": "Módosítva"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumentumtárak",
+      "labelUnknownRepository": "Ismeretlen dokumentumtár",
+      "descriptionRepositoryNotFound": "A dokumentumtár nem létezik, vagy nem rendelkezik a szükséges jogosultságokkal.",
+      "labelConfirmWrite": "Olvasás és írás (megerősítés kérése)",
+      "labelReadOnly": "Csak olvasás",
+      "labelWrite": "Olvasás és írás (automatikus)",
+      "labelGoToRepository": "Ugrás a tárhoz",
+      "labelChanged": "Módosítva"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Szerepválasztási útmutató",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Leírás",
+      "description": "Válasszon megfelelő nevet az ügynöknek. Rövid leírást is menthet.",
+      "labelName": "Név",
+      "labelDescription": "Leírás"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Munkaterület",
+      "description": "Válassza ki azt a munkaterületet, ahol az ügynököt létre szeretné hozni.",
+      "labelName": "Munkaterület",
+      "errorNoPermissions": "Nincs jogosultsága ügynökök létrehozására",
+      "errorNoWorkspaceSelected": "Nem választott munkaterületet",
+      "labelSelectWorkspace": "Válasszon munkaterületet."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "További funkciók",
+      "description": "Bővítse az ügynököt hasznos funkciókkal, hogy még egyszerűbb legyen a munka.",
+      "labelFileUpload": "Fájlok feltöltése",
+      "descriptionFileUpload": "A felhasználók fájlokat tölthetnek fel, amelyek tartalma szövegként elérhető az ügynök számára.",
+      "labelBatch": "Kötegelt feldolgozás",
+      "descriptionBatch": "A felhasználók üzenetenként automatikusan feldolgoztathatják a fájlokat.",
+      "labelPursueGoal": "Cél elérése",
+      "descriptionPursueGoal": "A felhasználók meghatározhatnak egy célt, és az ügynök ciklusban dolgozik, amíg el nem éri azt.",
+      "labelDisappearingChats": "Eltűnő beszélgetések",
+      "descriptionDisappearingChats": "A beszélgetések 12 óra elteltével automatikusan törlődhetnek. Ezt a felhasználónak kell beállítania.",
+      "labelNightshift": "Éjszakai műszak",
+      "descriptionNightshift": "A hosszan futó ügynökök áthelyezhetők az éjszakai műszakba, hogy nappal erőforrásokat takarítsanak meg.",
+      "labelTranscriber": "Átíró",
+      "labelNoTranscriber": "Nincs automatikus átírás",
+      "descriptionTranscriber": "A feltöltött hang- és videófájlok automatikus átírása ezzel az átíróval."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "További funkciók",
+      "labelFileUpload": "Fájlok feltöltése",
+      "descriptionFileUpload": "A felhasználók fájlokat tölthetnek fel, amelyek tartalma szövegként elérhető az ügynök számára.",
+      "labelBatch": "Kötegelt feldolgozás",
+      "descriptionBatch": "A felhasználók üzenetenként automatikusan feldolgoztathatják a fájlokat.",
+      "labelPursueGoal": "Cél elérése",
+      "descriptionPursueGoal": "A felhasználók meghatározhatnak egy célt, és az ügynök ciklusban dolgozik, amíg el nem éri azt.",
+      "labelDisappearingChats": "Eltűnő beszélgetések",
+      "descriptionDisappearingChats": "A beszélgetések 12 óra elteltével automatikusan törlődhetnek. Ezt a felhasználónak kell beállítania.",
+      "labelNightshift": "Éjszakai műszak",
+      "descriptionNightshift": "A hosszan futó ügynökök áthelyezhetők az éjszakai műszakba, hogy nappal erőforrásokat takarítsanak meg."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Javaslatok"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentáció"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Munkaterület",
+      "labelUnknownWorkspace": "Ismeretlen munkaterület",
+      "labelGoToWorkspace": "Ugrás a munkaterületre"
+    },
+    "AgentInfo": {
+      "labelRole": "Szerep: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Keresés...",
+      "tableColumnName": "Név",
+      "tableColumnCapablilities": "Képességek",
+      "tableColumnNameActions": "Műveletek",
+      "labelOtherAgents": "További ügynökök",
+      "labelFavorites": "Kedvencek",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelUnknownModel": "Ismeretlen modell: „{{id}}”",
+      "labelNoRepositories": "Nincsenek dokumentumtárak",
+      "labelUnknownRepository": "Ismeretlen dokumentumtár: „{{id}}”",
+      "labelRoleCount_other": "{{count}} szerep",
+      "labelRoleCount_zero": "Nincsenek szerepek",
+      "labelRoleCount_one": "{{count}} szerep"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelNameAsc": "Név A–Z",
+      "labelNameDesc": "Név Z–A",
+      "labelGroup": "Csoportosítás alapja",
+      "labelFavorites": "Kedvencek",
+      "labelFirstLetter": "Kezdőbetű",
+      "labelWorkspaces": "Munkaterületek",
+      "labelModel": "Modell",
+      "labelRepositories": "Dokumentumtárak",
+      "labelRoleCount": "Szerepek száma",
+      "labelCards": "Kártyák",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás",
+      "labelAgents": "Ügynökök",
+      "labelNewAgent": "Új ügynök",
+      "labelNoGroup": "Nincs csoportosítás"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Megjelenés",
+      "description": "Válassza ki az ügynököt legjobban jellemző színt és ikont.",
+      "labelIcon": "Ikon",
+      "labelColor": "Szín"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eltávolítás a kedvencekből",
+      "tooltipAddFavorite": "Hozzáadás a kedvencekhez"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Szerkesztés",
+      "tooltipInfo": "Információ",
+      "tooltipNewChat": "Új beszélgetés"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Ismeretlen munkaterület",
+      "labelModelUnknown": "Ismeretlen modell"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Webes hozzáférés",
+      "labelGeneralAccess": "Általános hozzáférés, webes keresés",
+      "descriptionFetch": "A webes letöltés az URL tartalmát a beszélgetés tárhelyére vagy egy csatlakoztatott, írható dokumentumtárba tölti le. A fájl feldolgozása után az ügynök elolvashatja a kinyert szöveget, és felhasználhatja a válaszában.",
+      "descriptionSearch": "A webes keresés segít az ügynöknek a keresési lekérdezéshez kapcsolódó oldalakat találni. A keresőszolgáltató címeket, hivatkozásokat és rövid részleteket ad vissza. A letöltéshez engedélyezett domainek listája nem korlátozza a webes keresést.",
+      "labelChanged": "Módosítva",
+      "labelFetch": "Letöltés",
+      "labelSearch": "Keresés",
+      "labelOn": "Bekapcsolva",
+      "labelOff": "Kikapcsolva",
+      "labelAsk": "Előbb kérdezzen rá",
+      "labelWhitelist": "Letöltés csak az engedélyezett domainekről",
+      "labelAll": "Letöltés minden webhelyről",
+      "labelEmptyWhitelist": "Nincsenek engedélyezett domainek",
+      "labelEdit": "Webes hozzáférés szerkesztése",
+      "labelDetails": "Részletek megjelenítése"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Eszköz: Beszélgetésbővítmények",
+      "labelFeatures": "Következő üzenet javaslata, beszélgetés címkéjének módosítása",
+      "description": "Az ügynök javaslatokat készíthet a következő felhasználói üzenetre, így a felhasználó a megfelelő üzenetre kattintva folytathatja a beszélgetést. <br /> Az ügynök módosíthatja a beszélgetés címkéjét, hogy a felhasználó könnyebben megtalálja azt az előzményekben."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Szerep leírása",
+      "description": "A szerep leírása az új felhasználói üzenet érkezésekor segít eldönteni, melyik szerep válaszoljon az üzenetre",
+      "labelName": "Név",
+      "labelSelectionHint": "Szerepválasztási útmutató",
+      "labelDeleteRole": "Szerep törlése ",
+      "labelDoNotOverride": "Ne írja felül",
+      "labelOverrideModel": "Modell felülírása",
+      "descriptionOverrideModel": "Ehhez a szerephez más modellt választhat, mint amelyet az ügynök általában használ.",
+      "confirmDeleteDescription": "Biztosan törli a(z) „{{name}}” szerepet? Ez a művelet nem vonható vissza.",
+      "labelCancel": "Mégse",
+      "labelThinking": "Gondolkodás"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Modell",
+      "description": "Az ügynök által használt nyelvi modell, kivéve, ha egy szerep felülírja.",
+      "labelName": "Modell",
+      "labelThinking": "Gondolkodás",
+      "labelThinking_optionalOn": "Gondolkodás",
+      "labelThinking_mandatoryOn": "Kötelező gondolkodás",
+      "labelThinking_optionalOff": "Gondolkodás nélkül",
+      "labelThinking_mandatoryOff": "Gondolkodás mindig kikapcsolva",
+      "labelSelectModel": "Válasszon modellt"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumentumtár",
+      "labelPathAgent": "Útvonal az ügynök számára",
+      "labelPathRepository": "Útvonal a dokumentumtárban",
+      "labelPermission": "Jogosultság",
+      "labelDeleteConnection": "Kapcsolat törlése",
+      "confirmDeleteTitle": "Kapcsolat törlése",
+      "confirmDeleteDescription": "Biztosan törli ezt a kapcsolatot a(z) „{{name}}” dokumentumtárral?",
+      "labelCancel": "Mégse",
+      "labelAddConnection": "További kapcsolat",
+      "labelUnknownRepository": "Ismeretlen dokumentumtár",
+      "labelConfirmWrite": "Olvasás és írás (megerősítés kérése)",
+      "labelReadOnly": "Csak olvasás",
+      "labelWrite": "Olvasás és írás (automatikus)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Címke",
+      "labelMessage": "Üzenet",
+      "labelClose": "Bezárás"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Név",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-fejlécek",
+      "labelHeaderName": "Név",
+      "labelHeaderValue": "Érték",
+      "labelAddHeader": "HTTP-fejléc hozzáadása",
+      "labelDeleteConnection": "Kapcsolat törlése",
+      "confirmDeleteTitle": "MCP törlése",
+      "confirmDeleteDescription": "Biztosan törli a(z) „{{name}}” MCP-konfigurációt?",
+      "labelCancel": "Mégse",
+      "labelDeleteMCP": "MCP törlése",
+      "labelAddMCP": "További MCP",
+      "errorInvalidUrl": "Az URL-nek érvényesnek kell lennie",
+      "labelOAuthApp": "OAuth-alkalmazás"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Adatok",
+      "labelConnectRepository": "Dokumentumtár csatlakoztatása",
+      "labelToolWebAccess": "Eszköz: Webes hozzáférés",
+      "labelConnectMCP": "Külső eszköz csatlakoztatása (MCP)",
+      "labelSupport": "Támogatás",
+      "labelToolChatExtensions": "Eszköz: Beszélgetésbővítmények",
+      "labelToolCalculator": "Eszköz: Számológép",
+      "labelSystem": "Rendszer",
+      "labelToolPlatformAccess": "Eszköz: Hozzáférés a schorn.ai platformhoz"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Új ügynök",
+      "emptyDescription": "Határozza meg az ügynök viselkedését, adathozzáférését, megjelenését és sok más beállítását.",
+      "labelDefinePrompt": "Írjon utasítást",
+      "descriptionDefinePrompt": "Az ügynök minősége az utasításaitól függ. Az egyértelmű szerepmeghatározások csökkentik a hallucinációkat és növelik a következetességet.",
+      "labelConnectTools": "Csatlakoztasson eszközöket",
+      "descriptionConnectTools": "Csatlakoztasson például dokumentumtárakat, hogy az ügynök tényekre támaszkodjon és vállalatspecifikus tudást használjon.",
+      "labelWriteDocs": "Írjon dokumentációt",
+      "descriptionWriteDocs": "Segítsen a felhasználóknak megérteni ennek az ügynöknek a képességeit.",
+      "infoRoleDefinition": "A szerep meghatározza az ügynök viselkedését és a feladat elvégzéséhez rendelkezésre álló eszközöket.",
+      "infoDocsDescription": "A dokumentáció tartalmazhat szöveget (a Markdown-formázás támogatott) és javaslatokat az ügynöknek küldhető üzenetekre.",
+      "infoAppearanceDescription": "A név, a leírás és a szín segít a felhasználóknak eligazodni az elérhető ügynökök között."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Javasolt üzenetek",
+      "descriptionRecommendedMessages": "Segítse a felhasználókat az ügynök legjobb használatát bemutató üzenetjavaslatokkal.",
+      "labelAddMessage": "Üzenet hozzáadása ",
+      "labelDocumentation": "Dokumentáció",
+      "descriptionDocumentation": "Itt osszon meg további információkat erről az ügynökről a felhasználókkal",
+      "labelShowPreview": "Előnézet megjelenítése",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "A dokumentáció segít a felhasználóknak az ügynök használatában. Új beszélgetés indításakor jelenik meg.",
+      "descriptionMarkdownHelp": "A Markdown egy egyszerű jelölőnyelv a szöveg gyors és könnyű formázásához.\n\n* **Szerkezet:** Címsorok (`#`), listák (számozott `1.` és számozatlan `-`), vízszintes vonalak.\n* **Szövegstílus:** **Félkövér** `**Félkövér**`, *Dőlt* `*Dőlt*`, ~~Áthúzott~~ `~~Áthúzott~~`.\n* **Kód:** Szövegközi kód (`code`) és szintaxiskiemeléssel ellátott kódblokkok.\n* **Rendszerezés:** Idézetek (`>`), ellenőrzőlisták (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Nincsenek szerepek",
+      "descriptionNoRoles": "Az ügynökhöz nincs meghatározva szerep. Szerep nélkül az ügynök nem működik.",
+      "labelAddRole": "Szerep hozzáadása ",
+      "infoMultipleRoles": "Az ügynökök több szerepet is betölthetnek. Egy-egy szerep jobban összpontosíthat a feladat egy részére.",
+      "infoTools": "Az ügynökök eszközöket használhatnak a felhasználói kérések jobb megválaszolásához (dokumentumkeresés, dokumentumkészítés stb.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Új ügynök",
+      "labelAgent": "Ügynök",
+      "labelCreateAgent": "Ügynök létrehozása",
+      "labelSaveAgent": "Ügynök mentése",
+      "tabOverview": "Áttekintés",
+      "tabPrompt": "Utasítás",
+      "tabDocs": "Támogatás",
+      "tabRoles": "Szerepek",
+      "tabSettings": "Beállítások",
+      "btnCreate": "Létrehozás",
+      "btnSave": "Mentés",
+      "labelEditAgent": "Ügynök szerkesztése",
+      "labelCloneAgent": "Mentés új ügynökként",
+      "labelDeleteAgent": "Ügynök törlése",
+      "confirmDeleteTitle": "Ügynök törlése",
+      "confirmDeleteDescription": "Biztosan törli a(z) „{{name}}” ügynököt? Ez a művelet nem vonható vissza.",
+      "labelCancel": "Mégse"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Szerep ",
+      "description": "Meghatározza az ügynök viselkedését és az ebben a környezetben használható eszközöket.",
+      "tabOverview": "Áttekintés",
+      "tabPrompt": "Utasítás",
+      "tabDocumentRepositoryMounts": "Dokumentumtárak",
+      "tabMCPs": "Külső eszközök (MCP)",
+      "tabWeb": "Internethozzáférés",
+      "tabChat": "Beszélgetésbővítmények",
+      "tabCalc": "Számológép",
+      "tabTools": "Eszközök",
+      "tabSettings": "Beállítások",
+      "toolWebAccess": "Internethozzáférés",
+      "chatExtensions": "Beszélgetésbővítmények",
+      "calculator": "Számológép",
+      "externalToolsMCP": "Külső eszközök (MCP)",
+      "labelPrompt": "Utasítás"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Módosítások elvetése",
+      "labelDiscardConfirm": "Biztosan elveti az ügynök összes nem mentett módosítását?",
+      "labelCancel": "Mégse",
+      "labelDiscard": "Módosítások elvetése"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Külső eszközök (MCP)",
+      "changedBadge": "Módosítva",
+      "unknownMcp": "Ismeretlen MCP",
+      "invalidUrl": "Érvénytelen URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Szemantikus keresés",
+      "labelChanged": "Módosítva",
+      "labelActive": "Aktív",
+      "labelInactive": "Inaktív",
+      "description": "Amikor az adatok jelentése a fontos, nem a pontos megfogalmazás. (Beágyazási modellt igényel)",
+      "labelUnknownModel": "Ismeretlen modell"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Kulcsszavas keresés",
+      "labelChanged": "Módosítva",
+      "labelActive": "Aktív",
+      "labelInactive": "Inaktív",
+      "description": "Pontos kifejezések és mondatok kereséséhez. (Nevek, megnevezések stb.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Átíró",
+      "labelChanged": "Módosítva",
+      "labelUnknownTranscriber": "Ismeretlen átíró",
+      "labelGoToTranscriber": "Ugrás az átíróhoz"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Új üzenet"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Feldolgozásra vár",
+      "tooltipPaused": "Szüneteltetve"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Gondolkodás bekapcsolva",
+      "labelThinkingOff": "Gondolkodás kikapcsolva",
+      "labelMessageStack": "Üzenetverem",
+      "placeholderMessage": "Üzenet...",
+      "tooltipUploadFiles": "Fájlok feltöltése",
+      "buttonPause": "Szüneteltetés",
+      "buttonStartBatch": "Köteg indítása",
+      "buttonSend": "Küldés",
+      "descriptionFilesPending": "A fájlok feltöltése vagy feldolgozása folyamatban van …",
+      "labelAttachFiles": "Fájlok csatolása",
+      "labelUploadFiles": "Fájlok feltöltése",
+      "labelSelectFile": "Meglévő fájl kiválasztása"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Engedélyezi ezt a műveletet?",
+      "descriptionAction": "Az ügynöknek szüksége van a jóváhagyására a folytatáshoz.",
+      "labelApprove": "Engedélyezés",
+      "labelReject": "Elutasítás",
+      "labelRetry": "Újrapróbálkozás",
+      "labelSubmitting": "Feldolgozás …",
+      "errorSubmit": "Nem sikerült elküldeni a döntését. Próbálja újra.",
+      "labelMCP": "Csatlakoztassa a fiókját",
+      "descriptionMCP": "Ez az MCP-eszköz bejelentkezést igényel. A várakozó hívás a csatlakozás után automatikusan folytatódik."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Menti a dokumentumot?",
+      "descriptionWriteFile": "Az ügynök menteni szeretné ezt a dokumentumot. A meglévő tartalom lecserélődik.",
+      "labelShowContent": "Tartalom megjelenítése",
+      "labelHideContent": "Tartalom elrejtése",
+      "descriptionEmptyFile": "A dokumentum üres tartalommal lesz mentve."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Webes letöltés",
+      "description": "Állítsa be a szerep webes hozzáférését. A letöltés és a keresés egymástól függetlenül kapcsolható be.",
+      "labelFetch": "Webes letöltés bekapcsolása",
+      "labelAskFetch": "Kérdezzen rá az oldal letöltése előtt",
+      "labelAccess": "Engedélyezett webhelyek",
+      "labelAll": "Minden webhely",
+      "labelWhitelist": "Engedélyezett domainek listája",
+      "descriptionAccess": "HTTP(S)-fájlok és weboldalak, a helyi hálózatot is beleértve. Az átirányításokra ugyanazok a hozzáférési szabályok vonatkoznak.",
+      "labelDomains": "Engedélyezett domainek",
+      "descriptionDomains": "Soronként egy gépnevet adjon meg, például example.com. Aldomainekhez használja a *.example.com alakot; ez magát az example.com domaint nem tartalmazza.",
+      "errorDomains": "Gépneveket vagy *.example.com alakú mintákat adjon meg protokoll, útvonal és port nélkül.",
+      "descriptionEmptyWhitelist": "Az üres engedélyezési lista minden oldalt letilt.",
+      "labelSearchTitle": "Webes keresés",
+      "labelSearch": "Webes keresés bekapcsolása",
+      "labelAskSearch": "Kérdezzen rá a webes keresés előtt",
+      "labelProvider": "Keresőszolgáltató",
+      "labelProviderDocs": "Szolgáltatói dokumentáció",
+      "labelApiKey": "API-kulcs",
+      "errorApiKey": "Adja meg a kiválasztott szolgáltató API-kulcsát.",
+      "labelMarket": "Staan nyelv és régió",
+      "descriptionMarket": "Például de-de vagy en-us. Az alapértelmezés en-us.",
+      "labelRemoveTool": "Eszköz eltávolítása",
+      "labelConfirmRemoveTool": "Eltávolítja a webes eszközt?",
+      "descriptionRemoveTool": "A webes letöltés és keresés beállításai, az engedélyezési listával és az API-kulccsal együtt, törlődnek ebből a szerepből.",
+      "labelCancel": "Mégse"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Weboldal letöltése",
+      "descriptionFetch": "Engedélyezi az ügynöknek az URL tartalmának letöltését, mentését és feldolgozását?",
+      "labelDestination": "Cél"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Keresés a weben",
+      "descriptionSearch": "Engedélyezi az ügynöknek, hogy elküldje ezt a lekérdezést a beállított keresőszolgáltatónak?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Bezárás",
+      "labelPending": "Fut",
+      "labelApproval": "Jóváhagyásra vár",
+      "labelDenied": "Elutasítva",
+      "labelDone": "Befejezve",
+      "errorRequest": "A kérés sikertelen"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Webes keresés",
+      "labelQuery": "Keresési lekérdezés",
+      "labelEmptyResults": "Nincs találat."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Weboldal",
+      "labelUrl": "URL",
+      "labelRange": "Karakterek: {{start}}–{{end}} / {{total}}",
+      "descriptionTruncated": "További tartalom érhető el a következő részben.",
+      "labelEmptyPage": "Ez az oldal nem tartalmaz olvasható szöveget.",
+      "labelSource": "Forrás megnyitása",
+      "descriptionFileReady": "A fájl mentve és feldolgozva. A kinyert szöveg közvetlenül elérhető az ügynök számára.",
+      "descriptionProcessingUnavailable": "A fájl mentve. Nincs kinyert szöveg; a hang- és videófájlokhoz beállított átíró szükséges.",
+      "descriptionProcessingFailed": "A fájl mentve, de a feldolgozás sikertelen volt vagy túllépte az időkorlátot. A feldolgozás a tárhelyen újraindítható."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Fájl másolása",
+      "labelMove": "Fájl áthelyezése",
+      "descriptionSuccess": "A fájl átvitele megtörtént. A szükséges keresési index a háttérben újraépül.",
+      "descriptionPending": "Fájlátvitel előkészítése…",
+      "descriptionProcessingError": "A fájl átvitele megtörtént, de a feldolgozást újra kell indítani a célhelyen.",
+      "errorTransfer": "A fájlátvitelt nem sikerült befejezni.",
+      "labelOpenFile": "Célfájl megnyitása",
+      "descriptionDenied": "A fájlátvitel elutasítva. Nem történt fájlátvitel.",
+      "descriptionApproval": "Várakozás az Ön jóváhagyására.",
+      "descriptionRunning": "Fájlátvitel…",
+      "labelClose": "Bezárás",
+      "labelSource": "Forrás",
+      "labelTarget": "Cél"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Engedélyezi a fájl másolását?",
+      "labelMove": "Engedélyezi a fájl áthelyezését?",
+      "descriptionCopy": "Az ügynök másolni szeretné ezt a fájlt és a feldolgozott tartalmát. A meglévő célfájlok soha nem íródnak felül.",
+      "descriptionMove": "Az ügynök át szeretné helyezni ezt a fájlt és a feldolgozott tartalmát. A forrás a sikeres másolás után törlődik.",
+      "labelSource": "Forrás",
+      "labelTarget": "Cél"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Ez az MCP-eszköz bejelentkezést igényel. A várakozó hívás a csatlakozás után automatikusan folytatódik.",
+      "labelConnect": "Fiókom csatlakoztatása"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-eszköz",
+      "labelDiscover": "Elérhető eszközök felderítése",
+      "labelPending": "Fut",
+      "labelDone": "Befejezve",
+      "labelApproval": "Bejelentkezés szükséges",
+      "labelDenied": "Elutasítva",
+      "errorRequest": "A kérés sikertelen",
+      "labelArguments": "Bemenet",
+      "labelResult": "Eredmény",
+      "labelClose": "Bezárás"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-alkalmazás",
+      "labelSearch": "Kapcsolat keresése",
+      "labelAutomatic": "Nincs beállított OAuth-alkalmazás",
+      "labelNone": "Nincs kiválasztott kapcsolat",
+      "labelMissing": "A kapcsolat nem érhető el",
+      "descriptionOAuth": "Opcionális: Válasszon regisztrált OAuth-alkalmazást ehhez az MCP-kiszolgálóhoz. Az URL-jét külön állítsa be ebben az ügynökben.",
+      "descriptionSearch": "A Staan és a Brave hitelesítő adatai központilag, a Beállítások → Kapcsolatok alatt kezelhetők.",
+      "errorMissing": "Ez a kapcsolat már nem érhető el. Válasszon másik kapcsolatot.",
+      "descriptionEmpty": "Nincs beállított megfelelő kapcsolat. A kapcsolatokat a Beállítások → Kapcsolatok alatt kezelheti."
+    }
+  },
+  "page": {
+    "labelTitle": "Ügynökök",
+    "emptyTitle": "Nincsenek ügynökök",
+    "emptyDescription": "Még nem hoztak létre ügynököt.",
+    "labelNewAgent": "Új ügynök",
+    "helpSearchTitle": "Keresés",
+    "helpSearchDescription": "Kereshet az ügynökök között. A keresés többek között az ügynök nevére, leírására és modelljére is kiterjed.",
+    "helpSortTitle": "Rendezés és csoportosítás",
+    "helpSortDescription": "Az ügynökök név szerint rendezhetők és különböző csoportokba sorolhatók. Csempékként vagy táblázatban jeleníthetők meg."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Ez az MCP-szolgáltató regisztrált OAuth-alkalmazást igényel. Kérjen meg egy rendszergazdát, hogy hozzon létre OAuth-alkalmazást ügyfélazonosítóval és ügyféltitokkal a Beállítások → Kapcsolatok alatt, majd válassza ki azt az ügynök MCP-beállításaiban. Ezután csatlakozzon újra a beszélgetésből.",
+    "errorStart": "Az MCP-engedélyezést nem sikerült elindítani.",
+    "errorCallback": "Az MCP-engedélyezés sikertelen volt vagy lejárt. Térjen vissza a beszélgetéshez, és próbálja újra."
+  }
+}

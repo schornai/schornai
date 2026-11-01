@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Beschrijving",
+      "description": "Kies een geschikte naam voor de werkruimte. Je kunt ook een korte beschrijving opslaan.",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving",
+      "buttonSave": "Opslaan",
+      "buttonReset": "Resetten"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentatie",
+      "description": "Deel hier aanvullende informatie over deze werkruimte met je gebruikers.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Opslaan",
+      "buttonReset": "Resetten"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO-koppelingen",
+      "description": "Selecteer welke SSO-groep toegang tot de werkruimte heeft en met welke rechten.",
+      "labelRoleUser": "Gebruikersgroep",
+      "labelRoleEditor": "Bewerkersgroep",
+      "labelRoleWorkspaceAdmin": "Werkruimtebeheerdersgroep",
+      "placeholderNoGroup": "Geen groep toegewezen",
+      "descriptionRoleUser": "Kan inhoud van de werkruimte bekijken, zoals agenten, transcriptoren en documentopslagplaatsen, maar niet bewerken.",
+      "descriptionRoleEditor": "Kan inhoud van de werkruimte bekijken en bewerken.",
+      "descriptionRoleWorkspaceAdmin": "Kan de werkruimte beheren en agenten, transcriptoren, documentopslagplaatsen en andere middelen aanmaken, bewerken en verwijderen.",
+      "buttonSave": "Opslaan",
+      "buttonReset": "Resetten"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatische gebruiker",
+      "description": "Als ‘Automatische gebruiker’ is ingeschakeld, krijgt iedereen die zich bij het systeem kan aanmelden automatisch gebruikersrechten in deze organisatie.",
+      "labelActive": "Automatische gebruiker ingeschakeld",
+      "labelInactive": "Automatische gebruiker uitgeschakeld"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nieuwe werkruimte",
+      "descriptionWorkspace": "Kies een naam en eventueel een beschrijving. Na het aanmaken van de werkruimte kun je de overige instellingen configureren.",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving",
+      "labelCreate": "Werkruimte aanmaken",
+      "labelCancel": "Annuleren",
+      "errorCreate": "De werkruimte kon niet worden aangemaakt. Probeer het opnieuw."
+    },
+    "WorkspaceCard": {
+      "labelType": "Werkruimte"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Werkruimte bewerken",
+      "tooltipInfo": "Werkruimte openen"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Aan favorieten toevoegen",
+      "tooltipRemoveFavorite": "Uit favorieten verwijderen"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Werkruimten zoeken",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving",
+      "labelRole": "Jouw rol",
+      "labelActions": "Acties",
+      "labelFavorites": "Favorieten",
+      "labelOtherWorkspaces": "Andere werkruimten",
+      "labelEmpty": "Geen werkruimten",
+      "descriptionEmpty": "Je hebt nog geen toegang tot een werkruimte.",
+      "labelNoResults": "Geen resultaten",
+      "descriptionNoResults": "Probeer een andere zoekterm."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelNameAsc": "Naam van A tot Z",
+      "labelNameDesc": "Naam van Z tot A",
+      "labelGroup": "Groeperen op",
+      "labelNoGroup": "Geen groep",
+      "labelFavorites": "Favorieten",
+      "labelFirstLetter": "Eerste letter",
+      "labelCards": "Kaarten",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Werkruimte aanmaken"
+    }
+  },
+  "page": {
+    "labelYourRole": "Jouw rol",
+    "labelEmpty": "Nog geen inhoud",
+    "descriptionEmpty": "Er zijn nog geen agenten, documentopslagplaatsen of transcriptoren beschikbaar in deze werkruimte.",
+    "labelTitle": "Werkruimten"
+  }
+}

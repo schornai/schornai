@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Нов разговор",
+        "mainLabelAgents": "Агенти",
+        "mainLabelApps": "Приложения",
+        "mainLabelWorkspaces": "Работни пространства",
+        "history": "История"
+      },
+      "SidebarFavorites": {
+        "label": "Любими",
+        "empty": "Все още няма добавени любими."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Няма любими",
+        "descriptionNoFavorites": "Можете да добавяте <agents>агенти</agents>, <documents>хранилища за документи</documents> и <transcribers>транскрибатори</transcribers> в любими."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Нов разговор"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Лека нощ];(5-11)[Добро утро];(12-17)[Добър ден];(18-inf)[Добър вечер];",
+      "labelAllAgents": "Всички агенти",
+      "labelToApps": "Към приложенията"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Профил",
+        "labelFavorites": "Любими",
+        "labelPermissions": "Права за достъп",
+        "labelModels": "Модели",
+        "labelTaskQueue": "Опашка от задачи",
+        "labelSettings": "Настройки",
+        "labelUsers": "Потребители",
+        "labelWorkspaces": "Работни пространства",
+        "labelSSOProvider": "SSO доставчик",
+        "labelXRAGUpload": "Качване на XRAG",
+        "labelSystemModel": "Системен модел",
+        "labelTheme": "Тема",
+        "labelBackToDashboard": "Обратно към таблото",
+        "labelConnections": "Връзки",
+        "labelProviderConnections": "Връзки",
+        "labelService": "Услуга",
+        "labelArtifacts": "Артефакти",
+        "labelCluster": "Клъстер"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Избор на икона",
+      "buttonMoreIcons": "Още икони",
+      "textLucideInfo": "Икони от <0>Lucide</0>",
+      "placeholderSearchIcons": "Търсене на икони...",
+      "buttonCancel": "Отказ"
+    },
+    "FileUploadDropZone": {
+      "drop": "Пуснете файл тук за качване"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Променено"
+    },
+    "Pagination": {
+      "labelPrev": "Предишно",
+      "labelNext": "Следващо"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Моят акаунт",
+      "labelSystem": "Система",
+      "labelModels": "Модели",
+      "labelCluster": "Клъстер",
+      "labelSettings": "Настройки",
+      "labelDashboard": "Табло",
+      "labelProfile": "Профил"
+    },
+    "SidebarUserSignOut": {
+      "label": "Изход"
+    },
+    "UserRoleText": {
+      "admin": "Администратор",
+      "workspace-admin": "Администратор на работно пространство",
+      "editor": "Редактор",
+      "user": "Потребител",
+      "none": "Няма разрешен достъп"
+    },
+    "StorageView": {
+      "placeholderSearch": "Търсене в тази папка…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Име",
+      "tableColumnType": "Тип",
+      "tableColumnSize": "Размер",
+      "tableColumnCreated": "Създадено",
+      "tableColumnUpdated": "Обновено",
+      "tableColumnNameActions": "Действия",
+      "groupTimeToday": "Днес",
+      "groupTimeLast7Days": "Последните 7 дни",
+      "groupTimeLast30Days": "Последните 30 дни",
+      "groupTimeOther": "Други",
+      "labelFolder": "Папка",
+      "descriptionProcessing": "Файлът се обработва"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Нова папка",
+      "placeholderFolderName": "Име на папката...",
+      "labelCancel": "Отказ",
+      "labelCreate": "Създаване"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Премахване",
+      "labelDescription": "Сигурни ли сте, че искате да премахнете „{{name}}“? Това не може да бъде отменено.",
+      "labelCancel": "Отказ",
+      "labelRemove": "Премахване"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Начална директория"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Няма файлове",
+      "labelDescription": "Текущата папка не съдържа файлове. Просто плъзнете файлове тук, за да ги качите.",
+      "labelUploadFile": "Качване на файл",
+      "labelCreateFile": "Създаване на файл"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Опции",
+      "labelView": "Изглед",
+      "labelSort": "Сортиране",
+      "labelNameAsc": "Име от А до Я",
+      "labelNameDesc": "Име от Я до А",
+      "labelSizeAsc": "Размер, възходящо",
+      "labelSizeDesc": "Размер, низходящо",
+      "labelCreatedAsc": "Дата на създаване, възходящо",
+      "labelCreatedDesc": "Дата на създаване, низходящо",
+      "labelUpdatedAsc": "Дата на обновяване, възходящо",
+      "labelUpdatedDesc": "Дата на обновяване, низходящо",
+      "labelGroup": "Групиране",
+      "labelNoGroup": "Без група",
+      "labelFirstLetter": "Първа буква",
+      "labelFileType": "Тип на файла",
+      "labelCreated": "Дата на създаване",
+      "labelUpdated": "Дата на обновяване",
+      "labelTilesSmall": "Плочки (малки)",
+      "labelTilesMedium": "Плочки (средни)",
+      "labelTilesLarge": "Плочки (големи)",
+      "labelTable": "Таблица",
+      "labelSaveView": "Запазване на изгледа",
+      "labelReset": "Нулиране",
+      "labelNewFolder": "Нова папка",
+      "labelThisFolder": "Тази папка",
+      "labelUploadFile": "Качване на файл",
+      "labelNew": "Ново",
+      "labelDeleteFolder": "Изтриване на папка",
+      "labelNewRecording": "Нов запис",
+      "labelColumns": "Изглед с колони",
+      "labelNewTextFile": "Нов файл"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Няма резултати",
+      "descriptionNoResults": "Търсенето ви не върна резултати. Преформулирайте заявката си.",
+      "labelCharacters": "символа"
+    },
+    "Transcription": {
+      "labelTitle": "Транскрипт",
+      "labelLoadingMedia": "Зареждане на медията…",
+      "labelBuffering": "Буфериране на възпроизвеждането…",
+      "labelSeeking": "Зареждане на позицията…",
+      "labelPlayer": "Медиен плейър",
+      "labelPlay": "Възпроизвеждане",
+      "labelPause": "Пауза",
+      "labelSeek": "Позиция на възпроизвеждане",
+      "labelBack": "Назад с 10 секунди",
+      "labelForward": "Напред с 10 секунди",
+      "labelSpeed": "Скорост на възпроизвеждане",
+      "labelUnmute": "Включване на звука",
+      "labelMute": "Изключване на звука",
+      "labelVolume": "Сила на звука",
+      "labelHideVideo": "Скриване на видеото",
+      "labelShowVideo": "Показване на видеото",
+      "labelPlaySegment": "Възпроизвеждане на сегмент {{number}}",
+      "labelReviewed": "Проверено",
+      "labelSegments": "Сегменти",
+      "labelWords": "Думи",
+      "descriptionEmpty": "Няма намерени резултати от транскрипция.",
+      "descriptionConfidence": "Увереност: {{percent}}%",
+      "errorPlayback": "Възпроизвеждането е неуспешно. Проверете дали медийният файл е достъпен и опитайте отново.",
+      "labelEditSegment": "Редактиране на сегмент {{number}}",
+      "labelSegmentText": "Текст на сегмента",
+      "labelSave": "Запазване",
+      "labelSaving": "Запазване…",
+      "labelSaveReviewed": "Запазване и отбелязване като проверено",
+      "labelCancel": "Отказ",
+      "labelRestoreOriginal": "Възстановяване на оригиналния текст",
+      "descriptionUnsaved": "Промените се прилагат само при запазване.",
+      "errorSave": "Запазването е неуспешно. Текстът ви е запазен. Опитайте отново.",
+      "errorConflict": "Този сегмент е променен. Копирайте черновата си и презаредете изгледа, преди да запазите отново.",
+      "labelDownloadSrt": "Изтегляне на SRT",
+      "descriptionSaveBeforeDownload": "Запазете или отменете редакциите си, преди да изтеглите SRT файла."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Изглед с колони",
+      "labelRoot": "Документи",
+      "labelDetails": "Подробности за файла",
+      "labelType": "Тип",
+      "labelSize": "Размер",
+      "labelUpdated": "Обновено",
+      "labelOpen": "Отваряне на файл"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Нов файл",
+      "labelName": "Име на файла",
+      "labelCreate": "Създаване на файл",
+      "labelCancel": "Отказ",
+      "errorCreate": "Файлът не можа да бъде създаден. Проверете името на файла и правата си за запис."
+    },
+    "StorageFileActions": {
+      "labelActions": "Действия за {{name}}",
+      "labelDownloadOriginal": "Изтегляне на оригинала",
+      "labelDownloadProcessed": "Изтегляне на обработения текст",
+      "labelRename": "Преименуване",
+      "labelProcess": "Повторна обработка",
+      "labelDelete": "Изтриване на файл",
+      "labelName": "Ново име на файла",
+      "labelCancel": "Отказ",
+      "labelConfirm": "Потвърждаване",
+      "descriptionDelete": "Да се изтрият ли окончателно „{{name}}“, обработеното му съдържание и записите в индекса за търсене?",
+      "descriptionProcess": "Да се обработи ли отново „{{name}}“? Ръчните промени ще бъдат презаписани.",
+      "descriptionQueued": "Обработката е в опашката или вече се изпълнява. Проверете състоянието ѝ в списъка с файлове.",
+      "descriptionUnsupported": "Този файл в момента не може да бъде обработен. За аудио и видео е необходим настроен транскрибатор.",
+      "errorAction": "Действието е неуспешно. Проверете правата за запис, съвпаденията на имена и текущите обработки. След неуспешно преименуване може да останат и двете имена; проверете списъка, преди да опитате отново.",
+      "labelOptions": "Опции",
+      "labelEdit": "Редактиране",
+      "descriptionRename": "Преименуване на „{{name}}“. Запазете разширението на файла. Оригиналът, обработеното съдържание и индексът за търсене се обновяват заедно. Съществуващите имена никога не се презаписват.",
+      "labelCopy": "Копиране в…",
+      "labelMove": "Преместване в…",
+      "descriptionCopy": "Копиране на „{{name}}“, включително обработеното му съдържание. Източникът ще бъде запазен.",
+      "descriptionMove": "Преместване на „{{name}}“, включително обработеното му съдържание. Източникът ще бъде премахнат след успешно копиране.",
+      "descriptionTransferred": "Файлът е прехвърлен. Индексите за търсене на местоназначението се изграждат отново във фонов режим.",
+      "descriptionTransferProcessingError": "Файлът е прехвърлен, но обработката не можа да бъде стартирана. Отворете целевия файл и изберете „Повторна обработка“. Не повтаряйте прехвърлянето."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Действия за {{name}}",
+      "labelDelete": "Изтриване на папка"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Съдържание",
+      "labelSave": "Запазване",
+      "labelCancel": "Отказ",
+      "errorSave": "Запазването е неуспешно. Опитайте отново.",
+      "errorConflict": "Съдържанието е променено. Презаредете преди запазване.",
+      "errorIndex": "Запазено, но индексът за търсене не можа да бъде обновен. Запазете отново."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Избор на целева папка",
+      "labelSelectFile": "Избор на съществуващ файл",
+      "descriptionFolder": "Изберете съществуваща папка. Ще бъде прехвърлен един файл; съществуващите имена никога не се презаписват.",
+      "descriptionFile": "Изберете файл от този разговор или от достъпно хранилище. Документите и записите трябва вече да са обработени.",
+      "labelStorage": "Хранилище",
+      "labelCurrentStorage": "Текущо хранилище",
+      "labelUp": "Родителска папка",
+      "descriptionLoading": "Зареждане на файлове…",
+      "descriptionEmpty": "Няма съответстващи записи в тази папка.",
+      "descriptionNoStorages": "Няма достъпни хранилища.",
+      "descriptionPending": "Файлът се прехвърля. Изчакайте резултата.",
+      "labelCancel": "Отказ",
+      "labelUseFolder": "Използване на тази папка",
+      "labelUseFile": "Прикачване на файл",
+      "labelRetry": "Презареждане",
+      "errorLoad": "Тази папка не можа да бъде заредена. Проверете достъпа и опитайте отново.",
+      "errorCollision": "Местоназначението вече съдържа файл или обработено съдържание с това име. Изберете друга папка; нищо не е презаписано.",
+      "errorSameTarget": "Източникът и местоназначението са еднакви. Изберете друга папка.",
+      "errorSourceChanged": "Източникът се промени по време на копирането. Непълният целеви файл е премахнат. Опитайте отново.",
+      "errorBusy": "Този файл в момента се обработва. Изчакайте обработката да завърши.",
+      "errorPermission": "Нямате необходимите права за източника или местоназначението.",
+      "errorSourceDelete": "Пълният целеви файл е създаден, но източникът не можа да бъде премахнат. Проверете и двете местоположения, преди да повторите операцията.",
+      "errorCleanup": "Копирането е неуспешно. Източникът е запазен, но на местоназначението може да са останали непълни файлове. Проверете го, преди да опитате отново.",
+      "errorAction": "Операцията е неуспешна. Проверете правата, имената на файловете и двете местоположения, преди да опитате отново.",
+      "errorNotProcessed": "Този файл все още не е обработен. Първо го обработете, след което го изберете отново."
+    }
+  },
+  "_welcomeMessage": "Добре дошли в\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Документация",
+    "feedback": "Обратна връзка",
+    "help": "Помощ",
+    "labelThemeLight": "Светла",
+    "labelThemeDark": "Тъмна",
+    "labelThemeSystem": "Операционна система",
+    "labelLanguage": "Език"
+  }
+}

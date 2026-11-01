@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Annuller",
+      "errorCancel": "Genereringen kunne ikke stoppes. Prøv igen."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Du har ikke adgang til denne agent."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Ukendt model",
+      "labelThinkingOptionalOn": "Ræsonnement",
+      "labelThinkingOptionalOff": "Obligatorisk ræsonnement",
+      "labelThinkingMandatoryOn": "Uden ræsonnement",
+      "labelThinkingMandatoryOff": "Obligatorisk uden ræsonnement",
+      "descriptionFeatureVision": "Dybere forståelse af billeder",
+      "labelModelSize": "Kontekststørrelse: {{size}} tusind",
+      "labelNotFound": "Modellen blev ikke fundet",
+      "labelChanged": "Ændret"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Værktøj: lommeregner",
+      "description": "Agenten kan bruge lommeregneren i stedet for selv at udføre beregninger. Det gør agenten bedre i stand til at håndtere mere komplekse tal."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tom",
+      "labelChanged": "Ændret"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumentarkiver",
+      "labelUnknownRepository": "Ukendt dokumentarkiv",
+      "descriptionRepositoryNotFound": "Dokumentarkivet findes ikke, eller du har ikke de nødvendige rettigheder.",
+      "labelConfirmWrite": "Læsning og skrivning (bed om bekræftelse)",
+      "labelReadOnly": "Kun læsning",
+      "labelWrite": "Læsning og skrivning (automatisk)",
+      "labelGoToRepository": "Gå til arkivet",
+      "labelChanged": "Ændret"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Vejledning til rollevalg",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Beskrivelse",
+      "description": "Vælg et passende navn til agenten. Du kan også gemme en kort beskrivelse.",
+      "labelName": "Navn",
+      "labelDescription": "Beskrivelse"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Arbejdsområde",
+      "description": "Vælg det arbejdsområde, hvor agenten skal oprettes.",
+      "labelName": "Arbejdsområde",
+      "errorNoPermissions": "Du har ikke rettigheder til at oprette agenter",
+      "errorNoWorkspaceSelected": "Du har ikke valgt et arbejdsområde",
+      "labelSelectWorkspace": "Vælg et arbejdsområde."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Ekstra funktioner",
+      "description": "Udvid agenten med nyttige funktioner for at gøre arbejdet endnu lettere.",
+      "labelFileUpload": "Upload filer",
+      "descriptionFileUpload": "Brugere kan uploade filer, hvis indhold bliver tilgængeligt for agenten som tekst.",
+      "labelBatch": "Batchbehandling",
+      "descriptionBatch": "Brugere kan få filer behandlet automatisk for hver besked.",
+      "labelPursueGoal": "Arbejd mod et mål",
+      "descriptionPursueGoal": "Brugere kan angive et mål, og agenten arbejder i en løkke, indtil målet er nået.",
+      "labelDisappearingChats": "Forsvindende chats",
+      "descriptionDisappearingChats": "Chats kan automatisk slette sig selv efter 12 timer. Brugeren skal aktivere denne indstilling.",
+      "labelNightshift": "Nattevagt",
+      "descriptionNightshift": "Agenter, der kører længe, kan flyttes til nattevagten for at spare ressourcer om dagen.",
+      "labelTranscriber": "Transskriberingsværktøj",
+      "labelNoTranscriber": "Ingen automatisk transskription",
+      "descriptionTranscriber": "Transskriber automatisk uploadede lyd- og videofiler med dette transskriberingsværktøj."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Ekstra funktioner",
+      "labelFileUpload": "Upload filer",
+      "descriptionFileUpload": "Brugere kan uploade filer, hvis indhold bliver tilgængeligt for agenten som tekst.",
+      "labelBatch": "Batchbehandling",
+      "descriptionBatch": "Brugere kan få filer behandlet automatisk for hver besked.",
+      "labelPursueGoal": "Arbejd mod et mål",
+      "descriptionPursueGoal": "Brugere kan angive et mål, og agenten arbejder i en løkke, indtil målet er nået.",
+      "labelDisappearingChats": "Forsvindende chats",
+      "descriptionDisappearingChats": "Chats kan automatisk slette sig selv efter 12 timer. Brugeren skal aktivere denne indstilling.",
+      "labelNightshift": "Nattevagt",
+      "descriptionNightshift": "Agenter, der kører længe, kan flyttes til nattevagten for at spare ressourcer om dagen."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Forslag"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentation"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Arbejdsområde",
+      "labelUnknownWorkspace": "Ukendt arbejdsområde",
+      "labelGoToWorkspace": "Gå til arbejdsområdet"
+    },
+    "AgentInfo": {
+      "labelRole": "Rolle: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Søg...",
+      "tableColumnName": "Navn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Handlinger",
+      "labelOtherAgents": "Andre agenter",
+      "labelFavorites": "Favoritter",
+      "labelNoGroup": "Ingen gruppe",
+      "labelUnknownModel": "Ukendt model »{{id}}«",
+      "labelNoRepositories": "Ingen dokumentarkiver",
+      "labelUnknownRepository": "Ukendt dokumentarkiv »{{id}}«",
+      "labelRoleCount_other": "{{count}} roller",
+      "labelRoleCount_zero": "Ingen roller",
+      "labelRoleCount_one": "{{count}} rolle"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelNameAsc": "Navn A til Å",
+      "labelNameDesc": "Navn Å til A",
+      "labelGroup": "Gruppér efter",
+      "labelFavorites": "Favoritter",
+      "labelFirstLetter": "Første bogstav",
+      "labelWorkspaces": "Arbejdsområder",
+      "labelModel": "Model",
+      "labelRepositories": "Dokumentarkiver",
+      "labelRoleCount": "Antal roller",
+      "labelCards": "Kort",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil",
+      "labelAgents": "Agenter",
+      "labelNewAgent": "Ny agent",
+      "labelNoGroup": "Ingen gruppe"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Udseende",
+      "description": "Vælg en farve og et ikon, der bedst repræsenterer agenten.",
+      "labelIcon": "Ikon",
+      "labelColor": "Farve"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Fjern fra favoritter",
+      "tooltipAddFavorite": "Føj til favoritter"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Rediger",
+      "tooltipInfo": "Information",
+      "tooltipNewChat": "Ny chat"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Ukendt arbejdsområde",
+      "labelModelUnknown": "Ukendt model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Webadgang",
+      "labelGeneralAccess": "Generel adgang, websøgning",
+      "descriptionFetch": "Webhentning downloader indholdet fra en URL til chatlageret eller et tilsluttet dokumentarkiv med skriveadgang. Når filen er behandlet, kan agenten læse den udtrukne tekst og bruge den i sit svar.",
+      "descriptionSearch": "Websøgning hjælper agenten med at finde relevante sider til en søgeforespørgsel. Søgetjenesten returnerer titler, links og korte uddrag. Listen over tilladte domæner til hentning begrænser ikke websøgninger.",
+      "labelChanged": "Ændret",
+      "labelFetch": "Hentning",
+      "labelSearch": "Søgning",
+      "labelOn": "Til",
+      "labelOff": "Fra",
+      "labelAsk": "Spørg først",
+      "labelWhitelist": "Hentning begrænset til tilladte domæner",
+      "labelAll": "Hent fra alle websteder",
+      "labelEmptyWhitelist": "Ingen domæner tilladt",
+      "labelEdit": "Rediger webadgang",
+      "labelDetails": "Vis detaljer"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Værktøj: chatudvidelser",
+      "labelFeatures": "Foreslå næste besked, ændr chattens navn",
+      "description": "Agenten kan foreslå brugerens næste besked, så brugeren blot kan klikke på den ønskede besked for at fortsætte chatten. <br /> Agenten kan ændre chattens navn for brugeren, så den er lettere at finde i historikken."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Rollebeskrivelse",
+      "description": "Rollebeskrivelsen bruges ved modtagelse af en ny brugerbesked til at afgøre, hvilken rolle der skal besvare beskeden",
+      "labelName": "Navn",
+      "labelSelectionHint": "Vejledning til rollevalg",
+      "labelDeleteRole": "Slet rolle ",
+      "labelDoNotOverride": "Tilsidesæt ikke",
+      "labelOverrideModel": "Tilsidesæt model",
+      "descriptionOverrideModel": "Du kan vælge en anden model til denne rolle end agentens generelle model.",
+      "confirmDeleteDescription": "Er du sikker på, at du vil slette rollen »{{name}}«? Denne handling kan ikke fortrydes.",
+      "labelCancel": "Annuller",
+      "labelThinking": "Ræsonnement"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Den store sprogmodel, som agenten bruger, medmindre en rolle tilsidesætter den.",
+      "labelName": "Model",
+      "labelThinking": "Ræsonnement",
+      "labelThinking_optionalOn": "Ræsonnement",
+      "labelThinking_mandatoryOn": "Obligatorisk ræsonnement",
+      "labelThinking_optionalOff": "Uden ræsonnement",
+      "labelThinking_mandatoryOff": "Obligatorisk uden ræsonnement",
+      "labelSelectModel": "Vælg en model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumentarkiv",
+      "labelPathAgent": "Sti for agenten",
+      "labelPathRepository": "Sti i dokumentarkivet",
+      "labelPermission": "Rettighed",
+      "labelDeleteConnection": "Slet forbindelse",
+      "confirmDeleteTitle": "Slet forbindelse",
+      "confirmDeleteDescription": "Vil du virkelig slette denne forbindelse til dokumentarkivet »{{name}}«?",
+      "labelCancel": "Annuller",
+      "labelAddConnection": "Ekstra forbindelse",
+      "labelUnknownRepository": "Ukendt dokumentarkiv",
+      "labelConfirmWrite": "Læsning og skrivning (bed om bekræftelse)",
+      "labelReadOnly": "Kun læsning",
+      "labelWrite": "Læsning og skrivning (automatisk)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Etiket",
+      "labelMessage": "Besked",
+      "labelClose": "Luk"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Navn",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-headere",
+      "labelHeaderName": "Navn",
+      "labelHeaderValue": "Værdi",
+      "labelAddHeader": "Tilføj HTTP-header",
+      "labelDeleteConnection": "Slet forbindelse",
+      "confirmDeleteTitle": "Slet MCP",
+      "confirmDeleteDescription": "Er du sikker på, at du vil slette MCP-konfigurationen »{{name}}«?",
+      "labelCancel": "Annuller",
+      "labelDeleteMCP": "Slet MCP",
+      "labelAddMCP": "Endnu en MCP",
+      "errorInvalidUrl": "URL’en skal være gyldig",
+      "labelOAuthApp": "OAuth-app"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Data",
+      "labelConnectRepository": "Tilslut dokumentarkiv",
+      "labelToolWebAccess": "Værktøj: webadgang",
+      "labelConnectMCP": "Tilslut eksternt værktøj (MCP)",
+      "labelSupport": "Support",
+      "labelToolChatExtensions": "Værktøj: chatudvidelser",
+      "labelToolCalculator": "Værktøj: lommeregner",
+      "labelSystem": "System",
+      "labelToolPlatformAccess": "Værktøj: adgang til schorn.ai-platformen"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Ny agent",
+      "emptyDescription": "Definer agentens adfærd, dataadgang, udseende og meget mere.",
+      "labelDefinePrompt": "Definer en prompt",
+      "descriptionDefinePrompt": "En agent er kun så god som sine instruktioner. Klare rolledefinitioner mindsker hallucinationer og øger konsistensen.",
+      "labelConnectTools": "Tilslut værktøjer",
+      "descriptionConnectTools": "Tilslut for eksempel dokumentarkiver, så agenten bygger på fakta og bruger virksomhedsspecifik viden.",
+      "labelWriteDocs": "Skriv dokumentation",
+      "descriptionWriteDocs": "Hjælp brugerne med at forstå, hvad denne agent kan.",
+      "infoRoleDefinition": "Rollen definerer agentens adfærd og de værktøjer, der er til rådighed for at løse opgaven.",
+      "infoDocsDescription": "Dokumentationen kan både indeholde tekst med Markdown-formatering og forslag til beskeder, der kan sendes til agenten.",
+      "infoAppearanceDescription": "Navn, beskrivelse og farve hjælper brugerne med at finde rundt blandt de tilgængelige agenter."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Foreslåede beskeder",
+      "descriptionRecommendedMessages": "Hjælp brugerne ved at foreslå beskeder, der viser, hvordan agenten bruges bedst.",
+      "labelAddMessage": "Tilføj besked ",
+      "labelDocumentation": "Dokumentation",
+      "descriptionDocumentation": "Del yderligere oplysninger om denne agent med brugerne her",
+      "labelShowPreview": "Vis forhåndsvisning",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentationen hjælper brugerne med at bruge agenten. Den vises, når brugeren starter en ny chat.",
+      "descriptionMarkdownHelp": "Markdown er et enkelt opmærkningssprog til hurtig og nem formatering af tekst.\n\n* **Struktur:** overskrifter (`#`), lister (nummererede `1.` og unummererede `-`), vandrette linjer.\n* **Tekststil:** **fed** `**fed**`, *kursiv* `*kursiv*`, ~~gennemstreget~~ `~~gennemstreget~~`.\n* **Kode:** indlejret kode (`code`) og kodeblokke med syntaksfremhævning.\n* **Organisering:** citater (`>`) og tjeklister (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Ingen roller",
+      "descriptionNoRoles": "Der er ikke defineret roller for agenten. Uden en rolle fungerer agenten ikke.",
+      "labelAddRole": "Tilføj rolle ",
+      "infoMultipleRoles": "Agenter kan have flere roller. En rolle kan koncentrere sig bedre om en delopgave.",
+      "infoTools": "Agenter kan bruge værktøjer til bedre at besvare brugernes forespørgsler, for eksempel søge efter og oprette dokumenter."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Ny agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Opret agent",
+      "labelSaveAgent": "Gem agent",
+      "tabOverview": "Oversigt",
+      "tabPrompt": "Prompt",
+      "tabDocs": "Support",
+      "tabRoles": "Roller",
+      "tabSettings": "Indstillinger",
+      "btnCreate": "Opret",
+      "btnSave": "Gem",
+      "labelEditAgent": "Rediger agent",
+      "labelCloneAgent": "Gem som ny agent",
+      "labelDeleteAgent": "Slet agent",
+      "confirmDeleteTitle": "Slet agent",
+      "confirmDeleteDescription": "Er du sikker på, at du vil slette agenten »{{name}}«? Denne handling kan ikke fortrydes.",
+      "labelCancel": "Annuller"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Rolle ",
+      "description": "Bestemmer agentens adfærd og de værktøjer, agenten må bruge i denne sammenhæng.",
+      "tabOverview": "Oversigt",
+      "tabPrompt": "Prompt",
+      "tabDocumentRepositoryMounts": "Dokumentarkiver",
+      "tabMCPs": "Eksterne værktøjer (MCP)",
+      "tabWeb": "Internetadgang",
+      "tabChat": "Chatudvidelser",
+      "tabCalc": "Lommeregner",
+      "tabTools": "Værktøjer",
+      "tabSettings": "Indstillinger",
+      "toolWebAccess": "Internetadgang",
+      "chatExtensions": "Chatudvidelser",
+      "calculator": "Lommeregner",
+      "externalToolsMCP": "Eksterne værktøjer (MCP)",
+      "labelPrompt": "Prompt"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kassér ændringer",
+      "labelDiscardConfirm": "Vil du virkelig kassere alle ikke-gemte ændringer af denne agent?",
+      "labelCancel": "Annuller",
+      "labelDiscard": "Kassér ændringer"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Eksterne værktøjer (MCP)",
+      "changedBadge": "Ændret",
+      "unknownMcp": "Ukendt MCP",
+      "invalidUrl": "Ugyldig URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantisk søgning",
+      "labelChanged": "Ændret",
+      "labelActive": "Aktiv",
+      "labelInactive": "Inaktiv",
+      "description": "Når dataenes betydning er vigtigere end den præcise ordlyd. Kræver en indlejringsmodel.",
+      "labelUnknownModel": "Ukendt model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Søgning efter nøgleord",
+      "labelChanged": "Ændret",
+      "labelActive": "Aktiv",
+      "labelInactive": "Inaktiv",
+      "description": "Til søgning efter præcise udtryk og sætninger, som navne og betegnelser."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transskriberingsværktøj",
+      "labelChanged": "Ændret",
+      "labelUnknownTranscriber": "Ukendt transskriberingsværktøj",
+      "labelGoToTranscriber": "Gå til transskriberingsværktøjet"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Ny besked"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Venter på behandling",
+      "tooltipPaused": "Sat på pause"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Ræsonnement aktiveret",
+      "labelThinkingOff": "Ræsonnement deaktiveret",
+      "labelMessageStack": "Beskedkø",
+      "placeholderMessage": "Besked...",
+      "tooltipUploadFiles": "Upload filer",
+      "buttonPause": "Sæt på pause",
+      "buttonStartBatch": "Start batch",
+      "buttonSend": "Send",
+      "descriptionFilesPending": "Filer uploades eller behandles…",
+      "labelAttachFiles": "Vedhæft filer",
+      "labelUploadFiles": "Upload filer",
+      "labelSelectFile": "Vælg en eksisterende fil"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Tillad denne handling?",
+      "descriptionAction": "Agenten skal bruge din godkendelse for at fortsætte.",
+      "labelApprove": "Tillad",
+      "labelReject": "Afvis",
+      "labelRetry": "Prøv igen",
+      "labelSubmitting": "Behandler…",
+      "errorSubmit": "Din beslutning kunne ikke sendes. Prøv igen.",
+      "labelMCP": "Tilslut din konto",
+      "descriptionMCP": "Dette MCP-værktøj kræver, at du logger ind. Det ventende kald fortsætter automatisk, når du har tilsluttet kontoen."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Gem dokument?",
+      "descriptionWriteFile": "Agenten vil gemme dette dokument. Eksisterende indhold bliver erstattet.",
+      "labelShowContent": "Vis indhold",
+      "labelHideContent": "Skjul indhold",
+      "descriptionEmptyFile": "Dokumentet gemmes med tomt indhold."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Webhentning",
+      "description": "Konfigurer webadgang for denne rolle. Hentning og søgning kan aktiveres uafhængigt af hinanden.",
+      "labelFetch": "Aktivér webhentning",
+      "labelAskFetch": "Spørg før en side hentes",
+      "labelAccess": "Tilladte websteder",
+      "labelAll": "Alle websteder",
+      "labelWhitelist": "Liste over tilladte domæner",
+      "descriptionAccess": "HTTP(S)-filer og websider, inklusive det lokale netværk. Omdirigeringer følger de samme adgangsregler.",
+      "labelDomains": "Tilladte domæner",
+      "descriptionDomains": "Ét værtsnavn pr. linje, for eksempel example.com. Brug *.example.com til underdomæner; dette omfatter ikke selve example.com.",
+      "errorDomains": "Indtast værtsnavne eller *.example.com uden protokol, sti eller port.",
+      "descriptionEmptyWhitelist": "En tom liste blokerer alle sider.",
+      "labelSearchTitle": "Websøgning",
+      "labelSearch": "Aktivér websøgning",
+      "labelAskSearch": "Spørg før søgning på nettet",
+      "labelProvider": "Søgetjeneste",
+      "labelProviderDocs": "Tjenestens dokumentation",
+      "labelApiKey": "API-nøgle",
+      "errorApiKey": "Indtast en API-nøgle til den valgte tjeneste.",
+      "labelMarket": "Sprog og region for Staan",
+      "descriptionMarket": "For eksempel de-de eller en-us. Standard er en-us.",
+      "labelRemoveTool": "Fjern værktøj",
+      "labelConfirmRemoveTool": "Fjern webværktøj?",
+      "descriptionRemoveTool": "Indstillingerne for webhentning og websøgning, inklusive listen over tilladte domæner og API-nøglen, fjernes fra denne rolle.",
+      "labelCancel": "Annuller"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Hent webside",
+      "descriptionFetch": "Tillad agenten at downloade, gemme og behandle denne URL?",
+      "labelDestination": "Destination"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Søg på nettet",
+      "descriptionSearch": "Tillad agenten at sende denne forespørgsel til den konfigurerede søgetjeneste?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Luk",
+      "labelPending": "Kører",
+      "labelApproval": "Afventer godkendelse",
+      "labelDenied": "Afvist",
+      "labelDone": "Fuldført",
+      "errorRequest": "Forespørgslen mislykkedes"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Websøgning",
+      "labelQuery": "Søgeforespørgsel",
+      "labelEmptyResults": "Ingen resultater fundet."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Webside",
+      "labelUrl": "URL",
+      "labelRange": "Tegn {{start}}–{{end}} af {{total}}",
+      "descriptionTruncated": "Der er mere indhold i det næste afsnit.",
+      "labelEmptyPage": "Denne side indeholder ingen læsbar tekst.",
+      "labelSource": "Åbn kilde",
+      "descriptionFileReady": "Filen er gemt og behandlet. Den udtrukne tekst er direkte tilgængelig for agenten.",
+      "descriptionProcessingUnavailable": "Filen er gemt. Der er ingen udtrukket tekst; lyd og video kræver et konfigureret transskriberingsværktøj.",
+      "descriptionProcessingFailed": "Filen er gemt, men behandlingen mislykkedes eller overskred tidsgrænsen. Behandlingen kan genstartes i lageret."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopiér fil",
+      "labelMove": "Flyt fil",
+      "descriptionSuccess": "Filen er overført. Eventuelle nødvendige søgeindeks genopbygges i baggrunden.",
+      "descriptionPending": "Forbereder filoverførsel…",
+      "descriptionProcessingError": "Filen er overført, men behandlingen skal genstartes på destinationen.",
+      "errorTransfer": "Filoverførslen kunne ikke fuldføres.",
+      "labelOpenFile": "Åbn destinationsfil",
+      "descriptionDenied": "Filoverførsel afvist. Ingen fil blev overført.",
+      "descriptionApproval": "Venter på din godkendelse.",
+      "descriptionRunning": "Overfører fil…",
+      "labelClose": "Luk",
+      "labelSource": "Kilde",
+      "labelTarget": "Destination"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Tillad kopiering af denne fil?",
+      "labelMove": "Tillad flytning af denne fil?",
+      "descriptionCopy": "Agenten vil kopiere denne fil og dens behandlede indhold. Eksisterende filer på destinationen overskrives aldrig.",
+      "descriptionMove": "Agenten vil flytte denne fil og dens behandlede indhold. Kilden fjernes, når kopieringen er gennemført.",
+      "labelSource": "Kilde",
+      "labelTarget": "Destination"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Dette MCP-værktøj kræver, at du logger ind. Det ventende kald fortsætter automatisk, når du har tilsluttet kontoen.",
+      "labelConnect": "Tilslut min konto"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-værktøj",
+      "labelDiscover": "Find tilgængelige værktøjer",
+      "labelPending": "Kører",
+      "labelDone": "Fuldført",
+      "labelApproval": "Login påkrævet",
+      "labelDenied": "Afvist",
+      "errorRequest": "Forespørgslen mislykkedes",
+      "labelArguments": "Input",
+      "labelResult": "Resultat",
+      "labelClose": "Luk"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-app",
+      "labelSearch": "Søgeforbindelse",
+      "labelAutomatic": "Ingen konfigureret OAuth-app",
+      "labelNone": "Ingen forbindelse valgt",
+      "labelMissing": "Forbindelsen er ikke tilgængelig",
+      "descriptionOAuth": "Valgfrit: Vælg en registreret OAuth-app til denne MCP-server. Konfigurer dens URL separat i denne agent.",
+      "descriptionSearch": "Loginoplysninger til Staan og Brave administreres centralt under Indstillinger → Forbindelser.",
+      "errorMissing": "Denne forbindelse er ikke længere tilgængelig. Vælg en anden forbindelse.",
+      "descriptionEmpty": "Der er ikke konfigureret en passende forbindelse. Administrer forbindelser under Indstillinger → Forbindelser."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenter",
+    "emptyTitle": "Ingen agenter",
+    "emptyDescription": "Der er ikke oprettet nogen agenter endnu.",
+    "labelNewAgent": "Ny agent",
+    "helpSearchTitle": "Søgning",
+    "helpSearchDescription": "Du kan søge efter agenter. Søgningen omfatter blandt andet agentens navn, beskrivelse og model.",
+    "helpSortTitle": "Sortering og gruppering",
+    "helpSortDescription": "Agenter kan sorteres efter navn og inddeles i forskellige grupper. De kan vises som felter eller som en tabel."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Denne MCP-udbyder kræver en registreret OAuth-app. Bed en administrator om at oprette en OAuth-app med Client ID og Client Secret under Indstillinger → Forbindelser, og vælg den i agentens MCP-indstillinger. Opret derefter forbindelse igen fra chatten.",
+    "errorStart": "MCP-godkendelsen kunne ikke startes.",
+    "errorCallback": "MCP-godkendelsen mislykkedes eller er udløbet. Gå tilbage til chatten, og prøv igen."
+  }
+}

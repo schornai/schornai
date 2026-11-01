@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Popis",
+      "description": "Vyberte vhodný názov pracovného priestoru. Môžete uložiť aj krátky popis.",
+      "labelName": "Názov",
+      "labelDescription": "Popis",
+      "buttonSave": "Uložiť",
+      "buttonReset": "Obnoviť"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentácia",
+      "description": "Tu zdieľajte s používateľmi ďalšie informácie o tomto pracovnom priestore.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Uložiť",
+      "buttonReset": "Obnoviť"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Mapovania SSO",
+      "description": "Vyberte, ktorá skupina SSO má prístup do pracovného priestoru a s akým oprávnením.",
+      "labelRoleUser": "Skupina používateľov",
+      "labelRoleEditor": "Skupina editorov",
+      "labelRoleWorkspaceAdmin": "Skupina správcov pracovného priestoru",
+      "placeholderNoGroup": "Nie je priradená žiadna skupina",
+      "descriptionRoleUser": "Môže zobrazovať obsah pracovného priestoru (agentov, prepisovače, úložiská dokumentov atď.), ale nemôže ho upravovať.",
+      "descriptionRoleEditor": "Môže zobrazovať obsah pracovného priestoru a tiež ho upravovať.",
+      "descriptionRoleWorkspaceAdmin": "Môže spravovať pracovný priestor a vytvárať, upravovať a mazať agentov, prepisovače, úložiská dokumentov atď.",
+      "buttonSave": "Uložiť",
+      "buttonReset": "Obnoviť"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatický používateľ",
+      "description": "Ak je zapnutá možnosť „Automatický používateľ“, každý, kto sa môže prihlásiť do boxu, automaticky získa v tejto organizácii oprávnenie používateľa.",
+      "labelActive": "Automatický používateľ zapnutý",
+      "labelInactive": "Automatický používateľ vypnutý"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nový pracovný priestor",
+      "descriptionWorkspace": "Vyberte názov a voliteľný popis. Ďalšie nastavenia môžete upraviť po vytvorení pracovného priestoru.",
+      "labelName": "Názov",
+      "labelDescription": "Popis",
+      "labelCreate": "Vytvoriť pracovný priestor",
+      "labelCancel": "Zrušiť",
+      "errorCreate": "Pracovný priestor sa nepodarilo vytvoriť. Skúste to znova."
+    },
+    "WorkspaceCard": {
+      "labelType": "Pracovný priestor"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Upraviť pracovný priestor",
+      "tooltipInfo": "Otvoriť pracovný priestor"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Pridať medzi obľúbené",
+      "tooltipRemoveFavorite": "Odobrať z obľúbených"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Hľadať pracovné priestory",
+      "labelName": "Názov",
+      "labelDescription": "Popis",
+      "labelRole": "Vaša rola",
+      "labelActions": "Akcie",
+      "labelFavorites": "Obľúbené",
+      "labelOtherWorkspaces": "Ďalšie pracovné priestory",
+      "labelEmpty": "Žiadne pracovné priestory",
+      "descriptionEmpty": "Zatiaľ nemáte prístup k žiadnemu pracovnému priestoru.",
+      "labelNoResults": "Žiadne výsledky",
+      "descriptionNoResults": "Skúste iný hľadaný výraz."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Zobrazenie",
+      "labelSort": "Zoradenie",
+      "labelNameAsc": "Názov od A po Z",
+      "labelNameDesc": "Názov od Z po A",
+      "labelGroup": "Zoskupiť podľa",
+      "labelNoGroup": "Bez zoskupenia",
+      "labelFavorites": "Obľúbené",
+      "labelFirstLetter": "Prvé písmeno",
+      "labelCards": "Karty",
+      "labelTable": "Tabuľka",
+      "labelSaveView": "Uložiť zobrazenie",
+      "labelReset": "Obnoviť"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Vytvoriť pracovný priestor"
+    }
+  },
+  "page": {
+    "labelYourRole": "Vaša rola",
+    "labelEmpty": "Zatiaľ žiadny obsah",
+    "descriptionEmpty": "V tomto pracovnom priestore zatiaľ nie sú dostupní žiadni agenti, úložiská dokumentov ani prepisovače.",
+    "labelTitle": "Pracovné priestory"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Előzmények"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Hiba",
+      "idle": "Tétlen",
+      "running": "Fut",
+      "success": "Sikeres"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Rögzítés",
+      "actionUnpin": "Rögzítés feloldása",
+      "actionDelete": "Törlés"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Keresés…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelLabelAsc": "Címke A–Z",
+      "labelLabelDesc": "Címke Z–A",
+      "labelCreatedAsc": "Létrehozás dátuma csökkenő",
+      "labelCreatedDesc": "Létrehozás dátuma növekvő",
+      "labelUpdatedAsc": "Frissítés dátuma csökkenő",
+      "labelUpdatedDesc": "Frissítés dátuma növekvő",
+      "labelGroup": "Csoportosítás",
+      "labelPinned": "Rögzített",
+      "labelState": "Állapot",
+      "labelType": "Típus",
+      "labelCreated": "Létrehozás dátuma",
+      "labelUpdated": "Frissítés dátuma",
+      "labelList": "Lista",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás",
+      "labelNoGroup": "Nincs csoportosítás"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Nincsenek tevékenységek",
+      "emptyDescription": "Itt jelennek meg a korábbi beszélgetések és átiratok.",
+      "emptyLabelAgents": "Ügynökök"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Ma",
+      "groupTimeLast7Days": "Elmúlt 7 nap",
+      "groupTimeLast30Days": "Elmúlt 30 nap",
+      "groupTimeOther": "Egyéb",
+      "groupPinned": "Rögzített",
+      "groupNotPinned": "Nincs rögzítve",
+      "groupUnknown": "Ismeretlen",
+      "groupChat": "Beszélgetés",
+      "groupTranscription": "Átírás",
+      "groupReindex": "Újraindexelés",
+      "labelReindex": "Újraindexelés",
+      "labelPinned": "Rögzített"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Címke",
+      "tableColumnType": "Típus",
+      "tableColumnState": "Állapot",
+      "tableColumnCreated": "Létrehozva",
+      "tableColumnUpdated": "Frissítve",
+      "tableColumnPinned": "Rögzített",
+      "tableColumnNameActions": "Műveletek",
+      "groupTimeToday": "Ma",
+      "groupTimeLast7Days": "Elmúlt 7 nap",
+      "groupTimeLast30Days": "Elmúlt 30 nap",
+      "groupTimeOther": "Egyéb",
+      "groupPinned": "Rögzített",
+      "groupNotPinned": "Nincs rögzítve",
+      "groupUnknown": "Ismeretlen",
+      "groupChat": "Beszélgetés",
+      "groupTranscription": "Átírás",
+      "groupReindex": "Újraindexelés",
+      "labelReindex": "Újraindexelés",
+      "labelPinned": "Rögzített"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Előzmények",
+      "labelPinned": "Rögzített",
+      "labelToday": "Ma",
+      "labelLast7Days": "Elmúlt 7 nap",
+      "labelLast30Days": "Elmúlt 30 nap",
+      "labelEmpty": "Üres"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Tevékenység",
+      "actionPin": "Rögzítés",
+      "actionUnpin": "Rögzítés feloldása",
+      "actionDelete": "Törlés",
+      "labelAgent": "Ügynök – {{name}}",
+      "actionNewChat": "Új beszélgetés",
+      "labelInfo": "Információ"
+    }
+  }
+}

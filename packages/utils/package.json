@@ -1,0 +1,17 @@
+{
+  "name": "@schornio/aibox-package-utils",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "devDependencies": {
+    "@schornio/aibox-eslint-config": "*",
+    "eslint": "^10.13.0"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "packages/utils"
+  }
+}

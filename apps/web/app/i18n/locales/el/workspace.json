@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Περιγραφή",
+      "description": "Επιλέξτε ένα κατάλληλο όνομα για τον χώρο εργασίας. Μπορείτε επίσης να αποθηκεύσετε μια σύντομη περιγραφή.",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή",
+      "buttonSave": "Αποθήκευση",
+      "buttonReset": "Επαναφορά"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Τεκμηρίωση",
+      "description": "Μοιραστείτε εδώ πρόσθετες πληροφορίες για αυτόν τον χώρο εργασίας με τους χρήστες σας.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Αποθήκευση",
+      "buttonReset": "Επαναφορά"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Αντιστοιχίσεις SSO",
+      "description": "Επιλέξτε ποια ομάδα SSO έχει πρόσβαση στον χώρο εργασίας και με ποια δικαιώματα.",
+      "labelRoleUser": "Ομάδα χρηστών",
+      "labelRoleEditor": "Ομάδα συντακτών",
+      "labelRoleWorkspaceAdmin": "Ομάδα διαχειριστών χώρου εργασίας",
+      "placeholderNoGroup": "Δεν έχει αντιστοιχιστεί ομάδα",
+      "descriptionRoleUser": "Μπορεί να βλέπει το περιεχόμενο του χώρου εργασίας (πράκτορες, απομαγνητοφωνητές, αποθετήρια εγγράφων κ.λπ.), αλλά δεν μπορεί να το επεξεργάζεται.",
+      "descriptionRoleEditor": "Μπορεί να βλέπει και επιπλέον να επεξεργάζεται το περιεχόμενο του χώρου εργασίας.",
+      "descriptionRoleWorkspaceAdmin": "Μπορεί να διαχειρίζεται τον χώρο εργασίας και να δημιουργεί, να επεξεργάζεται και να διαγράφει πράκτορες, απομαγνητοφωνητές, αποθετήρια εγγράφων κ.λπ.",
+      "buttonSave": "Αποθήκευση",
+      "buttonReset": "Επαναφορά"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Αυτόματος χρήστης",
+      "description": "Όταν ο «Αυτόματος χρήστης» είναι ενεργός, όλοι όσοι μπορούν να συνδεθούν στο box αποκτούν αυτόματα δικαιώματα χρήστη σε αυτόν τον οργανισμό.",
+      "labelActive": "Ο αυτόματος χρήστης είναι ενεργός",
+      "labelInactive": "Ο αυτόματος χρήστης είναι ανενεργός"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Νέος χώρος εργασίας",
+      "descriptionWorkspace": "Επιλέξτε ένα όνομα και μια προαιρετική περιγραφή. Μπορείτε να διαμορφώσετε πρόσθετες ρυθμίσεις μετά τη δημιουργία του χώρου εργασίας.",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή",
+      "labelCreate": "Δημιουργία χώρου εργασίας",
+      "labelCancel": "Ακύρωση",
+      "errorCreate": "Δεν ήταν δυνατή η δημιουργία του χώρου εργασίας. Δοκιμάστε ξανά."
+    },
+    "WorkspaceCard": {
+      "labelType": "Χώρος εργασίας"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Επεξεργασία χώρου εργασίας",
+      "tooltipInfo": "Άνοιγμα χώρου εργασίας"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Προσθήκη στα αγαπημένα",
+      "tooltipRemoveFavorite": "Αφαίρεση από τα αγαπημένα"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Αναζήτηση χώρων εργασίας",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή",
+      "labelRole": "Ο ρόλος σας",
+      "labelActions": "Ενέργειες",
+      "labelFavorites": "Αγαπημένα",
+      "labelOtherWorkspaces": "Άλλοι χώροι εργασίας",
+      "labelEmpty": "Δεν υπάρχουν χώροι εργασίας",
+      "descriptionEmpty": "Δεν έχετε ακόμη πρόσβαση σε χώρο εργασίας.",
+      "labelNoResults": "Δεν υπάρχουν αποτελέσματα",
+      "descriptionNoResults": "Δοκιμάστε διαφορετικό όρο αναζήτησης."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelNameAsc": "Όνομα από Α έως Ω",
+      "labelNameDesc": "Όνομα από Ω έως Α",
+      "labelGroup": "Ομαδοποίηση κατά",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelFavorites": "Αγαπημένα",
+      "labelFirstLetter": "Πρώτο γράμμα",
+      "labelCards": "Κάρτες",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Δημιουργία χώρου εργασίας"
+    }
+  },
+  "page": {
+    "labelYourRole": "Ο ρόλος σας",
+    "labelEmpty": "Δεν υπάρχει ακόμη περιεχόμενο",
+    "descriptionEmpty": "Δεν υπάρχουν ακόμη διαθέσιμοι πράκτορες, αποθετήρια εγγράφων ή απομαγνητοφωνητές σε αυτόν τον χώρο εργασίας.",
+    "labelTitle": "Χώροι εργασίας"
+  }
+}

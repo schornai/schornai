@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Ikkopja t-test tal-feedback fil-clipboard",
+      "feedbackText": "Test tal-feedback",
+      "feedbackTextRecommendation": "Grazzi, sempliċement ibgħatilna dan it-test fuq ",
+      "sendFeedback": "Ibgħat feedback bl-email",
+      "showFeedbackText": "Uri t-test tal-feedback",
+      "thankYou": "Grazzi talli ħadt il-ħin biex tagħti feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Ħassar il-messaġġi kollha ta’ żball",
+      "actionDeleteAllCancel": "Ikkanċella",
+      "actionDeleteAllExplainer": "Żgur li trid tħassar il-messaġġi kollha ta’ żball miġbura? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "actionDeleteAllShort": "Ħassar messaġġi ta’ żball",
+      "actionDeselectAll": "Neħħi l-għażla tal-messaġġi kollha ta’ żball",
+      "actionSelectAll": "Agħżel il-messaġġi kollha ta’ żball",
+      "explainer": "Il-messaġġi ta’ żball huma wkoll parti mill-feedback. Xi problemi jiġu solvuti awtomatikament mis-sistema u l-operazzjonijiet tiegħek ikomplu mingħajr interruzzjoni. Madankollu, jgħinna nkunu infurmati dwar dawn l-iżbalji sabiex inkunu nistgħu nsolvuhom.",
+      "explainerSecrecy": "Kun żgur li l-messaġġi ta’ żball ma fihomx data kunfidenzjali u/jew personali. Is-sistema hija mfassla fil-prinċipju biex tiżgura li l-messaġġi ta’ żball ma jinkludux data bħal din. Madankollu, il-messaġġi ta’ żball jirrigwardaw ċirkostanzi mhux previsti. Għalhekk, irrevedi l-feedback personalment għal raġunijiet ta’ sigurtà.",
+      "explainerSecrecyHeading": "Ebda data kunfidenzjali",
+      "heading": "Żbalji",
+      "tableColumnPartOfFeedback": "Parti mill-feedback",
+      "tableColumnDate": "Data",
+      "tableColumnErrorMessage": "Messaġġ ta’ żball"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Ma ngħatat ebda klassifikazzjoni bi stilel",
+      "starRating": "{{stars}} minn 5 stilel"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Armi l-feedback",
+      "discardFeedbackSub": "Żgur li trid tarmi l-feedback tiegħek? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "discardFeedbackCancel": "Ikkanċella",
+      "infoSecrecy": "Kun żgur li l-feedback li tibgħat ma fihx data kunfidenzjali u/jew personali.",
+      "writeFeedback": "Ikteb feedback",
+      "writeFeedbackSub": "Napprezzaw kull feedback, kemm pożittiv kif ukoll negattiv."
+    }
+  },
+  "page": {
+    "headingLine1": "Għinna ntejbu schorn.ai in a Box,",
+    "headingLine2": "agħtina l-feedback tiegħek",
+    "headingMain": "Feedback"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Name",
+      "labelFirstName": "Vorname",
+      "labelLastName": "Nachname",
+      "buttonSave": "Speichern",
+      "buttonReset": "Zurücksetzen"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Bild entfernen",
+      "alertDelete": "Bild entfernen",
+      "alertDeleteExplainer": "Wollen Sie Ihr Bild wirklich entfernen?",
+      "alertDeleteCancel": "Abbrechen"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Bild hochladen"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Berechtigungen",
+      "tableColumnName": "Name",
+      "tableColumnPermission": "Berechtigung",
+      "tableColumnDescription": "Beschreibung",
+      "infoEmpty": "Keine Berechtiungen",
+      "infoEmptyDescription": "Keine Funktionen der schorn.ai Box stehen zur Verfügung.",
+      "infoEmptyAdminDescription": "Als Administrator:in können Sie den ersten Arbeitsplatz erstellen.",
+      "infoEmptyAdminAction": "Ersten Arbeitsplatz erstellen",
+      "infoUser": "Können Inhalte einer Organisation sehen (Chatbots, Transkriptoren, Dokumente, Ablagen, etc.), jedoch nicht bearbeiten.",
+      "infoEditor": "Können Inhalte einer Organisation sehen und darüber hinaus auch bearbeiten (Neue Chatbots, Dokumente bearbeiten, löschen, etc. )",
+      "infoAdmin": "Können in allen Organisationen lesen und schreiben und darüber hinaus auch noch System-Einstellungen treffen (XRAG hochladen, Farben ändern, etc.) und Benutzer:innen verwalten"
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Personalisieren",
+    "infoPersonalizeDescription": "Hier können Sie Ihr Profilbild hochladen und Ihren Namen anpassen."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Neues Passwort gesetzt",
+    "description": "Das Setzen des neuen Passworts war erfolgreich. Sie sind nun mit dem neuen Passwort angemeldet.",
+    "buttonBackToDashboard": "Zum Dashboard"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Verbindungen",
+      "descriptionConnections": "Deine persönlichen OAuth-Verbindungen zu MCP-Servern. Trennen entfernt die hier gespeicherten Zugangsdaten. Bereits laufende Aufrufe können noch abschließen; Berechtigungen beim Anbieter kannst du dort widerrufen.",
+      "labelDisconnect": "Verbindung trennen",
+      "descriptionEmpty": "Verbinde dein Konto im Chat, sobald ein MCP-Werkzeug eine Anmeldung benötigt.",
+      "labelEmpty": "Noch keine Verbindungen",
+      "labelInfo": "Informationen zu Verbindungen",
+      "errorDisconnect": "Die Verbindung konnte nicht getrennt werden. Bitte erneut versuchen."
+    }
+  }
+}

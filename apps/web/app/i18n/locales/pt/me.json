@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nome",
+      "labelFirstName": "Nome próprio",
+      "labelLastName": "Apelido",
+      "buttonSave": "Guardar",
+      "buttonReset": "Repor"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Remover imagem",
+      "alertDelete": "Remover imagem",
+      "alertDeleteExplainer": "Tem a certeza de que pretende remover a sua imagem?",
+      "alertDeleteCancel": "Cancelar"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Carregar imagem"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Permissões",
+      "tableColumnName": "Nome",
+      "tableColumnPermission": "Permissão",
+      "tableColumnDescription": "Descrição",
+      "infoEmpty": "Sem permissões",
+      "infoEmptyDescription": "Não estão disponíveis funcionalidades do schorn.ai box.",
+      "infoEmptyAdminDescription": "Como administrador, pode criar o primeiro espaço de trabalho.",
+      "infoEmptyAdminAction": "Criar o primeiro espaço de trabalho",
+      "infoUser": "Pode ver o conteúdo da organização, como chatbots, transcritores, documentos e repositórios, mas não o pode editar.",
+      "infoEditor": "Pode ver e editar o conteúdo da organização, incluindo criar chatbots e editar ou eliminar documentos.",
+      "infoAdmin": "Pode ler e escrever em todas as organizações, gerir as definições do sistema, como carregar XRAG e alterar cores, e gerir utilizadores."
+    }
+  },
+  "page": {
+    "title": "Perfil",
+    "infoPersonalize": "Personalizar",
+    "infoPersonalizeDescription": "Pode carregar a sua imagem de perfil e alterar o seu nome aqui."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nova palavra-passe definida",
+    "description": "A nova palavra-passe foi definida com sucesso. Tem agora sessão iniciada com a nova palavra-passe.",
+    "buttonBackToDashboard": "Ir para o painel"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Ligações",
+      "descriptionConnections": "As suas ligações OAuth pessoais a servidores MCP. Desligar remove as credenciais aqui guardadas. As chamadas em curso podem terminar; revogue as permissões diretamente junto do fornecedor.",
+      "labelDisconnect": "Desligar",
+      "descriptionEmpty": "Ligue a sua conta na conversa quando uma ferramenta MCP exigir que inicie sessão.",
+      "labelEmpty": "Ainda sem ligações",
+      "labelInfo": "Sobre as ligações",
+      "errorDisconnect": "Não foi possível desligar a ligação. Tente novamente."
+    }
+  }
+}

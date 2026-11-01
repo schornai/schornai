@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transkription",
+    "description": "Transkriberare gör talat innehåll, som möten, intervjuer och samtal, strukturerat och sökbart för AI."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transkriberare"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Sök..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelNameAsc": "Namn A till Ö",
+      "labelNameDesc": "Namn Ö till A",
+      "labelGroup": "Gruppera efter",
+      "labelNoGroup": "Ingen grupp",
+      "labelFavorites": "Favoriter",
+      "labelFirstLetter": "Första bokstaven",
+      "labelWorkspaces": "Arbetsytor",
+      "labelModel": "Modell",
+      "labelCards": "Kort",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ",
+      "labelTranscribers": "Transkriberare",
+      "labelNewTranscriber": "Ny transkriberare"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Andra transkriberare",
+      "labelFavorites": "Favoriter",
+      "labelNoGroup": "Ingen grupp",
+      "labelUnknownModel": "Okänd modell ”{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Namn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Åtgärder",
+      "emptyTitle": "Inga transkriberare",
+      "emptyDescription": "Inga transkriberare har skapats ännu.",
+      "labelOtherTranscribers": "Andra transkriberare",
+      "labelFavorites": "Favoriter",
+      "labelNoGroup": "Ingen grupp",
+      "labelUnknownModel": "Okänd modell ”{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Okänd modell",
+      "labelUnknownWorkspace": "Okänd arbetsyta"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Redigera",
+      "tooltipInfo": "Information",
+      "tooltipNewTranscription": "Ny transkription",
+      "tooltipRecord": "Spela in ljud"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ta bort från favoriter",
+      "tooltipAddFavorite": "Lägg till i favoriter"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Ändrad",
+      "labelEmpty": "Tom"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Ny transkriberare",
+      "labelTranscriber": "Transkriberare",
+      "labelCreateTranscriber": "Skapa transkriberare",
+      "labelSaveTranscriber": "Spara transkriberare",
+      "labelCloneTranscriber": "Spara som ny transkriberare",
+      "labelDeleteTranscriber": "Ta bort transkriberare",
+      "confirmDeleteTitle": "Ta bort transkriberare",
+      "confirmDeleteDescription": "Vill du verkligen ta bort transkriberaren ”{{name}}”? Åtgärden kan inte ångras.",
+      "labelCancel": "Avbryt",
+      "tabOverview": "Översikt",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Inställningar",
+      "btnCreate": "Skapa",
+      "btnSave": "Spara"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kasta ändringar",
+      "labelDiscardConfirm": "Vill du verkligen kasta alla osparade ändringar av den här transkriberaren?",
+      "labelCancel": "Avbryt",
+      "labelDiscard": "Kasta ändringar"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Ny transkriberare",
+      "emptyDescription": "Ange transkriberarens beteende och utseende.",
+      "labelDefinePrompt": "Ange en prompt",
+      "descriptionDefinePrompt": "En kort prompt hjälper transkriberaren att förstå och skriva namn, facktermer och produktnamn på det sätt du förväntar dig.",
+      "helpTitle": "Hjälp",
+      "helpPromptDescription": "Med en prompt behöver transkriptionen färre korrigeringar i efterhand och resultatet blir mer konsekvent för längre eller ämnesspecifika inspelningar."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "Prompten skickas till transkriptionsmodellen Whisper för att hjälpa den att förstå ämnesspecifika termer."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Utseende",
+      "description": "Välj en färg och en ikon som bäst representerar transkriberaren.",
+      "labelIcon": "Ikon",
+      "labelColor": "Färg"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Beskrivning",
+      "description": "Välj ett lämpligt namn för transkriberaren. Du kan även spara en kort beskrivning.",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modell",
+      "description": "Transkriptionsmodellen som transkriberaren använder.",
+      "labelName": "Modell",
+      "labelSelectModel": "Välj en modell"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Arbetsyta",
+      "description": "Välj den arbetsyta där transkriberaren ska skapas.",
+      "labelName": "Arbetsyta",
+      "labelSelectWorkspace": "Välj en arbetsyta."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Filer",
+      "tabInfo": "Information"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Spela in ljud",
+      "labelReady": "Redo",
+      "labelRequesting": "Ansluter mikrofon",
+      "labelRecording": "Spelar in",
+      "labelStopping": "Avslutar inspelning",
+      "labelRecorded": "Inspelningen är klar",
+      "labelUploading": "Sparar",
+      "labelSaved": "Sparat",
+      "labelDuration": "Inspelningens längd",
+      "labelStart": "Starta inspelning",
+      "labelStop": "Stoppa inspelning",
+      "labelRecordAgain": "Spela in igen",
+      "labelCancel": "Avbryt",
+      "labelTranscribe": "Spara och transkribera",
+      "labelDiscard": "Kasta inspelning",
+      "labelPreview": "Förhandslyssna på inspelning",
+      "descriptionSaved": "Inspelningen har sparats. Transkriberingen startar automatiskt.",
+      "errorUnsupported": "Ljudinspelning kräver en webbläsare som stöds och en säker anslutning (HTTPS eller localhost).",
+      "errorPermission": "Åtkomst till mikrofonen nekades. Tillåt mikrofonåtkomst i webbläsaren och försök igen.",
+      "errorRecording": "Mikrofonen kunde inte spela in ljud. Kontrollera enheten och försök igen.",
+      "errorEmpty": "Inspelningen innehåller inget ljud. Spela in igen.",
+      "errorUpload": "Inspelningen kunde inte sparas. Du kan lyssna på den och försöka ladda upp igen.",
+      "descriptionScreenAwake": "Skärmen hålls vaken under inspelningen.",
+      "descriptionScreenSleep": "Skärmen kan inte hållas vaken. Håll sidan öppen och förhindra att skärmen låses automatiskt.",
+      "descriptionCloseBlocked": "Stoppa inspelningen och spara eller kasta den innan du stänger. Vänta tills eventuella uppladdningar är klara.",
+      "labelClose": "Stäng"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatiska omförsök",
+      "labelLevel": "Nivå",
+      "description": "Om resultaten är osäkra eller innehåller många upprepningar kan transkriberaren försöka tolka ett ljudavsnitt igen. Fler försök kan förbättra igenkänningen, men tar längre tid.",
+      "labelFast": "Snabb",
+      "labelBalanced": "Balanserad",
+      "labelThorough": "Grundlig",
+      "descriptionFast": "Ett försök per ljudavsnitt, utan automatiska omförsök.",
+      "descriptionBalanced": "Upp till 3 försök per ljudavsnitt.",
+      "descriptionThorough": "Upp till 6 försök per ljudavsnitt.",
+      "errorLevel": "Välj en av de tre nivåerna."
+    }
+  },
+  "page": {
+    "labelTitle": "Transkription",
+    "emptyTitle": "Inga transkriberare",
+    "emptyDescription": "Inga transkriberare har skapats ännu.",
+    "labelNewTranscriber": "Ny transkriberare",
+    "helpTitle": "Hjälp",
+    "helpSearchDescription": "Du kan söka efter transkriberare. Sökningen omfattar bland annat transkriberarens namn, beskrivning och modell.",
+    "helpSortDescription": "Transkriberare kan sorteras efter namn och delas in i olika grupper. De kan visas som kort eller som en tabell."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Jūs jau esat pierakstījies",
+      "backToDashboard": "Atpakaļ uz informācijas paneli",
+      "signOut": "Izrakstīties"
+    },
+    "PasswordSignIn": {
+      "header": "E-pasts",
+      "headerSub": "Pierakstīties ar e-pastu un paroli",
+      "inputEmailLabel": "E-pasts",
+      "inputPasswordLabel": "Parole",
+      "buttonSignIn": "Pierakstīties ar e-pastu",
+      "buttonReset": "Atiestatīt paroli"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Pierakstīties ar SSO pakalpojuma sniedzēju",
+      "buttonSignIn": "Pierakstīties ar {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Atiestatīt paroli",
+      "descriptionKey": "Ievadiet savu e-pasta adresi un administratora piešķirto atiestatīšanas atslēgu. Atslēgu var izmantot vienu reizi, un tā ir derīga 7 dienas.",
+      "labelEmail": "E-pasts",
+      "labelKey": "Paroles atiestatīšanas atslēga",
+      "labelPassword": "Jauna parole",
+      "labelPasswordAgain": "Atkārtojiet jauno paroli",
+      "descriptionPassword": "Izmantojiet vismaz 6 rakstzīmes un ievērojiet savas organizācijas paroļu prasības.",
+      "errorEmail": "Ievadiet derīgu e-pasta adresi.",
+      "errorKey": "Ievadiet atiestatīšanas atslēgu.",
+      "errorPassword": "Parolei jāsatur vismaz 6 rakstzīmes.",
+      "errorPasswordAgain": "Paroles nesakrīt.",
+      "errorReset": "Neizdevās mainīt paroli. Pārbaudiet e-pasta adresi, atslēgu un paroļu prasības. Atslēgas ar beigušos derīgumu vai jau izmantotas atslēgas nav derīgas.",
+      "descriptionSuccess": "Jūsu parole ir mainīta. Tagad varat pierakstīties ar jauno paroli.",
+      "labelReset": "Saglabāt paroli",
+      "labelSignIn": "Atpakaļ uz pierakstīšanos"
+    }
+  }
+}

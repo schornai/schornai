@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Repositorios de documentos",
+    "description": "Los repositorios de documentos crean una base de conocimientos centralizada, estructurada y fiable a la que los modelos de IA pueden acceder según el contexto."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Repositorio de documentos"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Buscar..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Opciones",
+      "labelView": "Vista",
+      "labelSort": "Ordenar",
+      "labelNameAsc": "Nombre de A a Z",
+      "labelNameDesc": "Nombre de Z a A",
+      "labelGroup": "Agrupar por",
+      "labelNoGroup": "Sin grupo",
+      "labelFavorites": "Favoritos",
+      "labelFirstLetter": "Primera letra",
+      "labelWorkspaces": "Espacios de trabajo",
+      "labelModel": "Transcriptor",
+      "labelCards": "Tarjetas",
+      "labelTable": "Tabla",
+      "labelSaveView": "Guardar vista",
+      "labelReset": "Restablecer",
+      "labelDocumentRepositories": "Repositorios de documentos",
+      "labelNewDocumentRepository": "Nuevo repositorio de documentos"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Otros repositorios de documentos",
+      "labelFavorites": "Favoritos",
+      "labelOtherTranscribers": "Otros transcriptores",
+      "labelUnknownTranscriber": "Transcriptor desconocido «{{id}}»"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nombre",
+      "tableColumnCapablilities": "Capacidades",
+      "tableColumnNameActions": "Acciones",
+      "emptyTitle": "Sin repositorios de documentos",
+      "emptyDescription": "Todavía no se ha creado ningún repositorio de documentos.",
+      "labelOtherDocumentRepositories": "Otros repositorios de documentos",
+      "labelFavorites": "Favoritos",
+      "labelNoGroup": "Sin grupo",
+      "labelUnknownTranscriber": "Transcriptor desconocido «{{id}}»"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Espacio de trabajo desconocido"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Editar",
+      "tooltipInfo": "Información"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Quitar de favoritos",
+      "tooltipAddFavorite": "Añadir a favoritos"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nuevo repositorio de documentos",
+      "labelDocumentRepository": "Repositorio de documentos",
+      "labelDocumentRepositoryDropdown": "Repositorio de documentos",
+      "labelCreateDocumentRepository": "Crear repositorio de documentos",
+      "labelSaveDocumentRepository": "Guardar repositorio de documentos",
+      "labelCloneDocumentRepository": "Guardar como nuevo repositorio de documentos",
+      "labelDeleteDocumentRepository": "Eliminar repositorio de documentos",
+      "confirmDeleteTitle": "Eliminar repositorio de documentos",
+      "confirmDeleteDescription": "¿Seguro que quieres eliminar el repositorio de documentos «{{name}}»? Esta acción no se puede deshacer.",
+      "labelCancel": "Cancelar",
+      "tabOverview": "Resumen",
+      "tabFeatures": "Funciones",
+      "tabSettings": "Configuración",
+      "btnCreate": "Crear",
+      "btnSave": "Guardar"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Descartar cambios",
+      "labelDiscardConfirm": "¿Seguro que quieres descartar todos los cambios sin guardar de este repositorio de documentos?",
+      "labelCancel": "Cancelar",
+      "labelDiscard": "Descartar cambios"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nuevo repositorio de documentos",
+      "emptyDescription": "Define el comportamiento y la apariencia del repositorio de documentos.",
+      "checklistSemanticSearchTitle": "Activar búsqueda semántica",
+      "checklistSemanticSearchDescription": "Activa la búsqueda semántica para mejorar la calidad de los resultados.",
+      "checklistTranscriberTitle": "Seleccionar transcriptor",
+      "checklistTranscriberDescription": "Selecciona un transcriptor para transcribir automáticamente todos los archivos de audio y vídeo subidos.",
+      "helpTitle": "Ayuda",
+      "helpKeywordSearch": "Búsqueda clásica por palabras clave. Es especialmente adecuada para nombres de marcas, personas y otros nombres propios.",
+      "helpEmbeddingDescription": "Añade un modelo de representaciones vectoriales para activar la búsqueda semántica, que encuentra documentos similares por su significado.",
+      "helpTranscriberDescription": "Añade un transcriptor al repositorio para transcribir automáticamente los archivos de audio y vídeo después de subirlos."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Índice de búsqueda",
+      "description": "Según el índice, se utilizan distintos métodos para ofrecer los mejores resultados para la consulta.",
+      "labelKeyword": "Búsqueda por palabras clave",
+      "descriptionKeyword": "Para buscar expresiones y frases precisas. (Nombres, denominaciones, etc.)",
+      "labelSemantic": "Búsqueda semántica",
+      "descriptionSemantic": "Cuando importa el significado de los datos y no su redacción exacta. (Requiere un modelo de representaciones vectoriales)",
+      "labelEmbeddingModel": "Modelo de representaciones vectoriales",
+      "descriptionEmbeddingModel": "El modelo de representaciones vectoriales es la base de la búsqueda semántica."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Sin transcriptor",
+      "labelLegend": "Transcriptor",
+      "description": "Los archivos de audio y vídeo se transcriben automáticamente después de subirlos.",
+      "labelTranscriber": "Transcriptor"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Descripción",
+      "description": "Elige un nombre adecuado para el repositorio de documentos. También puedes guardar una breve descripción.",
+      "labelName": "Nombre",
+      "labelDescription": "Descripción"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Apariencia",
+      "description": "Elige un color y un icono que representen al repositorio de documentos.",
+      "labelIcon": "Icono",
+      "labelColor": "Color"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Espacio de trabajo",
+      "description": "Selecciona el espacio de trabajo donde se creará el repositorio de documentos.",
+      "labelName": "Espacio de trabajo",
+      "labelSelectWorkspace": "Selecciona un espacio de trabajo."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Archivos",
+      "tabSearch": "Búsqueda de texto completo",
+      "tabInfo": "Información"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Buscar...",
+      "labelSearch": "Buscar"
+    },
+    "Search": {
+      "emptyTitle": "Búsqueda de texto completo",
+      "emptyDescription": "Busca texto en todos los archivos de este repositorio de documentos."
+    }
+  },
+  "page": {
+    "labelTitle": "Repositorios de documentos",
+    "emptyTitle": "Sin repositorios de documentos",
+    "emptyDescription": "Todavía no se ha creado ningún repositorio de documentos.",
+    "labelNewDocumentRepository": "Nuevo repositorio de documentos",
+    "helpTitle": "Ayuda",
+    "helpSearchDescription": "Puedes buscar repositorios de documentos por su nombre, descripción y transcriptor, entre otros datos.",
+    "helpSortDescription": "Los repositorios de documentos se pueden ordenar por nombre, agrupar y mostrar como tarjetas o como tabla.",
+    "helpTranscriberDescription": "Puedes seleccionar un transcriptor para los repositorios de documentos. Los archivos de audio y vídeo que subas se transcribirán automáticamente."
+  }
+}

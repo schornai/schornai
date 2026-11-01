@@ -1,0 +1,520 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Скасувати",
+      "errorCancel": "Не вдалося зупинити генерацію. Спробуйте ще раз."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "У вас немає доступу до цього агента."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Модель",
+      "labelUnknownModel": "Невідома модель",
+      "labelThinkingOptionalOn": "Міркування",
+      "labelThinkingOptionalOff": "Обов’язкове міркування",
+      "labelThinkingMandatoryOn": "Без міркування",
+      "labelThinkingMandatoryOff": "Обов’язково без міркування",
+      "descriptionFeatureVision": "Глибше розуміння зображень",
+      "labelModelSize": "Розмір контексту: {{size}} тис.",
+      "labelNotFound": "Модель не знайдено",
+      "labelChanged": "Змінено"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Інструмент: калькулятор",
+      "description": "Агент може використовувати калькулятор замість самостійних обчислень. Це дає йому змогу краще працювати зі складнішими числами."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Промпт",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Порожньо",
+      "labelChanged": "Змінено"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Сховища документів",
+      "labelUnknownRepository": "Невідоме сховище документів",
+      "descriptionRepositoryNotFound": "Сховище документів не існує або у вас немає потрібних дозволів.",
+      "labelConfirmWrite": "Читання й запис (із підтвердженням)",
+      "labelReadOnly": "Лише читання",
+      "labelWrite": "Читання й запис (автоматично)",
+      "labelGoToRepository": "Перейти до сховища",
+      "labelChanged": "Змінено"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Підказка щодо вибору ролі",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Опис",
+      "description": "Виберіть відповідну назву для агента. Також можна зберегти короткий опис.",
+      "labelName": "Ім’я",
+      "labelDescription": "Опис"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Робочий простір",
+      "description": "Виберіть робочий простір, у якому потрібно створити агента.",
+      "labelName": "Робочий простір",
+      "errorNoPermissions": "У вас немає дозволів на створення агентів",
+      "errorNoWorkspaceSelected": "Ви не вибрали робочий простір",
+      "labelSelectWorkspace": "Виберіть робочий простір."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Додаткові функції",
+      "description": "Додайте агенту корисні функції, щоб ще більше спростити роботу.",
+      "labelFileUpload": "Завантаження файлів",
+      "descriptionFileUpload": "Користувачі можуть завантажувати файли, вміст яких буде доступний агенту як текст.",
+      "labelBatch": "Пакетна обробка",
+      "descriptionBatch": "Користувачі можуть автоматично обробляти файли для кожного повідомлення.",
+      "labelPursueGoal": "Досягнення мети",
+      "descriptionPursueGoal": "Користувачі можуть визначити мету, і агент працюватиме в циклі, доки її не буде досягнуто.",
+      "labelDisappearingChats": "Зникаючі чати",
+      "descriptionDisappearingChats": "Чати можуть автоматично видалятися через 12 годин. Користувач має ввімкнути цю функцію.",
+      "labelNightshift": "Нічна зміна",
+      "descriptionNightshift": "Агентів, які працюють тривалий час, можна перевести на нічну зміну, щоб заощадити ресурси вдень.",
+      "labelTranscriber": "Транскрибатор",
+      "labelNoTranscriber": "Без автоматичної транскрипції",
+      "descriptionTranscriber": "Автоматично транскрибуйте завантажені аудіо- й відеофайли за допомогою цього транскрибатора."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Додаткові функції",
+      "labelFileUpload": "Завантаження файлів",
+      "descriptionFileUpload": "Користувачі можуть завантажувати файли, вміст яких буде доступний агенту як текст.",
+      "labelBatch": "Пакетна обробка",
+      "descriptionBatch": "Користувачі можуть автоматично обробляти файли для кожного повідомлення.",
+      "labelPursueGoal": "Досягнення мети",
+      "descriptionPursueGoal": "Користувачі можуть визначити мету, і агент працюватиме в циклі, доки її не буде досягнуто.",
+      "labelDisappearingChats": "Зникаючі чати",
+      "descriptionDisappearingChats": "Чати можуть автоматично видалятися через 12 годин. Користувач має ввімкнути цю функцію.",
+      "labelNightshift": "Нічна зміна",
+      "descriptionNightshift": "Агентів, які працюють тривалий час, можна перевести на нічну зміну, щоб заощадити ресурси вдень."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Пропозиції"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Документація"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Робочий простір",
+      "labelUnknownWorkspace": "Невідомий робочий простір",
+      "labelGoToWorkspace": "Перейти до робочого простору"
+    },
+    "AgentInfo": {
+      "labelRole": "Роль: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Пошук...",
+      "tableColumnName": "Ім’я",
+      "tableColumnCapablilities": "Можливості",
+      "tableColumnNameActions": "Дії",
+      "labelOtherAgents": "Інші агенти",
+      "labelFavorites": "Обране",
+      "labelNoGroup": "Без групування",
+      "labelUnknownModel": "Невідома модель «{{id}}»",
+      "labelNoRepositories": "Немає сховищ документів",
+      "labelUnknownRepository": "Невідоме сховище документів «{{id}}»",
+      "labelRoleCount_other": "{{count}} ролі",
+      "labelRoleCount_zero": "Немає ролей",
+      "labelRoleCount_one": "{{count}} роль",
+      "labelRoleCount_few": "{{count}} ролі",
+      "labelRoleCount_many": "{{count}} ролей"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Параметри",
+      "labelView": "Вигляд",
+      "labelSort": "Сортування",
+      "labelNameAsc": "Ім’я від А до Я",
+      "labelNameDesc": "Ім’я від Я до А",
+      "labelGroup": "Групувати за",
+      "labelFavorites": "Обране",
+      "labelFirstLetter": "Перша літера",
+      "labelWorkspaces": "Робочі простори",
+      "labelModel": "Модель",
+      "labelRepositories": "Сховища документів",
+      "labelRoleCount": "Кількість ролей",
+      "labelCards": "Картки",
+      "labelTable": "Таблиця",
+      "labelSaveView": "Зберегти вигляд",
+      "labelReset": "Скинути",
+      "labelAgents": "Агенти",
+      "labelNewAgent": "Новий агент",
+      "labelNoGroup": "Без групування"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Зовнішній вигляд",
+      "description": "Виберіть колір і піктограму, які найкраще представляють агента.",
+      "labelIcon": "Піктограма",
+      "labelColor": "Колір"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Вилучити з обраного",
+      "tooltipAddFavorite": "Додати до обраного"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Редагувати",
+      "tooltipInfo": "Інформація",
+      "tooltipNewChat": "Новий чат"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Невідомий робочий простір",
+      "labelModelUnknown": "Невідома модель"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Доступ до інтернету",
+      "labelGeneralAccess": "Загальний доступ, пошук в інтернеті",
+      "descriptionFetch": "Завантаження з інтернету зберігає вміст URL-адреси у сховищі чату або підключеному сховищі документів із дозволом на запис. Після обробки файлу агент може прочитати видобутий текст і використати його у відповіді.",
+      "descriptionSearch": "Пошук в інтернеті допомагає агенту знаходити сторінки за запитом. Пошуковий сервіс повертає заголовки, посилання й короткі уривки. Список дозволених доменів для завантаження не обмежує пошук.",
+      "labelChanged": "Змінено",
+      "labelFetch": "Завантаження",
+      "labelSearch": "Пошук",
+      "labelOn": "Увімкнено",
+      "labelOff": "Вимкнено",
+      "labelAsk": "Спочатку запитати",
+      "labelWhitelist": "Завантаження лише з дозволених доменів",
+      "labelAll": "Завантаження з усіх сайтів",
+      "labelEmptyWhitelist": "Немає дозволених доменів",
+      "labelEdit": "Редагувати доступ до інтернету",
+      "labelDetails": "Показати подробиці"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Інструмент: розширення чату",
+      "labelFeatures": "Пропозиції наступного повідомлення, зміна назви чату",
+      "description": "Агент може пропонувати наступні повідомлення користувача, щоб той міг продовжити чат, просто натиснувши відповідне повідомлення. <br /> Агент може змінювати назву чату для користувача, щоб його було легше знайти в історії."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Опис ролі",
+      "description": "Опис ролі використовується після отримання нового повідомлення користувача, щоб визначити, яка роль відповідатиме на нього",
+      "labelName": "Ім’я",
+      "labelSelectionHint": "Підказка щодо вибору ролі",
+      "labelDeleteRole": "Видалити роль ",
+      "labelDoNotOverride": "Не перевизначати",
+      "labelOverrideModel": "Перевизначити модель",
+      "descriptionOverrideModel": "Для цієї ролі можна вибрати модель, відмінну від загальної моделі агента.",
+      "confirmDeleteDescription": "Ви впевнені, що хочете видалити роль «{{name}}»? Цю дію неможливо скасувати.",
+      "labelCancel": "Скасувати",
+      "labelThinking": "Міркування"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Модель",
+      "description": "Велика мовна модель, яку використовує агент, якщо роль не перевизначає її.",
+      "labelName": "Модель",
+      "labelThinking": "Міркування",
+      "labelThinking_optionalOn": "Міркування",
+      "labelThinking_mandatoryOn": "Обов’язкове міркування",
+      "labelThinking_optionalOff": "Без міркування",
+      "labelThinking_mandatoryOff": "Обов’язково без міркування",
+      "labelSelectModel": "Виберіть модель"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Сховище документів",
+      "labelPathAgent": "Шлях для агента",
+      "labelPathRepository": "Шлях у сховищі документів",
+      "labelPermission": "Дозвіл",
+      "labelDeleteConnection": "Видалити підключення",
+      "confirmDeleteTitle": "Видалити підключення",
+      "confirmDeleteDescription": "Ви дійсно хочете видалити це підключення до сховища документів «{{name}}»?",
+      "labelCancel": "Скасувати",
+      "labelAddConnection": "Додаткове підключення",
+      "labelUnknownRepository": "Невідоме сховище документів",
+      "labelConfirmWrite": "Читання й запис (із підтвердженням)",
+      "labelReadOnly": "Лише читання",
+      "labelWrite": "Читання й запис (автоматично)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Назва",
+      "labelMessage": "Повідомлення",
+      "labelClose": "Закрити"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Ім’я",
+      "labelUrl": "URL-адреса",
+      "labelHTTPHeaders": "HTTP-заголовки",
+      "labelHeaderName": "Ім’я",
+      "labelHeaderValue": "Значення",
+      "labelAddHeader": "Додати HTTP-заголовок",
+      "labelDeleteConnection": "Видалити підключення",
+      "confirmDeleteTitle": "Видалити MCP",
+      "confirmDeleteDescription": "Ви впевнені, що хочете видалити конфігурацію MCP «{{name}}»?",
+      "labelCancel": "Скасувати",
+      "labelDeleteMCP": "Видалити MCP",
+      "labelAddMCP": "Ще один MCP",
+      "errorInvalidUrl": "URL-адреса має бути дійсною",
+      "labelOAuthApp": "Застосунок OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Дані",
+      "labelConnectRepository": "Підключити сховище документів",
+      "labelToolWebAccess": "Інструмент: доступ до інтернету",
+      "labelConnectMCP": "Підключити зовнішній інструмент (MCP)",
+      "labelSupport": "Підтримка",
+      "labelToolChatExtensions": "Інструмент: розширення чату",
+      "labelToolCalculator": "Інструмент: калькулятор",
+      "labelSystem": "Система",
+      "labelToolPlatformAccess": "Інструмент: доступ до платформи schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Новий агент",
+      "emptyDescription": "Визначте поведінку агента, доступ до даних, зовнішній вигляд і багато іншого.",
+      "labelDefinePrompt": "Визначте промпт",
+      "descriptionDefinePrompt": "Якість роботи агента залежить від його інструкцій. Чіткі визначення ролей мінімізують галюцинації та підвищують послідовність.",
+      "labelConnectTools": "Підключіть інструменти",
+      "descriptionConnectTools": "Наприклад, підключіть сховища документів, щоб агент спирався на факти та використовував знання вашої компанії.",
+      "labelWriteDocs": "Напишіть документацію",
+      "descriptionWriteDocs": "Допоможіть користувачам зрозуміти можливості цього агента.",
+      "infoRoleDefinition": "Роль визначає поведінку агента й інструменти, доступні для виконання завдання.",
+      "infoDocsDescription": "Документація може містити текст із форматуванням Markdown і пропозиції повідомлень для агента.",
+      "infoAppearanceDescription": "Назва, опис і колір допомагають користувачам орієнтуватися серед доступних агентів."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Запропоновані повідомлення",
+      "descriptionRecommendedMessages": "Допоможіть користувачам, запропонувавши повідомлення для ефективного використання агента.",
+      "labelAddMessage": "Додати повідомлення ",
+      "labelDocumentation": "Документація",
+      "descriptionDocumentation": "Поділіться тут із користувачами додатковою інформацією про цього агента",
+      "labelShowPreview": "Показати попередній перегляд",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Документація допомагає користувачам працювати з агентом. Вона відображається, коли користувач починає новий чат.",
+      "descriptionMarkdownHelp": "Markdown — це проста мова розмітки для швидкого й зручного форматування тексту.\n\n* **Структура:** заголовки (`#`), списки (нумеровані `1.` і ненумеровані `-`), горизонтальні лінії.\n* **Стиль тексту:** **жирний** `**жирний**`, *курсив* `*курсив*`, ~~закреслений~~ `~~закреслений~~`.\n* **Код:** вбудований код (`code`) і блоки коду з підсвічуванням синтаксису.\n* **Організація:** цитати (`>`), списки завдань (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Немає ролей",
+      "descriptionNoRoles": "Для агента не визначено жодної ролі. Без ролі агент не працюватиме.",
+      "labelAddRole": "Додати роль ",
+      "infoMultipleRoles": "Агенти можуть мати кілька ролей. Окрема роль може краще зосередитися на частині завдання.",
+      "infoTools": "Агенти можуть використовувати інструменти для кращих відповідей на запити користувачів: шукати документи, створювати їх тощо."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Новий агент",
+      "labelAgent": "Агент",
+      "labelCreateAgent": "Створити агента",
+      "labelSaveAgent": "Зберегти агента",
+      "tabOverview": "Огляд",
+      "tabPrompt": "Промпт",
+      "tabDocs": "Підтримка",
+      "tabRoles": "Ролі",
+      "tabSettings": "Налаштування",
+      "btnCreate": "Створити",
+      "btnSave": "Зберегти",
+      "labelEditAgent": "Редагувати агента",
+      "labelCloneAgent": "Зберегти як нового агента",
+      "labelDeleteAgent": "Видалити агента",
+      "confirmDeleteTitle": "Видалити агента",
+      "confirmDeleteDescription": "Ви впевнені, що хочете видалити агента «{{name}}»? Цю дію неможливо скасувати.",
+      "labelCancel": "Скасувати"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Роль ",
+      "description": "Визначає поведінку агента й інструменти, які йому дозволено використовувати в цьому контексті.",
+      "tabOverview": "Огляд",
+      "tabPrompt": "Промпт",
+      "tabDocumentRepositoryMounts": "Сховища документів",
+      "tabMCPs": "Зовнішні інструменти (MCP)",
+      "tabWeb": "Доступ до інтернету",
+      "tabChat": "Розширення чату",
+      "tabCalc": "Калькулятор",
+      "tabTools": "Інструменти",
+      "tabSettings": "Налаштування",
+      "toolWebAccess": "Доступ до інтернету",
+      "chatExtensions": "Розширення чату",
+      "calculator": "Калькулятор",
+      "externalToolsMCP": "Зовнішні інструменти (MCP)",
+      "labelPrompt": "Промпт"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Скасувати зміни",
+      "labelDiscardConfirm": "Ви дійсно хочете скасувати всі незбережені зміни цього агента?",
+      "labelCancel": "Скасувати",
+      "labelDiscard": "Скасувати зміни"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Зовнішні інструменти (MCP)",
+      "changedBadge": "Змінено",
+      "unknownMcp": "Невідомий MCP",
+      "invalidUrl": "Недійсна URL-адреса"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Семантичний пошук",
+      "labelChanged": "Змінено",
+      "labelActive": "Активно",
+      "labelInactive": "Неактивно",
+      "description": "Коли важливий зміст даних, а не точне формулювання. Потребує моделі ембедингів.",
+      "labelUnknownModel": "Невідома модель"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Пошук за ключовими словами",
+      "labelChanged": "Змінено",
+      "labelActive": "Активно",
+      "labelInactive": "Неактивно",
+      "description": "Для пошуку точних виразів і речень: імен, назв тощо."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Транскрибатор",
+      "labelChanged": "Змінено",
+      "labelUnknownTranscriber": "Невідомий транскрибатор",
+      "labelGoToTranscriber": "Перейти до транскрибатора"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Нове повідомлення"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Очікування обробки",
+      "tooltipPaused": "Призупинено"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Міркування ввімкнено",
+      "labelThinkingOff": "Міркування вимкнено",
+      "labelMessageStack": "Черга повідомлень",
+      "placeholderMessage": "Повідомлення...",
+      "tooltipUploadFiles": "Завантаження файлів",
+      "buttonPause": "Призупинити",
+      "buttonStartBatch": "Запустити пакетну обробку",
+      "buttonSend": "Надіслати",
+      "descriptionFilesPending": "Файли завантажуються або обробляються…",
+      "labelAttachFiles": "Прикріпити файли",
+      "labelUploadFiles": "Завантаження файлів",
+      "labelSelectFile": "Виберіть наявний файл"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Дозволити цю дію?",
+      "descriptionAction": "Для продовження агенту потрібне ваше схвалення.",
+      "labelApprove": "Дозволити",
+      "labelReject": "Відхилити",
+      "labelRetry": "Спробувати ще раз",
+      "labelSubmitting": "Обробка…",
+      "errorSubmit": "Не вдалося надіслати ваше рішення. Спробуйте ще раз.",
+      "labelMCP": "Підключіть свій обліковий запис",
+      "descriptionMCP": "Для цього інструмента MCP потрібно ввійти в обліковий запис. Після підключення очікуваний виклик продовжиться автоматично."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Зберегти документ?",
+      "descriptionWriteFile": "Агент хоче зберегти цей документ. Наявний вміст буде замінено.",
+      "labelShowContent": "Показати вміст",
+      "labelHideContent": "Приховати вміст",
+      "descriptionEmptyFile": "Документ буде збережено з порожнім вмістом."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Завантаження з інтернету",
+      "description": "Налаштуйте доступ до інтернету для цієї ролі. Завантаження й пошук можна ввімкнути незалежно одне від одного.",
+      "labelFetch": "Увімкнути завантаження з інтернету",
+      "labelAskFetch": "Запитувати перед завантаженням сторінки",
+      "labelAccess": "Дозволені сайти",
+      "labelAll": "Усі сайти",
+      "labelWhitelist": "Список дозволених доменів",
+      "descriptionAccess": "Файли й вебсторінки HTTP(S), зокрема в локальній мережі. До переспрямувань застосовуються ті самі правила доступу.",
+      "labelDomains": "Дозволені домени",
+      "descriptionDomains": "Одне ім’я хоста в рядку, наприклад example.com. Для піддоменів використовуйте *.example.com; сам example.com до цього шаблону не входить.",
+      "errorDomains": "Введіть імена хостів або *.example.com без протоколу, шляху чи порту.",
+      "descriptionEmptyWhitelist": "Порожній список дозволених доменів блокує всі сторінки.",
+      "labelSearchTitle": "Пошук в інтернеті",
+      "labelSearch": "Увімкнути пошук в інтернеті",
+      "labelAskSearch": "Запитувати перед пошуком в інтернеті",
+      "labelProvider": "Пошуковий сервіс",
+      "labelProviderDocs": "Документація сервісу",
+      "labelApiKey": "Ключ API",
+      "errorApiKey": "Введіть ключ API для вибраного сервісу.",
+      "labelMarket": "Мова й регіон Staan",
+      "descriptionMarket": "Наприклад, de-de або en-us. Типове значення — en-us.",
+      "labelRemoveTool": "Видалити інструмент",
+      "labelConfirmRemoveTool": "Видалити вебінструмент?",
+      "descriptionRemoveTool": "Налаштування завантаження й пошуку в інтернеті, включно зі списком дозволених доменів і ключем API, буде видалено з цієї ролі.",
+      "labelCancel": "Скасувати"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Завантажити вебсторінку",
+      "descriptionFetch": "Дозволити агенту завантажити, зберегти й обробити цю URL-адресу?",
+      "labelDestination": "Місце призначення"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Шукати в інтернеті",
+      "descriptionSearch": "Дозволити агенту надіслати цей запит налаштованому пошуковому сервісу?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Закрити",
+      "labelPending": "Виконується",
+      "labelApproval": "Очікує схвалення",
+      "labelDenied": "Відхилено",
+      "labelDone": "Завершено",
+      "errorRequest": "Помилка запиту"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Пошук в інтернеті",
+      "labelQuery": "Пошуковий запит",
+      "labelEmptyResults": "Нічого не знайдено."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Вебсторінка",
+      "labelUrl": "URL-адреса",
+      "labelRange": "Символи {{start}}–{{end}} із {{total}}",
+      "descriptionTruncated": "Продовження вмісту доступне в наступному розділі.",
+      "labelEmptyPage": "На цій сторінці немає тексту, придатного для читання.",
+      "labelSource": "Відкрити джерело",
+      "descriptionFileReady": "Файл збережено й оброблено. Видобутий текст доступний агенту безпосередньо.",
+      "descriptionProcessingUnavailable": "Файл збережено. Видобутого тексту немає; для аудіо й відео потрібен налаштований транскрибатор.",
+      "descriptionProcessingFailed": "Файл збережено, але обробка завершилася помилкою або перевищила час очікування. Обробку можна перезапустити у сховищі."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Копіювати файл",
+      "labelMove": "Перемістити файл",
+      "descriptionSuccess": "Файл перенесено. За потреби пошуковий індекс буде перебудовано у фоновому режимі.",
+      "descriptionPending": "Підготовка перенесення файлу…",
+      "descriptionProcessingError": "Файл перенесено, але обробку потрібно перезапустити в місці призначення.",
+      "errorTransfer": "Не вдалося завершити перенесення файлу.",
+      "labelOpenFile": "Відкрити файл у місці призначення",
+      "descriptionDenied": "Перенесення файлу відхилено. Файл не було перенесено.",
+      "descriptionApproval": "Очікування вашого схвалення.",
+      "descriptionRunning": "Перенесення файлу…",
+      "labelClose": "Закрити",
+      "labelSource": "Джерело",
+      "labelTarget": "Місце призначення"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Дозволити копіювання цього файлу?",
+      "labelMove": "Дозволити переміщення цього файлу?",
+      "descriptionCopy": "Агент хоче скопіювати цей файл і його оброблений вміст. Наявні файли в місці призначення ніколи не перезаписуються.",
+      "descriptionMove": "Агент хоче перемістити цей файл і його оброблений вміст. Оригінал буде видалено після успішного копіювання.",
+      "labelSource": "Джерело",
+      "labelTarget": "Місце призначення"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Для цього інструмента MCP потрібно ввійти в обліковий запис. Після підключення очікуваний виклик продовжиться автоматично.",
+      "labelConnect": "Підключити мій обліковий запис"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Інструмент MCP",
+      "labelDiscover": "Знайти доступні інструменти",
+      "labelPending": "Виконується",
+      "labelDone": "Завершено",
+      "labelApproval": "Потрібно ввійти",
+      "labelDenied": "Відмовлено",
+      "errorRequest": "Помилка запиту",
+      "labelArguments": "Вхідні дані",
+      "labelResult": "Результат",
+      "labelClose": "Закрити"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Застосунок OAuth",
+      "labelSearch": "Пошукове підключення",
+      "labelAutomatic": "Немає налаштованого застосунку OAuth",
+      "labelNone": "Підключення не вибрано",
+      "labelMissing": "Підключення недоступне",
+      "descriptionOAuth": "Необов’язково: виберіть зареєстрований застосунок OAuth для цього сервера MCP. Його URL-адресу налаштуйте окремо в цьому агенті.",
+      "descriptionSearch": "Облікові дані Staan і Brave керуються централізовано в розділі «Налаштування → Підключення».",
+      "errorMissing": "Це підключення більше недоступне. Виберіть інше.",
+      "descriptionEmpty": "Відповідне підключення не налаштовано. Керуйте підключеннями в розділі «Налаштування → Підключення»."
+    }
+  },
+  "page": {
+    "labelTitle": "Агенти",
+    "emptyTitle": "Немає агентів",
+    "emptyDescription": "Ще не створено жодного агента.",
+    "labelNewAgent": "Новий агент",
+    "helpSearchTitle": "Пошук",
+    "helpSearchDescription": "Ви можете шукати агентів. Пошук охоплює, зокрема, назву, опис і модель агента.",
+    "helpSortTitle": "Сортування й групування",
+    "helpSortDescription": "Агентів можна сортувати за назвою та розподіляти на групи. Їх можна відображати плитками або таблицею."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Для цього постачальника MCP потрібен зареєстрований застосунок OAuth. Попросіть адміністратора створити його з Client ID і Client Secret у розділі «Налаштування → Підключення» та виберіть його в налаштуваннях MCP агента. Потім підключіться знову з чату.",
+    "errorStart": "Не вдалося розпочати авторизацію MCP.",
+    "errorCallback": "Авторизація MCP завершилася помилкою або термін її дії минув. Поверніться до чату та спробуйте ще раз."
+  }
+}

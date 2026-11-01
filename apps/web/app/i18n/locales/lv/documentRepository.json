@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Dokumentu krātuves",
+    "description": "Dokumentu krātuves veido centralizētu, strukturētu un uzticamu zināšanu bāzi mākslīgajam intelektam, ko modeļi var izmantot atbilstoši kontekstam."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Dokumentu krātuve"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Meklēt..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelNameAsc": "Nosaukums no A līdz Z",
+      "labelNameDesc": "Nosaukums no Z līdz A",
+      "labelGroup": "Grupēt pēc",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelFavorites": "Izlase",
+      "labelFirstLetter": "Pirmais burts",
+      "labelWorkspaces": "Darbvietas",
+      "labelModel": "Transkribētājs",
+      "labelCards": "Kartītes",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt",
+      "labelDocumentRepositories": "Dokumentu krātuves",
+      "labelNewDocumentRepository": "Jauna dokumentu krātuve"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Citas dokumentu krātuves",
+      "labelFavorites": "Izlase",
+      "labelOtherTranscribers": "Citi transkribētāji",
+      "labelUnknownTranscriber": "Nezināms transkribētājs “{{id}}”"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nosaukums",
+      "tableColumnCapablilities": "Iespējas",
+      "tableColumnNameActions": "Darbības",
+      "emptyTitle": "Nav dokumentu krātuvju",
+      "emptyDescription": "Vēl nav izveidota neviena dokumentu krātuve.",
+      "labelOtherDocumentRepositories": "Citas dokumentu krātuves",
+      "labelFavorites": "Izlase",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelUnknownTranscriber": "Nezināms transkribētājs “{{id}}”"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Nezināma darbvieta"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Rediģēt",
+      "tooltipInfo": "Informācija"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Noņemt no izlases",
+      "tooltipAddFavorite": "Pievienot izlasei"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Jauna dokumentu krātuve",
+      "labelDocumentRepository": "Dokumentu krātuve",
+      "labelDocumentRepositoryDropdown": "Dokumentu krātuve",
+      "labelCreateDocumentRepository": "Izveidot dokumentu krātuvi",
+      "labelSaveDocumentRepository": "Saglabāt dokumentu krātuvi",
+      "labelCloneDocumentRepository": "Saglabāt kā jaunu dokumentu krātuvi",
+      "labelDeleteDocumentRepository": "Dzēst dokumentu krātuvi",
+      "confirmDeleteTitle": "Dzēst dokumentu krātuvi",
+      "confirmDeleteDescription": "Vai tiešām vēlaties dzēst dokumentu krātuvi “{{name}}”? Šo darbību nevar atsaukt.",
+      "labelCancel": "Atcelt",
+      "tabOverview": "Pārskats",
+      "tabFeatures": "Funkcijas",
+      "tabSettings": "Iestatījumi",
+      "btnCreate": "Izveidot",
+      "btnSave": "Saglabāt"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Atmest izmaiņas",
+      "labelDiscardConfirm": "Vai tiešām vēlaties atmest visas šīs dokumentu krātuves nesaglabātās izmaiņas?",
+      "labelCancel": "Atcelt",
+      "labelDiscard": "Atmest izmaiņas"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Jauna dokumentu krātuve",
+      "emptyDescription": "Nosakiet dokumentu krātuves darbību un izskatu.",
+      "checklistSemanticSearchTitle": "Ieslēgt semantisko meklēšanu",
+      "checklistSemanticSearchDescription": "Ieslēdziet semantisko meklēšanu. Tā var uzlabot meklēšanas rezultātu kvalitāti.",
+      "checklistTranscriberTitle": "Izvēlēties transkribētāju",
+      "checklistTranscriberDescription": "Izvēlieties transkribētāju, kas automātiski transkribē visus augšupielādētos video un audio failus.",
+      "helpTitle": "Palīdzība",
+      "helpKeywordSearch": "Parastā meklēšana pēc atslēgvārdiem. Vispiemērotākā zīmolu, personu vārdu un citu nosaukumu meklēšanai.",
+      "helpEmbeddingDescription": "Pievienojiet iegulumu modeli, lai ieslēgtu semantisko meklēšanu. Tas atrod līdzīgus dokumentus pēc to nozīmes.",
+      "helpTranscriberDescription": "Pievienojiet dokumentu krātuvei transkribētāju, un visi video un audio faili pēc augšupielādes tiks automātiski transkribēti."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Meklēšanas indekss",
+      "description": "Atkarībā no meklēšanas indeksa tiek izmantotas dažādas metodes, lai sniegtu vislabākos rezultātus atbilstoši vaicājumam.",
+      "labelKeyword": "Meklēšana pēc atslēgvārdiem",
+      "descriptionKeyword": "Precīzu izteicienu un teikumu meklēšanai. (Vārdi, nosaukumi utt.)",
+      "labelSemantic": "Semantiskā meklēšana",
+      "descriptionSemantic": "Kad svarīga ir datu nozīme, nevis precīzs formulējums. (Nepieciešams iegulumu modelis)",
+      "labelEmbeddingModel": "Iegulumu modelis",
+      "descriptionEmbeddingModel": "Iegulumu modelis ir semantiskās meklēšanas pamats."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Nav transkribētāja",
+      "labelLegend": "Transkribētājs",
+      "description": "Video un audio faili pēc augšupielādes tiek automātiski transkribēti.",
+      "labelTranscriber": "Transkribētājs"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Apraksts",
+      "description": "Izvēlieties dokumentu krātuvei piemērotu nosaukumu. Varat saglabāt arī īsu aprakstu.",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Izskats",
+      "description": "Izvēlieties krāsu un ikonu, kas vislabāk raksturo dokumentu krātuvi.",
+      "labelIcon": "Ikona",
+      "labelColor": "Krāsa"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Darbvieta",
+      "description": "Izvēlieties darbvietu, kurā izveidot dokumentu krātuvi.",
+      "labelName": "Darbvieta",
+      "labelSelectWorkspace": "Izvēlieties darbvietu."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Faili",
+      "tabSearch": "Pilnteksta meklēšana",
+      "tabInfo": "Informācija"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Meklēt...",
+      "labelSearch": "Meklēt"
+    },
+    "Search": {
+      "emptyTitle": "Pilnteksta meklēšana",
+      "emptyDescription": "Meklējiet tekstu visos šīs dokumentu krātuves failos."
+    }
+  },
+  "page": {
+    "labelTitle": "Dokumentu krātuves",
+    "emptyTitle": "Nav dokumentu krātuvju",
+    "emptyDescription": "Vēl nav izveidota neviena dokumentu krātuve.",
+    "labelNewDocumentRepository": "Jauna dokumentu krātuve",
+    "helpTitle": "Palīdzība",
+    "helpSearchDescription": "Varat meklēt dokumentu krātuves. Meklēšana cita starpā ietver krātuves nosaukumu, aprakstu un transkribētāju.",
+    "helpSortDescription": "Dokumentu krātuves var kārtot pēc nosaukuma un sadalīt dažādās grupās. Tās var attēlot kā kartītes vai tabulu.",
+    "helpTranscriberDescription": "Dokumentu krātuvēm varat izvēlēties transkribētāju. Augšupielādējot krātuvē audio vai video failus, tie tiek automātiski transkribēti."
+  }
+}

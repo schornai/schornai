@@ -1,0 +1,521 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Ikkanċella",
+      "errorCancel": "Ma setgħetx titwaqqaf il-ġenerazzjoni. Erġa’ pprova."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "M’għandekx aċċess għal dan l-aġent."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Mudell",
+      "labelUnknownModel": "Mudell mhux magħruf",
+      "labelThinkingOptionalOn": "Raġunament",
+      "labelThinkingOptionalOff": "Raġunament obbligatorju",
+      "labelThinkingMandatoryOn": "Mingħajr raġunament",
+      "labelThinkingMandatoryOff": "Obbligatorjament mingħajr raġunament",
+      "descriptionFeatureVision": "Fehim aktar profond tal-immaġnijiet",
+      "labelModelSize": "Daqs tal-kuntest: {{size}}k",
+      "labelNotFound": "Il-mudell ma nstabx",
+      "labelChanged": "Mibdul"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Għodda: Kalkolatur",
+      "description": "Minflok jagħmel il-kalkoli hu stess, l-aġent jista’ juża l-kalkolatur. Dan jippermettilu jittratta aħjar numri aktar kumplessi."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Istruzzjoni",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Vojt",
+      "labelChanged": "Mibdul"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Repożitorji tad-dokumenti",
+      "labelUnknownRepository": "Repożitorju tad-dokumenti mhux magħruf",
+      "descriptionRepositoryNotFound": "Ir-repożitorju tad-dokumenti ma jeżistix, jew m’għandekx il-permessi meħtieġa.",
+      "labelConfirmWrite": "Qari u kitba (itlob konferma)",
+      "labelReadOnly": "Qari biss",
+      "labelWrite": "Qari u kitba (awtomatiku)",
+      "labelGoToRepository": "Mur fir-repożitorju",
+      "labelChanged": "Mibdul"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Ħjiel għall-għażla tar-rwol",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Deskrizzjoni",
+      "description": "Agħżel isem adattat għall-aġent. Tista’ wkoll tissejvja deskrizzjoni qasira.",
+      "labelName": "Isem",
+      "labelDescription": "Deskrizzjoni"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Spazju tax-xogħol",
+      "description": "Agħżel l-ispazju tax-xogħol fejn għandu jinħoloq l-aġent.",
+      "labelName": "Spazju tax-xogħol",
+      "errorNoPermissions": "M’għandekx permess biex toħloq aġenti",
+      "errorNoWorkspaceSelected": "Ma għażiltx spazju tax-xogħol",
+      "labelSelectWorkspace": "Agħżel spazju tax-xogħol."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Funzjonijiet addizzjonali",
+      "description": "Żid funzjonijiet utli mal-aġent biex tagħmel ix-xogħol aktar faċli.",
+      "labelFileUpload": "Tella’ fajls",
+      "descriptionFileUpload": "L-utenti jistgħu jtellgħu fajls li l-kontenut tagħhom ikun disponibbli għall-aġent bħala test.",
+      "labelBatch": "Ipproċessar f’lottijiet",
+      "descriptionBatch": "L-utenti jistgħu jipproċessaw fajls awtomatikament għal kull messaġġ.",
+      "labelPursueGoal": "Segwi għan",
+      "descriptionPursueGoal": "L-utenti jistgħu jiddefinixxu għan u l-aġent jibqa’ jaħdem f’ċiklu sakemm jintlaħaq l-għan.",
+      "labelDisappearingChats": "Konversazzjonijiet li jisparixxu",
+      "descriptionDisappearingChats": "Il-konversazzjonijiet jistgħu jitħassru awtomatikament wara 12-il siegħa. Dan irid jiġi ssettjat mill-utent.",
+      "labelNightshift": "Xift ta’ billejl",
+      "descriptionNightshift": "Aġenti li jaħdmu għal żmien twil jistgħu jiġu mċaqilqa għax-xift ta’ billejl biex jiffrankaw ir-riżorsi matul il-jum.",
+      "labelTranscriber": "Traskrittur",
+      "labelNoTranscriber": "Mingħajr traskrizzjoni awtomatika",
+      "descriptionTranscriber": "Itraskrivi awtomatikament il-fajls tal-awdjo u tal-vidjo li jittellgħu b’dan it-traskrittur."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Funzjonijiet addizzjonali",
+      "labelFileUpload": "Tella’ fajls",
+      "descriptionFileUpload": "L-utenti jistgħu jtellgħu fajls li l-kontenut tagħhom ikun disponibbli għall-aġent bħala test.",
+      "labelBatch": "Ipproċessar f’lottijiet",
+      "descriptionBatch": "L-utenti jistgħu jipproċessaw fajls awtomatikament għal kull messaġġ.",
+      "labelPursueGoal": "Segwi għan",
+      "descriptionPursueGoal": "L-utenti jistgħu jiddefinixxu għan u l-aġent jibqa’ jaħdem f’ċiklu sakemm jintlaħaq l-għan.",
+      "labelDisappearingChats": "Konversazzjonijiet li jisparixxu",
+      "descriptionDisappearingChats": "Il-konversazzjonijiet jistgħu jitħassru awtomatikament wara 12-il siegħa. Dan irid jiġi ssettjat mill-utent.",
+      "labelNightshift": "Xift ta’ billejl",
+      "descriptionNightshift": "Aġenti li jaħdmu għal żmien twil jistgħu jiġu mċaqilqa għax-xift ta’ billejl biex jiffrankaw ir-riżorsi matul il-jum."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Suġġerimenti"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentazzjoni"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Spazju tax-xogħol",
+      "labelUnknownWorkspace": "Spazju tax-xogħol mhux magħruf",
+      "labelGoToWorkspace": "Mur fl-ispazju tax-xogħol"
+    },
+    "AgentInfo": {
+      "labelRole": "Rwol: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Fittex...",
+      "tableColumnName": "Isem",
+      "tableColumnCapablilities": "Kapaċitajiet",
+      "tableColumnNameActions": "Azzjonijiet",
+      "labelOtherAgents": "Aġenti oħra",
+      "labelFavorites": "Favoriti",
+      "labelNoGroup": "Mingħajr grupp",
+      "labelUnknownModel": "Mudell mhux magħruf \"{{id}}\"",
+      "labelNoRepositories": "Ebda repożitorju tad-dokumenti",
+      "labelUnknownRepository": "Repożitorju tad-dokumenti mhux magħruf \"{{id}}\"",
+      "labelRoleCount_other": "{{count}} rwol",
+      "labelRoleCount_zero": "Ebda rwol",
+      "labelRoleCount_one": "{{count}} rwol",
+      "labelRoleCount_two": "{{count}} rwoli",
+      "labelRoleCount_few": "{{count}} rwoli",
+      "labelRoleCount_many": "{{count}}-il rwol"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Għażliet",
+      "labelView": "Dehra",
+      "labelSort": "Issortja",
+      "labelNameAsc": "Isem minn A sa Z",
+      "labelNameDesc": "Isem minn Z sa A",
+      "labelGroup": "Iġbor skont",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "L-ewwel ittra",
+      "labelWorkspaces": "Spazji tax-xogħol",
+      "labelModel": "Mudell",
+      "labelRepositories": "Repożitorji tad-dokumenti",
+      "labelRoleCount": "Numru ta’ rwoli",
+      "labelCards": "Kards",
+      "labelTable": "Tabella",
+      "labelSaveView": "Issejvja d-dehra",
+      "labelReset": "Irrisettja",
+      "labelAgents": "Aġenti",
+      "labelNewAgent": "Aġent ġdid",
+      "labelNoGroup": "Mingħajr grupp"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Dehra",
+      "description": "Agħżel kulur u ikona li jirrappreżentaw l-aġent bl-aħjar mod.",
+      "labelIcon": "Ikona",
+      "labelColor": "Kulur"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Neħħi mill-favoriti",
+      "tooltipAddFavorite": "Żid mal-favoriti"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Editja",
+      "tooltipInfo": "Informazzjoni",
+      "tooltipNewChat": "Konversazzjoni ġdida"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Spazju tax-xogħol mhux magħruf",
+      "labelModelUnknown": "Mudell mhux magħruf"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Aċċess għall-web",
+      "labelGeneralAccess": "Aċċess ġenerali, tfittxija fuq il-web",
+      "descriptionFetch": "It-tniżżil mill-web iniżżel URL fil-ħażna tal-konversazzjoni jew f’repożitorju tad-dokumenti konness li jippermetti l-kitba. Wara l-ipproċessar tal-fajl, l-aġent jista’ jaqra t-test estratt u jużah fit-tweġiba tiegħu.",
+      "descriptionSearch": "It-tfittxija fuq il-web tgħin lill-aġent isib paġni rilevanti għal mistoqsija ta’ tfittxija. Il-fornitur tat-tfittxija jirritorna titli, links u siltiet qosra. Il-lista ta’ dominji permessi għat-tniżżil ma tirrestrinġix it-tfittxijiet fuq il-web.",
+      "labelChanged": "Mibdul",
+      "labelFetch": "Niżżel",
+      "labelSearch": "Fittex",
+      "labelOn": "Mixgħul",
+      "labelOff": "Mitfi",
+      "labelAsk": "Staqsi l-ewwel",
+      "labelWhitelist": "Tniżżil ristrett għal-lista ta’ dominji permessi",
+      "labelAll": "Niżżel mis-siti web kollha",
+      "labelEmptyWhitelist": "Ebda dominju permess",
+      "labelEdit": "Editja l-aċċess għall-web",
+      "labelDetails": "Uri d-dettalji"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Għodda: Estensjonijiet tal-konversazzjoni",
+      "labelFeatures": "Issuġġerixxi l-messaġġ li jmiss, ibdel it-tikketta tal-konversazzjoni",
+      "description": "L-aġent jista’ jiġġenera suġġerimenti għall-messaġġ li jmiss tal-utent sabiex l-utent ikun jista’ sempliċement jikklikkja l-messaġġ rilevanti biex ikompli l-konversazzjoni. <br /> L-aġent jista’ jibdel it-tikketta tal-konversazzjoni għall-utent sabiex il-konversazzjoni tkun aktar faċli biex tinstab fl-istorja."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Deskrizzjoni tar-rwol",
+      "description": "Id-deskrizzjoni tar-rwol tintuża meta jasal messaġġ ġdid tal-utent biex jiġi deċiż liema rwol se jwieġeb il-messaġġ",
+      "labelName": "Isem",
+      "labelSelectionHint": "Ħjiel għall-għażla tar-rwol",
+      "labelDeleteRole": "Ħassar rwol ",
+      "labelDoNotOverride": "Tissostitwixxix",
+      "labelOverrideModel": "Issostitwixxi l-mudell",
+      "descriptionOverrideModel": "Tista’ tagħżel mudell għal dan ir-rwol differenti mill-mudell ġenerali tal-aġent.",
+      "confirmDeleteDescription": "Żgur li trid tħassar ir-rwol \"{{name}}\"? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "labelCancel": "Ikkanċella",
+      "labelThinking": "Raġunament"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Mudell",
+      "description": "Il-mudell lingwistiku li juża l-aġent, sakemm ma jiġix sostitwit minn rwol.",
+      "labelName": "Mudell",
+      "labelThinking": "Raġunament",
+      "labelThinking_optionalOn": "Raġunament",
+      "labelThinking_mandatoryOn": "Raġunament obbligatorju",
+      "labelThinking_optionalOff": "Mingħajr raġunament",
+      "labelThinking_mandatoryOff": "Obbligatorjament mingħajr raġunament",
+      "labelSelectModel": "Agħżel mudell"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Repożitorju tad-dokumenti",
+      "labelPathAgent": "Mogħdija għall-aġent",
+      "labelPathRepository": "Mogħdija fir-repożitorju tad-dokumenti",
+      "labelPermission": "Permess",
+      "labelDeleteConnection": "Ħassar konnessjoni",
+      "confirmDeleteTitle": "Ħassar konnessjoni",
+      "confirmDeleteDescription": "Verament trid tħassar din il-konnessjoni mar-repożitorju tad-dokumenti \"{{name}}\"?",
+      "labelCancel": "Ikkanċella",
+      "labelAddConnection": "Konnessjoni addizzjonali",
+      "labelUnknownRepository": "Repożitorju tad-dokumenti mhux magħruf",
+      "labelConfirmWrite": "Qari u kitba (itlob konferma)",
+      "labelReadOnly": "Qari biss",
+      "labelWrite": "Qari u kitba (awtomatiku)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Tikketta",
+      "labelMessage": "Messaġġ",
+      "labelClose": "Agħlaq"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Isem",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Intestaturi HTTP",
+      "labelHeaderName": "Isem",
+      "labelHeaderValue": "Valur",
+      "labelAddHeader": "Żid intestatura HTTP",
+      "labelDeleteConnection": "Ħassar konnessjoni",
+      "confirmDeleteTitle": "Ħassar MCP",
+      "confirmDeleteDescription": "Żgur li trid tħassar il-konfigurazzjoni MCP \"{{name}}\"?",
+      "labelCancel": "Ikkanċella",
+      "labelDeleteMCP": "Ħassar MCP",
+      "labelAddMCP": "MCP ieħor",
+      "errorInvalidUrl": "Il-URL irid ikun validu",
+      "labelOAuthApp": "App OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Data",
+      "labelConnectRepository": "Qabbad repożitorju tad-dokumenti",
+      "labelToolWebAccess": "Għodda: Aċċess għall-web",
+      "labelConnectMCP": "Qabbad għodda esterna (MCP)",
+      "labelSupport": "Appoġġ",
+      "labelToolChatExtensions": "Għodda: Estensjonijiet tal-konversazzjoni",
+      "labelToolCalculator": "Għodda: Kalkolatur",
+      "labelSystem": "Sistema",
+      "labelToolPlatformAccess": "Għodda: Aċċess għall-pjattaforma schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Aġent ġdid",
+      "emptyDescription": "Iddefinixxi l-imġiba, l-aċċess għad-data, id-dehra tal-aġent u ħafna aktar.",
+      "labelDefinePrompt": "Iddefinixxi istruzzjoni",
+      "descriptionDefinePrompt": "Il-kwalità ta’ aġent tiddependi mill-istruzzjonijiet tiegħu. Definizzjonijiet ċari tar-rwoli jimminimizzaw l-alluċinazzjonijiet u jżidu l-konsistenza.",
+      "labelConnectTools": "Qabbad għodod",
+      "descriptionConnectTools": "Pereżempju, qabbad repożitorji tad-dokumenti sabiex l-aġent ikun ibbażat fuq fatti u juża għarfien speċifiku għall-kumpanija.",
+      "labelWriteDocs": "Ikteb dokumentazzjoni",
+      "descriptionWriteDocs": "Għin lill-utenti jifhmu l-kapaċitajiet ta’ dan l-aġent.",
+      "infoRoleDefinition": "Ir-rwol jiddefinixxi kif iġib ruħu l-aġent u liema għodod huma disponibbli biex jitlesta l-kompitu.",
+      "infoDocsDescription": "Id-dokumentazzjoni tista’ tkun kemm test (il-format Markdown huwa appoġġjat) kif ukoll suġġerimenti għal messaġġi li jintbagħtu lill-aġent.",
+      "infoAppearanceDescription": "L-isem, id-deskrizzjoni u l-kulur jgħinu lill-utenti jinnavigaw fost l-aġenti disponibbli."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Messaġġi ssuġġeriti",
+      "descriptionRecommendedMessages": "Għin lill-utenti billi tissuġġerixxi messaġġi dwar kif jużaw l-aġent bl-aħjar mod.",
+      "labelAddMessage": "Żid messaġġ ",
+      "labelDocumentation": "Dokumentazzjoni",
+      "descriptionDocumentation": "Aqsam hawn informazzjoni addizzjonali dwar dan l-aġent mal-utenti tiegħek",
+      "labelShowPreview": "Uri l-previżjoni",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Id-dokumentazzjoni tgħin lill-utenti jużaw l-aġent. Tintwera meta l-utent jibda konversazzjoni ġdida.",
+      "descriptionMarkdownHelp": "Markdown huwa lingwa ħafifa tal-markup għall-ifformattjar tat-test malajr u faċilment.\n\n* **Struttura:** Intestaturi (`#`), listi (ordnati `1.` u mhux ordnati `-`), linji orizzontali.\n* **Stil tat-test:** **Grassi** `**Grassi**`, *Korsiv* `*Korsiv*`, ~~Maqtugħ b’linja~~ `~~Maqtugħ b’linja~~`.\n* **Kodiċi:** Kodiċi fit-test (`code`) u blokki ta’ kodiċi b’enfasi tas-sintassi.\n* **Organizzazzjoni:** Kwotazzjonijiet (`>`), listi ta’ kontroll (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Ebda rwol",
+      "descriptionNoRoles": "Ma ġie ddefinit ebda rwol għall-aġent. Mingħajr rwol l-aġent ma jaħdimx.",
+      "labelAddRole": "Żid rwol ",
+      "infoMultipleRoles": "L-aġenti jistgħu jieħdu diversi rwoli. Rwol jista’ jikkonċentra aħjar fuq parti mill-kompitu.",
+      "infoTools": "L-aġenti jistgħu jużaw għodod biex iwieġbu aħjar għat-talbiet tal-utenti (ifittxu dokumenti, joħolqu dokumenti, eċċ.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Aġent ġdid",
+      "labelAgent": "Aġent",
+      "labelCreateAgent": "Oħloq aġent",
+      "labelSaveAgent": "Issejvja aġent",
+      "tabOverview": "Ħarsa ġenerali",
+      "tabPrompt": "Istruzzjoni",
+      "tabDocs": "Appoġġ",
+      "tabRoles": "Rwoli",
+      "tabSettings": "Settings",
+      "btnCreate": "Oħloq",
+      "btnSave": "Issejvja",
+      "labelEditAgent": "Editja aġent",
+      "labelCloneAgent": "Issejvja bħala aġent ġdid",
+      "labelDeleteAgent": "Ħassar aġent",
+      "confirmDeleteTitle": "Ħassar aġent",
+      "confirmDeleteDescription": "Żgur li trid tħassar l-aġent \"{{name}}\"? Din l-azzjoni ma tistax titreġġa’ lura.",
+      "labelCancel": "Ikkanċella"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Rwol ",
+      "description": "Jiddetermina l-imġiba tal-aġent u liema għodod jista’ juża f’dan il-kuntest.",
+      "tabOverview": "Ħarsa ġenerali",
+      "tabPrompt": "Istruzzjoni",
+      "tabDocumentRepositoryMounts": "Repożitorji tad-dokumenti",
+      "tabMCPs": "Għodod esterni (MCP)",
+      "tabWeb": "Aċċess għall-internet",
+      "tabChat": "Estensjonijiet tal-konversazzjoni",
+      "tabCalc": "Kalkolatur",
+      "tabTools": "Għodod",
+      "tabSettings": "Settings",
+      "toolWebAccess": "Aċċess għall-internet",
+      "chatExtensions": "Estensjonijiet tal-konversazzjoni",
+      "calculator": "Kalkolatur",
+      "externalToolsMCP": "Għodod esterni (MCP)",
+      "labelPrompt": "Istruzzjoni"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Armi l-bidliet",
+      "labelDiscardConfirm": "Verament trid tarmi l-bidliet kollha mhux issejvjati għal dan l-aġent?",
+      "labelCancel": "Ikkanċella",
+      "labelDiscard": "Armi l-bidliet"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Għodod esterni (MCP)",
+      "changedBadge": "Mibdul",
+      "unknownMcp": "MCP mhux magħruf",
+      "invalidUrl": "URL mhux validu"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Tfittxija semantika",
+      "labelChanged": "Mibdul",
+      "labelActive": "Attiv",
+      "labelInactive": "Inattiv",
+      "description": "Meta t-tifsira tad-data tkun aktar importanti mill-kliem eżatt. (Jeħtieġ mudell ta’ inkorporazzjoni)",
+      "labelUnknownModel": "Mudell mhux magħruf"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Tfittxija bil-kliem kjavi",
+      "labelChanged": "Mibdul",
+      "labelActive": "Attiv",
+      "labelInactive": "Inattiv",
+      "description": "Meta tfittex espressjonijiet u sentenzi preċiżi. (Ismijiet, denominazzjonijiet, eċċ.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Traskrittur",
+      "labelChanged": "Mibdul",
+      "labelUnknownTranscriber": "Traskrittur mhux magħruf",
+      "labelGoToTranscriber": "Mur fit-traskrittur"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Messaġġ ġdid"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Jistenna l-ipproċessar",
+      "tooltipPaused": "Imwaqqaf temporanjament"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Raġunament attivat",
+      "labelThinkingOff": "Raġunament diżattivat",
+      "labelMessageStack": "Munzell ta’ messaġġi",
+      "placeholderMessage": "Messaġġ...",
+      "tooltipUploadFiles": "Tella’ fajls",
+      "buttonPause": "Issospendi",
+      "buttonStartBatch": "Ibda l-lott",
+      "buttonSend": "Ibgħat",
+      "descriptionFilesPending": "Il-fajls qed jittellgħu jew jiġu pproċessati …",
+      "labelAttachFiles": "Ehmeż fajls",
+      "labelUploadFiles": "Tella’ fajls",
+      "labelSelectFile": "Agħżel fajl eżistenti"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Tippermetti din l-azzjoni?",
+      "descriptionAction": "L-aġent jeħtieġ l-approvazzjoni tiegħek biex ikompli.",
+      "labelApprove": "Ippermetti",
+      "labelReject": "Irrifjuta",
+      "labelRetry": "Erġa’ pprova",
+      "labelSubmitting": "Qed jiġi pproċessat …",
+      "errorSubmit": "Ma setgħetx tintbagħat id-deċiżjoni tiegħek. Erġa’ pprova.",
+      "labelMCP": "Qabbad il-kont tiegħek",
+      "descriptionMCP": "Din l-għodda MCP teħtieġ li tidħol fil-kont. Is-sejħa pendenti tkompli awtomatikament wara li tikkonnettja."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Issejvja d-dokument?",
+      "descriptionWriteFile": "L-aġent irid jissejvja dan id-dokument. Il-kontenut eżistenti se jiġi sostitwit.",
+      "labelShowContent": "Uri l-kontenut",
+      "labelHideContent": "Aħbi l-kontenut",
+      "descriptionEmptyFile": "Id-dokument se jiġi ssejvjat b’kontenut vojt."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Tniżżil mill-web",
+      "description": "Ikkonfigura l-aċċess għall-web għal dan ir-rwol. It-tniżżil u t-tfittxija jistgħu jiġu attivati indipendentement.",
+      "labelFetch": "Attiva t-tniżżil mill-web",
+      "labelAskFetch": "Staqsi qabel tniżżel paġna",
+      "labelAccess": "Siti web permessi",
+      "labelAll": "Is-siti web kollha",
+      "labelWhitelist": "Lista ta’ dominji permessi",
+      "descriptionAccess": "Fajls HTTP(S) u paġni web, inkluż in-network lokali. Ir-ridirezzjonijiet isegwu l-istess regoli ta’ aċċess.",
+      "labelDomains": "Dominji permessi",
+      "descriptionDomains": "Isem tal-host wieħed f’kull linja, pereżempju example.com. Uża *.example.com għas-sottodominji; dan ma jinkludix example.com innifsu.",
+      "errorDomains": "Daħħal ismijiet tal-hosts jew *.example.com mingħajr protokoll, mogħdija jew port.",
+      "descriptionEmptyWhitelist": "Lista vojta ta’ dominji permessi timblokka kull paġna.",
+      "labelSearchTitle": "Tfittxija fuq il-web",
+      "labelSearch": "Attiva t-tfittxija fuq il-web",
+      "labelAskSearch": "Staqsi qabel tfittex fuq il-web",
+      "labelProvider": "Fornitur tat-tfittxija",
+      "labelProviderDocs": "Dokumentazzjoni tal-fornitur",
+      "labelApiKey": "Ċavetta API",
+      "errorApiKey": "Daħħal ċavetta API għall-fornitur magħżul.",
+      "labelMarket": "Lingwa u reġjun ta’ Staan",
+      "descriptionMarket": "Pereżempju de-de jew en-us. Il-valur predefinit huwa en-us.",
+      "labelRemoveTool": "Neħħi għodda",
+      "labelConfirmRemoveTool": "Neħħi l-għodda tal-web?",
+      "descriptionRemoveTool": "Is-settings tat-tniżżil mill-web u tat-tfittxija fuq il-web, inklużi l-lista ta’ dominji permessi u ċ-ċavetta API, se jitneħħew minn dan ir-rwol.",
+      "labelCancel": "Ikkanċella"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Niżżel paġna web",
+      "descriptionFetch": "Tippermetti lill-aġent iniżżel, jissejvja u jipproċessa dan il-URL?",
+      "labelDestination": "Destinazzjoni"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Fittex fuq il-web",
+      "descriptionSearch": "Tippermetti lill-aġent jibgħat din il-mistoqsija lill-fornitur tat-tfittxija kkonfigurat?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Agħlaq",
+      "labelPending": "Għaddej",
+      "labelApproval": "Jistenna l-approvazzjoni",
+      "labelDenied": "Miċħud",
+      "labelDone": "Lest",
+      "errorRequest": "It-talba falliet"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Tfittxija fuq il-web",
+      "labelQuery": "Mistoqsija ta’ tfittxija",
+      "labelEmptyResults": "Ma nstab ebda riżultat."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Paġna web",
+      "labelUrl": "URL",
+      "labelRange": "Karattri {{start}}–{{end}} minn {{total}}",
+      "descriptionTruncated": "Hemm aktar kontenut disponibbli fit-taqsima li jmiss.",
+      "labelEmptyPage": "Din il-paġna ma fiha ebda test li jista’ jinqara.",
+      "labelSource": "Iftaħ is-sors",
+      "descriptionFileReady": "Il-fajl ġie ssejvjat u pproċessat. It-test estratt huwa disponibbli direttament għall-aġent.",
+      "descriptionProcessingUnavailable": "Il-fajl ġie ssejvjat. M’hemmx test estratt disponibbli; l-awdjo/il-vidjo jeħtieġ traskrittur ikkonfigurat.",
+      "descriptionProcessingFailed": "Il-fajl ġie ssejvjat, iżda l-ipproċessar falla jew qabeż il-limitu taż-żmien. L-ipproċessar jista’ jerġa’ jinbeda fil-ħażna."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Ikkopja fajl",
+      "labelMove": "Mexxi fajl",
+      "descriptionSuccess": "Il-fajl ġie ttrasferit. Kull indiċi tat-tfittxija meħtieġ jinbena mill-ġdid fl-isfond.",
+      "descriptionPending": "Qed jitħejja t-trasferiment tal-fajl…",
+      "descriptionProcessingError": "Il-fajl ġie ttrasferit, iżda l-ipproċessar irid jerġa’ jinbeda fid-destinazzjoni.",
+      "errorTransfer": "It-trasferiment tal-fajl ma setax jitlesta.",
+      "labelOpenFile": "Iftaħ il-fajl tad-destinazzjoni",
+      "descriptionDenied": "It-trasferiment tal-fajl ġie miċħud. Ma ġie ttrasferit ebda fajl.",
+      "descriptionApproval": "Jistenna l-approvazzjoni tiegħek.",
+      "descriptionRunning": "Qed jiġi ttrasferit il-fajl…",
+      "labelClose": "Agħlaq",
+      "labelSource": "Sors",
+      "labelTarget": "Destinazzjoni"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Tippermetti l-ikkupjar ta’ dan il-fajl?",
+      "labelMove": "Tippermetti ċ-ċaqliq ta’ dan il-fajl?",
+      "descriptionCopy": "L-aġent irid jikkopja dan il-fajl u l-kontenut ipproċessat tiegħu. Il-fajls eżistenti fid-destinazzjoni qatt ma jinkitbu fuqhom.",
+      "descriptionMove": "L-aġent irid imexxi dan il-fajl u l-kontenut ipproċessat tiegħu. Is-sors jitneħħa wara li l-ikkupjar jirnexxi.",
+      "labelSource": "Sors",
+      "labelTarget": "Destinazzjoni"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Din l-għodda MCP teħtieġ li tidħol fil-kont. Is-sejħa pendenti tkompli awtomatikament wara li tikkonnettja.",
+      "labelConnect": "Qabbad il-kont tiegħi"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Għodda MCP",
+      "labelDiscover": "Skopri l-għodod disponibbli",
+      "labelPending": "Għaddej",
+      "labelDone": "Lest",
+      "labelApproval": "Jeħtieġ dħul fil-kont",
+      "labelDenied": "Miċħud",
+      "errorRequest": "It-talba falliet",
+      "labelArguments": "Data mdaħħla",
+      "labelResult": "Riżultat",
+      "labelClose": "Agħlaq"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "App OAuth",
+      "labelSearch": "Konnessjoni tat-tfittxija",
+      "labelAutomatic": "Ebda app OAuth ikkonfigurata",
+      "labelNone": "Ebda konnessjoni magħżula",
+      "labelMissing": "Il-konnessjoni mhijiex disponibbli",
+      "descriptionOAuth": "Fakultattiv: Agħżel app OAuth irreġistrata għal dan is-server MCP. Ikkonfigura l-URL tiegħu indipendentement f’dan l-aġent.",
+      "descriptionSearch": "Il-kredenzjali ta’ Staan u Brave jiġu mmaniġġjati ċentralment taħt Settings → Konnessjonijiet.",
+      "errorMissing": "Din il-konnessjoni m’għadhiex disponibbli. Agħżel konnessjoni oħra.",
+      "descriptionEmpty": "Ma ġiet ikkonfigurata ebda konnessjoni xierqa. Immaniġġja l-konnessjonijiet taħt Settings → Konnessjonijiet."
+    }
+  },
+  "page": {
+    "labelTitle": "Aġenti",
+    "emptyTitle": "Ebda aġent",
+    "emptyDescription": "Għadu ma nħoloq ebda aġent.",
+    "labelNewAgent": "Aġent ġdid",
+    "helpSearchTitle": "Fittex",
+    "helpSearchDescription": "Tista’ tfittex aġenti. It-tfittxija tinkludi, fost affarijiet oħra, l-isem u d-deskrizzjoni tal-aġent, kif ukoll il-mudell tiegħu.",
+    "helpSortTitle": "Issortjar u gruppi",
+    "helpSortDescription": "L-aġenti jistgħu jiġu ssortjati skont l-isem u mqassma fi gruppi differenti. Jistgħu jintwerew bħala madum jew bħala tabella."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Dan il-fornitur MCP jeħtieġ app OAuth irreġistrata. Itlob lil amministratur joħloq app OAuth b’Client ID u Client Secret taħt Settings → Konnessjonijiet u agħżilha fis-settings MCP tal-aġent. Imbagħad erġa’ qabbad mill-konversazzjoni.",
+    "errorStart": "L-awtorizzazzjoni MCP ma setgħetx tinbeda.",
+    "errorCallback": "L-awtorizzazzjoni MCP falliet jew skadiet. Erġa’ lura għall-konversazzjoni u pprova mill-ġdid."
+  }
+}

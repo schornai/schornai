@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Feedback-Text in die Zischenablage kopieren",
+      "feedbackText": "Feedback-Text",
+      "feedbackTextRecommendation": "Am besten Sie schicken uns diesen Text einfach an ",
+      "sendFeedback": "Feedback per Email verschicken",
+      "showFeedbackText": "Feedback-Text anzeigen",
+      "thankYou": "Danke, dass Sie sich die Zeit nehmen für ein Feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Alle Fehlermeldungen löschen",
+      "actionDeleteAllCancel": "Abbrechen",
+      "actionDeleteAllExplainer": "Wollen Sie alle gesammelten Fehlermeldungen wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "actionDeleteAllShort": "Fehlermeldungen löschen",
+      "actionDeselectAll": "Alle Fehlermeldungen abwählen",
+      "actionSelectAll": "Alle Fehlermeldungen auswählen",
+      "explainer": "Teil des Feedbacks sind auch Fehlermeldungen. Manche Fehler behebt das System von selbst und Sie blieben im Normalbetrieb davon ungestört. Für uns ist es jedoch hilfreich, wenn wir selbst über diese Fehler bescheid wissen, damit wir sie beheben können.",
+      "explainerSecrecy": "Bitte achten Sie, dass Fehler keine geheimen und/oder personenbezogene Daten enthalten. Grundsätzlich ist das System so gestaltet, dass Fehlermeldungen keinerlei solcher Daten enthalten. Jedoch in der Natur von Fehlermeldungen liegt, dass es um unvorhergesehene Umstände geht. Also bitte sicherheitshalber das Feedback persönlich kontrollieren.",
+      "explainerSecrecyHeading": "Keine geheimen Daten",
+      "heading": "Fehler",
+      "tableColumnPartOfFeedback": "Teil des Feedbacks",
+      "tableColumnDate": "Datum",
+      "tableColumnErrorMessage": "Fehlermeldung"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Keine Sterne-Bewertung abgegeben",
+      "starRating": "{{stars}} / 5 Sterne"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Bewertung verwerfen",
+      "discardFeedbackSub": "Wollen Sie Ihre Bewertung wirklich verwerfen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "discardFeedbackCancel": "Abbrechen",
+      "infoSecrecy": "Bitte achten Sie beim Erstellen, dass das Feedback keine geheimen und/oder personenbezogene Daten enthält.",
+      "writeFeedback": "Bewertung schreiben",
+      "writeFeedbackSub": "Wir freuen uns über jedes Feedback, ob positiv oder negativ."
+    }
+  },
+  "page": {
+    "headingLine1": "Helfen Sie uns schorn.ai in a Box besser zu machen,",
+    "headingLine2": "geben Sie uns ein Feedback",
+    "headingMain": "Feedback"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Historia"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Virhe",
+      "idle": "Toimeton",
+      "running": "Käynnissä",
+      "success": "Onnistui"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Kiinnitä",
+      "actionUnpin": "Irrota kiinnitys",
+      "actionDelete": "Poista"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Hae…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelLabelAsc": "Nimi A–Ö",
+      "labelLabelDesc": "Nimi Ö–A",
+      "labelCreatedAsc": "Luontipäivä laskevasti",
+      "labelCreatedDesc": "Luontipäivä nousevasti",
+      "labelUpdatedAsc": "Päivityspäivä laskevasti",
+      "labelUpdatedDesc": "Päivityspäivä nousevasti",
+      "labelGroup": "Ryhmittely",
+      "labelPinned": "Kiinnitetty",
+      "labelState": "Tila",
+      "labelType": "Tyyppi",
+      "labelCreated": "Luontipäivä",
+      "labelUpdated": "Päivityspäivä",
+      "labelList": "Luettelo",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta",
+      "labelNoGroup": "Ei ryhmittelyä"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Ei tapahtumia",
+      "emptyDescription": "Aiemmat keskustelusi ja litterointisi näkyvät tässä.",
+      "emptyLabelAgents": "Agentit"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Tänään",
+      "groupTimeLast7Days": "Viimeiset 7 päivää",
+      "groupTimeLast30Days": "Viimeiset 30 päivää",
+      "groupTimeOther": "Muut",
+      "groupPinned": "Kiinnitetty",
+      "groupNotPinned": "Ei kiinnitetty",
+      "groupUnknown": "Tuntematon",
+      "groupChat": "Keskustelu",
+      "groupTranscription": "Litterointi",
+      "groupReindex": "Indeksoi uudelleen",
+      "labelReindex": "Indeksoi uudelleen",
+      "labelPinned": "Kiinnitetty"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Nimi",
+      "tableColumnType": "Tyyppi",
+      "tableColumnState": "Tila",
+      "tableColumnCreated": "Luotu",
+      "tableColumnUpdated": "Päivitetty",
+      "tableColumnPinned": "Kiinnitetty",
+      "tableColumnNameActions": "Toiminnot",
+      "groupTimeToday": "Tänään",
+      "groupTimeLast7Days": "Viimeiset 7 päivää",
+      "groupTimeLast30Days": "Viimeiset 30 päivää",
+      "groupTimeOther": "Muut",
+      "groupPinned": "Kiinnitetty",
+      "groupNotPinned": "Ei kiinnitetty",
+      "groupUnknown": "Tuntematon",
+      "groupChat": "Keskustelu",
+      "groupTranscription": "Litterointi",
+      "groupReindex": "Indeksoi uudelleen",
+      "labelReindex": "Indeksoi uudelleen",
+      "labelPinned": "Kiinnitetty"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Historia",
+      "labelPinned": "Kiinnitetty",
+      "labelToday": "Tänään",
+      "labelLast7Days": "Viimeiset 7 päivää",
+      "labelLast30Days": "Viimeiset 30 päivää",
+      "labelEmpty": "Tyhjä"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Tapahtuma",
+      "actionPin": "Kiinnitä",
+      "actionUnpin": "Irrota kiinnitys",
+      "actionDelete": "Poista",
+      "labelAgent": "Agentti – {{name}}",
+      "actionNewChat": "Uusi keskustelu",
+      "labelInfo": "Tiedot"
+    }
+  }
+}

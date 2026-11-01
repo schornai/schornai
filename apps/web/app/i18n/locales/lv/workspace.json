@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Apraksts",
+      "description": "Izvēlieties darbvietai piemērotu nosaukumu. Varat saglabāt arī īsu aprakstu.",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts",
+      "buttonSave": "Saglabāt",
+      "buttonReset": "Atiestatīt"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentācija",
+      "description": "Kopīgojiet šeit ar lietotājiem papildu informāciju par šo darbvietu.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Saglabāt",
+      "buttonReset": "Atiestatīt"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO kartējumi",
+      "description": "Izvēlieties, kurai SSO grupai ir piekļuve darbvietai un ar kādām atļaujām.",
+      "labelRoleUser": "Lietotāju grupa",
+      "labelRoleEditor": "Redaktoru grupa",
+      "labelRoleWorkspaceAdmin": "Darbvietas administratoru grupa",
+      "placeholderNoGroup": "Nav piešķirta grupa",
+      "descriptionRoleUser": "Var skatīt darbvietas saturu (aģentus, transkribētājus, dokumentu krātuves utt.), bet nevar to rediģēt.",
+      "descriptionRoleEditor": "Var skatīt darbvietas saturu un arī to rediģēt.",
+      "descriptionRoleWorkspaceAdmin": "Var pārvaldīt darbvietu un izveidot, rediģēt un dzēst aģentus, transkribētājus, dokumentu krātuves utt.",
+      "buttonSave": "Saglabāt",
+      "buttonReset": "Atiestatīt"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automātisks lietotājs",
+      "description": "Ja ir ieslēgta opcija “Automātisks lietotājs”, ikviens, kurš var pierakstīties box, automātiski saņem lietotāja atļaujas šajā organizācijā.",
+      "labelActive": "Automātisks lietotājs ieslēgts",
+      "labelInactive": "Automātisks lietotājs izslēgts"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Jauna darbvieta",
+      "descriptionWorkspace": "Izvēlieties nosaukumu un neobligātu aprakstu. Papildu iestatījumus varēsiet konfigurēt pēc darbvietas izveides.",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts",
+      "labelCreate": "Izveidot darbvietu",
+      "labelCancel": "Atcelt",
+      "errorCreate": "Neizdevās izveidot darbvietu. Mēģiniet vēlreiz."
+    },
+    "WorkspaceCard": {
+      "labelType": "Darbvieta"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Rediģēt darbvietu",
+      "tooltipInfo": "Atvērt darbvietu"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Pievienot izlasei",
+      "tooltipRemoveFavorite": "Noņemt no izlases"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Meklēt darbvietas",
+      "labelName": "Nosaukums",
+      "labelDescription": "Apraksts",
+      "labelRole": "Jūsu loma",
+      "labelActions": "Darbības",
+      "labelFavorites": "Izlase",
+      "labelOtherWorkspaces": "Citas darbvietas",
+      "labelEmpty": "Nav darbvietu",
+      "descriptionEmpty": "Jums vēl nav piekļuves nevienai darbvietai.",
+      "labelNoResults": "Nav rezultātu",
+      "descriptionNoResults": "Mēģiniet citu meklēšanas terminu."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Opcijas",
+      "labelView": "Skats",
+      "labelSort": "Kārtošana",
+      "labelNameAsc": "Nosaukums no A līdz Z",
+      "labelNameDesc": "Nosaukums no Z līdz A",
+      "labelGroup": "Grupēt pēc",
+      "labelNoGroup": "Bez grupēšanas",
+      "labelFavorites": "Izlase",
+      "labelFirstLetter": "Pirmais burts",
+      "labelCards": "Kartītes",
+      "labelTable": "Tabula",
+      "labelSaveView": "Saglabāt skatu",
+      "labelReset": "Atiestatīt"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Izveidot darbvietu"
+    }
+  },
+  "page": {
+    "labelYourRole": "Jūsu loma",
+    "labelEmpty": "Vēl nav satura",
+    "descriptionEmpty": "Šajā darbvietā vēl nav pieejamu aģentu, dokumentu krātuvju vai transkribētāju.",
+    "labelTitle": "Darbvietas"
+  }
+}

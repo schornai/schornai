@@ -1,0 +1,100 @@
+{
+  "page": {
+    "titleHistory": "Ajalugu"
+  },
+  "_components": {
+    "ActivityStateBadge": {
+      "error": "Viga",
+      "idle": "Jõude",
+      "running": "Töötab",
+      "success": "Õnnestus"
+    },
+    "ActivityIconGroupActions": {
+      "actionPin": "Kinnita",
+      "actionUnpin": "Eemalda kinnitus",
+      "actionDelete": "Kustuta"
+    },
+    "ActivityList": {
+      "placeholderSearch": "Otsi…"
+    },
+    "ActivityListOptionsDropdown": {
+      "labelOptions": "Valikud",
+      "labelView": "Vaade",
+      "labelSort": "Sortimine",
+      "labelLabelAsc": "Nimi A–Z",
+      "labelLabelDesc": "Nimi Z–A",
+      "labelCreatedAsc": "Loomiskuupäev kahanevalt",
+      "labelCreatedDesc": "Loomiskuupäev kasvavalt",
+      "labelUpdatedAsc": "Muutmiskuupäev kahanevalt",
+      "labelUpdatedDesc": "Muutmiskuupäev kasvavalt",
+      "labelGroup": "Rühmitamine",
+      "labelPinned": "Kinnitatud",
+      "labelState": "Olek",
+      "labelType": "Tüüp",
+      "labelCreated": "Loomiskuupäev",
+      "labelUpdated": "Muutmiskuupäev",
+      "labelList": "Loend",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvesta vaade",
+      "labelReset": "Lähtesta",
+      "labelNoGroup": "Rühmitamata"
+    },
+    "ActivityListEmpty": {
+      "emptyTitle": "Tegevusi pole",
+      "emptyDescription": "Siin kuvatakse sinu varasemad vestlused ja transkriptsioonid.",
+      "emptyLabelAgents": "Agendid"
+    },
+    "ActivityListList": {
+      "groupTimeToday": "Täna",
+      "groupTimeLast7Days": "Viimased 7 päeva",
+      "groupTimeLast30Days": "Viimased 30 päeva",
+      "groupTimeOther": "Muu",
+      "groupPinned": "Kinnitatud",
+      "groupNotPinned": "Kinnitamata",
+      "groupUnknown": "Teadmata",
+      "groupChat": "Vestlus",
+      "groupTranscription": "Transkriptsioon",
+      "groupReindex": "Indekseeri uuesti",
+      "labelReindex": "Indekseeri uuesti",
+      "labelPinned": "Kinnitatud"
+    },
+    "ActivityListTable": {
+      "tableColumnLabel": "Nimi",
+      "tableColumnType": "Tüüp",
+      "tableColumnState": "Olek",
+      "tableColumnCreated": "Loodud",
+      "tableColumnUpdated": "Muudetud",
+      "tableColumnPinned": "Kinnitatud",
+      "tableColumnNameActions": "Toimingud",
+      "groupTimeToday": "Täna",
+      "groupTimeLast7Days": "Viimased 7 päeva",
+      "groupTimeLast30Days": "Viimased 30 päeva",
+      "groupTimeOther": "Muu",
+      "groupPinned": "Kinnitatud",
+      "groupNotPinned": "Kinnitamata",
+      "groupUnknown": "Teadmata",
+      "groupChat": "Vestlus",
+      "groupTranscription": "Transkriptsioon",
+      "groupReindex": "Indekseeri uuesti",
+      "labelReindex": "Indekseeri uuesti",
+      "labelPinned": "Kinnitatud"
+    },
+    "SidebarActivitesRealtime": {
+      "labelHistory": "Ajalugu",
+      "labelPinned": "Kinnitatud",
+      "labelToday": "Täna",
+      "labelLast7Days": "Viimased 7 päeva",
+      "labelLast30Days": "Viimased 30 päeva",
+      "labelEmpty": "Tühi"
+    },
+    "SidebarActivitesMenuItem": {
+      "labelActivity": "Tegevus",
+      "actionPin": "Kinnita",
+      "actionUnpin": "Eemalda kinnitus",
+      "actionDelete": "Kustuta",
+      "labelAgent": "Agent – {{name}}",
+      "actionNewChat": "Uus vestlus",
+      "labelInfo": "Teave"
+    }
+  }
+}

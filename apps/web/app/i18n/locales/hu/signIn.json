@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Már be van jelentkezve",
+      "backToDashboard": "Vissza az irányítópultra",
+      "signOut": "Kijelentkezés"
+    },
+    "PasswordSignIn": {
+      "header": "E-mail",
+      "headerSub": "Bejelentkezés e-mail-címmel és jelszóval",
+      "inputEmailLabel": "E-mail",
+      "inputPasswordLabel": "Jelszó",
+      "buttonSignIn": "Bejelentkezés e-mail-címmel",
+      "buttonReset": "Jelszó visszaállítása"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Bejelentkezés SSO-szolgáltatóval",
+      "buttonSignIn": "Bejelentkezés ezzel: {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Jelszó visszaállítása",
+      "descriptionKey": "Adja meg az e-mail-címét és a rendszergazdától kapott visszaállító kulcsot. A kulcs egyszer használható fel, és 7 napig érvényes.",
+      "labelEmail": "E-mail",
+      "labelKey": "Jelszó-visszaállító kulcs",
+      "labelPassword": "Új jelszó",
+      "labelPasswordAgain": "Új jelszó ismét",
+      "descriptionPassword": "Használjon legalább 6 karaktert, és tartsa be a szervezete jelszókövetelményeit.",
+      "errorEmail": "Adjon meg érvényes e-mail-címet.",
+      "errorKey": "Adja meg a visszaállító kulcsát.",
+      "errorPassword": "A jelszónak legalább 6 karakterből kell állnia.",
+      "errorPasswordAgain": "A jelszavak nem egyeznek.",
+      "errorReset": "A jelszót nem sikerült módosítani. Ellenőrizze az e-mail-címet, a kulcsot és a jelszókövetelményeket. A lejárt vagy már felhasznált kulcsok érvénytelenek.",
+      "descriptionSuccess": "A jelszava megváltozott. Most már bejelentkezhet az új jelszavával.",
+      "labelReset": "Jelszó mentése",
+      "labelSignIn": "Vissza a bejelentkezéshez"
+    }
+  }
+}

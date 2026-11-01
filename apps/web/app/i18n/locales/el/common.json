@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Νέα συνομιλία",
+        "mainLabelAgents": "Πράκτορες",
+        "mainLabelApps": "Εφαρμογές",
+        "mainLabelWorkspaces": "Χώροι εργασίας",
+        "history": "Ιστορικό"
+      },
+      "SidebarFavorites": {
+        "label": "Αγαπημένα",
+        "empty": "Δεν έχουν προστεθεί ακόμη αγαπημένα."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Δεν υπάρχουν αγαπημένα",
+        "descriptionNoFavorites": "Μπορείτε να προσθέσετε <agents>πράκτορες</agents>, <documents>αποθετήρια εγγράφων</documents> και <transcribers>απομαγνητοφωνητές</transcribers> στα αγαπημένα."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Νέα συνομιλία"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Καληνύχτα];(5-11)[Καλημέρα];(12-17)[Καλό απόγευμα];(18-inf)[Καλησπέρα];",
+      "labelAllAgents": "Όλοι οι πράκτορες",
+      "labelToApps": "Στις εφαρμογές"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Προφίλ",
+        "labelFavorites": "Αγαπημένα",
+        "labelPermissions": "Δικαιώματα",
+        "labelModels": "Μοντέλα",
+        "labelTaskQueue": "Ουρά εργασιών",
+        "labelSettings": "Ρυθμίσεις",
+        "labelUsers": "Χρήστες",
+        "labelWorkspaces": "Χώροι εργασίας",
+        "labelSSOProvider": "Πάροχος SSO",
+        "labelXRAGUpload": "Μεταφόρτωση XRAG",
+        "labelSystemModel": "Μοντέλο συστήματος",
+        "labelTheme": "Θέμα",
+        "labelBackToDashboard": "Επιστροφή στον πίνακα ελέγχου",
+        "labelConnections": "Συνδέσεις",
+        "labelProviderConnections": "Συνδέσεις",
+        "labelService": "Υπηρεσία",
+        "labelArtifacts": "Τεχνουργήματα",
+        "labelCluster": "Συστοιχία"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Επιλογή εικονιδίου",
+      "buttonMoreIcons": "Περισσότερα εικονίδια",
+      "textLucideInfo": "Εικονίδια από το <0>Lucide</0>",
+      "placeholderSearchIcons": "Αναζήτηση εικονιδίων...",
+      "buttonCancel": "Ακύρωση"
+    },
+    "FileUploadDropZone": {
+      "drop": "Αποθέστε το αρχείο εδώ για μεταφόρτωση"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Τροποποιήθηκε"
+    },
+    "Pagination": {
+      "labelPrev": "Προηγούμενο",
+      "labelNext": "Επόμενο"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Ο λογαριασμός μου",
+      "labelSystem": "Σύστημα",
+      "labelModels": "Μοντέλα",
+      "labelCluster": "Συστοιχία",
+      "labelSettings": "Ρυθμίσεις",
+      "labelDashboard": "Πίνακας ελέγχου",
+      "labelProfile": "Προφίλ"
+    },
+    "SidebarUserSignOut": {
+      "label": "Αποσύνδεση"
+    },
+    "UserRoleText": {
+      "admin": "Διαχειριστής",
+      "workspace-admin": "Διαχειριστής χώρου εργασίας",
+      "editor": "Συντάκτης",
+      "user": "Χρήστης",
+      "none": "Δεν επιτρέπεται η πρόσβαση"
+    },
+    "StorageView": {
+      "placeholderSearch": "Αναζήτηση σε αυτόν τον φάκελο…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Όνομα",
+      "tableColumnType": "Τύπος",
+      "tableColumnSize": "Μέγεθος",
+      "tableColumnCreated": "Δημιουργήθηκε",
+      "tableColumnUpdated": "Ενημερώθηκε",
+      "tableColumnNameActions": "Ενέργειες",
+      "groupTimeToday": "Σήμερα",
+      "groupTimeLast7Days": "Τελευταίες 7 ημέρες",
+      "groupTimeLast30Days": "Τελευταίες 30 ημέρες",
+      "groupTimeOther": "Άλλα",
+      "labelFolder": "Φάκελος",
+      "descriptionProcessing": "Το αρχείο υποβάλλεται σε επεξεργασία"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Νέος φάκελος",
+      "placeholderFolderName": "Όνομα φακέλου...",
+      "labelCancel": "Ακύρωση",
+      "labelCreate": "Δημιουργία"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Αφαίρεση",
+      "labelDescription": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το «{{name}}»; Αυτό δεν μπορεί να αναιρεθεί.",
+      "labelCancel": "Ακύρωση",
+      "labelRemove": "Αφαίρεση"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Αρχικός κατάλογος"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Δεν υπάρχουν αρχεία",
+      "labelDescription": "Ο τρέχων φάκελος δεν περιέχει αρχεία. Απλώς σύρετε αρχεία εδώ για να τα μεταφορτώσετε.",
+      "labelUploadFile": "Μεταφόρτωση αρχείου",
+      "labelCreateFile": "Δημιουργία αρχείου"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelNameAsc": "Όνομα από Α έως Ω",
+      "labelNameDesc": "Όνομα από Ω έως Α",
+      "labelSizeAsc": "Μέγεθος, αύξουσα",
+      "labelSizeDesc": "Μέγεθος, φθίνουσα",
+      "labelCreatedAsc": "Ημερομηνία δημιουργίας, αύξουσα",
+      "labelCreatedDesc": "Ημερομηνία δημιουργίας, φθίνουσα",
+      "labelUpdatedAsc": "Ημερομηνία ενημέρωσης, αύξουσα",
+      "labelUpdatedDesc": "Ημερομηνία ενημέρωσης, φθίνουσα",
+      "labelGroup": "Ομαδοποίηση",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelFirstLetter": "Πρώτο γράμμα",
+      "labelFileType": "Τύπος αρχείου",
+      "labelCreated": "Ημερομηνία δημιουργίας",
+      "labelUpdated": "Ημερομηνία ενημέρωσης",
+      "labelTilesSmall": "Πλακίδια (μικρά)",
+      "labelTilesMedium": "Πλακίδια (μεσαία)",
+      "labelTilesLarge": "Πλακίδια (μεγάλα)",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά",
+      "labelNewFolder": "Νέος φάκελος",
+      "labelThisFolder": "Αυτός ο φάκελος",
+      "labelUploadFile": "Μεταφόρτωση αρχείου",
+      "labelNew": "Νέο",
+      "labelDeleteFolder": "Διαγραφή φακέλου",
+      "labelNewRecording": "Νέα εγγραφή",
+      "labelColumns": "Προβολή στηλών",
+      "labelNewTextFile": "Νέο αρχείο"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Δεν υπάρχουν αποτελέσματα",
+      "descriptionNoResults": "Η αναζήτησή σας δεν επέστρεψε αποτελέσματα. Αναδιατυπώστε το ερώτημά σας.",
+      "labelCharacters": "χαρακτήρες"
+    },
+    "Transcription": {
+      "labelTitle": "Απομαγνητοφωνημένο κείμενο",
+      "labelLoadingMedia": "Φόρτωση πολυμέσων…",
+      "labelBuffering": "Προσωρινή αποθήκευση αναπαραγωγής…",
+      "labelSeeking": "Φόρτωση θέσης…",
+      "labelPlayer": "Πρόγραμμα αναπαραγωγής πολυμέσων",
+      "labelPlay": "Αναπαραγωγή",
+      "labelPause": "Παύση",
+      "labelSeek": "Θέση αναπαραγωγής",
+      "labelBack": "Πίσω 10 δευτερόλεπτα",
+      "labelForward": "Μπροστά 10 δευτερόλεπτα",
+      "labelSpeed": "Ταχύτητα αναπαραγωγής",
+      "labelUnmute": "Κατάργηση σίγασης",
+      "labelMute": "Σίγαση",
+      "labelVolume": "Ένταση",
+      "labelHideVideo": "Απόκρυψη βίντεο",
+      "labelShowVideo": "Εμφάνιση βίντεο",
+      "labelPlaySegment": "Αναπαραγωγή τμήματος {{number}}",
+      "labelReviewed": "Ελέγχθηκε",
+      "labelSegments": "Τμήματα",
+      "labelWords": "Λέξεις",
+      "descriptionEmpty": "Δεν βρέθηκαν αποτελέσματα απομαγνητοφώνησης.",
+      "descriptionConfidence": "Βεβαιότητα: {{percent}}%",
+      "errorPlayback": "Η αναπαραγωγή απέτυχε. Ελέγξτε ότι το αρχείο πολυμέσων είναι διαθέσιμο και δοκιμάστε ξανά.",
+      "labelEditSegment": "Επεξεργασία τμήματος {{number}}",
+      "labelSegmentText": "Κείμενο τμήματος",
+      "labelSave": "Αποθήκευση",
+      "labelSaving": "Αποθήκευση…",
+      "labelSaveReviewed": "Αποθήκευση και σήμανση ως ελεγμένο",
+      "labelCancel": "Ακύρωση",
+      "labelRestoreOriginal": "Επαναφορά αρχικού κειμένου",
+      "descriptionUnsaved": "Οι αλλαγές εφαρμόζονται μόνο όταν αποθηκεύετε.",
+      "errorSave": "Η αποθήκευση απέτυχε. Το κείμενό σας έχει διατηρηθεί. Δοκιμάστε ξανά.",
+      "errorConflict": "Αυτό το τμήμα έχει αλλάξει. Αντιγράψτε το προσχέδιό σας και επαναφορτώστε την προβολή πριν αποθηκεύσετε ξανά.",
+      "labelDownloadSrt": "Λήψη SRT",
+      "descriptionSaveBeforeDownload": "Αποθηκεύστε ή ακυρώστε τις αλλαγές σας πριν κατεβάσετε το αρχείο SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Προβολή στηλών",
+      "labelRoot": "Έγγραφα",
+      "labelDetails": "Λεπτομέρειες αρχείου",
+      "labelType": "Τύπος",
+      "labelSize": "Μέγεθος",
+      "labelUpdated": "Ενημερώθηκε",
+      "labelOpen": "Άνοιγμα αρχείου"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Νέο αρχείο",
+      "labelName": "Όνομα αρχείου",
+      "labelCreate": "Δημιουργία αρχείου",
+      "labelCancel": "Ακύρωση",
+      "errorCreate": "Δεν ήταν δυνατή η δημιουργία του αρχείου. Ελέγξτε το όνομα του αρχείου και τα δικαιώματα εγγραφής σας."
+    },
+    "StorageFileActions": {
+      "labelActions": "Ενέργειες για {{name}}",
+      "labelDownloadOriginal": "Λήψη πρωτοτύπου",
+      "labelDownloadProcessed": "Λήψη επεξεργασμένου κειμένου",
+      "labelRename": "Μετονομασία",
+      "labelProcess": "Επανεπεξεργασία",
+      "labelDelete": "Διαγραφή αρχείου",
+      "labelName": "Νέο όνομα αρχείου",
+      "labelCancel": "Ακύρωση",
+      "labelConfirm": "Επιβεβαίωση",
+      "descriptionDelete": "Να διαγραφούν οριστικά το «{{name}}», το επεξεργασμένο περιεχόμενό του και οι καταχωρίσεις του ευρετηρίου αναζήτησης;",
+      "descriptionProcess": "Να υποβληθεί ξανά σε επεξεργασία το «{{name}}»; Οι χειροκίνητες αλλαγές θα αντικατασταθούν.",
+      "descriptionQueued": "Η επεξεργασία βρίσκεται στην ουρά ή εκτελείται ήδη. Ελέγξτε την κατάστασή της στη λίστα αρχείων.",
+      "descriptionUnsupported": "Αυτό το αρχείο δεν μπορεί να υποβληθεί σε επεξεργασία αυτή τη στιγμή. Ο ήχος και το βίντεο απαιτούν ρυθμισμένο απομαγνητοφωνητή.",
+      "errorAction": "Η ενέργεια απέτυχε. Ελέγξτε τα δικαιώματα εγγραφής, τις συγκρούσεις ονομάτων και τις εκτελούμενες επεξεργασίες. Μια αποτυχημένη μετονομασία μπορεί να αφήσει και τα δύο ονόματα αρχείων· ελέγξτε τη λίστα πριν δοκιμάσετε ξανά.",
+      "labelOptions": "Επιλογές",
+      "labelEdit": "Επεξεργασία",
+      "descriptionRename": "Μετονομασία του «{{name}}». Διατηρήστε την επέκταση αρχείου. Το πρωτότυπο, το επεξεργασμένο περιεχόμενο και το ευρετήριο αναζήτησης ενημερώνονται μαζί. Τα υπάρχοντα ονόματα δεν αντικαθίστανται ποτέ.",
+      "labelCopy": "Αντιγραφή σε…",
+      "labelMove": "Μετακίνηση σε…",
+      "descriptionCopy": "Αντιγραφή του «{{name}}», συμπεριλαμβανομένου του επεξεργασμένου περιεχομένου του. Η πηγή θα διατηρηθεί.",
+      "descriptionMove": "Μετακίνηση του «{{name}}», συμπεριλαμβανομένου του επεξεργασμένου περιεχομένου του. Η πηγή θα αφαιρεθεί μετά την επιτυχή αντιγραφή.",
+      "descriptionTransferred": "Το αρχείο μεταφέρθηκε. Τα ευρετήρια αναζήτησης του προορισμού αναδημιουργούνται στο παρασκήνιο.",
+      "descriptionTransferProcessingError": "Το αρχείο μεταφέρθηκε, αλλά δεν ήταν δυνατή η έναρξη της επεξεργασίας. Ανοίξτε το αρχείο προορισμού και επιλέξτε «Επανεπεξεργασία». Μην επαναλάβετε τη μεταφορά."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Ενέργειες για {{name}}",
+      "labelDelete": "Διαγραφή φακέλου"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Περιεχόμενο",
+      "labelSave": "Αποθήκευση",
+      "labelCancel": "Ακύρωση",
+      "errorSave": "Η αποθήκευση απέτυχε. Δοκιμάστε ξανά.",
+      "errorConflict": "Το περιεχόμενο έχει αλλάξει. Επαναφορτώστε πριν αποθηκεύσετε.",
+      "errorIndex": "Αποθηκεύτηκε, αλλά δεν ήταν δυνατή η ενημέρωση του ευρετηρίου αναζήτησης. Αποθηκεύστε ξανά."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Επιλογή φακέλου προορισμού",
+      "labelSelectFile": "Επιλογή υπάρχοντος αρχείου",
+      "descriptionFolder": "Επιλέξτε έναν υπάρχοντα φάκελο. Θα μεταφερθεί ένα αρχείο· τα υπάρχοντα ονόματα δεν αντικαθίστανται ποτέ.",
+      "descriptionFile": "Επιλέξτε ένα αρχείο από αυτή τη συνομιλία ή από ένα προσβάσιμο αποθετήριο. Τα έγγραφα και οι εγγραφές πρέπει να έχουν ήδη υποβληθεί σε επεξεργασία.",
+      "labelStorage": "Αποθηκευτικός χώρος",
+      "labelCurrentStorage": "Τρέχων αποθηκευτικός χώρος",
+      "labelUp": "Γονικός φάκελος",
+      "descriptionLoading": "Φόρτωση αρχείων…",
+      "descriptionEmpty": "Δεν υπάρχουν αντίστοιχες καταχωρίσεις σε αυτόν τον φάκελο.",
+      "descriptionNoStorages": "Δεν υπάρχουν προσβάσιμα αποθετήρια.",
+      "descriptionPending": "Το αρχείο μεταφέρεται. Περιμένετε το αποτέλεσμα.",
+      "labelCancel": "Ακύρωση",
+      "labelUseFolder": "Χρήση αυτού του φακέλου",
+      "labelUseFile": "Επισύναψη αρχείου",
+      "labelRetry": "Επαναφόρτωση",
+      "errorLoad": "Δεν ήταν δυνατή η φόρτωση αυτού του φακέλου. Ελέγξτε την πρόσβαση και δοκιμάστε ξανά.",
+      "errorCollision": "Ο προορισμός περιέχει ήδη αρχείο ή επεξεργασμένο περιεχόμενο με αυτό το όνομα. Επιλέξτε άλλο φάκελο· τίποτα δεν αντικαταστάθηκε.",
+      "errorSameTarget": "Η πηγή και ο προορισμός είναι ίδια. Επιλέξτε άλλο φάκελο.",
+      "errorSourceChanged": "Η πηγή άλλαξε κατά την αντιγραφή. Το ημιτελές αρχείο προορισμού αφαιρέθηκε. Δοκιμάστε ξανά.",
+      "errorBusy": "Αυτό το αρχείο υποβάλλεται σε επεξεργασία. Περιμένετε μέχρι να ολοκληρωθεί.",
+      "errorPermission": "Δεν έχετε τα απαιτούμενα δικαιώματα για την πηγή ή τον προορισμό.",
+      "errorSourceDelete": "Το πλήρες αρχείο προορισμού δημιουργήθηκε, αλλά δεν ήταν δυνατή η αφαίρεση της πηγής. Ελέγξτε και τις δύο τοποθεσίες πριν επαναλάβετε τη λειτουργία.",
+      "errorCleanup": "Η αντιγραφή απέτυχε. Η πηγή διατηρήθηκε, αλλά ενδέχεται να παραμένουν ημιτελή αρχεία στον προορισμό. Ελέγξτε τον πριν δοκιμάσετε ξανά.",
+      "errorAction": "Η λειτουργία απέτυχε. Ελέγξτε τα δικαιώματα, τα ονόματα αρχείων και τις δύο τοποθεσίες πριν δοκιμάσετε ξανά.",
+      "errorNotProcessed": "Αυτό το αρχείο δεν έχει υποβληθεί ακόμη σε επεξεργασία. Επεξεργαστείτε το πρώτα και έπειτα επιλέξτε το ξανά."
+    }
+  },
+  "_welcomeMessage": "Καλώς ήρθατε στο\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Τεκμηρίωση",
+    "feedback": "Σχόλια",
+    "help": "Βοήθεια",
+    "labelThemeLight": "Φωτεινό",
+    "labelThemeDark": "Σκοτεινό",
+    "labelThemeSystem": "Λειτουργικό σύστημα",
+    "labelLanguage": "Γλώσσα"
+  }
+}

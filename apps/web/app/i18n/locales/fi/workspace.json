@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Kuvaus",
+      "description": "Valitse työtilalle sopiva nimi. Voit tallentaa myös lyhyen kuvauksen.",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus",
+      "buttonSave": "Tallenna",
+      "buttonReset": "Palauta"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Ohjeet",
+      "description": "Jaa tässä käyttäjillesi lisätietoja tästä työtilasta.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Tallenna",
+      "buttonReset": "Palauta"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO-vastaavuudet",
+      "description": "Valitse, millä SSO-ryhmällä on pääsy työtilaan ja millä oikeuksilla.",
+      "labelRoleUser": "Käyttäjäryhmä",
+      "labelRoleEditor": "Muokkaajaryhmä",
+      "labelRoleWorkspaceAdmin": "Työtilan ylläpitäjäryhmä",
+      "placeholderNoGroup": "Ryhmää ei ole määritetty",
+      "descriptionRoleUser": "Voi tarkastella työtilan sisältöä (agentteja, litteroijia, asiakirjavarastoja jne.), mutta ei muokata sitä.",
+      "descriptionRoleEditor": "Voi tarkastella työtilan sisältöä ja lisäksi muokata sitä.",
+      "descriptionRoleWorkspaceAdmin": "Voi hallita työtilaa sekä luoda, muokata ja poistaa agentteja, litteroijia, asiakirjavarastoja ja muita kohteita.",
+      "buttonSave": "Tallenna",
+      "buttonReset": "Palauta"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automaattinen käyttäjä",
+      "description": "Kun ”Automaattinen käyttäjä” on käytössä, jokainen boxiin kirjautuva saa automaattisesti käyttäjän oikeudet tässä organisaatiossa.",
+      "labelActive": "Automaattinen käyttäjä käytössä",
+      "labelInactive": "Automaattinen käyttäjä pois käytöstä"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Uusi työtila",
+      "descriptionWorkspace": "Valitse nimi ja halutessasi kuvaus. Voit määrittää muut asetukset työtilan luomisen jälkeen.",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus",
+      "labelCreate": "Luo työtila",
+      "labelCancel": "Peruuta",
+      "errorCreate": "Työtilaa ei voitu luoda. Yritä uudelleen."
+    },
+    "WorkspaceCard": {
+      "labelType": "Työtila"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Muokkaa työtilaa",
+      "tooltipInfo": "Avaa työtila"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Lisää suosikkeihin",
+      "tooltipRemoveFavorite": "Poista suosikeista"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Hae työtiloja",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus",
+      "labelRole": "Oma roolisi",
+      "labelActions": "Toiminnot",
+      "labelFavorites": "Suosikit",
+      "labelOtherWorkspaces": "Muut työtilat",
+      "labelEmpty": "Ei työtiloja",
+      "descriptionEmpty": "Sinulla ei ole vielä pääsyä työtilaan.",
+      "labelNoResults": "Ei tuloksia",
+      "descriptionNoResults": "Kokeile toista hakusanaa."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelNameAsc": "Nimi A–Ö",
+      "labelNameDesc": "Nimi Ö–A",
+      "labelGroup": "Ryhmittele",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelFavorites": "Suosikit",
+      "labelFirstLetter": "Alkukirjain",
+      "labelCards": "Kortit",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Luo työtila"
+    }
+  },
+  "page": {
+    "labelYourRole": "Oma roolisi",
+    "labelEmpty": "Ei vielä sisältöä",
+    "descriptionEmpty": "Tässä työtilassa ei ole vielä agentteja, asiakirjavarastoja tai litteroijia.",
+    "labelTitle": "Työtilat"
+  }
+}

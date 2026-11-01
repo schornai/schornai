@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Αποθετήρια εγγράφων",
+    "description": "Τα αποθετήρια εγγράφων δημιουργούν μια κεντρική, δομημένη και αξιόπιστη βάση γνώσεων για την τεχνητή νοημοσύνη, στην οποία τα μοντέλα έχουν πρόσβαση ανάλογα με το πλαίσιο."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Αποθετήριο εγγράφων"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Αναζήτηση..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelNameAsc": "Όνομα από Α έως Ω",
+      "labelNameDesc": "Όνομα από Ω έως Α",
+      "labelGroup": "Ομαδοποίηση κατά",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelFavorites": "Αγαπημένα",
+      "labelFirstLetter": "Πρώτο γράμμα",
+      "labelWorkspaces": "Χώροι εργασίας",
+      "labelModel": "Απομαγνητοφωνητής",
+      "labelCards": "Κάρτες",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά",
+      "labelDocumentRepositories": "Αποθετήρια εγγράφων",
+      "labelNewDocumentRepository": "Νέο αποθετήριο εγγράφων"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Άλλα αποθετήρια εγγράφων",
+      "labelFavorites": "Αγαπημένα",
+      "labelOtherTranscribers": "Άλλοι απομαγνητοφωνητές",
+      "labelUnknownTranscriber": "Άγνωστος απομαγνητοφωνητής «{{id}}»"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Όνομα",
+      "tableColumnCapablilities": "Δυνατότητες",
+      "tableColumnNameActions": "Ενέργειες",
+      "emptyTitle": "Δεν υπάρχουν αποθετήρια εγγράφων",
+      "emptyDescription": "Δεν έχουν δημιουργηθεί ακόμη αποθετήρια εγγράφων.",
+      "labelOtherDocumentRepositories": "Άλλα αποθετήρια εγγράφων",
+      "labelFavorites": "Αγαπημένα",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelUnknownTranscriber": "Άγνωστος απομαγνητοφωνητής «{{id}}»"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Άγνωστος χώρος εργασίας"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Επεξεργασία",
+      "tooltipInfo": "Πληροφορίες"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Αφαίρεση από τα αγαπημένα",
+      "tooltipAddFavorite": "Προσθήκη στα αγαπημένα"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Νέο αποθετήριο εγγράφων",
+      "labelDocumentRepository": "Αποθετήριο εγγράφων",
+      "labelDocumentRepositoryDropdown": "Αποθετήριο εγγράφων",
+      "labelCreateDocumentRepository": "Δημιουργία αποθετηρίου εγγράφων",
+      "labelSaveDocumentRepository": "Αποθήκευση αποθετηρίου εγγράφων",
+      "labelCloneDocumentRepository": "Αποθήκευση ως νέο αποθετήριο εγγράφων",
+      "labelDeleteDocumentRepository": "Διαγραφή αποθετηρίου εγγράφων",
+      "confirmDeleteTitle": "Διαγραφή αποθετηρίου εγγράφων",
+      "confirmDeleteDescription": "Είστε βέβαιοι ότι θέλετε να διαγράψετε το αποθετήριο εγγράφων «{{name}}»; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+      "labelCancel": "Ακύρωση",
+      "tabOverview": "Επισκόπηση",
+      "tabFeatures": "Λειτουργίες",
+      "tabSettings": "Ρυθμίσεις",
+      "btnCreate": "Δημιουργία",
+      "btnSave": "Αποθήκευση"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Απόρριψη αλλαγών",
+      "labelDiscardConfirm": "Θέλετε πραγματικά να απορρίψετε όλες τις μη αποθηκευμένες αλλαγές σε αυτό το αποθετήριο εγγράφων;",
+      "labelCancel": "Ακύρωση",
+      "labelDiscard": "Απόρριψη αλλαγών"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Νέο αποθετήριο εγγράφων",
+      "emptyDescription": "Ορίστε τη συμπεριφορά και την εμφάνιση του αποθετηρίου εγγράφων.",
+      "checklistSemanticSearchTitle": "Ενεργοποίηση σημασιολογικής αναζήτησης",
+      "checklistSemanticSearchDescription": "Ενεργοποιήστε τη σημασιολογική αναζήτηση. Αυτό μπορεί να βελτιώσει την ποιότητα των αποτελεσμάτων αναζήτησης.",
+      "checklistTranscriberTitle": "Επιλογή απομαγνητοφωνητή",
+      "checklistTranscriberDescription": "Επιλέξτε έναν απομαγνητοφωνητή που απομαγνητοφωνεί αυτόματα όλα τα μεταφορτωμένα αρχεία βίντεο και ήχου.",
+      "helpTitle": "Βοήθεια",
+      "helpKeywordSearch": "Κλασική αναζήτηση λέξεων-κλειδιών. Κατάλληλη κυρίως για αναζήτηση επωνυμιών, ονομάτων προσώπων και άλλων ονομάτων.",
+      "helpEmbeddingDescription": "Προσθέστε ένα μοντέλο ενσωματώσεων για να ενεργοποιήσετε τη σημασιολογική αναζήτηση. Βρίσκει παρόμοια έγγραφα βάσει της σημασίας τους.",
+      "helpTranscriberDescription": "Προσθέστε έναν απομαγνητοφωνητή στο αποθετήριο εγγράφων και όλα τα αρχεία βίντεο και ήχου θα απομαγνητοφωνούνται αυτόματα μετά τη μεταφόρτωση."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Ευρετήριο αναζήτησης",
+      "description": "Ανάλογα με το ευρετήριο αναζήτησης, χρησιμοποιούνται διαφορετικές μέθοδοι για την παροχή των καλύτερων αποτελεσμάτων βάσει του ερωτήματος αναζήτησης.",
+      "labelKeyword": "Αναζήτηση λέξεων-κλειδιών",
+      "descriptionKeyword": "Κατά την αναζήτηση ακριβών εκφράσεων και προτάσεων. (Ονόματα, ονομασίες κ.λπ.)",
+      "labelSemantic": "Σημασιολογική αναζήτηση",
+      "descriptionSemantic": "Όταν προέχει η σημασία των δεδομένων και όχι η ακριβής διατύπωση. (Απαιτεί μοντέλο ενσωματώσεων)",
+      "labelEmbeddingModel": "Μοντέλο ενσωματώσεων",
+      "descriptionEmbeddingModel": "Το μοντέλο ενσωματώσεων αποτελεί τη βάση της σημασιολογικής αναζήτησης."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Χωρίς απομαγνητοφωνητή",
+      "labelLegend": "Απομαγνητοφωνητής",
+      "description": "Τα αρχεία βίντεο και ήχου απομαγνητοφωνούνται αυτόματα μετά τη μεταφόρτωση.",
+      "labelTranscriber": "Απομαγνητοφωνητής"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Περιγραφή",
+      "description": "Επιλέξτε ένα κατάλληλο όνομα για το αποθετήριο εγγράφων. Μπορείτε επίσης να αποθηκεύσετε μια σύντομη περιγραφή.",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Εμφάνιση",
+      "description": "Επιλέξτε ένα χρώμα και ένα εικονίδιο που αντιπροσωπεύουν καλύτερα το αποθετήριο εγγράφων.",
+      "labelIcon": "Εικονίδιο",
+      "labelColor": "Χρώμα"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Χώρος εργασίας",
+      "description": "Επιλέξτε τον χώρο εργασίας όπου θα δημιουργηθεί το αποθετήριο εγγράφων.",
+      "labelName": "Χώρος εργασίας",
+      "labelSelectWorkspace": "Επιλέξτε έναν χώρο εργασίας."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Αρχεία",
+      "tabSearch": "Αναζήτηση πλήρους κειμένου",
+      "tabInfo": "Πληροφορίες"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Αναζήτηση...",
+      "labelSearch": "Αναζήτηση"
+    },
+    "Search": {
+      "emptyTitle": "Αναζήτηση πλήρους κειμένου",
+      "emptyDescription": "Αναζητήστε κείμενο σε όλα τα αρχεία αυτού του αποθετηρίου εγγράφων."
+    }
+  },
+  "page": {
+    "labelTitle": "Αποθετήρια εγγράφων",
+    "emptyTitle": "Δεν υπάρχουν αποθετήρια εγγράφων",
+    "emptyDescription": "Δεν έχουν δημιουργηθεί ακόμη αποθετήρια εγγράφων.",
+    "labelNewDocumentRepository": "Νέο αποθετήριο εγγράφων",
+    "helpTitle": "Βοήθεια",
+    "helpSearchDescription": "Μπορείτε να αναζητήσετε αποθετήρια εγγράφων. Η αναζήτηση περιλαμβάνει, μεταξύ άλλων, το όνομα και την περιγραφή του αποθετηρίου εγγράφων, καθώς και τον απομαγνητοφωνητή του.",
+    "helpSortDescription": "Τα αποθετήρια εγγράφων μπορούν να ταξινομηθούν κατά όνομα και να κατανεμηθούν σε διαφορετικές ομάδες. Μπορούν να εμφανίζονται ως κάρτες ή ως πίνακας.",
+    "helpTranscriberDescription": "Μπορείτε να επιλέξετε έναν απομαγνητοφωνητή για τα αποθετήρια εγγράφων. Όταν μεταφορτώνονται αρχεία ήχου ή βίντεο στο αποθετήριο εγγράφων, απομαγνητοφωνούνται αυτόματα."
+  }
+}

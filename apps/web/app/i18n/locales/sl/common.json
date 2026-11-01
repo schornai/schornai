@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Nov pogovor",
+        "mainLabelAgents": "Agenti",
+        "mainLabelApps": "Aplikacije",
+        "mainLabelWorkspaces": "Delovni prostori",
+        "history": "Zgodovina"
+      },
+      "SidebarFavorites": {
+        "label": "Priljubljeno",
+        "empty": "Med priljubljene ni še nič dodano."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Ni priljubljenih",
+        "descriptionNoFavorites": "Med priljubljene lahko dodate <agents>agente</agents>, <documents>shrambe dokumentov</documents> in <transcribers>prepisovalnike</transcribers>."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Nov pogovor"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Lahko noč];(5-11)[Dobro jutro];(12-17)[Dober dan];(18-inf)[Dober večer];",
+      "labelAllAgents": "Vsi agenti",
+      "labelToApps": "Pojdi na aplikacije"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Priljubljeno",
+        "labelPermissions": "Dovoljenja",
+        "labelModels": "Modeli",
+        "labelTaskQueue": "Čakalna vrsta opravil",
+        "labelSettings": "Nastavitve",
+        "labelUsers": "Uporabniki",
+        "labelWorkspaces": "Delovni prostori",
+        "labelSSOProvider": "Ponudnik SSO",
+        "labelXRAGUpload": "Naloži XRAG",
+        "labelSystemModel": "Sistemski model",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Nazaj na nadzorno ploščo",
+        "labelConnections": "Povezave",
+        "labelProviderConnections": "Povezave",
+        "labelService": "Storitev",
+        "labelArtifacts": "Artefakti",
+        "labelCluster": "Gruča"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Izberi ikono",
+      "buttonMoreIcons": "Več ikon",
+      "textLucideInfo": "Ikone: <0>Lucide</0>",
+      "placeholderSearchIcons": "Išči ikone...",
+      "buttonCancel": "Prekliči"
+    },
+    "FileUploadDropZone": {
+      "drop": "Spustite datoteko sem za nalaganje"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Spremenjeno"
+    },
+    "Pagination": {
+      "labelPrev": "Prejšnje",
+      "labelNext": "Naslednje"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Moj račun",
+      "labelSystem": "Sistem",
+      "labelModels": "Modeli",
+      "labelCluster": "Gruča",
+      "labelSettings": "Nastavitve",
+      "labelDashboard": "Nadzorna plošča",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Odjava"
+    },
+    "UserRoleText": {
+      "admin": "Skrbnik",
+      "workspace-admin": "Skrbnik delovnega prostora",
+      "editor": "Urednik",
+      "user": "Uporabnik",
+      "none": "Niste pooblaščeni"
+    },
+    "StorageView": {
+      "placeholderSearch": "Išči v tej mapi…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Ime",
+      "tableColumnType": "Vrsta",
+      "tableColumnSize": "Velikost",
+      "tableColumnCreated": "Ustvarjeno",
+      "tableColumnUpdated": "Posodobljeno",
+      "tableColumnNameActions": "Dejanja",
+      "groupTimeToday": "Danes",
+      "groupTimeLast7Days": "Zadnjih 7 dni",
+      "groupTimeLast30Days": "Zadnjih 30 dni",
+      "groupTimeOther": "Drugo",
+      "labelFolder": "Mapa",
+      "descriptionProcessing": "Datoteka se obdeluje"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Nova mapa",
+      "placeholderFolderName": "Ime mape...",
+      "labelCancel": "Prekliči",
+      "labelCreate": "Ustvari"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Odstrani",
+      "labelDescription": "Ali res želite odstraniti »{{name}}«? Tega dejanja ni mogoče razveljaviti.",
+      "labelCancel": "Prekliči",
+      "labelRemove": "Odstrani"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Domača mapa"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Ni datotek",
+      "labelDescription": "Trenutna mapa ne vsebuje datotek. Preprosto povlecite datoteke sem, da jih naložite.",
+      "labelUploadFile": "Naloži datoteko",
+      "labelCreateFile": "Ustvari datoteko"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Pogled",
+      "labelSort": "Razvrščanje",
+      "labelNameAsc": "Ime od A do Ž",
+      "labelNameDesc": "Ime od Ž do A",
+      "labelSizeAsc": "Velikost naraščajoče",
+      "labelSizeDesc": "Velikost padajoče",
+      "labelCreatedAsc": "Datum nastanka naraščajoče",
+      "labelCreatedDesc": "Datum nastanka padajoče",
+      "labelUpdatedAsc": "Datum posodobitve naraščajoče",
+      "labelUpdatedDesc": "Datum posodobitve padajoče",
+      "labelGroup": "Združevanje",
+      "labelNoGroup": "Brez združevanja",
+      "labelFirstLetter": "Prva črka",
+      "labelFileType": "Vrsta datoteke",
+      "labelCreated": "Datum nastanka",
+      "labelUpdated": "Datum posodobitve",
+      "labelTilesSmall": "Ploščice (majhne)",
+      "labelTilesMedium": "Ploščice (srednje)",
+      "labelTilesLarge": "Ploščice (velike)",
+      "labelTable": "Tabela",
+      "labelSaveView": "Shrani pogled",
+      "labelReset": "Ponastavi",
+      "labelNewFolder": "Nova mapa",
+      "labelThisFolder": "Ta mapa",
+      "labelUploadFile": "Naloži datoteko",
+      "labelNew": "Novo",
+      "labelDeleteFolder": "Izbriši mapo",
+      "labelNewRecording": "Nov posnetek",
+      "labelColumns": "Stolpčni pogled",
+      "labelNewTextFile": "Nova datoteka"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Ni rezultatov",
+      "descriptionNoResults": "Iskanje ni vrnilo rezultatov. Preoblikujte poizvedbo.",
+      "labelCharacters": "znakov"
+    },
+    "Transcription": {
+      "labelTitle": "Prepis",
+      "labelLoadingMedia": "Nalaganje medija…",
+      "labelBuffering": "Medpomnjenje predvajanja…",
+      "labelSeeking": "Nalaganje položaja…",
+      "labelPlayer": "Predvajalnik medijev",
+      "labelPlay": "Predvajaj",
+      "labelPause": "Začasno ustavi",
+      "labelSeek": "Položaj predvajanja",
+      "labelBack": "10 sekund nazaj",
+      "labelForward": "10 sekund naprej",
+      "labelSpeed": "Hitrost predvajanja",
+      "labelUnmute": "Vklopi zvok",
+      "labelMute": "Utišaj",
+      "labelVolume": "Glasnost",
+      "labelHideVideo": "Skrij video",
+      "labelShowVideo": "Prikaži video",
+      "labelPlaySegment": "Predvajaj segment {{number}}",
+      "labelReviewed": "Pregledano",
+      "labelSegments": "Segmenti",
+      "labelWords": "Besede",
+      "descriptionEmpty": "Ni najdenih rezultatov prepisovanja.",
+      "descriptionConfidence": "Zanesljivost: {{percent}} %",
+      "errorPlayback": "Predvajanje ni uspelo. Preverite, ali je medijska datoteka na voljo, in poskusite znova.",
+      "labelEditSegment": "Uredi segment {{number}}",
+      "labelSegmentText": "Besedilo segmenta",
+      "labelSave": "Shrani",
+      "labelSaving": "Shranjevanje…",
+      "labelSaveReviewed": "Shrani in označi kot pregledano",
+      "labelCancel": "Prekliči",
+      "labelRestoreOriginal": "Obnovi izvirno besedilo",
+      "descriptionUnsaved": "Spremembe se uveljavijo šele, ko jih shranite.",
+      "errorSave": "Shranjevanje ni uspelo. Vaše besedilo je ohranjeno. Poskusite znova.",
+      "errorConflict": "Ta segment se je spremenil. Kopirajte svoj osnutek in pred ponovnim shranjevanjem znova naložite pogled.",
+      "labelDownloadSrt": "Prenesi SRT",
+      "descriptionSaveBeforeDownload": "Pred prenosom datoteke SRT shranite ali prekličite spremembe."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Stolpčni pogled",
+      "labelRoot": "Dokumenti",
+      "labelDetails": "Podrobnosti datoteke",
+      "labelType": "Vrsta",
+      "labelSize": "Velikost",
+      "labelUpdated": "Posodobljeno",
+      "labelOpen": "Odpri datoteko"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Nova datoteka",
+      "labelName": "Ime datoteke",
+      "labelCreate": "Ustvari datoteko",
+      "labelCancel": "Prekliči",
+      "errorCreate": "Datoteke ni bilo mogoče ustvariti. Preverite ime datoteke in dovoljenja za pisanje."
+    },
+    "StorageFileActions": {
+      "labelActions": "Dejanja za {{name}}",
+      "labelDownloadOriginal": "Prenesi izvirnik",
+      "labelDownloadProcessed": "Prenesi obdelano besedilo",
+      "labelRename": "Preimenuj",
+      "labelProcess": "Znova obdelaj",
+      "labelDelete": "Izbriši datoteko",
+      "labelName": "Novo ime datoteke",
+      "labelCancel": "Prekliči",
+      "labelConfirm": "Potrdi",
+      "descriptionDelete": "Trajno izbrišem »{{name}}«, njeno obdelano vsebino in vnose v iskalnem indeksu?",
+      "descriptionProcess": "Znova obdelam »{{name}}«? Ročne spremembe bodo prepisane.",
+      "descriptionQueued": "Obdelava je v čakalni vrsti ali že poteka. Preverite njeno stanje na seznamu datotek.",
+      "descriptionUnsupported": "Te datoteke trenutno ni mogoče obdelati. Zvok in video zahtevata nastavljen prepisovalnik.",
+      "errorAction": "Dejanje ni uspelo. Preverite dovoljenja za pisanje, podvojena imena in obdelavo v teku. Neuspešno preimenovanje lahko pusti obe imeni datoteke; pred ponovnim poskusom preverite seznam.",
+      "labelOptions": "Možnosti",
+      "labelEdit": "Uredi",
+      "descriptionRename": "Preimenujte »{{name}}«. Ohranite datotečno pripono. Izvirnik, obdelana vsebina in iskalni indeks se posodobijo skupaj. Obstoječa imena se nikoli ne prepišejo.",
+      "labelCopy": "Kopiraj v…",
+      "labelMove": "Premakni v…",
+      "descriptionCopy": "Kopiraj »{{name}}« skupaj z obdelano vsebino. Vir bo ohranjen.",
+      "descriptionMove": "Premakni »{{name}}« skupaj z obdelano vsebino. Vir bo odstranjen po uspešnem kopiranju.",
+      "descriptionTransferred": "Datoteka je prenesena. Ciljni iskalni indeksi se znova gradijo v ozadju.",
+      "descriptionTransferProcessingError": "Datoteka je prenesena, vendar obdelave ni bilo mogoče začeti. Odprite ciljno datoteko in izberite »Znova obdelaj«. Prenosa ne ponavljajte."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Dejanja za {{name}}",
+      "labelDelete": "Izbriši mapo"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Vsebina",
+      "labelSave": "Shrani",
+      "labelCancel": "Prekliči",
+      "errorSave": "Shranjevanje ni uspelo. Poskusite znova.",
+      "errorConflict": "Vsebina se je spremenila. Pred shranjevanjem jo znova naložite.",
+      "errorIndex": "Shranjeno, vendar iskalnega indeksa ni bilo mogoče posodobiti. Shranite znova."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Izberi ciljno mapo",
+      "labelSelectFile": "Izberi obstoječo datoteko",
+      "descriptionFolder": "Izberite obstoječo mapo. Prenesena bo ena datoteka; obstoječa imena se nikoli ne prepišejo.",
+      "descriptionFile": "Izberite datoteko iz tega pogovora ali dostopne shrambe. Dokumenti in posnetki morajo biti že obdelani.",
+      "labelStorage": "Shramba",
+      "labelCurrentStorage": "Trenutna shramba",
+      "labelUp": "Nadrejena mapa",
+      "descriptionLoading": "Nalaganje datotek…",
+      "descriptionEmpty": "V tej mapi ni ustreznih vnosov.",
+      "descriptionNoStorages": "Ni dostopnih shramb.",
+      "descriptionPending": "Datoteka se prenaša. Počakajte na rezultat.",
+      "labelCancel": "Prekliči",
+      "labelUseFolder": "Uporabi to mapo",
+      "labelUseFile": "Priloži datoteko",
+      "labelRetry": "Znova naloži",
+      "errorLoad": "Te mape ni bilo mogoče naložiti. Preverite dostop in poskusite znova.",
+      "errorCollision": "Na cilju že obstaja datoteka ali obdelana vsebina s tem imenom. Izberite drugo mapo; nič ni bilo prepisano.",
+      "errorSameTarget": "Vir in cilj sta enaka. Izberite drugo mapo.",
+      "errorSourceChanged": "Vir se je med kopiranjem spremenil. Nepopolna ciljna datoteka je bila odstranjena. Poskusite znova.",
+      "errorBusy": "Ta datoteka se trenutno obdeluje. Počakajte na konec.",
+      "errorPermission": "Nimate potrebnih dovoljenj za vir ali cilj.",
+      "errorSourceDelete": "Celotna ciljna datoteka je bila ustvarjena, vendar vira ni bilo mogoče odstraniti. Pred ponovitvijo dejanja preverite obe mesti.",
+      "errorCleanup": "Kopiranje ni uspelo. Vir je ohranjen, vendar lahko na cilju ostanejo nepopolne datoteke. Preverite ga pred ponovnim poskusom.",
+      "errorAction": "Dejanje ni uspelo. Pred ponovnim poskusom preverite dovoljenja, imena datotek in obe mesti.",
+      "errorNotProcessed": "Ta datoteka še ni obdelana. Najprej jo obdelajte in jo nato znova izberite."
+    }
+  },
+  "_welcomeMessage": "Dobrodošli v\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentacija",
+    "feedback": "Povratne informacije",
+    "help": "Pomoč",
+    "labelThemeLight": "Svetla",
+    "labelThemeDark": "Temna",
+    "labelThemeSystem": "Operacijski sistem",
+    "labelLanguage": "Jezik"
+  }
+}

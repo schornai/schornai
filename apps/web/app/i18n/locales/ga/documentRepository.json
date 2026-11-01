@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Stórais doiciméad",
+    "description": "Cruthaíonn stórais doiciméad bonn eolais lárnach, struchtúrtha agus iontaofa don intleacht shaorga ar féidir le samhlacha rochtain a fháil air de réir an chomhthéacs."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Stór doiciméad"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Cuardaigh..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Roghanna",
+      "labelView": "Amharc",
+      "labelSort": "Sórtáil",
+      "labelNameAsc": "Ainm ó A go Z",
+      "labelNameDesc": "Ainm ó Z go A",
+      "labelGroup": "Grúpáil de réir",
+      "labelNoGroup": "Gan grúpa",
+      "labelFavorites": "Ceanáin",
+      "labelFirstLetter": "An chéad litir",
+      "labelWorkspaces": "Spásanna oibre",
+      "labelModel": "Tras-scríobhaí",
+      "labelCards": "Cártaí",
+      "labelTable": "Tábla",
+      "labelSaveView": "Sábháil an t-amharc",
+      "labelReset": "Athshocraigh",
+      "labelDocumentRepositories": "Stórais doiciméad",
+      "labelNewDocumentRepository": "Stór doiciméad nua"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Stórais doiciméad eile",
+      "labelFavorites": "Ceanáin",
+      "labelOtherTranscribers": "Tras-scríobhaithe eile",
+      "labelUnknownTranscriber": "Tras-scríobhaí anaithnid \"{{id}}\""
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Ainm",
+      "tableColumnCapablilities": "Cumais",
+      "tableColumnNameActions": "Gníomhartha",
+      "emptyTitle": "Níl aon stór doiciméad ann",
+      "emptyDescription": "Níor cruthaíodh aon stór doiciméad fós.",
+      "labelOtherDocumentRepositories": "Stórais doiciméad eile",
+      "labelFavorites": "Ceanáin",
+      "labelNoGroup": "Gan grúpa",
+      "labelUnknownTranscriber": "Tras-scríobhaí anaithnid \"{{id}}\""
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Spás oibre anaithnid"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Cuir in eagar",
+      "tooltipInfo": "Eolas"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Bain de na ceanáin",
+      "tooltipAddFavorite": "Cuir leis na ceanáin"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Stór doiciméad nua",
+      "labelDocumentRepository": "Stór doiciméad",
+      "labelDocumentRepositoryDropdown": "Stór doiciméad",
+      "labelCreateDocumentRepository": "Cruthaigh stór doiciméad",
+      "labelSaveDocumentRepository": "Sábháil stór doiciméad",
+      "labelCloneDocumentRepository": "Sábháil mar stór doiciméad nua",
+      "labelDeleteDocumentRepository": "Scrios stór doiciméad",
+      "confirmDeleteTitle": "Scrios stór doiciméad",
+      "confirmDeleteDescription": "An bhfuil tú cinnte gur mhaith leat an stór doiciméad \"{{name}}\" a scriosadh? Ní féidir an gníomh seo a chealú.",
+      "labelCancel": "Cealaigh",
+      "tabOverview": "Forbhreathnú",
+      "tabFeatures": "Feidhmeanna",
+      "tabSettings": "Socruithe",
+      "btnCreate": "Cruthaigh",
+      "btnSave": "Sábháil"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Caith na hathruithe i leataobh",
+      "labelDiscardConfirm": "An bhfuil tú cinnte gur mhaith leat gach athrú gan sábháil ar an stór doiciméad seo a chaitheamh i leataobh?",
+      "labelCancel": "Cealaigh",
+      "labelDiscard": "Caith na hathruithe i leataobh"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Stór doiciméad nua",
+      "emptyDescription": "Sainigh iompar agus cuma an stórais doiciméad.",
+      "checklistSemanticSearchTitle": "Cumasaigh cuardach séimeantach",
+      "checklistSemanticSearchDescription": "Cumasaigh cuardach séimeantach. Féadann sé seo cáilíocht na dtorthaí cuardaigh a fheabhsú.",
+      "checklistTranscriberTitle": "Roghnaigh tras-scríobhaí",
+      "checklistTranscriberDescription": "Roghnaigh tras-scríobhaí a dhéanann gach comhad físe agus fuaime uaslódáilte a thras-scríobh go huathoibríoch.",
+      "helpTitle": "Cabhair",
+      "helpKeywordSearch": "Gnáthchuardach eochairfhocal. Is fearr é chun ainmneacha brandaí, daoine agus ainmneacha eile a chuardach.",
+      "helpEmbeddingDescription": "Cuir samhail leabaithe leis chun cuardach séimeantach a chumasú. Aimsíonn sé doiciméid chosúla bunaithe ar a mbrí.",
+      "helpTranscriberDescription": "Cuir tras-scríobhaí leis an stór doiciméad agus déanfar gach comhad físe agus fuaime a thras-scríobh go huathoibríoch tar éis uaslódála."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Innéacs cuardaigh",
+      "description": "Ag brath ar an innéacs cuardaigh, úsáidtear modhanna éagsúla chun na torthaí is fearr a sholáthar bunaithe ar an iarratas cuardaigh.",
+      "labelKeyword": "Cuardach eochairfhocal",
+      "descriptionKeyword": "Agus nathanna agus abairtí beachta á gcuardach. (Ainmneacha, teidil, srl.)",
+      "labelSemantic": "Cuardach séimeantach",
+      "descriptionSemantic": "Nuair is é brí na sonraí is tábhachtaí seachas an fhoclaíocht bheacht. (Teastaíonn samhail leabaithe)",
+      "labelEmbeddingModel": "Samhail leabaithe",
+      "descriptionEmbeddingModel": "Is í an tsamhail leabaithe bunús an chuardaigh shéimeantaigh."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Gan tras-scríobhaí",
+      "labelLegend": "Tras-scríobhaí",
+      "description": "Déantar comhaid físe agus fuaime a thras-scríobh go huathoibríoch tar éis uaslódála.",
+      "labelTranscriber": "Tras-scríobhaí"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Cur síos",
+      "description": "Roghnaigh ainm oiriúnach don stór doiciméad. Is féidir cur síos gairid a shábháil freisin.",
+      "labelName": "Ainm",
+      "labelDescription": "Cur síos"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Cuma",
+      "description": "Roghnaigh dath agus deilbhín a léiríonn an stór doiciméad is fearr.",
+      "labelIcon": "Deilbhín",
+      "labelColor": "Dath"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Spás oibre",
+      "description": "Roghnaigh an spás oibre ina gcruthófar an stór doiciméad.",
+      "labelName": "Spás oibre",
+      "labelSelectWorkspace": "Roghnaigh spás oibre."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Comhaid",
+      "tabSearch": "Cuardach lántéacs",
+      "tabInfo": "Eolas"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Cuardaigh...",
+      "labelSearch": "Cuardaigh"
+    },
+    "Search": {
+      "emptyTitle": "Cuardach lántéacs",
+      "emptyDescription": "Cuardaigh téacs i ngach comhad sa stór doiciméad seo."
+    }
+  },
+  "page": {
+    "labelTitle": "Stórais doiciméad",
+    "emptyTitle": "Níl aon stór doiciméad ann",
+    "emptyDescription": "Níor cruthaíodh aon stór doiciméad fós.",
+    "labelNewDocumentRepository": "Stór doiciméad nua",
+    "helpTitle": "Cabhair",
+    "helpSearchDescription": "Is féidir leat stórais doiciméad a chuardach. Áirítear sa chuardach, i measc rudaí eile, ainm agus cur síos an stórais doiciméad, chomh maith lena thras-scríobhaí.",
+    "helpSortDescription": "Is féidir stórais doiciméad a shórtáil de réir ainm agus a roinnt i ngrúpaí éagsúla. Is féidir iad a thaispeáint mar chártaí nó mar thábla.",
+    "helpTranscriberDescription": "Is féidir leat tras-scríobhaí a roghnú do stórais doiciméad. Nuair a uaslódáiltear comhaid fuaime nó físe chuig an stór doiciméad, déantar iad a thras-scríobh go huathoibríoch."
+  }
+}

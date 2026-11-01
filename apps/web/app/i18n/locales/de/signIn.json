@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Sie sind bereits angemeldet",
+      "backToDashboard": "Zum Dashboard",
+      "signOut": "Abmelden"
+    },
+    "PasswordSignIn": {
+      "header": "E-Mail",
+      "headerSub": "Anmelden mit E-Mail-Adresse und Passwort",
+      "inputEmailLabel": "E-Mail",
+      "inputPasswordLabel": "Password",
+      "buttonSignIn": "Mit E-Mail anmelden",
+      "buttonReset": "Neues Passwort"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Anmeldung mit SSO-Anbieter",
+      "buttonSignIn": "Mit {{name}} anmelden"
+    },
+    "ResetPassword": {
+      "labelTitle": "Passwort zurücksetzen",
+      "descriptionKey": "Gib deine E-Mail-Adresse und den Reset-Schlüssel ein, den du von deiner Administration erhalten hast. Der Schlüssel ist einmalig verwendbar und 7 Tage gültig.",
+      "labelEmail": "E-Mail",
+      "labelKey": "Passwort-Reset-Schlüssel",
+      "labelPassword": "Neues Passwort",
+      "labelPasswordAgain": "Neues Passwort wiederholen",
+      "descriptionPassword": "Verwende mindestens 6 Zeichen und beachte die Passwortvorgaben deiner Organisation.",
+      "errorEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "errorKey": "Bitte gib deinen Reset-Schlüssel ein.",
+      "errorPassword": "Das Passwort muss mindestens 6 Zeichen enthalten.",
+      "errorPasswordAgain": "Die Passwörter stimmen nicht überein.",
+      "errorReset": "Das Passwort konnte nicht geändert werden. Prüfe E-Mail-Adresse, Schlüssel und Passwortvorgaben. Abgelaufene oder bereits verwendete Schlüssel sind ungültig.",
+      "descriptionSuccess": "Dein Passwort wurde geändert. Du kannst dich jetzt mit dem neuen Passwort anmelden.",
+      "labelReset": "Passwort speichern",
+      "labelSignIn": "Zur Anmeldung"
+    }
+  }
+}

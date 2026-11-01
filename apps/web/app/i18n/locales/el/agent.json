@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Ακύρωση",
+      "errorCancel": "Δεν ήταν δυνατή η διακοπή της δημιουργίας. Δοκιμάστε ξανά."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Δεν έχετε πρόσβαση σε αυτόν τον πράκτορα."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Μοντέλο",
+      "labelUnknownModel": "Άγνωστο μοντέλο",
+      "labelThinkingOptionalOn": "Συλλογισμός",
+      "labelThinkingOptionalOff": "Υποχρεωτικός συλλογισμός",
+      "labelThinkingMandatoryOn": "Χωρίς συλλογισμό",
+      "labelThinkingMandatoryOff": "Υποχρεωτικά χωρίς συλλογισμό",
+      "descriptionFeatureVision": "Βαθύτερη κατανόηση εικόνων",
+      "labelModelSize": "Μέγεθος πλαισίου: {{size}}k",
+      "labelNotFound": "Το μοντέλο δεν βρέθηκε",
+      "labelChanged": "Τροποποιήθηκε"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Εργαλείο: Αριθμομηχανή",
+      "description": "Αντί να εκτελεί ο ίδιος τους υπολογισμούς, ο πράκτορας μπορεί να χρησιμοποιεί την αριθμομηχανή. Έτσι μπορεί να χειρίζεται καλύτερα πιο σύνθετους αριθμούς."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Προτροπή",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Κενό",
+      "labelChanged": "Τροποποιήθηκε"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Αποθετήρια εγγράφων",
+      "labelUnknownRepository": "Άγνωστο αποθετήριο εγγράφων",
+      "descriptionRepositoryNotFound": "Το αποθετήριο εγγράφων δεν υπάρχει ή δεν έχετε τα απαραίτητα δικαιώματα.",
+      "labelConfirmWrite": "Ανάγνωση και εγγραφή (με επιβεβαίωση)",
+      "labelReadOnly": "Μόνο ανάγνωση",
+      "labelWrite": "Ανάγνωση και εγγραφή (αυτόματα)",
+      "labelGoToRepository": "Μετάβαση στο αποθετήριο",
+      "labelChanged": "Τροποποιήθηκε"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Υπόδειξη επιλογής ρόλου",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Περιγραφή",
+      "description": "Επιλέξτε ένα κατάλληλο όνομα για τον πράκτορα. Μπορείτε επίσης να αποθηκεύσετε μια σύντομη περιγραφή.",
+      "labelName": "Όνομα",
+      "labelDescription": "Περιγραφή"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Χώρος εργασίας",
+      "description": "Επιλέξτε τον χώρο εργασίας όπου θα δημιουργηθεί ο πράκτορας.",
+      "labelName": "Χώρος εργασίας",
+      "errorNoPermissions": "Δεν έχετε δικαιώματα δημιουργίας πρακτόρων",
+      "errorNoWorkspaceSelected": "Δεν έχετε επιλέξει χώρο εργασίας",
+      "labelSelectWorkspace": "Επιλέξτε έναν χώρο εργασίας."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Πρόσθετες λειτουργίες",
+      "description": "Επεκτείνετε τον πράκτορα με χρήσιμες λειτουργίες για να κάνετε την εργασία ακόμη ευκολότερη.",
+      "labelFileUpload": "Μεταφόρτωση αρχείων",
+      "descriptionFileUpload": "Οι χρήστες μπορούν να μεταφορτώνουν αρχεία, το περιεχόμενο των οποίων είναι διαθέσιμο στον πράκτορα ως κείμενο.",
+      "labelBatch": "Μαζική επεξεργασία",
+      "descriptionBatch": "Οι χρήστες μπορούν να επεξεργάζονται αρχεία αυτόματα ανά μήνυμα.",
+      "labelPursueGoal": "Επιδίωξη στόχου",
+      "descriptionPursueGoal": "Οι χρήστες μπορούν να ορίσουν έναν στόχο και ο πράκτορας θα εκτελείται επαναληπτικά μέχρι να τον πετύχει.",
+      "labelDisappearingChats": "Συνομιλίες που εξαφανίζονται",
+      "descriptionDisappearingChats": "Οι συνομιλίες μπορούν να διαγράφονται αυτόματα μετά από 12 ώρες. Αυτό πρέπει να οριστεί από τον χρήστη.",
+      "labelNightshift": "Νυχτερινή βάρδια",
+      "descriptionNightshift": "Οι πράκτορες με μεγάλη διάρκεια εκτέλεσης μπορούν να μεταφερθούν στη νυχτερινή βάρδια για εξοικονόμηση πόρων κατά τη διάρκεια της ημέρας.",
+      "labelTranscriber": "Απομαγνητοφωνητής",
+      "labelNoTranscriber": "Χωρίς αυτόματη απομαγνητοφώνηση",
+      "descriptionTranscriber": "Αυτόματη απομαγνητοφώνηση μεταφορτωμένων αρχείων ήχου και βίντεο με αυτόν τον απομαγνητοφωνητή."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Πρόσθετες λειτουργίες",
+      "labelFileUpload": "Μεταφόρτωση αρχείων",
+      "descriptionFileUpload": "Οι χρήστες μπορούν να μεταφορτώνουν αρχεία, το περιεχόμενο των οποίων είναι διαθέσιμο στον πράκτορα ως κείμενο.",
+      "labelBatch": "Μαζική επεξεργασία",
+      "descriptionBatch": "Οι χρήστες μπορούν να επεξεργάζονται αρχεία αυτόματα ανά μήνυμα.",
+      "labelPursueGoal": "Επιδίωξη στόχου",
+      "descriptionPursueGoal": "Οι χρήστες μπορούν να ορίσουν έναν στόχο και ο πράκτορας θα εκτελείται επαναληπτικά μέχρι να τον πετύχει.",
+      "labelDisappearingChats": "Συνομιλίες που εξαφανίζονται",
+      "descriptionDisappearingChats": "Οι συνομιλίες μπορούν να διαγράφονται αυτόματα μετά από 12 ώρες. Αυτό πρέπει να οριστεί από τον χρήστη.",
+      "labelNightshift": "Νυχτερινή βάρδια",
+      "descriptionNightshift": "Οι πράκτορες με μεγάλη διάρκεια εκτέλεσης μπορούν να μεταφερθούν στη νυχτερινή βάρδια για εξοικονόμηση πόρων κατά τη διάρκεια της ημέρας."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Προτάσεις"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Τεκμηρίωση"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Χώρος εργασίας",
+      "labelUnknownWorkspace": "Άγνωστος χώρος εργασίας",
+      "labelGoToWorkspace": "Μετάβαση στον χώρο εργασίας"
+    },
+    "AgentInfo": {
+      "labelRole": "Ρόλος: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Αναζήτηση...",
+      "tableColumnName": "Όνομα",
+      "tableColumnCapablilities": "Δυνατότητες",
+      "tableColumnNameActions": "Ενέργειες",
+      "labelOtherAgents": "Άλλοι πράκτορες",
+      "labelFavorites": "Αγαπημένα",
+      "labelNoGroup": "Χωρίς ομάδα",
+      "labelUnknownModel": "Άγνωστο μοντέλο «{{id}}»",
+      "labelNoRepositories": "Δεν υπάρχουν αποθετήρια εγγράφων",
+      "labelUnknownRepository": "Άγνωστο αποθετήριο εγγράφων «{{id}}»",
+      "labelRoleCount_other": "{{count}} ρόλοι",
+      "labelRoleCount_zero": "Δεν υπάρχουν ρόλοι",
+      "labelRoleCount_one": "{{count}} ρόλος"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Επιλογές",
+      "labelView": "Προβολή",
+      "labelSort": "Ταξινόμηση",
+      "labelNameAsc": "Όνομα από Α έως Ω",
+      "labelNameDesc": "Όνομα από Ω έως Α",
+      "labelGroup": "Ομαδοποίηση κατά",
+      "labelFavorites": "Αγαπημένα",
+      "labelFirstLetter": "Πρώτο γράμμα",
+      "labelWorkspaces": "Χώροι εργασίας",
+      "labelModel": "Μοντέλο",
+      "labelRepositories": "Αποθετήρια εγγράφων",
+      "labelRoleCount": "Αριθμός ρόλων",
+      "labelCards": "Κάρτες",
+      "labelTable": "Πίνακας",
+      "labelSaveView": "Αποθήκευση προβολής",
+      "labelReset": "Επαναφορά",
+      "labelAgents": "Πράκτορες",
+      "labelNewAgent": "Νέος πράκτορας",
+      "labelNoGroup": "Χωρίς ομάδα"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Εμφάνιση",
+      "description": "Επιλέξτε ένα χρώμα και ένα εικονίδιο που αντιπροσωπεύουν καλύτερα τον πράκτορα.",
+      "labelIcon": "Εικονίδιο",
+      "labelColor": "Χρώμα"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Αφαίρεση από τα αγαπημένα",
+      "tooltipAddFavorite": "Προσθήκη στα αγαπημένα"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Επεξεργασία",
+      "tooltipInfo": "Πληροφορίες",
+      "tooltipNewChat": "Νέα συνομιλία"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Άγνωστος χώρος εργασίας",
+      "labelModelUnknown": "Άγνωστο μοντέλο"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Πρόσβαση στον ιστό",
+      "labelGeneralAccess": "Γενική πρόσβαση, αναζήτηση στον ιστό",
+      "descriptionFetch": "Η λήψη από τον ιστό αποθηκεύει ένα URL στον αποθηκευτικό χώρο της συνομιλίας ή σε ένα συνδεδεμένο αποθετήριο εγγράφων με δυνατότητα εγγραφής. Μετά την επεξεργασία του αρχείου, ο πράκτορας μπορεί να διαβάσει το εξαγόμενο κείμενο και να το χρησιμοποιήσει στην απάντησή του.",
+      "descriptionSearch": "Η αναζήτηση στον ιστό βοηθά τον πράκτορα να βρίσκει σχετικές σελίδες για ένα ερώτημα αναζήτησης. Ο πάροχος αναζήτησης επιστρέφει τίτλους, συνδέσμους και σύντομα αποσπάσματα. Η λίστα επιτρεπόμενων τομέων για λήψη δεν περιορίζει τις αναζητήσεις στον ιστό.",
+      "labelChanged": "Τροποποιήθηκε",
+      "labelFetch": "Λήψη",
+      "labelSearch": "Αναζήτηση",
+      "labelOn": "Ενεργό",
+      "labelOff": "Ανενεργό",
+      "labelAsk": "Πρώτα ερώτηση",
+      "labelWhitelist": "Η λήψη περιορίζεται στη λίστα επιτρεπόμενων τομέων",
+      "labelAll": "Λήψη από όλους τους ιστοτόπους",
+      "labelEmptyWhitelist": "Δεν επιτρέπονται τομείς",
+      "labelEdit": "Επεξεργασία πρόσβασης στον ιστό",
+      "labelDetails": "Εμφάνιση λεπτομερειών"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Εργαλείο: Επεκτάσεις συνομιλίας",
+      "labelFeatures": "Πρόταση επόμενου μηνύματος, αλλαγή ετικέτας συνομιλίας",
+      "description": "Ο πράκτορας μπορεί να δημιουργεί προτάσεις για το επόμενο μήνυμα του χρήστη, ώστε ο χρήστης να συνεχίζει τη συνομιλία κάνοντας απλώς κλικ στο αντίστοιχο μήνυμα. <br /> Ο πράκτορας μπορεί να αλλάζει την ετικέτα της συνομιλίας για τον χρήστη, ώστε να εντοπίζεται ευκολότερα στο ιστορικό."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Περιγραφή ρόλου",
+      "description": "Η περιγραφή του ρόλου χρησιμοποιείται όταν λαμβάνεται νέο μήνυμα χρήστη για να αποφασιστεί ποιος ρόλος θα απαντήσει στο μήνυμα",
+      "labelName": "Όνομα",
+      "labelSelectionHint": "Υπόδειξη επιλογής ρόλου",
+      "labelDeleteRole": "Διαγραφή ρόλου ",
+      "labelDoNotOverride": "Χωρίς παράκαμψη",
+      "labelOverrideModel": "Παράκαμψη μοντέλου",
+      "descriptionOverrideModel": "Μπορείτε να επιλέξετε για αυτόν τον ρόλο διαφορετικό μοντέλο από το γενικό μοντέλο του πράκτορα.",
+      "confirmDeleteDescription": "Είστε βέβαιοι ότι θέλετε να διαγράψετε τον ρόλο «{{name}}»; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+      "labelCancel": "Ακύρωση",
+      "labelThinking": "Συλλογισμός"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Μοντέλο",
+      "description": "Το γλωσσικό μοντέλο που χρησιμοποιεί ο πράκτορας, εκτός αν παρακάμπτεται από κάποιον ρόλο.",
+      "labelName": "Μοντέλο",
+      "labelThinking": "Συλλογισμός",
+      "labelThinking_optionalOn": "Συλλογισμός",
+      "labelThinking_mandatoryOn": "Υποχρεωτικός συλλογισμός",
+      "labelThinking_optionalOff": "Χωρίς συλλογισμό",
+      "labelThinking_mandatoryOff": "Υποχρεωτικά χωρίς συλλογισμό",
+      "labelSelectModel": "Επιλογή μοντέλου"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Αποθετήριο εγγράφων",
+      "labelPathAgent": "Διαδρομή για τον πράκτορα",
+      "labelPathRepository": "Διαδρομή στο αποθετήριο εγγράφων",
+      "labelPermission": "Δικαίωμα",
+      "labelDeleteConnection": "Διαγραφή σύνδεσης",
+      "confirmDeleteTitle": "Διαγραφή σύνδεσης",
+      "confirmDeleteDescription": "Θέλετε πραγματικά να διαγράψετε αυτή τη σύνδεση με το αποθετήριο εγγράφων «{{name}}»;",
+      "labelCancel": "Ακύρωση",
+      "labelAddConnection": "Πρόσθετη σύνδεση",
+      "labelUnknownRepository": "Άγνωστο αποθετήριο εγγράφων",
+      "labelConfirmWrite": "Ανάγνωση και εγγραφή (με επιβεβαίωση)",
+      "labelReadOnly": "Μόνο ανάγνωση",
+      "labelWrite": "Ανάγνωση και εγγραφή (αυτόματα)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Ετικέτα",
+      "labelMessage": "Μήνυμα",
+      "labelClose": "Κλείσιμο"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Όνομα",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Κεφαλίδες HTTP",
+      "labelHeaderName": "Όνομα",
+      "labelHeaderValue": "Τιμή",
+      "labelAddHeader": "Προσθήκη κεφαλίδας HTTP",
+      "labelDeleteConnection": "Διαγραφή σύνδεσης",
+      "confirmDeleteTitle": "Διαγραφή MCP",
+      "confirmDeleteDescription": "Είστε βέβαιοι ότι θέλετε να διαγράψετε τη διαμόρφωση MCP «{{name}}»;",
+      "labelCancel": "Ακύρωση",
+      "labelDeleteMCP": "Διαγραφή MCP",
+      "labelAddMCP": "Άλλο MCP",
+      "errorInvalidUrl": "Το URL πρέπει να είναι έγκυρο",
+      "labelOAuthApp": "Εφαρμογή OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Δεδομένα",
+      "labelConnectRepository": "Σύνδεση αποθετηρίου εγγράφων",
+      "labelToolWebAccess": "Εργαλείο: Πρόσβαση στον ιστό",
+      "labelConnectMCP": "Σύνδεση εξωτερικού εργαλείου (MCP)",
+      "labelSupport": "Υποστήριξη",
+      "labelToolChatExtensions": "Εργαλείο: Επεκτάσεις συνομιλίας",
+      "labelToolCalculator": "Εργαλείο: Αριθμομηχανή",
+      "labelSystem": "Σύστημα",
+      "labelToolPlatformAccess": "Εργαλείο: Πρόσβαση στην πλατφόρμα schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Νέος πράκτορας",
+      "emptyDescription": "Ορίστε τη συμπεριφορά, την πρόσβαση σε δεδομένα, την εμφάνιση του πράκτορα και πολλά ακόμη.",
+      "labelDefinePrompt": "Ορίστε μια προτροπή",
+      "descriptionDefinePrompt": "Η ποιότητα ενός πράκτορα εξαρτάται από τις οδηγίες του. Οι σαφείς ορισμοί ρόλων ελαχιστοποιούν τις παραισθήσεις και αυξάνουν τη συνέπεια.",
+      "labelConnectTools": "Συνδέστε εργαλεία",
+      "descriptionConnectTools": "Για παράδειγμα, συνδέστε αποθετήρια εγγράφων ώστε ο πράκτορας να βασίζεται σε γεγονότα και να χρησιμοποιεί γνώσεις ειδικές για την εταιρεία.",
+      "labelWriteDocs": "Γράψτε τεκμηρίωση",
+      "descriptionWriteDocs": "Βοηθήστε τους χρήστες να κατανοήσουν τις δυνατότητες αυτού του πράκτορα.",
+      "infoRoleDefinition": "Ο ρόλος καθορίζει τη συμπεριφορά του πράκτορα και τα εργαλεία που παρέχονται για την ολοκλήρωση της εργασίας.",
+      "infoDocsDescription": "Η τεκμηρίωση μπορεί να περιλαμβάνει τόσο κείμενο (υποστηρίζεται μορφοποίηση Markdown) όσο και προτάσεις μηνυμάτων προς τον πράκτορα.",
+      "infoAppearanceDescription": "Το όνομα, η περιγραφή και το χρώμα βοηθούν τους χρήστες να προσανατολίζονται μεταξύ των διαθέσιμων πρακτόρων."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Προτεινόμενα μηνύματα",
+      "descriptionRecommendedMessages": "Βοηθήστε τους χρήστες προτείνοντας μηνύματα για την καλύτερη δυνατή χρήση του πράκτορα.",
+      "labelAddMessage": "Προσθήκη μηνύματος ",
+      "labelDocumentation": "Τεκμηρίωση",
+      "descriptionDocumentation": "Μοιραστείτε εδώ πρόσθετες πληροφορίες για αυτόν τον πράκτορα με τους χρήστες σας",
+      "labelShowPreview": "Εμφάνιση προεπισκόπησης",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Η τεκμηρίωση βοηθά τους χρήστες να χρησιμοποιούν τον πράκτορα. Εμφανίζεται όταν ο χρήστης ξεκινά νέα συνομιλία.",
+      "descriptionMarkdownHelp": "Το Markdown είναι μια ελαφριά γλώσσα σήμανσης για γρήγορη και εύκολη μορφοποίηση κειμένου.\n\n* **Δομή:** Επικεφαλίδες (`#`), λίστες (αριθμημένες `1.` και μη αριθμημένες `-`), οριζόντιες γραμμές.\n* **Στυλ κειμένου:** **Έντονα** `**Έντονα**`, *Πλάγια* `*Πλάγια*`, ~~Διαγραφή~~ `~~Διαγραφή~~`.\n* **Κώδικας:** Ενσωματωμένος κώδικας (`code`) και μπλοκ κώδικα με επισήμανση σύνταξης.\n* **Οργάνωση:** Παραθέματα (`>`), λίστες ελέγχου (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Δεν υπάρχουν ρόλοι",
+      "descriptionNoRoles": "Δεν έχουν οριστεί ρόλοι για τον πράκτορα. Χωρίς ρόλο, ο πράκτορας δεν θα λειτουργεί.",
+      "labelAddRole": "Προσθήκη ρόλου ",
+      "infoMultipleRoles": "Οι πράκτορες μπορούν να αναλαμβάνουν πολλούς ρόλους. Ένας ρόλος μπορεί να εστιάζει καλύτερα σε ένα επιμέρους τμήμα της εργασίας.",
+      "infoTools": "Οι πράκτορες μπορούν να χρησιμοποιούν εργαλεία για να απαντούν καλύτερα στα αιτήματα των χρηστών (αναζήτηση εγγράφων, δημιουργία εγγράφων κ.λπ.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Νέος πράκτορας",
+      "labelAgent": "Πράκτορας",
+      "labelCreateAgent": "Δημιουργία πράκτορα",
+      "labelSaveAgent": "Αποθήκευση πράκτορα",
+      "tabOverview": "Επισκόπηση",
+      "tabPrompt": "Προτροπή",
+      "tabDocs": "Υποστήριξη",
+      "tabRoles": "Ρόλοι",
+      "tabSettings": "Ρυθμίσεις",
+      "btnCreate": "Δημιουργία",
+      "btnSave": "Αποθήκευση",
+      "labelEditAgent": "Επεξεργασία πράκτορα",
+      "labelCloneAgent": "Αποθήκευση ως νέος πράκτορας",
+      "labelDeleteAgent": "Διαγραφή πράκτορα",
+      "confirmDeleteTitle": "Διαγραφή πράκτορα",
+      "confirmDeleteDescription": "Είστε βέβαιοι ότι θέλετε να διαγράψετε τον πράκτορα «{{name}}»; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+      "labelCancel": "Ακύρωση"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Ρόλος ",
+      "description": "Καθορίζει τη συμπεριφορά του πράκτορα και ποια εργαλεία επιτρέπεται να χρησιμοποιεί σε αυτό το πλαίσιο.",
+      "tabOverview": "Επισκόπηση",
+      "tabPrompt": "Προτροπή",
+      "tabDocumentRepositoryMounts": "Αποθετήρια εγγράφων",
+      "tabMCPs": "Εξωτερικά εργαλεία (MCP)",
+      "tabWeb": "Πρόσβαση στο διαδίκτυο",
+      "tabChat": "Επεκτάσεις συνομιλίας",
+      "tabCalc": "Αριθμομηχανή",
+      "tabTools": "Εργαλεία",
+      "tabSettings": "Ρυθμίσεις",
+      "toolWebAccess": "Πρόσβαση στο διαδίκτυο",
+      "chatExtensions": "Επεκτάσεις συνομιλίας",
+      "calculator": "Αριθμομηχανή",
+      "externalToolsMCP": "Εξωτερικά εργαλεία (MCP)",
+      "labelPrompt": "Προτροπή"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Απόρριψη αλλαγών",
+      "labelDiscardConfirm": "Θέλετε πραγματικά να απορρίψετε όλες τις μη αποθηκευμένες αλλαγές σε αυτόν τον πράκτορα;",
+      "labelCancel": "Ακύρωση",
+      "labelDiscard": "Απόρριψη αλλαγών"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Εξωτερικά εργαλεία (MCP)",
+      "changedBadge": "Τροποποιήθηκε",
+      "unknownMcp": "Άγνωστο MCP",
+      "invalidUrl": "Μη έγκυρο URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Σημασιολογική αναζήτηση",
+      "labelChanged": "Τροποποιήθηκε",
+      "labelActive": "Ενεργό",
+      "labelInactive": "Ανενεργό",
+      "description": "Όταν προέχει η σημασία των δεδομένων και όχι η ακριβής διατύπωση. (Απαιτεί μοντέλο ενσωματώσεων)",
+      "labelUnknownModel": "Άγνωστο μοντέλο"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Αναζήτηση λέξεων-κλειδιών",
+      "labelChanged": "Τροποποιήθηκε",
+      "labelActive": "Ενεργό",
+      "labelInactive": "Ανενεργό",
+      "description": "Κατά την αναζήτηση ακριβών εκφράσεων και προτάσεων. (Ονόματα, ονομασίες κ.λπ.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Απομαγνητοφωνητής",
+      "labelChanged": "Τροποποιήθηκε",
+      "labelUnknownTranscriber": "Άγνωστος απομαγνητοφωνητής",
+      "labelGoToTranscriber": "Μετάβαση στον απομαγνητοφωνητή"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Νέο μήνυμα"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Αναμονή επεξεργασίας",
+      "tooltipPaused": "Σε παύση"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Ο συλλογισμός είναι ενεργός",
+      "labelThinkingOff": "Ο συλλογισμός είναι ανενεργός",
+      "labelMessageStack": "Ουρά μηνυμάτων",
+      "placeholderMessage": "Μήνυμα...",
+      "tooltipUploadFiles": "Μεταφόρτωση αρχείων",
+      "buttonPause": "Παύση",
+      "buttonStartBatch": "Έναρξη μαζικής επεξεργασίας",
+      "buttonSend": "Αποστολή",
+      "descriptionFilesPending": "Τα αρχεία μεταφορτώνονται ή υποβάλλονται σε επεξεργασία …",
+      "labelAttachFiles": "Επισύναψη αρχείων",
+      "labelUploadFiles": "Μεταφόρτωση αρχείων",
+      "labelSelectFile": "Επιλογή υπάρχοντος αρχείου"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Να επιτραπεί αυτή η ενέργεια;",
+      "descriptionAction": "Ο πράκτορας χρειάζεται την έγκρισή σας για να συνεχίσει.",
+      "labelApprove": "Να επιτραπεί",
+      "labelReject": "Απόρριψη",
+      "labelRetry": "Δοκιμάστε ξανά",
+      "labelSubmitting": "Επεξεργασία …",
+      "errorSubmit": "Δεν ήταν δυνατή η υποβολή της απόφασής σας. Δοκιμάστε ξανά.",
+      "labelMCP": "Συνδέστε τον λογαριασμό σας",
+      "descriptionMCP": "Αυτό το εργαλείο MCP απαιτεί να συνδεθείτε. Η εκκρεμής κλήση συνεχίζεται αυτόματα μετά τη σύνδεση."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Αποθήκευση εγγράφου;",
+      "descriptionWriteFile": "Ο πράκτορας θέλει να αποθηκεύσει αυτό το έγγραφο. Το υπάρχον περιεχόμενο θα αντικατασταθεί.",
+      "labelShowContent": "Εμφάνιση περιεχομένου",
+      "labelHideContent": "Απόκρυψη περιεχομένου",
+      "descriptionEmptyFile": "Το έγγραφο θα αποθηκευτεί με κενό περιεχόμενο."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Λήψη από τον ιστό",
+      "description": "Ρυθμίστε την πρόσβαση στον ιστό για αυτόν τον ρόλο. Η λήψη και η αναζήτηση μπορούν να ενεργοποιηθούν ανεξάρτητα.",
+      "labelFetch": "Ενεργοποίηση λήψης από τον ιστό",
+      "labelAskFetch": "Ερώτηση πριν από τη λήψη σελίδας",
+      "labelAccess": "Επιτρεπόμενοι ιστότοποι",
+      "labelAll": "Όλοι οι ιστότοποι",
+      "labelWhitelist": "Λίστα επιτρεπόμενων τομέων",
+      "descriptionAccess": "Αρχεία και ιστοσελίδες HTTP(S), συμπεριλαμβανομένου του τοπικού δικτύου. Οι ανακατευθύνσεις ακολουθούν τους ίδιους κανόνες πρόσβασης.",
+      "labelDomains": "Επιτρεπόμενοι τομείς",
+      "descriptionDomains": "Ένα όνομα κεντρικού υπολογιστή ανά γραμμή, για παράδειγμα example.com. Χρησιμοποιήστε *.example.com για υποτομείς· αυτό δεν περιλαμβάνει το ίδιο το example.com.",
+      "errorDomains": "Εισαγάγετε ονόματα κεντρικών υπολογιστών ή *.example.com χωρίς πρωτόκολλο, διαδρομή ή θύρα.",
+      "descriptionEmptyWhitelist": "Μια κενή λίστα επιτρεπόμενων τομέων αποκλείει όλες τις σελίδες.",
+      "labelSearchTitle": "Αναζήτηση στον ιστό",
+      "labelSearch": "Ενεργοποίηση αναζήτησης στον ιστό",
+      "labelAskSearch": "Ερώτηση πριν από την αναζήτηση στον ιστό",
+      "labelProvider": "Πάροχος αναζήτησης",
+      "labelProviderDocs": "Τεκμηρίωση παρόχου",
+      "labelApiKey": "Κλειδί API",
+      "errorApiKey": "Εισαγάγετε ένα κλειδί API για τον επιλεγμένο πάροχο.",
+      "labelMarket": "Γλώσσα και περιοχή Staan",
+      "descriptionMarket": "Για παράδειγμα de-de ή en-us. Προεπιλογή: en-us.",
+      "labelRemoveTool": "Αφαίρεση εργαλείου",
+      "labelConfirmRemoveTool": "Αφαίρεση εργαλείου ιστού;",
+      "descriptionRemoveTool": "Οι ρυθμίσεις λήψης και αναζήτησης στον ιστό, συμπεριλαμβανομένης της λίστας επιτρεπόμενων τομέων και του κλειδιού API, θα αφαιρεθούν από αυτόν τον ρόλο.",
+      "labelCancel": "Ακύρωση"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Λήψη ιστοσελίδας",
+      "descriptionFetch": "Να επιτραπεί στον πράκτορα να κατεβάσει, να αποθηκεύσει και να επεξεργαστεί αυτό το URL;",
+      "labelDestination": "Προορισμός"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Αναζήτηση στον ιστό",
+      "descriptionSearch": "Να επιτραπεί στον πράκτορα να στείλει αυτό το ερώτημα στον ρυθμισμένο πάροχο αναζήτησης;"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Κλείσιμο",
+      "labelPending": "Εκτελείται",
+      "labelApproval": "Αναμονή έγκρισης",
+      "labelDenied": "Απορρίφθηκε",
+      "labelDone": "Ολοκληρώθηκε",
+      "errorRequest": "Το αίτημα απέτυχε"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Αναζήτηση στον ιστό",
+      "labelQuery": "Ερώτημα αναζήτησης",
+      "labelEmptyResults": "Δεν βρέθηκαν αποτελέσματα."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Ιστοσελίδα",
+      "labelUrl": "URL",
+      "labelRange": "Χαρακτήρες {{start}}–{{end}} από {{total}}",
+      "descriptionTruncated": "Περισσότερο περιεχόμενο είναι διαθέσιμο στην επόμενη ενότητα.",
+      "labelEmptyPage": "Αυτή η σελίδα δεν περιέχει αναγνώσιμο κείμενο.",
+      "labelSource": "Άνοιγμα πηγής",
+      "descriptionFileReady": "Το αρχείο αποθηκεύτηκε και υποβλήθηκε σε επεξεργασία. Το εξαγόμενο κείμενο είναι άμεσα διαθέσιμο στον πράκτορα.",
+      "descriptionProcessingUnavailable": "Το αρχείο αποθηκεύτηκε. Δεν υπάρχει εξαγόμενο κείμενο· ο ήχος/το βίντεο απαιτεί ρυθμισμένο απομαγνητοφωνητή.",
+      "descriptionProcessingFailed": "Το αρχείο αποθηκεύτηκε, αλλά η επεξεργασία απέτυχε ή ξεπέρασε το χρονικό όριο. Η επεξεργασία μπορεί να ξεκινήσει ξανά στον αποθηκευτικό χώρο."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Αντιγραφή αρχείου",
+      "labelMove": "Μετακίνηση αρχείου",
+      "descriptionSuccess": "Το αρχείο μεταφέρθηκε. Κάθε απαραίτητο ευρετήριο αναζήτησης αναδημιουργείται στο παρασκήνιο.",
+      "descriptionPending": "Προετοιμασία μεταφοράς αρχείου…",
+      "descriptionProcessingError": "Το αρχείο μεταφέρθηκε, αλλά η επεξεργασία πρέπει να ξεκινήσει ξανά στον προορισμό.",
+      "errorTransfer": "Δεν ήταν δυνατή η ολοκλήρωση της μεταφοράς αρχείου.",
+      "labelOpenFile": "Άνοιγμα αρχείου προορισμού",
+      "descriptionDenied": "Η μεταφορά αρχείου απορρίφθηκε. Δεν μεταφέρθηκε κανένα αρχείο.",
+      "descriptionApproval": "Αναμονή της έγκρισής σας.",
+      "descriptionRunning": "Μεταφορά αρχείου…",
+      "labelClose": "Κλείσιμο",
+      "labelSource": "Πηγή",
+      "labelTarget": "Προορισμός"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Να επιτραπεί η αντιγραφή αυτού του αρχείου;",
+      "labelMove": "Να επιτραπεί η μετακίνηση αυτού του αρχείου;",
+      "descriptionCopy": "Ο πράκτορας θέλει να αντιγράψει αυτό το αρχείο και το επεξεργασμένο περιεχόμενό του. Τα υπάρχοντα αρχεία προορισμού δεν αντικαθίστανται ποτέ.",
+      "descriptionMove": "Ο πράκτορας θέλει να μετακινήσει αυτό το αρχείο και το επεξεργασμένο περιεχόμενό του. Η πηγή θα αφαιρεθεί μετά την επιτυχή αντιγραφή.",
+      "labelSource": "Πηγή",
+      "labelTarget": "Προορισμός"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Αυτό το εργαλείο MCP απαιτεί να συνδεθείτε. Η εκκρεμής κλήση συνεχίζεται αυτόματα μετά τη σύνδεση.",
+      "labelConnect": "Σύνδεση του λογαριασμού μου"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Εργαλείο MCP",
+      "labelDiscover": "Εντοπισμός διαθέσιμων εργαλείων",
+      "labelPending": "Εκτελείται",
+      "labelDone": "Ολοκληρώθηκε",
+      "labelApproval": "Απαιτείται σύνδεση",
+      "labelDenied": "Απορρίφθηκε",
+      "errorRequest": "Το αίτημα απέτυχε",
+      "labelArguments": "Είσοδος",
+      "labelResult": "Αποτέλεσμα",
+      "labelClose": "Κλείσιμο"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Εφαρμογή OAuth",
+      "labelSearch": "Σύνδεση αναζήτησης",
+      "labelAutomatic": "Δεν υπάρχει ρυθμισμένη εφαρμογή OAuth",
+      "labelNone": "Δεν έχει επιλεγεί σύνδεση",
+      "labelMissing": "Η σύνδεση δεν είναι διαθέσιμη",
+      "descriptionOAuth": "Προαιρετικά: Επιλέξτε μια καταχωρισμένη εφαρμογή OAuth για αυτόν τον διακομιστή MCP. Ρυθμίστε το URL του ανεξάρτητα σε αυτόν τον πράκτορα.",
+      "descriptionSearch": "Τα διαπιστευτήρια Staan και Brave διαχειρίζονται κεντρικά στις Ρυθμίσεις → Συνδέσεις.",
+      "errorMissing": "Αυτή η σύνδεση δεν είναι πλέον διαθέσιμη. Επιλέξτε άλλη σύνδεση.",
+      "descriptionEmpty": "Δεν έχει ρυθμιστεί κατάλληλη σύνδεση. Διαχειριστείτε τις συνδέσεις στις Ρυθμίσεις → Συνδέσεις."
+    }
+  },
+  "page": {
+    "labelTitle": "Πράκτορες",
+    "emptyTitle": "Δεν υπάρχουν πράκτορες",
+    "emptyDescription": "Δεν έχουν δημιουργηθεί ακόμη πράκτορες.",
+    "labelNewAgent": "Νέος πράκτορας",
+    "helpSearchTitle": "Αναζήτηση",
+    "helpSearchDescription": "Μπορείτε να αναζητήσετε πράκτορες. Η αναζήτηση περιλαμβάνει, μεταξύ άλλων, το όνομα και την περιγραφή του πράκτορα, καθώς και το μοντέλο του.",
+    "helpSortTitle": "Ταξινόμηση και ομαδοποίηση",
+    "helpSortDescription": "Οι πράκτορες μπορούν να ταξινομηθούν κατά όνομα και να κατανεμηθούν σε διαφορετικές ομάδες. Μπορούν να εμφανίζονται ως πλακίδια ή ως πίνακας."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Αυτός ο πάροχος MCP απαιτεί καταχωρισμένη εφαρμογή OAuth. Ζητήστε από έναν διαχειριστή να δημιουργήσει μια εφαρμογή OAuth με Client ID και Client Secret στις Ρυθμίσεις → Συνδέσεις και επιλέξτε την στις ρυθμίσεις MCP του πράκτορα. Στη συνέχεια συνδεθείτε ξανά από τη συνομιλία.",
+    "errorStart": "Δεν ήταν δυνατή η έναρξη της εξουσιοδότησης MCP.",
+    "errorCallback": "Η εξουσιοδότηση MCP απέτυχε ή έληξε. Επιστρέψτε στη συνομιλία και δοκιμάστε ξανά."
+  }
+}

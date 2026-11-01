@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Conversație nouă",
+        "mainLabelAgents": "Agenți",
+        "mainLabelApps": "Aplicații",
+        "mainLabelWorkspaces": "Spații de lucru",
+        "history": "Istoric"
+      },
+      "SidebarFavorites": {
+        "label": "Favorite",
+        "empty": "Nu ai adăugat încă favorite."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Nicio favorită",
+        "descriptionNoFavorites": "Poți adăuga <agents>agenți</agents>, <documents>depozite de documente</documents> și <transcribers>transcriptori</transcribers> la favorite."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Conversație nouă"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Noapte bună];(5-11)[Bună dimineața];(12-17)[Bună ziua];(18-inf)[Bună seara];",
+      "labelAllAgents": "Toți agenții",
+      "labelToApps": "La aplicații"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favorite",
+        "labelPermissions": "Permisiuni",
+        "labelModels": "Modele",
+        "labelTaskQueue": "Coada de sarcini",
+        "labelSettings": "Setări",
+        "labelUsers": "Utilizatori",
+        "labelWorkspaces": "Spații de lucru",
+        "labelSSOProvider": "Furnizor SSO",
+        "labelXRAGUpload": "Încarcă XRAG",
+        "labelSystemModel": "Model de sistem",
+        "labelTheme": "Temă",
+        "labelBackToDashboard": "Înapoi la panoul de control",
+        "labelConnections": "Conexiuni",
+        "labelProviderConnections": "Conexiuni",
+        "labelService": "Serviciu",
+        "labelArtifacts": "Artefacte",
+        "labelCluster": "Cluster"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Selectează pictograma",
+      "buttonMoreIcons": "Mai multe pictograme",
+      "textLucideInfo": "Pictograme de la <0>Lucide</0>",
+      "placeholderSearchIcons": "Caută pictograme...",
+      "buttonCancel": "Anulează"
+    },
+    "FileUploadDropZone": {
+      "drop": "Plasează fișierul aici pentru încărcare"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Modificat"
+    },
+    "Pagination": {
+      "labelPrev": "Anterior",
+      "labelNext": "Următor"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Contul meu",
+      "labelSystem": "Sistem",
+      "labelModels": "Modele",
+      "labelCluster": "Cluster",
+      "labelSettings": "Setări",
+      "labelDashboard": "Panou de control",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Deconectare"
+    },
+    "UserRoleText": {
+      "admin": "Administrator",
+      "workspace-admin": "Administrator al spațiului de lucru",
+      "editor": "Editor",
+      "user": "Utilizator",
+      "none": "Neautorizat"
+    },
+    "StorageView": {
+      "placeholderSearch": "Caută în acest dosar…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Nume",
+      "tableColumnType": "Tip",
+      "tableColumnSize": "Dimensiune",
+      "tableColumnCreated": "Creat",
+      "tableColumnUpdated": "Actualizat",
+      "tableColumnNameActions": "Acțiuni",
+      "groupTimeToday": "Astăzi",
+      "groupTimeLast7Days": "Ultimele 7 zile",
+      "groupTimeLast30Days": "Ultimele 30 de zile",
+      "groupTimeOther": "Altele",
+      "labelFolder": "Dosar",
+      "descriptionProcessing": "Fișierul este procesat"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Dosar nou",
+      "placeholderFolderName": "Numele dosarului...",
+      "labelCancel": "Anulează",
+      "labelCreate": "Creează"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Elimină",
+      "labelDescription": "Sigur vrei să elimini „{{name}}”? Acțiunea nu poate fi anulată.",
+      "labelCancel": "Anulează",
+      "labelRemove": "Elimină"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Dosar principal"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Niciun fișier",
+      "labelDescription": "Dosarul curent nu conține fișiere. Trage fișiere aici pentru a le încărca.",
+      "labelUploadFile": "Încarcă fișier",
+      "labelCreateFile": "Creează fișier"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Opțiuni",
+      "labelView": "Vizualizare",
+      "labelSort": "Sortare",
+      "labelNameAsc": "Nume de la A la Z",
+      "labelNameDesc": "Nume de la Z la A",
+      "labelSizeAsc": "Dimensiune crescător",
+      "labelSizeDesc": "Dimensiune descrescător",
+      "labelCreatedAsc": "Data creării crescător",
+      "labelCreatedDesc": "Data creării descrescător",
+      "labelUpdatedAsc": "Data actualizării crescător",
+      "labelUpdatedDesc": "Data actualizării descrescător",
+      "labelGroup": "Grupare",
+      "labelNoGroup": "Fără grup",
+      "labelFirstLetter": "Prima literă",
+      "labelFileType": "Tip de fișier",
+      "labelCreated": "Data creării",
+      "labelUpdated": "Data actualizării",
+      "labelTilesSmall": "Dale mici",
+      "labelTilesMedium": "Dale medii",
+      "labelTilesLarge": "Dale mari",
+      "labelTable": "Tabel",
+      "labelSaveView": "Salvează vizualizarea",
+      "labelReset": "Resetează",
+      "labelNewFolder": "Dosar nou",
+      "labelThisFolder": "Acest dosar",
+      "labelUploadFile": "Încarcă fișier",
+      "labelNew": "Nou",
+      "labelDeleteFolder": "Șterge dosarul",
+      "labelNewRecording": "Înregistrare nouă",
+      "labelColumns": "Vizualizare pe coloane",
+      "labelNewTextFile": "Fișier nou"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Niciun rezultat",
+      "descriptionNoResults": "Căutarea nu a returnat rezultate. Reformulează interogarea.",
+      "labelCharacters": "caractere"
+    },
+    "Transcription": {
+      "labelTitle": "Text transcris",
+      "labelLoadingMedia": "Se încarcă fișierul media…",
+      "labelBuffering": "Se pregătește redarea…",
+      "labelSeeking": "Se încarcă poziția…",
+      "labelPlayer": "Player media",
+      "labelPlay": "Redă",
+      "labelPause": "Pauză",
+      "labelSeek": "Poziția de redare",
+      "labelBack": "Înapoi cu 10 secunde",
+      "labelForward": "Înainte cu 10 secunde",
+      "labelSpeed": "Viteza de redare",
+      "labelUnmute": "Activează sunetul",
+      "labelMute": "Dezactivează sunetul",
+      "labelVolume": "Volum",
+      "labelHideVideo": "Ascunde videoclipul",
+      "labelShowVideo": "Arată videoclipul",
+      "labelPlaySegment": "Redă segmentul {{number}}",
+      "labelReviewed": "Verificat",
+      "labelSegments": "Segmente",
+      "labelWords": "Cuvinte",
+      "descriptionEmpty": "Nu s-au găsit rezultate ale transcrierii.",
+      "descriptionConfidence": "Nivel de încredere: {{percent}}%",
+      "errorPlayback": "Redarea a eșuat. Verifică disponibilitatea fișierului media și încearcă din nou.",
+      "labelEditSegment": "Editează segmentul {{number}}",
+      "labelSegmentText": "Textul segmentului",
+      "labelSave": "Salvează",
+      "labelSaving": "Se salvează…",
+      "labelSaveReviewed": "Salvează și marchează ca verificat",
+      "labelCancel": "Anulează",
+      "labelRestoreOriginal": "Restaurează textul original",
+      "descriptionUnsaved": "Modificările sunt aplicate doar la salvare.",
+      "errorSave": "Salvarea a eșuat. Textul tău a fost păstrat. Încearcă din nou.",
+      "errorConflict": "Acest segment s-a schimbat. Copiază ciorna și reîncarcă vizualizarea înainte de a salva din nou.",
+      "labelDownloadSrt": "Descarcă SRT",
+      "descriptionSaveBeforeDownload": "Salvează sau anulează modificările înainte de a descărca fișierul SRT."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Vizualizare pe coloane",
+      "labelRoot": "Documente",
+      "labelDetails": "Detaliile fișierului",
+      "labelType": "Tip",
+      "labelSize": "Dimensiune",
+      "labelUpdated": "Actualizat",
+      "labelOpen": "Deschide fișierul"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Fișier nou",
+      "labelName": "Numele fișierului",
+      "labelCreate": "Creează fișier",
+      "labelCancel": "Anulează",
+      "errorCreate": "Fișierul nu a putut fi creat. Verifică numele și permisiunile de scriere."
+    },
+    "StorageFileActions": {
+      "labelActions": "Acțiuni pentru {{name}}",
+      "labelDownloadOriginal": "Descarcă originalul",
+      "labelDownloadProcessed": "Descarcă textul procesat",
+      "labelRename": "Redenumește",
+      "labelProcess": "Reprocesează",
+      "labelDelete": "Șterge fișierul",
+      "labelName": "Noul nume al fișierului",
+      "labelCancel": "Anulează",
+      "labelConfirm": "Confirmă",
+      "descriptionDelete": "Ștergi definitiv „{{name}}”, conținutul său procesat și intrările din indexul de căutare?",
+      "descriptionProcess": "Reprocesezi „{{name}}”? Modificările manuale vor fi suprascrise.",
+      "descriptionQueued": "Procesarea este în coadă sau rulează deja. Verifică starea în lista de fișiere.",
+      "descriptionUnsupported": "Acest fișier nu poate fi procesat momentan. Fișierele audio și video necesită un transcriptor configurat.",
+      "errorAction": "Acțiunea a eșuat. Verifică permisiunile de scriere, conflictele de nume și procesarea în curs. O redenumire eșuată poate lăsa ambele nume; verifică lista înainte de a încerca din nou.",
+      "labelOptions": "Opțiuni",
+      "labelEdit": "Editează",
+      "descriptionRename": "Redenumește „{{name}}”. Păstrează extensia fișierului. Originalul, conținutul procesat și indexul de căutare se actualizează împreună. Numele existente nu sunt niciodată suprascrise.",
+      "labelCopy": "Copiază în…",
+      "labelMove": "Mută în…",
+      "descriptionCopy": "Copiază „{{name}}”, inclusiv conținutul procesat. Sursa va fi păstrată.",
+      "descriptionMove": "Mută „{{name}}”, inclusiv conținutul procesat. Sursa va fi eliminată după finalizarea cu succes a copierii.",
+      "descriptionTransferred": "Fișierul a fost transferat. Indexurile de căutare ale destinației sunt reconstruite în fundal.",
+      "descriptionTransferProcessingError": "Fișierul a fost transferat, dar procesarea nu a putut fi pornită. Deschide fișierul de la destinație și alege „Reprocesează”. Nu repeta transferul."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Acțiuni pentru {{name}}",
+      "labelDelete": "Șterge dosarul"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Conținut",
+      "labelSave": "Salvează",
+      "labelCancel": "Anulează",
+      "errorSave": "Salvarea a eșuat. Încearcă din nou.",
+      "errorConflict": "Conținutul s-a schimbat. Reîncarcă înainte de a salva.",
+      "errorIndex": "Salvat, dar indexul de căutare nu a putut fi actualizat. Salvează din nou."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Alege dosarul de destinație",
+      "labelSelectFile": "Alege un fișier existent",
+      "descriptionFolder": "Alege un dosar existent. Va fi transferat un singur fișier; numele existente nu sunt niciodată suprascrise.",
+      "descriptionFile": "Alege un fișier din această conversație sau dintr-un depozit accesibil. Documentele și înregistrările trebuie să fie deja procesate.",
+      "labelStorage": "Stocare",
+      "labelCurrentStorage": "Stocare curentă",
+      "labelUp": "Dosar părinte",
+      "descriptionLoading": "Se încarcă fișierele…",
+      "descriptionEmpty": "Nicio intrare corespunzătoare în acest dosar.",
+      "descriptionNoStorages": "Nu există depozite accesibile.",
+      "descriptionPending": "Se transferă fișierul. Așteaptă rezultatul.",
+      "labelCancel": "Anulează",
+      "labelUseFolder": "Folosește acest dosar",
+      "labelUseFile": "Atașează fișier",
+      "labelRetry": "Reîncarcă",
+      "errorLoad": "Acest dosar nu a putut fi încărcat. Verifică accesul și încearcă din nou.",
+      "errorCollision": "Destinația conține deja un fișier sau conținut procesat cu acest nume. Alege alt dosar; nimic nu a fost suprascris.",
+      "errorSameTarget": "Sursa și destinația sunt identice. Alege alt dosar.",
+      "errorSourceChanged": "Sursa s-a schimbat în timpul copierii. Copia incompletă de la destinație a fost eliminată. Încearcă din nou.",
+      "errorBusy": "Acest fișier este în curs de procesare. Așteaptă finalizarea.",
+      "errorPermission": "Nu ai permisiunile necesare pentru sursă sau destinație.",
+      "errorSourceDelete": "Fișierul complet de la destinație a fost creat, dar sursa nu a putut fi eliminată. Verifică ambele locații înainte de a repeta operația.",
+      "errorCleanup": "Copierea a eșuat. Sursa a fost păstrată, dar la destinație pot rămâne fișiere incomplete. Verifică destinația înainte de a încerca din nou.",
+      "errorAction": "Operația a eșuat. Verifică permisiunile, numele fișierelor și ambele locații înainte de a încerca din nou.",
+      "errorNotProcessed": "Acest fișier nu a fost încă procesat. Procesează-l mai întâi, apoi selectează-l din nou."
+    }
+  },
+  "_welcomeMessage": "Bun venit la\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Documentație",
+    "feedback": "Feedback",
+    "help": "Ajutor",
+    "labelThemeLight": "Luminos",
+    "labelThemeDark": "Întunecat",
+    "labelThemeSystem": "Sistem de operare",
+    "labelLanguage": "Limbă"
+  }
+}

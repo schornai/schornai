@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Documentopslagplaatsen",
+    "description": "Documentopslagplaatsen vormen een centrale, gestructureerde en betrouwbare kennisbank voor AI, waar modellen op basis van de context toegang toe hebben."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Documentopslagplaats"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Zoeken..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelNameAsc": "Naam van A tot Z",
+      "labelNameDesc": "Naam van Z tot A",
+      "labelGroup": "Groeperen op",
+      "labelNoGroup": "Geen groep",
+      "labelFavorites": "Favorieten",
+      "labelFirstLetter": "Eerste letter",
+      "labelWorkspaces": "Werkruimten",
+      "labelModel": "Transcriptor",
+      "labelCards": "Kaarten",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten",
+      "labelDocumentRepositories": "Documentopslagplaatsen",
+      "labelNewDocumentRepository": "Nieuwe documentopslagplaats"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Andere documentopslagplaatsen",
+      "labelFavorites": "Favorieten",
+      "labelOtherTranscribers": "Andere transcriptoren",
+      "labelUnknownTranscriber": "Onbekende transcriptor ‘{{id}}’"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Naam",
+      "tableColumnCapablilities": "Mogelijkheden",
+      "tableColumnNameActions": "Acties",
+      "emptyTitle": "Geen documentopslagplaatsen",
+      "emptyDescription": "Er zijn nog geen documentopslagplaatsen aangemaakt.",
+      "labelOtherDocumentRepositories": "Andere documentopslagplaatsen",
+      "labelFavorites": "Favorieten",
+      "labelNoGroup": "Geen groep",
+      "labelUnknownTranscriber": "Onbekende transcriptor ‘{{id}}’"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Onbekende werkruimte"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Bewerken",
+      "tooltipInfo": "Informatie"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Uit favorieten verwijderen",
+      "tooltipAddFavorite": "Aan favorieten toevoegen"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nieuwe documentopslagplaats",
+      "labelDocumentRepository": "Documentopslagplaats",
+      "labelDocumentRepositoryDropdown": "Documentopslagplaats",
+      "labelCreateDocumentRepository": "Documentopslagplaats aanmaken",
+      "labelSaveDocumentRepository": "Documentopslagplaats opslaan",
+      "labelCloneDocumentRepository": "Opslaan als nieuwe documentopslagplaats",
+      "labelDeleteDocumentRepository": "Documentopslagplaats verwijderen",
+      "confirmDeleteTitle": "Documentopslagplaats verwijderen",
+      "confirmDeleteDescription": "Weet je zeker dat je de documentopslagplaats ‘{{name}}’ wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "labelCancel": "Annuleren",
+      "tabOverview": "Overzicht",
+      "tabFeatures": "Functies",
+      "tabSettings": "Instellingen",
+      "btnCreate": "Aanmaken",
+      "btnSave": "Opslaan"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Wijzigingen verwerpen",
+      "labelDiscardConfirm": "Wil je echt alle niet-opgeslagen wijzigingen aan deze documentopslagplaats verwerpen?",
+      "labelCancel": "Annuleren",
+      "labelDiscard": "Wijzigingen verwerpen"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nieuwe documentopslagplaats",
+      "emptyDescription": "Bepaal het gedrag en uiterlijk van de documentopslagplaats.",
+      "checklistSemanticSearchTitle": "Semantisch zoeken inschakelen",
+      "checklistSemanticSearchDescription": "Schakel semantisch zoeken in. Dit kan de kwaliteit van zoekresultaten verbeteren.",
+      "checklistTranscriberTitle": "Transcriptor selecteren",
+      "checklistTranscriberDescription": "Selecteer een transcriptor die alle geüploade video- en audiobestanden automatisch transcribeert.",
+      "helpTitle": "Hulp",
+      "helpKeywordSearch": "Klassiek zoeken op trefwoorden. Het meest geschikt voor merknamen, persoonsnamen en andere namen.",
+      "helpEmbeddingDescription": "Voeg een embeddingmodel toe om semantisch zoeken in te schakelen. Hiermee vind je vergelijkbare documenten op basis van hun betekenis.",
+      "helpTranscriberDescription": "Voeg een transcriptor toe aan de documentopslagplaats. Alle video- en audiobestanden worden dan na het uploaden automatisch getranscribeerd."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Zoekindex",
+      "description": "Afhankelijk van de zoekindex worden verschillende methoden gebruikt om de beste resultaten voor de zoekopdracht te leveren.",
+      "labelKeyword": "Zoeken op trefwoorden",
+      "descriptionKeyword": "Voor het zoeken naar exacte uitdrukkingen en zinnen, zoals namen en aanduidingen.",
+      "labelSemantic": "Semantisch zoeken",
+      "descriptionSemantic": "Wanneer de betekenis van de gegevens belangrijker is dan de exacte formulering. Vereist een embeddingmodel.",
+      "labelEmbeddingModel": "Embeddingmodel",
+      "descriptionEmbeddingModel": "Het embeddingmodel vormt de basis voor semantisch zoeken."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Geen transcriptor",
+      "labelLegend": "Transcriptor",
+      "description": "Video- en audiobestanden worden na het uploaden automatisch getranscribeerd.",
+      "labelTranscriber": "Transcriptor"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Beschrijving",
+      "description": "Kies een geschikte naam voor de documentopslagplaats. Je kunt ook een korte beschrijving opslaan.",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Uiterlijk",
+      "description": "Kies een kleur en pictogram die de documentopslagplaats het best weergeven.",
+      "labelIcon": "Pictogram",
+      "labelColor": "Kleur"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Werkruimte",
+      "description": "Selecteer de werkruimte waarin je de documentopslagplaats wilt aanmaken.",
+      "labelName": "Werkruimte",
+      "labelSelectWorkspace": "Selecteer een werkruimte."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Bestanden",
+      "tabSearch": "Volledige tekst doorzoeken",
+      "tabInfo": "Informatie"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Zoeken...",
+      "labelSearch": "Zoeken"
+    },
+    "Search": {
+      "emptyTitle": "Volledige tekst doorzoeken",
+      "emptyDescription": "Zoek tekst in alle bestanden van deze documentopslagplaats."
+    }
+  },
+  "page": {
+    "labelTitle": "Documentopslagplaatsen",
+    "emptyTitle": "Geen documentopslagplaatsen",
+    "emptyDescription": "Er zijn nog geen documentopslagplaatsen aangemaakt.",
+    "labelNewDocumentRepository": "Nieuwe documentopslagplaats",
+    "helpTitle": "Hulp",
+    "helpSearchDescription": "Je kunt naar documentopslagplaatsen zoeken. De zoekopdracht omvat onder andere de naam, beschrijving en transcriptor van de opslagplaats.",
+    "helpSortDescription": "Documentopslagplaatsen kunnen op naam worden gesorteerd en in verschillende groepen worden ingedeeld. Je kunt ze als kaarten of als tabel weergeven.",
+    "helpTranscriberDescription": "Je kunt een transcriptor voor documentopslagplaatsen selecteren. Audio- en videobestanden die je naar de opslagplaats uploadt, worden automatisch getranscribeerd."
+  }
+}

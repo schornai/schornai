@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Description",
+      "description": "Choisissez un nom adapté à l’espace de travail. Vous pouvez également enregistrer une courte description.",
+      "labelName": "Nom",
+      "labelDescription": "Description",
+      "buttonSave": "Enregistrer",
+      "buttonReset": "Réinitialiser"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Documentation",
+      "description": "Partagez ici des informations supplémentaires sur cet espace de travail avec vos utilisateurs.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Enregistrer",
+      "buttonReset": "Réinitialiser"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "Correspondances SSO",
+      "description": "Définissez les groupes SSO qui ont accès à l’espace de travail et leurs autorisations.",
+      "labelRoleUser": "Groupe d’utilisateurs",
+      "labelRoleEditor": "Groupe d’éditeurs",
+      "labelRoleWorkspaceAdmin": "Groupe d’administrateurs de l’espace de travail",
+      "placeholderNoGroup": "Aucun groupe attribué",
+      "descriptionRoleUser": "Peut consulter le contenu de l’espace de travail (agents, transcripteurs, bases documentaires, etc.), mais ne peut pas le modifier.",
+      "descriptionRoleEditor": "Peut consulter et modifier le contenu de l’espace de travail.",
+      "descriptionRoleWorkspaceAdmin": "Peut gérer l’espace de travail et créer, modifier ou supprimer des agents, transcripteurs, bases documentaires, etc.",
+      "buttonSave": "Enregistrer",
+      "buttonReset": "Réinitialiser"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Utilisateur automatique",
+      "description": "Lorsque « Utilisateur automatique » est activé, toute personne pouvant se connecter à la box reçoit automatiquement les droits d’utilisateur dans cette organisation.",
+      "labelActive": "Utilisateur automatique activé",
+      "labelInactive": "Utilisateur automatique désactivé"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Nouvel espace de travail",
+      "descriptionWorkspace": "Choisissez un nom et une description facultative. Vous pourrez configurer les autres paramètres après la création de l’espace de travail.",
+      "labelName": "Nom",
+      "labelDescription": "Description",
+      "labelCreate": "Créer un espace de travail",
+      "labelCancel": "Annuler",
+      "errorCreate": "L’espace de travail n’a pas pu être créé. Veuillez réessayer."
+    },
+    "WorkspaceCard": {
+      "labelType": "Espace de travail"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Modifier l’espace de travail",
+      "tooltipInfo": "Ouvrir l’espace de travail"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Ajouter aux favoris",
+      "tooltipRemoveFavorite": "Retirer des favoris"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Rechercher des espaces de travail",
+      "labelName": "Nom",
+      "labelDescription": "Description",
+      "labelRole": "Votre rôle",
+      "labelActions": "Actions",
+      "labelFavorites": "Favoris",
+      "labelOtherWorkspaces": "Autres espaces de travail",
+      "labelEmpty": "Aucun espace de travail",
+      "descriptionEmpty": "Vous n’avez pas encore accès à un espace de travail.",
+      "labelNoResults": "Aucun résultat",
+      "descriptionNoResults": "Essayez un autre terme de recherche."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Options",
+      "labelView": "Affichage",
+      "labelSort": "Trier",
+      "labelNameAsc": "Nom de A à Z",
+      "labelNameDesc": "Nom de Z à A",
+      "labelGroup": "Regrouper par",
+      "labelNoGroup": "Aucun groupe",
+      "labelFavorites": "Favoris",
+      "labelFirstLetter": "Première lettre",
+      "labelCards": "Cartes",
+      "labelTable": "Tableau",
+      "labelSaveView": "Enregistrer la vue",
+      "labelReset": "Réinitialiser"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Créer un espace de travail"
+    }
+  },
+  "page": {
+    "labelYourRole": "Votre rôle",
+    "labelEmpty": "Aucun contenu pour le moment",
+    "descriptionEmpty": "Cet espace de travail ne contient encore aucun agent, aucune base documentaire ni aucun transcripteur disponible.",
+    "labelTitle": "Espaces de travail"
+  }
+}

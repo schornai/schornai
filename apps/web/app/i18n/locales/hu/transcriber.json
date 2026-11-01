@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Átírás",
+    "description": "Az átírók a beszélt tartalmakat – például megbeszéléseket, interjúkat vagy hívásokat – strukturálttá és kereshetővé teszik a mesterséges intelligencia számára."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Átíró"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Keresés..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Beállítások",
+      "labelView": "Nézet",
+      "labelSort": "Rendezés",
+      "labelNameAsc": "Név A–Z",
+      "labelNameDesc": "Név Z–A",
+      "labelGroup": "Csoportosítás alapja",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelFavorites": "Kedvencek",
+      "labelFirstLetter": "Kezdőbetű",
+      "labelWorkspaces": "Munkaterületek",
+      "labelModel": "Modell",
+      "labelCards": "Kártyák",
+      "labelTable": "Táblázat",
+      "labelSaveView": "Nézet mentése",
+      "labelReset": "Visszaállítás",
+      "labelTranscribers": "Átírók",
+      "labelNewTranscriber": "Új átíró"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "További átírók",
+      "labelFavorites": "Kedvencek",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelUnknownModel": "Ismeretlen modell: „{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Név",
+      "tableColumnCapablilities": "Képességek",
+      "tableColumnNameActions": "Műveletek",
+      "emptyTitle": "Nincsenek átírók",
+      "emptyDescription": "Még nem hoztak létre átírókat.",
+      "labelOtherTranscribers": "További átírók",
+      "labelFavorites": "Kedvencek",
+      "labelNoGroup": "Nincs csoportosítás",
+      "labelUnknownModel": "Ismeretlen modell: „{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Ismeretlen modell",
+      "labelUnknownWorkspace": "Ismeretlen munkaterület"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Szerkesztés",
+      "tooltipInfo": "Információ",
+      "tooltipNewTranscription": "Új átírás",
+      "tooltipRecord": "Hang rögzítése"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Eltávolítás a kedvencekből",
+      "tooltipAddFavorite": "Hozzáadás a kedvencekhez"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Utasítás",
+      "labelChanged": "Módosítva",
+      "labelEmpty": "Üres"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Új átíró",
+      "labelTranscriber": "Átíró",
+      "labelCreateTranscriber": "Átíró létrehozása",
+      "labelSaveTranscriber": "Átíró mentése",
+      "labelCloneTranscriber": "Mentés új átíróként",
+      "labelDeleteTranscriber": "Átíró törlése",
+      "confirmDeleteTitle": "Átíró törlése",
+      "confirmDeleteDescription": "Biztosan törli a(z) „{{name}}” átírót? Ez a művelet nem vonható vissza.",
+      "labelCancel": "Mégse",
+      "tabOverview": "Áttekintés",
+      "tabPrompt": "Utasítás",
+      "tabSettings": "Beállítások",
+      "btnCreate": "Létrehozás",
+      "btnSave": "Mentés"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Módosítások elvetése",
+      "labelDiscardConfirm": "Valóban elveti az átíró összes nem mentett módosítását?",
+      "labelCancel": "Mégse",
+      "labelDiscard": "Módosítások elvetése"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Új átíró",
+      "emptyDescription": "Határozza meg az átíró működését és megjelenését.",
+      "labelDefinePrompt": "Írjon utasítást",
+      "descriptionDefinePrompt": "Egy rövid utasítás segít az átírónak megérteni és az elvárt módon helyesen leírni a neveket, szakkifejezéseket és termékneveket.",
+      "helpTitle": "Súgó",
+      "helpPromptDescription": "Utasítás megadásával az átirat utólag kevesebb javítást igényel, és hosszabb vagy szakterülethez kapcsolódó felvételeknél következetesebb eredményt kap."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Utasítás",
+      "descriptionWhisperPrompt": "Az utasítást az átírási modell (Whisper) kapja meg, hogy könnyebben megértse a szakterülethez kapcsolódó kifejezéseket."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Megjelenés",
+      "description": "Válasszon olyan színt és ikont, amely a legjobban jellemzi az átírót.",
+      "labelIcon": "Ikon",
+      "labelColor": "Szín"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Leírás",
+      "description": "Válasszon megfelelő nevet az átírónak. Emellett rövid leírást is menthet.",
+      "labelName": "Név",
+      "labelDescription": "Leírás"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Modell",
+      "description": "Az átíró által használt átírási modell.",
+      "labelName": "Modell",
+      "labelSelectModel": "Válasszon modellt"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Munkaterület",
+      "description": "Válassza ki a munkaterületet, amelyen az átírót létre szeretné hozni.",
+      "labelName": "Munkaterület",
+      "labelSelectWorkspace": "Válasszon munkaterületet."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Fájlok",
+      "tabInfo": "Információ"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Hang rögzítése",
+      "labelReady": "Kész",
+      "labelRequesting": "Mikrofon csatlakoztatása",
+      "labelRecording": "Felvétel",
+      "labelStopping": "Felvétel befejezése",
+      "labelRecorded": "Felvétel kész",
+      "labelUploading": "Mentés",
+      "labelSaved": "Mentve",
+      "labelDuration": "Felvétel hossza",
+      "labelStart": "Felvétel indítása",
+      "labelStop": "Felvétel leállítása",
+      "labelRecordAgain": "Új felvétel készítése",
+      "labelCancel": "Mégse",
+      "labelTranscribe": "Mentés és átírás",
+      "labelDiscard": "Felvétel elvetése",
+      "labelPreview": "Felvétel előnézete",
+      "descriptionSaved": "A felvétel mentve. Az átírás automatikusan elindul.",
+      "errorUnsupported": "A hangrögzítéshez támogatott böngésző és biztonságos kapcsolat (HTTPS vagy localhost) szükséges.",
+      "errorPermission": "A mikrofonhoz való hozzáférés megtagadva. Engedélyezze a mikrofon használatát a böngészőben, és próbálja újra.",
+      "errorRecording": "A mikrofon nem tudott hangot rögzíteni. Ellenőrizze az eszközét, és próbálja újra.",
+      "errorEmpty": "A felvétel nem tartalmaz hangot. Készítsen új felvételt.",
+      "errorUpload": "A felvételt nem sikerült menteni. Meghallgathatja, és újra megpróbálhatja feltölteni.",
+      "descriptionScreenAwake": "A képernyő a felvétel alatt bekapcsolva marad.",
+      "descriptionScreenSleep": "A képernyőt nem lehet bekapcsolva tartani. Tartsa nyitva ezt az oldalt, és akadályozza meg a képernyő automatikus zárolását.",
+      "descriptionCloseBlocked": "Bezárás előtt állítsa le a felvételt, majd mentse vagy vesse el. Várja meg a folyamatban lévő feltöltés befejezését.",
+      "labelClose": "Bezárás"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatikus újrapróbálkozások",
+      "labelLevel": "Szint",
+      "description": "Ha az eredmények bizonytalanok vagy sok ismétlést tartalmaznak, az átíró újra megpróbálhatja felismerni a hangrészletet. Több próbálkozás javíthatja a felismerést, de több időt vesz igénybe.",
+      "labelFast": "Gyors",
+      "labelBalanced": "Kiegyensúlyozott",
+      "labelThorough": "Alapos",
+      "descriptionFast": "Hangrészletenként egy próbálkozás, automatikus ismétlés nélkül.",
+      "descriptionBalanced": "Hangrészletenként legfeljebb 3 próbálkozás.",
+      "descriptionThorough": "Hangrészletenként legfeljebb 6 próbálkozás.",
+      "errorLevel": "Válasszon a három szint közül."
+    }
+  },
+  "page": {
+    "labelTitle": "Átírás",
+    "emptyTitle": "Nincsenek átírók",
+    "emptyDescription": "Még nem hoztak létre átírókat.",
+    "labelNewTranscriber": "Új átíró",
+    "helpTitle": "Súgó",
+    "helpSearchDescription": "Kereshet az átírók között. A keresés többek között az átíró nevére és leírására, valamint a modelljére terjed ki.",
+    "helpSortDescription": "Az átírók név szerint rendezhetők, és különböző csoportokba sorolhatók. Kártyákként vagy táblázatként jeleníthetők meg."
+  }
+}

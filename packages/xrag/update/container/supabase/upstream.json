@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/supabase/supabase",
+  "ref": "self-hosted/v0.8.3",
+  "commit": "bc27d2661edd09a5d0b8d76ce33da6d4071a756e",
+  "path": "docker/docker-compose.yml"
+}

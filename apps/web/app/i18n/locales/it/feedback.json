@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copia testo del feedback negli appunti",
+      "feedbackText": "Testo del feedback",
+      "feedbackTextRecommendation": "Grazie! Inviaci questo testo a ",
+      "sendFeedback": "Invia feedback via e-mail",
+      "showFeedbackText": "Mostra testo del feedback",
+      "thankYou": "Grazie per aver dedicato del tempo al feedback"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Elimina tutti i messaggi di errore",
+      "actionDeleteAllCancel": "Annulla",
+      "actionDeleteAllExplainer": "Vuoi davvero eliminare tutti i messaggi di errore raccolti? Questa azione non può essere annullata.",
+      "actionDeleteAllShort": "Elimina messaggi di errore",
+      "actionDeselectAll": "Deseleziona tutti i messaggi di errore",
+      "actionSelectAll": "Seleziona tutti i messaggi di errore",
+      "explainer": "Anche i messaggi di errore fanno parte del feedback. Alcuni problemi vengono risolti automaticamente dal sistema e le operazioni proseguono senza interruzioni. Ci è comunque utile conoscere questi errori per poterli risolvere.",
+      "explainerSecrecy": "Assicurati che i messaggi di errore non contengano dati riservati o personali. Il sistema è progettato per escluderli dai messaggi, ma gli errori riguardano circostanze impreviste. Per motivi di sicurezza, verifica quindi personalmente il feedback.",
+      "explainerSecrecyHeading": "Nessun dato riservato",
+      "heading": "Errori",
+      "tableColumnPartOfFeedback": "Parte del feedback",
+      "tableColumnDate": "Data",
+      "tableColumnErrorMessage": "Messaggio di errore"
+    },
+    "StarRatingCard": {
+      "noStarRating": "Nessuna valutazione in stelle",
+      "starRating": "{{stars}} su 5 stelle"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Scarta feedback",
+      "discardFeedbackSub": "Vuoi davvero scartare il tuo feedback? Questa azione non può essere annullata.",
+      "discardFeedbackCancel": "Annulla",
+      "infoSecrecy": "Assicurati che il feedback inviato non contenga dati riservati o personali.",
+      "writeFeedback": "Scrivi feedback",
+      "writeFeedbackSub": "Apprezziamo qualsiasi feedback, positivo o negativo."
+    }
+  },
+  "page": {
+    "headingLine1": "Aiutaci a migliorare schorn.ai in a Box,",
+    "headingLine2": "inviaci il tuo feedback",
+    "headingMain": "Feedback"
+  }
+}

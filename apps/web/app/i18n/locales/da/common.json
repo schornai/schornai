@@ -1,0 +1,294 @@
+{
+  "main": {
+    "_components": {
+      "Sidebar": {
+        "mainLabelNewChat": "Ny chat",
+        "mainLabelAgents": "Agenter",
+        "mainLabelApps": "Apps",
+        "mainLabelWorkspaces": "Arbejdsområder",
+        "history": "Historik"
+      },
+      "SidebarFavorites": {
+        "label": "Favoritter",
+        "empty": "Der er endnu ikke tilføjet favoritter."
+      },
+      "DashboardFavorites": {
+        "labelNoFavorites": "Ingen favoritter",
+        "descriptionNoFavorites": "Du kan tilføje <agents>agenter</agents>, <documents>dokumentarkiver</documents> og <transcribers>transskriberingsværktøjer</transcribers> som favoritter."
+      },
+      "SidebarNewChat": {
+        "labelNewChat": "Ny chat"
+      }
+    },
+    "page": {
+      "greeting": "(0-4)[Godnat];(5-11)[Godmorgen];(12-17)[God eftermiddag];(18-inf)[Godaften];",
+      "labelAllAgents": "Alle agenter",
+      "labelToApps": "Til apps"
+    }
+  },
+  "settings": {
+    "_components": {
+      "Sidebar": {
+        "labelProfile": "Profil",
+        "labelFavorites": "Favoritter",
+        "labelPermissions": "Rettigheder",
+        "labelModels": "Modeller",
+        "labelTaskQueue": "Opgavekø",
+        "labelSettings": "Indstillinger",
+        "labelUsers": "Brugere",
+        "labelWorkspaces": "Arbejdsområder",
+        "labelSSOProvider": "SSO-udbyder",
+        "labelXRAGUpload": "Upload XRAG",
+        "labelSystemModel": "Systemmodel",
+        "labelTheme": "Tema",
+        "labelBackToDashboard": "Tilbage til oversigten",
+        "labelConnections": "Forbindelser",
+        "labelProviderConnections": "Forbindelser",
+        "labelService": "Tjeneste",
+        "labelArtifacts": "Artefakter",
+        "labelCluster": "Klynge"
+      }
+    }
+  },
+  "_components": {
+    "DialogPickerIcons": {
+      "dialogTitle": "Vælg ikon",
+      "buttonMoreIcons": "Flere ikoner",
+      "textLucideInfo": "Ikoner fra <0>Lucide</0>",
+      "placeholderSearchIcons": "Søg efter ikoner...",
+      "buttonCancel": "Annuller"
+    },
+    "FileUploadDropZone": {
+      "drop": "Slip filen her for at uploade"
+    },
+    "InputChangeIndicator": {
+      "labelChanged": "Ændret"
+    },
+    "Pagination": {
+      "labelPrev": "Forrige",
+      "labelNext": "Næste"
+    },
+    "SidebarFooter": {
+      "labelMyAccount": "Min konto",
+      "labelSystem": "System",
+      "labelModels": "Modeller",
+      "labelCluster": "Klynge",
+      "labelSettings": "Indstillinger",
+      "labelDashboard": "Oversigt",
+      "labelProfile": "Profil"
+    },
+    "SidebarUserSignOut": {
+      "label": "Log ud"
+    },
+    "UserRoleText": {
+      "admin": "Administrator",
+      "workspace-admin": "Arbejdsområdeadministrator",
+      "editor": "Redaktør",
+      "user": "Bruger",
+      "none": "Ikke autoriseret"
+    },
+    "StorageView": {
+      "placeholderSearch": "Søg i denne mappe…"
+    },
+    "StorageViewTable": {
+      "tableColumnName": "Navn",
+      "tableColumnType": "Type",
+      "tableColumnSize": "Størrelse",
+      "tableColumnCreated": "Oprettet",
+      "tableColumnUpdated": "Opdateret",
+      "tableColumnNameActions": "Handlinger",
+      "groupTimeToday": "I dag",
+      "groupTimeLast7Days": "Seneste 7 dage",
+      "groupTimeLast30Days": "Seneste 30 dage",
+      "groupTimeOther": "Andre",
+      "labelFolder": "Mappe",
+      "descriptionProcessing": "Filen behandles"
+    },
+    "StorageDialogCreateFolder": {
+      "labelTitle": "Ny mappe",
+      "placeholderFolderName": "Mappenavn...",
+      "labelCancel": "Annuller",
+      "labelCreate": "Opret"
+    },
+    "StorageDialogRemove": {
+      "labelTitle": "Fjern",
+      "labelDescription": "Er du sikker på, at du vil fjerne »{{name}}«? Dette kan ikke fortrydes.",
+      "labelCancel": "Annuller",
+      "labelRemove": "Fjern"
+    },
+    "StorageBreadcrumbs": {
+      "labelRoot": "Hjemmemappe"
+    },
+    "StorageViewEmpty": {
+      "labelTitle": "Ingen filer",
+      "labelDescription": "Den aktuelle mappe indeholder ingen filer. Træk filer hertil for at uploade dem.",
+      "labelUploadFile": "Upload fil",
+      "labelCreateFile": "Opret fil"
+    },
+    "StorageViewOptionsDropdown": {
+      "labelOptions": "Indstillinger",
+      "labelView": "Visning",
+      "labelSort": "Sortér",
+      "labelNameAsc": "Navn A til Å",
+      "labelNameDesc": "Navn Å til A",
+      "labelSizeAsc": "Størrelse stigende",
+      "labelSizeDesc": "Størrelse faldende",
+      "labelCreatedAsc": "Oprettelsesdato stigende",
+      "labelCreatedDesc": "Oprettelsesdato faldende",
+      "labelUpdatedAsc": "Opdateringsdato stigende",
+      "labelUpdatedDesc": "Opdateringsdato faldende",
+      "labelGroup": "Gruppér",
+      "labelNoGroup": "Ingen gruppe",
+      "labelFirstLetter": "Første bogstav",
+      "labelFileType": "Filtype",
+      "labelCreated": "Oprettelsesdato",
+      "labelUpdated": "Opdateringsdato",
+      "labelTilesSmall": "Små felter",
+      "labelTilesMedium": "Mellemstore felter",
+      "labelTilesLarge": "Store felter",
+      "labelTable": "Tabel",
+      "labelSaveView": "Gem visning",
+      "labelReset": "Nulstil",
+      "labelNewFolder": "Ny mappe",
+      "labelThisFolder": "Denne mappe",
+      "labelUploadFile": "Upload fil",
+      "labelNew": "Ny",
+      "labelDeleteFolder": "Slet mappe",
+      "labelNewRecording": "Ny optagelse",
+      "labelColumns": "Kolonnevisning",
+      "labelNewTextFile": "Ny fil"
+    },
+    "StorageSearchResult": {
+      "labelNoResults": "Ingen resultater",
+      "descriptionNoResults": "Din søgning gav ingen resultater. Prøv at omformulere søgningen.",
+      "labelCharacters": "tegn"
+    },
+    "Transcription": {
+      "labelTitle": "Transskription",
+      "labelLoadingMedia": "Indlæser medier…",
+      "labelBuffering": "Bufferlagrer afspilning…",
+      "labelSeeking": "Indlæser position…",
+      "labelPlayer": "Medieafspiller",
+      "labelPlay": "Afspil",
+      "labelPause": "Sæt på pause",
+      "labelSeek": "Afspilningsposition",
+      "labelBack": "10 sekunder tilbage",
+      "labelForward": "10 sekunder frem",
+      "labelSpeed": "Afspilningshastighed",
+      "labelUnmute": "Slå lyd til",
+      "labelMute": "Slå lyd fra",
+      "labelVolume": "Lydstyrke",
+      "labelHideVideo": "Skjul video",
+      "labelShowVideo": "Vis video",
+      "labelPlaySegment": "Afspil segment {{number}}",
+      "labelReviewed": "Gennemgået",
+      "labelSegments": "Segmenter",
+      "labelWords": "Ord",
+      "descriptionEmpty": "Ingen transskriptionsresultater fundet.",
+      "descriptionConfidence": "Sikkerhed: {{percent}}%",
+      "errorPlayback": "Afspilningen mislykkedes. Kontrollér, at mediefilen er tilgængelig, og prøv igen.",
+      "labelEditSegment": "Rediger segment {{number}}",
+      "labelSegmentText": "Segmenttekst",
+      "labelSave": "Gem",
+      "labelSaving": "Gemmer…",
+      "labelSaveReviewed": "Gem og markér som gennemgået",
+      "labelCancel": "Annuller",
+      "labelRestoreOriginal": "Gendan oprindelig tekst",
+      "descriptionUnsaved": "Ændringerne anvendes først, når du gemmer.",
+      "errorSave": "Det lykkedes ikke at gemme. Din tekst er bevaret. Prøv igen.",
+      "errorConflict": "Dette segment er blevet ændret. Kopiér din kladde, og genindlæs visningen, før du gemmer igen.",
+      "labelDownloadSrt": "Download SRT",
+      "descriptionSaveBeforeDownload": "Gem eller annuller dine ændringer, før du downloader SRT-filen."
+    },
+    "StorageViewColumns": {
+      "labelColumns": "Kolonnevisning",
+      "labelRoot": "Dokumenter",
+      "labelDetails": "Fildetaljer",
+      "labelType": "Type",
+      "labelSize": "Størrelse",
+      "labelUpdated": "Opdateret",
+      "labelOpen": "Åbn fil"
+    },
+    "StorageDialogCreateTextFile": {
+      "labelTitle": "Ny fil",
+      "labelName": "Filnavn",
+      "labelCreate": "Opret fil",
+      "labelCancel": "Annuller",
+      "errorCreate": "Filen kunne ikke oprettes. Kontrollér filnavnet og dine skriverettigheder."
+    },
+    "StorageFileActions": {
+      "labelActions": "Handlinger for {{name}}",
+      "labelDownloadOriginal": "Download original",
+      "labelDownloadProcessed": "Download behandlet tekst",
+      "labelRename": "Omdøb",
+      "labelProcess": "Behandl igen",
+      "labelDelete": "Slet fil",
+      "labelName": "Nyt filnavn",
+      "labelCancel": "Annuller",
+      "labelConfirm": "Bekræft",
+      "descriptionDelete": "Slet »{{name}}«, det behandlede indhold og søgeindeksposterne permanent?",
+      "descriptionProcess": "Behandl »{{name}}« igen? Manuelle ændringer bliver overskrevet.",
+      "descriptionQueued": "Behandlingen er i kø eller kører allerede. Kontrollér status i fillisten.",
+      "descriptionUnsupported": "Denne fil kan ikke behandles i øjeblikket. Lyd og video kræver et konfigureret transskriberingsværktøj.",
+      "errorAction": "Handlingen mislykkedes. Kontrollér skriverettigheder, navnekonflikter og igangværende behandling. En mislykket omdøbning kan efterlade begge filnavne; kontrollér listen, før du prøver igen.",
+      "labelOptions": "Indstillinger",
+      "labelEdit": "Rediger",
+      "descriptionRename": "Omdøb »{{name}}«. Behold filtypenavnet. Originalen, det behandlede indhold og søgeindekset opdateres samlet. Eksisterende navne overskrives aldrig.",
+      "labelCopy": "Kopiér til…",
+      "labelMove": "Flyt til…",
+      "descriptionCopy": "Kopiér »{{name}}« inklusive det behandlede indhold. Kilden bevares.",
+      "descriptionMove": "Flyt »{{name}}« inklusive det behandlede indhold. Kilden fjernes, når kopieringen er gennemført.",
+      "descriptionTransferred": "Filen er overført. Destinationens søgeindeks genopbygges i baggrunden.",
+      "descriptionTransferProcessingError": "Filen er overført, men behandlingen kunne ikke startes. Åbn destinationsfilen, og vælg »Behandl igen«. Gentag ikke overførslen."
+    },
+    "StorageObjectActions": {
+      "labelActions": "Handlinger for {{name}}",
+      "labelDelete": "Slet mappe"
+    },
+    "StorageFileEditor": {
+      "labelContent": "Indhold",
+      "labelSave": "Gem",
+      "labelCancel": "Annuller",
+      "errorSave": "Det lykkedes ikke at gemme. Prøv igen.",
+      "errorConflict": "Indholdet er blevet ændret. Genindlæs, før du gemmer.",
+      "errorIndex": "Gemt, men søgeindekset kunne ikke opdateres. Gem igen."
+    },
+    "StoragePickerDialog": {
+      "labelTargetFolder": "Vælg destinationsmappe",
+      "labelSelectFile": "Vælg en eksisterende fil",
+      "descriptionFolder": "Vælg en eksisterende mappe. Én fil bliver overført; eksisterende navne overskrives aldrig.",
+      "descriptionFile": "Vælg en fil fra denne chat eller et tilgængeligt arkiv. Dokumenter og optagelser skal allerede være behandlet.",
+      "labelStorage": "Lager",
+      "labelCurrentStorage": "Aktuelt lager",
+      "labelUp": "Overordnet mappe",
+      "descriptionLoading": "Indlæser filer…",
+      "descriptionEmpty": "Ingen matchende elementer i denne mappe.",
+      "descriptionNoStorages": "Ingen tilgængelige arkiver.",
+      "descriptionPending": "Overfører filen. Vent på resultatet.",
+      "labelCancel": "Annuller",
+      "labelUseFolder": "Brug denne mappe",
+      "labelUseFile": "Vedhæft fil",
+      "labelRetry": "Genindlæs",
+      "errorLoad": "Denne mappe kunne ikke indlæses. Kontrollér adgangen, og prøv igen.",
+      "errorCollision": "Destinationen indeholder allerede en fil eller behandlet indhold med dette navn. Vælg en anden mappe; intet blev overskrevet.",
+      "errorSameTarget": "Kilde og destination er den samme. Vælg en anden mappe.",
+      "errorSourceChanged": "Kilden blev ændret under kopieringen. Den ufuldstændige kopi på destinationen blev fjernet. Prøv igen.",
+      "errorBusy": "Denne fil behandles i øjeblikket. Vent, til behandlingen er færdig.",
+      "errorPermission": "Du har ikke de nødvendige rettigheder til kilden eller destinationen.",
+      "errorSourceDelete": "Den komplette destinationsfil blev oprettet, men kilden kunne ikke fjernes. Kontrollér begge placeringer, før du gentager handlingen.",
+      "errorCleanup": "Kopieringen mislykkedes. Kilden blev bevaret, men der kan være ufuldstændige filer på destinationen. Kontrollér den, før du prøver igen.",
+      "errorAction": "Handlingen mislykkedes. Kontrollér rettigheder, filnavne og begge placeringer, før du prøver igen.",
+      "errorNotProcessed": "Denne fil er endnu ikke behandlet. Behandl den først, og vælg den derefter igen."
+    }
+  },
+  "_welcomeMessage": "Velkommen til\n\n# schorn.ai in a Box\n\n",
+  "footer": {
+    "docs": "Dokumentation",
+    "feedback": "Feedback",
+    "help": "Hjælp",
+    "labelThemeLight": "Lyst",
+    "labelThemeDark": "Mørkt",
+    "labelThemeSystem": "Operativsystem",
+    "labelLanguage": "Sprog"
+  }
+}

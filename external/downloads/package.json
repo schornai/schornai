@@ -1,0 +1,21 @@
+{
+  "name": "@schornio/aibox-external-downloads",
+  "type": "module",
+  "scripts": {
+    "download": "node src/downloadAll.ts ./dist",
+    "download:container": "node src/container.ts ./dist",
+    "download:ffmpeg": "node src/ffmpeg.ts ./dist",
+    "download:node": "node src/node.ts ./dist",
+    "download:ollama": "node src/ollama.ts ./dist"
+  },
+  "devDependencies": {
+    "@schornio/aibox-eslint-config": "*",
+    "eslint": "^10.13.0"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git",
+    "directory": "external/downloads"
+  }
+}

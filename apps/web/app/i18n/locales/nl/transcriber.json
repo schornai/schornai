@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Transcriptie",
+    "description": "Transcriptoren maken gesproken inhoud, zoals vergaderingen, interviews en gesprekken, gestructureerd en doorzoekbaar voor AI."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Transcriptor"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Zoeken..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Opties",
+      "labelView": "Weergave",
+      "labelSort": "Sorteren",
+      "labelNameAsc": "Naam van A tot Z",
+      "labelNameDesc": "Naam van Z tot A",
+      "labelGroup": "Groeperen op",
+      "labelNoGroup": "Geen groep",
+      "labelFavorites": "Favorieten",
+      "labelFirstLetter": "Eerste letter",
+      "labelWorkspaces": "Werkruimten",
+      "labelModel": "Model",
+      "labelCards": "Kaarten",
+      "labelTable": "Tabel",
+      "labelSaveView": "Weergave opslaan",
+      "labelReset": "Resetten",
+      "labelTranscribers": "Transcriptoren",
+      "labelNewTranscriber": "Nieuwe transcriptor"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Andere transcriptoren",
+      "labelFavorites": "Favorieten",
+      "labelNoGroup": "Geen groep",
+      "labelUnknownModel": "Onbekend model ‘{{id}}’"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Naam",
+      "tableColumnCapablilities": "Mogelijkheden",
+      "tableColumnNameActions": "Acties",
+      "emptyTitle": "Geen transcriptoren",
+      "emptyDescription": "Er zijn nog geen transcriptoren aangemaakt.",
+      "labelOtherTranscribers": "Andere transcriptoren",
+      "labelFavorites": "Favorieten",
+      "labelNoGroup": "Geen groep",
+      "labelUnknownModel": "Onbekend model ‘{{id}}’"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Onbekend model",
+      "labelUnknownWorkspace": "Onbekende werkruimte"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Bewerken",
+      "tooltipInfo": "Informatie",
+      "tooltipNewTranscription": "Nieuwe transcriptie",
+      "tooltipRecord": "Audio opnemen"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Uit favorieten verwijderen",
+      "tooltipAddFavorite": "Aan favorieten toevoegen"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelChanged": "Gewijzigd",
+      "labelEmpty": "Leeg"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nieuwe transcriptor",
+      "labelTranscriber": "Transcriptor",
+      "labelCreateTranscriber": "Transcriptor aanmaken",
+      "labelSaveTranscriber": "Transcriptor opslaan",
+      "labelCloneTranscriber": "Opslaan als nieuwe transcriptor",
+      "labelDeleteTranscriber": "Transcriptor verwijderen",
+      "confirmDeleteTitle": "Transcriptor verwijderen",
+      "confirmDeleteDescription": "Weet je zeker dat je de transcriptor ‘{{name}}’ wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "labelCancel": "Annuleren",
+      "tabOverview": "Overzicht",
+      "tabPrompt": "Prompt",
+      "tabSettings": "Instellingen",
+      "btnCreate": "Aanmaken",
+      "btnSave": "Opslaan"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Wijzigingen verwerpen",
+      "labelDiscardConfirm": "Wil je echt alle niet-opgeslagen wijzigingen aan deze transcriptor verwerpen?",
+      "labelCancel": "Annuleren",
+      "labelDiscard": "Wijzigingen verwerpen"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nieuwe transcriptor",
+      "emptyDescription": "Bepaal het gedrag en uiterlijk van de transcriptor.",
+      "labelDefinePrompt": "Prompt opstellen",
+      "descriptionDefinePrompt": "Een korte prompt helpt de transcriptor om namen, vaktermen en productnamen te begrijpen en te schrijven zoals jij verwacht.",
+      "helpTitle": "Hulp",
+      "helpPromptDescription": "Met een prompt heeft de transcriptie achteraf minder correcties nodig en krijg je consistentere resultaten bij langere of gespecialiseerde opnamen."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Prompt",
+      "descriptionWhisperPrompt": "De prompt wordt doorgegeven aan het transcriptiemodel Whisper om het te helpen vaktermen te begrijpen."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Uiterlijk",
+      "description": "Kies een kleur en pictogram die de transcriptor het best weergeven.",
+      "labelIcon": "Pictogram",
+      "labelColor": "Kleur"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Beschrijving",
+      "description": "Kies een geschikte naam voor de transcriptor. Je kunt ook een korte beschrijving opslaan.",
+      "labelName": "Naam",
+      "labelDescription": "Beschrijving"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Het transcriptiemodel dat de transcriptor gebruikt.",
+      "labelName": "Model",
+      "labelSelectModel": "Selecteer een model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Werkruimte",
+      "description": "Selecteer de werkruimte waarin je de transcriptor wilt aanmaken.",
+      "labelName": "Werkruimte",
+      "labelSelectWorkspace": "Selecteer een werkruimte."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Bestanden",
+      "tabInfo": "Informatie"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Audio opnemen",
+      "labelReady": "Gereed",
+      "labelRequesting": "Microfoon verbinden",
+      "labelRecording": "Opnemen",
+      "labelStopping": "Opname afronden",
+      "labelRecorded": "Opname gereed",
+      "labelUploading": "Opslaan",
+      "labelSaved": "Opgeslagen",
+      "labelDuration": "Opnameduur",
+      "labelStart": "Opname starten",
+      "labelStop": "Opname stoppen",
+      "labelRecordAgain": "Opnieuw opnemen",
+      "labelCancel": "Annuleren",
+      "labelTranscribe": "Opslaan en transcriberen",
+      "labelDiscard": "Opname verwerpen",
+      "labelPreview": "Opnamevoorbeeld",
+      "descriptionSaved": "Opname opgeslagen. De transcriptie start automatisch.",
+      "errorUnsupported": "Voor audio-opnamen zijn een ondersteunde browser en een beveiligde verbinding vereist (HTTPS of localhost).",
+      "errorPermission": "Microfoontoegang is geweigerd. Sta toegang toe in je browser en probeer het opnieuw.",
+      "errorRecording": "De microfoon kon geen audio opnemen. Controleer je apparaat en probeer het opnieuw.",
+      "errorEmpty": "De opname bevat geen audio. Neem opnieuw op.",
+      "errorUpload": "De opname kon niet worden opgeslagen. Je kunt deze beluisteren en de upload opnieuw proberen.",
+      "descriptionScreenAwake": "Het scherm blijft aan tijdens de opname.",
+      "descriptionScreenSleep": "Het scherm kan niet actief worden gehouden. Houd deze pagina open en voorkom dat het scherm automatisch vergrendelt.",
+      "descriptionCloseBlocked": "Stop de opname en sla deze op of verwerp deze voordat je sluit. Wacht tot eventuele uploads voltooid zijn.",
+      "labelClose": "Sluiten"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automatische herhaalpogingen",
+      "labelLevel": "Niveau",
+      "description": "Bij onzekere resultaten of veel herhalingen kan de transcriptor een audiofragment opnieuw proberen te herkennen. Meer pogingen kunnen de herkenning verbeteren, maar kosten meer tijd.",
+      "labelFast": "Snel",
+      "labelBalanced": "Gebalanceerd",
+      "labelThorough": "Grondig",
+      "descriptionFast": "Eén poging per audiofragment, zonder automatische herhaling.",
+      "descriptionBalanced": "Maximaal 3 pogingen per audiofragment.",
+      "descriptionThorough": "Maximaal 6 pogingen per audiofragment.",
+      "errorLevel": "Kies een van de drie niveaus."
+    }
+  },
+  "page": {
+    "labelTitle": "Transcriptie",
+    "emptyTitle": "Geen transcriptoren",
+    "emptyDescription": "Er zijn nog geen transcriptoren aangemaakt.",
+    "labelNewTranscriber": "Nieuwe transcriptor",
+    "helpTitle": "Hulp",
+    "helpSearchDescription": "Je kunt naar transcriptoren zoeken. De zoekopdracht omvat onder andere de naam, beschrijving en het model van de transcriptor.",
+    "helpSortDescription": "Transcriptoren kunnen op naam worden gesorteerd en in verschillende groepen worden ingedeeld. Je kunt ze als kaarten of als tabel weergeven."
+  }
+}

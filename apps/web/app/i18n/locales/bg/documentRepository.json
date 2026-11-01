@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Хранилища за документи",
+    "description": "Хранилищата за документи създават централна, структурирана и надеждна база от знания за изкуствения интелект, до която моделите имат достъп според контекста."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Хранилище за документи"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Търсене..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Опции",
+      "labelView": "Изглед",
+      "labelSort": "Сортиране",
+      "labelNameAsc": "Име от А до Я",
+      "labelNameDesc": "Име от Я до А",
+      "labelGroup": "Групиране по",
+      "labelNoGroup": "Без група",
+      "labelFavorites": "Любими",
+      "labelFirstLetter": "Първа буква",
+      "labelWorkspaces": "Работни пространства",
+      "labelModel": "Транскрибатор",
+      "labelCards": "Карти",
+      "labelTable": "Таблица",
+      "labelSaveView": "Запазване на изгледа",
+      "labelReset": "Нулиране",
+      "labelDocumentRepositories": "Хранилища за документи",
+      "labelNewDocumentRepository": "Ново хранилище за документи"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Други хранилища за документи",
+      "labelFavorites": "Любими",
+      "labelOtherTranscribers": "Други транскрибатори",
+      "labelUnknownTranscriber": "Неизвестен транскрибатор „{{id}}“"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Име",
+      "tableColumnCapablilities": "Възможности",
+      "tableColumnNameActions": "Действия",
+      "emptyTitle": "Няма хранилища за документи",
+      "emptyDescription": "Все още няма създадени хранилища за документи.",
+      "labelOtherDocumentRepositories": "Други хранилища за документи",
+      "labelFavorites": "Любими",
+      "labelNoGroup": "Без група",
+      "labelUnknownTranscriber": "Неизвестен транскрибатор „{{id}}“"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Неизвестно работно пространство"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Редактиране",
+      "tooltipInfo": "Информация"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Премахване от любими",
+      "tooltipAddFavorite": "Добавяне в любими"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Ново хранилище за документи",
+      "labelDocumentRepository": "Хранилище за документи",
+      "labelDocumentRepositoryDropdown": "Хранилище за документи",
+      "labelCreateDocumentRepository": "Създаване на хранилище за документи",
+      "labelSaveDocumentRepository": "Запазване на хранилище за документи",
+      "labelCloneDocumentRepository": "Запазване като ново хранилище за документи",
+      "labelDeleteDocumentRepository": "Изтриване на хранилище за документи",
+      "confirmDeleteTitle": "Изтриване на хранилище за документи",
+      "confirmDeleteDescription": "Сигурни ли сте, че искате да изтриете хранилището за документи „{{name}}“? Това действие не може да бъде отменено.",
+      "labelCancel": "Отказ",
+      "tabOverview": "Общ преглед",
+      "tabFeatures": "Функции",
+      "tabSettings": "Настройки",
+      "btnCreate": "Създаване",
+      "btnSave": "Запазване"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Отхвърляне на промените",
+      "labelDiscardConfirm": "Наистина ли искате да отхвърлите всички незапазени промени по това хранилище за документи?",
+      "labelCancel": "Отказ",
+      "labelDiscard": "Отхвърляне на промените"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Ново хранилище за документи",
+      "emptyDescription": "Задайте поведението и външния вид на хранилището за документи.",
+      "checklistSemanticSearchTitle": "Включване на семантичното търсене",
+      "checklistSemanticSearchDescription": "Включете семантичното търсене. Това може да подобри качеството на резултатите от търсенето.",
+      "checklistTranscriberTitle": "Избор на транскрибатор",
+      "checklistTranscriberDescription": "Изберете транскрибатор, който автоматично да транскрибира всички качени видео- и аудиофайлове.",
+      "helpTitle": "Помощ",
+      "helpKeywordSearch": "Класическо търсене по ключови думи. Най-подходящо за търсене на марки, имена на хора и други наименования.",
+      "helpEmbeddingDescription": "Добавете модел за векторно представяне, за да включите семантичното търсене. То намира подобни документи въз основа на значението им.",
+      "helpTranscriberDescription": "Добавете транскрибатор към хранилището за документи и всички видео- и аудиофайлове ще се транскрибират автоматично след качване."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Индекс за търсене",
+      "description": "В зависимост от индекса за търсене се използват различни методи за предоставяне на най-добрите резултати въз основа на заявката.",
+      "labelKeyword": "Търсене по ключови думи",
+      "descriptionKeyword": "При търсене на точни изрази и изречения. (Имена, наименования и др.)",
+      "labelSemantic": "Семантично търсене",
+      "descriptionSemantic": "Когато е важно значението на данните, а не точната формулировка. (Изисква модел за векторно представяне)",
+      "labelEmbeddingModel": "Модел за векторно представяне",
+      "descriptionEmbeddingModel": "Моделът за векторно представяне е основата на семантичното търсене."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Няма транскрибатор",
+      "labelLegend": "Транскрибатор",
+      "description": "Видео- и аудиофайловете се транскрибират автоматично след качване.",
+      "labelTranscriber": "Транскрибатор"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Описание",
+      "description": "Изберете подходящо име за хранилището за документи. Можете да запазите и кратко описание.",
+      "labelName": "Име",
+      "labelDescription": "Описание"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Външен вид",
+      "description": "Изберете цвят и икона, които най-добре представят хранилището за документи.",
+      "labelIcon": "Икона",
+      "labelColor": "Цвят"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Работно пространство",
+      "description": "Изберете работното пространство, в което да бъде създадено хранилището за документи.",
+      "labelName": "Работно пространство",
+      "labelSelectWorkspace": "Изберете работно пространство."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "Файлове",
+      "tabSearch": "Пълнотекстово търсене",
+      "tabInfo": "Информация"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Търсене...",
+      "labelSearch": "Търсене"
+    },
+    "Search": {
+      "emptyTitle": "Пълнотекстово търсене",
+      "emptyDescription": "Търсете текст във всички файлове в това хранилище за документи."
+    }
+  },
+  "page": {
+    "labelTitle": "Хранилища за документи",
+    "emptyTitle": "Няма хранилища за документи",
+    "emptyDescription": "Все още няма създадени хранилища за документи.",
+    "labelNewDocumentRepository": "Ново хранилище за документи",
+    "helpTitle": "Помощ",
+    "helpSearchDescription": "Можете да търсите хранилища за документи. Търсенето включва, наред с друго, името и описанието на хранилището, както и неговия транскрибатор.",
+    "helpSortDescription": "Хранилищата за документи могат да се сортират по име и да се разпределят в различни групи. Могат да се показват като карти или като таблица.",
+    "helpTranscriberDescription": "Можете да изберете транскрибатор за хранилищата за документи. Когато в хранилището се качат аудио- или видеофайлове, те се транскрибират автоматично."
+  }
+}

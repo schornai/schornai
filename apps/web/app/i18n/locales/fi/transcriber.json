@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Litterointi",
+    "description": "Litteroijat muuntavat puhutun sisällön, kuten kokoukset, haastattelut ja puhelut, jäsennellyksi ja tekoälylle haettavaksi tiedoksi."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Litteroija"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Hae..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Asetukset",
+      "labelView": "Näkymä",
+      "labelSort": "Lajittelu",
+      "labelNameAsc": "Nimi A–Ö",
+      "labelNameDesc": "Nimi Ö–A",
+      "labelGroup": "Ryhmittele",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelFavorites": "Suosikit",
+      "labelFirstLetter": "Alkukirjain",
+      "labelWorkspaces": "Työtilat",
+      "labelModel": "Malli",
+      "labelCards": "Kortit",
+      "labelTable": "Taulukko",
+      "labelSaveView": "Tallenna näkymä",
+      "labelReset": "Palauta",
+      "labelTranscribers": "Litteroijat",
+      "labelNewTranscriber": "Uusi litteroija"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Muut litteroijat",
+      "labelFavorites": "Suosikit",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelUnknownModel": "Tuntematon malli ”{{id}}”"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Nimi",
+      "tableColumnCapablilities": "Ominaisuudet",
+      "tableColumnNameActions": "Toiminnot",
+      "emptyTitle": "Ei litteroijia",
+      "emptyDescription": "Litteroijia ei ole vielä luotu.",
+      "labelOtherTranscribers": "Muut litteroijat",
+      "labelFavorites": "Suosikit",
+      "labelNoGroup": "Ei ryhmittelyä",
+      "labelUnknownModel": "Tuntematon malli ”{{id}}”"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Tuntematon malli",
+      "labelUnknownWorkspace": "Tuntematon työtila"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Muokkaa",
+      "tooltipInfo": "Tiedot",
+      "tooltipNewTranscription": "Uusi litterointi",
+      "tooltipRecord": "Tallenna ääntä"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Poista suosikeista",
+      "tooltipAddFavorite": "Lisää suosikkeihin"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Kehote",
+      "labelChanged": "Muutettu",
+      "labelEmpty": "Tyhjä"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Uusi litteroija",
+      "labelTranscriber": "Litteroija",
+      "labelCreateTranscriber": "Luo litteroija",
+      "labelSaveTranscriber": "Tallenna litteroija",
+      "labelCloneTranscriber": "Tallenna uutena litteroijana",
+      "labelDeleteTranscriber": "Poista litteroija",
+      "confirmDeleteTitle": "Poista litteroija",
+      "confirmDeleteDescription": "Haluatko varmasti poistaa litteroijan ”{{name}}”? Tätä toimintoa ei voi perua.",
+      "labelCancel": "Peruuta",
+      "tabOverview": "Yleiskatsaus",
+      "tabPrompt": "Kehote",
+      "tabSettings": "Asetukset",
+      "btnCreate": "Luo",
+      "btnSave": "Tallenna"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Hylkää muutokset",
+      "labelDiscardConfirm": "Haluatko varmasti hylätä kaikki tämän litteroijan tallentamattomat muutokset?",
+      "labelCancel": "Peruuta",
+      "labelDiscard": "Hylkää muutokset"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Uusi litteroija",
+      "emptyDescription": "Määritä litteroijan toiminta ja ulkoasu.",
+      "labelDefinePrompt": "Kirjoita kehote",
+      "descriptionDefinePrompt": "Lyhyt kehote auttaa litteroijaa ymmärtämään nimet, ammattitermit ja tuotenimet sekä kirjoittamaan ne oikein odottamallasi tavalla.",
+      "helpTitle": "Ohje",
+      "helpPromptDescription": "Kehotteen avulla litterointi vaatii vähemmän jälkikorjauksia, ja pitkien tai tiettyyn aiheeseen liittyvien tallenteiden tulos on johdonmukaisempi."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Kehote",
+      "descriptionWhisperPrompt": "Kehote välitetään litterointimallille (Whisper), jotta se ymmärtää alakohtaiset termit paremmin."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Ulkoasu",
+      "description": "Valitse litteroijaa parhaiten kuvaava väri ja kuvake.",
+      "labelIcon": "Kuvake",
+      "labelColor": "Väri"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Kuvaus",
+      "description": "Valitse litteroijalle sopiva nimi. Voit tallentaa myös lyhyen kuvauksen.",
+      "labelName": "Nimi",
+      "labelDescription": "Kuvaus"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Malli",
+      "description": "Litteroijan käyttämä litterointimalli.",
+      "labelName": "Malli",
+      "labelSelectModel": "Valitse malli"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Työtila",
+      "description": "Valitse työtila, johon litteroija luodaan.",
+      "labelName": "Työtila",
+      "labelSelectWorkspace": "Valitse työtila."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Tiedostot",
+      "tabInfo": "Tiedot"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Tallenna ääntä",
+      "labelReady": "Valmis",
+      "labelRequesting": "Yhdistetään mikrofonia",
+      "labelRecording": "Tallennetaan ääntä",
+      "labelStopping": "Viimeistellään tallennetta",
+      "labelRecorded": "Tallenne valmis",
+      "labelUploading": "Tallennetaan",
+      "labelSaved": "Tallennettu",
+      "labelDuration": "Tallenteen kesto",
+      "labelStart": "Aloita tallennus",
+      "labelStop": "Lopeta tallennus",
+      "labelRecordAgain": "Tallenna uudelleen",
+      "labelCancel": "Peruuta",
+      "labelTranscribe": "Tallenna ja litteroi",
+      "labelDiscard": "Hylkää tallenne",
+      "labelPreview": "Tallenteen esikatselu",
+      "descriptionSaved": "Tallenne tallennettiin. Litterointi alkaa automaattisesti.",
+      "errorUnsupported": "Äänen tallennus vaatii tuetun selaimen ja suojatun yhteyden (HTTPS tai localhost).",
+      "errorPermission": "Mikrofonin käyttö estettiin. Salli mikrofonin käyttö selaimessasi ja yritä uudelleen.",
+      "errorRecording": "Mikrofoni ei voinut tallentaa ääntä. Tarkista laitteesi ja yritä uudelleen.",
+      "errorEmpty": "Tallenne ei sisällä ääntä. Tallenna uudelleen.",
+      "errorUpload": "Tallennetta ei voitu tallentaa. Voit kuunnella sen ja yrittää lataamista uudelleen.",
+      "descriptionScreenAwake": "Näyttö pysyy päällä tallennuksen ajan.",
+      "descriptionScreenSleep": "Näyttöä ei voida pitää päällä. Pidä tämä sivu avoinna ja estä näytön automaattinen lukittuminen.",
+      "descriptionCloseBlocked": "Lopeta tallennus ja tallenna tai hylkää tallenne ennen sulkemista. Odota mahdollisen latauksen valmistumista.",
+      "labelClose": "Sulje"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Automaattiset uudelleenyritykset",
+      "labelLevel": "Taso",
+      "description": "Jos tulokset ovat epävarmoja tai sisältävät paljon toistoa, litteroija voi yrittää tunnistaa ääniosuuden uudelleen. Useammat yritykset voivat parantaa tunnistusta, mutta vievät enemmän aikaa.",
+      "labelFast": "Nopea",
+      "labelBalanced": "Tasapainoinen",
+      "labelThorough": "Perusteellinen",
+      "descriptionFast": "Yksi yritys ääniosuutta kohden, ilman automaattisia uudelleenyrityksiä.",
+      "descriptionBalanced": "Enintään 3 yritystä ääniosuutta kohden.",
+      "descriptionThorough": "Enintään 6 yritystä ääniosuutta kohden.",
+      "errorLevel": "Valitse yksi kolmesta tasosta."
+    }
+  },
+  "page": {
+    "labelTitle": "Litterointi",
+    "emptyTitle": "Ei litteroijia",
+    "emptyDescription": "Litteroijia ei ole vielä luotu.",
+    "labelNewTranscriber": "Uusi litteroija",
+    "helpTitle": "Ohje",
+    "helpSearchDescription": "Voit hakea litteroijia. Haku kattaa muun muassa litteroijan nimen, kuvauksen ja mallin.",
+    "helpSortDescription": "Litteroijat voidaan lajitella nimen mukaan ja jakaa eri ryhmiin. Ne voidaan näyttää kortteina tai taulukkona."
+  }
+}

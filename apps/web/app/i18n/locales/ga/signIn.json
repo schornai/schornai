@@ -1,0 +1,39 @@
+{
+  "_components": {
+    "AlreadySignedIn": {
+      "info": "Tá tú sínithe isteach cheana",
+      "backToDashboard": "Ar ais go dtí an deais",
+      "signOut": "Sínigh amach"
+    },
+    "PasswordSignIn": {
+      "header": "Ríomhphost",
+      "headerSub": "Sínigh isteach le ríomhphost agus pasfhocal",
+      "inputEmailLabel": "Ríomhphost",
+      "inputPasswordLabel": "Pasfhocal",
+      "buttonSignIn": "Sínigh isteach le ríomhphost",
+      "buttonReset": "Athshocraigh pasfhocal"
+    },
+    "SSOSignIn": {
+      "header": "SSO",
+      "headerSub": "Sínigh isteach le soláthraí SSO",
+      "buttonSignIn": "Sínigh isteach le {{name}}"
+    },
+    "ResetPassword": {
+      "labelTitle": "Athshocraigh pasfhocal",
+      "descriptionKey": "Cuir do sheoladh ríomhphoist agus an eochair athshocraithe a thug do riarthóir duit isteach. Is féidir an eochair a úsáid uair amháin agus tá sí bailí ar feadh 7 lá.",
+      "labelEmail": "Ríomhphost",
+      "labelKey": "Eochair athshocraithe pasfhocail",
+      "labelPassword": "Pasfhocal nua",
+      "labelPasswordAgain": "Cuir an pasfhocal nua isteach arís",
+      "descriptionPassword": "Úsáid 6 charachtar ar a laghad agus cloígh le riachtanais phasfhocail d’eagraíochta.",
+      "errorEmail": "Cuir seoladh ríomhphoist bailí isteach.",
+      "errorKey": "Cuir d’eochair athshocraithe isteach.",
+      "errorPassword": "Ní mór 6 charachtar ar a laghad a bheith sa phasfhocal.",
+      "errorPasswordAgain": "Ní hionann na pasfhocail.",
+      "errorReset": "Níorbh fhéidir an pasfhocal a athrú. Seiceáil do sheoladh ríomhphoist, an eochair agus na riachtanais phasfhocail. Tá eochracha atá imithe in éag nó a úsáideadh cheana neamhbhailí.",
+      "descriptionSuccess": "Athraíodh do phasfhocal. Is féidir leat síniú isteach anois le do phasfhocal nua.",
+      "labelReset": "Sábháil an pasfhocal",
+      "labelSignIn": "Ar ais go dtí síniú isteach"
+    }
+  }
+}

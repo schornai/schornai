@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Naziv",
+      "labelFirstName": "Ime",
+      "labelLastName": "Prezime",
+      "buttonSave": "Spremi",
+      "buttonReset": "Vrati zadano"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Profilna slika"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Ukloni sliku",
+      "alertDelete": "Ukloni sliku",
+      "alertDeleteExplainer": "Želite li zaista ukloniti svoju sliku?",
+      "alertDeleteCancel": "Odustani"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Prenesi sliku"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Dozvole",
+      "tableColumnName": "Naziv",
+      "tableColumnPermission": "Dozvola",
+      "tableColumnDescription": "Opis",
+      "infoEmpty": "Nema dozvola",
+      "infoEmptyDescription": "Nijedna funkcija schorn.ai boxa nije dostupna.",
+      "infoEmptyAdminDescription": "Kao administrator možete stvoriti prvi radni prostor.",
+      "infoEmptyAdminAction": "Stvori prvi radni prostor",
+      "infoUser": "Može pregledavati sadržaj organizacije (chatbotove, transkriptore, dokumente, spremišta itd.), ali ga ne može uređivati.",
+      "infoEditor": "Može pregledavati sadržaj organizacije i dodatno ga uređivati (stvarati nove chatbotove, uređivati i brisati dokumente itd.).",
+      "infoAdmin": "Može čitati i pisati u svim organizacijama te dodatno upravljati postavkama sustava (prenositi XRAG, mijenjati boje itd.) i korisnicima."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Prilagodi",
+    "infoPersonalizeDescription": "Ovdje možete prenijeti profilnu sliku i prilagoditi svoje ime."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Nova lozinka postavljena",
+    "description": "Nova lozinka uspješno je postavljena. Sada ste prijavljeni s novom lozinkom.",
+    "buttonBackToDashboard": "Idi na nadzornu ploču"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Veze",
+      "descriptionConnections": "Vaše osobne OAuth veze s MCP poslužiteljima. Prekid veze uklanja ovdje spremljene vjerodajnice. Već pokrenuti pozivi mogu završiti; dozvole kod pružatelja opozovite izravno kod njega.",
+      "labelDisconnect": "Prekini vezu",
+      "descriptionEmpty": "Povežite svoj račun u razgovoru kada MCP alat zatraži prijavu.",
+      "labelEmpty": "Još nema veza",
+      "labelInfo": "O vezama",
+      "errorDisconnect": "Vezu nije moguće prekinuti. Pokušajte ponovno."
+    }
+  }
+}

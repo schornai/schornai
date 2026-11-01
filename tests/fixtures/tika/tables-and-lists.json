@@ -1,0 +1,5 @@
+{
+  "tikaVersion": "4.1.0",
+  "contentType": "text/plain;charset=utf-8",
+  "markdown": "Source document title   \n\n# Extraction sample\n\n|Item|Notes|\n|---|---|\n|Alpha|left \\| right|\n|Beta|Bold and italic|\n\n## Unordered list\n\n- &#32;        Apples         \n  - Green apples\n  - Red apples\n- Pears\n\n## Ordered list\n\n1. Upload\n2. Review\n\n中文 Ελληνικά العربية\n"
+}

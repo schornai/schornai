@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "Prepis",
+    "description": "Prepisovalniki pretvorijo govorjeno vsebino, kot so sestanki, intervjuji ali klici, v strukturirano obliko, po kateri lahko išče umetna inteligenca."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "Prepisovalnik"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "Išči..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Pogled",
+      "labelSort": "Razvrščanje",
+      "labelNameAsc": "Ime od A do Ž",
+      "labelNameDesc": "Ime od Ž do A",
+      "labelGroup": "Združi po",
+      "labelNoGroup": "Brez združevanja",
+      "labelFavorites": "Priljubljeno",
+      "labelFirstLetter": "Prva črka",
+      "labelWorkspaces": "Delovni prostori",
+      "labelModel": "Model",
+      "labelCards": "Kartice",
+      "labelTable": "Tabela",
+      "labelSaveView": "Shrani pogled",
+      "labelReset": "Ponastavi",
+      "labelTranscribers": "Prepisovalniki",
+      "labelNewTranscriber": "Nov prepisovalnik"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "Drugi prepisovalniki",
+      "labelFavorites": "Priljubljeno",
+      "labelNoGroup": "Brez združevanja",
+      "labelUnknownModel": "Neznan model »{{id}}«"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "Ime",
+      "tableColumnCapablilities": "Zmožnosti",
+      "tableColumnNameActions": "Dejanja",
+      "emptyTitle": "Ni prepisovalnikov",
+      "emptyDescription": "Ustvarjen ni še noben prepisovalnik.",
+      "labelOtherTranscribers": "Drugi prepisovalniki",
+      "labelFavorites": "Priljubljeno",
+      "labelNoGroup": "Brez združevanja",
+      "labelUnknownModel": "Neznan model »{{id}}«"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "Neznan model",
+      "labelUnknownWorkspace": "Neznan delovni prostor"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije",
+      "tooltipNewTranscription": "Nov prepis",
+      "tooltipRecord": "Posnemi zvok"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odstrani iz priljubljenih",
+      "tooltipAddFavorite": "Dodaj med priljubljene"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "Poziv",
+      "labelChanged": "Spremenjeno",
+      "labelEmpty": "Prazno"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "Nov prepisovalnik",
+      "labelTranscriber": "Prepisovalnik",
+      "labelCreateTranscriber": "Ustvari prepisovalnik",
+      "labelSaveTranscriber": "Shrani prepisovalnik",
+      "labelCloneTranscriber": "Shrani kot nov prepisovalnik",
+      "labelDeleteTranscriber": "Izbriši prepisovalnik",
+      "confirmDeleteTitle": "Izbriši prepisovalnik",
+      "confirmDeleteDescription": "Ali res želite izbrisati prepisovalnik »{{name}}«? Tega dejanja ni mogoče razveljaviti.",
+      "labelCancel": "Prekliči",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Poziv",
+      "tabSettings": "Nastavitve",
+      "btnCreate": "Ustvari",
+      "btnSave": "Shrani"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zavrzi spremembe",
+      "labelDiscardConfirm": "Ali res želite zavreči vse neshranjene spremembe tega prepisovalnika?",
+      "labelCancel": "Prekliči",
+      "labelDiscard": "Zavrzi spremembe"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "Nov prepisovalnik",
+      "emptyDescription": "Določite vedenje in videz prepisovalnika.",
+      "labelDefinePrompt": "Napišite poziv",
+      "descriptionDefinePrompt": "Kratek poziv pomaga prepisovalniku razumeti in pravilno zapisati imena, strokovne izraze in imena izdelkov tako, kot pričakujete.",
+      "helpTitle": "Pomoč",
+      "helpPromptDescription": "S pozivom prepis pozneje zahteva manj popravkov, pri daljših ali tematsko usmerjenih posnetkih pa dobite doslednejši rezultat."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "Poziv",
+      "descriptionWhisperPrompt": "Poziv se posreduje modelu za prepisovanje (Whisper), da lažje razume strokovne izraze."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "Videz",
+      "description": "Izberite barvo in ikono, ki najbolje predstavljata prepisovalnik.",
+      "labelIcon": "Ikona",
+      "labelColor": "Barva"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Izberite primerno ime prepisovalnika. Shranite lahko tudi kratek opis.",
+      "labelName": "Ime",
+      "labelDescription": "Opis"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Model za prepisovanje, ki ga uporablja prepisovalnik.",
+      "labelName": "Model",
+      "labelSelectModel": "Izberite model"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "Delovni prostor",
+      "description": "Izberite delovni prostor, v katerem želite ustvariti prepisovalnik.",
+      "labelName": "Delovni prostor",
+      "labelSelectWorkspace": "Izberite delovni prostor."
+    },
+    "TabsTranscription": {
+      "tabFiles": "Datoteke",
+      "tabInfo": "Informacije"
+    },
+    "AudioRecorder": {
+      "labelTitle": "Posnemi zvok",
+      "labelReady": "Pripravljeno",
+      "labelRequesting": "Povezovanje mikrofona",
+      "labelRecording": "Snemanje",
+      "labelStopping": "Zaključevanje snemanja",
+      "labelRecorded": "Posnetek je pripravljen",
+      "labelUploading": "Shranjevanje",
+      "labelSaved": "Shranjeno",
+      "labelDuration": "Trajanje posnetka",
+      "labelStart": "Začni snemanje",
+      "labelStop": "Ustavi snemanje",
+      "labelRecordAgain": "Posnemi znova",
+      "labelCancel": "Prekliči",
+      "labelTranscribe": "Shrani in prepiši",
+      "labelDiscard": "Zavrzi posnetek",
+      "labelPreview": "Predogled posnetka",
+      "descriptionSaved": "Posnetek je shranjen. Prepisovanje se bo začelo samodejno.",
+      "errorUnsupported": "Snemanje zvoka zahteva podprt brskalnik in varno povezavo (HTTPS ali localhost).",
+      "errorPermission": "Dostop do mikrofona je zavrnjen. Dovolite dostop do mikrofona v brskalniku in poskusite znova.",
+      "errorRecording": "Mikrofon ni mogel posneti zvoka. Preverite napravo in poskusite znova.",
+      "errorEmpty": "Posnetek ne vsebuje zvoka. Posnemite znova.",
+      "errorUpload": "Posnetka ni bilo mogoče shraniti. Lahko ga poslušate in znova poskusite naložiti.",
+      "descriptionScreenAwake": "Zaslon ostane vklopljen med snemanjem.",
+      "descriptionScreenSleep": "Zaslona ni mogoče ohraniti vklopljenega. Pustite to stran odprto in preprečite samodejno zaklepanje zaslona.",
+      "descriptionCloseBlocked": "Pred zapiranjem ustavite snemanje ter shranite ali zavrzite posnetek. Počakajte, da se nalaganje konča.",
+      "labelClose": "Zapri"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "Samodejni ponovni poskusi",
+      "labelLevel": "Raven",
+      "description": "Če so rezultati negotovi ali vsebujejo veliko ponavljanj, lahko prepisovalnik znova poskusi prepoznati zvočni odsek. Več poskusov lahko izboljša prepoznavanje, vendar traja dlje.",
+      "labelFast": "Hitro",
+      "labelBalanced": "Uravnoteženo",
+      "labelThorough": "Temeljito",
+      "descriptionFast": "En poskus na zvočni odsek, brez samodejnega ponavljanja.",
+      "descriptionBalanced": "Največ 3 poskusi na zvočni odsek.",
+      "descriptionThorough": "Največ 6 poskusov na zvočni odsek.",
+      "errorLevel": "Izberite eno od treh ravni."
+    }
+  },
+  "page": {
+    "labelTitle": "Prepis",
+    "emptyTitle": "Ni prepisovalnikov",
+    "emptyDescription": "Ustvarjen ni še noben prepisovalnik.",
+    "labelNewTranscriber": "Nov prepisovalnik",
+    "helpTitle": "Pomoč",
+    "helpSearchDescription": "Prepisovalnike lahko iščete. Iskanje med drugim vključuje ime in opis prepisovalnika ter njegov model.",
+    "helpSortDescription": "Prepisovalnike lahko razvrstite po imenu in razdelite v različne skupine. Prikazani so lahko kot kartice ali tabela."
+  }
+}

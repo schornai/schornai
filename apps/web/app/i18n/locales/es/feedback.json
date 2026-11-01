@@ -1,0 +1,44 @@
+{
+  "_components": {
+    "Actions": {
+      "copyFeedbackToClipboard": "Copiar comentarios al portapapeles",
+      "feedbackText": "Texto de los comentarios",
+      "feedbackTextRecommendation": "Envíanos este texto a ",
+      "sendFeedback": "Enviar comentarios por correo electrónico",
+      "showFeedbackText": "Mostrar comentarios",
+      "thankYou": "Gracias por dedicar tiempo a darnos tu opinión"
+    },
+    "ErrorLogs": {
+      "actionDeleteAll": "Eliminar todos los mensajes de error",
+      "actionDeleteAllCancel": "Cancelar",
+      "actionDeleteAllExplainer": "¿Seguro que quieres eliminar todos los mensajes de error recopilados? Esta acción no se puede deshacer.",
+      "actionDeleteAllShort": "Eliminar mensajes de error",
+      "actionDeselectAll": "Deseleccionar todos los mensajes de error",
+      "actionSelectAll": "Seleccionar todos los mensajes de error",
+      "explainer": "Los mensajes de error también forman parte de los comentarios. Algunos problemas se resuelven automáticamente sin interrumpir tus operaciones. Aun así, nos resulta útil conocer esos errores para poder solucionarlos.",
+      "explainerSecrecy": "Comprueba que los mensajes de error no contengan datos confidenciales ni personales. El sistema está diseñado para excluirlos, pero los errores se deben a circunstancias imprevistas. Por seguridad, revisa personalmente los comentarios.",
+      "explainerSecrecyHeading": "Sin datos confidenciales",
+      "heading": "Errores",
+      "tableColumnPartOfFeedback": "Incluido en los comentarios",
+      "tableColumnDate": "Fecha",
+      "tableColumnErrorMessage": "Mensaje de error"
+    },
+    "StarRatingCard": {
+      "noStarRating": "No se ha indicado una valoración",
+      "starRating": "{{stars}} de 5 estrellas"
+    },
+    "TextFeedback": {
+      "discardFeedback": "Descartar comentarios",
+      "discardFeedbackSub": "¿Seguro que quieres descartar tus comentarios? Esta acción no se puede deshacer.",
+      "discardFeedbackCancel": "Cancelar",
+      "infoSecrecy": "Comprueba que los comentarios enviados no contengan datos confidenciales ni personales.",
+      "writeFeedback": "Escribir comentarios",
+      "writeFeedbackSub": "Agradecemos todos los comentarios, tanto positivos como negativos."
+    }
+  },
+  "page": {
+    "headingLine1": "Ayúdanos a mejorar schorn.ai in a Box,",
+    "headingLine2": "danos tu opinión",
+    "headingMain": "Comentarios"
+  }
+}

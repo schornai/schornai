@@ -1,0 +1,59 @@
+{
+  "_components": {
+    "EditorName": {
+      "fieldGroupName": "Nume",
+      "labelFirstName": "Prenume",
+      "labelLastName": "Nume de familie",
+      "buttonSave": "Salvează",
+      "buttonReset": "Resetează"
+    },
+    "EditorAvatar": {
+      "titleAvatar": "Avatar"
+    },
+    "EditorAvatarDelete": {
+      "buttonDelete": "Elimină imaginea",
+      "alertDelete": "Elimină imaginea",
+      "alertDeleteExplainer": "Sigur vrei să elimini imaginea ta?",
+      "alertDeleteCancel": "Anulează"
+    },
+    "EditorAvatarUpload": {
+      "buttonUpload": "Încarcă imagine"
+    }
+  },
+  "permissions": {
+    "page": {
+      "title": "Permisiuni",
+      "tableColumnName": "Nume",
+      "tableColumnPermission": "Permisiune",
+      "tableColumnDescription": "Descriere",
+      "infoEmpty": "Fără permisiuni",
+      "infoEmptyDescription": "Nu este disponibilă nicio funcție a schorn.ai box.",
+      "infoEmptyAdminDescription": "Ca administrator, poți crea primul spațiu de lucru.",
+      "infoEmptyAdminAction": "Creează primul spațiu de lucru",
+      "infoUser": "Poate vizualiza conținutul organizației, precum chatboturi, transcriptori, documente și depozite, dar nu îl poate edita.",
+      "infoEditor": "Poate vizualiza și edita conținutul organizației, de exemplu creând chatboturi, editând sau ștergând documente.",
+      "infoAdmin": "Poate citi și scrie în toate organizațiile, gestiona setările sistemului, precum încărcarea XRAG și schimbarea culorilor, și administra utilizatorii."
+    }
+  },
+  "page": {
+    "title": "Profil",
+    "infoPersonalize": "Personalizare",
+    "infoPersonalizeDescription": "Aici poți încărca imaginea de profil și modifica numele."
+  },
+  "resetPasswordSuccess.page": {
+    "title": "Parolă nouă setată",
+    "description": "Parola nouă a fost setată cu succes. Acum ești autentificat cu noua parolă.",
+    "buttonBackToDashboard": "La panoul de control"
+  },
+  "connections": {
+    "page": {
+      "labelTitle": "Conexiuni",
+      "descriptionConnections": "Conexiunile tale OAuth personale la servere MCP. Deconectarea elimină datele de autentificare stocate aici. Apelurile în curs se pot finaliza; revocă permisiunile direct la furnizor.",
+      "labelDisconnect": "Deconectează",
+      "descriptionEmpty": "Conectează-ți contul din conversație când un instrument MCP solicită autentificarea.",
+      "labelEmpty": "Încă nu există conexiuni",
+      "labelInfo": "Despre conexiuni",
+      "errorDisconnect": "Conexiunea nu a putut fi deconectată. Încearcă din nou."
+    }
+  }
+}

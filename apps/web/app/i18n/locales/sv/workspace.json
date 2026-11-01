@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Beskrivning",
+      "description": "Välj ett lämpligt namn för arbetsytan. Du kan även spara en kort beskrivning.",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning",
+      "buttonSave": "Spara",
+      "buttonReset": "Återställ"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentation",
+      "description": "Dela mer information om den här arbetsytan med användarna här.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Spara",
+      "buttonReset": "Återställ"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO-mappningar",
+      "description": "Välj vilken SSO-grupp som har åtkomst till arbetsytan och med vilken behörighet.",
+      "labelRoleUser": "Användargrupp",
+      "labelRoleEditor": "Redaktörsgrupp",
+      "labelRoleWorkspaceAdmin": "Grupp för arbetsyteadministratörer",
+      "placeholderNoGroup": "Ingen grupp tilldelad",
+      "descriptionRoleUser": "Kan visa arbetsytans innehåll, som agenter, transkriberare och dokumentarkiv, men inte redigera det.",
+      "descriptionRoleEditor": "Kan visa och redigera arbetsytans innehåll.",
+      "descriptionRoleWorkspaceAdmin": "Kan hantera arbetsytan och skapa, redigera och ta bort agenter, transkriberare, dokumentarkiv och andra resurser.",
+      "buttonSave": "Spara",
+      "buttonReset": "Återställ"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatisk användare",
+      "description": "När ”Automatisk användare” är aktiverat får alla som kan logga in i systemet automatiskt användarbehörighet i den här organisationen.",
+      "labelActive": "Automatisk användare aktiverad",
+      "labelInactive": "Automatisk användare inaktiverad"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Ny arbetsyta",
+      "descriptionWorkspace": "Välj ett namn och en valfri beskrivning. Du kan konfigurera fler inställningar efter att arbetsytan har skapats.",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning",
+      "labelCreate": "Skapa arbetsyta",
+      "labelCancel": "Avbryt",
+      "errorCreate": "Arbetsytan kunde inte skapas. Försök igen."
+    },
+    "WorkspaceCard": {
+      "labelType": "Arbetsyta"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Redigera arbetsyta",
+      "tooltipInfo": "Öppna arbetsyta"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Lägg till i favoriter",
+      "tooltipRemoveFavorite": "Ta bort från favoriter"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Sök arbetsytor",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning",
+      "labelRole": "Din roll",
+      "labelActions": "Åtgärder",
+      "labelFavorites": "Favoriter",
+      "labelOtherWorkspaces": "Andra arbetsytor",
+      "labelEmpty": "Inga arbetsytor",
+      "descriptionEmpty": "Du har inte åtkomst till någon arbetsyta ännu.",
+      "labelNoResults": "Inga resultat",
+      "descriptionNoResults": "Prova ett annat sökord."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelNameAsc": "Namn A till Ö",
+      "labelNameDesc": "Namn Ö till A",
+      "labelGroup": "Gruppera efter",
+      "labelNoGroup": "Ingen grupp",
+      "labelFavorites": "Favoriter",
+      "labelFirstLetter": "Första bokstaven",
+      "labelCards": "Kort",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Skapa arbetsyta"
+    }
+  },
+  "page": {
+    "labelYourRole": "Din roll",
+    "labelEmpty": "Inget innehåll ännu",
+    "descriptionEmpty": "Det finns inga tillgängliga agenter, dokumentarkiv eller transkriberare i den här arbetsytan ännu.",
+    "labelTitle": "Arbetsytor"
+  }
+}

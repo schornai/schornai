@@ -1,0 +1,83 @@
+{
+  "private": true,
+  "author": "Thomas Schorn <thomas@schorn.ai>",
+  "description": "schorn.ai in a Box",
+  "workspaces": [
+    "apps/*",
+    "external/downloads",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:service": "npm run build --workspace packages/service",
+    "build:cli": "npm run build --workspace apps/cli",
+    "service": "node apps/cli/bin/schornai.js service",
+    "seed:reset": "node scripts/seed-reset.mjs",
+    "test": "node scripts/test-all.mjs",
+    "i18n:check": "node scripts/check-translations.mjs",
+    "dev:web": "turbo dev --filter @schornio/aibox-app-web --filter @schornio/aibox-app-realtime --filter @schornio/aibox-app-proxy --filter @schornio/aibox-app-document-extractor --filter @schornio/aibox-app-transcriber-mac",
+    "dev:service": "node --watch --watch-preserve-output packages/service/src/dev.ts",
+    "supabase:migrate": "npx supabase db diff --schema public,storage",
+    "supabase:types": "node scripts/supabase-types.mjs",
+    "external:downloads": "npm run download --workspace external/downloads",
+    "build:app:realtime": "rollup --config apps/realtime/rollup.config.js",
+    "build:app:transcriberMac": "rollup --config apps/transcriber-mac/rollup.config.js && npm run build --workspace apps/transcriber-mac",
+    "xrag:bundle": "node ./packages/xrag/update/bundleUpdate.mts",
+    "knip": "knip",
+    "test:watch": "vitest",
+    "test:coverage": "node scripts/test-all.mjs --coverage",
+    "test:scope": "node scripts/test-scope.mjs",
+    "test:js": "vitest run",
+    "test:python": "node scripts/test-python.mjs",
+    "test:python:coverage": "node scripts/test-python.mjs --coverage",
+    "storybook:web": "npm run storybook --workspace apps/web",
+    "storybook:ui": "npm run storybook --workspace packages/ui",
+    "storybook:build": "npm run build-storybook --workspace packages/ui && npm run build-storybook --workspace apps/web && npm run build-storybook --workspace apps/admin-mac",
+    "storybook:check": "node scripts/storybook/check-coverage.mjs",
+    "storybook:test": "node scripts/storybook/test-stories.mjs",
+    "storybook:typecheck": "npm run typecheck-storybook --workspace apps/web && npm run typecheck-storybook --workspace packages/ui && npm run typecheck-storybook --workspace apps/admin-mac",
+    "storybook:visual": "node scripts/storybook/visual.mjs",
+    "storybook:visual:update": "node scripts/storybook/visual.mjs --update-snapshots=all",
+    "storybook:visual:report": "playwright show-report playwright-report/storybook-visual",
+    "storybook:admin": "npm run storybook --workspace apps/admin-mac"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^26.6.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "jsdom": "^30.1.3",
+    "knip": "^6.41.0",
+    "rollup": "^4.64.9",
+    "tinyglobby": "^0.2.17",
+    "turbo": "^2.11.9",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  },
+  "packageManager": "npm@12.0.2",
+  "overrides": {
+    "micromark-extension-math": {
+      "katex": "0.19.0"
+    },
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "7.1.6"
+    }
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schornai/schornai.git"
+  },
+  "homepage": "https://schorn.ai",
+  "bugs": {
+    "url": "https://github.com/schornai/schornai/issues"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

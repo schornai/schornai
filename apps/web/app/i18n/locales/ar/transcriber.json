@@ -1,0 +1,180 @@
+{
+  "apps": {
+    "labelTitle": "تفريغ صوتي",
+    "description": "تحوّل أدوات التفريغ الصوتي المحتوى المنطوق، مثل الاجتماعات والمقابلات والمكالمات، إلى محتوى منظم وقابل للبحث للذكاء الاصطناعي."
+  },
+  "_components": {
+    "TranscriberCard": {
+      "labelType": "أداة التفريغ الصوتي"
+    },
+    "TranscriberList": {
+      "placeholderSearch": "بحث..."
+    },
+    "TranscriberListOptionsDropdown": {
+      "labelOptions": "الخيارات",
+      "labelView": "العرض",
+      "labelSort": "الفرز",
+      "labelNameAsc": "الاسم من أ إلى ي",
+      "labelNameDesc": "الاسم من ي إلى أ",
+      "labelGroup": "التجميع حسب",
+      "labelNoGroup": "دون مجموعة",
+      "labelFavorites": "المفضلة",
+      "labelFirstLetter": "الحرف الأول",
+      "labelWorkspaces": "مساحات العمل",
+      "labelModel": "النموذج",
+      "labelCards": "بطاقات",
+      "labelTable": "جدول",
+      "labelSaveView": "حفظ العرض",
+      "labelReset": "إعادة تعيين",
+      "labelTranscribers": "أدوات التفريغ الصوتي",
+      "labelNewTranscriber": "أداة تفريغ صوتي جديدة"
+    },
+    "TranscriberListCards": {
+      "labelOtherTranscribers": "أدوات تفريغ صوتي أخرى",
+      "labelFavorites": "المفضلة",
+      "labelNoGroup": "دون مجموعة",
+      "labelUnknownModel": "نموذج غير معروف «{{id}}»"
+    },
+    "TranscriberListTable": {
+      "tableColumnName": "الاسم",
+      "tableColumnCapablilities": "الإمكانات",
+      "tableColumnNameActions": "الإجراءات",
+      "emptyTitle": "لا توجد أدوات تفريغ صوتي",
+      "emptyDescription": "لم تُنشأ أي أداة تفريغ صوتي بعد.",
+      "labelOtherTranscribers": "أدوات تفريغ صوتي أخرى",
+      "labelFavorites": "المفضلة",
+      "labelNoGroup": "دون مجموعة",
+      "labelUnknownModel": "نموذج غير معروف «{{id}}»"
+    },
+    "TranscriberIconGroupInfos": {
+      "labelModelUnknown": "نموذج غير معروف",
+      "labelUnknownWorkspace": "مساحة عمل غير معروفة"
+    },
+    "TranscriberIconGroupActions": {
+      "tooltipEdit": "تعديل",
+      "tooltipInfo": "معلومات",
+      "tooltipNewTranscription": "تفريغ صوتي جديد",
+      "tooltipRecord": "تسجيل صوت"
+    },
+    "TranscriberIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "إزالة من المفضلة",
+      "tooltipAddFavorite": "إضافة إلى المفضلة"
+    },
+    "TranscriberInfoPrompt": {
+      "labelPrompt": "التعليمات",
+      "labelChanged": "معدّل",
+      "labelEmpty": "فارغ"
+    },
+    "TranscriberEditor": {
+      "labelNewTranscriber": "أداة تفريغ صوتي جديدة",
+      "labelTranscriber": "أداة التفريغ الصوتي",
+      "labelCreateTranscriber": "إنشاء أداة تفريغ صوتي",
+      "labelSaveTranscriber": "حفظ أداة التفريغ الصوتي",
+      "labelCloneTranscriber": "حفظ كأداة تفريغ صوتي جديدة",
+      "labelDeleteTranscriber": "حذف أداة التفريغ الصوتي",
+      "confirmDeleteTitle": "حذف أداة التفريغ الصوتي",
+      "confirmDeleteDescription": "هل أنت متأكد من حذف أداة التفريغ الصوتي «{{name}}»؟ لا يمكن التراجع عن هذا الإجراء.",
+      "labelCancel": "إلغاء",
+      "tabOverview": "نظرة عامة",
+      "tabPrompt": "التعليمات",
+      "tabSettings": "الإعدادات",
+      "btnCreate": "إنشاء",
+      "btnSave": "حفظ"
+    },
+    "TranscriberEditorDiscardAllChanges": {
+      "labelDiscardTitle": "تجاهل التغييرات",
+      "labelDiscardConfirm": "هل تريد فعلًا تجاهل جميع التغييرات غير المحفوظة على أداة التفريغ الصوتي هذه؟",
+      "labelCancel": "إلغاء",
+      "labelDiscard": "تجاهل التغييرات"
+    },
+    "TranscriberEditorOverview": {
+      "emptyTitle": "أداة تفريغ صوتي جديدة",
+      "emptyDescription": "حدد سلوك أداة التفريغ الصوتي ومظهرها.",
+      "labelDefinePrompt": "حدد التعليمات",
+      "descriptionDefinePrompt": "تساعد التعليمات القصيرة أداة التفريغ على فهم الأسماء والمصطلحات المتخصصة وأسماء المنتجات وكتابتها بالطريقة التي تتوقعها.",
+      "helpTitle": "المساعدة",
+      "helpPromptDescription": "بوجود تعليمات، يحتاج النص المفرغ إلى تصحيحات أقل لاحقًا، وتحصل على نتائج أكثر اتساقًا للتسجيلات الطويلة أو المتخصصة."
+    },
+    "TranscriberEditorPrompt": {
+      "labelPrompt": "التعليمات",
+      "descriptionWhisperPrompt": "تُمرّر التعليمات إلى نموذج التفريغ الصوتي Whisper لمساعدته على فهم المصطلحات المتخصصة."
+    },
+    "TranscriberEditorSettingsAppearance": {
+      "labelLegend": "المظهر",
+      "description": "حدد لونًا وأيقونة يمثلان أداة التفريغ الصوتي بأفضل شكل.",
+      "labelIcon": "الأيقونة",
+      "labelColor": "اللون"
+    },
+    "TranscriberEditorSettingsDescription": {
+      "labelLegend": "الوصف",
+      "description": "اختر اسمًا مناسبًا لأداة التفريغ الصوتي. يمكنك أيضًا حفظ وصف قصير.",
+      "labelName": "الاسم",
+      "labelDescription": "الوصف"
+    },
+    "TranscriberEditorSettingsModel": {
+      "labelTitle": "النموذج",
+      "description": "نموذج التفريغ الصوتي الذي تستخدمه الأداة.",
+      "labelName": "النموذج",
+      "labelSelectModel": "اختر نموذجًا"
+    },
+    "TranscriberEditorSettingsWorkspace": {
+      "labelLegend": "مساحة العمل",
+      "description": "اختر مساحة العمل التي تريد إنشاء أداة التفريغ الصوتي فيها.",
+      "labelName": "مساحة العمل",
+      "labelSelectWorkspace": "اختر مساحة عمل."
+    },
+    "TabsTranscription": {
+      "tabFiles": "الملفات",
+      "tabInfo": "معلومات"
+    },
+    "AudioRecorder": {
+      "labelTitle": "تسجيل صوت",
+      "labelReady": "جاهز",
+      "labelRequesting": "جارٍ توصيل الميكروفون",
+      "labelRecording": "جارٍ التسجيل",
+      "labelStopping": "جارٍ إنهاء التسجيل",
+      "labelRecorded": "التسجيل جاهز",
+      "labelUploading": "جارٍ الحفظ",
+      "labelSaved": "محفوظ",
+      "labelDuration": "مدة التسجيل",
+      "labelStart": "بدء التسجيل",
+      "labelStop": "إيقاف التسجيل",
+      "labelRecordAgain": "التسجيل مجددًا",
+      "labelCancel": "إلغاء",
+      "labelTranscribe": "حفظ وتفريغ صوتي",
+      "labelDiscard": "تجاهل التسجيل",
+      "labelPreview": "معاينة التسجيل",
+      "descriptionSaved": "حُفظ التسجيل. سيبدأ التفريغ الصوتي تلقائيًا.",
+      "errorUnsupported": "يتطلب تسجيل الصوت متصفحًا مدعومًا واتصالًا آمنًا (HTTPS أو localhost).",
+      "errorPermission": "رُفض الوصول إلى الميكروفون. اسمح بالوصول إليه في المتصفح وحاول مجددًا.",
+      "errorRecording": "تعذر على الميكروفون تسجيل الصوت. تحقق من جهازك وحاول مجددًا.",
+      "errorEmpty": "لا يحتوي التسجيل على صوت. يُرجى التسجيل مجددًا.",
+      "errorUpload": "تعذر حفظ التسجيل. يمكنك الاستماع إليه وإعادة محاولة الرفع.",
+      "descriptionScreenAwake": "تبقى الشاشة نشطة أثناء التسجيل.",
+      "descriptionScreenSleep": "تعذر إبقاء الشاشة نشطة. أبقِ هذه الصفحة مفتوحة وامنع القفل التلقائي للشاشة.",
+      "descriptionCloseBlocked": "أوقف التسجيل واحفظه أو تجاهله قبل الإغلاق. وانتظر حتى ينتهي أي رفع جارٍ.",
+      "labelClose": "إغلاق"
+    },
+    "TranscriberEditorSettingsRetries": {
+      "labelTitle": "إعادة المحاولة تلقائيًا",
+      "labelLevel": "المستوى",
+      "description": "عندما تكون النتائج غير مؤكدة أو تتضمن تكرارًا كبيرًا، يمكن لأداة التفريغ الصوتي محاولة التعرّف على المقطع الصوتي مرة أخرى. قد تؤدي زيادة عدد المحاولات إلى تحسين التعرّف على الكلام، لكنها تستغرق وقتًا أطول.",
+      "labelFast": "سريع",
+      "labelBalanced": "متوازن",
+      "labelThorough": "دقيق",
+      "descriptionFast": "محاولة واحدة لكل مقطع صوتي، دون إعادة المحاولة تلقائيًا.",
+      "descriptionBalanced": "حتى 3 محاولات لكل مقطع صوتي.",
+      "descriptionThorough": "حتى 6 محاولات لكل مقطع صوتي.",
+      "errorLevel": "يرجى اختيار أحد المستويات الثلاثة."
+    }
+  },
+  "page": {
+    "labelTitle": "تفريغ صوتي",
+    "emptyTitle": "لا توجد أدوات تفريغ صوتي",
+    "emptyDescription": "لم تُنشأ أي أداة تفريغ صوتي بعد.",
+    "labelNewTranscriber": "أداة تفريغ صوتي جديدة",
+    "helpTitle": "المساعدة",
+    "helpSearchDescription": "يمكنك البحث عن أدوات التفريغ الصوتي. يشمل البحث اسم الأداة ووصفها ونموذجها، من بين أمور أخرى.",
+    "helpSortDescription": "يمكن فرز أدوات التفريغ الصوتي حسب الاسم وتقسيمها إلى مجموعات مختلفة. ويمكن عرضها كبطاقات أو جدول."
+  }
+}

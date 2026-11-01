@@ -1,0 +1,97 @@
+{
+  "_components": {
+    "WorkspaceEditorDescription": {
+      "legend": "Opis",
+      "description": "Odaberite prikladan naziv radnog prostora. Možete spremiti i kratak opis.",
+      "labelName": "Naziv",
+      "labelDescription": "Opis",
+      "buttonSave": "Spremi",
+      "buttonReset": "Vrati zadano"
+    },
+    "WorkspaceEditorDocs": {
+      "legend": "Dokumentacija",
+      "description": "Ovdje podijelite s korisnicima dodatne informacije o ovom radnom prostoru.",
+      "labelMarkdown": "Markdown",
+      "buttonSave": "Spremi",
+      "buttonReset": "Vrati zadano"
+    },
+    "WorkspaceEditorSSOMappings": {
+      "legend": "SSO mapiranja",
+      "description": "Odaberite koja SSO grupa ima pristup radnom prostoru i s kojom dozvolom.",
+      "labelRoleUser": "Grupa korisnika",
+      "labelRoleEditor": "Grupa urednika",
+      "labelRoleWorkspaceAdmin": "Grupa administratora radnog prostora",
+      "placeholderNoGroup": "Nije dodijeljena grupa",
+      "descriptionRoleUser": "Može pregledavati sadržaj radnog prostora (agente, transkriptore, spremišta dokumenata itd.), ali ga ne može uređivati.",
+      "descriptionRoleEditor": "Može pregledavati sadržaj radnog prostora i dodatno ga uređivati.",
+      "descriptionRoleWorkspaceAdmin": "Može upravljati radnim prostorom te stvarati, uređivati i brisati agente, transkriptore, spremišta dokumenata itd.",
+      "buttonSave": "Spremi",
+      "buttonReset": "Vrati zadano"
+    },
+    "WorkspaceEditorAutoJoin": {
+      "legend": "Automatski korisnik",
+      "description": "Kada je uključen „Automatski korisnik”, svatko tko se može prijaviti u box automatski dobiva korisničke dozvole u ovoj organizaciji.",
+      "labelActive": "Automatski korisnik uključen",
+      "labelInactive": "Automatski korisnik isključen"
+    },
+    "WorkspaceCreator": {
+      "labelTitle": "Novi radni prostor",
+      "descriptionWorkspace": "Odaberite naziv i neobavezan opis. Dodatne postavke možete prilagoditi nakon stvaranja radnog prostora.",
+      "labelName": "Naziv",
+      "labelDescription": "Opis",
+      "labelCreate": "Stvori radni prostor",
+      "labelCancel": "Odustani",
+      "errorCreate": "Radni prostor nije moguće stvoriti. Pokušajte ponovno."
+    },
+    "WorkspaceCard": {
+      "labelType": "Radni prostor"
+    },
+    "WorkspaceIconGroupActions": {
+      "tooltipEdit": "Uredi radni prostor",
+      "tooltipInfo": "Otvori radni prostor"
+    },
+    "WorkspaceIconGroupActionFavorite": {
+      "tooltipAddFavorite": "Dodaj u favorite",
+      "tooltipRemoveFavorite": "Ukloni iz favorita"
+    },
+    "WorkspaceList": {
+      "labelSearch": "Pretraži radne prostore",
+      "labelName": "Naziv",
+      "labelDescription": "Opis",
+      "labelRole": "Vaša uloga",
+      "labelActions": "Radnje",
+      "labelFavorites": "Favoriti",
+      "labelOtherWorkspaces": "Ostali radni prostori",
+      "labelEmpty": "Nema radnih prostora",
+      "descriptionEmpty": "Još nemate pristup radnom prostoru.",
+      "labelNoResults": "Nema rezultata",
+      "descriptionNoResults": "Pokušajte drugi pojam za pretraživanje."
+    },
+    "WorkspaceListOptionsDropdown": {
+      "labelOptions": "Mogućnosti",
+      "labelView": "Prikaz",
+      "labelSort": "Sortiranje",
+      "labelNameAsc": "Naziv od A do Z",
+      "labelNameDesc": "Naziv od Z do A",
+      "labelGroup": "Grupiraj prema",
+      "labelNoGroup": "Bez grupiranja",
+      "labelFavorites": "Favoriti",
+      "labelFirstLetter": "Prvo slovo",
+      "labelCards": "Kartice",
+      "labelTable": "Tablica",
+      "labelSaveView": "Spremi prikaz",
+      "labelReset": "Vrati zadano"
+    }
+  },
+  "new": {
+    "page": {
+      "labelTitle": "Stvori radni prostor"
+    }
+  },
+  "page": {
+    "labelYourRole": "Vaša uloga",
+    "labelEmpty": "Još nema sadržaja",
+    "descriptionEmpty": "U ovom radnom prostoru još nema agenata, spremišta dokumenata ni transkriptora.",
+    "labelTitle": "Radni prostori"
+  }
+}

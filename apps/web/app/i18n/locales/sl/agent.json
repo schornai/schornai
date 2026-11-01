@@ -1,0 +1,520 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Prekliči",
+      "errorCancel": "Ustvarjanja ni bilo mogoče ustaviti. Poskusite znova."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Nimate dostopa do tega agenta."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Model",
+      "labelUnknownModel": "Neznan model",
+      "labelThinkingOptionalOn": "Razmišljanje",
+      "labelThinkingOptionalOff": "Obvezno razmišljanje",
+      "labelThinkingMandatoryOn": "Brez razmišljanja",
+      "labelThinkingMandatoryOff": "Razmišljanje vedno izklopljeno",
+      "descriptionFeatureVision": "Poglobljeno razumevanje slik",
+      "labelModelSize": "Velikost konteksta: {{size}}k",
+      "labelNotFound": "Model ni najden",
+      "labelChanged": "Spremenjeno"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Orodje: Kalkulator",
+      "description": "Agent lahko uporabi kalkulator, namesto da bi računal sam. Tako lažje obravnava zahtevnejše izračune."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Poziv",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Prazno",
+      "labelChanged": "Spremenjeno"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Shrambe dokumentov",
+      "labelUnknownRepository": "Neznana shramba dokumentov",
+      "descriptionRepositoryNotFound": "Shramba dokumentov ne obstaja ali pa nimate potrebnih dovoljenj.",
+      "labelConfirmWrite": "Branje in pisanje (zahtevaj potrditev)",
+      "labelReadOnly": "Samo branje",
+      "labelWrite": "Branje in pisanje (samodejno)",
+      "labelGoToRepository": "Pojdi v shrambo",
+      "labelChanged": "Spremenjeno"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Namig za izbiro vloge",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Opis",
+      "description": "Izberite primerno ime za agenta. Shranite lahko tudi kratek opis.",
+      "labelName": "Ime",
+      "labelDescription": "Opis"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Delovni prostor",
+      "description": "Izberite delovni prostor, v katerem želite ustvariti agenta.",
+      "labelName": "Delovni prostor",
+      "errorNoPermissions": "Nimate dovoljenja za ustvarjanje agentov",
+      "errorNoWorkspaceSelected": "Niste izbrali delovnega prostora",
+      "labelSelectWorkspace": "Izberite delovni prostor."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Dodatne funkcije",
+      "description": "Razširite agenta z uporabnimi funkcijami za še lažje delo.",
+      "labelFileUpload": "Nalaganje datotek",
+      "descriptionFileUpload": "Uporabniki lahko naložijo datoteke, katerih vsebina je agentu na voljo kot besedilo.",
+      "labelBatch": "Paketna obdelava",
+      "descriptionBatch": "Uporabniki lahko datoteke samodejno obdelajo za vsako sporočilo.",
+      "labelPursueGoal": "Doseganje cilja",
+      "descriptionPursueGoal": "Uporabniki lahko določijo cilj, agent pa bo deloval v zanki, dokler ga ne doseže.",
+      "labelDisappearingChats": "Izginjajoči pogovori",
+      "descriptionDisappearingChats": "Pogovori se lahko po 12 urah samodejno izbrišejo. To mora nastaviti uporabnik.",
+      "labelNightshift": "Nočna izmena",
+      "descriptionNightshift": "Agente, ki delujejo dlje časa, je mogoče prestaviti v nočno izmeno, da podnevi prihranite vire.",
+      "labelTranscriber": "Prepisovalnik",
+      "labelNoTranscriber": "Brez samodejnega prepisovanja",
+      "descriptionTranscriber": "Samodejno prepiši naložene zvočne in videodatoteke s tem prepisovalnikom."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Dodatne funkcije",
+      "labelFileUpload": "Nalaganje datotek",
+      "descriptionFileUpload": "Uporabniki lahko naložijo datoteke, katerih vsebina je agentu na voljo kot besedilo.",
+      "labelBatch": "Paketna obdelava",
+      "descriptionBatch": "Uporabniki lahko datoteke samodejno obdelajo za vsako sporočilo.",
+      "labelPursueGoal": "Doseganje cilja",
+      "descriptionPursueGoal": "Uporabniki lahko določijo cilj, agent pa bo deloval v zanki, dokler ga ne doseže.",
+      "labelDisappearingChats": "Izginjajoči pogovori",
+      "descriptionDisappearingChats": "Pogovori se lahko po 12 urah samodejno izbrišejo. To mora nastaviti uporabnik.",
+      "labelNightshift": "Nočna izmena",
+      "descriptionNightshift": "Agente, ki delujejo dlje časa, je mogoče prestaviti v nočno izmeno, da podnevi prihranite vire."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Predlogi"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentacija"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Delovni prostor",
+      "labelUnknownWorkspace": "Neznan delovni prostor",
+      "labelGoToWorkspace": "Pojdi v delovni prostor"
+    },
+    "AgentInfo": {
+      "labelRole": "Vloga: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Išči...",
+      "tableColumnName": "Ime",
+      "tableColumnCapablilities": "Zmožnosti",
+      "tableColumnNameActions": "Dejanja",
+      "labelOtherAgents": "Drugi agenti",
+      "labelFavorites": "Priljubljeno",
+      "labelNoGroup": "Brez združevanja",
+      "labelUnknownModel": "Neznan model »{{id}}«",
+      "labelNoRepositories": "Ni shramb dokumentov",
+      "labelUnknownRepository": "Neznana shramba dokumentov »{{id}}«",
+      "labelRoleCount_other": "{{count}} vlog",
+      "labelRoleCount_zero": "Ni vlog",
+      "labelRoleCount_one": "{{count}} vloga",
+      "labelRoleCount_two": "{{count}} vlogi",
+      "labelRoleCount_few": "{{count}} vloge"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Možnosti",
+      "labelView": "Pogled",
+      "labelSort": "Razvrščanje",
+      "labelNameAsc": "Ime od A do Ž",
+      "labelNameDesc": "Ime od Ž do A",
+      "labelGroup": "Združi po",
+      "labelFavorites": "Priljubljeno",
+      "labelFirstLetter": "Prva črka",
+      "labelWorkspaces": "Delovni prostori",
+      "labelModel": "Model",
+      "labelRepositories": "Shrambe dokumentov",
+      "labelRoleCount": "Število vlog",
+      "labelCards": "Kartice",
+      "labelTable": "Tabela",
+      "labelSaveView": "Shrani pogled",
+      "labelReset": "Ponastavi",
+      "labelAgents": "Agenti",
+      "labelNewAgent": "Nov agent",
+      "labelNoGroup": "Brez združevanja"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Videz",
+      "description": "Izberite barvo in ikono, ki najbolje predstavljata agenta.",
+      "labelIcon": "Ikona",
+      "labelColor": "Barva"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Odstrani iz priljubljenih",
+      "tooltipAddFavorite": "Dodaj med priljubljene"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Uredi",
+      "tooltipInfo": "Informacije",
+      "tooltipNewChat": "Nov pogovor"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Neznan delovni prostor",
+      "labelModelUnknown": "Neznan model"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Dostop do spleta",
+      "labelGeneralAccess": "Splošni dostop, spletno iskanje",
+      "descriptionFetch": "Pridobivanje s spleta prenese vsebino URL-ja v shrambo pogovora ali priključeno shrambo dokumentov z dovoljenjem za pisanje. Po obdelavi datoteke lahko agent prebere izvlečeno besedilo in ga uporabi v odgovoru.",
+      "descriptionSearch": "Spletno iskanje pomaga agentu najti strani, ki ustrezajo iskalni poizvedbi. Ponudnik iskanja vrne naslove, povezave in kratke izseke. Seznam domen, dovoljenih za pridobivanje, ne omejuje spletnega iskanja.",
+      "labelChanged": "Spremenjeno",
+      "labelFetch": "Pridobivanje",
+      "labelSearch": "Išči",
+      "labelOn": "Vklopljeno",
+      "labelOff": "Izklopljeno",
+      "labelAsk": "Najprej vprašaj",
+      "labelWhitelist": "Pridobivanje omejeno na seznam dovoljenih domen",
+      "labelAll": "Pridobivanje z vseh spletnih mest",
+      "labelEmptyWhitelist": "Ni dovoljenih domen",
+      "labelEdit": "Uredi dostop do spleta",
+      "labelDetails": "Prikaži podrobnosti"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Orodje: Razširitve pogovora",
+      "labelFeatures": "Predlaganje naslednjega sporočila, spreminjanje naziva pogovora",
+      "description": "Agent lahko predlaga naslednja uporabniška sporočila, tako da uporabnik za nadaljevanje pogovora preprosto klikne ustrezno sporočilo. <br /> Agent lahko uporabniku spremeni naziv pogovora, da ga je lažje najti v zgodovini."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Opis vloge",
+      "description": "Opis vloge se ob prejemu novega uporabniškega sporočila uporabi za izbiro vloge, ki bo nanj odgovorila",
+      "labelName": "Ime",
+      "labelSelectionHint": "Namig za izbiro vloge",
+      "labelDeleteRole": "Izbriši vlogo ",
+      "labelDoNotOverride": "Ne zamenjaj",
+      "labelOverrideModel": "Zamenjaj model",
+      "descriptionOverrideModel": "Za to vlogo lahko izberete drug model od tistega, ki ga agent uporablja na splošno.",
+      "confirmDeleteDescription": "Ali res želite izbrisati vlogo »{{name}}«? Tega dejanja ni mogoče razveljaviti.",
+      "labelCancel": "Prekliči",
+      "labelThinking": "Razmišljanje"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Model",
+      "description": "Jezikovni model, ki ga agent uporablja, razen če ga nadomestijo nastavitve vloge.",
+      "labelName": "Model",
+      "labelThinking": "Razmišljanje",
+      "labelThinking_optionalOn": "Razmišljanje",
+      "labelThinking_mandatoryOn": "Obvezno razmišljanje",
+      "labelThinking_optionalOff": "Brez razmišljanja",
+      "labelThinking_mandatoryOff": "Razmišljanje vedno izklopljeno",
+      "labelSelectModel": "Izberite model"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Shramba dokumentov",
+      "labelPathAgent": "Pot za agenta",
+      "labelPathRepository": "Pot v shrambi dokumentov",
+      "labelPermission": "Dovoljenje",
+      "labelDeleteConnection": "Izbriši povezavo",
+      "confirmDeleteTitle": "Izbriši povezavo",
+      "confirmDeleteDescription": "Ali res želite izbrisati to povezavo s shrambo dokumentov »{{name}}«?",
+      "labelCancel": "Prekliči",
+      "labelAddConnection": "Dodatna povezava",
+      "labelUnknownRepository": "Neznana shramba dokumentov",
+      "labelConfirmWrite": "Branje in pisanje (zahtevaj potrditev)",
+      "labelReadOnly": "Samo branje",
+      "labelWrite": "Branje in pisanje (samodejno)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Naziv",
+      "labelMessage": "Sporočilo",
+      "labelClose": "Zapri"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Ime",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "Glave HTTP",
+      "labelHeaderName": "Ime",
+      "labelHeaderValue": "Vrednost",
+      "labelAddHeader": "Dodaj glavo HTTP",
+      "labelDeleteConnection": "Izbriši povezavo",
+      "confirmDeleteTitle": "Izbriši MCP",
+      "confirmDeleteDescription": "Ali res želite izbrisati konfiguracijo MCP »{{name}}«?",
+      "labelCancel": "Prekliči",
+      "labelDeleteMCP": "Izbriši MCP",
+      "labelAddMCP": "Še en MCP",
+      "errorInvalidUrl": "URL mora biti veljaven",
+      "labelOAuthApp": "Aplikacija OAuth"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Podatki",
+      "labelConnectRepository": "Poveži shrambo dokumentov",
+      "labelToolWebAccess": "Orodje: Dostop do spleta",
+      "labelConnectMCP": "Poveži zunanje orodje (MCP)",
+      "labelSupport": "Podpora",
+      "labelToolChatExtensions": "Orodje: Razširitve pogovora",
+      "labelToolCalculator": "Orodje: Kalkulator",
+      "labelSystem": "Sistem",
+      "labelToolPlatformAccess": "Orodje: Dostop do platforme schorn.ai"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Nov agent",
+      "emptyDescription": "Določite vedenje, dostop do podatkov, videz agenta in še veliko več.",
+      "labelDefinePrompt": "Napišite poziv",
+      "descriptionDefinePrompt": "Agent je tako dober, kot so dobra njegova navodila. Jasne opredelitve vlog zmanjšajo halucinacije in povečajo doslednost.",
+      "labelConnectTools": "Povežite orodja",
+      "descriptionConnectTools": "Povežite na primer shrambe dokumentov, da se agent opira na dejstva in uporablja znanje, specifično za podjetje.",
+      "labelWriteDocs": "Napišite dokumentacijo",
+      "descriptionWriteDocs": "Pomagajte uporabnikom razumeti zmožnosti tega agenta.",
+      "infoRoleDefinition": "Vloga določa vedenje agenta in orodja, ki so mu na voljo za izvedbo naloge.",
+      "infoDocsDescription": "Dokumentacija lahko vsebuje besedilo (podprto je oblikovanje Markdown) in predloge sporočil, ki jih lahko pošljete agentu.",
+      "infoAppearanceDescription": "Ime, opis in barva pomagajo uporabnikom pri izbiri med razpoložljivimi agenti."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Predlagana sporočila",
+      "descriptionRecommendedMessages": "Pomagajte uporabnikom s predlogi sporočil, ki pokažejo, kako najbolje uporabljati agenta.",
+      "labelAddMessage": "Dodaj sporočilo ",
+      "labelDocumentation": "Dokumentacija",
+      "descriptionDocumentation": "Tukaj z uporabniki delite dodatne informacije o tem agentu",
+      "labelShowPreview": "Prikaži predogled",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentacija pomaga uporabnikom uporabljati agenta. Prikaže se, ko uporabnik začne nov pogovor.",
+      "descriptionMarkdownHelp": "Markdown je preprost označevalni jezik za hitro in enostavno oblikovanje besedila.\n\n* **Struktura:** Naslovi (`#`), seznami (oštevilčeni `1.` in neoštevilčeni `-`), vodoravne črte.\n* **Slog besedila:** **Krepko** `**Krepko**`, *Ležeče* `*Ležeče*`, ~~Prečrtano~~ `~~Prečrtano~~`.\n* **Koda:** Koda v besedilu (`code`) in bloki kode s poudarjanjem skladnje.\n* **Organizacija:** Citati (`>`), kontrolni seznami (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Ni vlog",
+      "descriptionNoRoles": "Za agenta ni določena nobena vloga. Brez vloge agent ne bo deloval.",
+      "labelAddRole": "Dodaj vlogo ",
+      "infoMultipleRoles": "Agenti lahko prevzamejo več vlog. Vsaka vloga se lahko bolje osredotoči na del naloge.",
+      "infoTools": "Agenti lahko uporabljajo orodja za boljše odgovarjanje na zahteve uporabnikov (iskanje dokumentov, ustvarjanje dokumentov itd.)."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Nov agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Ustvari agenta",
+      "labelSaveAgent": "Shrani agenta",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Poziv",
+      "tabDocs": "Podpora",
+      "tabRoles": "Vloge",
+      "tabSettings": "Nastavitve",
+      "btnCreate": "Ustvari",
+      "btnSave": "Shrani",
+      "labelEditAgent": "Uredi agenta",
+      "labelCloneAgent": "Shrani kot novega agenta",
+      "labelDeleteAgent": "Izbriši agenta",
+      "confirmDeleteTitle": "Izbriši agenta",
+      "confirmDeleteDescription": "Ali res želite izbrisati agenta »{{name}}«? Tega dejanja ni mogoče razveljaviti.",
+      "labelCancel": "Prekliči"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Vloga ",
+      "description": "Določa vedenje agenta in orodja, ki jih sme agent uporabljati v tem kontekstu.",
+      "tabOverview": "Pregled",
+      "tabPrompt": "Poziv",
+      "tabDocumentRepositoryMounts": "Shrambe dokumentov",
+      "tabMCPs": "Zunanja orodja (MCP)",
+      "tabWeb": "Dostop do interneta",
+      "tabChat": "Razširitve pogovora",
+      "tabCalc": "Kalkulator",
+      "tabTools": "Orodja",
+      "tabSettings": "Nastavitve",
+      "toolWebAccess": "Dostop do interneta",
+      "chatExtensions": "Razširitve pogovora",
+      "calculator": "Kalkulator",
+      "externalToolsMCP": "Zunanja orodja (MCP)",
+      "labelPrompt": "Poziv"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Zavrzi spremembe",
+      "labelDiscardConfirm": "Ali res želite zavreči vse neshranjene spremembe tega agenta?",
+      "labelCancel": "Prekliči",
+      "labelDiscard": "Zavrzi spremembe"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Zunanja orodja (MCP)",
+      "changedBadge": "Spremenjeno",
+      "unknownMcp": "Neznan MCP",
+      "invalidUrl": "Neveljaven URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantično iskanje",
+      "labelChanged": "Spremenjeno",
+      "labelActive": "Aktivno",
+      "labelInactive": "Neaktivno",
+      "description": "Ko je pomemben pomen podatkov in ne njihovo natančno besedilo. (Zahteva model vektorskih vložitev)",
+      "labelUnknownModel": "Neznan model"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Iskanje po ključnih besedah",
+      "labelChanged": "Spremenjeno",
+      "labelActive": "Aktivno",
+      "labelInactive": "Neaktivno",
+      "description": "Za iskanje natančnih izrazov in stavkov. (Imena, poimenovanja itd.)"
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Prepisovalnik",
+      "labelChanged": "Spremenjeno",
+      "labelUnknownTranscriber": "Neznan prepisovalnik",
+      "labelGoToTranscriber": "Pojdi na prepisovalnik"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Novo sporočilo"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Čaka na obdelavo",
+      "tooltipPaused": "Začasno ustavljeno"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Razmišljanje vklopljeno",
+      "labelThinkingOff": "Razmišljanje izklopljeno",
+      "labelMessageStack": "Sklad sporočil",
+      "placeholderMessage": "Sporočilo...",
+      "tooltipUploadFiles": "Nalaganje datotek",
+      "buttonPause": "Začasno ustavi",
+      "buttonStartBatch": "Zaženi paketno obdelavo",
+      "buttonSend": "Pošlji",
+      "descriptionFilesPending": "Datoteke se nalagajo ali obdelujejo …",
+      "labelAttachFiles": "Priloži datoteke",
+      "labelUploadFiles": "Nalaganje datotek",
+      "labelSelectFile": "Izberi obstoječo datoteko"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Dovolim to dejanje?",
+      "descriptionAction": "Agent za nadaljevanje potrebuje vašo odobritev.",
+      "labelApprove": "Dovoli",
+      "labelReject": "Zavrni",
+      "labelRetry": "Poskusi znova",
+      "labelSubmitting": "Obdelava …",
+      "errorSubmit": "Vaše odločitve ni bilo mogoče poslati. Poskusite znova.",
+      "labelMCP": "Povežite svoj račun",
+      "descriptionMCP": "To orodje MCP zahteva prijavo. Čakajoči klic se po povezavi računa samodejno nadaljuje."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Shranim dokument?",
+      "descriptionWriteFile": "Agent želi shraniti ta dokument. Obstoječa vsebina bo nadomeščena.",
+      "labelShowContent": "Prikaži vsebino",
+      "labelHideContent": "Skrij vsebino",
+      "descriptionEmptyFile": "Dokument bo shranjen s prazno vsebino."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Pridobivanje s spleta",
+      "description": "Nastavite dostop do spleta za to vlogo. Pridobivanje in iskanje lahko vklopite neodvisno.",
+      "labelFetch": "Vklopi pridobivanje s spleta",
+      "labelAskFetch": "Vprašaj pred pridobivanjem strani",
+      "labelAccess": "Dovoljena spletna mesta",
+      "labelAll": "Vsa spletna mesta",
+      "labelWhitelist": "Seznam dovoljenih domen",
+      "descriptionAccess": "Datoteke in spletne strani HTTP(S), vključno z lokalnim omrežjem. Za preusmeritve veljajo enaka pravila dostopa.",
+      "labelDomains": "Dovoljene domene",
+      "descriptionDomains": "Eno ime gostitelja na vrstico, na primer example.com. Za poddomene uporabite *.example.com; to ne vključuje same domene example.com.",
+      "errorDomains": "Vnesite imena gostiteljev ali *.example.com brez protokola, poti in vrat.",
+      "descriptionEmptyWhitelist": "Prazen seznam dovoljenih domen blokira vse strani.",
+      "labelSearchTitle": "Spletno iskanje",
+      "labelSearch": "Vklopi spletno iskanje",
+      "labelAskSearch": "Vprašaj pred spletnim iskanjem",
+      "labelProvider": "Ponudnik iskanja",
+      "labelProviderDocs": "Dokumentacija ponudnika",
+      "labelApiKey": "Ključ API",
+      "errorApiKey": "Vnesite ključ API za izbranega ponudnika.",
+      "labelMarket": "Jezik in regija Staan",
+      "descriptionMarket": "Na primer de-de ali en-us. Privzeto je en-us.",
+      "labelRemoveTool": "Odstrani orodje",
+      "labelConfirmRemoveTool": "Odstranim spletno orodje?",
+      "descriptionRemoveTool": "Nastavitve pridobivanja s spleta in spletnega iskanja, vključno s seznamom dovoljenih domen in ključem API, bodo odstranjene iz te vloge.",
+      "labelCancel": "Prekliči"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Pridobi spletno stran",
+      "descriptionFetch": "Dovolim agentu prenos, shranjevanje in obdelavo vsebine tega URL-ja?",
+      "labelDestination": "Cilj"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Išči po spletu",
+      "descriptionSearch": "Dovolim agentu poslati to poizvedbo nastavljenemu ponudniku iskanja?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Zapri",
+      "labelPending": "V teku",
+      "labelApproval": "Čaka na odobritev",
+      "labelDenied": "Zavrnjeno",
+      "labelDone": "Končano",
+      "errorRequest": "Zahteva ni uspela"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Spletno iskanje",
+      "labelQuery": "Iskalna poizvedba",
+      "labelEmptyResults": "Ni rezultatov."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Spletna stran",
+      "labelUrl": "URL",
+      "labelRange": "Znaki {{start}}–{{end}} od {{total}}",
+      "descriptionTruncated": "Več vsebine je na voljo v naslednjem razdelku.",
+      "labelEmptyPage": "Ta stran ne vsebuje berljivega besedila.",
+      "labelSource": "Odpri vir",
+      "descriptionFileReady": "Datoteka je shranjena in obdelana. Izvlečeno besedilo je neposredno na voljo agentu.",
+      "descriptionProcessingUnavailable": "Datoteka je shranjena. Izvlečeno besedilo ni na voljo; zvok in video zahtevata nastavljen prepisovalnik.",
+      "descriptionProcessingFailed": "Datoteka je shranjena, vendar obdelava ni uspela ali je potekla časovna omejitev. Obdelavo lahko znova zaženete v shrambi."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopiraj datoteko",
+      "labelMove": "Premakni datoteko",
+      "descriptionSuccess": "Datoteka je prenesena. Potrebni iskalni indeks se znova gradi v ozadju.",
+      "descriptionPending": "Priprava prenosa datoteke…",
+      "descriptionProcessingError": "Datoteka je prenesena, vendar je treba obdelavo znova zagnati na cilju.",
+      "errorTransfer": "Prenosa datoteke ni bilo mogoče dokončati.",
+      "labelOpenFile": "Odpri ciljno datoteko",
+      "descriptionDenied": "Prenos datoteke je zavrnjen. Nobena datoteka ni bila prenesena.",
+      "descriptionApproval": "Čakanje na vašo odobritev.",
+      "descriptionRunning": "Prenos datoteke…",
+      "labelClose": "Zapri",
+      "labelSource": "Vir",
+      "labelTarget": "Cilj"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Dovolim kopiranje te datoteke?",
+      "labelMove": "Dovolim premik te datoteke?",
+      "descriptionCopy": "Agent želi kopirati to datoteko in njeno obdelano vsebino. Obstoječe ciljne datoteke se nikoli ne prepišejo.",
+      "descriptionMove": "Agent želi premakniti to datoteko in njeno obdelano vsebino. Vir bo odstranjen po uspešnem kopiranju.",
+      "labelSource": "Vir",
+      "labelTarget": "Cilj"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "To orodje MCP zahteva prijavo. Čakajoči klic se po povezavi računa samodejno nadaljuje.",
+      "labelConnect": "Poveži moj račun"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "Orodje MCP",
+      "labelDiscover": "Odkrij razpoložljiva orodja",
+      "labelPending": "V teku",
+      "labelDone": "Končano",
+      "labelApproval": "Zahtevana je prijava",
+      "labelDenied": "Zavrnjeno",
+      "errorRequest": "Zahteva ni uspela",
+      "labelArguments": "Vnos",
+      "labelResult": "Rezultat",
+      "labelClose": "Zapri"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "Aplikacija OAuth",
+      "labelSearch": "Poišči povezavo",
+      "labelAutomatic": "Ni nastavljene aplikacije OAuth",
+      "labelNone": "Ni izbrane povezave",
+      "labelMissing": "Povezava ni na voljo",
+      "descriptionOAuth": "Izbirno: Izberite registrirano aplikacijo OAuth za ta strežnik MCP. Njegov URL nastavite ločeno v tem agentu.",
+      "descriptionSearch": "Poverilnice za Staan in Brave se upravljajo centralno v Nastavitve → Povezave.",
+      "errorMissing": "Ta povezava ni več na voljo. Izberite drugo povezavo.",
+      "descriptionEmpty": "Ustrezna povezava ni nastavljena. Povezave upravljajte v Nastavitve → Povezave."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenti",
+    "emptyTitle": "Ni agentov",
+    "emptyDescription": "Ustvarjen ni še noben agent.",
+    "labelNewAgent": "Nov agent",
+    "helpSearchTitle": "Išči",
+    "helpSearchDescription": "Agente lahko iščete. Iskanje med drugim vključuje ime in opis agenta ter njegov model.",
+    "helpSortTitle": "Razvrščanje in združevanje",
+    "helpSortDescription": "Agente lahko razvrstite po imenu in razdelite v različne skupine. Prikazani so lahko kot ploščice ali tabela."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Ta ponudnik MCP zahteva registrirano aplikacijo OAuth. Prosite skrbnika, naj v Nastavitve → Povezave ustvari aplikacijo OAuth z ID-jem odjemalca in skrivnostjo odjemalca, nato jo izberite v nastavitvah MCP agenta. Zatem se znova povežite iz pogovora.",
+    "errorStart": "Pooblastitve MCP ni bilo mogoče začeti.",
+    "errorCallback": "Pooblastitev MCP ni uspela ali je potekla. Vrnite se v pogovor in poskusite znova."
+  }
+}

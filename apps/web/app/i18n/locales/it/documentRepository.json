@@ -1,0 +1,153 @@
+{
+  "apps": {
+    "labelTitle": "Archivi di documenti",
+    "description": "Gli archivi di documenti creano una base di conoscenza centralizzata, strutturata e affidabile per l’IA, a cui i modelli possono accedere in base al contesto."
+  },
+  "_components": {
+    "DocumentRepositoryCard": {
+      "labelType": "Archivio di documenti"
+    },
+    "DocumentRepositoryList": {
+      "placeholderSearch": "Cerca..."
+    },
+    "DocumentRepositoryListOptionsDropdown": {
+      "labelOptions": "Opzioni",
+      "labelView": "Visualizzazione",
+      "labelSort": "Ordinamento",
+      "labelNameAsc": "Nome dalla A alla Z",
+      "labelNameDesc": "Nome dalla Z alla A",
+      "labelGroup": "Raggruppa per",
+      "labelNoGroup": "Nessun gruppo",
+      "labelFavorites": "Preferiti",
+      "labelFirstLetter": "Lettera iniziale",
+      "labelWorkspaces": "Spazi di lavoro",
+      "labelModel": "Trascrittore",
+      "labelCards": "Schede",
+      "labelTable": "Tabella",
+      "labelSaveView": "Salva visualizzazione",
+      "labelReset": "Reimposta",
+      "labelDocumentRepositories": "Archivi di documenti",
+      "labelNewDocumentRepository": "Nuovo archivio di documenti"
+    },
+    "DocumentRepositoryListCards": {
+      "labelOtherDocumentRepositories": "Altri archivi di documenti",
+      "labelFavorites": "Preferiti",
+      "labelOtherTranscribers": "Altri trascrittori",
+      "labelUnknownTranscriber": "Trascrittore sconosciuto «{{id}}»"
+    },
+    "DocumentRepositoryListTable": {
+      "tableColumnName": "Nome",
+      "tableColumnCapablilities": "Funzionalità",
+      "tableColumnNameActions": "Azioni",
+      "emptyTitle": "Nessun archivio di documenti",
+      "emptyDescription": "Non è stato ancora creato alcun archivio di documenti.",
+      "labelOtherDocumentRepositories": "Altri archivi di documenti",
+      "labelFavorites": "Preferiti",
+      "labelNoGroup": "Nessun gruppo",
+      "labelUnknownTranscriber": "Trascrittore sconosciuto «{{id}}»"
+    },
+    "DocumentRepositoryIconGroupInfos": {
+      "labelUnknownWorkspace": "Spazio di lavoro sconosciuto"
+    },
+    "DocumentRepositoryIconGroupActions": {
+      "tooltipEdit": "Modifica",
+      "tooltipInfo": "Informazioni"
+    },
+    "DocumentRepositoryIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Rimuovi dai preferiti",
+      "tooltipAddFavorite": "Aggiungi ai preferiti"
+    },
+    "DocumentRepositoryEditor": {
+      "labelNewDocumentRepository": "Nuovo archivio di documenti",
+      "labelDocumentRepository": "Archivio di documenti",
+      "labelDocumentRepositoryDropdown": "Archivio di documenti",
+      "labelCreateDocumentRepository": "Crea archivio di documenti",
+      "labelSaveDocumentRepository": "Salva archivio di documenti",
+      "labelCloneDocumentRepository": "Salva come nuovo archivio di documenti",
+      "labelDeleteDocumentRepository": "Elimina archivio di documenti",
+      "confirmDeleteTitle": "Elimina archivio di documenti",
+      "confirmDeleteDescription": "Vuoi davvero eliminare l’archivio di documenti «{{name}}»? Questa azione non può essere annullata.",
+      "labelCancel": "Annulla",
+      "tabOverview": "Panoramica",
+      "tabFeatures": "Funzioni",
+      "tabSettings": "Impostazioni",
+      "btnCreate": "Crea",
+      "btnSave": "Salva"
+    },
+    "DocumentRepositoryEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Scarta modifiche",
+      "labelDiscardConfirm": "Vuoi davvero scartare tutte le modifiche non salvate a questo archivio di documenti?",
+      "labelCancel": "Annulla",
+      "labelDiscard": "Scarta modifiche"
+    },
+    "DocumentRepositoryEditorOverview": {
+      "emptyTitle": "Nuovo archivio di documenti",
+      "emptyDescription": "Definisci il comportamento e l’aspetto dell’archivio di documenti.",
+      "checklistSemanticSearchTitle": "Attiva ricerca semantica",
+      "checklistSemanticSearchDescription": "Attiva la ricerca semantica per migliorare la qualità dei risultati.",
+      "checklistTranscriberTitle": "Seleziona trascrittore",
+      "checklistTranscriberDescription": "Seleziona un trascrittore che trascriva automaticamente tutti i file video e audio caricati.",
+      "helpTitle": "Aiuto",
+      "helpKeywordSearch": "Ricerca classica per parole chiave. Ideale per cercare marchi, nomi di persone e altre denominazioni.",
+      "helpEmbeddingDescription": "Aggiungi un modello di embedding per attivare la ricerca semantica, che trova documenti simili in base al loro significato.",
+      "helpTranscriberDescription": "Aggiungi un trascrittore all’archivio di documenti: tutti i file video e audio verranno trascritti automaticamente dopo il caricamento."
+    },
+    "DocumentRepositoryEditorFeaturesIndex": {
+      "labelLegend": "Indice di ricerca",
+      "description": "A seconda dell’indice di ricerca, vengono usati metodi diversi per fornire i migliori risultati in base alla query.",
+      "labelKeyword": "Ricerca per parole chiave",
+      "descriptionKeyword": "Per cercare espressioni e frasi precise, come nomi e denominazioni.",
+      "labelSemantic": "Ricerca semantica",
+      "descriptionSemantic": "Quando conta il significato dei dati anziché la formulazione esatta. Richiede un modello di embedding.",
+      "labelEmbeddingModel": "Modello di embedding",
+      "descriptionEmbeddingModel": "Il modello di embedding è alla base della ricerca semantica."
+    },
+    "DocumentRepositoryEditorFeaturesTranscriber": {
+      "labelNoTranscriber": "Nessun trascrittore",
+      "labelLegend": "Trascrittore",
+      "description": "I file video e audio vengono trascritti automaticamente dopo il caricamento.",
+      "labelTranscriber": "Trascrittore"
+    },
+    "DocumentRepositoryEditorSettingsDescription": {
+      "labelLegend": "Descrizione",
+      "description": "Scegli un nome adatto per l’archivio di documenti. Puoi anche salvare una breve descrizione.",
+      "labelName": "Nome",
+      "labelDescription": "Descrizione"
+    },
+    "DocumentRepositoryEditorSettingsAppearance": {
+      "labelLegend": "Aspetto",
+      "description": "Scegli un colore e un’icona che rappresentino al meglio l’archivio di documenti.",
+      "labelIcon": "Icona",
+      "labelColor": "Colore"
+    },
+    "DocumentRepositoryEditorSettingsWorkspace": {
+      "labelLegend": "Spazio di lavoro",
+      "description": "Seleziona lo spazio di lavoro in cui creare l’archivio di documenti.",
+      "labelName": "Spazio di lavoro",
+      "labelSelectWorkspace": "Seleziona uno spazio di lavoro."
+    },
+    "TabsDocumentRepository": {
+      "tabFiles": "File",
+      "tabSearch": "Ricerca nel testo completo",
+      "tabInfo": "Informazioni"
+    },
+    "InputQuery": {
+      "placeholderSearch": "Cerca...",
+      "labelSearch": "Ricerca"
+    },
+    "Search": {
+      "emptyTitle": "Ricerca nel testo completo",
+      "emptyDescription": "Cerca testo in tutti i file di questo archivio di documenti."
+    }
+  },
+  "page": {
+    "labelTitle": "Archivi di documenti",
+    "emptyTitle": "Nessun archivio di documenti",
+    "emptyDescription": "Non è stato ancora creato alcun archivio di documenti.",
+    "labelNewDocumentRepository": "Nuovo archivio di documenti",
+    "helpTitle": "Aiuto",
+    "helpSearchDescription": "Puoi cercare gli archivi di documenti. La ricerca include, tra le altre cose, il nome, la descrizione e il trascrittore dell’archivio.",
+    "helpSortDescription": "Gli archivi di documenti possono essere ordinati per nome e suddivisi in gruppi diversi. Possono essere visualizzati come schede o come tabella.",
+    "helpTranscriberDescription": "Puoi scegliere un trascrittore per gli archivi di documenti. Quando carichi file audio o video nell’archivio, vengono trascritti automaticamente."
+  }
+}

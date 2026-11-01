@@ -1,0 +1,518 @@
+{
+  "_components": {
+    "ChatCancelGeneration": {
+      "labelCancel": "Avbryt",
+      "errorCancel": "Det gick inte att stoppa genereringen. Försök igen."
+    },
+    "ChatComposeMessage": {
+      "errorNoAccess": "Du har inte åtkomst till den här agenten."
+    },
+    "AgentInfoModel": {
+      "labelTitle": "Modell",
+      "labelUnknownModel": "Okänd modell",
+      "labelThinkingOptionalOn": "Resonemang",
+      "labelThinkingOptionalOff": "Obligatoriskt resonemang",
+      "labelThinkingMandatoryOn": "Utan resonemang",
+      "labelThinkingMandatoryOff": "Obligatoriskt utan resonemang",
+      "descriptionFeatureVision": "Djupare förståelse av bilder",
+      "labelModelSize": "Kontextstorlek: {{size}} tusen",
+      "labelNotFound": "Modellen hittades inte",
+      "labelChanged": "Ändrad"
+    },
+    "AgentInfoToolCalculator": {
+      "labelTitle": "Verktyg: kalkylator",
+      "description": "Agenten kan använda kalkylatorn i stället för att själv utföra beräkningar. Det gör att agenten bättre kan hantera mer komplexa tal."
+    },
+    "AgentInfoPrompt": {
+      "labelPrompt": "Prompt",
+      "labelMarkdown": "Markdown",
+      "labelEmpty": "Tom",
+      "labelChanged": "Ändrad"
+    },
+    "AgentInfoRoleDocumentRepository": {
+      "labelTitle": "Dokumentarkiv",
+      "labelUnknownRepository": "Okänt dokumentarkiv",
+      "descriptionRepositoryNotFound": "Dokumentarkivet finns inte, eller så saknar du behörighet.",
+      "labelConfirmWrite": "Läsa och skriva (be om bekräftelse)",
+      "labelReadOnly": "Endast läsa",
+      "labelWrite": "Läsa och skriva (automatiskt)",
+      "labelGoToRepository": "Gå till arkivet",
+      "labelChanged": "Ändrad"
+    },
+    "AgentInfoRoleSelectionHint": {
+      "labelTitle": "Vägledning för rollval",
+      "labelMarkdown": "Markdown"
+    },
+    "AgentEditorSettingsDescription": {
+      "labelLegend": "Beskrivning",
+      "description": "Välj ett lämpligt namn för agenten. Du kan även spara en kort beskrivning.",
+      "labelName": "Namn",
+      "labelDescription": "Beskrivning"
+    },
+    "AgentEditorSettingsWorkspace": {
+      "labelLegend": "Arbetsyta",
+      "description": "Välj den arbetsyta där agenten ska skapas.",
+      "labelName": "Arbetsyta",
+      "errorNoPermissions": "Du har inte behörighet att skapa agenter",
+      "errorNoWorkspaceSelected": "Du har inte valt någon arbetsyta",
+      "labelSelectWorkspace": "Välj en arbetsyta."
+    },
+    "AgentEditorSettingsAdditionalFunctions": {
+      "labelLegend": "Ytterligare funktioner",
+      "description": "Utöka agenten med användbara funktioner för att göra arbetet ännu enklare.",
+      "labelFileUpload": "Ladda upp filer",
+      "descriptionFileUpload": "Användare kan ladda upp filer vars innehåll blir tillgängligt för agenten som text.",
+      "labelBatch": "Batchbearbetning",
+      "descriptionBatch": "Användare kan låta filer bearbetas automatiskt per meddelande.",
+      "labelPursueGoal": "Arbeta mot ett mål",
+      "descriptionPursueGoal": "Användare kan ange ett mål och agenten arbetar i en loop tills målet har uppnåtts.",
+      "labelDisappearingChats": "Försvinnande chattar",
+      "descriptionDisappearingChats": "Chattar kan tas bort automatiskt efter 12 timmar. Användaren måste aktivera detta.",
+      "labelNightshift": "Nattskift",
+      "descriptionNightshift": "Agenter som körs länge kan flyttas till nattskiftet för att spara resurser under dagen.",
+      "labelTranscriber": "Transkriberare",
+      "labelNoTranscriber": "Ingen automatisk transkribering",
+      "descriptionTranscriber": "Transkribera uppladdade ljud- och videofiler automatiskt med den här transkriberaren."
+    },
+    "AgentInfoAdditionalFunctions": {
+      "labelTitle": "Ytterligare funktioner",
+      "labelFileUpload": "Ladda upp filer",
+      "descriptionFileUpload": "Användare kan ladda upp filer vars innehåll blir tillgängligt för agenten som text.",
+      "labelBatch": "Batchbearbetning",
+      "descriptionBatch": "Användare kan låta filer bearbetas automatiskt per meddelande.",
+      "labelPursueGoal": "Arbeta mot ett mål",
+      "descriptionPursueGoal": "Användare kan ange ett mål och agenten arbetar i en loop tills målet har uppnåtts.",
+      "labelDisappearingChats": "Försvinnande chattar",
+      "descriptionDisappearingChats": "Chattar kan tas bort automatiskt efter 12 timmar. Användaren måste aktivera detta.",
+      "labelNightshift": "Nattskift",
+      "descriptionNightshift": "Agenter som körs länge kan flyttas till nattskiftet för att spara resurser under dagen."
+    },
+    "AgentInfoRecommendedMessages": {
+      "labelTitle": "Förslag"
+    },
+    "AgentInfoDocs": {
+      "labelTitle": "Dokumentation"
+    },
+    "AgentInfoWorkspace": {
+      "labelTitle": "Arbetsyta",
+      "labelUnknownWorkspace": "Okänd arbetsyta",
+      "labelGoToWorkspace": "Gå till arbetsytan"
+    },
+    "AgentInfo": {
+      "labelRole": "Roll: "
+    },
+    "AgentList": {
+      "placeholderSearch": "Sök...",
+      "tableColumnName": "Namn",
+      "tableColumnCapablilities": "Funktioner",
+      "tableColumnNameActions": "Åtgärder",
+      "labelOtherAgents": "Andra agenter",
+      "labelFavorites": "Favoriter",
+      "labelNoGroup": "Ingen grupp",
+      "labelUnknownModel": "Okänd modell ”{{id}}”",
+      "labelNoRepositories": "Inga dokumentarkiv",
+      "labelUnknownRepository": "Okänt dokumentarkiv ”{{id}}”",
+      "labelRoleCount_other": "{{count}} roller",
+      "labelRoleCount_zero": "Inga roller",
+      "labelRoleCount_one": "{{count}} roll"
+    },
+    "AgentListOptionsDropdown": {
+      "labelOptions": "Alternativ",
+      "labelView": "Vy",
+      "labelSort": "Sortera",
+      "labelNameAsc": "Namn A till Ö",
+      "labelNameDesc": "Namn Ö till A",
+      "labelGroup": "Gruppera efter",
+      "labelFavorites": "Favoriter",
+      "labelFirstLetter": "Första bokstaven",
+      "labelWorkspaces": "Arbetsytor",
+      "labelModel": "Modell",
+      "labelRepositories": "Dokumentarkiv",
+      "labelRoleCount": "Antal roller",
+      "labelCards": "Kort",
+      "labelTable": "Tabell",
+      "labelSaveView": "Spara vy",
+      "labelReset": "Återställ",
+      "labelAgents": "Agenter",
+      "labelNewAgent": "Ny agent",
+      "labelNoGroup": "Ingen grupp"
+    },
+    "AgentEditorSettingsAppearance": {
+      "labelLegend": "Utseende",
+      "description": "Välj en färg och en ikon som bäst representerar agenten.",
+      "labelIcon": "Ikon",
+      "labelColor": "Färg"
+    },
+    "AgentIconGroupActionFavorite": {
+      "tooltipRemoveFavorite": "Ta bort från favoriter",
+      "tooltipAddFavorite": "Lägg till i favoriter"
+    },
+    "AgentIconGroupActions": {
+      "tooltipEdit": "Redigera",
+      "tooltipInfo": "Information",
+      "tooltipNewChat": "Ny chatt"
+    },
+    "AgentIconGroupInfos": {
+      "labelUnknownWorkspace": "Okänd arbetsyta",
+      "labelModelUnknown": "Okänd modell"
+    },
+    "AgentInfoToolWebAccess": {
+      "labelTitle": "Webbåtkomst",
+      "labelGeneralAccess": "Allmän åtkomst, webbsökning",
+      "descriptionFetch": "Webbhämtning laddar ned innehållet från en URL till chattlagringen eller ett anslutet dokumentarkiv med skrivbehörighet. När filen har bearbetats kan agenten läsa den extraherade texten och använda den i sitt svar.",
+      "descriptionSearch": "Webbsökning hjälper agenten att hitta relevanta sidor för en sökfråga. Söktjänsten returnerar rubriker, länkar och korta utdrag. Listan över tillåtna domäner för hämtning begränsar inte webbsökningar.",
+      "labelChanged": "Ändrad",
+      "labelFetch": "Hämtning",
+      "labelSearch": "Sökning",
+      "labelOn": "På",
+      "labelOff": "Av",
+      "labelAsk": "Fråga först",
+      "labelWhitelist": "Hämtning begränsad till tillåtna domäner",
+      "labelAll": "Hämta från alla webbplatser",
+      "labelEmptyWhitelist": "Inga domäner tillåtna",
+      "labelEdit": "Redigera webbåtkomst",
+      "labelDetails": "Visa detaljer"
+    },
+    "AgentInfoToolChatExtensions": {
+      "labelTitle": "Verktyg: chattillägg",
+      "labelFeatures": "Föreslå nästa meddelande, ändra chattens namn",
+      "description": "Agenten kan föreslå nästa användarmeddelande så att användaren kan fortsätta chatten genom att klicka på det önskade meddelandet. <br /> Agenten kan ändra chattens namn åt användaren så att den blir lättare att hitta i historiken."
+    },
+    "AgentEditorRoleSettings": {
+      "labelRoleDescription": "Rollbeskrivning",
+      "description": "Rollbeskrivningen används när ett nytt användarmeddelande tas emot för att avgöra vilken roll som ska besvara meddelandet",
+      "labelName": "Namn",
+      "labelSelectionHint": "Vägledning för rollval",
+      "labelDeleteRole": "Ta bort roll ",
+      "labelDoNotOverride": "Åsidosätt inte",
+      "labelOverrideModel": "Åsidosätt modell",
+      "descriptionOverrideModel": "Du kan välja en annan modell för den här rollen än agentens allmänna modell.",
+      "confirmDeleteDescription": "Vill du verkligen ta bort rollen ”{{name}}”? Åtgärden kan inte ångras.",
+      "labelCancel": "Avbryt",
+      "labelThinking": "Resonemang"
+    },
+    "AgentEditorSettingsModel": {
+      "labelTitle": "Modell",
+      "description": "Den stora språkmodell som agenten använder, om den inte åsidosätts av en roll.",
+      "labelName": "Modell",
+      "labelThinking": "Resonemang",
+      "labelThinking_optionalOn": "Resonemang",
+      "labelThinking_mandatoryOn": "Obligatoriskt resonemang",
+      "labelThinking_optionalOff": "Utan resonemang",
+      "labelThinking_mandatoryOff": "Obligatoriskt utan resonemang",
+      "labelSelectModel": "Välj en modell"
+    },
+    "AgentEditorRoleDocumentRepositoryMounts": {
+      "labelRepository": "Dokumentarkiv",
+      "labelPathAgent": "Sökväg för agenten",
+      "labelPathRepository": "Sökväg i dokumentarkivet",
+      "labelPermission": "Behörighet",
+      "labelDeleteConnection": "Ta bort anslutning",
+      "confirmDeleteTitle": "Ta bort anslutning",
+      "confirmDeleteDescription": "Vill du verkligen ta bort den här anslutningen till dokumentarkivet ”{{name}}”?",
+      "labelCancel": "Avbryt",
+      "labelAddConnection": "Ytterligare anslutning",
+      "labelUnknownRepository": "Okänt dokumentarkiv",
+      "labelConfirmWrite": "Läsa och skriva (be om bekräftelse)",
+      "labelReadOnly": "Endast läsa",
+      "labelWrite": "Läsa och skriva (automatiskt)"
+    },
+    "AgentEditorDocsRecommendedMessage": {
+      "labelLabel": "Etikett",
+      "labelMessage": "Meddelande",
+      "labelClose": "Stäng"
+    },
+    "AgentEditorRoleMCPs": {
+      "labelName": "Namn",
+      "labelUrl": "URL",
+      "labelHTTPHeaders": "HTTP-huvuden",
+      "labelHeaderName": "Namn",
+      "labelHeaderValue": "Värde",
+      "labelAddHeader": "Lägg till HTTP-huvud",
+      "labelDeleteConnection": "Ta bort anslutning",
+      "confirmDeleteTitle": "Ta bort MCP",
+      "confirmDeleteDescription": "Vill du verkligen ta bort MCP-konfigurationen ”{{name}}”?",
+      "labelCancel": "Avbryt",
+      "labelDeleteMCP": "Ta bort MCP",
+      "labelAddMCP": "Ytterligare MCP",
+      "errorInvalidUrl": "URL:en måste vara giltig",
+      "labelOAuthApp": "OAuth-app"
+    },
+    "AgentEditorRoleTools": {
+      "labelData": "Data",
+      "labelConnectRepository": "Anslut dokumentarkiv",
+      "labelToolWebAccess": "Verktyg: webbåtkomst",
+      "labelConnectMCP": "Anslut externt verktyg (MCP)",
+      "labelSupport": "Support",
+      "labelToolChatExtensions": "Verktyg: chattillägg",
+      "labelToolCalculator": "Verktyg: kalkylator",
+      "labelSystem": "System",
+      "labelToolPlatformAccess": "Verktyg: åtkomst till schorn.ai-plattformen"
+    },
+    "AgentEditorOverview": {
+      "emptyTitle": "Ny agent",
+      "emptyDescription": "Ange agentens beteende, dataåtkomst, utseende och mycket mer.",
+      "labelDefinePrompt": "Ange en prompt",
+      "descriptionDefinePrompt": "En agent är bara så bra som sina instruktioner. Tydliga rolldefinitioner minskar hallucinationer och ökar konsekvensen.",
+      "labelConnectTools": "Anslut verktyg",
+      "descriptionConnectTools": "Anslut till exempel dokumentarkiv så att agenten utgår från fakta och använder företagsspecifik kunskap.",
+      "labelWriteDocs": "Skriv dokumentation",
+      "descriptionWriteDocs": "Hjälp användarna att förstå vad agenten kan göra.",
+      "infoRoleDefinition": "Rollen anger hur agenten ska bete sig och vilka verktyg som finns för att slutföra uppgiften.",
+      "infoDocsDescription": "Dokumentationen kan innehålla både text med Markdown-formatering och förslag på meddelanden till agenten.",
+      "infoAppearanceDescription": "Namn, beskrivning och färg hjälper användarna att hitta bland de tillgängliga agenterna."
+    },
+    "AgentEditorDocs": {
+      "labelRecommendedMessages": "Föreslagna meddelanden",
+      "descriptionRecommendedMessages": "Hjälp användarna genom att föreslå meddelanden som visar hur agenten används på bästa sätt.",
+      "labelAddMessage": "Lägg till meddelande ",
+      "labelDocumentation": "Dokumentation",
+      "descriptionDocumentation": "Dela mer information om den här agenten med användarna här",
+      "labelShowPreview": "Visa förhandsgranskning",
+      "labelMarkdown": "Markdown",
+      "descriptionDocumentationHelp": "Dokumentationen hjälper användarna att använda agenten. Den visas när användaren startar en ny chatt.",
+      "descriptionMarkdownHelp": "Markdown är ett enkelt märkspråk för att formatera text snabbt och lätt.\n\n* **Struktur:** rubriker (`#`), listor (numrerade `1.` och onumrerade `-`), vågräta linjer.\n* **Textstil:** **fetstil** `**fetstil**`, *kursiv* `*kursiv*`, ~~genomstruken~~ `~~genomstruken~~`.\n* **Kod:** kod i löpande text (`code`) och kodblock med syntaxmarkering.\n* **Organisation:** citat (`>`) och checklistor (`- [x]`)."
+    },
+    "AgentEditorRoles": {
+      "labelNoRoles": "Inga roller",
+      "descriptionNoRoles": "Inga roller har definierats för agenten. Utan en roll fungerar inte agenten.",
+      "labelAddRole": "Lägg till roll ",
+      "infoMultipleRoles": "Agenter kan ha flera roller. En roll kan fokusera bättre på en deluppgift.",
+      "infoTools": "Agenter kan använda verktyg för att bättre besvara användarnas förfrågningar, till exempel söka efter och skapa dokument."
+    },
+    "AgentEditor": {
+      "labelNewAgent": "Ny agent",
+      "labelAgent": "Agent",
+      "labelCreateAgent": "Skapa agent",
+      "labelSaveAgent": "Spara agent",
+      "tabOverview": "Översikt",
+      "tabPrompt": "Prompt",
+      "tabDocs": "Support",
+      "tabRoles": "Roller",
+      "tabSettings": "Inställningar",
+      "btnCreate": "Skapa",
+      "btnSave": "Spara",
+      "labelEditAgent": "Redigera agent",
+      "labelCloneAgent": "Spara som ny agent",
+      "labelDeleteAgent": "Ta bort agent",
+      "confirmDeleteTitle": "Ta bort agent",
+      "confirmDeleteDescription": "Vill du verkligen ta bort agenten ”{{name}}”? Åtgärden kan inte ångras.",
+      "labelCancel": "Avbryt"
+    },
+    "AgentEditorRole": {
+      "labelRole": "Roll ",
+      "description": "Anger agentens beteende och vilka verktyg agenten får använda i det här sammanhanget.",
+      "tabOverview": "Översikt",
+      "tabPrompt": "Prompt",
+      "tabDocumentRepositoryMounts": "Dokumentarkiv",
+      "tabMCPs": "Externa verktyg (MCP)",
+      "tabWeb": "Internetåtkomst",
+      "tabChat": "Chattillägg",
+      "tabCalc": "Kalkylator",
+      "tabTools": "Verktyg",
+      "tabSettings": "Inställningar",
+      "toolWebAccess": "Internetåtkomst",
+      "chatExtensions": "Chattillägg",
+      "calculator": "Kalkylator",
+      "externalToolsMCP": "Externa verktyg (MCP)",
+      "labelPrompt": "Prompt"
+    },
+    "AgentEditorDiscardAllChanges": {
+      "labelDiscardTitle": "Kasta ändringar",
+      "labelDiscardConfirm": "Vill du verkligen kasta alla osparade ändringar av den här agenten?",
+      "labelCancel": "Avbryt",
+      "labelDiscard": "Kasta ändringar"
+    },
+    "AgentInfoMCPs": {
+      "labelTitle": "Externa verktyg (MCP)",
+      "changedBadge": "Ändrad",
+      "unknownMcp": "Okänd MCP",
+      "invalidUrl": "Ogiltig URL"
+    },
+    "DocumentRepositoryInfoIndexEmbedding": {
+      "labelTitle": "Semantisk sökning",
+      "labelChanged": "Ändrad",
+      "labelActive": "Aktiv",
+      "labelInactive": "Inaktiv",
+      "description": "När uppgifternas betydelse är viktigare än den exakta ordalydelsen. Kräver en inbäddningsmodell.",
+      "labelUnknownModel": "Okänd modell"
+    },
+    "DocumentRepositoryInfoIndexKeyword": {
+      "labelTitle": "Nyckelordssökning",
+      "labelChanged": "Ändrad",
+      "labelActive": "Aktiv",
+      "labelInactive": "Inaktiv",
+      "description": "För sökning efter exakta uttryck och meningar, som namn och beteckningar."
+    },
+    "DocumentRepositoryInfoTranscriber": {
+      "labelTitle": "Transkriberare",
+      "labelChanged": "Ändrad",
+      "labelUnknownTranscriber": "Okänd transkriberare",
+      "labelGoToTranscriber": "Gå till transkriberaren"
+    },
+    "ChatComposeMessageBatch": {
+      "labelNewMessage": "Nytt meddelande"
+    },
+    "ChatComposeMessageBatchItem": {
+      "tooltipWaiting": "Väntar på bearbetning",
+      "tooltipPaused": "Pausad"
+    },
+    "ChatComposeMessageSelected": {
+      "labelThinkingOn": "Resonemang aktiverat",
+      "labelThinkingOff": "Resonemang inaktiverat",
+      "labelMessageStack": "Meddelandekö",
+      "placeholderMessage": "Meddelande...",
+      "tooltipUploadFiles": "Ladda upp filer",
+      "buttonPause": "Pausa",
+      "buttonStartBatch": "Starta batch",
+      "buttonSend": "Skicka",
+      "descriptionFilesPending": "Filer laddas upp eller bearbetas…",
+      "labelAttachFiles": "Bifoga filer",
+      "labelUploadFiles": "Ladda upp filer",
+      "labelSelectFile": "Välj en befintlig fil"
+    },
+    "ChatToolApproval": {
+      "labelTitle": "Tillåta den här åtgärden?",
+      "descriptionAction": "Agenten behöver ditt godkännande för att fortsätta.",
+      "labelApprove": "Tillåt",
+      "labelReject": "Neka",
+      "labelRetry": "Försök igen",
+      "labelSubmitting": "Bearbetar…",
+      "errorSubmit": "Det gick inte att skicka ditt beslut. Försök igen.",
+      "labelMCP": "Anslut ditt konto",
+      "descriptionMCP": "Det här MCP-verktyget kräver att du loggar in. Det väntande anropet fortsätter automatiskt när du har anslutit kontot."
+    },
+    "ChatToolApprovalStorageWriteFile": {
+      "labelTitle": "Spara dokument?",
+      "descriptionWriteFile": "Agenten vill spara det här dokumentet. Befintligt innehåll ersätts.",
+      "labelShowContent": "Visa innehåll",
+      "labelHideContent": "Dölj innehåll",
+      "descriptionEmptyFile": "Dokumentet sparas med tomt innehåll."
+    },
+    "AgentEditorRoleWebAccess": {
+      "labelTitle": "Webbhämtning",
+      "description": "Konfigurera webbåtkomst för den här rollen. Hämtning och sökning kan aktiveras oberoende av varandra.",
+      "labelFetch": "Aktivera webbhämtning",
+      "labelAskFetch": "Fråga innan en sida hämtas",
+      "labelAccess": "Tillåtna webbplatser",
+      "labelAll": "Alla webbplatser",
+      "labelWhitelist": "Lista över tillåtna domäner",
+      "descriptionAccess": "HTTP(S)-filer och webbsidor, även i det lokala nätverket. Omdirigeringar följer samma åtkomstregler.",
+      "labelDomains": "Tillåtna domäner",
+      "descriptionDomains": "Ett värdnamn per rad, till exempel example.com. Använd *.example.com för underdomäner; det omfattar inte själva example.com.",
+      "errorDomains": "Ange värdnamn eller *.example.com utan protokoll, sökväg eller port.",
+      "descriptionEmptyWhitelist": "En tom lista blockerar alla sidor.",
+      "labelSearchTitle": "Webbsökning",
+      "labelSearch": "Aktivera webbsökning",
+      "labelAskSearch": "Fråga innan sökning på webben",
+      "labelProvider": "Söktjänst",
+      "labelProviderDocs": "Tjänstens dokumentation",
+      "labelApiKey": "API-nyckel",
+      "errorApiKey": "Ange en API-nyckel för den valda tjänsten.",
+      "labelMarket": "Språk och region för Staan",
+      "descriptionMarket": "Till exempel de-de eller en-us. Standard är en-us.",
+      "labelRemoveTool": "Ta bort verktyg",
+      "labelConfirmRemoveTool": "Ta bort webbverktyget?",
+      "descriptionRemoveTool": "Inställningarna för webbhämtning och webbsökning, inklusive listan över tillåtna domäner och API-nyckeln, tas bort från den här rollen.",
+      "labelCancel": "Avbryt"
+    },
+    "ChatToolApprovalWebFetch": {
+      "labelTitle": "Hämta webbsida",
+      "descriptionFetch": "Tillåta att agenten laddar ned, sparar och bearbetar den här URL:en?",
+      "labelDestination": "Mål"
+    },
+    "ChatToolApprovalWebSearch": {
+      "labelTitle": "Sök på webben",
+      "descriptionSearch": "Tillåta att agenten skickar den här sökfrågan till den konfigurerade söktjänsten?"
+    },
+    "ChatMessagePartToolWebLayout": {
+      "labelClose": "Stäng",
+      "labelPending": "Körs",
+      "labelApproval": "Väntar på godkännande",
+      "labelDenied": "Avböjd",
+      "labelDone": "Slutförd",
+      "errorRequest": "Förfrågan misslyckades"
+    },
+    "ChatMessagePartToolWebSearch": {
+      "labelSearch": "Webbsökning",
+      "labelQuery": "Sökfråga",
+      "labelEmptyResults": "Inga resultat hittades."
+    },
+    "ChatMessagePartToolWebFetch": {
+      "labelFetch": "Webbsida",
+      "labelUrl": "URL",
+      "labelRange": "Tecken {{start}}–{{end}} av {{total}}",
+      "descriptionTruncated": "Mer innehåll finns i nästa avsnitt.",
+      "labelEmptyPage": "Den här sidan innehåller ingen läsbar text.",
+      "labelSource": "Öppna källa",
+      "descriptionFileReady": "Filen har sparats och bearbetats. Den extraherade texten är direkt tillgänglig för agenten.",
+      "descriptionProcessingUnavailable": "Filen har sparats. Ingen extraherad text finns; ljud och video kräver en konfigurerad transkriberare.",
+      "descriptionProcessingFailed": "Filen har sparats, men bearbetningen misslyckades eller tog för lång tid. Bearbetningen kan startas om i lagringen."
+    },
+    "ChatMessagePartToolStorageTransferFile": {
+      "labelCopy": "Kopiera fil",
+      "labelMove": "Flytta fil",
+      "descriptionSuccess": "Filen har överförts. Eventuella nödvändiga sökindex byggs om i bakgrunden.",
+      "descriptionPending": "Förbereder filöverföringen…",
+      "descriptionProcessingError": "Filen har överförts, men bearbetningen måste startas om på målplatsen.",
+      "errorTransfer": "Filöverföringen kunde inte slutföras.",
+      "labelOpenFile": "Öppna målfil",
+      "descriptionDenied": "Filöverföring nekad. Ingen fil överfördes.",
+      "descriptionApproval": "Väntar på ditt godkännande.",
+      "descriptionRunning": "Överför fil…",
+      "labelClose": "Stäng",
+      "labelSource": "Källa",
+      "labelTarget": "Mål"
+    },
+    "ChatToolApprovalStorageTransferFile": {
+      "labelCopy": "Tillåta kopiering av den här filen?",
+      "labelMove": "Tillåta flytt av den här filen?",
+      "descriptionCopy": "Agenten vill kopiera den här filen och dess bearbetade innehåll. Befintliga filer på målplatsen skrivs aldrig över.",
+      "descriptionMove": "Agenten vill flytta den här filen och dess bearbetade innehåll. Källan tas bort när kopieringen har lyckats.",
+      "labelSource": "Källa",
+      "labelTarget": "Mål"
+    },
+    "ChatMCPAuthorization": {
+      "descriptionConnect": "Det här MCP-verktyget kräver att du loggar in. Det väntande anropet fortsätter automatiskt när du har anslutit kontot.",
+      "labelConnect": "Anslut mitt konto"
+    },
+    "ChatMessagePartToolMCP": {
+      "labelMCP": "MCP-verktyg",
+      "labelDiscover": "Upptäck tillgängliga verktyg",
+      "labelPending": "Körs",
+      "labelDone": "Slutförd",
+      "labelApproval": "Inloggning krävs",
+      "labelDenied": "Nekad",
+      "errorRequest": "Förfrågan misslyckades",
+      "labelArguments": "Indata",
+      "labelResult": "Resultat",
+      "labelClose": "Stäng"
+    },
+    "AgentConnectionSelect": {
+      "labelOAuth": "OAuth-app",
+      "labelSearch": "Sökanslutning",
+      "labelAutomatic": "Ingen konfigurerad OAuth-app",
+      "labelNone": "Ingen anslutning vald",
+      "labelMissing": "Anslutningen är inte tillgänglig",
+      "descriptionOAuth": "Valfritt: välj en registrerad OAuth-app för den här MCP-servern. Konfigurera dess URL separat i den här agenten.",
+      "descriptionSearch": "Inloggningsuppgifter för Staan och Brave hanteras centralt under Inställningar → Anslutningar.",
+      "errorMissing": "Den här anslutningen är inte längre tillgänglig. Välj en annan anslutning.",
+      "descriptionEmpty": "Ingen matchande anslutning har konfigurerats. Hantera anslutningar under Inställningar → Anslutningar."
+    }
+  },
+  "page": {
+    "labelTitle": "Agenter",
+    "emptyTitle": "Inga agenter",
+    "emptyDescription": "Inga agenter har skapats ännu.",
+    "labelNewAgent": "Ny agent",
+    "helpSearchTitle": "Sökning",
+    "helpSearchDescription": "Du kan söka efter agenter. Sökningen omfattar bland annat agentens namn, beskrivning och modell.",
+    "helpSortTitle": "Sortering och gruppering",
+    "helpSortDescription": "Agenter kan sorteras efter namn och delas in i olika grupper. De kan visas som paneler eller som en tabell."
+  },
+  "mcpOAuth": {
+    "errorClientRequired": "Den här MCP-leverantören kräver en registrerad OAuth-app. Be en administratör skapa en OAuth-app med Client ID och Client Secret under Inställningar → Anslutningar och välj den i agentens MCP-inställningar. Anslut sedan igen från chatten.",
+    "errorStart": "Det gick inte att starta MCP-auktoriseringen.",
+    "errorCallback": "MCP-auktoriseringen misslyckades eller har löpt ut. Gå tillbaka till chatten och försök igen."
+  }
+}
