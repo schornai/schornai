@@ -1,22 +1,22 @@
 # November 2026
 
 Finaler Release für November 2026. Web-App und Mac-Admin-App zeigen
-**November 2026** ohne Release-Candidate-Zusatz. Der Quellstand enthält CLI
-`schornai@0.5.0`; auf npm bleibt `schornai@0.4.0` veröffentlicht.
+**November 2026** ohne Release-Candidate-Zusatz. Die zugehörige CLI-Version ist
+`schornai@0.5.0`.
 
 Veröffentlicht am **2. November 2026**. Der öffentliche
 [Setup-Endpunkt](https://schorn.ai/xrag/schornai/latest) liefert das finale
 macOS-ARM64-Setup. Das Paket wurde am selben Tag mit der unten beschriebenen
-Datenbankkorrektur unter derselben Adresse ersetzt. npm-`latest` bleibt auf
-[`schornai@0.4.0`](https://www.npmjs.com/package/schornai/v/0.4.0); ein neues
-npm-Paket wurde für diese Korrektur nicht veröffentlicht.
+Datenbankkorrektur unter derselben Adresse ersetzt. npm-`latest` verweist auf
+[`schornai@0.5.0`](https://www.npmjs.com/package/schornai/v/0.5.0), damit direkte
+CLI-Starts ebenfalls die korrigierte Dienstlogik verwenden.
 
 | Angabe          | Wert                                                |
 | --------------- | --------------------------------------------------- |
 | Branch          | `release/november-2026`                             |
 | Ausgangscommit  | `0cb49283e052f1d9a726becadcc79224585758f5` (`main`) |
 | Basis-Build     | `80a7a663492b4b2471e9bc11cb6e5ac96820e1bf`          |
-| Öffentliche CLI | `schornai@0.4.0`                                    |
+| Öffentliche CLI | `schornai@0.5.0`                                    |
 | Setup-Datei     | `november-2026.xrag.tar`                            |
 | Setup-Ziel      | macOS ARM64 (Apple Silicon)                         |
 
@@ -32,14 +32,11 @@ npm-Paket wurde für diese Korrektur nicht veröffentlicht.
 - Automatische Erstinstallation mit `npx schornai` nach ausdrücklicher
   Bestätigung. Die Archivextraktion unterstützt gültige symbolische Linkketten
   und zeigt die Prüf- und Entpackphase an.
-- Einrichtung des ersten Administrators über den mitgelieferten Dienst:
-  E-Mail-Adresse eingeben, einmaligen
+- Einrichtung des ersten Administrators nach einer neuen Installation oder
+  mit `npx schornai service setup-admin`: E-Mail-Adresse eingeben, einmaligen
   Schlüssel auf `/signin/reset` verwenden und das Passwort festlegen. Ein
   Mailserver ist dafür nicht erforderlich. Vorhandene Benutzer verhindern die
   erneute Kontoanlage; bestehende Konten und Rollen bleiben unverändert.
-  Die automatische Abfrage und `npx schornai service setup-admin` gehören zur
-  noch nicht veröffentlichten CLI 0.5.0; für npm 0.4.0 siehe die
-  [CLI-Anleitung](../de/cli/index.md#ersten-administrator-anlegen).
 - Zentrale Provider-Verbindungen und MCP-OAuth mit persönlichen Freigaben sowie
   Fortsetzung unterbrochener Chat-Anfragen.
 - Veröffentlichung des Quellcodes unter AGPL-3.0-only im Repository
@@ -60,11 +57,10 @@ können das passende XRAG nach einer konsistenten Sicherung unter
 bestätigt noch keine abgeschlossene Installation. Datenbankmigrationen werden
 nicht durch ein älteres Bundle automatisch rückgängig gemacht.
 
-Der reguläre XRAG-Updateweg, die Mac-App und der Abschluss einer Erstinstallation
-verwenden den neu mitgelieferten Dienst. Explizites `npx schornai service start`
-oder `restart` verwendet dagegen weiterhin die im npm-Paket enthaltene ältere
-Dienstlogik. Für die neue Startlogik über diese Befehle wäre ein eigener
-CLI-Release nötig; bis dahin die Mac-App oder die installierte Runtime verwenden.
+Der reguläre XRAG-Updateweg und die Mac-App verwenden den neu mitgelieferten
+Dienst. CLI `0.5.0` enthält dieselbe Dienstlogik für direkte Aufrufe wie
+`npx schornai service start` oder `restart`. Bereits global oder fest auf eine
+ältere Version installierte CLIs müssen auf `0.5.0` aktualisiert werden.
 Die globale Colima-Konfiguration wird durch die Korrektur nicht verändert.
 Weitere Voraussetzungen zu Speicherplatz, Sicherung und Wiederherstellung stehen
 in der [Betriebsanleitung](../de/box-admin/index.md).
@@ -82,7 +78,10 @@ Das korrigierte Archiv enthält den neu gebauten Dienst und die aktualisierten
 Datenbank-Startdateien. Container-Images, native Programme, Transcriber und
 Mac-App sind unverändert aus dem geprüften Basisarchiv übernommen. Die
 Integritätsmanifeste wurden aktualisiert; das gesamte Archiv wird mit der
-veröffentlichten CLI 0.4.0 geprüft. Die erfolgreiche Storybook-Typprüfung,
+bisher veröffentlichten CLI 0.4.0 geprüft. Die neue CLI 0.5.0 wurde separat
+außerhalb des Checkouts unter Node.js 24 geprüft: Hilfe, Version und die
+Dienststeuerung mit Start, Neustart, Status und Stoppen. Ihre Dienstdateien
+stimmen vollständig mit der Runtime im korrigierten XRAG überein. Die erfolgreiche Storybook-Typprüfung,
 Komponentenabdeckung und vier Visual-CI-Shards des Basis-Releases betreffen die
 unveränderte Oberfläche.
 
@@ -99,9 +98,8 @@ und TLS-Zertifikate werden separat eingerichtet.
   (4.466.759.680 Bytes),
   [SHA-256-Datei](https://e5bdpj0rnd1tojfy.public.blob.vercel-storage.com/november-2026.xrag.tar.sha256).
 - Setup-SHA-256: `831abf2a4dda1d0924543aae108cdc45304b10bb8ac17977c8561e8734b4deb4`.
-- Lokal gebautes, nicht auf npm veröffentlichtes CLI-Archiv
-  `schornai-0.5.0.tgz`, SHA-256:
-  `1166725abb244b9426495e90a4e7e9523e6407276af96e4eb72ec347f2b7dacc`.
+- CLI-SHA-256 (`schornai-0.5.0.tgz`):
+  `79896168fb3a7ed8cf07c7067b91dbeda7d79cabfcc4fd1c43586593f39f61d8`.
 
 Siehe [CLI](../de/cli/index.md), [Service und Mac-App](../de/box-admin/index.md),
 [Provider-Verbindungen](../de/settings/connections.md) und
