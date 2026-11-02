@@ -5,13 +5,18 @@ import type { Context } from "../packages/service/src/config.ts";
 import { configSchema } from "../packages/service/src/config.ts";
 import { Services } from "../packages/service/src/services.ts";
 import { ensureDocker } from "../packages/service/src/docker.ts";
-import { run, completion, terminate } from "../packages/service/src/process.ts";
+import {
+  run,
+  launch,
+  completion,
+  terminate,
+} from "../packages/service/src/process.ts";
 import { mkdtemp, rm, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 vi.mock("../packages/service/src/process.ts", () => ({
   run: vi.fn(),
-  launch: () => new EventEmitter(),
+  launch: vi.fn(() => new EventEmitter()),
   completion: vi.fn(
     (child: ChildProcess, event: string = "close") =>
       new Promise<void>((resolve) => child.once(event, () => resolve())),
@@ -34,6 +39,8 @@ const context: Context = {
 };
 beforeEach(() => {
   vi.mocked(run).mockReset();
+  vi.mocked(launch).mockClear();
+  vi.mocked(terminate).mockClear();
 });
 it("preserves ownership of a started Colima VM across an update pause and stops it on shutdown", async () => {
   vi.mocked(run).mockRejectedValueOnce(new Error("Docker is offline"));
@@ -69,6 +76,103 @@ it("does not claim or stop an already available Docker VM", async () => {
   expect(
     vi.mocked(run).mock.calls.some(([command]) => command.name === "colima"),
   ).toBe(false);
+});
+it("allows the installed Supabase copy window while retaining shorter waits for other stacks", async () => {
+  const root = await mkdtemp(join(tmpdir(), "service-start-budget-"));
+  const services = new Services(
+    {
+      ...context,
+      root,
+      config: {
+        ...context.config,
+        services: ["supabase", "document-extractor", "core"],
+      },
+    },
+    () => {},
+  );
+  try {
+    await services.start();
+    const starts = vi
+      .mocked(run)
+      .mock.calls.map(([command]) => command)
+      .filter((command) => command.args.includes("up"));
+    expect(
+      starts.map((command) => [
+        command.name,
+        command.args[command.args.indexOf("--wait-timeout") + 1],
+      ]),
+    ).toEqual([
+      ["supabase", "1800"],
+      ["document-extractor", "180"],
+      ["core", "180"],
+    ]);
+  } finally {
+    await services.stop();
+    await rm(root, { recursive: true, force: true });
+  }
+});
+it("follows database logs while startup is pending and cleans the follower up on failure", async () => {
+  const log = vi.fn();
+  let failStartup!: (error: Error) => void;
+  vi.mocked(run).mockImplementation(async (command) => {
+    if (command.name === "supabase" && command.args.includes("up"))
+      await new Promise<void>((_resolve, reject) => {
+        failStartup = reject;
+      });
+  });
+  const services = new Services(context, log);
+  const startup = services.start();
+  const failed = expect(startup).rejects.toThrow("Database copy failed");
+  await expect.poll(() => failStartup).toBeTypeOf("function");
+  expect(launch).toHaveBeenCalledWith(
+    expect.objectContaining({
+      name: "supabase:logs",
+      args: expect.arrayContaining(["logs", "--follow", "--tail", "100"]),
+    }),
+    log,
+  );
+  const follower = vi.mocked(launch).mock.results[0]!.value;
+  // The process transport can already deliver copy progress before `up --wait` returns.
+  vi.mocked(launch).mock.calls[0]![1]("supabase:logs", "Copying database");
+  expect(log).toHaveBeenCalledWith("supabase:logs", "Copying database");
+  failStartup(new Error("Database copy failed"));
+  await failed;
+  expect(terminate).toHaveBeenCalledWith(follower);
+  expect(run).toHaveBeenCalledWith(
+    expect.objectContaining({
+      name: "supabase",
+      args: expect.arrayContaining(["stop", "--timeout", "30"]),
+    }),
+    log,
+  );
+  expect(await services.status()).toEqual([]);
+});
+
+it("reattaches an early log follower after Compose creates containers without failing startup", async () => {
+  let finishStartup!: () => void;
+  vi.mocked(run).mockImplementation(async (command) => {
+    if (command.name === "supabase" && command.args.includes("up"))
+      await new Promise<void>((resolve) => {
+        finishStartup = resolve;
+      });
+  });
+  const services = new Services(context, vi.fn());
+  const startup = services.start();
+  try {
+    await expect.poll(() => finishStartup).toBeTypeOf("function");
+    const initialFollower = vi.mocked(launch).mock.results[0]!.value;
+    initialFollower.emit("exit", 0);
+    await expect
+      .poll(() => vi.mocked(launch).mock.calls.length, { timeout: 5000 })
+      .toBe(2);
+    expect(terminate).toHaveBeenCalledWith(initialFollower);
+    finishStartup();
+    await startup;
+  } finally {
+    finishStartup?.();
+    await services.stop();
+    await startup;
+  }
 });
 it("keeps the web app reachable when database migrations fail", async () => {
   const root = await mkdtemp(join(tmpdir(), "service-web-start-"));

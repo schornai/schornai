@@ -7,7 +7,7 @@ meta:
   required_role: "Betriebszugang zur Maschine; keine zusätzliche CLI-Anmeldung."
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; für die Erstinstallation OpenSSL und ein passendes Setup-Bundle; unter Linux laufendes Docker mit Compose ab 2.24.4."
-  status: "Finaler Release November 2026 mit CLI 0.5.0 und Einrichtung des ersten Administrators; Setup-Ziel macOS ARM64. Veröffentlichungsstand siehe Release-Hinweise."
+  status: "Finales Setup November 2026 für macOS ARM64; npm veröffentlicht CLI 0.4.0, Quellstand enthält 0.5.0. Veröffentlichungsstand siehe Release-Hinweise."
   last_verified: "2026-11-02"
   source_files:
     [
@@ -29,7 +29,8 @@ meta:
 # schorn.ai CLI
 
 Die CLI unter `apps/cli` bietet die Service-Befehle an. Das npm-Paket heißt
-`schornai`; Version `0.5.0` gehört zum finalen Release **November 2026**.
+`schornai`; auf npm ist derzeit Version `0.4.0` veröffentlicht. Der Quellstand
+für **November 2026** enthält die noch nicht veröffentlichte Version `0.5.0`.
 Den Veröffentlichungsstand findest du in den
 [Release-Hinweisen](../../releases/november-2026.md). Im Repository ist die CLI
 nach `npm run build:cli` verfügbar.
@@ -102,7 +103,20 @@ CLI-Version an.
 
 ## Ersten Administrator anlegen
 
-Diese Funktion ist in CLI `0.5.0` des finalen Releases **November 2026** enthalten.
+Diese Funktion ist im Dienst des finalen Setups **November 2026** und im
+CLI-Quellstand `0.5.0` enthalten. Die veröffentlichte npm-CLI `0.4.0` bietet
+weder die automatische Abfrage noch den Befehl `service setup-admin`. Nach der
+Installation des aktuellen Setups kann auf einem Mac stattdessen dessen
+Runtime verwendet werden:
+
+```bash
+~/.aibox/bin/node/node ~/.aibox/apps/service/cli.mjs service setup-admin
+```
+
+Bei einem anderen Installationsverzeichnis die beiden Pfade anpassen. Unter
+Linux `node` für die systemseitige Node.js-Runtime verwenden. Die folgenden
+Angaben zur automatischen Abfrage und zum `npx`-Befehl gelten für CLI `0.5.0`,
+sobald diese veröffentlicht ist, beziehungsweise nach einem lokalen CLI-Build.
 
 Nach einer neuen automatischen Installation fragt die CLI im Terminal nach der
 E-Mail-Adresse des ersten Administrators. Sie legt das Konto an und zeigt einen

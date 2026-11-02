@@ -218,25 +218,30 @@ services:
         condition: service_completed_successfully
     container_name: supabase-db
     image: supabase/postgres:15.19.0.004
+    entrypoint: !override
+      - /bin/sh
+      - /prepare-data.sh
+    stop_grace_period: 1m
     healthcheck: !override
       test:
         - CMD
-        - pg_isready
-        - -U
-        - postgres
-        - -h
-        - localhost
+        - /bin/sh
+        - /check-health.sh
       interval: 5s
       timeout: 5s
       retries: 10
+      start_period: 30m
     restart: on-failure
     command: !override
       - postgres
       - -c
       - config_file=/etc/postgresql/postgresql.conf
       - -c
+      - data_directory=/var/lib/postgresql/data/pgdata
+      - -c
       - log_min_messages=fatal
     environment: !override
+      PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_HOST: /var/run/postgresql
       PGPORT: ${POSTGRES_PORT}
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -251,7 +256,10 @@ services:
       - ./volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z
       - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
       - ./volumes/db/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
-      - ./volumes/db/data:/var/lib/postgresql/data:Z
+      - ./volumes/db/data:/legacy-pgdata:ro,z
+      - db-data:/var/lib/postgresql/data
+      - ./volumes/db/prepare-data.sh:/prepare-data.sh:ro,z
+      - ./volumes/db/check-health.sh:/check-health.sh:ro,z
       - ./volumes/db/_supabase.sql:/docker-entrypoint-initdb.d/migrations/97-_supabase.sql:Z
       - ./volumes/db/logs.sql:/docker-entrypoint-initdb.d/migrations/99-logs.sql:Z
       - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
@@ -329,6 +337,8 @@ services:
     profiles:
       - disabled
 volumes:
+  db-data:
+    name: supabase_db-data
   db-config:
     name: supabase_db-config
 networks:

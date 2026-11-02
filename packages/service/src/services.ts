@@ -11,6 +11,24 @@ import { completion, launch, run, terminate, type Command } from "./process.ts";
 import { binary, ensureDocker } from "./docker.ts";
 import { serviceCommands } from "./serviceCommands.ts";
 
+const supabaseStartupTimeoutSeconds = 30 * 60;
+const composeStartupTimeoutSeconds = 180;
+
+/** Include the database copy window as well as the existing launcher allowance. */
+export function serviceStartupTimeoutMs(config: Context["config"]) {
+  if (config.development || !config.services.includes("supabase"))
+    return 240_000;
+  const otherStacks = config.services.filter((service) =>
+    ["core", "document-extractor"].includes(service),
+  ).length;
+  return (
+    240_000 +
+    (supabaseStartupTimeoutSeconds +
+      otherStacks * composeStartupTimeoutSeconds) *
+      1000
+  );
+}
+
 export class Services {
   private nativeStates = new Map<string, ServiceStatus>();
   private children = new Set<ChildProcess>();
@@ -105,6 +123,20 @@ export class Services {
       }
       for (const { spec, services } of compose) {
         this.activeCompose.push(spec);
+        // Follow startup work too, including the first PostgreSQL data copy.
+        // The existing retry loop reconnects when Compose creates/replaces containers.
+        this.monitor({
+          ...spec,
+          name: `${spec.name}:logs`,
+          args: [
+            ...spec.args,
+            "logs",
+            "--follow",
+            "--no-color",
+            "--tail",
+            "100",
+          ],
+        });
         await run(
           {
             ...spec,
@@ -114,7 +146,11 @@ export class Services {
               "-d",
               "--wait",
               "--wait-timeout",
-              "180",
+              String(
+                !this.context.config.development && spec.name === "supabase"
+                  ? supabaseStartupTimeoutSeconds
+                  : composeStartupTimeoutSeconds,
+              ),
               ...(this.context.config.development && spec.name === "core"
                 ? ["--build"]
                 : []),
@@ -147,18 +183,6 @@ export class Services {
             );
           }
         }
-        this.monitor({
-          ...spec,
-          name: `${spec.name}:logs`,
-          args: [
-            ...spec.args,
-            "logs",
-            "--follow",
-            "--no-color",
-            "--tail",
-            "100",
-          ],
-        });
       }
       for (const spec of native) this.monitor(spec);
       this.log(

@@ -29,6 +29,25 @@ requested, and missing entries fall back to German at runtime.
 SQL regression checks in [`supabase/tests`](../supabase/tests) require a separate
 disposable database with the migrations applied. They are not run by `npm test`.
 
+## Installed PostgreSQL upgrades
+
+The database entrypoint's failure cases run in the full suite. To additionally
+verify the real PostgreSQL image and Docker Compose replacement of a running
+legacy database, run:
+
+```sh
+SCHORNAI_TEST_POSTGRES_UPGRADE=1 node_modules/.bin/vitest run tests/postgres-upgrade.integration.test.ts
+```
+
+This requires Docker Compose and the pinned `supabase/postgres:15.19.0.004` image.
+The test creates a unique disposable project and a small fixture directory in
+the checkout (so Colima can access it). It verifies preserved rows, the new data
+location, restart without reimporting stale data, source-content preservation,
+and the actual health check. Cleanup removes only that test project's containers,
+volumes and fixture data. The installed machine service and database are not used.
+The image uses a vanilla test cluster with extension preloading disabled; full
+Supabase schema migrations remain a separate validation layer.
+
 ## Storybook
 
 Storybook runs independently of the application services:

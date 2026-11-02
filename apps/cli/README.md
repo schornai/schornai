@@ -4,9 +4,10 @@ The schorn.ai command-line application. The public npm package and executable ar
 both named `schornai`; service implementation remains in the separate private
 workspace package `@schornio/aibox-package-service`.
 
-Requires Node.js 24 or newer. `schornai@0.5.0` belongs to the final
-**November 2026** release and includes automatic installation, service commands
-and first-administrator setup.
+Requires Node.js 24 or newer. The source version `schornai@0.5.0` belongs to
+**November 2026** and includes automatic installation, service commands and
+first-administrator setup. npm currently publishes `schornai@0.4.0`; version
+0.5.0 has not been published. The current XRAG setup can be installed with 0.4.0.
 
 ```sh
 npx schornai
@@ -31,7 +32,12 @@ also needs a running Docker Engine and Compose 2.24.4+; the Mac bundle supplies
 Docker/Colima. Other platforms are rejected before downloading. Models, mail
 delivery and a public domain/certificate are configured separately.
 
-The CLI offers first-administrator setup after a fresh installation.
+The source CLI 0.5.0 offers first-administrator setup after a fresh installation.
+The published CLI 0.4.0 does not offer this prompt or `service setup-admin`.
+After installing the current Mac XRAG setup, its runtime can run the command:
+`~/.aibox/bin/node/node ~/.aibox/apps/service/cli.mjs service setup-admin`.
+Adjust both paths for a custom installation root; on Linux use system `node`.
+The following prompt behavior applies to CLI 0.5.0 once published or built locally.
 It asks for an email in an interactive terminal and prints a one-time key for
 `/signin/reset`, where the operator chooses their password. No mail server is
 needed. The key expires after seven days. Enter or Ctrl+C skips this step.
