@@ -28,6 +28,8 @@ meta:
       "external/downloads/src/downloadAll.ts",
       "packages/xrag/update/container/docker-compose.yml",
       "packages/xrag/update/container/supabase/overrides.yml",
+      "packages/xrag/update/container/volumes/db/prepare-data.sh",
+      "packages/xrag/update/container/volumes/db/check-health.sh",
     ]
 ---
 
@@ -241,7 +243,7 @@ werden. Das Schließen der App lässt den Service weiterlaufen. Sprache
 (Deutsch oder Englisch) und Hell-/Dunkeldarstellung folgen dem System.
 
 Neben dem Logo steht die Release-Bezeichnung der installierten Mac-App, zum
-Beispiel **November 2026 Release Candidate 1**. Der Footer der Web-App zeigt
+Beispiel **November 2026**. Der Footer der Web-App zeigt
 deren Release-Bezeichnung. Bei getrennten Installationen können die Anzeigen
 abweichen; `schornai --version` zeigt stattdessen die eigenständige CLI-Version.
 
@@ -338,7 +340,8 @@ Eine bestimmte Zwischenversion ist für die Umstellung nicht erforderlich.
    ```
 
 2. Sichere vor dem Update Datenbank, Storage, `~/.aibox`, die bisherige Mac-App und
-   das Docker-Volume `supabase_db-config`. Eine Kopie laufender PostgreSQL-Dateien
+   die Docker-Volumes `supabase_db-config` und, falls schon vorhanden,
+   `supabase_db-data`. Eine Kopie laufender PostgreSQL-Dateien
    allein ist kein konsistentes Datenbank-Backup. Behalte `docker.env` und Zertifikate.
 
 3. Lade `update.xrag.tar` über die bisherige XRAG-Uploadseite der alten Box hoch.
@@ -375,6 +378,48 @@ automatisch. Auf vorhandenen Service-Systemen bleibt sie unverändert.
 Der Installer beendet die alte Admin-App und deren Compose-Projekt ohne
 Volumenlöschung, übernimmt die neuen Dienstdateien und erhält
 `docker/volumes/db/data`, Storage, Zertifikate und `supabase_db-config`.
+
+Lokales PostgreSQL verwendet künftig das Docker-Volume `supabase_db-data`.
+Beim ersten Start mit dem neuen Bundle übernimmt der Datenbankcontainer die
+bisherigen Daten aus `docker/volumes/db/data` automatisch. Compose beendet
+zuerst den alten Datenbankcontainer. Danach werden der vollständige
+PostgreSQL-15-Datenbestand einschließlich Transaktionsprotokollen kopiert und
+die Dateibesitzer für das verwendete Image eingerichtet. Die PostgreSQL-Hauptversion
+bleibt unverändert. Globale Colima-Einstellungen werden dabei nicht geändert.
+
+Die Übernahme schreibt zunächst in ein temporäres Verzeichnis im neuen Volume.
+Erst die vollständige Kopie wird als Datenbank verwendet. Nach einem Abbruch
+wird nur diese temporäre Kopie neu aufgebaut; eine vorhandene vollständige
+Zieldatenbank wird niemals durch den alten Stand ersetzt. Die Inhalte des alten
+Datenverzeichnisses bleiben erhalten. Auf SELinux-Systemen kann Docker dessen
+Sicherheitslabel für die schreibgeschützte Einbindung anpassen.
+
+Für die einmalige Kopie muss ausreichend freier Platz im Docker-Datenträger und
+auf dessen physischem Speicher vorhanden sein. Der Supabase-Start wartet dafür
+bis zu 30 Minuten. Die CLI berücksichtigt zusätzlich vier Minuten für den
+übrigen Start und jeweils drei Minuten für ausgewählte Core- und
+Document-Extractor-Dienste, also höchstens 40 Minuten. Fehler bei Dateizugriffen
+oder Platzmangel werden protokolliert.
+Unvollständige Datenbestände, andere PostgreSQL-Hauptversionen und symbolische
+Links, etwa externe Tablespaces oder WAL-Verzeichnisse, benötigen eine manuelle
+Übernahme. Bei solchen Fehlern wird keine leere Ersatzdatenbank angelegt.
+
+Nach der Übernahme enthält `docker/volumes/db/data` nur noch den alten Stand.
+Sichere die aktuelle Datenbank und `supabase_db-data`; lösche das Volume oder die
+Docker-VM nicht ohne eine geprüfte Sicherung. Ein Rückwechsel auf alte
+Compose-Dateien würde den alten Datenbestand öffnen und ist daher keine
+vollständige Wiederherstellung. Ist die bestehende Datenbank schon so gestört,
+dass XRAG-Uploads scheitern, lässt sich das neue Bundle weiterhin direkt auf der
+Maschine mit dem enthaltenen `setup.sh` installieren.
+
+Die Datenbank-Zustandsprüfung führt eine echte SQL-Abfrage aus und liest eine
+PostgreSQL-Kontrolldatei mit den Dateirechten des Datenbankprozesses. Wenn einer
+dieser Zugriffe fehlschlägt, gilt der Container als nicht gesund; beim Start
+werden abhängige Dienste dann nicht freigegeben. Die Prüfung repariert keine
+Dateirechte und verändert keine Daten. Ein laufender Service-Prozess allein
+belegt nicht, dass Datenbank und Anmeldung funktionieren. Wiederholte
+`Permission denied`-Fehler für PostgreSQL-Dateien erfordern eine Prüfung der
+Dateirechte und der Docker-Einbindung auf der betroffenen Maschine.
 
 Setup-Pakete erreichen alle Service mit konfigurierter `sharing`-URL. Installiert
 werden nur die ausgewählten Komponenten. Der Service pausiert dafür seine

@@ -4,8 +4,9 @@ The schorn.ai command-line application. The public npm package and executable ar
 both named `schornai`; service implementation remains in the separate private
 workspace package `@schornio/aibox-package-service`.
 
-Requires Node.js 24 or newer. Automatic setup and service commands are available
-in the published `schornai@0.3.0` release.
+Requires Node.js 24 or newer. `schornai@0.5.0` belongs to the final
+**November 2026** release and includes automatic installation, service commands
+and first-administrator setup.
 
 ```sh
 npx schornai
@@ -17,9 +18,8 @@ changing files. Only `y` (case-insensitive) proceeds; `n`, Enter, end of input o
 Ctrl+C cancels. Retrying an incomplete installation asks again.
 After confirmation it downloads the latest XRAG setup from
 `https://schorn.ai/xrag/schornai/latest`, validates the archive and platform,
-installs it and starts the service. The endpoint currently serves the November
-2026 Release Candidate 2 setup for macOS ARM64. An unavailable download exits
-with an error and can be retried.
+installs it and starts the service. The November 2026 setup targets macOS ARM64.
+An unavailable download exits with an error and can be retried.
 The bootstrap does not send a platform or architecture to that endpoint, so
 it can currently serve only one target. A macOS ARM64 bundle cannot install
 Linux; Linux needs a separately built bundle for the matching architecture.
@@ -31,13 +31,12 @@ also needs a running Docker Engine and Compose 2.24.4+; the Mac bundle supplies
 Docker/Colima. Other platforms are rejected before downloading. Models, mail
 delivery and a public domain/certificate are configured separately.
 
-The current source also offers first-administrator setup after a fresh installation.
+The CLI offers first-administrator setup after a fresh installation.
 It asks for an email in an interactive terminal and prints a one-time key for
 `/signin/reset`, where the operator chooses their password. No mail server is
 needed. The key expires after seven days. Enter or Ctrl+C skips this step.
 It can be retried on an installed instance with
-`npx schornai service setup-admin`. This addition is not part of the published
-0.3.0 package yet; build this checkout with `npm run build:cli` to use it.
+`npx schornai service setup-admin`.
 Core, a working Supabase connection, its private service credentials and `SITE_URL`
 are required. Any existing user prevents bootstrap; existing accounts and roles
 are never modified. Redirected input/output skips setup so keys do not enter logs.
@@ -75,6 +74,9 @@ From the repository root:
 npm run build:cli
 npm start --workspace apps/cli -- service --help
 ```
+
+CLI 0.5.0 includes the updated database startup budget and early container logs,
+including for explicit `service start` and `service restart` commands.
 
 The build compiles `packages/service` and includes that runtime in the CLI's
 `dist/service` directory. The published package needs no private registry or

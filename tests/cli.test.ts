@@ -12,7 +12,7 @@ it("exposes service help from the existing schornai CLI", async () => {
   expect(result.stdout).not.toContain("Coming soon");
   expect(
     (await execute(process.execPath, [cli, "--version"])).stdout.trim(),
-  ).toBe("0.3.0");
+  ).toBe("0.5.0");
 });
 it("fails unknown commands instead of silently accepting them", async () => {
   await expect(

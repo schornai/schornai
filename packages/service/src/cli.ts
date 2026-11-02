@@ -9,6 +9,7 @@ import { control } from "./control.ts";
 import { runDaemon } from "./daemon.ts";
 import { setupInitialAdmin } from "./initialAdmin.ts";
 import { initialAdminMessages } from "./initialAdminMessages.ts";
+import { serviceStartupTimeoutMs } from "./services.ts";
 
 const help = `Usage: schornai service <init|start|stop|restart|status|sync|logs|run|setup-admin> [options]
   --config PATH        Machine configuration (default: ~/.aibox/config.json)
@@ -169,7 +170,7 @@ export async function runServiceCLI(args = process.argv.slice(2)) {
       console.log("Service already running");
       return;
     }
-    await loadConfig(path);
+    const { config } = await loadConfig(path);
     await mkdir(join(root, "logs"), { recursive: true, mode: 0o700 });
     const fd = openSync(join(root, "logs/service-launch.log"), "a", 0o600);
     const child = spawn(
@@ -183,7 +184,7 @@ export async function runServiceCLI(args = process.argv.slice(2)) {
       error = value;
     });
     child.unref();
-    const deadline = Date.now() + 240_000;
+    const deadline = Date.now() + serviceStartupTimeoutMs(config);
     while (Date.now() < deadline) {
       if (error) throw error;
       if (child.exitCode !== null || child.signalCode !== null)

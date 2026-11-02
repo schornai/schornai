@@ -135,7 +135,7 @@ export function ServiceView({
         <LogoSchornAI className="w-32" />
         <Badge variant="outline">{t("labelAdmin")}</Badge>
         <p className="text-muted-foreground text-sm">
-          {t("labelRelease", { name: "November 2026 Release Candidate 2" })}
+          {t("labelRelease", { name: "November 2026" })}
         </p>
       </header>
       <Card>

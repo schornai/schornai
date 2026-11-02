@@ -92,6 +92,13 @@ commands, tracks ownership of local dependencies, and stops owned processes.
 [`process.ts`](../packages/service/src/process.ts) handles child-process groups
 and their output. Command environments contain credentials and must remain private.
 
+Installed PostgreSQL starts through
+[`prepare-data.sh`](../packages/xrag/update/container/volumes/db/prepare-data.sh),
+which imports the stopped legacy cluster into a Docker volume before delegating
+to the pinned image's entrypoint. See the [storage decision](adr/0001-postgres-data-volume.md)
+for ownership, retry and rollback constraints, and the
+[migration tests](../tests/postgres-data.test.ts) for failure handling.
+
 Development and installed machines use the same supervisor. Their launch plans
 differ: see [development behavior tests](../tests/service-development.test.ts),
 [environment resolution tests](../tests/service-environment.test.ts), and
