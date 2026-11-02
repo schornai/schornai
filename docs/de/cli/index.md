@@ -7,7 +7,7 @@ meta:
   required_role: "Betriebszugang zur Maschine; keine zusätzliche CLI-Anmeldung."
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; für die Erstinstallation OpenSSL und ein passendes Setup-Bundle; unter Linux laufendes Docker mit Compose ab 2.24.4."
-  status: "CLI 0.3.0 mit korrigierter Archivextraktion auf npm veröffentlicht; Download-Endpunkt liefert RC2 für macOS ARM64."
+  status: "Finaler Release November 2026 mit CLI 0.5.0 und Einrichtung des ersten Administrators; Setup-Ziel macOS ARM64. Veröffentlichungsstand siehe Release-Hinweise."
   last_verified: "2026-11-02"
   source_files:
     [
@@ -29,8 +29,10 @@ meta:
 # schorn.ai CLI
 
 Die CLI unter `apps/cli` bietet die Service-Befehle an. Das npm-Paket heißt
-`schornai`; Version `0.3.0` ist als `latest` veröffentlicht. Im Repository ist der aktuelle
-Quellstand mit Version `0.3.0` nach `npm run build:cli` verfügbar.
+`schornai`; Version `0.5.0` gehört zum finalen Release **November 2026**.
+Den Veröffentlichungsstand findest du in den
+[Release-Hinweisen](../../releases/november-2026.md). Im Repository ist die CLI
+nach `npm run build:cli` verfügbar.
 
 ## Automatische Installation oder Status
 
@@ -53,8 +55,9 @@ Status ohne Rückfrage.
 Nach der Bestätigung lädt die CLI das aktuelle XRAG-Setup von
 `https://schorn.ai/xrag/schornai/latest`, prüft Archiv, Pakettyp und Plattform und
 führt den enthaltenen Installer aus. Anschließend startet sie den Service.
-Der Endpunkt liefert derzeit das macOS-ARM64-Setup des November 2026 Release
-Candidate 2.
+Das Setup für **November 2026** ist für macOS ARM64 vorgesehen.
+Der Endpunkt liefert jeweils das zuletzt veröffentlichte Setup; eine gezielt
+gewählte CLI-Version legt die Version des heruntergeladenen Setups nicht fest.
 
 Die korrigierte CLI meldet nach dem Download
 `Download complete. Verifying and extracting schorn.ai setup...`.
@@ -99,9 +102,7 @@ CLI-Version an.
 
 ## Ersten Administrator anlegen
 
-Diese Funktion gehört zum aktuellen Quellstand und ist noch nicht im
-veröffentlichten Paket `0.3.0` enthalten. Baue diesen Checkout zunächst mit
-`npm run build:cli`, um sie über das lokale Workspace-Paket zu verwenden.
+Diese Funktion ist in CLI `0.5.0` des finalen Releases **November 2026** enthalten.
 
 Nach einer neuen automatischen Installation fragt die CLI im Terminal nach der
 E-Mail-Adresse des ersten Administrators. Sie legt das Konto an und zeigt einen
