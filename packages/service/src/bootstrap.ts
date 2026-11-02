@@ -20,6 +20,7 @@ import { writeJson } from "./files.ts";
 import { binary } from "./docker.ts";
 import { run } from "./process.ts";
 import { createLogger } from "./log.ts";
+import { initialAdminCommand, setupInitialAdmin } from "./initialAdmin.ts";
 
 export const latestSetupUrl = "https://schorn.ai/xrag/schornai/latest";
 const pendingSchema = z.object({ version: z.literal(1), fresh: z.boolean() });
@@ -133,6 +134,8 @@ export async function runDefaultCLI() {
   ) {
     console.log(`schorn.ai is already installed in ${root}`);
     await runServiceCLI(["service", "status", "--config", configPath]);
+    if (context.config.services.includes("core"))
+      console.log(initialAdminCommand(configPath));
     return;
   }
   if (!pending && (await hasLegacyLayout(root))) {
@@ -234,8 +237,10 @@ export async function runDefaultCLI() {
       signal,
     );
     await runServiceCLI(["service", "status", "--config", configPath]);
-    if (fresh)
+    if (fresh) {
       console.log("Open https://localhost (local self-signed certificate).");
+      await setupInitialAdmin(installation);
+    }
   } finally {
     try {
       if (temporary) await rm(temporary, { recursive: true, force: true });

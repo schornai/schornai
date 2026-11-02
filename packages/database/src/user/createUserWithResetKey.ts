@@ -1,7 +1,8 @@
 import type { SupabaseClient } from "../_shared/_types.ts";
 import { randomBytes } from "node:crypto";
 
-// Call only after authorizing the administrator in the server action.
+// Call only after authorizing the administrator, or from the local operator's
+// empty-instance bootstrap in createInitialAdminWithResetKey.
 export async function createUserWithResetKey(
   {
     email,

@@ -8,7 +8,7 @@ meta:
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; installierte Dienstdateien; für Container Docker Compose ab 2.24.4."
   status: "verfügbar"
-  last_verified: "2026-10-25"
+  last_verified: "2026-11-02"
   source_files:
     [
       "apps/admin-mac/src/main.ts",
@@ -16,6 +16,7 @@ meta:
       "apps/admin-mac/src/renderer/components/ServiceView.tsx",
       "packages/service/src/cli.ts",
       "packages/service/src/bootstrap.ts",
+      "packages/service/src/initialAdmin.ts",
       "packages/service/src/config.ts",
       "packages/service/src/dev.ts",
       "packages/service/src/services.ts",
@@ -52,6 +53,10 @@ Zertifikat, installiert und startet die Dienste. Bei vorhandener Installation
 zeigt er nur den Status. Download-Endpunkt und neue npm-Version müssen dafür
 bereitgestellt sein. Plattformen, Voraussetzungen und Dienstumfang stehen in der
 [CLI-Anleitung](../cli/index.md#automatische-installation-oder-status).
+Der aktuelle Quellstand bietet danach die
+[Einrichtung des ersten Administrators](../cli/index.md#ersten-administrator-anlegen)
+an. Über `service setup-admin` lässt sie sich für eine bereits installierte,
+noch leere Instanz nachholen. Die Mac-App legt selbst keine Benutzer an.
 Für eine bewusst abweichende Dienstauswahl bleibt der manuelle Ablauf verfügbar:
 
 ```bash
