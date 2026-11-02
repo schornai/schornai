@@ -99,7 +99,7 @@ und TLS-Zertifikate werden separat eingerichtet.
   [SHA-256-Datei](https://e5bdpj0rnd1tojfy.public.blob.vercel-storage.com/november-2026.xrag.tar.sha256).
 - Setup-SHA-256: `831abf2a4dda1d0924543aae108cdc45304b10bb8ac17977c8561e8734b4deb4`.
 - CLI-SHA-256 (`schornai-0.5.0.tgz`):
-  `79896168fb3a7ed8cf07c7067b91dbeda7d79cabfcc4fd1c43586593f39f61d8`.
+  `a8d5ca899d87c07657f81ab8005a103315f90de4d65558644c386b4fbc7207d9`.
 
 Siehe [CLI](../de/cli/index.md), [Service und Mac-App](../de/box-admin/index.md),
 [Provider-Verbindungen](../de/settings/connections.md) und
