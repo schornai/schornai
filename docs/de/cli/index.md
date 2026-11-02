@@ -8,7 +8,7 @@ meta:
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; für die Erstinstallation OpenSSL und ein passendes Setup-Bundle; unter Linux laufendes Docker mit Compose ab 2.24.4."
   status: "CLI 0.3.0 mit korrigierter Archivextraktion auf npm veröffentlicht; Download-Endpunkt liefert RC2 für macOS ARM64."
-  last_verified: "2026-10-28"
+  last_verified: "2026-11-02"
   source_files:
     [
       "apps/cli/package.json",
@@ -17,6 +17,10 @@ meta:
       "packages/service/src/cli.ts",
       "packages/service/src/bootstrap.ts",
       "packages/service/src/initialSetup.ts",
+      "packages/service/src/initialAdmin.ts",
+      "packages/service/src/initialAdminMessages.ts",
+      "packages/database/src/user/createInitialAdminWithResetKey.ts",
+      "packages/database/src/user/hasUsers.ts",
       "packages/xrag/src/archive.ts",
       "packages/xrag/update/scripts/generateDockerEnv.ts",
     ]
@@ -27,14 +31,6 @@ meta:
 Die CLI unter `apps/cli` bietet die Service-Befehle an. Das npm-Paket heißt
 `schornai`; Version `0.3.0` ist als `latest` veröffentlicht. Im Repository ist der aktuelle
 Quellstand mit Version `0.3.0` nach `npm run build:cli` verfügbar.
-
-**Bekannter Fehler in `0.2.0`:** Das macOS-ARM64-Setup kann nach vollständig
-abgeschlossenem Download beim Entpacken gültiger symbolischer Linkketten
-abbrechen. Beim anschließenden Aufräumen kann stattdessen `ENOTEMPTY` erscheinen.
-Die Korrektur ist in CLI `0.3.0` für
-[November 2026 Release Candidate 2](../../releases/november-2026-release-candidate-2.md)
-enthalten und auf npm veröffentlicht. Bei einer alten lokalen oder globalen
-Installation gezielt `npx --yes schornai@0.3.0` aufrufen.
 
 ## Automatische Installation oder Status
 
@@ -87,7 +83,8 @@ eingerichtet. Zugangsdaten liegen in `docker.env` mit Dateirechten `600` und
 werden nicht ausgegeben.
 
 Standardpfad ist `~/.aibox`. `SCHORNAI_HOME` wählt ein anderes Verzeichnis;
-`SCHORNAI_CONFIG` wählt beim Aufruf ohne Argumente eine konkrete Konfiguration.
+`SCHORNAI_CONFIG` wählt eine konkrete Konfiguration für die CLI;
+ein explizites `--config` hat Vorrang.
 Eine bereits mit `service init` angelegte Konfiguration ohne Dienstdateien wird
 vervollständigt. Ihre Dienstauswahl und vorhandene Zugangsdaten bleiben erhalten;
 benötigte Zugangsdaten einer entfernten Instanz müssen dort vorher hinterlegt sein.
@@ -100,6 +97,42 @@ prüfe die Logs und starte mit `npx schornai service start` erneut.
 `--help` und `--version` zeigen weiterhin ausschließlich Hilfe beziehungsweise
 CLI-Version an.
 
+## Ersten Administrator anlegen
+
+Diese Funktion gehört zum aktuellen Quellstand und ist noch nicht im
+veröffentlichten Paket `0.3.0` enthalten. Baue diesen Checkout zunächst mit
+`npm run build:cli`, um sie über das lokale Workspace-Paket zu verwenden.
+
+Nach einer neuen automatischen Installation fragt die CLI im Terminal nach der
+E-Mail-Adresse des ersten Administrators. Sie legt das Konto an und zeigt einen
+einmaligen Schlüssel. Öffne die angezeigte Adresse `/signin/reset` (lokal
+`https://localhost/signin/reset`) und trage E-Mail-Adresse, Schlüssel und dein
+neues Passwort ein. Melde dich anschließend mit E-Mail-Adresse und Passwort an.
+Das erste Konto erhält durch die Datenbank automatisch die globale Admin-Rolle;
+die CLI prüft diese Rolle vor der Ausgabe des Schlüssels.
+
+Für eine bereits installierte, noch leere Instanz oder nach einem übersprungenen
+Schritt:
+
+```sh
+npx schornai service setup-admin
+```
+
+Voraussetzungen sind Core, eine erreichbare Supabase-Instanz mit abgeschlossenen
+Migrationen sowie deren private Zugangsdaten und `SITE_URL` in der
+Maschinenkonfiguration beziehungsweise ihrer Umgebungsdatei. Die CLI sendet keine
+E-Mail; ein Mailserver ist nicht nötig. Der Schlüssel gilt sieben Tage und kann
+einmal verwendet werden. Bewahre ihn vertraulich auf; er wird nur im Terminal
+angezeigt und nicht in Service-Logs geschrieben.
+
+Enter ohne E-Mail-Adresse, `Strg+C` oder geschlossene Eingabe überspringen die
+Kontoanlage. Bei umgeleiteter Ein- oder Ausgabe wird sie ebenfalls übersprungen.
+Die Installation bleibt erhalten und der Befehl kann später erneut ausgeführt
+werden. Existiert schon ein Benutzer, werden weder ein weiteres Konto angelegt
+noch Berechtigungen oder Passwörter geändert. Für weitere Konten nutze die
+[Benutzerverwaltung](../settings/user/index.md). Dieser Befehl ist kein
+Wiederherstellungsweg für ein bestehendes Konto.
+
 ## Dienste gezielt steuern
 
 ```sh
@@ -111,7 +144,8 @@ npx schornai service stop
 ```
 
 `init` legt eine neue Maschinenkonfiguration an und überschreibt keine vorhandene.
-`--config /pfad/config.json` wählt eine andere Konfiguration. `restart` startet neu;
+`--config /pfad/config.json` wählt eine andere Konfiguration und hat Vorrang vor
+`SCHORNAI_CONFIG`. `restart` startet neu;
 `run` betreibt den Service im Vordergrund. `logs --lines 500 --json` liefert
 strukturierte Logzeilen. `--help` zeigt die Hilfe und `--version` die CLI-Version.
 

@@ -22,6 +22,8 @@
     "zod": "^4.6.7"
   },
   "dependencies": {
+    "@schornio/aibox-package-database": "*",
+    "@supabase/supabase-js": "2.118.0",
     "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*",
     "@hocuspocus/provider": "^4.7.1",

@@ -24,7 +24,14 @@ import { initialServices } from "../packages/service/src/initialSetup.ts";
 import { initConfig } from "../packages/service/src/config.ts";
 import { control } from "../packages/service/src/control.ts";
 import { run } from "../packages/service/src/process.ts";
+import { setupInitialAdmin } from "../packages/service/src/initialAdmin.ts";
 
+vi.mock("../packages/service/src/initialAdmin.ts", async (importOriginal) => ({
+  ...(await importOriginal<
+    typeof import("../packages/service/src/initialAdmin.ts")
+  >()),
+  setupInitialAdmin: vi.fn(),
+}));
 vi.mock("../packages/service/src/process.ts", () => ({ run: vi.fn() }));
 vi.mock("../packages/service/src/control.ts", () => ({ control: vi.fn() }));
 vi.mock("node:readline/promises", () => ({ createInterface: vi.fn() }));
@@ -37,6 +44,7 @@ let prompt: EventEmitter & {
 };
 
 beforeEach(async () => {
+  vi.mocked(setupInitialAdmin).mockReset().mockResolvedValue(undefined);
   directory = await mkdtemp(join(tmpdir(), "cli-bootstrap-test-"));
   root = join(directory, "machine");
   vi.stubEnv("SCHORNAI_HOME", root);
@@ -122,6 +130,9 @@ it("installs a setup containing a valid symlink chain and cleans up successfully
     "Download complete. Verifying and extracting schorn.ai setup...",
   );
   expect(output).toHaveBeenCalledWith("schorn.ai installed successfully");
+  expect(setupInitialAdmin).toHaveBeenCalledWith(
+    expect.objectContaining({ root }),
+  );
   expect(await readdir(root)).not.toContain(".setup-incomplete.json");
   expect(await readdir(root)).not.toContain(".setup-lock");
 });
@@ -148,6 +159,7 @@ it.each(["running", "stopped"])(
     expect(fetch).not.toHaveBeenCalled();
     expect(run).not.toHaveBeenCalled();
     expect(createInterface).not.toHaveBeenCalled();
+    expect(setupInitialAdmin).not.toHaveBeenCalled();
     expect(await readFile(join(root, "apps/service/cli.mjs"), "utf8")).toBe(
       "keep runtime",
     );
@@ -270,9 +282,25 @@ it("completes a config-only worker installation without replacing credentials or
   const before = await readFile(join(root, "config.json"), "utf8");
   await runDefaultCLI();
   expect(run).toHaveBeenCalled();
+  expect(setupInitialAdmin).not.toHaveBeenCalled();
   expect(await readFile(join(root, "config.json"), "utf8")).toBe(before);
   expect(await readFile(join(root, "docker.env"), "utf8")).toBe(
     "REMOTE_SECRET=keep\n",
+  );
+});
+
+it("keeps the installed runtime when administrator setup fails so it can be retried separately", async () => {
+  await bundle();
+  vi.mocked(setupInitialAdmin).mockRejectedValue(
+    new Error("Admin setup failed; retry setup-admin"),
+  );
+  await expect(runDefaultCLI()).rejects.toThrow("retry setup-admin");
+  expect(await readdir(root)).not.toContain(".setup-incomplete.json");
+  expect(await readdir(root)).not.toContain(".setup-lock");
+  await runDefaultCLI();
+  expect(fetch).toHaveBeenCalledOnce();
+  expect(output).toHaveBeenCalledWith(
+    expect.stringContaining("service setup-admin"),
   );
 });
 

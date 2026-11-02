@@ -4,7 +4,7 @@ const args = process.argv.slice(2);
 const help = `schorn.ai CLI
 
 Usage: schornai
-       schornai service <init|start|stop|restart|status|sync|logs|run> [options]
+       schornai service <init|start|stop|restart|status|sync|logs|run|setup-admin> [options]
        schornai service --help
 
 Without arguments, show the installed machine's status or ask to install schorn.ai.

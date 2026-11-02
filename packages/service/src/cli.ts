@@ -7,8 +7,10 @@ import { setTimeout as delay } from "node:timers/promises";
 import { defaultConfigPath, initConfig, loadConfig } from "./config.ts";
 import { control } from "./control.ts";
 import { runDaemon } from "./daemon.ts";
+import { setupInitialAdmin } from "./initialAdmin.ts";
+import { initialAdminMessages } from "./initialAdminMessages.ts";
 
-const help = `Usage: schornai service <init|start|stop|restart|status|sync|logs|run> [options]
+const help = `Usage: schornai service <init|start|stop|restart|status|sync|logs|run|setup-admin> [options]
   --config PATH        Machine configuration (default: ~/.aibox/config.json)
   --services LIST      Comma-separated services for init; default: none
   --follow             Follow logs
@@ -16,6 +18,7 @@ const help = `Usage: schornai service <init|start|stop|restart|status|sync|logs|
   --lines NUMBER       Recent log lines (default: 100)
   sync                 Reconcile artifacts now (requires a running service and sharing)
   run                  Run in the foreground (e.g. systemd/launchd)
+  setup-admin          ${initialAdminMessages().help}
 Services: core, supabase, transcriber-mlx, document-extractor, ollama
 `;
 export async function runServiceCLI(args = process.argv.slice(2)) {
@@ -38,8 +41,14 @@ export async function runServiceCLI(args = process.argv.slice(2)) {
   if (positionals[0] !== "service" || positionals.length !== 2)
     throw new Error(help);
   const action = positionals[1];
-  const path = resolve(values.config ?? defaultConfigPath());
+  const path = resolve(
+    values.config ?? process.env.SCHORNAI_CONFIG ?? defaultConfigPath(),
+  );
   const root = dirname(path);
+  if (action === "setup-admin") {
+    await setupInitialAdmin(await loadConfig(path));
+    return;
+  }
   if (action === "init") {
     await initConfig(path, values.services?.split(",").filter(Boolean) ?? []);
     console.log(`Created ${path}`);

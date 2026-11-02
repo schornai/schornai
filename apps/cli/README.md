@@ -31,8 +31,19 @@ also needs a running Docker Engine and Compose 2.24.4+; the Mac bundle supplies
 Docker/Colima. Other platforms are rejected before downloading. Models, mail
 delivery and a public domain/certificate are configured separately.
 
+The current source also offers first-administrator setup after a fresh installation.
+It asks for an email in an interactive terminal and prints a one-time key for
+`/signin/reset`, where the operator chooses their password. No mail server is
+needed. The key expires after seven days. Enter or Ctrl+C skips this step.
+It can be retried on an installed instance with
+`npx schornai service setup-admin`. This addition is not part of the published
+0.3.0 package yet; build this checkout with `npm run build:cli` to use it.
+Core, a working Supabase connection, its private service credentials and `SITE_URL`
+are required. Any existing user prevents bootstrap; existing accounts and roles
+are never modified. Redirected input/output skips setup so keys do not enter logs.
+
 The default installation directory is `~/.aibox`; `SCHORNAI_HOME` changes it and
-`SCHORNAI_CONFIG` selects an explicit config file for this default command.
+`SCHORNAI_CONFIG` selects an explicit config file for the CLI; `--config` takes precedence.
 Existing service configurations and credentials are preserved, including a
 configuration created with `service init` before installing. Such machines keep
 their selected services and must already have their required credentials.
