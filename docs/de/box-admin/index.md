@@ -8,7 +8,7 @@ meta:
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; installierte Dienstdateien; für Container Docker Compose ab 2.24.4."
   status: "verfügbar"
-  last_verified: "2026-11-02"
+  last_verified: "2026-11-04"
   source_files:
     [
       "apps/admin-mac/src/main.ts",
@@ -18,6 +18,9 @@ meta:
       "packages/service/src/bootstrap.ts",
       "packages/service/src/initialAdmin.ts",
       "packages/service/src/config.ts",
+      "packages/service/src/environment.ts",
+      "packages/utils/src/prepareTranscriberEnvironment.ts",
+      "apps/transcriber-mac/src/service/transcribeWorker.ts",
       "packages/service/src/dev.ts",
       "packages/service/src/services.ts",
       "packages/service/src/serviceCommands.ts",
@@ -188,9 +191,20 @@ sollten nicht gleichzeitig laufen.
 ```
 
 Erzeuge die tatsächliche `id` mit `init` auf jeder Maschine neu. Der Transcriber
-benötigt in seiner privaten `docker.env` die Werte `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY` und `REALTIME_SERVER_SECRET` der Zielinstanz. Für den Dateikatalog
-kommt `SERVICE_API_TOKEN` hinzu. Verwende Dateirechte `600`. Zugangsdaten gehören
-nicht in `config.json`. Eine reine Datenbankmaschine benötigt keinen laufenden
+benötigt in seiner privaten `docker.env` die Werte `SUPABASE_PUBLISHABLE_KEY`,
+`SUPABASE_SECRET_KEY`, `SUPABASE_JWT_SECRET` und `REALTIME_SERVER_SECRET` der
+Zielinstanz. Für den Dateikatalog kommt `SERVICE_API_TOKEN` hinzu.
+
+`SUPABASE_JWT_SECRET` ist das JWT-Signiersecret derselben Supabase-Instanz.
+Ein bestehendes `JWT_SECRET` wird als Alias übernommen. Ein explizites, nicht
+leeres `SUPABASE_JWT_SECRET` hat Vorrang. Der Worker benötigt dieses Secret,
+um Anfragen mit den Rechten des auftraggebenden Benutzers zu signieren.
+Fehlen beide Varianten, bricht er vor der Übernahme von Aufträgen mit einem
+Konfigurationsfehler ab. Das vollständige Umgebungsbeispiel steht unter
+[Worker-Installation unter macOS](worker-macos.md).
+
+Verwende Dateirechte `600`. Zugangsdaten gehören ausschließlich in die private
+`docker.env`. Eine reine Datenbankmaschine benötigt keinen laufenden
 Transcriber und lädt keine Transkriptionsmodelle herunter.
 
 Der Transcriber meldet nur Modelle als Fähigkeit an, deren Konfiguration und
