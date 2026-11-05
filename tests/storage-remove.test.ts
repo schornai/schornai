@@ -4,6 +4,7 @@ import { StorageSession } from "../packages/database/src/storage/_utils/StorageS
 import {
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "../packages/database/src/storage/_utils/toStorageObjectArray";
 
 const prefix = "workspace/repo/";
@@ -92,6 +93,7 @@ beforeEach(() => {
   files = new Set([
     prefix + "folder/a.txt",
     prefix + "folder/a.txt" + MDC_FILE_EXTENSION,
+    prefix + "folder/a.txt" + TEXT_WRITE_FILE_EXTENSION,
     prefix + "folder/nested/b.wav",
     prefix + "folder/nested/b.wav" + TRANSCRIPT_FILE_EXTENSION,
     prefix + "folder2/keep.txt",
@@ -182,6 +184,7 @@ it("stops at queued work and at a live processing lease", async () => {
 it("cleans orphaned sidecars using the original path and removes empty folder placeholders", async () => {
   files = new Set([
     prefix + "folder/a.txt" + MDC_FILE_EXTENSION,
+    prefix + "folder/a.txt" + TEXT_WRITE_FILE_EXTENSION,
     prefix + "folder/a.txt" + TRANSCRIPT_FILE_EXTENSION,
     prefix + "folder/empty/.empty-folder-placeholder",
   ]);

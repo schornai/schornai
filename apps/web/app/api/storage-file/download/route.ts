@@ -1,5 +1,9 @@
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
-import { storageDownloadResponse } from "@/lib/storageDownloadResponse";
+import {
+  storageDownloadResponse,
+  storageFileResponse,
+} from "@/lib/storageDownloadResponse";
+import { getFileTextBackup } from "@schornio/aibox-package-database/storage/getFileTextBackup";
 import { storageSchema } from "@schornio/aibox-package-database/storage/_schemas";
 import { requireStorageAccess } from "@schornio/aibox-package-database/storage/requireStorageAccess";
 import { validateStoragePath } from "@schornio/aibox-package-database/storage/validatePath";
@@ -34,12 +38,24 @@ export async function GET(request: Request) {
         { headers: { "Content-Type": "text/plain;charset=utf-8" } },
       );
     } else {
-      const { data, error } = await session.supabaseStorage.createSignedUrl(
+      const backup = await getFileTextBackup(
         session.getStoragePath(path).storagePath,
-        60,
+        {
+          storage: session.supabaseStorage,
+          signal: request.signal,
+        },
       );
-      if (error || !data) return new Response(null, { status: 404 });
-      response = await storageDownloadResponse(request, data.signedUrl);
+      if (backup) {
+        if (!backup.blob) return new Response(null, { status: 404 });
+        response = await storageFileResponse(new Response(backup.blob));
+      } else {
+        const { data, error } = await session.supabaseStorage.createSignedUrl(
+          session.getStoragePath(path).storagePath,
+          60,
+        );
+        if (error || !data) return new Response(null, { status: 404 });
+        response = await storageDownloadResponse(request, data.signedUrl);
+      }
     }
     response.headers.set("Cache-Control", "private, no-store");
     response.headers.set(

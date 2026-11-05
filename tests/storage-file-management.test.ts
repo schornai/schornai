@@ -27,6 +27,10 @@ function fixture(initial: Record<string, string> = {}) {
     Object.entries(initial).map(([path, text]) => [path, new Blob([text])]),
   );
   const api = {
+    download: vi.fn(async (path: string) => ({
+      data: objects.get(path) ?? null,
+      error: objects.has(path) ? null : { statusCode: "404" },
+    })),
     list: vi.fn(async (path: string, { search }: any) => {
       path = path.replace(/\/$/, "");
       const entries = new Map<string, any>();

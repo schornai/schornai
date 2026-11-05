@@ -78,6 +78,13 @@ lock. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
 [`updateTranscriptionSegment`](../packages/database/src/storage/updateTranscriptionSegment.ts)
 read, check conflicts, and write inside that lock, shared with processing workers.
 See [transcript correction tests](../tests/web/transcription-save.test.ts).
+Text edits retain a durable backup until both the original and Markdown history
+are saved. [`getFileTextBackup`](../packages/database/src/storage/getFileTextBackup.ts)
+keeps application reads on the previous version while
+[`recoverFileText`](../packages/database/src/storage/recoverFileText.ts) restores
+an interrupted write before the next edit or processing task. See
+[the recovery decision](adr/0002-recoverable-text-file-writes.md) and
+[failure/retry tests](../tests/storage-edit-text.test.ts).
 
 Both file and folder deletion actions use
 [`remove`](../packages/database/src/storage/remove.ts). It acquires each file's

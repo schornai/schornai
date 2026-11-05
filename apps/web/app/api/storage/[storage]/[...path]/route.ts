@@ -5,6 +5,7 @@ import {
   storageFileResponse,
 } from "@/lib/storageDownloadResponse";
 import { downloadThemeLogo } from "@schornio/aibox-package-database/storage/downloadThemeLogo";
+import { getFileTextBackup } from "@schornio/aibox-package-database/storage/getFileTextBackup";
 
 export async function GET(
   request: Request,
@@ -26,6 +27,20 @@ export async function GET(
     return storageFileResponse(new Response(data));
   }
 
+  if (["database_files", "realtime_files"].includes(storage)) {
+    try {
+      const backup = await getFileTextBackup(path.join("/"), {
+        storage: supabase.storage.from(storage),
+        signal: request.signal,
+      });
+      if (backup)
+        return backup.blob
+          ? storageFileResponse(new Response(backup.blob))
+          : new Response(null, { status: 404 });
+    } catch {
+      return new Response(null, { status: 503 });
+    }
+  }
   const { data, error } = await supabase.storage
     .from(storage)
     .createSignedUrl(path.join("/"), 60);

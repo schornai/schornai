@@ -56,6 +56,10 @@ export function StorageFileEditor({
             setError("errorConflict");
             return;
           }
+          if (result.data.status === "recoveryRequired") {
+            setError("errorRecovery");
+            return;
+          }
           setExpectedText(text);
           if (!result.data.indexQueued) {
             setError("errorIndex");

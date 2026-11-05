@@ -2,6 +2,7 @@ import type { StorageFileObject, StorageRealtimeSession } from "./_types.ts";
 import {
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "./_utils/toStorageObjectArray.ts";
 import { inspect } from "./inspect.ts";
 import { listStorageRows } from "./_utils/listStorageRows.ts";
@@ -32,6 +33,8 @@ export async function transferFile(
       from.storageSession,
       sourceName,
     );
+    if (rows.some((row) => row.name === sourceName + TEXT_WRITE_FILE_EXTENSION))
+      throw new Error("TEXT_WRITE_RECOVERY_REQUIRED");
     return suffixes.map((suffix) => {
       const row = rows.find(
         (entry) => entry.name === sourceName + suffix && entry.metadata,
@@ -58,7 +61,7 @@ export async function transferFile(
     if ((await inspect(parent, to.storageSession, { showAll: true }))?.file)
       throw new Error("TARGET_FOLDER_IS_FILE");
   }
-  for (const suffix of suffixes) {
+  for (const suffix of [...suffixes, TEXT_WRITE_FILE_EXTENSION]) {
     if (await inspect(pathTo + suffix, to.storageSession, { showAll: true }))
       throw new Error("FILE_ALREADY_EXISTS");
   }

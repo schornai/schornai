@@ -57,6 +57,45 @@ beforeEach(() => {
   vi.stubEnv("SUPABASE_AUTH_HOOK_SECRET", `v1,${hookSecret}`);
 });
 describe("storage download route", () => {
+  it.each(["database_files", "realtime_files"])(
+    "serves the saved original during recovery in %s",
+    async (storage) => {
+      const base64 = Buffer.from("old original").toString("base64");
+      state.download.mockResolvedValue({
+        data: new Blob([
+          JSON.stringify({
+            version: 1,
+            original: { base64, type: "text/plain" },
+            sidecar: null,
+          }),
+        ]),
+        error: null,
+      });
+      const response = await download(new Request("https://aibox.test"), {
+        params: Promise.resolve({ storage, path: ["folder", "file.txt"] }),
+      } as any);
+      expect(await response.text()).toBe("old original");
+      expect(state.sign).not.toHaveBeenCalled();
+      expect(response.headers.get("content-security-policy")).toContain(
+        "sandbox",
+      );
+      expect(response.headers.get("cache-control")).toBe("private, no-store");
+    },
+  );
+  it("does not expose a partial original if the recovery record cannot be read", async () => {
+    state.download.mockResolvedValue({
+      data: null,
+      error: new Error("unavailable"),
+    });
+    const response = await download(new Request("https://aibox.test"), {
+      params: Promise.resolve({
+        storage: "database_files",
+        path: ["file.txt"],
+      }),
+    } as any);
+    expect(response.status).toBe(503);
+    expect(state.sign).not.toHaveBeenCalled();
+  });
   it("preserves the SVG content type and sandboxes theme logos", async () => {
     vi.stubGlobal(
       "fetch",

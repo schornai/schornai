@@ -7,6 +7,7 @@ import {
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
   EMPTY_FOLDER_PLACEHOLDER,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "../packages/database/src/storage/_utils/toStorageObjectArray";
 import { list } from "../packages/database/src/storage/list";
 import { inspect } from "../packages/database/src/storage/inspect";
@@ -529,6 +530,7 @@ describe("recursive removal", () => {
         file.path,
         file.path + MDC_FILE_EXTENSION,
         file.path + TRANSCRIPT_FILE_EXTENSION,
+        file.path + TEXT_WRITE_FILE_EXTENSION,
       ]);
       expect(api.remove).toHaveBeenCalledTimes(1);
       expect(logAction).toHaveBeenLastCalledWith({

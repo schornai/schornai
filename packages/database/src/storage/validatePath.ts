@@ -6,6 +6,7 @@ import {
   EMPTY_FOLDER_PLACEHOLDER,
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "./_utils/toStorageObjectArray.ts";
 
 export function validateStoragePath(path: string, { allowRoot = false } = {}) {
@@ -26,6 +27,7 @@ export function validateStoragePath(path: string, { allowRoot = false } = {}) {
         (segment) =>
           segment === EMPTY_FOLDER_PLACEHOLDER ||
           segment.endsWith(MDC_FILE_EXTENSION) ||
+          segment.endsWith(TEXT_WRITE_FILE_EXTENSION) ||
           segment.endsWith(TRANSCRIPT_FILE_EXTENSION),
       )
   )

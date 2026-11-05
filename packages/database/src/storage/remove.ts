@@ -1,6 +1,7 @@
 import {
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "./_utils/toStorageObjectArray.ts";
 import type { StorageObject } from "./_types.ts";
 import type { StorageRealtimeSession } from "./_types.ts";
@@ -39,6 +40,7 @@ async function removeFile(
           storagePath,
           `${storagePath}${MDC_FILE_EXTENSION}`,
           `${storagePath}${TRANSCRIPT_FILE_EXTENSION}`,
+          `${storagePath}${TEXT_WRITE_FILE_EXTENSION}`,
         ]);
         if (error) throw error;
         storageSession.logAction({ state: "removed", target });
@@ -64,9 +66,11 @@ async function removeFolder(
   for (const storageObject of storageObjects) {
     if (storageObject.file) {
       // Sidecars use their original's lock, including orphaned sidecars.
-      const suffix = [MDC_FILE_EXTENSION, TRANSCRIPT_FILE_EXTENSION].find(
-        (extension) => storageObject.path.endsWith(extension),
-      );
+      const suffix = [
+        MDC_FILE_EXTENSION,
+        TRANSCRIPT_FILE_EXTENSION,
+        TEXT_WRITE_FILE_EXTENSION,
+      ].find((extension) => storageObject.path.endsWith(extension));
       const path = suffix
         ? storageObject.path.slice(0, -suffix.length)
         : storageObject.path;

@@ -10,13 +10,27 @@ import type {
 import { diff } from "@schornio/aibox-package-markdown-changelog/diff";
 import { getDocumentContent } from "./getDocumentContent.ts";
 import { serializeMDC } from "@schornio/aibox-package-markdown-changelog/serialize";
+import { getFileTextBackup } from "./getFileTextBackup.ts";
 
 export async function saveDocumentContent(
   target: StorageObject,
   content: StorageFileContent,
   storageSession: StorageRealtimeSession,
+  // Only updateFileText may publish/log after committing its durable backup.
+  { withinTextWrite = false }: { withinTextWrite?: boolean } = {},
 ) {
   try {
+    if (
+      !withinTextWrite &&
+      (await getFileTextBackup(
+        storageSession.getStoragePath(target.path).storagePath,
+        {
+          storage: storageSession.supabaseStorage,
+          signal: storageSession.abortSignal,
+        },
+      ))
+    )
+      throw new Error("TEXT_WRITE_RECOVERY_REQUIRED");
     if (content?.type === "mdc") {
       const currentContent = await getDocumentContent(
         target.path,
@@ -74,11 +88,12 @@ export async function saveDocumentContent(
       if (error) throw error;
     }
 
-    storageSession.logAction({
-      content,
-      state: "created",
-      target,
-    });
+    if (!withinTextWrite)
+      storageSession.logAction({
+        content,
+        state: "created",
+        target,
+      });
     return true;
   } catch (error) {
     storageSession.logAction({

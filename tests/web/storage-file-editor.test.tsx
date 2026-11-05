@@ -63,3 +63,23 @@ it("keeps edits visible on conflict and never saves on cancel", async () => {
   expect(client.execute).toHaveBeenCalledTimes(1);
   expect(client.replace).toHaveBeenCalled();
 });
+
+it("keeps the draft and expected version when recovery needs another attempt", async () => {
+  client.execute.mockResolvedValue({ data: { status: "recoveryRequired" } });
+  render(<StorageFileEditor {...props} />);
+  fireEvent.change(screen.getByRole("textbox"), { target: { value: "draft" } });
+  fireEvent.click(screen.getByRole("button", { name: "labelSave" }));
+  await screen.findByText("errorRecovery");
+  expect((screen.getByRole("textbox") as HTMLTextAreaElement).value).toBe(
+    "draft",
+  );
+  expect(client.replace).not.toHaveBeenCalled();
+  client.execute.mockResolvedValue({
+    data: { status: "saved", indexQueued: true },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "labelSave" }));
+  await waitFor(() => expect(client.replace).toHaveBeenCalled());
+  expect(client.execute).toHaveBeenLastCalledWith(
+    expect.objectContaining({ text: "draft", expectedText: "before" }),
+  );
+});

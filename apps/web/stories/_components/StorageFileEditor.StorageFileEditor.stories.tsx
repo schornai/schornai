@@ -49,3 +49,9 @@ export const Transcript: Story = {
     },
   },
 };
+export const RecoveryRequired: Story = {
+  parameters: {
+    serviceFixtures: { actionResult: { status: "recoveryRequired" } },
+  },
+  play: Error.play,
+};

@@ -246,6 +246,7 @@
       "labelDelete": "Delete folder"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Saving was interrupted. The previous version remains available. Your draft is kept here; try saving again to complete recovery.",
       "labelContent": "Content",
       "labelSave": "Save",
       "labelCancel": "Cancel",

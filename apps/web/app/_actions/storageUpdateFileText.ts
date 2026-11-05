@@ -31,7 +31,7 @@ export const storageUpdateFileText = serverActionClient
       async ({ session, queue }) => {
         requireIdleFile(queue, storage, input.path);
         const result = await updateFileText(input, { session });
-        if (result.status === "conflict") return result;
+        if (result.status !== "saved") return result;
         let indexQueued = true;
         if (storage.type === "documentRepository") {
           try {

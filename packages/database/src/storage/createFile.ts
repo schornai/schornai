@@ -1,6 +1,7 @@
 import type { StorageFileObject, StorageRealtimeSession } from "./_types.ts";
 import { fileNeedsProcessing } from "@schornio/aibox-package-utils/getFileTypeLabel";
 import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
+import { getFileTextBackup } from "./getFileTextBackup.ts";
 
 export async function createFile(
   file: Blob | undefined = new Blob([]),
@@ -9,6 +10,13 @@ export async function createFile(
   { upsert = true }: { upsert?: boolean } = {},
 ) {
   const { storagePath } = storageSession.getStoragePath(path);
+  if (
+    await getFileTextBackup(storagePath, {
+      storage: storageSession.supabaseStorage,
+      signal: storageSession.abortSignal,
+    })
+  )
+    throw new Error("TEXT_WRITE_RECOVERY_REQUIRED");
 
   storageSession.abortSignal?.throwIfAborted();
   const { error } = await storageSession.supabaseStorage.upload(

@@ -34,6 +34,9 @@ meta:
       "apps/web/app/_components/StoragePickerDialog.tsx",
       "packages/realtime/src/documents/storage/transferStorageFile.ts",
       "packages/database/src/storage/remove.ts",
+      "packages/database/src/storage/updateFileText.ts",
+      "packages/database/src/storage/recoverFileText.ts",
+      "packages/database/src/storage/getFileTextBackup.ts",
     ]
 ---
 
@@ -91,6 +94,8 @@ Ohne Ansichtsparameter oder mit `?view=preview` öffnet sich die Vorschau; `?vie
 In der Dateivorschau findest du **Optionen** rechts oben im Kopfbereich. **Optionen → Bearbeiten** öffnet Textdateien oder bereits verarbeitete Inhalte in einem Textfeld mit Monospace-Schrift. **Speichern** übernimmt den Text, **Abbrechen** verwirft ungespeicherte Eingaben. Speichern ist auf 1 MiB UTF-8-Text begrenzt. Wurde der Text inzwischen geändert, verhindert eine Konfliktmeldung das Überschreiben.
 
 Bei Text- und Codedateien wird auch die Originaldatei aktualisiert. Bei PDF-, Office- und Mediendateien bleibt das Original unverändert. Eine Bearbeitung des gesamten Transkripts wird als Textkorrektur gespeichert; die ursprünglichen Zeitmarken bleiben intern erhalten. Die Vorschau zeigt dann den korrigierten Gesamttext anstelle der Segmentbearbeitung und bietet keinen SRT-Export dieser Korrektur an.
+
+Schlägt das Speichern einer Text- oder Codedatei teilweise fehl, stellt die App den bisherigen Stand wieder her. Kann sie die Wiederherstellung nicht abschließen, bleibt dein Entwurf im Editor erhalten und du erhältst eine entsprechende Meldung. Vorschau und Downloads liefern währenddessen den gesicherten vorherigen Stand. Versuche das Speichern erneut; auch **Erneut verarbeiten** stellt den vorherigen Stand zuerst wieder her. Kopieren, Verschieben, Umbenennen und andere Überschreibungen bleiben bis dahin gesperrt. Löschen entfernt auch die Sicherung.
 
 Anlegen und Speichern starten keine Textextraktion oder Transkription. Nach dem Speichern wird der Suchindex einer gemeinsamen Ablage aus dem gespeicherten Text aktualisiert. Falls das Einreihen zur Indexierung scheitert, bleibt der Text gespeichert und eine Meldung fordert zum erneuten Speichern auf.
 

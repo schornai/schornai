@@ -1,3 +1,6 @@
+vi.mock("@schornio/aibox-package-database/storage/getFileTextBackup", () => ({
+  getFileTextBackup: state.backup,
+}));
 import { beforeEach, expect, it, vi } from "vitest";
 const state = vi.hoisted(() => ({
   access: vi.fn(),
@@ -5,6 +8,7 @@ const state = vi.hoisted(() => ({
   content: vi.fn(),
   signed: vi.fn(),
   relay: vi.fn(),
+  backup: vi.fn(),
 }));
 vi.mock("@/lib/supabase/createSupabaseServerClient", () => ({
   createSupabaseServerClient: async () => ({
@@ -13,6 +17,7 @@ vi.mock("@/lib/supabase/createSupabaseServerClient", () => ({
 }));
 vi.mock("@/lib/storageDownloadResponse", () => ({
   storageDownloadResponse: state.relay,
+  storageFileResponse: async (response: Response) => response,
 }));
 vi.mock(
   "@schornio/aibox-package-database/storage/requireStorageAccess",
@@ -91,4 +96,12 @@ it("rejects folder, traversal and missing processed content", async () => {
   state.inspect.mockResolvedValue({ file: true, name: "file.txt" });
   state.content.mockResolvedValue(undefined);
   expect((await GET(request("processed"))).status).toBe(404);
+});
+
+it("downloads the previous original while a text write needs recovery", async () => {
+  state.backup.mockResolvedValue({ blob: new Blob(["previous"]) });
+  const response = await GET(request());
+  expect(await response.text()).toBe("previous");
+  expect(response.headers.get("content-disposition")).toContain("attachment;");
+  expect(state.signed).not.toHaveBeenCalled();
 });
