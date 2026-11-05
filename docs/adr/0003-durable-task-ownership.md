@@ -18,3 +18,9 @@ including when the coordinator restarts with an older Yjs snapshot. The trade-of
 is database availability on claim/heartbeat/completion, retained task-ID records,
 and an interruption instead of automatic progress during a prolonged outage.
 Legacy claims without a durable owner are also interrupted during upgrade.
+
+Terminal task payloads are subsequently pruned after recovery under
+[FIND-011](https://trello.com/c/LJeSyC2W). Ownership records remain without those
+payloads: deleting the task-ID barrier would allow an old replica to start the
+same external effects again. Queue retention preserves fresh results briefly;
+a caller disconnected beyond that window can receive an expired-result error.

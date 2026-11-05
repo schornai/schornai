@@ -25,6 +25,22 @@ export function taskClaimStore() {
     rpc: vi.fn((name: string, args: any) =>
       reply(() => {
         const old = records.get(args?.p_task_id);
+        if (name === "prune_task_claim_snapshots") {
+          let removed = 0;
+          for (const record of records.values()) {
+            if (removed >= 1000) break;
+            if (
+              record.state !== "claimed" &&
+              !record.recovery_pending &&
+              record.snapshot &&
+              Date.parse(record.completed_at!) < Date.now() - 86_400_000
+            ) {
+              record.snapshot = null;
+              removed++;
+            }
+          }
+          return removed;
+        }
         if (name === "claim_background_task") {
           if (!old)
             records.set(args.p_task_id, {

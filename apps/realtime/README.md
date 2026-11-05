@@ -55,3 +55,16 @@ legacy claims are marked interrupted instead of being executed again.
 See the [task ownership decision](../../docs/adr/0003-durable-task-ownership.md)
 for replay limits and the [task documentation](../../docs/de/tasks/index.md)
 for user recovery steps.
+
+## Task result retention
+
+The coordinator prunes terminal queue history every minute: 24 hours maximum,
+1,000 newest entries, with a five-minute grace period for results and abort
+acknowledgements. Active work is exempt. Legacy records without a usable terminal
+timestamp receive the same grace starting when observed. A disconnected caller
+whose result has been removed fails with `TASK_RESULT_EXPIRED`.
+
+Database snapshots older than 24 hours are cleared in batches of 1,000 after
+recovery has completed. The task ID and ownership record remain as a replay
+barrier; Yjs replication metadata also remains. These limits bound retained task
+payloads, not total historical metadata or the number of active tasks.

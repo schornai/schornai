@@ -11,14 +11,18 @@ import { expireBackgroundTasks } from "@schornio/aibox-database/task/expireBackg
 import { getPendingTaskRecoveries } from "@schornio/aibox-database/task/getPendingTaskRecoveries";
 import { completeTaskRecovery } from "@schornio/aibox-database/task/completeTaskRecovery";
 import { getTaskClaims } from "@schornio/aibox-database/task/getTaskClaims";
+import { pruneTaskClaimSnapshots } from "@schornio/aibox-database/task/pruneTaskClaimSnapshots";
 import { getTaskQueue } from "./getTaskQueue.ts";
 import { hasCapabilities } from "./_utils.ts";
 import { encodeTaskValue, decodeTaskValue } from "./_taskCodec.ts";
 import { replaceTask } from "./replaceTask.ts";
+import { pruneTaskHistory } from "./pruneTaskHistory.ts";
 
 type ClaimedTask = Extract<Task, { state: "claimed" }> & { claimToken: string };
 export class TaskCoordinator {
   #pending = Promise.resolve();
+  #legacySeenAt = new Map<string, number>();
+  #nextCleanupAt = 0;
   readonly document: Doc;
   readonly options: TaskClaimOptions;
   readonly onInterrupted: (task: Task) => Promise<void>;
@@ -254,6 +258,13 @@ export class TaskCoordinator {
           if (current) await this.apply(current, task);
         }
       }
+    }
+    // Apply a grace period before pruning replicated results. Cleanup remains
+    // periodic even when no more work arrives, without touching active tasks.
+    if (Date.now() >= this.#nextCleanupAt) {
+      pruneTaskHistory(this.document, this.#legacySeenAt);
+      await pruneTaskClaimSnapshots(this.options);
+      this.#nextCleanupAt = Date.now() + 60_000;
     }
   }
 }

@@ -17,6 +17,7 @@ meta:
       "packages/realtime/src/server/createTaskCoordinatorExtension.ts",
       "packages/realtime/src/server/recoverTaskDocuments.ts",
       "packages/database/src/task/expireBackgroundTasks.ts",
+      "packages/realtime/src/documents/taskQueue/pruneTaskHistory.ts",
       "packages/database/src/realtime/getRealtimeDocumentPermission.ts",
     ]
 ---
@@ -71,3 +72,18 @@ automatisch erneut. Prüfe den bisherigen Gesprächsverlauf und bereits ausgefü
 Werkzeugaktionen, bevor du eine Anfrage erneut sendest oder eine Datei erneut
 verarbeiten lässt. Externe Aktionen werden durch den Absturz nicht rückgängig
 gemacht.
+
+## Aufbewahrung
+
+Der Aufgabenstapel ist kein dauerhaftes Archiv. Abgeschlossene, abgebrochene und
+fehlgeschlagene Aufgaben werden regelmäßig bereinigt: Einträge ab 24 Stunden
+werden entfernt, darüber hinaus bleiben die neuesten 1.000 erhalten. Ergebnisse
+und Abbruchbestätigungen sind während der ersten fünf Minuten geschützt; dadurch
+kann die Anzahl vorübergehend höher sein. Laufende und wartende Aufgaben bleiben
+erhalten. Erfolgreiche Aufgaben können schon früher verschwinden, sobald ihr
+aufrufender Dienst das Ergebnis abgeholt hat.
+
+Die Bereinigung läuft bei geladenem Aufgabenstapel etwa einmal pro Minute.
+Gesprächsverläufe und Dateien bleiben davon unberührt. Bleibt ein empfangender
+Dienst länger getrennt, kann sein Ergebnis inzwischen abgelaufen sein; er meldet
+dann einen Fehler, statt unbegrenzt darauf zu warten.

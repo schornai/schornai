@@ -1,7 +1,7 @@
 import type { Doc } from "yjs";
 import { getTaskQueue } from "./getTaskQueue.ts";
 
-// Requesters never replace task entries: only the worker publishes completion.
+// Requesters never replace task entries: the coordinator publishes completion.
 // Concurrent completion and cancellation therefore cannot duplicate a task.
 export function requestTaskAbort(document: Doc, taskId: string) {
   const { tasks, abortRequests } = getTaskQueue(document);

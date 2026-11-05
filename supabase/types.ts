@@ -1412,6 +1412,10 @@ export type Database = {
         };
         Returns: Record<string, unknown>[];
       };
+      prune_task_claim_snapshots: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
+      };
       reissue_password_reset_key: {
         Args: { new_reset_key: string; target_user_id: string };
         Returns: string;

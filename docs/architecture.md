@@ -45,6 +45,9 @@ release notes under `docs/` describe the state reviewed on their dates.
    matching chat and pauses remaining inputs. Read the
    [decision](adr/0003-durable-task-ownership.md) when changing retry semantics. The [`Task` union](../packages/realtime/src/documents/taskQueue/_types.ts)
    defines its states and payloads.
+   [Retention](../packages/realtime/src/documents/taskQueue/pruneTaskHistory.ts)
+   removes terminal history after the result grace period; database cleanup
+   discards old snapshots while retaining task IDs against replay.
 4. The [`chat worker`](../apps/realtime/src/chat/worker.ts) consumes submitted
    [chat inputs](../packages/realtime/src/documents/chatCurrentMessage/_types.ts),
    selects an agent role, runs its tools and model, and writes messages and
@@ -60,7 +63,8 @@ Behavior checks: [submission and cancellation](../tests/web/chat-submission.test
 [queue lifecycle](../tests/task-queue.test.ts),
 [ownership and restart](../tests/task-coordinator-transport.test.ts),
 [chat recovery](../tests/task-document-recovery.test.ts),
-[database claim invariants](../supabase/tests/task_claims.sql), and
+[database claim invariants](../supabase/tests/task_claims.sql),
+[result retention](../tests/task-retention.test.ts), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
 
 ## Agent credentials

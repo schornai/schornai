@@ -34,6 +34,15 @@ async function submitted() {
   return getTaskQueue(state.doc).tasks.get(0);
 }
 describe("task submission", () => {
+  it("rejects an expired result after retention cleanup instead of waiting forever", async () => {
+    const result = runTask("model-do-generate", {} as any, [], options);
+    const handled = expect(result).rejects.toThrow("TASK_RESULT_EXPIRED");
+    await submitted();
+    getTaskQueue(state.doc).tasks.delete(0);
+    await handled;
+    expect(state.disposed).toHaveBeenCalledOnce();
+    state.doc.destroy();
+  });
   it("returns the worker result, deletes finished tasks and disposes the connection", async () => {
     const result = runTask(
       "model-do-generate",
