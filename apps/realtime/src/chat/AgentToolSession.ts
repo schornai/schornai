@@ -81,6 +81,7 @@ export class AgentToolSession {
       supabaseServiceRole,
       agentId,
       abortSignal,
+      role.id,
     );
 
     this.#mountedDocumentRepositoriesPromise = (async () => {

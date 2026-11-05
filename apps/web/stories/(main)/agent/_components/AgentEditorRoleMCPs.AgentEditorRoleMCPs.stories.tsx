@@ -52,3 +52,16 @@ export const OAuthSelected: Story = {
     ],
   },
 };
+
+export const StoredHeaders: Story = {
+  args: { mcps: [{ ...meta.args.mcps[0]!, headers: { Authorization: null } }] },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText("Wert");
+    await expect(input).toHaveValue("");
+    await expect(input).toHaveAttribute("type", "password");
+    await expect(input).toHaveAttribute(
+      "placeholder",
+      "Gespeichert – zum Ersetzen eingeben",
+    );
+  },
+};

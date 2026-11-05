@@ -55,6 +55,19 @@ Behavior checks: [submission and cancellation](../tests/web/chat-submission.test
 [queue lifecycle](../tests/task-queue.test.ts), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
 
+## Agent credentials
+
+Agent creation and updates authorize the saved source and requested target
+workspaces before using the service client. The `save_agent_with_mcp_credentials`
+transaction stores header values in a protected table and leaves only names and
+null placeholders in `chatbots.config`. It retains unchanged values, validates
+copy scope and endpoint identity, and deletes credentials for removed connections.
+The [`MCP session`](../apps/realtime/src/chat/MCPToolSession.ts) loads headers via
+[`getAgentMCPHeaders`](../packages/database/src/agent/getAgentMCPHeaders.ts) only
+for the authorized saved agent role and endpoint. See
+[authorization and DTO tests](../tests/web/agent-credentials.test.ts) and
+[SQL transaction/access tests](../supabase/tests/agent_mcp_credentials.sql).
+
 ## Follow file processing
 
 [`StorageSession`](../packages/database/src/storage/_utils/StorageSession.ts)

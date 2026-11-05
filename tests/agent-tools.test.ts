@@ -27,6 +27,7 @@ const state = vi.hoisted(() => ({
   search: vi.fn(),
   repos: vi.fn(),
   mcp: vi.fn(),
+  mcpHeaders: vi.fn(async () => ({ Authorization: "private-test" })),
   disposed: vi.fn(),
   embedding: vi.fn(),
 }));
@@ -53,6 +54,9 @@ vi.mock(
   "@schornio/aibox-package-database/documentRepositories/getDocumentRepositorityByIdentifiers",
   () => ({ getDocumentRepositorityByIdentifiers: state.repos }),
 );
+vi.mock("@schornio/aibox-database/agent/getAgentMCPHeaders", () => ({
+  getAgentMCPHeaders: state.mcpHeaders,
+}));
 vi.mock("@ai-sdk/mcp", () => ({ createMCPClient: state.mcp }));
 vi.mock(
   "@schornio/aibox-realtime/documents/storage/StorageRealtimeSession",
@@ -417,7 +421,7 @@ describe("agent tool sessions", () => {
             id: "mcp",
             type: "http",
             url: "https://mcp.test",
-            headers: { Authorization: "test" },
+            headers: { Authorization: null },
           },
         ],
       } as any,
@@ -425,6 +429,7 @@ describe("agent tool sessions", () => {
     );
     await session.tools();
     expect(state.mcp).not.toHaveBeenCalled();
+    expect(state.mcpHeaders).not.toHaveBeenCalled();
     const approvals: any = await session.toolApproval();
     expect(
       await approvals.mcp({ serverId: "mcp" }, { toolCallId: "list" }),
@@ -434,7 +439,7 @@ describe("agent tool sessions", () => {
       transport: {
         type: "http",
         url: "https://mcp.test",
-        headers: { Authorization: "test" },
+        headers: { Authorization: "private-test" },
         authProvider: expect.anything(),
         fetch: expect.any(Function),
       },

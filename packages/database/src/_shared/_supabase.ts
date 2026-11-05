@@ -46,6 +46,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      agent_mcp_credentials: {
+        Row: {
+          agent_id: string;
+          headers: NonNullable<Json>;
+          mcp_id: string;
+          role_id: string;
+          url: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          agent_id: string;
+          headers: NonNullable<Json>;
+          mcp_id: string;
+          role_id: string;
+          url: string;
+        };
+        Update: {
+          agent_id?: string;
+          headers?: NonNullable<Json>;
+          mcp_id?: string;
+          role_id?: string;
+          url?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "agent_mcp_credentials_agent_id_fkey";
+            columns: ["agent_id"];
+            isOneToOne: false;
+            referencedRelation: "chatbots";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       ai_model_credentials: {
         Row: {
           api_key: string;
@@ -1161,6 +1194,10 @@ export type Database = {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: boolean;
       };
+      agent_config_has_no_credentials: {
+        Args: { p_config: Json };
+        Returns: boolean;
+      };
       authorize:
         | {
             Args: { p_role: Database["public"]["Enums"]["user_role"] };
@@ -1316,6 +1353,19 @@ export type Database = {
           p_name: string;
           p_repository_id: string;
           p_url: string;
+        };
+        Returns: undefined;
+      };
+      save_agent_with_mcp_credentials: {
+        Args: {
+          p_agent_id: string;
+          p_config: Json;
+          p_copy_agent_id?: string;
+          p_copy_workspace_id?: string;
+          p_description: string;
+          p_expected_workspace_id?: string;
+          p_name: string;
+          p_workspace_id: string;
         };
         Returns: undefined;
       };

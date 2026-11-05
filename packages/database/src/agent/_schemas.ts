@@ -176,7 +176,11 @@ export const agentConfigSchema = z.object({
         z.array(
           z.object({
             oauthConnectionId: z.optional(z.string()),
-            headers: z.record(z.string(), z.string()),
+            // null retains a stored value; strings are write-only replacements.
+            headers: z.record(
+              z.string().check(z.minLength(1)),
+              z.nullable(z.string().check(z.minLength(1))),
+            ),
             id: z.uuid(),
             name: z.optional(z.string()),
             type: z.literal("http"),

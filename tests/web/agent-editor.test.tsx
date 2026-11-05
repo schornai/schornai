@@ -227,7 +227,7 @@ function richEditor(view: string) {
             name: "Connector",
             type: "http",
             url: "https://example.test",
-            headers: { Authorization: "secret" },
+            headers: { Authorization: null },
           },
         ],
         documentRepositoryMounts: [
@@ -244,7 +244,7 @@ function richEditor(view: string) {
   });
 }
 describe("role connections and settings", () => {
-  it("edits MCP endpoints and renames headers without losing their values", () => {
+  it("requires new values after changing an MCP endpoint or header name", () => {
     richEditor("mcps");
     fireEvent.change(screen.getByDisplayValue("Connector"), {
       target: { value: "Updated connector" },
@@ -259,9 +259,9 @@ describe("role connections and settings", () => {
     expect(saveRole().mcps[0]).toMatchObject({
       name: "Updated connector",
       url: "https://new.test/mcp",
-      headers: { "X-Token": "secret" },
+      headers: { "X-Token": "" },
     });
-    fireEvent.change(screen.getByDisplayValue("secret"), {
+    fireEvent.change(screen.getByLabelText("labelHeaderValue"), {
       target: { value: "replacement" },
     });
     expect(saveRole().mcps[0].headers).toEqual({ "X-Token": "replacement" });
@@ -504,13 +504,16 @@ describe("complete role configuration interactions", () => {
     fireEvent.change(name, { target: { value: "Changed" } });
     discardField(name);
     expect(screen.getByDisplayValue("Connector")).toBeTruthy();
-    fireEvent.change(screen.getByDisplayValue("secret"), {
+    fireEvent.change(screen.getByLabelText("labelHeaderValue"), {
       target: { value: "Changed" },
     });
     fireEvent.click(
       screen.getByText("labelHTTPHeaders").querySelector("button")!,
     );
-    expect(screen.getByDisplayValue("secret")).toBeTruthy();
+    expect(
+      (screen.getByLabelText("labelHeaderValue") as HTMLInputElement).value,
+    ).toBe("");
+    expect(screen.getByPlaceholderText("labelStoredHeader")).toBeTruthy();
   });
   it("deletes repository mounts only after confirmation", async () => {
     richEditor("documentRepositoryMounts");
@@ -915,4 +918,58 @@ describe("agent editor resource labels and available tools", () => {
       expect(screen.queryByText("labelUnknownModel")).toBeNull();
     },
   );
+});
+
+it("keeps saved headers when a name field loses focus unchanged", () => {
+  richEditor("mcps");
+  const key = screen.getByDisplayValue("Authorization");
+  fireEvent.focus(key);
+  fireEvent.blur(key);
+  fireEvent.change(screen.getByDisplayValue("Connector"), {
+    target: { value: "Renamed" },
+  });
+  expect(saveRole().mcps[0].headers).toEqual({ Authorization: null });
+  const input = screen.getByLabelText("labelHeaderValue") as HTMLInputElement;
+  expect(input.type).toBe("password");
+  expect(input.value).toBe("");
+  fireEvent.change(input, { target: { value: "replacement" } });
+  expect(saveRole().mcps[0].headers).toEqual({ Authorization: "replacement" });
+  fireEvent.change(input, { target: { value: "" } });
+  expect(saveRole().mcps[0].headers).toEqual({ Authorization: null });
+});
+
+it("clears replacement values after success and keeps the draft on failure", async () => {
+  client.params = new URLSearchParams("view=roles&role-role=mcps");
+  editor("update", {
+    ...agent,
+    roles: [
+      {
+        ...agent.roles[0],
+        mcps: [
+          {
+            id: "11111111-1111-4111-8111-111111111111",
+            type: "http",
+            url: "https://mcp.test",
+            headers: { Authorization: null },
+          },
+        ],
+      },
+    ],
+  });
+  fireEvent.change(screen.getByLabelText("labelHeaderValue"), {
+    target: { value: "replacement" },
+  });
+  saveRole();
+  const { updateAgent } =
+    await import("../../apps/web/app/(main)/agent/_actions/updateAgent");
+  const callbacks = client.actionOptionsByAction.get(updateAgent);
+  act(() => callbacks.onError());
+  expect(
+    (screen.getByLabelText("labelHeaderValue") as HTMLInputElement).value,
+  ).toBe("replacement");
+  act(() => callbacks.onSuccess({ input: client.execute.mock.lastCall![0] }));
+  expect(
+    (screen.getByLabelText("labelHeaderValue") as HTMLInputElement).value,
+  ).toBe("");
+  expect(screen.getByPlaceholderText("labelStoredHeader")).toBeTruthy();
 });

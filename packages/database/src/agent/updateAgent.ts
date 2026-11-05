@@ -1,21 +1,29 @@
 import type { Agent } from "./_types.ts";
 import type { SupabaseClient } from "../_shared/_types.ts";
 
+/** Server-only. Caller must authorize workspace-admin for both the saved
+ * expectedWorkspaceId and the requested target workspace before creating the client. */
 export async function updateAgent(
   agent: Agent,
-  { supabase }: { supabase: SupabaseClient },
+  {
+    supabaseServiceRole,
+    expectedWorkspaceId,
+  }: {
+    supabaseServiceRole: SupabaseClient;
+    expectedWorkspaceId: string;
+  },
 ) {
-  const { description, name, workspaceId, ...config } = agent;
-
-  await supabase
-    .from("chatbots")
-    .update({
-      config,
-      description,
-      name,
-      organization_id: workspaceId,
-      roles: {},
-    })
-    .eq("id", agent.id)
-    .throwOnError();
+  const { description, name, workspaceId, id, ...config } = agent;
+  const { error } = await supabaseServiceRole.rpc(
+    "save_agent_with_mcp_credentials",
+    {
+      p_agent_id: id,
+      p_workspace_id: workspaceId,
+      p_name: name,
+      p_description: description,
+      p_config: config,
+      p_expected_workspace_id: expectedWorkspaceId,
+    },
+  );
+  if (error) throw new Error("AGENT_SAVE_FAILED");
 }

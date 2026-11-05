@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "MCP-Endpunkt und gegebenenfalls Zugangsdaten von der zuständigen Administration."
   status: "verfügbar"
-  last_verified: "2026-10-23"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(main)/agent/_components/AgentEditorRoleMCPs.tsx",
@@ -20,6 +20,11 @@ meta:
       "apps/web/app/api/mcp/oauth/callback/route.ts",
       "packages/realtime/src/mcp/MCPOAuthProvider.ts",
       "apps/realtime/src/chat/MCPToolSession.ts",
+      "packages/database/src/agent/getAgentMCPHeaders.ts",
+      "packages/database/src/agent/createAgent.ts",
+      "packages/database/src/agent/updateAgent.ts",
+      "apps/web/app/(main)/agent/_actions/createAgent.ts",
+      "apps/web/app/(main)/agent/_actions/updateAgent.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolMCP.tsx",
     ]
 ---
@@ -91,7 +96,9 @@ Im Chatverlauf erscheinen MCP-Aufrufe mit einem Stecker-Symbol, dem Werkzeugname
 
 Kläre mit der Administration, welche MCP-Werkzeuge Dateien lesen, Daten übertragen oder Änderungen ausführen. Beschränke diese Rechte am MCP-Dienst und seinen Zugangsdaten; Web-Fetch-Whitelist und Ablage-Schreibmodi gelten nur für die jeweiligen anderen Werkzeuge.
 
-Trage Zugangsdaten in die vom MCP-Dienst vorgegebenen Headerfelder ein. Die Header sind Teil der Agentenkonfiguration und für Personen mit Konfigurationszugriff einsehbar. Verwende dafür Zugangsdaten mit den für diesen Agenten benötigten Rechten und schwärze die Werte in Screenshots oder Supportnachrichten.
+Trage Zugangsdaten in die vom MCP-Dienst vorgegebenen Headerfelder ein. Gespeicherte Header-Werte bleiben verborgen, auch für Administrator:innen. Nur die Namen stehen in der lesbaren Agentenkonfiguration; die Werte lädt der Realtime-Dienst beim Aufruf. Ein leeres Feld mit **Gespeichert – zum Ersetzen eingeben** behält den vorhandenen Wert. Zum Ersetzen gibst du einen neuen Wert ein, zum Entfernen löschst du den Header und speicherst den Agenten.
+
+Bei einem geänderten Header-Namen oder einer anderen Server-Adresse musst du die Werte neu eingeben. Beim Kopieren eines Agenten werden unveränderte Zugangsdaten übernommen; dafür benötigst du Administrationsrechte für Quell- und Ziel-Arbeitsplatz. Verwende dafür Zugangsdaten mit den für diesen Agenten benötigten Rechten und schwärze die Werte in Screenshots oder Supportnachrichten.
 
 Mit **Weiterer MCP** ergänzt du weitere Verbindungen. **MCP löschen** beziehungsweise **Verbindung löschen** entfernt nach Bestätigung die Konfiguration dieser Verbindung. Speichere anschließend den Agenten. Widerrufe nicht mehr benötigte Zugangsdaten zusätzlich beim MCP-Dienst.
 

@@ -236,7 +236,10 @@
       "labelDeleteMCP": "MCP löschen",
       "labelAddMCP": "Weiterer MCP",
       "errorInvalidUrl": "URL muss gültig sein",
-      "labelOAuthApp": "OAuth-App"
+      "labelOAuthApp": "OAuth-App",
+      "labelStoredHeader": "Gespeichert – zum Ersetzen eingeben",
+      "descriptionStoredHeaders": "Gespeicherte Werte bleiben verborgen. Bei einem anderen Header-Namen oder einer anderen Server-Adresse musst du den Wert neu eingeben.",
+      "errorHeaderRequired": "Gib für jeden neuen oder geänderten Header einen Namen und einen Wert ein."
     },
     "AgentEditorRoleTools": {
       "labelData": "Daten",
