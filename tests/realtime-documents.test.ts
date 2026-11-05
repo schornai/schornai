@@ -1,3 +1,5 @@
+import { TaskCoordinator } from "../packages/realtime/src/documents/taskQueue/TaskCoordinator";
+import { taskClaimStore } from "./helpers/task-claims";
 import { describe, expect, it, vi } from "vitest";
 import { Doc, applyUpdate, encodeStateAsUpdate } from "yjs";
 import { TypedYMap } from "../packages/realtime/src/_lib/TypedYMap";
@@ -17,10 +19,7 @@ import { getActivities } from "../packages/realtime/src/documents/activity/getAc
 import { upsertActivity } from "../packages/realtime/src/documents/activity/upsertActivity";
 import { deleteActivity } from "../packages/realtime/src/documents/activity/deleteActivity";
 import { addTask } from "../packages/realtime/src/documents/taskQueue/addTask";
-import { claimTask } from "../packages/realtime/src/documents/taskQueue/claimTask";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
-import { setTaskDone } from "../packages/realtime/src/documents/taskQueue/setTaskDone";
-import { setTaskError } from "../packages/realtime/src/documents/taskQueue/setTaskError";
 import { deleteTask } from "../packages/realtime/src/documents/taskQueue/deleteTask";
 import { registerAbortTask } from "../packages/realtime/src/documents/taskQueue/registerAbortTask";
 import { hasCapabilities } from "../packages/realtime/src/documents/taskQueue/_utils";
@@ -249,28 +248,33 @@ describe("task queue state machine", () => {
       userClaims: [],
     },
   });
-  it("claims only matching task types and capabilities, exactly once", () => {
+  it("claims only matching task types and capabilities, exactly once", async () => {
     const document = new Doc();
+    const coordinator = new TaskCoordinator(
+      document,
+      taskClaimStore().options,
+      async () => {},
+    );
     addTask(document, task("gpu", ["gpu"]));
     addTask(document, task("cpu"));
     expect(
-      claimTask(document, "worker", "transcribe", ["gpu"]),
+      await coordinator.claim("transcribe", ["gpu"], "worker"),
     ).toBeUndefined();
-    expect(claimTask(document, "worker", "chat", [])).toMatchObject({
+    const cpu = (await coordinator.claim("chat", [], "worker"))!;
+    expect(cpu).toMatchObject({
       id: "cpu",
       state: "claimed",
       claimedBy: "worker",
     });
-    expect(claimTask(document, "worker", "chat", [])).toBeUndefined();
-    expect(claimTask(document, "worker", "chat", ["gpu"])!.id).toBe("gpu");
-    setTaskDone(document, "cpu", undefined);
-    setTaskError(document, "gpu", new Error("failed"));
+    expect(await coordinator.claim("chat", [], "worker")).toBeUndefined();
+    const gpu = (await coordinator.claim("chat", ["gpu"], "worker"))!;
+    expect(gpu.id).toBe("gpu");
+    await coordinator.finish("cpu", cpu.claimToken, undefined);
+    await coordinator.finish("gpu", gpu.claimToken, undefined, "Error: failed");
     expect(getTaskQueue(document).tasks.toArray()).toMatchObject([
       { state: "error", error: "Error: failed" },
       { state: "finished" },
     ]);
-    setTaskDone(document, "missing", undefined);
-    setTaskError(document, "missing", "error");
     deleteTask(document, "missing");
     deleteTask(document, "gpu");
     expect(

@@ -8,12 +8,15 @@ meta:
   role_scope: "Gesamte Instanz"
   prerequisites: "Laufender Realtime-Server für aktuelle Warteschlangenstände."
   status: "verfügbar"
-  last_verified: "2026-10-25"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(settings)/_components/Sidebar.tsx",
       "apps/web/app/(settings)/tasks/_components/TaskTable.tsx",
       "packages/realtime/src/documents/taskQueue/_types.ts",
+      "packages/realtime/src/server/createTaskCoordinatorExtension.ts",
+      "packages/realtime/src/server/recoverTaskDocuments.ts",
+      "packages/database/src/task/expireBackgroundTasks.ts",
       "packages/database/src/realtime/getRealtimeDocumentPermission.ts",
     ]
 ---
@@ -53,3 +56,18 @@ Diese Ansicht ist nur lesbar. Starte Chat-Anfragen, Dateiverarbeitung oder Trans
 Aufgaben lassen sich hier nicht löschen, neu starten oder priorisieren. Einen Chat brichst du im Gespräch ab; eine Datei startest du über ihr Aktionsmenü mit **Erneut verarbeiten** neu.
 
 Bleibt eine Aufgabe auf `pending`, prüfe die benötigten Dienste: Realtime und Modellserver für Chats, Tika für Dokumentextraktion, Mac-Transcriber und Whisper-Modell für Audio/Video. Bei `error` öffne den betroffenen Chat oder die Datei und lies die Fehlermeldung. Notiere Typ, Status, Zeitpunkt und Ressourcenadresse und suche damit in den [Box-Admin-Protokollen](../box-admin/index.md).
+
+## Nach einem Worker-Absturz
+
+Eine übernommene Aufgabe muss regelmäßig ein Lebenszeichen melden. Bleibt es
+90 Sekunden aus, wird die Aufgabe beim nächsten Wiederherstellungslauf als
+`error` markiert. Diese Prüfung läuft bei verbundenem Aufgabenstapel alle
+10 Sekunden und nach dessen Laden. Dafür müssen Realtime-Server und Datenbank
+erreichbar sein; ein Ausfall kann die Wiederherstellung verzögern.
+
+Ein betroffener Chat wird wieder freigegeben, noch wartende Texte seines
+Nachrichtenstapels werden pausiert. Die unterbrochene Aufgabe startet nicht
+automatisch erneut. Prüfe den bisherigen Gesprächsverlauf und bereits ausgeführte
+Werkzeugaktionen, bevor du eine Anfrage erneut sendest oder eine Datei erneut
+verarbeiten lässt. Externe Aktionen werden durch den Absturz nicht rückgängig
+gemacht.

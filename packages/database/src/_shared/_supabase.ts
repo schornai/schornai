@@ -941,6 +941,37 @@ export type Database = {
         };
         Relationships: [];
       };
+      task_claims: {
+        Row: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          completed_at?: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending?: boolean;
+          snapshot?: string | null;
+          state: string;
+          task_id: string;
+        };
+        Update: {
+          completed_at?: string | null;
+          expires_at?: string;
+          owner_token?: string;
+          recovery_pending?: boolean;
+          snapshot?: string | null;
+          state?: string;
+          task_id?: string;
+        };
+        Relationships: [];
+      };
       text_searches: {
         Row: {
           created_at: string;
@@ -1223,6 +1254,24 @@ export type Database = {
         Args: { user_role: string; visibility: string };
         Returns: boolean;
       };
+      claim_background_task: {
+        Args: { p_owner_token: string; p_snapshot: string; p_task_id: string };
+        Returns: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "task_claims";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       create_external_ai_model: {
         Args: {
           api_key: string;
@@ -1242,6 +1291,33 @@ export type Database = {
       ensure_realtime_document: {
         Args: { p_document_name: string; p_user_ids: string[] };
         Returns: string;
+      };
+      expire_background_tasks: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "task_claims";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
+      finish_background_task: {
+        Args: {
+          p_owner_token: string;
+          p_snapshot: string;
+          p_state: string;
+          p_task_id: string;
+        };
+        Returns: boolean;
       };
       generate_custom_id: { Args: Record<PropertyKey, never>; Returns: string };
       get_parent_folders: {
@@ -1343,6 +1419,10 @@ export type Database = {
       release_storage_file_lock: {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: undefined;
+      };
+      renew_background_task: {
+        Args: { p_owner_token: string; p_task_id: string };
+        Returns: boolean;
       };
       replace_file_index: {
         Args: {

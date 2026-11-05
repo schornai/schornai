@@ -1,3 +1,4 @@
+import { saveRealtimeDocument } from "@schornio/aibox-database/realtime/saveRealtimeDocument";
 import { Database } from "@hocuspocus/extension-database";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
 
@@ -8,12 +9,6 @@ const postgresHexToUint8Array = (src: string) =>
       .match(/.{1,2}/g)!
       .map((byte) => parseInt(byte, 16)),
   );
-
-const uint8ArrayToPostgresHex = (src: Uint8Array) =>
-  "\\x" +
-  Array.from(src)
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
 
 // warum ist das in diesem ordner?
 export function createSupabaseExtension({
@@ -66,19 +61,7 @@ export function createSupabaseExtension({
         return;
       }
 
-      await supabase
-        .from("realtime_documents")
-        .upsert(
-          {
-            document_data: uint8ArrayToPostgresHex(state),
-            document_name: documentName,
-            updated_at: new Date().toISOString(),
-          },
-          {
-            onConflict: "document_name",
-          },
-        )
-        .throwOnError();
+      await saveRealtimeDocument(documentName, state, { supabase });
     },
   });
 }

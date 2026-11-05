@@ -435,3 +435,36 @@ describe("chat worker approval continuation", () => {
     expect(activity()?.state).toBe("success");
   });
 });
+
+it.each(["lease-lost", "new-generation"])(
+  "ignores a late model result after %s",
+  async (reason) => {
+    queue({ type: "text", text: "First" });
+    queue({ type: "text", text: "Waiting" });
+    const controller = new AbortController();
+    mocks.stream.mockImplementationOnce(async () => {
+      if (reason === "lease-lost")
+        controller.abort(new Error("TASK_LEASE_LOST"));
+      else {
+        chat.getMap("state").set("generationId", "new-generation");
+        chat.getMap("state").set("type", "queued");
+      }
+      return {
+        stream: {},
+        usage: Promise.resolve({ inputTokens: 1, outputTokens: 1 }),
+      };
+    });
+    await run(controller.signal);
+    expect(
+      getChat(chat)
+        .messages!.toArray()
+        .some((message) => message.id === "answer"),
+    ).toBe(false);
+    expect(getChatCurrentMessageBatch(current).length).toBe(1);
+    expect(getChat(chat).state!.get("type")).toBe(
+      reason === "new-generation" ? "queued" : "generating",
+    );
+    if (reason === "new-generation")
+      expect(getChat(chat).state!.get("generationId")).toBe("new-generation");
+  },
+);

@@ -37,8 +37,13 @@ release notes under `docs/` describe the state reviewed on their dates.
    that the chat is idle, then queueing marks a generation as queued and adds its
    task. Authorization stays in the entry points.
 3. [`TaskQueue`](../packages/realtime/src/documents/taskQueue/TaskQueue.ts)
-   claims work by type and capabilities and owns completion/error/abort
-   acknowledgement. The [`Task` union](../packages/realtime/src/documents/taskQueue/_types.ts)
+   requests ownership by type and capabilities from the server's
+   [coordinator](../packages/realtime/src/server/createTaskCoordinatorExtension.ts).
+   [Database claims](../packages/database/src/task) grant one owner and require a
+   live lease for renewal/completion. Expired work fails without replay;
+   [recovery](../packages/realtime/src/server/recoverTaskDocuments.ts) releases its
+   matching chat and pauses remaining inputs. Read the
+   [decision](adr/0003-durable-task-ownership.md) when changing retry semantics. The [`Task` union](../packages/realtime/src/documents/taskQueue/_types.ts)
    defines its states and payloads.
 4. The [`chat worker`](../apps/realtime/src/chat/worker.ts) consumes submitted
    [chat inputs](../packages/realtime/src/documents/chatCurrentMessage/_types.ts),
@@ -52,7 +57,10 @@ release notes under `docs/` describe the state reviewed on their dates.
 
 Behavior checks: [submission and cancellation](../tests/web/chat-submission.test.tsx),
 [worker processing](../tests/chat-worker.test.ts),
-[queue lifecycle](../tests/task-queue.test.ts), and
+[queue lifecycle](../tests/task-queue.test.ts),
+[ownership and restart](../tests/task-coordinator-transport.test.ts),
+[chat recovery](../tests/task-document-recovery.test.ts),
+[database claim invariants](../supabase/tests/task_claims.sql), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
 
 ## Agent credentials

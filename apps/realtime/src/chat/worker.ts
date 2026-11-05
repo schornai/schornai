@@ -103,8 +103,23 @@ export async function chatWorker({
         type: "chat",
       };
 
+      const assertGenerationActive = (allowFinalPartialAnswer = false) => {
+        if (
+          !allowFinalPartialAnswer ||
+          (abortSignal.reason instanceof Error &&
+            abortSignal.reason.message === "TASK_LEASE_LOST")
+        )
+          abortSignal.throwIfAborted();
+        const state = chat.document.getMap("state");
+        if (
+          (state.has("generationId") &&
+            state.get("generationId") !== claimedTask.id) ||
+          ["idle", "error"].includes(String(state.get("type")))
+        )
+          throw new DOMException("Generation no longer active", "AbortError");
+      };
       const claimNextInput = () => {
-        abortSignal.throwIfAborted();
+        assertGenerationActive();
         return claimNextChatCurrentMessage(currentChatMessage.document, {
           awaitingApproval:
             getChatInteraction(getChat(chat.document).messages?.toArray() ?? [])
@@ -321,6 +336,7 @@ export async function chatWorker({
           }),
           terminateOnError: true,
         })) {
+          assertGenerationActive(true);
           if (!timingFirstResponse) {
             timingFirstResponse = performance.now();
           }
@@ -347,6 +363,7 @@ export async function chatWorker({
             : undefined;
 
           const usage = await result.usage;
+          assertGenerationActive();
 
           updateChatMessage(chat.document, {
             ...latestChatMessage,
@@ -383,6 +400,7 @@ export async function chatWorker({
         claimedCurrentChatMessage = claimNextInput();
       }
 
+      assertGenerationActive();
       setChatState(chat.document, {
         type: "idle",
       });
@@ -395,6 +413,19 @@ export async function chatWorker({
             : "success",
       });
     } catch (error) {
+      const state = chat.document.getMap("state");
+      // Recovery owns a lost lease. A late worker must not re-block the chat or
+      // replace the state of a generation submitted after recovery.
+      if (
+        state.get("generationId") !== claimedTask.id ||
+        !["queued", "generating", "aborting"].includes(
+          String(state.get("type")),
+        ) ||
+        (abortSignal.aborted &&
+          abortSignal.reason instanceof Error &&
+          abortSignal.reason.message === "TASK_LEASE_LOST")
+      )
+        return;
       if (error instanceof Error && error.name === "AbortError") {
         // The Stop action releases the UI only after TaskQueue acknowledges
         // completion, which happens after these providers have been disposed.

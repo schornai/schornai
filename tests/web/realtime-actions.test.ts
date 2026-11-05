@@ -17,7 +17,7 @@ import { addChatCurrentMessage } from "../../packages/realtime/src/documents/cha
 import { getChatCurrentMessageBatch } from "../../packages/realtime/src/documents/chatCurrentMessage/getChatCurrentMessageBatch";
 import { normalizeChatCurrentMessage } from "../../packages/realtime/src/documents/chatCurrentMessage/normalizeChatCurrentMessage";
 import { setChatCurrentMessageState } from "../../packages/realtime/src/documents/chatCurrentMessage/setChatCurrentMessageState";
-import { setTaskDone } from "../../packages/realtime/src/documents/taskQueue/setTaskDone";
+import { replaceTask } from "../../packages/realtime/src/documents/taskQueue/replaceTask";
 const mocks = vi.hoisted(() => ({
   docs: [] as any[],
   batchDocs: [] as any[],
@@ -214,7 +214,7 @@ describe("realtime server actions", () => {
       });
       getTaskQueue(queue).abortRequests.observe(() => {
         queueMicrotask(() => {
-          setTaskDone(queue, "active", undefined);
+          acknowledgeAbort(queue, "active");
         });
       });
       await abortChatGeneration({ activityId: "activity", agentId: "agent" });
@@ -451,7 +451,7 @@ it("does not reset a newer generation when old cancellation completes", async ()
       chat.getMap("state").set("type", "queued");
       chat.getMap("state").set("generationId", "new");
       upsertActivity(activities, { id: "activity", state: "running" });
-      setTaskDone(queue, "old", undefined);
+      acknowledgeAbort(queue, "old");
     }),
   );
   await abortChatGeneration({ activityId: "activity", agentId: "agent" });
@@ -567,7 +567,7 @@ it("tolerates a legacy task arriving while waiting for cancellation", async () =
           content: {},
         } as any,
       ]);
-      setTaskDone(queue, "old", undefined);
+      acknowledgeAbort(queue, "old");
     }),
   );
   await abortChatGeneration({ activityId: "activity", agentId: "agent" });
@@ -611,3 +611,16 @@ it("claims a parent without publishing activity metadata during initial page ren
   expect(mocks.ensure).toHaveBeenCalled();
   expect(mocks.sync).not.toHaveBeenCalled();
 });
+
+// Simulate the coordinator acknowledgement at the action's document seam.
+function acknowledgeAbort(document: Doc, id: string) {
+  const task = getTaskQueue(document)
+    .tasks.toArray()
+    .find((task) => task.id === id)!;
+  replaceTask(document, {
+    ...task,
+    state: "aborted",
+    abortingAtISO: new Date().toISOString(),
+    abortedAtISO: new Date().toISOString(),
+  });
+}
