@@ -86,6 +86,12 @@ before its original and sidecars. Recursive deletion stops at the first error;
 retrying cleans up the remaining files. See
 [removal tests](../tests/storage-remove.test.ts).
 
+[`createIndex`](../packages/database/src/storage/createIndex.ts) prepares all model
+results before publishing a file's source, chunks, keywords and vectors through
+the `replace_file_index` transaction. The previous index survives preparation or
+publication failures. See [index tests](../tests/search-index.test.ts) and
+[SQL rollback and permission checks](../supabase/tests/replace_file_index.sql).
+
 ## Follow machine startup
 
 ```text

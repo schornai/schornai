@@ -64,6 +64,7 @@ describe("Supabase type generation", () => {
       "export type Database = {};\n",
     ]);
     expect(test.args).toContain("--local");
+    expect(test.args).toContain("supabase@2.120.0");
   });
   it("supports a disposable target without logging its credentials", () => {
     const url =

@@ -8,12 +8,13 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Mindestens ein aktiver Suchindex und erfolgreich verarbeitete Dateien."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(main)/app/documents/[documentRepositoryId]/search/page.tsx",
       "apps/web/app/(main)/app/documents/[documentRepositoryId]/search/_components/Search.tsx",
       "apps/web/app/_components/StorageSearchResult.tsx",
+      "packages/database/src/storage/createIndex.ts",
     ]
 ---
 
@@ -31,6 +32,8 @@ Die **Volltextsuche** sucht innerhalb der verarbeiteten Dateien einer Dokumenten
 4. Lies die Textausschnitte und öffne die passende Datei für den Zusammenhang.
 
 Die Suche verwendet die in der Ablage aktivierten Verfahren. Es gibt dabei keinen separaten Umschalter pro Suchanfrage zwischen Schlüsselwort- und semantischer Suche.
+
+Während einer erneuten Indexierung bleibt der bisherige Suchbestand einer Datei verfügbar. Erst nach erfolgreicher Vorbereitung werden Textausschnitte, Schlüsselwortindex und Vektoren gemeinsam ersetzt. Scheitert die Verarbeitung, findet die Suche weiterhin den zuletzt erfolgreich indexierten Stand; dieser kann vom inzwischen bearbeiteten Dateitext abweichen. Wiederhole dann **Erneut verarbeiten** im Dateimenü.
 
 ## Gute Suchanfragen
 

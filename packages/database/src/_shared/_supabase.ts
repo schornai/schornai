@@ -1123,11 +1123,11 @@ export type Database = {
     Views: {
       text_searches_with_sources: {
         Row: {
-          created_at: string;
-          database_id: string;
-          id: string;
-          object_id: string;
-          source_id: string;
+          created_at: string | null;
+          database_id: string | null;
+          id: string | null;
+          object_id: string | null;
+          source_id: string | null;
           text_search_vector: unknown;
         };
         ComputedFields: never;
@@ -1305,6 +1305,18 @@ export type Database = {
       };
       release_storage_file_lock: {
         Args: { p_bucket: string; p_path: string; p_token: string };
+        Returns: undefined;
+      };
+      replace_file_index: {
+        Args: {
+          p_chunks: Json;
+          p_embedding_dimension: number;
+          p_keyword: boolean;
+          p_mime_type: string;
+          p_name: string;
+          p_repository_id: string;
+          p_url: string;
+        };
         Returns: undefined;
       };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };

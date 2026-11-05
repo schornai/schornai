@@ -30,47 +30,7 @@ function toBatches<T>(chunks: T[], batchSize: number): T[][] {
   return batches;
 }
 
-async function deleteSourceByUrlThrottled(
-  url: string,
-  {
-    abortSignal,
-    supabase,
-  }: { abortSignal: AbortSignal; supabase: SupabaseClient },
-) {
-  // We have to be careful to not delete many things at once,
-  // because it quickly leads to timeouts
-
-  const { data: sources } = await supabase
-    .from("sources")
-    .select()
-    .abortSignal(abortSignal)
-    .eq("url", url)
-    .throwOnError();
-
-  for (const source of sources) {
-    let moreToDelete = true;
-
-    while (moreToDelete) {
-      const { count } = await supabase
-        .from("source_objects")
-        .delete({ count: "exact" })
-        .abortSignal(abortSignal)
-        .eq("source_id", source.id)
-        .limit(100)
-        .order("id")
-        .throwOnError();
-      moreToDelete = (count ?? 0) >= 100;
-    }
-
-    await supabase
-      .from("sources")
-      .delete()
-      .abortSignal(abortSignal)
-      .eq("id", source.id)
-      .throwOnError();
-  }
-}
-
+/** Caller must authorize write access and hold the storage file lease. */
 export async function createIndex(
   target: StorageFileObject,
   content: string,
@@ -88,87 +48,60 @@ export async function createIndex(
 ) {
   const url = `database_files/${storageSession.getStoragePath(target.path).storagePath}`;
 
-  await deleteSourceByUrlThrottled(url, { abortSignal, supabase });
-
-  if (
-    !documentRepository.index?.keyword?.active &&
-    !documentRepository.index?.embedding?.active
-  ) {
-    return;
-  }
-
-  const { data: dbSource } = await supabase
-    .from("sources")
-    .insert({
-      database_id: documentRepository.id,
-      mime_type: target.type,
-      name: target.name,
-      url,
-    })
-    .abortSignal(abortSignal)
-    .select()
-    .single()
-    .throwOnError();
-
-  const chunks = chunk(content).map(({ content, start }) => ({
-    content,
-    id: crypto.randomUUID(),
-    page: start,
-    source_id: dbSource.id,
-  }));
-
-  const batches = toBatches(chunks, 100);
-
-  for (const batch of batches) {
-    await supabase
-      .from("source_objects")
-      .insert(batch)
-      .abortSignal(abortSignal)
-      .throwOnError();
-
-    if (documentRepository.index?.keyword?.active) {
-      await supabase
-        .from("text_searches")
-        .insert(
-          batch.map((chunk) => ({
-            database_id: documentRepository.id,
-            object_id: chunk.id,
-            text_search_vector: chunk.content
-              .replaceAll(/[^\p{L}\p{N}_]+/gu, " ")
-              .trim(),
-          })),
-        )
-        .abortSignal(abortSignal)
-        .throwOnError();
-    }
-
-    if (
-      documentRepository.index?.embedding?.active &&
-      documentRepository.index?.embedding?.modelIdentifier &&
-      documentRepository.index?.embedding?.modelVectorSize
-    ) {
-      const embeddingsTable =
-        `embeddings_${documentRepository.index.embedding.modelVectorSize}` as const;
-
+  const keyword = documentRepository.index?.keyword?.active ?? false;
+  const embedding = documentRepository.index?.embedding?.active
+    ? documentRepository.index.embedding
+    : undefined;
+  if (embedding && (!embedding.modelIdentifier || !embedding.modelVectorSize))
+    throw new Error("INVALID_EMBEDDING_CONFIGURATION");
+  const chunks: {
+    content: string;
+    page: number;
+    searchText: string;
+    embedding?: number[];
+  }[] =
+    keyword || embedding
+      ? chunk(content).map(({ content, start }) => ({
+          content,
+          page: start,
+          searchText: content.replaceAll(/[^\p{L}\p{N}_]+/gu, " ").trim(),
+        }))
+      : [];
+  // Prepare every external result first. Failed batches leave the published index intact.
+  if (embedding) {
+    for (const batch of toBatches(chunks, 100)) {
+      abortSignal.throwIfAborted();
       const { embeddings } = await embedMany({
         abortSignal,
-        model: embeddingModel(
-          documentRepository.index.embedding.modelIdentifier,
-        ),
+        model: embeddingModel(embedding.modelIdentifier!),
         values: batch.map((chunk) => chunk.content),
       });
-
-      await supabase
-        .from(embeddingsTable)
-        .insert(
-          embeddings.map((embedding, index) => ({
-            database_id: documentRepository.id,
-            embedding: embedding as unknown as string,
-            object_id: batch[index]?.id ?? "not_set",
-          })),
+      if (
+        embeddings.length !== batch.length ||
+        embeddings.some(
+          (vector) =>
+            vector.length !== embedding.modelVectorSize ||
+            vector.some((value) => !Number.isFinite(value)),
         )
-        .abortSignal(abortSignal)
-        .throwOnError();
+      )
+        throw new Error("INVALID_FILE_EMBEDDINGS");
+      batch.forEach((chunk, index) => {
+        chunk.embedding = embeddings[index]!;
+      });
     }
   }
+  abortSignal.throwIfAborted();
+  // Source, chunks, keywords and vectors must commit together, including deletion of the old index.
+  await supabase
+    .rpc("replace_file_index", {
+      p_repository_id: documentRepository.id,
+      p_url: url,
+      p_name: target.name,
+      p_mime_type: target.type,
+      p_keyword: keyword,
+      p_embedding_dimension: embedding?.modelVectorSize ?? 0,
+      p_chunks: chunks,
+    })
+    .abortSignal(abortSignal)
+    .throwOnError();
 }
