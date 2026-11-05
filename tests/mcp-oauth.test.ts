@@ -5,6 +5,7 @@ import {
   MCPAuthorizationRequired,
 } from "../packages/realtime/src/mcp/MCPOAuthProvider";
 import type { MCPOAuthSession } from "../packages/database/src/mcp/_types";
+import { fetchWithValidatedEndpoint } from "@ai-sdk/provider-utils";
 
 vi.mock("@ai-sdk/provider-utils", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@ai-sdk/provider-utils")>()),
@@ -42,6 +43,171 @@ const login = {
 beforeEach(() => {
   store.clear();
   configured.value = null;
+});
+
+it.each([
+  { challenge: undefined, metadata: undefined, scope: undefined },
+  {
+    challenge:
+      'Basic resource_metadata="https://malicious.test/metadata", scope="ignored"',
+    metadata: undefined,
+    scope: undefined,
+  },
+  {
+    challenge: 'Bearer resource_metadata="not a URL", scope="read"',
+    metadata: undefined,
+    scope: "read",
+  },
+  { challenge: 'Bearer scope="read"', metadata: undefined, scope: "read" },
+])(
+  "captures only valid Bearer challenge fields: $challenge",
+  async ({ challenge, metadata, scope }) => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(null, {
+          status: 401,
+          headers: challenge ? { "www-authenticate": challenge } : {},
+        }),
+      ),
+    );
+    const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+    await provider.fetch(new URL(serverUrl));
+    expect(provider.authorizationOptions).toEqual({
+      serverUrl,
+      resourceMetadataUrl: metadata,
+      scope,
+    });
+    expect(store.get(`alice:${serverUrl}`)?.data).toEqual({
+      challenge: scope ? { scope } : {},
+    });
+  },
+);
+
+it.each([undefined, "request body"])(
+  "preserves Request method/body/headers and manual redirect handling",
+  async (body) => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response(null, { status: 200 })),
+    );
+    const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+    const request = new Request(serverUrl, {
+      method: body ? "POST" : "GET",
+      body,
+      headers: { "x-test": "value" },
+      redirect: "manual",
+    });
+    await provider.fetch(request);
+    const sent = vi.mocked(fetchWithValidatedEndpoint).mock.calls.at(-1)![0];
+    expect(sent).toMatchObject({
+      url: serverUrl,
+      trustedOrigin: "https://mcp.example.test",
+      redirect: "manual",
+      init: { method: body ? "POST" : "GET" },
+    });
+    expect(new Headers(sent.init?.headers).get("x-test")).toBe("value");
+    expect(
+      sent.init?.body
+        ? new TextDecoder().decode(sent.init.body as ArrayBuffer)
+        : undefined,
+    ).toBe(body);
+    expect(store.size).toBe(0);
+  },
+);
+
+it("does not persist another endpoint's unauthorized challenge", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue(
+      new Response(null, {
+        status: 401,
+        headers: { "www-authenticate": 'Bearer scope="unrelated"' },
+      }),
+    ),
+  );
+  const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+  await provider.fetch("https://auth.example.test/token");
+  expect(provider.authorizationOptions.scope).toBeUndefined();
+  expect(store.size).toBe(0);
+});
+
+it.each(["all", "client", "tokens", "verifier"] as const)(
+  "invalidates only the requested %s credential scope",
+  async (scope) => {
+    const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+    await provider.prepareLogin(login);
+    await provider.saveTokens({ access_token: "access", token_type: "Bearer" });
+    await provider.saveClientInformation({ client_id: "dynamic" });
+    await provider.saveAuthorizationServerInformation({
+      issuer: "https://auth.example.test",
+    } as any);
+    await provider.saveCodeVerifier("verifier");
+    await provider.invalidateCredentials(scope, {
+      tokens: { access_token: "access", token_type: "Bearer" },
+    });
+    const data = store.get(`alice:${serverUrl}`)!.data as any;
+    expect(Boolean(data.tokens)).toBe(scope !== "all" && scope !== "tokens");
+    expect(Boolean(data.client)).toBe(scope !== "all" && scope !== "client");
+    expect(Boolean(data.authorizationServer)).toBe(
+      scope !== "all" && scope !== "client",
+    );
+    if (scope === "all" || scope === "verifier")
+      expect(() => provider.codeVerifier()).toThrow(
+        "Missing MCP authorization verifier",
+      );
+    else expect(provider.codeVerifier()).toBe("verifier");
+  },
+);
+
+it("ignores invalidation from an older token and supports an explicit credential reset", async () => {
+  const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+  await provider.saveTokens({ access_token: "new", token_type: "Bearer" });
+  const saved = structuredClone(store.get(`alice:${serverUrl}`));
+  await provider.invalidateCredentials("all", {
+    tokens: { access_token: "old", token_type: "Bearer" },
+  });
+  expect(store.get(`alice:${serverUrl}`)).toEqual(saved);
+  await provider.invalidateCredentials("all");
+  expect(provider.tokens()).toBeUndefined();
+});
+
+it("keeps dynamic registration for the same redirect and discards it when the redirect changes", async () => {
+  const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+  expect(() => provider.redirectUrl).toThrow(MCPAuthorizationRequired);
+  await provider.prepareLogin(login);
+  await provider.saveClientInformation({ client_id: "dynamic" });
+  await provider.saveAuthorizationServerInformation({
+    issuer: "https://auth.test",
+  } as any);
+  await provider.prepareLogin(login);
+  expect(provider.clientInformation()).toEqual({ client_id: "dynamic" });
+  expect(provider.authorizationServerInformation()).toEqual({
+    issuer: "https://auth.test",
+  });
+  await provider.prepareLogin({
+    ...login,
+    redirectUrl: "https://new.test/callback",
+  });
+  expect(provider.clientInformation()).toBeUndefined();
+  expect(provider.authorizationServerInformation()).toBeUndefined();
+});
+
+it("supports a configured public client without exposing a fabricated secret", async () => {
+  configured.value = {
+    client_id: "public-client",
+    client_secret: null,
+    version: "v1",
+  };
+  const provider = await MCPOAuthProvider.load("alice", serverUrl, {
+    ...options,
+    agentId: "agent",
+  });
+  expect(provider.clientInformation()).toEqual({ client_id: "public-client" });
+  const dynamic = await MCPOAuthProvider.load("bob", serverUrl, options);
+  configured.value = null;
+  await dynamic.useConfiguredClient("agent", "mcp-1");
+  expect(dynamic.isClientInformationDynamicallyRegistered()).toBe(true);
 });
 
 describe("per-user MCP OAuth", () => {

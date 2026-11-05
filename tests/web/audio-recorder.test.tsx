@@ -149,6 +149,83 @@ it("handles missing recording support without requesting the microphone", async 
   expect(await screen.findByText("errorUnsupported")).toBeTruthy();
   expect(getUserMedia).not.toHaveBeenCalled();
 });
+
+it("reports missing media devices before opening a microphone", async () => {
+  Object.defineProperty(navigator, "mediaDevices", {
+    configurable: true,
+    value: undefined,
+  });
+  render(<AudioRecorder />);
+  fireEvent.click(screen.getByRole("button", { name: "labelStart" }));
+  await screen.findByText("errorUnsupported");
+  expect(getUserMedia).not.toHaveBeenCalled();
+});
+
+it.each([false, true])(
+  "ignores a late upload completion after unmount (reject=%s)",
+  async (reject) => {
+    const pending = Promise.withResolvers<unknown>();
+    mocks.upload.mockReturnValueOnce(pending.promise);
+    const finished = vi.fn();
+    const view = render(<AudioRecorder onFinished={finished} />);
+    await record();
+    fireEvent.click(screen.getByRole("button", { name: "labelTranscribe" }));
+    await screen.findByText("labelUploading");
+    view.unmount();
+    await act(async () => {
+      if (reject) pending.reject(new Error("late failure"));
+      else pending.resolve([{ state: "success" }]);
+    });
+    expect(finished).not.toHaveBeenCalled();
+    expect(revokeUrl).toHaveBeenCalledWith("blob:recording");
+  },
+);
+
+it("ignores empty data chunks and uses the chunk MIME type when the recorder omits it", async () => {
+  render(<AudioRecorder />);
+  await start();
+  const recorder = instances[0]!;
+  recorder.mimeType = "";
+  emitAudio = false;
+  act(() => {
+    recorder.ondataavailable?.({ data: new Blob([]) });
+    recorder.ondataavailable?.({
+      data: new Blob(["audio"], { type: "audio/ogg" }),
+    });
+  });
+  fireEvent.click(screen.getByRole("button", { name: "labelStop" }));
+  fireEvent.click(
+    await screen.findByRole("button", { name: "labelTranscribe" }),
+  );
+  await screen.findByText("descriptionSaved");
+  expect(mocks.upload.mock.calls[0]![0][0]).toMatchObject({
+    type: "audio/ogg",
+    size: 5,
+  });
+});
+
+it.each([
+  [{ type: "color-oklch-hue" as const, oklchHue: 42 }, "oklch(70% 0.15 42)"],
+  [{ type: "color-rgb" as const, red: 1, green: 2, blue: 3 }, "rgb(1 2 3)"],
+])("uses the configured recording colour (%j)", (appColor, expected) => {
+  const view = render(<AudioRecorder appColor={appColor} />);
+  const area = view.container.querySelector<HTMLElement>(
+    '[style*="--orb-color"]',
+  );
+  expect(area?.style.getPropertyValue("--orb-color")).toBe(expected);
+});
+
+it("ignores recorder errors from a discarded clip after a new recording starts", async () => {
+  render(<AudioRecorder />);
+  await record();
+  const previous = instances[0]!;
+  fireEvent.click(screen.getByRole("button", { name: "labelDiscard" }));
+  await start();
+  act(() => previous.onerror?.());
+  expect(screen.queryByText("errorRecording")).toBeNull();
+  expect(screen.getByRole("button", { name: "labelStop" })).toBeTruthy();
+  expect(trackStop).toHaveBeenCalledOnce();
+});
 it("keeps the recording for retry after a failed upload", async () => {
   mocks.upload.mockResolvedValueOnce([{ state: "error" }]);
   render(<AudioRecorder />);

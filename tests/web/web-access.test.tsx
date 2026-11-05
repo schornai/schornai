@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
 import "./client-setup";
+import { client } from "./client-setup";
 import {
   cleanup,
   fireEvent,
   render,
   screen,
   waitFor,
+  within,
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { useState } from "react";
@@ -60,6 +62,133 @@ function expand() {
 }
 
 describe("web access configuration", () => {
+  it.each(["Fetch", "Search"])(
+    "enabling %s on a disabled configuration leaves the other capability off",
+    (capability) => {
+      render(
+        <Editor
+          config={{
+            ...defaultWebAccess,
+            active: false,
+            webFetch: "ask",
+            webSearch: "ask",
+          }}
+        />,
+      );
+      fireEvent.click(
+        screen.getByRole("switch", { name: `label${capability}` }),
+      );
+      expect(mocks.role.toolWebAccess.active).toBe(true);
+      expect(mocks.role.toolWebAccess[`web${capability}`]).toBe("on");
+      expect(
+        mocks.role.toolWebAccess[
+          capability === "Fetch" ? "webSearch" : "webFetch"
+        ],
+      ).toBe("off");
+      fireEvent.click(
+        screen.getByRole("switch", { name: `labelAsk${capability}` }),
+      );
+      expect(mocks.role.toolWebAccess[`web${capability}`]).toBe("ask");
+      fireEvent.click(
+        screen.getByRole("switch", { name: `labelAsk${capability}` }),
+      );
+      expect(mocks.role.toolWebAccess[`web${capability}`]).toBe("on");
+      fireEvent.click(
+        screen.getByRole("switch", { name: `label${capability}` }),
+      );
+      expect(mocks.role.toolWebAccess[`web${capability}`]).toBe("off");
+    },
+  );
+
+  it("changes fetch restrictions and removes web access only after confirmation", async () => {
+    client.push.mockClear();
+    render(<Editor config={{ ...defaultWebAccess, webFetch: "on" }} />);
+    await userEvent.click(
+      screen.getByRole("combobox", { name: "labelAccess" }),
+    );
+    await userEvent.click(
+      await screen.findByRole("option", { name: "labelWhitelist" }),
+    );
+    expect(mocks.role.toolWebAccess.webFetchAccess).toBe("allow-list");
+    fireEvent.click(screen.getByRole("button", { name: "labelRemoveTool" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "labelCancel",
+      }),
+    );
+    expect(mocks.role.toolWebAccess).toBeDefined();
+    fireEvent.click(screen.getByRole("button", { name: "labelRemoveTool" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "labelRemoveTool",
+      }),
+    );
+    expect(mocks.role.toolWebAccess).toBeUndefined();
+    expect(client.push).toHaveBeenCalledWith("?view=roles#role-role");
+  });
+
+  it.each([
+    { config: undefined, fetch: "labelOff", search: "labelOff" },
+    {
+      config: { ...defaultWebAccess, active: false },
+      fetch: "labelOff",
+      search: "labelOff",
+    },
+    {
+      config: {
+        ...defaultWebAccess,
+        webFetch: "on",
+        webSearch: "ask",
+        webSearchProvider: "staan",
+      },
+      fetch: "labelOn",
+      search: "labelAsk",
+    },
+    {
+      config: {
+        ...defaultWebAccess,
+        webFetch: "off",
+        webSearch: "off",
+        webFetchAccess: "allow-list",
+        webFetchAllowList: [],
+      },
+      fetch: "labelOff",
+      search: "labelOff",
+    },
+  ])(
+    "shows the effective permissions and empty allowlists without an edit action",
+    ({ config, fetch, search }) => {
+      const { container } = render(
+        <AgentInfoToolWebAccess
+          agentRole={config ? { toolWebAccess: config as any } : undefined}
+        />,
+      );
+      expand();
+      expect(screen.getByText(`labelFetch: ${fetch}`)).toBeTruthy();
+      expect(
+        screen.getByText(new RegExp(`labelSearch: ${search}`)),
+      ).toBeTruthy();
+      expect(container.querySelector("a")).toBeNull();
+      if (config?.webFetchAccess === "allow-list")
+        expect(screen.getByText("labelEmptyWhitelist")).toBeTruthy();
+      else expect(screen.getByText("labelAll")).toBeTruthy();
+    },
+  );
+
+  it("keeps the configured edit pathname and does not mark unchanged web permissions as edited", () => {
+    render(
+      <AgentInfoToolWebAccess
+        agentRole={{ toolWebAccess: defaultWebAccess }}
+        editDefaultRole={{ toolWebAccess: defaultWebAccess } as any}
+        editRoleId="role"
+        editAgentPathname="/agent/one/edit"
+      />,
+    );
+    expect(document.querySelector("a")!.getAttribute("href")).toBe(
+      "/agent/one/edit?view=roles&role-role=tool-web#role-role",
+    );
+    expect(screen.queryByText("labelChanged")).toBeNull();
+  });
   it("enables fetch/search independently and retains configuration when toggled off", async () => {
     render(<Editor />);
     fireEvent.click(screen.getByRole("switch", { name: "labelFetch" }));

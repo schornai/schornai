@@ -11,6 +11,7 @@ import {
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { I18nextProvider } from "react-i18next";
 import { App } from "../apps/admin-mac/src/renderer/App";
+import { ServiceView } from "../apps/admin-mac/src/renderer/components/ServiceView";
 import { createAdminI18n } from "../apps/admin-mac/src/i18n";
 import type {
   AdminAPI,
@@ -226,4 +227,112 @@ describe("Admin Mac service controls", () => {
       ).toHaveLength(5),
     );
   });
+});
+
+it("shows empty logs and hides them again without controlling the service", async () => {
+  const command = vi.fn(async () => JSON.stringify({ state: "running" }));
+  await mount(command);
+  fireEvent.click(screen.getByRole("button", { name: "Protokolle anzeigen" }));
+  expect(screen.queryByRole("table")).toBeNull();
+  expect(screen.queryByRole("checkbox")).toBeNull();
+  expect(
+    (
+      screen.getByRole("button", {
+        name: "Filter zurücksetzen",
+      }) as HTMLButtonElement
+    ).disabled,
+  ).toBe(true);
+  fireEvent.click(
+    screen.getByRole("button", { name: "Protokolle ausblenden" }),
+  );
+  expect(screen.queryByRole("textbox")).toBeNull();
+  expect(command.mock.calls).toEqual([["start"], ["status"]]);
+});
+
+it("stops through the bridge and shows stopping until the command completes", async () => {
+  const pending = Promise.withResolvers<string>();
+  const command = vi
+    .fn<AdminAPI["command"]>()
+    .mockResolvedValue(JSON.stringify({ state: "running" }));
+  await mount(command);
+  command
+    .mockReturnValueOnce(pending.promise)
+    .mockResolvedValue(JSON.stringify({ state: "stopped" }));
+  fireEvent.click(screen.getByRole("button", { name: "Stoppen" }));
+  expect(screen.getByRole("status").textContent).toBe("Stoppt");
+  expect(
+    (screen.getByRole("button", { name: "Stoppen" }) as HTMLButtonElement)
+      .disabled,
+  ).toBe(true);
+  await act(async () => pending.resolve(""));
+  expect(command.mock.calls.slice(-2)).toEqual([["stop"], ["status"]]);
+  expect(
+    (screen.getByRole("button", { name: "Starten" }) as HTMLButtonElement)
+      .disabled,
+  ).toBe(false);
+});
+
+it.each(["error", "custom-state"])(
+  "displays service status %s without assuming a known label",
+  async (status) => {
+    const i18n = createAdminI18n("de");
+    await act(async () =>
+      render(
+        <I18nextProvider i18n={i18n}>
+          <ServiceView
+            status={status}
+            pending={null}
+            error=""
+            messages={[]}
+            onControl={vi.fn()}
+          />
+        </I18nextProvider>,
+      ),
+    );
+    expect(screen.getByRole("status").textContent).toBe(
+      status === "error" ? "Fehler" : status,
+    );
+  },
+);
+
+it("can clear a sender filter by toggling the same sender again", async () => {
+  const { log } = await mount(
+    vi.fn(async () => JSON.stringify({ state: "running" })),
+  );
+  act(() => {
+    log({
+      sender: "web",
+      level: "stdout",
+      timestampISO: "2026-01-01T00:00:00Z",
+      message: "Web ready",
+    });
+    log({
+      sender: "worker",
+      level: "stdout",
+      timestampISO: "2026-01-01T00:00:01Z",
+      message: "Worker ready",
+    });
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Protokolle anzeigen" }));
+  const checkbox = screen.getByRole("checkbox", { name: "web" });
+  fireEvent.click(checkbox);
+  expect(screen.queryByText("Worker ready")).toBeNull();
+  fireEvent.click(checkbox);
+  expect(screen.getByText("Worker ready")).toBeTruthy();
+});
+
+it("does not poll during a pending command and surfaces status failures afterwards", async () => {
+  vi.useFakeTimers();
+  const pending = Promise.withResolvers<string>();
+  const command = vi
+    .fn<AdminAPI["command"]>()
+    .mockReturnValueOnce(pending.promise)
+    .mockResolvedValue(JSON.stringify({ state: "running" }));
+  await mount(command);
+  await act(async () => vi.advanceTimersByTimeAsync(3000));
+  expect(command).toHaveBeenCalledOnce();
+  await act(async () => pending.resolve(""));
+  command.mockRejectedValueOnce(new Error("status unavailable"));
+  await act(async () => vi.advanceTimersByTimeAsync(3000));
+  expect(screen.getByRole("alert").textContent).toContain("status unavailable");
 });

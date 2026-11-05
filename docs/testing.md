@@ -26,8 +26,41 @@ or invalid secondary translations produce warnings; locale-specific plural forms
 can also produce warnings. Secondary languages are updated only when explicitly
 requested, and missing entries fall back to German at runtime.
 
-SQL regression checks in [`supabase/tests`](../supabase/tests) require a separate
-disposable database with the migrations applied. They are not run by `npm test`.
+## Coverage
+
+```sh
+python3 -m venv .test-venv
+.test-venv/bin/python -m pip install -r tests/requirements.txt
+npm run test:coverage
+```
+
+This runs the full suite with JavaScript and Python coverage. The JavaScript gate
+requires 90% of lines, statements, functions and branches, plus 90% lines per
+workspace. Python requires 90%. Reports are written to `coverage/` and
+[`reports/coverage.md`](../reports/coverage.md), including failures.
+
+The JavaScript scope follows production application imports and the separately
+deployed machine service. Stories, fixtures inside Storybook directories, tests,
+generated declarations and build configuration are not production coverage.
+`npm run test:scope` regenerates the dependency inventory and unused-code review
+candidates; tests cannot make unused production code appear reachable.
+
+## SQL regressions
+
+```sh
+npm run test:sql
+```
+
+Requires Node.js 24+, Docker and network access for the pinned Supabase CLI and
+database image. The runner creates a uniquely named, disposable local database,
+applies the complete migration sequence and seed, then executes every `.sql`
+file in [`supabase/tests`](../supabase/tests). Any SQL error fails the run.
+
+The runner uses its own project ID, port and work directory under `.service-dev`;
+it neither loads application credentials nor links to a hosted database. It
+removes only its own containers and volumes after success, failure or a handled
+interrupt. Cleanup failure also fails the run and prints the retained project
+configuration for manual recovery. SQL regressions are separate from `npm test`.
 
 ## Installed PostgreSQL upgrades
 
@@ -161,8 +194,16 @@ screenshots.
 
 ## CI
 
-The [test workflow](../.github/workflows/test.yml) runs `npm test` on Node.js 24
-and Python 3.13. The separate
+The [test workflow](../.github/workflows/test.yml) runs independent jobs for:
+
+- The complete JavaScript/Python suite with coverage gates on Node.js 24 and
+  Python 3.13; coverage reports are uploaded even when a gate fails.
+- Production builds of the web app, realtime app and CLI/service, plus type
+  checks for the two desktop applications. The web build uses the same non-secret
+  metadata placeholders as its Dockerfile.
+- SQL regressions against a newly created disposable database.
+
+The separate
 [Storybook workflow](../.github/workflows/storybook-visual.yml) runs the type and
 coverage checks and distributes visual tests across four Linux ARM64 jobs. Its
 reports and diffs are uploaded as artifacts; CI does not update baselines.

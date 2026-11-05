@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -29,4 +29,59 @@ jobs:
         with:
           python-version: "3.13"
       - run: npm ci
-      - run: npm test
+      - run: python -m pip install -r tests/requirements.txt
+      - run: npm run test:coverage
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-coverage
+          path: |
+            coverage/
+            reports/coverage.md
+          retention-days: 14
+          if-no-files-found: error
+
+  production:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: web
+            command: npm run build --workspace apps/web
+          - target: realtime
+            command: npm run build:app:realtime
+          - target: cli-service
+            command: npm run build:cli
+          - target: desktop-types
+            command: npm run typecheck --workspace apps/admin-mac && node_modules/.bin/tsc --noEmit -p apps/transcriber-mac/tsconfig.json
+    name: Production (${{ matrix.target }})
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Same non-secret metadata placeholders as apps/web/Dockerfile.
+      SUPABASE_URL: http://build.invalid
+      SUPABASE_PUBLIC_ANON_KEY: build-only
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: ${{ matrix.command }}
+
+  sql:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm run test:sql

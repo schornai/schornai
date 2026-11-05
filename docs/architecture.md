@@ -187,8 +187,12 @@ excluded. Follow that policy before assuming a live document survives a restart.
 
 - [`npm test`](../scripts/test-all.mjs) runs translation checks, JavaScript/TypeScript
   behavior tests, and Python tests. [`vitest.config.mts`](../vitest.config.mts)
-  defines discovery and test aliases. Supabase SQL checks under
-  [`supabase/tests`](../supabase/tests) are separate from this command.
+  defines discovery and test aliases. The [test CI workflow](../.github/workflows/test.yml)
+  adds coverage gates and production builds. Use the [testing guide](testing.md)
+  when reproducing a failing validation layer locally.
+- [`npm run test:sql`](../scripts/test-sql.mjs) runs every regression in
+  [`supabase/tests`](../supabase/tests) against its own disposable database.
+  This is separate from `npm test`; the runner owns database setup and cleanup.
 - UI and context changes also need the [Storybook checks](testing.md#storybook)
   and relevant visual stories. The [visual CI workflow](../.github/workflows/storybook-visual.yml)
   runs those separately from `npm test`.

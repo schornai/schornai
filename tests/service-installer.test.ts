@@ -10,7 +10,11 @@ import {
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { installUpdate } from "../packages/service/src/installer.ts";
+import {
+  installUpdate,
+  hasLegacyLayout,
+} from "../packages/service/src/installer.ts";
+import { control } from "../packages/service/src/control.ts";
 import { initConfig, loadConfig } from "../packages/service/src/config.ts";
 import { getDirectoryIntegrity } from "../packages/xrag/update/scripts/modules/integrity.ts";
 import { run } from "../packages/service/src/process.ts";
@@ -35,6 +39,134 @@ vi.mock("../packages/service/src/process.ts", () => ({ run: vi.fn() }));
 const dirs: string[] = [];
 beforeEach(() => {
   vi.mocked(run).mockReset();
+  vi.mocked(control)
+    .mockReset()
+    .mockRejectedValue(
+      Object.assign(new Error("Not running"), { code: "ENOENT" }),
+    );
+});
+
+it.each([
+  {
+    change: "version",
+    services: [],
+    expected: "Unsupported installation bundle",
+  },
+  {
+    change: "native-platform",
+    services: ["ollama"],
+    expected: "native binaries do not match",
+  },
+  {
+    change: "image-architecture",
+    services: ["supabase"],
+    expected: "Docker image architecture does not match",
+  },
+])(
+  "rejects $change mismatches before stopping services or replacing installed files",
+  async ({ change, services, expected }) => {
+    const { bundle, machine, config } = await fixture();
+    const configuration = JSON.parse(await readFile(config, "utf8"));
+    configuration.services = services;
+    await writeFile(config, JSON.stringify(configuration));
+    const manifestPath = join(bundle, "installation.json");
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+    if (change === "version") manifest.version = 2;
+    if (change === "image-architecture")
+      manifest.arch = "unsupported-architecture";
+    await writeFile(manifestPath, JSON.stringify(manifest));
+    await expect(installUpdate(bundle)).rejects.toThrow(expected);
+    expect(await readFile(join(machine, "apps/service/cli.mjs"), "utf8")).toBe(
+      "old service",
+    );
+    expect(control).not.toHaveBeenCalled();
+    expect(run).not.toHaveBeenCalled();
+  },
+);
+
+it("uses the default installation config and tolerates absent optional native runtimes", async () => {
+  const { bundle, machine } = await fixture();
+  const manifestPath = join(bundle, "installation.json");
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  manifest.platform = process.platform;
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  vi.stubEnv("SCHORNAI_CONFIG", undefined);
+  vi.stubEnv("SCHORNAI_HOME", machine);
+  await installUpdate(bundle);
+  expect(await readFile(join(machine, "apps/service/cli.mjs"), "utf8")).toBe(
+    "new service",
+  );
+  expect(run).not.toHaveBeenCalled();
+});
+
+it("waits for an unmanaged daemon to stop, then resumes it with the new runtime", async () => {
+  const { bundle, machine } = await fixture();
+  vi.stubEnv("SCHORNAI_SERVICE_UPDATE", "");
+  const running = { pid: 123, state: "running" as const, services: [] };
+  vi.mocked(control)
+    .mockResolvedValueOnce(running)
+    .mockResolvedValueOnce(running)
+    .mockResolvedValueOnce(running);
+  await installUpdate(bundle);
+  expect(vi.mocked(control).mock.calls.map(([, action]) => action)).toEqual([
+    "status",
+    "stop",
+    "status",
+    "status",
+  ]);
+  expect(run).toHaveBeenCalledWith(
+    expect.objectContaining({
+      args: [
+        join(machine, "apps/service/cli.mjs"),
+        "service",
+        "start",
+        "--config",
+        join(machine, "config.json"),
+      ],
+    }),
+    expect.any(Function),
+  );
+});
+
+it.each(["initial-probe", "shutdown-probe", "timeout"])(
+  "leaves installed files intact when daemon shutdown fails at %s",
+  async (failure) => {
+    const { bundle, machine } = await fixture();
+    vi.stubEnv("SCHORNAI_SERVICE_UPDATE", "");
+    const denied = Object.assign(new Error("not permitted"), {
+      code: "EACCES",
+    });
+    const running = { pid: 123, state: "running" as const, services: [] };
+    if (failure === "initial-probe")
+      vi.mocked(control).mockRejectedValue(denied);
+    else if (failure === "shutdown-probe")
+      vi.mocked(control)
+        .mockResolvedValueOnce(running)
+        .mockResolvedValueOnce(running)
+        .mockRejectedValue(denied);
+    else {
+      let now = 0;
+      vi.spyOn(Date, "now").mockImplementation(() => now);
+      vi.mocked(control).mockImplementation(async (_, action) => {
+        if (action === "status") now += 120_001;
+        return running;
+      });
+    }
+    await expect(installUpdate(bundle)).rejects.toThrow(
+      failure === "timeout"
+        ? "Service did not stop for update"
+        : "not permitted",
+    );
+    expect(await readFile(join(machine, "apps/service/cli.mjs"), "utf8")).toBe(
+      "old service",
+    );
+  },
+);
+
+it("does not treat unreadable legacy layout metadata as an absent installation", async () => {
+  const { machine } = await fixture();
+  await mkdir(join(machine, "docker/docker-compose.yml"));
+  await expect(hasLegacyLayout(machine)).rejects.toThrow();
 });
 afterEach(async () => {
   await Promise.all(

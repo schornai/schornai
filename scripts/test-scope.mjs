@@ -14,13 +14,15 @@ const ignored = new Set([
   "coverage",
   "tests",
   "test",
+  "stories",
+  ".storybook",
 ]);
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const file = path.join(dir, entry.name);
     if (entry.isDirectory()) return ignored.has(entry.name) ? [] : walk(file);
     return /\.(?:[cm]?[jt]sx?)$/.test(file) &&
-      !/\.(?:test|spec|d)\.ts[x]?$/.test(file)
+      !/\.(?:test|spec|stories|d)\.[cm]?[jt]sx?$/.test(file)
       ? [file]
       : [];
   });
@@ -135,11 +137,16 @@ for (const file of files) {
   imports.set(file, deps);
 }
 const configuration = (file) =>
-  /(?:eslint\.config|rollup\.config|next\.config|postcss\.config|jest\.config)/.test(
+  /(?:eslint\.config|rollup\.config|next\.config|postcss\.config|jest\.config|forge\.config|vite\.[^.]+\.config)/.test(
     file,
   );
 const appFiles = files.filter(
-  (file) => relative(file).startsWith("apps/") && !configuration(file),
+  // The separately deployed machine service is loaded through built .mjs
+  // files by the CLI, which a source-only import graph cannot otherwise follow.
+  (file) =>
+    (relative(file).startsWith("apps/") ||
+      relative(file).startsWith("packages/service/src/")) &&
+    !configuration(file),
 );
 const reachable = new Set(appFiles);
 const queue = [...appFiles];

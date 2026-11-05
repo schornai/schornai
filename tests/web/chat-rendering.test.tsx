@@ -133,9 +133,49 @@ describe("chat message rendering", () => {
     "tool-storage-write-file",
     "tool-storage-search",
     "dynamic-tool",
+    "tool-mcp",
+    "tool-storage-copy-file",
+    "tool-storage-move-file",
+    "tool-web-fetch",
+    "tool-web-search",
   ])("provides an icon for %s", (partType) => {
     const result = render(<ChatMessagePartIcon partType={partType as any} />);
     expect(result.container.querySelector("svg")).toBeTruthy();
+  });
+
+  it.each([
+    "tool-mcp",
+    "tool-storage-copy-file",
+    "tool-storage-move-file",
+    "tool-web-fetch",
+    "tool-web-search",
+    "dynamic-tool",
+  ])("renders persisted %s tool failures in the message dispatcher", (type) => {
+    const view = render(
+      <ChatMessagePart
+        part={
+          {
+            type,
+            toolCallId: "tool",
+            toolName: "custom",
+            state: "output-error",
+            errorText: "Tool unavailable",
+            input: {
+              url: "https://example.test",
+              query: "query",
+              sourcePath: "source.txt",
+              targetPath: "target.txt",
+              name: "custom",
+              arguments: {},
+            },
+          } as any
+        }
+      />,
+    );
+    expect(view.container.textContent).toBeTruthy();
+    const button = view.container.querySelector("button");
+    if (button) fireEvent.click(button);
+    expect(view.container.querySelector("svg")).toBeTruthy();
   });
   it.each([
     undefined,

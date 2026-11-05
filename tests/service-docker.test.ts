@@ -14,6 +14,16 @@ import {
 import { mkdtemp, rm, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+const processCommands = vi.hoisted(() => ({ execute: vi.fn() }));
+vi.mock("node:child_process", async (original) => {
+  const { promisify } = await import("node:util");
+  return {
+    ...(await original<typeof import("node:child_process")>()),
+    execFile: Object.assign(() => {}, {
+      [promisify.custom]: processCommands.execute,
+    }),
+  };
+});
 vi.mock("../packages/service/src/process.ts", () => ({
   run: vi.fn(),
   launch: vi.fn(() => new EventEmitter()),
@@ -38,9 +48,115 @@ const context: Context = {
   }),
 };
 beforeEach(() => {
+  processCommands.execute.mockReset();
   vi.mocked(run).mockReset();
   vi.mocked(launch).mockClear();
   vi.mocked(terminate).mockClear();
+});
+
+it.each(["array", "lines"])(
+  "reports Compose container states and health from %s output",
+  async (format) => {
+    const rows = [
+      { Service: "db", State: "running", Health: "healthy" },
+      { Service: "retrying", State: "restarting", Health: "unhealthy" },
+      { Service: "new", State: "created", Health: "starting" },
+      { Service: "finished", State: "exited" },
+      { Service: "failed", State: "dead", Health: "" },
+      { Service: "other", State: "paused", Health: "unsupported" },
+    ];
+    processCommands.execute.mockResolvedValue({
+      stdout:
+        format === "array"
+          ? JSON.stringify(rows)
+          : rows.map((row) => JSON.stringify(row)).join("\n") + "\n",
+      stderr: "",
+    });
+    const services = new Services(context, vi.fn());
+    try {
+      await services.start();
+      expect(await services.status()).toEqual([
+        { name: "supabase:db", state: "running", health: "healthy" },
+        { name: "supabase:retrying", state: "restarting", health: "unhealthy" },
+        { name: "supabase:new", state: "starting", health: "starting" },
+        { name: "supabase:finished", state: "stopped" },
+        { name: "supabase:failed", state: "stopped" },
+        { name: "supabase:other", state: "unknown" },
+      ]);
+      expect(processCommands.execute).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.arrayContaining(["ps", "--all", "--format", "json"]),
+        expect.objectContaining({ timeout: 3000 }),
+      );
+    } finally {
+      await services.stop();
+    }
+  },
+);
+
+it.each(["invalid json", undefined])(
+  "reports unknown state when Compose status is unreadable",
+  async (stdout) => {
+    if (stdout)
+      processCommands.execute.mockResolvedValue({ stdout, stderr: "" });
+    else
+      processCommands.execute.mockRejectedValue(
+        new Error("Docker unavailable"),
+      );
+    const services = new Services(context, vi.fn());
+    try {
+      await services.start();
+      expect(await services.status()).toEqual([
+        { name: "supabase", state: "unknown" },
+      ]);
+    } finally {
+      await services.stop();
+    }
+  },
+);
+
+it("reports local Supabase availability without logging its credentials", async () => {
+  const logs = vi.fn();
+  const services = new Services(
+    {
+      ...context,
+      config: {
+        ...context.config,
+        development: { workspace: "/test-checkout" },
+      },
+    },
+    logs,
+  );
+  processCommands.execute.mockResolvedValue({
+    stdout: "secret cli output",
+    stderr: "",
+  });
+  try {
+    await services.start();
+    expect(await services.status()).toEqual([
+      { name: "supabase", state: "running" },
+    ]);
+    processCommands.execute.mockRejectedValue(new Error("offline"));
+    expect(await services.status()).toEqual([
+      { name: "supabase", state: "error" },
+    ]);
+    expect(JSON.stringify(logs.mock.calls)).not.toContain("secret cli output");
+  } finally {
+    await services.stop();
+  }
+});
+
+it("reports shutdown failures after attempting to stop all owned services", async () => {
+  const services = new Services(context, vi.fn());
+  await services.start();
+  vi.mocked(run).mockImplementation(async (command) => {
+    if (command.args.includes("stop")) throw new Error("stop failed");
+  });
+  await expect(services.stop()).rejects.toThrow(
+    "Some services could not be stopped",
+  );
+  expect(await services.status()).toEqual([]);
+  await services.stop();
 });
 it("preserves ownership of a started Colima VM across an update pause and stops it on shutdown", async () => {
   vi.mocked(run).mockRejectedValueOnce(new Error("Docker is offline"));

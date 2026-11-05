@@ -25,7 +25,7 @@ function tar(
   entries: {
     path: string;
     body?: string;
-    type?: "File" | "SymbolicLink" | "Link" | "Directory";
+    type?: "File" | "SymbolicLink" | "Link" | "Directory" | "FIFO";
     linkpath?: string;
   }[],
 ) {
@@ -285,4 +285,79 @@ it("rejects chained symlinks that escape after resolving an intermediate ancesto
       ]),
     ),
   ).rejects.toThrow("XRAG_UNSAFE_LINK");
+});
+
+it.each(["", "/absolute", "C:/windows", "back\\slash"])(
+  "rejects unsafe link targets (%s)",
+  async (linkpath) => {
+    await expect(
+      inspectArchive(
+        tar([metadata, { path: "link", type: "SymbolicLink", linkpath }]),
+      ),
+    ).rejects.toThrow(linkpath ? "XRAG_UNSAFE_LINK" : "TAR_ENTRY_INVALID");
+  },
+);
+
+it("rejects symlink cycles and unsupported device-like entries", async () => {
+  await expect(
+    inspectArchive(
+      tar([
+        metadata,
+        { path: "a", type: "SymbolicLink", linkpath: "b" },
+        { path: "b", type: "SymbolicLink", linkpath: "a" },
+      ]),
+    ),
+  ).rejects.toThrow("XRAG_UNSAFE_LINK");
+  await expect(
+    inspectArchive(tar([metadata, { path: "pipe", type: "FIFO" }])),
+  ).rejects.toThrow("XRAG_UNSUPPORTED_ENTRY");
+});
+
+it.each(["description.md", "image.png"])(
+  "bounds retained metadata bytes (%s)",
+  async (path) => {
+    const body = "x".repeat(path === "image.png" ? 5_000_001 : 256_001);
+    await expect(
+      inspectArchive(tar([metadata, { path, body }])),
+    ).rejects.toThrow("XRAG_INVALID_METADATA");
+  },
+);
+
+it("rejects missing or linked metadata and permits duplicate directory headers", async () => {
+  await expect(
+    inspectArchive(tar([{ path: "data", body: "text" }])),
+  ).rejects.toThrow();
+  await expect(
+    inspectArchive(
+      tar([
+        { path: "actual.json", body: metadata.body },
+        { path: "xrag.json", type: "SymbolicLink", linkpath: "actual.json" },
+      ]),
+    ),
+  ).rejects.toThrow("XRAG_INVALID_METADATA");
+  await expect(
+    inspectArchive(
+      tar([
+        metadata,
+        { path: "folder", type: "Directory" },
+        { path: "folder", type: "Directory" },
+      ]),
+    ),
+  ).resolves.toHaveProperty("xrag.xrag_type", "files");
+});
+
+it("preserves safe parent traversal and dangling links inside the destination", async () => {
+  const { file, destination, id } = await extractionFixture([
+    { path: "folder/data", body: "data" },
+    { path: "folder/sub/link", type: "SymbolicLink", linkpath: "../data" },
+    { path: "folder/dangling", type: "SymbolicLink", linkpath: "missing" },
+    { path: "hard", type: "Link", linkpath: "folder/data" },
+    { path: "via-hard", type: "SymbolicLink", linkpath: "hard" },
+  ]);
+  await extractArchive(file, destination, id);
+  expect(await readFile(join(destination, "folder/sub/link"), "utf8")).toBe(
+    "data",
+  );
+  expect(await readFile(join(destination, "via-hard"), "utf8")).toBe("data");
+  expect(await readlink(join(destination, "folder/dangling"))).toBe("missing");
 });

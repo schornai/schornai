@@ -29,6 +29,8 @@ const mocks = vi.hoisted(() => ({
   approve: vi.fn(),
   attach: vi.fn(),
   selectFile: vi.fn(),
+  files: [] as any[],
+  tile: vi.fn(),
 }));
 vi.mock(
   "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageContext",
@@ -46,11 +48,21 @@ vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
 }));
 vi.mock("../../apps/web/app/_components/StorageViewProvider", () => ({
   useStorageView: () => ({
-    itemGroups: [],
+    itemGroups: [["files", mocks.files]],
     pendingFilePaths: mocks.pendingFilePaths,
     storage: { type: "activity", agentId: "agent", activityId: "activity" },
     basePathApp: "/files",
   }),
+}));
+vi.mock("../../apps/web/app/_components/StorageObjectTile", () => ({
+  StorageObjectTile: (props: any) => {
+    mocks.tile(props);
+    return (
+      <a href={`${props.basePathApp}/${props.storageObject.path}`}>
+        {props.storageObject.name}
+      </a>
+    );
+  },
 }));
 vi.mock(
   "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/submitCurrentMessage",
@@ -86,6 +98,7 @@ beforeEach(() => {
   mocks.canSend = true;
   mocks.uploads = [];
   mocks.pendingFilePaths = [];
+  mocks.files = [];
   for (const mock of Object.values(mocks))
     if (vi.isMockFunction(mock)) mock.mockReset();
   mocks.sync.mockResolvedValue(undefined);
@@ -498,6 +511,65 @@ it("offers upload or existing-file selection and attaches the server-authorized 
     path: "existing.txt",
   });
   expect(mocks.upload).not.toHaveBeenCalled();
+});
+
+it.each([
+  undefined,
+  { serverError: "private detail" },
+  { data: { error: "STORAGE_NOT_AUTHORIZED" } },
+])(
+  "keeps file selection open when the server does not authorize an attachment (%j)",
+  async (result) => {
+    mocks.selectFile.mockResolvedValue(result);
+    compose();
+    act(() => screen.getByRole("button", { name: "labelAttachFiles" }).focus());
+    fireEvent.keyDown(
+      screen.getByRole("button", { name: "labelAttachFiles" }),
+      { key: "ArrowDown" },
+    );
+    fireEvent.click(
+      await screen.findByRole("menuitem", { name: "labelSelectFile" }),
+    );
+    fireEvent.click(
+      await screen.findByRole("button", { name: "existing.txt" }),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "labelUseFile" }));
+    await screen.findByRole("alert");
+    expect(screen.getByRole("dialog")).toBeTruthy();
+    expect(screen.queryByText("private detail")).toBeNull();
+    expect(mocks.attach).not.toHaveBeenCalled();
+  },
+);
+
+it("links existing repository attachments to their own storage while local files stay in the chat", () => {
+  const repository = {
+    type: "documentRepository",
+    workspaceId: "workspace",
+    documentRepositoryId: "repo",
+  };
+  mocks.files = [
+    { file: true, path: "local.txt", name: "Local" },
+    {
+      file: true,
+      path: "shared.txt",
+      name: "Shared",
+      attachment: { storage: repository, agentPath: "docs/shared.txt" },
+    },
+  ];
+  mocks.context.selectedCurrentMessage.content.files = mocks.files;
+  compose();
+  expect(screen.getByRole("link", { name: "Local" }).getAttribute("href")).toBe(
+    "/files/local.txt",
+  );
+  expect(
+    screen.getByRole("link", { name: "Shared" }).getAttribute("href"),
+  ).toBe("/app/documents/repo/files/shared.txt");
+  expect(mocks.tile).toHaveBeenCalledWith(
+    expect.objectContaining({
+      storage: repository,
+      storageObject: mocks.files[1],
+    }),
+  );
 });
 
 it("connects MCP through OAuth bound to the pending approval, not a generic approve", () => {
