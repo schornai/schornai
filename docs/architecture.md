@@ -72,9 +72,12 @@ and [`withStorageFileLock`](../packages/database/src/storage/withStorageFileLock
 The [`storage-processing` tests](../tests/storage-processing.test.ts) cover this
 routing and processing behavior.
 
-Text and transcript corrections use the web app's
-[`withStorageFileOperation`](../apps/web/lib/storageFileOperations.ts) with a file
-lock. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
+Text edits from the editor and agent tool share
+[`writeStorageFileText`](../packages/realtime/src/documents/storage/writeStorageFileText.ts)
+for authorization, a file lease, saved-content indexing and partial-result reporting.
+Transcript segment corrections use the web app's
+[`withStorageFileOperation`](../apps/web/lib/storageFileOperations.ts) with the same
+lease. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
 [`updateTranscriptionSegment`](../packages/database/src/storage/updateTranscriptionSegment.ts)
 read, check conflicts, and write inside that lock, shared with processing workers.
 See [transcript correction tests](../tests/web/transcription-save.test.ts).
@@ -85,6 +88,8 @@ keeps application reads on the previous version while
 an interrupted write before the next edit or processing task. See
 [the recovery decision](adr/0002-recoverable-text-file-writes.md) and
 [failure/retry tests](../tests/storage-edit-text.test.ts).
+See [shared write tests](../tests/storage-write-service.test.ts) for permission,
+queue, creation and worker-identity checks.
 
 Both file and folder deletion actions use
 [`remove`](../packages/database/src/storage/remove.ts). It acquires each file's

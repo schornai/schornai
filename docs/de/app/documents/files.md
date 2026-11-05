@@ -37,6 +37,7 @@ meta:
       "packages/database/src/storage/updateFileText.ts",
       "packages/database/src/storage/recoverFileText.ts",
       "packages/database/src/storage/getFileTextBackup.ts",
+      "packages/realtime/src/documents/storage/writeStorageFileText.ts",
     ]
 ---
 

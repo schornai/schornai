@@ -17,13 +17,13 @@ import {
 } from "./_utils/textWriteRecovery.ts";
 import { recoverFileText } from "./recoverFileText.ts";
 
-// Caller must authorize write access and hold the file lock.
+// Caller must authorize write access and hold the file lock. Omit expectedText only for intentional overwrites.
 export async function updateFileText(
   {
     path,
     text,
     expectedText,
-  }: { path: string; text: string; expectedText: string },
+  }: { path: string; text: string; expectedText?: string },
   { session }: { session: StorageRealtimeSession },
 ) {
   if (new TextEncoder().encode(text).byteLength > 1024 * 1024)
@@ -39,7 +39,11 @@ export async function updateFileText(
   if (!current) throw new Error("FILE_NOT_EDITABLE");
   const previous =
     current.type === "mdc" ? current.current : transcriptionToText(current);
-  if (previous !== expectedText && previous !== text)
+  if (
+    expectedText !== undefined &&
+    previous !== expectedText &&
+    previous !== text
+  )
     return { status: "conflict" as const };
   const content =
     current.type === "mdc"

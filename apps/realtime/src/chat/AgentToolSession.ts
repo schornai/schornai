@@ -130,6 +130,10 @@ export class AgentToolSession {
                     this.#role.documentRepositoryMounts,
                     mountedDocumentRepositories,
                     {
+                      authenticatedUser: {
+                        userId: this.#userId,
+                        userClaims: this.#userClaims,
+                      },
                       serverToken: this.#serverToken,
                       supabase: this.#supabase,
                       websocketProvider: this.#websocketProvider,
