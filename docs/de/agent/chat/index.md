@@ -14,6 +14,7 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
+      "packages/realtime/src/_lib/waitForProviderSynced.ts",
     ]
 ---
 
@@ -32,6 +33,11 @@ Starte einen Chat über **Neuer Chat** am Agenten. Vorhandene Gespräche öffnes
 5. Warte auf die Antwort. Wenn eine Werkzeugaktion freigegeben werden muss, erscheint stattdessen eine [Rückfrage](freigaben.md).
 
 Frage konkret nach, wenn dir eine Antwort unklar ist. Beispiel: „Welche Aussagen stammen aus der Datei? Nenne die passende Fundstelle und kennzeichne Vermutungen.“
+
+Beim Senden wartet der Server pro Synchronisationsschritt höchstens 30 Sekunden
+auf den Realtime-Dienst. Eine abgelehnte Anmeldung oder eine geschlossene Verbindung
+beendet das Warten früher mit einem Fehler. Prüfe bei einem Sendefehler den
+Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 
 ## Antwort lesen und weiterverwenden
 
