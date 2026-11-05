@@ -107,7 +107,7 @@ beforeEach(() => {
     versions: [],
   });
   state.create.mockResolvedValue(file);
-  state.save.mockResolvedValue(undefined);
+  state.save.mockResolvedValue(true);
   state.repos.mockResolvedValue([repo]);
   state.disposed.mockResolvedValue(undefined);
   state.search.mockResolvedValue({
@@ -219,6 +219,23 @@ describe("agent filesystem tools", () => {
       { current: "changed", type: "mdc", versions: [] },
       expect.anything(),
     );
+    expect(state.disposed).toHaveBeenCalledOnce();
+  });
+  it("reports unsuccessful saves and still disposes the realtime session", async () => {
+    state.save.mockResolvedValue(false);
+    const tool = storageWriteFileTool(
+      "activity",
+      "agent",
+      [mount],
+      [repo],
+      context,
+    );
+    expect(
+      await execute(tool, { path: "/docs/file.txt", content: "changed" }),
+    ).toEqual({
+      ok: false,
+      error: "The file content could not be saved.",
+    });
     expect(state.disposed).toHaveBeenCalledOnce();
   });
   it("creates missing files, rejects folders and unauthorized mounts, and disposes on failure", async () => {

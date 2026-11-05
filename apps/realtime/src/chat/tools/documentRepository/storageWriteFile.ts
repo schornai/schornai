@@ -75,11 +75,15 @@ export function storageWriteFileTool(
           };
         }
 
-        await saveDocumentContent(
+        const saved = await saveDocumentContent(
           file,
           { current: content, type: "mdc", versions: [] },
           storageSession,
         );
+
+        if (!saved) {
+          return { ok: false, error: "The file content could not be saved." };
+        }
 
         return {
           ok: true,

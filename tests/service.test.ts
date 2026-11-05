@@ -5,7 +5,11 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { afterEach, expect, it } from "vitest";
-import { initConfig, loadConfig } from "../packages/service/src/config.ts";
+import {
+  configSchema,
+  initConfig,
+  loadConfig,
+} from "../packages/service/src/config.ts";
 import { createLogger } from "../packages/service/src/log.ts";
 import { needsArtifact } from "../packages/service/src/artifacts.ts";
 import { control } from "../packages/service/src/control.ts";
@@ -15,6 +19,41 @@ const cli = fileURLToPath(
   new URL("../packages/service/src/main.ts", import.meta.url),
 );
 const execute = promisify(execFile);
+it.each([
+  "http://updates.example.com",
+  "http://10.0.0.5:3001",
+  "http://0.0.0.0:3001",
+  "http://localhost.example.com",
+  "http://127.0.0.1.example.com",
+  "http://[::ffff:10.0.0.5]",
+])("rejects insecure remote sharing at %s", async (url) => {
+  const root = await directory();
+  const path = join(root, "config.json");
+  await writeFile(
+    path,
+    JSON.stringify({
+      version: 1,
+      id: crypto.randomUUID(),
+      services: [],
+      sharing: { url },
+    }),
+  );
+  await expect(loadConfig(path)).rejects.toThrow("Sharing requires HTTPS");
+});
+it.each([
+  "https://updates.example.com",
+  "http://127.0.0.1:3001",
+  "http://[::1]:3001",
+])("allows secure or explicit loopback sharing at %s", (url) => {
+  expect(
+    configSchema.parse({
+      version: 1,
+      id: crypto.randomUUID(),
+      services: [],
+      sharing: { url },
+    }).sharing?.url,
+  ).toBe(url);
+});
 async function directory() {
   const dir = await mkdtemp(join(tmpdir(), "schornai-test-"));
   dirs.push(dir);
