@@ -140,17 +140,21 @@ it("does not mutate an actively processed file", async () => {
   expect(state.index).not.toHaveBeenCalled();
   expect(state.remove).not.toHaveBeenCalled();
 });
-it("clears only the file index before deleting the original and reports failure", async () => {
+it("uses the shared removal operation and reports failure", async () => {
   state.remove.mockRejectedValue(new Error("delete failed"));
   await expect(
     storageFileAction({ storage, path: "file.txt", action: "delete" }),
   ).rejects.toThrow("delete failed");
-  expect(state.index).toHaveBeenCalledWith(
+  expect(state.remove).toHaveBeenCalledWith("file.txt", state.session, {
+    supabase: state.supabase,
+    beforeRemove: expect.any(Function),
+  });
+  state.remove.mock.calls[0][2].beforeRemove("file.txt");
+  expect(state.idle).toHaveBeenCalledWith(
+    state.queueProvider,
+    storage,
     "file.txt",
-    state.session,
-    state.supabase,
   );
-  expect(state.remove).toHaveBeenCalledWith("file.txt", state.session);
 });
 it("returns already-running processing without creating a second job", async () => {
   state.queue.mockResolvedValue("alreadyQueued");

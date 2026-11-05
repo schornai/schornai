@@ -79,6 +79,13 @@ lock. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
 read, check conflicts, and write inside that lock, shared with processing workers.
 See [transcript correction tests](../tests/web/transcription-save.test.ts).
 
+Both file and folder deletion actions use
+[`remove`](../packages/database/src/storage/remove.ts). It acquires each file's
+worker lease, checks active work through the caller, and removes that file's index
+before its original and sidecars. Recursive deletion stops at the first error;
+retrying cleans up the remaining files. See
+[removal tests](../tests/storage-remove.test.ts).
+
 ## Follow machine startup
 
 ```text

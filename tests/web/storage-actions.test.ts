@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { authorizeStorageMutation } from "../../apps/web/lib/authorizeStorageMutation";
 import { storageCreateFolders } from "../../apps/web/app/_actions/storageCreateFolders";
 import { storageRemove } from "../../apps/web/app/_actions/storageRemove";
 vi.mock("@/lib/authorizeStorageMutation", () => ({
@@ -14,7 +13,27 @@ const mocks = vi.hoisted(() => ({
   remove: vi.fn(),
   dispose: vi.fn(),
   redirect: vi.fn(),
+  access: vi.fn(),
+  idle: vi.fn(),
+  revalidate: vi.fn(),
 }));
+vi.mock("@/lib/storageFileOperations", () => ({
+  withStorageFileOperation: async (
+    storage: any,
+    _path: string,
+    supabase: any,
+    action: any,
+  ) => {
+    await mocks.access(storage, "write", { supabase });
+    try {
+      return await action({ session: {}, queue: {} });
+    } finally {
+      await mocks.dispose();
+    }
+  },
+  requireIdleFile: mocks.idle,
+}));
+vi.mock("next/cache", () => ({ revalidatePath: mocks.revalidate }));
 vi.mock("@/lib/serverActionClient", () => ({
   serverActionClient: {
     inputSchema: (schema: any) => ({
@@ -100,6 +119,7 @@ describe("storage mutation server actions", () => {
       expect(mocks.remove).toHaveBeenCalledWith(
         "folder/file.txt",
         expect.any(Object),
+        { supabase: expect.any(Object), beforeRemove: expect.any(Function) },
       );
       expect(mocks.dispose).toHaveBeenCalledOnce();
       if (redirectToParent)
@@ -122,9 +142,7 @@ describe("storage mutation server actions", () => {
 });
 
 it("rejects unauthorized storage mutations before opening privileged sessions", async () => {
-  vi.mocked(authorizeStorageMutation).mockRejectedValueOnce(
-    new Error("NOT_AUTHORIZED"),
-  );
+  mocks.access.mockRejectedValueOnce(new Error("NOT_AUTHORIZED"));
   await expect(
     storageRemove({ storage: storages[0], path: "private.txt" } as any),
   ).rejects.toThrow("NOT_AUTHORIZED");
