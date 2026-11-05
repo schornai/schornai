@@ -20,6 +20,8 @@ meta:
       "apps/web/app/_components/transcription/TranscriptionSegmentEditor.tsx",
       "apps/web/app/_components/transcription/transcriptionText.ts",
       "apps/web/app/_actions/storageUpdateTranscriptionSegment.ts",
+      "packages/database/src/storage/updateTranscriptionSegment.ts",
+      "apps/web/lib/storageFileOperations.ts",
     ]
 ---
 
@@ -49,6 +51,11 @@ Die Übersicht nennt **Abschnitte**, **Wörter** und den Anteil **Geprüft**. **
 ## Speicherfehler und gleichzeitige Bearbeitung
 
 Bei einem Speicherfehler bleibt der Entwurf erhalten. Versuche erneut zu speichern. Meldet die App, dass der Abschnitt inzwischen geändert wurde, **kopiere zuerst deinen Entwurf**, lade dann die Ansicht neu und gleiche ihn mit dem aktuellen Text ab. So überschreibst du keine zwischenzeitliche Änderung unbesehen.
+
+Änderungen an unterschiedlichen Abschnitten werden nacheinander in den aktuellen
+Dateistand übernommen. Ist die Datei gerade durch eine andere Verarbeitung oder
+einen anderen Server gesperrt, wird der Speicherversuch abgelehnt. Warte auf den
+Abschluss und versuche es erneut; dein Entwurf bleibt erhalten.
 
 ## Als Untertitel exportieren
 

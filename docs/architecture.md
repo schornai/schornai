@@ -72,6 +72,13 @@ and [`withStorageFileLock`](../packages/database/src/storage/withStorageFileLock
 The [`storage-processing` tests](../tests/storage-processing.test.ts) cover this
 routing and processing behavior.
 
+Text and transcript corrections use the web app's
+[`withStorageFileOperation`](../apps/web/lib/storageFileOperations.ts) with a file
+lock. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
+[`updateTranscriptionSegment`](../packages/database/src/storage/updateTranscriptionSegment.ts)
+read, check conflicts, and write inside that lock, shared with processing workers.
+See [transcript correction tests](../tests/web/transcription-save.test.ts).
+
 ## Follow machine startup
 
 ```text

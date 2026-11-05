@@ -1,20 +1,34 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Doc } from "yjs";
 import { storageUpdateTranscriptionSegment } from "../../apps/web/app/_actions/storageUpdateTranscriptionSegment";
 import { getDocumentContent } from "@schornio/aibox-package-database/storage/getDocumentContent";
 import { transcriptionToSrt } from "../../apps/web/app/_components/transcription/transcriptionText";
 
-vi.mock("@/lib/authorizeStorageMutation", () => ({
-  authorizeStorageMutation: vi.fn(async () => ({
-    user: { id: "user" },
-    userClaims: [],
-  })),
-}));
 const mocks = vi.hoisted(() => ({
+  access: vi.fn(),
+  rpc: vi.fn(),
+  revalidate: vi.fn(),
+  leases: new Map<string, string>(),
   upload: vi.fn(),
   dispose: vi.fn(),
   log: vi.fn(),
   json: "",
   session: null as any,
+}));
+vi.mock(
+  "@schornio/aibox-package-database/storage/requireStorageAccess",
+  () => ({ requireStorageAccess: mocks.access }),
+);
+vi.mock("@/lib/ensureActivity", () => ({ ensureActivity: vi.fn() }));
+vi.mock("next/cache", () => ({ revalidatePath: mocks.revalidate }));
+vi.mock("@schornio/aibox-realtime/server/ServerRealtimeProvider", () => ({
+  ServerRealtimeProvider: class {
+    document = new Doc();
+    async waitForSynced() {}
+    async [Symbol.asyncDispose]() {
+      this.document.destroy();
+    }
+  },
 }));
 vi.mock("@/lib/serverActionClient", () => ({
   serverActionClient: {
@@ -27,6 +41,7 @@ vi.mock("@/lib/serverActionClient", () => ({
 vi.mock("@/lib/supabase/createSupabaseServerClient", () => ({
   createSupabaseServerClient: async () => ({
     storage: { userScoped: true },
+    rpc: mocks.rpc,
   }),
 }));
 vi.mock("@schornio/aibox-package-database/storage/inspect", () => ({
@@ -49,7 +64,8 @@ vi.mock(
       getStoragePath(path: string) {
         return { storagePath: path };
       }
-      constructor(public options: unknown) {
+      constructor(public options: { abortSignal: AbortSignal }) {
+        this.abortSignal = options.abortSignal;
         mocks.session = this;
       }
       async [Symbol.asyncDispose]() {
@@ -85,6 +101,22 @@ const input = () => ({
   reviewed: true,
 });
 beforeEach(() => {
+  mocks.access.mockReset().mockResolvedValue(undefined);
+  mocks.revalidate.mockReset();
+  mocks.leases.clear();
+  mocks.rpc.mockReset().mockImplementation((name, args) => ({
+    abortSignal: async () => {
+      const key = `${args.p_bucket}/${args.p_path}`;
+      const owner = mocks.leases.get(key);
+      if (name === "release_storage_file_lock") {
+        if (owner === args.p_token) mocks.leases.delete(key);
+        return { data: null, error: null };
+      }
+      if (owner && owner !== args.p_token) return { data: false, error: null };
+      mocks.leases.set(key, args.p_token);
+      return { data: true, error: null };
+    },
+  }));
   mocks.json = JSON.stringify({ segments: [first, second] });
   mocks.log.mockReset();
   mocks.dispose.mockReset();
@@ -94,6 +126,65 @@ beforeEach(() => {
   });
 });
 describe("transcription persistence and export", () => {
+  it("preserves concurrent edits of different segments through the shared file operation", async () => {
+    const results = await Promise.all([
+      storageUpdateTranscriptionSegment(input()),
+      storageUpdateTranscriptionSegment({
+        ...input(),
+        segmentIndex: 1,
+        expectedSegment: second,
+        text: "Second edit",
+      }),
+    ]);
+    expect(results.map((result) => result.status)).toEqual(["saved", "saved"]);
+    expect(
+      JSON.parse(mocks.json).segments.map(
+        (segment: any) => segment.segmentOverride,
+      ),
+    ).toEqual([input().text, "Second edit"]);
+    expect(mocks.rpc).toHaveBeenCalledWith(
+      "acquire_storage_file_lock",
+      expect.objectContaining({
+        p_bucket: "realtime_files",
+        p_path: "activity_transcription__activity_transcriber/speech.wav",
+      }),
+    );
+    expect(mocks.leases.size).toBe(0);
+  });
+  it("reports a conflict for concurrent edits of the same segment", async () => {
+    const results = await Promise.all([
+      storageUpdateTranscriptionSegment(input()),
+      storageUpdateTranscriptionSegment({ ...input(), text: "Stale edit" }),
+    ]);
+    expect(results.map((result) => result.status)).toEqual([
+      "saved",
+      "conflict",
+    ]);
+    expect(mocks.upload).toHaveBeenCalledOnce();
+    expect(mocks.revalidate).toHaveBeenCalledOnce();
+  });
+  it("rejects a lease held by another server without changing the transcript", async () => {
+    mocks.leases.set(
+      "realtime_files/activity_transcription__activity_transcriber/speech.wav",
+      "other-server",
+    );
+    await expect(storageUpdateTranscriptionSegment(input())).rejects.toThrow(
+      "FILE_PROCESSING_IN_PROGRESS",
+    );
+    expect(mocks.upload).not.toHaveBeenCalled();
+    mocks.leases.clear();
+    expect(await storageUpdateTranscriptionSegment(input())).toMatchObject({
+      status: "saved",
+    });
+  });
+  it("authorizes before acquiring the lease", async () => {
+    mocks.access.mockRejectedValue(new Error("denied"));
+    await expect(storageUpdateTranscriptionSegment(input())).rejects.toThrow(
+      "denied",
+    );
+    expect(mocks.rpc).not.toHaveBeenCalled();
+    expect(mocks.upload).not.toHaveBeenCalled();
+  });
   it("persists corrections, preserves other segments, and exports the reloaded content", async () => {
     const result = await storageUpdateTranscriptionSegment(input());
     expect(result).toMatchObject({ status: "saved" });
