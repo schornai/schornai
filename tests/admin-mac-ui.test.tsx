@@ -98,6 +98,7 @@ describe("Admin Mac service controls", () => {
   });
 
   it("keeps the newest 1,000 logs per sender and resets text and sender filters together", async () => {
+    vi.useFakeTimers();
     const { log } = await mount(
       vi.fn(async () => JSON.stringify({ state: "running" })),
     );
@@ -129,7 +130,8 @@ describe("Admin Mac service controls", () => {
     expect(screen.queryByText("web entry 1")).toBeNull();
     fireEvent.click(screen.getByRole("checkbox", { name: "transcriber-mlx" }));
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "WEB" } });
-    expect(await screen.findByText("Keine passenden Meldungen")).toBeTruthy();
+    await act(() => vi.advanceTimersByTimeAsync(250));
+    expect(screen.getByText("Keine passenden Meldungen")).toBeTruthy();
     fireEvent.click(
       screen.getByRole("button", { name: "Filter zurücksetzen" }),
     );
@@ -139,10 +141,9 @@ describe("Admin Mac service controls", () => {
         .getByRole("checkbox", { name: "transcriber-mlx" })
         .getAttribute("aria-checked"),
     ).toBe("false");
-    await waitFor(() =>
-      expect(
-        within(screen.getByRole("table")).getAllByRole("row"),
-      ).toHaveLength(1002),
+    await act(() => vi.advanceTimersByTimeAsync(250));
+    expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(
+      1002,
     );
   });
 
