@@ -37,11 +37,11 @@ case "$(uname -m)" in
   aarch64) SCHORNAI_NODE_ARCH=arm64 ;;
   *) echo "Nicht unterstützte Architektur"; exit 1 ;;
 esac
-SCHORNAI_NODE_RELEASE="node-v24.22.0-linux-$SCHORNAI_NODE_ARCH"
+SCHORNAI_NODE_RELEASE="node-v26.12.1-linux-$SCHORNAI_NODE_ARCH"
 mkdir -p "$HOME/Downloads/node"
 cd "$HOME/Downloads/node"
-curl -fSLO "https://nodejs.org/dist/v24.22.0/$SCHORNAI_NODE_RELEASE.tar.xz"
-curl -fSLO https://nodejs.org/dist/v24.22.0/SHASUMS256.txt
+curl -fSLO "https://nodejs.org/dist/v26.12.1/$SCHORNAI_NODE_RELEASE.tar.xz"
+curl -fSLO https://nodejs.org/dist/v26.12.1/SHASUMS256.txt
 sha256sum --check --ignore-missing SHASUMS256.txt
 sudo tar -xJf "$SCHORNAI_NODE_RELEASE.tar.xz" -C /opt
 sudo ln -s "/opt/$SCHORNAI_NODE_RELEASE/bin/node" /usr/local/bin/node
@@ -51,7 +51,7 @@ node --version
 ```
 
 Die Version entspricht dem gebündelten Mac-Runtime-Stand; alternativ eine neuere
-unterstützte Node-LTS-Version ab 24 aus dem [offiziellen Node-Archiv](https://nodejs.org/en/download/archive/v24.22.0)
+unterstützte Node-LTS-Version ab 24 aus dem [offiziellen Node-Archiv](https://nodejs.org/en/download/archive/v26.12.1)
 verwenden. Auf einem bereits eingerichteten Rechner vorhandene Installationen
 prüfen, bevor Symlinks angelegt werden.
 

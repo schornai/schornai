@@ -196,8 +196,8 @@ screenshots.
 
 The [test workflow](../.github/workflows/test.yml) runs independent jobs for:
 
-- The complete JavaScript/Python suite with coverage gates on Node.js 24 and
-  Python 3.13; coverage reports are uploaded even when a gate fails.
+- The complete JavaScript/Python suite with coverage gates on Node.js 26 and
+  Python 3.15; coverage reports are uploaded even when a gate fails.
 - Production builds of the web app, realtime app and CLI/service, plus type
   checks for the two desktop applications. The web build uses the same non-secret
   metadata placeholders as its Dockerfile.
