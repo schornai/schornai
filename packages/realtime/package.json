@@ -12,7 +12,7 @@
   "dependencies": {
     "@ai-sdk/amazon-bedrock": "5.0.118",
     "@ai-sdk/anthropic": "4.0.82",
-    "@ai-sdk/azure": "4.0.104",
+    "@ai-sdk/azure": "4.0.116",
     "@ai-sdk/google": "4.0.99",
     "@ai-sdk/huggingface": "2.0.71",
     "@ai-sdk/mcp": "^2.0.78",
