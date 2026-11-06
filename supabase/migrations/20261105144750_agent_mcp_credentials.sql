@@ -136,9 +136,9 @@ GRANT EXECUTE ON FUNCTION "public"."save_agent_with_mcp_credentials"(text, text,
 
 REVOKE ALL ON TABLE "public"."agent_mcp_credentials" FROM "postgres";
 
-GRANT DELETE, INSERT, MAINTAIN, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."agent_mcp_credentials" TO "postgres";
+GRANT DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."agent_mcp_credentials" TO "postgres";
 
-GRANT DELETE, INSERT, MAINTAIN, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."agent_mcp_credentials" TO "service_role";
+GRANT DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."agent_mcp_credentials" TO "service_role";
 
 -- Move every configured MCP header, including non-Authorization headers. The
 -- public config retains only names; legacy empty values remain usable unchanged.

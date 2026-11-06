@@ -123,6 +123,6 @@ GRANT EXECUTE ON FUNCTION "public"."renew_background_task"(text, uuid) TO "servi
 
 REVOKE ALL ON TABLE "public"."task_claims" FROM "postgres";
 
-GRANT DELETE, INSERT, MAINTAIN, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."task_claims" TO "postgres";
+GRANT DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."task_claims" TO "postgres";
 
-GRANT DELETE, INSERT, MAINTAIN, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."task_claims" TO "service_role";
+GRANT DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE ON TABLE "public"."task_claims" TO "service_role";
