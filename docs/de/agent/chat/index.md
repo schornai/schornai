@@ -8,12 +8,14 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
+      "packages/realtime/src/_lib/waitForProviderSynced.ts",
+      "packages/realtime/src/server/recoverTaskDocuments.ts",
     ]
 ---
 
@@ -33,6 +35,11 @@ Starte einen Chat über **Neuer Chat** am Agenten. Vorhandene Gespräche öffnes
 
 Frage konkret nach, wenn dir eine Antwort unklar ist. Beispiel: „Welche Aussagen stammen aus der Datei? Nenne die passende Fundstelle und kennzeichne Vermutungen.“
 
+Beim Senden wartet der Server pro Synchronisationsschritt höchstens 30 Sekunden
+auf den Realtime-Dienst. Eine abgelehnte Anmeldung oder eine geschlossene Verbindung
+beendet das Warten früher mit einem Fehler. Prüfe bei einem Sendefehler den
+Gesprächsverlauf, bevor du die Nachricht erneut sendest.
+
 ## Antwort lesen und weiterverwenden
 
 Während der Antwort zeigt der Chat auch Nachdenkabschnitte und Werkzeugergebnisse. Warte nach einer Websuche oder einem Dateiabruf auf den abschließenden Antworttext.
@@ -44,6 +51,16 @@ Während der Antwort zeigt der Chat auch Nachdenkabschnitte und Werkzeugergebnis
 Das Gehirnsymbol schaltet die gewünschte Nachdenken-Option für die Nachricht um. Ob sie wirkt, hängt von Modell und [verpflichtenden Einstellungen](../edit/einstellungen.md) ab.
 
 Während der Generierung kannst du **Abbrechen** wählen. Bereits ausgeführte Werkzeugaktionen werden dadurch nicht rückgängig gemacht. Eine Pause des [Nachrichtenstapels](stapel.md) hält dagegen die noch wartenden Nachrichten zurück.
+
+## Wenn die Verarbeitung abstürzt
+
+Nach einem erkannten Worker-Ausfall zeigt der Chat einen Fehler und wird wieder
+freigegeben. Noch wartende Texte werden pausiert; die unterbrochene Anfrage wird
+nicht automatisch wiederholt. Prüfe vorhandene Antworten und bereits ausgeführte
+Werkzeugaktionen, bevor du erneut sendest. Die Erkennung benötigt einen laufenden
+Realtime-Server und eine erreichbare Datenbank und kann etwa zwei Minuten dauern;
+bei Dienstausfällen länger. Details stehen unter
+[Aufgabenstapel](../../tasks/index.md#nach-einem-worker-absturz).
 
 ## Reiter im Gespräch
 

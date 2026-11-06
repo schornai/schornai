@@ -195,6 +195,12 @@ benötigt in seiner privaten `docker.env` die Werte `SUPABASE_PUBLISHABLE_KEY`,
 `SUPABASE_SECRET_KEY`, `SUPABASE_JWT_SECRET` und `REALTIME_SERVER_SECRET` der
 Zielinstanz. Für den Dateikatalog kommt `SERVICE_API_TOKEN` hinzu.
 
+Für `sharing.url` ist HTTPS vorgeschrieben. HTTP ist ausschließlich mit den
+Loopback-Adressen `127.0.0.1` und `[::1]` für Verbindungen auf demselben Rechner
+erlaubt. Entfernte HTTP-Adressen, auch im privaten Netz, werden beim Laden der
+Konfiguration abgelehnt. Stelle bestehende entfernte Sharing-Verbindungen vor
+dem Neustart auf HTTPS um.
+
 `SUPABASE_JWT_SECRET` ist das JWT-Signiersecret derselben Supabase-Instanz.
 Ein bestehendes `JWT_SECRET` wird als Alias übernommen. Ein explizites, nicht
 leeres `SUPABASE_JWT_SECRET` hat Vorrang. Der Worker benötigt dieses Secret,

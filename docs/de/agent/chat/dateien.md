@@ -12,7 +12,7 @@ meta:
   role_scope: "Gespräch beziehungsweise Zielablage"
   prerequisites: "Für Audio- und Videoinhalte: ein in der Agentenrolle zugeordneter Transkriptor."
   status: "verfügbar"
-  last_verified: "2026-10-17"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/files/_components/Folder.tsx",
@@ -20,6 +20,8 @@ meta:
       "packages/realtime/src/documents/storage/createStorageProcessingTask.ts",
       "apps/web/app/_actions/storageSelectChatFile.ts",
       "packages/database/src/storage/_utils/storageToAgentPath.ts",
+      "apps/realtime/src/chat/tools/documentRepository/storageWriteFile.ts",
+      "packages/realtime/src/documents/storage/writeStorageFileText.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolStorageTransferFile.tsx",
     ]
 ---
@@ -62,6 +64,10 @@ Ist dem Agenten ein Transkriptor zugeordnet, werden Audio- und Videodateien auto
 ## Unterschied zur Dokumentenablage
 
 Gesprächsdateien gehören zum jeweiligen Chat. Eine über die Agentenrolle eingebundene Dokumentenablage ist eine separate, gemeinsame Wissensquelle. Schreibaktionen in dieser Ablage können auch für andere Personen sichtbar werden; prüfe entsprechende [Freigaben](freigaben.md).
+
+Beim Schreiben durch den Agenten gelten die Freigabe der eingebundenen Ablage und deine eigenen Schreibrechte. Text- und Codedateien werden einschließlich Originaldownload aktualisiert; in gemeinsamen Ablagen wird anschließend der Suchindex aus dem gespeicherten Text aktualisiert. Laufende Dateiverarbeitung blockiert konkurrierendes Schreiben. Teilfehler beim Speichern verwenden dieselbe [Wiederherstellung wie der Editor](../../app/documents/files.md#neue-datei-und-text-bearbeiten).
+
+Das Schreibwerkzeug kann neue Text- und Codedateien anlegen, etwa `.txt`, `.md` oder `.json`, mit höchstens 1 MiB UTF-8-Text. Bei vorhandenen PDF-, Office- oder Mediendateien bearbeitet es nur bereits extrahierten Text beziehungsweise das Transkript; das Original bleibt erhalten. Neue Binärformate lassen sich damit nicht erzeugen. Scheitert nur das Einreihen zur Indexierung, meldet das Werkzeug ausdrücklich, dass die Datei bereits gespeichert wurde; derselbe Text kann erneut gespeichert werden.
 
 Kopieren und Verschieben erscheinen im Chat als einklappbare Werkzeugzeilen mit Quelle, Ziel und Status. Klicke auf die Zeile, um Details und nach erfolgreicher Übertragung den Link zur Zieldatei zu öffnen. Die Werkzeugzeile zeigt auch ausstehende Freigaben und abgelehnte Übertragungen. Ein Fehler beim anschließenden Indexieren wird getrennt vom erfolgreichen Transfer angezeigt.
 

@@ -49,6 +49,10 @@ Für das Lesen braucht das Konto der chattenden Person mindestens die Benutzerro
 
 ## Dateien durch den Agenten übertragen
 
+Beim Schreiben von Dateiinhalten erhält der Agent nur nach erfolgreichem Speichern
+eine Erfolgsmeldung. Schlägt das Speichern fehl, meldet das Werkzeug einen Fehler;
+der Agent kann darauf reagieren und den Schreibvorgang erneut versuchen.
+
 Mit eingebundenen Ablagen stehen auch die Werkzeuge **Datei kopieren** und **Datei verschieben** zur Verfügung. Der Agent verwendet seine eingebundenen Pfade; Gesprächsdateien liegen unter `this_conversation/`. Quelle und Ziel sind vollständige Dateipfade. Fehlende Zielordner werden automatisch angelegt. Die Dateiendung bleibt gleich; eine vorhandene Zieldatei wird nicht überschrieben.
 
 Kopieren benötigt einen lesbaren Quellpfad und einen beschreibbaren Zielpfad. Beim Verschieben muss auch die Quelle beschreibbar sein. Verlangt eine betroffene Schreibverbindung eine Rückfrage, wartet das Werkzeug auf die Freigabe mit angezeigtem Quell- und Zielpfad.

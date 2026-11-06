@@ -38,7 +38,8 @@
     "storybook:visual": "node scripts/storybook/visual.mjs",
     "storybook:visual:update": "node scripts/storybook/visual.mjs --update-snapshots=all",
     "storybook:visual:report": "playwright show-report playwright-report/storybook-visual",
-    "storybook:admin": "npm run storybook --workspace apps/admin-mac"
+    "storybook:admin": "npm run storybook --workspace apps/admin-mac",
+    "test:sql": "node scripts/test-sql.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

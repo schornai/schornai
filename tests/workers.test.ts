@@ -1,3 +1,6 @@
+vi.mock("@schornio/aibox-database/storage/recoverFileText", () => ({
+  recoverFileText: mocks.recover,
+}));
 vi.mock("@schornio/aibox-database/storage/getDocumentContent", () => ({
   getDocumentContent: mocks.savedContent,
 }));
@@ -32,6 +35,7 @@ const mocks = vi.hoisted(() => ({
   blob: vi.fn(),
   readFile: vi.fn(),
   savedContent: vi.fn(),
+  recover: vi.fn(),
   save: vi.fn(),
   index: vi.fn(),
   repository: vi.fn(),
@@ -305,6 +309,10 @@ describe("file processing worker", () => {
       },
     };
     await mocks.handler(repositoryTask, signal);
+    expect(mocks.recover).toHaveBeenCalledWith(file.path, mocks.storage);
+    expect(mocks.recover.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.inspect.mock.invocationCallOrder[0]!,
+    );
     expect(mocks.save).toHaveBeenCalledWith(
       file,
       { type: "mdc", current: "text", versions: [] },
@@ -350,6 +358,16 @@ describe("file processing worker", () => {
     await expect(mocks.handler(task, signal)).rejects.toThrow(
       "Unable to save extracted content",
     );
+    expect(mocks.index).not.toHaveBeenCalled();
+  });
+  it("stops processing and indexing while text recovery fails", async () => {
+    mocks.recover.mockRejectedValue(new Error("recovery failed"));
+    await processFileWorker(config);
+    await expect(mocks.handler(task, signal)).rejects.toThrow(
+      "recovery failed",
+    );
+    expect(mocks.inspect).not.toHaveBeenCalled();
+    expect(mocks.save).not.toHaveBeenCalled();
     expect(mocks.index).not.toHaveBeenCalled();
   });
   it("extracts rich-text files and does not index activity files", async () => {

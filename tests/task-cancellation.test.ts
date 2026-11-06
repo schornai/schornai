@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { Doc, applyUpdate, encodeStateAsUpdate } from "yjs";
 import { addTask } from "../packages/realtime/src/documents/taskQueue/addTask";
-import { claimTask } from "../packages/realtime/src/documents/taskQueue/claimTask";
+import { TaskCoordinator } from "../packages/realtime/src/documents/taskQueue/TaskCoordinator";
+import { taskClaimStore } from "./helpers/task-claims";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
 import { requestTaskAbort } from "../packages/realtime/src/documents/taskQueue/requestTaskAbort";
-import { setTaskDone } from "../packages/realtime/src/documents/taskQueue/setTaskDone";
 const task = {
   id: "task",
   type: "chat",
@@ -25,7 +25,12 @@ function fixture() {
     requiredCapabilities: [],
     parameters: { ...task.parameters, userClaims: [] },
   });
-  return { worker, requester };
+  const coordinator = new TaskCoordinator(
+    worker,
+    taskClaimStore().options,
+    async () => {},
+  );
+  return { worker, requester, coordinator };
 }
 function merge(a: Doc, b: Doc) {
   const left = encodeStateAsUpdate(a),
@@ -36,15 +41,15 @@ function merge(a: Doc, b: Doc) {
 describe("replicated cancellation", () => {
   it.each(["cancel-first", "finish-first"])(
     "concurrent completion and %s leave one terminal task",
-    (order) => {
-      const { worker, requester } = fixture();
-      claimTask(worker, "worker", "chat", []);
+    async (order) => {
+      const { worker, requester, coordinator } = fixture();
+      const claimed = (await coordinator.claim("chat", [], "worker"))!;
       applyUpdate(requester, encodeStateAsUpdate(worker));
       if (order === "cancel-first") {
         requestTaskAbort(requester, "task");
-        setTaskDone(worker, "task", undefined);
+        await coordinator.finish("task", claimed.claimToken, undefined);
       } else {
-        setTaskDone(worker, "task", undefined);
+        await coordinator.finish("task", claimed.claimToken, undefined);
         requestTaskAbort(requester, "task");
       }
       merge(worker, requester);
@@ -57,13 +62,13 @@ describe("replicated cancellation", () => {
       }
     },
   );
-  it("acknowledges cancellation received before completion with abort timestamps", () => {
-    const { worker, requester } = fixture();
-    claimTask(worker, "worker", "chat", []);
+  it("acknowledges cancellation received before completion with abort timestamps", async () => {
+    const { worker, requester, coordinator } = fixture();
+    const claimed = (await coordinator.claim("chat", [], "worker"))!;
     applyUpdate(requester, encodeStateAsUpdate(worker));
     requestTaskAbort(requester, "task");
     applyUpdate(worker, encodeStateAsUpdate(requester));
-    setTaskDone(worker, "task", undefined);
+    await coordinator.finish("task", claimed.claimToken, undefined);
     merge(worker, requester);
     expect(getTaskQueue(requester).tasks.toArray()).toMatchObject([
       {
@@ -75,12 +80,12 @@ describe("replicated cancellation", () => {
     worker.destroy();
     requester.destroy();
   });
-  it("never starts a pending task with a replicated cancellation request", () => {
-    const { worker, requester } = fixture();
+  it("never starts a pending task with a replicated cancellation request", async () => {
+    const { worker, requester, coordinator } = fixture();
     applyUpdate(requester, encodeStateAsUpdate(worker));
     requestTaskAbort(requester, "task");
     applyUpdate(worker, encodeStateAsUpdate(requester));
-    expect(claimTask(worker, "worker", "chat", [])).toBeUndefined();
+    expect(await coordinator.claim("chat", [], "worker")).toBeUndefined();
     expect(getTaskQueue(worker).tasks.get(0).state).toBe("aborted");
     worker.destroy();
     requester.destroy();

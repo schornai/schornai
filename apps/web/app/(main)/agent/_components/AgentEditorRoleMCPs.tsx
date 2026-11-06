@@ -13,6 +13,7 @@ import {
 } from "@schornio/aibox-package-ui/components/alert-dialog";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -158,7 +159,16 @@ export function AgentEditorRoleMCPs({
                 )}
                 id={`${mcp.id}-${urlInputId}`}
                 onChange={({ currentTarget: { value } }) =>
-                  setAgentRoleMCP(mcp.id, (prev) => ({ ...prev, url: value }))
+                  setAgentRoleMCP(mcp.id, (prev) => ({
+                    ...prev,
+                    url: value,
+                    headers: Object.fromEntries(
+                      Object.entries(prev.headers).map(([key, header]) => [
+                        key,
+                        header ?? "",
+                      ]),
+                    ),
+                  }))
                 }
                 value={mcp.url ?? ""}
               />
@@ -208,6 +218,18 @@ export function AgentEditorRoleMCPs({
                     variant="inline"
                   />
                 </h4>
+                <FieldDescription>
+                  {t("descriptionStoredHeaders")}
+                </FieldDescription>
+                {hasValidationError(
+                  "roles",
+                  roleIndex,
+                  "mcps",
+                  mcpIndex,
+                  "headers",
+                ) ? (
+                  <FieldError>{t("errorHeaderRequired")}</FieldError>
+                ) : undefined}
                 {Object.entries(mcp.headers).map(([headerKey, headerValue]) => (
                   <div className="flex items-end gap-3" key={headerKey}>
                     <Field>
@@ -220,7 +242,10 @@ export function AgentEditorRoleMCPs({
                         className="bg-background"
                         id={`${mcp.id}-${headerInputIdPrefix}-key-${headerKey}`}
                         onBlur={() => {
-                          if (currentHTTPHeaderKey === headerKey) {
+                          if (
+                            currentHTTPHeaderKey === headerKey &&
+                            currentHTTPHeaderKeyValue !== headerKey
+                          ) {
                             const headers = { ...mcp.headers };
 
                             delete headers[currentHTTPHeaderKey];
@@ -248,7 +273,16 @@ export function AgentEditorRoleMCPs({
                         }
                       />
                     </Field>
-                    <Field>
+                    <Field
+                      data-invalid={hasValidationError(
+                        "roles",
+                        roleIndex,
+                        "mcps",
+                        mcpIndex,
+                        "headers",
+                        headerKey,
+                      )}
+                    >
                       <FieldLabel
                         htmlFor={`${mcp.id}-${headerInputIdPrefix}-value-${headerKey}`}
                       >
@@ -262,11 +296,32 @@ export function AgentEditorRoleMCPs({
                             ...prev,
                             headers: {
                               ...mcp.headers,
-                              [headerKey]: value,
+                              [headerKey]:
+                                value ||
+                                (defaultRole?.mcps?.find(
+                                  ($) => $.id === mcp.id && $.url === mcp.url,
+                                )?.headers[headerKey] === null
+                                  ? null
+                                  : ""),
                             },
                           }))
                         }
-                        value={headerValue}
+                        value={headerValue ?? ""}
+                        type="password"
+                        autoComplete="new-password"
+                        placeholder={
+                          headerValue === null
+                            ? t("labelStoredHeader")
+                            : undefined
+                        }
+                        aria-invalid={hasValidationError(
+                          "roles",
+                          roleIndex,
+                          "mcps",
+                          mcpIndex,
+                          "headers",
+                          headerKey,
+                        )}
                       />
                     </Field>
                     <Button

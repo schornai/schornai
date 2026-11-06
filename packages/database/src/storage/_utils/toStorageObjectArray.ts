@@ -5,6 +5,7 @@ import { omitNullish } from "@schornio/aibox-package-utils/omitNullish";
 export const EMPTY_FOLDER_PLACEHOLDER = ".empty-folder-placeholder";
 export const MDC_FILE_EXTENSION = ".__xrag_content.mdc";
 export const TRANSCRIPT_FILE_EXTENSION = ".__xrag_transcript.json";
+export const TEXT_WRITE_FILE_EXTENSION = ".__xrag_text_write.json";
 
 function getReadableContent(
   fileName: string,
@@ -44,6 +45,7 @@ export function toStorageObjectArray(
     : data
         .filter((item) => item.name !== EMPTY_FOLDER_PLACEHOLDER)
         .filter((file) => !file.name.endsWith(MDC_FILE_EXTENSION))
+        .filter((file) => !file.name.endsWith(TEXT_WRITE_FILE_EXTENSION))
         .filter((file) => !file.name.endsWith(TRANSCRIPT_FILE_EXTENSION));
 
   return filteredData.map((fileObject) => ({

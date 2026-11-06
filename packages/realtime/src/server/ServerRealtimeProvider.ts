@@ -9,6 +9,7 @@ export class ServerRealtimeProvider {
   document: YDoc;
   provider: HocuspocusProvider;
   disposalAbortSignal?: AbortSignal;
+  #initialSynchronizationFailed = false;
 
   static getServerToken(secret: string) {
     return `Worker ${secret}` satisfies ServerRealtimeProviderToken;
@@ -38,14 +39,23 @@ export class ServerRealtimeProvider {
   }
 
   async waitForSynced(config?: { abortSignal: AbortSignal }) {
-    return waitForProviderSynced(this.provider, config);
+    try {
+      await waitForProviderSynced(this.provider, config);
+      this.#initialSynchronizationFailed = false;
+    } catch (error) {
+      if (!this.provider.isSynced) this.#initialSynchronizationFailed = true;
+      throw error;
+    }
   }
 
   async [Symbol.asyncDispose]() {
     try {
-      await this.waitForSynced({
-        abortSignal: this.disposalAbortSignal ?? AbortSignal.timeout(30_000),
-      });
+      // No writes can be confirmed after a failed initial handshake. Release
+      // the request's document immediately instead of waiting a second time.
+      if (!this.#initialSynchronizationFailed)
+        await this.waitForSynced({
+          abortSignal: this.disposalAbortSignal ?? AbortSignal.timeout(30_000),
+        });
     } finally {
       try {
         this.provider.destroy();

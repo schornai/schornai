@@ -11,7 +11,8 @@ import { dirname, resolve } from "node:path";
 // An explicit URL allows generation against a disposable migration database.
 // Never print it: it may contain credentials. Without it, keep the local target.
 const args = [
-  "supabase",
+  "--yes",
+  "supabase@2.120.0",
   "gen",
   "types",
   "--lang=typescript",

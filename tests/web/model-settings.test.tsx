@@ -9,11 +9,16 @@ import {
   screen,
   waitFor,
   within,
+  act,
 } from "@testing-library/react";
 import { ModelMetadataForm } from "../../apps/web/app/(settings)/models/_components/ModelMetadataForm";
 import { ExternalModelForm } from "../../apps/web/app/(settings)/models/_components/ExternalModelForm";
 import { SidebarProvider } from "@schornio/aibox-package-ui/components/sidebar";
 import { ModelsOverview } from "../../apps/web/app/(settings)/models/_components/ModelsOverview";
+import { ModelDetails } from "../../apps/web/app/(settings)/models/_components/ModelDetails";
+import { toModelSummary } from "../../apps/web/app/(settings)/models/modelSummary";
+import { discoverModels } from "../../apps/web/app/(settings)/models/_actions/discoverModels";
+import userEvent from "@testing-library/user-event";
 vi.mock(
   "../../apps/web/app/(settings)/models/_actions/addExternalModel",
   () => ({ addExternalModel: vi.fn() }),
@@ -42,6 +47,335 @@ beforeEach(() => {
   client.refresh.mockReset();
   client.pending = false;
   client.params = new URLSearchParams();
+  client.push.mockReset();
+  vi.mocked(discoverModels)
+    .mockReset()
+    .mockResolvedValue({ data: { models: [] } });
+});
+
+it("copies only public model metadata into a client summary", () => {
+  const config = {
+    contextSize: 8192,
+    embeddingVectorSize: 768,
+    featureThinking: true,
+    featureTools: false,
+    featureVision: true,
+    fileSystemIdentifier: "model-files",
+    provider: "antropic-aws",
+    baseUrl: "https://runtime.test",
+    region: "eu-west-1",
+    modelId: "remote-model",
+    apiKey: "must-stay-private",
+    extraCredential: "also-private",
+  };
+  const model = {
+    id: "model",
+    name: "Example",
+    description: "Documentation",
+    identifier: "external:example",
+    type: "external_llm_v1",
+    config,
+    credentials: "private-top-level",
+  };
+  expect(toModelSummary(model as any)).toEqual({
+    id: model.id,
+    name: model.name,
+    description: model.description,
+    identifier: model.identifier,
+    type: model.type,
+    contextSize: 8192,
+    embeddingVectorSize: 768,
+    featureThinking: true,
+    featureTools: false,
+    featureVision: true,
+    fileSystemIdentifier: "model-files",
+    provider: "antropic-aws",
+    baseUrl: "https://runtime.test",
+    region: "eu-west-1",
+    modelId: "remote-model",
+  });
+  expect(
+    JSON.stringify(toModelSummary({ ...model, config: {} } as any)),
+  ).not.toContain("private");
+  expect(
+    toModelSummary({ ...model, config: {} } as any).contextSize,
+  ).toBeUndefined();
+});
+
+it.each([
+  {
+    type: "ollama_llm_v1",
+    config: {
+      contextSize: 8192,
+      featureThinking: true,
+      featureTools: false,
+      featureVision: true,
+    },
+    description: "Usage documentation",
+  },
+  {
+    type: "ollama_embedding_v1",
+    config: { contextSize: 4096, embeddingVectorSize: 768 },
+    description: "",
+  },
+  {
+    type: "mlx_whisper_v1",
+    config: { fileSystemIdentifier: "local-whisper" },
+    description: undefined,
+  },
+  {
+    type: "external_llm_v1",
+    config: {
+      provider: "antropic-aws",
+      baseUrl: "https://bedrock.test",
+      region: "eu-west-1",
+      modelId: "remote-model",
+    },
+    description: "Cloud usage",
+  },
+  { type: "external_llm_v1", config: {}, description: "" },
+])(
+  "shows appropriate $type properties, connection settings and documentation",
+  ({ type, config, description }) => {
+    const model = toModelSummary({
+      id: "model",
+      name: "Example",
+      identifier: "model-identifier",
+      type,
+      config,
+      description,
+    } as any);
+    const { container } = render(<ModelDetails model={model} />);
+    fireEvent.click(
+      screen.getByRole("button", { name: "labelModelProperties" }),
+    );
+    expect(screen.getByText("labelIdentifier")).toBeTruthy();
+    expect(Boolean(screen.queryByText("labelContextSize"))).toBe(
+      "contextSize" in config,
+    );
+    expect(Boolean(screen.queryByText("labelEmbeddingSize"))).toBe(
+      "embeddingVectorSize" in config,
+    );
+    if ("featureTools" in config)
+      expect(screen.getByText("labelNo")).toBeTruthy();
+    if (type === "external_llm_v1") {
+      fireEvent.click(screen.getByRole("button", { name: "labelConnection" }));
+      expect(screen.getByText("labelBaseUrl")).toBeTruthy();
+      expect(Boolean(screen.queryByText("fields.region"))).toBe(
+        "region" in config,
+      );
+      expect(
+        container.querySelector('a[href="?view=connection"]'),
+      ).not.toBeNull();
+    } else
+      expect(
+        screen.queryByRole("button", { name: "labelConnection" }),
+      ).toBeNull();
+    fireEvent.click(
+      screen.getByRole("button", { name: "fields.documentation" }),
+    );
+    expect(
+      screen.getByText(description || "descriptionNoDocumentation"),
+    ).toBeTruthy();
+    expect(container.querySelector('a[href="?view=settings"]')).not.toBeNull();
+  },
+);
+
+it("saves Azure deployment names manually without discovering models", async () => {
+  client.execute.mockResolvedValue({ data: { id: "azure-model" } });
+  render(<ExternalModelForm provider="openai-azure" />);
+  fireEvent.change(screen.getByLabelText("fields.baseUrl"), {
+    target: { value: "https://team.openai.azure.com/openai/v1" },
+  });
+  fireEvent.change(screen.getByLabelText("fields.deployment"), {
+    target: { value: "production-deployment" },
+  });
+  fireEvent.change(screen.getByLabelText("fields.apiKey"), {
+    target: { value: "private-test-key" },
+  });
+  fireEvent.submit(screen.getByLabelText("fields.deployment").closest("form")!);
+  await waitFor(() =>
+    expect(client.push).toHaveBeenCalledWith("/models/azure-model"),
+  );
+  expect(client.execute).toHaveBeenCalledWith(
+    expect.objectContaining({
+      modelId: "production-deployment",
+      apiKey: "private-test-key",
+    }),
+  );
+  expect(
+    (screen.getByLabelText("fields.apiKey") as HTMLInputElement).value,
+  ).toBe("");
+  expect(discoverModels).not.toHaveBeenCalled();
+});
+
+it("uses the selected Bedrock region for discovery and saves connection updates without navigation", async () => {
+  vi.useFakeTimers();
+  client.execute.mockResolvedValue({ data: { id: "saved" } });
+  render(
+    <ExternalModelForm
+      provider="antropic-aws"
+      initial={{
+        id: "saved",
+        name: "Bedrock",
+        modelId: "model",
+        region: "eu-west-1",
+      }}
+    />,
+  );
+  fireEvent.change(screen.getByLabelText("fields.region"), {
+    target: { value: "us-east-1" },
+  });
+  fireEvent.change(screen.getByLabelText("fields.apiKey"), {
+    target: { value: "replacement-key" },
+  });
+  await act(() => vi.advanceTimersByTimeAsync(700));
+  expect(discoverModels).toHaveBeenCalledWith(
+    expect.objectContaining({
+      provider: "antropic-aws",
+      baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+      region: "us-east-1",
+      apiKey: "replacement-key",
+    }),
+  );
+  await act(async () =>
+    fireEvent.submit(screen.getByLabelText("fields.region").closest("form")!),
+  );
+  expect(client.execute).toHaveBeenCalledWith(
+    expect.objectContaining({
+      id: "saved",
+      region: "us-east-1",
+      baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+    }),
+  );
+  expect(client.refresh).toHaveBeenCalledOnce();
+  expect(client.push).not.toHaveBeenCalled();
+});
+
+it("shows discovery errors without erasing a manually entered model ID and permits retry", async () => {
+  vi.useFakeTimers();
+  vi.mocked(discoverModels)
+    .mockResolvedValueOnce(undefined)
+    .mockResolvedValueOnce({
+      data: { models: [{ id: "discovered", name: "Discovered" }] },
+    });
+  render(<ExternalModelForm provider="openai-compatible" />);
+  fireEvent.change(screen.getByLabelText("fields.baseUrl"), {
+    target: { value: "https://models.test/v1" },
+  });
+  fireEvent.change(screen.getByLabelText("fields.modelId"), {
+    target: { value: "manual-model" },
+  });
+  await act(() => vi.advanceTimersByTimeAsync(700));
+  expect(screen.getByText("errorDiscovery")).toBeTruthy();
+  expect(
+    (screen.getByLabelText("fields.modelId") as HTMLInputElement).value,
+  ).toBe("manual-model");
+  fireEvent.click(screen.getByRole("button", { name: "labelLoadModels" }));
+  await act(() => vi.advanceTimersByTimeAsync(700));
+  expect(screen.getByText("labelModelsFound")).toBeTruthy();
+});
+
+it("selects a discovered model by its public name and submits its exact identifier", async () => {
+  vi.mocked(discoverModels).mockResolvedValue({
+    data: {
+      models: [
+        { id: "named", name: "Friendly model" },
+        { id: "same", name: "same" },
+        { id: "plain" },
+      ],
+    },
+  });
+  client.execute.mockResolvedValue({ data: { id: "saved" } });
+  render(
+    <ExternalModelForm
+      provider="openai-compatible"
+      initial={{
+        id: "saved",
+        name: "Connection",
+        modelId: "",
+        baseUrl: "https://models.test/v1",
+      }}
+    />,
+  );
+  await screen.findByText("labelModelsFound");
+  const input = screen.getByLabelText("fields.modelId");
+  await userEvent.click(input);
+  fireEvent.keyDown(input, { key: "ArrowDown" });
+  expect(await screen.findByRole("option", { name: "plain" })).toBeTruthy();
+  expect(screen.getByRole("option", { name: "same" })).toBeTruthy();
+  await userEvent.click(
+    screen.getByRole("option", { name: /named.*Friendly model/ }),
+  );
+  expect((input as HTMLInputElement).value).toBe("named");
+  fireEvent.submit(input.closest("form")!);
+  await waitFor(() =>
+    expect(client.execute).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "saved", modelId: "named" }),
+    ),
+  );
+});
+
+it("accepts a custom identifier when discovery has no matching model", async () => {
+  render(
+    <ExternalModelForm
+      provider="openai-compatible"
+      initial={{
+        id: "saved",
+        name: "Connection",
+        modelId: "",
+        baseUrl: "https://models.test/v1",
+      }}
+    />,
+  );
+  const input = screen.getByLabelText("fields.modelId");
+  await userEvent.type(input, "private-model");
+  fireEvent.keyDown(input, { key: "ArrowDown" });
+  await userEvent.click(
+    await screen.findByRole("option", { name: "labelUseModelIdentifier" }),
+  );
+  expect((input as HTMLInputElement).value).toBe("private-model");
+  fireEvent.submit(input.closest("form")!);
+  await waitFor(() =>
+    expect(client.execute).toHaveBeenCalledWith(
+      expect.objectContaining({ modelId: "private-model" }),
+    ),
+  );
+});
+
+it.each(["resolve", "reject"])(
+  "ignores a stale discovery request that later %ss after editing the endpoint",
+  async (outcome) => {
+    vi.useFakeTimers();
+    const gate = Promise.withResolvers<any>();
+    vi.mocked(discoverModels)
+      .mockReturnValueOnce(gate.promise)
+      .mockResolvedValue({ data: { models: [] } });
+    render(<ExternalModelForm provider="openai-compatible" />);
+    fireEvent.change(screen.getByLabelText("fields.baseUrl"), {
+      target: { value: "https://models.test/v1" },
+    });
+    await act(() => vi.advanceTimersByTimeAsync(700));
+    expect(screen.getByText("labelLoadingModels")).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("fields.baseUrl"), {
+      target: { value: "https://new.test/v1" },
+    });
+    await act(() => vi.advanceTimersByTimeAsync(700));
+    await act(async () => {
+      if (outcome === "resolve")
+        gate.resolve({ data: { models: [{ id: "stale", name: "Stale" }] } });
+      else gate.reject(new Error("stale failure"));
+    });
+    expect(screen.getByText("labelModelsFound")).toBeTruthy();
+    expect(screen.queryByText("errorDiscovery")).toBeNull();
+  },
+);
+
+it("disables repeated model saves while an action is pending", () => {
+  client.pending = true;
+  render(<ExternalModelForm provider="openai" />);
+  fireEvent.submit(screen.getByLabelText("fields.apiKey").closest("form")!);
+  expect(client.execute).not.toHaveBeenCalled();
 });
 
 it("shows the cloud promotion and links to provider selection", () => {

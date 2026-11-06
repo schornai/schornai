@@ -8,12 +8,14 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für Modellwechsel: ein bereitgestelltes Sprachmodell; für externe Dienste deren URL und Zugangsdaten."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/web/app/(main)/agent/_components/AgentEditor.tsx",
       "apps/web/app/(main)/agent/_components/AgentEditorDiscardAllChanges.tsx",
       "apps/web/app/(main)/agent/_actions/deleteAgent.ts",
+      "apps/web/app/(main)/agent/_actions/createAgent.ts",
+      "apps/web/app/(main)/agent/_actions/updateAgent.ts",
     ]
 ---
 
@@ -40,7 +42,7 @@ Rücksetzsymbole an Feldern verwerfen die jeweilige Änderung. **Änderungen ver
 
 ## Als neuen Agenten speichern
 
-Im Agentenmenü kannst du **Als neuen Agenten speichern** verwenden. So entsteht eine eigenständige Kopie der Konfiguration. Vergib einen unterscheidbaren Namen und prüfe Arbeitsplatz, Rollen und Datenzugriffe. Verknüpfte Dokumentenablagen und Dienste werden dadurch nicht als eigene Ressourcen dupliziert; die Konfiguration kann weiterhin auf dieselben Quellen verweisen.
+Im Agentenmenü kannst du **Als neuen Agenten speichern** verwenden. So entsteht eine eigenständige Kopie der Konfiguration. Gespeicherte [MCP-Header](mcp.md) werden dabei übernommen, ohne ihre Werte anzuzeigen. Für das Kopieren oder Verschieben in einen anderen Arbeitsplatz benötigst du Administrationsrechte für Quell- und Ziel-Arbeitsplatz. Vergib einen unterscheidbaren Namen und prüfe Arbeitsplatz, Rollen und Datenzugriffe. Verknüpfte Dokumentenablagen und Dienste werden dadurch nicht als eigene Ressourcen dupliziert; die Konfiguration kann weiterhin auf dieselben Quellen verweisen.
 
 ## Löschen
 

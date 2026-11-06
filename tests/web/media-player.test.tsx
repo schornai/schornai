@@ -225,3 +225,85 @@ it("uses the measured recording duration when a recorded WebM has no finite meta
   fireEvent.durationChange(media.video);
   expect(media.value.duration).toBe(12.8);
 });
+
+it("ignores non-finite controls and clamps valid playback settings", () => {
+  const media = mount("audio.mp3", Infinity);
+  expect(media.value.duration).toBe(0);
+  act(() => {
+    media.value.playUntil(Infinity);
+    media.value.playUntil(0);
+    media.value.setCurrentTime(NaN);
+    media.value.setVolume(Infinity);
+    media.value.setRate(NaN);
+  });
+  expect(play).not.toHaveBeenCalled();
+  expect(media.value).toMatchObject({ currentTime: 0, volume: 1, rate: 1 });
+  act(() => {
+    media.value.setCurrentTime(-10);
+    media.value.setVolume(0);
+    media.value.setRate(-2);
+  });
+  fireEvent.volumeChange(media.video);
+  expect(media.video.muted).toBe(true);
+  expect(media.value).toMatchObject({ currentTime: 0, volume: 0, rate: 0.25 });
+  act(() => {
+    media.value.setVolume(5);
+    media.value.setRate(5);
+  });
+  expect(media.video.muted).toBe(false);
+  expect(media.value).toMatchObject({ volume: 1, rate: 2 });
+});
+
+it("ignores a stale playback failure after pause and browser aborts", async () => {
+  let reject!: (error: Error) => void;
+  play.mockImplementationOnce(
+    () =>
+      new Promise((_, fail) => {
+        reject = fail;
+      }),
+  );
+  const media = mount();
+  act(() => {
+    media.value.play();
+    media.value.pause();
+  });
+  await act(async () => reject(new Error("late failure")));
+  expect(media.value.error).toBe(false);
+  play.mockRejectedValueOnce(new DOMException("interrupted", "AbortError"));
+  await act(async () => media.value.play());
+  expect(media.value).toMatchObject({
+    error: false,
+    loading: null,
+    isPlaying: false,
+  });
+});
+
+it("distinguishes seeking from buffering and retains a real media error on metadata events", () => {
+  const media = mount("");
+  expect(media.value.loading).toBeNull();
+  fireEvent.loadStart(media.video);
+  expect(media.value.loading).toBe("loading");
+  fireEvent.stalled(media.video);
+  expect(media.value.loading).toBe("buffering");
+  Object.defineProperty(media.video, "seeking", {
+    value: true,
+    configurable: true,
+  });
+  fireEvent.waiting(media.video);
+  expect(media.value.loading).toBe("seeking");
+  fireEvent.stalled(media.video);
+  fireEvent.pause(media.video);
+  expect(media.value.loading).toBe("seeking");
+  Object.defineProperties(media.video, {
+    seeking: { value: false, configurable: true },
+    readyState: { value: 2, configurable: true },
+    error: { value: { code: 4 }, configurable: true },
+    currentTime: { value: NaN, configurable: true },
+  });
+  fireEvent.pause(media.video);
+  expect(media.value.loading).toBeNull();
+  fireEvent.error(media.video);
+  fireEvent.loadedMetadata(media.video);
+  fireEvent.timeUpdate(media.video);
+  expect(media.value).toMatchObject({ error: true, currentTime: 0 });
+});

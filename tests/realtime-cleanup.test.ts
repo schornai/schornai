@@ -25,6 +25,40 @@ const config = {
   serverToken: "Worker tests",
   websocketProvider: { websocketProvider: {} },
 } as any;
+it("releases a provider immediately after failed initial authentication", async () => {
+  const provider = new ServerRealtimeProvider({
+    ...config,
+    documentName: "taskQueue",
+  });
+  const destroy = vi.spyOn(provider.document, "destroy");
+  const waiting = provider.waitForSynced();
+  state.providers[0].emit("authenticationFailed");
+  await expect(waiting).rejects.toThrow("authentication failed");
+  await provider[Symbol.asyncDispose]();
+  expect(state.providers[0].destroy).toHaveBeenCalledOnce();
+  expect(destroy).toHaveBeenCalledOnce();
+  expect(state.providers[0].eventNames()).toEqual([]);
+});
+it("flushes pending writes after recovering from a failed initial handshake", async () => {
+  const provider = new ServerRealtimeProvider({
+    ...config,
+    documentName: "taskQueue",
+  });
+  const sdk = state.providers[0];
+  const failed = provider.waitForSynced();
+  sdk.emit("close");
+  await expect(failed).rejects.toThrow("connection closed");
+  sdk.isSynced = true;
+  sdk.hasUnsyncedChanges = false;
+  await provider.waitForSynced();
+  sdk.hasUnsyncedChanges = true;
+  const disposing = provider[Symbol.asyncDispose]();
+  expect(sdk.destroy).not.toHaveBeenCalled();
+  sdk.hasUnsyncedChanges = false;
+  sdk.emit("unsyncedChanges");
+  await disposing;
+  expect(sdk.destroy).toHaveBeenCalledOnce();
+});
 it.each([false, true])(
   "disposes an unsynchronized provider after its deadline (initially synced: %s)",
   async (synced) => {

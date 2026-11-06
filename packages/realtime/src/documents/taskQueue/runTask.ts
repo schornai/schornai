@@ -36,8 +36,11 @@ export async function runTask<TTaskType extends Task["type"]>(
   abortSignal.throwIfAborted();
 
   const { tasks } = getTaskQueue(taskQueue.document);
+  let observedTask = false;
   const handler = () => {
     const task = tasks.toArray().find((task) => task.id === taskId);
+    if (task) observedTask = true;
+    else if (observedTask) taskPromise.reject(new Error("TASK_RESULT_EXPIRED"));
 
     switch (task?.state) {
       case "aborted":

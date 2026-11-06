@@ -101,6 +101,16 @@ export function mapAgent(dbChatbot: ChatbotDatabaseRow): Agent {
 
   return {
     ...config,
+    // Defense in depth for legacy rows: callers never receive header values.
+    roles: config.roles.map((role) => ({
+      ...role,
+      mcps: role.mcps?.map((mcp) => ({
+        ...mcp,
+        headers: Object.fromEntries(
+          Object.keys(mcp.headers).map((key) => [key, null]),
+        ),
+      })),
+    })),
     description: dbChatbot.description,
     id: dbChatbot.id,
     name: dbChatbot.name,

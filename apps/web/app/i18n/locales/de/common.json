@@ -246,6 +246,7 @@
       "labelDelete": "Ordner löschen"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Speichern wurde unterbrochen. Der bisherige Stand bleibt verfügbar. Dein Entwurf bleibt hier erhalten; versuche das Speichern erneut, um die Wiederherstellung abzuschließen.",
       "labelContent": "Inhalt",
       "labelSave": "Speichern",
       "labelCancel": "Abbrechen",

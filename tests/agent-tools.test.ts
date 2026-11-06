@@ -1,3 +1,7 @@
+vi.mock(
+  "@schornio/aibox-realtime/documents/storage/writeStorageFileText",
+  () => ({ writeStorageFileText: state.write }),
+);
 vi.mock("@schornio/aibox-package-database/mcp/getMCPOAuthClient", () => ({
   getMCPOAuthClient: vi.fn(async () => null),
 }));
@@ -19,9 +23,11 @@ const state = vi.hoisted(() => ({
   content: vi.fn(),
   create: vi.fn(),
   save: vi.fn(),
+  write: vi.fn(),
   search: vi.fn(),
   repos: vi.fn(),
   mcp: vi.fn(),
+  mcpHeaders: vi.fn(async () => ({ Authorization: "private-test" })),
   disposed: vi.fn(),
   embedding: vi.fn(),
 }));
@@ -48,6 +54,9 @@ vi.mock(
   "@schornio/aibox-package-database/documentRepositories/getDocumentRepositorityByIdentifiers",
   () => ({ getDocumentRepositorityByIdentifiers: state.repos }),
 );
+vi.mock("@schornio/aibox-database/agent/getAgentMCPHeaders", () => ({
+  getAgentMCPHeaders: state.mcpHeaders,
+}));
 vi.mock("@ai-sdk/mcp", () => ({ createMCPClient: state.mcp }));
 vi.mock(
   "@schornio/aibox-realtime/documents/storage/StorageRealtimeSession",
@@ -107,7 +116,8 @@ beforeEach(() => {
     versions: [],
   });
   state.create.mockResolvedValue(file);
-  state.save.mockResolvedValue(undefined);
+  state.save.mockResolvedValue(true);
+  state.write.mockResolvedValue({ status: "saved", file, indexQueued: true });
   state.repos.mockResolvedValue([repo]);
   state.disposed.mockResolvedValue(undefined);
   state.search.mockResolvedValue({
@@ -198,7 +208,37 @@ describe("agent filesystem tools", () => {
       ok: false,
     });
   });
-  it("writes existing files in repository paths and disposes realtime sessions", async () => {
+  it("uses the shared authorized write flow for mounted files", async () => {
+    const authenticatedUser = {
+      userId: "worker-user",
+      userClaims: "admin" as const,
+    };
+    const tool = storageWriteFileTool("activity", "agent", [mount], [repo], {
+      ...context,
+      authenticatedUser,
+    });
+    expect(
+      await execute(tool, { path: "/docs/file.txt", content: "changed" }),
+    ).toMatchObject({ ok: true, storagePath: "base/file.txt" });
+    expect(state.write).toHaveBeenCalledWith(
+      {
+        storage: {
+          type: "documentRepository",
+          documentRepositoryId: "repo-id",
+          workspaceId: "workspace",
+        },
+        path: "base/file.txt",
+        text: "changed",
+        createIfMissing: true,
+      },
+      expect.objectContaining({
+        authenticatedUser,
+        abortSignal: options.abortSignal,
+      }),
+    );
+  });
+  it("reports a failed write without exposing storage errors", async () => {
+    state.write.mockRejectedValue(new Error("private storage details"));
     const tool = storageWriteFileTool(
       "activity",
       "agent",
@@ -208,20 +248,28 @@ describe("agent filesystem tools", () => {
     );
     expect(
       await execute(tool, { path: "/docs/file.txt", content: "changed" }),
-    ).toMatchObject({ ok: true, storagePath: "base/file.txt" });
-    expect(state.inspect).toHaveBeenCalledWith(
-      "base/file.txt",
-      expect.anything(),
-    );
-    expect(state.create).not.toHaveBeenCalled();
-    expect(state.save).toHaveBeenCalledWith(
-      file,
-      { current: "changed", type: "mdc", versions: [] },
-      expect.anything(),
-    );
-    expect(state.disposed).toHaveBeenCalledOnce();
+    ).toEqual({ ok: false, error: "The file content could not be saved." });
   });
-  it("creates missing files, rejects folders and unauthorized mounts, and disposes on failure", async () => {
+  it.each([
+    [{ status: "saved", file, indexQueued: false }, "file was saved"],
+    [{ status: "recoveryRequired" }, "retry writing the same content"],
+  ])(
+    "reports partial outcomes without claiming full success",
+    async (result, message) => {
+      state.write.mockResolvedValue(result);
+      const tool = storageWriteFileTool(
+        "activity",
+        "agent",
+        [mount],
+        [repo],
+        context,
+      );
+      expect(
+        await execute(tool, { path: "/docs/file.txt", content: "changed" }),
+      ).toEqual({ ok: false, error: expect.stringContaining(message) });
+    },
+  );
+  it("rejects folders, unauthorized mounts and traversal before normalization", async () => {
     const tool = storageWriteFileTool(
       "activity",
       "agent",
@@ -229,27 +277,30 @@ describe("agent filesystem tools", () => {
       [repo],
       context,
     );
-    state.inspect.mockRejectedValue(new Error("missing"));
-    await execute(tool, { path: "/docs/file.txt", content: "created" });
-    expect(state.create).toHaveBeenCalledWith(
-      expect.any(Blob),
-      "base/file.txt",
-      expect.anything(),
-    );
-    state.inspect.mockResolvedValue({ folder: true });
-    expect(await execute(tool, { path: "/docs", content: "" })).toMatchObject({
-      ok: false,
-      error: expect.stringContaining("folder"),
-    });
+    state.write.mockRejectedValue(new Error("TARGET_IS_FOLDER"));
     expect(
-      await execute(tool, { path: "/docs-other", content: "" }),
-    ).toMatchObject({ ok: false });
-    state.inspect.mockResolvedValue(file);
-    state.save.mockRejectedValue(new Error("write failed"));
-    await expect(
-      execute(tool, { path: "/docs/file.txt", content: "bad" }),
-    ).rejects.toThrow("write failed");
-    expect(state.disposed).toHaveBeenCalledTimes(3);
+      await execute(tool, { path: "/docs/folder", content: "" }),
+    ).toMatchObject({ ok: false, error: expect.stringContaining("folder") });
+    state.write.mockClear();
+    for (const path of [
+      "/docs-other",
+      "/docs/../this_conversation/file.txt",
+      "/docs/a.txt.__xrag_text_write.json",
+    ]) {
+      expect(await execute(tool, { path, content: "" })).toMatchObject({
+        ok: false,
+      });
+    }
+    expect(state.write).not.toHaveBeenCalled();
+    const approval = storageWriteFileToolApproval(
+      "activity",
+      "agent",
+      [mount],
+      [repo],
+    );
+    expect(
+      approval({ path: "/docs/../this_conversation/file.txt", content: "" }),
+    ).toBe("denied");
   });
   it("rejects a read-only mount at execution even when invoked directly", async () => {
     const tool = storageWriteFileTool(
@@ -262,8 +313,7 @@ describe("agent filesystem tools", () => {
     expect(
       await execute(tool, { path: "/docs/file.txt", content: "forged" }),
     ).toMatchObject({ ok: false });
-    expect(state.save).not.toHaveBeenCalled();
-    expect(state.create).not.toHaveBeenCalled();
+    expect(state.write).not.toHaveBeenCalled();
   });
   it.each([
     ["confirm-write", "user-approval"],
@@ -371,7 +421,7 @@ describe("agent tool sessions", () => {
             id: "mcp",
             type: "http",
             url: "https://mcp.test",
-            headers: { Authorization: "test" },
+            headers: { Authorization: null },
           },
         ],
       } as any,
@@ -379,6 +429,7 @@ describe("agent tool sessions", () => {
     );
     await session.tools();
     expect(state.mcp).not.toHaveBeenCalled();
+    expect(state.mcpHeaders).not.toHaveBeenCalled();
     const approvals: any = await session.toolApproval();
     expect(
       await approvals.mcp({ serverId: "mcp" }, { toolCallId: "list" }),
@@ -388,7 +439,7 @@ describe("agent tool sessions", () => {
       transport: {
         type: "http",
         url: "https://mcp.test",
-        headers: { Authorization: "test" },
+        headers: { Authorization: "private-test" },
         authProvider: expect.anything(),
         fetch: expect.any(Function),
       },

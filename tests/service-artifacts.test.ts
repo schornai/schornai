@@ -6,6 +6,7 @@ import {
   rm,
   symlink,
   readlink,
+  stat,
 } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -427,3 +428,189 @@ it("does not fall back to an older setup when the latest has been deleted", asyn
   expect(fetcher).toHaveBeenCalledTimes(1);
   expect(hooks.beforeInstall).not.toHaveBeenCalled();
 });
+
+async function syncFixture() {
+  const root = await mkdtemp(join(tmpdir(), "service-artifact-failure-"));
+  directories.push(root);
+  const context = {
+    root,
+    configPath: join(root, "config.json"),
+    environment: { SERVICE_API_TOKEN: "x".repeat(64) },
+    config: configSchema.parse({
+      version: 1,
+      id: "00000000-0000-4000-8000-000000000001",
+      services: ["core", "ollama", "transcriber-mlx"],
+      sharing: { url: "https://sharing.test" },
+    }),
+  };
+  const hooks = { beforeInstall: vi.fn(), afterInstall: vi.fn() },
+    log = vi.fn();
+  const sync = (signal = new AbortController().signal) =>
+    syncArtifacts(context, log, signal, hooks);
+  return { context, hooks, log, sync };
+}
+
+it("does not fetch without sharing and rejects missing tokens or corrupt installation state", async () => {
+  const { context, sync } = await syncFixture();
+  context.config.sharing = undefined;
+  await expect(sync()).resolves.toBeUndefined();
+  expect(fetch).not.toHaveBeenCalled();
+  context.config.sharing = {
+    url: "https://sharing.test",
+    tokenEnv: "SERVICE_API_TOKEN",
+  };
+  context.environment.SERVICE_API_TOKEN = "short";
+  await expect(sync()).rejects.toThrow("at least 32 characters");
+  context.environment.SERVICE_API_TOKEN = "x".repeat(64);
+  await writeFile(join(context.root, "service-artifacts.json"), "broken JSON");
+  await expect(sync()).rejects.toThrow();
+  expect(fetch).not.toHaveBeenCalled();
+});
+
+it.each(["http", "pagination"])(
+  "fails safely on catalog %s errors",
+  async (failure) => {
+    const { sync, hooks } = await syncFixture();
+    vi.mocked(fetch).mockResolvedValue(
+      failure === "http"
+        ? new Response(null, { status: 503 })
+        : Response.json({ artifacts: [], nextOffset: 0 }),
+    );
+    await expect(sync()).rejects.toThrow(
+      failure === "http" ? "Catalog unavailable" : "Invalid catalog pagination",
+    );
+    expect(hooks.beforeInstall).not.toHaveBeenCalled();
+  },
+);
+
+it.each(["http", "body", "metadata", "identifier"])(
+  "keeps failed downloads retryable (%s)",
+  async (failure) => {
+    const { context, hooks, sync, log } = await syncFixture();
+    const source = join(context.root, "source");
+    await mkdir(source);
+    const xrag = {
+      xrag_version: 1,
+      xrag_type: "mlxWhisperModel",
+      meta: { name: "Whisper", identifier: "whisper" },
+    };
+    await writeFile(join(source, "xrag.json"), JSON.stringify(xrag));
+    await writeFile(join(source, "weights.npz"), "weights");
+    await writeFile(join(source, "config.json"), "{}");
+    const file = join(context.root, "archive.tar");
+    await c({ cwd: source, file }, ["."]);
+    const bytes = await readFile(file),
+      id = createHash("sha256").update(bytes).digest("hex");
+    const artifact = {
+      id,
+      name: "model.tar",
+      size: bytes.length,
+      createdAt: "2026-10-24T10:00:00Z",
+      xrag:
+        failure === "metadata"
+          ? { ...xrag, meta: { ...xrag.meta, name: "Mismatch" } }
+          : xrag,
+    };
+    vi.mocked(fetch).mockImplementation(async (url) =>
+      String(url).endsWith(id)
+        ? failure === "http"
+          ? new Response(null, { status: 503 })
+          : failure === "body"
+            ? new Response(null)
+            : new Response(bytes)
+        : Response.json({ artifacts: [artifact], nextOffset: null }),
+    );
+    await expect(sync()).resolves.toEqual({ failed: 1 });
+    expect(log).toHaveBeenCalledWith(
+      "xrag",
+      expect.stringContaining("Installation failed"),
+      "stderr",
+    );
+    await expect(
+      readFile(join(context.root, "service-artifacts.json")),
+    ).rejects.toMatchObject({ code: "ENOENT" });
+    expect(hooks.beforeInstall).toHaveBeenCalledTimes(
+      failure === "identifier" ? 1 : 0,
+    );
+    expect(hooks.afterInstall).toHaveBeenCalledTimes(
+      failure === "identifier" ? 1 : 0,
+    );
+  },
+);
+
+it.each(["certificate", "ollamaModel"])(
+  "installs %s payloads at their consumer paths",
+  async (type) => {
+    const { context, sync, hooks } = await syncFixture();
+    const source = join(context.root, "source");
+    await mkdir(source);
+    const xrag =
+      type === "certificate"
+        ? { xrag_version: 1, xrag_type: type }
+        : {
+            xrag_version: 1,
+            xrag_type: type,
+            modelName: "test-model",
+            modelTag: "latest",
+            meta: {
+              type: "ollama_llm_v1",
+              name: "Test",
+              identifier: "test",
+              contextSize: 4096,
+              featureThinking: false,
+              featureVision: false,
+              featureTools: false,
+            },
+          };
+    await writeFile(join(source, "xrag.json"), JSON.stringify(xrag));
+    if (type === "certificate") {
+      await writeFile(join(source, "privkey.pem"), "private fixture");
+      await writeFile(join(source, "fullkey.pem"), "public fixture");
+    } else {
+      await mkdir(join(source, "blobs"));
+      await writeFile(join(source, "blobs/model"), "model weights");
+      await writeFile(join(source, "manifest.json"), "{}");
+    }
+    const file = join(context.root, "archive.tar");
+    await c({ cwd: source, file }, ["."]);
+    const bytes = await readFile(file),
+      id = createHash("sha256").update(bytes).digest("hex");
+    vi.mocked(fetch).mockImplementation(async (url) =>
+      String(url).endsWith(id)
+        ? new Response(bytes)
+        : Response.json({
+            artifacts: [
+              {
+                id,
+                name: "artifact.tar",
+                size: bytes.length,
+                createdAt: "2026-10-24T10:00:00Z",
+                xrag,
+              },
+            ],
+            nextOffset: null,
+          }),
+    );
+    await expect(sync()).resolves.toEqual({ failed: 0 });
+    if (type === "certificate") {
+      const path = join(context.root, "docker/volumes/api/cert/privkey.pem");
+      expect(await readFile(path, "utf8")).toBe("private fixture");
+      expect((await stat(path)).mode & 0o777).toBe(0o600);
+      expect(hooks.afterInstall).toHaveBeenCalledWith(false);
+    } else {
+      expect(
+        await readFile(
+          join(
+            context.root,
+            "ollama/models/manifests/local_registry.schorn.ai/library/test-model/latest",
+          ),
+          "utf8",
+        ),
+      ).toBe("{}");
+      expect(
+        await readFile(join(context.root, "ollama/models/blobs/model"), "utf8"),
+      ).toBe("model weights");
+      expect(hooks.beforeInstall).not.toHaveBeenCalled();
+    }
+  },
+);

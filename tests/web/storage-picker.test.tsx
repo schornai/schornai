@@ -14,6 +14,7 @@ vi.mock("../../apps/web/app/_actions/storageBrowse", () => ({
   storageBrowse: browse,
 }));
 import { StoragePickerDialog } from "../../apps/web/app/_components/StoragePickerDialog";
+import userEvent from "@testing-library/user-event";
 const storage = {
   type: "documentRepository",
   workspaceId: "workspace",
@@ -154,4 +155,201 @@ it("disables repeat submissions and closing while a transfer is pending", async 
   expect(select).toHaveBeenCalledOnce();
   await act(async () => finish());
   expect(close).toHaveBeenCalledWith(false);
+});
+
+it.each([
+  [new Error("FILE_NOT_PROCESSED"), "errorNotProcessed"],
+  [new Error("SOURCE_EQUALS_TARGET"), "errorSameTarget"],
+  [new Error("SOURCE_CHANGED_DURING_COPY"), "errorSourceChanged"],
+  [new Error("FILE_PROCESSING_IN_PROGRESS"), "errorBusy"],
+  [new Error("STORAGE_NOT_AUTHORIZED"), "errorPermission"],
+  [new Error("COPIED_SOURCE_DELETE_FAILED"), "errorSourceDelete"],
+  [new Error("COPY_FAILED_TARGET_CLEANUP_REQUIRED"), "errorCleanup"],
+  [new Error("TARGET_FOLDER_NOT_FOUND"), "errorLoad"],
+  [new Error("private backend detail"), "errorAction"],
+  [null, "errorAction"],
+])(
+  "presents a safe transfer error and keeps the dialog open (%s)",
+  async (failure, message) => {
+    const close = vi.fn();
+    render(
+      <StoragePickerDialog
+        open
+        currentStorage={storage}
+        mode="folder"
+        onOpenChange={close}
+        onSelect={vi.fn().mockRejectedValue(failure)}
+      />,
+    );
+    await screen.findByRole("button", { name: "folder" });
+    fireEvent.click(screen.getByRole("button", { name: "labelUseFolder" }));
+    expect((await screen.findByRole("alert")).textContent).toBe(message);
+    expect(close).not.toHaveBeenCalled();
+  },
+);
+
+it("shows an empty repository list and allows cancellation without submitting", async () => {
+  const close = vi.fn(),
+    select = vi.fn();
+  render(
+    <StoragePickerDialog
+      open
+      mode="file"
+      title="Choose a source"
+      description="Available documents"
+      onOpenChange={close}
+      onSelect={select}
+    />,
+  );
+  await screen.findByText("descriptionNoStorages");
+  expect(screen.getByRole("heading").textContent).toBe("Choose a source");
+  expect(
+    (screen.getByRole("button", { name: "labelUseFile" }) as HTMLButtonElement)
+      .disabled,
+  ).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "labelCancel" }));
+  expect(close).toHaveBeenCalledWith(false);
+  expect(select).not.toHaveBeenCalled();
+});
+
+it("switches from activity storage to a named repository and navigates back to its root", async () => {
+  browse.mockImplementation(async (input) => ({
+    data: {
+      repositories: [
+        {
+          id: "repo",
+          workspaceId: "workspace",
+          workspaceName: "Team",
+          name: "Documents",
+        },
+        { id: "other", workspaceId: "workspace", name: "Other" },
+      ],
+      files: input.storage ? (input.path ? [] : [folder]) : [],
+    },
+  }));
+  const activity = {
+    type: "activity",
+    activityId: "chat",
+    agentId: "agent",
+  } as const;
+  render(
+    <StoragePickerDialog
+      open
+      currentStorage={activity}
+      mode="folder"
+      onOpenChange={vi.fn()}
+      onSelect={vi.fn()}
+    />,
+  );
+  await screen.findByRole("button", { name: "folder" });
+  await userEvent.click(screen.getByRole("combobox"));
+  await userEvent.click(
+    await screen.findByRole("option", { name: "Documents · Team" }),
+  );
+  await waitFor(() =>
+    expect(browse).toHaveBeenLastCalledWith({
+      storage,
+      path: "",
+      mode: "write",
+    }),
+  );
+  fireEvent.click(await screen.findByRole("button", { name: "folder" }));
+  await screen.findByText("descriptionEmpty");
+  fireEvent.click(screen.getByRole("button", { name: "labelUp" }));
+  await screen.findByRole("button", { name: "folder" });
+  expect(browse).toHaveBeenLastCalledWith({ storage, path: "", mode: "write" });
+});
+
+it("does not display a late browse response after the dialog closes and reopens", async () => {
+  let finish!: (result: unknown) => void;
+  browse.mockImplementationOnce(
+    () =>
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+  );
+  const props = {
+    onOpenChange: vi.fn(),
+    onSelect: vi.fn(),
+    mode: "folder" as const,
+  };
+  const view = render(<StoragePickerDialog {...props} open />);
+  view.rerender(<StoragePickerDialog {...props} open={false} />);
+  view.rerender(<StoragePickerDialog {...props} open />);
+  await screen.findByText("descriptionNoStorages");
+  await act(async () =>
+    finish({
+      data: {
+        repositories: [
+          { id: "stale", name: "Stale", workspaceId: "workspace" },
+        ],
+        files: [],
+      },
+    }),
+  );
+  expect(screen.queryByText("Stale")).toBeNull();
+  expect(browse).toHaveBeenCalledTimes(2);
+});
+
+it.each([false, true])(
+  "ignores a stale folder request after reopening (reject=%s)",
+  async (reject) => {
+    const pending = Promise.withResolvers<any>();
+    browse.mockImplementation(async (input) =>
+      input.path
+        ? pending.promise
+        : { data: { repositories: [], files: input.storage ? [folder] : [] } },
+    );
+    const props = {
+      currentStorage: storage,
+      mode: "folder" as const,
+      onOpenChange: vi.fn(),
+      onSelect: vi.fn(),
+    };
+    const view = render(<StoragePickerDialog {...props} open />);
+    fireEvent.click(await screen.findByRole("button", { name: "folder" }));
+    await screen.findByText("descriptionLoading");
+    view.rerender(<StoragePickerDialog {...props} open={false} />);
+    view.rerender(<StoragePickerDialog {...props} open />);
+    await screen.findByRole("button", { name: "folder" });
+    await act(async () => {
+      if (reject) pending.reject(new Error("late error"));
+      else
+        pending.resolve({
+          data: {
+            repositories: [],
+            files: [{ folder: true, path: "stale", name: "Stale" }],
+          },
+        });
+    });
+    expect(screen.queryByText("Stale")).toBeNull();
+    expect(screen.queryByRole("alert")).toBeNull();
+  },
+);
+
+it("retries a failed folder load without accepting an inaccessible destination", async () => {
+  browse
+    .mockResolvedValueOnce({ data: { repositories: [], files: [] } })
+    .mockResolvedValueOnce(undefined);
+  render(
+    <StoragePickerDialog
+      open
+      currentStorage={storage}
+      mode="folder"
+      onOpenChange={vi.fn()}
+      onSelect={vi.fn()}
+    />,
+  );
+  await screen.findByRole("alert");
+  expect(
+    (
+      screen.getByRole("button", {
+        name: "labelUseFolder",
+      }) as HTMLButtonElement
+    ).disabled,
+  ).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "labelRetry" }));
+  await screen.findByRole("button", { name: "folder" });
+  expect(screen.queryByRole("alert")).toBeNull();
+  expect(browse).toHaveBeenLastCalledWith({ storage, path: "", mode: "write" });
 });

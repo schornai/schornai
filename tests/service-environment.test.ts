@@ -1,4 +1,7 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
+import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { configSchema, type Context } from "../packages/service/src/config.ts";
 import {
   connectionEnvironment,
@@ -149,3 +152,81 @@ it("uses the single Core sharing URL for a remote worker and loopback for coloca
     "https://explicit.example/v2/realtime",
   );
 });
+
+it.each(["linux", "darwin"])(
+  "refuses unsupported transcriber hosts (%s/x64)",
+  (platform) => {
+    vi.spyOn(process, "platform", "get").mockReturnValue(
+      platform as NodeJS.Platform,
+    );
+    vi.spyOn(process, "arch", "get").mockReturnValue("x64");
+    expect(() => serviceCommands(context(["transcriber-mlx"]))).toThrow(
+      "macOS on Apple Silicon",
+    );
+  },
+);
+
+it.each(["configured", "environment", "local", "none"])(
+  "chooses the transcriber certificate source (%s)",
+  async (source) => {
+    vi.spyOn(process, "platform", "get").mockReturnValue("darwin");
+    vi.spyOn(process, "arch", "get").mockReturnValue("arm64");
+    const root = await mkdtemp(join(tmpdir(), "service-command-cert-"));
+    try {
+      const current = context(["core", "transcriber-mlx"]);
+      current.root = root;
+      current.configPath = join(root, "config.json");
+      current.environment.REALTIME_SERVER_SECRET =
+        "test-worker-secret-at-least-32-characters";
+      current.environment.SUPABASE_URL = "https://database.test";
+      current.environment.SUPABASE_JWT_SECRET = "test-jwt-signing-secret";
+      const local = join(root, "docker/volumes/api/cert/fullkey.pem");
+      await mkdir(join(root, "docker/volumes/api/cert"), { recursive: true });
+      if (source !== "none") await writeFile(local, "fixture certificate");
+      if (source === "configured") current.config.caFile = "certs/custom.pem";
+      if (source === "environment")
+        current.environment.NODE_EXTRA_CA_CERTS = "/explicit/cert.pem";
+      const worker = serviceCommands(current).native.find(
+        (item) => item.name === "transcriber-mlx",
+      )!;
+      expect(worker.env.NODE_EXTRA_CA_CERTS).toBe(
+        source === "configured"
+          ? join(root, "certs/custom.pem")
+          : source === "environment"
+            ? "/explicit/cert.pem"
+            : source === "local"
+              ? local
+              : undefined,
+      );
+      expect(worker.args).toEqual(["appTranscriberMac.js"]);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  },
+);
+
+it.each(["explicit", "remote", "local"])(
+  "resolves the development proxy database address (%s)",
+  (source) => {
+    const current = context(["core"], {
+      supabase:
+        source === "remote"
+          ? "https://db.example/path"
+          : "http://127.0.0.1:54321",
+    });
+    current.config.development = { workspace: "/tmp/checkout" };
+    current.environment.PATH = "/custom/bin";
+    current.environment.AIBOX_DOCKER_HOST = "docker.test";
+    if (source === "explicit")
+      current.environment.AIBOX_SUPABASE_PROXY_URL = "http://manual:8000";
+    const plan = serviceCommands(current);
+    expect(plan.compose[0]!.spec.env.AIBOX_SUPABASE_PROXY_URL).toBe(
+      source === "explicit"
+        ? "http://manual:8000"
+        : source === "remote"
+          ? "https://db.example"
+          : "http://docker.test:54321",
+    );
+    expect(plan.native[0]!.env.PATH).toMatch(/:\/custom\/bin$/);
+  },
+);

@@ -19,6 +19,9 @@ const mocks = vi.hoisted(() => ({
   approval: vi.fn(),
   convert: vi.fn(),
   sync: vi.fn(),
+  repositories: vi.fn(),
+  storageAccess: vi.fn(),
+  roles: [] as any[],
 }));
 vi.mock("@schornio/aibox-realtime/documents/taskQueue/TaskQueue", () => ({
   TaskQueue: class {
@@ -66,17 +69,17 @@ vi.mock(
 vi.mock("@schornio/aibox-database/agent/getAgentById", () => ({
   getAgentById: async () => ({
     id: "agent",
-    roles: [
-      {
-        id: "role",
-        name: "Writer",
-        prompt: "Write",
-        modelIdentifierOverride: "override",
-      },
-    ],
+    roles: mocks.roles,
     modelIdentifier: "default",
     modelThinking: "optional-on",
   }),
+}));
+vi.mock(
+  "@schornio/aibox-database/documentRepositories/getDocumentRepositories",
+  () => ({ getDocumentRepositories: mocks.repositories }),
+);
+vi.mock("@schornio/aibox-database/storage/requireStorageAccess", () => ({
+  requireStorageAccess: mocks.storageAccess,
 }));
 vi.mock("@schornio/aibox-database/chat/loadMessageFiles", () => ({
   loadMessageFiles: mocks.load,
@@ -154,6 +157,17 @@ beforeEach(() => {
   ];
   mocks.streamError = undefined;
   mocks.sync.mockResolvedValue(undefined);
+  mocks.roles = [
+    {
+      id: "role",
+      name: "Writer",
+      prompt: "Write",
+      modelIdentifierOverride: "override",
+      documentRepositoryMounts: [],
+    },
+  ];
+  mocks.repositories.mockResolvedValue([]);
+  mocks.storageAccess.mockResolvedValue(undefined);
   mocks.load.mockImplementation(async (messages) => messages);
   mocks.convert.mockImplementation(async (messages) => messages);
   mocks.select.mockResolvedValue({
@@ -315,6 +329,99 @@ describe("chat worker orchestration", () => {
   });
 });
 
+it.each(["allowed", "unmounted", "denied", "local"])(
+  "resolves attachment references only through current mounts and read access (%s)",
+  async (mode) => {
+    const storage = {
+      type: "documentRepository",
+      workspaceId: "workspace",
+      documentRepositoryId: "repo",
+    };
+    const attachment =
+      mode === "local" ? undefined : { storage, agentPath: "docs/file.txt" };
+    mocks.repositories.mockResolvedValue([
+      {
+        id: "repo",
+        workspaceId: "workspace",
+        identifier: "docs",
+        name: "Documents",
+      },
+    ]);
+    if (mode !== "unmounted")
+      mocks.roles[0].documentRepositoryMounts = [
+        {
+          mount: "docs",
+          pathRepository: "",
+          documentRepositoryIdentifier: "docs",
+          permission: "read",
+        },
+      ];
+    if (mode === "denied")
+      mocks.storageAccess.mockRejectedValue(new Error("access revoked"));
+    queue({
+      type: "text",
+      text: "Read file",
+      files: [
+        {
+          file: true,
+          path: "file.txt",
+          name: "file.txt",
+          type: "text/plain",
+          attachment,
+        },
+      ],
+    });
+    let reference: any;
+    mocks.load.mockImplementation(async (messages, _session, options) => {
+      reference = await options.resolveReference({
+        url: "file.txt",
+        name: "file.txt",
+        attachment,
+      });
+      return messages;
+    });
+    await run();
+    if (mode === "allowed") {
+      expect(reference.agentPath).toBe("docs/file.txt");
+      expect(reference.storageSession.storage).toEqual(storage);
+    } else expect(reference).toBeUndefined();
+    expect(mocks.storageAccess).toHaveBeenCalledTimes(
+      ["allowed", "denied"].includes(mode) ? 1 : 0,
+    );
+    if (mode === "allowed")
+      expect(mocks.storageAccess).toHaveBeenCalledWith(
+        storage,
+        "read",
+        expect.any(Object),
+      );
+    expect(mocks.repositories).toHaveBeenCalledTimes(mode === "local" ? 0 : 1);
+  },
+);
+
+it("rejects approval resumption when its original agent role has been removed", async () => {
+  getChat(chat).messages!.push([
+    {
+      id: "assistant",
+      role: "assistant",
+      metadata: { roleId: "removed-role" },
+      parts: [
+        {
+          type: "tool-first",
+          toolCallId: "call",
+          state: "approval-requested",
+          input: {},
+          approval: { id: "approval" },
+        },
+      ],
+    } as any,
+  ]);
+  queue({ type: "tool-approval", approvalId: "approval", approved: true });
+  await expect(run()).rejects.toThrow("Agent role no longer available");
+  expect(mocks.stream).not.toHaveBeenCalled();
+  expect(mocks.select).not.toHaveBeenCalled();
+  expect(activity()?.state).toBe("error");
+});
+
 // The retired draft worker was removed; exercise cancellation on the live worker.
 it("stops before claiming another queued draft and preserves the partial answer", async () => {
   queue({ type: "text", text: "First" });
@@ -435,3 +542,36 @@ describe("chat worker approval continuation", () => {
     expect(activity()?.state).toBe("success");
   });
 });
+
+it.each(["lease-lost", "new-generation"])(
+  "ignores a late model result after %s",
+  async (reason) => {
+    queue({ type: "text", text: "First" });
+    queue({ type: "text", text: "Waiting" });
+    const controller = new AbortController();
+    mocks.stream.mockImplementationOnce(async () => {
+      if (reason === "lease-lost")
+        controller.abort(new Error("TASK_LEASE_LOST"));
+      else {
+        chat.getMap("state").set("generationId", "new-generation");
+        chat.getMap("state").set("type", "queued");
+      }
+      return {
+        stream: {},
+        usage: Promise.resolve({ inputTokens: 1, outputTokens: 1 }),
+      };
+    });
+    await run(controller.signal);
+    expect(
+      getChat(chat)
+        .messages!.toArray()
+        .some((message) => message.id === "answer"),
+    ).toBe(false);
+    expect(getChatCurrentMessageBatch(current).length).toBe(1);
+    expect(getChat(chat).state!.get("type")).toBe(
+      reason === "new-generation" ? "queued" : "generating",
+    );
+    if (reason === "new-generation")
+      expect(getChat(chat).state!.get("generationId")).toBe("new-generation");
+  },
+);

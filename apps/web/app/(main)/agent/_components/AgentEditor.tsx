@@ -59,7 +59,7 @@ import type { Theme } from "../../../_models/systemConfigTheme";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import type { ValidationErrors } from "next-safe-action";
 import type { WorkspaceClaims } from "../../../_models/getWorkspaceClaims";
-import type { agentSchema } from "@schornio/aibox-package-database/agent/_schemas";
+import { agentSchema } from "@schornio/aibox-package-database/agent/_schemas";
 import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { composite } from "@schornio/aibox-package-utils/composite";
 import { createAgent } from "../_actions/createAgent";
@@ -150,7 +150,25 @@ export function AgentEditor({
     execute,
     isPending,
     result: { validationErrors: defaultValidationErrors },
-  } = useAction(mode === "create" ? createAgent : updateAgent, actionUtils);
+  } = useAction(mode === "create" ? createAgent : updateAgent, {
+    ...actionUtils,
+    onSuccess({ input }) {
+      actionUtils.onSuccess();
+      const saved = agentSchema.parse(input.agent);
+      setAgent({
+        ...saved,
+        roles: saved.roles.map((role) => ({
+          ...role,
+          mcps: role.mcps?.map((mcp) => ({
+            ...mcp,
+            headers: Object.fromEntries(
+              Object.keys(mcp.headers).map((key) => [key, null]),
+            ),
+          })),
+        })),
+      });
+    },
+  });
 
   const {
     actionUtils: createCloneActionUtils,
@@ -274,7 +292,10 @@ export function AgentEditor({
                       hasSucceeded={createCloneHasSucceeded}
                       isPending={createCloneIsPending}
                       onClick={() =>
-                        createCloneExecute({ agent: (agent ?? {}) as Agent })
+                        createCloneExecute({
+                          agent: (agent ?? {}) as Agent,
+                          copyFromAgentId: defaultAgent?.id,
+                        })
                       }
                     >
                       <CirclePlus /> {t("labelCloneAgent")}

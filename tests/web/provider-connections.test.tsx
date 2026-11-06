@@ -7,6 +7,8 @@ import {
   screen,
   fireEvent,
   waitFor,
+  within,
+  act,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SidebarProvider } from "@schornio/aibox-package-ui/components/sidebar";
@@ -151,6 +153,59 @@ it("requires OAuth credentials only on creation", () => {
   expect(
     (screen.getByLabelText("labelClientSecret") as HTMLInputElement).required,
   ).toBe(true);
+});
+
+it("groups connections by their first letter", () => {
+  client.params = new URLSearchParams("group=first-letter&sort=name:desc");
+  list();
+  expect(screen.getByText("A")).toBeTruthy();
+  expect(screen.getByText("Z")).toBeTruthy();
+});
+
+it("requires confirmation, preserves a failed deletion and closes only after successful retry", async () => {
+  request.mockResolvedValueOnce({ serverError: "denied" });
+  list();
+  fireEvent.click(screen.getAllByRole("button", { name: "labelDelete" })[0]!);
+  const dialog = await screen.findByRole("alertdialog");
+  expect(request).not.toHaveBeenCalled();
+  fireEvent.click(within(dialog).getByRole("button", { name: "labelDelete" }));
+  await screen.findByText("errorDelete");
+  expect(request).toHaveBeenLastCalledWith({ id: "two" });
+  fireEvent.click(within(dialog).getByRole("button", { name: "labelDelete" }));
+  await waitFor(() => expect(screen.queryByRole("alertdialog")).toBeNull());
+  expect(request).toHaveBeenCalledTimes(2);
+  // Revalidation supplies the new collection; the manager does not mutate props.
+  expect(screen.getByRole("link", { name: "Alpha" })).toBeTruthy();
+});
+
+it("cancels deletion and prevents duplicate requests while pending", async () => {
+  list();
+  fireEvent.click(screen.getAllByRole("button", { name: "labelDelete" })[0]!);
+  fireEvent.click(
+    within(await screen.findByRole("alertdialog")).getByRole("button", {
+      name: "labelCancel",
+    }),
+  );
+  await waitFor(() => expect(screen.queryByRole("alertdialog")).toBeNull());
+  expect(request).not.toHaveBeenCalled();
+  const pending = Promise.withResolvers<{ data: { id: string } }>();
+  request.mockReturnValueOnce(pending.promise);
+  fireEvent.click(screen.getAllByRole("button", { name: "labelDelete" })[0]!);
+  const dialog = await screen.findByRole("alertdialog");
+  fireEvent.click(within(dialog).getByRole("button", { name: "labelDelete" }));
+  await waitFor(() =>
+    expect(
+      (
+        within(dialog).getByRole("button", {
+          name: "labelCancel",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true),
+  );
+  fireEvent.click(within(dialog).getByRole("button", { name: "labelDelete" }));
+  expect(request).toHaveBeenCalledOnce();
+  await act(async () => pending.resolve({ data: { id: "two" } }));
+  await waitFor(() => expect(screen.queryByRole("alertdialog")).toBeNull());
 });
 it("omits immutable OAuth credentials when renaming", async () => {
   render(<ConnectionForm kind="oauth" connection={connections[1]} />);

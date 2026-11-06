@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Zugängliche Ablage; für Uploads und Änderungen Schreibrechte."
   status: "verfügbar"
-  last_verified: "2026-10-18"
+  last_verified: "2026-11-05"
   source_files:
     [
       "apps/realtime/src/processFile/readFileContent.ts",
@@ -28,9 +28,16 @@ meta:
       "apps/web/lib/authorizeStorageMutation.ts",
       "apps/web/app/_actions/storageQueueProcessFiles.ts",
       "apps/web/app/_actions/storageUpdateTranscriptionSegment.ts",
+      "apps/web/app/_actions/storageRemove.ts",
+      "apps/web/app/_actions/storageFileAction.ts",
+      "apps/web/lib/storageFileOperations.ts",
       "apps/web/app/_components/StoragePickerDialog.tsx",
       "packages/realtime/src/documents/storage/transferStorageFile.ts",
       "packages/database/src/storage/remove.ts",
+      "packages/database/src/storage/updateFileText.ts",
+      "packages/database/src/storage/recoverFileText.ts",
+      "packages/database/src/storage/getFileTextBackup.ts",
+      "packages/realtime/src/documents/storage/writeStorageFileText.ts",
     ]
 ---
 
@@ -89,6 +96,8 @@ In der Dateivorschau findest du **Optionen** rechts oben im Kopfbereich. **Optio
 
 Bei Text- und Codedateien wird auch die Originaldatei aktualisiert. Bei PDF-, Office- und Mediendateien bleibt das Original unverändert. Eine Bearbeitung des gesamten Transkripts wird als Textkorrektur gespeichert; die ursprünglichen Zeitmarken bleiben intern erhalten. Die Vorschau zeigt dann den korrigierten Gesamttext anstelle der Segmentbearbeitung und bietet keinen SRT-Export dieser Korrektur an.
 
+Schlägt das Speichern einer Text- oder Codedatei teilweise fehl, stellt die App den bisherigen Stand wieder her. Kann sie die Wiederherstellung nicht abschließen, bleibt dein Entwurf im Editor erhalten und du erhältst eine entsprechende Meldung. Vorschau und Downloads liefern währenddessen den gesicherten vorherigen Stand. Versuche das Speichern erneut; auch **Erneut verarbeiten** stellt den vorherigen Stand zuerst wieder her. Kopieren, Verschieben, Umbenennen und andere Überschreibungen bleiben bis dahin gesperrt. Löschen entfernt auch die Sicherung.
+
 Anlegen und Speichern starten keine Textextraktion oder Transkription. Nach dem Speichern wird der Suchindex einer gemeinsamen Ablage aus dem gespeicherten Text aktualisiert. Falls das Einreihen zur Indexierung scheitert, bleibt der Text gespeichert und eine Meldung fordert zum erneuten Speichern auf.
 
 ## Einzelne Dateien verwalten
@@ -115,5 +124,7 @@ Original und verarbeitete Inhalte werden zusammen übertragen. Manuelle Transkri
 ## Ordner löschen und aktuelle Grenzen
 
 Bei Schreibrechten besitzen löschbare Ordner ein eigenes **…**-Menü und ein Rechtsklick-Menü mit **Ordner löschen**. Ein normaler Klick öffnet den Ordner. Gelöscht wird der ausgewählte Ordner einschließlich seiner Unterordner und Dateien. Das Hauptverzeichnis, der aktuell geöffnete Ordner und dessen übergeordnete Ordner können dort nicht gelöscht werden. Die Optionen und das Kontextmenü auf freien Flächen bieten keine Löschaktion für den aktuellen Ordner. Prüfe den Ordnernamen im Bestätigungsdialog und lade benötigte Dateien vorher herunter; die Löschung lässt sich nicht rückgängig machen.
+
+Auch beim Löschen eines Ordners werden die Suchindexeinträge jeder enthaltenen Datei entfernt. Eine Datei mit wartender oder laufender Verarbeitung wird nicht gelöscht. Bei einem Fehler stoppt der Vorgang; bereits gelöschte Dateien bleiben gelöscht. Lade die Ansicht neu und wiederhole die Löschung für die verbliebenen Dateien, sobald die Verarbeitung abgeschlossen oder der Fehler behoben ist. Scheitert nur das Entfernen einer Datei nach der Indexbereinigung, bleibt sie bis zur erneuten Indexierung aus der Suche ausgeschlossen.
 
 Die hier beschriebenen Dateiaktionen beziehen sich jeweils auf eine einzelne Datei. Ganze Ordner oder mehrere Dateien gleichzeitig lassen sich nicht kopieren oder verschieben. Bei Copy-/Move-Aufrufen durch den Agenten werden fehlende Zielordner einschließlich verschachtelter Unterordner automatisch angelegt. Belegt eine Datei einen Teil des Ordnerpfads, wird der Transfer abgewiesen. Die Dateiansicht bietet weiterhin die Auswahl eines vorhandenen Zielordners.

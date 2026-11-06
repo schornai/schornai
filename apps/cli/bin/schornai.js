@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const args = process.argv.slice(2);
+import { realpathSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 const help = `schorn.ai CLI
 
 Usage: schornai
@@ -11,12 +12,16 @@ Without arguments, show the installed machine's status or ask to install schorn.
 
 News: https://schorn.ai/newsletter`;
 
-try {
+export async function runCLI(
+  args,
+  loadService = (file) =>
+    import(new URL(`../dist/service/${file}`, import.meta.url).href),
+) {
   if (!args.length) {
-    const { runDefaultCLI } = await import("../dist/service/bootstrap.mjs");
+    const { runDefaultCLI } = await loadService("bootstrap.mjs");
     await runDefaultCLI();
   } else if (args[0] === "service") {
-    const { runServiceCLI } = await import("../dist/service/commands.mjs");
+    const { runServiceCLI } = await loadService("commands.mjs");
     await runServiceCLI(args);
   } else if (args[0] === "--help" || args[0] === "-h") {
     console.log(help);
@@ -30,7 +35,16 @@ try {
   } else {
     throw new Error(`Unknown command: ${args[0]}\n${help}`);
   }
-} catch (error) {
-  console.error(error instanceof Error ? error.message : "Command failed");
-  process.exitCode = 1;
+}
+
+if (
+  process.argv[1] &&
+  realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
+  try {
+    await runCLI(process.argv.slice(2));
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "Command failed");
+    process.exitCode = 1;
+  }
 }

@@ -3,24 +3,74 @@ import { Doc } from "yjs";
 import { TaskQueue } from "../packages/realtime/src/documents/taskQueue/TaskQueue";
 import { addTask } from "../packages/realtime/src/documents/taskQueue/addTask";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
+import { taskClaimStore } from "./helpers/task-claims";
 import { registerAbortTask } from "../packages/realtime/src/documents/taskQueue/registerAbortTask";
 const state = vi.hoisted(() => ({
   doc: undefined as any,
+  store: undefined as any,
   token: vi.fn((token: string) => `Worker ${token}`),
 }));
-vi.mock("../packages/realtime/src/server/ServerRealtimeProvider", () => ({
-  ServerRealtimeProvider: class {
-    static getServerToken = state.token;
-    document = state.doc;
-    provider = { destroy: vi.fn() };
-  },
-}));
+vi.mock("../packages/realtime/src/server/ServerRealtimeProvider", async () => {
+  const { EventEmitter } = await import("node:events");
+  const { TaskCoordinator } =
+    await import("../packages/realtime/src/documents/taskQueue/TaskCoordinator");
+  const { encodeTaskValue, decodeTaskValue } =
+    await import("../packages/realtime/src/documents/taskQueue/_taskCodec");
+  return {
+    ServerRealtimeProvider: class {
+      static getServerToken = state.token;
+      document = state.doc;
+      coordinator = new TaskCoordinator(
+        state.doc,
+        state.store.options,
+        async () => {},
+      );
+      provider = Object.assign(new EventEmitter(), {
+        destroy: vi.fn(),
+        sendStateless: (payload: string) => {
+          const command = JSON.parse(payload);
+          void this.coordinator.run(async () => {
+            const response: any = {
+              protocol: command.protocol,
+              requestId: command.requestId,
+              ok: true,
+            };
+            if (command.action === "claim") {
+              const claimed = await this.coordinator.claim(
+                command.type,
+                command.capabilities,
+                command.worker,
+              );
+              if (claimed) response.task = encodeTaskValue(claimed);
+            } else if (command.action === "renew")
+              response.accepted = await this.coordinator.renew(
+                command.taskId,
+                command.token,
+              );
+            else
+              response.accepted = await this.coordinator.finish(
+                command.taskId,
+                command.token,
+                command.result ? decodeTaskValue(command.result) : undefined,
+                command.error,
+              );
+            this.provider.emit("stateless", {
+              payload: JSON.stringify(response),
+            });
+          });
+        },
+      });
+      waitForSynced = async () => {};
+    },
+  };
+});
 vi.mock(
   "../packages/realtime/src/server/ServerRealtimeWebsocketProvider",
   () => ({ ServerRealtimeWebsocketProvider: class {} }),
 );
 beforeEach(() => {
   state.doc = new Doc();
+  state.store = taskClaimStore();
 });
 const config = {
   capabilities: ["model"],
@@ -142,7 +192,7 @@ describe("task queue worker lifecycle", () => {
     );
     expect(getTaskQueue(state.doc).tasks.get(0)).toMatchObject({
       state: "error",
-      error: "Error: failed",
+      error: "TASK_WORKER_STOPPED",
     });
     state.doc.destroy();
   });

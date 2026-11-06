@@ -3,17 +3,14 @@
 import type { Agent } from "@schornio/aibox-database/agent/_types";
 import type { DocumentRepository } from "@schornio/aibox-database/documentRepositories/_types";
 import type { ServerRealtimeWebsocketProvider } from "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider";
-import { StorageRealtimeSession } from "@schornio/aibox-realtime/documents/storage/StorageRealtimeSession";
+import { writeStorageFileText } from "@schornio/aibox-realtime/documents/storage/writeStorageFileText";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
 import type { ToolApprovalStatus } from "ai";
 import type { ToolStorageWriteFile } from "@schornio/aibox-database/chat/_types";
 import { agentToStoragePath } from "@schornio/aibox-package-database/storage/_utils/agentToStoragePath";
-import { createFile } from "@schornio/aibox-database/storage/createFile";
-import { inspect } from "@schornio/aibox-database/storage/inspect";
+import { validateStoragePath } from "@schornio/aibox-database/storage/validatePath";
 import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
-import { saveDocumentContent } from "@schornio/aibox-package-database/storage/saveDocumentContent";
 import { tool } from "ai";
-import { tryAsync } from "@schornio/aibox-package-utils/tryAsync";
 import { z } from "zod/mini";
 
 export function storageWriteFileTool(
@@ -25,75 +22,97 @@ export function storageWriteFileTool(
     serverToken,
     supabase,
     websocketProvider,
+    authenticatedUser,
   }: {
     serverToken: `Worker ${string}`;
     supabase: SupabaseClient;
+    authenticatedUser?: Parameters<
+      typeof writeStorageFileText
+    >[1]["authenticatedUser"];
     websocketProvider: ServerRealtimeWebsocketProvider;
   },
 ) {
   return tool({
     description:
-      "Writes text content to a file at a specific path. " +
-      "If the file already exists, its content will be overwritten. " +
-      "If the file does not exist, it will be created automatically.",
+      "Writes UTF-8 text (up to 1 MiB) under the file lock. Existing text/code originals and their processed text are updated together; new text/code files are created automatically. For other existing formats, only previously extracted text or transcription is edited; the binary original is preserved. Repository indexing is queued from the saved text. If an error says the file was saved but indexing failed, retry the same content.",
     async execute(
       { content, path: pathInput }: ToolStorageWriteFile["input"],
       { abortSignal },
     ): Promise<ToolStorageWriteFile["output"]> {
-      const path = resolvePath(pathInput);
-
-      const storagePath = agentToStoragePath({
-        activityId,
-        agentId,
-        mountedDocumentRepositories,
-        mounts,
-        path,
-      });
-
-      if (storagePath && storagePath.permission !== "read-only") {
-        await using storageSession = new StorageRealtimeSession({
-          abortSignal,
-          serverToken,
-          storage: storagePath.storage,
-          supabaseStorage: supabase.storage,
-          websocketProvider,
+      try {
+        validateStoragePath(pathInput);
+        const storagePath = agentToStoragePath({
+          activityId,
+          agentId,
+          mountedDocumentRepositories,
+          mounts,
+          path: resolvePath(pathInput),
         });
-
-        const file =
-          (await tryAsync(() => inspect(storagePath.path, storageSession)))
-            .data ??
-          (await createFile(
-            new Blob([content]),
-            storagePath.path,
-            storageSession,
-          ));
-
-        if (file.folder) {
+        if (!storagePath || storagePath.permission === "read-only")
           return {
             ok: false,
-            error: "The specified path is a folder.",
+            error:
+              "The specified path is invalid or you do not have permission to write to this location.",
           };
-        }
-
-        await saveDocumentContent(
-          file,
-          { current: content, type: "mdc", versions: [] },
-          storageSession,
+        const result = await writeStorageFileText(
+          {
+            storage: storagePath.storage,
+            path: storagePath.path,
+            text: content,
+            createIfMissing: true,
+          },
+          {
+            supabase,
+            authenticatedUser,
+            serverToken,
+            websocketProvider,
+            abortSignal,
+          },
         );
-
+        if (result.status === "recoveryRequired")
+          return {
+            ok: false,
+            error:
+              "Saving was interrupted. The previous version remains available; retry writing the same content to recover.",
+          };
+        if (result.status !== "saved")
+          return {
+            ok: false,
+            error:
+              "The file changed before it could be saved. Read it again before retrying.",
+          };
+        if (!result.indexQueued)
+          return {
+            ok: false,
+            error:
+              "The file was saved, but its search index could not be queued. Retry writing the same content.",
+          };
         return {
           ok: true,
-          file,
+          file: result.file,
           storage: storagePath.storage,
           storagePath: storagePath.path,
         };
+      } catch (error) {
+        const messages: Record<string, string> = {
+          TARGET_IS_FOLDER: "The specified path is a folder.",
+          TARGET_FOLDER_IS_FILE:
+            "A file occupies part of the destination folder path.",
+          UNSUPPORTED_NEW_TEXT_FILE:
+            "New files must have a supported text or code extension, such as .txt, .md or .json.",
+          FILE_NOT_EDITABLE:
+            "This file has no editable extracted text. Process it before editing its text.",
+          TEXT_FILE_TOO_LARGE: "The text exceeds the 1 MiB UTF-8 limit.",
+          FILE_PROCESSING_IN_PROGRESS:
+            "The file is being processed or edited. Wait before retrying.",
+        };
+        return {
+          ok: false,
+          error:
+            messages[error instanceof Error ? error.message : ""] ??
+            "The file content could not be saved.",
+        };
       }
-
-      return {
-        ok: false,
-        error:
-          "The specified path is invalid or you do not have permission to write to this location. Please check the path and try again.",
-      };
     },
     inputSchema: z.object({
       content: z
@@ -119,6 +138,11 @@ export function storageWriteFileToolApproval(
   return ({
     path: pathInput,
   }: ToolStorageWriteFile["input"]): ToolApprovalStatus => {
+    try {
+      validateStoragePath(pathInput);
+    } catch {
+      return "denied";
+    }
     const path = resolvePath(pathInput);
 
     const storagePath = agentToStoragePath({

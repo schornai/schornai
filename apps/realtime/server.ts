@@ -2,6 +2,7 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { watchOllamaModels } from "./src/_utils/watchOllamaModels.ts";
 import { Server } from "@hocuspocus/server";
+import { createTaskCoordinatorExtension } from "@schornio/aibox-realtime/server/createTaskCoordinatorExtension";
 import { createServiceStatusExtension } from "@schornio/aibox-realtime/server/createServiceStatusExtension";
 import { chatWorker } from "./src/chat/worker.ts";
 import { createSupabaseClient } from "@schornio/aibox-database/_util/createSupabaseClient";
@@ -44,6 +45,7 @@ const realtimeServer = new Server({
     }),
     createSupabaseExtension({ supabase: supabaseServiceRole }),
     createServiceStatusExtension(),
+    createTaskCoordinatorExtension({ supabaseServiceRole }),
   ],
   port,
 });

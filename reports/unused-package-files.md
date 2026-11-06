@@ -6,26 +6,12 @@ These are review candidates, not deletion instructions. Framework entry points, 
 
 ## No incoming production import
 
-- `packages/admin-app/eslint.config.mjs`
-- `packages/admin-app/forge.config.ts`
-- `packages/admin-app/postcss.config.mjs`
-- `packages/admin-app/src/main.ts`
-- `packages/admin-app/src/main/handleCollectBoxData.ts`
-- `packages/admin-app/src/main/handleWorkerBox.ts`
-- `packages/admin-app/src/main/lib/getInternalApiKey.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateOllama.ts`
-- `packages/admin-app/src/preload.ts`
-- `packages/admin-app/src/renderer.ts`
-- `packages/admin-app/vite.main.config.ts`
-- `packages/admin-app/vite.preload.config.ts`
-- `packages/admin-app/vite.renderer.config.ts`
 - `packages/database/eslint.config.ts`
 - `packages/database/src/activity/getActivityColors.ts`
 - `packages/database/src/activity/getDocumentBlob.ts`
 - `packages/database/src/activity/inspectPath.ts`
 - `packages/database/src/activity/listDirectory.ts`
 - `packages/database/src/chatbot/getChatbotsByIds.ts`
-- `packages/database/src/config/setSystemConfig.ts`
 - `packages/database/src/documentRepositories/StoreTEST.ts`
 - `packages/database/src/documentRepositories/exists.ts`
 - `packages/database/src/documentRepositories/fileToMarkdown.ts`
@@ -40,7 +26,6 @@ These are review candidates, not deletion instructions. Framework entry points, 
 - `packages/database/src/sso/getProviderId copy.ts`
 - `packages/database/src/storage/copy.ts`
 - `packages/database/src/storage/move.ts`
-- `packages/database/src/storage/rename.ts`
 - `packages/database/src/system/_types.ts`
 - `packages/database/src/transcriber/getTranscriptionById.ts`
 - `packages/database/src/transcriber/insertTranscriber.ts`
@@ -52,7 +37,6 @@ These are review candidates, not deletion instructions. Framework entry points, 
 - `packages/database/src/user/getSSOProviderById.ts`
 - `packages/database/src/user/getSSOProviders.ts`
 - `packages/database/src/user/joinPermissions.ts`
-- `packages/database/src/user/toggleAdmin.ts`
 - `packages/database/src/workspace/getOrganizationById.ts`
 - `packages/database/src/workspace/getOrganizationsWithRole.ts`
 - `packages/database/src/workspace/isVisibleFor.ts`
@@ -70,13 +54,9 @@ These are review candidates, not deletion instructions. Framework entry points, 
 - `packages/desktop-app/vite.main.config.ts`
 - `packages/desktop-app/vite.preload.config.ts`
 - `packages/desktop-app/vite.renderer.config.ts`
-- `packages/markdown-changelog/jest.config.js`
 - `packages/markdown-changelog/src/restore.ts`
 - `packages/realtime/eslint.config.ts`
-- `packages/realtime/src/_lib/getPermission.ts`
-- `packages/realtime/src/_lib/getPermissionManager.ts`
 - `packages/realtime/src/_lib/sanitizeFileName.ts`
-- `packages/realtime/src/createRealtimeServer.ts`
 - `packages/realtime/src/documents/agentGeneration/_types.ts`
 - `packages/realtime/src/documents/agentGeneration/_utils.ts`
 - `packages/realtime/src/documents/agentGeneration/getMessageReadableStream.ts`
@@ -96,77 +76,34 @@ These are review candidates, not deletion instructions. Framework entry points, 
 - `packages/realtime/src/documents/chatCurrentMessage/setFileUrl.ts`
 - `packages/realtime/src/documents/chatCurrentMessage/setMessage.ts`
 - `packages/realtime/src/documents/reindex/getReindexStates.ts`
+- `packages/realtime/src/documents/reindex/setReindexStates.ts`
 - `packages/realtime/src/documents/transcribe/setTranscription.ts`
 - `packages/realtime/src/documents/workerLog/_utils.ts`
 - `packages/realtime/src/documents/workerLog/log.ts`
 - `packages/realtime/src/server/embed.ts`
+- `packages/service/rollup.config.mjs`
+- `packages/service/src/bootstrap.ts`
+- `packages/service/src/dev.ts`
+- `packages/service/src/main.ts`
 - `packages/ui/eslint.config.ts`
 - `packages/ui/src/components/header.tsx`
 - `packages/utils/eslint.config.ts`
+- `packages/utils/src/getLocalized.ts`
 - `packages/xrag/eslint.config.mjs`
 - `packages/xrag/ollamaModel/createXRAG.ts`
-- `packages/xrag/update/.tmp/051cea03-5052-4dc3-b90c-15a52bc50c1a/update.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/apps/transcriber-mac/appTranscriberMac.js`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/echoDockerEnv.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/generateSetupFromReadme.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/dockerImagesIntegrity.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/update.mts`
 - `packages/xrag/update/bundleUpdate.mts`
 - `packages/xrag/update/scripts/echoDockerEnv.ts`
 - `packages/xrag/update/scripts/generateSetupFromReadme.ts`
 - `packages/xrag/update/scripts/modules/dockerImagesIntegrity.mts`
+- `packages/xrag/update/scripts/modules/dockerLoadImages.mts`
+- `packages/xrag/update/scripts/modules/remove.ts`
+- `packages/xrag/update/scripts/modules/stopAdminApp.mts`
 - `packages/xrag/update/update.mts`
 
 ## Outside the apps dependency graph
 
 These files may be used by standalone package applications or tools, even when they have incoming imports.
 
-- `packages/admin-app/eslint.config.mjs`
-- `packages/admin-app/forge.config.ts`
-- `packages/admin-app/postcss.config.mjs`
-- `packages/admin-app/src/main.ts`
-- `packages/admin-app/src/main/handleCollectBoxData.ts`
-- `packages/admin-app/src/main/handleRunBox.ts`
-- `packages/admin-app/src/main/handleRunMainBox.ts`
-- `packages/admin-app/src/main/handleWorkerBox.ts`
-- `packages/admin-app/src/main/handleXRAG.ts`
-- `packages/admin-app/src/main/lib/cleanupXRAGFiles.ts`
-- `packages/admin-app/src/main/lib/getBinDir.ts`
-- `packages/admin-app/src/main/lib/getBoxDir.ts`
-- `packages/admin-app/src/main/lib/getBoxEnv.ts`
-- `packages/admin-app/src/main/lib/getInternalApiKey.ts`
-- `packages/admin-app/src/main/lib/getOllamaDir.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateActivities.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateChatbots.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateDatabases.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateFiles.ts`
-- `packages/admin-app/src/main/lib/migrate_january/migrateOllama.ts`
-- `packages/admin-app/src/main/lib/pipeDockerComposeProcessOutput.ts`
-- `packages/admin-app/src/main/lib/pipeProcessOutput.ts`
-- `packages/admin-app/src/main/lib/race.ts`
-- `packages/admin-app/src/main/lib/runXRAG.ts`
-- `packages/admin-app/src/main/lib/runXRAGCertificate.ts`
-- `packages/admin-app/src/main/lib/runXRAGMLXWhisperModel.ts`
-- `packages/admin-app/src/main/lib/runXRAGOllamaModel.ts`
-- `packages/admin-app/src/main/lib/runXRAGSetup.ts`
-- `packages/admin-app/src/main/lib/runXRAGSiteUrl.ts`
-- `packages/admin-app/src/main/lib/sendMessage.ts`
-- `packages/admin-app/src/main/lib/timeout.ts`
-- `packages/admin-app/src/main/lib/tryReadFile.ts`
-- `packages/admin-app/src/main/lib/waitForDocker.ts`
-- `packages/admin-app/src/main/lib/xragSchema.ts`
-- `packages/admin-app/src/main/supabase/client.ts`
-- `packages/admin-app/src/main/supabase/clientAuthenticated.ts`
-- `packages/admin-app/src/main/supabase/types.ts`
-- `packages/admin-app/src/main/supabase/waitForDb.ts`
-- `packages/admin-app/src/preload.ts`
-- `packages/admin-app/src/preload/exposeInMainWorld.ts`
-- `packages/admin-app/src/renderer.ts`
-- `packages/admin-app/src/renderer/App.tsx`
-- `packages/admin-app/src/renderer/LogoMain.tsx`
-- `packages/admin-app/vite.main.config.ts`
-- `packages/admin-app/vite.preload.config.ts`
-- `packages/admin-app/vite.renderer.config.ts`
 - `packages/database/eslint.config.ts`
 - `packages/database/src/_util/sanitizeFileName.ts`
 - `packages/database/src/_util/supabaseAdditionalEndpoints.ts`
@@ -178,7 +115,6 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/database/src/chatbot/_mappers.ts`
 - `packages/database/src/chatbot/getChatbots.ts`
 - `packages/database/src/chatbot/getChatbotsByIds.ts`
-- `packages/database/src/config/setSystemConfig.ts`
 - `packages/database/src/documentRepositories/StoreTEST.ts`
 - `packages/database/src/documentRepositories/exists.ts`
 - `packages/database/src/documentRepositories/fileToMarkdown.ts`
@@ -196,7 +132,6 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/database/src/sso/getProviderId copy.ts`
 - `packages/database/src/storage/copy.ts`
 - `packages/database/src/storage/move.ts`
-- `packages/database/src/storage/rename.ts`
 - `packages/database/src/system/_types.ts`
 - `packages/database/src/transcriber/getTranscriptionById.ts`
 - `packages/database/src/transcriber/insertTranscriber.ts`
@@ -211,7 +146,6 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/database/src/user/getSSOProviders.ts`
 - `packages/database/src/user/isAdmin.ts`
 - `packages/database/src/user/joinPermissions.ts`
-- `packages/database/src/user/toggleAdmin.ts`
 - `packages/database/src/workspace/getOrganizationById.ts`
 - `packages/database/src/workspace/getOrganizationsWithRole.ts`
 - `packages/database/src/workspace/isVisibleFor.ts`
@@ -245,17 +179,10 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/eslint-config/react-strict.ts`
 - `packages/eslint-config/react.ts`
 - `packages/eslint-config/strict.ts`
-- `packages/markdown-changelog/jest.config.js`
 - `packages/markdown-changelog/src/restore.ts`
 - `packages/markdown-changelog/src/update.ts`
 - `packages/realtime/eslint.config.ts`
-- `packages/realtime/src/_lib/UserPermissionManager.ts`
-- `packages/realtime/src/_lib/WorkerPermissionManager.ts`
-- `packages/realtime/src/_lib/getPermission.ts`
-- `packages/realtime/src/_lib/getPermissionManager.ts`
-- `packages/realtime/src/_lib/parseDocumentName.ts`
 - `packages/realtime/src/_lib/sanitizeFileName.ts`
-- `packages/realtime/src/createRealtimeServer.ts`
 - `packages/realtime/src/documents/agentGeneration/_types.ts`
 - `packages/realtime/src/documents/agentGeneration/_utils.ts`
 - `packages/realtime/src/documents/agentGeneration/getMessageReadableStream.ts`
@@ -275,7 +202,9 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/realtime/src/documents/chatCurrentMessage/setFileState.ts`
 - `packages/realtime/src/documents/chatCurrentMessage/setFileUrl.ts`
 - `packages/realtime/src/documents/chatCurrentMessage/setMessage.ts`
+- `packages/realtime/src/documents/reindex/_types.ts`
 - `packages/realtime/src/documents/reindex/getReindexStates.ts`
+- `packages/realtime/src/documents/reindex/setReindexStates.ts`
 - `packages/realtime/src/documents/transcribe/_types.ts`
 - `packages/realtime/src/documents/transcribe/getTranscription.ts`
 - `packages/realtime/src/documents/transcribe/setTranscription.ts`
@@ -283,56 +212,29 @@ These files may be used by standalone package applications or tools, even when t
 - `packages/realtime/src/documents/workerLog/_utils.ts`
 - `packages/realtime/src/documents/workerLog/log.ts`
 - `packages/realtime/src/server/embed.ts`
+- `packages/service/rollup.config.mjs`
 - `packages/ui/eslint.config.ts`
 - `packages/ui/postcss.config.mjs`
 - `packages/ui/src/components/header.tsx`
 - `packages/utils/eslint.config.ts`
+- `packages/utils/src/getLocalized.ts`
 - `packages/xrag/eslint.config.mjs`
 - `packages/xrag/ollamaModel/createXRAG.ts`
-- `packages/xrag/update/.tmp/051cea03-5052-4dc3-b90c-15a52bc50c1a/update.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/apps/transcriber-mac/appTranscriberMac.js`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/echoDockerEnv.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/generateRandomString.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/generateSetupFromReadme.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/generateSupabaseKey.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/jsrsasign-jwths-min-11.1.0.js`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/copy.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/dockerImagesIntegrity.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/dockerLoadImages.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/getBundlePaths.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/integrity.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/remove.ts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/run.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/scripts/modules/stopAdminApp.mts`
-- `packages/xrag/update/.tmp/d2e7b458-f3bc-432c-a1a1-c20897516f33/update.mts`
+- `packages/xrag/update/build/images.mts`
+- `packages/xrag/update/build/workspace.mts`
 - `packages/xrag/update/bundleUpdate.mts`
 - `packages/xrag/update/scripts/echoDockerEnv.ts`
-- `packages/xrag/update/scripts/generateRandomString.ts`
 - `packages/xrag/update/scripts/generateSetupFromReadme.ts`
-- `packages/xrag/update/scripts/generateSupabaseKey.ts`
-- `packages/xrag/update/scripts/jsrsasign-jwths-min-11.1.0.js`
 - `packages/xrag/update/scripts/modules/copy.mts`
 - `packages/xrag/update/scripts/modules/dockerImagesIntegrity.mts`
 - `packages/xrag/update/scripts/modules/dockerLoadImages.mts`
 - `packages/xrag/update/scripts/modules/getBundlePaths.mts`
-- `packages/xrag/update/scripts/modules/integrity.ts`
 - `packages/xrag/update/scripts/modules/remove.ts`
-- `packages/xrag/update/scripts/modules/run.mts`
 - `packages/xrag/update/scripts/modules/stopAdminApp.mts`
 - `packages/xrag/update/update.mts`
 
 ## Unresolved internal imports
 
-- `apps/realtime/src/example_reindex_worker/tryGetFileContent.ts`: `@schornio/aibox-database/documents2/getFile`
-- `apps/realtime/src/example_reindex_worker/tryGetFileContent.ts`: `@schornio/aibox-database/documents2/_types`
-- `apps/realtime/src/example_reindex_worker/tryGetFileContent.ts`: `@schornio/aibox-database/documents2/fileToMarkdown`
-- `apps/realtime/src/example_reindex_worker/tryGetFileContent.ts`: `@schornio/aibox-database/documents2/uploadMDC`
-- `apps/realtime/src/example_worker_reindex.ts`: `@schornio/aibox-database/documents2/createIndex`
-- `apps/realtime/src/example_worker_reindex.ts`: `@schornio/aibox-realtime/documents/taskQueue/finishTask`
-- `apps/realtime/src/example_worker_reindex.ts`: `@schornio/aibox-database/documents2/getDocumentDatabaseById`
-- `apps/realtime/src/example_worker_reindex.ts`: `@schornio/aibox-database/documents2/tree`
-- `packages/realtime/src/_lib/UserPermissionManager.ts`: `@schornio/aibox-database/_util/createClientByJWT`
-- `packages/realtime/src/documents/reindex/_types.ts`: `@schornio/aibox-database/documents2/_types`
 - `packages/realtime/src/server/embed.ts`: `@schornio/aibox-realtime/documents/embeddings/_types`
 - `packages/realtime/src/server/embed.ts`: `@schornio/aibox-realtime/documents/embeddings/getEmbeddings`
 - `packages/realtime/src/server/embed.ts`: `@schornio/aibox-realtime/documents/embeddings/_utils`

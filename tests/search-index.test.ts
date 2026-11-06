@@ -200,94 +200,154 @@ describe("index creation", () => {
   const storage = {
     getStoragePath: () => ({ storagePath: "workspace/repo/file.txt" }),
   } as any;
+  const repository = {
+    id: "repo",
+    index: {
+      keyword: { active: true },
+      embedding: {
+        active: true,
+        modelIdentifier: "embed",
+        modelVectorSize: 768,
+      },
+    },
+  } as any;
   function indexingDatabase() {
-    const { supabase, builders } = database({
-      source_objects: { count: 0 },
-      text_searches: { data: null },
-      embeddings_768: { data: null },
-    });
-    const sourcesRead = query({ data: [{ id: "old" }] });
-    const sourcesWrite = query({ data: { id: "new" } });
-    let sourcesCalls = 0;
-    const original = supabase.from.getMockImplementation()!;
-    supabase.from.mockImplementation((table) =>
-      table === "sources"
-        ? ++sourcesCalls === 1
-          ? sourcesRead
-          : sourcesWrite
-        : original(table),
-    );
-    return { supabase, builders, sourcesRead, sourcesWrite };
+    const publish = vi.fn().mockResolvedValue({ data: null, error: null });
+    const abortSignal = vi.fn(() => ({ throwOnError: publish }));
+    const supabase = { rpc: vi.fn(() => ({ abortSignal })) } as any;
+    return { supabase, publish, abortSignal };
   }
-  it("deletes old sources in bounded batches before returning for an inactive index", async () => {
-    const { supabase, builders, sourcesWrite } = indexingDatabase();
+  beforeEach(() => {
+    ai.embedMany.mockImplementation(async ({ values }) => ({
+      embeddings: values.map(() => Array(768).fill(0.1)),
+    }));
+  });
+  it("clears a disabled index in the same publication operation", async () => {
+    const { supabase, publish } = indexingDatabase();
     await createIndex(file, "text", { id: "repo" } as any, storage, {
       supabase,
       embeddingModel: vi.fn(),
-    } as any);
-    expect(builders.source_objects!.limit).toHaveBeenCalledWith(100);
-    expect(sourcesWrite.delete).toHaveBeenCalled();
-    expect(sourcesWrite.insert).not.toHaveBeenCalled();
-  });
-  it("chunks and batches keyword and embedding writes, preserving source offsets", async () => {
-    const { supabase, builders, sourcesWrite } = indexingDatabase();
-    const repository = {
-      id: "repo",
-      index: {
-        keyword: { active: true },
-        embedding: {
-          active: true,
-          modelIdentifier: "embed",
-          modelVectorSize: 768,
-        },
-      },
-    };
-    await createIndex(file, "word ".repeat(8500), repository as any, storage, {
-      supabase,
-      embeddingModel: () => ({ modelId: "embed" }),
-      abortSignal: signal,
-    } as any);
-    expect(sourcesWrite.insert).toHaveBeenCalledWith({
-      database_id: "repo",
-      mime_type: "text/plain",
-      name: "file.txt",
-      url: "database_files/workspace/repo/file.txt",
     });
-    expect(builders.source_objects!.insert).toHaveBeenCalledTimes(2);
-    const first = builders.source_objects!.insert.mock.calls[0]![0];
-    expect(first).toHaveLength(100);
-    expect(first[0]).toMatchObject({ page: 0, source_id: "new" });
-    expect(first[1].page).toBe(400);
-    expect(builders.text_searches!.insert).toHaveBeenCalledTimes(2);
-    expect(builders.embeddings_768!.insert).toHaveBeenCalledTimes(2);
-    expect(ai.embedMany).toHaveBeenCalledTimes(2);
-  });
-  it("indexes short Unicode text without dropping its only chunk", async () => {
-    const { supabase, builders } = indexingDatabase();
-    await createIndex(
-      file,
-      "Grüße 世界",
-      { id: "repo", index: { keyword: { active: true } } } as any,
-      storage,
-      { supabase, embeddingModel: vi.fn() } as any,
+    expect(supabase.rpc).toHaveBeenCalledWith(
+      "replace_file_index",
+      expect.objectContaining({
+        p_repository_id: "repo",
+        p_url: "database_files/workspace/repo/file.txt",
+        p_keyword: false,
+        p_embedding_dimension: 0,
+        p_chunks: [],
+      }),
     );
-    expect(builders.source_objects!.insert.mock.calls[0]![0]).toMatchObject([
-      { content: "Grüße 世界", page: 0 },
-    ]);
-    expect(builders.text_searches!.insert.mock.calls[0]![0]).toMatchObject([
-      { text_search_vector: "Grüße 世界" },
-    ]);
-  });
-  it("can build just a keyword index with an empty content source", async () => {
-    const { supabase, builders } = indexingDatabase();
-    await createIndex(
-      file,
-      "",
-      { id: "repo", index: { keyword: { active: true } } } as any,
-      storage,
-      { supabase, embeddingModel: vi.fn() } as any,
-    );
-    expect(builders.source_objects!.insert).not.toHaveBeenCalled();
+    expect(publish).toHaveBeenCalledOnce();
     expect(ai.embedMany).not.toHaveBeenCalled();
   });
+  it("prepares all batches before publishing chunks, keywords and embeddings once", async () => {
+    const { supabase, publish, abortSignal } = indexingDatabase();
+    await createIndex(file, "word ".repeat(8500), repository, storage, {
+      supabase,
+      embeddingModel: () => ({ modelId: "embed" }) as any,
+      abortSignal: signal,
+    });
+    expect(ai.embedMany).toHaveBeenCalledTimes(2);
+    expect(supabase.rpc).toHaveBeenCalledOnce();
+    const input = supabase.rpc.mock.calls[0][1];
+    expect(input).toMatchObject({
+      p_mime_type: "text/plain",
+      p_name: "file.txt",
+      p_keyword: true,
+      p_embedding_dimension: 768,
+    });
+    expect(input.p_chunks).toHaveLength(107);
+    expect(input.p_chunks[0]).toMatchObject({
+      page: 0,
+      embedding: Array(768).fill(0.1),
+    });
+    expect(input.p_chunks[1].page).toBe(400);
+    expect(input.p_chunks[100].embedding).toHaveLength(768);
+    expect(publish.mock.invocationCallOrder[0]).toBeGreaterThan(
+      ai.embedMany.mock.invocationCallOrder[1]!,
+    );
+    expect(abortSignal).toHaveBeenCalledWith(signal);
+  });
+  it("does not touch the old index when a later embedding batch fails", async () => {
+    const { supabase } = indexingDatabase();
+    ai.embedMany
+      .mockResolvedValueOnce({
+        embeddings: Array.from({ length: 100 }, () => Array(768).fill(0.1)),
+      })
+      .mockRejectedValueOnce(new Error("model unavailable"));
+    await expect(
+      createIndex(file, "word ".repeat(8500), repository, storage, {
+        supabase,
+        embeddingModel: vi.fn(),
+      }),
+    ).rejects.toThrow("model unavailable");
+    expect(supabase.rpc).not.toHaveBeenCalled();
+  });
+  it.each(
+    [[], [[1]], [Array(768).fill(NaN)]].map((embeddings) => ({ embeddings })),
+  )(
+    "rejects incomplete or invalid vectors before publication",
+    async ({ embeddings }) => {
+      const { supabase } = indexingDatabase();
+      ai.embedMany.mockResolvedValue({ embeddings });
+      await expect(
+        createIndex(file, "text", repository, storage, {
+          supabase,
+          embeddingModel: vi.fn(),
+        }),
+      ).rejects.toThrow("INVALID_FILE_EMBEDDINGS");
+      expect(supabase.rpc).not.toHaveBeenCalled();
+    },
+  );
+  it("does not publish after cancellation and propagates transaction failures", async () => {
+    const { supabase, publish } = indexingDatabase();
+    const controller = new AbortController();
+    controller.abort(new Error("cancelled"));
+    await expect(
+      createIndex(file, "text", repository, storage, {
+        supabase,
+        embeddingModel: vi.fn(),
+        abortSignal: controller.signal,
+      }),
+    ).rejects.toThrow("cancelled");
+    expect(supabase.rpc).not.toHaveBeenCalled();
+    publish.mockRejectedValueOnce(new Error("transaction failed"));
+    await expect(
+      createIndex(file, "text", repository, storage, {
+        supabase,
+        embeddingModel: vi.fn(),
+      }),
+    ).rejects.toThrow("transaction failed");
+  });
+  it("preserves the existing index when embedding configuration is incomplete", async () => {
+    const { supabase } = indexingDatabase();
+    await expect(
+      createIndex(
+        file,
+        "text",
+        { id: "repo", index: { embedding: { active: true } } } as any,
+        storage,
+        { supabase, embeddingModel: vi.fn() },
+      ),
+    ).rejects.toThrow("INVALID_EMBEDDING_CONFIGURATION");
+    expect(supabase.rpc).not.toHaveBeenCalled();
+  });
+  it.each(["Grüße 世界", ""])(
+    "publishes keyword-only text including empty content: %s",
+    async (text) => {
+      const { supabase } = indexingDatabase();
+      await createIndex(
+        file,
+        text,
+        { id: "repo", index: { keyword: { active: true } } } as any,
+        storage,
+        { supabase, embeddingModel: vi.fn() },
+      );
+      expect(supabase.rpc.mock.calls[0][1].p_chunks).toEqual(
+        text ? [{ content: text, page: 0, searchText: text }] : [],
+      );
+      expect(ai.embedMany).not.toHaveBeenCalled();
+    },
+  );
 });

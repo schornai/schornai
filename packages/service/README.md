@@ -81,6 +81,10 @@ no catalog polling. Failed work retries with exponential backoff (up to 60s).
 `sync` queues work in an already running daemon; inspect logs or the Service page
 for completion.
 
+Sharing requires HTTPS, except for HTTP connections to the literal loopback
+addresses `127.0.0.1` and `[::1]`. Remote HTTP URLs (including private networks)
+are rejected when loading configuration; migrate them to HTTPS before restarting.
+
 Web and realtime containers both require the sharing token. Remote machines use
 `<sharing.url>/v2/realtime`, or the explicit `endpoints.realtime`. Local web hosts
 use loopback port 9001 in production (`SERVICE_REALTIME_PORT` can override it)

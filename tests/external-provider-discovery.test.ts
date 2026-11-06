@@ -8,6 +8,159 @@ const input = {
   apiKey: "private",
 };
 afterEach(() => vi.unstubAllGlobals());
+it("bounds, deduplicates and validates remote model names without requiring a key for compatible providers", async () => {
+  const fetcher = vi.fn().mockResolvedValue(
+    Response.json({
+      data: [
+        { id: "" },
+        { id: 123 },
+        { id: "x".repeat(501) },
+        { id: "z", displayName: "Zed" },
+        { id: "a", display_name: 123 },
+        { id: "z", display_name: "Latest" },
+        ...Array.from({ length: 2100 }, (_, index) => ({
+          id: `model-${String(index).padStart(4, "0")}`,
+          display_name: "n".repeat(600),
+        })),
+      ],
+    }),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  const result = await listExternalModels({ ...input, apiKey: "" });
+  expect(result.models).toHaveLength(2000);
+  expect(result.models[0]).toEqual({ id: "a", name: "a" });
+  expect(result.models.at(-1)).toEqual({ id: "z", name: "Latest" });
+  expect(result.models[1]!.name).toHaveLength(500);
+  expect(fetcher.mock.calls[0][1].headers).toEqual({});
+  expect(fetcher).toHaveBeenCalledOnce();
+});
+
+it.each([{}, { data: null }, { data: [], has_more: true, last_id: 12 }])(
+  "sanitizes malformed provider catalogs or cursors",
+  async (body) => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json(body)));
+    await expect(
+      listExternalModels({ ...input, provider: "antropic" }),
+    ).rejects.toThrow(/^MODEL_DISCOVERY_FAILED$/);
+  },
+);
+
+it("stops repeated page cursors and drops Google rows without a usable generation ID", async () => {
+  const fetcher = vi.fn().mockImplementation(async () =>
+    Response.json({
+      models: [
+        { name: "models/no-generation" },
+        { supportedGenerationMethods: ["generateContent"] },
+        {
+          name: "models/chat",
+          displayName: "Chat",
+          supportedGenerationMethods: ["generateContent"],
+        },
+      ],
+      nextPageToken: "same",
+    }),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  expect(
+    (await listExternalModels({ ...input, provider: "google" })).models,
+  ).toEqual([{ id: "chat", name: "Chat" }]);
+  expect(fetcher).toHaveBeenCalledTimes(2);
+});
+
+it.each([undefined, "invalid-region"])(
+  "rejects invalid Bedrock region %s before network access",
+  async (region) => {
+    await expect(
+      listExternalModels({ ...input, provider: "antropic-aws", region }),
+    ).rejects.toThrow(/^MODEL_DISCOVERY_FAILED$/);
+    expect(fetch).not.toHaveBeenCalled();
+  },
+);
+
+it("filters unusable Bedrock profiles, follows cursors and preserves model display names", async () => {
+  const fetcher = vi
+    .fn()
+    .mockResolvedValueOnce(
+      Response.json({
+        modelSummaries: [
+          {
+            modelId: "valid",
+            modelName: "Named model",
+            inferenceTypesSupported: ["ON_DEMAND"],
+          },
+          { modelId: 1 },
+          { modelId: "no-inference" },
+          { modelId: "provisioned", inferenceTypesSupported: ["PROVISIONED"] },
+        ],
+      }),
+    )
+    .mockResolvedValueOnce(
+      Response.json({
+        inferenceProfileSummaries: [
+          { status: "INACTIVE", inferenceProfileId: "inactive" },
+          { status: "ACTIVE" },
+          { status: "ACTIVE", inferenceProfileId: "no-models" },
+          {
+            status: "ACTIVE",
+            inferenceProfileId: "wrong-model",
+            models: [{}, { modelArn: "other" }],
+          },
+        ],
+        nextToken: "next/profile",
+      }),
+    )
+    .mockResolvedValueOnce(
+      Response.json({
+        inferenceProfileSummaries: [
+          {
+            status: "ACTIVE",
+            inferenceProfileId: "profile",
+            inferenceProfileName: "Named profile",
+            models: [{ modelArn: "anthropic.chat" }],
+          },
+        ],
+        nextToken: "next/profile",
+      }),
+    );
+  vi.stubGlobal("fetch", fetcher);
+  expect(
+    (
+      await listExternalModels({
+        ...input,
+        provider: "antropic-aws",
+        region: "eu-west-1",
+      })
+    ).models,
+  ).toEqual([
+    { id: "profile", name: "Named profile" },
+    { id: "valid", name: "Named model" },
+  ]);
+  expect(fetcher.mock.calls[2][0]).toContain("nextToken=next%2Fprofile");
+  expect(fetcher).toHaveBeenCalledTimes(3);
+});
+
+it.each(["http-error", "malformed-foundations", "malformed-profiles"])(
+  "sanitizes Bedrock failure %s",
+  async (failure) => {
+    const fetcher = vi.fn();
+    if (failure === "http-error")
+      fetcher.mockResolvedValue(new Response("private", { status: 403 }));
+    else if (failure === "malformed-foundations")
+      fetcher.mockResolvedValue(Response.json({ modelSummaries: {} }));
+    else
+      fetcher
+        .mockResolvedValueOnce(Response.json({ modelSummaries: [] }))
+        .mockResolvedValue(Response.json({ inferenceProfileSummaries: null }));
+    vi.stubGlobal("fetch", fetcher);
+    await expect(
+      listExternalModels({
+        ...input,
+        provider: "antropic-aws",
+        region: "eu-west-1",
+      }),
+    ).rejects.toThrow(/^MODEL_DISCOVERY_FAILED$/);
+  },
+);
 it("lists compatible endpoints with bearer authentication and blocks redirects", async () => {
   const fetcher = vi
     .fn()

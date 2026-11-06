@@ -19,6 +19,7 @@ type TaskStatePending = {
 type TaskStateClaimed = Omit<TaskStatePending, "state"> & {
   state: "claimed";
 
+  claimToken?: string;
   claimedBy: string;
   claimedAtISO: string;
 };
@@ -60,6 +61,7 @@ type TaskStateError = (
 ) & {
   state: "error";
   error: string;
+  finishedAtISO?: string;
 };
 
 export type TaskTypeChat = {

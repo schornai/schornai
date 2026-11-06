@@ -7,7 +7,6 @@ import { validateStoragePath } from "@schornio/aibox-package-database/storage/va
 import { inspect } from "@schornio/aibox-package-database/storage/inspect";
 import { rename } from "@schornio/aibox-package-database/storage/rename";
 import { remove } from "@schornio/aibox-package-database/storage/remove";
-import { removeFileIndex } from "@schornio/aibox-package-database/storage/fileIndex";
 import {
   queueFileProcessing,
   requireIdleFile,
@@ -51,11 +50,14 @@ export const storageFileAction = serverActionClient
           revalidatePath("/", "layout");
           return { file };
         }
-        await removeFileIndex(path, session, supabase);
-        await remove(path, session);
+        await remove(path, session, {
+          supabase,
+          beforeRemove: (filePath) =>
+            requireIdleFile(queue, input.storage, filePath),
+        });
         revalidatePath("/", "layout");
         return { deleted: true };
       },
-      { lock: input.action !== "process" },
+      { lock: input.action === "rename" },
     );
   });

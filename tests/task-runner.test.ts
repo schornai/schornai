@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Doc } from "yjs";
 import { runTask } from "../packages/realtime/src/documents/taskQueue/runTask";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
-import { claimTask } from "../packages/realtime/src/documents/taskQueue/claimTask";
-import { setTaskDone } from "../packages/realtime/src/documents/taskQueue/setTaskDone";
-import { setTaskError } from "../packages/realtime/src/documents/taskQueue/setTaskError";
+import { TaskCoordinator } from "../packages/realtime/src/documents/taskQueue/TaskCoordinator";
+import { taskClaimStore } from "./helpers/task-claims";
+let coordinator: TaskCoordinator;
 const state = vi.hoisted(() => ({
   doc: undefined as any,
   synced: vi.fn(),
@@ -20,6 +20,11 @@ vi.mock("@schornio/aibox-realtime/server/ServerRealtimeProvider", () => ({
 // Relative imports within the package resolve to the same module as its exports.
 beforeEach(() => {
   state.doc = new Doc();
+  coordinator = new TaskCoordinator(
+    state.doc,
+    taskClaimStore().options,
+    async () => {},
+  );
   state.synced.mockReset().mockResolvedValue(undefined);
   state.disposed.mockReset().mockResolvedValue(undefined);
 });
@@ -29,6 +34,15 @@ async function submitted() {
   return getTaskQueue(state.doc).tasks.get(0);
 }
 describe("task submission", () => {
+  it("rejects an expired result after retention cleanup instead of waiting forever", async () => {
+    const result = runTask("model-do-generate", {} as any, [], options);
+    const handled = expect(result).rejects.toThrow("TASK_RESULT_EXPIRED");
+    await submitted();
+    getTaskQueue(state.doc).tasks.delete(0);
+    await handled;
+    expect(state.disposed).toHaveBeenCalledOnce();
+    state.doc.destroy();
+  });
   it("returns the worker result, deletes finished tasks and disposes the connection", async () => {
     const result = runTask(
       "model-do-generate",
@@ -42,8 +56,14 @@ describe("task submission", () => {
       requiredCapabilities: ["GPU"],
       type: "model-do-generate",
     });
-    claimTask(state.doc, "worker", "model-do-generate", ["GPU"]);
-    setTaskDone(state.doc, task.id, { output: "done" } as any);
+    const claimed = (await coordinator.claim(
+      "model-do-generate",
+      ["GPU"],
+      "worker",
+    ))!;
+    await coordinator.finish(task.id, claimed.claimToken, {
+      output: "done",
+    } as any);
     await expect(result).resolves.toEqual({ output: "done" });
     expect(getTaskQueue(state.doc).tasks.length).toBe(0);
     expect(state.disposed).toHaveBeenCalledOnce();
@@ -53,7 +73,12 @@ describe("task submission", () => {
     const result = runTask("model-do-generate", {} as any, [], options);
     const handled = expect(result).rejects.toBeUndefined();
     const task = await submitted();
-    setTaskError(state.doc, task.id, "failed");
+    const claimed = (await coordinator.claim(
+      "model-do-generate",
+      [],
+      "worker",
+    ))!;
+    await coordinator.finish(task.id, claimed.claimToken, undefined, "failed");
     await handled;
     expect(state.disposed).toHaveBeenCalledOnce();
     state.doc.destroy();

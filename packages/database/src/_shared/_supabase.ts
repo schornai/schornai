@@ -46,6 +46,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      agent_mcp_credentials: {
+        Row: {
+          agent_id: string;
+          headers: NonNullable<Json>;
+          mcp_id: string;
+          role_id: string;
+          url: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          agent_id: string;
+          headers: NonNullable<Json>;
+          mcp_id: string;
+          role_id: string;
+          url: string;
+        };
+        Update: {
+          agent_id?: string;
+          headers?: NonNullable<Json>;
+          mcp_id?: string;
+          role_id?: string;
+          url?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "agent_mcp_credentials_agent_id_fkey";
+            columns: ["agent_id"];
+            isOneToOne: false;
+            referencedRelation: "chatbots";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       ai_model_credentials: {
         Row: {
           api_key: string;
@@ -908,6 +941,37 @@ export type Database = {
         };
         Relationships: [];
       };
+      task_claims: {
+        Row: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          completed_at?: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending?: boolean;
+          snapshot?: string | null;
+          state: string;
+          task_id: string;
+        };
+        Update: {
+          completed_at?: string | null;
+          expires_at?: string;
+          owner_token?: string;
+          recovery_pending?: boolean;
+          snapshot?: string | null;
+          state?: string;
+          task_id?: string;
+        };
+        Relationships: [];
+      };
       text_searches: {
         Row: {
           created_at: string;
@@ -1123,11 +1187,11 @@ export type Database = {
     Views: {
       text_searches_with_sources: {
         Row: {
-          created_at: string;
-          database_id: string;
-          id: string;
-          object_id: string;
-          source_id: string;
+          created_at: string | null;
+          database_id: string | null;
+          id: string | null;
+          object_id: string | null;
+          source_id: string | null;
           text_search_vector: unknown;
         };
         ComputedFields: never;
@@ -1161,6 +1225,10 @@ export type Database = {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: boolean;
       };
+      agent_config_has_no_credentials: {
+        Args: { p_config: Json };
+        Returns: boolean;
+      };
       authorize:
         | {
             Args: { p_role: Database["public"]["Enums"]["user_role"] };
@@ -1186,6 +1254,24 @@ export type Database = {
         Args: { user_role: string; visibility: string };
         Returns: boolean;
       };
+      claim_background_task: {
+        Args: { p_owner_token: string; p_snapshot: string; p_task_id: string };
+        Returns: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "task_claims";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       create_external_ai_model: {
         Args: {
           api_key: string;
@@ -1205,6 +1291,33 @@ export type Database = {
       ensure_realtime_document: {
         Args: { p_document_name: string; p_user_ids: string[] };
         Returns: string;
+      };
+      expire_background_tasks: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          completed_at: string | null;
+          expires_at: string;
+          owner_token: string;
+          recovery_pending: boolean;
+          snapshot: string | null;
+          state: string;
+          task_id: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "task_claims";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
+      finish_background_task: {
+        Args: {
+          p_owner_token: string;
+          p_snapshot: string;
+          p_state: string;
+          p_task_id: string;
+        };
+        Returns: boolean;
       };
       generate_custom_id: { Args: Record<PropertyKey, never>; Returns: string };
       get_parent_folders: {
@@ -1299,12 +1412,45 @@ export type Database = {
         };
         Returns: Record<string, unknown>[];
       };
+      prune_task_claim_snapshots: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
+      };
       reissue_password_reset_key: {
         Args: { new_reset_key: string; target_user_id: string };
         Returns: string;
       };
       release_storage_file_lock: {
         Args: { p_bucket: string; p_path: string; p_token: string };
+        Returns: undefined;
+      };
+      renew_background_task: {
+        Args: { p_owner_token: string; p_task_id: string };
+        Returns: boolean;
+      };
+      replace_file_index: {
+        Args: {
+          p_chunks: Json;
+          p_embedding_dimension: number;
+          p_keyword: boolean;
+          p_mime_type: string;
+          p_name: string;
+          p_repository_id: string;
+          p_url: string;
+        };
+        Returns: undefined;
+      };
+      save_agent_with_mcp_credentials: {
+        Args: {
+          p_agent_id: string;
+          p_config: Json;
+          p_copy_agent_id?: string;
+          p_copy_workspace_id?: string;
+          p_description: string;
+          p_expected_workspace_id?: string;
+          p_name: string;
+          p_workspace_id: string;
+        };
         Returns: undefined;
       };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };

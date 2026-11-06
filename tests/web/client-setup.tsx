@@ -6,6 +6,7 @@ const client = vi.hoisted(() => ({
   replace: vi.fn(),
   refresh: vi.fn(),
   execute: vi.fn(),
+  reset: vi.fn(),
   validationErrors: undefined as any,
   actionOptions: undefined as any,
   actionOptionsByAction: new Map<unknown, any>(),
@@ -66,6 +67,7 @@ vi.mock("next-safe-action/hooks", () => ({
     return {
       execute: client.execute,
       executeAsync: client.execute,
+      reset: client.reset,
       isPending: client.pending,
       result: { validationErrors: client.validationErrors },
     };

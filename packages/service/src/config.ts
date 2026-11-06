@@ -37,7 +37,13 @@ export const configSchema = z.strictObject({
     .default({ manageColima: false, memory: 8 }),
   sharing: z
     .strictObject({
-      url: endpoint,
+      url: endpoint.refine((value) => {
+        const url = new URL(value);
+        return (
+          url.protocol === "https:" ||
+          ["127.0.0.1", "[::1]"].includes(url.hostname)
+        );
+      }, "Sharing requires HTTPS except on loopback addresses 127.0.0.1 and [::1]"),
       tokenEnv: z
         .string()
         .regex(/^[A-Z][A-Z0-9_]*$/)

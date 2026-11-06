@@ -7,6 +7,7 @@ import {
   MDC_FILE_EXTENSION,
   TRANSCRIPT_FILE_EXTENSION,
   EMPTY_FOLDER_PLACEHOLDER,
+  TEXT_WRITE_FILE_EXTENSION,
 } from "../packages/database/src/storage/_utils/toStorageObjectArray";
 import { list } from "../packages/database/src/storage/list";
 import { inspect } from "../packages/database/src/storage/inspect";
@@ -42,6 +43,7 @@ function session(
   };
   const logAction = vi.fn();
   const storageSession = {
+    storage: { type: "activity", agentId: "agent", activityId: "activity" },
     getStoragePath: (path: string) => ({
       storagePath: path,
       resolvedPath: path,
@@ -504,6 +506,12 @@ describe("storage writes and logging", () => {
 });
 
 describe("recursive removal", () => {
+  const options = {
+    supabase: {
+      rpc: () => ({ abortSignal: async () => ({ data: true, error: null }) }),
+    } as any,
+    beforeRemove: () => {},
+  };
   it.each([undefined, "text", "transcript"])(
     "removes a file and its %s sidecar",
     async (readableContent) => {
@@ -517,11 +525,12 @@ describe("recursive removal", () => {
           ...(readableContent ? [row("file.txt" + sidecar)] : []),
         ],
       });
-      await remove(file.path, storageSession);
+      await remove(file.path, storageSession, options);
       expect(api.remove).toHaveBeenCalledWith([
         file.path,
         file.path + MDC_FILE_EXTENSION,
         file.path + TRANSCRIPT_FILE_EXTENSION,
+        file.path + TEXT_WRITE_FILE_EXTENSION,
       ]);
       expect(api.remove).toHaveBeenCalledTimes(1);
       expect(logAction).toHaveBeenLastCalledWith({
@@ -536,14 +545,16 @@ describe("recursive removal", () => {
       folder: [row("a"), row("nested", false)],
       "folder/nested": [row("b")],
     });
-    await remove("folder", storageSession);
+    await remove("folder", storageSession, options);
     expect(api.remove).toHaveBeenCalledTimes(2);
     expect(logAction).toHaveBeenLastCalledWith({
       state: "removed",
       target: { folder: true, name: "folder", path: "folder" },
     });
-    api.remove.mockResolvedValue({ error: { message: "permission" } });
-    await expect(remove("folder/a", storageSession)).rejects.toMatchObject({
+    api.remove.mockResolvedValue({ error: new Error("permission") });
+    await expect(
+      remove("folder/a", storageSession, options),
+    ).rejects.toMatchObject({
       message: "permission",
     });
     expect(logAction.mock.lastCall![0]).toMatchObject({
@@ -551,7 +562,7 @@ describe("recursive removal", () => {
       message: "permission",
     });
     logAction.mockClear();
-    await remove("missing", storageSession);
+    await remove("missing", storageSession, options);
     expect(logAction).not.toHaveBeenCalled();
   });
 });

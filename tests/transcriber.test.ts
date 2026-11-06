@@ -179,4 +179,64 @@ describe("persistent transcription process", () => {
     expect(process.kill).toHaveBeenCalledOnce();
     await expect(worker.transcribe(params())).rejects.toThrow("stopped");
   });
+
+  it.each(["missing-result", "oversized"])(
+    "rejects %s protocol data and cleans temporary audio",
+    async (failure) => {
+      const { process, requests } = child();
+      await using worker = new TranscriberProcess();
+      const running = worker.transcribe(params());
+      const rejected = expect(running).rejects.toThrow(
+        failure === "oversized" ? "size limit" : "invalid response",
+      );
+      const job = await request(requests);
+      process.stdout.write(
+        failure === "oversized"
+          ? "x".repeat(64 * 1024 * 1024 + 1)
+          : JSON.stringify({ id: job.id }) + "\n",
+      );
+      await rejected;
+      expect(process.kill).toHaveBeenCalledWith("SIGKILL");
+      expect(existsSync(job.audioPath)).toBe(false);
+    },
+  );
+
+  it("ignores stale process events while a replacement processes another file", async () => {
+    const first = child(),
+      next = child();
+    await using worker = new TranscriberProcess();
+    const failed = worker.transcribe(params());
+    const rejected = expect(failed).rejects.toThrow("invalid response");
+    await request(first.requests);
+    first.process.stdout.write("invalid\n");
+    await rejected;
+    const running = worker.transcribe(params());
+    const job = await request(next.requests);
+    first.process.stdout.write("stale response\n");
+    first.process.stdin.emit("error", new Error("late EPIPE"));
+    first.process.emit("error", new Error("late startup error"));
+    expect(next.process.kill).not.toHaveBeenCalled();
+    respond(next.process, job.id);
+    await expect(running).resolves.toEqual(mapTranscription(result));
+  });
+
+  it("does not start Python when shutdown occurs while audio is being copied", async () => {
+    let controller!: ReadableStreamDefaultController<Uint8Array>;
+    const file = new Blob(["audio"]);
+    vi.spyOn(file, "stream").mockReturnValue(
+      new ReadableStream({
+        start(value) {
+          controller = value;
+        },
+      }),
+    );
+    const worker = new TranscriberProcess();
+    const running = worker.transcribe({ ...params(), file });
+    const rejected = expect(running).rejects.toThrow("stopped");
+    await worker[Symbol.asyncDispose]();
+    controller.enqueue(new TextEncoder().encode("audio"));
+    controller.close();
+    await rejected;
+    expect(spawn).not.toHaveBeenCalled();
+  });
 });

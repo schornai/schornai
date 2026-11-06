@@ -1,3 +1,4 @@
+import { getAgentMCPHeaders } from "@schornio/aibox-database/agent/getAgentMCPHeaders";
 import type { ToolMCP } from "@schornio/aibox-database/chat/_types";
 import { createMCPClient, type MCPClient } from "@ai-sdk/mcp";
 import { tool } from "ai";
@@ -22,14 +23,17 @@ export class MCPToolSession {
   private userId: string;
   private supabase: SupabaseClient;
   private agentId?: string;
+  private roleId?: string;
   constructor(
     servers: NonNullable<Agent["roles"][number]["mcps"]>,
     userId: string,
     supabase: SupabaseClient,
     agentId?: string,
     abortSignal?: AbortSignal,
+    roleId?: string,
   ) {
     this.agentId = agentId;
+    this.roleId = roleId;
     this.abortSignal = abortSignal;
     this.servers = servers;
     this.userId = userId;
@@ -51,7 +55,12 @@ export class MCPToolSession {
           transport: {
             type: "http",
             url: server.url,
-            headers: server.headers,
+            headers: await getAgentMCPHeaders(
+              this.agentId ?? "",
+              this.roleId ?? "",
+              server,
+              { supabaseServiceRole: this.supabase },
+            ),
             authProvider,
             fetch: authProvider.fetch,
           },

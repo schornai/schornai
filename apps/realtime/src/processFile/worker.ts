@@ -1,4 +1,5 @@
 import { getDocumentContent } from "@schornio/aibox-database/storage/getDocumentContent";
+import { recoverFileText } from "@schornio/aibox-database/storage/recoverFileText";
 import { transcriptionToText } from "@schornio/aibox-database/storage/transcriptionToText";
 import { withStorageFileLock } from "@schornio/aibox-database/storage/withStorageFileLock";
 import { ServerRealtimeProvider } from "@schornio/aibox-realtime/server/ServerRealtimeProvider";
@@ -63,6 +64,7 @@ export async function processFileWorker({
           websocketProvider,
         });
 
+        await recoverFileText(claimedTask.parameters.path, storageSession);
         const useSavedContent =
           claimedTask.parameters.useSavedContent ||
           claimedTask.parameters.reuseContent;

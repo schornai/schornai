@@ -37,9 +37,17 @@ release notes under `docs/` describe the state reviewed on their dates.
    that the chat is idle, then queueing marks a generation as queued and adds its
    task. Authorization stays in the entry points.
 3. [`TaskQueue`](../packages/realtime/src/documents/taskQueue/TaskQueue.ts)
-   claims work by type and capabilities and owns completion/error/abort
-   acknowledgement. The [`Task` union](../packages/realtime/src/documents/taskQueue/_types.ts)
+   requests ownership by type and capabilities from the server's
+   [coordinator](../packages/realtime/src/server/createTaskCoordinatorExtension.ts).
+   [Database claims](../packages/database/src/task) grant one owner and require a
+   live lease for renewal/completion. Expired work fails without replay;
+   [recovery](../packages/realtime/src/server/recoverTaskDocuments.ts) releases its
+   matching chat and pauses remaining inputs. Read the
+   [decision](adr/0003-durable-task-ownership.md) when changing retry semantics. The [`Task` union](../packages/realtime/src/documents/taskQueue/_types.ts)
    defines its states and payloads.
+   [Retention](../packages/realtime/src/documents/taskQueue/pruneTaskHistory.ts)
+   removes terminal history after the result grace period; database cleanup
+   discards old snapshots while retaining task IDs against replay.
 4. The [`chat worker`](../apps/realtime/src/chat/worker.ts) consumes submitted
    [chat inputs](../packages/realtime/src/documents/chatCurrentMessage/_types.ts),
    selects an agent role, runs its tools and model, and writes messages and
@@ -52,8 +60,25 @@ release notes under `docs/` describe the state reviewed on their dates.
 
 Behavior checks: [submission and cancellation](../tests/web/chat-submission.test.tsx),
 [worker processing](../tests/chat-worker.test.ts),
-[queue lifecycle](../tests/task-queue.test.ts), and
+[queue lifecycle](../tests/task-queue.test.ts),
+[ownership and restart](../tests/task-coordinator-transport.test.ts),
+[chat recovery](../tests/task-document-recovery.test.ts),
+[database claim invariants](../supabase/tests/task_claims.sql),
+[result retention](../tests/task-retention.test.ts), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
+
+## Agent credentials
+
+Agent creation and updates authorize the saved source and requested target
+workspaces before using the service client. The `save_agent_with_mcp_credentials`
+transaction stores header values in a protected table and leaves only names and
+null placeholders in `chatbots.config`. It retains unchanged values, validates
+copy scope and endpoint identity, and deletes credentials for removed connections.
+The [`MCP session`](../apps/realtime/src/chat/MCPToolSession.ts) loads headers via
+[`getAgentMCPHeaders`](../packages/database/src/agent/getAgentMCPHeaders.ts) only
+for the authorized saved agent role and endpoint. See
+[authorization and DTO tests](../tests/web/agent-credentials.test.ts) and
+[SQL transaction/access tests](../supabase/tests/agent_mcp_credentials.sql).
 
 ## Follow file processing
 
@@ -71,6 +96,38 @@ including [`requireStorageAccess`](../packages/database/src/storage/requireStora
 and [`withStorageFileLock`](../packages/database/src/storage/withStorageFileLock.ts).
 The [`storage-processing` tests](../tests/storage-processing.test.ts) cover this
 routing and processing behavior.
+
+Text edits from the editor and agent tool share
+[`writeStorageFileText`](../packages/realtime/src/documents/storage/writeStorageFileText.ts)
+for authorization, a file lease, saved-content indexing and partial-result reporting.
+Transcript segment corrections use the web app's
+[`withStorageFileOperation`](../apps/web/lib/storageFileOperations.ts) with the same
+lease. [`updateFileText`](../packages/database/src/storage/updateFileText.ts) and
+[`updateTranscriptionSegment`](../packages/database/src/storage/updateTranscriptionSegment.ts)
+read, check conflicts, and write inside that lock, shared with processing workers.
+See [transcript correction tests](../tests/web/transcription-save.test.ts).
+Text edits retain a durable backup until both the original and Markdown history
+are saved. [`getFileTextBackup`](../packages/database/src/storage/getFileTextBackup.ts)
+keeps application reads on the previous version while
+[`recoverFileText`](../packages/database/src/storage/recoverFileText.ts) restores
+an interrupted write before the next edit or processing task. See
+[the recovery decision](adr/0002-recoverable-text-file-writes.md) and
+[failure/retry tests](../tests/storage-edit-text.test.ts).
+See [shared write tests](../tests/storage-write-service.test.ts) for permission,
+queue, creation and worker-identity checks.
+
+Both file and folder deletion actions use
+[`remove`](../packages/database/src/storage/remove.ts). It acquires each file's
+worker lease, checks active work through the caller, and removes that file's index
+before its original and sidecars. Recursive deletion stops at the first error;
+retrying cleans up the remaining files. See
+[removal tests](../tests/storage-remove.test.ts).
+
+[`createIndex`](../packages/database/src/storage/createIndex.ts) prepares all model
+results before publishing a file's source, chunks, keywords and vectors through
+the `replace_file_index` transaction. The previous index survives preparation or
+publication failures. See [index tests](../tests/search-index.test.ts) and
+[SQL rollback and permission checks](../supabase/tests/replace_file_index.sql).
 
 ## Follow machine startup
 
@@ -130,8 +187,12 @@ excluded. Follow that policy before assuming a live document survives a restart.
 
 - [`npm test`](../scripts/test-all.mjs) runs translation checks, JavaScript/TypeScript
   behavior tests, and Python tests. [`vitest.config.mts`](../vitest.config.mts)
-  defines discovery and test aliases. Supabase SQL checks under
-  [`supabase/tests`](../supabase/tests) are separate from this command.
+  defines discovery and test aliases. The [test CI workflow](../.github/workflows/test.yml)
+  adds coverage gates and production builds. Use the [testing guide](testing.md)
+  when reproducing a failing validation layer locally.
+- [`npm run test:sql`](../scripts/test-sql.mjs) runs every regression in
+  [`supabase/tests`](../supabase/tests) against its own disposable database.
+  This is separate from `npm test`; the runner owns database setup and cleanup.
 - UI and context changes also need the [Storybook checks](testing.md#storybook)
   and relevant visual stories. The [visual CI workflow](../.github/workflows/storybook-visual.yml)
   runs those separately from `npm test`.

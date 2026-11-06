@@ -40,7 +40,9 @@ let builders: any;
 const avatarRemove = vi.fn();
 beforeEach(() => {
   ({ supabase: state.db, builders } = database({
-    chatbots: { data: {} },
+    chatbots: {
+      data: { ...agent, organization_id: "workspace", config: agent },
+    },
     databases: { data: {} },
     transcribers: {
       data: { id: "transcriber", organization_id: "workspace", config: {} },
@@ -105,14 +107,6 @@ const transcriber = {
   version: "transcriber-v2",
 };
 const entities = [
-  [
-    "agent",
-    "chatbots",
-    "../../apps/web/app/(main)/agent/_actions/",
-    agent,
-    "agentId",
-    "/agent",
-  ],
   [
     "documentRepository",
     "databases",
@@ -410,3 +404,42 @@ it.each(["https://evil.test", "//evil.test", "javascript:alert(1)"])(
     expect(redirect).toHaveBeenLastCalledWith("/");
   },
 );
+
+describe("agent server actions", () => {
+  it("creates through the credential transaction and redirects to the persisted ID", async () => {
+    const { createAgent } =
+      await import("../../apps/web/app/(main)/agent/_actions/createAgent");
+    await createAgent({ agent });
+    const [operation, args] = state.service.rpc.mock.lastCall;
+    expect(operation).toBe("save_agent_with_mcp_credentials");
+    expect(args).toMatchObject({
+      p_name: agent.name,
+      p_workspace_id: "workspace",
+    });
+    expect(redirect).toHaveBeenCalledWith(`/agent/${args.p_agent_id}`);
+    expect(revalidatePath).toHaveBeenCalledWith("/");
+  });
+  it("updates the authorized agent and validates before writing", async () => {
+    const { updateAgent } =
+      await import("../../apps/web/app/(main)/agent/_actions/updateAgent");
+    await updateAgent({ agent });
+    expect(state.service.rpc).toHaveBeenCalledWith(
+      "save_agent_with_mcp_credentials",
+      expect.objectContaining({
+        p_agent_id: "agent",
+        p_expected_workspace_id: "workspace",
+      }),
+    );
+    expect(revalidatePath).toHaveBeenCalledWith("/agent/agent", "layout");
+    expect(() => updateAgent({ agent: { name: 123 } } as any)).toThrow();
+    expect(state.service.rpc).toHaveBeenCalledOnce();
+  });
+  it("deletes only the requested agent and returns to the collection", async () => {
+    const { deleteAgent } =
+      await import("../../apps/web/app/(main)/agent/_actions/deleteAgent");
+    await deleteAgent({ agentId: "delete-me" });
+    expect(builders.chatbots.delete).toHaveBeenCalledOnce();
+    expect(builders.chatbots.eq).toHaveBeenCalledWith("id", "delete-me");
+    expect(redirect).toHaveBeenCalledWith("/agent");
+  });
+});
