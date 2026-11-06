@@ -10,7 +10,7 @@
     "eslint": "^10.13.0"
   },
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "5.0.118",
+    "@ai-sdk/amazon-bedrock": "5.0.132",
     "@ai-sdk/anthropic": "4.0.82",
     "@ai-sdk/azure": "4.0.104",
     "@ai-sdk/google": "4.0.99",
