@@ -42,3 +42,9 @@ Rücksetzsymbole verwerfen einzelne Änderungen. **Änderungen verwerfen** setzt
 **Als neue Dokumentenablage speichern** kopiert die Konfiguration in eine leere Ablage. Übertrage die benötigten Dateien anschließend mit [Kopieren](files.md#kopieren-und-verschieben) oder lade sie in die neue Ablage hoch.
 
 **Dokumentenablage löschen** entfernt die Ressource nach Bestätigung und kann in der Oberfläche nicht rückgängig gemacht werden. Lade benötigte Dateien vorher herunter und entferne die Verbindung aus betroffenen Agentenrollen. Für die Bereinigung verbliebener Storage-Objekte und Backups ist die Betriebsadministration zuständig.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Workspace-Administrator. `platform_repositories_list` liest zugängliche Ablagen ab Benutzerstufe. `platform_repository_create`, `platform_repository_update` und `platform_repository_delete` verwalten Ablagen; Änderungen prüfen Quell- und Ziel-Workspace.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

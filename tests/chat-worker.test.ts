@@ -14,6 +14,7 @@ const mocks = vi.hoisted(() => ({
   select: vi.fn(),
   messages: [] as any[],
   streamError: undefined as any,
+  realUIStream: false,
   model: vi.fn(),
   tools: vi.fn(),
   approval: vi.fn(),
@@ -108,7 +109,12 @@ vi.mock("ai", async (importOriginal) => ({
     value.generateMessageId();
     return value.stream;
   },
-  readUIMessageStream: async function* () {
+  readUIMessageStream: async function* (options: any) {
+    if (mocks.realUIStream) {
+      const actual = await importOriginal<any>();
+      yield* actual.readUIMessageStream(options);
+      return;
+    }
     if (mocks.streamError) throw mocks.streamError;
     for (const message of mocks.messages) yield message;
   },
@@ -156,6 +162,7 @@ beforeEach(() => {
     },
   ];
   mocks.streamError = undefined;
+  mocks.realUIStream = false;
   mocks.sync.mockResolvedValue(undefined);
   mocks.roles = [
     {
@@ -185,6 +192,68 @@ beforeEach(() => {
   });
 });
 describe("chat worker orchestration", () => {
+  it("repairs interrupted historical input before continuing, without replaying its reasoning", async () => {
+    chat.getArray("messages").push([
+      {
+        id: "old",
+        role: "assistant",
+        parts: [
+          { type: "step-start" },
+          {
+            type: "reasoning",
+            text: "",
+            state: "done",
+            providerMetadata: { openai: { itemId: "rs_missing" } },
+          },
+          {
+            type: "tool-platform_agent_create",
+            toolCallId: "create",
+            state: "input-streaming",
+            input: { agent: { name: "Demo" } },
+          },
+        ],
+      },
+    ]);
+    queue({ type: "text", text: "weiter" });
+    await run();
+    const history = mocks.convert.mock.calls[0][0];
+    expect(history[0].parts).toEqual([
+      { type: "step-start" },
+      expect.objectContaining({ state: "output-error" }),
+    ]);
+    expect(getChat(chat).messages?.toArray()[0]).toEqual(history[0]);
+    expect(chat.getMap("state").get("type")).toBe("idle");
+  });
+
+  it("marks a silently truncated stream as an error instead of leaving the tool running", async () => {
+    mocks.messages = [
+      {
+        id: "partial",
+        role: "assistant",
+        parts: [
+          {
+            type: "reasoning",
+            text: "",
+            state: "done",
+            providerMetadata: { openai: { itemId: "rs_missing" } },
+          },
+          {
+            type: "tool-platform_agent_create",
+            toolCallId: "create",
+            state: "input-streaming",
+            input: { agent: { name: "Demo" } },
+          },
+        ],
+      },
+    ];
+    queue({ type: "text", text: "create demo" });
+    await expect(run()).rejects.toThrow("TOOL_INPUT_INTERRUPTED");
+    expect(getChat(chat).messages?.toArray().at(-1)?.parts).toEqual([
+      expect.objectContaining({ state: "output-error" }),
+    ]);
+    expect(chat.getMap("state").get("type")).toBe("error");
+  });
+
   it("turns queued text and attachments into messages and publishes usage and activity state", async () => {
     queue({
       type: "text",
@@ -575,3 +644,69 @@ it.each(["lease-lost", "new-generation"])(
       expect(getChat(chat).state!.get("generationId")).toBe("new-generation");
   },
 );
+
+it("resumes approved platform tools from immutable stored messages through the real SDK stream", async () => {
+  mocks.realUIStream = true;
+  chat.getArray("messages").push([
+    {
+      id: "tool-request",
+      role: "assistant",
+      metadata: { roleId: "role" },
+      parts: [
+        {
+          type: "tool-platform_repository_create",
+          toolCallId: "create",
+          state: "approval-requested",
+          input: { repository: { name: "Demo" } },
+          approval: { id: "approval" },
+        },
+      ],
+    },
+  ]);
+  queue({ type: "tool-approval", approvalId: "approval", approved: true });
+  let saved: any;
+  mocks.stream.mockImplementationOnce(async () => {
+    saved = chat.getArray<any>("messages").get(0);
+    const freeze = (value: any) => {
+      if (value && typeof value === "object") {
+        Object.values(value).forEach(freeze);
+        Object.freeze(value);
+      }
+    };
+    freeze(saved);
+    return {
+      usage: Promise.resolve({ inputTokens: 1, outputTokens: 1 }),
+      stream: new ReadableStream({
+        start(controller) {
+          for (const chunk of [
+            { type: "start", messageId: "tool-request" },
+            {
+              type: "tool-output-available",
+              toolCallId: "create",
+              output: { documentRepositoryId: "created" },
+            },
+            { type: "text-start", id: "text" },
+            { type: "text-delta", id: "text", delta: "Created" },
+            { type: "text-end", id: "text" },
+            { type: "finish" },
+          ])
+            controller.enqueue(chunk);
+          controller.close();
+        },
+      }),
+    };
+  });
+  await run();
+  expect(getChat(chat).state?.get("type")).toBe("idle");
+  expect(getChat(chat).messages?.toArray().at(-1)?.parts).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        type: "tool-platform_repository_create",
+        state: "output-available",
+        output: { documentRepositoryId: "created" },
+      }),
+      expect.objectContaining({ type: "text", text: "Created" }),
+    ]),
+  );
+  expect(saved.parts[0].state).toBe("approval-responded");
+});

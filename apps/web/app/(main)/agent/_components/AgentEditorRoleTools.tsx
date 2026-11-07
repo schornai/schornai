@@ -1,4 +1,5 @@
 "use client";
+import { defaultPlatformAgentAccess } from "@schornio/aibox-package-database/mcp/platformAgentPolicy";
 
 import {
   Calculator,
@@ -95,7 +96,20 @@ export function AgentEditorRoleTools({ roleId }: { roleId: string }) {
 
       <h3 className="p-3 font-medium">{t("labelSystem")}</h3>
 
-      <Button disabled variant="ghost">
+      <Button
+        variant="ghost"
+        onClick={() => {
+          setAgentRole(roleId, (role) => ({
+            ...role,
+            toolPlatformAccess:
+              role.toolPlatformAccess ??
+              structuredClone(defaultPlatformAgentAccess),
+          }));
+          router.push(
+            `?view=roles&role-${roleId}=tool-platform#role-${roleId}`,
+          );
+        }}
+      >
         <DraftingCompass /> {t("labelToolPlatformAccess")}
       </Button>
     </ContainerMain>

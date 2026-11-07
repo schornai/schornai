@@ -37,7 +37,7 @@ const authUser = {
   user_metadata: {},
 };
 let builders: any;
-const avatarRemove = vi.fn();
+const avatarRemove = vi.fn().mockResolvedValue({ error: null });
 beforeEach(() => {
   ({ supabase: state.db, builders } = database({
     chatbots: {

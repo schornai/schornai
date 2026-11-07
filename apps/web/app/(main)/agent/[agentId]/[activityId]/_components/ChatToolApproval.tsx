@@ -1,8 +1,9 @@
 "use client";
+import { PlatformToolPreview } from "./PlatformToolPreview";
 import { ChatMCPAuthorization } from "./ChatMCPAuthorization";
 import { ChatToolApprovalStorageTransferFile } from "./ChatToolApprovalStorageTransferFile";
 
-import { Check, ShieldCheck, X } from "lucide-react";
+import { Check, DraftingCompass, ShieldCheck, X } from "lucide-react";
 import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ChatCancelGeneration } from "./ChatCancelGeneration";
@@ -126,6 +127,24 @@ function ChatToolApprovalDetails({
   request: ToolApprovalRequest;
 }) {
   const { t } = useT("agent", { keyPrefix: "_components.ChatToolApproval" });
+  const { t: platformT } = useT("agent", {
+    keyPrefix: "_components.PlatformToolPreview",
+  });
+  if (request.toolName.startsWith("platform_"))
+    return (
+      <ChatToolApprovalContent
+        description={t("descriptionAction")}
+        icon={<DraftingCompass />}
+        title={platformT(`tools.${request.toolName}`, {
+          defaultValue: request.toolName,
+        })}
+      >
+        <PlatformToolPreview
+          toolName={request.toolName}
+          value={request.input}
+        />
+      </ChatToolApprovalContent>
+    );
   switch (request.toolName) {
     case "mcp":
       return (

@@ -16,6 +16,9 @@ meta:
       "apps/web/app/(settings)/settings/sso/_components/EditSAMLAttributeMapping.tsx",
       "apps/web/lib/defaultSAMLAttributes.ts",
       "packages/database/src/user/buildAccessToken.ts",
+      "packages/database/src/sso/createSSOSettings.ts",
+      "packages/database/src/sso/saveSSOAttributeMapping.ts",
+      "packages/realtime/src/platform/settingsTools.ts",
     ]
 ---
 
@@ -63,3 +66,13 @@ Melde dich mit einem vorgesehenen SSO-Konto an und kontrolliere unter **Profil �
 **SSO Anbieter entfernen** öffnet einen Bestätigungsdialog. **SSO Anbieter löschen** entfernt die Konfiguration und lässt sich hier nicht rückgängig machen. Stelle vor einer geplanten Umstellung sicher, dass ein funktionierender administrativer Zugang zur Instanz erhalten bleibt.
 
 Passwortprobleme eines SSO-Kontos werden beim Anmeldeanbieter gelöst, nicht über den lokalen Reset-Schlüssel.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_sso_get`: SAML-Anbieter und Attributzuordnung lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_sso_create`: SAML-Anbieter aus Metadaten anlegen. Mindeststufe: **Globaler Administrator**.
+- `platform_sso_delete`: SAML-Anbieter entfernen. Mindeststufe: **Globaler Administrator**.
+- `platform_sso_mapping_update`: SAML-Attribute zuordnen. Mindeststufe: **Globaler Administrator**.
+- `platform_sso_metadata`: Service-Provider-Metadaten als XML abrufen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

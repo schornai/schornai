@@ -64,3 +64,9 @@ Fehlt nach einer SSO-Anmeldung eine Rolle, lass die Gruppenmitgliedschaft beim A
 Eine leere Liste erklärt, warum keine Agenten oder Apps verfügbar sind. Bitte die Administration um Zugang zu einem benannten Arbeitsplatz. Globale Administrator:innen können bei einer neuen Instanz zunächst einen [Arbeitsplatz anlegen](../settings/workspace/new.md).
 
 Wird eine Aktion trotz passender angezeigter Rolle abgelehnt, notiere die betroffene Ressource und die Fehlermeldung für die Administration. Weitere Schritte stehen unter [Fehlerbehebung](../hilfe/fehlerbehebung.md).
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_permissions_get`: Eigene Berechtigungen und Werkzeugstufe lesen. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

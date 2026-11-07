@@ -55,6 +55,10 @@ export async function validateChatMessages(messages: unknown) {
       },
       { [key in keyof typeof dataSchemas]: z.infer<(typeof dataSchemas)[key]> },
       {
+        [name: `platform_${string}`]: {
+          input: Record<string, unknown>;
+          output: unknown;
+        };
         mcp: ToolMCP;
         "web-fetch": ToolWebFetch;
         "web-search": ToolWebSearch;

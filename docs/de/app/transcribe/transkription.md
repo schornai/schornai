@@ -64,3 +64,12 @@ Abschluss und versuche es erneut; dein Entwurf bleibt erhalten.
 3. Verwende die heruntergeladene `.srt`-Datei in einer Anwendung, die dieses Untertitelformat unterstützt.
 
 Der Export enthält den gespeicherten Text einschließlich Korrekturen und die vorhandenen Zeitmarken. Er ist nicht auf als geprüft markierte Abschnitte beschränkt. Leere Abschnitte oder Abschnitte ohne gültige Zeitspanne werden ausgelassen. Für die Weiterverarbeitung als Dokument lade über **Verarbeiteten Text herunterladen** den Text herunter und öffne ihn in deinem Textverarbeitungsprogramm.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Editor**.
+- `platform_activity_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Benutzer**.
+- `platform_file_read`: Extrahierten Inhalt, Textversionen und Transkript lesen. Mindeststufe: **Benutzer**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

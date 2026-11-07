@@ -667,6 +667,82 @@ export type Database = {
         };
         Relationships: [];
       };
+      platform_mcp_clients: {
+        Row: {
+          created_at: string;
+          id: string;
+          name: string;
+          redirect_uris: NonNullable<Json>;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          name: string;
+          redirect_uris: NonNullable<Json>;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          name?: string;
+          redirect_uris?: NonNullable<Json>;
+        };
+        Relationships: [];
+      };
+      platform_mcp_grants: {
+        Row: {
+          access_expires_at: string | null;
+          access_hash: string | null;
+          access_level: string;
+          challenge: string;
+          client_id: string;
+          code_expires_at: string;
+          code_hash: string | null;
+          created_at: string;
+          id: string;
+          redirect_uri: string;
+          resource: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_expires_at?: string | null;
+          access_hash?: string | null;
+          access_level: string;
+          challenge: string;
+          client_id: string;
+          code_expires_at: string;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          redirect_uri: string;
+          resource: string;
+          user_id: string;
+        };
+        Update: {
+          access_expires_at?: string | null;
+          access_hash?: string | null;
+          access_level?: string;
+          challenge?: string;
+          client_id?: string;
+          code_expires_at?: string;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          redirect_uri?: string;
+          resource?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "platform_mcp_grants_client_id_fkey";
+            columns: ["client_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_mcp_clients";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       provider_connections: {
         Row: {
           client_id: string | null;
@@ -1291,6 +1367,17 @@ export type Database = {
       ensure_realtime_document: {
         Args: { p_document_name: string; p_user_ids: string[] };
         Returns: string;
+      };
+      exchange_platform_mcp_code: {
+        Args: {
+          p_access_hash: string;
+          p_challenge: string;
+          p_client_id: string;
+          p_code_hash: string;
+          p_redirect_uri: string;
+          p_resource: string;
+        };
+        Returns: boolean;
       };
       expire_background_tasks: {
         Args: Record<PropertyKey, never>;

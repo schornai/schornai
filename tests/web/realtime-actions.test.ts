@@ -1,4 +1,6 @@
 vi.mock("server-only", () => ({}));
+vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
+import { revalidatePath } from "next/cache";
 vi.mock(
   "@schornio/aibox-package-database/storage/requireStorageAccess",
   () => ({ requireStorageAccess: vi.fn() }),
@@ -351,6 +353,7 @@ describe("realtime server actions", () => {
       expect(getActivities(other).activities.has("activity")).toBe(
         mode === "revoked",
       );
+      expect(revalidatePath).toHaveBeenCalledWith("/", "layout");
       expect(mocks.redirect).toHaveBeenCalledWith("/");
     },
   );

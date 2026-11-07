@@ -42,3 +42,10 @@ Prüfe E-Mail-Adresse, vollständigen Schlüssel und die Übereinstimmung der be
 Bei SSO-Konten ist der Anmeldeanbieter für das Passwort zuständig. Verwende dort den von deiner Organisation vorgesehenen Ablauf.
 
 Die zusätzliche Seite [Neues Passwort gesetzt](../me/reset-password-success.md) ist eine Bestätigungsseite für einen anderen Passwortablauf. Der hier beschriebene Schlüsselablauf bestätigt den Erfolg direkt auf `/signin/reset`.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer**.
+- `platform_user_reset_key`: Einmaligen Reset-Schlüssel neu ausstellen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

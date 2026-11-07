@@ -42,3 +42,12 @@ Weise mindestens einen Arbeitsplatz mit der benötigten Rolle zu. In Arbeitsplä
 Wenn die E-Mail-Adresse bereits verwendet wird, öffne das bestehende Konto in der Benutzerliste und stelle dort bei Bedarf einen neuen Reset-Schlüssel aus.
 
 Kopiere den Schlüssel vor dem Verlassen der Erfolgsmeldung. Geht er verloren oder läuft er ab, wähle auf der Benutzer-Detailseite **Bearbeiten → Passwort zurücksetzen → Neuen Reset-Schlüssel ausstellen**. Der neue Schlüssel ersetzt alle noch unbenutzten früheren Schlüssel.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_user_create`: E-Mail-Konto mit einmaligem Einrichtungsschlüssel anlegen. Mindeststufe: **Globaler Administrator**.
+- `platform_user_reset_key`: Einmaligen Reset-Schlüssel neu ausstellen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).
+
+`platform_user_access_message` erzeugt für globale Administratoren die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.

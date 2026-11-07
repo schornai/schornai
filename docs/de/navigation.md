@@ -33,6 +33,7 @@ meta:
 - [Eine Dokumentenablage mit einem Agenten verbinden](agent/edit/dokumentenablagen.md)
 - [Web-Zugriff konfigurieren](agent/edit/web.md)
 - [Externe Werkzeuge über MCP anbinden](agent/edit/mcp.md)
+- [Plattformzugriff und schorn.ai als MCP-Server](agent/edit/plattformzugriff.md)
 - [Anleitungen und Nachrichtenvorschläge für einen Agenten](agent/edit/unterstuetzung.md)
 - [Modelle und allgemeine Agenteneinstellungen](agent/edit/einstellungen.md)
 - [Mit einem Agenten chatten](agent/chat/index.md)
@@ -121,3 +122,12 @@ meta:
 - [Core mit lokalem oder entferntem Supabase](box-admin/supabase.md)
 - [Worker-Installation unter macOS](box-admin/worker-macos.md)
 - [Worker-Installation unter Linux](box-admin/worker-linux.md)
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_favorites_get`: Eigene Favoriten lesen. Mindeststufe: **Benutzer**.
+- `platform_favorites_update`: Favoriten und Sidebar-Sichtbarkeit speichern. Mindeststufe: **Benutzer**.
+- `platform_view_preferences_get`: Gruppierung, Sortierung und Ansicht lesen. Mindeststufe: **Benutzer**.
+- `platform_view_preferences_update`: Gruppierung, Sortierung und Ansicht speichern. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](agent/edit/plattformzugriff.md).

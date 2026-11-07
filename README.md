@@ -26,7 +26,8 @@ need them, and give your team access through a shared web interface.
 - **Choose your models.** Use Ollama locally or configure external providers such
   as OpenAI, Anthropic, Google, Mistral, and OpenAI-compatible endpoints.
 - **Connect tools.** Give agents controlled web access and MCP integrations,
-  including per-user OAuth connections where supported.
+  including per-user OAuth connections where supported. Expose schorn.ai through
+  [platform MCP access](docs/de/agent/edit/plattformzugriff.md) with four access levels.
 - **Share a workspace.** Manage users, permissions, and SSO, with synchronized
   chats and background work across connected machines.
 
@@ -104,3 +105,7 @@ software is provided without warranty.
 Third-party code and dependencies retain their respective licenses. Model weights
 and external services have their own licenses and terms. See the full [license
 text](LICENSE) for the terms that apply to this project.
+
+The local development seed includes a demo agent with automatic user/editor tools, workspace-admin approval, and global-admin tools disabled
+so the tool tab and read access can be tried without granting administrative tools.
+See [development setup](docs/development.md) for the local-only seed reset workflow.

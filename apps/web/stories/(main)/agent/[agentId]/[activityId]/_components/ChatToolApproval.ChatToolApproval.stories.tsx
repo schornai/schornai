@@ -1,3 +1,7 @@
+import {
+  platformPreviewAgent,
+  platformPreviewRepository,
+} from "../../../../../../.storybook/platform-tool-fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChatToolApproval } from "../../../../../../app/(main)/agent/[agentId]/[activityId]/_components/ChatToolApproval";
 
@@ -253,4 +257,35 @@ export const MCPConnection: Story = {
     },
   },
   parameters: { contextFixtures: { useCanSendMessage: true } },
+};
+
+export const PlatformAgent: Story = {
+  args: {
+    request: {
+      approvalId: "platform-agent",
+      toolName: "platform_agent_create",
+      input: { agent: platformPreviewAgent },
+    },
+  },
+};
+export const PlatformRepository: Story = {
+  args: {
+    request: {
+      approvalId: "platform-repository",
+      toolName: "platform_repository_create",
+      input: { repository: platformPreviewRepository },
+    },
+  },
+};
+export const PlatformFile: Story = {
+  args: {
+    request: {
+      approvalId: "platform-file",
+      toolName: "platform_file_write",
+      input: {
+        path: "team/Onboarding.md",
+        text: "# Willkommen\n\nEin Beispiel für die Vorschau.",
+      },
+    },
+  },
 };

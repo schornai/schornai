@@ -55,5 +55,21 @@
       "labelInfo": "About connections",
       "errorDisconnect": "The connection could not be disconnected. Please try again."
     }
+  },
+  "platformMcp": {
+    "labelTitle": "Authorize {{client}}",
+    "description": "This application can act on your behalf using tools at the selected level. Your workspace permissions still apply. The access token is valid for one hour. Only authorize applications you trust.",
+    "labelLevel": "Access level",
+    "labelResource": "MCP endpoint",
+    "labelRedirect": "Redirect address",
+    "labelApprove": "Authorize",
+    "labelDeny": "Deny",
+    "errorAuthorization": "The authorization request is invalid or your permissions are insufficient.",
+    "level": {
+      "user": "User",
+      "editor": "Editor",
+      "workspace": "Workspace administrator",
+      "admin": "Global administrator"
+    }
   }
 }

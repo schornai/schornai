@@ -22,12 +22,14 @@ import { useRouter } from "next/navigation";
 import { hasPermission } from "@/lib/hasPermission";
 
 export function AgentCard({
+  preview = false,
   agent,
   documentRepositoryMap,
   favorites,
   model,
   workspace,
 }: {
+  preview?: boolean;
   agent?: Partial<Agent>;
   documentRepositoryMap: Map<string | symbol, DocumentRepository>;
   favorites?: SettingFavorites;
@@ -43,7 +45,7 @@ export function AgentCard({
       </CardAppHeader>
       <CardAppMain
         render={
-          agent ? (
+          agent && !preview ? (
             <button
               disabled={
                 !hasPermission({ claim: workspace?.claim, permission: "user" })
@@ -68,11 +70,13 @@ export function AgentCard({
           model={model}
           workspace={workspace}
         />
-        <AgentIconGroupActions
-          agent={agent}
-          favorites={favorites}
-          workspace={workspace}
-        />
+        {!preview && (
+          <AgentIconGroupActions
+            agent={agent}
+            favorites={favorites}
+            workspace={workspace}
+          />
+        )}
       </CardAppFooter>
     </CardApp>
   );

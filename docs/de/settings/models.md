@@ -84,3 +84,13 @@ Auf der Detailseite jedes Modells — lokal oder extern — kannst du den **Anze
 ## Modelle löschen
 
 **Modell löschen** öffnet eine Bestätigung. Nach dem Löschen verschwinden der Datenbankeintrag und gegebenenfalls der zugehörige gespeicherte API-Schlüssel. Lokale Dateien werden nicht deinstalliert und laufende Dienste nicht beendet. Eine erneute Registrierung durch die Bereitstellung kann ein lokales Modell wieder hinzufügen. Agenten und Rollen, die das gelöschte Modell verwenden, bleiben erhalten, funktionieren aber erst wieder, wenn ihnen ein anderes verfügbares Modell zugewiesen wurde. Tipp: Gruppiere die Agentenübersicht unter **Optionen** nach **Modell**. Betroffene Agenten erscheinen in den Gruppen **Unbekanntes Modell**.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_models_discover`: Verfügbare Modelle eines Providers ermitteln. Mindeststufe: **Globaler Administrator**.
+- `platform_model_create`: Externes Modell registrieren. Mindeststufe: **Globaler Administrator**.
+- `platform_model_connection_update`: Modellverbindung ändern. Mindeststufe: **Globaler Administrator**.
+- `platform_model_metadata_update`: Modellname und Beschreibung ändern. Mindeststufe: **Globaler Administrator**.
+- `platform_model_delete`: Modellregistrierung löschen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

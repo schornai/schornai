@@ -1,4 +1,3 @@
-import { cacheTag } from "next/cache";
 import { createSupabaseAnonClient } from "@/lib/supabase/createSupabaseAnonClient";
 import { getSystemConfig } from "@schornio/aibox-package-database/config/getSystemConfig";
 import { trySync } from "@schornio/aibox-package-utils/trySync";
@@ -36,9 +35,6 @@ function isLegacyTheme(
 export async function getSystemConfigTheme(): Promise<
   z.infer<typeof themeSchema>
 > {
-  "use cache: private";
-  cacheTag("systemConfigTheme");
-
   const supabase = createSupabaseAnonClient();
   const themeConfigString = await getSystemConfig("theme", { supabase });
 

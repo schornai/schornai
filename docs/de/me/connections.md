@@ -30,3 +30,10 @@ Während des Trennens zeigt der Button den laufenden Vorgang an. Schlägt er feh
 Die leere Ansicht erklärt, wie du deine erste Verbindung im Chat herstellst. Zugangsdaten werden ausschließlich serverseitig gespeichert und niemals auf dieser Seite angezeigt.
 
 Details zu Voraussetzungen und unterstützten Anbietern stehen unter [Externe Werkzeuge über MCP](../agent/edit/mcp.md).
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_personal_mcp_connections`: Eigene externe OAuth-Verbindungen auflisten. Mindeststufe: **Benutzer**.
+- `platform_personal_mcp_disconnect`: Eigene externe OAuth-Verbindung trennen. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

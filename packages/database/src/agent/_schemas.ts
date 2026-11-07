@@ -205,6 +205,20 @@ export const agentConfigSchema = z.object({
           updateChatLabel: z.optional(z.boolean()),
         }),
       ),
+      toolPlatformAccess: z.optional(
+        z.object({
+          active: z.boolean(),
+          level: z.enum(["user", "editor", "workspace", "admin"]),
+          approvals: z.optional(
+            z.object({
+              user: z.enum(["auto", "ask", "off"]),
+              editor: z.enum(["auto", "ask", "off"]),
+              workspace: z.enum(["auto", "ask", "off"]),
+              admin: z.enum(["auto", "ask", "off"]),
+            }),
+          ),
+        }),
+      ),
       toolWebAccess: z.optional(webAccessConfigSchema),
     }),
   ),

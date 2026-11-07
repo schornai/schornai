@@ -55,5 +55,21 @@
       "labelInfo": "Informationen zu Verbindungen",
       "errorDisconnect": "Die Verbindung konnte nicht getrennt werden. Bitte erneut versuchen."
     }
+  },
+  "platformMcp": {
+    "labelTitle": "Zugriff für {{client}} freigeben",
+    "description": "Diese Anwendung kann mit den Werkzeugen der gewählten Stufe in Ihrem Namen handeln. Ihre Workspace-Berechtigungen gelten weiterhin. Das Zugriffstoken ist eine Stunde gültig. Geben Sie nur Anwendungen frei, denen Sie vertrauen.",
+    "labelLevel": "Zugriffsstufe",
+    "labelResource": "MCP-Endpunkt",
+    "labelRedirect": "Rückleitungsadresse",
+    "labelApprove": "Freigeben",
+    "labelDeny": "Ablehnen",
+    "errorAuthorization": "Die Freigabe ist ungültig oder Ihre Berechtigungen reichen nicht aus.",
+    "level": {
+      "user": "Benutzer",
+      "editor": "Editor",
+      "workspace": "Workspace-Administrator",
+      "admin": "Globaler Administrator"
+    }
   }
 }
