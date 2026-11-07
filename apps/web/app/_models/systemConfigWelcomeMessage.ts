@@ -1,4 +1,3 @@
-import { cacheTag } from "next/cache";
 import { createSupabaseAnonClient } from "@/lib/supabase/createSupabaseAnonClient";
 import { getSystemConfig } from "@schornio/aibox-package-database/config/getSystemConfig";
 import { tryAsync } from "@schornio/aibox-package-utils/tryAsync";
@@ -10,9 +9,6 @@ const welcomeMessageSchema = z.object({
 });
 
 export async function getSystemConfigWelcomeMessage() {
-  "use cache: private";
-  cacheTag("systemConfigWelcomeMessage");
-
   const supabase = createSupabaseAnonClient();
   const { data: welcomeMessageConfigString } = await tryAsync(() =>
     getSystemConfig("welcomeMessage", { supabase }),

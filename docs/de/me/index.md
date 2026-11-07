@@ -18,6 +18,8 @@ meta:
       "apps/web/i18n.config.ts",
       "apps/web/app/_components/LanguageProvider.tsx",
       "apps/web/app/_components/SidebarPanel.tsx",
+      "packages/realtime/src/platform/profileTools.ts",
+      "packages/database/src/user/replaceProfileAvatar.ts",
     ]
 ---
 
@@ -54,3 +56,13 @@ Markiere Agenten, Dokumentenablagen, Transkriptoren oder Arbeitsplätze über da
 In Listen passt du über **Optionen** die Sortierung, Gruppierung und Ansicht an. **Ansicht speichern** speichert die Auswahl für die jeweilige Übersicht.
 
 Für Zugriffsfragen öffne [Berechtigungen](permissions.md). Ein Passwort änderst du über den vorgesehenen [Reset-Ablauf](../signin/reset.md), bei SSO über deinen Anmeldeanbieter.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer**.
+- `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer**.
+- `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer**.
+- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer**.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

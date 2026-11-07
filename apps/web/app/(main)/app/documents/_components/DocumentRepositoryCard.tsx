@@ -22,12 +22,14 @@ import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
 
 export function DocumentRepositoryCard({
+  preview = false,
   documentRepository,
   embeddingModel,
   favorites,
   transcriber,
   workspace,
 }: {
+  preview?: boolean;
   documentRepository?: Partial<DocumentRepository>;
   embeddingModel?: AIModel;
   favorites?: SettingFavorites;
@@ -47,7 +49,7 @@ export function DocumentRepositoryCard({
       </CardAppHeader>
       <CardAppMain
         render={
-          documentRepository ? (
+          documentRepository && !preview ? (
             <button
               onClick={() =>
                 router.push(`/app/documents/${documentRepository.id}/files`)
@@ -75,11 +77,13 @@ export function DocumentRepositoryCard({
           transcriber={transcriber}
           workspace={workspace}
         />
-        <DocumentRepositoryIconGroupActions
-          documentRepository={documentRepository}
-          favorites={favorites}
-          workspace={workspace}
-        />
+        {!preview && (
+          <DocumentRepositoryIconGroupActions
+            documentRepository={documentRepository}
+            favorites={favorites}
+            workspace={workspace}
+          />
+        )}
       </CardAppFooter>
     </CardApp>
   );

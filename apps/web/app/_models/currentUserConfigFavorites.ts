@@ -16,23 +16,14 @@ const settingFavoritesLegacySchema = z.array(
   }),
 );
 
-export const settingFavoritesSchema = z.object({
-  favorites: z.array(
-    z.object({
-      id: z.string(),
-      type: z.union([
-        z.literal("agent"),
-        z.literal("transcriber"),
-        z.literal("documentRepository"),
-        z.literal("workspace"),
-      ]),
-    }),
-  ),
-  showInSidebar: z._default(z.boolean(), true),
-  version: z.literal("favorites-v2"),
-});
-
-export type SettingFavorites = z.infer<typeof settingFavoritesSchema>;
+import {
+  settingFavoritesSchema,
+  type SettingFavorites,
+} from "@schornio/aibox-package-database/config/favoritesSchema";
+export {
+  settingFavoritesSchema,
+  type SettingFavorites,
+} from "@schornio/aibox-package-database/config/favoritesSchema";
 
 const settingFavoritesWithLegacySupportSchema = z.union([
   settingFavoritesSchema,

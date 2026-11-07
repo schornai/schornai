@@ -52,3 +52,14 @@ Prüfe den Verarbeitungsstatus und ob ein Transkriptionsmodell verfügbar ist. B
 Bei einem dauerhaften Fehler notiere Dateityp, ungefähre Länge und die Meldung für die Administration.
 
 Verwende für eine Zusammenfassung des fertigen Textes anschließend einen geeigneten Agenten. Der Transkriptor selbst dient der Verschriftlichung.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_activity_create`: Chat- oder Transkriptionsaktivität anlegen. Mindeststufe: **Benutzer**.
+- `platform_files_list`: Dateien und Ordner auflisten. Mindeststufe: **Benutzer**.
+- `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer**.
+- `platform_activity_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Benutzer**.
+- `platform_activity_file_process`: Extraktion, Indexierung oder Transkription starten. Mindeststufe: **Benutzer**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

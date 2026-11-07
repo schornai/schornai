@@ -1,0 +1,193 @@
+{
+  "apps/web/app/(main)/_actions/deleteActivity.ts": {
+    "tools": ["platform_activity_delete"]
+  },
+  "apps/web/app/(main)/_actions/pinActivity.ts": {
+    "tools": ["platform_activity_update"]
+  },
+  "apps/web/app/(main)/_actions/updateFavorite.ts": {
+    "tools": ["platform_favorites_update"]
+  },
+  "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/abortChatGeneration.ts": {
+    "tools": ["platform_chat_abort"]
+  },
+  "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/submitCurrentMessage.ts": {
+    "tools": [
+      "platform_chat_send",
+      "platform_chat_submit_batch",
+      "platform_chat_tool_approval"
+    ]
+  },
+  "apps/web/app/(main)/agent/_actions/createAgent.ts": {
+    "tools": ["platform_agent_create"]
+  },
+  "apps/web/app/(main)/agent/_actions/deleteAgent.ts": {
+    "tools": ["platform_agent_delete"]
+  },
+  "apps/web/app/(main)/agent/_actions/updateAgent.ts": {
+    "tools": ["platform_agent_update"]
+  },
+  "apps/web/app/(main)/app/documents/_actions/createDocumentRepository.ts": {
+    "tools": ["platform_repository_create"]
+  },
+  "apps/web/app/(main)/app/documents/_actions/deleteDocumentRepository.ts": {
+    "tools": ["platform_repository_delete"]
+  },
+  "apps/web/app/(main)/app/documents/_actions/updateDocumentRepository.ts": {
+    "tools": ["platform_repository_update"]
+  },
+  "apps/web/app/(main)/app/transcribe/_actions/createTranscriber.ts": {
+    "tools": ["platform_transcriber_create"]
+  },
+  "apps/web/app/(main)/app/transcribe/_actions/deleteTranscriber.ts": {
+    "tools": ["platform_transcriber_delete"]
+  },
+  "apps/web/app/(main)/app/transcribe/_actions/updateTranscriber.ts": {
+    "tools": ["platform_transcriber_update"]
+  },
+  "apps/web/app/(settings)/_actions/updateProfileAvatar.ts": {
+    "tools": ["platform_profile_avatar_update", "platform_user_avatar_update"]
+  },
+  "apps/web/app/(settings)/_actions/updateProfileName.ts": {
+    "tools": ["platform_profile_name_update", "platform_user_name_update"]
+  },
+  "apps/web/app/(settings)/artifacts/_actions/deleteArtifact.ts": {
+    "tools": ["platform_artifact_delete"]
+  },
+  "apps/web/app/(settings)/me/connections/_actions/disconnectMCP.ts": {
+    "tools": ["platform_personal_mcp_disconnect"]
+  },
+  "apps/web/app/(settings)/models/_actions/addExternalModel.ts": {
+    "tools": ["platform_model_create"]
+  },
+  "apps/web/app/(settings)/models/_actions/deleteModel.ts": {
+    "tools": ["platform_model_delete"]
+  },
+  "apps/web/app/(settings)/models/_actions/discoverModels.ts": {
+    "tools": ["platform_models_discover"]
+  },
+  "apps/web/app/(settings)/models/_actions/updateExternalModel.ts": {
+    "tools": ["platform_model_connection_update"]
+  },
+  "apps/web/app/(settings)/models/_actions/updateModelMetadata.ts": {
+    "tools": ["platform_model_metadata_update"]
+  },
+  "apps/web/app/(settings)/settings/_actions/updatePermission.ts": {
+    "tools": ["platform_user_permission_update"]
+  },
+  "apps/web/app/(settings)/settings/connections/_actions/deleteConnection.ts": {
+    "tools": ["platform_connection_delete"]
+  },
+  "apps/web/app/(settings)/settings/connections/_actions/saveConnection.ts": {
+    "tools": ["platform_connection_save"]
+  },
+  "apps/web/app/(settings)/settings/sso/_actions/addSSOProvider.ts": {
+    "tools": ["platform_sso_create"]
+  },
+  "apps/web/app/(settings)/settings/sso/_actions/deleteSSOProvider.ts": {
+    "tools": ["platform_sso_delete"]
+  },
+  "apps/web/app/(settings)/settings/sso/_actions/downloadSAMLMetadata.ts": {
+    "tools": ["platform_sso_metadata"]
+  },
+  "apps/web/app/(settings)/settings/sso/_actions/updateSAMLAttributeMapping.ts": {
+    "tools": ["platform_sso_mapping_update"]
+  },
+  "apps/web/app/(settings)/settings/theme/_actions/updateAccessMessage.ts": {
+    "tools": ["platform_theme_update"]
+  },
+  "apps/web/app/(settings)/settings/theme/_actions/updateTheme.ts": {
+    "tools": ["platform_theme_update"]
+  },
+  "apps/web/app/(settings)/settings/theme/_actions/updateThemeSettings.ts": {
+    "tools": ["platform_theme_update"]
+  },
+  "apps/web/app/(settings)/settings/theme/_actions/updateWelcomeMessage.ts": {
+    "tools": ["platform_theme_update"]
+  },
+  "apps/web/app/(settings)/settings/user/_actions/createUser.ts": {
+    "tools": ["platform_user_create"]
+  },
+  "apps/web/app/(settings)/settings/user/_actions/reissueResetKey.ts": {
+    "tools": ["platform_user_reset_key"]
+  },
+  "apps/web/app/(settings)/settings/user/_actions/toggleAdmin.ts": {
+    "tools": ["platform_user_admin_update"]
+  },
+  "apps/web/app/(settings)/settings/workspace/_actions/createWorkspace.ts": {
+    "tools": ["platform_workspace_create"]
+  },
+  "apps/web/app/(settings)/settings/workspace/_actions/updateAutoJoin.ts": {
+    "tools": ["platform_workspace_autojoin_update"]
+  },
+  "apps/web/app/(settings)/settings/workspace/_actions/updateDescription.ts": {
+    "tools": ["platform_workspace_update"]
+  },
+  "apps/web/app/(settings)/settings/workspace/_actions/updateDocumentation.ts": {
+    "tools": ["platform_workspace_documentation_update"]
+  },
+  "apps/web/app/(settings)/settings/workspace/_actions/updateSSOMapping.ts": {
+    "tools": ["platform_workspace_sso_mapping_update"]
+  },
+  "apps/web/app/(settings)/settings/xrag/_actions/submitXRAG.ts": {
+    "tools": ["platform_artifact_publish"]
+  },
+  "apps/web/app/_actions/signOut.ts": {
+    "protocol": "Die MCP-Verbindung wird \u00fcber den OAuth-Widerrufsendpunkt beendet. Browser-Cookies geh\u00f6ren zur unabh\u00e4ngigen Browsersitzung."
+  },
+  "apps/web/app/_actions/storageBrowse.ts": {
+    "tools": ["platform_files_list", "platform_repositories_list"]
+  },
+  "apps/web/app/_actions/storageCreateFolders.ts": {
+    "tools": ["platform_folder_create", "platform_activity_folder_create"]
+  },
+  "apps/web/app/_actions/storageCreateTextFile.ts": {
+    "tools": ["platform_file_write", "platform_activity_file_write"]
+  },
+  "apps/web/app/_actions/storageFileAction.ts": {
+    "tools": [
+      "platform_file_transfer",
+      "platform_file_delete",
+      "platform_file_process"
+    ]
+  },
+  "apps/web/app/_actions/storageQueueProcessFiles.ts": {
+    "tools": ["platform_file_process", "platform_activity_file_process"]
+  },
+  "apps/web/app/_actions/storageRemove.ts": {
+    "tools": ["platform_file_delete", "platform_activity_file_delete"]
+  },
+  "apps/web/app/_actions/storageSelectChatFile.ts": {
+    "tools": ["platform_chat_file_select"]
+  },
+  "apps/web/app/_actions/storageTransferFile.ts": {
+    "tools": ["platform_file_transfer", "platform_activity_file_transfer"]
+  },
+  "apps/web/app/_actions/storageUpdateFileText.ts": {
+    "tools": ["platform_file_write", "platform_activity_file_write"]
+  },
+  "apps/web/app/_actions/storageUpdateTranscriptionSegment.ts": {
+    "tools": [
+      "platform_transcription_segment_update",
+      "platform_activity_transcription_segment_update"
+    ]
+  },
+  "apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts": {
+    "protocol": "Die Zustimmung ist Bestandteil des OAuth-Protokolls und muss von der angemeldeten Person erteilt werden; ein Werkzeug kann sich diese Zustimmung nicht selbst geben."
+  },
+  "apps/web/app/signin/_actions/resetPassword.ts": {
+    "tools": ["platform_profile_password_reset"]
+  },
+  "apps/web/app/signin/_actions/signInWithPassword.ts": {
+    "protocol": "Anmeldung ist Voraussetzung f\u00fcr MCP und erfolgt \u00fcber den OAuth-Login. Zugangsdaten werden nicht zur Erlangung einer fremden MCP-Identit\u00e4t entgegengenommen."
+  },
+  "apps/web/app/signin/_actions/signInWithSSO.ts": {
+    "protocol": "Anmeldung erfolgt vor Werkzeugzugriff \u00fcber OAuth und den Identit\u00e4tsanbieter. Die KI darf dessen interaktive Anmeldung nicht ersetzen."
+  },
+  "apps/web/lib/groupSortView/action.ts": {
+    "tools": ["platform_view_preferences_update"]
+  },
+  "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts": {
+    "tools": ["platform_personal_mcp_revoke"]
+  }
+}

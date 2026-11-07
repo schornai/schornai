@@ -33,7 +33,7 @@ release notes under `docs/` describe the state reviewed on their dates.
    queue providers. [`pendingMCPApproval`](../apps/web/lib/mcp/pendingApproval.ts)
    is the OAuth resumption entry point and additionally validates the exact
    pending approval and document access.
-2. Both use [`queueChat`](../apps/web/lib/chat/queueChat.ts): the caller checks
+2. Both use [`queueChat`](../packages/realtime/src/documents/chat/queueChat.ts): the caller checks
    that the chat is idle, then queueing marks a generation as queued and adds its
    task. Authorization stays in the entry points.
 3. [`TaskQueue`](../packages/realtime/src/documents/taskQueue/TaskQueue.ts)
@@ -53,7 +53,11 @@ release notes under `docs/` describe the state reviewed on their dates.
    selects an agent role, runs its tools and model, and writes messages and
    activity state. [`AgentToolSession`](../apps/realtime/src/chat/AgentToolSession.ts)
    owns the tools available to that role.
-5. [`abortChatGeneration`](../apps/web/app/%28main%29/agent/%5BagentId%5D/%5BactivityId%5D/_actions/abortChatGeneration.ts)
+   [`finalizeInterruptedToolInputs`](../packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts)
+   closes truncated tool inputs without execution and removes reasoning from
+   their interrupted step before history is replayed. Completed steps and
+   genuine approval requests remain unchanged.
+5. [`abortChatGeneration`](../packages/realtime/src/documents/chat/abortChatGeneration.ts)
    and the queue/worker cooperate on cancellation. Follow the whole path when
    changing busy checks or cleanup; an idle-looking chat alone does not prove
    that the previous task has finished.
@@ -198,3 +202,65 @@ excluded. Follow that policy before assuming a live document survives a restart.
   runs those separately from `npm test`.
 - [`AGENTS.md`](../AGENTS.md) is the source for contribution requirements, including
   formatting, documentation, translations, and the full suite before commits.
+
+## Platform MCP and native agent tools
+
+[`createPlatformTools`](../packages/realtime/src/platform/tools.ts) defines the shared
+catalog for the web application's single [MCP route](../apps/web/app/mcp/route.ts) and
+[`AgentToolSession`](../apps/realtime/src/chat/AgentToolSession.ts). The
+[registry](../packages/realtime/src/platform/registry.ts) checks the access ceiling
+and handlers authorize the exact workspace before privileged operations.
+[Chat queueing](../packages/realtime/src/documents/chat/queueChat.ts) is shared
+with the existing web submission and OAuth-resumption entry points through their
+compatibility export. Delegated chats receive claims limited to the tool's level.
+
+[Platform OAuth](../apps/web/lib/platformMcp/oauth.ts) uses separate opaque tokens,
+S256 PKCE and exact resource binding. [Database operations](../packages/database/src/platformMcp)
+keep hashed codes and tokens private; the exchange RPC consumes a code atomically.
+The refresh RPC locks the grant, consumes the refresh credential and rotates both
+credentials in one transaction. Consumed hashes remain until grant deletion to
+revoke the entire family on replay. Refresh never extends the original 30-day
+consent deadline; either token type can revoke the grant. See the
+[rotation regression tests](../supabase/tests/platform_mcp_refresh.sql).
+The [consent action](../apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts)
+validates the registered redirect and the selected level against the authenticated user's current permissions.
+The [consent user loader](../apps/web/lib/platformMcp/getAuthorizationUser.ts)
+resolves current roles for both the available choices and the submission check.
+[Authentication](../apps/web/lib/platformMcp/authenticate.ts) rechecks the account
+and current roles and creates a user client limited to the authorized level.
+
+Behavior checks: [catalog and OAuth inputs](../tests/platform-mcp.test.ts),
+[HTTP SDK transport](../tests/platform-mcp-http.test.ts),
+[access ceilings](../tests/platform-access.test.ts), and
+[SQL credential isolation and replay](../supabase/tests/platform_mcp_oauth.sql).
+The [user guide and catalog](de/agent/edit/plattformzugriff.md) document tool names,
+levels and limits. Maintain matching tools and page references as required by
+[AGENTS.md](../AGENTS.md#platform-mcp-and-agent-tools).
+
+The catalog is grouped into [settings](../packages/realtime/src/platform/settingsTools.ts),
+[profiles](../packages/realtime/src/platform/profileTools.ts),
+[workflow operations](../packages/realtime/src/platform/workflowTools.ts), and
+[monitoring](../packages/realtime/src/platform/monitoringTools.ts).
+Theme schemas and atomic saves live in [database/config](../packages/database/src/config),
+SAML defaults and operations in [database/sso](../packages/database/src/sso).
+The UI and MCP share [file selection](../packages/realtime/src/documents/storage/selectChatFile.ts)
+, [history removal](../packages/realtime/src/documents/activity/removeActivityFromHistory.ts),
+and [avatar replacement](../packages/database/src/user/replaceProfileAvatar.ts).
+Theme and welcome-message loaders read current values on page load so mutations
+from realtime workers do not depend on a Next.js action's private cache invalidation.
+
+The [coverage inventory](../tests/fixtures/platform-mcp-coverage.json) accounts for
+all web Server Actions, including explicit authentication-protocol exceptions.
+[Coverage checks](../tests/platform-mcp-coverage.test.ts) fail when an action lacks
+an entry or a tool lacks German catalog documentation.
+[Extended authorization tests](../tests/platform-mcp-extended.test.ts) guard
+self-service identity, asset privileges and activity-versus-repository access;
+[workflow tests](../tests/platform-mcp-workflow.test.ts) exercise actual Yjs drafts,
+approval matching and delegated claim ceilings through an in-memory transport.
+
+Platform agent approval policies live in [`platformAgentPolicy.ts`](../packages/database/src/mcp/platformAgentPolicy.ts).
+The shared registry enforces disabled levels, including privileged variants of user-level tools;
+`AgentToolSession` supplies the agent policy while external OAuth MCP endpoints retain their own consent ceiling.
+[`PlatformToolPreview`](../apps/web/app/%28main%29/agent/%5BagentId%5D/%5BactivityId%5D/_components/PlatformToolPreview.tsx)
+uses read-only snapshots of the existing agent and repository info layouts for approvals and results.
+Policy regressions are covered by [`platform-agent-policy.test.ts`](../tests/platform-agent-policy.test.ts).

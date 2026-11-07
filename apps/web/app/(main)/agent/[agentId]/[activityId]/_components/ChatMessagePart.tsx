@@ -1,6 +1,17 @@
+import {
+  ChatMessagePartToolPlatform,
+  isPlatformToolPart,
+} from "./ChatMessagePartToolPlatform";
 import { ChatMessagePartToolMCP } from "./ChatMessagePartToolMCP";
 import { ChatMessagePartToolStorageTransferFile } from "./ChatMessagePartToolStorageTransferFile";
-import { Copy, FolderInput, Globe, Plug, Search } from "lucide-react";
+import {
+  Copy,
+  DraftingCompass,
+  FolderInput,
+  Globe,
+  Plug,
+  Search,
+} from "lucide-react";
 import { ChatMessagePartToolWebFetch } from "./ChatMessagePartToolWebFetch";
 import { ChatMessagePartToolWebSearch } from "./ChatMessagePartToolWebSearch";
 import {
@@ -36,6 +47,7 @@ export function ChatMessagePartIcon({
 }: {
   partType: ChatMessage["parts"][number]["type"];
 }) {
+  if (partType.startsWith("tool-platform_")) return <DraftingCompass />;
   switch (partType) {
     case "tool-mcp":
       return <Plug />;
@@ -69,6 +81,8 @@ export function ChatMessagePart({
   agentColor?: AppColor;
   part: ChatMessage["parts"][number];
 }) {
+  if (isPlatformToolPart(part))
+    return <ChatMessagePartToolPlatform part={part} agentColor={agentColor} />;
   switch (part.type) {
     case "tool-mcp":
       return <ChatMessagePartToolMCP agentColor={agentColor} part={part} />;

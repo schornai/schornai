@@ -113,7 +113,7 @@ consumers can share the distribution protocol without becoming machine services.
 Core and native workers share `src/environment.ts` for local and remote Supabase
 connections, including Supabase Cloud. Use `endpoints.supabase` and private
 `SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_SECRET_KEY` settings; legacy key names remain
-supported. Trusted realtime and transcription workers currently also require
+supported. The web server for platform MCP and trusted realtime and transcription workers also require
 `SUPABASE_JWT_SECRET` to sign user-scoped HS256 tokens in `createClientWithClaims`.
 The service maps an existing `JWT_SECRET` to this setting; an explicit
 `SUPABASE_JWT_SECRET` takes precedence. API keys do not replace this signing secret.

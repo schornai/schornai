@@ -1,4 +1,6 @@
 "use client";
+import { getPlatformApprovals } from "@schornio/aibox-package-database/mcp/platformAgentPolicy";
+import { platformAccessLevels } from "@schornio/aibox-package-database/mcp/platformAccess";
 
 import {
   Alert,
@@ -47,7 +49,19 @@ export function AgentInfoToolPlatformAccess({
         <AlertDescription>
           <CollapsibleContent>
             <AlertDescription className="pt-3">
-              {t("description")}
+              <dl className="grid grid-cols-2 gap-2">
+                {platformAccessLevels.map((level) => (
+                  <div className="contents" key={level}>
+                    <dt>{t(`level.${level}`)}</dt>
+                    <dd>
+                      {t(
+                        `mode.${getPlatformApprovals(agentRole?.toolPlatformAccess)[level]}`,
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p>{t("descriptionPermissions")}</p>
             </AlertDescription>
           </CollapsibleContent>
         </AlertDescription>

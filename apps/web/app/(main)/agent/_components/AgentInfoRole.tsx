@@ -1,4 +1,5 @@
 "use client";
+import { AgentInfoToolPlatformAccess } from "./AgentInfoToolPlatformAccess";
 
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import type { Agent } from "@schornio/aibox-package-database/agent/_types";
@@ -63,6 +64,9 @@ export function AgentInfoRole({
           editRoleId={editable ? role.id : undefined}
         />
       ) : undefined}
+      {role.toolPlatformAccess?.active && (
+        <AgentInfoToolPlatformAccess agentRole={role} />
+      )}
       {role.modelIdentifierOverride ? (
         <AgentInfoModel
           editAgentPathname={editAgentPathname}

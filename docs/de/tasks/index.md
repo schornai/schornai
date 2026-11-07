@@ -87,3 +87,9 @@ Die Bereinigung läuft bei geladenem Aufgabenstapel etwa einmal pro Minute.
 Gesprächsverläufe und Dateien bleiben davon unberührt. Bleibt ein empfangender
 Dienst länger getrennt, kann sein Ergebnis inzwischen abgelaufen sein; er meldet
 dann einen Fehler, statt unbegrenzt darauf zu warten.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_tasks_list`: Aufgabentypen und Zustände lesen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

@@ -22,6 +22,9 @@ meta:
       "apps/web/lib/accessMessage.ts",
       "apps/web/app/_components/Logo.tsx",
       "supabase/migrations/20261020084830_public_theme_settings.sql",
+      "packages/database/src/config/saveThemeSettings.ts",
+      "packages/database/src/config/themeSettings.ts",
+      "packages/realtime/src/platform/settingsTools.ts",
     ]
 ---
 
@@ -66,3 +69,14 @@ Ohne eigene Vorlage wird ein deutscher oder englischer Standardtext verwendet. D
 | `{{expires}}`   | Ablaufdatum mit Uhrzeit in der aktuellen Sprache |
 
 Die Vorlage ist reiner Text. Bedingungen, Schleifen und HTML werden nicht ausgewertet. Unbekannte Platzhalter verhindern das Speichern. Der Betreff darf höchstens 300 Zeichen ohne Zeilenumbruch enthalten, die Nachricht höchstens 10.000 Zeichen. Verwende eine allgemeine Anrede, wenn Namen nicht immer vorliegen.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_theme_get`: Gespeicherte Farben, Logos und Nachrichtenvorlagen lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_theme_update`: Theme, Begrüßung und Zugangsvorlagen gemeinsam speichern. Mindeststufe: **Globaler Administrator**.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
+- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
+
+`platform_user_access_message` erzeugt für globale Administratoren die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.

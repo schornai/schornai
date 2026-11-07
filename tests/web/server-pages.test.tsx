@@ -754,15 +754,19 @@ describe("server storage views and application composition", () => {
       ],
     };
     expect(
-      component(await themePage(), "ThemeEditor").props.defaultTheme,
+      component(await themePage().props.children.type(), "ThemeEditor").props
+        .defaultTheme,
     ).toEqual(state.theme);
     expect(
-      component(await themePage(), "ThemeEditor").props.defaultWelcomeMessage,
+      component(await themePage().props.children.type(), "ThemeEditor").props
+        .defaultWelcomeMessage,
     ).toEqual(state.welcome);
   });
   it("hides theme settings from non-administrators", async () => {
     state.profile = { isAdmin: false };
-    await expect(themePage()).rejects.toThrow("NOT_FOUND");
+    await expect(themePage().props.children.type()).rejects.toThrow(
+      "NOT_FOUND",
+    );
   });
   it("assembles sidebar favorites and retains the empty state", async () => {
     state.favorites = {

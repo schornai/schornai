@@ -1,6 +1,7 @@
 "use client";
+import { AgentEditorRolePlatformAccess } from "./AgentEditorRolePlatformAccess";
 
-import { Bot, File, Globe, Plug } from "lucide-react";
+import { Bot, File, Globe, Plug, DraftingCompass } from "lucide-react";
 import {
   Field,
   FieldGroup,
@@ -114,6 +115,12 @@ export function AgentEditorRole({
             </TabsTrigger>
           ) : undefined}
 
+          {role.toolPlatformAccess && (
+            <TabsTrigger value="tool-platform">
+              <DraftingCompass />
+              {t("tabPlatform")}
+            </TabsTrigger>
+          )}
           <TabsTrigger value="tools">{t("tabTools")}</TabsTrigger>
 
           <TabsTrigger value="settings">{t("tabSettings")}</TabsTrigger>
@@ -194,6 +201,9 @@ export function AgentEditorRole({
           <AgentEditorRoleWebAccess role={role} />
         </TabsContent>
 
+        <TabsContent value="tool-platform">
+          <AgentEditorRolePlatformAccess role={role} />
+        </TabsContent>
         <TabsContent value="tools">
           <AgentEditorRoleTools roleId={role.id} />
         </TabsContent>

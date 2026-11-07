@@ -51,3 +51,9 @@ Sind beide Verfahren aktiv, können Ergebnisse aus beiden Suchwegen angezeigt we
 - Bei einem nicht verfügbaren Embedding-Modell muss die Arbeitsplatzadministration die [Ablagekonfiguration](edit.md) prüfen.
 
 Um eine andere Ablage zu durchsuchen, öffne dort den Reiter **Volltextsuche**.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Benutzer. `platform_documents_search` durchsucht den aktivierten Schlüsselwortindex einer zugänglichen Ablage. `platform_file_read` liest anschließend den gespeicherten Inhalt. Mit `semantic` ist zusätzlich die semantische Suche möglich, wenn der entsprechende Index und das Embedding-Modell eingerichtet sind.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

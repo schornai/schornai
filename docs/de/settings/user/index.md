@@ -43,3 +43,10 @@ Unter **Optionen** kannst du nach Name, E-Mail oder letzter Anmeldung sortieren 
 Wähle unter **Optionen → Benutzer:in erstellen** den [Ablauf zur Kontoanlage](new.md). Dabei entsteht ein einmaliger Reset-Schlüssel, den du der Person selbst weitergibst. Es wird keine E-Mail verschickt.
 
 Für bestehende lokale Konten kannst du auf der [Detailseite unter Passwort zurücksetzen](details.md#reset-schlüssel-neu-ausstellen) einen neuen Reset-Schlüssel ausstellen. Zum Löschen eines Kontos wende dich an die Betriebsadministration; dafür bietet diese Oberfläche keine Aktion.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_users_list`: Benutzerverzeichnis lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_user_create`: E-Mail-Konto mit einmaligem Einrichtungsschlüssel anlegen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

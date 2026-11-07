@@ -141,6 +141,14 @@ it("starts the web application independently of the migration result", async () 
     ),
   );
   expect(compose.services.web.depends_on).toBeUndefined();
+  // Platform MCP must sign user-scoped database tokens in the web process,
+  // just as the worker does; a service-role fallback would bypass RLS.
+  expect(compose.services.web.environment.SUPABASE_JWT_SECRET).toBe(
+    "${SUPABASE_JWT_SECRET:-${JWT_SECRET:-}}",
+  );
+  expect(compose.services.web.environment.SUPABASE_JWT_SECRET).toBe(
+    compose.services.realtimeyjs.environment.SUPABASE_JWT_SECRET,
+  );
   expect(compose.services.realtimeyjs.depends_on.web.condition).toBe(
     "service_started",
   );
@@ -182,3 +190,30 @@ it.each([
     });
   },
 );
+
+it("bounds public platform OAuth traffic at the TLS ingress independently of forwarded client IPs", async () => {
+  const config = await readFile(
+    new URL("../apps/proxy/nginx.conf.template", import.meta.url),
+    "utf8",
+  );
+  expect(config).toContain(
+    "limit_req_zone $binary_remote_addr zone=platform_oauth_register:10m rate=20r/m;",
+  );
+  expect(config).toContain(
+    "limit_req_zone $binary_remote_addr zone=platform_oauth_tokens:10m rate=120r/m;",
+  );
+  expect(config).not.toMatch(/limit_req_zone\s+\$http_/);
+  for (const location of [
+    "location = /api/platform-mcp/register",
+    "location ~ ^/api/platform-mcp/(token|revoke)$",
+  ]) {
+    const block = config.slice(
+      config.indexOf(location),
+      config.indexOf("\n    }", config.indexOf(location)),
+    );
+    expect(block).toContain("client_max_body_size 32k;");
+    expect(block).toContain("limit_req_status 429;");
+    expect(block).toMatch(/limit_req zone=platform_oauth_/);
+    expect(block).toContain("proxy_pass ${WEB_ENV_URL};");
+  }
+});

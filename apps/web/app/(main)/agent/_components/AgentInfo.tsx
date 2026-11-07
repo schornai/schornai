@@ -19,6 +19,7 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { useT } from "next-i18next/client";
 
 export function AgentInfo({
+  preview = false,
   agent,
   documentRepositoryMap,
   editAgentPathname,
@@ -28,6 +29,7 @@ export function AgentInfo({
   modelMap,
   workspace,
 }: {
+  preview?: boolean;
   agent?: Partial<Agent>;
   documentRepositoryMap: Map<string | symbol, DocumentRepository>;
   editAgentPathname?: string;
@@ -48,6 +50,7 @@ export function AgentInfo({
   return (
     <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
       <AgentCard
+        preview={preview}
         documentRepositoryMap={documentRepositoryMap}
         agent={agent}
         favorites={favorites}
@@ -99,7 +102,7 @@ export function AgentInfo({
         ) : undefined}
         {(agent?.recommendedMessages?.length ?? 0) > 0 ? (
           <AgentInfoRecommendedMessages
-            agent={agent}
+            agent={preview ? { ...agent, id: undefined } : agent}
             editAgentPathname={editAgentPathname}
             editDefaultAgent={editDefaultAgent}
             editable={editable}

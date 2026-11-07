@@ -48,12 +48,52 @@
   "connections": {
     "page": {
       "labelTitle": "Verbindungen",
-      "descriptionConnections": "Deine persönlichen OAuth-Verbindungen zu MCP-Servern. Trennen entfernt die hier gespeicherten Zugangsdaten. Bereits laufende Aufrufe können noch abschließen; Berechtigungen beim Anbieter kannst du dort widerrufen.",
       "labelDisconnect": "Verbindung trennen",
-      "descriptionEmpty": "Verbinde dein Konto im Chat, sobald ein MCP-Werkzeug eine Anmeldung benötigt.",
       "labelEmpty": "Noch keine Verbindungen",
-      "labelInfo": "Informationen zu Verbindungen",
-      "errorDisconnect": "Die Verbindung konnte nicht getrennt werden. Bitte erneut versuchen."
+      "errorDisconnect": "Die Verbindung konnte nicht getrennt werden. Bitte erneut versuchen.",
+      "labelOutgoing": "Verbindungen zu externen Diensten",
+      "descriptionOutgoing": "Diese Konten nutzt schorn.ai, um für dich externe MCP-Dienste aufzurufen.",
+      "labelServer": "MCP-Server",
+      "labelCancel": "Abbrechen",
+      "labelDisconnectNamed": "Verbindung zu {{serverUrl}} trennen",
+      "descriptionDisconnect": "Möchtest du die Verbindung zu {{serverUrl}} trennen? Die hier gespeicherten Zugangsdaten werden entfernt. Bereits laufende Aufrufe können noch abschließen. Berechtigungen beim Anbieter kannst du dort widerrufen."
+    },
+    "incoming": {
+      "labelTitle": "Zugriff auf schorn.ai",
+      "description": "Diese Anwendungen dürfen über MCP in deinem Namen auf schorn.ai zugreifen. Die Freigabe erweitert deine eigenen Rechte nicht.",
+      "labelCreated": "Freigegeben am",
+      "labelExpires": "Gültig bis",
+      "labelExpired": "Abgelaufen",
+      "labelRevoke": "Zugriff widerrufen",
+      "labelRevokeNamed": "Zugriff für {{name}} widerrufen",
+      "descriptionRevoke": "Möchtest du den Zugriff für „{{name}}“ widerrufen? Alle Zugriffs- und Refresh-Tokens dieser Freigabe werden ungültig. Bereits laufende Aufrufe können noch abschließen. Eine erneute Verbindung benötigt deine Freigabe.",
+      "labelCancel": "Abbrechen",
+      "errorRevoke": "Der Zugriff konnte nicht widerrufen werden. Bitte erneut versuchen.",
+      "labelApplication": "Anwendung",
+      "labelLevel": "Zugriffsstufe"
     }
+  },
+  "platformMcp": {
+    "labelTitle": "Zugriff für {{client}} freigeben",
+    "description": "Diese Anwendung kann in deinem Namen handeln. Prüfe die Details und gib nur Anwendungen frei, denen du vertraust.",
+    "labelLevel": "Zugriffsstufe",
+    "labelResource": "MCP-Endpunkt",
+    "labelRedirect": "Rückleitungsadresse",
+    "labelApprove": "Freigeben",
+    "labelDeny": "Ablehnen",
+    "errorAuthorization": "Die Freigabe ist ungültig oder Ihre Berechtigungen reichen nicht aus.",
+    "level": {
+      "user": "Benutzer",
+      "editor": "Editor",
+      "workspace": "Workspace-Administrator",
+      "admin": "Globaler Administrator"
+    },
+    "labelConnectTitle": "Deine Werkzeuge. Deine Freigabe.",
+    "descriptionConnect": "Verbinde eine KI-Anwendung mit schorn.ai und entscheide, welchen Zugriff du ihr erlaubst.",
+    "descriptionPermissions": "Deine bestehenden Berechtigungen gelten weiterhin. Eine Freigabe erweitert deine Rechte nicht.",
+    "descriptionExpiry": "Die Freigabe gilt bis zu 30 Tage. Unterstützt die Anwendung Refresh-Tokens, verlängert sie den Zugriff automatisch im Hintergrund.",
+    "labelPlatformAccess": "Plattformzugriff",
+    "descriptionLevel": "Wähle die höchste Zugriffsstufe, die du dieser Anwendung erlaubst. Verfügbar sind nur Stufen innerhalb deiner aktuellen Berechtigungen.",
+    "descriptionNoAccess": "Dein Konto hat derzeit keine Berechtigung für den Plattformzugriff."
   }
 }

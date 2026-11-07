@@ -52,3 +52,12 @@ Mit **Löschen** entfernst du den Verlaufseintrag sofort, ohne Bestätigungsdial
 Gesprächs- und Dateidaten bleiben gespeichert; laufende Verarbeitung wird fortgesetzt. Verwende vorher im Chat **Abbrechen**, um eine Generierung zu stoppen. Bei gemeinsam verwendeten Aktivitäten wird der Eintrag auch aus den Verläufen der anderen berechtigten Personen entfernt. Für das Bereinigen der gespeicherten Gesprächsdaten wende dich an die Betriebsadministration.
 
 Verlaufseinträge lassen sich nur einzeln entfernen; eine automatische Löschfrist ist nicht einstellbar.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_activities_list`: Eigenen Verlauf lesen. Mindeststufe: **Benutzer**.
+- `platform_activity_create`: Chat- oder Transkriptionsaktivität anlegen. Mindeststufe: **Benutzer**.
+- `platform_activity_update`: Aktivität umbenennen oder anheften. Mindeststufe: **Benutzer**.
+- `platform_activity_delete`: Aktivität aus dem Verlauf entfernen. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

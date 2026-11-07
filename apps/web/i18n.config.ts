@@ -5,8 +5,7 @@ import { fallbackLanguage, supportedLanguages } from "./lib/languages";
 const resourceLoader: I18nConfig["resourceLoader"] =
   process.env.NODE_ENV === "development"
     ? async (lng, ns) => {
-        "use cache";
-
+        // Development translations must be reread when locale files change.
         const fs = await import("fs/promises");
         const path = await import("path");
         const content = await fs.readFile(

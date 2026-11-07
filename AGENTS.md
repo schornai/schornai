@@ -12,7 +12,7 @@ This document provides instructions for AI agents assisting with this project.
 ## Follow Existing Application Patterns
 
 - Before implementing a feature, inspect the nearest comparable feature and its actions, components, hooks, and Storybook fixtures. Reuse the established pattern instead of introducing a parallel transport, authorization helper, state-management approach, or mock system.
-- Share business logic used by multiple entry points. For example, normal chat submission and OAuth resumption use `apps/web/lib/chat/queueChat.ts` for busy checks and queue submission; keep their entry-point-specific authorization and approval validation in their callers.
+- Share business logic used by multiple entry points. For example, normal chat submission and OAuth resumption use `packages/realtime/src/documents/chat/queueChat.ts` for busy checks and queue submission; keep their entry-point-specific authorization and approval validation in their callers.
 - Reuse domain types instead of independently declaring the same payload in the database package, UI, and realtime worker. Use package import paths supported by the consuming application's dependencies.
 - Avoid provider-specific exceptions when the same invariant applies to every provider. Keep genuinely required provider behavior explicit and covered by tests.
 
@@ -31,6 +31,12 @@ This document provides instructions for AI agents assisting with this project.
 - Use `ButtonAction` for asynchronous action buttons, including save and disconnect, and wire up pending/error feedback. Preserve form values on failure and navigate or close dialogs only after success. Disable duplicate submissions while pending.
 - Avoid copying server-provided collections into local state merely to update them after a mutation. Let route revalidation supply the new data. Local editable drafts and intentional optimistic updates are separate, justified cases.
 - Match comparable app tables and controls: reuse the existing grouping/sorting/preferences hooks, icon actions, and confirmation dialogs. Destructive remove actions use the `X` icon and `variant="destructive"`; MCP controls use `Plug`. Copy controls follow the existing `ButtonAction` plus tooltip and clipboard-feedback pattern.
+
+## Platform MCP and Agent Tools
+
+- When adding, changing, or removing an application capability, maintain its corresponding platform MCP tools in the same change. External MCP clients and schornai agents must use the same authorized business operations as the UI.
+- Expose platform MCP at `/mcp` only. Keep the access levels cumulative: user, editor, workspace administrator, and global administrator. OAuth consent offers only levels within the caller’s current permissions, and the issued token records the selected ceiling. Consent and agent configuration limit tool availability; they never grant permissions. Authorize the caller and the specific resource on every invocation.
+- At the end of each affected German user documentation page, document the corresponding tool names, purpose, minimum access level, required permissions, and limitations. Keep these references synchronized with tool changes. Explicitly document capabilities that cannot be exposed as tools and why.
 
 ## Database Package
 

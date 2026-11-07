@@ -12,12 +12,12 @@
     "typecheck-storybook": "tsc -p .storybook/tsconfig.json"
   },
   "dependencies": {
-    "xrag": "*",
     "@ai-sdk/mcp": "2.0.78",
     "@dnd-kit/helpers": "^0.5.1",
     "@dnd-kit/react": "^0.5.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/provider-react": "^4.7.1",
+    "@modelcontextprotocol/sdk": "1.32.1",
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-ui": "*",
     "@schornio/aibox-package-utils": "*",
@@ -39,8 +39,9 @@
     "server-only": "0.0.1",
     "standardwebhooks": "1.1.1",
     "tus-js-client": "^4.3.1",
-    "zod": "^4.6.7",
-    "undici": "^7.30.2"
+    "undici": "^7.30.2",
+    "xrag": "*",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^10.6.2",

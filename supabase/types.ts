@@ -667,6 +667,112 @@ export type Database = {
         };
         Relationships: [];
       };
+      platform_mcp_clients: {
+        Row: {
+          created_at: string;
+          id: string;
+          name: string;
+          redirect_uris: NonNullable<Json>;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          name: string;
+          redirect_uris: NonNullable<Json>;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          name?: string;
+          redirect_uris?: NonNullable<Json>;
+        };
+        Relationships: [];
+      };
+      platform_mcp_grants: {
+        Row: {
+          access_expires_at: string | null;
+          access_hash: string | null;
+          access_level: string;
+          challenge: string;
+          client_id: string;
+          code_expires_at: string;
+          code_hash: string | null;
+          created_at: string;
+          id: string;
+          redirect_uri: string;
+          refresh_expires_at: string | null;
+          resource: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_expires_at?: string | null;
+          access_hash?: string | null;
+          access_level: string;
+          challenge: string;
+          client_id: string;
+          code_expires_at: string;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          redirect_uri: string;
+          refresh_expires_at?: string | null;
+          resource: string;
+          user_id: string;
+        };
+        Update: {
+          access_expires_at?: string | null;
+          access_hash?: string | null;
+          access_level?: string;
+          challenge?: string;
+          client_id?: string;
+          code_expires_at?: string;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          redirect_uri?: string;
+          refresh_expires_at?: string | null;
+          resource?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "platform_mcp_grants_client_id_fkey";
+            columns: ["client_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_mcp_clients";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      platform_mcp_refresh_tokens: {
+        Row: {
+          consumed_at: string | null;
+          grant_id: string;
+          token_hash: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          consumed_at?: string | null;
+          grant_id: string;
+          token_hash: string;
+        };
+        Update: {
+          consumed_at?: string | null;
+          grant_id?: string;
+          token_hash?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "platform_mcp_refresh_tokens_grant_id_fkey";
+            columns: ["grant_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_mcp_grants";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       provider_connections: {
         Row: {
           client_id: string | null;
@@ -1292,6 +1398,29 @@ export type Database = {
         Args: { p_document_name: string; p_user_ids: string[] };
         Returns: string;
       };
+      exchange_platform_mcp_code: {
+        Args: {
+          p_access_hash: string;
+          p_challenge: string;
+          p_client_id: string;
+          p_code_hash: string;
+          p_redirect_uri: string;
+          p_resource: string;
+        };
+        Returns: boolean;
+      };
+      exchange_platform_mcp_tokens: {
+        Args: {
+          p_access_hash: string;
+          p_challenge: string;
+          p_client_id: string;
+          p_code_hash: string;
+          p_redirect_uri: string;
+          p_refresh_hash: string;
+          p_resource: string;
+        };
+        Returns: string;
+      };
       expire_background_tasks: {
         Args: Record<PropertyKey, never>;
         Returns: {
@@ -1416,6 +1545,17 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: number;
       };
+      refresh_platform_mcp_tokens: {
+        Args: {
+          p_access_hash: string;
+          p_client_id: string;
+          p_next_refresh_hash: string;
+          p_refresh_hash: string;
+          p_resource?: string;
+          p_scope?: string;
+        };
+        Returns: string;
+      };
       reissue_password_reset_key: {
         Args: { new_reset_key: string; target_user_id: string };
         Returns: string;
@@ -1438,6 +1578,10 @@ export type Database = {
           p_repository_id: string;
           p_url: string;
         };
+        Returns: undefined;
+      };
+      revoke_platform_mcp_grant: {
+        Args: { p_client_id: string; p_token_hash: string };
         Returns: undefined;
       };
       save_agent_with_mcp_credentials: {

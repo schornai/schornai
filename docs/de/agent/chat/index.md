@@ -8,13 +8,17 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-05"
+  last_verified: "2026-11-07"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
       "packages/realtime/src/_lib/waitForProviderSynced.ts",
+      "packages/realtime/src/documents/chat/queueChat.ts",
+      "packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts",
+      "packages/realtime/src/documents/chat/abortChatGeneration.ts",
+      "packages/realtime/src/platform/chatTools.ts",
       "packages/realtime/src/server/recoverTaskDocuments.ts",
     ]
 ---
@@ -62,6 +66,11 @@ Realtime-Server und eine erreichbare Datenbank und kann etwa zwei Minuten dauern
 bei Dienstausfällen länger. Details stehen unter
 [Aufgabenstapel](../../tasks/index.md#nach-einem-worker-absturz).
 
+Wenn die Übertragung einer Werkzeug-Eingabe abbricht, wird der unvollständige
+Aufruf als fehlgeschlagen abgeschlossen und nicht ausgeführt. Beim nächsten
+Senden werden auch ältere, so unterbrochene Aufrufe für die Fortsetzung
+bereinigt. Bereits abgeschlossene Werkzeugaktionen bleiben erhalten.
+
 ## Reiter im Gespräch
 
 - **Chat:** Nachrichten und Antworten.
@@ -69,3 +78,9 @@ bei Dienstausfällen länger. Details stehen unter
 - **Info:** die aktuelle Agentenkonfiguration und Dokumentation.
 
 Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [Hinweisen zur Fehlerbehebung](../../hilfe/fehlerbehebung.md).
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -81,3 +81,7 @@ Setze vor eine App-Route die Adresse deiner Instanz, etwa `https://box.example.o
 Reiter und Dialoge ohne eigene Seitenroute sind in den Kapiteln zu [Agentenrollen](../agent/edit/rollen.md), [Web-Zugriff](../agent/edit/web.md), [MCP](../agent/edit/mcp.md), [Nachrichtenstapeln](../agent/chat/stapel.md), [Freigaben](../agent/chat/freigaben.md), [Aufnahmen](../app/transcribe/aufnahme.md) und [Transkriptbearbeitung](../app/transcribe/transkription.md) dokumentiert. Die [vollständige Navigation](../navigation.md) führt zu allen Anleitungen.
 
 Desktop-App, Service-CLI und Mac-App haben keine eigenen Web-Seitenrouten. Ihre Bedienabläufe stehen unter [Desktop-App](../desktop/index.md), [CLI](../cli/index.md) und [Service und Mac-App](../box-admin/index.md).
+
+## Plattform-MCP
+
+Der Endpunkt `/mcp` sowie die Freigabeseite `/oauth/authorize` sind unter [Plattformzugriff](../agent/edit/plattformzugriff.md) beschrieben. OAuth-Discovery liegt unter `/.well-known/oauth-authorization-server` und `/.well-known/oauth-protected-resource/mcp`; Registrierung, Tokenaustausch und Widerruf unter `/api/platform-mcp/`.

@@ -27,7 +27,15 @@ export function ChatMessageStep({
       (part.state === "streaming" || part.state === "input-streaming"),
   );
 
-  const uniquePartTypes = Array.from(new Set(parts.map((part) => part.type)));
+  const uniquePartTypes = Array.from(
+    new Set(
+      parts.map((part) =>
+        part.type.startsWith("tool-platform_")
+          ? ("tool-platform_" as const)
+          : part.type,
+      ),
+    ),
+  );
 
   if (parts.length === 1) {
     return <ChatMessagePart agentColor={agentColor} part={parts[0]!} />;

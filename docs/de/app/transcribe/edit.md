@@ -51,3 +51,9 @@ Prüfe neue Einstellungen mit einer kurzen Aufnahme. Für bestehende Transkripte
 Wähle **Transkriptor löschen** und bestätige den Dialog. Die Aktion ist in der Oberfläche nicht rückgängig zu machen. Prüfe vorher, ob Agenten oder Dokumentenablagen diesen Transkriptor noch für automatische Medienverarbeitung verwenden, und passe deren Zuordnungen an.
 
 Für die Konfiguration brauchst du Arbeitsplatzadministratorrechte oder globale Administratorrechte. Bei einem Arbeitsplatzwechsel benötigst du diese Rechte sowohl im bisherigen als auch im neuen Arbeitsplatz.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Workspace-Administrator. `platform_transcribers_list` liest zugängliche Konfigurationen ab Benutzerstufe. `platform_transcriber_create`, `platform_transcriber_update` und `platform_transcriber_delete` verwalten Transkriptoren im berechtigten Workspace.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

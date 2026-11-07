@@ -62,7 +62,7 @@ DOCUMENT_EXTRACTOR_URL=http://127.0.0.1:9998
 
 The Supabase keys and signing secret must come from the same instance. Service
 maps the public and private keys to the existing web/worker variable names.
-Workers currently require a matching HS256 signing secret even when using newer
+The web server for platform MCP and the workers require a matching HS256 signing secret even when using newer
 publishable/secret API keys. See the
 [Supabase configuration guide](de/box-admin/supabase.md) for local, remote, and
 Cloud deployments and the auth-hook requirements.

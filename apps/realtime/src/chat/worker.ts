@@ -32,6 +32,7 @@ import { selectRole } from "./selectRole.ts";
 import { setChatState } from "@schornio/aibox-realtime/documents/chat/setChatState";
 import { streamText } from "ai-sdk-ollama";
 import { updateChatMessage } from "@schornio/aibox-realtime/documents/chat/updateChatMessage";
+import { finalizeInterruptedToolInputs } from "@schornio/aibox-realtime/documents/chat/finalizeInterruptedToolInputs";
 import { upsertActivity } from "@schornio/aibox-realtime/documents/activity/upsertActivity";
 
 export async function chatWorker({
@@ -193,7 +194,12 @@ export async function chatWorker({
         }
 
         const { messages: yMessages } = getChat(chat.document);
-        const messages = yMessages?.toArray() ?? [];
+        const messages = (yMessages?.toArray() ?? []).map((message) => {
+          const finalized = finalizeInterruptedToolInputs(message);
+          if (finalized !== message)
+            updateChatMessage(chat.document, finalized);
+          return finalized;
+        });
 
         const agent = await getAgentById(claimedTask.parameters.agentId, {
           abortSignal,
@@ -328,7 +334,12 @@ export async function chatWorker({
         let latestChatMessage: ChatMessage | undefined = undefined;
         const lastMessage = messages.at(-1);
         for await (const uiMessage of readUIMessageStream<ChatMessage>({
-          message: lastMessage?.role === "assistant" ? lastMessage : undefined,
+          // The SDK mutates its continuation state. Yjs-owned messages may
+          // be frozen and must never be edited outside a document transaction.
+          message:
+            lastMessage?.role === "assistant"
+              ? structuredClone(lastMessage)
+              : undefined,
           stream: toUIMessageStream({
             generateMessageId: () => crypto.randomUUID(),
             originalMessages: messages,
@@ -354,6 +365,12 @@ export async function chatWorker({
         }
 
         if (latestChatMessage) {
+          const finalized = finalizeInterruptedToolInputs(latestChatMessage);
+          if (finalized !== latestChatMessage) {
+            assertGenerationActive();
+            updateChatMessage(chat.document, finalized);
+            throw new Error("TOOL_INPUT_INTERRUPTED");
+          }
           const timingEnd = performance.now();
           const inputDuration = timingFirstResponse
             ? timingFirstResponse - timingStart
@@ -426,6 +443,10 @@ export async function chatWorker({
           abortSignal.reason.message === "TASK_LEASE_LOST")
       )
         return;
+      for (const message of getChat(chat.document).messages?.toArray() ?? []) {
+        const finalized = finalizeInterruptedToolInputs(message);
+        if (finalized !== message) updateChatMessage(chat.document, finalized);
+      }
       if (error instanceof Error && error.name === "AbortError") {
         // The Stop action releases the UI only after TaskQueue acknowledges
         // completion, which happens after these providers have been disposed.
