@@ -35,7 +35,7 @@ Klappe die Informationsbereiche auf, um die eingerichteten Verbindungen zu sehen
 
 ## Mit einem Beispiel beginnen
 
-Lies eine vorgeschlagene Nachricht und verwende ihren Text als Ausgangspunkt. Im dokumentierten Stand kann der direkte Klick auf eine Vorschlagskarte auf eine nicht vorhandene Chatadresse führen. Öffne in diesem Fall **Neuer Chat** am Agenten und übernimm den Vorschlag manuell in das Eingabefeld.
+Ein Klick auf eine vorgeschlagene Nachricht öffnet einen neuen Chat und füllt das Eingabefeld mit ihrem Text. Das Feld erhält den Fokus, sodass du den Text bearbeiten oder mit `Enter` senden kannst. Der Vorschlag wird nicht automatisch gesendet.
 
 ## Informationen im laufenden Chat
 

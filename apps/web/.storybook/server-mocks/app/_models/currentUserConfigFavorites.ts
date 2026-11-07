@@ -18,7 +18,7 @@ export const settingFavoritesSchema = z.object({
 export const getCurrentUserConfigFavorites = async () =>
   getServiceFixture("getCurrentUserConfigFavorites", {
     favorites: [{ id: "11111111-1111-4111-8111-111111111111", type: "agent" }],
-    showInSidebar: false,
+    showInSidebar: true,
     version: "favorites-v2",
     agents: [
       {

@@ -25,7 +25,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { AudioRecorderButton } from "../../../../../_components/AudioRecorderModal";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
 import { Button } from "@schornio/aibox-package-ui/components/button";
@@ -45,14 +45,17 @@ import { useT } from "next-i18next/client";
 
 export function ChatComposeMessageSelected({
   className,
+  inputRef,
 }: {
   className?: string;
+  inputRef?: RefObject<HTMLTextAreaElement | null>;
 }) {
   const { t } = useT("agent", {
     keyPrefix: "_components.ChatComposeMessageSelected",
   });
   const formRef = useRef<HTMLFormElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fallbackTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = inputRef ?? fallbackTextareaRef;
   const submittingRef = useRef(false);
   const [filePickerOpen, setFilePickerOpen] = useState(false);
   const uploadRef = useRef<HTMLInputElement>(null);

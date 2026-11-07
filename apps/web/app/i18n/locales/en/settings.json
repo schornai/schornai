@@ -330,7 +330,9 @@
     "cardXragLabel": "Upload XRAG",
     "cardXragDescription": "Install agents, documents, models or update the entire box via an XRAG package.",
     "cardAppearanceLabel": "Appearance",
-    "cardAppearanceDescription": "Customize the colors and appearance of the box to your liking."
+    "cardAppearanceDescription": "Customize the colors and appearance of the box to your liking.",
+    "cardConnectionsLabel": "Connections",
+    "cardConnectionsDescription": "Manage OAuth apps and search connections centrally."
   },
   "users.page": {
     "labelTitle": "Users"
@@ -512,7 +514,9 @@
     "descriptionOAuthSecret": "Stored only on the server and cannot be changed after creation.",
     "labelCopyCallback": "Copy callback URL",
     "labelCallbackCopied": "Callback URL copied",
-    "errorCopyCallback": "Could not copy callback URL"
+    "errorCopyCallback": "Could not copy callback URL",
+    "labelIssuer": "OAuth issuer",
+    "descriptionIssuer": "Exact issuer URL of the provider where the client ID is registered. Once set, it cannot be changed. Add it to existing apps that have no issuer."
   },
   "service": {
     "errorUnauthorized": "Service authorization failed.",

@@ -1,3 +1,4 @@
+import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ConnectionForm } from "../../../../../app/(settings)/settings/connections/_components/ConnectionForm";
 const meta = {
@@ -18,7 +19,23 @@ export const Edit: Story = {
       name: "GitHub",
       kind: "oauth",
       client_id: "example-client",
+      issuer: "https://github.com",
       market: null,
     },
+  },
+};
+
+export const LegacyOAuth: Story = {
+  args: {
+    ...Edit.args,
+    connection: { ...Edit.args!.connection!, issuer: null },
+  },
+  async play({ canvas }) {
+    await expect(
+      canvas.getByRole("textbox", { name: "OAuth-Aussteller (Issuer)" }),
+    ).toBeEnabled();
+    await expect(
+      canvas.getByRole("textbox", { name: "Client-ID" }),
+    ).toBeDisabled();
   },
 };

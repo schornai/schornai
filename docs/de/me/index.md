@@ -3,7 +3,7 @@ title: "Profil und persönliche Einstellungen"
 description: "Namen, Profilbild, Sprache, Darstellung und Favoriten anpassen."
 lang: de
 meta:
-  app_urls: ["/me"]
+  app_urls: ["/me", "/me/favorites"]
   required_role: "Angemeldetes Konto; keine zusätzliche Arbeitsplatzrolle."
   role_scope: "Eigenes Konto"
   prerequisites: "Für Passwortänderungen: ein lokales Konto; SSO-Passwörter verwaltet der Identitätsanbieter."
@@ -12,6 +12,9 @@ meta:
   source_files:
     [
       "apps/web/app/(settings)/me/(main)/page.tsx",
+      "apps/web/app/(settings)/me/favorites/page.tsx",
+      "apps/web/app/(settings)/me/favorites/_components/FavoritesEditor.tsx",
+      "apps/web/app/(main)/_components/SidebarFavorites.tsx",
       "apps/web/app/(settings)/_components/EditorAvatar.tsx",
       "apps/web/app/_components/Footer.tsx",
       "apps/web/lib/languages.ts",
@@ -25,7 +28,7 @@ meta:
 
 # Profil und persönliche Einstellungen
 
-Öffne im Kontomenü **Profil**. Hier bearbeitest du deinen Namen und dein Profilbild.
+Öffne im Kontomenü **Profil**. Hier bearbeitest du deinen Namen und dein Profilbild. Darunter führen Kacheln zu **Favoriten**, **Berechtigungen** und **Verbindungen**.
 
 ![Profilbild mit Upload- und Entfernen-Aktionen](../assets/profil.png)
 
@@ -53,12 +56,16 @@ Daneben wählst du **Hell**, **Dunkel** oder die Einstellung des Betriebssystems
 
 Markiere Agenten, Dokumentenablagen, Transkriptoren oder Arbeitsplätze über das Sternsymbol als Favorit. Die markierten Inhalte findest du auf dem Dashboard und in der Favoriten-Navigation, solange du Zugriff darauf hast.
 
+Über den Bearbeiten-Button neben **Favoriten** in der Seitenleiste oder unter **Profil → Favoriten** (`/me/favorites`) verschiebst du Einträge am Griff per Drag-and-drop. Über das **Favorit-entfernen-Symbol** entfernst du die Markierung direkt aus dem Entwurf, nicht den Inhalt. Bis zum Speichern kannst du sie mit **Zurücksetzen** wiederherstellen. Auch nicht mehr verfügbare Einträge kannst du entfernen. Der Schalter **In der Seitenleiste anzeigen** blendet die gesamte Favoritengruppe ein oder aus; die Dashboard-Favoriten bleiben sichtbar. Mit **Speichern** übernimmst du alle Änderungen, mit **Zurücksetzen** verwirfst du den Entwurf.
+
 In Listen passt du über **Optionen** die Sortierung, Gruppierung und Ansicht an. **Ansicht speichern** speichert die Auswahl für die jeweilige Übersicht.
 
 Für Zugriffsfragen öffne [Berechtigungen](permissions.md). Ein Passwort änderst du über den vorgesehenen [Reset-Ablauf](../signin/reset.md), bei SSO über deinen Anmeldeanbieter.
 
 ## Zugehörige MCP-Werkzeuge
 
+- `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer**; nur eigenes Konto.
+- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte.
 - `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer**.
 - `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer**.
 - `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer**.

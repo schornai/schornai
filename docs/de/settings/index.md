@@ -21,6 +21,8 @@ meta:
 
 Globale Administrator:innen öffnen die **Einstellungen** über das Kontomenü oder die Verwaltungsnavigation. Arbeitsplatzadministrator:innen erreichen die Verwaltung ihres eigenen Arbeitsplatzes über **Arbeitsplätze → Arbeitsplatz öffnen → Bearbeiten**.
 
+Die Kachelübersicht enthält auch **Verbindungen** für die zentralen OAuth-Apps und Suchzugänge.
+
 | Bereich                             | Aufgabe                                                               |
 | ----------------------------------- | --------------------------------------------------------------------- |
 | [Benutzer:innen](user/index.md)     | Lokale Konten anlegen, Profile und Rechte verwalten                   |

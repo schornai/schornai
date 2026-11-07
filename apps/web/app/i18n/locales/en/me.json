@@ -38,7 +38,13 @@
   "page": {
     "title": "Profile",
     "infoPersonalize": "Personalize",
-    "infoPersonalizeDescription": "You can upload your profile picture and customize your name here."
+    "infoPersonalizeDescription": "You can upload your profile picture and customize your name here.",
+    "cardFavoritesLabel": "Favorites",
+    "cardFavoritesDescription": "Sort, remove and show favorites in the sidebar.",
+    "cardPermissionsLabel": "Permissions",
+    "cardPermissionsDescription": "View your roles and access permissions.",
+    "cardConnectionsLabel": "Connections",
+    "cardConnectionsDescription": "Manage your personal connections."
   },
   "resetPasswordSuccess.page": {
     "title": "New password set",
@@ -95,5 +101,23 @@
     "labelPlatformAccess": "Platform access",
     "descriptionLevel": "Choose the highest access level to allow this application. Only levels within your current permissions are available.",
     "descriptionNoAccess": "Your account currently has no permission to access the platform."
+  },
+  "favorites": {
+    "labelTitle": "Favorites",
+    "description": "Drag favorites by their handle. Save to apply the order, removed entries and visibility.",
+    "labelMove": "Move {{name}}",
+    "labelRemoveNamed": "Remove {{name}} from favorites",
+    "labelSave": "Save",
+    "labelReset": "Reset",
+    "labelEmpty": "No favorites yet.",
+    "labelUnavailable": "No longer available",
+    "labelShowInSidebar": "Show in sidebar",
+    "errorSave": "Could not save favorites. Please try again.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Workspace",
+      "transcriber": "Transcriber",
+      "documentRepository": "Document repository"
+    }
   }
 }

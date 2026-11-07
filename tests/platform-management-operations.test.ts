@@ -546,6 +546,20 @@ describe("platform management operations", () => {
     expect(await execute("platform_connection_save", connection)).toEqual({
       id,
     });
+    const oauth = {
+      kind: "oauth",
+      name: "OAuth",
+      clientId: "client",
+      secret: "secret",
+      issuer: "https://auth.test",
+    };
+    await execute("platform_connection_save", oauth);
+    expect(io.saveConnectionSettings).toHaveBeenCalledWith(oauth, {
+      supabase: service,
+    });
+    await expect(
+      execute("platform_connection_save", { ...oauth, issuer: undefined }),
+    ).rejects.toThrow();
     io.publish.mockResolvedValue("artifact");
     expect(
       await execute("platform_artifact_publish", {

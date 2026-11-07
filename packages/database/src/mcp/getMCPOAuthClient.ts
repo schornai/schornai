@@ -24,11 +24,13 @@ export async function getMCPOAuthClient(
     !connection ||
     connection.kind !== "oauth" ||
     !connection.client_id ||
+    !connection.issuer ||
     !connection.secret?.trim()
   )
     throw new Error("MCP_OAUTH_CONNECTION_UNAVAILABLE");
   return {
     client_id: connection.client_id,
+    issuer: connection.issuer,
     client_secret: connection.secret,
     version: connection.version,
   };

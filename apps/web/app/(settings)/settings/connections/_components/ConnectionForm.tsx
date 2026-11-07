@@ -48,6 +48,7 @@ export function ConnectionForm({
   const router = useRouter();
   const [name, setName] = useState(connection?.name ?? "");
   const [clientId, setClientId] = useState(connection?.client_id ?? "");
+  const [issuer, setIssuer] = useState(connection?.issuer ?? "");
   const [secret, setSecret] = useState("");
   const [market, setMarket] = useState(connection?.market ?? "");
   const {
@@ -69,6 +70,7 @@ export function ConnectionForm({
       kind,
       name,
       ...(kind === "oauth" && connection ? {} : { clientId, secret }),
+      issuer: kind === "oauth" ? issuer : undefined,
       market: kind === "staan" ? market : undefined,
     });
   }
@@ -97,6 +99,20 @@ export function ConnectionForm({
               disabled={pending || !!connection}
               onChange={(e) => setClientId(e.target.value)}
             />
+          </Field>
+        )}
+        {kind === "oauth" && (
+          <Field>
+            <FieldLabel htmlFor={`${id}-issuer`}>{t("labelIssuer")}</FieldLabel>
+            <Input
+              id={`${id}-issuer`}
+              type="url"
+              required
+              value={issuer}
+              disabled={pending || !!connection?.issuer}
+              onChange={(e) => setIssuer(e.target.value)}
+            />
+            <FieldDescription>{t("descriptionIssuer")}</FieldDescription>
           </Field>
         )}
         {!(kind === "oauth" && connection) && (

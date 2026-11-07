@@ -5,6 +5,7 @@ export const connectionFixtures: ConnectionMetadata[] = [
     name: "GitHub",
     kind: "oauth",
     client_id: "example-client",
+    issuer: "https://github.com",
     market: null,
   },
   {
@@ -12,6 +13,7 @@ export const connectionFixtures: ConnectionMetadata[] = [
     name: "Websuche",
     kind: "brave",
     client_id: null,
+    issuer: null,
     market: null,
   },
   {
@@ -19,6 +21,7 @@ export const connectionFixtures: ConnectionMetadata[] = [
     name: "Staan",
     kind: "staan",
     client_id: null,
+    issuer: null,
     market: "de-de",
   },
 ];

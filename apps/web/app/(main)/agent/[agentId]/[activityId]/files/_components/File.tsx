@@ -68,7 +68,12 @@ export async function File({
         </HeaderMainAsideContent>
       </HeaderMain>
 
-      <TabsChat activityId={activityId} agentId={agentId} pathSegment="files" />
+      <TabsChat
+        activityId={activityId}
+        agentId={agentId}
+        pathSegment="files"
+        hasDocumentation={Boolean(agent?.documentation?.trim())}
+      />
 
       <ContainerMain>
         <StorageBreadcrumbs

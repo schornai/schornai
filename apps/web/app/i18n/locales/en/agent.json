@@ -5,7 +5,8 @@
       "errorCancel": "Generation could not be stopped. Please try again."
     },
     "ChatComposeMessage": {
-      "errorNoAccess": "You do not have access to this agent."
+      "errorNoAccess": "You do not have access to this agent.",
+      "labelRecommendedMessages": "Suggested messages"
     },
     "AgentInfoModel": {
       "labelTitle": "Model",
@@ -713,6 +714,16 @@
       "descriptionConflict": "The file changed in the meantime. Read its current content before saving again.",
       "descriptionRecovery": "The file needs recovery. Open the file before saving again.",
       "descriptionIndexNotQueued": "The file was saved, but indexing could not be started."
+    },
+    "ChatMessageItems": {
+      "labelTitle": "How can I help you?",
+      "descriptionEmpty": "Write your first message"
+    },
+    "TabsChat": {
+      "labelChat": "Chat",
+      "labelFiles": "Files",
+      "labelDocumentation": "Documentation",
+      "labelInfo": "Info"
     }
   },
   "page": {

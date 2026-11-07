@@ -11,6 +11,7 @@ const meta = {
         name: "Websuche",
         kind: "brave",
         client_id: null,
+        issuer: null,
         market: null,
       },
       {
@@ -18,6 +19,7 @@ const meta = {
         name: "GitHub",
         kind: "oauth",
         client_id: "example-client",
+        issuer: "https://github.com",
         market: null,
       },
       {
@@ -25,6 +27,7 @@ const meta = {
         name: "Staan",
         kind: "staan",
         client_id: null,
+        issuer: null,
         market: "de-de",
       },
     ],

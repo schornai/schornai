@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Pencil } from "lucide-react";
 import {
   SidebarFavoriteItemAgent,
   SidebarFavoriteItemDocumentRepository,
@@ -8,6 +10,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarGroupAction,
   SidebarMenu,
 } from "@schornio/aibox-package-ui/components/sidebar";
 import { Fragment } from "react/jsx-runtime";
@@ -19,7 +22,7 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 
 export async function SidebarFavorites() {
   const [
-    { agents, documentRepositories, favorites, transcribers },
+    { agents, documentRepositories, favorites, transcribers, showInSidebar },
     { t },
     { claims },
   ] = await Promise.all([
@@ -28,9 +31,9 @@ export async function SidebarFavorites() {
     getWorkspaceClaims(),
   ]);
 
-  // if (!showInSidebar) {
-  //   return undefined;
-  // }
+  if (!showInSidebar) {
+    return null;
+  }
 
   const workspaceMap = new Map(
     claims
@@ -58,6 +61,14 @@ export async function SidebarFavorites() {
       )}
     >
       <SidebarGroupLabel>{t("label")}</SidebarGroupLabel>
+      <SidebarGroupAction
+        className="text-sidebar-foreground/70 hover:text-sidebar-foreground [&>svg]:size-3"
+        render={<Link href="/me/favorites" />}
+        aria-label={t("labelEdit")}
+        title={t("labelEdit")}
+      >
+        <Pencil />
+      </SidebarGroupAction>
       <SidebarGroupContent>
         <SidebarMenu className="gap-1">
           {(favorites?.length ?? 0) === 0 ? (

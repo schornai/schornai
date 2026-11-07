@@ -29,6 +29,8 @@ Starte einen Chat über **Neuer Chat** am Agenten. Vorhandene Gespräche öffnes
 
 ![Nachrichteneingabe mit Nachdenken, Nachrichtenstapel, Dateiupload und Senden](../../assets/chat-eingabe.png)
 
+Der leere Chat zeigt das Agenten-Icon und den Hinweis **Schreibe deine erste Nachricht**. Wenn der Agent vorgeschlagene Nachrichten hat, erscheinen sie als Kacheln in der Agentenfarbe direkt über der Texteingabe. Ein Klick ersetzt den bisherigen Text und setzt den Fokus ins Eingabefeld. Du kannst den Vorschlag bearbeiten oder mit `Enter` senden; er wird nicht automatisch abgeschickt. Dasselbe gilt beim Einstieg über eine Vorschlagskarte in der Agenteninfo.
+
 ## Nachricht senden
 
 1. Beschreibe dein Ziel im Feld **Nachricht…**. Nenne relevante Daten und das gewünschte Format.
@@ -75,12 +77,15 @@ bereinigt. Bereits abgeschlossene Werkzeugaktionen bleiben erhalten.
 
 - **Chat:** Nachrichten und Antworten.
 - **Dateien:** die Dateien dieses Gesprächs.
-- **Info:** die aktuelle Agentenkonfiguration und Dokumentation.
+- **Dokumentation:** der vollständige Dokumentationstext des Agenten; nur bei hinterlegtem Text sichtbar.
+- **Info:** die aktuelle Agentenkonfiguration.
 
 Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [Hinweisen zur Fehlerbehebung](../../hilfe/fehlerbehebung.md).
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+
+Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion und wird nicht als MCP-Werkzeug angeboten. MCP-Clients können den gewünschten Text mit `platform_chat_send` senden.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

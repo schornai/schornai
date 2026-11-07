@@ -13,7 +13,7 @@ export function ContainerChat({ children }: { children: ReactNode }) {
         <MessageScrollerProvider autoScroll={true}>
           <MessageScroller>
             <MessageScrollerViewport className="scroll-fade-none">
-              {children}
+              <div className="flex min-h-full flex-col">{children}</div>
             </MessageScrollerViewport>
             <MessageScrollerButton />
           </MessageScroller>
