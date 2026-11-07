@@ -8,7 +8,9 @@ export async function getGrant(
 ) {
   const { data, error } = await supabase
     .from("platform_mcp_grants")
-    .select("id,user_id,client_id,access_level,resource,redirect_uri")
+    .select(
+      "id,user_id,client_id,access_level,resource,redirect_uri,access_expires_at",
+    )
     .eq("access_hash", hash)
     .eq("resource", resource)
     .gt("access_expires_at", new Date().toISOString())

@@ -48,12 +48,29 @@
   "connections": {
     "page": {
       "labelTitle": "Connections",
-      "descriptionConnections": "Your personal OAuth connections to MCP servers. Disconnecting removes credentials stored here. Calls already running may finish; revoke provider permissions directly with the provider.",
       "labelDisconnect": "Disconnect",
-      "descriptionEmpty": "Connect your account in chat when an MCP tool needs you to sign in.",
       "labelEmpty": "No connections yet",
-      "labelInfo": "About connections",
-      "errorDisconnect": "The connection could not be disconnected. Please try again."
+      "errorDisconnect": "The connection could not be disconnected. Please try again.",
+      "labelOutgoing": "Connections to external services",
+      "descriptionOutgoing": "schorn.ai uses these accounts to call external MCP services on your behalf.",
+      "labelServer": "MCP server",
+      "labelCancel": "Cancel",
+      "labelDisconnectNamed": "Disconnect from {{serverUrl}}",
+      "descriptionDisconnect": "Disconnect from {{serverUrl}}? The credentials stored here will be removed. Requests already in progress may still complete. You can revoke permissions with the provider directly."
+    },
+    "incoming": {
+      "labelTitle": "Access to schorn.ai",
+      "description": "These applications can access schorn.ai through MCP on your behalf. Authorization does not expand your own permissions.",
+      "labelCreated": "Authorized on",
+      "labelExpires": "Valid until",
+      "labelExpired": "Expired",
+      "labelRevoke": "Revoke access",
+      "labelRevokeNamed": "Revoke access for {{name}}",
+      "descriptionRevoke": "Revoke access for “{{name}}”? All access and refresh tokens for this authorization will become invalid. Requests already running may still finish. Reconnecting requires your authorization.",
+      "labelCancel": "Cancel",
+      "errorRevoke": "Access could not be revoked. Please try again.",
+      "labelApplication": "Application",
+      "labelLevel": "Access level"
     }
   },
   "platformMcp": {
@@ -74,7 +91,7 @@
     "labelConnectTitle": "Your tools. Your permission.",
     "descriptionConnect": "Connect an AI application to schorn.ai and decide which access to allow.",
     "descriptionPermissions": "Your existing permissions still apply. Authorizing an application does not expand your rights.",
-    "descriptionExpiry": "Access lasts for one hour. After that, you need to authorize it again.",
+    "descriptionExpiry": "Authorization lasts for up to 30 days. Applications that support refresh tokens renew access automatically in the background.",
     "labelPlatformAccess": "Platform access",
     "descriptionLevel": "Choose the highest access level to allow this application. Only levels within your current permissions are available.",
     "descriptionNoAccess": "Your account currently has no permission to access the platform."

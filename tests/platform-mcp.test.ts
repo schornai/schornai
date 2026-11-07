@@ -79,7 +79,7 @@ describe("platform MCP catalog", () => {
 });
 
 describe("platform OAuth inputs", () => {
-  it("negotiates authorization-code registration when a client also requests refresh tokens", () => {
+  it("accepts authorization-code and refresh-token registration", () => {
     const metadata = {
       client_name: "schorn.ai",
       redirect_uris: ["https://localhost:3000/api/mcp/oauth/callback"],
@@ -91,7 +91,7 @@ describe("platform OAuth inputs", () => {
         ...metadata,
         grant_types: ["authorization_code", "refresh_token"],
       }).grant_types,
-    ).toEqual(["authorization_code"]);
+    ).toEqual(["authorization_code", "refresh_token"]);
     expect(registrationSchema.parse(metadata).grant_types).toEqual([
       "authorization_code",
     ]);

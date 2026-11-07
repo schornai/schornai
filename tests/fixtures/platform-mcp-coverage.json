@@ -133,7 +133,7 @@
     "tools": ["platform_artifact_publish"]
   },
   "apps/web/app/_actions/signOut.ts": {
-    "protocol": "Die MCP-Verbindung wird über den OAuth-Widerrufsendpunkt beendet. Browser-Cookies gehören zur unabhängigen Browsersitzung."
+    "protocol": "Die MCP-Verbindung wird \u00fcber den OAuth-Widerrufsendpunkt beendet. Browser-Cookies geh\u00f6ren zur unabh\u00e4ngigen Browsersitzung."
   },
   "apps/web/app/_actions/storageBrowse.ts": {
     "tools": ["platform_files_list", "platform_repositories_list"]
@@ -179,12 +179,15 @@
     "tools": ["platform_profile_password_reset"]
   },
   "apps/web/app/signin/_actions/signInWithPassword.ts": {
-    "protocol": "Anmeldung ist Voraussetzung für MCP und erfolgt über den OAuth-Login. Zugangsdaten werden nicht zur Erlangung einer fremden MCP-Identität entgegengenommen."
+    "protocol": "Anmeldung ist Voraussetzung f\u00fcr MCP und erfolgt \u00fcber den OAuth-Login. Zugangsdaten werden nicht zur Erlangung einer fremden MCP-Identit\u00e4t entgegengenommen."
   },
   "apps/web/app/signin/_actions/signInWithSSO.ts": {
-    "protocol": "Anmeldung erfolgt vor Werkzeugzugriff über OAuth und den Identitätsanbieter. Die KI darf dessen interaktive Anmeldung nicht ersetzen."
+    "protocol": "Anmeldung erfolgt vor Werkzeugzugriff \u00fcber OAuth und den Identit\u00e4tsanbieter. Die KI darf dessen interaktive Anmeldung nicht ersetzen."
   },
   "apps/web/lib/groupSortView/action.ts": {
     "tools": ["platform_view_preferences_update"]
+  },
+  "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts": {
+    "tools": ["platform_personal_mcp_revoke"]
   }
 }

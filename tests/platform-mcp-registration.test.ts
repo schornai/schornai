@@ -39,7 +39,7 @@ it("registers the actual schorn.ai OAuth client while reporting only supported g
     client_id: "11111111-1111-4111-8111-111111111111",
     redirect_uris: [provider.redirectUrl],
     token_endpoint_auth_method: "none",
-    grant_types: ["authorization_code"],
+    grant_types: ["authorization_code", "refresh_token"],
   });
   expect(mocks.register).toHaveBeenCalledWith(
     "schorn.ai",

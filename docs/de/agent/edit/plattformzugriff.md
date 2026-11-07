@@ -15,6 +15,9 @@ meta:
     - "apps/web/app/(main)/agent/_components/AgentEditorRole.tsx"
     - "apps/web/lib/platformMcp/handleRequest.ts"
     - "apps/web/lib/platformMcp/authenticate.ts"
+    - "apps/web/app/api/platform-mcp/token/route.ts"
+    - "apps/web/app/api/platform-mcp/revoke/route.ts"
+    - "supabase/migrations/20261107113011_platform_mcp_refresh_tokens.sql"
     - "apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts"
     - "packages/database/src/mcp/platformAccess.ts"
     - "packages/database/src/mcp/platformAgentPolicy.ts"
@@ -75,7 +78,17 @@ Alle Stufen verwenden denselben Endpunkt `https://DEINE-BOX/mcp`. Wähle auf der
 
 Das Token ist an `/mcp` und die gewählte Stufe gebunden. Auch globale Administratoren geben mit der Auswahl **Benutzer** nur Benutzerzugriff frei. Werden deine Rechte später reduziert, stehen auch mit einem bestehenden Token nur die noch erlaubten Funktionen zur Verfügung. Beim Start eines weiteren Agenten bleibt diese Begrenzung erhalten. Die früheren Endpunkte mit Stufensuffix sind nicht mehr verfügbar: Stelle bestehende Verbindungen auf `/mcp` um und melde sie erneut an.
 
-Das Zugriffstoken ist eine Stunde gültig. Danach muss der Client erneut eine Freigabe einholen; Refresh-Tokens werden derzeit nicht ausgegeben. Fordert ein Client bei der dynamischen Registrierung zusätzlich `refresh_token` an, bestätigt der Server ausschließlich `authorization_code`; eine reine Refresh-Token-Registrierung wird abgelehnt. Clients können ein Token über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt zurückziehen. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Kontosperren und aktuelle Rollen werden bei externen MCP-Anfragen geprüft.
+Das Zugriffstoken ist höchstens eine Stunde gültig. Der OAuth-Server gibt zusätzlich ein **Refresh-Token** aus. Unterstützt dein MCP-Client die automatische Erneuerung, erhält er damit neue Zugriffstokens im Hintergrund; du musst nicht jede Stunde die Freigabeseite öffnen. schorn.ai unterstützt diese Erneuerung als MCP-Client bereits.
+
+Die gesamte Freigabe läuft **30 Tage nach dem ersten Tokenaustausch** ab. Erneuerungen verschieben diesen Zeitpunkt nicht. Danach ist eine neue sichtbare Freigabe erforderlich; bei einer weiterhin aktiven schorn.ai-Sitzung normalerweise ohne erneute Passworteingabe. Bereits vor Einführung der Refresh-Tokens verbundene Clients benötigen einmalig eine neue Freigabe. Clients ohne Refresh-Unterstützung müssen nach Ablauf des Zugriffstokens erneut eine Freigabe einholen.
+
+Bei jeder Erneuerung wird das Refresh-Token ersetzt. Der Client muss das neue Token speichern; eine Wiederverwendung eines verbrauchten Refresh-Tokens widerruft die gesamte Freigabe einschließlich des zuletzt ausgestellten Zugriffstokens. Auch nach einer verlorenen Erneuerungsantwort kann deshalb eine neue Freigabe nötig sein. Zugriffsstufe und Endpunkt bleiben gebunden, und aktuelle Rechte werden bei jedem Werkzeugaufruf geprüft. Gesperrte Konten können ihren Zugriff nicht verlängern.
+
+Die dynamische Registrierung und OAuth-Discovery unterstützen `authorization_code` und `refresh_token`; eine reine Refresh-Token-Registrierung ohne erstmalige Code-Anmeldung wird abgelehnt. Clients erneuern über `/api/platform-mcp/token` mit `grant_type=refresh_token`, `client_id`, `refresh_token` und derselben `resource`. Eine mitgesendete `scope` muss der freigegebenen Stufe entsprechen; eine andere Stufe benötigt eine neue Freigabe. Der Server liefert das neue Tokenpaar, die verbleibende Zugriffstoken-Laufzeit und die freigegebene Stufe zurück.
+
+Unter [Profil → Verbindungen](../../me/connections.md) kannst du deine eingehenden Freigaben mit Zugriffsstufe und Ablaufdatum ansehen und einzeln widerrufen.
+
+Clients können über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt ein Zugriffstoken oder Refresh-Token zusammen mit ihrer `client_id` widerrufen. Das beendet die gesamte Freigabe. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Die Migration `platform_mcp_refresh_tokens` ist für Ausgabe, Erneuerung und Widerruf erforderlich. OAuth-Erneuerung und -Widerruf sind Protokollendpunkte, keine Modellwerkzeuge; Tokens gehören nicht in Chatnachrichten.
 
 Externe Clients entscheiden selbst, wann sie zusätzlich vor einzelnen Werkzeugaufrufen nachfragen. Die Bestätigung im schorn.ai-Chat gilt für interne Plattformwerkzeuge.
 
@@ -136,6 +149,8 @@ Die folgenden Namen sind die tatsächlichen MCP-Werkzeugnamen. Jede höhere Stuf
 | `platform_permissions_get`                       | Benutzer                | Eigene Berechtigungen und Werkzeugstufe lesen                                        | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |
 | `platform_personal_mcp_connections`              | Benutzer                | Eigene externe OAuth-Verbindungen auflisten                                          | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |
 | `platform_personal_mcp_disconnect`               | Benutzer                | Eigene externe OAuth-Verbindung trennen                                              | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |
+| `platform_personal_mcp_grants`                   | Benutzer                | Eigene eingehende Plattformfreigaben auflisten                                       | Eigenes Konto; nur Metadaten, keine Tokens                                                                                  |
+| `platform_personal_mcp_revoke`                   | Benutzer                | Eine eigene Plattformfreigabe und alle zugehörigen Tokens widerrufen                 | Eigene `grantId`; kann den aufrufenden Client selbst trennen                                                                |
 | `platform_profile_avatar_update`                 | Benutzer                | Eigenes Profilbild setzen oder zurücksetzen                                          | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |
 | `platform_profile_get`                           | Benutzer                | Eigenes Profil und Anmeldemethode lesen                                              | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |
 | `platform_profile_name_update`                   | Benutzer                | Eigenen Profilnamen ändern                                                           | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                     |

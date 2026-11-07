@@ -346,5 +346,9 @@
   [
     "apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts",
     "apps/web/.storybook/server-mocks/app/oauth/authorize/_actions/authorizePlatformMcp.ts"
+  ],
+  [
+    "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts",
+    "apps/web/.storybook/server-mocks/app/(settings)/me/connections/_actions/revokePlatformMcp.ts"
   ]
 ]

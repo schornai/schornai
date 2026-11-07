@@ -1,3 +1,5 @@
+import { listUserGrants } from "@schornio/aibox-database/platformMcp/listUserGrants";
+import { revokeUserGrant } from "@schornio/aibox-database/platformMcp/revokeUserGrant";
 import { uploadAsset } from "@schornio/aibox-database/storage/uploadAsset";
 import { redeemPasswordResetKey } from "@schornio/aibox-database/user/redeemPasswordResetKey";
 import { preferencesSchema } from "@schornio/aibox-database/config/viewPreferences";
@@ -114,6 +116,28 @@ export function addProfileTools(
         supabase: context.supabaseServiceRole,
       });
       return { disconnected: true };
+    },
+  );
+  add(
+    "platform_personal_mcp_grants",
+    "List applications authorized to access schorn.ai on your behalf, including access level and expiry, without credentials.",
+    "user",
+    true,
+    z.object({}),
+    () =>
+      listUserGrants(context.userId, { supabase: context.supabaseServiceRole }),
+  );
+  add(
+    "platform_personal_mcp_revoke",
+    "Revoke one of your incoming schorn.ai MCP authorizations and all its access and refresh tokens. May disconnect this client if it revokes its own grant.",
+    "user",
+    false,
+    z.object({ grantId: z.uuid() }),
+    async ({ grantId }) => {
+      await revokeUserGrant(context.userId, grantId, {
+        supabase: context.supabaseServiceRole,
+      });
+      return { revoked: true };
     },
   );
   add(

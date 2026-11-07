@@ -6,10 +6,9 @@ export async function revokeGrant(
   clientId: string,
   { supabase }: { supabase: SupabaseClient },
 ) {
-  const { error } = await supabase
-    .from("platform_mcp_grants")
-    .delete()
-    .eq("access_hash", hash)
-    .eq("client_id", clientId);
+  const { error } = await supabase.rpc("revoke_platform_mcp_grant", {
+    p_token_hash: hash,
+    p_client_id: clientId,
+  });
   if (error) throw new Error("MCP_REVOCATION_FAILED");
 }

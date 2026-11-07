@@ -61,9 +61,7 @@ export const registrationSchema = z.object({
     .min(1)
     .max(2)
     .refine((grants) => grants.includes("authorization_code"))
-    .default(["authorization_code"])
-    // RFC 7591 permits narrowing requested metadata in the registration
-    // response. Clients commonly request refresh as well; we only issue codes.
-    .transform(() => ["authorization_code"] as ["authorization_code"]),
+    .default(["authorization_code"]),
+
   response_types: z.array(z.literal("code")).length(1).default(["code"]),
 });

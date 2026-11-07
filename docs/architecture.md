@@ -217,6 +217,11 @@ compatibility export. Delegated chats receive claims limited to the tool's level
 [Platform OAuth](../apps/web/lib/platformMcp/oauth.ts) uses separate opaque tokens,
 S256 PKCE and exact resource binding. [Database operations](../packages/database/src/platformMcp)
 keep hashed codes and tokens private; the exchange RPC consumes a code atomically.
+The refresh RPC locks the grant, consumes the refresh credential and rotates both
+credentials in one transaction. Consumed hashes remain until grant deletion to
+revoke the entire family on replay. Refresh never extends the original 30-day
+consent deadline; either token type can revoke the grant. See the
+[rotation regression tests](../supabase/tests/platform_mcp_refresh.sql).
 The [consent action](../apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts)
 validates the registered redirect and the selected level against the authenticated user's current permissions.
 The [consent user loader](../apps/web/lib/platformMcp/getAuthorizationUser.ts)

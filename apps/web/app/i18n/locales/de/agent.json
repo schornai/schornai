@@ -704,7 +704,9 @@
         "platform_tasks_list": "Aufgaben auflisten",
         "platform_workspace_users": "Workspace-Mitglieder anzeigen",
         "platform_permissions_get": "Eigene Berechtigungen anzeigen",
-        "platform_user_get": "Benutzer anzeigen"
+        "platform_user_get": "Benutzer anzeigen",
+        "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",
+        "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",

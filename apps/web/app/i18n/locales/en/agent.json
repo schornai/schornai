@@ -704,7 +704,9 @@
         "platform_tasks_list": "List tasks",
         "platform_workspace_users": "View workspace members",
         "platform_permissions_get": "View own permissions",
-        "platform_user_get": "View user"
+        "platform_user_get": "View user",
+        "platform_personal_mcp_grants": "List your platform authorizations",
+        "platform_personal_mcp_revoke": "Revoke platform authorization"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",
