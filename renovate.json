@@ -14,6 +14,18 @@
   },
   "packageRules": [
     {
+      "description": "Maintain the pinned Supabase stack as a coordinated upgrade: review upstream.json, the upstream Compose file, overrides and volume scripts together, then validate the XRAG bundle. Independent image bumps do not validate stack compatibility.",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["packages/xrag/update/container/supabase/**"],
+      "enabled": false
+    },
+    {
+      "description": "These images are built locally by packages/xrag/update/build/images.mts and are not registry dependencies.",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["aibox-*"],
+      "enabled": false
+    },
+    {
       "description": "The installed PG15 data volume requires an explicit major-version migration.",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["supabase/postgres"],
