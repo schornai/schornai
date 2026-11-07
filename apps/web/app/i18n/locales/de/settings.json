@@ -330,7 +330,9 @@
     "cardXragLabel": "XRAG hochladen",
     "cardXragDescription": "Installieren Sie Agenten, Dokumente, Modelle oder aktualisieren Sie die gesamte Box über ein XRAG-Paket.",
     "cardAppearanceLabel": "Darstellung",
-    "cardAppearanceDescription": "Passen Sie die Farben und die Darstellung der Box an Ihre Wünsche an."
+    "cardAppearanceDescription": "Passen Sie die Farben und die Darstellung der Box an Ihre Wünsche an.",
+    "cardConnectionsLabel": "Verbindungen",
+    "cardConnectionsDescription": "OAuth-Apps und Suchzugänge zentral verwalten."
   },
   "users.page": {
     "labelTitle": "Benutzer:innen"

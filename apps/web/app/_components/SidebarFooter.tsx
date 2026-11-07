@@ -75,6 +75,7 @@ export async function SidebarFooter() {
                       }
                     />
                     <DropdownMenuItem
+                      className="cursor-pointer"
                       render={
                         <Link href="/models">
                           <Brain />

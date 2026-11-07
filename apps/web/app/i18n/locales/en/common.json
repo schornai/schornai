@@ -10,7 +10,8 @@
       },
       "SidebarFavorites": {
         "label": "Favorites",
-        "empty": "No favorites added yet."
+        "empty": "No favorites added yet.",
+        "labelEdit": "Edit favorites"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "No favorites",

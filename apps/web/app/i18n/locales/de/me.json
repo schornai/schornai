@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Personalisieren",
-    "infoPersonalizeDescription": "Hier können Sie Ihr Profilbild hochladen und Ihren Namen anpassen."
+    "infoPersonalizeDescription": "Hier können Sie Ihr Profilbild hochladen und Ihren Namen anpassen.",
+    "cardFavoritesLabel": "Favoriten",
+    "cardFavoritesDescription": "Favoriten sortieren, entfernen und in der Seitenleiste anzeigen.",
+    "cardPermissionsLabel": "Berechtigungen",
+    "cardPermissionsDescription": "Deine Rollen und Zugriffsrechte ansehen.",
+    "cardConnectionsLabel": "Verbindungen",
+    "cardConnectionsDescription": "Deine persönlichen Verbindungen verwalten."
   },
   "resetPasswordSuccess.page": {
     "title": "Neues Passwort gesetzt",
@@ -95,5 +101,23 @@
     "labelPlatformAccess": "Plattformzugriff",
     "descriptionLevel": "Wähle die höchste Zugriffsstufe, die du dieser Anwendung erlaubst. Verfügbar sind nur Stufen innerhalb deiner aktuellen Berechtigungen.",
     "descriptionNoAccess": "Dein Konto hat derzeit keine Berechtigung für den Plattformzugriff."
+  },
+  "favorites": {
+    "labelTitle": "Favoriten",
+    "description": "Verschiebe Favoriten am Griff. Übernimm Reihenfolge, entfernte Einträge und Sichtbarkeit mit Speichern.",
+    "labelMove": "{{name}} verschieben",
+    "labelRemoveNamed": "{{name}} aus Favoriten entfernen",
+    "labelSave": "Speichern",
+    "labelReset": "Zurücksetzen",
+    "labelEmpty": "Keine Favoriten vorhanden.",
+    "labelUnavailable": "Nicht mehr verfügbar",
+    "labelShowInSidebar": "In der Seitenleiste anzeigen",
+    "errorSave": "Favoriten konnten nicht gespeichert werden. Bitte erneut versuchen.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Arbeitsplatz",
+      "transcriber": "Transkriptor",
+      "documentRepository": "Dokumentenablage"
+    }
   }
 }

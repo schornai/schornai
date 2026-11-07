@@ -3,6 +3,7 @@ import {
   Library,
   PackageOpen,
   Paintbrush,
+  Plug,
   Settings,
   UsersRound,
 } from "lucide-react";
@@ -66,6 +67,24 @@ export default async function Page() {
 
               <div className="p-3 text-sm">
                 {t("cardWorkspacesDescription")}
+              </div>
+            </div>
+
+            <div className="w-96">
+              <ContainerStyled
+                className="flex aspect-video flex-col items-center"
+                render={<Link href="/settings/connections" />}
+                variant="card"
+              >
+                <div className="bg-muted my-auto flex aspect-square w-36 items-center justify-center rounded-full">
+                  <Plug className="size-10" />
+                </div>
+                <div className="mt-auto text-sm font-medium">
+                  {t("cardConnectionsLabel")}
+                </div>
+              </ContainerStyled>
+              <div className="p-3 text-sm">
+                {t("cardConnectionsDescription")}
               </div>
             </div>
 

@@ -44,3 +44,14 @@ export const DocumentRepository: Story = {
     },
   },
 };
+
+export const Hidden: Story = {
+  parameters: {
+    serviceFixtures: {
+      getCurrentUserConfigFavorites: { showInSidebar: false },
+    },
+  },
+  async play({ canvas }) {
+    await expect(canvas.queryByRole("list")).not.toBeInTheDocument();
+  },
+};
