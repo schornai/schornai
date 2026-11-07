@@ -38,7 +38,7 @@ vi.mock(
 );
 vi.mock(
   "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatContext",
-  () => ({ useCanSendMessage: () => mocks.canSend }),
+  () => ({ useCanSendMessage: () => mocks.canSend, useMessages: () => [] }),
 );
 vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
   useFileUpload: () => ({
@@ -593,4 +593,32 @@ it("connects MCP through OAuth bound to the pending approval, not a generic appr
   expect(fields.get("mcpId")).toBe("trello");
   expect(screen.queryByRole("button", { name: "labelApprove" })).toBeNull();
   expect(mocks.approve).not.toHaveBeenCalled();
+});
+
+it("replaces the draft and focuses the textbox for tiles and initial or changed hashes", () => {
+  mocks.context.interaction = { type: "message-batch" };
+  const recommendations = [
+    { id: "first", label: "First suggestion", message: "First message" },
+    { id: "second", label: "Second suggestion", message: "Second message" },
+  ];
+  const originalUrl = window.location.href;
+  try {
+    window.history.replaceState(null, "", "#recommendedMessage=first");
+    render(<ChatComposeMessage recommendedMessages={recommendations} />);
+    expect(mocks.text).toHaveBeenLastCalledWith("First message");
+    expect(document.activeElement).toBe(screen.getByRole("textbox"));
+    expect(window.location.hash).toBe("");
+    fireEvent.click(screen.getByRole("button", { name: /Second suggestion/ }));
+    expect(mocks.text).toHaveBeenLastCalledWith("Second message");
+    expect(document.activeElement).toBe(screen.getByRole("textbox"));
+    act(() => {
+      window.history.replaceState(null, "", "#recommendedMessage=first");
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    });
+    expect(mocks.text).toHaveBeenLastCalledWith("First message");
+    expect(document.activeElement).toBe(screen.getByRole("textbox"));
+    expect(client.execute).not.toHaveBeenCalled();
+  } finally {
+    window.history.replaceState(null, "", originalUrl);
+  }
 });

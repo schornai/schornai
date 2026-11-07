@@ -5,7 +5,8 @@
       "errorCancel": "Die Generierung konnte nicht abgebrochen werden. Bitte erneut versuchen."
     },
     "ChatComposeMessage": {
-      "errorNoAccess": "Kein Zugriff auf diesen Agenten."
+      "errorNoAccess": "Kein Zugriff auf diesen Agenten.",
+      "labelRecommendedMessages": "Vorgeschlagene Nachrichten"
     },
     "AgentEditorSettingsAppearance": {
       "labelLegend": "Aussehen",
@@ -713,6 +714,16 @@
       "descriptionConflict": "Die Datei wurde zwischenzeitlich geändert. Lies den aktuellen Inhalt vor dem erneuten Speichern.",
       "descriptionRecovery": "Die Datei benötigt eine Wiederherstellung. Öffne die Datei, bevor du erneut speicherst.",
       "descriptionIndexNotQueued": "Die Datei wurde gespeichert, die Indexierung konnte jedoch nicht gestartet werden."
+    },
+    "ChatMessageItems": {
+      "labelTitle": "Wie kann ich dir helfen?",
+      "descriptionEmpty": "Schreibe deine erste Nachricht"
+    },
+    "TabsChat": {
+      "labelChat": "Chat",
+      "labelFiles": "Dateien",
+      "labelDocumentation": "Dokumentation",
+      "labelInfo": "Info"
     }
   },
   "page": {

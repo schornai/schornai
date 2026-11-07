@@ -14,7 +14,7 @@ meta:
 
 # Zuordnung aller App-Seiten
 
-Diese Übersicht erfasst **55 Seitenrouten** aus `apps/web/app`. Routengruppen wie `(main)` und `(settings)` sind keine URL-Bestandteile. `[agentId]` und ähnliche Angaben sind Platzhalter. `[[...path]]` steht für das optionale Hauptverzeichnis, einen Ordnerpfad oder eine Datei.
+Diese Übersicht erfasst **57 Seitenrouten** aus `apps/web/app`. Routengruppen wie `(main)` und `(settings)` sind keine URL-Bestandteile. `[agentId]` und ähnliche Angaben sind Platzhalter. `[[...path]]` steht für das optionale Hauptverzeichnis, einen Ordnerpfad oder eine Datei.
 
 Setze vor eine App-Route die Adresse deiner Instanz, etwa `https://box.example.org/agent`. Ersetze Kennungen wie `[agentId]` durch die ID aus der geöffneten App-Seite. Die zweite Spalte verlinkt die zugehörige Anleitung.
 
@@ -26,6 +26,7 @@ Setze vor eine App-Route die Adresse deiner Instanz, etwa `https://box.example.o
 | `/agent/[agentId]`                                               | [Fähigkeiten eines Agenten ansehen](../agent/details.md)                                    | Benutzer:in (user) oder höher im Arbeitsplatz des Agenten.                                                                                                   |
 | `/agent/[agentId]/[activityId]`                                  | [Mit einem Agenten chatten](../agent/chat/index.md)                                         | Benutzer:in (user) oder höher im Arbeitsplatz des Agenten; Zugriff auf das Gespräch.                                                                         |
 | `/agent/[agentId]/[activityId]/files/[[...path]]`                | [Dateien und Aufnahmen im Chat](../agent/chat/dateien.md)                                   | Benutzer:in (user) oder höher; Zugriff auf das Gespräch. Für gemeinsame Ablagen gelten deren zusätzliche Rechte.                                             |
+| `/agent/[agentId]/[activityId]/documentation`                    | [Dokumentation im Gespräch](../agent/chat/info.md)                                          | Benutzer:in (user) oder höher; Zugriff auf den Agenten. Nur bei hinterlegter Dokumentation.                                                                  |
 | `/agent/[agentId]/[activityId]/info`                             | [Agenteninformationen im Gespräch](../agent/chat/info.md)                                   | Benutzer:in (user) oder höher; Zugriff auf den Agenten und das Gespräch.                                                                                     |
 | `/agent/[agentId]/edit`                                          | [Agenten bearbeiten, kopieren und löschen](../agent/edit/index.md)                          | Arbeitsplatzadministrator:in (workspace-admin) oder Administrator:in (admin).                                                                                |
 | `/agent/new`                                                     | [Einen Agenten erstellen](../agent/new.md)                                                  | Arbeitsplatzadministrator:in (workspace-admin) oder Administrator:in (admin).                                                                                |

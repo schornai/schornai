@@ -72,7 +72,12 @@ export async function Folder({
         </HeaderMainAsideContent>
       </HeaderMain>
 
-      <TabsChat activityId={activityId} agentId={agentId} pathSegment="files" />
+      <TabsChat
+        activityId={activityId}
+        agentId={agentId}
+        pathSegment="files"
+        hasDocumentation={Boolean(agent?.documentation?.trim())}
+      />
 
       <StorageView />
     </StorageContext>

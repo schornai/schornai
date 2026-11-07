@@ -77,21 +77,26 @@ export default async function Page(
             activityId={activityId}
             agentId={agentId}
             pathSegment="chat"
+            hasDocumentation={Boolean(agent.documentation?.trim())}
           />
 
-          <ContainerMain>
+          <ContainerMain className="flex flex-1 flex-col">
             <TabsMainContent view="default">
-              <MessageScrollerContent>
+              <MessageScrollerContent className="h-auto min-h-0 flex-1">
                 <ChatMessageItems
                   activityId={activityId}
                   agentColor={agent.color}
+                  agentIcon={agent.icon}
                 />
               </MessageScrollerContent>
             </TabsMainContent>
           </ContainerMain>
         </ContainerChat>
 
-        <ChatComposeMessage agentColor={agent.color} />
+        <ChatComposeMessage
+          agentColor={agent.color}
+          recommendedMessages={agent.recommendedMessages}
+        />
       </ChatComposeMessageContext>
     </ChatContext>
   );
