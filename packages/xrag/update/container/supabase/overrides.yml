@@ -147,7 +147,7 @@ services:
       - postgrest
   storage:
     container_name: supabase-storage
-    image: supabase/storage-api:v1.89.2
+    image: supabase/storage-api:v1.89.9
     depends_on: !override
       db:
         condition: service_healthy
