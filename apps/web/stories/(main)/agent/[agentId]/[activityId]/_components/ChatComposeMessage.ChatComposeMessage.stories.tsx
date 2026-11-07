@@ -1,9 +1,18 @@
+import { ChatComposeFixtureProvider } from "../../../../../../.storybook/context-fixtures";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChatComposeMessage } from "../../../../../../app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessage";
 
 const meta = {
   title: "Web/(main)/agent/[agentId]/[activityId]/ChatComposeMessage",
   component: ChatComposeMessage,
+  decorators: [
+    (Story) => (
+      <ChatComposeFixtureProvider>
+        <Story />
+      </ChatComposeFixtureProvider>
+    ),
+  ],
   args: { agentColor: { type: "color-oklch-hue", oklchHue: 284 } },
 } satisfies Meta<typeof ChatComposeMessage>;
 export default meta;
@@ -196,5 +205,87 @@ export const ToolApproval: Story = {
         },
       },
     },
+  },
+};
+
+const recommendedMessages = [
+  {
+    id: "summary",
+    label: "Zusammenfassen",
+    message: "Fasse die wichtigsten Punkte zusammen.",
+  },
+  {
+    id: "ideas",
+    label: "Ideen sammeln",
+    message: "Hilf mir, neue Ideen zu sammeln.",
+  },
+];
+
+export const RecommendedMessages: Story = {
+  args: { recommendedMessages },
+  parameters: { contextFixtures: { useMessages: [] } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.clear(canvas.getByRole("textbox"));
+    await userEvent.type(
+      canvas.getByRole("textbox"),
+      "Mein bisheriger Entwurf",
+    );
+    await userEvent.click(
+      canvas.getByRole("button", { name: /Zusammenfassen/ }),
+    );
+    await waitFor(() =>
+      expect(canvas.getByRole("textbox")).toHaveValue(
+        recommendedMessages[0]!.message,
+      ),
+    );
+    await expect(canvas.getByRole("textbox")).toHaveFocus();
+    await userEvent.click(
+      canvas.getByRole("button", { name: /Ideen sammeln/ }),
+    );
+    await waitFor(() =>
+      expect(canvas.getByRole("textbox")).toHaveValue(
+        recommendedMessages[1]!.message,
+      ),
+    );
+    await expect(canvas.getByRole("textbox")).toHaveFocus();
+  },
+};
+
+export const RecommendedMessageHash: Story = {
+  args: { recommendedMessages },
+  parameters: { contextFixtures: { useMessages: [] } },
+  beforeEach: () => {
+    const originalUrl = window.location.href;
+    window.history.replaceState(
+      window.history.state,
+      "",
+      "#recommendedMessage=summary",
+    );
+    return () =>
+      window.history.replaceState(window.history.state, "", originalUrl);
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await waitFor(() =>
+      expect(canvas.getByRole("textbox")).toHaveValue(
+        recommendedMessages[0]!.message,
+      ),
+    );
+    await expect(canvas.getByRole("textbox")).toHaveFocus();
+    await expect(window.location.hash).toBe("");
+    window.history.replaceState(
+      window.history.state,
+      "",
+      "#recommendedMessage=ideas",
+    );
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+    await waitFor(() =>
+      expect(canvas.getByRole("textbox")).toHaveValue(
+        recommendedMessages[1]!.message,
+      ),
+    );
+    await expect(canvas.getByRole("textbox")).toHaveFocus();
+    await expect(window.location.hash).toBe("");
   },
 };

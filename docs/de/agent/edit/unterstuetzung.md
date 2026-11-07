@@ -39,4 +39,4 @@ Wähle unter **Vorgeschlagene Nachrichten** die Aktion **Nachricht hinzufügen**
 
 Beispiel: Bezeichnung „Besprechung zusammenfassen“, Nachricht „Fasse die folgenden Notizen in Entscheidungen, offene Fragen und nächste Schritte zusammen. Frage nach, wenn Angaben fehlen.“
 
-**Aktueller Hinweis:** Der direkte Einstieg über eine Vorschlagskarte kann auf eine nicht vorhandene Route führen. Bis dieser Ablauf korrigiert ist, können Benutzer:innen den Vorschlag lesen und seinen Text in einen über **Neuer Chat** gestarteten Chat übernehmen.
+Die Vorschläge erscheinen in der Agenteninfo und im leeren Chat über der Texteingabe. Ein Klick übernimmt den vollständigen Nachrichtentext in das Eingabefeld und fokussiert es. Vorhandener Eingabetext wird ersetzt; gesendet wird erst mit **Senden** oder `Enter`.

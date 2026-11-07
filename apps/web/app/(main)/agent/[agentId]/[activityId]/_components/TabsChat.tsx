@@ -1,19 +1,25 @@
-import { File, Info, MessageSquare } from "lucide-react";
+"use client";
+
+import { Book, File, Info, MessageSquare } from "lucide-react";
 import {
   TabsMainList,
   TabsMainTriggerBase,
 } from "../../../../../_components/TabsMain";
 import Link from "next/link";
+import { useT } from "next-i18next/client";
 
 export function TabsChat({
   activityId,
   agentId,
   pathSegment,
+  hasDocumentation = false,
 }: {
   activityId: string;
   agentId: string;
-  pathSegment: "chat" | "files" | "info";
+  pathSegment: "chat" | "files" | "documentation" | "info";
+  hasDocumentation?: boolean;
 }) {
+  const { t } = useT("agent", { keyPrefix: "_components.TabsChat" });
   return (
     <TabsMainList className="mb-6" stickyTop>
       <TabsMainTriggerBase
@@ -21,7 +27,7 @@ export function TabsChat({
         nativeButton={false}
         render={
           <Link href={`/agent/${agentId}/${activityId}`}>
-            <MessageSquare /> Chat
+            <MessageSquare /> {t("labelChat")}
           </Link>
         }
       />
@@ -30,16 +36,27 @@ export function TabsChat({
         nativeButton={false}
         render={
           <Link href={`/agent/${agentId}/${activityId}/files`}>
-            <File /> Dateien
+            <File /> {t("labelFiles")}
           </Link>
         }
       />
+      {hasDocumentation ? (
+        <TabsMainTriggerBase
+          isCurrentView={pathSegment === "documentation"}
+          nativeButton={false}
+          render={
+            <Link href={`/agent/${agentId}/${activityId}/documentation`}>
+              <Book /> {t("labelDocumentation")}
+            </Link>
+          }
+        />
+      ) : null}
       <TabsMainTriggerBase
         isCurrentView={pathSegment === "info"}
         nativeButton={false}
         render={
           <Link href={`/agent/${agentId}/${activityId}/info`}>
-            <Info /> Info
+            <Info /> {t("labelInfo")}
           </Link>
         }
       />

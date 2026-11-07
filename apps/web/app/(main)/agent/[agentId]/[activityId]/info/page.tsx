@@ -4,8 +4,6 @@ import {
 } from "@schornio/aibox-package-ui/components/header-main";
 import { AgentInfo } from "../../../_components/AgentInfo";
 import { BotMessageSquare } from "lucide-react";
-import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
-import { MarkdownProse } from "@schornio/aibox-package-ui/components/markdown-prose";
 import { TabsChat } from "../_components/TabsChat";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import { getAIModels } from "../../../../../_models/getAIModels";
@@ -56,7 +54,12 @@ export default async function Page(
         </HeaderMainContent>
       </HeaderMain>
 
-      <TabsChat activityId={activityId} agentId={agentId} pathSegment="info" />
+      <TabsChat
+        activityId={activityId}
+        agentId={agentId}
+        pathSegment="info"
+        hasDocumentation={Boolean(agent.documentation?.trim())}
+      />
 
       <AgentInfo
         agent={agent}
@@ -70,14 +73,6 @@ export default async function Page(
           (workspace) => workspace.id === agent.workspaceId,
         )}
       />
-
-      <hr className="my-10" />
-
-      <ContainerMain>
-        <MarkdownProse className="max-w-full">
-          {agent.documentation}
-        </MarkdownProse>
-      </ContainerMain>
     </>
   );
 }
