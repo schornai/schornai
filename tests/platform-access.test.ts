@@ -2,18 +2,12 @@ import { describe, expect, it } from "vitest";
 import {
   includesPlatformAccess,
   platformAccessLevels,
-  platformAccessPath,
+  availablePlatformAccessLevels,
   requirePlatformAccess,
 } from "../packages/database/src/mcp/platformAccess.ts";
 
 describe("platform access", () => {
-  it("exposes cumulative levels at the four public paths", () => {
-    expect(platformAccessLevels.map(platformAccessPath)).toEqual([
-      "/mcp",
-      "/mcp/editor",
-      "/mcp/workspace",
-      "/mcp/admin",
-    ]);
+  it("exposes cumulative access levels", () => {
     for (const [i, granted] of platformAccessLevels.entries()) {
       for (const [j, required] of platformAccessLevels.entries()) {
         expect(includesPlatformAccess(granted, required)).toBe(i >= j);
@@ -74,4 +68,18 @@ it("limits delegated chat permissions to the tool's ceiling without adding membe
     { organization_id: "a", role: "editor" },
     { organization_id: "b", role: "user" },
   ]);
+});
+
+it("only offers consent levels permitted by the current roles", () => {
+  expect(availablePlatformAccessLevels("admin")).toEqual(platformAccessLevels);
+  expect(availablePlatformAccessLevels([])).toEqual([]);
+  for (const [role, levels] of [
+    ["user", ["user"]],
+    ["editor", ["user", "editor"]],
+    ["workspace-admin", ["user", "editor", "workspace"]],
+  ] as const) {
+    expect(
+      availablePlatformAccessLevels([{ organization_id: "a", role }]),
+    ).toEqual(levels);
+  }
 });

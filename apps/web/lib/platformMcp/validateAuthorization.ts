@@ -10,7 +10,7 @@ export async function validateAuthorization(value: unknown) {
   const origin = mcpRequestOrigin(
     new Request(`http://${h.get("host")}`, { headers: h }),
   );
-  validateResource(input.resource, input.scope, origin);
+  validateResource(input.resource, origin);
   const client = await getClient(input.client_id, {
     supabase: createSupabaseServiceRoleClient(),
   });

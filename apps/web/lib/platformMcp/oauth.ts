@@ -1,9 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
 import { z } from "zod";
-import {
-  platformAccessLevels,
-  platformAccessPath,
-} from "@schornio/aibox-package-database/mcp/platformAccess";
+import { platformAccessLevels } from "@schornio/aibox-package-database/mcp/platformAccess";
 
 export const hashCredential = (value: string) =>
   createHash("sha256").update(value).digest("base64url");
@@ -16,17 +13,28 @@ export const authorizationSchema = z.object({
   code_challenge_method: z.literal("S256"),
   code_challenge: z.string().regex(/^[A-Za-z0-9_-]{43}$/),
   resource: z.url().max(2048),
-  scope: z.enum(platformAccessLevels),
+  scope: z
+    .string()
+    .max(200)
+    .optional()
+    .refine(
+      (scope) =>
+        scope === undefined ||
+        scope.trim() === "" ||
+        scope
+          .trim()
+          .split(/\s+/)
+          .every((level) =>
+            platformAccessLevels.includes(
+              level as (typeof platformAccessLevels)[number],
+            ),
+          ),
+    ),
   state: z.string().min(1).max(2048),
 });
 
-export function validateResource(
-  resource: string,
-  level: (typeof platformAccessLevels)[number],
-  origin: string,
-) {
-  if (resource !== `${origin}${platformAccessPath(level)}`)
-    throw new Error("INVALID_RESOURCE");
+export function validateResource(resource: string, origin: string) {
+  if (resource !== `${origin}/mcp`) throw new Error("INVALID_RESOURCE");
 }
 
 export function validRedirectUri(value: string) {
@@ -49,8 +57,13 @@ export const registrationSchema = z.object({
     .max(10),
   token_endpoint_auth_method: z.literal("none").default("none"),
   grant_types: z
-    .array(z.literal("authorization_code"))
-    .length(1)
-    .default(["authorization_code"]),
+    .array(z.enum(["authorization_code", "refresh_token"]))
+    .min(1)
+    .max(2)
+    .refine((grants) => grants.includes("authorization_code"))
+    .default(["authorization_code"])
+    // RFC 7591 permits narrowing requested metadata in the registration
+    // response. Clients commonly request refresh as well; we only issue codes.
+    .transform(() => ["authorization_code"] as ["authorization_code"]),
   response_types: z.array(z.literal("code")).length(1).default(["code"]),
 });

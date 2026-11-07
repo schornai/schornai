@@ -4,8 +4,9 @@ import { buildAccessToken } from "@schornio/aibox-package-database/user/buildAcc
 import { getGrant } from "@schornio/aibox-package-database/platformMcp/getGrant";
 import {
   platformAccessLevels,
-  requirePlatformAccess,
   limitPlatformClaims,
+  availablePlatformAccessLevels,
+  includesPlatformAccess,
   type PlatformAccessLevel,
 } from "@schornio/aibox-package-database/mcp/platformAccess";
 import { createSupabaseServiceRoleClient } from "@/lib/supabase/createSupabaseServiceRoleClient";
@@ -14,7 +15,6 @@ import { hashCredential } from "./oauth";
 export async function authenticatePlatformMcp(
   request: Request,
   resource: string,
-  level: PlatformAccessLevel,
 ) {
   const authorization = request.headers.get("authorization");
   const token = authorization?.match(/^Bearer ([A-Za-z0-9_-]{43})$/i)?.[1];
@@ -25,8 +25,7 @@ export async function authenticatePlatformMcp(
   });
   if (
     !grant ||
-    grant.access_level !== level ||
-    !platformAccessLevels.includes(level)
+    !platformAccessLevels.includes(grant.access_level as PlatformAccessLevel)
   )
     return null;
   const { data, error } = await supabaseServiceRole.auth.admin.getUserById(
@@ -42,7 +41,12 @@ export async function authenticatePlatformMcp(
     { user_id: data.user.id, claims: { app_metadata: data.user.app_metadata } },
     { supabaseServiceRole },
   );
-  requirePlatformAccess(currentClaims, level, "user");
+  const level = availablePlatformAccessLevels(currentClaims)
+    .filter((level) =>
+      includesPlatformAccess(grant.access_level as PlatformAccessLevel, level),
+    )
+    .at(-1);
+  if (!level) throw new Error("NOT_AUTHORIZED");
   const workspaceIds =
     currentClaims === "admin" && level !== "admin"
       ? (await getWorkspaces({ supabase: supabaseServiceRole })).map(

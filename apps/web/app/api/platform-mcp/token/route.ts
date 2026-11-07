@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getGrant } from "@schornio/aibox-package-database/platformMcp/getGrant";
 import { exchangeCode } from "@schornio/aibox-package-database/platformMcp/exchangeCode";
 import { createSupabaseServiceRoleClient } from "@/lib/supabase/createSupabaseServiceRoleClient";
 import { hashCredential, newCredential } from "@/lib/platformMcp/oauth";
@@ -30,7 +31,12 @@ export async function POST(request: Request) {
       { supabase: createSupabaseServiceRoleClient() },
     );
     if (!valid) return oauthResponse({ error: "invalid_grant" }, 400);
+    const grant = await getGrant(hashCredential(token), input.resource, {
+      supabase: createSupabaseServiceRoleClient(),
+    });
+    if (!grant) return oauthResponse({ error: "invalid_grant" }, 400);
     return oauthResponse({
+      scope: grant.access_level,
       access_token: token,
       token_type: "Bearer",
       expires_in: 3600,

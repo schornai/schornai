@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { serverActionClient } from "@/lib/serverActionClient";
-import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
+import { getAuthorizationUser } from "@/lib/platformMcp/getAuthorizationUser";
 import { createSupabaseServiceRoleClient } from "@/lib/supabase/createSupabaseServiceRoleClient";
 import { validateAuthorization } from "@/lib/platformMcp/validateAuthorization";
 import {
@@ -9,32 +9,37 @@ import {
   hashCredential,
   newCredential,
 } from "@/lib/platformMcp/oauth";
-import { getCurrentUser } from "@schornio/aibox-package-database/user/getCurrentUser";
-import { getCurrentUserClaims } from "@schornio/aibox-package-database/user/getCurrentUserClaims";
-import { requirePlatformAccess } from "@schornio/aibox-package-database/mcp/platformAccess";
+import {
+  requirePlatformAccess,
+  platformAccessLevels,
+} from "@schornio/aibox-package-database/mcp/platformAccess";
 import { createGrant } from "@schornio/aibox-package-database/platformMcp/createGrant";
 
 export const authorizePlatformMcp = serverActionClient
-  .inputSchema(z.object({ request: authorizationSchema, approve: z.boolean() }))
+  .inputSchema(
+    z.object({
+      request: authorizationSchema,
+      approve: z.boolean(),
+      level: z.enum(platformAccessLevels),
+    }),
+  )
   .action(async ({ parsedInput }) => {
     const { input } = await validateAuthorization(parsedInput.request);
-    const supabase = await createSupabaseServerClient();
-    const user = await getCurrentUser({ supabaseAuth: supabase.auth });
+    const { user, claims } = await getAuthorizationUser();
     const target = new URL(input.redirect_uri);
     target.searchParams.set("state", input.state);
     if (!parsedInput.approve) {
       target.searchParams.set("error", "access_denied");
       return { redirectUrl: target.href };
     }
-    const claims = await getCurrentUserClaims({ supabaseAuth: supabase.auth });
-    requirePlatformAccess(claims, input.scope, "user");
+    requirePlatformAccess(claims, parsedInput.level, parsedInput.level);
     const code = newCredential();
     await createGrant(
       {
         client_id: input.client_id,
         user_id: user.id,
         resource: input.resource,
-        access_level: input.scope,
+        access_level: parsedInput.level,
         redirect_uri: input.redirect_uri,
         challenge: input.code_challenge,
         code_hash: hashCredential(code),

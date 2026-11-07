@@ -206,7 +206,7 @@ excluded. Follow that policy before assuming a live document survives a restart.
 ## Platform MCP and native agent tools
 
 [`createPlatformTools`](../packages/realtime/src/platform/tools.ts) defines the shared
-catalog for the web application's four [MCP routes](../apps/web/app/mcp) and
+catalog for the web application's single [MCP route](../apps/web/app/mcp/route.ts) and
 [`AgentToolSession`](../apps/realtime/src/chat/AgentToolSession.ts). The
 [registry](../packages/realtime/src/platform/registry.ts) checks the access ceiling
 and handlers authorize the exact workspace before privileged operations.
@@ -218,7 +218,9 @@ compatibility export. Delegated chats receive claims limited to the tool's level
 S256 PKCE and exact resource binding. [Database operations](../packages/database/src/platformMcp)
 keep hashed codes and tokens private; the exchange RPC consumes a code atomically.
 The [consent action](../apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts)
-validates the registered redirect and the authenticated user's permissions.
+validates the registered redirect and the selected level against the authenticated user's current permissions.
+The [consent user loader](../apps/web/lib/platformMcp/getAuthorizationUser.ts)
+resolves current roles for both the available choices and the submission check.
 [Authentication](../apps/web/lib/platformMcp/authenticate.ts) rechecks the account
 and current roles and creates a user client limited to the authorized level.
 

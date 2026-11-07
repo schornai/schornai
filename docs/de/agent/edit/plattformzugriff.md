@@ -3,18 +3,10 @@ title: "schorn.ai über Plattformwerkzeuge und MCP verwenden"
 description: "Plattformzugriff für Agenten konfigurieren und externe KI-Anwendungen per OAuth verbinden."
 lang: de
 meta:
-  app_urls:
-    [
-      "/agent/[agentId]/edit?view=roles",
-      "/mcp",
-      "/mcp/editor",
-      "/mcp/workspace",
-      "/mcp/admin",
-      "/oauth/authorize",
-    ]
+  app_urls: ["/agent/[agentId]/edit?view=roles", "/mcp", "/oauth/authorize"]
   required_role: "Benutzer:in bis globale Administrator:in, abhängig vom Werkzeug. Agentenkonfiguration: Workspace-Administrator:in."
   role_scope: "Eigenes Konto, berechtigte Workspaces oder ganze Instanz."
-  prerequisites: "Aktuelle Datenbankmigrationen; für Chats und Dateioperationen ein erreichbarer Realtime-Dienst und passende Worker. Externe Clients benötigen Streamable HTTP und OAuth mit PKCE (S256)."
+  prerequisites: "Aktuelle Datenbankmigrationen und SUPABASE_JWT_SECRET im Webserver; für Chats und Dateioperationen ein erreichbarer Realtime-Dienst und passende Worker. Externe Clients benötigen Streamable HTTP und OAuth mit PKCE (S256)."
   status: "verfügbar"
   last_verified: "2026-11-07"
   source_files:
@@ -68,20 +60,22 @@ Im Chat zeigen Plattformaktionen verständliche Titel, Status und aufklappbare V
 
 ## Externe KI-Anwendung verbinden
 
-Trage in deinem MCP-Client eine der folgenden Adressen mit der Domain deiner Instanz ein:
+Trage in deinem MCP-Client `https://DEINE-BOX/mcp` mit der Domain deiner Instanz ein. Die Zugriffsstufe wählst du anschließend bei der OAuth-Freigabe:
 
-| Endpunkt                          | Stufe                   | Zusätzliche Möglichkeiten                                                                                |
-| --------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| `https://DEINE-BOX/mcp`           | Benutzer                | Ressourcen auflisten, Dokumente lesen und suchen, Chats starten und lesen, eigene Aktivitäten bearbeiten |
-| `https://DEINE-BOX/mcp/editor`    | Editor                  | Dateien schreiben, hochladen, kopieren, verschieben, löschen und verarbeiten                             |
-| `https://DEINE-BOX/mcp/workspace` | Workspace-Administrator | Agenten, Ablagen und Transkriptoren verwalten; Workspace-Beschreibung und Dokumentation bearbeiten       |
-| `https://DEINE-BOX/mcp/admin`     | Globaler Administrator  | Workspaces anlegen, Benutzerrechte, Modelle, Provider-Verbindungen und Artefakte verwalten               |
+| Zugriffsstufe           | Verfügbare Funktionen (kumulativ)                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Benutzer                | Eigene Chats, zugängliche Agenten und Ablagen lesen; Profil und persönliche Verbindungen verwalten            |
+| Editor                  | Zusätzlich Dateien schreiben, hochladen, kopieren, verschieben, löschen und verarbeiten                       |
+| Workspace-Administrator | Zusätzlich Agenten, Ablagen und Transkriptoren verwalten; Workspace-Beschreibung und Dokumentation bearbeiten |
+| Globaler Administrator  | Zusätzlich Workspaces anlegen, Benutzerrechte, Modelle, Provider-Verbindungen und Artefakte verwalten         |
 
 Der Client erkennt über die MCP-Antwort die OAuth-Anmeldung. Melde dich mit deinem schorn.ai-Konto an und prüfe auf der Freigabeseite den Namen der Anwendung, die Zugriffsstufe, den MCP-Endpunkt und die Rückleitungsadresse. **Ablehnen** erteilt keinen Zugriff. **Freigeben** erlaubt der Anwendung die Werkzeuge dieser Stufe innerhalb deiner bestehenden Berechtigungen.
 
-Eine Freigabe ist an genau einen Endpunkt gebunden. Ein Token für `/mcp` funktioniert nicht bei `/mcp/admin`. Auch ein globaler Administrator gibt am Benutzer-Endpunkt nur Benutzerzugriff frei. Beim Start eines weiteren Agenten bleibt diese Begrenzung erhalten.
+Alle Stufen verwenden denselben Endpunkt `https://DEINE-BOX/mcp`. Wähle auf der OAuth-Freigabeseite die höchste Stufe, die du der Anwendung erlauben möchtest. Die Auswahl beginnt bei **Benutzer** und bietet nur Stufen bis zu deiner höchsten aktuellen Berechtigung an. Die konkrete Berechtigung im jeweiligen Workspace wird bei jedem Aufruf zusätzlich geprüft.
 
-Das Zugriffstoken ist eine Stunde gültig. Danach muss der Client erneut eine Freigabe einholen; Refresh-Tokens werden derzeit nicht ausgegeben. Clients können ein Token über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt zurückziehen. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Kontosperren und aktuelle Rollen werden bei externen MCP-Anfragen geprüft.
+Das Token ist an `/mcp` und die gewählte Stufe gebunden. Auch globale Administratoren geben mit der Auswahl **Benutzer** nur Benutzerzugriff frei. Werden deine Rechte später reduziert, stehen auch mit einem bestehenden Token nur die noch erlaubten Funktionen zur Verfügung. Beim Start eines weiteren Agenten bleibt diese Begrenzung erhalten. Die früheren Endpunkte mit Stufensuffix sind nicht mehr verfügbar: Stelle bestehende Verbindungen auf `/mcp` um und melde sie erneut an.
+
+Das Zugriffstoken ist eine Stunde gültig. Danach muss der Client erneut eine Freigabe einholen; Refresh-Tokens werden derzeit nicht ausgegeben. Fordert ein Client bei der dynamischen Registrierung zusätzlich `refresh_token` an, bestätigt der Server ausschließlich `authorization_code`; eine reine Refresh-Token-Registrierung wird abgelehnt. Clients können ein Token über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt zurückziehen. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Kontosperren und aktuelle Rollen werden bei externen MCP-Anfragen geprüft.
 
 Externe Clients entscheiden selbst, wann sie zusätzlich vor einzelnen Werkzeugaufrufen nachfragen. Die Bestätigung im schorn.ai-Chat gilt für interne Plattformwerkzeuge.
 

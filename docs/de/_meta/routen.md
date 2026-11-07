@@ -84,4 +84,4 @@ Desktop-App, Service-CLI und Mac-App haben keine eigenen Web-Seitenrouten. Ihre 
 
 ## Plattform-MCP
 
-Die Endpunkte `/mcp`, `/mcp/editor`, `/mcp/workspace` und `/mcp/admin` sowie die Freigabeseite `/oauth/authorize` sind unter [Plattformzugriff](../agent/edit/plattformzugriff.md) beschrieben. OAuth-Discovery liegt unter `/.well-known/oauth-authorization-server` und `/.well-known/oauth-protected-resource/mcp` mit den jeweiligen Stufensuffixen; Registrierung, Tokenaustausch und Widerruf unter `/api/platform-mcp/`.
+Der Endpunkt `/mcp` sowie die Freigabeseite `/oauth/authorize` sind unter [Plattformzugriff](../agent/edit/plattformzugriff.md) beschrieben. OAuth-Discovery liegt unter `/.well-known/oauth-authorization-server` und `/.well-known/oauth-protected-resource/mcp`; Registrierung, Tokenaustausch und Widerruf unter `/api/platform-mcp/`.

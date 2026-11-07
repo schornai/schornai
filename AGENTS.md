@@ -35,7 +35,7 @@ This document provides instructions for AI agents assisting with this project.
 ## Platform MCP and Agent Tools
 
 - When adding, changing, or removing an application capability, maintain its corresponding platform MCP tools in the same change. External MCP clients and schornai agents must use the same authorized business operations as the UI.
-- Keep the access levels cumulative: `/mcp` (user), `/mcp/editor` (editor), `/mcp/workspace` (workspace administrator), and `/mcp/admin` (global administrator). An endpoint or agent configuration limits tool availability; it never grants permissions. Authorize the caller and the specific resource on every invocation.
+- Expose platform MCP at `/mcp` only. Keep the access levels cumulative: user, editor, workspace administrator, and global administrator. OAuth consent offers only levels within the caller’s current permissions, and the issued token records the selected ceiling. Consent and agent configuration limit tool availability; they never grant permissions. Authorize the caller and the specific resource on every invocation.
 - At the end of each affected German user documentation page, document the corresponding tool names, purpose, minimum access level, required permissions, and limitations. Keep these references synchronized with tool changes. Explicitly document capabilities that cannot be exposed as tools and why.
 
 ## Database Package

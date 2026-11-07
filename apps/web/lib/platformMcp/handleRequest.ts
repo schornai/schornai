@@ -8,20 +8,16 @@ import { revalidatePath } from "next/cache";
 import { createPlatformTools } from "@schornio/aibox-realtime/platform/tools";
 import { getRealtimeServerToken } from "@schornio/aibox-realtime/server/getRealtimeServerToken";
 import { ServerRealtimeWebsocketProvider } from "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider";
-import {
-  platformAccessPath,
-  type PlatformAccessLevel,
-} from "@schornio/aibox-package-database/mcp/platformAccess";
 import { mcpRequestOrigin } from "@/lib/mcp/requestOrigin";
 import { authenticatePlatformMcp } from "./authenticate";
 
-export function platformMcpHandler(level: PlatformAccessLevel) {
+export function platformMcpHandler() {
   return async (request: Request) => {
     const origin = mcpRequestOrigin(request);
-    const resource = `${origin}${platformAccessPath(level)}`;
+    const resource = `${origin}/mcp`;
     let context;
     try {
-      context = await authenticatePlatformMcp(request, resource, level);
+      context = await authenticatePlatformMcp(request, resource);
     } catch {
       return new Response(null, { status: 403 });
     }
@@ -29,7 +25,7 @@ export function platformMcpHandler(level: PlatformAccessLevel) {
       return new Response(null, {
         status: 401,
         headers: {
-          "WWW-Authenticate": `Bearer resource_metadata="${origin}/.well-known/oauth-protected-resource${platformAccessPath(level)}", scope="${level}"`,
+          "WWW-Authenticate": `Bearer resource_metadata="${origin}/.well-known/oauth-protected-resource/mcp"`,
           "Cache-Control": "no-store",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Expose-Headers": "WWW-Authenticate",

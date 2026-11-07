@@ -15,6 +15,7 @@ meta:
     - "packages/service/src/services.ts"
     - "packages/service/src/serviceCommands.ts"
     - "packages/database/src/auth/createClientWithClaims.ts"
+    - "apps/web/lib/platformMcp/authenticate.ts"
     - "packages/xrag/update/container/docker-compose.yml"
     - "apps/proxy/nginx.conf.template"
     - "apps/web/app/api/auth/access-token/route.ts"
@@ -77,13 +78,13 @@ App-Variablen ab. Bestehende `ANON_KEY`/`SERVICE_ROLE_KEY` sowie
 `SUPABASE_PUBLIC_ANON_KEY`, `SUPABASE_ANON_KEY` und `SUPABASE_SERVICE_ROLE_KEY`
 funktionieren weiter. Die neuen Namen haben Vorrang. Publishable-/Secret-Keys
 und Legacy-Keys werden nach demselben Verfahren an die Supabase-Clients übergeben.
-Realtime- und Transcriber-Worker benötigen derzeit zusätzlich das JWT-Signiersecret
+Der Webserver für Plattform-MCP sowie Realtime- und Transcriber-Worker benötigen derzeit zusätzlich das JWT-Signiersecret
 der Zielinstanz. `createClientWithClaims` erzeugt damit HS256-JWTs für Zugriffe mit
 den Rechten des auftraggebenden Benutzers. `SUPABASE_JWT_SECRET` hat Vorrang vor
 dem bestehenden `JWT_SECRET`; bei installierten Boxen wird dieser bisherige Wert
 automatisch übernommen. API-Schlüssel ersetzen das Signiersecret nicht. Die
 Zielinstanz muss diese HS256-JWTs akzeptieren; diese Voraussetzung gilt auch bei
-Supabase Cloud. Die aktuelle Worker-Implementierung unterstützt einen Betrieb
+Supabase Cloud. Diese Komponenten unterstützen einen Betrieb
 allein mit Publishable-/Secret-Keys ohne passendes Signiersecret nicht.
 Siehe auch [Supabase: API-Schlüssel](https://supabase.com/docs/guides/getting-started/api-keys).
 
@@ -91,7 +92,7 @@ Eine explizite `endpoints.supabase` hat Vorrang vor `SUPABASE_URL`. Ohne beide
 verwendet Service nur dann die lokale API, wenn die Rolle `supabase` gewählt ist.
 Für native Worker ist das Port 8085, für Core-Container die interne Docker-Adresse.
 Bei einem entfernten Supabase sind kein lokaler Postgres oder Pooler auf Core nötig.
-Das Signiersecret bleibt für die Worker erforderlich. Die Proxy-Routen `/auth` und `/sso` verwenden den Hostnamen des
+Das Signiersecret bleibt für Plattform-MCP und die Worker erforderlich. Die Proxy-Routen `/auth` und `/sso` verwenden den Hostnamen des
 Supabase-Ziels, TLS-SNI und Zertifikatsprüfung.
 
 Auf einer separaten selbst betriebenen Supabase-Maschine setzt du beispielsweise

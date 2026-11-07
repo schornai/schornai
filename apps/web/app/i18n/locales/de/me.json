@@ -58,7 +58,7 @@
   },
   "platformMcp": {
     "labelTitle": "Zugriff für {{client}} freigeben",
-    "description": "Diese Anwendung kann mit den Werkzeugen der gewählten Stufe in Ihrem Namen handeln. Ihre Workspace-Berechtigungen gelten weiterhin. Das Zugriffstoken ist eine Stunde gültig. Geben Sie nur Anwendungen frei, denen Sie vertrauen.",
+    "description": "Diese Anwendung kann in deinem Namen handeln. Prüfe die Details und gib nur Anwendungen frei, denen du vertraust.",
     "labelLevel": "Zugriffsstufe",
     "labelResource": "MCP-Endpunkt",
     "labelRedirect": "Rückleitungsadresse",
@@ -70,6 +70,13 @@
       "editor": "Editor",
       "workspace": "Workspace-Administrator",
       "admin": "Globaler Administrator"
-    }
+    },
+    "labelConnectTitle": "Deine Werkzeuge. Deine Freigabe.",
+    "descriptionConnect": "Verbinde eine KI-Anwendung mit schorn.ai und entscheide, welchen Zugriff du ihr erlaubst.",
+    "descriptionPermissions": "Deine bestehenden Berechtigungen gelten weiterhin. Eine Freigabe erweitert deine Rechte nicht.",
+    "descriptionExpiry": "Der Zugriff gilt für eine Stunde. Danach ist eine erneute Freigabe erforderlich.",
+    "labelPlatformAccess": "Plattformzugriff",
+    "descriptionLevel": "Wähle die höchste Zugriffsstufe, die du dieser Anwendung erlaubst. Verfügbar sind nur Stufen innerhalb deiner aktuellen Berechtigungen.",
+    "descriptionNoAccess": "Dein Konto hat derzeit keine Berechtigung für den Plattformzugriff."
   }
 }

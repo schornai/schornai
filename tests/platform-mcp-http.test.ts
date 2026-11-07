@@ -37,7 +37,7 @@ import {
 } from "../apps/web/lib/platformMcp/handleRequest";
 import { GET as resourceMetadata } from "../apps/web/app/.well-known/oauth-protected-resource/[...path]/route";
 
-const handler = platformMcpHandler("user");
+const handler = platformMcpHandler();
 function request(method: string, params = {}, origin?: string) {
   return new Request("https://example.test/mcp", {
     method: "POST",
@@ -107,7 +107,7 @@ describe("platform MCP HTTP transport", () => {
     expect(body.result.isError).toBe(true);
     expect(JSON.stringify(body)).not.toContain("private-token");
   });
-  it("publishes exact resource metadata for all four levels", async () => {
+  it("publishes all consent levels at a single resource and retires old level paths", async () => {
     for (const path of [
       ["mcp"],
       ["mcp", "editor"],
@@ -121,9 +121,12 @@ describe("platform MCP HTTP transport", () => {
         ),
         { params: Promise.resolve({ path }) },
       );
-      expect((await response.json()).resource).toBe(
-        "https://example.test/" + path.join("/"),
-      );
+      if (path.length === 1)
+        expect(await response.json()).toMatchObject({
+          resource: "https://example.test/mcp",
+          scopes_supported: ["user", "editor", "workspace", "admin"],
+        });
+      else expect(response.status).toBe(404);
     }
   });
 });

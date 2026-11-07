@@ -8,8 +8,16 @@ export const platformAccessLevels = [
 ] as const;
 export type PlatformAccessLevel = (typeof platformAccessLevels)[number];
 
-export function platformAccessPath(level: PlatformAccessLevel) {
-  return level === "user" ? "/mcp" : `/mcp/${level}`;
+/** Levels the caller can explicitly consent to; resource checks still apply. */
+export function availablePlatformAccessLevels(claims: UserClaims) {
+  return platformAccessLevels.filter((level) => {
+    try {
+      requirePlatformAccess(claims, level, level);
+      return true;
+    } catch {
+      return false;
+    }
+  });
 }
 
 export function includesPlatformAccess(
@@ -22,7 +30,7 @@ export function includesPlatformAccess(
   );
 }
 
-/** Endpoint ceilings never replace authorization of the target workspace. */
+/** Consent and agent ceilings never replace authorization of the target workspace. */
 export function requirePlatformAccess(
   claims: UserClaims,
   ceiling: PlatformAccessLevel,

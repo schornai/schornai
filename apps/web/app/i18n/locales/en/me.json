@@ -58,7 +58,7 @@
   },
   "platformMcp": {
     "labelTitle": "Authorize {{client}}",
-    "description": "This application can act on your behalf using tools at the selected level. Your workspace permissions still apply. The access token is valid for one hour. Only authorize applications you trust.",
+    "description": "This application can act on your behalf. Review the details and only authorize applications you trust.",
     "labelLevel": "Access level",
     "labelResource": "MCP endpoint",
     "labelRedirect": "Redirect address",
@@ -70,6 +70,13 @@
       "editor": "Editor",
       "workspace": "Workspace administrator",
       "admin": "Global administrator"
-    }
+    },
+    "labelConnectTitle": "Your tools. Your permission.",
+    "descriptionConnect": "Connect an AI application to schorn.ai and decide which access to allow.",
+    "descriptionPermissions": "Your existing permissions still apply. Authorizing an application does not expand your rights.",
+    "descriptionExpiry": "Access lasts for one hour. After that, you need to authorize it again.",
+    "labelPlatformAccess": "Platform access",
+    "descriptionLevel": "Choose the highest access level to allow this application. Only levels within your current permissions are available.",
+    "descriptionNoAccess": "Your account currently has no permission to access the platform."
   }
 }

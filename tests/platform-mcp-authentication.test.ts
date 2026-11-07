@@ -51,18 +51,12 @@ describe("platform MCP bearer authentication", () => {
     "Bearer " + "a".repeat(44),
     "Bearer " + "/".repeat(43),
   ])("rejects malformed header %s before accessing grants", async (header) => {
-    expect(
-      await authenticatePlatformMcp(request(header), resource, "user"),
-    ).toBeNull();
+    expect(await authenticatePlatformMcp(request(header), resource)).toBeNull();
     expect(io.grant).not.toHaveBeenCalled();
   });
-  it("hashes the credential, binds the resource and caps administrator claims for a user endpoint", async () => {
+  it("hashes the credential, binds the resource and caps administrator claims for user consent", async () => {
     expect(
-      await authenticatePlatformMcp(
-        request(`Bearer ${token}`),
-        resource,
-        "user",
-      ),
+      await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
     ).toMatchObject({
       userId: "user",
       level: "user",
@@ -83,16 +77,12 @@ describe("platform MCP bearer authentication", () => {
       expect.anything(),
     );
   });
-  it.each([null, { access_level: "admin" }, { access_level: "unknown" }])(
-    "refuses missing grants or grants for a different endpoint level",
+  it.each([null, { access_level: "unknown" }])(
+    "refuses missing grants or grants with an invalid level",
     async (grant) => {
       io.grant.mockResolvedValue(grant);
       expect(
-        await authenticatePlatformMcp(
-          request(`Bearer ${token}`),
-          resource,
-          "user",
-        ),
+        await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
       ).toBeNull();
       expect(io.client).not.toHaveBeenCalled();
     },
@@ -107,11 +97,7 @@ describe("platform MCP bearer authentication", () => {
   ])("rejects absent, banned or unverifiable users", async (result) => {
     io.service.auth.admin.getUserById.mockResolvedValue(result);
     expect(
-      await authenticatePlatformMcp(
-        request(`Bearer ${token}`),
-        resource,
-        "user",
-      ),
+      await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
     ).toBeNull();
     expect(io.claims).not.toHaveBeenCalled();
   });
@@ -124,33 +110,42 @@ describe("platform MCP bearer authentication", () => {
       { organization_id: "workspace", role: "editor" },
     ]);
     expect(
-      await authenticatePlatformMcp(
-        request(`Bearer ${token}`),
-        resource,
-        "user",
-      ),
+      await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
     ).toMatchObject({
       claims: [{ organization_id: "workspace", role: "user" }],
     });
     expect(io.workspaces).not.toHaveBeenCalled();
     io.claims.mockResolvedValue([]);
     await expect(
-      authenticatePlatformMcp(request(`Bearer ${token}`), resource, "user"),
+      authenticatePlatformMcp(request(`Bearer ${token}`), resource),
     ).rejects.toThrow("NOT_AUTHORIZED");
   });
-  it("keeps explicit global administrator scope only on its own endpoint", async () => {
+  it("keeps explicit global administrator scope only with explicit admin consent", async () => {
     io.grant.mockResolvedValue({
       user_id: "user",
       access_level: "admin",
       redirect_uri: "https://client.test/callback",
     });
     expect(
-      await authenticatePlatformMcp(
-        request(`Bearer ${token}`),
-        "https://box.test/mcp/admin",
-        "admin",
-      ),
+      await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
     ).toMatchObject({ claims: "admin" });
     expect(io.workspaces).not.toHaveBeenCalled();
+  });
+});
+
+it("reduces a previously granted admin token to the current editor role", async () => {
+  io.grant.mockResolvedValue({
+    user_id: "user",
+    access_level: "admin",
+    redirect_uri: "https://client.test/callback",
+  });
+  io.claims.mockResolvedValue([
+    { organization_id: "workspace", role: "editor" },
+  ]);
+  expect(
+    await authenticatePlatformMcp(request(`Bearer ${token}`), resource),
+  ).toMatchObject({
+    level: "editor",
+    claims: [{ organization_id: "workspace", role: "editor" }],
   });
 });

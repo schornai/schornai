@@ -141,6 +141,14 @@ it("starts the web application independently of the migration result", async () 
     ),
   );
   expect(compose.services.web.depends_on).toBeUndefined();
+  // Platform MCP must sign user-scoped database tokens in the web process,
+  // just as the worker does; a service-role fallback would bypass RLS.
+  expect(compose.services.web.environment.SUPABASE_JWT_SECRET).toBe(
+    "${SUPABASE_JWT_SECRET:-${JWT_SECRET:-}}",
+  );
+  expect(compose.services.web.environment.SUPABASE_JWT_SECRET).toBe(
+    compose.services.realtimeyjs.environment.SUPABASE_JWT_SECRET,
+  );
   expect(compose.services.realtimeyjs.depends_on.web.condition).toBe(
     "service_started",
   );

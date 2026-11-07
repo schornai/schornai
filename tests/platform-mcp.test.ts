@@ -79,6 +79,34 @@ describe("platform MCP catalog", () => {
 });
 
 describe("platform OAuth inputs", () => {
+  it("negotiates authorization-code registration when a client also requests refresh tokens", () => {
+    const metadata = {
+      client_name: "schorn.ai",
+      redirect_uris: ["https://localhost:3000/api/mcp/oauth/callback"],
+      token_endpoint_auth_method: "none",
+      response_types: ["code"],
+    };
+    expect(
+      registrationSchema.parse({
+        ...metadata,
+        grant_types: ["authorization_code", "refresh_token"],
+      }).grant_types,
+    ).toEqual(["authorization_code"]);
+    expect(registrationSchema.parse(metadata).grant_types).toEqual([
+      "authorization_code",
+    ]);
+    for (const grants of [
+      ["refresh_token"],
+      ["client_credentials"],
+      ["authorization_code", "password"],
+      [],
+    ]) {
+      expect(
+        registrationSchema.safeParse({ ...metadata, grant_types: grants })
+          .success,
+      ).toBe(false);
+    }
+  });
   it("only accepts HTTPS or loopback redirects without fragments or credentials", () => {
     for (const uri of [
       "https://client.example/callback",
@@ -103,22 +131,18 @@ describe("platform OAuth inputs", () => {
         }).success,
       ).toBe(false);
   });
-  it("binds consent to the exact origin, endpoint and level", () => {
+  it("binds consent to the exact origin and single endpoint", () => {
     expect(() =>
-      validateResource(
-        "https://example.test/mcp",
-        "user",
-        "https://example.test",
-      ),
+      validateResource("https://example.test/mcp", "https://example.test"),
     ).not.toThrow();
     for (const resource of [
       "https://example.test/mcp/admin",
       "https://evil.test/mcp",
       "https://example.test/mcp?admin=1",
     ])
-      expect(() =>
-        validateResource(resource, "user", "https://example.test"),
-      ).toThrow("INVALID_RESOURCE");
+      expect(() => validateResource(resource, "https://example.test")).toThrow(
+        "INVALID_RESOURCE",
+      );
   });
   it("uses unpredictable tokens and S256 PKCE", () => {
     const a = newCredential();
