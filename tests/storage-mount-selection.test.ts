@@ -164,3 +164,80 @@ it("prevents direct execution of a forbidden move and reports successful transfe
     move: false,
   });
 });
+
+it.each([false, true])(
+  "requires source confirmation only for a move: move=%s",
+  (move) => {
+    expect(
+      storageTransferFileToolApproval(
+        move,
+        toolContext,
+      )({ fromPath: "target/a.txt", toPath: "this_conversation/a.txt" }),
+    ).toBe(move ? "user-approval" : "approved");
+  },
+);
+it.each([
+  { fromPath: "unmounted/a.txt", toPath: "target/a.txt" },
+  { fromPath: "docs/a.txt", toPath: "unmounted/a.txt" },
+])("rejects unresolved mounts before invoking storage: %j", async (input) => {
+  transfer.mockClear();
+  const tool = storageTransferFileTool(false, toolContext, {
+    supabase: {} as any,
+    websocketProvider: {} as any,
+    serverToken: "Worker test",
+  });
+  expect(storageTransferFileToolApproval(false, toolContext)(input)).toBe(
+    "denied",
+  );
+  expect(
+    await tool.execute!(input, { toolCallId: "call", messages: [] }),
+  ).toMatchObject({
+    ok: false,
+    error: expect.stringContaining("Transfer failed"),
+  });
+  expect(transfer).not.toHaveBeenCalled();
+});
+it.each([
+  ["FILE_ALREADY_EXISTS", "Nothing was overwritten"],
+  ["TARGET_FOLDER_IS_FILE", "different folder path"],
+  ["SOURCE_EQUALS_TARGET", "identical"],
+  ["FILE_PROCESSING_IN_PROGRESS", "wait before retrying"],
+  ["SOURCE_CHANGED_DURING_COPY", "rolled back"],
+  ["COPIED_SOURCE_DELETE_FAILED", "Inspect both locations"],
+  ["COPY_FAILED_TARGET_CLEANUP_REQUIRED", "source was retained"],
+  ["unknown private detail", "Transfer failed"],
+])(
+  "returns actionable safe errors for %s without retrying",
+  async (code, message) => {
+    transfer.mockReset().mockRejectedValue(new Error(code));
+    const tool = storageTransferFileTool(false, toolContext, {
+      supabase: {} as any,
+      websocketProvider: {} as any,
+      serverToken: "Worker test",
+    });
+    expect(
+      await tool.execute!(
+        { fromPath: "docs/a.txt", toPath: "this_conversation/a.txt" },
+        { toolCallId: "call", messages: [] },
+      ),
+    ).toMatchObject({ ok: false, error: expect.stringContaining(message) });
+    expect(transfer).toHaveBeenCalledOnce();
+  },
+);
+it("sanitizes non-Error transfer failures", async () => {
+  transfer.mockReset().mockRejectedValue("private token");
+  const tool = storageTransferFileTool(false, toolContext, {
+    supabase: {} as any,
+    websocketProvider: {} as any,
+    serverToken: "Worker test",
+  });
+  const result = await tool.execute!(
+    { fromPath: "docs/a.txt", toPath: "this_conversation/a.txt" },
+    { toolCallId: "call", messages: [] },
+  );
+  expect(result).toMatchObject({
+    ok: false,
+    error: expect.stringContaining("Transfer failed"),
+  });
+  expect(JSON.stringify(result)).not.toContain("private token");
+});
