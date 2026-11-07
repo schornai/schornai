@@ -516,7 +516,7 @@
     "labelCallbackCopied": "Callback-URL kopiert",
     "errorCopyCallback": "Callback-URL konnte nicht kopiert werden",
     "labelIssuer": "OAuth-Aussteller (Issuer)",
-    "descriptionIssuer": "Exakte Issuer-URL des Anbieters, bei dem die Client-ID registriert ist. Einmal gesetzt, ist sie unveränderlich. Bei bestehenden Apps ohne Aussteller bitte nachtragen."
+    "descriptionIssuer": "Kann nach dem Anlegen nicht geändert werden."
   },
   "service": {
     "errorUnauthorized": "Service-Zugriff nicht autorisiert.",

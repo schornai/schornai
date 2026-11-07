@@ -516,7 +516,7 @@
     "labelCallbackCopied": "Callback URL copied",
     "errorCopyCallback": "Could not copy callback URL",
     "labelIssuer": "OAuth issuer",
-    "descriptionIssuer": "Exact issuer URL of the provider where the client ID is registered. Once set, it cannot be changed. Add it to existing apps that have no issuer."
+    "descriptionIssuer": "Cannot be changed after creation."
   },
   "service": {
     "errorUnauthorized": "Service authorization failed.",
