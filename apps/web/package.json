@@ -17,7 +17,7 @@
     "@dnd-kit/react": "^0.5.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/provider-react": "^4.7.1",
-    "@modelcontextprotocol/sdk": "1.32.1",
+    "@modelcontextprotocol/sdk": "1.32.2",
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-ui": "*",
     "@schornio/aibox-package-utils": "*",
