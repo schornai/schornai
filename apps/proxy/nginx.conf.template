@@ -1,3 +1,8 @@
+# Public OAuth protocol endpoints must not allow unbounded registration/token floods.
+# Use the connection address, never a caller-supplied forwarding header.
+limit_req_zone $binary_remote_addr zone=platform_oauth_register:10m rate=20r/m;
+limit_req_zone $binary_remote_addr zone=platform_oauth_tokens:10m rate=120r/m;
+
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -27,6 +32,22 @@ server {
     proxy_buffer_size 128k;
     proxy_buffers 4 256k;
     proxy_busy_buffers_size 256k;
+
+    location = /api/platform-mcp/register {
+        client_max_body_size 32k;
+        limit_req zone=platform_oauth_register burst=10 nodelay;
+        limit_req_status 429;
+        proxy_pass ${WEB_ENV_URL};
+        proxy_redirect ${WEB_ENV_URL} /;
+    }
+
+    location ~ ^/api/platform-mcp/(token|revoke)$ {
+        client_max_body_size 32k;
+        limit_req zone=platform_oauth_tokens burst=30 nodelay;
+        limit_req_status 429;
+        proxy_pass ${WEB_ENV_URL};
+        proxy_redirect ${WEB_ENV_URL} /;
+    }
 
     location / {
         proxy_pass ${WEB_ENV_URL};

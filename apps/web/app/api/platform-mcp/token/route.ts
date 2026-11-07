@@ -6,7 +6,11 @@ import { refreshTokens } from "@schornio/aibox-package-database/platformMcp/refr
 import { platformAccessLevels } from "@schornio/aibox-package-database/mcp/platformAccess";
 import { createSupabaseServiceRoleClient } from "@/lib/supabase/createSupabaseServiceRoleClient";
 import { hashCredential, newCredential } from "@/lib/platformMcp/oauth";
-import { oauthOptions, oauthResponse } from "@/lib/platformMcp/http";
+import {
+  oauthOptions,
+  oauthResponse,
+  readOAuthBody,
+} from "@/lib/platformMcp/http";
 const credential = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
 const common = { client_id: z.uuid(), resource: z.url() };
 const schema = z.discriminatedUnion("grant_type", [
@@ -28,7 +32,7 @@ export const OPTIONS = oauthOptions;
 export async function POST(request: Request) {
   try {
     const input = schema.parse(
-      Object.fromEntries(new URLSearchParams(await request.text())),
+      Object.fromEntries(new URLSearchParams(await readOAuthBody(request))),
     );
     const token = newCredential();
     const refreshToken = newCredential();

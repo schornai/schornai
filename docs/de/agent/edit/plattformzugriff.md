@@ -17,6 +17,8 @@ meta:
     - "apps/web/lib/platformMcp/authenticate.ts"
     - "apps/web/app/api/platform-mcp/token/route.ts"
     - "apps/web/app/api/platform-mcp/revoke/route.ts"
+    - "apps/web/lib/platformMcp/http.ts"
+    - "apps/proxy/nginx.conf.template"
     - "supabase/migrations/20261107113011_platform_mcp_refresh_tokens.sql"
     - "apps/web/app/oauth/authorize/_actions/authorizePlatformMcp.ts"
     - "packages/database/src/mcp/platformAccess.ts"
@@ -88,7 +90,7 @@ Die dynamische Registrierung und OAuth-Discovery unterstützen `authorization_co
 
 Unter [Profil → Verbindungen](../../me/connections.md) kannst du deine eingehenden Freigaben mit Zugriffsstufe und Ablaufdatum ansehen und einzeln widerrufen.
 
-Clients können über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt ein Zugriffstoken oder Refresh-Token zusammen mit ihrer `client_id` widerrufen. Das beendet die gesamte Freigabe. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Die Migration `platform_mcp_refresh_tokens` ist für Ausgabe, Erneuerung und Widerruf erforderlich. OAuth-Erneuerung und -Widerruf sind Protokollendpunkte, keine Modellwerkzeuge; Tokens gehören nicht in Chatnachrichten.
+Clients können über den in den OAuth-Metadaten angegebenen Widerrufsendpunkt ein Zugriffstoken oder Refresh-Token zusammen mit ihrer `client_id` widerrufen. Das beendet die gesamte Freigabe. MCP-Tokens sind keine Supabase-Sitzungstokens und funktionieren nicht direkt an der Datenbank-API. Die Migration `platform_mcp_refresh_tokens` ist für Ausgabe, Erneuerung und Widerruf erforderlich. Registrierung, Tokenaustausch und Widerruf akzeptieren höchstens 32 KiB Anfragedaten, auch bei Übertragung ohne `Content-Length`. Der mitgelieferte Proxy begrenzt pro Verbindungs-IP Registrierungen auf 20 pro Minute (kurzzeitiger Puffer: 10) und Token-/Widerrufsanfragen zusammen auf 120 pro Minute (Puffer: 30); Überschreitungen erhalten HTTP 429. Hinter einem weiteren Reverse-Proxy teilen sich dessen Verbindungen dieses Kontingent. Bei eigenem Ingress müssen entsprechende Grenzen gesetzt werden; der Web-Port darf nicht öffentlich am Proxy vorbei erreichbar sein. OAuth-Erneuerung und -Widerruf sind Protokollendpunkte, keine Modellwerkzeuge; Tokens gehören nicht in Chatnachrichten.
 
 Externe Clients entscheiden selbst, wann sie zusätzlich vor einzelnen Werkzeugaufrufen nachfragen. Die Bestätigung im schorn.ai-Chat gilt für interne Plattformwerkzeuge.
 
