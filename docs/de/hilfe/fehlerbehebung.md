@@ -34,7 +34,7 @@ Beginne mit dem betroffenen Ablauf und der genauen Meldung. Notiere Zeitpunkt, R
 
 Prüfe, ob der Agent noch existiert und du Zugriff auf seinen Arbeitsplatz hast. Verwende die Agentenübersicht statt eines möglicherweise veralteten Links. Fehlt nach einer Rollenänderung weiter der Zugriff, gib der Administration die betroffene URL und deine sichtbare Rolle.
 
-Wenn der Fehler nach dem Klick auf eine **vorgeschlagene Nachricht** auftritt, starte über **Neuer Chat** an der Agentenkarte und übernimm den Vorschlagstext manuell.
+Eine **vorgeschlagene Nachricht** öffnet einen neuen Chat und füllt die Texteingabe. Sie wird erst mit **Senden** oder `Enter` abgeschickt.
 
 ## „Senden“ ist nicht verfügbar
 

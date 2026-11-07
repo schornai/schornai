@@ -25,7 +25,7 @@ export function AgentRecommendedMessage({
           disabled={!agent?.id}
           onClick={() => {
             router.push(
-              `/agent/${agent?.id}/chat/${crypto.randomUUID()}#recommendedMessage=${id}`,
+              `/agent/${agent?.id}/${crypto.randomUUID()}#recommendedMessage=${encodeURIComponent(id)}`,
             );
           }}
         />

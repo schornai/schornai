@@ -1,6 +1,18 @@
 "use client";
 
-import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
+import type {
+  AppColor,
+  AppIcon,
+} from "@schornio/aibox-package-database/_shared/_types";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "@schornio/aibox-package-ui/components/empty";
+import { DynamicIcon, type IconName } from "lucide-react/dynamic";
+import { useT } from "next-i18next/client";
 import { ChatMessage } from "./ChatMessage";
 import { useActivites } from "../../../../_components/ActivityContextProvider";
 import { useMessages } from "./ChatContext";
@@ -8,17 +20,33 @@ import { useMessages } from "./ChatContext";
 export function ChatMessageItems({
   activityId,
   agentColor,
+  agentIcon,
 }: {
   activityId: string;
   agentColor: AppColor;
+  agentIcon?: AppIcon;
 }) {
+  const { t } = useT("agent", { keyPrefix: "_components.ChatMessageItems" });
   const { activities } = useActivites();
   const activity = activities.find((activity) => activity.id === activityId);
 
   const messages = useMessages();
 
   if (!messages || messages.length === 0) {
-    return undefined;
+    return (
+      <Empty className="py-12">
+        <EmptyHeader>
+          <EmptyMedia>
+            <DynamicIcon
+              name={(agentIcon?.iconName ?? "bot-message-square") as IconName}
+              className="size-16"
+            />
+          </EmptyMedia>
+          <EmptyTitle>{t("labelTitle")}</EmptyTitle>
+          <EmptyDescription>{t("descriptionEmpty")}</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    );
   }
 
   return (

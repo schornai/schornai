@@ -353,16 +353,21 @@ it.each([undefined, "idle", "running", "error"])(
     );
   },
 );
-it.each([undefined, []])("omits empty messages %j", (messages) => {
-  mocks.messages = messages;
-  const view = render(
-    <ChatMessageItems
-      activityId="activity"
-      agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
-    />,
-  );
-  expect(view.container.textContent).toBe("");
-});
+it.each([undefined, []])(
+  "shows the agent empty state without an action button %j",
+  (messages) => {
+    mocks.messages = messages;
+    const view = render(
+      <ChatMessageItems
+        activityId="activity"
+        agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
+      />,
+    );
+    expect(view.container.textContent).toContain("labelTitle");
+    expect(view.container.textContent).toContain("descriptionEmpty");
+    expect(screen.queryByRole("button")).toBeNull();
+  },
+);
 it.each([undefined, "Short", "x".repeat(181)])(
   "expands and collapses only long user messages %j",
   (text) => {

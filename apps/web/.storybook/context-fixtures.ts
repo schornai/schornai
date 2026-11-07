@@ -1,3 +1,9 @@
+import {
+  createContext,
+  createElement,
+  useContext,
+  type ReactNode,
+} from "react";
 import { connectionFixtures } from "./connection-fixtures";
 // Fixed context data; the component implementations remain real (spy-only mocks).
 import { fn, mocked } from "storybook/test";
@@ -26,6 +32,20 @@ import { useWorkspaceList as hook20 } from "../app/(settings)/settings/workspace
 import { useWorkspaceEditPermissionList as hook21 } from "../app/(settings)/settings/workspace/[workspaceId]/_components/WorkspaceEditPermissionListProvider.tsx";
 import { useXRAGUpload as hook22 } from "../app/(settings)/settings/xrag/_components/XRAGUploadProvider.tsx";
 import { useFeedback as hook23 } from "../app/feedback/_components/FeedbackContext.tsx";
+
+// Composer controls and recommendation tiles consume the same draft in the app.
+const chatComposeFixtureContext = createContext<
+  ReturnType<typeof hook9> | undefined
+>(undefined);
+
+export function ChatComposeFixtureProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const value = hook9();
+  return createElement(chatComposeFixtureContext.Provider, { value }, children);
+}
 
 export function configureContextFixtures(
   scenario: Scenario,
@@ -434,71 +454,33 @@ export function configureContextFixtures(
         overrides.useMessages,
       ) as ReturnType<typeof hook8>,
   );
-  mocked(hook9).mockImplementation(
-    () =>
-      useContextFixture(
-        {
-          activity: {
-            content: {
-              chatbotId: "11111111-1111-4111-8111-111111111111",
-              type: "chat",
-            },
-            createdAtISO: "2026-01-15T12:00:00.000Z",
-            deleteAtISO: "Beispiel",
-            id: "11111111-1111-4111-8111-111111111111",
-            label: "Beispiel",
-            labelUserInput: false,
-            pinned: false,
-            state: "running",
-            stateTimeoutISO: "2026-01-15T12:00:00.000Z",
-            updatedAtISO: "2026-01-15T12:00:00.000Z",
+  mocked(hook9).mockImplementation(() => {
+    const shared = useContext(chatComposeFixtureContext);
+    const local = useContextFixture(
+      {
+        activity: {
+          content: {
+            chatbotId: "11111111-1111-4111-8111-111111111111",
+            type: "chat",
           },
-          activityId: "11111111-1111-4111-8111-111111111111",
-          agentId: "11111111-1111-4111-8111-111111111111",
-          defaultThinking: false,
-          interaction: { type: "message-batch" },
-          approvalSubmitted: false,
-          submitToolApproval: fn(),
-          messageBatch: [
-            {
-              id: "11111111-1111-4111-8111-111111111111",
-              state: "queued",
-              content: {
-                files: [
-                  {
-                    name: "Beispiel",
-                    path: "/beispiel.txt",
-                    createdAtISO: "2026-01-15T12:00:00.000Z",
-                    file: true,
-                    readableContent: "text",
-                    size: 1,
-                    type: "text",
-                    updatedAtISO: "2026-01-15T12:00:00.000Z",
-                    currentAction: {
-                      target: {
-                        name: "Beispiel",
-                        path: "/beispiel.txt",
-                        createdAtISO: "2026-01-15T12:00:00.000Z",
-                        file: true,
-                        readableContent: "text",
-                        size: 1,
-                        type: "text",
-                        updatedAtISO: "2026-01-15T12:00:00.000Z",
-                      },
-                      progress: 0.45,
-                      state: "uploading",
-                    },
-                  },
-                ],
-                type: "text",
-                text: "Eine Beispielnachricht.",
-                thinking: false,
-              },
-            },
-          ],
-          messageBatchAdd: fn(() => ({ messageId: crypto.randomUUID() })),
-          messageBatchDelete: fn(),
-          selectedCurrentMessage: {
+          createdAtISO: "2026-01-15T12:00:00.000Z",
+          deleteAtISO: "Beispiel",
+          id: "11111111-1111-4111-8111-111111111111",
+          label: "Beispiel",
+          labelUserInput: false,
+          pinned: false,
+          state: "running",
+          stateTimeoutISO: "2026-01-15T12:00:00.000Z",
+          updatedAtISO: "2026-01-15T12:00:00.000Z",
+        },
+        activityId: "11111111-1111-4111-8111-111111111111",
+        agentId: "11111111-1111-4111-8111-111111111111",
+        defaultThinking: false,
+        interaction: { type: "message-batch" },
+        approvalSubmitted: false,
+        submitToolApproval: fn(),
+        messageBatch: [
+          {
             id: "11111111-1111-4111-8111-111111111111",
             state: "queued",
             content: {
@@ -533,21 +515,60 @@ export function configureContextFixtures(
               thinking: false,
             },
           },
-          setMessageBatchState: fn(),
-          setMessageState: fn(),
-          setSelectedCurrentMessageId: fn(),
-          setFirstCurrentMessageSubmitted: fn(
-            () => "11111111-1111-4111-8111-111111111111",
-          ),
-          setSelectedCurrentMessageText: fn(),
-          setSelectedCurrentMessageThinking: fn(),
-          addSelectedFiles: fn(),
-          waitForSubmittedChanges: fn(async () => {}),
+        ],
+        messageBatchAdd: fn(() => ({ messageId: crypto.randomUUID() })),
+        messageBatchDelete: fn(),
+        selectedCurrentMessage: {
+          id: "11111111-1111-4111-8111-111111111111",
+          state: "queued",
+          content: {
+            files: [
+              {
+                name: "Beispiel",
+                path: "/beispiel.txt",
+                createdAtISO: "2026-01-15T12:00:00.000Z",
+                file: true,
+                readableContent: "text",
+                size: 1,
+                type: "text",
+                updatedAtISO: "2026-01-15T12:00:00.000Z",
+                currentAction: {
+                  target: {
+                    name: "Beispiel",
+                    path: "/beispiel.txt",
+                    createdAtISO: "2026-01-15T12:00:00.000Z",
+                    file: true,
+                    readableContent: "text",
+                    size: 1,
+                    type: "text",
+                    updatedAtISO: "2026-01-15T12:00:00.000Z",
+                  },
+                  progress: 0.45,
+                  state: "uploading",
+                },
+              },
+            ],
+            type: "text",
+            text: "Eine Beispielnachricht.",
+            thinking: false,
+          },
         },
-        scenario,
-        overrides.useChatComposeMessage,
-      ) as ReturnType<typeof hook9>,
-  );
+        setMessageBatchState: fn(),
+        setMessageState: fn(),
+        setSelectedCurrentMessageId: fn(),
+        setFirstCurrentMessageSubmitted: fn(
+          () => "11111111-1111-4111-8111-111111111111",
+        ),
+        setSelectedCurrentMessageText: fn(),
+        setSelectedCurrentMessageThinking: fn(),
+        addSelectedFiles: fn(),
+        waitForSubmittedChanges: fn(async () => {}),
+      },
+      scenario,
+      overrides.useChatComposeMessage,
+    ) as ReturnType<typeof hook9>;
+    return shared ?? local;
+  });
   mocked(hook10).mockImplementation(
     () =>
       useContextFixture(
