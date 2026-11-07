@@ -19,9 +19,16 @@ export async function saveConnectionSettings(
   if (
     editingOAuth &&
     ((input.clientId !== undefined && input.clientId !== current.client_id) ||
+      (current.issuer &&
+        input.issuer !== undefined &&
+        input.issuer !== current.issuer) ||
       input.secret)
   )
     throw new Error("OAUTH_CREDENTIALS_IMMUTABLE");
+  const issuer =
+    input.kind === "oauth" ? (current?.issuer ?? input.issuer) : null;
+  if (input.kind === "oauth" && !issuer)
+    throw new Error("OAUTH_ISSUER_REQUIRED");
   const clientId =
     input.kind === "oauth" ? (current?.client_id ?? input.clientId) : null;
   const secret = editingOAuth
@@ -36,6 +43,7 @@ export async function saveConnectionSettings(
       name: input.name,
       kind: input.kind,
       client_id: clientId ?? null,
+      issuer: issuer ?? null,
       secret,
       market: input.kind === "staan" ? input.market || null : null,
     },

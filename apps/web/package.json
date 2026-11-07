@@ -12,7 +12,7 @@
     "typecheck-storybook": "tsc -p .storybook/tsconfig.json"
   },
   "dependencies": {
-    "@ai-sdk/mcp": "2.0.78",
+    "@ai-sdk/mcp": "2.0.90",
     "@dnd-kit/helpers": "^0.5.1",
     "@dnd-kit/react": "^0.5.1",
     "@hocuspocus/provider": "^4.7.1",

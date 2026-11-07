@@ -238,6 +238,7 @@ export class MCPOAuthProvider implements OAuthClientProvider {
     if (this.configuredClient)
       return {
         client_id: this.configuredClient.client_id,
+        issuer: this.configuredClient.issuer,
         ...(this.configuredClient.client_secret
           ? { client_secret: this.configuredClient.client_secret }
           : {}),

@@ -23,6 +23,7 @@ beforeEach(() => {
   mocks.connection.mockResolvedValue({
     kind: "oauth",
     client_id: "client",
+    issuer: "https://auth.test",
     secret: "secret",
     version: "version",
   });
@@ -32,6 +33,7 @@ it("resolves only the configured agent reference and exposes version for token i
     await getMCPOAuthClient("agent", "mcp", "https://mcp.test", options),
   ).toEqual({
     client_id: "client",
+    issuer: "https://auth.test",
     client_secret: "secret",
     version: "version",
   });
@@ -47,6 +49,7 @@ it("rejects removed references and search keys", async () => {
   for (const connection of [
     null,
     { kind: "brave" },
+    { kind: "oauth", client_id: "client", secret: "secret", issuer: null },
     { kind: "oauth", client_id: "client", secret: null },
     { kind: "oauth", client_id: "client", secret: "   " },
     { kind: "oauth", client_id: null, secret: "secret" },

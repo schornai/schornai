@@ -148,7 +148,7 @@ export function addAdminTools(
   );
   add(
     "platform_connection_save",
-    "Create or edit a shared OAuth, Brave or Staan connection. Secrets are write-only. OAuth identity cannot change after creation.",
+    "Create or edit a shared OAuth, Brave or Staan connection. Secrets are write-only. OAuth apps require an explicit issuer URL. Client ID, secret and a configured issuer cannot change; a missing legacy issuer may be supplied once.",
     "admin",
     false,
     connectionInputSchema,

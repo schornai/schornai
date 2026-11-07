@@ -23,6 +23,7 @@ const connection = {
   kind: "oauth" as const,
   server_url: "https://api.githubcopilot.com/mcp/",
   client_id: "client",
+  issuer: "https://auth.test",
   market: null,
 };
 beforeEach(() => {

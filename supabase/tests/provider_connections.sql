@@ -16,8 +16,20 @@ END $test$;
 SET LOCAL ROLE service_role;
 INSERT INTO public.provider_connections (name, kind, secret) VALUES ('Test search', 'brave', 'test-only');
 INSERT INTO public.provider_connections (name, kind, client_id) VALUES ('Reusable OAuth', 'oauth', 'test-client');
+INSERT INTO public.provider_connections (name, kind, client_id, issuer)
+VALUES ('Bound OAuth', 'oauth', 'test-client', 'https://auth.example.test');
 DO $test$
 BEGIN
+  BEGIN
+    INSERT INTO public.provider_connections (name, kind, secret, issuer) VALUES ('Invalid search issuer', 'brave', 'test-only', 'https://auth.example.test');
+    RAISE EXCEPTION 'Search issuer accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+  BEGIN
+    INSERT INTO public.provider_connections (name, kind, client_id, issuer) VALUES ('Blank issuer', 'oauth', 'test-client', ' ');
+    RAISE EXCEPTION 'Blank issuer accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
   BEGIN
     INSERT INTO public.provider_connections (name, kind) VALUES ('Invalid search', 'staan');
     RAISE EXCEPTION 'Search without credentials accepted';

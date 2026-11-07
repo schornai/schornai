@@ -35,6 +35,7 @@ const connections = [
     name: "Zulu",
     kind: "brave",
     client_id: null,
+    issuer: null,
     market: null,
   },
   {
@@ -42,6 +43,7 @@ const connections = [
     name: "Alpha",
     kind: "oauth",
     client_id: "client",
+    issuer: "https://auth.test",
     market: null,
   },
 ];
@@ -241,3 +243,31 @@ it.each([false, true])(
     write.mockRestore();
   },
 );
+
+it("lets a legacy OAuth app add its issuer without resending stored credentials", async () => {
+  render(
+    <ConnectionForm
+      kind="oauth"
+      connection={{ ...connections[1], issuer: null }}
+    />,
+  );
+  const issuer = screen.getByLabelText("labelIssuer") as HTMLInputElement;
+  expect(issuer.required).toBe(true);
+  expect(issuer.disabled).toBe(false);
+  fireEvent.change(issuer, { target: { value: "https://auth.test/tenant" } });
+  fireEvent.click(screen.getByRole("button", { name: "labelSave" }));
+  await waitFor(() => expect(request).toHaveBeenCalled());
+  expect(request.mock.calls[0]![0]).toMatchObject({
+    id: "two",
+    issuer: "https://auth.test/tenant",
+  });
+  expect(request.mock.calls[0]![0]).not.toHaveProperty("secret");
+  expect(request.mock.calls[0]![0]).not.toHaveProperty("clientId");
+});
+
+it("keeps a configured issuer read-only", () => {
+  render(<ConnectionForm kind="oauth" connection={connections[1]} />);
+  expect(
+    (screen.getByLabelText("labelIssuer") as HTMLInputElement).disabled,
+  ).toBe(true);
+});

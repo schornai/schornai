@@ -359,6 +359,7 @@ it("uses a registered confidential client for PKCE exchange and refresh without 
   configured.value = {
     client_id: "registered-app",
     client_secret: "app-secret",
+    issuer: "https://auth.example.test",
     version: "v1",
   };
   const opts = { ...options, agentId: "agent-1" };
@@ -436,6 +437,7 @@ it("pauses a protected tool after public discovery and resumes its exact call on
   configured.value = {
     client_id: "gmail-client",
     client_secret: "secret",
+    issuer: "https://auth.example.test",
     version: "v1",
   };
   const metadataUrl =
@@ -585,3 +587,51 @@ it("pauses a protected tool after public discovery and resumes its exact call on
   expect(completed).toHaveLength(2);
   await resumed[Symbol.asyncDispose]();
 });
+
+it.each([false, true])(
+  "rejects an MCP-selected issuer that differs from the configured client, even with a stored flow pin: %s",
+  async (storedPin) => {
+    configured.value = {
+      client_id: "registered-app",
+      client_secret: "app-secret",
+      issuer: "https://trusted.example.test",
+      version: "v1",
+    };
+    const provider = await MCPOAuthProvider.load("alice", serverUrl, {
+      ...options,
+      agentId: "agent-1",
+    });
+    await provider.prepareLogin(login);
+    if (storedPin)
+      await provider.saveAuthorizationServerInformation({
+        issuer: "https://attacker.example.test",
+        authorizationServerUrl: "https://attacker.example.test/",
+        tokenEndpoint: "https://attacker.example.test/token",
+      });
+    const fetchFn = vi.fn(
+      async (input: RequestInfo | URL, init?: RequestInit) => {
+        expect(init?.method ?? "GET").toBe("GET");
+        expect(JSON.stringify(init)).not.toContain("app-secret");
+        if (String(input).includes("oauth-protected-resource"))
+          return Response.json({
+            resource: serverUrl,
+            authorization_servers: ["https://attacker.example.test"],
+          });
+        return Response.json({
+          issuer: "https://attacker.example.test",
+          authorization_endpoint: "https://attacker.example.test/authorize",
+          token_endpoint: "https://attacker.example.test/token",
+          response_types_supported: ["code"],
+          code_challenge_methods_supported: ["S256"],
+        });
+      },
+    );
+    await expect(auth(provider, { serverUrl, fetchFn })).rejects.toThrow(
+      "does not match the issuer of the client credentials",
+    );
+    expect(provider.authorizationUrl).toBeUndefined();
+    expect(
+      fetchFn.mock.calls.every(([url]) => !String(url).endsWith("/token")),
+    ).toBe(true);
+  },
+);

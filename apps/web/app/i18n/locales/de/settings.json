@@ -514,7 +514,9 @@
     "descriptionOAuthSecret": "Wird ausschließlich serverseitig gespeichert und kann nach dem Anlegen nicht geändert werden.",
     "labelCopyCallback": "Callback-URL kopieren",
     "labelCallbackCopied": "Callback-URL kopiert",
-    "errorCopyCallback": "Callback-URL konnte nicht kopiert werden"
+    "errorCopyCallback": "Callback-URL konnte nicht kopiert werden",
+    "labelIssuer": "OAuth-Aussteller (Issuer)",
+    "descriptionIssuer": "Kann nach dem Anlegen nicht geändert werden."
   },
   "service": {
     "errorUnauthorized": "Service-Zugriff nicht autorisiert.",

@@ -15,7 +15,7 @@
     "@ai-sdk/azure": "4.0.116",
     "@ai-sdk/google": "4.0.111",
     "@ai-sdk/huggingface": "2.0.84",
-    "@ai-sdk/mcp": "2.0.78",
+    "@ai-sdk/mcp": "2.0.90",
     "@ai-sdk/mistral": "4.0.79",
     "@ai-sdk/openai": "4.0.108",
     "@ai-sdk/openai-compatible": "3.0.84",

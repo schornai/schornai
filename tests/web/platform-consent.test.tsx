@@ -37,8 +37,9 @@ it("displays the exact resource and redirect and approves only the selected ceil
   expect(screen.getByText(request.resource)).toBeTruthy();
   expect(screen.getByText(request.redirect_uri)).toBeTruthy();
   await user.click(screen.getByRole("combobox"));
+  const editor = await screen.findByRole("option", { name: "level.editor" });
   expect(screen.queryByRole("option", { name: "level.admin" })).toBeNull();
-  await user.click(screen.getByRole("option", { name: "level.editor" }));
+  await user.click(editor);
   fireEvent.click(screen.getByRole("button", { name: "labelApprove" }));
   expect(client.execute).toHaveBeenCalledExactlyOnceWith({
     request,

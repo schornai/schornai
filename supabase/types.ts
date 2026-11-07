@@ -777,6 +777,7 @@ export type Database = {
         Row: {
           client_id: string | null;
           id: string;
+          issuer: string | null;
           kind: string;
           market: string | null;
           name: string;
@@ -787,6 +788,7 @@ export type Database = {
         Insert: {
           client_id?: string | null;
           id?: string;
+          issuer?: string | null;
           kind: string;
           market?: string | null;
           name: string;
@@ -796,6 +798,7 @@ export type Database = {
         Update: {
           client_id?: string | null;
           id?: string;
+          issuer?: string | null;
           kind?: string;
           market?: string | null;
           name?: string;

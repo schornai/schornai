@@ -6,7 +6,7 @@
     "start": "node ./server.ts"
   },
   "dependencies": {
-    "@ai-sdk/mcp": "2.0.78",
+    "@ai-sdk/mcp": "2.0.90",
     "@ai-sdk/openai-compatible": "3.0.84",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../../packages/database",

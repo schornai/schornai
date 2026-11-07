@@ -41,6 +41,7 @@ const data = {
   name: "GitHub",
   kind: "oauth" as const,
   clientId: "client",
+  issuer: "https://auth.test",
   secret: "new-secret",
 };
 beforeEach(() => {
@@ -51,6 +52,7 @@ beforeEach(() => {
     id,
     kind: "oauth",
     client_id: "client",
+    issuer: "https://auth.test",
     secret: "old-secret",
   });
 });
@@ -83,12 +85,14 @@ it("preserves the existing OAuth credentials when renaming", async () => {
       name: "Renamed",
       secret: "old-secret",
       client_id: "client",
+      issuer: "https://auth.test",
     }),
     expect.anything(),
   );
 });
 it.each([
   { clientId: "other", secret: "" },
+  { issuer: "https://other.test", secret: "" },
   { clientId: "client", secret: "replacement" },
 ])("rejects OAuth credential edits: %j", async (changes) => {
   expect(
@@ -176,5 +180,53 @@ it.each([
     expect(await getAgentConnections()).toEqual([]);
     expect(mocks.service).toHaveBeenCalledTimes(allowed ? 1 : 0);
     expect(mocks.list).toHaveBeenCalledTimes(allowed ? 1 : 0);
+  },
+);
+
+it("allows an administrator to bind a legacy OAuth app once", async () => {
+  mocks.get.mockResolvedValue({
+    id,
+    kind: "oauth",
+    client_id: "client",
+    secret: "old-secret",
+    issuer: null,
+  });
+  expect(
+    (await saveConnection({ id, name: "Legacy", kind: "oauth" }))?.serverError,
+  ).toBeTruthy();
+  expect(mocks.save).not.toHaveBeenCalled();
+  expect(
+    (
+      await saveConnection({
+        id,
+        name: "Legacy",
+        kind: "oauth",
+        issuer: "https://auth.test",
+      })
+    )?.data,
+  ).toEqual({ id });
+  expect(mocks.save).toHaveBeenCalledWith(
+    expect.objectContaining({
+      issuer: "https://auth.test",
+      secret: "old-secret",
+    }),
+    expect.anything(),
+  );
+});
+it.each([
+  undefined,
+  "",
+  "not a URL",
+  "http://auth.test",
+  "https://user:secret@auth.test",
+  "https://auth.test?query=1",
+  "https://auth.test#fragment",
+])(
+  "rejects invalid or missing issuers before accessing credentials: %s",
+  async (issuer) => {
+    expect(
+      (await saveConnection({ ...data, issuer }))?.validationErrors,
+    ).toBeTruthy();
+    expect(mocks.service).not.toHaveBeenCalled();
   },
 );

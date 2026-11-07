@@ -514,7 +514,9 @@
     "descriptionOAuthSecret": "Stored only on the server and cannot be changed after creation.",
     "labelCopyCallback": "Copy callback URL",
     "labelCallbackCopied": "Callback URL copied",
-    "errorCopyCallback": "Could not copy callback URL"
+    "errorCopyCallback": "Could not copy callback URL",
+    "labelIssuer": "OAuth issuer",
+    "descriptionIssuer": "Cannot be changed after creation."
   },
   "service": {
     "errorUnauthorized": "Service authorization failed.",
