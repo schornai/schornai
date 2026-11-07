@@ -203,7 +203,7 @@ services:
     volumes: !override
       - ./volumes/storage:/var/lib/storage:z
   db-config-init:
-    image: supabase/postgres:15.19.0.004
+    image: supabase/postgres:15.19.0.018
     user: root
     network_mode: none
     entrypoint:
@@ -217,7 +217,7 @@ services:
       db-config-init:
         condition: service_completed_successfully
     container_name: supabase-db
-    image: supabase/postgres:15.19.0.004
+    image: supabase/postgres:15.19.0.018
     entrypoint: !override
       - /bin/sh
       - /prepare-data.sh
