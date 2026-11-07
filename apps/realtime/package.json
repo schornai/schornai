@@ -6,14 +6,15 @@
     "start": "node ./server.ts"
   },
   "dependencies": {
-    "@ai-sdk/mcp": "^2.0.78",
-    "@ai-sdk/openai-compatible": "3.0.71",
+    "@ai-sdk/mcp": "2.0.78",
+    "@ai-sdk/openai-compatible": "3.0.84",
     "@hocuspocus/server": "^4.7.1",
-    "@schornio/aibox-database": "*",
+    "@schornio/aibox-database": "file:../../packages/database",
     "@schornio/aibox-realtime": "*",
-    "@supabase/supabase-js": "2.118.0",
-    "ai": "^7.0.143",
-    "ai-sdk-ollama": "^4.5.1"
+    "@supabase/supabase-js": "2.119.0",
+    "ai": "7.0.162",
+    "ai-sdk-ollama": "^4.5.1",
+    "undici": "^7.30.2"
   },
   "license": "AGPL-3.0-only",
   "repository": {

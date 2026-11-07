@@ -5,13 +5,15 @@ import { exec } from "./util/exec.ts";
 import { probe } from "./util/probe.ts";
 import { runDownload } from "./util/runDownload.ts";
 
+const nodeVersion = "26.12.1";
+
 export async function node(target: string) {
   await mkdir(target, { recursive: true });
 
   // --- node ---
   // FROM: https://nodejs.org/en/download
   await download(
-    "https://nodejs.org/dist/v24.22.0/node-v24.22.0-darwin-arm64.tar.gz",
+    `https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-darwin-arm64.tar.gz`,
     `${target}/node.tar.gz`,
   );
   await mkdir(`${target}/node`, { recursive: true });
@@ -21,10 +23,10 @@ export async function node(target: string) {
     "--strip-components=2",
     "-C",
     `${target}/node`,
-    "node-v24.22.0-darwin-arm64/bin/node",
+    `node-v${nodeVersion}-darwin-arm64/bin/node`,
   ]);
   await rm(`${target}/node.tar.gz`);
-  await probe("v24.22.0", `${target}/node/node`, ["--version"]);
+  await probe(`v${nodeVersion}`, `${target}/node/node`, ["--version"]);
 }
 
 runDownload(import.meta.url, node);

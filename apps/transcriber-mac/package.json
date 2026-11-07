@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
-    "eslint": "^10.13.0"
+    "eslint": "^10.14.0"
   },
   "dependencies": {
-    "@schornio/aibox-database": "*",
+    "@schornio/aibox-database": "file:../../packages/database",
     "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*"
   },

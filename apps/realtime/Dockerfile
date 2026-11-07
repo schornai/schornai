@@ -1,7 +1,7 @@
 # IMPORTANT: Node.js Version Maintenance
-# This Dockerfile uses Node.js 24.22.0-slim, which was the latest LTS version at the time of writing.
+# This Dockerfile uses Node.js 26.12.1-slim, which was the latest LTS version at the time of writing.
 # To ensure security and compatibility, regularly update the NODE_VERSION ARG to the latest LTS version.
-ARG NODE_VERSION=24.22.0-slim
+ARG NODE_VERSION=26.12.1-slim
 
 FROM node:${NODE_VERSION}
 
@@ -20,6 +20,9 @@ RUN --mount=type=cache,target=/root/.npm \
 
 # Copy application source code
 COPY ./apps/realtime/dist/rollup/appRealtime.js ./apps/realtime/appRealtime.js
+
+# The bundled AI SDK resolves its HTTP client from the emitted entry point.
+RUN node -e "require('node:module').createRequire('/app/apps/realtime/appRealtime.js')('undici')"
 
 USER node
 

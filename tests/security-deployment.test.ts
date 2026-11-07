@@ -124,8 +124,8 @@ it.each([0, 17])(
       "push",
       "--include-all",
       "--yes",
-      "--db-url",
-      dsn,
+      "--skip-vault",
+      `--remote=${dsn}`,
     ]);
   },
 );
