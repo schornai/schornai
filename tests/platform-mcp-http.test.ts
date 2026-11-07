@@ -3,6 +3,8 @@ const mocks = vi.hoisted(() => ({
   authenticate: vi.fn(),
   execute: vi.fn(),
   revalidate: vi.fn(),
+  context: vi.fn(),
+  readOnly: false,
 }));
 vi.mock("../apps/web/lib/platformMcp/authenticate", () => ({
   authenticatePlatformMcp: mocks.authenticate,
@@ -16,17 +18,23 @@ vi.mock(
   () => ({ ServerRealtimeWebsocketProvider: class {} }),
 );
 vi.mock("@schornio/aibox-realtime/platform/tools", () => ({
-  createPlatformTools: () => [
-    {
-      name: "platform_test",
-      description: "Test",
-      readOnly: false,
-      inputSchema: { type: "object", properties: {} },
-      execute: mocks.execute,
-    },
-  ],
+  createPlatformTools: (context: unknown) => {
+    mocks.context(context);
+    return [
+      {
+        name: "platform_test",
+        description: "Test",
+        readOnly: mocks.readOnly,
+        inputSchema: { type: "object", properties: {} },
+        execute: mocks.execute,
+      },
+    ];
+  },
 }));
-import { platformMcpHandler } from "../apps/web/lib/platformMcp/handleRequest";
+import {
+  platformMcpHandler,
+  platformMcpOptions,
+} from "../apps/web/lib/platformMcp/handleRequest";
 import { GET as resourceMetadata } from "../apps/web/app/.well-known/oauth-protected-resource/[...path]/route";
 
 const handler = platformMcpHandler("user");
@@ -44,6 +52,7 @@ function request(method: string, params = {}, origin?: string) {
 }
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.readOnly = false;
   mocks.authenticate.mockResolvedValue({
     userId: "user",
     claims: "admin",
@@ -117,4 +126,79 @@ describe("platform MCP HTTP transport", () => {
       );
     }
   });
+});
+
+it("returns forbidden when current authorization cannot be established", async () => {
+  mocks.authenticate.mockRejectedValue(new Error("private auth detail"));
+  const response = await handler(request("tools/list"));
+  expect(response.status).toBe(403);
+  expect(await response.text()).toBe("");
+});
+it("rejects unsupported HTTP methods after authentication", async () => {
+  const response = await handler(new Request("https://example.test/mcp"));
+  expect(response.status).toBe(405);
+  expect(response.headers.get("Allow")).toBe("POST");
+});
+it("reports unknown tools without invoking an operation", async () => {
+  const response = await handler(request("tools/call", { name: "missing" }));
+  expect((await response.json()).result).toMatchObject({
+    isError: true,
+    content: [{ text: "UNKNOWN_TOOL" }],
+  });
+  expect(mocks.execute).not.toHaveBeenCalled();
+});
+it("handles no-argument read operations without invalidating UI routes", async () => {
+  mocks.readOnly = true;
+  mocks.execute.mockResolvedValue(undefined);
+  const response = await handler(
+    request("tools/call", { name: "platform_test" }),
+  );
+  expect((await response.json()).result.content[0].text).toBe(
+    '{"success":true}',
+  );
+  expect(mocks.execute).toHaveBeenCalledWith({});
+  expect(mocks.revalidate).not.toHaveBeenCalled();
+});
+it.each(["https://example.test", "https://client.test"])(
+  "accepts the server or authorized client origin %s",
+  async (origin) => {
+    mocks.authenticate.mockResolvedValue({
+      userId: "user",
+      claims: "admin",
+      level: "user",
+      clientOrigin: "https://client.test",
+    });
+    const response = await handler(request("tools/list", {}, origin));
+    expect(response.status).toBe(200);
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe(origin);
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+  },
+);
+it("provides preflight headers for external MCP clients", () => {
+  const response = platformMcpOptions();
+  expect(response.status).toBe(204);
+  expect(response.headers.get("Access-Control-Allow-Headers")).toContain(
+    "Authorization",
+  );
+  expect(response.headers.get("Access-Control-Allow-Methods")).toContain(
+    "POST",
+  );
+});
+it("only supplies server SSO credentials when configured", async () => {
+  await handler(request("tools/list"));
+  const { getSsoConfig } = mocks.context.mock.calls[0][0];
+  try {
+    vi.stubEnv("SUPABASE_URL", "");
+    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "");
+    expect(getSsoConfig).toThrow("SSO_NOT_CONFIGURED");
+    vi.stubEnv("SUPABASE_URL", "https://database.test");
+    expect(getSsoConfig).toThrow("SSO_NOT_CONFIGURED");
+    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "server-only");
+    expect(getSsoConfig()).toEqual({
+      supabaseUrl: "https://database.test",
+      supabaseServiceRoleKey: "server-only",
+    });
+  } finally {
+    vi.unstubAllEnvs();
+  }
 });
