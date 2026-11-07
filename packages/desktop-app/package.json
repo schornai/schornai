@@ -28,17 +28,17 @@
     "@typescript-eslint/eslint-plugin": "^8.71.2",
     "@typescript-eslint/parser": "^8.71.2",
     "autoprefixer": "^10.6.1",
-    "electron": "44.9.0",
-    "eslint": "^10.13.0",
+    "electron": "45.2.1",
+    "eslint": "^10.14.0",
     "eslint-plugin-import": "^2.32.0",
-    "postcss": "^8.5.30",
+    "postcss": "^8.5.32",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
-    "vite": "8.3.5"
+    "vite": "8.3.6"
   },
   "keywords": [],
   "author": {

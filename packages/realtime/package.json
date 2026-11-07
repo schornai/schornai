@@ -7,30 +7,30 @@
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
-    "eslint": "^10.13.0"
+    "eslint": "^10.14.0"
   },
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "5.0.118",
-    "@ai-sdk/anthropic": "4.0.82",
-    "@ai-sdk/azure": "4.0.104",
-    "@ai-sdk/google": "4.0.99",
-    "@ai-sdk/huggingface": "2.0.71",
-    "@ai-sdk/mcp": "^2.0.78",
-    "@ai-sdk/mistral": "4.0.66",
-    "@ai-sdk/openai": "4.0.96",
-    "@ai-sdk/openai-compatible": "3.0.71",
-    "@ai-sdk/provider-utils": "5.0.62",
+    "@ai-sdk/amazon-bedrock": "5.0.132",
+    "@ai-sdk/anthropic": "4.0.96",
+    "@ai-sdk/azure": "4.0.116",
+    "@ai-sdk/google": "4.0.111",
+    "@ai-sdk/huggingface": "2.0.84",
+    "@ai-sdk/mcp": "2.0.78",
+    "@ai-sdk/mistral": "4.0.79",
+    "@ai-sdk/openai": "4.0.108",
+    "@ai-sdk/openai-compatible": "3.0.84",
+    "@ai-sdk/provider-utils": "5.0.74",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-package-utils": "*",
-    "ai": "^7.0.143",
+    "ai": "7.0.162",
     "yjs": "^13.6.33",
-    "xrag": "*"
+    "xrag": "*",
+    "@schornio/aibox-database": "file:../database"
   },
   "peerDependencies": {
-    "@schornio/aibox-database": "*",
-    "@supabase/supabase-js": "2.118.0"
+    "@supabase/supabase-js": "2.119.0"
   },
   "license": "AGPL-3.0-only",
   "repository": {

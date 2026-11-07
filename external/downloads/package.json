@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
-    "eslint": "^10.13.0"
+    "eslint": "^10.14.0"
   },
   "license": "AGPL-3.0-only",
   "repository": {

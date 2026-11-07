@@ -1,7 +1,7 @@
 {
   "name": "@schornio/aibox-app-document-extractor",
   "scripts": {
-    "dev": "docker run --publish 127.0.0.1:9998:9998 apache/tika:4.1.0-1-full"
+    "dev": "docker run --publish 127.0.0.1:9998:9998 apache/tika:4.2.0-1-full"
   },
   "license": "AGPL-3.0-only",
   "repository": {

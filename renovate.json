@@ -1,7 +1,58 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:recommended"],
+  "minimumReleaseAge": "3 days",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "packages/xrag/update/container/supabase/docker-compose.yml"
   ],
-  "minimumReleaseAge": "3 days"
+  "docker-compose": {
+    "managerFilePatterns": [
+      "/packages/xrag/update/container/supabase/overrides\\.yml$/"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "The installed PG15 data volume requires an explicit major-version migration.",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["supabase/postgres"],
+      "allowedVersions": "/^15\\./"
+    },
+    {
+      "description": "The Rollup builds and Storybook coverage checker require the TypeScript 6 JavaScript compiler API.",
+      "matchPackageNames": ["typescript"],
+      "matchCurrentVersion": "/^6\\./",
+      "allowedVersions": "<7"
+    },
+    {
+      "matchPackageNames": ["node"],
+      "groupName": "Node runtime"
+    },
+    {
+      "matchPackageNames": ["apache/tika"],
+      "groupName": "Tika runtime"
+    },
+    {
+      "description": "Core, MCP and provider adapters share the same LanguageModel protocol.",
+      "matchPackageNames": ["ai", "@ai-sdk/**"],
+      "groupName": "AI SDK"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["external/downloads/src/node.ts"],
+      "matchStrings": ["const nodeVersion = \"(?<currentValue>[0-9.]+)\""],
+      "datasourceTemplate": "node-version",
+      "depNameTemplate": "node"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["apps/document-extractor/package.json"],
+      "matchStrings": ["apache/tika:(?<currentValue>[^\" ]+)"],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "apache/tika"
+    }
+  ]
 }

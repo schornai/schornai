@@ -118,7 +118,7 @@ services:
       AUTH_HOOK_URL: ${AUTH_HOOK_URL:-http://web:3000}
   rest:
     container_name: supabase-rest
-    image: postgrest/postgrest:v16.4
+    image: postgrest/postgrest:v16.5
     restart: unless-stopped
     depends_on: !override
       db:
@@ -147,7 +147,7 @@ services:
       - postgrest
   storage:
     container_name: supabase-storage
-    image: supabase/storage-api:v1.83.5
+    image: supabase/storage-api:v1.89.2
     depends_on: !override
       db:
         condition: service_healthy
@@ -185,7 +185,7 @@ services:
       - ./volumes/storage:/var/lib/storage:z
   imgproxy:
     container_name: supabase-imgproxy
-    image: darthsim/imgproxy:v4.0.18
+    image: darthsim/imgproxy:v4.0.21
     restart: on-failure
     healthcheck: !override
       test:

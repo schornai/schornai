@@ -1,4 +1,10 @@
+import { createRequire } from "node:module";
+import { dirname, relative } from "node:path";
 import type { NextConfig } from "next";
+
+const undiciDirectory = dirname(
+  createRequire(import.meta.url).resolve("undici/package.json"),
+);
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -25,7 +31,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // The AI SDK loads undici dynamically, so keep it in the runtime image.
   outputFileTracingIncludes: {
-    "/*": ["../../node_modules/undici/**/*"],
+    "/*": [`${relative(import.meta.dirname, undiciDirectory)}/**/*`],
   },
   reactCompiler: true,
   transpilePackages: ["@schornio/aibox-package-ui"],

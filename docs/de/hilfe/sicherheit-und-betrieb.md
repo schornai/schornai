@@ -115,8 +115,8 @@ PEM-Datei und starte den betroffenen Node-Dienst neu.
 
 ## Host und Wartung
 
-Die mitgelieferten Node-Dienste verwenden Node 24.22.0; für Datei-Extraktion wird
-Tika 4.1 eingesetzt. Aktualisiere Tika und die Anwendungen gemeinsam. Die Box
+Die mitgelieferten Node-Dienste verwenden Node 26.12.1; für Datei-Extraktion wird
+Tika 4.2 eingesetzt. Aktualisiere Tika und die Anwendungen gemeinsam. Die Box
 bleibt auf PostgreSQL 15 und erhält dort das aktuelle Wartungsrelease; dieses
 Update nimmt keinen automatischen Wechsel auf eine neue PostgreSQL-Hauptversion
 vor. Ein solcher Wechsel benötigt eine gesonderte Datenmigration.
