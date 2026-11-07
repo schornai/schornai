@@ -42,13 +42,13 @@ export async function Sidebar() {
               />
             </SidebarMenuItem>
             <SidebarMenuSub>
-              {/* <SidebarMenuSubItem>
+              <SidebarMenuSubItem>
                 <SidebarMenuSubButton
                   render={
                     <Link href="/me/favorites">{t("labelFavorites")}</Link>
                   }
                 />
-              </SidebarMenuSubItem> */}
+              </SidebarMenuSubItem>
               <SidebarMenuSubItem>
                 <SidebarMenuSubButton
                   render={

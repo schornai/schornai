@@ -770,6 +770,7 @@ describe("server storage views and application composition", () => {
   });
   it("assembles sidebar favorites and retains the empty state", async () => {
     state.favorites = {
+      showInSidebar: true,
       favorites: [{ id: "agent", type: "agent" }],
       agents: state.agents,
       transcribers: state.transcribers,
@@ -779,7 +780,7 @@ describe("server storage views and application composition", () => {
       component(await SidebarFavorites(), "SidebarFavoriteItemAgent").props
         .agent,
     ).toBe(state.agents[0]);
-    state.favorites = {};
+    state.favorites = { showInSidebar: true, favorites: [] };
     expect(
       component(await SidebarFavorites(), "SidebarFavoriteItemAgent"),
     ).toBeUndefined();
@@ -803,6 +804,7 @@ it.each([
     [
       "/settings/user",
       "/settings/workspace",
+      "/settings/connections",
       "/settings/sso",
       "/settings/xrag",
       "/settings/theme",
@@ -834,6 +836,7 @@ it.each([true, false, undefined])(
     const adminPaths = [
       "/settings/user",
       "/settings/workspace",
+      "/settings/connections",
       "/settings/sso",
       "/settings/xrag",
     ];
@@ -1129,7 +1132,10 @@ it("lists accessible workspaces and joins only workspace favorites", async () =>
 
 it("resolves workspace favorites for dashboard and sidebar and hides inaccessible entries", async () => {
   state.workspaces = [{ id: "workspace", name: "Team", claim: "user" }] as any;
-  state.favorites = { favorites: [{ id: "workspace", type: "workspace" }] };
+  state.favorites = {
+    showInSidebar: true,
+    favorites: [{ id: "workspace", type: "workspace" }],
+  };
   expect(
     component(await DashboardFavorites(), "WorkspaceCard").props.workspace,
   ).toBe(state.workspaces[0]);
@@ -1253,4 +1259,16 @@ it.each(["user", "editor", undefined])(
 it("blocks editing a transcriber in a different workspace", async () => {
   state.workspaces = [{ id: "other", name: "Other", claim: "workspace-admin" }];
   await expect(editTranscriber(params())).rejects.toThrow("NOT_FOUND");
+});
+
+it("hides sidebar favorites without removing dashboard favorites", async () => {
+  state.workspaces = [{ id: "workspace", name: "Team", claim: "user" }];
+  state.favorites = {
+    showInSidebar: false,
+    favorites: [{ id: "workspace", type: "workspace" }],
+  };
+  expect(await SidebarFavorites()).toBeNull();
+  expect(
+    component(await DashboardFavorites(), "WorkspaceCard").props.workspace,
+  ).toBe(state.workspaces[0]);
 });

@@ -330,7 +330,9 @@
     "cardXragLabel": "Upload XRAG",
     "cardXragDescription": "Install agents, documents, models or update the entire box via an XRAG package.",
     "cardAppearanceLabel": "Appearance",
-    "cardAppearanceDescription": "Customize the colors and appearance of the box to your liking."
+    "cardAppearanceDescription": "Customize the colors and appearance of the box to your liking.",
+    "cardConnectionsLabel": "Connections",
+    "cardConnectionsDescription": "Manage OAuth apps and search connections centrally."
   },
   "users.page": {
     "labelTitle": "Users"
