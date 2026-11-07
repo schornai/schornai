@@ -167,3 +167,40 @@ describe("application startup and Python packaging", () => {
     },
   );
 });
+
+it("derives a transcription identity and releases signal listeners after shutdown", async () => {
+  vi.stubEnv("WORKER_IDENTIFIER", undefined);
+  let resolve!: () => void;
+  mocks.transcribe.mockReturnValue(
+    new Promise<void>((done) => {
+      resolve = done;
+    }),
+  );
+  const before = process.listeners("SIGTERM");
+  await import("../apps/transcriber-mac/server");
+  const options = mocks.transcribe.mock.calls[0][0];
+  expect(options.workerIdentifier).toContain(`:transcriber:${process.pid}`);
+  expect(options.abortSignal.aborted).toBe(false);
+  const listener = process
+    .listeners("SIGTERM")
+    .find((entry) => !before.includes(entry))!;
+  // Invoke only this worker's handler; never signal the actual test runner.
+  listener();
+  expect(options.abortSignal.reason.message).toBe(
+    "Transcriber service stopping",
+  );
+  resolve();
+  await vi.waitFor(() =>
+    expect(process.listeners("SIGTERM")).not.toContain(listener),
+  );
+});
+it("reports transcription startup failures with a nonzero exit", async () => {
+  const exit = vi
+    .spyOn(process, "exit")
+    .mockImplementation(() => undefined as never);
+  const failure = new Error("worker failed");
+  mocks.transcribe.mockRejectedValue(failure);
+  await import("../apps/transcriber-mac/server");
+  await vi.waitFor(() => expect(exit).toHaveBeenCalledWith(1));
+  expect(console.error).toHaveBeenCalledWith(failure);
+});

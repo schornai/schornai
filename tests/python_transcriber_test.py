@@ -150,5 +150,44 @@ class TranscriberTest(unittest.TestCase):
         self.assertEqual(second['result']['transcription'], 'OK')
 
 
+    def test_invalid_options_rejected_before_loading_model(self):
+        for options in [dict(model_identifier=None), dict(model_identifier=42),
+                        dict(model_identifier="a" * 129), dict(retry_level="unknown"),
+                        dict(initial_prompt=42)]:
+            arguments = dict(audio_path="/tmp/audio", model_identifier="model")
+            arguments.update(options)
+            with self.subTest(options=options), self.assertRaises(ValueError):
+                transcription.transcribe(**arguments)
+            mlx.transcribe.assert_not_called()
+
+    def test_custom_home_and_empty_prompt(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(transcription.os.environ, {"SCHORNAI_HOME": directory}):
+            result = transcription.transcribe("/tmp/audio", "model", initial_prompt="")
+            self.assertEqual(result["transcription"], "Hello")
+            self.assertEqual(mlx.transcribe.call_args.kwargs["path_or_hf_repo"], str(Path(directory).resolve() / "mlx/whisper/models/model"))
+            self.assertNotIn("initial_prompt", mlx.transcribe.call_args.kwargs)
+
+    def test_missing_cli_model_exits_before_reading_audio(self):
+        with patch.object(sys, "argv", [str(SOURCE)]), contextlib.redirect_stderr(io.StringIO()) as errors:
+            with self.assertRaises(SystemExit) as raised:
+                transcription.main()
+        self.assertEqual(raised.exception.code, 2)
+        self.assertIn("--fileSystemIdentifier is required", errors.getvalue())
+        mlx.transcribe.assert_not_called()
+
+    def test_server_recovers_from_invalid_json_and_incomplete_requests(self):
+        lines = ['{broken', '{}', '{"id":"missing-audio"}', json.dumps({"id": "valid", "audioPath": "/tmp/audio", "modelIdentifier": "model"})]
+        output = io.StringIO()
+        with patch.object(sys, "stdin", io.StringIO("\n".join(lines))), contextlib.redirect_stdout(output):
+            transcription.serve()
+        responses = [json.loads(line) for line in output.getvalue().splitlines()]
+        self.assertEqual([r["id"] for r in responses], [None, None, "missing-audio", "valid"])
+        self.assertIn("JSONDecodeError", responses[0]["error"])
+        self.assertIn("KeyError", responses[1]["error"])
+        self.assertIn("KeyError", responses[2]["error"])
+        self.assertEqual(responses[3]["result"]["transcription"], "Hello")
+        mlx.transcribe.assert_called_once()
+
+
 if __name__ == '__main__':
     unittest.main()
