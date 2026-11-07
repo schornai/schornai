@@ -99,6 +99,16 @@ describe("seed matches application schemas", () => {
       agent.roles[0].documentRepositoryMounts[0].documentRepositoryIdentifier,
     ).toBe(repository.identifier);
     expect(agent.modelIdentifier).toBe("qwen3:0.6b");
+    expect(agent.roles[0].toolPlatformAccess).toEqual({
+      active: true,
+      level: "workspace",
+      approvals: {
+        user: "auto",
+        editor: "auto",
+        workspace: "ask",
+        admin: "off",
+      },
+    });
     const transcriber = configs.find(
       (config) => config.version === "transcriber-v2",
     );

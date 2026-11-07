@@ -59,3 +59,9 @@ Ein Klick auf den Namen oder **Bearbeiten** öffnet die eigene Bearbeitungsseite
 Vorhandene direkt im Agenten gespeicherte Suchschlüssel werden bei der Datenbankmigration in zentrale Verbindungen übernommen und im Agenten durch Referenzen ersetzt. Lokale Seed-Daten enthalten keine echten Anbieter-Secrets.
 
 Die OAuth-App hat keine eigene MCP-URL. Die Callback-URL bleibt für die Rückkehr nach der Anmeldung erforderlich. Die verfügbaren Verbindungen werden beim Öffnen des Agenten-Editors serverseitig geladen.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Globaler Administrator. `platform_connections_list` zeigt Metadaten ohne Geheimnisse. `platform_connection_save` erstellt oder ändert Verbindungen mit denselben Regeln wie die Oberfläche; bestehende OAuth-Identitäten sind unveränderlich. `platform_connection_delete` entfernt eine Verbindung.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../agent/edit/plattformzugriff.md).

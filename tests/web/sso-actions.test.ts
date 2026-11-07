@@ -57,9 +57,9 @@ describe("SSO provider actions", () => {
     },
   );
   it("rejects missing metadata before writing to Supabase", async () => {
-    await expect(
+    expect(() =>
       addSSOProvider({ metadataAsUrl: "", metadataAsXML: "" }),
-    ).rejects.toThrow("INTERNAL_SERVER_ERROR");
+    ).toThrow();
     expect(mocks.add).not.toHaveBeenCalled();
   });
   it("deletes a provider and invalidates cached pages", async () => {

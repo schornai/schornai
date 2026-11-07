@@ -21,8 +21,7 @@ import { Input } from "@schornio/aibox-package-ui/components/input";
 import { Textarea } from "@schornio/aibox-package-ui/components/textarea";
 import {
   accessMessageMailto,
-  getAccessMessageTemplate,
-  renderAccessMessage,
+  composeAccessMessage,
   type AccessMessageTemplates,
 } from "@/lib/accessMessage";
 
@@ -56,18 +55,18 @@ export function AccessMessageDialog({
         variant="outline"
         onClick={() => {
           const language = i18n?.language ?? "en";
-          const template = getAccessMessageTemplate(templates, language);
-          const values = {
-            firstName: firstName.trim(),
-            lastName: lastName.trim(),
-            fullName: `${firstName.trim()} ${lastName.trim()}`.trim(),
+          const message = composeAccessMessage({
+            templates,
+            language,
             email,
+            firstName,
+            lastName,
             resetKey,
-            resetUrl: `${window.location.origin}/signin/reset`,
-            expires: new Date(expires).toLocaleString(language),
-          };
-          setSubject(renderAccessMessage(template.subject, values));
-          setBody(renderAccessMessage(template.body, values));
+            expires,
+            applicationUrl: window.location.origin,
+          });
+          setSubject(message.subject);
+          setBody(message.body);
           setCopyState(undefined);
           setOpen(true);
         }}

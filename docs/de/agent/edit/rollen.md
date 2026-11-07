@@ -45,10 +45,16 @@ Unter **Modell überschreiben** kannst du ein anderes Modell als das Standardmod
 - [Internet-Zugriff](web.md): Webseiten abrufen oder über einen Suchanbieter suchen.
 - [Externes Werkzeug (MCP) anbinden](mcp.md): Funktionen eines eingerichteten externen Dienstes bereitstellen.
 
-**Chat Erweiterung**, **Taschenrechner** und **schorn.ai Plattform Zugang** sind im aktuellen Werkzeug-Auswahlbereich deaktiviert. Für diese noch nicht verfügbaren Werkzeuge erscheinen keine Rollen-Tabs, auch wenn ältere Konfigurationen entsprechende Einträge enthalten.
+**Chat Erweiterung** und **Taschenrechner** sind im Werkzeug-Auswahlbereich deaktiviert. **schorn.ai Plattform Zugang** öffnet dagegen einen eigenen [Plattformzugriff-Tab](plattformzugriff.md), in dem du Aktivierung und die Freigaberegel je Zugriffsstufe einstellst.
 
 ## Rolle entfernen
 
 Öffne die Einstellungen der Rolle, wähle **Rolle löschen** und bestätige. Speichere anschließend den Agenten. Entferne nicht alle Rollen: Ohne eine verwendbare Rolle kann der Agent keine Aufgabe bearbeiten.
 
 Eine gute Kontrolle ist ein neuer Chat mit einer passenden und einer unpassenden Anfrage. So erkennst du, ob Rollenauswahl und Prompt die gewünschte Abgrenzung vermitteln.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Workspace-Administrator. `platform_agent_get` liest die Agentenkonfiguration; `platform_agent_update` speichert Rollen und deren `toolPlatformAccess` mit `active` und `level`. Das Setzen einer höheren Werkzeugstufe erweitert keine Benutzerberechtigungen.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

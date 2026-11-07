@@ -1,3 +1,12 @@
+import {
+  getPlatformApprovals,
+  platformPolicyCeiling,
+} from "@schornio/aibox-database/mcp/platformAgentPolicy";
+import { createPlatformTools } from "@schornio/aibox-realtime/platform/tools";
+import {
+  platformAgentTools,
+  platformAgentApprovals,
+} from "@schornio/aibox-realtime/platform/agentTools";
 import { getConnectionCredentials } from "@schornio/aibox-database/connections/getConnectionCredentials";
 import {
   storageTransferFileTool,
@@ -187,6 +196,7 @@ export class AgentToolSession {
         : {};
 
     return {
+      ...platformAgentTools(this.#platformTools()),
       ...(this.#role.mcps?.length ? { mcp: this.#mcp.tool() } : {}),
       ...documentRepositoryTools,
       ...(fetchEnabled
@@ -215,6 +225,7 @@ export class AgentToolSession {
     const mountedDocumentRepositories =
       await this.#mountedDocumentRepositoriesPromise;
     return {
+      ...platformAgentApprovals(this.#platformTools()),
       ...(this.#role.mcps?.length ? { mcp: this.#mcp.approval } : {}),
       "web-fetch": this.#role.toolWebAccess
         ? webFetchToolApproval(
@@ -245,6 +256,30 @@ export class AgentToolSession {
         mountedDocumentRepositories,
       ),
     };
+  }
+
+  #platformTools() {
+    const access = this.#role.toolPlatformAccess;
+    return access?.active
+      ? createPlatformTools({
+          userId: this.#userId,
+          getSsoConfig: () => {
+            const supabaseUrl = process.env.SUPABASE_URL;
+            const supabaseServiceRoleKey =
+              process.env.SUPABASE_SERVICE_ROLE_KEY;
+            if (!supabaseUrl || !supabaseServiceRoleKey)
+              throw new Error("SSO_NOT_CONFIGURED");
+            return { supabaseUrl, supabaseServiceRoleKey };
+          },
+          claims: this.#userClaims,
+          level: platformPolicyCeiling(getPlatformApprovals(access)),
+          approvals: getPlatformApprovals(access),
+          supabase: this.#supabase,
+          supabaseServiceRole: this.#supabaseServiceRole,
+          serverToken: this.#serverToken,
+          websocketProvider: this.#websocketProvider,
+        })
+      : [];
   }
 
   #webFetchContext(

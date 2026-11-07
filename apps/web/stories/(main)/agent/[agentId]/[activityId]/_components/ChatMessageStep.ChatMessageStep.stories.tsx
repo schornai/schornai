@@ -53,3 +53,32 @@ export const MCP: Story = {
     ],
   },
 };
+
+export const PlatformGrouped: Story = {
+  args: {
+    parts: [
+      {
+        type: "tool-platform_repository_create",
+        toolCallId: "repository",
+        state: "output-available",
+        input: { repository: { name: "Demo" } },
+        output: { documentRepositoryId: "demo" },
+      },
+      { type: "reasoning", state: "done", text: "Die Ablage ist bereit." },
+      {
+        type: "tool-platform_file_write",
+        toolCallId: "file-1",
+        state: "output-available",
+        input: { path: "Onboarding.md", text: "Willkommen" },
+        output: { saved: true },
+      },
+      {
+        type: "tool-platform_file_write",
+        toolCallId: "file-2",
+        state: "output-available",
+        input: { path: "Reisekosten.md", text: "Richtlinien" },
+        output: { saved: true },
+      },
+    ],
+  },
+};

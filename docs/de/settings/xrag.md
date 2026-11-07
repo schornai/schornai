@@ -119,3 +119,11 @@ Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 
 Neue Setup-Bundles enthalten Plattform und Architektur. Mac und Linux erhalten
 so jeweils das neueste passende Paket, auch bei einem gemeinsamen Dateikatalog.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
+- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer**.
+- `platform_artifact_publish`: Hochgeladenes XRAG-Paket veröffentlichen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

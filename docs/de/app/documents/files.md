@@ -128,3 +128,14 @@ Bei Schreibrechten besitzen löschbare Ordner ein eigenes **…**-Menü und ein 
 Auch beim Löschen eines Ordners werden die Suchindexeinträge jeder enthaltenen Datei entfernt. Eine Datei mit wartender oder laufender Verarbeitung wird nicht gelöscht. Bei einem Fehler stoppt der Vorgang; bereits gelöschte Dateien bleiben gelöscht. Lade die Ansicht neu und wiederhole die Löschung für die verbliebenen Dateien, sobald die Verarbeitung abgeschlossen oder der Fehler behoben ist. Scheitert nur das Entfernen einer Datei nach der Indexbereinigung, bleibt sie bis zur erneuten Indexierung aus der Suche ausgeschlossen.
 
 Die hier beschriebenen Dateiaktionen beziehen sich jeweils auf eine einzelne Datei. Ganze Ordner oder mehrere Dateien gleichzeitig lassen sich nicht kopieren oder verschieben. Bei Copy-/Move-Aufrufen durch den Agenten werden fehlende Zielordner einschließlich verschachtelter Unterordner automatisch angelegt. Belegt eine Datei einen Teil des Ordnerpfads, wird der Transfer abgewiesen. Die Dateiansicht bietet weiterhin die Auswahl eines vorhandenen Zielordners.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_files_list`: Dateien und Ordner auflisten. Mindeststufe: **Benutzer**.
+- `platform_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Editor**.
+- `platform_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Editor**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+- `platform_file_delete`: Datei oder Ordner einschließlich Index löschen. Mindeststufe: **Editor**.
+- `platform_file_transfer`: Datei kopieren, verschieben oder umbenennen. Mindeststufe: **Editor**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

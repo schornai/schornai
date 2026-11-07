@@ -60,6 +60,7 @@ $agent${
     "name": "Assistent",
     "prompt": "Du bist ein hilfreicher Assistent. Antworte kurz und auf Deutsch.",
     "documentRepositoryMounts": [{"id": "a1b00000-0000-4000-8000-000000000004", "documentRepositoryIdentifier": "lokale-testdokumente", "mount": "/default", "pathRepository": "/", "permission": "read-only"}],
+    "toolPlatformAccess": {"active": true, "level": "workspace", "approvals": {"user": "auto", "editor": "auto", "workspace": "ask", "admin": "off"}},
     "toolCalculator": {"active": true}
   }]
 }$agent$::jsonb);

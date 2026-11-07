@@ -49,3 +49,11 @@ Im Agentenmenü kannst du **Als neuen Agenten speichern** verwenden. So entsteht
 Wähle im Menü **Agent löschen** und bestätige den Dialog. Das Löschen des Agenten lässt sich in der Oberfläche nicht rückgängig machen. Informiere Personen, die den Agenten verwenden, vor dem Löschen. Soll auch der gespeicherte Gesprächs- und Dateibestand entfernt werden, beauftrage die Betriebsadministration mit dessen Bereinigung.
 
 Teste nach dem Speichern einen neuen Chat mit einer typischen Frage und den benötigten Werkzeugen.
+
+## Zugehörige MCP-Werkzeuge
+
+**Mindeststufe:** Workspace-Administrator. `platform_agent_create`, `platform_agent_update` und `platform_agent_delete` erstellen, ändern und löschen Agenten. `platform_agent_get` und `platform_agents_list` lesen zugängliche Konfigurationen bereits ab Benutzerstufe. Beim Verschieben werden Quell- und Ziel-Workspace geprüft.
+
+Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).
+
+Mit `platform_agent_create` und `copyFromAgentId` können Workspace-Administratoren Agenten einschließlich gespeicherter MCP-Zugangsdaten kopieren. Quelle und Ziel erfordern jeweils Administratorrechte im Workspace. Rollen- und MCP-IDs sowie URLs müssen für die Übernahme unverändert bleiben; Geheimnisse werden nicht ausgegeben.

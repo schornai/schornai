@@ -23,6 +23,8 @@ meta:
       "apps/realtime/src/chat/tools/documentRepository/storageWriteFile.ts",
       "packages/realtime/src/documents/storage/writeStorageFileText.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolStorageTransferFile.tsx",
+      "packages/realtime/src/documents/storage/selectChatFile.ts",
+      "packages/realtime/src/platform/workflowTools.ts",
     ]
 ---
 
@@ -72,3 +74,13 @@ Das Schreibwerkzeug kann neue Text- und Codedateien anlegen, etwa `.txt`, `.md` 
 Kopieren und Verschieben erscheinen im Chat als einklappbare Werkzeugzeilen mit Quelle, Ziel und Status. Klicke auf die Zeile, um Details und nach erfolgreicher Übertragung den Link zur Zieldatei zu öffnen. Die Werkzeugzeile zeigt auch ausstehende Freigaben und abgelehnte Übertragungen. Ein Fehler beim anschließenden Indexieren wird getrennt vom erfolgreichen Transfer angezeigt.
 
 Beim Kopieren oder Verschieben durch den Agenten muss der Zielpfad den Dateinamen enthalten, zum Beispiel `/default/berichte/2026/hello.md`. Fehlende Zielordner werden automatisch angelegt, auch über mehrere Ebenen. Bestehende Dateien werden nicht überschrieben; belegt eine Datei einen benötigten Ordnerpfad, schlägt der Transfer fehl.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mindeststufe: **Benutzer**.
+- `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer**.
+- `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer**.
+- `platform_activity_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Benutzer**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

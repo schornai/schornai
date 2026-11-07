@@ -234,3 +234,19 @@ export const RoleToolWebAccessWebFetchAllowListMultiple: Story = {
     },
   },
 };
+
+export const PlatformAccess: Story = {
+  args: {
+    role: {
+      ...meta.args.role,
+      toolPlatformAccess: { active: true, level: "editor" },
+    },
+  },
+  parameters: {
+    nextjs: {
+      navigation: {
+        query: { "role-11111111-1111-4111-8111-111111111111": "tool-platform" },
+      },
+    },
+  },
+};

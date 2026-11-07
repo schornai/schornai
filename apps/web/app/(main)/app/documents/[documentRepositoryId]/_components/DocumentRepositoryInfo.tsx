@@ -13,6 +13,7 @@ import type { Transcriber_new } from "@schornio/aibox-package-database/transcrib
 import type { WorkspaceClaim } from "../../../../../_models/getWorkspaceClaims";
 
 export function DocumentRepositoryInfo({
+  preview = false,
   editDocumentRepositoryPathname,
   editDefaultDocumentRepository,
   editable,
@@ -22,6 +23,7 @@ export function DocumentRepositoryInfo({
   transcriberMap,
   workspace,
 }: {
+  preview?: boolean;
   editDocumentRepositoryPathname?: string;
   editDefaultDocumentRepository?: Partial<DocumentRepository>;
   editable?: boolean;
@@ -42,6 +44,7 @@ export function DocumentRepositoryInfo({
   return (
     <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
       <DocumentRepositoryCard
+        preview={preview}
         favorites={favorites}
         documentRepository={documentRepository}
         embeddingModel={embeddingModel}

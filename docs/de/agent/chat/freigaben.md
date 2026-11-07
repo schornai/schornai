@@ -8,7 +8,7 @@ meta:
   role_scope: "Gespräch und Zielressource"
   prerequisites: "Für die Anzeige einer Freigabe: ein Werkzeug mit aktivierter Bestätigung in der Agentenrolle."
   status: "verfügbar"
-  last_verified: "2026-10-17"
+  last_verified: "2026-11-07"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatToolApproval.tsx",
@@ -22,6 +22,12 @@ meta:
 # Werkzeugaktionen prüfen und freigeben
 
 Ein Agent kann Werkzeuge einsetzen, um Dateien zu lesen oder zu schreiben, im Web zu suchen oder eine Seite abzurufen. Wenn die Konfiguration eine Bestätigung verlangt, wartet er auf deine Entscheidung.
+
+## Plattformaktionen
+
+Plattformwerkzeuge zeigen statt JSON eine Vorschau: Agenten und Dokumentenablagen mit ihrer Info-Ansicht, Dateien mit den üblichen Dateikacheln und der bestehenden Datei-/Transkriptvorschau sowie andere Daten als beschriftete Felder. Die aufklappbare Ergebniskarte unterscheidet Abschluss, Ablehnung und Fehler und besitzt wie die Storage-Werkzeuge einen Schließen-Button. Mehrere Plattformaufrufe teilen sich in der Schrittübersicht ein Plattform-Symbol. Die Vorschau bildet die angeforderte beziehungsweise ausgeführte Aktion ab; sie ist keine nachgeladene Live-Ansicht.
+
+Ob eine Rückfrage erscheint, legt die Agentenrolle je Stufe fest: **Automatisch**, **Freigabe erforderlich** oder **Aus**. Neu hinzugefügter Plattformzugriff führt Benutzer- und Editoraktionen automatisch aus, verlangt für Workspace-Administratoraktionen eine Freigabe und deaktiviert globale Administratoraktionen. Das gilt auch für lesende Aufrufe. Details und das Verhalten bestehender Agenten stehen unter [Plattformzugriff](../edit/plattformzugriff.md).
 
 ## Eine Rückfrage beantworten
 
@@ -57,3 +63,10 @@ Bei Fetch kann der Download erfolgreich sein, während die Textverarbeitung sche
 Verwende **Erneut versuchen**, wenn die Oberfläche diesen Fehler anzeigt. Wiederhole nicht unbesehen die gesamte Aufgabe, wenn eine Schreibaktion möglicherweise schon ausgeführt wurde. Kontrolliere zuerst den Zielinhalt.
 
 Die einzelne Freigabe ändert keine Arbeitsplatzrechte. Bei automatisch erlaubten Werkzeugen kann eine Rückfrage entfallen; die [Agentenkonfiguration](../edit/rollen.md) legt dies fest.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_chat_tool_approval`: Exakte offene Werkzeuganfrage freigeben oder ablehnen. Mindeststufe: **Benutzer**.
+- `platform_chat_read`: Chatnachrichten und Zustand lesen. Mindeststufe: **Benutzer**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

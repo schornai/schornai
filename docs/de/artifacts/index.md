@@ -69,3 +69,10 @@ Zielplattformen können deshalb mehrere Pakete als **Aktuelles Setup** markiert
 sein. Die Empfängerangabe zeigt bei solchen Paketen auch Plattform und Architektur.
 Zurückgezogene Releases verhindern einen Rückfall auf ältere Pakete für
 dasselbe Ziel.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_artifacts_list`: Veröffentlichte Artefakte lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_artifact_delete`: Artefakt und Katalogeintrag entfernen. Mindeststufe: **Globaler Administrator**.
+
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
