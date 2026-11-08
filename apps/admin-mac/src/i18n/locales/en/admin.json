@@ -28,7 +28,8 @@
       "labelEmpty": "No logs yet",
       "descriptionEmpty": "New messages will appear here automatically.",
       "labelNoMatches": "No matching messages",
-      "descriptionNoMatches": "Adjust the search or sender selection, or reset both."
+      "descriptionNoMatches": "Adjust the search or sender selection, or reset both.",
+      "labelReleaseName": "December Development Build 6"
     }
   }
 }

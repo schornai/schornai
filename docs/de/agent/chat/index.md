@@ -16,6 +16,8 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
       "packages/realtime/src/_lib/waitForProviderSynced.ts",
       "packages/realtime/src/documents/chat/queueChat.ts",
+      "packages/realtime/src/documents/chat/retryChatGeneration.ts",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatError.tsx",
       "packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts",
       "packages/realtime/src/documents/chat/abortChatGeneration.ts",
       "packages/realtime/src/platform/chatTools.ts",
@@ -58,6 +60,17 @@ Das Gehirnsymbol schaltet die gewünschte Nachdenken-Option für die Nachricht u
 
 Während der Generierung kannst du **Abbrechen** wählen. Bereits ausgeführte Werkzeugaktionen werden dadurch nicht rückgängig gemacht. Eine Pause des [Nachrichtenstapels](stapel.md) hält dagegen die noch wartenden Nachrichten zurück.
 
+## Fehler anzeigen und erneut versuchen
+
+Bei einem Fehler erscheint unter den Nachrichten eine kurze rote Fehlerbeschreibung.
+Klicke darauf, um die vollständigen verfügbaren Fehlerdetails aufzuklappen.
+**Erneut versuchen** setzt die Antwort mit dem vorhandenen Gesprächsverlauf fort,
+ohne deine Nachricht doppelt zu senden. Vorhandene Antworten und Werkzeugergebnisse
+bleiben erhalten; wartende Entwürfe werden dabei nicht gesendet. Bereits ausgeführte
+Werkzeugaktionen werden nicht rückgängig gemacht. Offene Werkzeugfreigaben musst du
+zuerst beantworten. Während des Starts ist der Button gesperrt; schlägt der Start
+fehl, bleibt die Fehlermeldung sichtbar und du kannst es erneut versuchen.
+
 ## Wenn die Verarbeitung abstürzt
 
 Nach einem erkannten Worker-Ausfall zeigt der Chat einen Fehler und wird wieder
@@ -84,7 +97,7 @@ Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
 
 Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion und wird nicht als MCP-Werkzeug angeboten. MCP-Clients können den gewünschten Text mit `platform_chat_send` senden.
 

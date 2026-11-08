@@ -37,6 +37,7 @@ export async function queueChat(
     activityId: string;
     userId: string;
     userClaims: UserClaims;
+    retry?: boolean;
   },
   {
     chat,

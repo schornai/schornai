@@ -707,7 +707,8 @@
         "platform_permissions_get": "View own permissions",
         "platform_user_get": "View user",
         "platform_personal_mcp_grants": "List your platform authorizations",
-        "platform_personal_mcp_revoke": "Revoke platform authorization"
+        "platform_personal_mcp_revoke": "Revoke platform authorization",
+        "platform_chat_retry": "Retry chat"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",
@@ -724,6 +725,13 @@
       "labelFiles": "Files",
       "labelDocumentation": "Documentation",
       "labelInfo": "Info"
+    },
+    "ChatError": {
+      "labelDetails": "Error details",
+      "labelRetry": "Retry",
+      "descriptionFailed": "The response could not be generated.",
+      "descriptionNoDetails": "No further error details are available.",
+      "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals."
     }
   },
   "page": {

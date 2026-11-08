@@ -1,4 +1,5 @@
 "use client";
+import { ChatError } from "./ChatError";
 
 import type {
   AppColor,
@@ -15,14 +16,16 @@ import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { useT } from "next-i18next/client";
 import { ChatMessage } from "./ChatMessage";
 import { useActivites } from "../../../../_components/ActivityContextProvider";
-import { useMessages } from "./ChatContext";
+import { useChatError, useMessages } from "./ChatContext";
 
 export function ChatMessageItems({
   activityId,
+  agentId,
   agentColor,
   agentIcon,
 }: {
   activityId: string;
+  agentId: string;
   agentColor: AppColor;
   agentIcon?: AppIcon;
 }) {
@@ -31,8 +34,9 @@ export function ChatMessageItems({
   const activity = activities.find((activity) => activity.id === activityId);
 
   const messages = useMessages();
+  const error = useChatError();
 
-  if (!messages || messages.length === 0) {
+  if ((!messages || messages.length === 0) && error === undefined) {
     return (
       <Empty className="py-12">
         <EmptyHeader>
@@ -51,7 +55,7 @@ export function ChatMessageItems({
 
   return (
     <>
-      {messages.map((message) => (
+      {messages?.map((message) => (
         <ChatMessage
           agentColor={agentColor}
           key={message.id}
@@ -59,8 +63,8 @@ export function ChatMessageItems({
         />
       ))}
 
-      {activity?.state === "error" ? (
-        <div className="bg-destructive size-2 rounded-full" />
+      {error !== undefined ? (
+        <ChatError error={error} agentId={agentId} activityId={activityId} />
       ) : undefined}
 
       {activity?.state === "running" ? (

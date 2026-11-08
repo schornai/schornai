@@ -350,5 +350,9 @@
   [
     "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts",
     "apps/web/.storybook/server-mocks/app/(settings)/me/connections/_actions/revokePlatformMcp.ts"
+  ],
+  [
+    "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts"
   ]
 ]

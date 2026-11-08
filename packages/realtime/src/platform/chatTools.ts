@@ -1,3 +1,4 @@
+import { retryChatGeneration } from "../documents/chat/retryChatGeneration.ts";
 import { storageSchema } from "@schornio/aibox-database/storage/_schemas";
 import { selectChatFile } from "../documents/storage/selectChatFile.ts";
 import { abortChatGeneration } from "../documents/chat/abortChatGeneration.ts";
@@ -188,6 +189,31 @@ export function addChatTools(
       );
       await provider.waitForSynced();
       return { activityId };
+    },
+  );
+  add(
+    "platform_chat_retry",
+    "Continue a failed chat from its existing history without resending a user message or processing queued drafts. Requires an error state and no pending tool approval.",
+    "user",
+    false,
+    chatId,
+    async (input) => {
+      await authorizeChat(input);
+      const userClaims = limitPlatformClaims(
+        context.claims,
+        context.level,
+        context.claims === "admin"
+          ? (await getWorkspaces({ supabase })).map((workspace) => workspace.id)
+          : [],
+      );
+      await retryChatGeneration(input, {
+        userId: context.userId,
+        userClaims,
+        supabase,
+        serverToken,
+        websocketProvider,
+      });
+      return { ...input, status: "queued" };
     },
   );
   add(
