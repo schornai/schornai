@@ -28,8 +28,7 @@
       "labelEmpty": "Noch keine Protokolle",
       "descriptionEmpty": "Neue Meldungen erscheinen automatisch hier.",
       "labelNoMatches": "Keine passenden Meldungen",
-      "descriptionNoMatches": "Passe die Suche oder Absender-Auswahl an oder setze beides zurück.",
-      "labelReleaseName": "Dezember Development Build 6"
+      "descriptionNoMatches": "Passe die Suche oder Absender-Auswahl an oder setze beides zurück."
     }
   }
 }

@@ -137,6 +137,94 @@ export type Database = {
         };
         Relationships: [];
       };
+      artifact_catalog: {
+        Row: {
+          created_at: string;
+          deleted_at: string | null;
+          id: string;
+          metadata: NonNullable<Json>;
+          object_path: string;
+          purged_at: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          deleted_at?: string | null;
+          id: string;
+          metadata: NonNullable<Json>;
+          object_path: string;
+          purged_at?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          deleted_at?: string | null;
+          id?: string;
+          metadata?: NonNullable<Json>;
+          object_path?: string;
+          purged_at?: string | null;
+        };
+        Relationships: [];
+      };
+      artifact_publications: {
+        Row: {
+          announced_at: string | null;
+          artifact_id: string | null;
+          attempts: number;
+          cleaned_at: string | null;
+          created_at: string;
+          error_code: string | null;
+          id: string;
+          lease_until: string | null;
+          name: string;
+          owner_token: string | null;
+          retry_at: string;
+          state: string;
+          updated_at: string;
+          upload_path: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          announced_at?: string | null;
+          artifact_id?: string | null;
+          attempts?: number;
+          cleaned_at?: string | null;
+          created_at?: string;
+          error_code?: string | null;
+          id?: string;
+          lease_until?: string | null;
+          name: string;
+          owner_token?: string | null;
+          retry_at?: string;
+          state?: string;
+          updated_at?: string;
+          upload_path: string;
+        };
+        Update: {
+          announced_at?: string | null;
+          artifact_id?: string | null;
+          attempts?: number;
+          cleaned_at?: string | null;
+          created_at?: string;
+          error_code?: string | null;
+          id?: string;
+          lease_until?: string | null;
+          name?: string;
+          owner_token?: string | null;
+          retry_at?: string;
+          state?: string;
+          updated_at?: string;
+          upload_path?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "artifact_publications_artifact_id_fkey";
+            columns: ["artifact_id"];
+            isOneToOne: false;
+            referencedRelation: "artifact_catalog";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       box_runtime_states: {
         Row: {
           box_id: string;
@@ -1363,6 +1451,31 @@ export type Database = {
         Args: { user_role: string; visibility: string };
         Returns: boolean;
       };
+      claim_artifact_publication: {
+        Args: { p_owner_token: string };
+        Returns: {
+          announced_at: string | null;
+          artifact_id: string | null;
+          attempts: number;
+          cleaned_at: string | null;
+          created_at: string;
+          error_code: string | null;
+          id: string;
+          lease_until: string | null;
+          name: string;
+          owner_token: string | null;
+          retry_at: string;
+          state: string;
+          updated_at: string;
+          upload_path: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "artifact_publications";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       claim_background_task: {
         Args: { p_owner_token: string; p_snapshot: string; p_task_id: string };
         Returns: {
@@ -1424,6 +1537,10 @@ export type Database = {
         };
         Returns: string;
       };
+      expire_artifact_uploads: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
+      };
       expire_background_tasks: {
         Args: Record<PropertyKey, never>;
         Returns: {
@@ -1441,6 +1558,14 @@ export type Database = {
           isOneToOne: false;
           isSetofReturn: true;
         };
+      };
+      fail_artifact_publication: {
+        Args: { p_id: string; p_owner_token: string; p_retryable: boolean };
+        Returns: boolean;
+      };
+      finish_artifact_publication: {
+        Args: { p_id: string; p_metadata: Json; p_owner_token: string };
+        Returns: string;
       };
       finish_background_task: {
         Args: {
@@ -1566,6 +1691,10 @@ export type Database = {
       release_storage_file_lock: {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: undefined;
+      };
+      renew_artifact_publication: {
+        Args: { p_id: string; p_owner_token: string };
+        Returns: boolean;
       };
       renew_background_task: {
         Args: { p_owner_token: string; p_task_id: string };

@@ -7,6 +7,8 @@ import { control, socketPath } from "./control.ts";
 import { writeJson } from "./files.ts";
 import { createLogger } from "./log.ts";
 import { Services } from "./services.ts";
+import { recoverArtifactInstallations } from "./activateArtifactDirectory.ts";
+import { artifactLimits, cleanArtifactCache } from "./artifactDownload.ts";
 import { startSynchronization } from "./synchronization.ts";
 import { createMetricsSampler } from "./metrics.ts";
 import { hostname } from "node:os";
@@ -105,6 +107,8 @@ export async function runDaemon(configPath: string) {
     });
     await chmod(socket, 0o600);
     log("service", `Starting ${config.id}`);
+    await recoverArtifactInstallations(root);
+    await cleanArtifactCache(root, artifactLimits(config));
     await services.start(controller.signal);
     if (controller.signal.aborted) return;
     state = "running";

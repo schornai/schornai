@@ -1,9 +1,7 @@
 "use server";
 
 import { saveCreateSupabaseServiceRoleClient } from "@/lib/supabase/saveCreateSupabaseServiceRoleClient";
-import { ArtifactCatalogSession } from "@schornio/aibox-realtime/documents/artifactCatalog/ArtifactCatalogSession";
-import { ServerRealtimeWebsocketProvider } from "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider";
-import { getRealtimeServerToken } from "@schornio/aibox-realtime/server/getRealtimeServerToken";
+import { publishArtifact } from "@schornio/aibox-package-database/xrag/publishArtifact";
 import { revalidatePath } from "next/cache";
 import { serverActionClient } from "@/lib/serverActionClient";
 import { z } from "zod";
@@ -21,11 +19,7 @@ export const submitXRAG = serverActionClient
   )
   .action(async ({ parsedInput: { actionFileName } }) => {
     const supabase = await saveCreateSupabaseServiceRoleClient();
-    await using session = new ArtifactCatalogSession({
-      serverToken: getRealtimeServerToken(),
-      websocketProvider: new ServerRealtimeWebsocketProvider(),
-    });
-    const id = await session.publish(actionFileName, { supabase });
+    const id = await publishArtifact(actionFileName, { supabase });
     revalidatePath("/settings/xrag");
     revalidatePath("/models");
     revalidatePath("/artifacts");

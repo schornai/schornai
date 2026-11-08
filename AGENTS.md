@@ -48,6 +48,14 @@ This document provides instructions for AI agents assisting with this project.
 - Keep credentials out of public model metadata, client props, logs, and forwarded database errors. Credential reads belong in explicitly documented server-only package operations.
 - Database migrations, seed data, and SQL regression checks belong in the root `supabase/` directory. Regenerate `supabase/types.ts` and `packages/database/src/_shared/_supabase.ts` together with `npm run supabase:types` after schema changes; do not hand-edit generated types.
 
+## Release Names and XRAG Bundles
+
+- When asked to create a release or bundle XRAG, assign the release name as part of the agent workflow before committing or building. These rules are for agents only; keep naming policy out of bundler code, validation, and user documentation.
+- Use English release names in every UI language. Update only `RELEASE_NAME` in `packages/ui/src/lib/release.ts`; Web and Mac read this shared metadata outside i18n. Their Storybook stories pass a fixed example via `releaseName`: keep those fixtures and snapshots unchanged when creating releases. Changes only to release metadata do not require local Storybook or visual regression runs; the normal checks still apply when rendering or component behavior changes.
+- Unless the user explicitly requests a normal release, create a development release. After a normal release, advance its release month by one (including the year rollover) and start at `Development Build 1`: `September 2026 Revision 1` → `October 2026 Development Build 1`; `November 2026` → `December 2026 Development Build 1`.
+- After a development release, keep its month and year and increment only the build number: `December 2026 Development Build 7` → `December 2026 Development Build 8`. Always include the year and spell out `Development`. Use the previous release's month, not the current calendar month. A failed build retry keeps its assigned name; a new bundle after a successful build gets the next number.
+- The bundler produces `update.xrag.tar`. After a successful build, rename it without copying to `update-<lowercase-english-release-name-with-hyphens>.xrag.tar`, for example `update-december-2026-development-build-8.xrag.tar`. Preserve existing archives and report the final path. Renaming an already built archive does not increment its build number or change its embedded release label.
+
 ## Formatting
 
 - After making changes, run the locally installed Prettier on every file you created or modified that Prettier supports, before finishing the task.

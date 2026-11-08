@@ -66,6 +66,9 @@ const io = vi.hoisted(() => ({
   publish: vi.fn(),
   removeArtifact: vi.fn(),
 }));
+vi.mock("../packages/database/src/xrag/publishArtifact.ts", () => ({
+  publishArtifact: io.publish,
+}));
 vi.mock("@schornio/aibox-database/workspace/getWorkspaces", () => ({
   getWorkspaces: io.getWorkspaces,
 }));

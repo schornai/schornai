@@ -9,121 +9,181 @@ meta:
   role_scope: "Gesamte Instanz"
   prerequisites: "Vertrauenswürdiges XRAG-Paket; Service mit passender Dienstkonfiguration und Freigabetoken."
   status: "verfügbar"
-  last_verified: "2026-10-25"
+  last_verified: "2026-11-08"
   source_files:
     [
       "apps/web/app/(settings)/settings/xrag/_components/XRAGUpload.tsx",
       "apps/web/app/(settings)/settings/xrag/_components/XRAGUploadProvider.tsx",
+      "apps/web/app/(settings)/settings/xrag/_components/XRAGPublicationStatus.tsx",
+      "apps/web/lib/resumeUpload.ts",
       "apps/web/app/(settings)/settings/xrag/_actions/submitXRAG.ts",
       "apps/web/app/api/service/artifacts/route.ts",
       "apps/web/app/api/service/artifacts/[id]/route.ts",
       "packages/database/src/xrag/publishArtifact.ts",
+      "packages/database/src/xrag/processArtifactPublication.ts",
+      "packages/database/src/xrag/getArtifactPublication.ts",
+      "packages/database/src/xrag/cleanupArtifactPublications.ts",
+      "apps/realtime/src/artifacts/worker.ts",
+      "packages/service/src/artifactDownload.ts",
+      "packages/service/src/activateArtifactDirectory.ts",
       "packages/service/src/artifacts.ts",
       "packages/xrag/src/archive.ts",
+      "packages/service/src/installer.ts",
+      "packages/xrag/update/bundleUpdate.mts",
     ]
 ---
 
 # XRAG-Pakete bereitstellen
 
-Die Web-App stellt XRAG-Dateien in einem gemeinsamen, privaten Dateikatalog
-bereit. Jeder [Service](../box-admin/index.md) prüft selbst, welche Dateien zu
-seinen ausgewählten Diensten passen. Auch später eingerichtete oder vorübergehend
-offline befindliche Rechner können veröffentlichte Dateien beziehen.
+Über den privaten Dateikatalog verteilst du XRAG-Pakete an deine
+[Services](../box-admin/index.md). Jeder Service bezieht die Pakete, die zu seiner
+Plattform, Architektur und den ausgewählten Diensten passen. Vorübergehend offline
+befindliche Maschinen können die Dateien nach ihrer Wiederverbindung beziehen.
 
 ![XRAG-Uploadbereich](../assets/xrag.png)
 
 ## Paket veröffentlichen
 
-1. Prüfe Quelle, Zielversion und benötigte Dienste des Pakets. Setup-Pakete können Programme auf den Rechnern ausführen.
+1. Prüfe Quelle, Zielversion und benötigte Dienste des Pakets. Setup-Pakete können Programme auf den Maschinen ausführen.
 2. Öffne **Einstellungen → XRAG hochladen** als globale Administratorin oder globaler Administrator.
-3. Ziehe die XRAG-Datei in den Bereich oder wähle **Hochladen**.
-4. Warte, bis Übertragung und Veröffentlichung abgeschlossen sind. Die Web-App prüft Archivpfade, Metadaten und erforderliche Dateien und berechnet die SHA-256-Prüfsumme.
+3. Ziehe die `.xrag.tar`-Datei in den Uploadbereich oder wähle **Hochladen**. Du kannst mehrere Dateien auswählen; sie werden nacheinander übertragen.
+4. Warte auf den Veröffentlichungsstatus. Nach der Übertragung wird das Paket geprüft. Dafür muss das Browserfenster nicht geöffnet bleiben.
 5. Prüfe die Installation auf den betreffenden Maschinen mit `npx schornai service logs --follow` oder in der Mac-App.
 
-Die Upload-Rückmeldung bestätigt keine abgeschlossene Installation auf den
-Maschinen. XRAG-Installationen sind im Service-Log sichtbar, nicht im
-Aufgabenstapel der Web-App. Der lokale Status steht außerdem in
-`~/.aibox/service-artifacts.json`. Erfolgreich installierte Prüfsummen werden
-nicht erneut installiert. Änderungen werden über Yjs angekündigt. Der Service
-gleicht beim Start, nach Wiederverbindungen und bei solchen Änderungen ab.
-Fehlgeschlagene Vorgänge werden mit wachsendem Abstand bis maximal 60 Sekunden
-erneut versucht. Es gibt keine regelmäßigen Katalogabfragen. Mit
-`npx schornai service sync` stößt du einen Abgleich manuell an.
+Eine abgeschlossene Übertragung bedeutet noch nicht, dass das Paket veröffentlicht
+oder auf den Maschinen installiert ist. Der Uploadbereich zeigt den Status der
+Veröffentlichung. Die letzten 100 Aufträge werden für bis zu 72 Stunden in diesem
+Browser und Benutzerkonto gespeichert und nach einem Neuladen erneut abgefragt.
+Bei deaktiviertem Browserspeicher gilt das nur für die geöffnete Seite.
 
-| Pakettyp                     | Empfänger                                                         |
-| ---------------------------- | ----------------------------------------------------------------- |
-| Setup/Update                 | Alle passenden Service-Instanzen mit konfiguriertem Dateikatalog. |
-| MLX-Whisper-Modell           | Maschinen mit `transcriber-mlx`.                                  |
-| Ollama-Modell                | Maschinen mit `ollama`.                                           |
-| Zertifikat oder Site-URL     | Maschinen mit `supabase` oder `core`.                             |
-| Allgemeine Dateien (`files`) | Maschinen mit einem in `targets` genannten Dienst.                |
+Die Veröffentlichung akzeptiert Archive bis 200 GiB. Niedrigere Limits der
+jeweiligen Storage-Installation gelten zusätzlich. Unter
+[Cluster → Artefakte](../artifacts/index.md) kannst du veröffentlichte Dateien
+prüfen und löschen. Bereits gelöschter Paketinhalt kann nicht erneut
+veröffentlicht werden; erstelle bei Bedarf ein neues Paket.
+
+### Upload fortsetzen
+
+Wähle nach einem Abbruch dieselbe lokale Datei erneut aus. Der Browser kann die
+Übertragung innerhalb von 24 Stunden fortsetzen, wenn Benutzerkonto, Dateiname,
+Änderungsdatum und Dateigröße übereinstimmen. Ist die Uploadsitzung abgelaufen oder
+der Browserspeicher gelöscht, beginnt die Übertragung neu.
+
+Ein Veröffentlichungsauftrag läuft auch nach dem Schließen des Browsers oder
+einem Serverneustart weiter. Vorübergehende Fehler werden bis zu fünfmal
+bearbeitet. Bei einer endgültig fehlgeschlagenen Veröffentlichung prüfst du das
+Paket und lädst es erneut hoch.
+
+## Installation und Empfänger
+
+Der Service gleicht den Katalog beim Start, nach Wiederverbindungen und bei
+Änderungen ab. Mit `npx schornai service sync` kannst du den Abgleich manuell
+anstoßen. Fehlgeschlagene Installationen werden mit wachsendem Abstand bis maximal
+60 Sekunden erneut versucht. Bereits erfolgreich installierte Pakete werden nicht
+erneut installiert.
+
+| Pakettyp                     | Empfänger                                                  |
+| ---------------------------- | ---------------------------------------------------------- |
+| Setup/Update                 | Service-Instanzen mit passender Plattform und Architektur. |
+| MLX-Whisper-Modell           | Maschinen mit `transcriber-mlx`.                           |
+| Ollama-Modell                | Maschinen mit `ollama`.                                    |
+| Zertifikat oder Site-URL     | Maschinen mit `supabase` oder `core`.                      |
+| Allgemeine Dateien (`files`) | Maschinen mit einem in `targets` genannten Dienst.         |
 
 Allgemeine Dateien werden unter `~/.aibox/assets/<name>/<Prüfsumme>/` abgelegt und
-nicht ausgeführt. Dieses Paketformat kann später zusätzliche Diensttypen
-versorgen. Unbekannte Dienstnamen in `config.json` werden derzeit abgelehnt, bis
-der Service eine entsprechende Implementierung erhält.
+nicht ausgeführt. Die in `config.json` ausgewählten Dienste müssen vom Service
+unterstützt werden.
 
-Modellmetadaten werden einmal zentral registriert. Alle Transcriber verwenden
-für dasselbe Modell denselben Dateisystembezeichner. Ein Transcriber erhält neue
-Aufträge erst, wenn die benötigten Gewichte und die Konfiguration lokal vorhanden
-sind. Wähle das Modell anschließend im Agenten, Transkriptor oder Suchindex aus.
-Ein entfernter Ollama-Dienst kann über `endpoints.ollama` angebunden werden; nach
-Änderungen an seinen Modellen muss der Realtime-Dienst seine Fähigkeiten neu
-ermitteln, gegebenenfalls durch einen Neustart.
+Wähle ein veröffentlichtes Modell anschließend im Agenten, Transkriptor oder
+Suchindex aus. Transcriber erhalten Aufträge erst, wenn die benötigten Gewichte
+und die Konfiguration lokal vorhanden sind. Ein entfernter Ollama-Dienst kann
+über `endpoints.ollama` angebunden werden. Nach Änderungen an seinen Modellen muss
+der Realtime-Dienst seine Fähigkeiten neu ermitteln, gegebenenfalls durch einen
+Neustart.
+
+### Setup-Updates
+
+Ein Setup-Paket ist eine `.xrag.tar`-Datei. Der Service installiert das zuletzt
+veröffentlichte passende Setup für seine Plattform und Architektur. Dabei werden
+die ausgewählten Dienste vorübergehend pausiert. Ein Rechnerneustart oder `sudo`
+ist nicht erforderlich.
+
+Setup-Updates laufen ausschließlich vorwärts. Nach einem Abbruch kann derselbe
+Release erneut versucht werden; eine ältere Veröffentlichung wird nicht als
+Ersatz installiert. Überholte Setup-Archive werden auf dem Server automatisch
+entfernt. Pro Plattform und Architektur bleibt der aktuelle Release erhalten.
+Modelle und andere Datenpakete werden dadurch nicht gelöscht.
+
+Bei einer manuellen Installation werden die entpackten Laufzeitverzeichnisse
+verbraucht. Entpacke das Archiv für einen erneuten Installationsversuch nochmals.
+Eine unter `~/Applications` vorhandene optionale Mac-App wird ebenfalls
+aktualisiert. Weitere Hinweise findest du in der
+[Betriebsanleitung](../box-admin/index.md).
 
 ## Freigabe konfigurieren
 
-In der privaten Umgebung der Web-App, des Realtime-Dienstes und jeder beziehenden Maschine muss derselbe
-`SERVICE_API_TOKEN` mit mindestens 32 Zeichen stehen. Die `sharing.url` in der
-Maschinenkonfiguration zeigt auf die Web-App. Der Token erlaubt das Lesen des Katalogs und der veröffentlichten Dateien sowie
-validierte Statusmeldungen des Services. Er erlaubt keine direkten Änderungen
-an Yjs-Dokumenten oder administrativen Datenbankdaten. Ein Transcriber benötigt daneben seine gesonderten
-Betriebszugangsdaten. Verwende TLS und vertraute Zertifikate für entfernte Rechner.
+In der privaten Umgebung der Web-App, des Realtime-Dienstes und jeder beziehenden
+Maschine muss derselbe `SERVICE_API_TOKEN` mit mindestens 32 Zeichen stehen.
+`sharing.url` in der Maschinenkonfiguration zeigt auf die Web-App. Verwende TLS
+und vertraute Zertifikate für entfernte Rechner.
 
-Die Dateien verbleiben im vorhandenen privaten Storage-Bucket `box-action-files`.
-Der Katalog wird erst nach erfolgreicher Prüfung veröffentlicht. Es gibt keine
-automatische Löschung nach der ersten Installation. Unter [Cluster → Artefakte](../artifacts/index.md)
-kannst du veröffentlichte Dateien prüfen und löschen. Der Uploadbereich bleibt
-für neue Pakete zuständig. Temporäre Originaluploads werden nach erfolgreicher
-Veröffentlichung entfernt; identischer Inhalt erzeugt keine zweite Version.
-Ein bereits gelöschter Inhalt kann nicht erneut veröffentlicht werden; erstelle
-ein neues Paket. Unbekannte Pakettypen oder Formatversionen im Katalog werden von
-älteren Service übersprungen. Agenten- und Docrepo-Importe sind noch nicht
-implementiert, können später aber denselben Katalog verwenden.
+Der Token erlaubt das Lesen des Katalogs und der veröffentlichten Dateien sowie
+Statusmeldungen des Services. Er erlaubt keine administrativen Änderungen. Ein
+Transcriber benötigt daneben seine gesonderten Betriebszugangsdaten.
 
-## Updates und Fehler
+## Speicher und Wiederaufnahme auf Maschinen
 
-Neue Setup-Bundles funktionieren sowohl mit der bisherigen Admin-App als auch mit
-einem laufenden Service. Auf einer alten Box erzeugt das Bundle die fehlende
-Maschinenkonfiguration automatisch, übernimmt bestehende Daten und Zugangsdaten
-und startet den Service. Ein manueller Zwischenschritt ist nicht erforderlich.
-Für die Umstellung wird das neue Bundle über die bisherige Web-App der alten
-Box hochgeladen; die Kompatibilität übernimmt das Bundle selbst.
-Historische Setup-Archive ohne Service-Payload werden vom neuen
-Service nicht ausgeführt. Bei mehreren veröffentlichten Setup-Paketen verwendet
-er das zuletzt veröffentlichte passende Paket für seine Plattform und Architektur.
+Unterbrochene Downloads werden fortgesetzt und nach Abschluss anhand ihrer
+Prüfsumme kontrolliert. Beschädigte Dateien werden verworfen. Zwei Minuten ohne
+Datenfortschritt brechen einen Transfer ab; für einen laufenden Download gibt es
+kein festes Stundenlimit.
 
-Setup-Updates pausieren die ausgewählten Dienste und installieren nur deren
-Komponenten. Der Updater startet keinen Rechner neu und benötigt kein `sudo`.
-Bei der Umstellung einer alten Box wird die Mac-App unter `~/Applications`
-installiert. Auf Service-Systemen wird sie nur aktualisiert, wenn sie dort
-bereits vorhanden ist. Details stehen in der
-[Betriebsanleitung](../box-admin/index.md).
+Der mitgelieferte Web-Proxy und das Storage-Gateway leiten die Übertragungen
+ohne temporäre Dateipuffer weiter. Ihre Inaktivitätslimits betragen zwei Minuten.
+Zusätzlich vorgeschaltete Proxys müssen Streaming und ausreichend lange
+Inaktivitätslimits ebenfalls unterstützen. Uploads erfolgen in 6-MiB-Abschnitten.
 
-Notiere bei Fehlern Paketname, Zeitpunkt und Meldung. Prüfe
+Der Service prüft den freien Speicher vor Download und Entpacken. Beim Start und
+vor dem Abgleich entfernt er verwaiste Arbeitsverzeichnisse und abgelaufene
+Teildownloads. Bei Platzbedarf werden ältere Teildownloads zuerst entfernt.
+Installierte Nutzdaten und die Datenbank bleiben erhalten. Unterbrochene
+Verzeichniswechsel werden vor dem Start der Dienste repariert.
+
+Im optionalen Abschnitt `artifacts` der `config.json` kannst du die Grenzen
+anpassen:
+
+| Einstellung         | Standard               | Bedeutung                                                |
+| ------------------- | ---------------------- | -------------------------------------------------------- |
+| `maxCacheBytes`     | 536870912000 (500 GiB) | Obergrenze für Downloads und reservierten Arbeitsbedarf. |
+| `minFreeBytes`      | 5368709120 (5 GiB)     | Freie Reserve auf dem Dateisystem.                       |
+| `maxExtractedBytes` | 429496729600 (400 GiB) | Maximale entpackte Nutzdaten pro Archiv.                 |
+| `maxEntries`        | 1000000                | Maximale Zahl der Archiveinträge.                        |
+| `retentionHours`    | 72                     | Aufbewahrung ungenutzter Teildownloads in Stunden.       |
+| `idleTimeoutMs`     | 120000                 | Zeit ohne Downloadfortschritt in Millisekunden.          |
+
+Auf dem Server werden ungenutzte Uploads und Arbeitsdateien nach 72 Stunden
+bereinigt. Aktive Veröffentlichungsaufträge und benötigte veröffentlichte Dateien
+bleiben erhalten. Fehlgeschlagene Löschungen werden erneut versucht.
+
+## Fehler untersuchen
+
+Notiere Paketname, Zeitpunkt und Fehlermeldung. Prüfe
 `~/.aibox/logs/service.log` und für Setup-Ausgaben
-`~/.aibox/logs/update/log_<Zeitstempel>.txt`. Eine Prüfsumme belegt die
-Unverändertheit, nicht die Vertrauenswürdigkeit des Herausgebers. Die
-Uploadseite bietet keine Rückgängig-Aktion; sichere Daten und Konfiguration vor
-Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
+`~/.aibox/logs/update/log_<Zeitstempel>.txt`. Der lokale Installationsstatus steht
+in `~/.aibox/service-artifacts.json`.
 
-Neue Setup-Bundles enthalten Plattform und Architektur. Mac und Linux erhalten
-so jeweils das neueste passende Paket, auch bei einem gemeinsamen Dateikatalog.
+Eine Prüfsumme bestätigt die Unverändertheit einer Datei, nicht die
+Vertrauenswürdigkeit ihres Herausgebers. Sichere Daten und Konfiguration vor
+Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 
 ## Zugehörige MCP-Werkzeuge
 
 - `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
 - `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer**.
-- `platform_artifact_publish`: Hochgeladenes XRAG-Paket veröffentlichen. Mindeststufe: **Globaler Administrator**.
+- `platform_artifact_publish`: Veröffentlichung eines hochgeladenen XRAG-Pakets einreihen; liefert eine Auftrags-ID. Mindeststufe: **Globaler Administrator**.
+- `platform_artifact_publication_get`: Mit dieser Auftrags-ID den Status (`queued`, `processing`, `published`, `error`) und nach Veröffentlichung die Artefakt-Prüfsumme abfragen. Mindeststufe: **Globaler Administrator**. Bestätigt keine Installation auf Maschinen.
 
-Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
+Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die
+betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen,
+besondere Grenzen und der vollständige Werkzeugkatalog stehen unter
+[Plattformzugriff](../agent/edit/plattformzugriff.md).

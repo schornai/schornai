@@ -19,6 +19,8 @@ const args = [
   "--schema",
   "public",
 ];
+const workdir = process.env.SUPABASE_TYPES_WORKDIR;
+if (workdir) args.push("--workdir", workdir);
 const databaseUrl = process.env.SUPABASE_TYPES_DB_URL;
 args.push(...(databaseUrl ? ["--db-url", databaseUrl] : ["--local"]));
 const result = spawnSync("npx", args, {

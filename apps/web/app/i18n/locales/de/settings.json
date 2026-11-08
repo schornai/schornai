@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG Upload",
-      "description": "Ziehen Sie eine XRAG-Datei hierher, um sie hochzuladen und den Inhalt zu installieren.",
+      "description": "Ziehen Sie eine XRAG-Datei hierher, um sie hochzuladen und den Inhalt zu installieren. Nach einem Abbruch dieselbe Datei erneut auswählen, um die Übertragung fortzusetzen.",
       "buttonUpload": "Hochladen",
       "errorUpload": "Fehler beim Upload der XRAG-Datei \"{{name}}\".",
-      "successUpload": "XRAG \"{{name}}\" erfolgreich hochgeladen. Je nach Größe und Art des Uploads kann es einige Minuten dauern, bis die Änderungen wirksam sind.",
-      "buttonHide": "Ausblenden"
+      "successUpload": "{{name}}: Übertragung abgeschlossen. Die Veröffentlichung wird separat geprüft.",
+      "buttonHide": "Ausblenden",
+      "labelProcessing": "{{name}}: Wird geprüft und veröffentlicht.",
+      "labelPublished": "{{name}}: Veröffentlicht und für passende Dienste verfügbar.",
+      "errorPublication": "{{name}}: Veröffentlichung fehlgeschlagen. Prüfe das Paket und lade es erneut hoch.",
+      "errorPublicationStatus": "{{name}}: Status momentan nicht verfügbar. Die Abfrage wird wiederholt."
     },
     "TaskTable": {
       "tableColumnType": "Typ",

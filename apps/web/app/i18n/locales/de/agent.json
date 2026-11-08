@@ -717,6 +717,7 @@
         "platform_user_get": "Benutzer anzeigen",
         "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",
         "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen",
+        "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen",
         "platform_chat_retry": "Chat erneut versuchen",
         "platform_calculate": "Berechnung ausführen",
         "platform_current_date_time": "Aktuelles Datum und Uhrzeit"

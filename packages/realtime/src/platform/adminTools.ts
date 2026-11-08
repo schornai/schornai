@@ -1,7 +1,8 @@
 import { connectionInputSchema } from "@schornio/aibox-database/connections/connectionInputSchema";
 import { saveConnectionSettings } from "@schornio/aibox-database/connections/saveConnectionSettings";
 import { listArtifacts } from "@schornio/aibox-database/xrag/listArtifacts";
-import { ArtifactCatalogSession } from "../documents/artifactCatalog/ArtifactCatalogSession.ts";
+import { publishArtifact } from "@schornio/aibox-database/xrag/publishArtifact";
+import { getArtifactPublication } from "@schornio/aibox-database/xrag/getArtifactPublication";
 import { z } from "zod";
 import type { PlatformContext, platformRegistry } from "./registry.ts";
 import { externalModelInputSchema } from "@schornio/aibox-database/aiModel/externalModelInputSchema";
@@ -164,7 +165,7 @@ export function addAdminTools(
   );
   add(
     "platform_artifact_publish",
-    "Publish an already uploaded XRAG package. The package must exist in the administrator upload area.",
+    "Queue validation/publication of an uploaded XRAG package. Returns a publication job ID, not an artifact ID. Check platform_artifact_publication_get for completion.",
     "admin",
     false,
     z.object({
@@ -176,11 +177,15 @@ export function addAdminTools(
         .refine((value) => value !== "." && value !== ".."),
     }),
     async ({ actionFileName }) => {
-      await using session = new ArtifactCatalogSession({
-        serverToken: context.serverToken,
-        websocketProvider: context.websocketProvider,
-      });
-      return { id: await session.publish(actionFileName, options) };
+      return { id: await publishArtifact(actionFileName, options) };
     },
+  );
+  add(
+    "platform_artifact_publication_get",
+    "Read a publication job: queued, processing, published or error. Published jobs include the artifact digest; this does not confirm installation on machines.",
+    "admin",
+    true,
+    z.object({ id: z.uuid() }),
+    ({ id }) => getArtifactPublication(id, options),
   );
 }

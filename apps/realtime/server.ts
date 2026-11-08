@@ -1,3 +1,4 @@
+import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { watchOllamaModels } from "./src/_utils/watchOllamaModels.ts";
@@ -60,6 +61,10 @@ function fatal(error: unknown) {
 
 try {
   await realtimeServer.listen();
+  void artifactPublicationWorker({
+    supabase: supabaseServiceRole,
+    signal: new AbortController().signal,
+  }).catch(fatal);
   void watchOllamaModels({
     directory:
       process.env.OLLAMA_MODELS ?? join(homedir(), ".aibox/ollama/models"),

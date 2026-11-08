@@ -181,6 +181,34 @@ differ: see [development behavior tests](../tests/service-development.test.ts),
 [service README](../packages/service/README.md) for artifact synchronization and
 deployment details.
 
+## Follow XRAG publication
+
+[`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a
+publication after the global-admin entry point authorizes the caller. The
+[artifact worker](../apps/realtime/src/artifacts/worker.ts) streams and validates
+the original immutable upload through
+[`processArtifactPublication`](../packages/database/src/xrag/processArtifactPublication.ts).
+The SQL transaction publishes catalog metadata and completes the leased job;
+[`announceArtifactPublications`](../packages/database/src/xrag/announceArtifactPublications.ts)
+delivers its durable outbox to Yjs. Read
+[the publication decision](adr/0004-durable-artifact-publication.md) when changing
+object ownership, retries, or withdrawal semantics.
+
+[`artifactDownload`](../packages/service/src/artifactDownload.ts) owns resumable
+machine downloads, checksum verification, cache budgets and orphan cleanup.
+[`activateArtifactDirectory`](../packages/service/src/activateArtifactDirectory.ts)
+consumes prepared model/file directories by rename and recovers interrupted swaps
+before consumers start. See [publication SQL tests](../supabase/tests/artifact_publications.sql),
+[worker tests](../tests/artifact-publication-worker.test.ts),
+[download tests](../tests/artifact-download.test.ts),
+[process-crash test](../tests/artifact-crash.test.ts), and
+[activation recovery tests](../tests/artifact-activation.test.ts).
+
+Setup stays a single archive. The service persists its selected publication before
+installation so a truncated or changed catalog cannot cause a downgrade. See
+[service artifact tests](../tests/service-artifacts.test.ts) for selection and
+[installer tests](../tests/service-installer.test.ts) for consuming extracted runtimes.
+
 ## Names that change across layers
 
 These mappings explain existing compatibility names; they are not independent

@@ -133,6 +133,11 @@ try {
     );
   }
   console.log(`Passed all ${files.length} SQL regression files.`);
+  if (process.argv.includes("--generate-types")) {
+    env.SUPABASE_TYPES_WORKDIR = workdir;
+    await run("npm", ["run", "supabase:types"]);
+    delete env.SUPABASE_TYPES_WORKDIR;
+  }
 } catch (error) {
   console.error(error instanceof Error ? error.message : "SQL tests failed");
   process.exitCode = 1;

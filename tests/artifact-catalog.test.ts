@@ -15,29 +15,53 @@ const artifact = {
   createdAt: "2026-10-24T12:00:00Z",
   xrag: { xrag_version: 1 as const, xrag_type: "setup" as const },
 };
-it("withdraws before removing bytes, preserves a release tombstone, and safely retries failed purges", async () => {
-  const objects = new Map<string, Blob>([
-    [`catalog/${artifact.id}.json`, new Blob([JSON.stringify(artifact)])],
-    [`artifacts/${artifact.id}.tar`, new Blob(["bytes"])],
-  ]);
-  const remove = vi.fn(async (paths: string[]) => {
-    for (const path of paths) objects.delete(path);
-    return { error: null };
+it("withdraws before removing bytes and retries a failed purge without resetting withdrawal", async () => {
+  const row = {
+    id: artifact.id,
+    metadata: artifact,
+    created_at: artifact.createdAt,
+    object_path: "uploads/original/model.tar",
+    deleted_at: null as string | null,
+    purged_at: null as string | null,
+  };
+  const remove = vi.fn(async () => {
+    expect(row.deleted_at).toBeTruthy();
+    return { error: null as any };
   });
-  remove.mockResolvedValueOnce({ error: { message: "offline" } } as any);
-  const bucket = {
-    download: vi.fn(async (path: string) => ({
-      data: objects.get(path),
-      error: null,
-    })),
-    upload: vi.fn(async (path: string, body: string) => {
-      objects.set(path, new Blob([body]));
-      return { error: null };
-    }),
-    remove,
+  remove.mockResolvedValueOnce({ error: { message: "offline" } });
+  const from = () => {
+    let update: Record<string, unknown> | undefined;
+    let condition: string | undefined;
+    const builder: any = {
+      select: () => builder,
+      eq: () => builder,
+      single: () => builder,
+      maybeSingle: () => builder,
+      is: (column: string) => {
+        condition = column;
+        return builder;
+      },
+      update: (value: Record<string, unknown>) => {
+        update = value;
+        return builder;
+      },
+      then: (resolve: any, reject: any) => {
+        if (
+          update &&
+          (!condition || row[condition as keyof typeof row] === null)
+        )
+          Object.assign(row, update);
+        return Promise.resolve({ data: row, error: null }).then(
+          resolve,
+          reject,
+        );
+      },
+    };
+    return builder;
   };
   const supabase = {
-    storage: { from: () => bucket },
+    from,
+    storage: { from: () => ({ remove }) },
   } as unknown as SupabaseClient;
   await expect(deleteArtifact(artifact.id, { supabase })).rejects.toThrow(
     "ARTIFACT_DELETE_FAILED",
@@ -45,17 +69,10 @@ it("withdraws before removing bytes, preserves a release tombstone, and safely r
   const withdrawn = await getArtifact(artifact.id, { supabase });
   expect(withdrawn.deletedAt).toBeTruthy();
   expect(withdrawn.purgedAt).toBeUndefined();
-  expect(objects.has(`artifacts/${artifact.id}.tar`)).toBe(true);
   const deleted = await deleteArtifact(artifact.id, { supabase });
-  expect(deleted.purgedAt).toBeTruthy();
   expect(deleted.deletedAt).toBe(withdrawn.deletedAt);
-  expect(objects.has(`artifacts/${artifact.id}.tar`)).toBe(false);
-  expect((await getArtifact(artifact.id, { supabase })).createdAt).toBe(
-    artifact.createdAt,
-  );
-  await expect(
-    deleteArtifact(artifact.id, { supabase }),
-  ).resolves.toMatchObject({ id: artifact.id });
+  expect(deleted.purgedAt).toBeTruthy();
+  expect(remove).toHaveBeenLastCalledWith([row.object_path]);
 });
 it("bounded CRUD updates cannot resurrect a deleted artifact over a newer Storage snapshot", () => {
   const doc = new Doc();

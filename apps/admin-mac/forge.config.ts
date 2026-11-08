@@ -2,12 +2,14 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import type { ForgeConfig } from "@electron-forge/shared-types";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { VitePlugin } from "@electron-forge/plugin-vite";
+import { download } from "../../external/downloads/src/util/download.ts";
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: "assets/app-icon/squared",
     name: "schorn.ai Admin",
+    download: { downloader: { download } },
   },
   plugins: [
     new VitePlugin({

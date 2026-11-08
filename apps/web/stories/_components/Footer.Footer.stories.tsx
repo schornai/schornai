@@ -5,7 +5,8 @@ import { expect, userEvent, within } from "storybook/test";
 const meta = {
   title: "Web/Footer",
   component: Footer,
-  args: {},
+  // Stable visual fixture: release metadata changes must not change snapshots.
+  args: { releaseName: "December 2026 Development Build 7" },
 } satisfies Meta<typeof Footer>;
 export default meta;
 type Story = StoryObj<typeof meta>;
