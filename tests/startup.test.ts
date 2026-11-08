@@ -14,6 +14,7 @@ const mocks = vi.hoisted(() => ({
   spawn: vi.fn(),
   mkdir: vi.fn(),
   watchModels: vi.fn(),
+  scheduler: vi.fn(),
 }));
 vi.mock("@hocuspocus/server", () => ({
   Server: class {
@@ -48,6 +49,9 @@ vi.mock("../apps/transcriber-mac/src/service/transcribeWorker", () => ({
 vi.mock("../apps/realtime/src/_utils/watchOllamaModels", () => ({
   watchOllamaModels: mocks.watchModels,
 }));
+vi.mock("../apps/realtime/src/scheduler/startScheduler", () => ({
+  startScheduler: mocks.scheduler,
+}));
 vi.mock("node:child_process", () => ({ spawn: mocks.spawn }));
 vi.mock("node:fs/promises", () => ({ mkdir: mocks.mkdir }));
 beforeEach(() => {
@@ -63,6 +67,7 @@ beforeEach(() => {
     mocks.transcribe,
   ])
     worker.mockResolvedValue(undefined);
+  mocks.scheduler.mockReturnValue(new Promise(() => {}));
   mocks.listen.mockResolvedValue(undefined);
   mocks.mkdir.mockResolvedValue(undefined);
   mocks.watchModels.mockReturnValue(new Promise(() => {}));
@@ -78,6 +83,10 @@ describe("application startup and Python packaging", () => {
       await import("../apps/realtime/server");
       expect(mocks.serverConfig.port).toBe(port ? 9010 : 9000);
       expect(mocks.listen).toHaveBeenCalledOnce();
+      expect(mocks.scheduler).toHaveBeenCalledWith({
+        supabase: { service: true },
+        signal: expect.any(AbortSignal),
+      });
       for (const worker of [
         mocks.chat,
         mocks.generate,
@@ -203,4 +212,12 @@ it("reports transcription startup failures with a nonzero exit", async () => {
   await import("../apps/transcriber-mac/server");
   await vi.waitFor(() => expect(exit).toHaveBeenCalledWith(1));
   expect(console.error).toHaveBeenCalledWith(failure);
+});
+
+it("stops scheduled work when the realtime server is destroyed", async () => {
+  await import("../apps/realtime/server");
+  const { signal } = mocks.scheduler.mock.lastCall![0];
+  expect(signal.aborted).toBe(false);
+  await mocks.serverConfig.extensions[0].onDestroy();
+  expect(signal.aborted).toBe(true);
 });

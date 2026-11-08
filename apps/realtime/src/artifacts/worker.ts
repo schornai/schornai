@@ -2,7 +2,6 @@ import { setTimeout as delay } from "node:timers/promises";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
 import { processArtifactPublication } from "@schornio/aibox-database/xrag/processArtifactPublication";
 import { announceArtifactPublications } from "@schornio/aibox-database/xrag/announceArtifactPublications";
-import { cleanupArtifactPublications } from "@schornio/aibox-database/xrag/cleanupArtifactPublications";
 import { ArtifactCatalogSession } from "@schornio/aibox-realtime/documents/artifactCatalog/ArtifactCatalogSession";
 import { ServerRealtimeWebsocketProvider } from "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider";
 import { getRealtimeServerToken } from "@schornio/aibox-realtime/server/getRealtimeServerToken";
@@ -32,16 +31,7 @@ export async function artifactPublicationWorker({
     }
   }
   async function maintain() {
-    let cleanupAt = 0;
     while (!signal.aborted) {
-      if (Date.now() >= cleanupAt) {
-        try {
-          await cleanupArtifactPublications({ supabase });
-          cleanupAt = Date.now() + 60_000;
-        } catch {
-          if (!signal.aborted) console.error("Artifact cleanup will retry");
-        }
-      }
       try {
         await announceArtifactPublications(
           (id) => session.announce(id, { supabase }),

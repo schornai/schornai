@@ -947,6 +947,49 @@ export type Database = {
         };
         Relationships: [];
       };
+      scheduled_jobs: {
+        Row: {
+          attempts: number;
+          id: string;
+          interval_seconds: number | null;
+          kind: string;
+          lease_token: string | null;
+          lease_until: string | null;
+          max_attempts: number;
+          payload: NonNullable<Json>;
+          run_at: string;
+          state: string;
+          updated_at: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          attempts?: number;
+          id: string;
+          interval_seconds?: number | null;
+          kind: string;
+          lease_token?: string | null;
+          lease_until?: string | null;
+          max_attempts?: number;
+          payload?: NonNullable<Json>;
+          run_at?: string;
+          state?: string;
+          updated_at?: string;
+        };
+        Update: {
+          attempts?: number;
+          id?: string;
+          interval_seconds?: number | null;
+          kind?: string;
+          lease_token?: string | null;
+          lease_until?: string | null;
+          max_attempts?: number;
+          payload?: NonNullable<Json>;
+          run_at?: string;
+          state?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       settings_user: {
         Row: {
           created_at: string;
@@ -1494,6 +1537,28 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      claim_scheduled_job: {
+        Args: { p_kinds: string[] };
+        Returns: {
+          attempts: number;
+          id: string;
+          interval_seconds: number | null;
+          kind: string;
+          lease_token: string | null;
+          lease_until: string | null;
+          max_attempts: number;
+          payload: NonNullable<Json>;
+          run_at: string;
+          state: string;
+          updated_at: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "scheduled_jobs";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       create_external_ai_model: {
         Args: {
           api_key: string;
@@ -1574,6 +1639,10 @@ export type Database = {
           p_state: string;
           p_task_id: string;
         };
+        Returns: boolean;
+      };
+      finish_scheduled_job: {
+        Args: { p_id: string; p_success: boolean; p_token: string };
         Returns: boolean;
       };
       generate_custom_id: { Args: Record<PropertyKey, never>; Returns: string };
@@ -1698,6 +1767,10 @@ export type Database = {
       };
       renew_background_task: {
         Args: { p_owner_token: string; p_task_id: string };
+        Returns: boolean;
+      };
+      renew_scheduled_job: {
+        Args: { p_id: string; p_token: string };
         Returns: boolean;
       };
       replace_file_index: {

@@ -1,3 +1,4 @@
+import { startScheduler } from "./src/scheduler/startScheduler.ts";
 import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -31,8 +32,15 @@ const supabaseServiceRole = createSupabaseClient({
   },
 });
 
+const schedulerAbort = new AbortController();
+
 const realtimeServer = new Server({
   extensions: [
+    {
+      async onDestroy() {
+        schedulerAbort.abort();
+      },
+    },
     createRealtimeAuthentication({
       secret,
       serviceSecret: process.env.SERVICE_API_TOKEN,
@@ -61,6 +69,12 @@ function fatal(error: unknown) {
 
 try {
   await realtimeServer.listen();
+  process.once("SIGTERM", () => schedulerAbort.abort());
+  process.once("SIGINT", () => schedulerAbort.abort());
+  void startScheduler({
+    supabase: supabaseServiceRole,
+    signal: schedulerAbort.signal,
+  }).catch(fatal);
   void artifactPublicationWorker({
     supabase: supabaseServiceRole,
     signal: new AbortController().signal,

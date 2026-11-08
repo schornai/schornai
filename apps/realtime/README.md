@@ -68,3 +68,52 @@ Database snapshots older than 24 hours are cleared in batches of 1,000 after
 recovery has completed. The task ID and ownership record remain as a replay
 barrier; Yjs replication metadata also remains. These limits bound retained task
 payloads, not total historical metadata or the number of active tasks.
+
+## Durable scheduler
+
+[`startScheduler.ts`](src/scheduler/startScheduler.ts) registers trusted handlers
+and recurring system jobs; [`worker.ts`](src/scheduler/worker.ts) executes them.
+Apply `20261108212843_scheduled_jobs.sql` before deploying this server. The first
+handler, `artifacts.cleanup`, replaces the artifact worker's cleanup timer. It
+runs immediately after initial registration, then 60 seconds after each success.
+Registration is idempotent across restarts and servers.
+
+Server-side callers use `scheduleJob` and `cancelJob` in
+[`database/scheduler`](../../packages/database/src/scheduler). Supply a stable
+unique ID, registered kind, JSON payload and `runAt` date; optionally specify
+`intervalSeconds` and `maxAttempts` (default 5). Register a handler in
+`startScheduler.ts` before creating jobs for that kind. Payload validation and
+resource authorization belong to that handler and its authorized entry point.
+Only service-role clients can access jobs. This is infrastructure, with no UI,
+MCP tool, arbitrary script execution or user-supplied handler names exposed.
+
+Jobs survive restarts. Each server claims one job at a time, polling every second
+while idle. Unknown kinds remain queued until a supporting worker is deployed.
+Postgres atomically claims due work using `SKIP LOCKED`. Leases last 90 seconds
+and renew every 20 seconds. Lease loss, shutdown or cancellation aborts the
+handler's signal. Handlers must honor that signal and avoid unbounded operations;
+a handler that never settles occupies this worker until process restart.
+Cancellation removes the record; it cannot undo a side effect already in flight.
+
+Delivery is **at least once**: a crash after a side effect but before completion
+can repeat that side effect. Handlers must be idempotent, using the job ID where
+appropriate; future automatic chats need durable submission deduplication before
+they can safely use this scheduler. This differs deliberately from existing
+interactive task recovery; see [the decision](../../docs/adr/0005-scheduled-job-delivery.md).
+An old lease cannot complete or renew a newly claimed job.
+
+Failed executions retry with exponential delays from 5 seconds up to one hour.
+Expired leases also consume an attempt. Exhaustion sets `failed`; recurring jobs
+also stop on exhaustion (cleanup allows 100 attempts). Inspect `scheduled_jobs`
+and the sanitized `SCHEDULER_*` logs through operator database/log access. To
+retry a terminal job, cancel its ID and schedule it again after resolving the
+cause. Completed and failed records are retained for inspection and deduplication
+until explicitly cancelled; avoid storing secrets or large data in payloads.
+
+Intervals use completion time, so missed occurrences coalesce into one execution
+after downtime and slow handlers do not create a backlog. Dates are absolute
+instants; calendar cron expressions and time zones are not supported. Chat expiry
+and scheduled chat generation are future handlers, not enabled by this change.
+
+Behavior tests: [`scheduler.test.ts`](../../tests/scheduler.test.ts) and
+[`scheduled_jobs.sql`](../../supabase/tests/scheduled_jobs.sql).

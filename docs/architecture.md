@@ -181,6 +181,18 @@ differ: see [development behavior tests](../tests/service-development.test.ts),
 [service README](../packages/service/README.md) for artifact synchronization and
 deployment details.
 
+## Follow scheduled work
+
+The realtime server starts the [scheduler](../apps/realtime/src/scheduler/startScheduler.ts)
+and registers `artifacts.cleanup`. The [worker](../apps/realtime/src/scheduler/worker.ts)
+claims durable jobs through [database operations](../packages/database/src/scheduler);
+Postgres owns due times, lease tokens, retries and interval rescheduling.
+Read the [delivery decision](adr/0005-scheduled-job-delivery.md) when adding a
+handler with external side effects, and the [runtime guide](../apps/realtime/README.md#durable-scheduler)
+for registration, cancellation and failure recovery. Tests cover
+[worker behavior](../tests/scheduler.test.ts) and
+[SQL ownership and privileges](../supabase/tests/scheduled_jobs.sql).
+
 ## Follow XRAG publication
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a

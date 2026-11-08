@@ -8,10 +8,12 @@ meta:
   role_scope: "Jeweilige Maschine"
   prerequisites: "Node.js ab Version 24; installierte Dienstdateien; für Container Docker Compose ab 2.24.4."
   status: "verfügbar"
-  last_verified: "2026-11-04"
+  last_verified: "2026-11-08"
   source_files:
     [
       "apps/admin-mac/src/main.ts",
+      "apps/realtime/src/scheduler/startScheduler.ts",
+      "apps/realtime/src/scheduler/worker.ts",
       "apps/admin-mac/src/renderer/App.tsx",
       "apps/admin-mac/src/renderer/components/ServiceView.tsx",
       "packages/ui/src/lib/release.ts",
@@ -481,3 +483,28 @@ Web-App, Realtime-Dienst und Service benötigen denselben `SERVICE_API_TOKEN`.
 Entfernte Maschinen verwenden `/v2/realtime` an der Freigabeadresse oder
 `endpoints.realtime`. Auf lokalen Core-Hosts verwendet der Service den nur auf
 Loopback erreichbaren Port 9001 (Entwicklung: 9000).
+
+## Zeitgesteuerte Hintergrundjobs
+
+Der Realtime-Dienst führt dauerhaft in der Datenbank gespeicherte Jobs aus.
+Aktuell bereinigt er Artefakt-Uploads und zurückgezogene Artefakte beim ersten
+Start und danach jeweils 60 Sekunden nach erfolgreichem Abschluss. Voraussetzung
+ist die Migration `20261108212843_scheduled_jobs.sql` vor dem Server-Update.
+Fällige Jobs werden nach einem Neustart nachgeholt; während eines Ausfalls des
+Realtime-Diensts laufen sie nicht. Fehler werden mit wachsendem Abstand erneut
+versucht. Nach 100 erfolglosen Versuchen stoppt der Artefakt-Cleanup und benötigt
+einen Eingriff durch die Betriebsadministration.
+
+Zur Diagnose dienen die `SCHEDULER_*`-Meldungen im Realtime-Protokoll und die
+Tabelle `scheduled_jobs` über administrativen Datenbankzugriff. Abgeschlossene
+und fehlgeschlagene Einträge bleiben gespeichert. Die
+[technische Anleitung](../../../apps/realtime/README.md#durable-scheduler)
+beschreibt die Wiederaufnahme nach Behebung der Ursache. Automatisches Löschen
+von Chats und zeitgesteuerte Chat-Nachrichten sind noch nicht eingerichtet.
+
+### Plattform-MCP
+
+Für den Scheduler gibt es keine Plattform-MCP-Tools und keine Benutzeroberfläche.
+Er ist interne Infrastruktur mit Service-Role-Zugriff. Neue benutzerbedienbare
+Zeitplanfunktionen benötigen eigene Berechtigungsprüfungen und passende Tools;
+MCP-Clients können derzeit keine Jobs anlegen oder abbrechen.
