@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import "./client-setup";
+import { client } from "./client-setup";
 import {
   act,
   cleanup,
@@ -20,6 +20,7 @@ const mocks = vi.hoisted(() => ({
   tile: vi.fn(),
   clipboard: vi.fn(),
   messages: undefined as any,
+  error: undefined as string | undefined,
   activities: [] as any[],
 }));
 vi.mock("../../apps/web/app/_components/StorageViewProvider", () => ({
@@ -49,6 +50,9 @@ vi.mock("@schornio/aibox-package-ui/components/message-scroller", () => ({
 }));
 afterEach(cleanup);
 beforeEach(() => {
+  mocks.error = undefined;
+  client.execute.mockClear();
+  client.pending = false;
   mocks.preview.mockClear();
   mocks.tile.mockClear();
   mocks.clipboard.mockReset().mockResolvedValue(undefined);
@@ -324,7 +328,10 @@ vi.mock(
 );
 vi.mock(
   "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatContext",
-  () => ({ useMessages: () => mocks.messages }),
+  () => ({
+    useMessages: () => mocks.messages,
+    useChatError: () => mocks.error,
+  }),
 );
 it.each([undefined, "idle", "running", "error"])(
   "renders ordered messages and the activity indicator for state %s",
@@ -337,9 +344,11 @@ it.each([undefined, "idle", "running", "error"])(
         parts: [{ type: "text", text: "Second" }],
       },
     ];
+    mocks.error = state === "error" ? "Model unavailable\nHTTP 503" : undefined;
     mocks.activities = state ? [{ id: "activity", state }] : [];
     const view = render(
       <ChatMessageItems
+        agentId="agent"
         activityId="activity"
         agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
       />,
@@ -348,17 +357,43 @@ it.each([undefined, "idle", "running", "error"])(
     expect(!!view.container.querySelector(".animate-ping")).toBe(
       state === "running",
     );
-    expect(!!view.container.querySelector(".bg-destructive")).toBe(
+    expect(Boolean(screen.queryByRole("button", { name: "labelRetry" }))).toBe(
       state === "error",
     );
+    if (state === "error") {
+      fireEvent.click(screen.getByRole("button", { name: /labelDetails/ }));
+      expect(screen.getByText(/HTTP 503/)).toBeTruthy();
+      fireEvent.click(screen.getByRole("button", { name: "labelRetry" }));
+      expect(client.execute).toHaveBeenCalledWith({
+        agentId: "agent",
+        activityId: "activity",
+      });
+    }
   },
 );
+it("shows errors even when no messages were recorded and disables retry while pending", () => {
+  mocks.messages = [];
+  mocks.error = "";
+  client.pending = true;
+  render(
+    <ChatMessageItems
+      agentId="agent"
+      activityId="activity"
+      agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
+    />,
+  );
+  expect(screen.getByText("descriptionFailed")).toBeTruthy();
+  expect(
+    screen.getByRole("button", { name: "labelRetry" }).hasAttribute("disabled"),
+  ).toBe(true);
+});
 it.each([undefined, []])(
   "shows the agent empty state without an action button %j",
   (messages) => {
     mocks.messages = messages;
     const view = render(
       <ChatMessageItems
+        agentId="agent"
         activityId="activity"
         agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
       />,

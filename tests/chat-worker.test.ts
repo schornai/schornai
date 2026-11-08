@@ -128,6 +128,7 @@ const task = {
     agentId: "agent",
     userId: "user",
     userClaims: [],
+    retry: false,
   },
 };
 function queue(content: any) {
@@ -149,6 +150,7 @@ function activity() {
 beforeEach(() => {
   for (const mock of Object.values(mocks))
     if (vi.isMockFunction(mock)) mock.mockReset();
+  task.parameters.retry = false;
   chat = new Doc();
   current = new Doc();
   activities = new Doc();
@@ -192,6 +194,36 @@ beforeEach(() => {
   });
 });
 describe("chat worker orchestration", () => {
+  it("does not let a stale retry overwrite a newer generation", async () => {
+    task.parameters.retry = true;
+    chat.getMap("state").set("generationId", "newer-generation");
+    chat.getMap("state").set("type", "queued");
+    await run();
+    expect(mocks.stream).not.toHaveBeenCalled();
+    expect(chat.getMap("state").get("generationId")).toBe("newer-generation");
+    expect(chat.getMap("state").get("type")).toBe("queued");
+  });
+  it("retries stored history without duplicating the user message or consuming queued drafts", async () => {
+    task.parameters.retry = true;
+    const original = {
+      id: "original",
+      role: "user",
+      parts: [{ type: "text", text: "Question" }],
+    };
+    chat.getArray("messages").push([original]);
+    queue({ type: "text", text: "Do not send this draft" });
+    const before = getChatCurrentMessageBatch(current).toArray();
+    await run();
+    expect(mocks.convert).toHaveBeenCalledWith([original]);
+    expect(mocks.stream).toHaveBeenCalledTimes(1);
+    expect(
+      getChat(chat)
+        .messages?.toArray()
+        .filter((message) => message.role === "user"),
+    ).toEqual([original]);
+    expect(getChatCurrentMessageBatch(current).toArray()).toEqual(before);
+    expect(chat.getMap("state").get("type")).toBe("idle");
+  });
   it("repairs interrupted historical input before continuing, without replaying its reasoning", async () => {
     chat.getArray("messages").push([
       {

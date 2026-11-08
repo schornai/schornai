@@ -1,3 +1,4 @@
+import { Doc } from "yjs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 const io = vi.hoisted(() => ({
   docs: new Map<string, any>(),
@@ -126,6 +127,76 @@ beforeEach(() => {
   });
 });
 describe("platform chat and monitoring integration", () => {
+  it("retries only failed chats, keeps history and limits delegated claims", async () => {
+    const chat = new Doc();
+    io.docs.set(getChatDocumentName(input), chat);
+    const message = {
+      id: "question",
+      role: "user",
+      parts: [{ type: "text", text: "Hello" }],
+    };
+    chat.getArray("messages").push([message]);
+    await expect(execute("platform_chat_retry", input)).rejects.toThrow(
+      "CHAT_NOT_FAILED",
+    );
+    chat.getMap("state").set("type", "error");
+    await execute("platform_chat_retry", input, { ...c, level: "user" });
+    expect(chat.getArray("messages").toArray()).toEqual([message]);
+    expect(chat.getMap("state").get("type")).toBe("queued");
+    expect(
+      getTaskQueue(io.docs.get("taskQueue")).tasks.toArray()[0],
+    ).toMatchObject({
+      parameters: {
+        retry: true,
+        userClaims: [{ organization_id: "workspace", role: "user" }],
+      },
+    });
+    await expect(execute("platform_chat_retry", input)).rejects.toThrow(
+      "CHAT_BUSY",
+    );
+    expect(getTaskQueue(io.docs.get("taskQueue")).tasks.length).toBe(1);
+  });
+  it("rejects retry without document access or workspace membership", async () => {
+    io.permission.mockResolvedValue(undefined);
+    await expect(execute("platform_chat_retry", input)).rejects.toThrow(
+      "NOT_AUTHORIZED",
+    );
+    expect(io.docs.size).toBe(0);
+    io.permission.mockResolvedValue("read");
+    await expect(
+      execute("platform_chat_retry", input, {
+        ...c,
+        level: "user",
+        claims: [{ organization_id: "another", role: "user" }],
+      }),
+    ).rejects.toThrow("NOT_AUTHORIZED");
+    expect(io.docs.size).toBe(0);
+  });
+  it("does not bypass pending approvals when retrying", async () => {
+    const chat = new Doc();
+    io.docs.set(getChatDocumentName(input), chat);
+    chat.getMap("state").set("type", "error");
+    chat.getArray("messages").push([
+      { id: "q", role: "user", parts: [{ type: "text", text: "Hello" }] },
+      {
+        id: "a",
+        role: "assistant",
+        parts: [
+          {
+            type: "tool-web-fetch",
+            toolCallId: "call",
+            state: "approval-requested",
+            input: { url: "https://example.com" },
+            approval: { id: "approval" },
+          },
+        ],
+      },
+    ]);
+    await expect(execute("platform_chat_retry", input)).rejects.toThrow(
+      "TOOL_APPROVAL_REQUIRED",
+    );
+    expect(getTaskQueue(io.docs.get("taskQueue")).tasks.length).toBe(0);
+  });
   it.each(["chat", "transcription"])(
     "creates a private %s activity and records its label",
     async (kind) => {

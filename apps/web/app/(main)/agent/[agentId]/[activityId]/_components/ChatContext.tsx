@@ -88,3 +88,10 @@ export function useMessages(): ChatMessage[] {
 
   return messages;
 }
+
+export function useChatError(): string | undefined {
+  const provider = useProvider();
+  const chat = useMemo(() => getChat(provider.document), [provider.document]);
+  const state = useRealtimeTypedMap(chat.state);
+  return state?.type === "error" ? state.error : undefined;
+}

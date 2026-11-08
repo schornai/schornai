@@ -84,6 +84,7 @@ export default async function Page(
             <TabsMainContent view="default">
               <MessageScrollerContent className="h-auto min-h-0 flex-1">
                 <ChatMessageItems
+                  agentId={agentId}
                   activityId={activityId}
                   agentColor={agent.color}
                   agentIcon={agent.icon}

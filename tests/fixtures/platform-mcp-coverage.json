@@ -189,5 +189,8 @@
   },
   "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts": {
     "tools": ["platform_personal_mcp_revoke"]
+  },
+  "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts": {
+    "tools": ["platform_chat_retry"]
   }
 }
