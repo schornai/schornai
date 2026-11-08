@@ -14,6 +14,7 @@ meta:
       "apps/admin-mac/src/main.ts",
       "apps/admin-mac/src/renderer/App.tsx",
       "apps/admin-mac/src/renderer/components/ServiceView.tsx",
+      "packages/ui/src/lib/release.ts",
       "packages/service/src/cli.ts",
       "packages/service/src/bootstrap.ts",
       "packages/service/src/initialAdmin.ts",
@@ -263,7 +264,7 @@ werden. Das Schließen der App lässt den Service weiterlaufen. Sprache
 (Deutsch oder Englisch) und Hell-/Dunkeldarstellung folgen dem System.
 
 Neben dem Logo steht die Release-Bezeichnung der installierten Mac-App, zum
-Beispiel **Dezember Dev Build 7**. Der Footer der Web-App zeigt
+Beispiel **December 2026 Development Build 7**. Der Footer der Web-App zeigt
 deren Release-Bezeichnung. Bei getrennten Installationen können die Anzeigen
 abweichen; `schornai --version` zeigt stattdessen die eigenständige CLI-Version.
 

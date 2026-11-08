@@ -1,6 +1,6 @@
-# Dezember Dev Build 7
+# December 2026 Development Build 7
 
-Web-App und Mac-Admin-App zeigen **Dezember Dev Build 7**. Das Setup wird als
+Web-App und Mac-Admin-App zeigen **December 2026 Development Build 7**. Das Setup wird als
 `.xrag.tar` für macOS ARM64 (Apple Silicon) gebündelt.
 
 Enthalten sind die Verarbeitung großer XRAG-Pakete im Hintergrund,

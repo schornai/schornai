@@ -16,8 +16,13 @@ import Link from "next/link";
 import { LogoSchornAI } from "@schornio/aibox-package-ui/components/logo-schornai";
 import { useTheme } from "next-themes";
 import { fallbackLanguage, languages } from "../../lib/languages";
+import { RELEASE_NAME } from "@schornio/aibox-package-ui/lib/release";
 
-export function Footer() {
+export function Footer({
+  releaseName = RELEASE_NAME,
+}: {
+  releaseName?: string;
+}) {
   const { t, i18n } = useT(undefined, { useSuspense: false });
   const changeLanguage = useChangeLanguage();
 
@@ -38,9 +43,7 @@ export function Footer() {
           <Link href="/">
             <LogoSchornAI className="text-muted-foreground w-20" />
           </Link>
-          <span className="text-muted-foreground text-xs">
-            {t("footer.labelReleaseName")}
-          </span>
+          <span className="text-muted-foreground text-xs">{releaseName}</span>
         </div>
         <div className="flex flex-col gap-3 lg:flex-row">
           <div className="max-lg:grid max-lg:w-full max-lg:grid-cols-2 lg:flex">

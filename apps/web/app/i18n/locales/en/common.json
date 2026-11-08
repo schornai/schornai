@@ -291,7 +291,6 @@
     "labelThemeLight": "Light",
     "labelThemeDark": "Dark",
     "labelThemeSystem": "Operating system",
-    "labelLanguage": "Language",
-    "labelReleaseName": "December Dev Build 7"
+    "labelLanguage": "Language"
   }
 }

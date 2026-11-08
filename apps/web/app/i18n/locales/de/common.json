@@ -291,7 +291,6 @@
     "labelThemeLight": "Hell",
     "labelThemeDark": "Dunkel",
     "labelThemeSystem": "Betriebsystem",
-    "labelLanguage": "Sprache",
-    "labelReleaseName": "Dezember Dev Build 7"
+    "labelLanguage": "Sprache"
   }
 }
