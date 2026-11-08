@@ -10,15 +10,19 @@ individual validation layers.
 npm test
 ```
 
-Requires Node.js 24+ and Python 3. The runner checks German/English translation
+Requires Node.js 24+ and Python 3.11+ (required by the pinned coverage package). The runner checks German/English translation
 parity, runs all Vitest tests under `tests`, `apps`, and `packages`, then runs the
-Python unit tests. Tests use model mocks, local HTTP/WebSocket servers, and Yjs
+Python unit tests, with the same JavaScript and Python coverage gates as CI. Install
+the Python test dependencies with the setup commands below before the first run. Tests use model mocks, local HTTP/WebSocket servers, and Yjs
 documents; no production services or API keys are required. Local test ports must
 be available. Set `AIBOX_TEST_PYTHON` to select a Python interpreter; otherwise
 the runner prefers `.test-venv` when present, then system Python.
 
 `npm run test:watch` is useful while iterating. Before every commit, run the full
-`npm test` after formatting and all final edits. Filtered tests do not replace it.
+`npm test` after formatting and all final edits. Before pushing, ensure the passing
+run covers the committed content, including any merge changes. Filtered tests do
+not replace it. Use `npm run test:js -- <test-file>` for fast focused iterations;
+that command does not satisfy the commit/push gate.
 
 `npm run i18n:check` runs the translation check on its own without changing files.
 German/English differences in files, keys, or value types fail the check. Missing
@@ -29,12 +33,17 @@ requested, and missing entries fall back to German at runtime.
 ## Coverage
 
 ```sh
-python3 -m venv .test-venv
+python3.13 -m venv .test-venv
 .test-venv/bin/python -m pip install -r tests/requirements.txt
 npm run test:coverage
 ```
 
-This runs the full suite with JavaScript and Python coverage. The JavaScript gate
+Use an installed Python 3.11+ interpreter for the venv; the example uses 3.13.
+The macOS system Python may be too old.
+
+`npm test` and `npm run test:coverage` both run the full suite with JavaScript and
+Python coverage. Coverage is always enabled in the full-suite runner, including
+when called directly as `node scripts/test-all.mjs`. The JavaScript gate
 requires 90% of lines, statements, functions and branches, plus 90% lines per
 workspace. Python requires 90%. Reports are written to `coverage/` and
 [`reports/coverage.md`](../reports/coverage.md), including failures.
