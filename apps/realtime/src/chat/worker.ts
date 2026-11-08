@@ -127,7 +127,14 @@ export async function chatWorker({
               .type === "tool-approval",
         });
       };
-      let claimedCurrentChatMessage = claimNextInput();
+      assertGenerationActive();
+      // Retry continues the stored history without consuming or duplicating a draft.
+      let claimedCurrentChatMessage:
+        | ReturnType<typeof claimNextInput>
+        | { content: { type: "retry"; thinking?: boolean } } = claimedTask
+        .parameters.retry
+        ? { content: { type: "retry" } }
+        : claimNextInput();
 
       setChatState(chat.document, {
         generationId: claimedTask.id,
@@ -258,16 +265,16 @@ export async function chatWorker({
         const previousMetadata = messages.at(-1)?.metadata;
         const thinking =
           messageContent.thinking ??
-          (messageContent.type === "tool-approval"
+          (messageContent.type !== "text"
             ? previousMetadata?.thinking
             : false) ??
           false;
         const resumedRole =
-          messageContent.type === "tool-approval" && previousMetadata?.roleId
+          messageContent.type !== "text" && previousMetadata?.roleId
             ? agent.roles.find((role) => role.id === previousMetadata.roleId)
             : undefined;
         if (
-          messageContent.type === "tool-approval" &&
+          messageContent.type !== "text" &&
           previousMetadata?.roleId &&
           !resumedRole
         )
@@ -414,7 +421,9 @@ export async function chatWorker({
         //   }
         // }
         await currentChatMessage.waitForSynced();
-        claimedCurrentChatMessage = claimNextInput();
+        claimedCurrentChatMessage = claimedTask.parameters.retry
+          ? undefined
+          : claimNextInput();
       }
 
       assertGenerationActive();

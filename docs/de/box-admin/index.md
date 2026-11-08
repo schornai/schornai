@@ -263,7 +263,7 @@ werden. Das Schließen der App lässt den Service weiterlaufen. Sprache
 (Deutsch oder Englisch) und Hell-/Dunkeldarstellung folgen dem System.
 
 Neben dem Logo steht die Release-Bezeichnung der installierten Mac-App, zum
-Beispiel **November 2026**. Der Footer der Web-App zeigt
+Beispiel **Dezember Dev Build 7**. Der Footer der Web-App zeigt
 deren Release-Bezeichnung. Bei getrennten Installationen können die Anzeigen
 abweichen; `schornai --version` zeigt stattdessen die eigenständige CLI-Version.
 

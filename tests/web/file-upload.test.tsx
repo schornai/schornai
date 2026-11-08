@@ -117,7 +117,7 @@ describe("resumable file uploads", () => {
     expect(upload.options).toMatchObject({
       endpoint: "/api/storage/upload/resumable",
       chunkSize: 6291456,
-      headers: { authorization: "Bearer session-token", "x-upsert": "true" },
+      headers: { "x-upsert": "true" },
       metadata: {
         objectName: "activity/id/folder/hello.txt",
         bucketName: "files",
@@ -303,6 +303,37 @@ it("uses the refreshed session token for later chunks of a long upload", async (
     "authorization",
     "Bearer renewed-session",
   );
+});
+it("sends exactly one authorization value through the real TUS browser transport on repeated uploads", async () => {
+  const { Upload: BrowserUpload } = await vi.importActual<{
+    Upload: typeof import("tus-js-client").Upload;
+  }>("tus-js-client/lib/browser/index.js");
+  const headers = vi.spyOn(XMLHttpRequest.prototype, "setRequestHeader");
+  const send = vi
+    .spyOn(XMLHttpRequest.prototype, "send")
+    .mockImplementation(() => {});
+  const hook = mount();
+  for (const token of ["session-token", "renewed-session"]) {
+    state.token = token;
+    hook.rerender();
+    await queue(hook, [file()]);
+    const queued = state.uploads.at(-1);
+    headers.mockClear();
+    send.mockClear();
+    const upload = new BrowserUpload(queued.file, queued.options);
+    try {
+      upload.start();
+      await waitFor(() => expect(send).toHaveBeenCalledOnce());
+      expect(
+        headers.mock.calls.filter(
+          ([name]) => name.toLowerCase() === "authorization",
+        ),
+      ).toEqual([["authorization", `Bearer ${token}`]]);
+    } finally {
+      await upload.abort();
+    }
+    await act(async () => queued.options.onSuccess());
+  }
 });
 it("allocates a fresh immutable destination for a second upload of the same filename", async () => {
   let sequence = 0;

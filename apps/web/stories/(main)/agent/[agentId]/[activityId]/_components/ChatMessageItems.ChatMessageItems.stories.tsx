@@ -5,6 +5,7 @@ const meta = {
   title: "Web/(main)/agent/[agentId]/[activityId]/ChatMessageItems",
   component: ChatMessageItems,
   args: {
+    agentId: "11111111-1111-4111-8111-111111111111",
     activityId: "11111111-1111-4111-8111-111111111111",
     agentColor: { type: "color-oklch-hue", oklchHue: 284 },
   },
@@ -29,3 +30,12 @@ export const Empty: Story = { parameters: { scenario: "empty" } };
 export const Pending: Story = { parameters: { scenario: "pending" } };
 export const Error: Story = { parameters: { scenario: "error" } };
 export const Success: Story = { parameters: { scenario: "success" } };
+
+export const ErrorWithoutMessages: Story = {
+  parameters: {
+    contextFixtures: {
+      useMessages: [],
+      useChatError: "Die Antwort konnte nicht gestartet werden.",
+    },
+  },
+};

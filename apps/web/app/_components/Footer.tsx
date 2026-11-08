@@ -38,7 +38,9 @@ export function Footer() {
           <Link href="/">
             <LogoSchornAI className="text-muted-foreground w-20" />
           </Link>
-          <span className="text-muted-foreground text-xs">November 2026</span>
+          <span className="text-muted-foreground text-xs">
+            {t("footer.labelReleaseName")}
+          </span>
         </div>
         <div className="flex flex-col gap-3 lg:flex-row">
           <div className="max-lg:grid max-lg:w-full max-lg:grid-cols-2 lg:flex">

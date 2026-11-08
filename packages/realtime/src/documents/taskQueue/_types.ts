@@ -70,6 +70,7 @@ export type TaskTypeChat = {
   parameters: {
     activityId: string;
     agentId: string;
+    retry?: boolean;
     userClaims: UserClaims;
     userId: string;
   };

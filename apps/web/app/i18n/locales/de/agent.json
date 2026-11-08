@@ -708,7 +708,8 @@
         "platform_user_get": "Benutzer anzeigen",
         "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",
         "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen",
-        "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen"
+        "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen",
+        "platform_chat_retry": "Chat erneut versuchen"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -725,6 +726,13 @@
       "labelFiles": "Dateien",
       "labelDocumentation": "Dokumentation",
       "labelInfo": "Info"
+    },
+    "ChatError": {
+      "labelDetails": "Fehlerdetails",
+      "labelRetry": "Erneut versuchen",
+      "descriptionFailed": "Die Antwort konnte nicht erstellt werden.",
+      "descriptionNoDetails": "Keine weiteren Fehlerdetails verfügbar.",
+      "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben."
     }
   },
   "page": {

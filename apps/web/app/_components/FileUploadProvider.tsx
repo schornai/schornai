@@ -285,10 +285,11 @@ export function useFileUpload() {
         chunkSize: 6 * 1024 * 1024, // NOTE: it must be set to 6MB (for now) do not change it
         endpoint: "/api/storage/upload/resumable",
         headers: {
-          authorization: `Bearer ${sessionToken}`,
           "x-upsert": String(upsert),
         },
         onBeforeRequest: (request) => {
+          // XHR appends repeated headers. Set authorization only here so each
+          // request carries exactly one token, including after session refresh.
           request.setHeader("authorization", `Bearer ${currentToken.current}`);
         },
         metadata: {

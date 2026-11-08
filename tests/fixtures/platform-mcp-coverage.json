@@ -192,5 +192,8 @@
   },
   "apps/web/lib/groupSortView/action.ts": {
     "tools": ["platform_view_preferences_update"]
+  },
+  "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts": {
+    "tools": ["platform_chat_retry"]
   }
 }

@@ -138,6 +138,11 @@ Prüfsumme kontrolliert. Beschädigte Dateien werden verworfen. Zwei Minuten ohn
 Datenfortschritt brechen einen Transfer ab; für einen laufenden Download gibt es
 kein festes Stundenlimit.
 
+Der mitgelieferte Web-Proxy und das Storage-Gateway leiten die Übertragungen
+ohne temporäre Dateipuffer weiter. Ihre Inaktivitätslimits betragen zwei Minuten.
+Zusätzlich vorgeschaltete Proxys müssen Streaming und ausreichend lange
+Inaktivitätslimits ebenfalls unterstützen. Uploads erfolgen in 6-MiB-Abschnitten.
+
 Der Service prüft den freien Speicher vor Download und Entpacken. Beim Start und
 vor dem Abgleich entfernt er verwaiste Arbeitsverzeichnisse und abgelaufene
 Teildownloads. Bei Platzbedarf werden ältere Teildownloads zuerst entfernt.

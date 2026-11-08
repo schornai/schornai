@@ -1,3 +1,4 @@
+import { useChatError } from "../app/(main)/agent/[agentId]/[activityId]/_components/ChatContext.tsx";
 import {
   createContext,
   createElement,
@@ -395,6 +396,16 @@ export function configureContextFixtures(
         scenario,
         overrides.useStorageView,
       ) as ReturnType<typeof hook5>,
+  );
+  mocked(useChatError).mockImplementation(
+    () =>
+      useContextFixture(
+        scenario === "error"
+          ? "Das Sprachmodell ist nicht erreichbar.\nDie Verbindung wurde unterbrochen."
+          : undefined,
+        scenario,
+        overrides.useChatError,
+      ) as ReturnType<typeof useChatError>,
   );
   mocked(hook6).mockImplementation(
     () =>
