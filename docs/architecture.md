@@ -71,6 +71,20 @@ Behavior checks: [submission and cancellation](../tests/web/chat-submission.test
 [result retention](../tests/task-retention.test.ts), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
 
+## Chat support and calculator
+
+[`AgentToolSession`](../apps/realtime/src/chat/AgentToolSession.ts) exposes the selected
+role's enabled [support tools](../apps/realtime/src/chat/tools/support/tools.ts).
+The bounded [calculator](../packages/realtime/src/tools/calculate.ts) and
+[clock](../packages/realtime/src/tools/currentDateTime.ts) are shared with platform MCP.
+[`setActivityLabel`](../packages/realtime/src/documents/activity/setActivityLabel.ts)
+keeps automatic titles from replacing manual ones. Reply suggestions remain tool
+results in chat history; [`getResponseSuggestions`](../packages/realtime/src/documents/chat/getResponseSuggestions.ts)
+selects the latest assistant turn for the existing composer. Clicking a suggestion
+adds to the draft; normal submission retains its authorization and queue checks.
+See [behavior tests](../tests/chat-support-calculator.test.ts) and
+[tool-session tests](../tests/agent-tools.test.ts).
+
 ## Agent credentials
 
 Agent creation and updates authorize the saved source and requested target

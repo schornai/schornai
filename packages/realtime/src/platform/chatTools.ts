@@ -1,3 +1,4 @@
+import { setActivityLabel } from "../documents/activity/setActivityLabel.ts";
 import { retryChatGeneration } from "../documents/chat/retryChatGeneration.ts";
 import { storageSchema } from "@schornio/aibox-database/storage/_schemas";
 import { selectChatFile } from "../documents/storage/selectChatFile.ts";
@@ -178,11 +179,12 @@ export function addChatTools(
       await provider.waitForSynced();
       if (!getActivities(provider.document).activities.has(activityId))
         throw new Error("NOT_FOUND");
+      if (label !== undefined)
+        setActivityLabel(provider.document, activityId, label);
       upsertActivity(
         provider.document,
         {
           id: activityId,
-          ...(label === undefined ? {} : { label, labelUserInput: true }),
           ...(pinned === undefined ? {} : { pinned }),
         },
         { minorChange: true },

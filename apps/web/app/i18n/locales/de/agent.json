@@ -6,7 +6,8 @@
     },
     "ChatComposeMessage": {
       "errorNoAccess": "Kein Zugriff auf diesen Agenten.",
-      "labelRecommendedMessages": "Vorgeschlagene Nachrichten"
+      "labelRecommendedMessages": "Vorgeschlagene Nachrichten",
+      "labelResponseSuggestions": "Antwortvorschläge – zum Entwurf hinzufügen"
     },
     "AgentEditorSettingsAppearance": {
       "labelLegend": "Aussehen",
@@ -28,7 +29,8 @@
     },
     "AgentInfoToolCalculator": {
       "labelTitle": "Werkzeug: Taschenrechner",
-      "description": "Statt dass der Agent die Berechnungen selbst vornehmen muss, kann diese den Taschenrechner benutzen. Dadurch kann der Agent besser mit komplexeren Zahlen umgehen."
+      "description": "Statt dass der Agent die Berechnungen selbst vornehmen muss, kann diese den Taschenrechner benutzen. Dadurch kann der Agent besser mit komplexeren Zahlen umgehen.",
+      "labelEdit": "Bearbeiten"
     },
     "AgentInfoPrompt": {
       "labelPrompt": "Prompt",
@@ -176,8 +178,13 @@
     },
     "AgentInfoToolChatExtensions": {
       "labelTitle": "Werkzeug: Chat Erweiterungen",
-      "labelFeatures": "Nächste Nachricht vorschlagen, Chat Beschriftung ändern",
-      "description": "Der Agent kann Vorschläge für die nächste Benutzer:innen-Nachricht generieren, so das der:die Benutzer:in lediglich auf die jeweilige Nachricht klicken kann um den Chat fortzuführen. <br /> Agent kann die Chat Beschriftung für den:die Benutzer:in ändern, so das der Chat besser im Verlauf gefunden werden kann."
+      "labelFeatures": "Chat-Titel, Antwortvorschläge und aktuelle Uhrzeit",
+      "description": "Der Agent kann den Chat benennen, optionale Antwortvorschläge anbieten und die aktuelle Uhrzeit abfragen. Manuell gesetzte Chat-Namen bleiben erhalten.",
+      "labelEdit": "Bearbeiten",
+      "labelTitleFeature": "Chat-Titel",
+      "labelSuggestionsFeature": "Antwortvorschläge",
+      "labelTimeFeature": "Aktuelle Uhrzeit",
+      "labelNoFeatures": "Keine Funktionen aktiviert"
     },
     "AgentEditorRoleSettings": {
       "labelRoleDescription": "Rollenbeschreibung",
@@ -320,7 +327,9 @@
       "chatExtensions": "Chat Erweiterungen",
       "externalToolsMCP": "Externe Werkzeuge (MCP)",
       "toolWebAccess": "Internet Zugriff",
-      "tabPlatform": "Plattformzugriff"
+      "tabPlatform": "Plattformzugriff",
+      "tabCalculator": "Taschenrechner",
+      "tabChatSupport": "Chat Support"
     },
     "AgentInfoMCPs": {
       "labelTitle": "Externe Werkzeuge (MCP)",
@@ -505,7 +514,6 @@
       "labelGoToTranscriber": "Zum Transkriptor"
     },
     "AgentEditorRolePlatformAccess": {
-      "labelActive": "Plattformzugriff aktivieren",
       "labelLevel": "Zugriffsstufe",
       "description": "Die Einstellungen begrenzen die verfügbaren Aktionen. Es gelten immer zusätzlich deine eigenen Berechtigungen im jeweiligen Workspace; eine Freigabe erteilt keine zusätzlichen Rechte.",
       "level": {
@@ -535,7 +543,8 @@
         "ask": "Freigabe erforderlich",
         "off": "Aus"
       },
-      "descriptionPermissions": "Es gelten zusätzlich die Berechtigungen der ausführenden Person."
+      "descriptionPermissions": "Es gelten zusätzlich die Berechtigungen der ausführenden Person.",
+      "labelEdit": "Bearbeiten"
     },
     "PlatformToolPreview": {
       "labelConfidential": "Vertraulicher Wert ausgeblendet",
@@ -708,7 +717,9 @@
         "platform_user_get": "Benutzer anzeigen",
         "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",
         "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen",
-        "platform_chat_retry": "Chat erneut versuchen"
+        "platform_chat_retry": "Chat erneut versuchen",
+        "platform_calculate": "Berechnung ausführen",
+        "platform_current_date_time": "Aktuelles Datum und Uhrzeit"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -732,6 +743,28 @@
       "descriptionFailed": "Die Antwort konnte nicht erstellt werden.",
       "descriptionNoDetails": "Keine weiteren Fehlerdetails verfügbar.",
       "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben."
+    },
+    "AgentEditorRoleSupport": {
+      "labelCalculator": "Taschenrechner",
+      "labelChatSupport": "Chat Support",
+      "descriptionCalculator": "Berechnet Ausdrücke wie (42 + 2) / 34, sqrt(5) oder avg(2;4;5). Unterstützt Listen und Arrays, trigonometrische Funktionen im Bogenmaß sowie ln und log (Basis 10). Dezimalzahlen mit Punkt; maximal 2000 Zeichen. Ergebnisse sind endliche reelle Zahlen mit Gleitkommapräzision.",
+      "descriptionChatSupport": "Der Agent kann den Chat benennen, optionale Antwortvorschläge anbieten und die aktuelle Uhrzeit abfragen. Manuell gesetzte Chat-Namen bleiben erhalten.",
+      "label_updateChatLabel": "Chat-Titel setzen",
+      "label_recommendNextMessages": "Antwortvorschläge anbieten",
+      "label_currentDateTime": "Aktuelles Datum und Uhrzeit abfragen"
+    },
+    "ChatMessagePartToolSupport": {
+      "tool-calculator": "Berechnung",
+      "tool-chat-set-label": "Chat-Titel",
+      "tool-chat-current-date-time": "Datum und Uhrzeit",
+      "tool-chat-response-suggestions": "Antwortvorschläge",
+      "labelInput": "Eingabe",
+      "labelManualTitlePreserved": "Manueller Titel beibehalten"
+    },
+    "AgentEditorRoleRemoveTool": {
+      "labelRemove": "Werkzeug entfernen",
+      "descriptionRemove": "Das Werkzeug wird aus dieser Rolle entfernt. Speichere den Agenten, um die Änderung zu übernehmen.",
+      "labelCancel": "Abbrechen"
     }
   },
   "page": {

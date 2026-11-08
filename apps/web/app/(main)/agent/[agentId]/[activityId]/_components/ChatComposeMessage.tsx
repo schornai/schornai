@@ -15,6 +15,8 @@ import { useChatComposeMessage } from "./ChatComposeMessageContext";
 import { useState, useRef, useEffect, useEffectEvent } from "react";
 import { ContainerStyled } from "@schornio/aibox-package-ui/components/container-styled";
 import { useT } from "next-i18next/client";
+import { getResponseSuggestions } from "@schornio/aibox-realtime/documents/chat/getResponseSuggestions";
+import { Button } from "@schornio/aibox-package-ui/components/button";
 import { useMessages } from "./ChatContext";
 
 export function ChatComposeMessage({
@@ -78,6 +80,7 @@ function ChatMessageBatchInput({
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messages = useMessages();
+  const suggestions = getResponseSuggestions(messages);
   const { t } = useT("agent", { keyPrefix: "_components.ChatComposeMessage" });
   const { activityId, selectedCurrentMessage, setSelectedCurrentMessageText } =
     useChatComposeMessage();
@@ -143,6 +146,32 @@ function ChatMessageBatchInput({
           ))}
         </div>
       ) : null}
+      {suggestions.length > 0 && (
+        <div
+          className="mb-3 flex flex-wrap gap-2"
+          role="group"
+          aria-label={t("labelResponseSuggestions")}
+        >
+          {suggestions.map((suggestion, index) => (
+            <Button
+              key={index}
+              type="button"
+              variant="outline"
+              className="h-auto max-w-full text-left wrap-anywhere whitespace-normal"
+              disabled={selectedCurrentMessage?.state === "submitted"}
+              onClick={() =>
+                applyRecommendedMessage(
+                  selectedCurrentMessage?.content.text
+                    ? `${selectedCurrentMessage.content.text}\n${suggestion}`
+                    : suggestion,
+                )
+              }
+            >
+              {suggestion}
+            </Button>
+          ))}
+        </div>
+      )}
       <Collapsible open={batchViewOpen} onOpenChange={setBatchViewOpen}>
         <div className="bg-muted rounded-lg border">
           <CollapsibleContent>

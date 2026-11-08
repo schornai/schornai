@@ -84,11 +84,41 @@ export function AgentEditorRoleTools({ roleId }: { roleId: string }) {
 
       <h3 className="p-3 font-medium">{t("labelSupport")}</h3>
 
-      <Button disabled variant="ghost">
+      <Button
+        variant="ghost"
+        onClick={() => {
+          setAgentRole(roleId, (role) => ({
+            ...role,
+            toolChatAwareness: {
+              ...(role.toolChatAwareness ?? {
+                active: true,
+                updateChatLabel: true,
+                recommendNextMessages: true,
+                currentDateTime: true,
+              }),
+              active: true,
+            },
+          }));
+          router.push(
+            `?view=roles&role-${roleId}=tool-chat-extensions#role-${roleId}`,
+          );
+        }}
+      >
         <MessageSquareQuote /> {t("labelToolChatExtensions")}
       </Button>
 
-      <Button disabled variant="ghost">
+      <Button
+        variant="ghost"
+        onClick={() => {
+          setAgentRole(roleId, (role) => ({
+            ...role,
+            toolCalculator: { ...role.toolCalculator, active: true },
+          }));
+          router.push(
+            `?view=roles&role-${roleId}=tool-calculator#role-${roleId}`,
+          );
+        }}
+      >
         <Calculator /> {t("labelToolCalculator")}
       </Button>
 
@@ -101,9 +131,11 @@ export function AgentEditorRoleTools({ roleId }: { roleId: string }) {
         onClick={() => {
           setAgentRole(roleId, (role) => ({
             ...role,
-            toolPlatformAccess:
-              role.toolPlatformAccess ??
-              structuredClone(defaultPlatformAgentAccess),
+            toolPlatformAccess: {
+              ...(role.toolPlatformAccess ??
+                structuredClone(defaultPlatformAgentAccess)),
+              active: true,
+            },
           }));
           router.push(
             `?view=roles&role-${roleId}=tool-platform#role-${roleId}`,

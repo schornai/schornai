@@ -8,11 +8,14 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-07"
+  last_verified: "2026-11-08"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessage.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolSupport.tsx",
+      "packages/realtime/src/documents/chat/getResponseSuggestions.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
       "packages/realtime/src/_lib/waitForProviderSynced.ts",
       "packages/realtime/src/documents/chat/queueChat.ts",
@@ -53,6 +56,12 @@ Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 Während der Antwort zeigt der Chat auch Nachdenkabschnitte und Werkzeugergebnisse. Warte nach einer Websuche oder einem Dateiabruf auf den abschließenden Antworttext.
 
 Über **Nachricht kopieren** kopierst du den Text einer Antwort in die Zwischenablage. Wenn Nutzungsdaten verfügbar sind, zeigt **Statistik** Eingabe- und Ausgabe-Tokens sowie die Ausgabegeschwindigkeit. Ein Token entspricht je nach Text einem Wort, Wortteil oder Satzzeichen.
+
+## Antwortvorschläge und unterstützende Werkzeuge
+
+Wenn die ausgewählte Rolle [Chat Support](../edit/rollen.md#chat-support) aktiviert hat, kann die KI während des Gesprächs Antwortvorschläge über dem Eingabefeld anbieten. Ein Klick **ergänzt** deinen vorhandenen Entwurf. Du kannst mehrere Vorschläge übernehmen, den Text bearbeiten oder weiterhin frei schreiben. Erst **Senden** übermittelt deine Antwort. Die Vorschläge verschwinden nach deiner nächsten Nachricht; sie sind keine Werkzeugfreigabe.
+
+Chat Support kann außerdem einen sprechenden Namen im Verlauf setzen und die aktuelle Uhrzeit abfragen. Manuell gesetzte Namen bleiben erhalten. Der aktivierte [Taschenrechner](../edit/rollen.md#taschenrechner) liefert Berechnungen als aufklappbares Werkzeugergebnis mit Eingabe, Ergebnis oder Fehlerstatus. Die KI entscheidet anhand der Anfrage und des Rollenprompts, welche aktivierten Werkzeuge sie verwendet.
 
 ## Nachdenken und Abbrechen
 
@@ -98,6 +107,8 @@ Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [
 ## Zugehörige MCP-Werkzeuge
 
 **Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+
+`platform_calculate` und `platform_current_date_time` bieten dieselbe Berechnung und Uhrzeitfunktion ab Stufe **User**, ohne zusätzliche Ressourcenrechte. `platform_activity_update` benennt eigene Aktivitäten um. `platform_chat_read` enthält auch die Ergebnisse des rolleninternen Tools `chat-response-suggestions`; `platform_chat_send` kann eine ausgewählte Antwort senden. Die rolleninternen Tools `calculator`, `chat-set-label`, `chat-current-date-time` und `chat-response-suggestions` stehen nur bei entsprechender Aktivierung in der ausgewählten Rolle zur Verfügung.
 
 Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion und wird nicht als MCP-Werkzeug angeboten. MCP-Clients können den gewünschten Text mit `platform_chat_send` senden.
 

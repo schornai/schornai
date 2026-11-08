@@ -559,3 +559,47 @@ describe("lazy MCP authorization", () => {
     expect(close).toHaveBeenCalledOnce();
   });
 });
+
+it("only exposes support tools enabled for the selected role", async () => {
+  const role: any = {
+    documentRepositoryMounts: [],
+    toolCalculator: { active: true },
+    toolChatAwareness: {
+      active: true,
+      updateChatLabel: true,
+      recommendNextMessages: true,
+      currentDateTime: true,
+    },
+  };
+  await using session = new AgentToolSession("activity", "agent", role, {
+    ...context,
+    abortSignal: options.abortSignal,
+  });
+  const tools = await session.tools();
+  expect(Object.keys(tools).sort()).toEqual([
+    "calculator",
+    "chat-current-date-time",
+    "chat-response-suggestions",
+    "chat-set-label",
+  ]);
+  expect(await execute(tools.calculator, { expression: "avg(2;4;5)" })).toEqual(
+    { ok: true, expression: "avg(2;4;5)", result: 11 / 3 },
+  );
+  expect(
+    await execute(tools.calculator, { expression: "1 / 0" }),
+  ).toMatchObject({ ok: false });
+  expect(
+    await execute(tools["chat-response-suggestions"], {
+      suggestions: ["Yes", "No"],
+    }),
+  ).toEqual({ ok: true, suggestions: ["Yes", "No"] });
+  expect(
+    await execute(tools["chat-current-date-time"], { timeZone: "wrong" }),
+  ).toMatchObject({ ok: false });
+  role.toolCalculator.active = false;
+  role.toolChatAwareness.active = false;
+  expect(await session.tools()).toEqual({});
+  role.toolChatAwareness.active = true;
+  role.toolChatAwareness.updateChatLabel = false;
+  expect((await session.tools())["chat-set-label"]).toBeUndefined();
+});

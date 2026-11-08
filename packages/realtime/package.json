@@ -23,11 +23,12 @@
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/server": "^4.7.1",
+    "@schornio/aibox-database": "file:../database",
     "@schornio/aibox-package-utils": "*",
     "ai": "7.0.163",
-    "yjs": "^13.6.33",
+    "mathjs": "15.2.0",
     "xrag": "*",
-    "@schornio/aibox-database": "file:../database"
+    "yjs": "^13.6.33"
   },
   "peerDependencies": {
     "@supabase/supabase-js": "2.119.0"

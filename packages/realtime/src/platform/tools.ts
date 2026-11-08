@@ -1,3 +1,5 @@
+import { calculate } from "../tools/calculate.ts";
+import { currentDateTime } from "../tools/currentDateTime.ts";
 import { addMonitoringTools } from "./monitoringTools.ts";
 import { addWorkflowTools } from "./workflowTools.ts";
 import { addProfileTools } from "./profileTools.ts";
@@ -290,6 +292,22 @@ export function createPlatformTools(context: PlatformContext) {
       await updateUserPermission(input, { supabaseServiceRole });
       return { userId: input.userId, workspaceId: input.workspaceId };
     },
+  );
+  add(
+    "platform_calculate",
+    "Calculate finite real arithmetic. Supports + - * / ^ mod, sqrt, trigonometry in radians, ln, log (base 10), and sum/avg/min/max lists or arrays. Semicolons or commas separate arguments.",
+    "user",
+    true,
+    z.object({ expression: z.string().min(1).max(2000) }),
+    async ({ expression }) => ({ expression, result: calculate(expression) }),
+  );
+  add(
+    "platform_current_date_time",
+    "Read the current date and time in an optional IANA time zone (default UTC).",
+    "user",
+    true,
+    z.object({ timeZone: z.string().max(100).optional() }),
+    async ({ timeZone }) => currentDateTime(timeZone),
   );
   addStorageTools(context, registry);
   addChatTools(context, registry);

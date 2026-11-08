@@ -1,7 +1,16 @@
 "use client";
+import { AgentEditorRoleSupport } from "./AgentEditorRoleSupport";
 import { AgentEditorRolePlatformAccess } from "./AgentEditorRolePlatformAccess";
 
-import { Bot, File, Globe, Plug, DraftingCompass } from "lucide-react";
+import {
+  Bot,
+  File,
+  Globe,
+  Plug,
+  DraftingCompass,
+  Calculator,
+  MessageSquareQuote,
+} from "lucide-react";
 import {
   Field,
   FieldGroup,
@@ -38,7 +47,10 @@ export function AgentEditorRole({
   const inputPromtId = useId();
   const selectedTab = useSearchParams().get(`role-${role.id}`);
   const unavailableTab =
-    selectedTab === "tool-calculator" || selectedTab === "tool-chat-extensions";
+    (selectedTab === "tool-calculator" && !role.toolCalculator?.active) ||
+    (selectedTab === "tool-chat-extensions" &&
+      !role.toolChatAwareness?.active) ||
+    (selectedTab === "tool-platform" && !role.toolPlatformAccess?.active);
 
   const { agent, defaultAgent, setAgentRole, hasValidationError, relations } =
     useAgentEditor();
@@ -115,7 +127,19 @@ export function AgentEditorRole({
             </TabsTrigger>
           ) : undefined}
 
-          {role.toolPlatformAccess && (
+          {role.toolChatAwareness?.active && (
+            <TabsTrigger value="tool-chat-extensions">
+              <MessageSquareQuote />
+              {t("tabChatSupport")}
+            </TabsTrigger>
+          )}
+          {role.toolCalculator?.active && (
+            <TabsTrigger value="tool-calculator">
+              <Calculator />
+              {t("tabCalculator")}
+            </TabsTrigger>
+          )}
+          {role.toolPlatformAccess?.active && (
             <TabsTrigger value="tool-platform">
               <DraftingCompass />
               {t("tabPlatform")}
@@ -201,9 +225,21 @@ export function AgentEditorRole({
           <AgentEditorRoleWebAccess role={role} />
         </TabsContent>
 
-        <TabsContent value="tool-platform">
-          <AgentEditorRolePlatformAccess role={role} />
-        </TabsContent>
+        {role.toolPlatformAccess?.active && (
+          <TabsContent value="tool-platform">
+            <AgentEditorRolePlatformAccess role={role} />
+          </TabsContent>
+        )}
+        {role.toolCalculator?.active && (
+          <TabsContent value="tool-calculator">
+            <AgentEditorRoleSupport role={role} kind="toolCalculator" />
+          </TabsContent>
+        )}
+        {role.toolChatAwareness?.active && (
+          <TabsContent value="tool-chat-extensions">
+            <AgentEditorRoleSupport role={role} kind="toolChatAwareness" />
+          </TabsContent>
+        )}
         <TabsContent value="tools">
           <AgentEditorRoleTools roleId={role.id} />
         </TabsContent>

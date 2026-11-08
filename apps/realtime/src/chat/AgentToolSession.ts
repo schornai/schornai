@@ -1,3 +1,4 @@
+import { supportTools } from "./tools/support/tools.ts";
 import {
   getPlatformApprovals,
   platformPolicyCeiling,
@@ -196,6 +197,12 @@ export class AgentToolSession {
         : {};
 
     return {
+      ...supportTools(this.#role, {
+        userId: this.#userId,
+        activityId: this.#activityId,
+        serverToken: this.#serverToken,
+        websocketProvider: this.#websocketProvider,
+      }),
       ...platformAgentTools(this.#platformTools()),
       ...(this.#role.mcps?.length ? { mcp: this.#mcp.tool() } : {}),
       ...documentRepositoryTools,
