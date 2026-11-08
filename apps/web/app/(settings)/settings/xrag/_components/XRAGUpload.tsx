@@ -20,6 +20,7 @@ import { Fragment } from "react/jsx-runtime";
 import { StorageViewUpload } from "../../../../_components/StorageViewUpload";
 import { useFileUpload } from "../../../../_components/FileUploadProvider";
 import { useT } from "next-i18next/client";
+import { XRAGPublicationStatus } from "./XRAGPublicationStatus";
 import { useXRAGUpload } from "./XRAGUploadProvider";
 
 export default function XRAGUpload() {
@@ -27,7 +28,7 @@ export default function XRAGUpload() {
 
   const { uploads, queueFileUploadsByFileList, clearFinished } =
     useFileUpload();
-  const { hasErrored, hasSucceeded, isPending } = useXRAGUpload();
+  const { publications, hasErrored, hasSucceeded, isPending } = useXRAGUpload();
 
   return (
     <>
@@ -53,11 +54,21 @@ export default function XRAGUpload() {
                   queueFileUploadsByFileList(event.currentTarget.files)
                 }
                 type="file"
+                multiple
+                accept=".tar"
               />
             </ButtonAction>
           </EmptyContent>
         </EmptyHeader>
       </Empty>
+
+      {publications.length > 0 ? (
+        <ContainerMain className="flex flex-col gap-3">
+          {publications.map((publication) => (
+            <XRAGPublicationStatus key={publication.id} {...publication} />
+          ))}
+        </ContainerMain>
+      ) : null}
 
       {isPending ? <StorageViewUpload /> : undefined}
 

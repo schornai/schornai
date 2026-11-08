@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG upload",
-      "description": "Drag an XRAG file here to upload it and install its content.",
+      "description": "Drag an XRAG file here to upload it and install its content. After an interruption, select the same file again to resume the upload.",
       "buttonUpload": "Upload",
       "errorUpload": "Error uploading the XRAG file \"{{name}}\".",
-      "successUpload": "XRAG \"{{name}}\" uploaded successfully. Depending on the size and type of the upload, it may take a few minutes before the changes take effect.",
-      "buttonHide": "Hide"
+      "successUpload": "{{name}}: Upload complete. Publication is checked separately.",
+      "buttonHide": "Hide",
+      "labelProcessing": "{{name}}: Validating and publishing.",
+      "labelPublished": "{{name}}: Published and available to matching services.",
+      "errorPublication": "{{name}}: Publication failed. Check the package and upload it again.",
+      "errorPublicationStatus": "{{name}}: Status temporarily unavailable. Retrying."
     },
     "TaskTable": {
       "tableColumnType": "Type",

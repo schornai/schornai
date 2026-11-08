@@ -4,6 +4,20 @@ One Node.js process per machine owns the configured services, restarts failed na
 workers, records bounded logs and pulls matching XRAG packages from the web app.
 The optional macOS launcher in `apps/admin-mac` only controls this process.
 
+Setup remains one `update.xrag.tar` using the existing archive format.
+Publication retains the original uploaded bytes. Installation consumes validated
+runtime directories by rename and removes replaced versions after activation.
+No split release manifest or component dependency protocol is needed.
+
+`service-release.json` records the selected publication before changing runtimes.
+Synchronization can retry that release after a crash but never selects an older
+publication, even when the server no longer lists the installed release. Temporary
+swap backups exist only until activation completes; they are not rollback releases.
+Server cleanup removes superseded setup archives while retaining the current
+release for each platform/architecture and leaving model/data archives alone.
+For a manual retry, extract the archive again because installation consumes its
+runtime directories.
+
 For code navigation, see [machine startup in the repository map](../../docs/architecture.md#follow-machine-startup).
 [`serviceCommands.ts`](src/serviceCommands.ts) resolves what to launch;
 [`services.ts`](src/services.ts) owns supervision and shutdown. Both development
@@ -101,12 +115,22 @@ the UI marks it offline. These are host metrics, not per-container resource usag
 Global administrators inspect machines as tiles or tables at `/service`. The Cluster menu opens a tile overview at `/cluster`
 and contains Service, Tasks, and Artifacts; `/artifacts` offers tables and tiles (using Attachment components) with
 deletion. Both collections share the Docrepo group/sort/view preferences pattern.
-Storage owns immutable files and catalog metadata; Yjs carries a bounded CRUD log
+Storage owns immutable files; PostgreSQL owns catalog metadata and publication
+jobs. Yjs carries a bounded CRUD log
 and a separate machine-status document. Small deletion tombstones preserve release
 ordering so withdrawing the newest setup cannot reactivate an older one. Already
 installed files and registered models are unaffected. Unknown catalog artifact
 types/versions are skipped by services that do not support them; future import
 consumers can share the distribution protocol without becoming machine services.
+
+The optional `artifacts` configuration controls cache size, free-space reserve,
+archive expansion limits and partial-download retention. See the
+[XRAG operator guide](../../docs/de/settings/xrag.md#speicher-und-wiederaufnahme-auf-maschinen)
+for fields and defaults. Downloads resume by digest and are verified before use.
+The daemon repairs interrupted model/file directory swaps before starting consumers.
+Publication runs in the realtime worker and retains the original immutable upload;
+the web action returns a publication job ID. Read
+[ADR 0004](../../docs/adr/0004-durable-artifact-publication.md) when changing that lifecycle.
 
 ## Supabase and workers
 

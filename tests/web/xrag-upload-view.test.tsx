@@ -4,6 +4,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import XRAGUpload from "../../apps/web/app/(settings)/settings/xrag/_components/XRAGUpload";
 const upload = vi.hoisted(() => ({
+  publications: [],
   uploads: [] as any[],
   queueFileUploadsByFileList: vi.fn(),
   clearFinished: vi.fn(),

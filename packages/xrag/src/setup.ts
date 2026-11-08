@@ -1,5 +1,15 @@
 import { xragSchemaSetup, type Artifact } from "./schema.ts";
 
+export function compareSetupReleases(
+  a: Pick<Artifact, "id" | "createdAt">,
+  b: Pick<Artifact, "id" | "createdAt">,
+) {
+  return (
+    Date.parse(a.createdAt) - Date.parse(b.createdAt) ||
+    a.id.localeCompare(b.id)
+  );
+}
+
 export function setupMatches(
   artifact: Artifact,
   platform: string,
@@ -21,10 +31,7 @@ export function latestSetupFor(
 ) {
   return artifacts
     .filter((artifact) => setupMatches(artifact, platform, arch))
-    .toSorted(
-      (a, b) =>
-        b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id),
-    )[0];
+    .toSorted((a, b) => compareSetupReleases(b, a))[0];
 }
 
 export function currentSetupIds(artifacts: Artifact[]) {

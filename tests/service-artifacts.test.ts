@@ -614,3 +614,55 @@ it.each(["certificate", "ollamaModel"])(
     }
   },
 );
+
+it.each(["older-date", "same-date"])(
+  "never downgrades after a restart when the catalog omits the installed release: %s",
+  async (scenario) => {
+    const root = await mkdtemp(join(tmpdir(), "service-forward-only-"));
+    directories.push(root);
+    const release = {
+      id: "f".repeat(64),
+      createdAt: "2026-11-08T12:00:00.000Z",
+    };
+    await writeFile(
+      join(root, "service-release.json"),
+      JSON.stringify(release),
+    );
+    const older = {
+      id: "a".repeat(64),
+      createdAt:
+        scenario === "older-date"
+          ? "2026-11-07T12:00:00.000Z"
+          : release.createdAt,
+      name: "older.xrag.tar",
+      size: 100,
+      xrag: { xrag_version: 1, xrag_type: "setup" },
+    };
+    const fetchMock = vi.fn(async () =>
+      Response.json({ artifacts: [older], nextOffset: null }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    const hooks = { beforeInstall: vi.fn(), afterInstall: vi.fn() };
+    await syncArtifacts(
+      {
+        root,
+        configPath: join(root, "config.json"),
+        config: configSchema.parse({
+          version: 1,
+          id: "00000000-0000-4000-8000-000000000001",
+          services: [],
+          sharing: { url: "https://sharing.test" },
+        }),
+        environment: { SERVICE_API_TOKEN: "x".repeat(64) },
+      },
+      vi.fn(),
+      new AbortController().signal,
+      hooks,
+    );
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(hooks.beforeInstall).not.toHaveBeenCalled();
+    expect(
+      JSON.parse(await readFile(join(root, "service-release.json"), "utf8")),
+    ).toEqual(release);
+  },
+);

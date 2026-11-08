@@ -3,28 +3,35 @@ import {
   mkdir,
   mkdtemp,
   readFile,
+  readdir,
   rename,
   rm,
   writeFile,
 } from "node:fs/promises";
-import { createWriteStream } from "node:fs";
 import { join } from "node:path";
-import { pipeline } from "node:stream/promises";
 import { isDeepStrictEqual } from "node:util";
 import {
   artifactTargets,
+  artifactSchema,
   catalogSchema,
   xragSchema,
   type Artifact,
 } from "xrag/schema";
 import { extractArchive } from "xrag/archive";
 import { validateSiteUrl } from "xrag/validateSiteUrl";
-import { latestSetupFor, setupMatches } from "xrag/setup";
+import { latestSetupFor, setupMatches, compareSetupReleases } from "xrag/setup";
 import type { Context } from "./config.ts";
 import { resolveFrom } from "./config.ts";
 import { writeJson } from "./files.ts";
 import type { Log } from "./log.ts";
 import { run } from "./process.ts";
+import { activateArtifactDirectory } from "./activateArtifactDirectory.ts";
+import {
+  artifactLimits,
+  cleanArtifactCache,
+  downloadArtifact,
+  requireArtifactSpace,
+} from "./artifactDownload.ts";
 
 export function needsArtifact(artifact: Artifact, services: string[]) {
   if (
@@ -71,28 +78,28 @@ async function install(
         throw new Error("Missing shared model filesystem identifier");
       const models = join(root, "mlx/whisper/models");
       await mkdir(models, { recursive: true });
-      const staging = await mkdtemp(join(models, ".install-"));
       const target = join(models, artifact.fileSystemIdentifier);
-      try {
-        await cp(join(directory, "config.json"), join(staging, "config.json"));
-        await cp(join(directory, "weights.npz"), join(staging, "weights.npz"));
-        await writeJson(join(staging, "model.json"), {
-          identifier: xrag.meta.identifier,
-        });
-        await rm(target, { recursive: true, force: true });
-        await rename(staging, target);
-      } finally {
-        await rm(staging, { recursive: true, force: true });
-      }
+      await writeJson(join(directory, "model.json"), {
+        identifier: xrag.meta.identifier,
+      });
+      await activateArtifactDirectory(directory, target);
       return true;
     }
     case "ollamaModel": {
       const models = join(root, "ollama/models");
       await mkdir(join(models, "blobs"), { recursive: true });
-      await cp(join(directory, "blobs"), join(models, "blobs"), {
-        recursive: true,
-        verbatimSymlinks: true,
+      const blobs = await readdir(join(directory, "blobs"), {
+        withFileTypes: true,
       });
+      if (blobs.some((blob) => !blob.isFile()))
+        throw new Error("XRAG_INVALID_BLOB");
+      // Consume verified staging instead of making another full model copy.
+      // Existing shared blobs remain in place until each atomic replacement.
+      for (const blob of blobs)
+        await rename(
+          join(directory, "blobs", blob.name),
+          join(models, "blobs", blob.name),
+        );
       const manifests = join(
         models,
         "manifests/local_registry.schorn.ai/library",
@@ -137,8 +144,8 @@ async function install(
     }
     case "files": {
       const target = join(root, "assets", xrag.name, artifact.id);
-      await mkdir(target, { recursive: true });
-      await cp(directory, target, { recursive: true, verbatimSymlinks: true });
+      await mkdir(join(root, "assets", xrag.name), { recursive: true });
+      await activateArtifactDirectory(directory, target);
       return false;
     }
   }
@@ -162,7 +169,20 @@ export async function syncArtifacts(
     );
   const headers = { Authorization: `Bearer ${token}` };
   const base = `${sharing.url.replace(/\/$/, "")}/api/service/artifacts`;
+  const limits = artifactLimits(context.config);
+  // Offline retries must also enforce retention before contacting the catalog.
+  const cache = await cleanArtifactCache(context.root, limits);
   const stateFile = join(context.root, "service-artifacts.json");
+  const releaseFile = join(context.root, "service-release.json");
+  const releaseSchema = artifactSchema.pick({ id: true, createdAt: true });
+  let release: ReturnType<typeof releaseSchema.parse> | undefined;
+  try {
+    release = releaseSchema.parse(
+      JSON.parse(await readFile(releaseFile, "utf8")),
+    );
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
   let installed: Record<string, string> = {};
   try {
     installed = JSON.parse(await readFile(stateFile, "utf8"));
@@ -197,29 +217,23 @@ export async function syncArtifacts(
       (context.config.development && artifact.xrag.xrag_type === "setup") ||
       installed[artifact.id] ||
       (artifact.xrag.xrag_type === "setup" &&
-        artifact.id !== latestSetup?.id) ||
+        (artifact.id !== latestSetup?.id ||
+          (release && compareSetupReleases(artifact, release) < 0))) ||
       !needsArtifact(artifact, context.config.services)
     )
       continue;
     signal.throwIfAborted();
-    const cache = join(context.root, "cache");
-    await mkdir(cache, { recursive: true, mode: 0o700 });
     const temporary = await mkdtemp(join(cache, "xrag-"));
     let paused = false;
     try {
       log("xrag", `Downloading ${artifact.name} (${artifact.xrag.xrag_type})`);
-      const response = await fetch(`${base}/${artifact.id}`, {
+      const archive = await downloadArtifact(
+        artifact,
+        `${base}/${artifact.id}`,
         headers,
-        redirect: "error",
-        signal: AbortSignal.any([signal, AbortSignal.timeout(3_600_000)]),
-      });
-      if (!response.ok || !response.body)
-        throw new Error(`Download failed (HTTP ${response.status})`);
-      const archive = join(temporary, "archive.tar");
-      await pipeline(
-        response.body,
-        createWriteStream(archive, { mode: 0o600 }),
-        { signal },
+        cache,
+        limits,
+        signal,
       );
       const extracted = join(temporary, "payload");
       await mkdir(extracted, { mode: 0o700 });
@@ -228,9 +242,27 @@ export async function syncArtifacts(
         extracted,
         artifact.id,
         signal,
+        {
+          limits,
+          beforeExtract: async ({ extractedBytes, entryCount }) => {
+            // Large payloads are consumed by rename, not copied a second time.
+            await requireArtifactSpace(
+              cache,
+              extractedBytes + entryCount * 4096,
+              limits,
+              archive,
+            );
+          },
+        },
       );
       if (!isDeepStrictEqual(inspected.xrag, xragSchema.parse(artifact.xrag)))
         throw new Error("Catalog metadata differs from archive");
+      if (artifact.xrag.xrag_type === "setup") {
+        // Persist the forward-only boundary before changing a runtime. Retrying
+        // this release after a crash is allowed, falling back to an older one is not.
+        release = releaseSchema.parse(artifact);
+        await writeJson(releaseFile, release);
+      }
       const disruptive = [
         "setup",
         "mlxWhisperModel",
@@ -244,6 +276,7 @@ export async function syncArtifacts(
       const restart = await install(artifact, extracted, context, log, signal);
       installed[artifact.id] = new Date().toISOString();
       await writeJson(stateFile, installed);
+      await rm(archive, { force: true });
       log("xrag", `Installed ${artifact.name}`);
       if (paused) {
         paused = false;

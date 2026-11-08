@@ -707,7 +707,8 @@
         "platform_permissions_get": "Eigene Berechtigungen anzeigen",
         "platform_user_get": "Benutzer anzeigen",
         "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",
-        "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen"
+        "platform_personal_mcp_revoke": "Plattformfreigabe widerrufen",
+        "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",

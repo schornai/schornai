@@ -1,12 +1,17 @@
 // "use client";
 
 import type { Dispatch, ReactNode, SetStateAction } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { Upload } from "tus-js-client";
 import { logError } from "@schornio/aibox-package-ui/components/error-log";
 import { omitNullish } from "@schornio/aibox-package-utils/omitNullish";
 import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
 import { useSessionToken } from "@/lib/supabase/use-session-token";
+import {
+  resumeUpload,
+  uploadFingerprint,
+  uploadResumeUser,
+} from "@/lib/resumeUpload";
 
 const EXCLUDED_FILE_NAMES = new Set([".DS_Store", "Thumbs.db", "desktop.ini"]);
 
@@ -21,6 +26,7 @@ function isDirectory(
 }
 
 type FileUploadQueued = {
+  objectName?: string;
   id: string;
   file: File;
   path: string;
@@ -35,6 +41,7 @@ type FileUploadProgress = Omit<FileUploadQueued, "state"> & {
 
 type FileUploadSuccess = Omit<FileUploadProgress, "state"> & {
   state: "success";
+  objectName: string;
 };
 
 type FileUploadError = Omit<FileUploadQueued, "state"> & {
@@ -101,7 +108,9 @@ const fileUploadContext = createContext<
       basePath: string;
       beforeUpload?: (fileUploads: FileUploadQueued[]) => void | Promise<void>;
       bucketName: string;
-      bucketPath: string;
+      bucketPath: string | (() => string);
+      upsert: boolean;
+      resumable: boolean;
       onFileUploadError?: (fileUpload: FileUploadError) => void;
       onFileUploadProgress?: (fileUpload: FileUploadProgress) => void;
       onFileUploadSuccess?: (fileUpload: FileUploadSuccess) => void;
@@ -123,6 +132,8 @@ export function FileUploadProvider({
   onFileUploadProgress,
   onFileUploadSuccess,
   restrictUpload,
+  upsert = true,
+  resumable = false,
 }: {
   afterUpload?: (
     fileUploads: (FileUploadSuccess | FileUploadError)[],
@@ -131,12 +142,14 @@ export function FileUploadProvider({
   basePath: string;
   beforeUpload?: (fileUploads: FileUploadQueued[]) => void | Promise<void>;
   bucketName: string;
-  bucketPath: string;
+  bucketPath: string | (() => string);
   children: ReactNode;
   onFileUploadError?: (fileUpload: FileUploadError) => void;
   onFileUploadProgress?: (fileUpload: FileUploadProgress) => void;
   onFileUploadSuccess?: (fileUpload: FileUploadSuccess) => void;
   restrictUpload?: (files: File[]) => boolean;
+  upsert?: boolean;
+  resumable?: boolean;
 }) {
   const [uploads, setUploads] = useState<FileUpload[]>([]);
 
@@ -168,6 +181,8 @@ export function FileUploadProvider({
         beforeUpload,
         bucketName,
         bucketPath,
+        upsert,
+        resumable,
         onFileUploadError,
         onFileUploadProgress,
         onFileUploadSuccess,
@@ -183,6 +198,8 @@ export function FileUploadProvider({
 
 export function useFileUpload() {
   const sessionToken = useSessionToken();
+  const currentToken = useRef(sessionToken);
+  currentToken.current = sessionToken;
 
   const context = useContext(fileUploadContext);
 
@@ -198,6 +215,8 @@ export function useFileUpload() {
     beforeUpload,
     bucketName,
     bucketPath,
+    upsert,
+    resumable,
     uploads,
     setUploads,
     onFileUploadError,
@@ -251,14 +270,26 @@ export function useFileUpload() {
       const { promise: uploadPromise, resolve: uploadResolve } =
         Promise.withResolvers();
 
-      const objectName = resolvePath(`${bucketPath}/${fileUpload.path}`);
+      let objectName = resolvePath(
+        `${typeof bucketPath === "function" ? bucketPath() : bucketPath}/${fileUpload.path}`,
+      );
+      const resumeUser = resumable ? uploadResumeUser(sessionToken) : undefined;
 
       const tusUpload = new Upload(fileUpload.file, {
+        ...(resumeUser
+          ? {
+              fingerprint: async () =>
+                uploadFingerprint(resumeUser, bucketName, fileUpload.file),
+            }
+          : {}),
         chunkSize: 6 * 1024 * 1024, // NOTE: it must be set to 6MB (for now) do not change it
         endpoint: "/api/storage/upload/resumable",
         headers: {
           authorization: `Bearer ${sessionToken}`,
-          "x-upsert": "true",
+          "x-upsert": String(upsert),
+        },
+        onBeforeRequest: (request) => {
+          request.setHeader("authorization", `Bearer ${currentToken.current}`);
         },
         metadata: {
           bucketName,
@@ -295,6 +326,7 @@ export function useFileUpload() {
         onSuccess() {
           const fileUploadSuccess: FileUploadSuccess = {
             ...fileUpload,
+            objectName,
             progress: 1,
             state: "success",
           };
@@ -310,7 +342,17 @@ export function useFileUpload() {
         uploadDataDuringCreation: true,
       });
 
-      tusUpload.start();
+      try {
+        if (resumeUser)
+          objectName =
+            (await resumeUpload(tusUpload, bucketName, fileUpload.file)) ??
+            objectName;
+        tusUpload.start();
+      } catch (error) {
+        // Storage-disabled browsers still support a fresh streamed upload.
+        logError("FileUploadResume", error);
+        tusUpload.start();
+      }
 
       await uploadPromise;
     }

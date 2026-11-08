@@ -47,7 +47,7 @@ beforeEach(() => {
 });
 afterEach(() => session.document.destroy());
 
-it("publishes metadata into the synchronized catalog and waits for delivery", async () => {
+it("queues without a realtime dependency, then separately announces completed publication", async () => {
   const calls: string[] = [];
   boundary.sync.mockImplementation(async () => {
     calls.push("sync");
@@ -66,7 +66,9 @@ it("publishes metadata into the synchronized catalog and waits for delivery", as
   await expect(session.publish("upload.tar", options)).resolves.toBe(
     artifact.id,
   );
-  expect(calls).toEqual(["sync", "publish", "get", "sync"]);
+  expect(calls).toEqual(["publish"]);
+  await session.announce(artifact.id, options);
+  expect(calls).toEqual(["publish", "sync", "get", "sync"]);
   expect(boundary.publish).toHaveBeenCalledWith("upload.tar", options);
   expect(boundary.get).toHaveBeenCalledWith(artifact.id, options);
   expect(getArtifactLog(session.document).toArray()).toEqual([
@@ -113,7 +115,7 @@ it.each(["withdrawn", "missing", "unavailable"])(
   },
 );
 
-it.each(["publish", "remove"] as const)(
+it.each(["announce", "remove"] as const)(
   "does not %s before synchronization succeeds",
   async (operation) => {
     boundary.sync.mockRejectedValue(new Error("sync timeout"));

@@ -361,3 +361,36 @@ it("preserves safe parent traversal and dangling links inside the destination", 
   expect(await readFile(join(destination, "via-hard"), "utf8")).toBe("data");
   expect(await readlink(join(destination, "folder/dangling"))).toBe("missing");
 });
+
+it("rejects archive size and entry limits while inspecting, before extraction", async () => {
+  await expect(
+    inspectArchive(
+      tar([metadata, { path: "large", body: "payload" }]),
+      undefined,
+      { maxExtractedBytes: 1, maxEntries: 100 },
+    ),
+  ).rejects.toThrow("XRAG_EXTRACTED_LIMIT");
+  await expect(
+    inspectArchive(
+      tar([metadata, { path: "many", body: "payload" }]),
+      undefined,
+      { maxExtractedBytes: 1_000_000, maxEntries: 1 },
+    ),
+  ).rejects.toThrow("XRAG_ENTRY_LIMIT");
+});
+
+it("checks the extraction space reservation before creating any payload", async () => {
+  const { file, destination, id } = await extractionFixture([
+    { path: "data", body: "payload" },
+  ]);
+  await expect(
+    extractArchive(file, destination, id, undefined, {
+      beforeExtract: async (inspection) => {
+        expect(inspection.extractedBytes).toBeGreaterThan(7);
+        expect(inspection.entryCount).toBe(2);
+        throw new Error("XRAG_DISK_SPACE");
+      },
+    }),
+  ).rejects.toThrow("XRAG_DISK_SPACE");
+  expect(await readdir(destination)).toEqual([]);
+});

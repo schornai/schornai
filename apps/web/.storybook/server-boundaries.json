@@ -350,5 +350,9 @@
   [
     "apps/web/app/(settings)/me/connections/_actions/revokePlatformMcp.ts",
     "apps/web/.storybook/server-mocks/app/(settings)/me/connections/_actions/revokePlatformMcp.ts"
+  ],
+  [
+    "apps/web/app/(settings)/settings/xrag/_actions/getXRAGPublication.ts",
+    "apps/web/.storybook/server-mocks/app/(settings)/settings/xrag/_actions/getXRAGPublication.ts"
   ]
 ]
