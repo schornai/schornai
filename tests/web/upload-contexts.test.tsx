@@ -197,10 +197,11 @@ describe("upload orchestration contexts", () => {
     );
     act(() => mocks.upload.beforeUpload());
     expect(state().isPending).toBe(true);
-    act(() => mocks.upload.onFileUploadSuccess(upload));
-    expect(mocks.upload.bucketPath).toMatch(/^uploads\/[0-9a-f-]{36}$/);
+    const objectName = `${mocks.upload.bucketPath()}/file.txt`;
+    act(() => mocks.upload.onFileUploadSuccess({ ...upload, objectName }));
+    expect(objectName).toMatch(/^uploads\/[0-9a-f-]{36}\/file.txt$/);
     expect(client.execute).toHaveBeenCalledWith({
-      actionFileName: `${mocks.upload.bucketPath}/file.txt`,
+      actionFileName: objectName,
     });
     expect(state().isPending).toBe(false);
     act(() => mocks.upload.onFileUploadError(new Error("failed")));

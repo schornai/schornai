@@ -55,3 +55,35 @@ it.each([
     "ARTIFACT_UNAVAILABLE",
   );
 });
+
+it("forwards and validates a byte range without exposing the signed URL", async () => {
+  const supabase = {
+    storage: {
+      from: () => ({
+        createSignedUrl: async () => ({
+          data: { signedUrl: "https://storage.test/private" },
+          error: null,
+        }),
+      }),
+    },
+  } as any;
+  const range = { start: 5, end: 9, size: 10 };
+  const fetch = vi.fn(
+    async () =>
+      new Response("12345", {
+        status: 206,
+        headers: { "Content-Range": "bytes 5-9/10" },
+      }),
+  );
+  vi.stubGlobal("fetch", fetch);
+  const stream = await getArtifactStream("archive", { supabase, range });
+  expect(await new Response(stream).text()).toBe("12345");
+  expect(fetch).toHaveBeenCalledWith(
+    "https://storage.test/private",
+    expect.objectContaining({ headers: { Range: "bytes=5-9" } }),
+  );
+  fetch.mockResolvedValue(new Response("0123456789"));
+  await expect(
+    getArtifactStream("archive", { supabase, range }),
+  ).rejects.toThrow("ARTIFACT_UNAVAILABLE");
+});

@@ -24,7 +24,7 @@ export function archivePath(value: string) {
   ) {
     throw new Error("XRAG_UNSAFE_PATH");
   }
-  return posix.normalize(value).replace(/^\.\//, "");
+  return posix.normalize(value).replace(/^\.\//, "").replace(/\/$/, "") || ".";
 }
 
 type ArchiveLink = { target: string; hard: boolean };
@@ -73,11 +73,23 @@ async function assertSafeLink(
   }
 }
 
+export type ArchiveLimits = {
+  maxExtractedBytes: number;
+  maxEntries: number;
+};
+const defaultLimits: ArchiveLimits = {
+  maxExtractedBytes: 400 * 1024 ** 3,
+  maxEntries: 1_000_000,
+};
+
 /** Stream even very large archives; only small metadata files are held in memory. */
 export async function inspectArchive(
   source: AsyncIterable<Uint8Array>,
   signal?: AbortSignal,
+  limits: ArchiveLimits = defaultLimits,
 ) {
+  let extractedBytes = 0;
+  let entryCount = 0;
   const hash = createHash("sha256");
   let size = 0;
   const metadata = new Map<string, Buffer>();
@@ -97,6 +109,16 @@ export async function inspectArchive(
     strict: true,
     onReadEntry(entry) {
       try {
+        entryCount++;
+        if (entryCount > limits.maxEntries) throw new Error("XRAG_ENTRY_LIMIT");
+        if (!Number.isSafeInteger(entry.size) || entry.size < 0)
+          throw new Error("XRAG_INVALID_SIZE");
+        extractedBytes += entry.size;
+        if (
+          !Number.isSafeInteger(extractedBytes) ||
+          extractedBytes > limits.maxExtractedBytes
+        )
+          throw new Error("XRAG_EXTRACTED_LIMIT");
         const name = archivePath(entry.path);
         if (names.has(name) && entry.type !== "Directory")
           throw new Error("XRAG_DUPLICATE_ENTRY");
@@ -134,6 +156,8 @@ export async function inspectArchive(
         }
       } catch (error) {
         invalid = error as Error;
+        // Stop consuming a rejected archive instead of reading arbitrarily large payloads.
+        parser.abort(invalid);
       }
       entry.resume();
     },
@@ -174,7 +198,15 @@ export async function inspectArchive(
             : [];
   if (required.some((name) => !files.has(name)))
     throw new Error("XRAG_MISSING_PAYLOAD");
-  return { id: hash.digest("hex"), size, xrag, metadata, links };
+  return {
+    id: hash.digest("hex"),
+    size,
+    xrag,
+    metadata,
+    links,
+    extractedBytes,
+    entryCount,
+  };
 }
 
 /** Extract only into a fresh, private directory owned by the caller. */
@@ -183,14 +215,25 @@ export async function extractArchive(
   destination: string,
   expectedId: string,
   signal?: AbortSignal,
+  options: {
+    limits?: ArchiveLimits;
+    beforeExtract?: (
+      inspection: Awaited<ReturnType<typeof inspectArchive>>,
+    ) => Promise<void>;
+  } = {},
 ) {
   if (!(await lstat(destination)).isDirectory())
     throw new Error("XRAG_UNSAFE_DESTINATION");
   if ((await readdir(destination)).length)
     throw new Error("XRAG_DESTINATION_NOT_EMPTY");
   const root = await realpath(destination);
-  const result = await inspectArchive(createReadStream(file), signal);
+  const result = await inspectArchive(
+    createReadStream(file),
+    signal,
+    options.limits,
+  );
   if (result.id !== expectedId) throw new Error("XRAG_CHECKSUM_MISMATCH");
+  await options.beforeExtract?.(result);
   signal?.throwIfAborted();
   let extractionError: Error | undefined;
   await x({

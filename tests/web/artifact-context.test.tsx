@@ -111,10 +111,28 @@ it.each([false, true])(
       realtime.dashboard.mock.calls
         .at(-1)![0]
         .artifacts.map((artifact: any) => artifact.id),
-    ).toEqual([serviceArtifacts[0]!.id, serviceArtifacts[1]!.id]);
+    ).toEqual([serviceArtifacts[0]!.id]);
+    expect(client.refresh).toHaveBeenCalledTimes(initiallySynced ? 3 : 2);
     act(() => realtime.provider.emit("status", { status: "disconnected" }));
     expect(screen.getByText("disconnected")).toBeTruthy();
     unmount();
     expect(realtime.provider.listenerCount("synced")).toBe(0);
   },
 );
+
+it("does not resurrect artifacts from persisted history and displays refreshed SQL rows", () => {
+  addArtifactLog(realtime.provider.document, serviceArtifacts[1]!);
+  const { rerender } = render(<ArtifactContext artifacts={[]} />);
+  expect(realtime.dashboard.mock.calls.at(-1)![0].artifacts).toEqual([]);
+  expect(client.refresh).toHaveBeenCalled();
+  const initialRefreshes = client.refresh.mock.calls.length;
+  rerender(<ArtifactContext artifacts={[serviceArtifacts[0]!]} />);
+  expect(realtime.dashboard.mock.calls.at(-1)![0].artifacts).toEqual([
+    serviceArtifacts[0]!,
+  ]);
+  expect(client.refresh).toHaveBeenCalledTimes(initialRefreshes);
+  act(() => addArtifactLog(realtime.provider.document, serviceArtifacts[0]!));
+  expect(client.refresh).toHaveBeenCalledTimes(initialRefreshes + 1);
+  rerender(<ArtifactContext artifacts={[]} />);
+  expect(realtime.dashboard.mock.calls.at(-1)![0].artifacts).toEqual([]);
+});

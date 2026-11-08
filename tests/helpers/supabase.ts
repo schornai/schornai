@@ -15,6 +15,8 @@ export function query(response: Response = { data: [], error: null }) {
     "upsert",
     "delete",
     "eq",
+    "is",
+    "not",
     "neq",
     "in",
     "order",

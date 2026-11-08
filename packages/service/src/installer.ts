@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rename, rm, access } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, access } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -13,7 +13,7 @@ import {
 } from "./config.ts";
 import { writeJson } from "./files.ts";
 import { stopLegacyTranscriber } from "./stopLegacyTranscriber.ts";
-import { createLogger, type Log } from "./log.ts";
+import { createLogger } from "./log.ts";
 import { run } from "./process.ts";
 import { control } from "./control.ts";
 import { binary, ensureDocker } from "./docker.ts";
@@ -24,6 +24,7 @@ import {
   getFileIntegrity,
   type DirectoryIntegrity,
 } from "../../xrag/update/scripts/modules/integrity.ts";
+import { activateArtifactDirectory } from "./activateArtifactDirectory.ts";
 import { ensureSecuritySecrets } from "../../xrag/update/scripts/securitySecrets.ts";
 
 export type InstallationManifest = {
@@ -37,31 +38,6 @@ export type InstallationManifest = {
   };
   images: { file: string; services: string[] }[];
 };
-async function replaceDirectory(source: string, destination: string, log: Log) {
-  const temporary = `${destination}.new-${randomUUID()}`;
-  const previous = `${destination}.previous`;
-  await cp(source, temporary, { recursive: true, verbatimSymlinks: true });
-  try {
-    await rm(previous, { recursive: true, force: true });
-  } catch (error) {
-    if (
-      !["EACCES", "EPERM"].includes((error as NodeJS.ErrnoException).code ?? "")
-    )
-      throw error;
-    // Old bundles used sudo ditto for the Mac app. Its root-owned backup can
-    // be moved within the user's Applications folder, but not removed by us.
-    const preserved = `${previous}-${randomUUID()}`;
-    await rename(previous, preserved);
-    log("setup", `Preserved protected backup: ${preserved}`);
-  }
-  if (existsSync(destination)) await rename(destination, previous);
-  try {
-    await rename(temporary, destination);
-  } catch (error) {
-    if (existsSync(previous)) await rename(previous, destination);
-    throw error;
-  }
-}
 
 export async function hasLegacyLayout(root: string) {
   try {
@@ -246,18 +222,16 @@ export async function installUpdate(bundle: string) {
       // Linux/container-only bundles use the host's Node, Docker and Ollama.
       // Mac bundles carry these runtimes and replace them together with the app.
       if (existsSync(join(bundle, "bin", name)))
-        await replaceDirectory(
+        await activateArtifactDirectory(
           join(bundle, "bin", name),
           join(root, "bin", name),
-          log,
         );
     }
   }
   if (config.services.includes("transcriber-mlx"))
-    await replaceDirectory(
+    await activateArtifactDirectory(
       join(bundle, "apps/transcriber-mac"),
       join(root, "apps/transcriber-mac"),
-      log,
     );
   if (hasDocker) {
     const docker = join(root, "docker");
@@ -323,16 +297,14 @@ export async function installUpdate(bundle: string) {
   ) {
     await mkdir(dirname(appPath), { recursive: true });
     await access(join(bundle, "apps/schorn.ai Admin.app"));
-    await replaceDirectory(
+    await activateArtifactDirectory(
       join(bundle, "apps/schorn.ai Admin.app"),
       appPath,
-      log,
     );
   }
-  await replaceDirectory(
+  await activateArtifactDirectory(
     join(bundle, "apps/service"),
     join(root, "apps/service"),
-    log,
   );
   log("setup", "Update finished");
   // An old Admin download includes xrag.tar in its extracted working folder.

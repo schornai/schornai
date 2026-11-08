@@ -708,6 +708,7 @@
         "platform_user_get": "View user",
         "platform_personal_mcp_grants": "List your platform authorizations",
         "platform_personal_mcp_revoke": "Revoke platform authorization",
+        "platform_artifact_publication_get": "Read XRAG publication status",
         "platform_chat_retry": "Retry chat"
       },
       "labelClose": "Close",

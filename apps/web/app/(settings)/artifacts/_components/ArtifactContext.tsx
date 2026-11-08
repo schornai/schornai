@@ -6,7 +6,6 @@ import { RealtimeRoom } from "@/lib/RealtimeRoom";
 import { useRealtimeArray } from "@/lib/useRealtimeArray";
 import { useRealtimeRoomConnected } from "@/lib/useRealtimeRoomConnected";
 import {
-  applyArtifactLog,
   artifactCatalogDocumentName,
   getArtifactLog,
 } from "@schornio/aibox-realtime/documents/artifactCatalog/_utils";
@@ -18,22 +17,27 @@ function Catalog({ artifacts, userPreferences }: Props) {
   const provider = useHocuspocusProvider();
   const log = useRealtimeArray(getArtifactLog(provider.document));
   const connected = useRealtimeRoomConnected();
-  const router = useRouter();
+  const { refresh: refreshPage } = useRouter();
+  const latestChange = log.at(-1)?.id;
   useEffect(() => {
-    // Missed or compacted entries are reconciled with the authoritative Storage snapshot.
+    // Events invalidate the SQL snapshot; replayed history is not a catalog.
+    if (latestChange) refreshPage();
+  }, [latestChange, refreshPage]);
+  useEffect(() => {
+    // Reconcile missed or compacted events with the authoritative SQL snapshot.
     let syncedOnce = provider.isSynced;
     const refresh = () => {
-      if (syncedOnce) router.refresh();
+      if (syncedOnce) refreshPage();
       syncedOnce = true;
     };
     provider.on("synced", refresh);
     return () => {
       provider.off("synced", refresh);
     };
-  }, [provider, router]);
+  }, [provider, refreshPage]);
   return (
     <ArtifactDashboard
-      artifacts={applyArtifactLog(artifacts, log)}
+      artifacts={artifacts}
       connected={connected}
       userPreferences={userPreferences}
     />

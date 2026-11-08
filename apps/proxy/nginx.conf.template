@@ -49,6 +49,20 @@ server {
         proxy_redirect ${WEB_ENV_URL} /;
     }
 
+    # TUS chunks and artifact downloads pass through without temporary disk files.
+    # These are inactivity limits, not limits on the complete transfer duration.
+    location ~ ^/api/(storage/upload/resumable|service/artifacts)(/|$) {
+        proxy_request_buffering off;
+        proxy_buffering off;
+        proxy_max_temp_file_size 0;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        client_body_timeout 120s;
+        send_timeout 120s;
+        proxy_pass ${WEB_ENV_URL};
+        proxy_redirect ${WEB_ENV_URL} /;
+    }
+
     location / {
         proxy_pass ${WEB_ENV_URL};
         proxy_redirect ${WEB_ENV_URL} /;

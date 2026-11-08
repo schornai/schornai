@@ -58,6 +58,7 @@ import {
   TableRow,
 } from "@schornio/aibox-package-ui/components/table";
 import type { ChildProcessMessage, ServiceAction } from "../../types";
+import { RELEASE_NAME } from "@schornio/aibox-package-ui/lib/release";
 
 export function ServiceView({
   status,
@@ -65,7 +66,9 @@ export function ServiceView({
   error,
   messages,
   onControl,
+  releaseName = RELEASE_NAME,
 }: {
+  releaseName?: string;
   status: string;
   pending: ServiceAction | null;
   error: string;
@@ -135,7 +138,7 @@ export function ServiceView({
         <LogoSchornAI className="w-32" />
         <Badge variant="outline">{t("labelAdmin")}</Badge>
         <p className="text-muted-foreground text-sm">
-          {t("labelRelease", { name: t("labelReleaseName") })}
+          {t("labelRelease", { name: releaseName })}
         </p>
       </header>
       <Card>

@@ -59,6 +59,28 @@ export const configSchema = z.strictObject({
     })
     .default({}),
   caFile: z.string().min(1).optional(),
+  artifacts: z
+    .strictObject({
+      maxCacheBytes: z
+        .number()
+        .int()
+        .positive()
+        .default(500 * 1024 ** 3),
+      minFreeBytes: z
+        .number()
+        .int()
+        .nonnegative()
+        .default(5 * 1024 ** 3),
+      maxExtractedBytes: z
+        .number()
+        .int()
+        .positive()
+        .default(400 * 1024 ** 3),
+      maxEntries: z.number().int().positive().default(1_000_000),
+      retentionHours: z.number().positive().default(72),
+      idleTimeoutMs: z.number().int().positive().default(120_000),
+    })
+    .optional(),
   development: z
     .strictObject({
       workspace: z

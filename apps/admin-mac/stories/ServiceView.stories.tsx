@@ -7,6 +7,8 @@ const meta = {
   title: "Admin/ServiceView",
   component: ServiceView,
   args: {
+    // Stable visual fixture, independent of the current product release.
+    releaseName: "December 2026 Development Build 7",
     status: "running",
     pending: null,
     error: "",
@@ -20,7 +22,9 @@ type Story = StoryObj<typeof meta>;
 export const Running: Story = {
   play: async ({ canvasElement }) => {
     await expect(
-      within(canvasElement).getByText("Release: Dezember Development Build 6"),
+      within(canvasElement).getByText(
+        "Release: December 2026 Development Build 7",
+      ),
     ).toBeVisible();
   },
 };

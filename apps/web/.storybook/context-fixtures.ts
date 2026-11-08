@@ -66,6 +66,7 @@ export function configureContextFixtures(
               file,
               id: "recording-upload",
               path: file.name,
+              objectName: `uploads/recording/${file.name}`,
               progress: 1,
               sanitizedFileType: file.type,
               state: "success" as const,
@@ -1283,7 +1284,12 @@ export function configureContextFixtures(
   mocked(hook22).mockImplementation(
     () =>
       useContextFixture(
-        { hasErrored: false, hasSucceeded: false, isPending: false },
+        {
+          publications: [],
+          hasErrored: false,
+          hasSucceeded: false,
+          isPending: false,
+        },
         scenario,
         overrides.useXRAGUpload,
       ) as ReturnType<typeof hook22>,

@@ -141,6 +141,52 @@ it("checks version output written to stderr as well as stdout", async () => {
     ]),
   ).resolves.toBeUndefined();
 });
+it("downloads the exact pinned GitHub asset directly through the API", async () => {
+  const root = await directory();
+  const target = join(root, "binary");
+  const mock = vi.mocked(fetch);
+  mock.mockResolvedValueOnce(
+    Response.json({
+      assets: [
+        { name: "another-platform", id: 10 },
+        { name: "tool-arm64", id: 42 },
+      ],
+    }),
+  );
+  mock.mockResolvedValueOnce(new Response("complete binary"));
+  await download(
+    "https://github.com/owner/tool/releases/download/v1.2.3/tool-arm64",
+    target,
+  );
+  expect(mock).toHaveBeenNthCalledWith(
+    1,
+    "https://api.github.com/repos/owner/tool/releases/tags/v1.2.3",
+    expect.anything(),
+  );
+  expect(mock).toHaveBeenNthCalledWith(
+    2,
+    "https://api.github.com/repos/owner/tool/releases/assets/42",
+    expect.objectContaining({
+      headers: { Accept: "application/octet-stream" },
+    }),
+  );
+  expect(await readFile(target, "utf8")).toBe("complete binary");
+  expect(await readdir(root)).toEqual(["binary"]);
+  expect(mock).toHaveBeenCalledTimes(2);
+});
+it("does not substitute a different GitHub release asset when the pinned one is missing", async () => {
+  const root = await directory();
+  const target = join(root, "binary");
+  await writeFile(target, "previous");
+  vi.mocked(fetch).mockResolvedValueOnce(
+    Response.json({ assets: [{ name: "different", id: 42 }] }),
+  );
+  await expect(
+    download("https://github.com/owner/tool/releases/download/v1/tool", target),
+  ).rejects.toThrow("GitHub release asset missing");
+  expect(await readFile(target, "utf8")).toBe("previous");
+  expect(await readdir(root)).toEqual(["binary"]);
+});
 it("checks the downloaded Ollama client independently of a configured server", async () => {
   const root = await directory();
   const binary = join(root, "ollama");
@@ -151,7 +197,11 @@ it("checks the downloaded Ollama client independently of a configured server", a
   await chmod(binary, 0o755);
   const archive = join(root, "ollama.tgz");
   await promisify(execFile)("tar", ["-czf", archive, "-C", root, "ollama"]);
-  vi.mocked(fetch).mockResolvedValueOnce(new Response(await readFile(archive)));
+  vi.mocked(fetch)
+    .mockResolvedValueOnce(
+      Response.json({ assets: [{ name: "ollama-darwin.tgz", id: 42 }] }),
+    )
+    .mockResolvedValueOnce(new Response(await readFile(archive)));
   vi.stubEnv("OLLAMA_HOST", "http://remote.test:11434");
   const { ollama: actualOllama } = await vi.importActual<
     typeof import("../external/downloads/src/ollama.ts")

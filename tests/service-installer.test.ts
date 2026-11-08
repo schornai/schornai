@@ -4,8 +4,9 @@ import {
   readFile,
   writeFile,
   rm,
-  chmod,
   readdir,
+  cp,
+  rename,
 } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -223,9 +224,7 @@ it("updates the portable service without installing unselected services or chang
   expect(await readFile(join(machine, "apps/service/cli.mjs"), "utf8")).toBe(
     "new service",
   );
-  expect(
-    await readFile(join(machine, "apps/service.previous/cli.mjs"), "utf8"),
-  ).toBe("old service");
+  expect(await readdir(join(machine, "apps"))).toEqual(["service"]);
   expect(await readFile(config, "utf8")).toBe(before);
   expect(
     await readFile(join(machine, "docker/volumes/db/data/keep"), "utf8"),
@@ -371,6 +370,7 @@ it("finishes automatic migration on retry after the old Compose layout was alrea
   vi.mocked(run).mockImplementation(async (command) => {
     if (command.args[0] === "load") throw new Error("Image import failed");
   });
+  await cp(bundle, `${bundle}-retry`, { recursive: true });
   await expect(installUpdate(bundle)).rejects.toThrow("Image import failed");
   expect(
     await readFile(join(machine, "docker/docker-compose.yml"), "utf8"),
@@ -380,6 +380,8 @@ it("finishes automatic migration on retry after the old Compose layout was alrea
   ).toContain("admin-app");
   const before = await readFile(config, "utf8");
   vi.mocked(run).mockReset().mockResolvedValue(undefined);
+  await rm(bundle, { recursive: true, force: true });
+  await rename(`${bundle}-retry`, bundle);
   await installUpdate(bundle);
   expect(await readFile(config, "utf8")).toBe(before);
   expect(
@@ -444,33 +446,6 @@ it("rejects modified bundle contents before replacing installed files", async ()
     "old service",
   );
 });
-it.skipIf(process.getuid?.() === 0)(
-  "preserves a protected old app backup instead of failing the next update",
-  async () => {
-    const { bundle, machine } = await fixture();
-    const previous = join(machine, "apps/service.previous");
-    await mkdir(previous);
-    await writeFile(join(previous, "legacy"), "protected legacy payload");
-    await chmod(previous, 0o555);
-    try {
-      await installUpdate(bundle);
-      const preserved = (await readdir(join(machine, "apps"))).find((name) =>
-        name.startsWith("service.previous-"),
-      );
-      expect(preserved).toBeDefined();
-      expect(
-        await readFile(join(machine, "apps", preserved!, "legacy"), "utf8"),
-      ).toBe("protected legacy payload");
-      expect(
-        await readFile(join(machine, "apps/service/cli.mjs"), "utf8"),
-      ).toBe("new service");
-    } finally {
-      for (const name of await readdir(join(machine, "apps")))
-        if (name.startsWith("service.previous"))
-          await chmod(join(machine, "apps", name), 0o755);
-    }
-  },
-);
 it("restores Docker after the legacy launcher quits before removing its old containers", async () => {
   const { bundle, machine, config } = await fixture();
   const configuration = JSON.parse(await readFile(config, "utf8"));
@@ -530,4 +505,28 @@ it("honors the supplied bootstrap Node instead of an older installed runtime", a
   });
   expect(result.stdout).toContain("bundle-runtime");
   expect(result.stdout).not.toContain("old-runtime");
+});
+
+it("consumes runtime staging and removes the replaced version", async () => {
+  const { stat } = await import("node:fs/promises");
+  const { bundle, machine } = await fixture();
+  const path = join(bundle, "installation.json");
+  const manifest = JSON.parse(await readFile(path, "utf8"));
+  await writeFile(
+    path,
+    JSON.stringify({
+      ...manifest,
+      version: 1,
+      platform: process.platform,
+    }),
+  );
+  const before = await stat(join(bundle, "apps/service/cli.mjs"));
+  await installUpdate(bundle);
+  expect((await stat(join(machine, "apps/service/cli.mjs"))).ino).toBe(
+    before.ino,
+  );
+  expect(await readdir(join(machine, "apps"))).toEqual(["service"]);
+  await expect(stat(join(bundle, "apps/service"))).rejects.toMatchObject({
+    code: "ENOENT",
+  });
 });

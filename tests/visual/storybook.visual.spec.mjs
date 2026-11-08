@@ -1,8 +1,9 @@
 import { test as base, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
-// A page per worker keeps module/font caches warm. Every story is force-mounted;
-// Storybook runs its beforeEach cleanup and play function on each selection.
+// A page per worker keeps module/font caches warm for synchronous stories.
+// Async stories navigate afresh so pending RSC/Suspense work from the previous
+// selection cannot replace content after the current story's play checks pass.
 const test = base.extend({
   visualPage: [
     async ({ browser }, use, workerInfo) => {
@@ -141,7 +142,10 @@ for (const [book, directory] of [
       const theme = testInfo.project.name;
       await page.mouse.move(0, 0);
       const url = `http://127.0.0.1:${port}/${book}/iframe.html?id=${encodeURIComponent(story.id)}&viewMode=story&globals=theme:${theme};locale:de`;
-      if (!page.url().includes(`/${book}/iframe.html`)) {
+      if (
+        story.tags?.includes("async-component") ||
+        !page.url().includes(`/${book}/iframe.html`)
+      ) {
         await page.goto(url, { waitUntil: "domcontentloaded" });
       } else {
         await page.evaluate((storyId) => {

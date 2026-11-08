@@ -5,7 +5,7 @@ import { getArtifact } from "@schornio/aibox-database/xrag/getArtifact";
 import { ServerRealtimeProvider } from "../../server/ServerRealtimeProvider.ts";
 import { addArtifactLog, artifactCatalogDocumentName } from "./_utils.ts";
 
-/** Caller must authorize a global admin. Storage owns bytes/metadata, Yjs delivers CRUD changes. */
+/** Caller must authorize a global admin. SQL owns catalog metadata, Storage owns bytes, and Yjs delivers changes. */
 export class ArtifactCatalogSession extends ServerRealtimeProvider {
   constructor(
     options: Omit<
@@ -16,11 +16,13 @@ export class ArtifactCatalogSession extends ServerRealtimeProvider {
     super({ ...options, documentName: artifactCatalogDocumentName });
   }
   async publish(name: string, options: { supabase: SupabaseClient }) {
+    return publishArtifact(name, options);
+  }
+
+  async announce(id: string, options: { supabase: SupabaseClient }) {
     await this.waitForSynced({ abortSignal: AbortSignal.timeout(30_000) });
-    const id = await publishArtifact(name, options);
     addArtifactLog(this.document, await getArtifact(id, options));
     await this.waitForSynced({ abortSignal: AbortSignal.timeout(30_000) });
-    return id;
   }
   async remove(id: string, options: { supabase: SupabaseClient }) {
     await this.waitForSynced({ abortSignal: AbortSignal.timeout(30_000) });
