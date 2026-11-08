@@ -4,7 +4,7 @@ import {
   Alert,
   AlertDescription,
 } from "@schornio/aibox-package-ui/components/alert";
-import { Calculator, ChevronsUpDown } from "lucide-react";
+import { Calculator, Pencil, ChevronsUpDown } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,12 +14,17 @@ import type { Agent } from "@schornio/aibox-package-database/agent/_types";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { InfoActions } from "../../../_components/InfoActions";
 import { InfoTitle } from "../../../_components/InfoTitle";
+import Link from "next/link";
 import { useT } from "next-i18next/client";
 
 export function AgentInfoToolCalculator({
   agentRole,
+  editAgentPathname,
+  editRoleId,
 }: {
   agentRole?: Partial<Agent["roles"][number]>;
+  editAgentPathname?: string;
+  editRoleId?: string;
 }) {
   const { t } = useT("agent", {
     keyPrefix: "_components.AgentInfoToolCalculator",
@@ -35,6 +40,21 @@ export function AgentInfoToolCalculator({
           </CollapsibleTrigger>
           <InfoActions>
             <strong>{agentRole?.name}</strong>
+            {editRoleId && (
+              <Button
+                aria-label={t("labelEdit")}
+                nativeButton={false}
+                render={
+                  <Link
+                    href={`${editAgentPathname ?? ""}?view=roles&role-${editRoleId}=tool-calculator#role-${editRoleId}`}
+                  />
+                }
+                size="icon-xs"
+                variant="ghost"
+              >
+                <Pencil />
+              </Button>
+            )}
             <CollapsibleTrigger
               render={
                 <Button size="icon-xs" variant="ghost">

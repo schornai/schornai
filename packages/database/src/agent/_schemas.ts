@@ -202,6 +202,7 @@ export const agentConfigSchema = z.object({
         z.object({
           active: z.boolean(),
           recommendNextMessages: z.optional(z.boolean()),
+          currentDateTime: z.optional(z.boolean()),
           updateChatLabel: z.optional(z.boolean()),
         }),
       ),

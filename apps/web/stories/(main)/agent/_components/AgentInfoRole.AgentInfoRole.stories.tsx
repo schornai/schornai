@@ -1,3 +1,4 @@
+import { expect } from "storybook/test";
 import { repeatFixtures } from "../../../../.storybook/repeat-fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AgentInfoRole } from "../../../../app/(main)/agent/_components/AgentInfoRole";
@@ -333,5 +334,41 @@ export const RoleToolWebAccessWebFetchAllowListMultiple: Story = {
         ),
       },
     },
+  },
+};
+
+export const SupportTools: Story = {
+  args: {
+    editable: true,
+    role: {
+      id: "support-role",
+      prompt: "Hilf bei der Planung.",
+      documentRepositoryMounts: [],
+      toolPlatformAccess: { active: true, level: "workspace" },
+      toolChatAwareness: {
+        active: true,
+        updateChatLabel: true,
+        recommendNextMessages: true,
+        currentDateTime: true,
+      },
+      toolCalculator: { active: true },
+    },
+  },
+  play: async ({ canvas }) => {
+    const platform = canvas.getByText(/^Plattformzugriff$|^Platform access$/);
+    const chat = canvas.getByText(
+      /Werkzeug: Chat Erweiterungen|Tool: Chat Extensions/,
+    );
+    const calculator = canvas.getByText(
+      /Werkzeug: Taschenrechner|Tool: Calculator/,
+    );
+    await expect(
+      calculator.compareDocumentPosition(platform) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    await expect(
+      chat.compareDocumentPosition(calculator) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   },
 };

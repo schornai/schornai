@@ -33,9 +33,9 @@ export const Admin: Story = {
     role: { ...role, toolPlatformAccess: { active: true, level: "admin" } },
   },
 };
-export const Disabled: Story = {
+export const UserAccess: Story = {
   args: {
-    role: { ...role, toolPlatformAccess: { active: false, level: "user" } },
+    role: { ...role, toolPlatformAccess: { active: true, level: "user" } },
   },
 };
 export const ChangeLevel: Story = {

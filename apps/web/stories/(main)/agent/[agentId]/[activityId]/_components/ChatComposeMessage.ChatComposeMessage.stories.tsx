@@ -289,3 +289,49 @@ export const RecommendedMessageHash: Story = {
     await expect(window.location.hash).toBe("");
   },
 };
+
+export const ResponseSuggestions: Story = {
+  parameters: {
+    contextFixtures: {
+      useMessages: [
+        {
+          id: "assistant-suggestions",
+          role: "assistant",
+          parts: [
+            {
+              type: "tool-chat-response-suggestions",
+              toolCallId: "suggestions",
+              state: "output-available",
+              input: {
+                suggestions: [
+                  "Bitte ein Beispiel",
+                  "Weiter mit dem nächsten Schritt",
+                ],
+              },
+              output: {
+                ok: true,
+                suggestions: [
+                  "Bitte ein Beispiel",
+                  "Weiter mit dem nächsten Schritt",
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.clear(canvas.getByRole("textbox"));
+    await userEvent.type(canvas.getByRole("textbox"), "Mein Entwurf");
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Bitte ein Beispiel" }),
+    );
+    await waitFor(() =>
+      expect(canvas.getByRole("textbox")).toHaveValue(
+        "Mein Entwurf\nBitte ein Beispiel",
+      ),
+    );
+    await expect(canvas.getByRole("textbox")).toHaveFocus();
+  },
+};

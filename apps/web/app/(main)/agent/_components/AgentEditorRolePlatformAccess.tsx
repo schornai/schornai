@@ -17,7 +17,7 @@ import {
   FieldLabel,
   FieldDescription,
 } from "@schornio/aibox-package-ui/components/field";
-import { Switch } from "@schornio/aibox-package-ui/components/switch";
+import { AgentEditorRoleRemoveTool } from "./AgentEditorRoleRemoveTool";
 import {
   Select,
   SelectContent,
@@ -39,25 +39,12 @@ export function AgentEditorRolePlatformAccess({
   const id = useId();
   const config = role.toolPlatformAccess ?? {
     ...defaultPlatformAgentAccess,
-    active: false,
+    active: true,
   };
   const approvals = getPlatformApprovals(role.toolPlatformAccess);
   return (
     <ContainerMain>
       <FieldGroup>
-        <Field orientation="horizontal">
-          <Switch
-            id={id}
-            checked={config.active}
-            onCheckedChange={(active) =>
-              setAgentRole(role.id, (previous) => ({
-                ...previous,
-                toolPlatformAccess: { ...config, active },
-              }))
-            }
-          />
-          <FieldLabel htmlFor={id}>{t("labelActive")}</FieldLabel>
-        </Field>
         <FieldDescription>{t("description")}</FieldDescription>
         {platformAccessLevels.map((level) => (
           <Field key={level}>
@@ -66,7 +53,6 @@ export function AgentEditorRolePlatformAccess({
             </FieldLabel>
             <Select
               value={approvals[level]}
-              disabled={!config.active}
               onValueChange={(value) => {
                 if (
                   !platformApprovalModes.includes(value as PlatformApprovalMode)
@@ -80,6 +66,7 @@ export function AgentEditorRolePlatformAccess({
                   ...previous,
                   toolPlatformAccess: {
                     ...config,
+                    active: true,
                     approvals: next,
                     level: platformPolicyCeiling(next),
                   },
@@ -102,6 +89,12 @@ export function AgentEditorRolePlatformAccess({
           </Field>
         ))}
         <FieldDescription>{t("descriptionModes")}</FieldDescription>
+        <Field orientation="horizontal">
+          <AgentEditorRoleRemoveTool
+            roleId={role.id}
+            tool="toolPlatformAccess"
+          />
+        </Field>
       </FieldGroup>
     </ContainerMain>
   );

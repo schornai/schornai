@@ -43,8 +43,10 @@ Mit Plattformwerkzeugen kann eine KI schorn.ai-Daten lesen und erlaubte Aktionen
 
 1. Öffne **Agent bearbeiten → Rollen** und die gewünschte Rolle.
 2. Wähle unter **Werkzeuge** den Eintrag **schorn.ai Plattform Zugang**.
-3. Es erscheint der Tab **Plattformzugriff**. Dort kannst du das Werkzeug ein- oder ausschalten und für jede Stufe **Automatisch**, **Freigabe erforderlich** oder **Aus** wählen.
+3. Es erscheint der Tab **Plattformzugriff**. Das Werkzeug ist damit aktiv. Dort kannst du für jede Stufe **Automatisch**, **Freigabe erforderlich** oder **Aus** wählen.
 4. Speichere den Agenten.
+
+Mit **Werkzeug entfernen** und der anschließenden Bestätigung entfernst du den Plattformzugriff aus der Rolle; sein Tab verschwindet. Speichere danach den Agenten. Zum erneuten Hinzufügen verwende wieder **Werkzeuge**. Einen separaten Aktiv-Schalter gibt es nicht.
 
 Die Voreinstellung für neu hinzugefügten Plattformzugriff ist:
 
@@ -223,3 +225,7 @@ Die folgenden Namen sind die tatsächlichen MCP-Werkzeugnamen. Jede höhere Stuf
 `platform_agent_create` akzeptiert zusätzlich `copyFromAgentId`. Lies zuerst den Quellagenten, ändere den Namen und gegebenenfalls die Ablageeinbindungen und übergib die angepasste Konfiguration zusammen mit der Quell-ID. Für Quelle und Ziel sind Workspace-Administratorrechte erforderlich. Behalte Rollen-IDs, MCP-IDs und MCP-URLs bei; `null` als Headerwert übernimmt das hinterlegte Geheimnis ausschließlich serverseitig. Geänderte URLs benötigen neue Zugangsdaten. Die Antwort enthält nur die neue Agenten-ID, keine Geheimnisse.
 
 Die Werkzeuge `platform_agent_create` und `platform_agent_update` speichern die Freigaberegeln in `roles[].toolPlatformAccess.approvals` mit den Schlüsseln `user`, `editor`, `workspace`, `admin` und den Werten `auto`, `ask`, `off`. Die Agentenkonfiguration bleibt Workspace-Administratoren vorbehalten; die Regeln gewähren keine zusätzlichen Benutzerrechte.
+
+### Rechnen und aktuelle Uhrzeit
+
+`platform_calculate` berechnet numerische Ausdrücke mit demselben begrenzten mathjs-Parser wie das Rollenwerkzeug. `platform_current_date_time` liefert den aktuellen Zeitpunkt in UTC oder einer angegebenen IANA-Zeitzone. Beide sind ab Stufe **User** verfügbar und benötigen keine zusätzlichen Ressourcenrechte. Ausdrucksgrenzen, Funktionen und Zeitverhalten stehen unter [Chat Support und Taschenrechner](rollen.md#taschenrechner).

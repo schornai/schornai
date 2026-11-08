@@ -7,7 +7,7 @@
 <!-- List the checks you ran and their results. State any checks you could not run. -->
 
 - [ ] Changed files formatted with the repository's Prettier.
-- [ ] Full `npm test` passes after the final changes and formatting.
+- [ ] Full `npm test` passes, including CI coverage thresholds, after the final changes and formatting.
 - [ ] Applicable Storybook checks and visual stories pass, or no UI/context change.
 - [ ] German user documentation and German/English translations updated, or explain why no update is needed.
 

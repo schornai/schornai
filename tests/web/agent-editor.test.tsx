@@ -838,7 +838,7 @@ describe("web configuration in the agent editor", () => {
 
 describe("agent editor resource labels and available tools", () => {
   it.each([false, true])(
-    "hides unavailable tool tabs for legacy active=%s configuration",
+    "only shows enabled support tool tabs for saved active=%s configuration",
     (active) => {
       client.params = new URLSearchParams(
         "view=roles&role-role=tool-calculator",
@@ -853,11 +853,15 @@ describe("agent editor resource labels and available tools", () => {
           },
         ],
       });
-      expect(screen.queryByRole("tab", { name: /tabCalc/ })).toBeNull();
-      expect(screen.queryByRole("tab", { name: /tabChat/ })).toBeNull();
+      expect(Boolean(screen.queryByRole("tab", { name: /tabCalc/ }))).toBe(
+        active,
+      );
+      expect(Boolean(screen.queryByRole("tab", { name: /tabChat/ }))).toBe(
+        active,
+      );
       expect(
         screen
-          .getByRole("tab", { name: "tabOverview" })
+          .getByRole("tab", { name: active ? "tabCalculator" : "tabOverview" })
           .getAttribute("aria-selected"),
       ).toBe("true");
     },
@@ -973,3 +977,67 @@ it("clears replacement values after success and keeps the draft on failure", asy
   ).toBe("");
   expect(screen.getByPlaceholderText("labelStoredHeader")).toBeTruthy();
 });
+
+describe("support tool settings", () => {
+  it("persists independent chat features and calculator activation", () => {
+    client.params = new URLSearchParams(
+      "view=roles&role-role=tool-chat-extensions",
+    );
+    editor("update", {
+      ...agent,
+      roles: [
+        {
+          ...agent.roles[0],
+          toolCalculator: { active: true },
+          toolChatAwareness: {
+            active: true,
+            updateChatLabel: true,
+            recommendNextMessages: true,
+            currentDateTime: true,
+          },
+        },
+      ],
+    });
+    fireEvent.click(
+      screen.getByRole("switch", { name: "label_recommendNextMessages" }),
+    );
+    const saved = saveRole();
+    expect(saved.toolCalculator).toEqual({ active: true });
+    expect(saved.toolChatAwareness).toEqual({
+      active: true,
+      updateChatLabel: true,
+      recommendNextMessages: false,
+      currentDateTime: true,
+    });
+  });
+});
+
+it.each([
+  ["toolCalculator", "tool-calculator", "tabCalculator"],
+  ["toolChatAwareness", "tool-chat-extensions", "tabChatSupport"],
+  ["toolPlatformAccess", "tool-platform", "tabPlatform"],
+])(
+  "removing %s removes its configuration and tab",
+  async (kind, tab, label) => {
+    const user = userEvent.setup();
+    client.params = new URLSearchParams(`view=roles&role-role=${tab}`);
+    editor("update", {
+      ...agent,
+      roles: [
+        {
+          ...agent.roles[0],
+          toolCalculator: { active: true },
+          toolChatAwareness: { active: true, updateChatLabel: true },
+          toolPlatformAccess: { active: true, level: "user" },
+        },
+      ],
+    });
+    await user.click(screen.getByRole("button", { name: "labelRemove" }));
+    const dialog = await screen.findByRole("alertdialog");
+    await user.click(
+      within(dialog).getByRole("button", { name: "labelRemove" }),
+    );
+    expect(screen.queryByRole("tab", { name: label })).toBeNull();
+    expect(saveRole()[kind]).toBeUndefined();
+  },
+);

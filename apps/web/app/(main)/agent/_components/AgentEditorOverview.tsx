@@ -106,7 +106,10 @@ export function AgentEditorOverview({
                       (role) =>
                         role.documentRepositoryMounts.length > 0 ||
                         (role.mcps?.length ?? 0) > 0 ||
-                        role.toolWebAccess,
+                        role.toolWebAccess ||
+                        role.toolCalculator?.active ||
+                        role.toolChatAwareness?.active ||
+                        role.toolPlatformAccess?.active,
                     )
                       ? "success"
                       : undefined

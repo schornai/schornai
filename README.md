@@ -106,6 +106,6 @@ Third-party code and dependencies retain their respective licenses. Model weight
 and external services have their own licenses and terms. See the full [license
 text](LICENSE) for the terms that apply to this project.
 
-The local development seed includes a demo agent with automatic user/editor tools, workspace-admin approval, and global-admin tools disabled
+The local development seed includes a demo agent with calculator and chat support (automatic titles, reply suggestions and current time), automatic user/editor tools, workspace-admin approval, and global-admin tools disabled
 so the tool tab and read access can be tried without granting administrative tools.
 See [development setup](docs/development.md) for the local-only seed reset workflow.

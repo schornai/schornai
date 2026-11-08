@@ -148,3 +148,20 @@ export type ToolWebSearch = ToolHelper<
     nextOffset?: number;
   }
 >;
+
+export type ToolCalculator = ToolHelper<
+  { expression: string },
+  { expression: string; result: number }
+>;
+export type ToolChatSetLabel = ToolHelper<
+  { label: string },
+  { label: string; updated: boolean }
+>;
+export type ToolChatResponseSuggestions = ToolHelper<
+  { suggestions: string[] },
+  { suggestions: string[] }
+>;
+export type ToolChatCurrentDateTime = ToolHelper<
+  { timeZone?: string },
+  { iso: string; timeZone: string; local: string; unixMilliseconds: number }
+>;

@@ -70,16 +70,16 @@ This document provides instructions for AI agents assisting with this project.
 - Changes without user-facing documentation impact, such as internal refactoring, tests, or tooling changes, do not require user documentation updates. Briefly record why no update is needed in the change summary or PR description.
 - Complete this check and any documentation updates before the final formatting and test run required for the commit.
 
-## Tests Before Commits
+## Tests Before Commits and Pushes
 
-- Before every commit, run the complete test suite with `npm test` from the repository root, including both JavaScript and Python tests. Do not use test filters or substitute scoped tests for the full suite.
+- Before every commit, run the complete test suite with `npm test` from the repository root, including JavaScript and Python tests and the same coverage thresholds as CI. `npm test` enables coverage by default; `npm run test:coverage` is an equivalent explicit command. Do not use test filters or substitute scoped tests for the full suite.
 - Run the tests after the final changes and formatting so that they validate the state being committed.
-- Commit only when the complete test suite passes. If tests fail or cannot run, report the issue and do not commit.
+- Commit and push only when the complete suite and all coverage gates pass. Before pushing, verify that the successful run covers the final committed content; rerun `npm test` after any subsequent changes or merges. If tests or coverage fail or cannot run, report the issue and do not commit or push. Keep the configured coverage thresholds and production scope intact; cover missing behavior instead of lowering or excluding it.
 
 ## CI and Storybook Validation
 
 - Mock new server entry points through `apps/web/.storybook/server-boundaries.json` and the corresponding `server-mocks/` files. Reuse the existing action-hook mocks; do not add a bespoke Vite alias or fetch mock for each feature. Keep pure sample data in fixture modules rather than coupling it to transport mocks.
-- Inspect the applicable workflows in `.github/workflows/` before declaring a change ready. `npm test` runs JavaScript and Python tests; it does **not** run Storybook type checks, story coverage, or visual regression tests. The web application's TypeScript check also excludes Storybook.
+- Inspect the applicable workflows in `.github/workflows/` before declaring a change ready. `npm test` runs JavaScript and Python tests with coverage gates; it does **not** run Storybook type checks, story coverage, or visual regression tests. The web application's TypeScript check also excludes Storybook.
 - For UI changes or changes to context/provider contracts, run `npm run storybook:typecheck` and `npm run storybook:check`. Update Storybook context fixtures when hook return values change and add stories for new custom components.
 - Run affected visual stories using `STORYBOOK_FILTER='<story-id regex>' npm run storybook:visual`. Include transitive consumers of changed shared components, not only direct imports (for example, `StorageViewEmpty` → `StorageViewTable` → `StorageView`). Check the matched story IDs with `--list` before running a filter; a passing filtered run only validates that selection. Use the default Linux ARM64 Docker runner so screenshot baselines match CI; do not create macOS baselines for Linux CI.
 - For intended appearance changes, inspect the actual screenshots before updating only the affected baselines, then rerun without snapshot updates. Do not accept runtime errors or failed story interactions as expected visual changes.

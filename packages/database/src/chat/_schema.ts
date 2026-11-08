@@ -2,6 +2,10 @@ import type { ToolMCP } from "./_types.ts";
 import { storageSchema } from "../storage/_schemas.ts";
 import type { LanguageModelUsage, UIMessage } from "ai";
 import type {
+  ToolCalculator,
+  ToolChatSetLabel,
+  ToolChatResponseSuggestions,
+  ToolChatCurrentDateTime,
   ToolWebFetch,
   ToolWebSearch,
   ToolStorageList,
@@ -59,6 +63,10 @@ export async function validateChatMessages(messages: unknown) {
           input: Record<string, unknown>;
           output: unknown;
         };
+        calculator: ToolCalculator;
+        "chat-set-label": ToolChatSetLabel;
+        "chat-response-suggestions": ToolChatResponseSuggestions;
+        "chat-current-date-time": ToolChatCurrentDateTime;
         mcp: ToolMCP;
         "web-fetch": ToolWebFetch;
         "web-search": ToolWebSearch;

@@ -1,4 +1,6 @@
 "use client";
+import { AgentInfoToolCalculator } from "./AgentInfoToolCalculator";
+import { AgentInfoToolChatExtensions } from "./AgentInfoToolChatExtensions";
 import { AgentInfoToolPlatformAccess } from "./AgentInfoToolPlatformAccess";
 
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
@@ -64,8 +66,26 @@ export function AgentInfoRole({
           editRoleId={editable ? role.id : undefined}
         />
       ) : undefined}
+      {role.toolChatAwareness?.active && (
+        <AgentInfoToolChatExtensions
+          agentRole={role}
+          editAgentPathname={editAgentPathname}
+          editRoleId={editable ? role.id : undefined}
+        />
+      )}
+      {role.toolCalculator?.active && (
+        <AgentInfoToolCalculator
+          agentRole={role}
+          editAgentPathname={editAgentPathname}
+          editRoleId={editable ? role.id : undefined}
+        />
+      )}
       {role.toolPlatformAccess?.active && (
-        <AgentInfoToolPlatformAccess agentRole={role} />
+        <AgentInfoToolPlatformAccess
+          agentRole={role}
+          editAgentPathname={editAgentPathname}
+          editRoleId={editable ? role.id : undefined}
+        />
       )}
       {role.modelIdentifierOverride ? (
         <AgentInfoModel

@@ -99,6 +99,13 @@ describe("seed matches application schemas", () => {
       agent.roles[0].documentRepositoryMounts[0].documentRepositoryIdentifier,
     ).toBe(repository.identifier);
     expect(agent.modelIdentifier).toBe("qwen3:0.6b");
+    expect(agent.roles[0].toolCalculator).toEqual({ active: true });
+    expect(agent.roles[0].toolChatAwareness).toEqual({
+      active: true,
+      updateChatLabel: true,
+      recommendNextMessages: true,
+      currentDateTime: true,
+    });
     expect(agent.roles[0].toolPlatformAccess).toEqual({
       active: true,
       level: "workspace",

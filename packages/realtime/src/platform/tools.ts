@@ -1,3 +1,9 @@
+import {
+  calculate,
+  calculatorInputSchema,
+  calculatorDescription,
+} from "../tools/calculate.ts";
+import { currentDateTime } from "../tools/currentDateTime.ts";
 import { addMonitoringTools } from "./monitoringTools.ts";
 import { addWorkflowTools } from "./workflowTools.ts";
 import { addProfileTools } from "./profileTools.ts";
@@ -290,6 +296,22 @@ export function createPlatformTools(context: PlatformContext) {
       await updateUserPermission(input, { supabaseServiceRole });
       return { userId: input.userId, workspaceId: input.workspaceId };
     },
+  );
+  add(
+    "platform_calculate",
+    calculatorDescription,
+    "user",
+    true,
+    calculatorInputSchema,
+    async ({ expression }) => ({ expression, result: calculate(expression) }),
+  );
+  add(
+    "platform_current_date_time",
+    "Read the current date and time in an optional IANA time zone (default UTC).",
+    "user",
+    true,
+    z.object({ timeZone: z.string().max(100).optional() }),
+    async ({ timeZone }) => currentDateTime(timeZone),
   );
   addStorageTools(context, registry);
   addChatTools(context, registry);

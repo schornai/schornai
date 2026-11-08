@@ -6,7 +6,8 @@
     },
     "ChatComposeMessage": {
       "errorNoAccess": "You do not have access to this agent.",
-      "labelRecommendedMessages": "Suggested messages"
+      "labelRecommendedMessages": "Suggested messages",
+      "labelResponseSuggestions": "Reply suggestions – add to draft"
     },
     "AgentInfoModel": {
       "labelTitle": "Model",
@@ -22,7 +23,8 @@
     },
     "AgentInfoToolCalculator": {
       "labelTitle": "Tool: Calculator",
-      "description": "Instead of the agent having to perform calculations itself, it can use the calculator. This allows the agent to better handle more complex numbers."
+      "description": "Instead of the agent having to perform calculations itself, it can use the calculator. This allows the agent to better handle more complex numbers.",
+      "labelEdit": "Edit"
     },
     "AgentInfoPrompt": {
       "labelPrompt": "Prompt",
@@ -176,8 +178,13 @@
     },
     "AgentInfoToolChatExtensions": {
       "labelTitle": "Tool: Chat Extensions",
-      "labelFeatures": "Suggest next message, change chat label",
-      "description": "The agent can generate suggestions for the next user message so that the user can simply click on the respective message to continue the chat. <br /> Agent can change the chat label for the user so that the chat can be better found in the history."
+      "labelFeatures": "Chat titles, reply suggestions and current time",
+      "description": "The agent can name the chat, offer optional reply suggestions and read the current time. Manually set chat names are preserved.",
+      "labelEdit": "Edit",
+      "labelTitleFeature": "Chat title",
+      "labelSuggestionsFeature": "Reply suggestions",
+      "labelTimeFeature": "Current time",
+      "labelNoFeatures": "No features enabled"
     },
     "AgentEditorRoleSettings": {
       "labelRoleDescription": "Role description",
@@ -320,7 +327,9 @@
       "calculator": "Calculator",
       "externalToolsMCP": "External Tools (MCP)",
       "labelPrompt": "Prompt",
-      "tabPlatform": "Platform access"
+      "tabPlatform": "Platform access",
+      "tabCalculator": "Calculator",
+      "tabChatSupport": "Chat Support"
     },
     "AgentEditorDiscardAllChanges": {
       "labelDiscardTitle": "Discard changes",
@@ -505,7 +514,6 @@
       "descriptionEmpty": "No matching connection has been configured. Manage connections under Settings → Connections."
     },
     "AgentEditorRolePlatformAccess": {
-      "labelActive": "Enable platform access",
       "labelLevel": "Access level",
       "description": "These settings limit available actions. Your own permissions in each workspace always apply; approving an action does not grant additional permissions.",
       "level": {
@@ -535,7 +543,8 @@
         "ask": "Require approval",
         "off": "Off"
       },
-      "descriptionPermissions": "The acting user’s own permissions also apply."
+      "descriptionPermissions": "The acting user’s own permissions also apply.",
+      "labelEdit": "Edit"
     },
     "PlatformToolPreview": {
       "labelConfidential": "Confidential value hidden",
@@ -709,7 +718,9 @@
         "platform_personal_mcp_grants": "List your platform authorizations",
         "platform_personal_mcp_revoke": "Revoke platform authorization",
         "platform_artifact_publication_get": "Read XRAG publication status",
-        "platform_chat_retry": "Retry chat"
+        "platform_chat_retry": "Retry chat",
+        "platform_calculate": "Calculate expression",
+        "platform_current_date_time": "Current date and time"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",
@@ -733,6 +744,28 @@
       "descriptionFailed": "The response could not be generated.",
       "descriptionNoDetails": "No further error details are available.",
       "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals."
+    },
+    "AgentEditorRoleSupport": {
+      "labelCalculator": "Calculator",
+      "labelChatSupport": "Chat Support",
+      "descriptionCalculator": "Evaluates expressions such as (42 + 2) / 34, sqrt(5) or avg(2;4;5). Supports lists and arrays, trigonometric functions in radians, ln and log (base 10). Use decimal points; maximum 32,768 characters; additional nesting and complexity limits apply. Results are finite real numbers with floating-point precision.",
+      "descriptionChatSupport": "The agent can name the chat, offer optional reply suggestions and read the current time. Manually set chat names are preserved.",
+      "label_updateChatLabel": "Set chat title",
+      "label_recommendNextMessages": "Offer reply suggestions",
+      "label_currentDateTime": "Read current date and time"
+    },
+    "ChatMessagePartToolSupport": {
+      "tool-calculator": "Calculation",
+      "tool-chat-set-label": "Chat title",
+      "tool-chat-current-date-time": "Date and time",
+      "tool-chat-response-suggestions": "Reply suggestions",
+      "labelInput": "Input",
+      "labelManualTitlePreserved": "Manual title preserved"
+    },
+    "AgentEditorRoleRemoveTool": {
+      "labelRemove": "Remove tool",
+      "descriptionRemove": "This removes the tool from this role. Save the agent to apply the change.",
+      "labelCancel": "Cancel"
     }
   },
   "page": {

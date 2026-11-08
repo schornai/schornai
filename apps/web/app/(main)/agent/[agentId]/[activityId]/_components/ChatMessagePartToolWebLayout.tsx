@@ -65,7 +65,15 @@ export function ChatMessagePartToolWebLayout({
   agentColor?: AppColor;
   part: Extract<
     ChatMessage["parts"][number],
-    { type: "tool-web-fetch" | "tool-web-search" }
+    {
+      type:
+        | "tool-web-fetch"
+        | "tool-web-search"
+        | "tool-calculator"
+        | "tool-chat-set-label"
+        | "tool-chat-current-date-time"
+        | "tool-chat-response-suggestions";
+    }
   >;
   icon: ReactNode;
   title: string;

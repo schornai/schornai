@@ -1,3 +1,4 @@
+import { ChatMessagePartToolSupport } from "./ChatMessagePartToolSupport";
 import {
   ChatMessagePartToolPlatform,
   isPlatformToolPart,
@@ -5,6 +6,10 @@ import {
 import { ChatMessagePartToolMCP } from "./ChatMessagePartToolMCP";
 import { ChatMessagePartToolStorageTransferFile } from "./ChatMessagePartToolStorageTransferFile";
 import {
+  Calculator,
+  Clock,
+  Tag,
+  MessageSquareQuote,
   Copy,
   DraftingCompass,
   FolderInput,
@@ -49,6 +54,14 @@ export function ChatMessagePartIcon({
 }) {
   if (partType.startsWith("tool-platform_")) return <DraftingCompass />;
   switch (partType) {
+    case "tool-calculator":
+      return <Calculator />;
+    case "tool-chat-set-label":
+      return <Tag />;
+    case "tool-chat-current-date-time":
+      return <Clock />;
+    case "tool-chat-response-suggestions":
+      return <MessageSquareQuote />;
     case "tool-mcp":
       return <Plug />;
     case "tool-storage-copy-file":
@@ -84,6 +97,11 @@ export function ChatMessagePart({
   if (isPlatformToolPart(part))
     return <ChatMessagePartToolPlatform part={part} agentColor={agentColor} />;
   switch (part.type) {
+    case "tool-calculator":
+    case "tool-chat-set-label":
+    case "tool-chat-current-date-time":
+    case "tool-chat-response-suggestions":
+      return <ChatMessagePartToolSupport agentColor={agentColor} part={part} />;
     case "tool-mcp":
       return <ChatMessagePartToolMCP agentColor={agentColor} part={part} />;
     case "tool-storage-copy-file":

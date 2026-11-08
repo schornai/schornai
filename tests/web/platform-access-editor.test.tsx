@@ -37,24 +37,16 @@ function draft() {
   return JSON.parse(screen.getByRole("status").textContent!);
 }
 
-it("starts disabled and enables the default policy without losing role fields", async () => {
+it("has no global activation switch and removes the configured tool", async () => {
   const user = userEvent.setup();
-  render(<Harness />);
-  for (const select of screen.getAllByRole("combobox"))
-    expect((select as HTMLButtonElement).disabled).toBe(true);
-  await user.click(screen.getByRole("switch"));
-  expect(draft()).toMatchObject({
-    id: "role",
-    prompt: "Keep me",
-    toolPlatformAccess: defaultPlatformAgentAccess,
-  });
-  for (const select of screen.getAllByRole("combobox"))
-    expect((select as HTMLButtonElement).disabled).toBe(false);
-  await user.click(screen.getByRole("switch"));
-  expect(draft().toolPlatformAccess).toEqual({
-    ...defaultPlatformAgentAccess,
-    active: false,
-  });
+  render(<Harness access={defaultPlatformAgentAccess} />);
+  expect(screen.queryByRole("switch")).toBeNull();
+  await user.click(screen.getByRole("button", { name: "labelRemove" }));
+  await user.click(
+    screen.getAllByRole("button", { name: "labelRemove" }).at(-1)!,
+  );
+  expect(draft().toolPlatformAccess).toBeUndefined();
+  expect(draft().prompt).toBe("Keep me");
 });
 
 it("updates one approval mode and recalculates the maximum level", async () => {
