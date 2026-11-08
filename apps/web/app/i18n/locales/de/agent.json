@@ -748,7 +748,7 @@
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",
       "labelChatSupport": "Chat Support",
-      "descriptionCalculator": "Berechnet Ausdrücke wie (42 + 2) / 34, sqrt(5) oder avg(2;4;5). Unterstützt Listen und Arrays, trigonometrische Funktionen im Bogenmaß sowie ln und log (Basis 10). Dezimalzahlen mit Punkt; maximal 2000 Zeichen. Ergebnisse sind endliche reelle Zahlen mit Gleitkommapräzision.",
+      "descriptionCalculator": "Berechnet Ausdrücke wie (42 + 2) / 34, sqrt(5) oder avg(2;4;5). Unterstützt Listen und Arrays, trigonometrische Funktionen im Bogenmaß sowie ln und log (Basis 10). Dezimalzahlen mit Punkt; maximal 32.768 Zeichen; zusätzliche Grenzen für Verschachtelung und Komplexität. Ergebnisse sind endliche reelle Zahlen mit Gleitkommapräzision.",
       "descriptionChatSupport": "Der Agent kann den Chat benennen, optionale Antwortvorschläge anbieten und die aktuelle Uhrzeit abfragen. Manuell gesetzte Chat-Namen bleiben erhalten.",
       "label_updateChatLabel": "Chat-Titel setzen",
       "label_recommendNextMessages": "Antwortvorschläge anbieten",

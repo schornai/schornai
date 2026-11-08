@@ -1,4 +1,8 @@
-import { calculate } from "../tools/calculate.ts";
+import {
+  calculate,
+  calculatorInputSchema,
+  calculatorDescription,
+} from "../tools/calculate.ts";
 import { currentDateTime } from "../tools/currentDateTime.ts";
 import { addMonitoringTools } from "./monitoringTools.ts";
 import { addWorkflowTools } from "./workflowTools.ts";
@@ -295,10 +299,10 @@ export function createPlatformTools(context: PlatformContext) {
   );
   add(
     "platform_calculate",
-    "Calculate finite real arithmetic. Supports + - * / ^ mod, sqrt, trigonometry in radians, ln, log (base 10), and sum/avg/min/max lists or arrays. Semicolons or commas separate arguments.",
+    calculatorDescription,
     "user",
     true,
-    z.object({ expression: z.string().min(1).max(2000) }),
+    calculatorInputSchema,
     async ({ expression }) => ({ expression, result: calculate(expression) }),
   );
   add(

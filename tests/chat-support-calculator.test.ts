@@ -8,6 +8,21 @@ import { getResponseSuggestions } from "../packages/realtime/src/documents/chat/
 import type { ChatMessage } from "../packages/database/src/chat/_types.ts";
 
 describe("calculator", () => {
+  it("evaluates large lists beyond the former character limit", () => {
+    expect(calculate(`sum([${Array(3000).fill("1").join(",")}])`)).toBe(3000);
+    expect(calculate(`avg(${Array(3000).fill("2").join(";")})`)).toBe(2);
+    expect(calculate("1" + " ".repeat(32767))).toBe(1);
+    expect(() => calculate("1" + " ".repeat(32768))).toThrow();
+  });
+  it("bounds wide trees and recursive parser paths", () => {
+    expect(() => calculate(`sum(${Array(4096).fill("1").join(",")})`)).toThrow(
+      "complex",
+    );
+    expect(calculate("(".repeat(64) + "1" + ")".repeat(64))).toBe(1);
+    expect(calculate("+".repeat(128) + "1")).toBe(1);
+    expect(() => calculate("+".repeat(129) + "1")).toThrow("operators");
+    expect(() => calculate("1^".repeat(129) + "1")).toThrow("operators");
+  });
   it.each([
     ["3283 + 2342", 5625],
     ["23 * 32 + 1", 737],
@@ -53,7 +68,7 @@ describe("calculator", () => {
     "sin([1,2])",
     "1e999",
     "1;2",
-    "(".repeat(33) + "1" + ")".repeat(33),
+    "(".repeat(65) + "1" + ")".repeat(65),
     "1+".repeat(1000) + "1",
   ])("rejects %s", (expression) =>
     expect(() => calculate(expression)).toThrow(),

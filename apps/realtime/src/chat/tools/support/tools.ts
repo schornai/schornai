@@ -7,7 +7,11 @@ import type {
   ToolChatCurrentDateTime,
 } from "@schornio/aibox-database/chat/_types";
 import type { Agent } from "@schornio/aibox-database/agent/_types";
-import { calculate } from "@schornio/aibox-realtime/tools/calculate";
+import {
+  calculate,
+  calculatorInputSchema,
+  calculatorDescription,
+} from "@schornio/aibox-realtime/tools/calculate";
 import { currentDateTime } from "@schornio/aibox-realtime/tools/currentDateTime";
 import { setActivityLabel } from "@schornio/aibox-realtime/documents/activity/setActivityLabel";
 import { getActivitiesDocumentName } from "@schornio/aibox-realtime/documents/activity/_utils";
@@ -26,9 +30,8 @@ export function supportTools(
   const tools: ToolSet = {};
   if (role.toolCalculator?.active)
     tools.calculator = tool({
-      description:
-        "Calculate a numeric expression. Supports + - * / ^ % mod, parentheses, pi, e; sqrt, sin/cos/tan and inverses (radians), ln (natural), log/log10 (base 10), log2, abs, floor, ceil, round, exp, pow, mod. sum/avg/min/max accept lists or arrays: avg(2;4;5), sum([1,2,3]). Commas and semicolons separate arguments; decimals use a dot. Finite real numbers only; maximum 2000 characters.",
-      inputSchema: z.object({ expression: z.string().min(1).max(2000) }),
+      description: calculatorDescription,
+      inputSchema: calculatorInputSchema,
       async execute({ expression }): Promise<ToolCalculator["output"]> {
         try {
           return { ok: true, expression, result: calculate(expression) };

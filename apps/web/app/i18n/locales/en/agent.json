@@ -748,7 +748,7 @@
     "AgentEditorRoleSupport": {
       "labelCalculator": "Calculator",
       "labelChatSupport": "Chat Support",
-      "descriptionCalculator": "Evaluates expressions such as (42 + 2) / 34, sqrt(5) or avg(2;4;5). Supports lists and arrays, trigonometric functions in radians, ln and log (base 10). Use decimal points; maximum 2000 characters. Results are finite real numbers with floating-point precision.",
+      "descriptionCalculator": "Evaluates expressions such as (42 + 2) / 34, sqrt(5) or avg(2;4;5). Supports lists and arrays, trigonometric functions in radians, ln and log (base 10). Use decimal points; maximum 32,768 characters; additional nesting and complexity limits apply. Results are finite real numbers with floating-point precision.",
       "descriptionChatSupport": "The agent can name the chat, offer optional reply suggestions and read the current time. Manually set chat names are preserved.",
       "label_updateChatLabel": "Set chat title",
       "label_recommendNextMessages": "Offer reply suggestions",
