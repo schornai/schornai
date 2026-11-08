@@ -27,7 +27,7 @@ import { patchChatCurrentMessage } from "@schornio/aibox-realtime/documents/chat
 import { setChatCurrentMessageState } from "@schornio/aibox-realtime/documents/chatCurrentMessage/setChatCurrentMessageState";
 import { useActivites } from "../../../../_components/ActivityContextProvider";
 import { useHocuspocusProvider } from "@hocuspocus/provider-react";
-import { useMessages } from "./ChatContext";
+import { useCanSendMessage, useMessages } from "./ChatContext";
 import { useRealtimeArray } from "@/lib/useRealtimeArray";
 import { useState } from "react";
 import { waitForProviderSynced } from "@schornio/aibox-realtime/_lib/waitForProviderSynced";
@@ -92,7 +92,13 @@ function ChatComposeMessageContextProvider({
   const messageBatch = inputs.filter(
     (input): input is TextMessage => input.content.type === "text",
   );
-  const interaction = getChatInteraction(useMessages());
+  const messages = useMessages();
+  const canSend = useCanSendMessage();
+  // Streamed approvals may still be resolved by the running worker. Only
+  // request a decision once submission is possible, including cancellation cleanup.
+  const interaction: ChatInteraction = canSend
+    ? getChatInteraction(messages)
+    : { type: "message-batch" };
   const approvalSubmitted = inputs.some(
     (input) => input.content.type === "tool-approval",
   );

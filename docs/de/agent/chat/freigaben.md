@@ -8,10 +8,12 @@ meta:
   role_scope: "Gespräch und Zielressource"
   prerequisites: "Für die Anzeige einer Freigabe: ein Werkzeug mit aktivierter Bestätigung in der Agentenrolle."
   status: "verfügbar"
-  last_verified: "2026-11-07"
+  last_verified: "2026-11-08"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatToolApproval.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageContext.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatCancelGeneration.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatToolApprovalStorageWriteFile.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatToolApprovalStorageTransferFile.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolStorageTransferFile.tsx",
@@ -30,6 +32,8 @@ Plattformwerkzeuge zeigen statt JSON eine Vorschau: Agenten und Dokumentenablage
 Ob eine Rückfrage erscheint, legt die Agentenrolle je Stufe fest: **Automatisch**, **Freigabe erforderlich** oder **Aus**. Neu hinzugefügter Plattformzugriff führt Benutzer- und Editoraktionen automatisch aus, verlangt für Workspace-Administratoraktionen eine Freigabe und deaktiviert globale Administratoraktionen. Das gilt auch für lesende Aufrufe. Details und das Verhalten bestehender Agenten stehen unter [Plattformzugriff](../edit/plattformzugriff.md).
 
 ## Eine Rückfrage beantworten
+
+Die Rückfrage unten im Chat erscheint, sobald die laufende Generierung beendet ist und deine Entscheidung angenommen werden kann. Während der Generierung bleibt **Abbrechen** verfügbar. Bei einer offenen, beantwortbaren Rückfrage wird **Abbrechen** ausgeblendet.
 
 1. Lies die angezeigte Aktion und kontrolliere Ziel, URL oder Suchanfrage.
 2. Prüfe bei einer Datei den Pfad und über **Inhalt anzeigen** den vorgesehenen Text.

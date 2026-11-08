@@ -7,17 +7,19 @@ import { logError } from "@schornio/aibox-package-ui/components/error-log";
 import { useAction } from "next-safe-action/hooks";
 import { useChatComposeMessage } from "./ChatComposeMessageContext";
 import { useState } from "react";
+import { useChatStatus } from "./ChatContext";
 import { useT } from "next-i18next/client";
 
 export function ChatCancelGeneration() {
-  const { activity, activityId, agentId } = useChatComposeMessage();
+  const { activityId, agentId } = useChatComposeMessage();
   const { t } = useT("agent", {
     keyPrefix: "_components.ChatCancelGeneration",
   });
   const { executeAsync, isPending } = useAction(abortChatGeneration);
   const [hasError, setHasError] = useState(false);
 
-  if (activity?.state !== "running") return null;
+  const status = useChatStatus();
+  if (status !== "queued" && status !== "generating") return null;
 
   const cancel = () => {
     setHasError(false);
