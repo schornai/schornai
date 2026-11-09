@@ -720,7 +720,9 @@
         "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen",
         "platform_chat_retry": "Chat erneut versuchen",
         "platform_calculate": "Berechnung ausführen",
-        "platform_current_date_time": "Aktuelles Datum und Uhrzeit"
+        "platform_current_date_time": "Aktuelles Datum und Uhrzeit",
+        "platform_chat_expiration_get": "Chat-Löschfrist lesen",
+        "platform_chat_expiration_set": "Chat-Löschfrist ändern"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -766,6 +768,23 @@
       "labelRemove": "Werkzeug entfernen",
       "descriptionRemove": "Das Werkzeug wird aus dieser Rolle entfernt. Speichere den Agenten, um die Änderung zu übernehmen.",
       "labelCancel": "Abbrechen"
+    },
+    "ChatExpirationSettings": {
+      "labelOpen": "Automatisch löschen",
+      "labelScheduled": "Löschung: {{date}}",
+      "labelTitle": "Chat automatisch löschen",
+      "descriptionDeletion": "Löscht diesen Chat mit Nachrichten, Entwürfen und Chat-Dateien endgültig für alle Beteiligten. Dateien in Dokumenten-Repositories bleiben erhalten.",
+      "descriptionScheduled": "Aktueller Löschtermin: {{date}}.",
+      "descriptionDisabled": "Die automatische Löschung ist ausgeschaltet.",
+      "labelDuration": "Löschen nach",
+      "labelUnit": "Zeiteinheit",
+      "labelMinutes": "Minuten",
+      "labelHours": "Stunden",
+      "labelDays": "Tage",
+      "descriptionDeadline": "Der Termin zählt ab dem Speichern. Neue Nachrichten verlängern die Frist nicht. Möglich sind 1 Minute bis 365 Tage. Bei einem Serverausfall wird die Löschung nachgeholt.",
+      "labelDisable": "Ausschalten",
+      "labelSave": "Löschfrist speichern",
+      "errorSave": "Die Löschfrist konnte nicht gespeichert werden. Bitte versuche es erneut."
     }
   },
   "page": {

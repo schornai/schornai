@@ -1,3 +1,6 @@
+import { chatExpirationSchema } from "@schornio/aibox-database/chat/expirationSchema";
+import { setChatExpiration } from "@schornio/aibox-database/chat/setChatExpiration";
+import { getChatExpiration } from "@schornio/aibox-database/chat/getChatExpiration";
 import { setActivityLabel } from "../documents/activity/setActivityLabel.ts";
 import { retryChatGeneration } from "../documents/chat/retryChatGeneration.ts";
 import { storageSchema } from "@schornio/aibox-database/storage/_schemas";
@@ -75,6 +78,31 @@ export function addChatTools(
         messages: chat.messages?.toArray(),
         state: provider.document.getMap("state").toJSON(),
       };
+    },
+  );
+  add(
+    "platform_chat_expiration_set",
+    "Set or disable automatic deletion for a chat you participate in. seconds is a whole number of minutes (60–31536000), or null to disable. The fixed deadline starts now; new messages do not extend it. Deletes messages, drafts, history and chat files for all participants. Cannot undo deletion once it begins.",
+    "user",
+    false,
+    chatExpirationSchema,
+    async (input) => {
+      await authorizeChat(input);
+      return setChatExpiration(input, {
+        userId: context.userId,
+        supabase: context.supabaseServiceRole,
+      });
+    },
+  );
+  add(
+    "platform_chat_expiration_get",
+    "Read the automatic deletion deadline of a permitted chat.",
+    "user",
+    true,
+    chatId,
+    async (input) => {
+      await authorizeChat(input);
+      return getChatExpiration(input, { supabase });
     },
   );
   add(

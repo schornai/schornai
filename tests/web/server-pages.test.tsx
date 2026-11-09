@@ -1,3 +1,6 @@
+vi.mock("@schornio/aibox-package-database/chat/getChatExpiration", () => ({
+  getChatExpiration: async () => ({ seconds: null, expiresAt: null }),
+}));
 vi.mock("../../apps/web/app/_models/getAgentConnections", () => ({
   getAgentConnections: async () => [],
 }));

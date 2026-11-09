@@ -33,7 +33,7 @@ BEGIN
   FOREACH role_name IN ARRAY ARRAY['anon','authenticated'] LOOP
     IF has_table_privilege(role_name,'public.task_claims','SELECT') OR has_table_privilege(role_name,'public.task_claims','INSERT') OR
        has_table_privilege(role_name,'public.task_claims','UPDATE') OR has_table_privilege(role_name,'public.task_claims','DELETE') THEN RAISE EXCEPTION 'Public task ledger access'; END IF;
-    IF has_function_privilege(role_name,'public.claim_background_task(text,uuid,text)','EXECUTE') OR
+    IF has_function_privilege(role_name,'public.claim_background_task(text,uuid,text,text)','EXECUTE') OR
        has_function_privilege(role_name,'public.renew_background_task(text,uuid)','EXECUTE') OR
        has_function_privilege(role_name,'public.finish_background_task(text,uuid,text,text)','EXECUTE') OR
        has_function_privilege(role_name,'public.expire_background_tasks()','EXECUTE') THEN RAISE EXCEPTION 'Public claim RPC access'; END IF;

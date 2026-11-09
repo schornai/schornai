@@ -112,8 +112,29 @@ until explicitly cancelled; avoid storing secrets or large data in payloads.
 
 Intervals use completion time, so missed occurrences coalesce into one execution
 after downtime and slow handlers do not create a backlog. Dates are absolute
-instants; calendar cron expressions and time zones are not supported. Chat expiry
-and scheduled chat generation are future handlers, not enabled by this change.
+instants; calendar cron expressions and time zones are not supported. The `chat.expire` handler implements per-chat fixed deletion deadlines. Scheduled
+chat generation remains a future handler.
 
 Behavior tests: [`scheduler.test.ts`](../../tests/scheduler.test.ts) and
 [`scheduled_jobs.sql`](../../supabase/tests/scheduled_jobs.sql).
+
+### Disappearing chats
+
+Apply `20261108223550_disappearing_chats.sql` before deploying the web and realtime
+apps and all model/chat workers together. `set_chat_expiration` checks actual chat membership and atomically updates
+the deadline and scheduler lease. A stale handler cannot delete a rescheduled
+chat. `begin_chat_expiration` requires the live lease and makes deletion
+irreversible; database triggers fence later document persistence and uploads.
+The parent and draft retain empty tombstones so old URLs cannot recreate them.
+The realtime extension rejects syncs and closes loaded connections on every node.
+New model tasks carry chat ownership so their prompt/result snapshots are purged
+with the chat, even after their queue results were consumed. Pre-upgrade model
+snapshots lack this association and retain the existing up-to-24-hour retention.
+
+`expireChat` requests cancellation of chat/file tasks, waits for acknowledgement,
+then removes chat files, participants' history entries and document access.
+Failures retry through the scheduler, with the tombstone retained. After 100
+attempts operators must retry the failed job as described above, preserving its
+payload and parent tombstone. Backups, exports and external provider retention
+are outside this operation. Repositories are unaffected. No seed reset is needed:
+any new chat with the seeded demo agent can opt into deletion through its UI.

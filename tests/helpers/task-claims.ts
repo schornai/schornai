@@ -45,6 +45,7 @@ export function taskClaimStore() {
           if (!old)
             records.set(args.p_task_id, {
               task_id: args.p_task_id,
+              chat_document_name: args.p_chat_document_name ?? null,
               owner_token: args.p_owner_token,
               snapshot: args.p_snapshot,
               state: "claimed",

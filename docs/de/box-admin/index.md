@@ -14,6 +14,7 @@ meta:
       "apps/admin-mac/src/main.ts",
       "apps/realtime/src/scheduler/startScheduler.ts",
       "apps/realtime/src/scheduler/worker.ts",
+      "apps/realtime/src/scheduler/expireChat.ts",
       "apps/admin-mac/src/renderer/App.tsx",
       "apps/admin-mac/src/renderer/components/ServiceView.tsx",
       "packages/ui/src/lib/release.ts",
@@ -499,12 +500,15 @@ Zur Diagnose dienen die `SCHEDULER_*`-Meldungen im Realtime-Protokoll und die
 Tabelle `scheduled_jobs` über administrativen Datenbankzugriff. Abgeschlossene
 und fehlgeschlagene Einträge bleiben gespeichert. Die
 [technische Anleitung](../../../apps/realtime/README.md#durable-scheduler)
-beschreibt die Wiederaufnahme nach Behebung der Ursache. Automatisches Löschen
-von Chats und zeitgesteuerte Chat-Nachrichten sind noch nicht eingerichtet.
+beschreibt die Wiederaufnahme nach Behebung der Ursache. [Automatisches Löschen von Chats](../agent/chat/index.md#chat-automatisch-löschen)
+ist pro Chat einstellbar. Zeitgesteuerte Chat-Nachrichten sind noch nicht eingerichtet.
 
 ### Plattform-MCP
 
-Für den Scheduler gibt es keine Plattform-MCP-Tools und keine Benutzeroberfläche.
+Für die allgemeine Scheduler-Verwaltung gibt es keine Plattform-MCP-Tools und keine Benutzeroberfläche.
 Er ist interne Infrastruktur mit Service-Role-Zugriff. Neue benutzerbedienbare
 Zeitplanfunktionen benötigen eigene Berechtigungsprüfungen und passende Tools;
-MCP-Clients können derzeit keine Jobs anlegen oder abbrechen.
+MCP-Clients können keine beliebigen Jobs anlegen oder abbrechen. Für Chat-Löschfristen
+stehen `platform_chat_expiration_get` und `platform_chat_expiration_set` ab Stufe
+Benutzer mit Arbeitsplatz- und Chat-Zugriff bereit. Änderungen verlangen tatsächliche
+Chat-Teilnahme; bereits begonnene Löschungen sind unumkehrbar.

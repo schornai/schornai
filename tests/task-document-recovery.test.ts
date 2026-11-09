@@ -81,6 +81,7 @@ beforeEach(() => {
   };
   options = {
     supabaseServiceRole: {
+      rpc: vi.fn(async () => ({ data: false, error: null })),
       from: () => ({
         upsert: ({ document_name, document_data }: any) => ({
           abortSignal: async () => {
@@ -181,3 +182,13 @@ it.each(["finished", "aborted"])(
     ).toMatchObject({ state: state === "finished" ? "success" : "idle" });
   },
 );
+
+it("never opens a deleted chat during terminal task recovery", async () => {
+  options.supabaseServiceRole.rpc.mockResolvedValueOnce({
+    data: true,
+    error: null,
+  });
+  await recoverTaskDocuments(instance, task, options);
+  expect(instance.openDirectConnection).not.toHaveBeenCalled();
+  expect(saved.size).toBe(0);
+});

@@ -1,3 +1,4 @@
+import { createChatExpirationExtension } from "@schornio/aibox-realtime/server/createChatExpirationExtension";
 import { startScheduler } from "./src/scheduler/startScheduler.ts";
 import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
 import { homedir } from "node:os";
@@ -52,6 +53,7 @@ const realtimeServer = new Server({
         return authorizeRealtimeUser(token, documentName, { supabase });
       },
     }),
+    createChatExpirationExtension({ supabase: supabaseServiceRole }),
     createSupabaseExtension({ supabase: supabaseServiceRole }),
     createServiceStatusExtension(),
     createTaskCoordinatorExtension({ supabaseServiceRole }),
@@ -74,6 +76,7 @@ try {
   void startScheduler({
     supabase: supabaseServiceRole,
     signal: schedulerAbort.signal,
+    instance: realtimeServer.hocuspocus,
   }).catch(fatal);
   void artifactPublicationWorker({
     supabase: supabaseServiceRole,

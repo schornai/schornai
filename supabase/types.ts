@@ -925,23 +925,32 @@ export type Database = {
       realtime_documents: {
         Row: {
           created_at: string;
+          deleted_at: string | null;
           document_data: string | null;
           document_name: string;
+          expires_at: string | null;
+          expiry_seconds: number | null;
           id: string;
           updated_at: string;
         };
         ComputedFields: never;
         Insert: {
           created_at?: string;
+          deleted_at?: string | null;
           document_data?: string | null;
           document_name: string;
+          expires_at?: string | null;
+          expiry_seconds?: number | null;
           id?: string;
           updated_at?: string;
         };
         Update: {
           created_at?: string;
+          deleted_at?: string | null;
           document_data?: string | null;
           document_name?: string;
+          expires_at?: string | null;
+          expiry_seconds?: number | null;
           id?: string;
           updated_at?: string;
         };
@@ -1183,6 +1192,7 @@ export type Database = {
       };
       task_claims: {
         Row: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1193,6 +1203,7 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          chat_document_name?: string | null;
           completed_at?: string | null;
           expires_at: string;
           owner_token: string;
@@ -1202,6 +1213,7 @@ export type Database = {
           task_id: string;
         };
         Update: {
+          chat_document_name?: string | null;
           completed_at?: string | null;
           expires_at?: string;
           owner_token?: string;
@@ -1481,6 +1493,25 @@ export type Database = {
             };
             Returns: boolean;
           };
+      begin_chat_expiration: {
+        Args: { p_document_name: string; p_token: string };
+        Returns: {
+          created_at: string;
+          deleted_at: string | null;
+          document_data: string | null;
+          document_name: string;
+          expires_at: string | null;
+          expiry_seconds: number | null;
+          id: string;
+          updated_at: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "realtime_documents";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       can_access: {
         Args: {
           minimum_role: string;
@@ -1520,8 +1551,14 @@ export type Database = {
         };
       };
       claim_background_task: {
-        Args: { p_owner_token: string; p_snapshot: string; p_task_id: string };
+        Args: {
+          p_chat_document_name?: string;
+          p_owner_token: string;
+          p_snapshot: string;
+          p_task_id: string;
+        };
         Returns: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1609,6 +1646,7 @@ export type Database = {
       expire_background_tasks: {
         Args: Record<PropertyKey, never>;
         Returns: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1662,6 +1700,7 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      is_chat_deleted: { Args: { p_document_name: string }; Returns: boolean };
       match_embeddings_1024: {
         Args: {
           match_count: number;
@@ -1742,6 +1781,10 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: number;
       };
+      purge_chat_task_snapshots: {
+        Args: { p_document_name: string };
+        Returns: undefined;
+      };
       refresh_platform_mcp_tokens: {
         Args: {
           p_access_hash: string;
@@ -1801,6 +1844,10 @@ export type Database = {
           p_workspace_id: string;
         };
         Returns: undefined;
+      };
+      set_chat_expiration: {
+        Args: { p_document_name: string; p_seconds: number; p_user_id: string };
+        Returns: string;
       };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };
       update_external_ai_model: {

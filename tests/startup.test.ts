@@ -86,6 +86,7 @@ describe("application startup and Python packaging", () => {
       expect(mocks.scheduler).toHaveBeenCalledWith({
         supabase: { service: true },
         signal: expect.any(AbortSignal),
+        instance: undefined,
       });
       for (const worker of [
         mocks.chat,

@@ -358,5 +358,9 @@
   [
     "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts",
     "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts"
+  ],
+  [
+    "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts"
   ]
 ]

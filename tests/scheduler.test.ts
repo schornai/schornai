@@ -201,7 +201,11 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   const f = fixture(undefined, { kind: "artifacts.cleanup" });
   const upsert = vi.fn().mockResolvedValue({ error: null });
   f.supabase.from = vi.fn(() => ({ upsert }));
-  await startScheduler({ supabase: f.supabase, signal: f.stop.signal });
+  await startScheduler({
+    supabase: f.supabase,
+    signal: f.stop.signal,
+    instance: {} as any,
+  });
   expect(upsert).toHaveBeenCalledWith(
     expect.objectContaining({
       id: "system:artifacts.cleanup",

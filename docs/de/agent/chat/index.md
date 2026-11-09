@@ -24,6 +24,9 @@ meta:
       "packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts",
       "packages/realtime/src/documents/chat/abortChatGeneration.ts",
       "packages/realtime/src/platform/chatTools.ts",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatExpirationSettings.tsx",
+      "apps/realtime/src/scheduler/expireChat.ts",
+      "packages/database/src/chat/setChatExpiration.ts",
       "packages/realtime/src/server/recoverTaskDocuments.ts",
     ]
 ---
@@ -104,6 +107,34 @@ bereinigt. Bereits abgeschlossene Werkzeugaktionen bleiben erhalten.
 
 Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [Hinweisen zur Fehlerbehebung](../../hilfe/fehlerbehebung.md).
 
+## Chat automatisch löschen
+
+Über **Automatisch löschen** im Chat legst du eine Frist von **1 Minute bis 365 Tagen**
+fest. Wähle eine Dauer in Minuten, Stunden oder Tagen und bestätige mit
+**Löschfrist speichern**. Der feste Termin zählt ab dem Speichern; neue Nachrichten
+verschieben ihn nicht. Der geplante Zeitpunkt wird in UTC angezeigt. Du kannst
+die Frist ändern oder ausschalten, solange die Löschung noch nicht begonnen hat.
+Bei einem gemeinsam genutzten Chat gilt die Einstellung für alle Beteiligten.
+
+Zum Termin sperrt der Realtime-Dienst den Chat und stoppt laufende Chat- und
+Dateiverarbeitung. Er entfernt Nachrichten, Entwürfe, Chat-Dateien und die Einträge
+in den Verläufen aller Beteiligten. Dateien aus gemeinsam verwendeten
+Dokumenten-Repositories bleiben erhalten. Offene Chatansichten wechseln zum
+Verlauf. Ein alter Link kann das Gespräch nicht wieder anlegen.
+
+Der Realtime-Dienst und die Datenbank müssen laufen. Bei Ausfällen wird die
+Löschung nachgeholt; bei Fehlern werden Datei- und Verlaufsbereinigung erneut
+versucht. Der Chat bleibt ab Beginn der Löschung gesperrt. Die Löschung ist
+endgültig und kann dann auch durch Ausschalten der Frist nicht rückgängig
+gemacht werden. Bereits exportierte oder heruntergeladene Kopien, Backups und
+Daten bei externen Modell- oder Werkzeuganbietern werden damit nicht gelöscht.
+Seit diesem Update erzeugte Modell-Aufgaben werden dem Chat zugeordnet und ihre
+Prompt-/Ergebnis-Snapshots ebenfalls bereinigt. Ältere, noch nicht zugeordnete
+Aufgaben-Snapshots unterliegen weiterhin der normalen Aufbewahrung von bis zu
+24 Stunden.
+Technische Löschmarkierungen ohne Nachrichteninhalt bleiben zum Schutz vor
+Wiederherstellung erhalten.
+
 ## Zugehörige MCP-Werkzeuge
 
 **Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
@@ -113,3 +144,11 @@ Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [
 Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion und wird nicht als MCP-Werkzeug angeboten. MCP-Clients können den gewünschten Text mit `platform_chat_send` senden.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).
+
+`platform_chat_expiration_get` liest die Frist; `platform_chat_expiration_set`
+setzt oder deaktiviert sie. Mindeststufe ist **Benutzer** mit Zugriff auf den
+Arbeitsplatz des Agenten und den konkreten Chat. Änderungen setzen tatsächliche
+Teilnahme am Chat voraus; ein höheres Tool-Level ersetzt diese Prüfung nicht.
+`seconds` muss ein Vielfaches von 60 zwischen 60 und 31.536.000 sein; `null`
+schaltet die Frist aus. Jede Änderung mit einer Dauer beginnt die Frist neu.
+Bereits begonnene Löschungen können nicht zurückgenommen werden.

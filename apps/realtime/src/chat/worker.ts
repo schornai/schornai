@@ -286,6 +286,10 @@ export async function chatWorker({
             modelMessages,
             {
               model: await getChatModel(agent.modelIdentifier, {
+                chat: {
+                  activityId: claimedTask.parameters.activityId,
+                  agentId: claimedTask.parameters.agentId,
+                },
                 supabaseServiceRole,
                 abortSignal,
                 serverToken,
@@ -325,6 +329,10 @@ export async function chatWorker({
           instructions: selectedRole?.prompt,
           messages: modelMessages,
           model: await getChatModel(selectedRoleModelIdentifier, {
+            chat: {
+              activityId: claimedTask.parameters.activityId,
+              agentId: claimedTask.parameters.agentId,
+            },
             supabaseServiceRole,
             abortSignal,
             serverToken,

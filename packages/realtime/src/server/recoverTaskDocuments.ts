@@ -1,8 +1,8 @@
+import { isChatDeleted } from "@schornio/aibox-database/chat/isChatDeleted";
 import type { Hocuspocus } from "@hocuspocus/server";
-import { encodeStateAsUpdate } from "yjs";
 import type { Task } from "../documents/taskQueue/_types.ts";
 import type { TaskClaimOptions } from "@schornio/aibox-database/task/_types";
-import { saveRealtimeDocument } from "@schornio/aibox-database/realtime/saveRealtimeDocument";
+import { persistRealtimeDocument } from "./persistRealtimeDocument.ts";
 import { getAllowedUserIdsByDocumentName } from "../_lib/getAllowedUserIdsByDocumentName.ts";
 import { getChatDocumentName } from "../documents/chat/_utils.ts";
 import { getChatCurrentMessageDocumentName } from "../documents/chatCurrentMessage/_utils.ts";
@@ -27,17 +27,13 @@ export async function recoverTaskDocuments(
   )
     return;
   const name = getChatDocumentName(task.parameters);
+  if (await isChatDeleted(name, { supabase: supabaseServiceRole })) return;
   const chat = await instance.openDirectConnection(name);
-  const persist = async (connection: typeof chat) => {
-    const document = connection.document!;
-    // Hocuspocus's normal store hook catches errors. Recovery must observe them
-    // before acknowledging its durable recovery flag, using the same save mutex.
-    await document.saveMutex.runExclusive(() =>
-      saveRealtimeDocument(document.name, encodeStateAsUpdate(document), {
-        supabase: supabaseServiceRole,
-      }),
-    );
-  };
+  const persist = (connection: typeof chat) =>
+    persistRealtimeDocument(connection.document!, {
+      supabase: supabaseServiceRole,
+    });
+
   try {
     const document = chat.document!;
     const state = document.getMap("state");
