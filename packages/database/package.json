@@ -19,7 +19,7 @@
     "xrag": "*",
     "@schornio/aibox-package-markdown-changelog": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.163",
+    "ai": "7.0.164",
     "jose": "^6.2.12"
   },
   "license": "AGPL-3.0-only",
