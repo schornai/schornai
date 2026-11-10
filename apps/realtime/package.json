@@ -6,13 +6,13 @@
     "start": "node ./server.ts"
   },
   "dependencies": {
-    "@ai-sdk/mcp": "2.0.92",
-    "@ai-sdk/openai-compatible": "3.0.86",
+    "@ai-sdk/mcp": "2.0.93",
+    "@ai-sdk/openai-compatible": "3.0.87",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../../packages/database",
     "@schornio/aibox-realtime": "*",
     "@supabase/supabase-js": "2.119.0",
-    "ai": "7.0.164",
+    "ai": "7.0.165",
     "ai-sdk-ollama": "^4.5.1",
     "undici": "^8.0.0"
   },
