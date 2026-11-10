@@ -26,7 +26,7 @@
     "@supabase/supabase-js": "2.119.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "fuse.js": "^7.5.0",
-    "i18next": "^26.5.2",
+    "i18next": "^27.0.0",
     "i18next-intervalplural-postprocessor": "^3.0.0",
     "lucide-react": "^1.59.0",
     "next": "16.4.5",
