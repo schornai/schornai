@@ -51,6 +51,7 @@ vi.mock("next-i18next/server", () => ({
   })),
 }));
 vi.mock("next/cache", () => ({
+  io: vi.fn(async () => {}),
   cacheTag: vi.fn(),
   revalidatePath: vi.fn(),
   updateTag: vi.fn(),
