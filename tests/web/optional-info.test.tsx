@@ -37,7 +37,11 @@ for (const ModelComponent of [InfoModel, AgentInfoModel]) {
         />,
       );
       fireEvent.click(screen.getByRole("button", { name: "labelTitle" }));
-      expect(view.container.textContent).toContain("labelModelSize");
+      expect(view.container.textContent).toContain(
+        ModelComponent === AgentInfoModel
+          ? "labelContextTokens"
+          : "labelModelSize",
+      );
       expect(!!view.container.querySelector("img")).toBe(!!thinking);
       expect(!!screen.queryByText("descriptionFeatureVision")).toBe(!!thinking);
       expect(view.container.querySelector("a")!.getAttribute("href")).toContain(

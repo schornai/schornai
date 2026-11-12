@@ -1,4 +1,5 @@
 "use client";
+import { ModelContextSize } from "../../../_components/ModelContextSize";
 import { Brain, Book, Settings2, ChevronsUpDown, Pencil } from "lucide-react";
 import Link from "next/link";
 import { MarkdownProse } from "@schornio/aibox-package-ui/components/markdown-prose";
@@ -25,7 +26,9 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
   const details = [
     [t("labelType"), t(`types.${model.type}`)],
     [t("labelIdentifier"), model.modelId || model.identifier],
-    [t("labelContextSize"), model.contextSize],
+    ...(model.type === "external_llm_v1" || model.type === "ollama_llm_v1"
+      ? []
+      : [[t("labelContextSize"), model.contextSize]]),
     [t("labelEmbeddingSize"), model.embeddingVectorSize],
     [t("labelFileSystemIdentifier"), model.fileSystemIdentifier],
     ...(["featureThinking", "featureTools", "featureVision"] as const)
@@ -39,6 +42,15 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
       summary: model.modelId || model.identifier,
       content: (
         <dl className="grid gap-3 sm:grid-cols-2">
+          {(model.type === "external_llm_v1" ||
+            model.type === "ollama_llm_v1") && (
+            <div>
+              <dt>{t("labelContextSize")}</dt>
+              <dd>
+                <ModelContextSize contextSize={model.contextSize} />
+              </dd>
+            </div>
+          )}
           {details
             .filter(([, value]) => value !== undefined)
             .map(([label, value]) => (

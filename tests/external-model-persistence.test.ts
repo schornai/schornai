@@ -6,6 +6,7 @@ import { updateExternalAIModel } from "../packages/database/src/aiModel/updateEx
 
 const input = {
   name: "Test model",
+  contextSize: 32768,
   modelId: "chat",
   baseUrl: "https://example.com/v1",
   apiKey: "private-key",
@@ -19,6 +20,7 @@ describe("external model persistence boundary", () => {
     expect(rpc).toHaveBeenCalledExactlyOnceWith("create_external_ai_model", {
       model_name: input.name,
       external_model_id: input.modelId,
+      context_size: 32768,
       base_url: input.baseUrl,
       api_key: input.apiKey,
       provider: "openai-compatible",
@@ -53,6 +55,7 @@ describe("external model persistence boundary", () => {
     expect(rpc).toHaveBeenCalledExactlyOnceWith("update_external_ai_model", {
       target_model_id: "model-id",
       external_model_id: input.modelId,
+      context_size: 32768,
       base_url: input.baseUrl,
       api_key: "",
       provider: "openai-compatible",

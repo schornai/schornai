@@ -35,6 +35,14 @@ const external = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  const model = {
+    specificationVersion: "v4",
+    provider: "test",
+    modelId: "test",
+    supportedUrls: {},
+  };
+  mocks.local.mockReturnValue(model);
+  mocks.chatModel.mockReturnValue(model);
   mocks.create.mockReturnValue({ chatModel: mocks.chatModel });
 });
 describe("external model input and public metadata", () => {
@@ -122,3 +130,20 @@ describe("chat model selection", () => {
     expect(mocks.create).not.toHaveBeenCalled();
   });
 });
+
+it.each([null, undefined, 32768])(
+  "accepts optional context size %s",
+  (contextSize) => {
+    expect(
+      externalModelInputSchema.safeParse({ ...input, contextSize }).success,
+    ).toBe(true);
+  },
+);
+it.each([0, -1, 1.5, 2147483648])(
+  "rejects invalid context size %s",
+  (contextSize) => {
+    expect(
+      externalModelInputSchema.safeParse({ ...input, contextSize }).success,
+    ).toBe(false);
+  },
+);

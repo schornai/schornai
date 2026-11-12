@@ -9,7 +9,7 @@ meta:
   role_scope: "Gesamte Instanz"
   prerequisites: "Registrierte lokale Modelle oder Zugangsdaten für einen unterstützten externen Anbieter."
   status: "verfügbar; schorn.ai Cloud angekündigt"
-  last_verified: "2026-10-18"
+  last_verified: "2026-11-12"
   source_files:
     - "apps/web/app/(settings)/_components/Sidebar.tsx"
     - "apps/web/app/(settings)/models/page.tsx"
@@ -32,10 +32,13 @@ meta:
     - "packages/database/src/aiModel/deleteAIModel.ts"
     - "apps/web/app/_components/InfoModel.tsx"
     - "packages/realtime/src/models/getChatModel.ts"
+    - "packages/realtime/src/models/withContextCompression.ts"
+    - "apps/web/app/_components/ModelContextSize.tsx"
     - "packages/database/src/aiModel/createExternalAIModel.ts"
     - "packages/database/src/aiModel/updateExternalAIModel.ts"
     - "packages/database/src/aiModel/getExternalAIModelConnection.ts"
     - "supabase/migrations/20261018103000_atomic_external_model_credentials.sql"
+    - "supabase/migrations/20261112132204_context_compression.sql"
 ---
 
 # Modelle verwalten
@@ -49,6 +52,11 @@ meta:
 Die Übersicht zeigt lokale und externe Modelle gemeinsam. Unter **Optionen** wechselst du zwischen Karten- und Tabellenansicht, sortierst nach Name und gruppierst nach Modelltyp, intern/extern oder Anfangsbuchstabe. Die Gruppierung nach Modelltyp fasst lokale und externe Sprachmodelle zusammen. Ohne Gruppierung erscheinen alle Modelle in einer Liste. Mit der Suche findest du Modelle anhand von Name, Beschreibung oder Kennung. Eine angepasste Ansicht lässt sich über **Ansicht speichern** als persönliche Voreinstellung sichern. Ein Klick auf die Modellkarte öffnet eine eigene Modellseite mit Kennung und den hinterlegten Eigenschaften, beispielsweise Kontextgröße, Werkzeugunterstützung oder Vektordimensionen.
 
 Die Liste enthält die registrierten Modelle. Wenn ein gelistetes lokales Modell im Chat nicht antwortet, lass die Betriebsadministration den Modelldienst und die installierten Modelldateien prüfen. Installation und Aktualisierung erfolgen über [XRAG](xrag.md).
+
+Bei Sprachmodellen zeigen Karten, Tabelle und Detailseite die Kontextgröße in Tokens.
+**Keine Kontextgröße** erscheint rot; der Tooltip erklärt, dass dann die automatische
+Kontextkomprimierung deaktiviert ist. Dasselbe gilt für die aufgeklappte Modellinformation
+am Agenten, auch für abweichende Rollenmodelle.
 
 ## Externe Modelle
 
@@ -66,6 +74,14 @@ Gib auf der Einrichtungsseite einen Anzeigenamen und die Zugangsdaten ein. Unter
 - **Azure OpenAI:** Basis-URL `https://RESOURCE.openai.azure.com/openai/v1`, API-Schlüssel und der Name deiner Bereitstellung. Der allgemeine Modellkatalog liefert keine Liste der eigenen Bereitstellungen; deshalb wird der Name manuell eingegeben.
 - **Anthropic über Amazon Bedrock:** AWS-Region und Bedrock-API-Schlüssel. Für den Katalogabruf benötigt der Schlüssel Berechtigungen für `ListFoundationModels` und `ListInferenceProfiles`. Alternativ gibst du die Modellkennung oder Inference-Profile-ID manuell ein. IAM-Zugangsdaten werden in dieser Oberfläche nicht verwendet.
 - **Andere native Anbieter:** API-Schlüssel beziehungsweise Hugging-Face-Token und Modellkennung; die API-Adresse ist bereits hinterlegt.
+
+**Kontextgröße (Tokens)** ist optional. Bei der Auswahl eines neuen Modells übernimmt
+schorn.ai eine verfügbare Grenze aus dem Anbieter-Katalog (Google, Anthropic, Mistral).
+Andere Kataloge liefern derzeit keine von schorn.ai ausgewertete Grenze. Eigene Eingaben
+und gespeicherte Einstellungen werden nicht automatisch überschrieben. Trage die tatsächlich
+nutzbare Grenze deiner Bereitstellung ein; ein zu hoher Wert kann weiterhin Anbieterfehler
+verursachen. Leer lassen oder den Wert entfernen deaktiviert die automatische Komprimierung.
+Bestehende Modelle ohne Grenze bleiben unverändert deaktiviert.
 
 Zugangsdaten in URLs, Query-Parameter und Fragmente sind nicht erlaubt. Schlüssel werden ausschließlich serverseitig gespeichert und nie erneut angezeigt. Auf der Detailseite eines gespeicherten externen Modells kannst du Anzeigename, Modellkennung, Verbindungseinstellungen und Schlüssel ändern. Ein leeres Schlüsselfeld behält den bisherigen Schlüssel. Die Modellliste verwendet die gespeicherten Zugangsdaten serverseitig; du musst den Schlüssel nicht erneut eingeben. Bei einer noch nicht gespeicherten Änderung der Adresse oder Region speicherst du zuerst oder gibst einen neuen Schlüssel ein.
 
@@ -94,3 +110,9 @@ Auf der Detailseite jedes Modells — lokal oder extern — kannst du den **Anze
 - `platform_model_delete`: Modellregistrierung löschen. Mindeststufe: **Globaler Administrator**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
+
+Die Modellwerkzeuge zum Anlegen und Bearbeiten akzeptieren das optionale Feld
+`contextSize` (positive ganze Tokenzahl; `null` entfernt die Grenze). Der Mindestzugriff
+bleibt **admin** mit globaler Administratorberechtigung. `platform_models_discover`
+liefert zusätzlich verfügbare Kontextgrenzen; der Abruf allein ändert kein gespeichertes
+Modell. Die automatische Komprimierung benötigt kein eigenes Werkzeug.

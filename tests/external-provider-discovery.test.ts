@@ -317,3 +317,44 @@ it.each(externalModelProviders.filter((p) => p !== "openai-compatible"))(
     ).toThrow("MODEL_API_KEY_REQUIRED");
   },
 );
+
+it.each([
+  [
+    "google",
+    {
+      models: [
+        {
+          name: "models/chat",
+          supportedGenerationMethods: ["generateContent"],
+          inputTokenLimit: 32768,
+        },
+      ],
+    },
+  ],
+  ["antropic", { data: [{ id: "chat", max_input_tokens: 32768 }] }],
+  ["mistral", { data: [{ id: "chat", max_context_length: 32768 }] }],
+] as const)(
+  "discovers the documented context limit for %s",
+  async (provider, body) => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json(body)));
+    expect(
+      (await listExternalModels({ ...input, provider })).models[0],
+    ).toMatchObject({ id: "chat", contextSize: 32768 });
+  },
+);
+it.each([null, 0, -1, 1.5, "32000", 2147483648])(
+  "ignores invalid provider context size %s",
+  async (max_input_tokens) => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue(
+          Response.json({ data: [{ id: "chat", max_input_tokens }] }),
+        ),
+    );
+    expect(
+      (await listExternalModels({ ...input, provider: "antropic" })).models[0],
+    ).not.toHaveProperty("contextSize");
+  },
+);

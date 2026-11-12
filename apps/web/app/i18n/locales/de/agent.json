@@ -743,7 +743,9 @@
       "labelRetry": "Erneut versuchen",
       "descriptionFailed": "Die Antwort konnte nicht erstellt werden.",
       "descriptionNoDetails": "Keine weiteren Fehlerdetails verfügbar.",
-      "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben."
+      "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben.",
+      "errorContextBudget": "Die aktuelle Anfrage oder ihre Werkzeuge überschreiten das Kontextbudget. Verkleinere Anhänge oder starte einen neuen Chat; prüfe gegebenenfalls die eingestellte Kontextgröße.",
+      "errorContextCompression": "Der Gesprächskontext konnte nicht zuverlässig zusammengefasst werden. Der Chatverlauf ist erhalten. Versuche es erneut."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",
@@ -766,6 +768,12 @@
       "labelRemove": "Werkzeug entfernen",
       "descriptionRemove": "Das Werkzeug wird aus dieser Rolle entfernt. Speichere den Agenten, um die Änderung zu übernehmen.",
       "labelCancel": "Abbrechen"
+    },
+    "ChatMessagePartContextCompression": {
+      "labelPending": "Kontext wird zusammengefasst …",
+      "labelCompleted": "Kontext zusammengefasst",
+      "labelFailed": "Kontext konnte nicht zusammengefasst werden",
+      "labelInterrupted": "Zusammenfassung des Kontexts abgebrochen"
     }
   },
   "page": {

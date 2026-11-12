@@ -44,6 +44,7 @@ export function ExternalModelForm({
     baseUrl?: string;
     modelId?: string;
     region?: string;
+    contextSize?: number;
   };
 }) {
   const { t } = useT("settings", { keyPrefix: "models" });
@@ -56,7 +57,16 @@ export function ExternalModelForm({
   const [region, setRegion] = useState(initial?.region ?? "eu-central-1");
   const [apiKey, setApiKey] = useState("");
   const [modelId, setModelId] = useState(initial?.modelId ?? "");
+  const [contextSizeOverride, setContextSizeOverride] = useState<string>();
   const [models, setModels] = useState<DiscoveredModel[]>([]);
+  const contextSize =
+    contextSizeOverride ??
+    (initial && modelId === initial.modelId
+      ? initial.contextSize?.toString()
+      : models
+          .find((model) => model.id === modelId)
+          ?.contextSize?.toString()) ??
+    "";
   const [discovery, setDiscovery] = useState<
     "idle" | "loading" | "ready" | "error"
   >("idle");
@@ -162,6 +172,7 @@ export function ExternalModelForm({
             baseUrl: endpoint,
             apiKey,
             modelId,
+            contextSize: contextSize.trim() ? Number(contextSize) : null,
             ...(provider === "antropic-aws" ? { region } : {}),
           };
           try {
@@ -335,6 +346,22 @@ export function ExternalModelForm({
                     : "descriptionModelDiscovery",
               )}
             </FieldDescription>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor={`${id}-context`}>
+              {t("labelContextSize")}
+            </FieldLabel>
+            <Input
+              id={`${id}-context`}
+              type="number"
+              min={1}
+              max={2147483647}
+              step={1}
+              value={contextSize}
+              disabled={pending}
+              onChange={(event) => setContextSizeOverride(event.target.value)}
+            />
+            <FieldDescription>{t("descriptionContextSize")}</FieldDescription>
           </Field>
         </FieldGroup>
         {!manual && (

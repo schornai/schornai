@@ -25,11 +25,19 @@ export function ChatError({
     useAction(retryChatGeneration);
   const details = error.trim() || t("descriptionNoDetails");
   const firstLine = error.trim().split(/\r?\n/, 1)[0];
-  const summary = firstLine
-    ? firstLine.length > 140
-      ? `${firstLine.slice(0, 140)}…`
-      : firstLine
-    : t("descriptionFailed");
+  const contextError =
+    error === "CONTEXT_BUDGET_EXCEEDED"
+      ? t("errorContextBudget")
+      : error === "CONTEXT_COMPRESSION_FAILED"
+        ? t("errorContextCompression")
+        : undefined;
+  const summary =
+    contextError ??
+    (firstLine
+      ? firstLine.length > 140
+        ? `${firstLine.slice(0, 140)}…`
+        : firstLine
+      : t("descriptionFailed"));
 
   return (
     <Collapsible className="text-destructive border-destructive/20 bg-destructive/5 min-w-0 rounded-xl border p-3">

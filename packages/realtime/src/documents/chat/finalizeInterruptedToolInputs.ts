@@ -13,11 +13,24 @@ export function finalizeInterruptedToolInputs(
     if (isToolUIPart(part) && part.state === "input-streaming")
       interruptedSteps.add(step);
   }
-  if (!interruptedSteps.size) return message;
+  if (
+    !interruptedSteps.size &&
+    !message.parts.some(
+      (part) =>
+        part.type === "data-contextCompression" &&
+        part.data.state === "pending",
+    )
+  )
+    return message;
   step = 0;
   return {
     ...message,
     parts: message.parts.flatMap((part): ChatMessage["parts"] => {
+      if (
+        part.type === "data-contextCompression" &&
+        part.data.state === "pending"
+      )
+        return [{ ...part, data: { state: "interrupted" } }];
       if (part.type === "step-start") step++;
       // An interrupted response may contain reasoning IDs that the provider
       // never committed. Keep completed steps, but never replay this reasoning.

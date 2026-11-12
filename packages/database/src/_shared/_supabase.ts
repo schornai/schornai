@@ -1498,6 +1498,7 @@ export type Database = {
         Args: {
           api_key: string;
           base_url: string;
+          context_size?: number;
           external_model_id: string;
           model_name: string;
           provider?: string;
@@ -1734,6 +1735,7 @@ export type Database = {
         Args: {
           api_key: string;
           base_url: string;
+          context_size?: number;
           external_model_id: string;
           provider: string;
           region?: string;

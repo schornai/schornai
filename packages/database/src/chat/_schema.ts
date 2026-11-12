@@ -38,7 +38,12 @@ export const chatFileDataSchema = z.object({
   ),
 });
 
+export const chatContextCompressionSchema = z.object({
+  state: z.enum(["pending", "completed", "failed", "interrupted"]),
+});
+
 const dataSchemas = {
+  contextCompression: chatContextCompressionSchema,
   file: chatFileDataSchema,
   role: chatRoleDataSchema,
 };

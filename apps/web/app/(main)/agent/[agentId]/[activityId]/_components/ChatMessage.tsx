@@ -19,14 +19,17 @@ function groupMessageParts(parts: ChatMessagePart[]) {
   const visibleParts = parts.filter((part) => part.type !== "step-start");
 
   const partGroups: (
-    | ["standalone", Extract<ChatMessagePart, { type: "text" }>]
+    | [
+        "standalone",
+        Extract<ChatMessagePart, { type: "text" | "data-contextCompression" }>,
+      ]
     | ["grouped", ChatMessagePart[]]
   )[] = [];
 
   let currentGroup: ["grouped", ChatMessagePart[]] | undefined = undefined;
 
   for (const part of visibleParts) {
-    if (part.type === "text") {
+    if (part.type === "text" || part.type === "data-contextCompression") {
       if (currentGroup) {
         partGroups.push(currentGroup);
         currentGroup = undefined;

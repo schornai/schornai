@@ -469,7 +469,11 @@
     "labelEditSection": "Edit {{section}}",
     "labelToggleSection": "Expand/collapse {{section}}",
     "descriptionDeleteAgents": "Agents that use this model are retained. However, they cannot be used again until you assign them another available model.",
-    "descriptionDeleteAgentsTip": "Tip: In the agent overview, open “Options” and group by “Model”. Affected agents appear in the “Unknown model” groups."
+    "descriptionDeleteAgentsTip": "Tip: In the agent overview, open “Options” and group by “Model”. Affected agents appear in the “Unknown model” groups.",
+    "labelContextUnknown": "No context size",
+    "descriptionCompressionDisabled": "Automatic context compression is disabled without a context size.",
+    "descriptionContextSize": "Optional: usable context size in tokens. Filled from the provider when available; you can correct it. Leave blank to disable automatic context compression.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Connections",

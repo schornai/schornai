@@ -743,7 +743,9 @@
       "labelRetry": "Retry",
       "descriptionFailed": "The response could not be generated.",
       "descriptionNoDetails": "No further error details are available.",
-      "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals."
+      "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals.",
+      "errorContextBudget": "The current request or its tools exceed the context budget. Reduce attachments or start a new chat; check the configured context size if necessary.",
+      "errorContextCompression": "The conversation context could not be summarized reliably. Your chat history is preserved. Please try again."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Calculator",
@@ -766,6 +768,12 @@
       "labelRemove": "Remove tool",
       "descriptionRemove": "This removes the tool from this role. Save the agent to apply the change.",
       "labelCancel": "Cancel"
+    },
+    "ChatMessagePartContextCompression": {
+      "labelPending": "Summarizing context…",
+      "labelCompleted": "Context summarized",
+      "labelFailed": "Context could not be summarized",
+      "labelInterrupted": "Context summarization interrupted"
     }
   },
   "page": {

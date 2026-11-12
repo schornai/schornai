@@ -5,6 +5,8 @@ lang: de
 meta:
   app_urls:
     [
+      "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
+      "apps/web/app/_components/ModelContextSize.tsx",
       "/agent/[agentId]/[activityId]/info",
       "/agent/[agentId]/[activityId]/documentation",
     ]
@@ -12,7 +14,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-11-07"
+  last_verified: "2026-11-12"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/info/page.tsx",
@@ -33,6 +35,11 @@ Klappe die Informationsbereiche auf, um Modell, Prompt, Rollen, angebundene Abla
 Über **Chat** kehrst du in dasselbe Gespräch zurück. **Dateien** öffnet dessen Dateien. Ein Bearbeitungslink führt zur gemeinsamen Agentenkonfiguration und benötigt die Rolle Arbeitsplatzadministrator:in oder globale Administratorrechte.
 
 Die angezeigten Informationen spiegeln die aktuelle Konfiguration wider. Wurde der Agent zwischenzeitlich geändert, müssen sie nicht den Einstellungen einer früheren Antwort entsprechen. Für die konkrete Antwort sind zusätzlich die darin angezeigten Werkzeugaufrufe und Quellen wichtig.
+
+Bei aufgeklappten Modellinformationen siehst du die hinterlegte Kontextgröße in Tokens,
+auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erscheint ein roter
+Hinweis mit Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
+Die Grenze verwalten globale Administrator:innen unter **Modelle**.
 
 ## Zugehörige MCP-Werkzeuge
 
