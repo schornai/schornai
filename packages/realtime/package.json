@@ -25,7 +25,7 @@
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../database",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.165",
+    "ai": "7.0.166",
     "mathjs": "15.2.0",
     "xrag": "*",
     "yjs": "^13.6.33"
