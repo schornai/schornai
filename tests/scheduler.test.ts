@@ -89,6 +89,18 @@ it("executes supported work and acknowledges with the exact lease", async () => 
     p_success: true,
   });
 });
+it("does not execute or acknowledge a job without a lease token", async () => {
+  const handler = vi.fn(async () => {});
+  const f = fixture(handler, { lease_token: null });
+  const running = f.run();
+  await vi.advanceTimersByTimeAsync(1_000);
+  await running;
+  expect(handler).not.toHaveBeenCalled();
+  expect(
+    f.rpc.mock.calls.every(([name]) => name === "claim_scheduled_job"),
+  ).toBe(true);
+  expect(console.error).toHaveBeenCalledWith("SCHEDULER_UNAVAILABLE");
+});
 it("records failure without logging payloads or arbitrary errors", async () => {
   const f = fixture(
     vi.fn(async () => {
