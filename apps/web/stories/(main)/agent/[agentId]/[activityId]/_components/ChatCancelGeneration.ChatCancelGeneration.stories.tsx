@@ -5,6 +5,7 @@ import { ChatCancelGeneration } from "../../../../../../app/(main)/agent/[agentI
 const meta = {
   title: "Web/(main)/agent/[agentId]/[activityId]/ChatCancelGeneration",
   component: ChatCancelGeneration,
+  parameters: { contextFixtures: { useChatStatus: "generating" } },
 } satisfies Meta<typeof ChatCancelGeneration>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -18,7 +19,10 @@ export const Pending: Story = {
 };
 export const Idle: Story = {
   parameters: {
-    contextFixtures: { useChatComposeMessage: { activity: { state: "idle" } } },
+    contextFixtures: {
+      useChatStatus: "idle",
+      useChatComposeMessage: { activity: { state: "running" } },
+    },
   },
   play: async ({ canvasElement }) => {
     await expect(within(canvasElement).queryByRole("button")).toBeNull();
@@ -31,5 +35,12 @@ export const Error: Story = {
     await userEvent.click(canvas.getByRole("button"));
     await expect(await canvas.findByRole("alert")).toBeVisible();
     await expect(canvas.getByRole("button")).toBeEnabled();
+  },
+};
+
+export const Queued: Story = {
+  parameters: { contextFixtures: { useChatStatus: "queued" } },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole("button")).toBeEnabled();
   },
 };

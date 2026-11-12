@@ -17,6 +17,7 @@ import { ChatComposeMessage } from "../../apps/web/app/(main)/agent/[agentId]/[a
 const mocks = vi.hoisted(() => ({
   context: {} as any,
   canSend: true,
+  chatStatus: "idle",
   uploads: [] as any[],
   pendingFilePaths: [] as string[],
   upload: vi.fn(),
@@ -38,7 +39,11 @@ vi.mock(
 );
 vi.mock(
   "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatContext",
-  () => ({ useCanSendMessage: () => mocks.canSend, useMessages: () => [] }),
+  () => ({
+    useCanSendMessage: () => mocks.canSend,
+    useMessages: () => [],
+    useChatStatus: () => mocks.chatStatus,
+  }),
 );
 vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
   useFileUpload: () => ({
@@ -96,6 +101,7 @@ beforeEach(() => {
   client.execute.mockReset().mockResolvedValue({});
   client.pending = false;
   mocks.canSend = true;
+  mocks.chatStatus = "idle";
   mocks.uploads = [];
   mocks.pendingFilePaths = [];
   mocks.files = [];
@@ -140,6 +146,7 @@ function compose() {
 
 it("stops an active generation through the server action and reports failures", async () => {
   mocks.context.activity = { state: "running" };
+  mocks.chatStatus = "generating";
   mocks.context.interaction = { type: "message-batch" };
   const view = render(<ChatComposeMessage />);
   fireEvent.click(screen.getByRole("button", { name: "labelCancel" }));
@@ -154,7 +161,8 @@ it("stops an active generation through the server action and reports failures", 
   await waitFor(() =>
     expect(screen.getByRole("alert").textContent).toBe("errorCancel"),
   );
-  mocks.context.activity = { state: "idle" };
+  mocks.chatStatus = "idle";
+  // The independently replicated activity still says running.
   view.rerender(<ChatComposeMessage />);
   expect(screen.queryByRole("button", { name: "labelCancel" })).toBeNull();
 });

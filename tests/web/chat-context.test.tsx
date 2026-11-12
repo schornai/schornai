@@ -258,3 +258,63 @@ it("keeps submission disabled while cancellation is cleaning up after the worker
   act(() => state.provider.document.getMap("cancellations").delete("stop"));
   expect(result.current).toBe(true);
 });
+
+// Streamed approval parts are provisional until the worker releases the chat.
+it.each(["queued", "generating", "aborting"])(
+  "waits for a stable approval while chat is %s",
+  (status) => {
+    const chat = getChat(state.provider.document);
+    chat.state.set("type", status as any);
+    const { result } = mount();
+    act(() =>
+      chat.messages.push([
+        {
+          id: "assistant",
+          role: "assistant",
+          parts: [
+            {
+              type: "tool-fetch",
+              toolCallId: "tool",
+              state: "approval-requested",
+              input: {},
+              approval: { id: "approval" },
+            },
+          ],
+        } as any,
+      ]),
+    );
+    expect(result.current.interaction.type).toBe("message-batch");
+    act(() => chat.state.set("type", "idle"));
+    expect(result.current.interaction.type).toBe("tool-approval");
+  },
+);
+
+it("does not flash approvals resolved during streaming or cancellation cleanup", () => {
+  const chat = getChat(state.provider.document);
+  chat.state.set("type", "generating");
+  const { result } = mount();
+  act(() =>
+    chat.messages.push([
+      {
+        id: "assistant",
+        role: "assistant",
+        parts: [
+          {
+            type: "tool-fetch",
+            toolCallId: "tool",
+            state: "approval-requested",
+            input: {},
+            approval: { id: "approval" },
+          },
+        ],
+      } as any,
+    ]),
+  );
+  expect(result.current.interaction.type).toBe("message-batch");
+  act(() => state.provider.document.getMap("cancellations").set("stop", true));
+  act(() => chat.state.set("type", "idle"));
+  expect(result.current.interaction.type).toBe("message-batch");
+  act(() => chat.messages.delete(0, 1));
+  act(() => state.provider.document.getMap("cancellations").delete("stop"));
+  expect(result.current.interaction.type).toBe("message-batch");
+});
