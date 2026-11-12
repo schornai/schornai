@@ -32,11 +32,12 @@ export async function schedulerWorker({
       const job = await claimJob(kinds, options);
       if (job) {
         if (signal.aborted) return; // Let the unstarted claim expire.
+        const token = job.lease_token;
+        if (!token) throw new Error("SCHEDULER_LEASE_TOKEN_MISSING");
         const controller = new AbortController();
         const heartbeat = new AbortController();
         const abort = () => controller.abort();
         signal.addEventListener("abort", abort, { once: true });
-        const token = job.lease_token!;
         const renew = (async () => {
           while (!heartbeat.signal.aborted) {
             try {
@@ -54,7 +55,9 @@ export async function schedulerWorker({
         try {
           let success = false;
           try {
-            await handlers.get(job.kind)!(job, controller.signal);
+            const handler = handlers.get(job.kind);
+            if (!handler) throw new Error("SCHEDULER_HANDLER_MISSING");
+            await handler(job, controller.signal);
             success = true;
           } catch {
             if (!controller.signal.aborted)
