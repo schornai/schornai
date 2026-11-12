@@ -82,7 +82,7 @@ export function addChatTools(
   );
   add(
     "platform_chat_expiration_set",
-    "Set or disable automatic deletion for a chat you participate in. seconds is a whole number of minutes (60–31536000), or null to disable. The fixed deadline starts now; new messages do not extend it. Deletes messages, drafts, history and chat files for all participants. Cannot undo deletion once it begins.",
+    "Set or disable automatic deletion for a chat you participate in. seconds must be 43200 (12 hours), or null to disable. Requires disappearing chats to be enabled for this agent. The fixed deadline starts now; new messages do not extend it. Deletes messages, drafts, history and chat files for all participants. Cannot undo deletion once it begins.",
     "user",
     false,
     chatExpirationSchema,

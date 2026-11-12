@@ -29,7 +29,7 @@ afterEach(() => {
 const input = {
   agentId: "11111111-1111-4111-8111-111111111111",
   activityId: "22222222-2222-4222-8222-222222222222",
-  seconds: 3600,
+  seconds: 43_200,
 };
 const name = `activity_chat___${input.activityId}_${input.agentId}`;
 it("atomically changes deadlines, supports disabling and sanitizes RPC failures", async () => {
@@ -38,7 +38,7 @@ it("atomically changes deadlines, supports disabling and sanitizes RPC failures"
     .mockResolvedValue({ data: "2030-01-01T00:00:00Z", error: null });
   const options = { userId: "owner", supabase: { rpc } as any };
   await expect(setChatExpiration(input, options)).resolves.toEqual({
-    seconds: 3600,
+    seconds: 43_200,
     expiresAt: "2030-01-01T00:00:00Z",
   });
   await setChatExpiration({ ...input, seconds: null }, options);
@@ -47,7 +47,7 @@ it("atomically changes deadlines, supports disabling and sanitizes RPC failures"
     p_user_id: "owner",
     p_seconds: null,
   });
-  for (const seconds of [0, 61, 31_536_060])
+  for (const seconds of [0, 60, 3600, 61, 31_536_060])
     await expect(
       setChatExpiration({ ...input, seconds }, options),
     ).rejects.toThrow();

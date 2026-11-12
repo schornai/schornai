@@ -1,4 +1,3 @@
-import { ChatExpirationSettings } from "./_components/ChatExpirationSettings";
 import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
 import { ensureActivity } from "@/lib/ensureActivity";
 import { getCurrentUser } from "@schornio/aibox-package-database/user/getCurrentUser";
@@ -72,6 +71,8 @@ export default async function Page(
         activityId={activityId}
         agentId={agentId}
         modelThinking={agent.modelThinking}
+        additionalFunctions={agent.additionalFunctions}
+        expiration={expiration}
         audioRecording={
           agent.transcriberIdentifier ? { appColor: agent.color } : undefined
         }
@@ -87,12 +88,6 @@ export default async function Page(
           />
 
           <ContainerMain className="flex flex-1 flex-col">
-            <ChatExpirationSettings
-              key={expiration.expiresAt ?? "off"}
-              agentId={agentId}
-              activityId={activityId}
-              expiration={expiration}
-            />
             <TabsMainContent view="default">
               <MessageScrollerContent className="h-auto min-h-0 flex-1">
                 <ChatMessageItems

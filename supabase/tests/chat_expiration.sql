@@ -7,27 +7,27 @@ declare name text := 'activity_chat___aab00000-0000-4000-8000-000000000010_aab00
 begin
   doc_id := public.ensure_realtime_document(name, array[owner_id]);
   begin
-    perform public.set_chat_expiration(name, 'aab00000-0000-4000-8000-000000000002', 60);
+    perform public.set_chat_expiration(name, 'aab00000-0000-4000-8000-000000000002', 43200);
     raise exception 'Unauthorized schedule accepted';
   exception when insufficient_privilege then null; end;
   begin
     perform public.set_chat_expiration(name, owner_id, 61);
     raise exception 'Invalid duration accepted';
   exception when invalid_parameter_value then null; end;
-  deadline := public.set_chat_expiration(name, owner_id, 60);
-  assert deadline = now() + interval '60 seconds';
+  deadline := public.set_chat_expiration(name, owner_id, 43200);
+  assert deadline = now() + interval '12 hours';
   assert (select run_at = deadline and state = 'pending' from public.scheduled_jobs where id = 'chat.expire:' || name);
   assert not exists(select from public.claim_scheduled_job(array['chat.expire']));
   -- Claims from a previous deadline cannot delete a rescheduled chat.
   update public.scheduled_jobs set run_at = now() where id = 'chat.expire:' || name;
   select * into job from public.claim_scheduled_job(array['chat.expire']);
-  perform public.set_chat_expiration(name, owner_id, 3600);
+  perform public.set_chat_expiration(name, owner_id, 43200);
   assert not exists(select from public.begin_chat_expiration(name, job.lease_token));
   assert not public.finish_scheduled_job(job.id, job.lease_token, true);
   perform public.set_chat_expiration(name, owner_id, null);
   assert not exists(select from public.scheduled_jobs where id = job.id);
   assert (select expires_at is null from public.realtime_documents where id = doc_id);
-  perform public.set_chat_expiration(name, owner_id, 60);
+  perform public.set_chat_expiration(name, owner_id, 43200);
   update public.scheduled_jobs set run_at = now() where id = 'chat.expire:' || name;
   update public.realtime_documents set expires_at = now(), document_data = '\x736563726574' where id = doc_id;
   select * into job from public.claim_scheduled_job(array['chat.expire']);

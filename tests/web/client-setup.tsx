@@ -11,6 +11,7 @@ const client = vi.hoisted(() => ({
   actionOptions: undefined as any,
   actionOptionsByAction: new Map<unknown, any>(),
   pending: false,
+  actionErrored: false,
   onDragEnd: undefined as any,
   supportedLanguages: ["en", "de"],
 }));
@@ -70,6 +71,7 @@ vi.mock("next-safe-action/hooks", () => ({
       executeAsync: client.execute,
       reset: client.reset,
       isPending: client.pending,
+      hasErrored: client.actionErrored,
       result: { validationErrors: client.validationErrors },
     };
   },

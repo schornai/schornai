@@ -29,6 +29,7 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import { AudioRecorderButton } from "../../../../../_components/AudioRecorderModal";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
 import { Button } from "@schornio/aibox-package-ui/components/button";
+import { ChatExpirationSettings } from "./ChatExpirationSettings";
 import { ChatCancelGeneration } from "./ChatCancelGeneration";
 import { CollapsibleTrigger } from "@schornio/aibox-package-ui/components/collapsible";
 import { StorageObjectTile } from "../../../../../_components/StorageObjectTile";
@@ -64,6 +65,8 @@ export function ChatComposeMessageSelected({
   const { queueFileUploadsByFileList, uploads = [] } = useFileUpload();
 
   const {
+    additionalFunctions,
+    expiration,
     activity,
     addSelectedFiles,
     activityId,
@@ -239,79 +242,97 @@ export function ChatComposeMessageSelected({
               : t("labelThinkingOff")}
           </TooltipContent>
         </Tooltip>
-        <Tooltip>
-          <CollapsibleTrigger
-            render={
-              <TooltipTrigger
+        {additionalFunctions?.batch !== false ? (
+          <Tooltip>
+            <CollapsibleTrigger
+              render={
+                <TooltipTrigger
+                  render={
+                    <Button
+                      className="aria-expanded:bg-primary/10 aria-expanded:text-primary aria-expanded:dark:bg-primary/80 aria-expanded:dark:hover:bg-primary/50 aria-expanded:hover:bg-primary/20 px-0.5 aria-expanded:dark:text-white"
+                      size={messageBatch.length > 1 ? "sm" : "icon-sm"}
+                      variant="ghost"
+                    >
+                      <Layers className="size-4" />{" "}
+                      {messageBatch.length > 1
+                        ? messageBatch.length
+                        : undefined}
+                    </Button>
+                  }
+                />
+              }
+            />
+            <TooltipContent>{t("labelMessageStack")}</TooltipContent>
+          </Tooltip>
+        ) : null}
+        {additionalFunctions?.fileUpload !== false ? (
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger
                 render={
                   <Button
-                    className="aria-expanded:bg-primary/10 aria-expanded:text-primary aria-expanded:dark:bg-primary/80 aria-expanded:dark:hover:bg-primary/50 aria-expanded:hover:bg-primary/20 px-0.5 aria-expanded:dark:text-white"
-                    size={messageBatch.length > 1 ? "sm" : "icon-sm"}
+                    type="button"
+                    size="icon-sm"
                     variant="ghost"
-                  >
-                    <Layers className="size-4" />{" "}
-                    {messageBatch.length > 1 ? messageBatch.length : undefined}
-                  </Button>
+                    aria-label={t("labelAttachFiles")}
+                    disabled={selectedCurrentMessage?.state === "submitted"}
+                  />
                 }
-              />
-            }
+              >
+                <Paperclip />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={() => uploadRef.current?.click()}>
+                    <Upload />
+                    {t("labelUploadFiles")}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setFilePickerOpen(true)}>
+                    <File />
+                    {t("labelSelectFile")}
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <input
+              ref={uploadRef}
+              className="hidden"
+              multiple
+              type="file"
+              onChange={({ currentTarget }) => {
+                queueFileUploadsByFileList(currentTarget.files);
+                currentTarget.value = "";
+              }}
+            />
+            <StoragePickerDialog
+              open={filePickerOpen}
+              onOpenChange={setFilePickerOpen}
+              mode="file"
+              currentStorage={activity ? storage : undefined}
+              onSelect={async (selection) => {
+                const result = await storageSelectChatFile({
+                  agentId,
+                  activityId,
+                  storage: selection.storage,
+                  path: selection.path,
+                });
+                if (!result?.data?.file)
+                  throw new Error(result?.data?.error ?? "SELECT_FILE_FAILED");
+                addSelectedFiles([result.data.file]);
+              }}
+            />
+          </>
+        ) : null}
+
+        {(additionalFunctions?.disappearingChats !== false ||
+          expiration?.expiresAt) &&
+        expiration ? (
+          <ChatExpirationSettings
+            agentId={agentId}
+            activityId={activityId}
+            expiration={expiration}
           />
-          <TooltipContent>{t("labelMessageStack")}</TooltipContent>
-        </Tooltip>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button
-                type="button"
-                size="icon-sm"
-                variant="ghost"
-                aria-label={t("labelAttachFiles")}
-                disabled={selectedCurrentMessage?.state === "submitted"}
-              />
-            }
-          >
-            <Paperclip />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => uploadRef.current?.click()}>
-                <Upload />
-                {t("labelUploadFiles")}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setFilePickerOpen(true)}>
-                <File />
-                {t("labelSelectFile")}
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <input
-          ref={uploadRef}
-          className="hidden"
-          multiple
-          type="file"
-          onChange={({ currentTarget }) => {
-            queueFileUploadsByFileList(currentTarget.files);
-            currentTarget.value = "";
-          }}
-        />
-        <StoragePickerDialog
-          open={filePickerOpen}
-          onOpenChange={setFilePickerOpen}
-          mode="file"
-          currentStorage={activity ? storage : undefined}
-          onSelect={async (selection) => {
-            const result = await storageSelectChatFile({
-              agentId,
-              activityId,
-              storage: selection.storage,
-              path: selection.path,
-            });
-            if (!result?.data?.file)
-              throw new Error(result?.data?.error ?? "SELECT_FILE_FAILED");
-            addSelectedFiles([result.data.file]);
-          }}
-        />
+        ) : null}
 
         <AudioRecorderButton
           iconOnly
@@ -333,7 +354,9 @@ export function ChatComposeMessageSelected({
             </Button>
           ) : undefined}
 
-          {!isSubmitted && messageBatchPaused.length > 1 ? (
+          {additionalFunctions?.batch !== false &&
+          !isSubmitted &&
+          messageBatchPaused.length > 1 ? (
             <Button
               disabled={filesPending}
               name="batch"

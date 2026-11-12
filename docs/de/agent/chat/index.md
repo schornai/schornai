@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-08"
+  last_verified: "2026-11-12"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -109,11 +109,10 @@ Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [
 
 ## Chat automatisch löschen
 
-Über **Automatisch löschen** im Chat legst du eine Frist von **1 Minute bis 365 Tagen**
-fest. Wähle eine Dauer in Minuten, Stunden oder Tagen und bestätige mit
-**Löschfrist speichern**. Der feste Termin zählt ab dem Speichern; neue Nachrichten
-verschieben ihn nicht. Der geplante Zeitpunkt wird in UTC angezeigt. Du kannst
-die Frist ändern oder ausschalten, solange die Löschung noch nicht begonnen hat.
+Mit dem **ClockFading-Symbol** neben den Zusatzfunktionen der Chat-Eingabe schaltest du selbstlöschende Chats ein. Ein weiterer Klick schaltet sie aus. Die Frist beträgt immer **12 Stunden ab dem Einschalten**; neue Nachrichten verschieben sie nicht. Der eingeschaltete Button ist in der Primärfarbe hervorgehoben; beim Darüberfahren zeigt der Tooltip den Löschzeitpunkt in der lokalen Zeitzone. Eine freie Dauer oder ein Bestätigungsdialog sind nicht vorgesehen.
+
+Die Funktion muss in den Agenteneinstellungen verfügbar sein. Dort kann sie für neue Chats auch standardmäßig eingeschaltet werden. Bestehende Chats behalten ihre Einstellung. Eine bereits aktive Frist lässt sich weiterhin ausschalten, wenn die Funktion später im Agenten deaktiviert wird.
+
 Bei einem gemeinsam genutzten Chat gilt die Einstellung für alle Beteiligten.
 
 Zum Termin sperrt der Realtime-Dienst den Chat und stoppt laufende Chat- und
@@ -149,6 +148,6 @@ Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/ed
 setzt oder deaktiviert sie. Mindeststufe ist **Benutzer** mit Zugriff auf den
 Arbeitsplatz des Agenten und den konkreten Chat. Änderungen setzen tatsächliche
 Teilnahme am Chat voraus; ein höheres Tool-Level ersetzt diese Prüfung nicht.
-`seconds` muss ein Vielfaches von 60 zwischen 60 und 31.536.000 sein; `null`
-schaltet die Frist aus. Jede Änderung mit einer Dauer beginnt die Frist neu.
+`seconds` muss 43.200 (12 Stunden) sein; `null`
+schaltet die Frist aus. Einschalten erfordert die aktivierte Zusatzfunktion des Agenten. Jede Änderung mit einer Dauer beginnt die Frist neu.
 Bereits begonnene Löschungen können nicht zurückgenommen werden.

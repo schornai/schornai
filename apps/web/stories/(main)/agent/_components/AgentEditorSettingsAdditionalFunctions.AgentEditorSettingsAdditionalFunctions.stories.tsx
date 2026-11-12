@@ -43,3 +43,34 @@ export const TranscriberSelected: Story = {
     },
   },
 };
+
+export const DisappearingDefaultOn: Story = {
+  parameters: {
+    contextFixtures: {
+      useAgentEditor: {
+        agent: {
+          additionalFunctions: {
+            fileUpload: true,
+            batch: true,
+            disappearingChats: "default-on",
+          },
+        },
+      },
+    },
+  },
+};
+export const Disabled: Story = {
+  parameters: {
+    contextFixtures: {
+      useAgentEditor: {
+        agent: {
+          additionalFunctions: {
+            fileUpload: false,
+            batch: false,
+            disappearingChats: false,
+          },
+        },
+      },
+    },
+  },
+};

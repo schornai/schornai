@@ -34,7 +34,7 @@ import { setChatExpiration } from "../../apps/web/app/(main)/agent/[agentId]/[ac
 const input = {
   agentId: "11111111-1111-4111-8111-111111111111",
   activityId: "22222222-2222-4222-8222-222222222222",
-  seconds: 60,
+  seconds: 43200,
 };
 beforeEach(() => {
   vi.clearAllMocks();

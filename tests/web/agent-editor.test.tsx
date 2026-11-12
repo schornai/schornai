@@ -17,6 +17,7 @@ import {
 } from "../../apps/web/app/(main)/agent/_components/AgentEditor";
 import { SidebarProvider } from "../../packages/ui/src/components/sidebar";
 import { AgentInfo } from "../../apps/web/app/(main)/agent/_components/AgentInfo";
+import { AgentInfoAdditionalFunctions } from "../../apps/web/app/(main)/agent/_components/AgentInfoAdditionalFunctions";
 import { agentSchema } from "../../packages/database/src/agent/_schemas";
 
 vi.mock("../../apps/web/app/(main)/agent/_actions/createAgent", () => ({
@@ -685,17 +686,84 @@ describe("agent settings persistence and resets", () => {
       }
     },
   );
+  it("persists all three disappearing-chat modes and restores the saved default", async () => {
+    settings();
+    const select = screen.getByRole("combobox", {
+      name: /labelDisappearingChats/,
+    });
+    for (const [label, value] of [
+      ["labelDisappearingDefaultOn", "default-on"],
+      ["labelDisappearingDisabled", false],
+    ] as const) {
+      await selectOption(select, label);
+      fireEvent.click(screen.getByRole("button", { name: "btnSave" }));
+      expect(
+        client.execute.mock.lastCall![0].agent.additionalFunctions
+          .disappearingChats,
+      ).toBe(value);
+    }
+    await selectOption(select, "labelDisappearingDefaultOn");
+    discardField(select);
+    expect(select.textContent).toContain("labelDisappearingDefaultOff");
+  });
+  it.each([undefined, false, "default-on"])(
+    "can save default-off and restore the original mode %s",
+    async (original) => {
+      settings({
+        ...agent,
+        additionalFunctions:
+          original === undefined
+            ? undefined
+            : { ...agent.additionalFunctions, disappearingChats: original },
+      });
+      const select = screen.getByRole("combobox", {
+        name: /labelDisappearingChats/,
+      });
+      await selectOption(select, "labelDisappearingDefaultOn");
+      await selectOption(select, "labelDisappearingDefaultOff");
+      // Another changed field makes saving possible even when off is the original default.
+      fireEvent.change(screen.getByDisplayValue("Description"), {
+        target: { value: "Updated" },
+      });
+      fireEvent.click(screen.getByRole("button", { name: "btnSave" }));
+      expect(
+        client.execute.mock.lastCall![0].agent.additionalFunctions
+          .disappearingChats,
+      ).toBe(true);
+      await selectOption(select, "labelDisappearingDisabled");
+      await selectOption(select, "labelDisappearingDefaultOn");
+      if (original === "default-on")
+        await selectOption(select, "labelDisappearingDefaultOff");
+      discardField(select);
+      expect(select.textContent).toContain(
+        original === false
+          ? "labelDisappearingDisabled"
+          : original === "default-on"
+            ? "labelDisappearingDefaultOn"
+            : "labelDisappearingDefaultOff",
+      );
+    },
+  );
   it("stores and restores a changed model, thinking preference and workspace", async () => {
     settings();
-    for (const [index, name, property, value] of [
-      [1, "Other model", "modelIdentifier", "second-model"],
-      [2, "labelThinking_mandatoryOff", "modelThinking", "mandatory-off"],
-      [3, "Other workspace", "workspaceId", "other-workspace"],
+    for (const [section, index, name, property, value] of [
+      ["model", 0, "Other model", "modelIdentifier", "second-model"],
+      [
+        "model",
+        1,
+        "labelThinking_mandatoryOff",
+        "modelThinking",
+        "mandatory-off",
+      ],
+      ["workspace", 0, "Other workspace", "workspaceId", "other-workspace"],
     ] as const) {
-      await selectOption(index, name);
+      const select = within(document.getElementById(section)!).getAllByRole(
+        "combobox",
+      )[index];
+      await selectOption(select, name);
       fireEvent.click(screen.getByRole("button", { name: "btnSave" }));
       expect(client.execute.mock.lastCall![0].agent[property]).toBe(value);
-      discardField(screen.getAllByRole("combobox")[index]);
+      discardField(select);
     }
     expect(
       (screen.getByRole("button", { name: "btnSave" }) as HTMLButtonElement)
@@ -1041,3 +1109,30 @@ it.each([
     expect(saveRole()[kind]).toBeUndefined();
   },
 );
+
+it("omits the additional-functions summary when all supported functions are disabled", () => {
+  const view = render(
+    <AgentInfoAdditionalFunctions
+      agent={{
+        ...agent,
+        additionalFunctions: {
+          ...agent.additionalFunctions,
+          fileUpload: false,
+          batch: false,
+          disappearingChats: false,
+        },
+      }}
+    />,
+  );
+  expect(view.container.textContent).toBe("");
+});
+it("expands the supported functions and explains disappearing chats", () => {
+  render(<AgentInfoAdditionalFunctions agent={agent} />);
+  expect(screen.queryByText("descriptionDisappearingChats")).toBeNull();
+  fireEvent.click(screen.getByRole("button", { name: "labelTitle" }));
+  expect(screen.getByText("descriptionDisappearingChats")).toBeTruthy();
+  expect(screen.queryByText("labelPursueGoal")).toBeNull();
+  expect(screen.queryByText("labelNightshift")).toBeNull();
+  fireEvent.click(screen.getByRole("button", { name: "labelTitle" }));
+  expect(screen.queryByText("descriptionDisappearingChats")).toBeNull();
+});

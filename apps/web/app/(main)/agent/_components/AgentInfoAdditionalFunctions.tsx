@@ -54,7 +54,10 @@ export function AgentInfoAdditionalFunctions({
   const enabledFunctions = Object.entries(
     agent?.additionalFunctions ?? defaultAgentEnabledAdditionalFunctions,
   )
-    .filter(([, entry]) => entry)
+    .filter(
+      ([key, entry]) =>
+        entry && ["fileUpload", "batch", "disappearingChats"].includes(key),
+    )
     .map(([key]) => key)
     .toSorted((a, b) => order.indexOf(a) - order.indexOf(b));
 
@@ -111,24 +114,12 @@ export function AgentInfoAdditionalFunctions({
                         <Layers className="inline size-4" /> {t("labelBatch")}
                       </>
                     ) : undefined}
-                    {/* {enabledFunction === "pursueGoal" ? (
-                      <>
-                        <Goal className="inline size-4" />{" "}
-                        {t("labelPursueGoal")}
-                      </>
-                    ) : undefined}
-                    {enabledFunction === "nightshift" ? (
-                      <>
-                        <MoonStar className="inline size-4" />{" "}
-                        {t("labelNightshift")}
-                      </>
-                    ) : undefined}
                     {enabledFunction === "disappearingChats" ? (
                       <>
                         <ClockFading className="inline size-4" />{" "}
                         {t("labelDisappearingChats")}
                       </>
-                    ) : undefined} */}
+                    ) : null}
                     {index + 1 < enabledFunctions.length ? "," : undefined}
                   </span>{" "}
                 </Fragment>

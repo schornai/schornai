@@ -70,12 +70,15 @@
       "labelPursueGoal": "Pursue goal",
       "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
       "labelDisappearingChats": "Disappearing chats",
-      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "descriptionDisappearingChats": "Chats are deleted 12 hours after enabling. The default applies to new chats; users can toggle it in the chat.",
       "labelNightshift": "Night shift",
       "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day.",
       "labelTranscriber": "Transcriber",
       "labelNoTranscriber": "No automatic transcription",
-      "descriptionTranscriber": "Automatically transcribe uploaded audio and video files with this transcriber."
+      "descriptionTranscriber": "Automatically transcribe uploaded audio and video files with this transcriber.",
+      "labelDisappearingDisabled": "Unavailable",
+      "labelDisappearingDefaultOff": "Off by default",
+      "labelDisappearingDefaultOn": "On by default"
     },
     "AgentInfoAdditionalFunctions": {
       "labelTitle": "Additional Functions",
@@ -86,7 +89,7 @@
       "labelPursueGoal": "Pursue goal",
       "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
       "labelDisappearingChats": "Disappearing chats",
-      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "descriptionDisappearingChats": "Can be toggled in the chat. Enabled chats are deleted after 12 hours.",
       "labelNightshift": "Night shift",
       "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day."
     },
@@ -770,21 +773,10 @@
       "labelCancel": "Cancel"
     },
     "ChatExpirationSettings": {
-      "labelOpen": "Auto-delete",
-      "labelScheduled": "Deletion: {{date}}",
-      "labelTitle": "Automatically delete chat",
-      "descriptionDeletion": "Permanently deletes this chat, its messages, drafts and chat files for all participants. Files in document repositories are kept.",
-      "descriptionScheduled": "Current deletion time: {{date}}.",
-      "descriptionDisabled": "Automatic deletion is disabled.",
-      "labelDuration": "Delete after",
-      "labelUnit": "Time unit",
-      "labelMinutes": "Minutes",
-      "labelHours": "Hours",
-      "labelDays": "Days",
-      "descriptionDeadline": "The deadline starts when you save. New messages do not extend it. Choose 1 minute to 365 days. If the server is offline, deletion runs after recovery.",
-      "labelDisable": "Turn off",
-      "labelSave": "Save deletion timer",
-      "errorSave": "The deletion timer could not be saved. Please try again."
+      "labelEnable": "Enable disappearing chats (12 hours)",
+      "labelDisable": "Disable disappearing chats (12 hours)",
+      "errorSave": "Could not save the setting.",
+      "descriptionScheduled": "Deletes on {{date}}. Click to turn off."
     }
   },
   "page": {

@@ -14,42 +14,53 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const Scheduled: Story = {
-  args: { expiration: { seconds: 86400, expiresAt: "2030-01-02T12:00:00Z" } },
+  args: { expiration: { seconds: 43200, expiresAt: "2030-01-02T12:00:00Z" } },
 };
-export const Configure: Story = {
+export const Enable: Story = {
   play: async ({ canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole("button"));
-    const dialog = within(canvasElement.ownerDocument.body).getByRole("dialog");
+    const button = within(canvasElement).getByRole("button", {
+      name: "Selbstlöschende Chats einschalten (12 Stunden)",
+    });
+    await expect(button).toHaveAttribute("aria-pressed", "false");
+    await userEvent.click(button);
     await expect(
-      within(dialog).getByRole("spinbutton", { name: "Löschen nach" }),
-    ).toHaveValue(1);
-    await expect(within(dialog).getByText("Tage")).toBeInTheDocument();
+      within(canvasElement.ownerDocument.body).queryByRole("dialog"),
+    ).not.toBeInTheDocument();
   },
 };
-export const Disable: Story = { args: Scheduled.args, play: Configure.play };
-export const Invalid: Story = {
-  play: async (context) => {
-    await Configure.play!(context);
-    const dialog = within(context.canvasElement.ownerDocument.body).getByRole(
-      "dialog",
-    );
-    await userEvent.clear(within(dialog).getByRole("spinbutton"));
-    await userEvent.type(within(dialog).getByRole("spinbutton"), "366");
-    await expect(
-      within(dialog).getByRole("button", { name: "Löschfrist speichern" }),
-    ).toBeDisabled();
+export const Disable: Story = {
+  args: Scheduled.args,
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button", {
+      name: "Selbstlöschende Chats ausschalten (12 Stunden)",
+    });
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await userEvent.click(button);
   },
 };
-export const Error: Story = {
-  parameters: { scenario: "error" },
-  play: async (context) => {
-    await Configure.play!(context);
-    const dialog = within(context.canvasElement.ownerDocument.body).getByRole(
-      "dialog",
+export const Pending: Story = {
+  parameters: { scenario: "pending" },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button");
+    await expect(button).toBeDisabled();
+    await expect(button.querySelectorAll("svg")).toHaveLength(1);
+    await expect(button.querySelector(".lucide-clock-fading")).toBeNull();
+    await expect(button.querySelector(".lucide-loader-circle")).not.toBeNull();
+  },
+};
+export const Error: Story = { parameters: { scenario: "error" } };
+
+export const ScheduledHover: Story = {
+  args: Scheduled.args,
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button");
+    await expect(button).toHaveClass("text-primary");
+    await userEvent.hover(button);
+    const tooltip = await within(canvasElement.ownerDocument.body).findByText(
+      /Wird am.*gelöscht/,
     );
-    await userEvent.click(
-      within(dialog).getByRole("button", { name: "Löschfrist speichern" }),
-    );
-    await expect(await within(dialog).findByRole("alert")).toBeInTheDocument();
+    await expect(tooltip).toHaveTextContent("02.01.2030");
+    await expect(tooltip).toHaveTextContent("13:00");
+    await expect(tooltip).toHaveTextContent("Zum Ausschalten klicken.");
   },
 };

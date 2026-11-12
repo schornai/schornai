@@ -12,7 +12,7 @@ vi.mock(
 const input = {
   agentId: "11111111-1111-4111-8111-111111111111",
   activityId: "22222222-2222-4222-8222-222222222222",
-  seconds: 60,
+  seconds: 43_200,
 };
 it("uses authenticated identity, workspace authorization and the same atomic operation for MCP", async () => {
   mocks.agent.mockResolvedValue({ workspaceId: "workspace" });
@@ -33,7 +33,7 @@ it("uses authenticated identity, workspace authorization and the same atomic ope
   const set = tools.find((t) => t.name === "platform_chat_expiration_set")!;
   const get = tools.find((t) => t.name === "platform_chat_expiration_get")!;
   await expect(set.execute({ ...input, userId: "injected" })).resolves.toEqual({
-    seconds: 60,
+    seconds: 43_200,
     expiresAt: "2030-01-01T00:00:00Z",
   });
   expect(rpc).toHaveBeenCalledWith(
@@ -44,6 +44,7 @@ it("uses authenticated identity, workspace authorization and the same atomic ope
     seconds: null,
     expiresAt: null,
   });
+  await expect(set.execute({ ...input, seconds: 3600 })).rejects.toThrow();
   mocks.permission.mockResolvedValue(undefined);
   await expect(set.execute(input)).rejects.toThrow("NOT_AUTHORIZED");
   mocks.permission.mockResolvedValue("read");
