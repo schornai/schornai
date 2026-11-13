@@ -745,7 +745,14 @@
       "descriptionNoDetails": "Keine weiteren Fehlerdetails verfügbar.",
       "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben.",
       "errorContextBudget": "Die aktuelle Anfrage oder ihre Werkzeuge überschreiten das Kontextbudget. Verkleinere Anhänge oder starte einen neuen Chat; prüfe gegebenenfalls die eingestellte Kontextgröße.",
-      "errorContextCompression": "Der Gesprächskontext konnte nicht zuverlässig zusammengefasst werden. Der Chatverlauf ist erhalten. Versuche es erneut."
+      "errorContextCompression": "Der Gesprächskontext konnte nicht zuverlässig zusammengefasst werden. Der Chatverlauf ist erhalten. Versuche es erneut.",
+      "errorWorkerLost": "Die Verbindung zum verarbeitenden Dienst wurde unterbrochen. Prüfe bereits ausgeführte Werkzeugaktionen, bevor du es erneut versuchst.",
+      "errorToolInputInterrupted": "Die Eingabe für einen Werkzeugaufruf wurde unterbrochen. Dieses Werkzeug wurde nicht ausgeführt. Versuche es erneut.",
+      "errorRoleNotFound": "Die benötigte Agentenrolle ist nicht mehr verfügbar. Prüfe die Rollen des Agenten oder starte einen neuen Chat.",
+      "errorApprovalRoleNotFound": "Die Rolle zur offenen Werkzeugfreigabe ist nicht mehr verfügbar. Prüfe die Rollen des Agenten und starte einen neuen Chat.",
+      "errorApprovalRolesMismatch": "Die offenen Werkzeugfreigaben gehören zu unterschiedlichen Rollen und können nicht gemeinsam fortgesetzt werden. Starte einen neuen Chat.",
+      "errorModelApiKey": "Für das Sprachmodell fehlt der API-Schlüssel. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
+      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",

@@ -745,7 +745,14 @@
       "descriptionNoDetails": "No further error details are available.",
       "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals.",
       "errorContextBudget": "The current request or its tools exceed the context budget. Reduce attachments or start a new chat; check the configured context size if necessary.",
-      "errorContextCompression": "The conversation context could not be summarized reliably. Your chat history is preserved. Please try again."
+      "errorContextCompression": "The conversation context could not be summarized reliably. Your chat history is preserved. Please try again.",
+      "errorWorkerLost": "The connection to the processing service was lost. Check any completed tool actions before retrying.",
+      "errorToolInputInterrupted": "Input generation for a tool call was interrupted. This tool was not executed. Try again.",
+      "errorRoleNotFound": "The required agent role is no longer available. Check the agent’s roles or start a new chat.",
+      "errorApprovalRoleNotFound": "The role for the pending tool approval is no longer available. Check the agent’s roles and start a new chat.",
+      "errorApprovalRolesMismatch": "The pending tool approvals belong to different roles and cannot be resumed together. Start a new chat.",
+      "errorModelApiKey": "The language model’s API key is missing. Ask someone with access to model management to check its configuration.",
+      "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Calculator",

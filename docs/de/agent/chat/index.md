@@ -108,7 +108,10 @@ Während der Generierung kannst du **Abbrechen** wählen. Bereits ausgeführte W
 ## Fehler anzeigen und erneut versuchen
 
 Bei einem Fehler erscheint unter den Nachrichten eine kurze rote Fehlerbeschreibung.
-Klicke darauf, um die vollständigen verfügbaren Fehlerdetails aufzuklappen.
+Bekannte Kontext-, Dienst-, Werkzeug-, Rollen- und Modellkonfigurationsfehler werden
+mit verständlichen Hinweisen angezeigt. Bei anderen Fehlern erscheint die erste Zeile,
+bei langen Meldungen gekürzt. Klicke darauf, um die vollständigen verfügbaren
+Fehlerdetails aufzuklappen.
 **Erneut versuchen** setzt die Antwort mit dem vorhandenen Gesprächsverlauf fort,
 ohne deine Nachricht doppelt zu senden. Vorhandene Antworten und Werkzeugergebnisse
 bleiben erhalten; wartende Entwürfe werden dabei nicht gesendet. Bereits ausgeführte
