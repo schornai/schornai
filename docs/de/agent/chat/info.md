@@ -37,8 +37,8 @@ Klappe die Informationsbereiche auf, um Modell, Prompt, Rollen, angebundene Abla
 Die angezeigten Informationen spiegeln die aktuelle Konfiguration wider. Wurde der Agent zwischenzeitlich geändert, müssen sie nicht den Einstellungen einer früheren Antwort entsprechen. Für die konkrete Antwort sind zusätzlich die darin angezeigten Werkzeugaufrufe und Quellen wichtig.
 
 Bei aufgeklappten Modellinformationen siehst du die hinterlegte Kontextgröße in Tokens,
-auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erscheint ein roter
-Hinweis mit Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
+auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erklärt ein
+Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
 Die Grenze verwalten globale Administrator:innen unter **Modelle**.
 
 ## Zugehörige MCP-Werkzeuge

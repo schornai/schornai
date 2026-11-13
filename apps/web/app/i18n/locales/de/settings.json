@@ -472,7 +472,7 @@
     "descriptionDeleteAgentsTip": "Tipp: Gruppiere die Agentenübersicht unter „Optionen“ nach „Modell“. Betroffene Agenten findest du dort in den Gruppen „Unbekanntes Modell“.",
     "labelContextUnknown": "Keine Kontextgröße",
     "descriptionCompressionDisabled": "Ohne Kontextgröße ist die automatische Kontextkomprimierung deaktiviert.",
-    "descriptionContextSize": "Optional: nutzbare Kontextgröße in Tokens. Wird vom Anbieter übernommen, wenn verfügbar; du kannst den Wert korrigieren. Leer lassen deaktiviert die automatische Kontextkomprimierung.",
+    "descriptionContextSize": "Optional, in Tokens. Ohne Angabe ist die automatische Kontextkomprimierung deaktiviert.",
     "labelContextTokens": "{{size}} Tokens"
   },
   "connections": {

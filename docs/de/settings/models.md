@@ -54,7 +54,7 @@ Die Übersicht zeigt lokale und externe Modelle gemeinsam. Unter **Optionen** we
 Die Liste enthält die registrierten Modelle. Wenn ein gelistetes lokales Modell im Chat nicht antwortet, lass die Betriebsadministration den Modelldienst und die installierten Modelldateien prüfen. Installation und Aktualisierung erfolgen über [XRAG](xrag.md).
 
 Bei Sprachmodellen zeigen Karten, Tabelle und Detailseite die Kontextgröße in Tokens.
-**Keine Kontextgröße** erscheint rot; der Tooltip erklärt, dass dann die automatische
+Bei **Keine Kontextgröße** erklärt der Tooltip, dass die automatische
 Kontextkomprimierung deaktiviert ist. Dasselbe gilt für die aufgeklappte Modellinformation
 am Agenten, auch für abweichende Rollenmodelle.
 

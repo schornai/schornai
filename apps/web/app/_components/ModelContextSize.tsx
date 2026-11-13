@@ -12,9 +12,7 @@ export function ModelContextSize({ contextSize }: { contextSize?: number }) {
     return <span>{t("labelContextTokens", { size: contextSize })}</span>;
   return (
     <Tooltip>
-      <TooltipTrigger
-        render={<span tabIndex={0} className="text-destructive" />}
-      >
+      <TooltipTrigger render={<span tabIndex={0} />}>
         {t("labelContextUnknown")}
       </TooltipTrigger>
       <TooltipContent>{t("descriptionCompressionDisabled")}</TooltipContent>

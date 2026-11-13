@@ -472,7 +472,7 @@
     "descriptionDeleteAgentsTip": "Tip: In the agent overview, open “Options” and group by “Model”. Affected agents appear in the “Unknown model” groups.",
     "labelContextUnknown": "No context size",
     "descriptionCompressionDisabled": "Automatic context compression is disabled without a context size.",
-    "descriptionContextSize": "Optional: usable context size in tokens. Filled from the provider when available; you can correct it. Leave blank to disable automatic context compression.",
+    "descriptionContextSize": "Optional, in tokens. Leave blank to disable automatic context compression.",
     "labelContextTokens": "{{size}} tokens"
   },
   "connections": {

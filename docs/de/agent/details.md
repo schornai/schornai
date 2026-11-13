@@ -36,8 +36,8 @@ meta:
 Klappe die Informationsbereiche auf, um die eingerichteten Verbindungen zu sehen. Wird eine Ablage als unbekannt angezeigt, lass die Arbeitsplatzadministration die Zuordnung und deine Leserechte an dieser Ablage prüfen.
 
 Bei aufgeklappten Modellinformationen siehst du die hinterlegte Kontextgröße in Tokens,
-auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erscheint ein roter
-Hinweis mit Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
+auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erklärt ein
+Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
 Die Grenze verwalten globale Administrator:innen unter **Modelle**.
 
 ## Mit einem Beispiel beginnen
