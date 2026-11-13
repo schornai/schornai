@@ -6,7 +6,8 @@
     "download:container": "node src/container.ts ./dist",
     "download:ffmpeg": "node src/ffmpeg.ts ./dist",
     "download:node": "node src/node.ts ./dist",
-    "download:ollama": "node src/ollama.ts ./dist"
+    "download:ollama": "node src/ollama.ts ./dist",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",

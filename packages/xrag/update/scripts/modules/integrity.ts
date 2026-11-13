@@ -15,7 +15,7 @@ export type DirectoryIntegrity = {
   type: "directory";
 };
 
-export type FileOrDirectoryIntegrity = FileIntegrity | DirectoryIntegrity;
+type FileOrDirectoryIntegrity = FileIntegrity | DirectoryIntegrity;
 
 export type DockerImageIntegrity = {
   digest: string;
@@ -24,7 +24,7 @@ export type DockerImageIntegrity = {
   type: "docker-image";
 };
 
-export type BinVersionIntegrity = {
+type BinVersionIntegrity = {
   name: string;
   version: string;
   fileIntegrity: FileIntegrity;
@@ -56,7 +56,7 @@ function getFileHash(path: string) {
   });
 }
 
-export async function getFileSystemIntegrity(
+async function getFileSystemIntegrity(
   path: string,
 ): Promise<FileOrDirectoryIntegrity> {
   const stats = await stat(path);

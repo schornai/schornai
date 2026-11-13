@@ -58,12 +58,3 @@ export async function run(
 
   return { stderr, stdout };
 }
-
-export async function tryRun(...params: Parameters<typeof run>) {
-  try {
-    const result = await run(...params);
-    return { result, state: "success" as const };
-  } catch {
-    return { result: undefined, state: "error" as const };
-  }
-}

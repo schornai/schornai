@@ -2,10 +2,7 @@ import { join } from "node:path";
 import { run } from "../scripts/modules/run.mts";
 import type { DockerImageIntegrity } from "../scripts/modules/integrity.ts";
 
-export const imageBuilds: Record<
-  string,
-  { dockerfile: string; context: string }
-> = {
+const imageBuilds: Record<string, { dockerfile: string; context: string }> = {
   "aibox-web:latest": { dockerfile: "apps/web/Dockerfile", context: "." },
   "aibox-realtime:latest": {
     dockerfile: "apps/realtime/Dockerfile",
@@ -21,7 +18,7 @@ export const imageBuilds: Record<
   },
 };
 
-export const composeGroups = [
+const composeGroups = [
   { role: "core", files: ["docker-compose.yml"], profiles: [] },
   {
     role: "supabase",

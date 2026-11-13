@@ -37,7 +37,7 @@ export function validateResource(resource: string, origin: string) {
   if (resource !== `${origin}/mcp`) throw new Error("INVALID_RESOURCE");
 }
 
-export function validRedirectUri(value: string) {
+function validRedirectUri(value: string) {
   const url = new URL(value);
   return (
     !url.hash &&

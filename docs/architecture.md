@@ -236,6 +236,9 @@ excluded. Follow that policy before assuming a live document survives a restart.
   defines discovery and test aliases. The [test CI workflow](../.github/workflows/test.yml)
   adds coverage gates and production builds. Use the [testing guide](testing.md)
   when reproducing a failing validation layer locally.
+- [`npm run knip`](../knip.ts) checks unused code and dependency declarations in
+  a separate CI job. Read the [testing guide](testing.md#unused-code-and-dependencies)
+  when maintaining dynamic entry points or reviewing findings.
 - [`npm run test:sql`](../scripts/test-sql.mjs) runs every regression in
   [`supabase/tests`](../supabase/tests) against its own disposable database.
   This is separate from `npm test`; the runner owns database setup and cleanup.

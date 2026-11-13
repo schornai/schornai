@@ -10,7 +10,9 @@
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/mdast": "^4.0.4",
     "@types/node": "^26.6.5",
+    "@types/unist": "^3.0.3",
     "typescript": "^7.0.0"
   },
   "dependencies": {

@@ -7,7 +7,8 @@
     "python:install:requirements": "./venv/bin/python -m pip install --upgrade pip==26.2.1 && ./venv/bin/python -m pip install --upgrade --upgrade-strategy eager --requirement ./requirements.txt",
     "python:build": "node ./src/bundlePython.ts",
     "build": "npm run python:build",
-    "dev": "node --watch --env-file-if-exists .env ./server.ts"
+    "dev": "node --watch --env-file-if-exists .env ./server.ts",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
