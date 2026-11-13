@@ -121,3 +121,24 @@ export const ModelThinking_missing: Story = {
 };
 export const Model_missing: Story = { args: { model: undefined } };
 export const Opened: Story = { play: openDisclosure };
+
+export const ExternalOpened: Story = {
+  args: Model_external_llm_v1_external_llm_v1.args,
+  play: openDisclosure,
+};
+export const ExternalWithContextOpened: Story = {
+  args: {
+    model: {
+      ...Model_external_llm_v1_external_llm_v1.args!.model!,
+      type: "external_llm_v1",
+      config: {
+        provider: "mistral",
+        modelId: "example",
+        baseUrl: "https://api.mistral.ai/v1",
+        headers: {},
+        contextSize: 32768,
+      },
+    },
+  },
+  play: openDisclosure,
+};

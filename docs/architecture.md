@@ -71,6 +71,25 @@ Behavior checks: [submission and cancellation](../tests/web/chat-submission.test
 [result retention](../tests/task-retention.test.ts), and
 [OAuth routes and resumption](../tests/mcp-oauth-routes.test.ts).
 
+## Model context budgets
+
+[`getChatModel`](../packages/realtime/src/models/getChatModel.ts) wraps local and external
+models with [`withContextCompression`](../packages/realtime/src/models/withContextCompression.ts).
+The wrapper budgets each provider call, including routing and tool continuations. Unknown
+context sizes disable it. Summaries replace only the outgoing prompt, never Yjs messages;
+open tool exchanges and the latest user input remain intact. Summary requests use the
+unwrapped model and chunks measured against the actual request budget, preventing recursive
+compression. The summary length target is separate from the generation output reserve
+(including reasoning); empty or output-truncated summaries fail. Recognized context error
+codes survive SDK stream conversion while provider errors stay sanitized. The cache lives only
+for the model object's lifetime. The chat worker writes compression lifecycle events as
+`data-contextCompression` parts into its existing SDK UI-message stream; normal Yjs
+message persistence and `platform_chat_read` retain these markers. The
+[`ChatMessagePartContextCompression`](../apps/web/app/%28main%29/agent/%5BagentId%5D/%5BactivityId%5D/_components/ChatMessagePartContextCompression.tsx)
+renderer keeps them visible outside collapsed tool groups. Worker recovery finalizes
+unfinished status parts as interrupted. See [budget regressions](../tests/context-compression.test.ts)
+and [status/persistence regressions](../tests/context-compression-status.test.ts).
+
 ## Chat support and calculator
 
 [`AgentToolSession`](../apps/realtime/src/chat/AgentToolSession.ts) exposes the selected

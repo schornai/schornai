@@ -15,6 +15,7 @@ const mocks = vi.hoisted(() => ({
   messages: [] as any[],
   streamError: undefined as any,
   realUIStream: false,
+  realProviderStream: false,
   model: vi.fn(),
   tools: vi.fn(),
   approval: vi.fn(),
@@ -88,8 +89,8 @@ vi.mock("@schornio/aibox-database/chat/loadMessageFiles", () => ({
 vi.mock("../apps/realtime/src/chat/selectRole", () => ({
   selectRole: mocks.select,
 }));
-vi.mock("@schornio/aibox-realtime/_lib/aiboxModel", () => ({
-  aiboxModel: mocks.model,
+vi.mock("@schornio/aibox-realtime/models/getChatModel", () => ({
+  getChatModel: mocks.model,
 }));
 vi.mock("../apps/realtime/src/chat/AgentToolSession", () => ({
   AgentToolSession: class {
@@ -102,23 +103,38 @@ vi.mock("../apps/realtime/src/chat/AgentToolSession", () => ({
   },
 }));
 vi.mock("ai-sdk-ollama", () => ({ streamText: mocks.stream }));
-vi.mock("ai", async (importOriginal) => ({
-  ...(await importOriginal<any>()),
-  convertToModelMessages: mocks.convert,
-  toUIMessageStream: (value: any) => {
-    value.generateMessageId();
-    return value.stream;
-  },
-  readUIMessageStream: async function* (options: any) {
-    if (mocks.realUIStream) {
-      const actual = await importOriginal<any>();
-      yield* actual.readUIMessageStream(options);
-      return;
-    }
-    if (mocks.streamError) throw mocks.streamError;
-    for (const message of mocks.messages) yield message;
-  },
-}));
+vi.mock("ai", async (importOriginal) => {
+  const actual = await importOriginal<any>();
+  return {
+    ...(await importOriginal<any>()),
+    convertToModelMessages: mocks.convert,
+    toUIMessageStream: (value: any) => {
+      if (mocks.realProviderStream) return actual.toUIMessageStream(value);
+      return value.stream instanceof ReadableStream
+        ? value.stream
+        : new ReadableStream({
+            start(controller) {
+              controller.close();
+            },
+          });
+    },
+    readUIMessageStream: async function* (options: any) {
+      if (mocks.realUIStream) {
+        const actual = await importOriginal<any>();
+        yield* actual.readUIMessageStream(options);
+        return;
+      }
+      let metadata;
+      for await (const chunk of options.stream) {
+        if (chunk.type === "error") throw new Error(chunk.errorText);
+        if (chunk.type === "message-metadata") metadata = chunk.messageMetadata;
+      }
+      if (mocks.streamError) throw mocks.streamError;
+      for (const message of mocks.messages)
+        yield { ...message, metadata: { ...message.metadata, ...metadata } };
+    },
+  };
+});
 let chat: Doc, current: Doc, activities: Doc;
 const task = {
   id: "generation",
@@ -165,6 +181,7 @@ beforeEach(() => {
   ];
   mocks.streamError = undefined;
   mocks.realUIStream = false;
+  mocks.realProviderStream = false;
   mocks.sync.mockResolvedValue(undefined);
   mocks.roles = [
     {
@@ -742,3 +759,96 @@ it("resumes approved platform tools from immutable stored messages through the r
   );
   expect(saved.parts[0].state).toBe("approval-responded");
 });
+
+it("streams routing and answer compression markers through the same persisted SDK message", async () => {
+  mocks.realUIStream = true;
+  mocks.model.mockImplementation((id, context) => ({
+    id,
+    onCompression: context.onCompression,
+  }));
+  mocks.select.mockImplementationOnce(async (_agent, _messages, { model }) => {
+    model.onCompression({ id: "routing", state: "pending" });
+    model.onCompression({ id: "routing", state: "completed" });
+    return {
+      id: "role",
+      name: "Writer",
+      prompt: "Write",
+      modelIdentifierOverride: "override",
+    };
+  });
+  mocks.stream.mockImplementationOnce(async ({ model }) => {
+    model.onCompression({ id: "answer-compression", state: "pending" });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(getChat(chat).messages?.toArray().at(-1)?.parts).toContainEqual({
+      type: "data-contextCompression",
+      id: "answer-compression",
+      data: { state: "pending" },
+    });
+    model.onCompression({ id: "answer-compression", state: "completed" });
+    return {
+      usage: Promise.resolve({ inputTokens: 1, outputTokens: 1 }),
+      stream: new ReadableStream({
+        start(controller) {
+          controller.enqueue({ type: "text-start", id: "text" });
+          controller.enqueue({
+            type: "text-delta",
+            id: "text",
+            delta: "Continued answer",
+          });
+          controller.enqueue({ type: "text-end", id: "text" });
+          controller.enqueue({ type: "finish" });
+          controller.close();
+        },
+      }),
+    };
+  });
+  queue({ type: "text", text: "Continue" });
+  await run();
+  const messages = getChat(chat).messages!.toArray();
+  expect(messages).toHaveLength(2);
+  expect(messages[0]?.parts).toContainEqual(
+    expect.objectContaining({ type: "text", text: "Continue" }),
+  );
+  expect(messages[1]?.parts).toEqual([
+    {
+      type: "data-contextCompression",
+      id: "routing",
+      data: { state: "completed" },
+    },
+    {
+      type: "data-contextCompression",
+      id: "answer-compression",
+      data: { state: "completed" },
+    },
+    expect.objectContaining({ type: "text", text: "Continued answer" }),
+  ]);
+  expect(messages[1]?.metadata).toMatchObject({
+    roleId: "role",
+    roleName: "Writer",
+  });
+});
+
+it.each([
+  "CONTEXT_COMPRESSION_FAILED",
+  "CONTEXT_BUDGET_EXCEEDED",
+  "private provider detail",
+])(
+  "keeps recognized compression errors through the real SDK stream: %s",
+  async (code) => {
+    mocks.realUIStream = true;
+    mocks.realProviderStream = true;
+    mocks.stream.mockResolvedValueOnce({
+      usage: Promise.resolve({ inputTokens: 0, outputTokens: 0 }),
+      stream: new ReadableStream({
+        start(controller) {
+          controller.enqueue({ type: "error", error: new Error(code) });
+          controller.close();
+        },
+      }),
+    });
+    queue({ type: "text", text: "Continue" });
+    const expected = code.startsWith("CONTEXT_") ? code : "An error occurred.";
+    await expect(run()).rejects.toThrow(expected);
+    expect(getChat(chat).state!.get("error")).toBe(expected);
+  },
+);

@@ -6,10 +6,10 @@ BEGIN
      OR has_table_privilege('authenticated', 'public.ai_model_credentials', 'SELECT') THEN
     RAISE EXCEPTION 'Model credentials are exposed';
   END IF;
-  IF has_function_privilege('anon', 'public.create_external_ai_model(text,text,text,text,text,text)', 'EXECUTE')
-     OR has_function_privilege('authenticated', 'public.create_external_ai_model(text,text,text,text,text,text)', 'EXECUTE')
-     OR has_function_privilege('anon', 'public.update_external_ai_model(text,text,text,text,text,text)', 'EXECUTE')
-     OR has_function_privilege('authenticated', 'public.update_external_ai_model(text,text,text,text,text,text)', 'EXECUTE') THEN
+  IF has_function_privilege('anon', 'public.create_external_ai_model(text,text,text,text,text,text,integer)', 'EXECUTE')
+     OR has_function_privilege('authenticated', 'public.create_external_ai_model(text,text,text,text,text,text,integer)', 'EXECUTE')
+     OR has_function_privilege('anon', 'public.update_external_ai_model(text,text,text,text,text,text,integer)', 'EXECUTE')
+     OR has_function_privilege('authenticated', 'public.update_external_ai_model(text,text,text,text,text,text,integer)', 'EXECUTE') THEN
     RAISE EXCEPTION 'Model mutation RPC is exposed';
   END IF;
 END $test$;
@@ -89,6 +89,25 @@ BEGIN
     RAISE EXCEPTION 'Blank update erased the stored key';
   END IF;
 
+  PERFORM public.update_external_ai_model(test_model_id, 'changed-again',
+    'https://other.example.com/v1', '', 'openai-compatible', NULL, 32768);
+  IF (SELECT (config->>'contextSize')::integer FROM public.ai_models WHERE id = test_model_id) <> 32768 THEN
+    RAISE EXCEPTION 'Context size not stored';
+  END IF;
+  BEGIN
+    PERFORM public.update_external_ai_model(test_model_id, 'changed-again',
+      'https://other.example.com/v1', 'must-not-change', 'openai-compatible', NULL, 0);
+    RAISE EXCEPTION 'Invalid context size accepted';
+  EXCEPTION WHEN invalid_parameter_value THEN NULL;
+  END;
+  IF (SELECT api_key FROM public.ai_model_credentials WHERE model_id = test_model_id) <> 'replacement-secret' THEN
+    RAISE EXCEPTION 'Invalid context size changed credentials';
+  END IF;
+  PERFORM public.update_external_ai_model(test_model_id, 'changed-again',
+    'https://other.example.com/v1', '', 'openai-compatible', NULL, NULL);
+  IF (SELECT config ? 'contextSize' FROM public.ai_models WHERE id = test_model_id) THEN
+    RAISE EXCEPTION 'Clearing context size failed';
+  END IF;
   DELETE FROM public.ai_models WHERE id = test_model_id;
   IF EXISTS (SELECT 1 FROM public.ai_model_credentials WHERE model_id = test_model_id) THEN
     RAISE EXCEPTION 'Credentials were not removed with their model';

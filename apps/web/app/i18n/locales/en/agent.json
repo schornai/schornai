@@ -743,7 +743,16 @@
       "labelRetry": "Retry",
       "descriptionFailed": "The response could not be generated.",
       "descriptionNoDetails": "No further error details are available.",
-      "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals."
+      "errorRetry": "Could not start the retry. Please check the connection and pending tool approvals.",
+      "errorContextBudget": "The request exceeds the context budget. Reduce attachments or start a new chat.",
+      "errorContextCompression": "The context could not be summarized. Try again; your chat history is preserved.",
+      "errorWorkerLost": "The connection to the processing service was lost. Check any completed tool actions before retrying.",
+      "errorToolInputInterrupted": "Input generation for a tool call was interrupted. This tool was not executed. Try again.",
+      "errorRoleNotFound": "The required agent role is no longer available. Check the agent’s roles or start a new chat.",
+      "errorApprovalRoleNotFound": "The role for the pending tool approval is no longer available. Check the agent’s roles and start a new chat.",
+      "errorApprovalRolesMismatch": "The pending tool approvals belong to different roles and cannot be resumed together. Start a new chat.",
+      "errorModelApiKey": "The language model’s API key is missing. Ask someone with access to model management to check its configuration.",
+      "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Calculator",
@@ -766,6 +775,12 @@
       "labelRemove": "Remove tool",
       "descriptionRemove": "This removes the tool from this role. Save the agent to apply the change.",
       "labelCancel": "Cancel"
+    },
+    "ChatMessagePartContextCompression": {
+      "labelPending": "Summarizing context…",
+      "labelCompleted": "Context summarized",
+      "labelFailed": "Context could not be summarized",
+      "labelInterrupted": "Context summarization interrupted"
     }
   },
   "page": {

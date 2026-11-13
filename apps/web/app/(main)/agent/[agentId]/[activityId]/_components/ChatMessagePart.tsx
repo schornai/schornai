@@ -1,4 +1,5 @@
 import { ChatMessagePartToolSupport } from "./ChatMessagePartToolSupport";
+import { ChatMessagePartContextCompression } from "./ChatMessagePartContextCompression";
 import {
   ChatMessagePartToolPlatform,
   isPlatformToolPart,
@@ -16,6 +17,7 @@ import {
   Globe,
   Plug,
   Search,
+  Summary,
 } from "lucide-react";
 import { ChatMessagePartToolWebFetch } from "./ChatMessagePartToolWebFetch";
 import { ChatMessagePartToolWebSearch } from "./ChatMessagePartToolWebSearch";
@@ -54,6 +56,8 @@ export function ChatMessagePartIcon({
 }) {
   if (partType.startsWith("tool-platform_")) return <DraftingCompass />;
   switch (partType) {
+    case "data-contextCompression":
+      return <Summary />;
     case "tool-calculator":
       return <Calculator />;
     case "tool-chat-set-label":
@@ -97,6 +101,8 @@ export function ChatMessagePart({
   if (isPlatformToolPart(part))
     return <ChatMessagePartToolPlatform part={part} agentColor={agentColor} />;
   switch (part.type) {
+    case "data-contextCompression":
+      return <ChatMessagePartContextCompression part={part} />;
     case "tool-calculator":
     case "tool-chat-set-label":
     case "tool-chat-current-date-time":

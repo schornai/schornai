@@ -7,6 +7,7 @@ import type {
 import type {
   chatFeatures,
   chatFileDataSchema,
+  chatContextCompressionSchema,
   chatMessagesSchema,
 } from "./_schema.ts";
 import type { Database } from "../_shared/_supabase.ts";
@@ -94,6 +95,9 @@ export type ChatDatabaseRow = Database["public"]["Tables"]["chats"]["Row"] & {
 };
 
 export type ChatFileData = z.infer<typeof chatFileDataSchema>;
+export type ChatContextCompression = z.infer<
+  typeof chatContextCompressionSchema
+>;
 
 export type ChatMessage = z.infer<typeof chatMessagesSchema>[number];
 

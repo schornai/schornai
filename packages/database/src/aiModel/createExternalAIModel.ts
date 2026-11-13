@@ -10,6 +10,7 @@ export async function createExternalAIModel(
     apiKey: string;
     provider?: ExternalModelProvider;
     region?: string;
+    contextSize?: number | null;
   },
   { supabase }: { supabase: SupabaseClient },
 ) {
@@ -21,6 +22,9 @@ export async function createExternalAIModel(
       base_url: input.baseUrl,
       api_key: input.apiKey,
       provider: input.provider ?? "openai-compatible",
+      ...(input.contextSize !== undefined
+        ? { context_size: input.contextSize ?? undefined }
+        : {}),
       ...(input.region ? { region: input.region } : {}),
     });
     if (error || !id) throw new Error();

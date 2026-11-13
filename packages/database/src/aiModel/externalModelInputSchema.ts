@@ -8,6 +8,13 @@ export const externalModelInputSchema = z
       .string()
       .regex(/^[a-z]{2}(?:-[a-z]+)+-\d+$/)
       .optional(),
+    contextSize: z
+      .number()
+      .int()
+      .positive()
+      .max(2147483647)
+      .nullable()
+      .optional(),
     name: z.string().trim().min(1).max(500),
     modelId: z
       .string()

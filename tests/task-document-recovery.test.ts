@@ -181,3 +181,27 @@ it.each(["finished", "aborted"])(
     ).toMatchObject({ state: state === "finished" ? "success" : "idle" });
   },
 );
+
+it("persists interrupted compression status after the worker is lost", async () => {
+  get(chatName)
+    .getArray("messages")
+    .push([
+      {
+        id: "response",
+        role: "assistant",
+        parts: [
+          {
+            type: "data-contextCompression",
+            id: "summary",
+            data: { state: "pending" },
+          },
+        ],
+      },
+    ]);
+  await recoverTaskDocuments(instance, task, options);
+  const restored = new Doc();
+  applyUpdate(restored, saved.get(chatName)!);
+  expect(restored.getArray<any>("messages").get(0).parts[0].data.state).toBe(
+    "interrupted",
+  );
+});

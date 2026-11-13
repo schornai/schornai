@@ -416,3 +416,39 @@ it.each([undefined, "Short", "x".repeat(181)])(
     } else expect(screen.queryByRole("button")).toBeNull();
   },
 );
+
+it.each([
+  ["CONTEXT_BUDGET_EXCEEDED", "errorContextBudget"],
+  ["CONTEXT_COMPRESSION_FAILED", "errorContextCompression"],
+  ["TASK_WORKER_LOST", "errorWorkerLost"],
+  ["TOOL_INPUT_INTERRUPTED", "errorToolInputInterrupted"],
+  ["ROLE_NOT_FOUND", "errorRoleNotFound"],
+  ["Agent role no longer available", "errorRoleNotFound"],
+  ["TOOL_APPROVAL_ROLE_NOT_FOUND", "errorApprovalRoleNotFound"],
+  ["TOOL_APPROVAL_ROLES_MISMATCH", "errorApprovalRolesMismatch"],
+  ["MODEL_API_KEY_REQUIRED", "errorModelApiKey"],
+  ["MODEL_REGION_REQUIRED", "errorModelRegion"],
+  ["An error occurred.", "descriptionFailed"],
+  ["   ", "descriptionFailed"],
+  ["Unknown provider error\nAdditional details", "Unknown provider error"],
+  ["x".repeat(141), `${"x".repeat(140)}…`],
+  ["constructor", "constructor"],
+  ["  CONTEXT_BUDGET_EXCEEDED\r\nAdditional details  ", "errorContextBudget"],
+])(
+  "shows a readable summary for %s and preserves details",
+  (error, summary) => {
+    mocks.error = error;
+    render(
+      <ChatMessageItems
+        agentId="agent"
+        activityId="activity"
+        agentColor={{ type: "color-oklch-hue", oklchHue: 100 }}
+      />,
+    );
+    expect(screen.getByRole("status").textContent).toBe(summary);
+    fireEvent.click(screen.getByRole("button", { name: /labelDetails/ }));
+    expect(document.querySelector("pre")?.textContent).toBe(
+      error.trim() || "descriptionNoDetails",
+    );
+  },
+);

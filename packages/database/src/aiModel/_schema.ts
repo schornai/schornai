@@ -48,6 +48,7 @@ export type ExternalModelProvider = z.infer<typeof externalModelProviderSchema>;
 export const aiModelExternalLLMV1Schema = z.object({
   config: z.object({
     provider: externalModelProviderSchema,
+    contextSize: z.number().int().positive().optional(),
     modelId: z.string().min(1),
     baseUrl: z.string(),
     region: z.string().optional(),

@@ -1,3 +1,6 @@
+import { withContextCompression } from "./withContextCompression.ts";
+import type { ContextCompressionListener } from "./withContextCompression.ts";
+import { getAIModelByIdentifier } from "@schornio/aibox-package-database/aiModel/getAIModelByIdentifier";
 import { createExternalLanguageModel } from "./createExternalLanguageModel.ts";
 import { aiboxModel } from "../_lib/aiboxModel.ts";
 import type { SupabaseClient } from "@schornio/aibox-package-database/_shared/_types";
@@ -8,10 +11,26 @@ export async function getChatModel(
   context: Parameters<typeof aiboxModel>[1] & {
     supabaseServiceRole: SupabaseClient;
     abortSignal?: AbortSignal;
+    onCompression?: ContextCompressionListener;
   },
 ) {
-  if (!identifier.startsWith("external:"))
-    return aiboxModel(identifier, context);
+  if (!identifier.startsWith("external:")) {
+    let metadata: ReturnType<typeof getAIModelByIdentifier> | undefined;
+    return withContextCompression(
+      aiboxModel(identifier, context),
+      async () => {
+        metadata ??= getAIModelByIdentifier(identifier, {
+          supabase: context.supabaseServiceRole,
+          abortSignal: context.abortSignal,
+        });
+        const model = await metadata;
+        return "contextSize" in model.config
+          ? model.config.contextSize
+          : undefined;
+      },
+      context.onCompression,
+    );
+  }
   const { config, apiKey } = await getExternalAIModelConnection(
     { identifier },
     {
@@ -19,5 +38,9 @@ export async function getChatModel(
       abortSignal: context.abortSignal,
     },
   );
-  return createExternalLanguageModel(config, apiKey);
+  return withContextCompression(
+    createExternalLanguageModel(config, apiKey),
+    async () => config.contextSize,
+    context.onCompression,
+  );
 }
