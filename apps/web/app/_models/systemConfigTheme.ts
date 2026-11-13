@@ -3,7 +3,7 @@ import { getSystemConfig } from "@schornio/aibox-package-database/config/getSyst
 import { trySync } from "@schornio/aibox-package-utils/trySync";
 import { z } from "zod/mini";
 import { themeColorSchema, themeSchema } from "@/lib/theme";
-export { themeColorSchema, themeSchema } from "@/lib/theme";
+export { themeSchema } from "@/lib/theme";
 export type { Theme } from "@/lib/theme";
 
 const themeLegacySchema = z.object({

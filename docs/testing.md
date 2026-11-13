@@ -30,6 +30,23 @@ or invalid secondary translations produce warnings; locale-specific plural forms
 can also produce warnings. Secondary languages are updated only when explicitly
 requested, and missing entries fall back to German at runtime.
 
+## Unused code and dependencies
+
+`npm run knip` checks unused files, exports, types, dependencies, undeclared
+imports and unresolved imports. The test workflow runs it as a separate required-to-pass
+job on pull requests and pushes to `main` and `dev`; it is separate from `npm test`.
+
+[`knip.ts`](../knip.ts) records entry points invoked outside the static import graph:
+Storybook replacements come from the existing boundary manifest, while standalone
+XRAG tools and subprocess scripts are explicit entries. Keep new dynamic entry
+points here with their invocation reason. Check callers and build scripts before
+removing a reported file; use narrowly scoped, explained exceptions for generated
+imports and intentionally public component exports.
+
+Package export maps remain public entry points. Knip does not prove that every
+exported package operation has a repository caller; use the production dependency
+inventory from `npm run test:scope` when reviewing those candidates.
+
 ## Coverage
 
 ```sh

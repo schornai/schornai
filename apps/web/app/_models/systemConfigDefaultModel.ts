@@ -10,8 +10,6 @@ export const defaultModelSchema = z.object({
   version: z.literal("default-model-v2"),
 });
 
-export type DefaultModel = z.infer<typeof defaultModelSchema>;
-
 export async function getSystemConfigDefaultModel(): Promise<
   z.infer<typeof defaultModelSchema> | undefined
 > {

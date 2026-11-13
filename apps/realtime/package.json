@@ -7,9 +7,10 @@
   },
   "dependencies": {
     "@ai-sdk/mcp": "2.0.93",
-    "@ai-sdk/openai-compatible": "3.0.87",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../../packages/database",
+    "@schornio/aibox-package-database": "*",
+    "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*",
     "@supabase/supabase-js": "2.119.0",
     "ai": "7.0.166",
@@ -21,5 +22,8 @@
     "type": "git",
     "url": "https://github.com/schornai/schornai.git",
     "directory": "apps/realtime"
+  },
+  "devDependencies": {
+    "@schornio/aibox-eslint-config": "*"
   }
 }

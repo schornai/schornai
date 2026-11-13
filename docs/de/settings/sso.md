@@ -14,7 +14,7 @@ meta:
       "apps/web/app/(settings)/settings/sso/page.tsx",
       "apps/web/app/(settings)/settings/sso/_components/AddSSOProvider.tsx",
       "apps/web/app/(settings)/settings/sso/_components/EditSAMLAttributeMapping.tsx",
-      "apps/web/lib/defaultSAMLAttributes.ts",
+      "packages/database/src/sso/defaultSAMLAttributes.ts",
       "packages/database/src/user/buildAccessToken.ts",
       "packages/database/src/sso/createSSOSettings.ts",
       "packages/database/src/sso/saveSSOAttributeMapping.ts",
