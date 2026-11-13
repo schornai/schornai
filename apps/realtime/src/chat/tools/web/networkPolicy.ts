@@ -28,7 +28,7 @@ nonPublicV6.addSubnet("2001:db8::", 32, "ipv6");
 nonPublicV6.addSubnet("2002::", 16, "ipv6");
 nonPublicV6.addSubnet("3fff::", 20, "ipv6");
 
-export function isPublicAddress(address: string) {
+function isPublicAddress(address: string) {
   const family = isIP(address);
   return family === 4
     ? !nonPublicV4.check(address, "ipv4")

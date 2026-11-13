@@ -10,17 +10,16 @@
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
     "@supabase/supabase-js": "2.119.0",
-    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.6.5",
     "eslint": "^10.14.0",
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "xrag": "*",
     "@schornio/aibox-package-markdown-changelog": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.166",
-    "jose": "^6.2.12"
+    "ai": "7.0.168",
+    "jose": "^6.2.12",
+    "xrag": "*"
   },
   "license": "AGPL-3.0-only",
   "repository": {

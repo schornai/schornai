@@ -15,6 +15,8 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessage.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolSupport.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartContextCompression.tsx",
+      "apps/realtime/src/chat/worker.ts",
       "packages/realtime/src/documents/chat/getResponseSuggestions.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
       "packages/realtime/src/_lib/waitForProviderSynced.ts",
@@ -27,6 +29,7 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatExpirationSettings.tsx",
       "apps/realtime/src/scheduler/expireChat.ts",
       "packages/database/src/chat/setChatExpiration.ts",
+      "packages/realtime/src/models/withContextCompression.ts",
       "packages/realtime/src/server/recoverTaskDocuments.ts",
     ]
 ---
@@ -38,6 +41,39 @@ Starte einen Chat über **Neuer Chat** am Agenten. Vorhandene Gespräche öffnes
 ![Nachrichteneingabe mit Nachdenken, Nachrichtenstapel, Dateiupload und Senden](../../assets/chat-eingabe.png)
 
 Der leere Chat zeigt das Agenten-Icon und den Hinweis **Schreibe deine erste Nachricht**. Wenn der Agent vorgeschlagene Nachrichten hat, erscheinen sie als Kacheln in der Agentenfarbe direkt über der Texteingabe. Ein Klick ersetzt den bisherigen Text und setzt den Fokus ins Eingabefeld. Du kannst den Vorschlag bearbeiten oder mit `Enter` senden; er wird nicht automatisch abgeschickt. Dasselbe gilt beim Einstieg über eine Vorschlagskarte in der Agenteninfo.
+
+## Automatische Kontextkomprimierung
+
+Wenn für das verwendete Modell eine Kontextgröße hinterlegt ist, schätzt schorn.ai vor
+jedem Modellaufruf den Umfang von Nachrichten, Anweisungen und Werkzeugdefinitionen.
+Es bleiben 15 % Sicherheitsabstand und eine Ausgabereserve von standardmäßig 8.192 Tokens,
+begrenzt auf 25 % des Kontextfensters. Ein ausdrücklich angefordertes Ausgabelimit ersetzt
+den Standardwert, bleibt aber ebenfalls auf 25 % begrenzt. Die Reserve begrenzt auch die generierte Ausgabe einschließlich modellabhängiger
+Reasoning-Tokens. Die Schätzung ist keine exakte Anbieterzählung, insbesondere bei Anhängen.
+
+Bei Platzmangel werden ältere Inhalte und abgeschlossene Werkzeugschritte durch eine
+Zusammenfassung ersetzt, ausschließlich für den Modellinput. Der sichtbare und gespeicherte
+Chatverlauf bleibt vollständig erhalten. Die aktuelle Nutzeranfrage, Systemanweisungen und
+offene Werkzeugaufrufe/Freigaben bleiben bestehen. Das gilt auch für Rollenauswahl und
+Rollen mit einem anderen Modell. Ohne hinterlegte Kontextgröße ist die Funktion aus.
+
+Während der Komprimierung erscheint im Chat ein Marker mit dem Summary-Symbol und
+„Kontext wird zusammengefasst …“. Nach Erfolg lautet er „Kontext zusammengefasst“.
+Bei Fehler oder Abbruch zeigt der Marker den entsprechenden Zustand. Diese Statushinweise
+bleiben im gespeicherten Verlauf erhalten; die interne Zusammenfassung selbst wird nicht
+als Chatnachricht angezeigt. Sie werden auch über den bestehenden Nachrichtenabruf
+`platform_chat_read` als `data-contextCompression`-Bestandteile bereitgestellt.
+
+Zusammenfassungen können Details verlieren, benötigen zusätzliche Modellaufrufe und können
+Kosten und Wartezeit erhöhen. Sie werden im laufenden Modellobjekt wiederverwendet, aber
+nicht als dauerhafte Chatnachricht gespeichert. Ihre zusätzlichen Tokens sind nicht in der
+Nutzungsanzeige der abschließenden Antwort enthalten. Ältere binäre Anhänge werden mit einem
+Verweis statt ihres Inhalts zusammengefasst. Passt bereits die aktuelle Anfrage mit ihren
+Werkzeugen nicht ins Budget, erscheint ein Fehler; verkleinere die Eingabe oder beginne
+einen neuen Chat. Zusammenfassungsaufrufe haben eine eigene Ausgabereserve, die auch
+Reasoning-Tokens abdeckt. Eine leere oder vom Anbieter wegen des Ausgabelimits abgeschnittene
+Zusammenfassung gilt als fehlgeschlagen. Dann erscheint eine verständliche Fehlermeldung;
+es wird kein übergroßer Folgeaufruf gesendet.
 
 ## Nachricht senden
 
@@ -75,7 +111,10 @@ Während der Generierung kannst du **Abbrechen** wählen. Bereits ausgeführte W
 ## Fehler anzeigen und erneut versuchen
 
 Bei einem Fehler erscheint unter den Nachrichten eine kurze rote Fehlerbeschreibung.
-Klicke darauf, um die vollständigen verfügbaren Fehlerdetails aufzuklappen.
+Bekannte Kontext-, Dienst-, Werkzeug-, Rollen- und Modellkonfigurationsfehler werden
+mit verständlichen Hinweisen angezeigt. Bei anderen Fehlern erscheint die erste Zeile,
+bei langen Meldungen gekürzt. Klicke darauf, um die vollständigen verfügbaren
+Fehlerdetails aufzuklappen.
 **Erneut versuchen** setzt die Antwort mit dem vorhandenen Gesprächsverlauf fort,
 ohne deine Nachricht doppelt zu senden. Vorhandene Antworten und Werkzeugergebnisse
 bleiben erhalten; wartende Entwürfe werden dabei nicht gesendet. Bereits ausgeführte
@@ -151,3 +190,7 @@ Teilnahme am Chat voraus; ein höheres Tool-Level ersetzt diese Prüfung nicht.
 `seconds` muss 43.200 (12 Stunden) sein; `null`
 schaltet die Frist aus. Einschalten erfordert die aktivierte Zusatzfunktion des Agenten. Jede Änderung mit einer Dauer beginnt die Frist neu.
 Bereits begonnene Löschungen können nicht zurückgenommen werden.
+Kontextkomprimierung läuft ebenfalls bei `platform_chat_send` (Mindestzugriff **user**,
+Berechtigung für Agent und Gespräch) automatisch. Es gibt kein separates Komprimierungswerkzeug;
+die Prüfung erfolgt zwingend vor jedem betroffenen Modellaufruf. Die Modellgrenze verwalten
+globale Administrator:innen mit den Modellwerkzeugen (Mindestzugriff **admin**).

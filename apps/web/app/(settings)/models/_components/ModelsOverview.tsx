@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useT } from "next-i18next/client";
+import { ModelContextSize } from "../../../_components/ModelContextSize";
 import { ModelCard } from "./ModelCard";
 import { Badge } from "@schornio/aibox-package-ui/components/badge";
 import { Button } from "@schornio/aibox-package-ui/components/button";
@@ -260,6 +261,7 @@ export function ModelsOverview({
                   <TableHead>{t("labelType")}</TableHead>
                   <TableHead>{t("labelOrigin")}</TableHead>
                   <TableHead>{t("labelIdentifier")}</TableHead>
+                  <TableHead>{t("labelContextSize")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -267,7 +269,7 @@ export function ModelsOverview({
                   <Fragment key={toKey(key)}>
                     {key !== NO_GROUP_KEY && (
                       <TableRow>
-                        <TableCell colSpan={4} className="bg-muted font-medium">
+                        <TableCell colSpan={5} className="bg-muted font-medium">
                           {groupLabel(key)}
                         </TableCell>
                       </TableRow>
@@ -287,6 +289,14 @@ export function ModelsOverview({
                         <TableCell>{originLabel(model)}</TableCell>
                         <TableCell>
                           {model.modelId || model.identifier}
+                        </TableCell>
+                        <TableCell>
+                          {model.type === "external_llm_v1" ||
+                          model.type === "ollama_llm_v1" ? (
+                            <ModelContextSize contextSize={model.contextSize} />
+                          ) : (
+                            (model.contextSize ?? "—")
+                          )}
                         </TableCell>
                       </TableRow>
                     ))}

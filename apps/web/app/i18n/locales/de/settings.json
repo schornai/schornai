@@ -469,7 +469,11 @@
     "labelEditSection": "{{section}} bearbeiten",
     "labelToggleSection": "{{section}} ein-/ausklappen",
     "descriptionDeleteAgents": "Agenten, die dieses Modell verwenden, bleiben erhalten. Sie können jedoch erst wieder verwendet werden, wenn du ihnen ein anderes verfügbares Modell zuweist.",
-    "descriptionDeleteAgentsTip": "Tipp: Gruppiere die Agentenübersicht unter „Optionen“ nach „Modell“. Betroffene Agenten findest du dort in den Gruppen „Unbekanntes Modell“."
+    "descriptionDeleteAgentsTip": "Tipp: Gruppiere die Agentenübersicht unter „Optionen“ nach „Modell“. Betroffene Agenten findest du dort in den Gruppen „Unbekanntes Modell“.",
+    "labelContextUnknown": "Keine Kontextgröße",
+    "descriptionCompressionDisabled": "Ohne Kontextgröße ist die automatische Kontextkomprimierung deaktiviert.",
+    "descriptionContextSize": "Optional, in Tokens. Ohne Angabe ist die automatische Kontextkomprimierung deaktiviert.",
+    "labelContextTokens": "{{size}} Tokens"
   },
   "connections": {
     "labelTitle": "Verbindungen",

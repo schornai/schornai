@@ -8,9 +8,11 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für einen neuen Chat: ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-12"
   source_files:
     [
+      "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
+      "apps/web/app/_components/ModelContextSize.tsx",
       "apps/web/app/(main)/agent/[agentId]/page.tsx",
       "apps/web/app/(main)/agent/_components/AgentInfo.tsx",
       "apps/web/app/(main)/agent/_components/AgentRecommendedMessage.tsx",
@@ -33,6 +35,11 @@ meta:
 
 Klappe die Informationsbereiche auf, um die eingerichteten Verbindungen zu sehen. Wird eine Ablage als unbekannt angezeigt, lass die Arbeitsplatzadministration die Zuordnung und deine Leserechte an dieser Ablage prüfen.
 
+Bei aufgeklappten Modellinformationen siehst du die hinterlegte Kontextgröße in Tokens,
+auch bei externen und abweichenden Rollenmodellen. Fehlt die Größe, erklärt ein
+Tooltip: Die automatische Kontextkomprimierung ist dann deaktiviert.
+Die Grenze verwalten globale Administrator:innen unter **Modelle**.
+
 ## Mit einem Beispiel beginnen
 
 Ein Klick auf eine vorgeschlagene Nachricht öffnet einen neuen Chat und füllt das Eingabefeld mit ihrem Text. Das Feld erhält den Fokus, sodass du den Text bearbeiten oder mit `Enter` senden kannst. Der Vorschlag wird nicht automatisch gesendet.
@@ -42,3 +49,10 @@ Ein Klick auf eine vorgeschlagene Nachricht öffnet einen neuen Chat und füllt 
 Der Reiter [Info](chat/info.md) bietet die Agenteninformationen auch innerhalb eines Gesprächs. Nach einer Änderung am Agenten zeigt auch dieser Reiter die neuen Einstellungen; frühere Konfigurationen lassen sich hier nicht abrufen.
 
 Zum Ändern der Konfiguration brauchst du die Rolle Arbeitsplatzadministrator:in oder globale Administratorrechte. Details findest du unter [Agent bearbeiten](edit/index.md).
+
+## Zugehörige MCP-Werkzeuge
+
+`platform_agent_get` liest die Agentenkonfiguration (Mindestzugriff **user**, Zugriff auf
+den jeweiligen Agenten erforderlich). `platform_models_list` liefert öffentliche
+Modellmetadaten einschließlich einer hinterlegten Kontextgröße (Mindestzugriff **user**).
+Die Kontextanzeige selbst ist eine Browserfunktion und benötigt kein eigenes Werkzeug.

@@ -5,7 +5,13 @@ import {
   ServerBatchRealtimeProvider,
   ServerRealtimeProvider,
 } from "@schornio/aibox-realtime/server/ServerRealtimeProvider";
-import { readUIMessageStream, toUIMessageStream } from "ai";
+import {
+  createUIMessageStream,
+  readUIMessageStream,
+  toUIMessageStream,
+} from "ai";
+import type { LanguageModelUsage } from "ai";
+import type { ContextCompressionListener } from "@schornio/aibox-realtime/models/withContextCompression";
 import type { Activity } from "@schornio/aibox-realtime/documents/activity/_types";
 import { AgentToolSession } from "./AgentToolSession.ts";
 import type { ChatMessage } from "@schornio/aibox-database/chat/_types";
@@ -279,13 +285,88 @@ export async function chatWorker({
           !resumedRole
         )
           throw new Error("Agent role no longer available");
-        const selectedRole =
-          resumedRole ??
-          (await selectRole(
-            agent,
-            modelMessages,
-            {
-              model: await getChatModel(agent.modelIdentifier, {
+        const lastMessage = messages.at(-1);
+        const timingStart = performance.now();
+        let timingFirstResponse: number | undefined;
+        let usage: LanguageModelUsage | undefined;
+        let streamFailure: { error: unknown } | undefined;
+        const responseStream = createUIMessageStream<ChatMessage>({
+          originalMessages: messages,
+          generateId: () => crypto.randomUUID(),
+          onError: (error) => {
+            streamFailure = { error };
+            return error instanceof Error ? error.message : String(error);
+          },
+          execute: async ({ writer }) => {
+            writer.write({ type: "start" });
+            const onCompression: ContextCompressionListener = ({
+              id,
+              state,
+            }) => {
+              writer.write({
+                type: "data-contextCompression",
+                id,
+                data: { state },
+              });
+            };
+            const selectedRole =
+              resumedRole ??
+              (await selectRole(
+                agent,
+                modelMessages,
+                {
+                  model: await getChatModel(agent.modelIdentifier, {
+                    onCompression,
+                    chat: {
+                      activityId: claimedTask.parameters.activityId,
+                      agentId: claimedTask.parameters.agentId,
+                    },
+                    supabaseServiceRole,
+                    abortSignal,
+                    serverToken,
+                    websocketProvider,
+                  }),
+                  thinking,
+                },
+                {
+                  abortSignal,
+                  chatMessages: messages,
+                },
+              ));
+
+            const selectedRoleModelIdentifier =
+              selectedRole.modelIdentifierOverride ?? agent.modelIdentifier;
+
+            await using toolSession = new AgentToolSession(
+              claimedTask.parameters.activityId,
+              claimedTask.parameters.agentId,
+              selectedRole,
+              {
+                supabaseServiceRole,
+                userId: claimedTask.parameters.userId,
+                userClaims: claimedTask.parameters.userClaims,
+                abortSignal,
+                serverToken,
+                supabase,
+                websocketProvider,
+              },
+            );
+
+            writer.write({
+              type: "message-metadata",
+              messageMetadata: {
+                roleId: selectedRole.id,
+                roleName: selectedRole.name,
+                thinking,
+              },
+            });
+
+            const result = await streamText({
+              abortSignal,
+              instructions: selectedRole?.prompt,
+              messages: modelMessages,
+              model: await getChatModel(selectedRoleModelIdentifier, {
+                onCompression,
                 chat: {
                   activityId: claimedTask.parameters.activityId,
                   agentId: claimedTask.parameters.agentId,
@@ -295,88 +376,59 @@ export async function chatWorker({
                 serverToken,
                 websocketProvider,
               }),
-              thinking,
-            },
-            {
-              abortSignal,
-              chatMessages: messages,
-            },
-          ));
+              reasoning: getReasoning(
+                selectedRole?.modelThinkingOverride ?? agent.modelThinking,
+                thinking,
+              ),
+              toolApproval: await toolSession.toolApproval(),
+              tools: await toolSession.tools(),
+            });
 
-        const selectedRoleModelIdentifier =
-          selectedRole.modelIdentifierOverride ?? agent.modelIdentifier;
-
-        await using toolSession = new AgentToolSession(
-          claimedTask.parameters.activityId,
-          claimedTask.parameters.agentId,
-          selectedRole,
-          {
-            supabaseServiceRole,
-            userId: claimedTask.parameters.userId,
-            userClaims: claimedTask.parameters.userClaims,
-            abortSignal,
-            serverToken,
-            supabase,
-            websocketProvider,
+            writer.merge(
+              toUIMessageStream({
+                stream: result.stream,
+                originalMessages: messages,
+                sendStart: false,
+                onError: (error) => {
+                  // Expose only known application codes; keep provider errors sanitized.
+                  if (
+                    error instanceof Error &&
+                    [
+                      "CONTEXT_COMPRESSION_FAILED",
+                      "CONTEXT_BUDGET_EXCEEDED",
+                    ].includes(error.message)
+                  )
+                    return error.message;
+                  return "An error occurred.";
+                },
+              }),
+            );
+            usage = await result.usage;
           },
-        );
-
-        const timingStart = performance.now();
-        let timingFirstResponse: number | undefined = undefined;
-
-        const result = await streamText({
-          abortSignal,
-          instructions: selectedRole?.prompt,
-          messages: modelMessages,
-          model: await getChatModel(selectedRoleModelIdentifier, {
-            chat: {
-              activityId: claimedTask.parameters.activityId,
-              agentId: claimedTask.parameters.agentId,
-            },
-            supabaseServiceRole,
-            abortSignal,
-            serverToken,
-            websocketProvider,
-          }),
-          reasoning: getReasoning(
-            selectedRole?.modelThinkingOverride ?? agent.modelThinking,
-            thinking,
-          ),
-          toolApproval: await toolSession.toolApproval(),
-          tools: await toolSession.tools(),
         });
 
         let latestChatMessage: ChatMessage | undefined = undefined;
-        const lastMessage = messages.at(-1);
-        for await (const uiMessage of readUIMessageStream<ChatMessage>({
-          // The SDK mutates its continuation state. Yjs-owned messages may
-          // be frozen and must never be edited outside a document transaction.
-          message:
-            lastMessage?.role === "assistant"
-              ? structuredClone(lastMessage)
-              : undefined,
-          stream: toUIMessageStream({
-            generateMessageId: () => crypto.randomUUID(),
-            originalMessages: messages,
-            stream: result.stream,
-          }),
-          terminateOnError: true,
-        })) {
-          assertGenerationActive(true);
-          if (!timingFirstResponse) {
-            timingFirstResponse = performance.now();
-          }
+        try {
+          for await (const uiMessage of readUIMessageStream<ChatMessage>({
+            // The SDK mutates its continuation state. Yjs-owned messages may
+            // be frozen and must never be edited outside a document transaction.
+            message:
+              lastMessage?.role === "assistant"
+                ? structuredClone(lastMessage)
+                : undefined,
+            stream: responseStream,
+            terminateOnError: true,
+          })) {
+            assertGenerationActive(true);
+            if (!timingFirstResponse) {
+              timingFirstResponse = performance.now();
+            }
 
-          latestChatMessage = {
-            ...uiMessage,
-            metadata: {
-              ...uiMessage.metadata,
-              roleId: selectedRole.id,
-              roleName: selectedRole.name,
-              thinking,
-            },
-          };
-          updateChatMessage(chat.document, latestChatMessage);
+            latestChatMessage = uiMessage;
+            updateChatMessage(chat.document, latestChatMessage);
+          }
+        } catch (error) {
+          throw streamFailure ? streamFailure.error : error;
         }
 
         if (latestChatMessage) {
@@ -394,7 +446,6 @@ export async function chatWorker({
             ? timingEnd - timingFirstResponse
             : undefined;
 
-          const usage = await result.usage;
           assertGenerationActive();
 
           updateChatMessage(chat.document, {

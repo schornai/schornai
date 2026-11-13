@@ -1,4 +1,5 @@
 "use client";
+import { ModelContextSize } from "../../../_components/ModelContextSize";
 import { Brain, Pencil } from "lucide-react";
 import Link from "next/link";
 import { useT } from "next-i18next/client";
@@ -36,7 +37,18 @@ export function ModelCard({ model }: { model: ModelSummary }) {
           </CardAppDescription>
         </CardAppContent>
       </CardAppMain>
-      <CardAppFooter className="justify-end">
+      <CardAppFooter
+        className={
+          model.type === "ollama_llm_v1" || external
+            ? "justify-between"
+            : "justify-end"
+        }
+      >
+        {(model.type === "ollama_llm_v1" || external) && (
+          <span className="self-center text-xs">
+            <ModelContextSize contextSize={model.contextSize} />
+          </span>
+        )}
         <Button
           nativeButton={false}
           render={

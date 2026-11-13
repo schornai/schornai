@@ -10,6 +10,7 @@ export async function updateExternalAIModel(
     apiKey: string;
     provider: ExternalModelProvider;
     region?: string;
+    contextSize?: number | null;
   },
   { supabase }: { supabase: SupabaseClient },
 ) {
@@ -21,6 +22,9 @@ export async function updateExternalAIModel(
       base_url: input.baseUrl,
       api_key: input.apiKey,
       provider: input.provider,
+      ...(input.contextSize !== undefined
+        ? { context_size: input.contextSize ?? undefined }
+        : {}),
       ...(input.region ? { region: input.region } : {}),
     });
     if (error) throw new Error();

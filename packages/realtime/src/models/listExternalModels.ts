@@ -1,6 +1,10 @@
 import type { ExternalModelProvider } from "@schornio/aibox-package-database/aiModel/_schema";
 
-export type DiscoveredModel = { id: string; name: string };
+export type DiscoveredModel = {
+  id: string;
+  name: string;
+  contextSize?: number;
+};
 export async function listExternalModels(input: {
   provider: ExternalModelProvider;
   baseUrl: string;
@@ -101,10 +105,25 @@ export async function listExternalModels(input: {
             ? row.name?.replace(/^models\//, "")
             : row.id;
         if (typeof id !== "string" || !id || id.length > 500) continue;
+        const reportedContext =
+          input.provider === "google"
+            ? row.inputTokenLimit
+            : input.provider === "antropic"
+              ? row.max_input_tokens
+              : input.provider === "mistral"
+                ? row.max_context_length
+                : undefined;
+        const contextSize =
+          Number.isSafeInteger(reportedContext) &&
+          reportedContext > 0 &&
+          reportedContext <= 2147483647
+            ? (reportedContext as number)
+            : undefined;
         const name = row.display_name ?? row.displayName ?? id;
         models.set(id, {
           id,
           name: typeof name === "string" ? name.slice(0, 500) : id,
+          ...(contextSize ? { contextSize } : {}),
         });
         if (models.size >= 2000) break;
       }

@@ -14,6 +14,8 @@ import { upsertActivity } from "../documents/activity/upsertActivity.ts";
 import { setChatState } from "../documents/chat/setChatState.ts";
 import { getChat } from "../documents/chat/getChat.ts";
 import { getChatInteraction } from "../documents/chat/getChatInteraction.ts";
+import { finalizeInterruptedToolInputs } from "../documents/chat/finalizeInterruptedToolInputs.ts";
+import { updateChatMessage } from "../documents/chat/updateChatMessage.ts";
 
 /** A terminal task can outlive the worker that normally releases its chat. */
 export async function recoverTaskDocuments(
@@ -64,6 +66,10 @@ export async function recoverTaskDocuments(
     // Recheck after asynchronous loads. Never clear a later generation's state.
     if (state.get("generationId") !== task.id) return;
     await chat.transact((doc) => {
+      for (const message of getChat(doc).messages?.toArray() ?? []) {
+        const finalized = finalizeInterruptedToolInputs(message);
+        if (finalized !== message) updateChatMessage(doc, finalized);
+      }
       doc.getMap("cancellations").clear();
       if (
         ["queued", "generating", "aborting"].includes(String(state.get("type")))

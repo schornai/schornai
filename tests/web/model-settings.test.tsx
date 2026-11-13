@@ -151,7 +151,7 @@ it.each([
     );
     expect(screen.getByText("labelIdentifier")).toBeTruthy();
     expect(Boolean(screen.queryByText("labelContextSize"))).toBe(
-      "contextSize" in config,
+      "contextSize" in config || type === "external_llm_v1",
     );
     expect(Boolean(screen.queryByText("labelEmbeddingSize"))).toBe(
       "embeddingVectorSize" in config,
@@ -413,6 +413,7 @@ it("preserves input on failure and navigates only after confirmed creation", asy
   expect(client.execute.mock.lastCall![0]).toEqual({
     provider: "openai-compatible",
     name: "Team",
+    contextSize: null,
     modelId: "chat",
     baseUrl: "https://api.example.com/v1",
     apiKey: "",
@@ -594,4 +595,58 @@ it("does not pass a saved key to an edited endpoint", async () => {
     { timeout: 2000 },
   );
   expect(discoverModels).not.toHaveBeenCalledWith({ id: "saved" });
+});
+
+it("saves and explicitly clears a model context limit", async () => {
+  client.execute.mockResolvedValue({ data: { id: "model" } });
+  render(
+    <ExternalModelForm
+      provider="openai-compatible"
+      initial={{
+        id: "model",
+        name: "Test",
+        modelId: "chat",
+        baseUrl: "https://example.com/v1",
+        contextSize: 32768,
+      }}
+    />,
+  );
+  const field = screen.getByLabelText("labelContextSize");
+  expect((field as HTMLInputElement).value).toBe("32768");
+  fireEvent.change(field, { target: { value: "65536" } });
+  fireEvent.submit(field.closest("form")!);
+  await waitFor(() =>
+    expect(client.execute).toHaveBeenCalledWith(
+      expect.objectContaining({ contextSize: 65536 }),
+    ),
+  );
+  fireEvent.change(field, { target: { value: "" } });
+  fireEvent.submit(field.closest("form")!);
+  await waitFor(() =>
+    expect(client.execute).toHaveBeenLastCalledWith(
+      expect.objectContaining({ contextSize: null }),
+    ),
+  );
+});
+it("adopts provider context metadata without overwriting a manual value", async () => {
+  vi.mocked(discoverModels).mockResolvedValue({
+    data: {
+      models: [{ id: "chat", name: "Chat", contextSize: 32768 }],
+      manual: false,
+    },
+  });
+  render(<ExternalModelForm provider="openai-compatible" />);
+  fireEvent.change(screen.getByLabelText("fields.baseUrl"), {
+    target: { value: "https://example.com/v1" },
+  });
+  const field = screen.getByLabelText("labelContextSize");
+  fireEvent.change(screen.getByRole("combobox"), { target: { value: "chat" } });
+  await waitFor(() => expect((field as HTMLInputElement).value).toBe("32768"), {
+    timeout: 3000,
+  });
+  fireEvent.change(field, { target: { value: "8192" } });
+  fireEvent.change(screen.getByRole("combobox"), {
+    target: { value: "custom" },
+  });
+  expect((field as HTMLInputElement).value).toBe("8192");
 });

@@ -1,5 +1,6 @@
 "use client";
 
+import { ModelContextSize } from "../../../_components/ModelContextSize";
 import {
   Alert,
   AlertDescription,
@@ -121,13 +122,11 @@ export function AgentInfoModel({
                       {t("descriptionFeatureVision")}
                     </li>
                   ) : undefined}
-                  {modelLLM.type === "ollama_llm_v1" ? (
-                    <li>
-                      {t("labelModelSize", {
-                        size: modelLLM.config.contextSize,
-                      })}
-                    </li>
-                  ) : undefined}
+                  <li>
+                    <ModelContextSize
+                      contextSize={modelLLM.config.contextSize}
+                    />
+                  </li>
                 </ul>
 
                 {modelLLM.image ? (

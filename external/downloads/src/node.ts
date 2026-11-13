@@ -5,7 +5,7 @@ import { exec } from "./util/exec.ts";
 import { probe } from "./util/probe.ts";
 import { runDownload } from "./util/runDownload.ts";
 
-const nodeVersion = "26.13.0";
+const nodeVersion = "26.13.1";
 
 export async function node(target: string) {
   await mkdir(target, { recursive: true });

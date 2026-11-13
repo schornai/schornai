@@ -2,30 +2,30 @@
   "name": "@schornio/aibox-realtime",
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts",
-    "./react/*": "./src/react/*.tsx"
+    "./*": "./src/*.ts"
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
     "eslint": "^10.14.0"
   },
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "5.0.135",
-    "@ai-sdk/anthropic": "4.0.99",
-    "@ai-sdk/azure": "4.0.119",
-    "@ai-sdk/google": "4.0.114",
-    "@ai-sdk/huggingface": "2.0.87",
-    "@ai-sdk/mcp": "2.0.93",
-    "@ai-sdk/mistral": "4.0.81",
-    "@ai-sdk/openai": "4.0.111",
-    "@ai-sdk/openai-compatible": "3.0.87",
-    "@ai-sdk/provider-utils": "5.0.76",
+    "@ai-sdk/amazon-bedrock": "5.0.137",
+    "@ai-sdk/anthropic": "4.0.101",
+    "@ai-sdk/azure": "4.0.121",
+    "@ai-sdk/google": "4.0.116",
+    "@ai-sdk/huggingface": "2.0.89",
+    "@ai-sdk/mcp": "2.0.95",
+    "@ai-sdk/mistral": "4.0.83",
+    "@ai-sdk/openai": "4.0.113",
+    "@ai-sdk/openai-compatible": "3.0.89",
+    "@ai-sdk/provider-utils": "5.0.78",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../database",
+    "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.166",
+    "ai": "7.0.168",
     "mathjs": "15.2.0",
     "xrag": "*",
     "yjs": "^13.6.33"
@@ -38,5 +38,8 @@
     "type": "git",
     "url": "https://github.com/schornai/schornai.git",
     "directory": "packages/realtime"
+  },
+  "scripts": {
+    "lint": "eslint ."
   }
 }

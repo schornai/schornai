@@ -7,7 +7,7 @@ import {
 } from "node:fs";
 import { join } from "node:path";
 
-export type LogEntry = {
+type LogEntry = {
   timestampISO: string;
   sender: string;
   level: "stdout" | "stderr";

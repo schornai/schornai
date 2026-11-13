@@ -748,7 +748,16 @@
       "labelRetry": "Erneut versuchen",
       "descriptionFailed": "Die Antwort konnte nicht erstellt werden.",
       "descriptionNoDetails": "Keine weiteren Fehlerdetails verfügbar.",
-      "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben."
+      "errorRetry": "Der erneute Versuch konnte nicht gestartet werden. Bitte prüfe die Verbindung und offene Werkzeugfreigaben.",
+      "errorContextBudget": "Die Anfrage überschreitet das Kontextbudget. Verkleinere Anhänge oder starte einen neuen Chat.",
+      "errorContextCompression": "Der Kontext konnte nicht zusammengefasst werden. Versuche es erneut; dein Chatverlauf bleibt erhalten.",
+      "errorWorkerLost": "Die Verbindung zum verarbeitenden Dienst wurde unterbrochen. Prüfe bereits ausgeführte Werkzeugaktionen, bevor du es erneut versuchst.",
+      "errorToolInputInterrupted": "Die Eingabe für einen Werkzeugaufruf wurde unterbrochen. Dieses Werkzeug wurde nicht ausgeführt. Versuche es erneut.",
+      "errorRoleNotFound": "Die benötigte Agentenrolle ist nicht mehr verfügbar. Prüfe die Rollen des Agenten oder starte einen neuen Chat.",
+      "errorApprovalRoleNotFound": "Die Rolle zur offenen Werkzeugfreigabe ist nicht mehr verfügbar. Prüfe die Rollen des Agenten und starte einen neuen Chat.",
+      "errorApprovalRolesMismatch": "Die offenen Werkzeugfreigaben gehören zu unterschiedlichen Rollen und können nicht gemeinsam fortgesetzt werden. Starte einen neuen Chat.",
+      "errorModelApiKey": "Für das Sprachmodell fehlt der API-Schlüssel. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
+      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",
@@ -777,6 +786,12 @@
       "labelDisable": "Selbstlöschende Chats ausschalten (12 Stunden)",
       "errorSave": "Die Einstellung konnte nicht gespeichert werden.",
       "descriptionScheduled": "Wird am {{date}} gelöscht. Zum Ausschalten klicken."
+    },
+    "ChatMessagePartContextCompression": {
+      "labelPending": "Kontext wird zusammengefasst …",
+      "labelCompleted": "Kontext zusammengefasst",
+      "labelFailed": "Kontext konnte nicht zusammengefasst werden",
+      "labelInterrupted": "Zusammenfassung des Kontexts abgebrochen"
     }
   },
   "page": {
