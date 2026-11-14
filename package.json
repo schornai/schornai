@@ -42,9 +42,9 @@
     "test:sql": "node scripts/test-sql.mjs"
   },
   "devDependencies": {
-    "@ai-sdk/mcp": "2.0.95",
-    "@ai-sdk/openai": "4.0.113",
-    "@ai-sdk/provider-utils": "5.0.78",
+    "@ai-sdk/mcp": "2.0.96",
+    "@ai-sdk/openai": "4.0.114",
+    "@ai-sdk/provider-utils": "5.0.79",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/provider-react": "^4.7.1",
@@ -61,7 +61,7 @@
     "@testing-library/user-event": "^14.6.8",
     "@types/node": "^26.6.5",
     "@vitest/coverage-v8": "^5.1.0",
-    "ai": "7.0.168",
+    "ai": "7.0.169",
     "i18next": "^27.0.0",
     "jose": "^6.2.12",
     "jsdom": "^31.0.0",
