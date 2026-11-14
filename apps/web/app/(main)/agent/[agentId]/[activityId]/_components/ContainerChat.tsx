@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
 
 export function ContainerChat({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex-1">
+    <div data-slot="chat-container" className="relative flex-1">
       <div className="absolute inset-0">
         <MessageScrollerProvider autoScroll={true}>
           <MessageScroller>
