@@ -3,6 +3,10 @@ import { mkdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(".");
+// Chromium's new screenshot surface can briefly resize full-page captures to
+// 1x1, remounting responsive sidebars and losing focused tooltips mid-capture.
+// Use Playwright's legacy surface in both native and Docker runs.
+process.env.PLAYWRIGHT_LEGACY_SCREENSHOT = "1";
 const playwrightVersion = JSON.parse(
   await readFile("node_modules/@playwright/test/package.json", "utf8"),
 ).version;
@@ -55,6 +59,7 @@ try {
       dockerArgs.push("-v", `${resolve(directory)}:/work/${directory}`);
     for (const variable of [
       "CI",
+      "PLAYWRIGHT_LEGACY_SCREENSHOT",
       "STORYBOOK_FILTER",
       "STORYBOOK_VISUAL_BOOK",
       "STORYBOOK_VISUAL_WORKERS",
