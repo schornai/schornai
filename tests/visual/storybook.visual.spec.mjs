@@ -20,7 +20,7 @@ const test = base.extend({
           // 1x1. Do not let that capture-only artifact remount responsive UI.
           // Real viewport changes outside capture (including mobile) still fire.
           // https://github.com/schloerke/chrome-devtools-protocol-screenshot-bug
-          const ignoreCaptureResize = (event) => {
+          const ignoreCaptureEvent = (event) => {
             if (
               window.__visualCapturing &&
               innerWidth === 1 &&
@@ -28,11 +28,20 @@ const test = base.extend({
             )
               event.stopImmediatePropagation();
           };
-          addEventListener("resize", ignoreCaptureResize, true);
+          // That transient viewport also emits synthetic pointer exits, which
+          // would close otherwise visible hover tooltips during capture.
+          for (const event of [
+            "resize",
+            "pointerout",
+            "pointerleave",
+            "mouseout",
+            "mouseleave",
+          ])
+            addEventListener(event, ignoreCaptureEvent, true);
           const matchMedia = window.matchMedia.bind(window);
           window.matchMedia = (query) => {
             const media = matchMedia(query);
-            media.addEventListener("change", ignoreCaptureResize);
+            media.addEventListener("change", ignoreCaptureEvent);
             return media;
           };
           // Storybook recognizes its test runner and skips animation wait timeouts.
