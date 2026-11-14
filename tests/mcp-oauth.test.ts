@@ -454,6 +454,14 @@ it("pauses a protected tool after public discovery and resumes its exact call on
         const request = JSON.parse(String(init.body));
         if (request.id === undefined)
           return new Response(null, { status: 202 });
+        // A legacy server rejects modern discovery at the JSON-RPC boundary;
+        // a thrown fetch error represents a network failure and cannot fall back.
+        if (request.method === "server/discover")
+          return Response.json({
+            jsonrpc: "2.0",
+            id: request.id,
+            error: { code: -32601, message: "Method not found" },
+          });
         let result: unknown;
         if (request.method === "initialize")
           result = {
