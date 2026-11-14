@@ -200,6 +200,26 @@ differ: see [development behavior tests](../tests/service-development.test.ts),
 [service README](../packages/service/README.md) for artifact synchronization and
 deployment details.
 
+## Follow scheduled work
+
+The realtime server starts the [scheduler](../apps/realtime/src/scheduler/startScheduler.ts)
+and registers `artifacts.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
+claims durable jobs through [database operations](../packages/database/src/scheduler);
+Postgres owns due times, lease tokens, retries and interval rescheduling.
+Read the [delivery decision](adr/0005-scheduled-job-delivery.md) when adding a
+handler with external side effects, and the [runtime guide](../apps/realtime/README.md#durable-scheduler)
+for registration, cancellation and failure recovery. Tests cover
+[worker behavior](../tests/scheduler.test.ts) and
+[SQL ownership and privileges](../supabase/tests/scheduled_jobs.sql).
+
+Chat expiry uses [atomic deadline updates](../packages/database/src/chat/setChatExpiration.ts),
+[cleanup](../apps/realtime/src/scheduler/expireChat.ts), and a
+[realtime guard](../packages/realtime/src/server/createChatExpirationExtension.ts).
+The web action and platform tools share the same membership-checked database
+operation. Read the [tombstone decision](adr/0006-disappearing-chat-tombstones.md)
+when changing deletion, replay protection or task snapshot retention. Tests cover [cleanup and fencing](../tests/chat-expiration.test.ts)
+and [SQL deadlines and tombstones](../supabase/tests/chat_expiration.sql).
+
 ## Follow XRAG publication
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a

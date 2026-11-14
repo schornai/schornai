@@ -15,7 +15,9 @@ export async function runTask<TTaskType extends Task["type"]>(
     abortSignal = new AbortController().signal,
     serverToken,
     websocketProvider,
+    chat,
   }: {
+    chat?: Task["chat"];
     abortSignal?: AbortSignal;
     serverToken: `Worker ${string}`;
     websocketProvider: ServerRealtimeWebsocketProvider;
@@ -71,6 +73,7 @@ export async function runTask<TTaskType extends Task["type"]>(
   try {
     addTask(taskQueue.document, {
       id: taskId,
+      ...(chat ? { chat } : {}),
       parameters,
       requiredCapabilities,
       state: "pending",

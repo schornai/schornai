@@ -2,6 +2,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { externalModelInputSchema } from "../apps/web/app/(settings)/models/externalModelInputSchema";
 import { toModelSummary } from "../apps/web/app/(settings)/models/modelSummary";
 import { getChatModel } from "@schornio/aibox-realtime/models/getChatModel";
+import { createClient } from "@supabase/supabase-js";
+import type { SupabaseDatabase } from "../packages/database/src/_shared/_types";
 
 const mocks = vi.hoisted(() => ({
   local: vi.fn(),
@@ -89,6 +91,81 @@ describe("external model input and public metadata", () => {
   });
 });
 describe("chat model selection", () => {
+  it.each(["gemma4:31b-mlx", "qwen3.8:27b-mlx"])(
+    "generates and streams with %s when artifact and runtime identifiers differ",
+    async (tag) => {
+      const identifier = `local_registry.schorn.ai/library/${tag}`;
+      const row = {
+        id: "local-model",
+        identifier: `ai.schorn__ollama__${tag}`,
+        type: "ollama_llm_v1",
+        created_at: "2026-11-13T00:00:00Z",
+        config: { ollamaIdentifier: identifier, contextSize: 262144 },
+      };
+      const fetch = vi.fn(async (input: RequestInfo | URL) => {
+        const url = new URL(String(input));
+        const matches =
+          url.searchParams.get("config->>ollamaIdentifier") ===
+            `eq.${identifier}` &&
+          url.searchParams.get("type") ===
+            "in.(ollama_llm_v1,ollama_embedding_v1)" &&
+          !url.searchParams.has("identifier");
+        return new Response(
+          JSON.stringify(
+            matches
+              ? row
+              : { code: "PGRST116", details: "The result contains 0 rows" },
+          ),
+          {
+            status: matches ? 200 : 406,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      });
+      const supabaseServiceRole = createClient<SupabaseDatabase>(
+        "https://database.test",
+        "test-key",
+        {
+          global: { fetch },
+          auth: { persistSession: false, autoRefreshToken: false },
+        },
+      );
+      const doGenerate = vi
+        .fn()
+        .mockResolvedValue({ content: [{ type: "text", text: "Hello" }] });
+      const doStream = vi
+        .fn()
+        .mockResolvedValue({ stream: new ReadableStream() });
+      mocks.local.mockReturnValue({
+        specificationVersion: "v4",
+        provider: "aibox",
+        modelId: identifier,
+        supportedUrls: {},
+        doGenerate,
+        doStream,
+      });
+      const model = await getChatModel(identifier, {
+        supabaseServiceRole,
+      } as any);
+      const options = {
+        prompt: [
+          {
+            role: "user" as const,
+            content: [{ type: "text" as const, text: "Hello" }],
+          },
+        ],
+      };
+      await model.doGenerate(options);
+      await model.doStream(options);
+      for (const call of [doGenerate, doStream]) {
+        expect(call).toHaveBeenCalledExactlyOnceWith({
+          ...options,
+          maxOutputTokens: 8192,
+        });
+      }
+      expect(fetch).toHaveBeenCalledTimes(1);
+    },
+  );
   it("keeps local models on the distributed worker", async () => {
     const context = {} as any;
     await getChatModel("qwen3:8b", context);

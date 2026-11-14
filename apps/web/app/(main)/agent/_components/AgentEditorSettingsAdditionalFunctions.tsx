@@ -9,7 +9,7 @@ import {
   FieldLegend,
   FieldSet,
 } from "@schornio/aibox-package-ui/components/field";
-import { Layers, Paperclip } from "lucide-react";
+import { ClockFading, Layers, Paperclip } from "lucide-react";
 import { ButtonDiscardChanges } from "@schornio/aibox-package-ui/components/button-discard-changes";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
 import { Switch } from "@schornio/aibox-package-ui/components/switch";
@@ -30,9 +30,7 @@ export function AgentEditorSettingsAdditionalFunctions() {
   const switchFileUploadId = useId();
   const switchBatchId = useId();
   const transcriberSelectId = useId();
-  // const switchPursueGoalId = useId();
-  // const switchDisappearingChatsId = useId();
-  // const switchNightshiftId = useId();
+  const disappearingChatsId = useId();
 
   const { t } = useT("agent", {
     keyPrefix: "_components.AgentEditorSettingsAdditionalFunctions",
@@ -128,6 +126,80 @@ export function AgentEditorSettingsAdditionalFunctions() {
             </FieldContent>
           </Field>
           <Field>
+            <FieldLabel htmlFor={disappearingChatsId}>
+              <ClockFading className="inline size-4" />{" "}
+              {t("labelDisappearingChats")}
+              <ButtonDiscardChanges
+                objA={defaultAgent?.additionalFunctions?.disappearingChats}
+                objB={agent?.additionalFunctions?.disappearingChats}
+                onClick={() =>
+                  setAgent((prev) => ({
+                    ...prev,
+                    additionalFunctions: {
+                      ...(prev?.additionalFunctions ??
+                        defaultAgentEnabledAdditionalFunctions),
+                      disappearingChats:
+                        defaultAgent?.additionalFunctions?.disappearingChats ??
+                        true,
+                    },
+                  }))
+                }
+                variant="inline"
+              />
+            </FieldLabel>
+            <FieldDescription>
+              {t("descriptionDisappearingChats")}
+            </FieldDescription>
+            <Select
+              items={[
+                { value: "disabled", label: t("labelDisappearingDisabled") },
+                { value: "off", label: t("labelDisappearingDefaultOff") },
+                { value: "on", label: t("labelDisappearingDefaultOn") },
+              ]}
+              value={
+                agent?.additionalFunctions?.disappearingChats === false
+                  ? "disabled"
+                  : agent?.additionalFunctions?.disappearingChats ===
+                      "default-on"
+                    ? "on"
+                    : "off"
+              }
+              onValueChange={(value) => {
+                if (!value) return;
+                setAgent((prev) => ({
+                  ...prev,
+                  additionalFunctions: {
+                    ...(prev?.additionalFunctions ??
+                      defaultAgentEnabledAdditionalFunctions),
+                    disappearingChats:
+                      value === "disabled"
+                        ? false
+                        : value === "on"
+                          ? "default-on"
+                          : true,
+                  },
+                }));
+              }}
+            >
+              <SelectTrigger id={disappearingChatsId}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="disabled">
+                    {t("labelDisappearingDisabled")}
+                  </SelectItem>
+                  <SelectItem value="off">
+                    {t("labelDisappearingDefaultOff")}
+                  </SelectItem>
+                  <SelectItem value="on">
+                    {t("labelDisappearingDefaultOn")}
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Field>
+          <Field>
             <FieldLabel htmlFor={transcriberSelectId}>
               {t("labelTranscriber")}{" "}
               <ButtonDiscardChanges
@@ -168,124 +240,6 @@ export function AgentEditorSettingsAdditionalFunctions() {
               </SelectContent>
             </Select>
           </Field>
-          {/* <Field orientation="horizontal">
-            <Switch
-              checked={agent?.additionalFunctions?.pursueGoal ?? true}
-              id={switchPursueGoalId}
-              onCheckedChange={(checked) =>
-                setAgent((prev) => ({
-                  ...prev,
-                  additionalFunctions: {
-                    ...(prev?.additionalFunctions ??
-                      defaultAgentEnabledAdditionalFunctions),
-                    pursueGoal: checked,
-                  },
-                }))
-              }
-            />
-            <FieldContent>
-              <FieldLabel htmlFor={switchPursueGoalId}>
-                <Goal className="inline size-4" /> {t("labelPursueGoal")}{" "}
-                <ButtonDiscardChanges
-                  objA={defaultAgent?.additionalFunctions?.pursueGoal}
-                  objB={agent?.additionalFunctions?.pursueGoal}
-                  onClick={() =>
-                    setAgent((prev) => ({
-                      ...prev,
-                      additionalFunctions: {
-                        ...(prev?.additionalFunctions ??
-                          defaultAgentEnabledAdditionalFunctions),
-                        pursueGoal:
-                          defaultAgent?.additionalFunctions?.pursueGoal ?? true,
-                      },
-                    }))
-                  }
-                  variant="inline"
-                />
-              </FieldLabel>
-              <FieldDescription>{t("descriptionPursueGoal")}</FieldDescription>
-            </FieldContent>
-          </Field>
-          <Field orientation="horizontal">
-            <Switch
-              checked={agent?.additionalFunctions?.disappearingChats ?? true}
-              id={switchDisappearingChatsId}
-              onCheckedChange={(checked) =>
-                setAgent((prev) => ({
-                  ...prev,
-                  additionalFunctions: {
-                    ...(prev?.additionalFunctions ??
-                      defaultAgentEnabledAdditionalFunctions),
-                    disappearingChats: checked,
-                  },
-                }))
-              }
-            />
-            <FieldContent>
-              <FieldLabel htmlFor={switchDisappearingChatsId}>
-                <ClockFading className="inline size-4" />{" "}
-                {t("labelDisappearingChats")}{" "}
-                <ButtonDiscardChanges
-                  objA={defaultAgent?.additionalFunctions?.disappearingChats}
-                  objB={agent?.additionalFunctions?.disappearingChats}
-                  onClick={() =>
-                    setAgent((prev) => ({
-                      ...prev,
-                      additionalFunctions: {
-                        ...(prev?.additionalFunctions ??
-                          defaultAgentEnabledAdditionalFunctions),
-                        disappearingChats:
-                          defaultAgent?.additionalFunctions
-                            ?.disappearingChats ?? true,
-                      },
-                    }))
-                  }
-                  variant="inline"
-                />
-              </FieldLabel>
-              <FieldDescription>
-                {t("descriptionDisappearingChats")}
-              </FieldDescription>
-            </FieldContent>
-          </Field>
-          <Field orientation="horizontal">
-            <Switch
-              checked={agent?.additionalFunctions?.nightshift ?? true}
-              id={switchNightshiftId}
-              onCheckedChange={(checked) =>
-                setAgent((prev) => ({
-                  ...prev,
-                  additionalFunctions: {
-                    ...(prev?.additionalFunctions ??
-                      defaultAgentEnabledAdditionalFunctions),
-                    nightshift: checked,
-                  },
-                }))
-              }
-            />
-            <FieldContent>
-              <FieldLabel htmlFor={switchNightshiftId}>
-                <MoonStar className="inline size-4" /> {t("labelNightshift")}{" "}
-                <ButtonDiscardChanges
-                  objA={defaultAgent?.additionalFunctions?.nightshift}
-                  objB={agent?.additionalFunctions?.nightshift}
-                  onClick={() =>
-                    setAgent((prev) => ({
-                      ...prev,
-                      additionalFunctions: {
-                        ...(prev?.additionalFunctions ??
-                          defaultAgentEnabledAdditionalFunctions),
-                        nightshift:
-                          defaultAgent?.additionalFunctions?.nightshift ?? true,
-                      },
-                    }))
-                  }
-                  variant="inline"
-                />
-              </FieldLabel>
-              <FieldDescription>{t("descriptionNightshift")}</FieldDescription>
-            </FieldContent>
-          </Field> */}
         </FieldGroup>
       </FieldSet>
     </ContainerMain>

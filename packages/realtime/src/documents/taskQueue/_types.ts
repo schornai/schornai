@@ -10,6 +10,7 @@ import type { UserClaims } from "@schornio/aibox-database/auth/_types";
 
 type TaskStatePending = {
   id: string;
+  chat?: { activityId: string; agentId: string };
 
   requiredCapabilities: string[];
 

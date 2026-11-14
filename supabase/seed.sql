@@ -76,7 +76,7 @@ $trello${
   "color": {"type": "color-oklch-hue", "oklchHue": 240},
   "icon": {"type": "icon-lucide", "iconName": "bot"},
   "documentation": "Benötigt ein eigenes Trello-Konto und eine persönliche OAuth-Anmeldung im Chat. Für zuverlässige Werkzeugaufrufe ein geeignetes Modell auswählen.",
-  "additionalFunctions": {"batch": false, "disappearingChats": true, "fileUpload": false, "nightshift": false, "pursueGoal": false},
+  "additionalFunctions": {"batch": false, "disappearingChats": "default-on", "fileUpload": false, "nightshift": false, "pursueGoal": false},
   "recommendedMessages": [],
   "roles": [{
     "id": "a1b00000-0000-4000-8000-000000000005",

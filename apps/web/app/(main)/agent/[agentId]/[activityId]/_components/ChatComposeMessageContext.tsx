@@ -1,4 +1,5 @@
 "use client";
+import type { ChatExpiration } from "@schornio/aibox-package-database/chat/expirationSchema";
 import type { StorageRealtimeObject } from "@schornio/aibox-realtime/documents/storage/_types";
 import type { AudioRecordingConfig } from "../../../../../_components/AudioRecorderModal";
 
@@ -37,6 +38,8 @@ const context = createContext<
       activity?: Activity;
       activityId: string;
       agentId: string;
+      additionalFunctions?: Agent["additionalFunctions"];
+      expiration?: ChatExpiration;
       // chatGenerationAbort: () => void;
       // chatGenerationPause: () => void;
       // chatGenerationStart: () => void;
@@ -67,12 +70,16 @@ function ChatComposeMessageContextProvider({
   activityId,
   agentId,
   modelThinking,
+  additionalFunctions,
+  expiration,
   audioRecording,
   children,
 }: {
   activityId: string;
   agentId: string;
   modelThinking?: Agent["modelThinking"];
+  additionalFunctions?: Agent["additionalFunctions"];
+  expiration?: ChatExpiration;
   audioRecording?: AudioRecordingConfig;
   children: ReactNode;
 }) {
@@ -250,6 +257,8 @@ function ChatComposeMessageContextProvider({
         addSelectedFiles,
         activityId,
         agentId,
+        additionalFunctions,
+        expiration,
         approvalSubmitted,
         defaultThinking:
           modelThinking === "mandatory-on" || modelThinking === "optional-on",
@@ -283,7 +292,10 @@ function ChatComposeMessageContextProvider({
         userPreferences={{}}
       >
         {interaction.type === "message-batch" ? (
-          <FileUploadDropZone className="flex flex-col">
+          <FileUploadDropZone
+            className="flex flex-col"
+            disabled={additionalFunctions?.fileUpload === false}
+          >
             {children}
           </FileUploadDropZone>
         ) : (
@@ -298,12 +310,16 @@ export function ChatComposeMessageContext({
   activityId,
   agentId,
   modelThinking,
+  additionalFunctions,
+  expiration,
   audioRecording,
   children,
 }: {
   activityId: string;
   agentId: string;
   modelThinking?: Agent["modelThinking"];
+  additionalFunctions?: Agent["additionalFunctions"];
+  expiration?: ChatExpiration;
   audioRecording?: AudioRecordingConfig;
   children?: ReactNode;
 }) {
@@ -315,6 +331,8 @@ export function ChatComposeMessageContext({
         activityId={activityId}
         agentId={agentId}
         modelThinking={modelThinking}
+        additionalFunctions={additionalFunctions}
+        expiration={expiration}
         audioRecording={audioRecording}
       >
         {children}

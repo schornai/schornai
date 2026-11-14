@@ -317,6 +317,10 @@ export async function chatWorker({
                 {
                   model: await getChatModel(agent.modelIdentifier, {
                     onCompression,
+                    chat: {
+                      activityId: claimedTask.parameters.activityId,
+                      agentId: claimedTask.parameters.agentId,
+                    },
                     supabaseServiceRole,
                     abortSignal,
                     serverToken,
@@ -363,6 +367,10 @@ export async function chatWorker({
               messages: modelMessages,
               model: await getChatModel(selectedRoleModelIdentifier, {
                 onCompression,
+                chat: {
+                  activityId: claimedTask.parameters.activityId,
+                  agentId: claimedTask.parameters.agentId,
+                },
                 supabaseServiceRole,
                 abortSignal,
                 serverToken,

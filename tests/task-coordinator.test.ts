@@ -200,3 +200,26 @@ it("retains the Yjs wire value types in transport snapshots", () => {
     nested: [null, undefined, true],
   });
 });
+
+it("does not restore purged chat prompts from a stale queue replica", async () => {
+  const original = {
+    ...task(),
+    chat: { activityId: "activity", agentId: "agent" },
+  };
+  addTask(document, original);
+  await coordinator.apply(
+    {
+      task_id: original.id,
+      owner_token: "old",
+      state: "error",
+      snapshot: null,
+      recovery_pending: false,
+      completed_at: new Date().toISOString(),
+      expires_at: new Date().toISOString(),
+      chat_document_name: "activity_chat___activity_agent",
+    },
+    original,
+  );
+  expect(getTaskQueue(document).tasks.length).toBe(0);
+  expect(recover).not.toHaveBeenCalled();
+});

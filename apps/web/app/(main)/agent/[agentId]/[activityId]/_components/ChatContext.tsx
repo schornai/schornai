@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useEffect } from "react";
 import type { ChatMessage } from "@schornio/aibox-database/chat/_types";
 import { ExhaustiveError } from "@schornio/aibox-package-utils/ExhaustiveError";
 import type { ReactNode } from "react";
@@ -13,12 +13,27 @@ import { useRealtimeArray } from "@/lib/useRealtimeArray";
 import { useRealtimeMap } from "@/lib/useRealtimeMap";
 import { useRealtimeTypedMap } from "@/lib/useRealtimeTypedMap";
 
+import { useRouter } from "next/navigation";
+
 const context = createContext<{
   provider?: ReturnType<typeof useHocuspocusProvider>;
 }>({});
 
 function HocuspocusContext({ children }: { children: ReactNode }) {
   const provider = useHocuspocusProvider();
+  const router = useRouter();
+  useEffect(() => {
+    const onStateless = ({ payload }: { payload: string }) => {
+      try {
+        if (JSON.parse(payload).type === "chat-deleted")
+          router.replace("/activity");
+      } catch {}
+    };
+    provider.on("stateless", onStateless);
+    return () => {
+      provider.off("stateless", onStateless);
+    };
+  }, [provider, router]);
   return <context.Provider value={{ provider }}>{children}</context.Provider>;
 }
 

@@ -1,3 +1,5 @@
+import { createChatExpirationExtension } from "@schornio/aibox-realtime/server/createChatExpirationExtension";
+import { startScheduler } from "./src/scheduler/startScheduler.ts";
 import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -31,8 +33,15 @@ const supabaseServiceRole = createSupabaseClient({
   },
 });
 
+const schedulerAbort = new AbortController();
+
 const realtimeServer = new Server({
   extensions: [
+    {
+      async onDestroy() {
+        schedulerAbort.abort();
+      },
+    },
     createRealtimeAuthentication({
       secret,
       serviceSecret: process.env.SERVICE_API_TOKEN,
@@ -44,6 +53,7 @@ const realtimeServer = new Server({
         return authorizeRealtimeUser(token, documentName, { supabase });
       },
     }),
+    createChatExpirationExtension({ supabase: supabaseServiceRole }),
     createSupabaseExtension({ supabase: supabaseServiceRole }),
     createServiceStatusExtension(),
     createTaskCoordinatorExtension({ supabaseServiceRole }),
@@ -61,6 +71,13 @@ function fatal(error: unknown) {
 
 try {
   await realtimeServer.listen();
+  process.once("SIGTERM", () => schedulerAbort.abort());
+  process.once("SIGINT", () => schedulerAbort.abort());
+  void startScheduler({
+    supabase: supabaseServiceRole,
+    signal: schedulerAbort.signal,
+    instance: realtimeServer.hocuspocus,
+  }).catch(fatal);
   void artifactPublicationWorker({
     supabase: supabaseServiceRole,
     signal: new AbortController().signal,

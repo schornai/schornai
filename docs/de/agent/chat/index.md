@@ -26,6 +26,9 @@ meta:
       "packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts",
       "packages/realtime/src/documents/chat/abortChatGeneration.ts",
       "packages/realtime/src/platform/chatTools.ts",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatExpirationSettings.tsx",
+      "apps/realtime/src/scheduler/expireChat.ts",
+      "packages/database/src/chat/setChatExpiration.ts",
       "packages/realtime/src/models/withContextCompression.ts",
       "packages/realtime/src/server/recoverTaskDocuments.ts",
     ]
@@ -143,6 +146,34 @@ bereinigt. Bereits abgeschlossene Werkzeugaktionen bleiben erhalten.
 
 Bei ausbleibender Antwort prüfe zuerst offene Werkzeugfreigaben und folge den [Hinweisen zur Fehlerbehebung](../../hilfe/fehlerbehebung.md).
 
+## Chat automatisch löschen
+
+Mit dem **ClockFading-Symbol** neben den Zusatzfunktionen der Chat-Eingabe schaltest du selbstlöschende Chats ein. Ein weiterer Klick schaltet sie aus. Die Frist beträgt immer **12 Stunden ab dem Einschalten**; neue Nachrichten verschieben sie nicht. Der eingeschaltete Button ist in der Primärfarbe hervorgehoben; beim Darüberfahren zeigt der Tooltip den Löschzeitpunkt in der lokalen Zeitzone. Eine freie Dauer oder ein Bestätigungsdialog sind nicht vorgesehen.
+
+Die Funktion muss in den Agenteneinstellungen verfügbar sein. Dort kann sie für neue Chats auch standardmäßig eingeschaltet werden. Bestehende Chats behalten ihre Einstellung. Eine bereits aktive Frist lässt sich weiterhin ausschalten, wenn die Funktion später im Agenten deaktiviert wird.
+
+Bei einem gemeinsam genutzten Chat gilt die Einstellung für alle Beteiligten.
+
+Zum Termin sperrt der Realtime-Dienst den Chat und stoppt laufende Chat- und
+Dateiverarbeitung. Er entfernt Nachrichten, Entwürfe, Chat-Dateien und die Einträge
+in den Verläufen aller Beteiligten. Dateien aus gemeinsam verwendeten
+Dokumenten-Repositories bleiben erhalten. Offene Chatansichten wechseln zum
+Verlauf. Auch beim erneuten Öffnen eines alten Chatlinks wirst du zum Verlauf
+weitergeleitet. Der Link kann das gelöschte Gespräch nicht wieder anlegen.
+
+Der Realtime-Dienst und die Datenbank müssen laufen. Bei Ausfällen wird die
+Löschung nachgeholt; bei Fehlern werden Datei- und Verlaufsbereinigung erneut
+versucht. Der Chat bleibt ab Beginn der Löschung gesperrt. Die Löschung ist
+endgültig und kann dann auch durch Ausschalten der Frist nicht rückgängig
+gemacht werden. Bereits exportierte oder heruntergeladene Kopien, Backups und
+Daten bei externen Modell- oder Werkzeuganbietern werden damit nicht gelöscht.
+Seit diesem Update erzeugte Modell-Aufgaben werden dem Chat zugeordnet und ihre
+Prompt-/Ergebnis-Snapshots ebenfalls bereinigt. Ältere, noch nicht zugeordnete
+Aufgaben-Snapshots unterliegen weiterhin der normalen Aufbewahrung von bis zu
+24 Stunden.
+Technische Löschmarkierungen ohne Nachrichteninhalt bleiben zum Schutz vor
+Wiederherstellung erhalten.
+
 ## Zugehörige MCP-Werkzeuge
 
 **Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
@@ -153,6 +184,13 @@ Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).
 
+`platform_chat_expiration_get` liest die Frist; `platform_chat_expiration_set`
+setzt oder deaktiviert sie. Mindeststufe ist **Benutzer** mit Zugriff auf den
+Arbeitsplatz des Agenten und den konkreten Chat. Änderungen setzen tatsächliche
+Teilnahme am Chat voraus; ein höheres Tool-Level ersetzt diese Prüfung nicht.
+`seconds` muss 43.200 (12 Stunden) sein; `null`
+schaltet die Frist aus. Einschalten erfordert die aktivierte Zusatzfunktion des Agenten. Jede Änderung mit einer Dauer beginnt die Frist neu.
+Bereits begonnene Löschungen können nicht zurückgenommen werden.
 Kontextkomprimierung läuft ebenfalls bei `platform_chat_send` (Mindestzugriff **user**,
 Berechtigung für Agent und Gespräch) automatisch. Es gibt kein separates Komprimierungswerkzeug;
 die Prüfung erfolgt zwingend vor jedem betroffenen Modellaufruf. Die Modellgrenze verwalten

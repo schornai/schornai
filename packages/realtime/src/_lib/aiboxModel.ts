@@ -11,7 +11,9 @@ export function aiboxModel(
   {
     serverToken,
     websocketProvider,
+    chat,
   }: {
+    chat?: { activityId: string; agentId: string };
     serverToken: `Worker ${string}`;
     websocketProvider: ServerRealtimeWebsocketProvider;
   },
@@ -25,7 +27,7 @@ export function aiboxModel(
           modelId,
         },
         [modelId],
-        { abortSignal, serverToken, websocketProvider },
+        { abortSignal, serverToken, websocketProvider, chat },
       );
     },
 
@@ -64,7 +66,7 @@ export function aiboxModel(
           modelId,
         },
         [modelId],
-        { abortSignal: signal, serverToken, websocketProvider },
+        { abortSignal: signal, serverToken, websocketProvider, chat },
       ).catch((error: unknown) => {
         if (!cancellation.signal.aborted) {
           setModelDoStreamError(modelDoStream.document, error);

@@ -630,3 +630,92 @@ it("replaces the draft and focuses the textbox for tiles and initial or changed 
     window.history.replaceState(null, "", originalUrl);
   }
 });
+
+describe("agent additional-function availability", () => {
+  it("hides disabled attachment and batch controls while preserving existing drafts", () => {
+    mocks.context.additionalFunctions = {
+      fileUpload: false,
+      batch: false,
+      disappearingChats: false,
+    };
+    mocks.context.expiration = { seconds: null, expiresAt: null };
+    mocks.context.messageBatch.push({
+      id: "second",
+      state: "paused",
+      content: { type: "text", text: "Second draft" },
+    });
+    const view = compose();
+    expect(
+      screen.queryByRole("button", { name: "labelAttachFiles" }),
+    ).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "buttonStartBatch" }),
+    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "labelEnable" })).toBeNull();
+    expect(view.container.querySelector('input[type="file"]')).toBeNull();
+    expect(view.container.querySelector(".lucide-layers")).toBeNull();
+    expect(screen.getByRole("textbox").getAttribute("disabled")).toBeNull();
+    expect((screen.getByRole("textbox") as HTMLTextAreaElement).value).toBe(
+      "Draft",
+    );
+    expect(mocks.context.messageBatch).toHaveLength(2);
+  });
+  it.each([true, "default-on"])(
+    "allows toggling expiry when the agent mode is %s",
+    (mode) => {
+      mocks.context.additionalFunctions = { disappearingChats: mode };
+      mocks.context.expiration = { seconds: null, expiresAt: null };
+      compose();
+      fireEvent.click(screen.getByRole("button", { name: "labelEnable" }));
+      expect(client.execute).toHaveBeenCalledWith({
+        agentId: "agent",
+        activityId: "activity",
+        seconds: 43200,
+      });
+    },
+  );
+  it("lets participants cancel an existing deadline after the agent disables the feature", () => {
+    mocks.context.additionalFunctions = { disappearingChats: false };
+    mocks.context.expiration = {
+      seconds: 43200,
+      expiresAt: "2030-01-01T12:00:00Z",
+    };
+    const view = compose();
+    fireEvent.click(screen.getByRole("button", { name: "labelDisable" }));
+    expect(client.execute).toHaveBeenCalledWith({
+      agentId: "agent",
+      activityId: "activity",
+      seconds: null,
+    });
+    mocks.context.expiration = { seconds: null, expiresAt: null };
+    view.rerender(
+      <Collapsible>
+        <ChatComposeMessageSelected />
+      </Collapsible>,
+    );
+    expect(screen.queryByRole("button", { name: "labelEnable" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "labelDisable" })).toBeNull();
+  });
+});
+
+it("closes an open batch drawer when the agent disables batch management", async () => {
+  mocks.context.interaction = { type: "message-batch" };
+  mocks.context.additionalFunctions = { batch: true };
+  const view = render(<ChatComposeMessage />);
+  fireEvent.click(
+    view.container.querySelector(".lucide-layers")!.closest("button")!,
+  );
+  expect(
+    await screen.findByRole("button", { name: "labelNewMessage" }),
+  ).toBeTruthy();
+  mocks.context.additionalFunctions = { batch: false };
+  view.rerender(<ChatComposeMessage />);
+  await waitFor(() =>
+    expect(
+      screen.queryByRole("button", { name: "labelNewMessage" }),
+    ).toBeNull(),
+  );
+  expect((screen.getByRole("textbox") as HTMLTextAreaElement).value).toBe(
+    "Draft",
+  );
+});
