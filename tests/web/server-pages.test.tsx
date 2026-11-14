@@ -3,7 +3,7 @@ vi.mock("@schornio/aibox-package-database/chat/isChatDeleted", () => ({
 }));
 import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
 import { isChatDeleted } from "@schornio/aibox-package-database/chat/isChatDeleted";
-import { ensureActivity } from "@/lib/ensureActivity";
+import { ensureActivity } from "../../apps/web/lib/ensureActivity";
 vi.mock("@schornio/aibox-package-database/chat/getChatExpiration", () => ({
   getChatExpiration: vi.fn(async () => ({ seconds: null, expiresAt: null })),
 }));
@@ -39,7 +39,9 @@ const state = vi.hoisted(() => ({
   inspect: vi.fn(),
   isGlobalAdmin: true,
 }));
-vi.mock("@/lib/ensureActivity", () => ({ ensureActivity: vi.fn() }));
+vi.mock("../../apps/web/lib/ensureActivity", () => ({
+  ensureActivity: vi.fn(),
+}));
 vi.mock("@schornio/aibox-package-database/user/getCurrentUser", () => ({
   getCurrentUser: async () => ({ id: "user" }),
 }));
