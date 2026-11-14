@@ -17,7 +17,7 @@
   "dependencies": {
     "@schornio/aibox-package-markdown-changelog": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.168",
+    "ai": "7.0.169",
     "jose": "^6.2.12",
     "xrag": "*"
   },
