@@ -1,5 +1,11 @@
+vi.mock("@schornio/aibox-package-database/chat/isChatDeleted", () => ({
+  isChatDeleted: vi.fn(async () => false),
+}));
+import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
+import { isChatDeleted } from "@schornio/aibox-package-database/chat/isChatDeleted";
+import { ensureActivity } from "@/lib/ensureActivity";
 vi.mock("@schornio/aibox-package-database/chat/getChatExpiration", () => ({
-  getChatExpiration: async () => ({ seconds: null, expiresAt: null }),
+  getChatExpiration: vi.fn(async () => ({ seconds: null, expiresAt: null })),
 }));
 vi.mock("../../apps/web/app/_models/getAgentConnections", () => ({
   getAgentConnections: async () => [],
@@ -10,7 +16,7 @@ vi.mock("../../apps/web/app/_models/systemConfigAccessMessage", () => ({
 import "./client-setup";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getAgentById as getAgentContent } from "@schornio/aibox-package-database/agent/getAgentById";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { isValidElement } from "react";
 import { RealtimeProvider } from "../../apps/web/lib/RealtimeProvider";
 const state = vi.hoisted(() => ({
@@ -44,6 +50,9 @@ vi.mock("@/lib/supabase/getWorkspaceAdminContext", () => ({
   }),
 }));
 vi.mock("next/navigation", () => ({
+  redirect: (path: string) => {
+    throw new Error(`REDIRECT:${path}`);
+  },
   notFound: () => {
     throw new Error("NOT_FOUND");
   },
@@ -145,6 +154,9 @@ function params() {
 }
 beforeEach(() => {
   state.isGlobalAdmin = true;
+  vi.mocked(redirect).mockImplementation((path) => {
+    throw new Error(`REDIRECT:${path}`);
+  });
   vi.mocked(notFound).mockImplementation(() => {
     throw new Error("NOT_FOUND");
   });
@@ -729,6 +741,35 @@ describe("server storage views and application composition", () => {
     ).toBe("mandatory-on");
     state.entity = undefined;
     await expect(chatPage(request)).rejects.toThrow("NOT_FOUND");
+  });
+  it.each(["initialization", "expiration read"])(
+    "returns to history when deletion blocks %s",
+    async (stage) => {
+      const operation =
+        stage === "initialization" ? ensureActivity : getChatExpiration;
+      vi.mocked(operation).mockRejectedValueOnce(
+        new Error("DOCUMENT_ACCESS_DENIED"),
+      );
+      vi.mocked(isChatDeleted).mockResolvedValueOnce(true);
+      await expect(
+        chatPage({
+          params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+        } as any),
+      ).rejects.toThrow("REDIRECT:/activity");
+      expect(isChatDeleted).toHaveBeenLastCalledWith(
+        "activity_chat___activity_agent",
+        { supabase: {} },
+      );
+    },
+  );
+  it("preserves initialization failures when the chat was not deleted", async () => {
+    const error = new Error("connection failed");
+    vi.mocked(ensureActivity).mockRejectedValueOnce(error);
+    await expect(
+      chatPage({
+        params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+      } as any),
+    ).rejects.toBe(error);
   });
   it("shows a clear access error without opening realtime rooms for an unauthorized chat", async () => {
     state.workspaces = [{ id: "workspace", name: "Workspace" }];

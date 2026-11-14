@@ -158,7 +158,8 @@ Zum Termin sperrt der Realtime-Dienst den Chat und stoppt laufende Chat- und
 Dateiverarbeitung. Er entfernt Nachrichten, Entwürfe, Chat-Dateien und die Einträge
 in den Verläufen aller Beteiligten. Dateien aus gemeinsam verwendeten
 Dokumenten-Repositories bleiben erhalten. Offene Chatansichten wechseln zum
-Verlauf. Ein alter Link kann das Gespräch nicht wieder anlegen.
+Verlauf. Auch beim erneuten Öffnen eines alten Chatlinks wirst du zum Verlauf
+weitergeleitet. Der Link kann das gelöschte Gespräch nicht wieder anlegen.
 
 Der Realtime-Dienst und die Datenbank müssen laufen. Bei Ausfällen wird die
 Löschung nachgeholt; bei Fehlern werden Datei- und Verlaufsbereinigung erneut

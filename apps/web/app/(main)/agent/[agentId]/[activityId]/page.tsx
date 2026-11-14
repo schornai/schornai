@@ -1,4 +1,6 @@
 import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
+import { isChatDeleted } from "@schornio/aibox-package-database/chat/isChatDeleted";
+import { getChatDocumentName } from "@schornio/aibox-realtime/documents/chat/_utils";
 import { ensureActivity } from "@/lib/ensureActivity";
 import { getCurrentUser } from "@schornio/aibox-package-database/user/getCurrentUser";
 import { ChatComposeMessage } from "./_components/ChatComposeMessage";
@@ -15,7 +17,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerC
 import { createSupabaseServiceRoleClient } from "@/lib/supabase/createSupabaseServiceRoleClient";
 import { getAgentWorkspaceId } from "@schornio/aibox-package-database/agent/getAgentWorkspaceId";
 import { getAgentById } from "@schornio/aibox-package-database/agent/getAgentById";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { tryAsync } from "@schornio/aibox-package-utils/tryAsync";
 import { getWorkspaceClaims } from "../../../../_models/getWorkspaceClaims";
 import { hasPermission } from "@/lib/hasPermission";
@@ -56,15 +58,25 @@ export default async function Page(
   );
   if (!agent) notFound();
   const user = await getCurrentUser({ supabaseAuth: supabase.auth });
-  await ensureActivity(
-    user.id,
-    { type: "activity", activityId, agentId },
-    { publishActivity: false },
-  );
-  const expiration = await getChatExpiration(
-    { agentId, activityId },
-    { supabase },
-  );
+  const expiration = await (async () => {
+    try {
+      await ensureActivity(
+        user.id,
+        { type: "activity", activityId, agentId },
+        { publishActivity: false },
+      );
+      return await getChatExpiration({ agentId, activityId }, { supabase });
+    } catch (error) {
+      // Expiry can fence the chat during initialization or the subsequent read.
+      if (
+        await isChatDeleted(getChatDocumentName({ agentId, activityId }), {
+          supabase: createSupabaseServiceRoleClient(),
+        })
+      )
+        redirect("/activity");
+      throw error;
+    }
+  })();
   return (
     <ChatContext activityId={activityId} agentId={agentId}>
       <ChatComposeMessageContext
