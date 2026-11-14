@@ -74,6 +74,7 @@ try {
   process.once("SIGTERM", () => schedulerAbort.abort());
   process.once("SIGINT", () => schedulerAbort.abort());
   void startScheduler({
+    serverToken: `Worker ${token}`,
     supabase: supabaseServiceRole,
     signal: schedulerAbort.signal,
     instance: realtimeServer.hocuspocus,

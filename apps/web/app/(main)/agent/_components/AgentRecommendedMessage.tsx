@@ -7,10 +7,14 @@ import { useRouter } from "next/navigation";
 export function AgentRecommendedMessage({
   agent,
   className,
+  onSelect,
+  disabled = false,
   recommendedMessage: { id, message, label },
 }: {
   agent?: Partial<Agent>;
   className?: string;
+  onSelect?: (message: string) => void;
+  disabled?: boolean;
   recommendedMessage: Agent["recommendedMessages"][number];
 }) {
   const router = useRouter();
@@ -21,9 +25,14 @@ export function AgentRecommendedMessage({
       className={className}
       render={
         <button
+          type="button"
           className="text-left"
-          disabled={!agent?.id}
+          disabled={disabled || !agent?.id}
           onClick={() => {
+            if (onSelect) {
+              onSelect(message);
+              return;
+            }
             router.push(
               `/agent/${agent?.id}/${crypto.randomUUID()}#recommendedMessage=${encodeURIComponent(id)}`,
             );

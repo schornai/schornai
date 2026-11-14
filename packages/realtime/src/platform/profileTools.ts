@@ -83,7 +83,7 @@ export function addProfileTools(
   );
   add(
     "platform_favorites_update",
-    "Replace your favorites and sidebar visibility. Does not grant access to the referenced resources.",
+    "Replace your favorites (including personal automations) and sidebar visibility. Does not grant access to the referenced resources; automation favorites still require editor access and ownership.",
     "user",
     false,
     settingFavoritesSchema,

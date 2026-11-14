@@ -214,6 +214,7 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   const upsert = vi.fn().mockResolvedValue({ error: null });
   f.supabase.from = vi.fn(() => ({ upsert }));
   await startScheduler({
+    serverToken: "Worker test",
     supabase: f.supabase,
     signal: f.stop.signal,
     instance: {} as any,

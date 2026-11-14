@@ -54,7 +54,7 @@ Daneben wählst du **Hell**, **Dunkel** oder die Einstellung des Betriebssystems
 
 ![Favorisierter Agent auf dem Dashboard](../assets/favoriten.png)
 
-Markiere Agenten, Dokumentenablagen, Transkriptoren oder Arbeitsplätze über das Sternsymbol als Favorit. Die markierten Inhalte findest du auf dem Dashboard und in der Favoriten-Navigation, solange du Zugriff darauf hast.
+Markiere Agenten, Dokumentenablagen, Transkriptoren, persönliche Automationen oder Arbeitsplätze über das Sternsymbol als Favorit. Die markierten Inhalte findest du auf dem Dashboard und in der Favoriten-Navigation, solange du Zugriff darauf hast.
 
 Über den Bearbeiten-Button neben **Favoriten** in der Seitenleiste oder unter **Profil → Favoriten** (`/me/favorites`) verschiebst du Einträge am Griff per Drag-and-drop. Über das **Favorit-entfernen-Symbol** entfernst du die Markierung direkt aus dem Entwurf, nicht den Inhalt. Bis zum Speichern kannst du sie mit **Zurücksetzen** wiederherstellen. Auch nicht mehr verfügbare Einträge kannst du entfernen. Der Schalter **In der Seitenleiste anzeigen** blendet die gesamte Favoritengruppe ein oder aus; die Dashboard-Favoriten bleiben sichtbar. Mit **Speichern** übernimmst du alle Änderungen, mit **Zurücksetzen** verwirfst du den Entwurf.
 
@@ -65,7 +65,7 @@ Für Zugriffsfragen öffne [Berechtigungen](permissions.md). Ein Passwort änder
 ## Zugehörige MCP-Werkzeuge
 
 - `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer**; nur eigenes Konto.
-- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte.
+- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte. Persönliche Automationen bleiben auf ihre Eigentümer mit Editorzugriff beschränkt.
 - `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer**.
 - `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer**.
 - `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer**.

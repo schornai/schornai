@@ -725,7 +725,12 @@
         "platform_calculate": "Berechnung ausführen",
         "platform_current_date_time": "Aktuelles Datum und Uhrzeit",
         "platform_chat_expiration_get": "Chat-Löschfrist lesen",
-        "platform_chat_expiration_set": "Chat-Löschfrist ändern"
+        "platform_chat_expiration_set": "Chat-Löschfrist ändern",
+        "platform_automations_list": "Automationen auflisten",
+        "platform_automation_save": "Automation speichern",
+        "platform_automation_delete": "Automation löschen",
+        "platform_automation_runs": "Ausführungen ansehen",
+        "platform_automation_run": "Automation jetzt ausführen"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",

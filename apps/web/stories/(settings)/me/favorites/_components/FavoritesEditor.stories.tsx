@@ -58,3 +58,20 @@ export const EditAndReset: Story = {
     await expect(save).toBeDisabled();
   },
 };
+
+export const Automation: Story = {
+  args: {
+    config: {
+      version: "favorites-v2",
+      showInSidebar: true,
+      favorites: [{ type: "automation", id: "automation" }],
+    },
+    appearances: {
+      "automation:automation": {
+        name: "Wochenbericht",
+        color: { type: "color-oklch-hue", oklchHue: 290 },
+        icon: undefined,
+      },
+    },
+  },
+};

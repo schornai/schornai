@@ -20,11 +20,13 @@ import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
 
 export function TranscriberCard({
+  preview = false,
   transcriber,
   favorites,
   model,
   workspace,
 }: {
+  preview?: boolean;
   transcriber?: Partial<Transcriber_new>;
   favorites?: SettingFavorites;
   model?: AIModel;
@@ -43,7 +45,7 @@ export function TranscriberCard({
       </div>
       <CardAppMain
         render={
-          transcriber ? (
+          transcriber && !preview ? (
             <button
               onClick={() =>
                 router.push(
@@ -62,11 +64,13 @@ export function TranscriberCard({
       </CardAppMain>
       <CardAppFooter>
         <TranscriberIconGroupInfos model={model} workspace={workspace} />
-        <TranscriberIconGroupActions
-          favorites={favorites}
-          transcriber={transcriber}
-          workspace={workspace}
-        />
+        {!preview && (
+          <TranscriberIconGroupActions
+            favorites={favorites}
+            transcriber={transcriber}
+            workspace={workspace}
+          />
+        )}
       </CardAppFooter>
     </CardApp>
   );

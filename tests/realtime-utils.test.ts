@@ -234,6 +234,7 @@ describe("database-backed realtime persistence", () => {
       "storage___x",
       "model_do_stream__x",
       "embeddings__x",
+      "automation_runs___00000000-0000-4000-8000-000000000001",
     ]) {
       expect(
         await extension.configuration.fetch({ documentName } as any),

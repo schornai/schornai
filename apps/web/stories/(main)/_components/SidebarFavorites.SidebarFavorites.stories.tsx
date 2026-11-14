@@ -1,3 +1,4 @@
+import { savedAutomation } from "../app/automation/fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect } from "storybook/test";
 import { SidebarFavorites } from "../../../app/(main)/_components/SidebarFavorites";
@@ -53,5 +54,16 @@ export const Hidden: Story = {
   },
   async play({ canvas }) {
     await expect(canvas.queryByRole("list")).not.toBeInTheDocument();
+  },
+};
+
+export const Automation: Story = {
+  parameters: {
+    serviceFixtures: {
+      getCurrentUserConfigFavorites: {
+        favorites: [{ id: savedAutomation.id, type: "automation" }],
+        automations: [savedAutomation],
+      },
+    },
   },
 };

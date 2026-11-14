@@ -84,6 +84,7 @@ describe("application startup and Python packaging", () => {
       expect(mocks.serverConfig.port).toBe(port ? 9010 : 9000);
       expect(mocks.listen).toHaveBeenCalledOnce();
       expect(mocks.scheduler).toHaveBeenCalledWith({
+        serverToken: `Worker ${process.env.REALTIME_SERVER_SECRET ?? "test-only-realtime-secret-not-for-production"}`,
         supabase: { service: true },
         signal: expect.any(AbortSignal),
         instance: undefined,

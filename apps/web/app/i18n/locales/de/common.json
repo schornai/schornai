@@ -281,6 +281,26 @@
       "errorCleanup": "Der Kopiervorgang wurde abgebrochen. Die Quelle bleibt erhalten, am Ziel können unvollständige Dateien liegen. Prüfe das Ziel vor einem erneuten Versuch.",
       "errorAction": "Die Aktion ist fehlgeschlagen. Prüfe Rechte, Dateinamen und beide Speicherorte vor einem erneuten Versuch.",
       "errorNotProcessed": "Diese Datei ist noch nicht verarbeitet. Verarbeite sie zuerst und wähle sie danach erneut aus."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentenablage",
+        "transcriber": "Transkriptor"
+      },
+      "labelSelected": "Ausgewählt",
+      "labelChangeResource": "{{resource}} wechseln",
+      "labelChange": "Wechseln",
+      "labelClearResource": "{{resource}} entfernen",
+      "labelChooseResource": "{{resource}} auswählen",
+      "descriptionUnavailable": "Die bisherige Auswahl ist nicht mehr verfügbar. Wähle einen neuen Eintrag.",
+      "descriptionEmpty": "Hier fehlt noch deine Auswahl. Klicke, um etwas einzusetzen.",
+      "descriptionDialog": "Wähle die Karte aus, die du hier verwenden möchtest.",
+      "labelSearch": "Suchen …",
+      "labelSelectNamed": "{{name}} auswählen",
+      "labelSelect": "Auswählen",
+      "labelNoResults": "Keine passenden Einträge",
+      "descriptionNoResults": "Passe deine Suche an oder lege zuerst einen Eintrag an."
     }
   },
   "_welcomeMessage": "Willkommen bei\n\n# schorn.ai in a Box\n\n",

@@ -281,6 +281,26 @@
       "errorCleanup": "Copying failed. The source was retained, but incomplete files may remain at the destination. Check it before retrying.",
       "errorAction": "The operation failed. Check permissions, filenames and both locations before retrying.",
       "errorNotProcessed": "This file has not been processed yet. Process it first, then select it again."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Document repository",
+        "transcriber": "Transcriber"
+      },
+      "labelSelected": "Selected",
+      "labelChangeResource": "Change {{resource}}",
+      "labelChange": "Change",
+      "labelClearResource": "Remove {{resource}}",
+      "labelChooseResource": "Select {{resource}}",
+      "descriptionUnavailable": "Your previous selection is no longer available. Choose a new entry.",
+      "descriptionEmpty": "Your selection goes here. Click to add an item.",
+      "descriptionDialog": "Choose the card you would like to use here.",
+      "labelSearch": "Search …",
+      "labelSelectNamed": "Select {{name}}",
+      "labelSelect": "Select",
+      "labelNoResults": "No matching entries",
+      "descriptionNoResults": "Adjust your search or create an entry first."
     }
   },
   "_welcomeMessage": "Welcome to\n\n# schorn.ai in a Box\n\n",

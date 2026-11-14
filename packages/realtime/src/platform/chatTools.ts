@@ -1,10 +1,10 @@
+import { sendChatMessage } from "./sendChatMessage.ts";
 import { chatExpirationSchema } from "@schornio/aibox-database/chat/expirationSchema";
 import { setChatExpiration } from "@schornio/aibox-database/chat/setChatExpiration";
 import { getChatExpiration } from "@schornio/aibox-database/chat/getChatExpiration";
 import { setActivityLabel } from "../documents/activity/setActivityLabel.ts";
 import { retryChatGeneration } from "../documents/chat/retryChatGeneration.ts";
 import { storageSchema } from "@schornio/aibox-database/storage/_schemas";
-import { selectChatFile } from "../documents/storage/selectChatFile.ts";
 import { abortChatGeneration } from "../documents/chat/abortChatGeneration.ts";
 import { limitPlatformClaims } from "@schornio/aibox-database/mcp/platformAccess";
 import { getWorkspaces } from "@schornio/aibox-database/workspace/getWorkspaces";
@@ -12,15 +12,9 @@ import { z } from "zod";
 import type { PlatformContext, platformRegistry } from "./registry.ts";
 import { getAgentById } from "@schornio/aibox-database/agent/getAgentById";
 import { getRealtimeDocumentPermission } from "@schornio/aibox-database/realtime/getRealtimeDocumentPermission";
-import { ensureRealtimeDocument } from "@schornio/aibox-database/realtime/ensureRealtimeDocument";
 import { ServerRealtimeProvider } from "../server/ServerRealtimeProvider.ts";
 import { getChatDocumentName } from "../documents/chat/_utils.ts";
 import { getChat } from "../documents/chat/getChat.ts";
-import { assertChatIdle, queueChat } from "../documents/chat/queueChat.ts";
-import { getTaskQueueDocumentName } from "../documents/taskQueue/_utils.ts";
-import { getChatCurrentMessageDocumentName } from "../documents/chatCurrentMessage/_utils.ts";
-import { addChatCurrentMessage } from "../documents/chatCurrentMessage/addChatCurrentMessage.ts";
-import { setChatCurrentMessageState } from "../documents/chatCurrentMessage/setChatCurrentMessageState.ts";
 import { getActivitiesDocumentName } from "../documents/activity/_utils.ts";
 import { getActivities } from "../documents/activity/getActivities.ts";
 import { upsertActivity } from "../documents/activity/upsertActivity.ts";
@@ -120,73 +114,7 @@ export function addChatTools(
         .max(50)
         .default([]),
     }),
-    async ({ agentId, activityId, text, thinking, files: fileRefs }) => {
-      if (!text.trim() && !fileRefs.length) throw new Error("MESSAGE_REQUIRED");
-      workspace(
-        "user",
-        (await getAgentById(agentId, { supabase })).workspaceId,
-      );
-      const input = { agentId, activityId: activityId ?? crypto.randomUUID() };
-      if (activityId) await authorizeChat(input);
-      else
-        await ensureRealtimeDocument(
-          getChatDocumentName(input),
-          { userIds: [context.userId] },
-          { supabase: context.supabaseServiceRole },
-        );
-      await using chat = new ServerRealtimeProvider({
-        documentName: getChatDocumentName(input),
-        serverToken,
-        websocketProvider,
-      });
-      await using taskQueue = new ServerRealtimeProvider({
-        documentName: getTaskQueueDocumentName(),
-        serverToken,
-        websocketProvider,
-      });
-      await using draft = new ServerRealtimeProvider({
-        documentName: getChatCurrentMessageDocumentName(input),
-        serverToken,
-        websocketProvider,
-      });
-      await Promise.all([
-        chat.waitForSynced(),
-        taskQueue.waitForSynced(),
-        draft.waitForSynced(),
-      ]);
-      assertChatIdle(input, { chat, taskQueue });
-      const files = [];
-      for (const ref of fileRefs) {
-        const selected = await selectChatFile(
-          { ...input, ...ref },
-          { supabase, serverToken, websocketProvider },
-        );
-        if (!selected.file) throw new Error("FILE_NOT_PROCESSED");
-        files.push(selected.file);
-      }
-      const { messageId } = addChatCurrentMessage(draft.document, {
-        type: "text",
-        text,
-        thinking,
-        files,
-      });
-      setChatCurrentMessageState(draft.document, messageId, "submitted");
-      await draft.waitForSynced();
-      const ids =
-        context.claims === "admin" && context.level !== "admin"
-          ? (await getWorkspaces({ supabase })).map((workspace) => workspace.id)
-          : [];
-      const userClaims = limitPlatformClaims(
-        context.claims,
-        context.level,
-        ids,
-      );
-      await queueChat(
-        { ...input, userId: context.userId, userClaims },
-        { chat, taskQueue },
-      );
-      return { ...input, messageId, status: "queued" };
-    },
+    (input) => sendChatMessage(input, context),
   );
   add(
     "platform_activity_update",

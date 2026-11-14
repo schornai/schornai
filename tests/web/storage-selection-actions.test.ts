@@ -212,3 +212,31 @@ it("references an accessible common mount using the agent path instead of making
   });
   expect(state.transfer).not.toHaveBeenCalled();
 });
+
+it("forces a copy even for mounted files and rejects unmounted references", async () => {
+  await expect(
+    storageSelectChatFile({ ...input, attachmentMode: "reference" }),
+  ).rejects.toThrow("FILE_REFERENCE_NOT_MOUNTED");
+  expect(state.transfer).not.toHaveBeenCalled();
+  state.agent.mockResolvedValue({
+    roles: [
+      {
+        documentRepositoryMounts: [
+          {
+            id: "mount",
+            documentRepositoryIdentifier: "repo",
+            mount: "knowledge",
+            pathRepository: "",
+            permission: "read-only",
+          },
+        ],
+      },
+    ],
+  });
+  const result = await storageSelectChatFile({
+    ...input,
+    attachmentMode: "copy",
+  });
+  expect(result.copied).toBe(true);
+  expect(state.transfer).toHaveBeenCalledOnce();
+});

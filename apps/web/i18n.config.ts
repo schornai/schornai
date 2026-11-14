@@ -28,6 +28,7 @@ const i18nConfig: I18nConfig = {
     "signIn",
     "agent",
     "activity",
+    "automation",
     "documentRepository",
     "transcriber",
     "settings",

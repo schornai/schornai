@@ -108,4 +108,6 @@ text](LICENSE) for the terms that apply to this project.
 
 The local development seed includes a demo agent with calculator and chat support (automatic titles, reply suggestions and current time), automatic user/editor tools, workspace-admin approval, and global-admin tools disabled
 so the tool tab and read access can be tried without granting administrative tools.
+It also includes a paused personal weekly automation with a card description, color and icon for the demo account; enable it under `/app/automation` after configuring the local model.
+
 See [development setup](docs/development.md) for the local-only seed reset workflow.

@@ -1,3 +1,4 @@
+import { parseAutomationRunsDocumentName } from "../automation/_realtime.ts";
 import type { SupabaseClient } from "../_shared/_types.ts";
 
 const uuid =
@@ -39,6 +40,18 @@ export async function getRealtimeDocumentPermission(
     )
   ) {
     return isAdmin ? "read" : undefined;
+  }
+
+  const automationId = parseAutomationRunsDocumentName(documentName);
+  if (automationId) {
+    const { data, error } = await supabase
+      .from("automations")
+      .select("id")
+      .eq("id", automationId)
+      .eq("user_id", userId)
+      .maybeSingle();
+    // RLS additionally requires editor access; even admins only see their own.
+    return !error && data ? "read" : undefined;
   }
 
   const draftMatch = draft.exec(documentName);

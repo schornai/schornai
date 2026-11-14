@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "../_shared/_types";
+import type { SupabaseClient } from "../_shared/_types.ts";
 
 /** Server-only. Caller must authenticate userId before using service role.
  * Only non-secret metadata may cross the server/client boundary. */
