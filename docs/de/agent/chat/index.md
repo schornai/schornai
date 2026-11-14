@@ -12,6 +12,8 @@ meta:
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
+      "apps/web/app/(main)/layout.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ContainerChat.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessage.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolSupport.tsx",
@@ -34,6 +36,8 @@ meta:
 # Mit einem Agenten chatten
 
 Starte einen Chat über **Neuer Chat** am Agenten. Vorhandene Gespräche öffnest du über den [Verlauf](../../activity/index.md).
+
+In der mobilen Chatansicht ist die Fußzeile mit Feedback, Sprach- und Designauswahl ausgeblendet, damit unter dem Chat kein zusätzlicher Scrollbereich entsteht. Auf anderen Seiten und in der Desktopansicht bleibt sie verfügbar.
 
 ![Nachrichteneingabe mit Nachdenken, Nachrichtenstapel, Dateiupload und Senden](../../assets/chat-eingabe.png)
 
