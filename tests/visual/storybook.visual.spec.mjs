@@ -16,6 +16,25 @@ const test = base.extend({
       });
       await page.addInitScript(
         (captureCSS) => {
+          // Chromium full-page captures can transiently resize the viewport to
+          // 1x1. Do not let that capture-only artifact remount responsive UI.
+          // Real viewport changes outside capture (including mobile) still fire.
+          // https://github.com/schloerke/chrome-devtools-protocol-screenshot-bug
+          const ignoreCaptureResize = (event) => {
+            if (
+              window.__visualCapturing &&
+              innerWidth === 1 &&
+              innerHeight === 1
+            )
+              event.stopImmediatePropagation();
+          };
+          addEventListener("resize", ignoreCaptureResize, true);
+          const matchMedia = window.matchMedia.bind(window);
+          window.matchMedia = (query) => {
+            const media = matchMedia(query);
+            media.addEventListener("change", ignoreCaptureResize);
+            return media;
+          };
           // Storybook recognizes its test runner and skips animation wait timeouts.
           const userAgent = navigator.userAgent;
           Object.defineProperty(navigator, "userAgent", {
@@ -196,9 +215,14 @@ for (const [book, directory] of [
       );
       expect(result.payload?.status).not.toBe("error");
       expect(result.payload?.storyId).toBe(story.id);
-      await expect(page).toHaveScreenshot([book, `${story.id}.png`], {
-        fullPage: true,
-      });
+      await page.evaluate(() => (window.__visualCapturing = true));
+      try {
+        await expect(page).toHaveScreenshot([book, `${story.id}.png`], {
+          fullPage: true,
+        });
+      } finally {
+        await page.evaluate(() => (window.__visualCapturing = false));
+      }
     });
   }
 }
