@@ -87,8 +87,10 @@ resource authorization belong to that handler and its authorized entry point.
 Only service-role clients can access jobs. This is infrastructure, with no UI,
 MCP tool, arbitrary script execution or user-supplied handler names exposed.
 
-Jobs survive restarts. Each server claims one job at a time, polling every second
-while idle. Unknown kinds remain queued until a supporting worker is deployed.
+Jobs survive restarts. Each server runs separate sequential workers for
+automation chat submission and system maintenance, polling every second while
+idle. Slow attachments cannot occupy the worker responsible for chat deletion,
+time dispatch and artifact cleanup. Unknown kinds remain queued until a supporting worker is deployed.
 Postgres atomically claims due work using `SKIP LOCKED`. Leases last 90 seconds
 and renew every 20 seconds. Lease loss, shutdown or cancellation aborts the
 handler's signal. Handlers must honor that signal and avoid unbounded operations;
@@ -103,8 +105,11 @@ interactive task recovery; see [the decision](../../docs/adr/0005-scheduled-job-
 An old lease cannot complete or renew a newly claimed job.
 
 Failed executions retry with exponential delays from 5 seconds up to one hour.
-Expired leases also consume an attempt. Exhaustion sets `failed`; recurring jobs
-also stop on exhaustion (cleanup allows 100 attempts). Inspect `scheduled_jobs`
+Expired leases also consume an attempt. Exhaustion sets one-off jobs to `failed`.
+Recurring jobs restart their attempt budget after a cooldown of at least one
+hour (or their interval, if longer), including after a final-attempt crash.
+Apply `20261115091351_automation_scheduler_hardening.sql` for this behavior; it
+also revives previously failed recurring jobs. Inspect `scheduled_jobs`
 and the sanitized `SCHEDULER_*` logs through operator database/log access. To
 retry a terminal job, cancel its ID and schedule it again after resolving the
 cause. Completed and failed records are retained for inspection and deduplication
@@ -113,7 +118,7 @@ until explicitly cancelled; avoid storing secrets or large data in payloads.
 Intervals use completion time, so missed occurrences coalesce into one execution
 after downtime and slow handlers do not create a backlog. Dates are absolute
 instants; calendar cron expressions and time zones are not supported. The `chat.expire` handler implements per-chat fixed deletion deadlines. Scheduled
-chat generation remains a future handler.
+chat generation is handled by `automation.run` in the independent worker.
 
 Behavior tests: [`scheduler.test.ts`](../../tests/scheduler.test.ts) and
 [`scheduled_jobs.sql`](../../supabase/tests/scheduled_jobs.sql).

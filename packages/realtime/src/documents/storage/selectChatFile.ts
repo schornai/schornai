@@ -27,12 +27,15 @@ export async function selectChatFile(
     supabase,
     serverToken,
     websocketProvider,
+    abortSignal,
   }: {
     supabase: SupabaseClient;
     serverToken: `Worker ${string}`;
     websocketProvider: ServerRealtimeWebsocketProvider;
+    abortSignal?: AbortSignal;
   },
 ) {
+  abortSignal?.throwIfAborted();
   const path = validateStoragePath(input.path);
   const destination = {
     type: "activity" as const,
@@ -47,6 +50,7 @@ export async function selectChatFile(
     new StorageSession({
       storage: input.storage,
       supabaseStorage: supabase.storage,
+      abortSignal,
     }),
   );
   if (!file?.file) throw new Error("FILE_NOT_FOUND");
@@ -57,6 +61,7 @@ export async function selectChatFile(
       new StorageSession({
         storage: input.storage,
         supabaseStorage: supabase.storage,
+        abortSignal,
       }),
     ))
   )
@@ -107,6 +112,7 @@ export async function selectChatFile(
       supabase,
       serverToken,
       websocketProvider,
+      abortSignal,
     },
   );
   return {

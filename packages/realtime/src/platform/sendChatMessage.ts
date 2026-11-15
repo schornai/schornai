@@ -34,9 +34,10 @@ export async function sendChatMessage(
       attachmentMode?: "copy" | "reference";
     }[];
   },
-  context: PlatformContext,
+  context: PlatformContext & { abortSignal?: AbortSignal },
 ) {
-  const { supabase, serverToken, websocketProvider } = context;
+  const { supabase, serverToken, websocketProvider, abortSignal } = context;
+  abortSignal?.throwIfAborted();
   const { workspace } = platformRegistry(context);
   if (!text.trim() && !fileRefs.length) throw new Error("MESSAGE_REQUIRED");
   workspace("user", (await getAgentById(agentId, { supabase })).workspaceId);
@@ -44,6 +45,7 @@ export async function sendChatMessage(
     agentId,
     activityId: activityId ?? newActivityId ?? crypto.randomUUID(),
   };
+  abortSignal?.throwIfAborted();
   if (activityId) {
     const permission = await getRealtimeDocumentPermission(
       getChatDocumentName(input),
@@ -60,32 +62,37 @@ export async function sendChatMessage(
     documentName: getChatDocumentName(input),
     serverToken,
     websocketProvider,
+    disposalAbortSignal: abortSignal,
   });
   await using taskQueue = new ServerRealtimeProvider({
     documentName: getTaskQueueDocumentName(),
     serverToken,
     websocketProvider,
+    disposalAbortSignal: abortSignal,
   });
   await using draft = new ServerRealtimeProvider({
     documentName: getChatCurrentMessageDocumentName(input),
     serverToken,
     websocketProvider,
+    disposalAbortSignal: abortSignal,
   });
   await Promise.all([
-    chat.waitForSynced(),
-    taskQueue.waitForSynced(),
-    draft.waitForSynced(),
+    chat.waitForSynced(abortSignal ? { abortSignal } : undefined),
+    taskQueue.waitForSynced(abortSignal ? { abortSignal } : undefined),
+    draft.waitForSynced(abortSignal ? { abortSignal } : undefined),
   ]);
   assertChatIdle(input, { chat, taskQueue });
   const files = [];
   for (const ref of fileRefs) {
+    abortSignal?.throwIfAborted();
     const selected = await selectChatFile(
       { ...input, ...ref },
-      { supabase, serverToken, websocketProvider },
+      { supabase, serverToken, websocketProvider, abortSignal },
     );
     if (!selected.file) throw new Error("FILE_NOT_PROCESSED");
     files.push(selected.file);
   }
+  abortSignal?.throwIfAborted();
   const { messageId } = addChatCurrentMessage(draft.document, {
     type: "text",
     text,
@@ -93,7 +100,7 @@ export async function sendChatMessage(
     files,
   });
   setChatCurrentMessageState(draft.document, messageId, "submitted");
-  await draft.waitForSynced();
+  await draft.waitForSynced(abortSignal ? { abortSignal } : undefined);
   const ids =
     context.claims === "admin" && context.level !== "admin"
       ? (await getWorkspaces({ supabase })).map((workspace) => workspace.id)
@@ -101,7 +108,7 @@ export async function sendChatMessage(
   const userClaims = limitPlatformClaims(context.claims, context.level, ids);
   await queueChat(
     { ...input, userId: context.userId, userClaims },
-    { chat, taskQueue },
+    { chat, taskQueue, abortSignal },
   );
   return { ...input, messageId, status: "queued" };
 }

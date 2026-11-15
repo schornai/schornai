@@ -54,6 +54,20 @@ do $$ begin
  assert (select count(*)=2 from public.automation_runs where automation_id='aae00000-0000-4000-8000-000000000011');
  assert exists(select from public.automation_runs where event->>'type'='processed' and event->>'path'='inbox/sub/report.pdf');
 end $$;
+-- Reads and bookkeeping writes must not create uploaded/processed/updated runs.
+update public.automations set trigger = jsonb_set(trigger, '{events}', '["uploaded","processed","deleted","updated"]') where id='aae00000-0000-4000-8000-000000000011';
+update storage.objects set last_accessed_at = now(), updated_at = now()
+ where name in ('automation-test/repository/inbox/sub/report.pdf', 'automation-test/repository/inbox/sub/report.pdf.__xrag_content.mdc');
+do $$ begin
+ assert (select count(*)=2 from public.automation_runs where automation_id='aae00000-0000-4000-8000-000000000011'), 'Bookkeeping must not start another chat';
+end $$;
+update storage.objects set version = gen_random_uuid()::text where name='automation-test/repository/inbox/sub/report.pdf';
+update storage.objects set version = gen_random_uuid()::text where name='automation-test/repository/inbox/sub/report.pdf.__xrag_content.mdc';
+insert into storage.objects(bucket_id,name) values ('database_files','automation-test/repository/inbox/sub/file.abxrag_content.mdc');
+do $$ begin
+ assert (select count(*)=5 from public.automation_runs where automation_id='aae00000-0000-4000-8000-000000000011'), 'Real object versions must still trigger runs';
+ assert exists(select from public.automation_runs where event->>'type'='uploaded' and event->>'path'='inbox/sub/file.abxrag_content.mdc'), 'Sidecar suffixes must match literally';
+end $$;
 delete from storage.objects where name='automation-test/repository/inbox/sub/report.pdf';
 do $$ begin assert exists(select from public.automation_runs where event->>'type'='deleted' and event->>'path'='inbox/sub/report.pdf'); end $$;
 do $$ declare a public.automations; run_id uuid; request_id uuid := gen_random_uuid(); token uuid := gen_random_uuid(); before_due timestamptz; begin

@@ -17,6 +17,7 @@ const mocks = vi.hoisted(() => ({
   client: vi.fn(),
   inspect: vi.fn(),
   content: vi.fn(),
+  workspaces: vi.fn(),
 }));
 vi.mock("../packages/database/src/agent/getAgentById.ts", () => ({
   getAgentById: mocks.agent,
@@ -26,6 +27,9 @@ vi.mock("../packages/database/src/storage/requireStorageAccess.ts", () => ({
 }));
 vi.mock("../packages/database/src/user/buildAccessToken.ts", () => ({
   buildAccessToken: mocks.claims,
+}));
+vi.mock("../packages/database/src/workspace/getWorkspaces.ts", () => ({
+  getWorkspaces: mocks.workspaces,
 }));
 vi.mock("../packages/database/src/auth/createClientWithClaims.ts", () => ({
   createClientWithClaims: mocks.client,
@@ -89,6 +93,7 @@ beforeEach(() => {
   vi.resetAllMocks();
   mocks.agent.mockResolvedValue({ id: "agent", workspaceId: "workspace" });
   mocks.claims.mockResolvedValue([]);
+  mocks.workspaces.mockResolvedValue([{ id: "workspace" }]);
   mocks.client.mockResolvedValue({ storage: { from: () => ({}) } });
   mocks.inspect.mockResolvedValue({ file: true });
 });
@@ -291,13 +296,25 @@ it("waits for uploaded file content but not for deleted, missing or unselected a
   const f = fixture();
   const pending = {
     automation_id: id,
+    revision: "revision",
+    occurrence: "upload",
     state: "pending",
     event: { type: "uploaded", path: "inbox/file.pdf" },
   };
   const prepare = (run: any = pending, trigger: any = storageTrigger) => {
     f.supabase.from
       .mockReturnValueOnce(query({ data: run }))
-      .mockReturnValueOnce(query({ data: { user_id: id, trigger } }));
+      .mockReturnValueOnce(
+        query({
+          data: {
+            user_id: id,
+            trigger,
+            revision: "revision",
+            enabled: true,
+            access_level: "editor",
+          },
+        }),
+      );
   };
   prepare();
   expect(await automationFileIsReady(id, f.options)).toBe(false);
@@ -311,6 +328,93 @@ it("waits for uploaded file content but not for deleted, missing or unselected a
   expect(await automationFileIsReady(id, f.options)).toBe(true);
   prepare(pending, { ...storageTrigger, attachment: "none" });
   expect(await automationFileIsReady(id, f.options)).toBe(true);
+});
+
+it("limits fresh administrative and workspace roles before any automated attachment read", async () => {
+  const f = fixture();
+  mocks.claims.mockResolvedValue("admin");
+  expect(
+    await getAutomationOwner(id, { ...f.options, level: "editor" }),
+  ).toEqual([{ organization_id: "workspace", role: "editor" }]);
+  expect(await getAutomationOwner(id, { ...f.options, level: "admin" })).toBe(
+    "admin",
+  );
+  mocks.claims.mockResolvedValue([
+    { organization_id: "workspace", role: "workspace-admin" },
+    { organization_id: "other", role: "user" },
+  ]);
+  expect(
+    await getAutomationOwner(id, { ...f.options, level: "editor" }),
+  ).toEqual([
+    { organization_id: "workspace", role: "editor" },
+    { organization_id: "other", role: "user" },
+  ]);
+});
+
+it.each([
+  { revision: "changed", enabled: true },
+  { revision: "revision", enabled: false },
+])(
+  "lets the fence cancel obsolete runs without waiting for file processing: %j",
+  async (definition) => {
+    const f = fixture();
+    f.supabase.from
+      .mockReturnValueOnce(
+        query({
+          data: {
+            automation_id: id,
+            revision: "revision",
+            occurrence: "uploaded",
+            state: "pending",
+            event: { type: "uploaded", path: "inbox/file.pdf" },
+          },
+        }),
+      )
+      .mockReturnValueOnce(
+        query({
+          data: { ...definition, user_id: id, trigger: storageTrigger },
+        }),
+      );
+    expect(await automationFileIsReady(id, f.options)).toBe(true);
+    expect(mocks.client).not.toHaveBeenCalled();
+    expect(mocks.content).not.toHaveBeenCalled();
+  },
+);
+
+it("uses a manual run's narrower ceiling during readiness checks for paused automations", async () => {
+  const f = fixture();
+  mocks.claims.mockResolvedValue("admin");
+  f.supabase.from
+    .mockReturnValueOnce(
+      query({
+        data: {
+          automation_id: id,
+          revision: "revision",
+          occurrence: "manual:request",
+          state: "pending",
+          event: {
+            type: "manual",
+            path: "inbox/file.pdf",
+            accessLevel: "editor",
+          },
+        },
+      }),
+    )
+    .mockReturnValueOnce(
+      query({
+        data: {
+          revision: "revision",
+          enabled: false,
+          access_level: "admin",
+          user_id: id,
+          trigger: storageTrigger,
+        },
+      }),
+    );
+  expect(await automationFileIsReady(id, f.options)).toBe(false);
+  expect(mocks.client).toHaveBeenCalledWith(id, [
+    { organization_id: "workspace", role: "editor" },
+  ]);
 });
 
 it("runs only owned saved definitions and atomically queues an idempotent manual request", async () => {

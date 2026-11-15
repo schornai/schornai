@@ -15,7 +15,6 @@ export async function startScheduler(
   },
 ) {
   const handlers = new Map<string, JobHandler>([
-    ["automation.run", (job, signal) => runAutomation(job, signal, options)],
     [
       "automation.dispatch",
       async (_job, signal) => {
@@ -54,5 +53,18 @@ export async function startScheduler(
     },
     options,
   );
-  await schedulerWorker({ ...options, handlers });
+  // A slow attachment or an event backlog must not delay chat deletion and
+  // system maintenance. Each lane still claims only one job at a time.
+  await Promise.all([
+    schedulerWorker({ ...options, handlers }),
+    schedulerWorker({
+      ...options,
+      handlers: new Map([
+        [
+          "automation.run",
+          (job, signal) => runAutomation(job, signal, options),
+        ],
+      ]),
+    }),
+  ]);
 }

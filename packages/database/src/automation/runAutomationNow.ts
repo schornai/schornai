@@ -7,7 +7,7 @@ import type { AutomationOptions } from "./_types.ts";
 import { getAgentById } from "../agent/getAgentById.ts";
 import { requirePlatformAccess } from "../mcp/platformAccess.ts";
 import { requireStorageAccess } from "../storage/requireStorageAccess.ts";
-import { validateStoragePath } from "../storage/validatePath.ts";
+import { validateAutomationFilePath } from "./validateAutomationFilePath.ts";
 import { StorageSession } from "../storage/_utils/StorageSession.ts";
 import { inspect } from "../storage/inspect.ts";
 
@@ -41,14 +41,7 @@ export async function runAutomationNow(
       supabase: options.supabase,
     });
     if (trigger.attachment !== "none") {
-      path = validateStoragePath(value.path ?? "");
-      const relative = trigger.folder
-        ? path.startsWith(`${trigger.folder}/`)
-          ? path.slice(trigger.folder.length + 1)
-          : ""
-        : path;
-      if (!relative || (!trigger.includeSubfolders && relative.includes("/")))
-        throw new Error("AUTOMATION_FILE_OUTSIDE_SCOPE");
+      path = validateAutomationFilePath(value.path ?? "", trigger);
       const session = new StorageSession({
         storage: trigger.storage,
         supabaseStorage: options.supabase.storage,

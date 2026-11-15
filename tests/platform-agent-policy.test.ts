@@ -122,3 +122,31 @@ it("requires a human decision before granting another tool approval", () => {
     "approved",
   );
 });
+
+it.each(["platform_automation_save", "platform_automation_run"])(
+  "requires consent before delegating future execution through %s",
+  (name) => {
+    expect(approval(context(), name)).toBe("user-approval");
+    expect(
+      approval(
+        context({
+          user: "auto",
+          editor: "auto",
+          workspace: "auto",
+          admin: "auto",
+        }),
+        name,
+      ),
+    ).toBe("user-approval");
+    expect(
+      createPlatformTools(
+        context({
+          user: "auto",
+          editor: "off",
+          workspace: "auto",
+          admin: "off",
+        }),
+      ).some((tool) => tool.name === name),
+    ).toBe(false);
+  },
+);

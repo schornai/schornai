@@ -236,6 +236,19 @@ when changing retries or durability. Behavior checks cover
 [calendar rules](../tests/automation.test.ts) and
 [ownership/outbox/fencing](../supabase/tests/automations.sql).
 
+The [scheduler hardening migration](../supabase/migrations/20261115091351_automation_scheduler_hardening.sql)
+ignores storage bookkeeping updates and lets recurring maintenance recover after
+retry exhaustion. Automation submissions use a separate sequential worker from
+maintenance and deletion. Their cancellation signal reaches attachment transfers
+and the queue publication; see [submission cancellation tests](../tests/automation-chat-submission.test.ts).
+[getAutomationOwner](../packages/database/src/automation/getAutomationOwner.ts)
+applies the execution ceiling before constructing a user client, including file
+readiness checks. Manual and captured events share
+[folder validation](../packages/database/src/automation/validateAutomationFilePath.ts).
+The platform registry always requires human approval when a native agent saves
+or runs an automation, because the target agent has its own tool policy; see
+[approval tests](../tests/platform-agent-policy.test.ts).
+
 Run history uses [AutomationRunsLive](../apps/web/app/%28main%29/app/automation/_components/AutomationRunsLive.tsx)
 to observe a read-only Yjs document on the existing Hocuspocus connection.
 The automation worker updates that document when an execution changes state.

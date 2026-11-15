@@ -15,7 +15,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Ein zugänglicher Agent mit einsatzbereitem Modell und laufendem Realtime-Dienst. Für Dateitrigger Zugriff auf den Speicherort."
   status: "verfügbar"
-  last_verified: "2026-11-14"
+  last_verified: "2026-11-15"
   source_files:
     - "apps/web/app/(main)/app/automation/_components/AutomationNextRun.tsx"
     - "apps/web/app/(main)/app/automation/_components/AutomationRuns.tsx"
@@ -36,6 +36,10 @@ meta:
     - "packages/database/src/automation/runAutomationNow.ts"
     - "apps/web/app/(main)/app/automation/_components/AutomationRun.tsx"
     - "packages/realtime/src/platform/automationTools.ts"
+    - "packages/realtime/src/platform/registry.ts"
+    - "packages/database/src/automation/getAutomationOwner.ts"
+    - "packages/database/src/automation/validateAutomationFilePath.ts"
+    - "supabase/migrations/20261115091351_automation_scheduler_hardening.sql"
 ---
 
 # Automationen
@@ -64,6 +68,8 @@ Kalendertermine berücksichtigen die angegebene Zeitzone. Eine bei der Sommerzei
 Wähle unter **Auslöser** die große Kachel **Dateibasiert**. Über **Ordner auswählen** bestimmst du die Ablage und den Ordner gemeinsam im bekannten Ordnerdialog. Der gewählte Bereich wird als Ablage und Pfad angezeigt; beim erneuten Öffnen startest du im gewählten Ordner. Wählst du den Stammordner, gilt die gesamte Ablage. Unterordner kannst du mit dem Schalter einschließen. Die Ordnerauswahl bietet Speicherorte an, für die du Schreibzugriff hast. Über MCP können auch lesbare Speicherorte verwendet werden. Aktiviere eines oder mehrere Ereignisse über die Schalter: **Hochgeladen**, **Verarbeitet**, **Gelöscht**, **Aktualisiert** oder **Verschoben**. Verschieben bezieht sich auf den neuen Pfad. Abhängig vom Speicherablauf kann ein Verschieben auch als Hochladen und Löschen erscheinen.
 
 **Verarbeitet** wird beim Speichern des extrahierten Inhalts ausgelöst. Interne Hilfsdateien werden nicht als eigene Uploads angezeigt. Der Chat erhält zusätzlich zur Nachricht Ereignis und Dateipfad.
+
+Reine Änderungen an Zugriffszeitstempeln lösen keine Automation aus. Auch beim automatischen Start werden Dateipfade auf den eingestellten Ordnerbereich und ungültige Pfadbestandteile geprüft. Ereignis und Dateipfad werden als nicht vertrauenswürdige Daten gekennzeichnet. Dateiinhalte können trotzdem fremde Anweisungen enthalten; die Werkzeuge und Freigaberegeln des Zielagenten gelten weiterhin. Wähle für überwachte, gemeinsam beschreibbare Ablagen einen Agenten mit den dafür erforderlichen Rechten und Freigaben. Schreibzugriffe des Agenten auf den überwachten Bereich können weitere echte Dateiereignisse auslösen.
 
 Für die Datei gibt es drei Möglichkeiten:
 
@@ -99,6 +105,8 @@ Unter **Bearbeiten** kannst du die Automation ändern oder über den hervorgehob
 
 Bei einem Dienstabbruch während des Chat-Starts kann eine Ausführung als unterbrochen fehlschlagen. Sie wird nicht automatisch erneut gesendet, damit keine doppelten Chats oder Werkzeugaktionen entstehen. Bereits begonnene Starts können durch Pausieren oder Löschen nicht zurückgenommen werden.
 
+Verliert ein laufender Start seine Ausführungsberechtigung im Scheduler oder überschreitet er zwei Minuten, wird vor weiteren Schritten abgebrochen; bereits übergebene Chats bleiben bestehen. Wartung und automatische Chat-Löschung werden unabhängig von wartenden Automations-Chats verarbeitet. Geänderte oder pausierte Automationen warten für noch nicht gestartete alte Läufe nicht weiter auf Dateiverarbeitung.
+
 Bei Dateiauslösern sind **Dateiereignisse** und **Datei mitsenden** separat einklappbar. Die Zusammenfassungen zeigen die gewählten Ereignisse und den Versandmodus. Neue Dateiauslöser verwenden standardmäßig **In den Chat kopieren**; gespeicherte Einstellungen bleiben erhalten. Unter **Weitere Optionen** kannst du Unterordner einbeziehen. Bei täglichen und monatlichen Zeitplänen lässt sich die angezeigte **Zeitzone** aufklappen und ändern.
 
 Fehlerhafte Eingaben werden nach einem Speicherversuch direkt am betroffenen Feld erklärt und rot markiert. Die betroffenen Reiter werden hervorgehoben; der Editor wechselt zum ersten Fehler. Hinweise zu Wochentagen, Dateiereignissen und Zeitzone bleiben auch bei eingeklappten Optionen sichtbar. Beim Korrigieren verschwinden die zugehörigen Hinweise. Schlägt das Speichern fehl, bleiben deine Eingaben erhalten und du kannst es erneut versuchen.
@@ -108,6 +116,8 @@ Die Ausführungsliste erhält Änderungen über die bestehende WebSocket-Verbind
 ## Plattform-MCP und Agentenwerkzeuge
 
 Alle Werkzeuge sind am gemeinsamen Endpunkt `/mcp` verfügbar. Die Automationswerkzeuge benötigen mindestens **editor**. Die MCP-Freigabe ersetzt weder Eigentümerschaft noch Arbeitsplatz- und Dateirechte. Beim Speichern über MCP bleibt dessen Zugriffsstufe auch für spätere Chat-Ausführungen die Obergrenze.
+
+Für schorn.ai-Agenten verlangen `platform_automation_save` und `platform_automation_run` immer deine Bestätigung, auch bei automatischen Editoraktionen. So kann ein Agent spätere Ausführungen unter den Werkzeugregeln eines anderen Agenten nicht unbemerkt beauftragen. Eine deaktivierte Editorstufe bleibt gesperrt. Externe MCP-Clients verwenden weiterhin ihre erteilte OAuth-Freigabe. Bei einem manuellen Lauf gilt zusätzlich die niedrigere Stufe aus gespeicherter Automation und aktuellem MCP-Aufruf; diese Grenze greift bereits beim Prüfen und Lesen von Dateianhängen.
 
 | Werkzeug                     | Zweck und Einschränkungen                                                                                                                                                           |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
