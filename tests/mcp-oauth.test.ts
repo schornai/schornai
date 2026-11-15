@@ -180,6 +180,11 @@ it("keeps dynamic registration for the same redirect and discards it when the re
   await provider.saveAuthorizationServerInformation({
     issuer: "https://auth.test",
   } as any);
+  await provider.saveTokens({
+    access_token: "access",
+    refresh_token: "refresh",
+    token_type: "Bearer",
+  });
   await provider.prepareLogin(login);
   expect(provider.clientInformation()).toEqual({ client_id: "dynamic" });
   expect(provider.authorizationServerInformation()).toEqual({
@@ -191,6 +196,7 @@ it("keeps dynamic registration for the same redirect and discards it when the re
   });
   expect(provider.clientInformation()).toBeUndefined();
   expect(provider.authorizationServerInformation()).toBeUndefined();
+  expect(provider.tokens()).toBeUndefined();
 });
 
 it("supports a configured public client without exposing a fabricated secret", async () => {
@@ -211,6 +217,38 @@ it("supports a configured public client without exposing a fabricated secret", a
 });
 
 describe("per-user MCP OAuth", () => {
+  it.each([undefined, "rotated-refresh"])(
+    "persists the refresh token across reconnect and callback when the response supplies %s",
+    async (refreshToken) => {
+      const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
+      await provider.prepareLogin(login);
+      await provider.saveTokens({
+        access_token: "old-access",
+        refresh_token: "original-refresh",
+        token_type: "Bearer",
+      });
+
+      const reconnect = await MCPOAuthProvider.load(
+        "alice",
+        serverUrl,
+        options,
+      );
+      await reconnect.prepareLogin(login);
+      const callback = await MCPOAuthProvider.load("alice", serverUrl, options);
+      await callback.saveTokens({
+        access_token: "new-access",
+        token_type: "Bearer",
+        ...(refreshToken ? { refresh_token: refreshToken } : {}),
+      });
+
+      const worker = await MCPOAuthProvider.load("alice", serverUrl, options);
+      expect(worker.tokens()).toEqual({
+        access_token: "new-access",
+        refresh_token: refreshToken ?? "original-refresh",
+        token_type: "Bearer",
+      });
+    },
+  );
   it("isolates users and endpoints and persists refresh tokens across provider instances", async () => {
     const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
     await provider.prepareLogin(login);
