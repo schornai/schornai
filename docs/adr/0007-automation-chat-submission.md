@@ -1,7 +1,7 @@
 # Fence automation chat submission before external side effects
 
 The [scheduler's at-least-once delivery](0005-scheduled-job-delivery.md) can retry
-a handler after a crash. Personal automations therefore persist an occurrence
+a handler after a crash. Automations therefore persist an occurrence
 and stable activity ID, then atomically mark the run started under its live job
 lease before invoking the shared chat submission operation. A repeated started
 run is recorded as interrupted rather than replayed: preventing duplicate chat

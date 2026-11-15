@@ -34,21 +34,6 @@ export default async function Page() {
         <div className="w-96">
           <ContainerStyled
             className="flex aspect-video flex-col items-center"
-            render={<Link href="/app/automation" />}
-            variant="card"
-          >
-            <div className="bg-muted my-auto flex aspect-square w-36 items-center justify-center rounded-full">
-              <CircleChevronsRight className="size-10" />
-            </div>
-            <div className="mt-auto text-sm font-medium">
-              {tAutomation("labelTitle")}
-            </div>
-          </ContainerStyled>
-          <div className="p-3 text-sm">{tAutomation("descriptionApp")}</div>
-        </div>
-        <div className="w-96">
-          <ContainerStyled
-            className="flex aspect-video flex-col items-center"
             render={<Link href="/app/documents" />}
             variant="card"
           >
@@ -80,6 +65,21 @@ export default async function Page() {
           </ContainerStyled>
 
           <div className="p-3 text-sm">{tTranscriber("description")}</div>
+        </div>
+        <div className="w-96">
+          <ContainerStyled
+            className="flex aspect-video flex-col items-center"
+            render={<Link href="/app/automation" />}
+            variant="card"
+          >
+            <div className="bg-muted my-auto flex aspect-square w-36 items-center justify-center rounded-full">
+              <CircleChevronsRight className="size-10" />
+            </div>
+            <div className="mt-auto text-sm font-medium">
+              {tAutomation("labelTitle")}
+            </div>
+          </ContainerStyled>
+          <div className="p-3 text-sm">{tAutomation("descriptionApp")}</div>
         </div>
       </ContainerMain>
     </>

@@ -1,6 +1,6 @@
 ---
 title: "Apps"
-description: "Dokumentenablagen, Transkription und persönliche Automationen öffnen."
+description: "Dokumentenablagen, Transkription und Automationen öffnen."
 lang: de
 meta:
   app_urls: ["/app"]

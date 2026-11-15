@@ -220,7 +220,7 @@ operation. Read the [tombstone decision](adr/0006-disappearing-chat-tombstones.m
 when changing deletion, replay protection or task snapshot retention. Tests cover [cleanup and fencing](../tests/chat-expiration.test.ts)
 and [SQL deadlines and tombstones](../supabase/tests/chat_expiration.sql).
 
-## Personal automations
+## Automations
 
 The list shares filter and display preferences through [AutomationListProvider](../apps/web/app/%28main%29/app/automation/_components/AutomationListProvider.tsx). Header options, cards and table consume that state. Creation and editing use dedicated routes with the shared `TabsMain` editor pattern; [AutomationInfo](../apps/web/app/%28main%29/app/automation/_components/AutomationInfo.tsx) also renders the live draft preview. [AutomationScheduleFields](../apps/web/app/%28main%29/app/automation/_components/AutomationScheduleFields.tsx) maps the daily calendar UI to weekly rules with all days selected; hourly rules start at the next full UTC hour and retain their interval from the previous due time, avoiding dispatcher drift; legacy day intervals retain elapsed-time semantics. Card appearance uses the shared app color/icon schemas. Favorites share the global favorites configuration, dashboard, sidebar and RLS-scoped [favorite loader](../packages/database/src/automation/getAutomationsByIds.ts). Saving a copy uses the same create operation without an ID and starts paused. Storage selection uses one [StoragePickerDialog](../apps/web/app/_components/StoragePickerDialog.tsx) for repository and folder together.
 

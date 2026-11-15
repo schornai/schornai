@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { automationInputSchema } from "../packages/database/src/automation/_schemas.ts";
 import { nextAutomationTime } from "../packages/database/src/automation/nextAutomationTime.ts";
 
-describe("personal automation schedules", () => {
+describe("automation schedules", () => {
   it("advances elapsed intervals and consumes one-time dates", () => {
     const after = new Date("2026-03-28T12:00:00Z");
     expect(

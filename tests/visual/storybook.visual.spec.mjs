@@ -73,7 +73,7 @@ const test = base.extend({
             (event) => {
               if (
                 !event.isTrusted &&
-                window.__visualStoryId?.endsWith("--hover") &&
+                window.__visualStoryId?.endsWith("-hover") &&
                 event.target instanceof Element
               ) {
                 window.__visualHoverTarget?.removeAttribute(
@@ -194,7 +194,7 @@ for (const [book, directory] of [
       await page.waitForLoadState("networkidle");
       await page.evaluate(() => window.__visualHoverPromise);
       expect(await page.evaluate(() => window.__visualErrors)).toEqual([]);
-      if (story.id.endsWith("--hover"))
+      if (story.id.endsWith("-hover"))
         expect(
           await page.evaluate(() =>
             window.__visualHoverTarget?.matches(":hover"),

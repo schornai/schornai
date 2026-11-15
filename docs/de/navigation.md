@@ -48,7 +48,7 @@ meta:
 
 ## Apps
 
-- [Persönliche Automationen](app/automation.md)
+- [Automationen](app/automation.md)
 
 - [Apps](app/index.md)
 - [Dokumentenablagen](app/documents/index.md)

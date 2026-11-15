@@ -2,7 +2,7 @@
   "labelTitle": "Automations",
   "labelNew": "New automation",
   "labelEdit": "Edit automation",
-  "descriptionPersonal": "Your personal automations each start a new chat with an agent. Requires editor access.",
+  "descriptionPersonal": "Your automations each start a new chat with an agent. Requires editor access.",
   "labelName": "Name",
   "labelAgent": "Agent",
   "labelMessage": "Message",

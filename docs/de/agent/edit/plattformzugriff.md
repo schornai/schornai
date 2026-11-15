@@ -232,6 +232,6 @@ Die Werkzeuge `platform_agent_create` und `platform_agent_update` speichern die 
 
 `platform_calculate` berechnet numerische Ausdrücke mit demselben begrenzten mathjs-Parser wie das Rollenwerkzeug. `platform_current_date_time` liefert den aktuellen Zeitpunkt in UTC oder einer angegebenen IANA-Zeitzone. Beide sind ab Stufe **User** verfügbar und benötigen keine zusätzlichen Ressourcenrechte. Ausdrucksgrenzen, Funktionen und Zeitverhalten stehen unter [Chat Support und Taschenrechner](rollen.md#taschenrechner).
 
-### Persönliche Automationen
+### Automationen
 
-Ab Zugriffsstufe **editor** stehen `platform_automations_list`, `platform_automation_save`, `platform_automation_delete`, `platform_automation_runs` und `platform_automation_run` bereit. Sie verwalten ausschließlich eigene Automationen; Speichern verlangt Editor-Rechte beim Zielagenten und Lesezugriff auf den Speicherort. Die gewählte MCP-Zugriffsstufe bleibt bei späteren Ausführungen die Obergrenze. Zeitpläne, Dateianhänge und Grenzen beschreibt [Persönliche Automationen](../../app/automation.md).
+Ab Zugriffsstufe **editor** stehen `platform_automations_list`, `platform_automation_save`, `platform_automation_delete`, `platform_automation_runs` und `platform_automation_run` bereit. Sie verwalten ausschließlich eigene Automationen; Speichern verlangt Editor-Rechte beim Zielagenten und Lesezugriff auf den Speicherort. Die gewählte MCP-Zugriffsstufe bleibt bei späteren Ausführungen die Obergrenze. Zeitpläne, Dateianhänge und Grenzen beschreibt [Automationen](../../app/automation.md).

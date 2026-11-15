@@ -856,7 +856,7 @@ it.each([
       "/settings/theme",
     ],
   ],
-  [appsIndex, ["/app/automation", "/app/documents", "/app/transcribe"]],
+  [appsIndex, ["/app/documents", "/app/transcribe", "/app/automation"]],
   [ClusterOverview, ["/service", "/tasks", "/artifacts"]],
 ] as const)(
   "passes navigation destinations to index cards in %s",

@@ -1,5 +1,5 @@
 ---
-title: "Persönliche Automationen"
+title: "Automationen"
 description: "Neue Chats nach Zeitplan oder bei Dateiereignissen starten."
 lang: de
 meta:
@@ -38,7 +38,7 @@ meta:
     - "packages/realtime/src/platform/automationTools.ts"
 ---
 
-# Persönliche Automationen
+# Automationen
 
 Öffne **Apps → Automationen**. Über **Neue Automation** unter der Liste oder im Menü **Optionen** legst du eine Automation an. Der Editor hat die Reiter **Übersicht**, **Auslöser**, **Chat starten** und **Einstellungen**. Wähle unter **Chat starten** den Agenten und formuliere die Nachricht; den Namen findest du unter **Einstellungen**. In **Übersicht** steht der Aktiv-Schalter über der Vorschau deiner Eingaben. Die Info-Kacheln lassen sich für Details aufklappen und markieren ungespeicherte Änderungen. Mit **Erstellen** bzw. **Speichern** in der festen Reiterleiste übernimmst du die Änderungen. Jede Ausführung eröffnet einen neuen persönlichen Chat. Andere Personen können deine Automationen nicht verwalten, auch nicht mit Arbeitsplatzadministratorrechten.
 

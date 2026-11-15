@@ -2,7 +2,7 @@
   "labelTitle": "Automationen",
   "labelNew": "Neue Automation",
   "labelEdit": "Automation bearbeiten",
-  "descriptionPersonal": "Deine persönlichen Automationen starten jeweils einen neuen Chat mit einem Agenten. Verfügbar ab Editor-Rolle.",
+  "descriptionPersonal": "Deine Automationen starten jeweils einen neuen Chat mit einem Agenten. Verfügbar ab Editor-Rolle.",
   "labelName": "Name",
   "labelAgent": "Agent",
   "labelMessage": "Nachricht",
