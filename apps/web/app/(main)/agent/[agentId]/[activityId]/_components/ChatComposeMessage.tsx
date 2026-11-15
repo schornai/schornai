@@ -82,8 +82,12 @@ function ChatMessageBatchInput({
   const messages = useMessages();
   const suggestions = getResponseSuggestions(messages);
   const { t } = useT("agent", { keyPrefix: "_components.ChatComposeMessage" });
-  const { activityId, selectedCurrentMessage, setSelectedCurrentMessageText } =
-    useChatComposeMessage();
+  const {
+    additionalFunctions,
+    activityId,
+    selectedCurrentMessage,
+    setSelectedCurrentMessageText,
+  } = useChatComposeMessage();
   const applyRecommendedMessage = (text: string) => {
     setSelectedCurrentMessageText(text);
     textareaRef.current?.focus();
@@ -172,7 +176,10 @@ function ChatMessageBatchInput({
           ))}
         </div>
       )}
-      <Collapsible open={batchViewOpen} onOpenChange={setBatchViewOpen}>
+      <Collapsible
+        open={additionalFunctions?.batch !== false && batchViewOpen}
+        onOpenChange={setBatchViewOpen}
+      >
         <div className="bg-muted rounded-lg border">
           <CollapsibleContent>
             <ChatComposeMessageBatch />

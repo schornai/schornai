@@ -5,6 +5,7 @@ import {
 } from "../tools/calculate.ts";
 import { currentDateTime } from "../tools/currentDateTime.ts";
 import { addMonitoringTools } from "./monitoringTools.ts";
+import { addAutomationTools } from "./automationTools.ts";
 import { addWorkflowTools } from "./workflowTools.ts";
 import { addProfileTools } from "./profileTools.ts";
 import { addSettingsTools } from "./settingsTools.ts";
@@ -41,6 +42,7 @@ import { addStorageTools } from "./storageTools.ts";
 
 export function createPlatformTools(context: PlatformContext) {
   const registry = platformRegistry(context);
+  addAutomationTools(context, registry);
   const { add, workspace } = registry;
   const { supabase, supabaseServiceRole } = context;
   const id = z.object({ id: z.string().min(1) });

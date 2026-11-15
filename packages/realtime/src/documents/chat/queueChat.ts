@@ -42,11 +42,30 @@ export async function queueChat(
   {
     chat,
     taskQueue,
-  }: { chat: ServerRealtimeProvider; taskQueue: ServerRealtimeProvider },
+    abortSignal,
+  }: {
+    chat: ServerRealtimeProvider;
+    taskQueue: ServerRealtimeProvider;
+    abortSignal?: AbortSignal;
+  },
 ) {
+  abortSignal?.throwIfAborted();
   const generationId = crypto.randomUUID();
   setChatState(chat.document, { type: "queued", generationId });
-  await chat.waitForSynced();
+  try {
+    await chat.waitForSynced(abortSignal ? { abortSignal } : undefined);
+    abortSignal?.throwIfAborted();
+  } catch (error) {
+    // No task has been published yet. Release our busy marker so cancellation
+    // cannot leave the chat permanently queued without a worker to recover it.
+    if (chat.document.getMap("state").get("generationId") === generationId) {
+      setChatState(chat.document, { type: "idle", generationId });
+      await chat
+        .waitForSynced({ abortSignal: AbortSignal.timeout(5_000) })
+        .catch(() => {});
+    }
+    throw error;
+  }
   addTask(taskQueue.document, {
     id: generationId,
     parameters,
@@ -54,5 +73,5 @@ export async function queueChat(
     state: "pending",
     type: "chat",
   });
-  await taskQueue.waitForSynced();
+  await taskQueue.waitForSynced(abortSignal ? { abortSignal } : undefined);
 }

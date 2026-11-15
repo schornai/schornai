@@ -14,12 +14,15 @@ import { getSSOProvider } from "@schornio/aibox-package-database/sso/getSSOProvi
 import { getSystemConfigSignIn } from "../_models/systemConfigSignIn";
 import { getSystemConfigWelcomeMessage } from "../_models/systemConfigWelcomeMessage";
 import { getT } from "next-i18next/server";
+import { io } from "next/cache";
 import { tryAsync } from "@schornio/aibox-package-utils/tryAsync";
 
 // Sign-in waits for the current session and configured authentication methods.
 export const instant = false;
 
 export default async function Page(params: PageProps<"/signin">) {
+  // Start session-dependent loaders only after the prerender stage.
+  await io();
   const [
     currentUserProfile,
     searchParams,

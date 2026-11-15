@@ -1,3 +1,12 @@
+vi.mock("@schornio/aibox-package-database/chat/isChatDeleted", () => ({
+  isChatDeleted: vi.fn(async () => false),
+}));
+import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
+import { isChatDeleted } from "@schornio/aibox-package-database/chat/isChatDeleted";
+import { ensureActivity } from "../../apps/web/lib/ensureActivity";
+vi.mock("@schornio/aibox-package-database/chat/getChatExpiration", () => ({
+  getChatExpiration: vi.fn(async () => ({ seconds: null, expiresAt: null })),
+}));
 vi.mock("../../apps/web/app/_models/getAgentConnections", () => ({
   getAgentConnections: async () => [],
 }));
@@ -7,7 +16,7 @@ vi.mock("../../apps/web/app/_models/systemConfigAccessMessage", () => ({
 import "./client-setup";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getAgentById as getAgentContent } from "@schornio/aibox-package-database/agent/getAgentById";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { isValidElement } from "react";
 import { RealtimeProvider } from "../../apps/web/lib/RealtimeProvider";
 const state = vi.hoisted(() => ({
@@ -30,7 +39,9 @@ const state = vi.hoisted(() => ({
   inspect: vi.fn(),
   isGlobalAdmin: true,
 }));
-vi.mock("@/lib/ensureActivity", () => ({ ensureActivity: vi.fn() }));
+vi.mock("../../apps/web/lib/ensureActivity", () => ({
+  ensureActivity: vi.fn(),
+}));
 vi.mock("@schornio/aibox-package-database/user/getCurrentUser", () => ({
   getCurrentUser: async () => ({ id: "user" }),
 }));
@@ -41,6 +52,9 @@ vi.mock("@/lib/supabase/getWorkspaceAdminContext", () => ({
   }),
 }));
 vi.mock("next/navigation", () => ({
+  redirect: (path: string) => {
+    throw new Error(`REDIRECT:${path}`);
+  },
   notFound: () => {
     throw new Error("NOT_FOUND");
   },
@@ -142,6 +156,9 @@ function params() {
 }
 beforeEach(() => {
   state.isGlobalAdmin = true;
+  vi.mocked(redirect).mockImplementation((path) => {
+    throw new Error(`REDIRECT:${path}`);
+  });
   vi.mocked(notFound).mockImplementation(() => {
     throw new Error("NOT_FOUND");
   });
@@ -727,6 +744,35 @@ describe("server storage views and application composition", () => {
     state.entity = undefined;
     await expect(chatPage(request)).rejects.toThrow("NOT_FOUND");
   });
+  it.each(["initialization", "expiration read"])(
+    "returns to history when deletion blocks %s",
+    async (stage) => {
+      const operation =
+        stage === "initialization" ? ensureActivity : getChatExpiration;
+      vi.mocked(operation).mockRejectedValueOnce(
+        new Error("DOCUMENT_ACCESS_DENIED"),
+      );
+      vi.mocked(isChatDeleted).mockResolvedValueOnce(true);
+      await expect(
+        chatPage({
+          params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+        } as any),
+      ).rejects.toThrow("REDIRECT:/activity");
+      expect(isChatDeleted).toHaveBeenLastCalledWith(
+        "activity_chat___activity_agent",
+        { supabase: {} },
+      );
+    },
+  );
+  it("preserves initialization failures when the chat was not deleted", async () => {
+    const error = new Error("connection failed");
+    vi.mocked(ensureActivity).mockRejectedValueOnce(error);
+    await expect(
+      chatPage({
+        params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+      } as any),
+    ).rejects.toBe(error);
+  });
   it("shows a clear access error without opening realtime rooms for an unauthorized chat", async () => {
     state.workspaces = [{ id: "workspace", name: "Workspace" }];
     vi.mocked(getAgentContent).mockClear();
@@ -810,7 +856,7 @@ it.each([
       "/settings/theme",
     ],
   ],
-  [appsIndex, ["/app/documents", "/app/transcribe"]],
+  [appsIndex, ["/app/documents", "/app/transcribe", "/app/automation"]],
   [ClusterOverview, ["/service", "/tasks", "/artifacts"]],
 ] as const)(
   "passes navigation destinations to index cards in %s",
@@ -1271,4 +1317,33 @@ it("hides sidebar favorites without removing dashboard favorites", async () => {
   expect(
     component(await DashboardFavorites(), "WorkspaceCard").props.workspace,
   ).toBe(state.workspaces[0]);
+});
+
+it("shows owned automation favorites on dashboard and sidebar while omitting unavailable definitions", async () => {
+  const automation = {
+    id: "automation",
+    name: "Briefing",
+    enabled: false,
+    trigger: { type: "time", schedule: { kind: "hours", every: 1 } },
+  };
+  state.favorites = {
+    showInSidebar: true,
+    favorites: [{ type: "automation", id: "automation" }],
+    automations: [automation],
+  };
+  expect(
+    component(await DashboardFavorites(), "AutomationCard").props.automation,
+  ).toEqual(automation);
+  expect(
+    component(await SidebarFavorites(), "SidebarFavoriteItemAutomation").props
+      .automation,
+  ).toEqual(automation);
+  state.favorites.automations = [];
+  expect(
+    component(await DashboardFavorites(), "AutomationCard"),
+  ).toBeUndefined();
+  expect(
+    component(await SidebarFavorites(), "SidebarFavoriteItemAutomation").props
+      .automation,
+  ).toBeUndefined();
 });

@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "../_shared/_types";
+import type { SupabaseClient } from "../_shared/_types.ts";
 
 /** Server-only. Caller must authenticate userId before using service role.
  * Removes tokens and pending states. Stale provider writes fail their CAS. */

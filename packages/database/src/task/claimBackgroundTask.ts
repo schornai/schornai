@@ -6,12 +6,14 @@ export async function claimBackgroundTask(
   ownerToken: string,
   snapshot: string,
   { supabaseServiceRole }: TaskClaimOptions,
+  chatDocumentName?: string,
 ) {
   const { data, error } = await supabaseServiceRole
     .rpc("claim_background_task", {
       p_task_id: taskId,
       p_owner_token: ownerToken,
       p_snapshot: snapshot,
+      ...(chatDocumentName ? { p_chat_document_name: chatDocumentName } : {}),
     })
     .abortSignal(AbortSignal.timeout(10_000));
   if (error) throw new Error("TASK_CLAIM_UNAVAILABLE");

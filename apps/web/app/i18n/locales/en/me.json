@@ -117,7 +117,8 @@
       "agent": "Agent",
       "workspace": "Workspace",
       "transcriber": "Transcriber",
-      "documentRepository": "Document repository"
+      "documentRepository": "Document repository",
+      "automation": "Automation"
     }
   }
 }

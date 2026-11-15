@@ -19,6 +19,7 @@ export const selectChatFileSchema = z.object({
   activityId: z.string(),
   storage: storageSchema,
   path: z.string(),
+  attachmentMode: z.optional(z.enum(["copy", "reference"])),
 });
 export async function selectChatFile(
   input: z.infer<typeof selectChatFileSchema>,
@@ -26,12 +27,15 @@ export async function selectChatFile(
     supabase,
     serverToken,
     websocketProvider,
+    abortSignal,
   }: {
     supabase: SupabaseClient;
     serverToken: `Worker ${string}`;
     websocketProvider: ServerRealtimeWebsocketProvider;
+    abortSignal?: AbortSignal;
   },
 ) {
+  abortSignal?.throwIfAborted();
   const path = validateStoragePath(input.path);
   const destination = {
     type: "activity" as const,
@@ -46,6 +50,7 @@ export async function selectChatFile(
     new StorageSession({
       storage: input.storage,
       supabaseStorage: supabase.storage,
+      abortSignal,
     }),
   );
   if (!file?.file) throw new Error("FILE_NOT_FOUND");
@@ -56,6 +61,7 @@ export async function selectChatFile(
       new StorageSession({
         storage: input.storage,
         supabaseStorage: supabase.storage,
+        abortSignal,
       }),
     ))
   )
@@ -74,7 +80,7 @@ export async function selectChatFile(
     agentId: input.agentId,
     activityId: input.activityId,
   });
-  if (agentPath)
+  if (agentPath && input.attachmentMode !== "copy")
     return {
       file: {
         ...file,
@@ -82,6 +88,8 @@ export async function selectChatFile(
       } satisfies StorageRealtimeObject,
       copied: false,
     };
+  if (input.attachmentMode === "reference")
+    throw new Error("FILE_REFERENCE_NOT_MOUNTED");
   const extension =
     file.name.lastIndexOf(".") > 0
       ? file.name.slice(file.name.lastIndexOf("."))
@@ -104,6 +112,7 @@ export async function selectChatFile(
       supabase,
       serverToken,
       websocketProvider,
+      abortSignal,
     },
   );
   return {

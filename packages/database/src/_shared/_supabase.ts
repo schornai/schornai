@@ -225,6 +225,126 @@ export type Database = {
           },
         ];
       };
+      automation_runs: {
+        Row: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          activity_id?: string;
+          automation_id: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence: string;
+          revision: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Update: {
+          activity_id?: string;
+          automation_id?: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence?: string;
+          revision?: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automation_runs_automation_id_fkey";
+            columns: ["automation_id"];
+            isOneToOne: false;
+            referencedRelation: "automations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      automations: {
+        Row: {
+          access_level: string;
+          agent_id: string;
+          color: Json | null;
+          created_at: string;
+          description: string;
+          enabled: boolean;
+          icon: Json | null;
+          id: string;
+          message: string;
+          name: string;
+          next_run_at: string | null;
+          revision: string;
+          storage_bucket: string | null;
+          storage_prefix: string | null;
+          trigger: NonNullable<Json>;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_level?: string;
+          agent_id: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message: string;
+          name: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger: NonNullable<Json>;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          access_level?: string;
+          agent_id?: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message?: string;
+          name?: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger?: NonNullable<Json>;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automations_agent_id_fkey";
+            columns: ["agent_id"];
+            isOneToOne: false;
+            referencedRelation: "chatbots";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       box_runtime_states: {
         Row: {
           box_id: string;
@@ -925,24 +1045,76 @@ export type Database = {
       realtime_documents: {
         Row: {
           created_at: string;
+          deleted_at: string | null;
           document_data: string | null;
           document_name: string;
+          expires_at: string | null;
+          expiry_seconds: number | null;
           id: string;
           updated_at: string;
         };
         ComputedFields: never;
         Insert: {
           created_at?: string;
+          deleted_at?: string | null;
           document_data?: string | null;
           document_name: string;
+          expires_at?: string | null;
+          expiry_seconds?: number | null;
           id?: string;
           updated_at?: string;
         };
         Update: {
           created_at?: string;
+          deleted_at?: string | null;
           document_data?: string | null;
           document_name?: string;
+          expires_at?: string | null;
+          expiry_seconds?: number | null;
           id?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      scheduled_jobs: {
+        Row: {
+          attempts: number;
+          id: string;
+          interval_seconds: number | null;
+          kind: string;
+          lease_token: string | null;
+          lease_until: string | null;
+          max_attempts: number;
+          payload: NonNullable<Json>;
+          run_at: string;
+          state: string;
+          updated_at: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          attempts?: number;
+          id: string;
+          interval_seconds?: number | null;
+          kind: string;
+          lease_token?: string | null;
+          lease_until?: string | null;
+          max_attempts?: number;
+          payload?: NonNullable<Json>;
+          run_at?: string;
+          state?: string;
+          updated_at?: string;
+        };
+        Update: {
+          attempts?: number;
+          id?: string;
+          interval_seconds?: number | null;
+          kind?: string;
+          lease_token?: string | null;
+          lease_until?: string | null;
+          max_attempts?: number;
+          payload?: NonNullable<Json>;
+          run_at?: string;
+          state?: string;
           updated_at?: string;
         };
         Relationships: [];
@@ -1140,6 +1312,7 @@ export type Database = {
       };
       task_claims: {
         Row: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1150,6 +1323,7 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          chat_document_name?: string | null;
           completed_at?: string | null;
           expires_at: string;
           owner_token: string;
@@ -1159,6 +1333,7 @@ export type Database = {
           task_id: string;
         };
         Update: {
+          chat_document_name?: string | null;
           completed_at?: string | null;
           expires_at?: string;
           owner_token?: string;
@@ -1438,6 +1613,47 @@ export type Database = {
             };
             Returns: boolean;
           };
+      begin_automation_run: {
+        Args: { p_id: string; p_token: string };
+        Returns: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "automation_runs";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
+      begin_chat_expiration: {
+        Args: { p_document_name: string; p_token: string };
+        Returns: {
+          created_at: string;
+          deleted_at: string | null;
+          document_data: string | null;
+          document_name: string;
+          expires_at: string | null;
+          expiry_seconds: number | null;
+          id: string;
+          updated_at: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "realtime_documents";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       can_access: {
         Args: {
           minimum_role: string;
@@ -1477,8 +1693,14 @@ export type Database = {
         };
       };
       claim_background_task: {
-        Args: { p_owner_token: string; p_snapshot: string; p_task_id: string };
+        Args: {
+          p_chat_document_name?: string;
+          p_owner_token: string;
+          p_snapshot: string;
+          p_task_id: string;
+        };
         Returns: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1490,6 +1712,28 @@ export type Database = {
         SetofOptions: {
           from: "*";
           to: "task_claims";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
+      claim_scheduled_job: {
+        Args: { p_kinds: string[] };
+        Returns: {
+          attempts: number;
+          id: string;
+          interval_seconds: number | null;
+          kind: string;
+          lease_token: string | null;
+          lease_until: string | null;
+          max_attempts: number;
+          payload: NonNullable<Json>;
+          run_at: string;
+          state: string;
+          updated_at: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "scheduled_jobs";
           isOneToOne: false;
           isSetofReturn: true;
         };
@@ -1509,6 +1753,25 @@ export type Database = {
       custom_access_token_hook: { Args: { event: Json }; Returns: Json };
       decrement_current_streams: {
         Args: { p_box_id: string; p_model_identifier: string };
+        Returns: undefined;
+      };
+      enqueue_automation_manual: {
+        Args: {
+          p_event: Json;
+          p_id: string;
+          p_request_id: string;
+          p_revision: string;
+          p_user_id: string;
+        };
+        Returns: string;
+      };
+      enqueue_automation_time: {
+        Args: {
+          p_due: string;
+          p_id: string;
+          p_next: string;
+          p_revision: string;
+        };
         Returns: undefined;
       };
       ensure_realtime_document: {
@@ -1545,6 +1808,7 @@ export type Database = {
       expire_background_tasks: {
         Args: Record<PropertyKey, never>;
         Returns: {
+          chat_document_name: string | null;
           completed_at: string | null;
           expires_at: string;
           owner_token: string;
@@ -1577,6 +1841,10 @@ export type Database = {
         };
         Returns: boolean;
       };
+      finish_scheduled_job: {
+        Args: { p_id: string; p_success: boolean; p_token: string };
+        Returns: boolean;
+      };
       generate_custom_id: { Args: Record<PropertyKey, never>; Returns: string };
       get_parent_folders: {
         Args: { folder_id: string };
@@ -1594,6 +1862,7 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      is_chat_deleted: { Args: { p_document_name: string }; Returns: boolean };
       match_embeddings_1024: {
         Args: {
           match_count: number;
@@ -1674,6 +1943,10 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: number;
       };
+      purge_chat_task_snapshots: {
+        Args: { p_document_name: string };
+        Returns: undefined;
+      };
       refresh_platform_mcp_tokens: {
         Args: {
           p_access_hash: string;
@@ -1699,6 +1972,10 @@ export type Database = {
       };
       renew_background_task: {
         Args: { p_owner_token: string; p_task_id: string };
+        Returns: boolean;
+      };
+      renew_scheduled_job: {
+        Args: { p_id: string; p_token: string };
         Returns: boolean;
       };
       replace_file_index: {
@@ -1729,6 +2006,10 @@ export type Database = {
           p_workspace_id: string;
         };
         Returns: undefined;
+      };
+      set_chat_expiration: {
+        Args: { p_document_name: string; p_seconds: number; p_user_id: string };
+        Returns: string;
       };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };
       update_external_ai_model: {

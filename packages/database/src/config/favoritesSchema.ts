@@ -8,6 +8,7 @@ export const settingFavoritesSchema = z.object({
         z.literal("transcriber"),
         z.literal("documentRepository"),
         z.literal("workspace"),
+        z.literal("automation"),
       ]),
     }),
   ),

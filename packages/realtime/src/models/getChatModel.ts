@@ -1,6 +1,6 @@
 import { withContextCompression } from "./withContextCompression.ts";
 import type { ContextCompressionListener } from "./withContextCompression.ts";
-import { getAIModelByIdentifier } from "@schornio/aibox-package-database/aiModel/getAIModelByIdentifier";
+import { getAIModelByOllamaIdentifier } from "@schornio/aibox-package-database/aiModel/getAIModelByOllamaIdentifier";
 import { createExternalLanguageModel } from "./createExternalLanguageModel.ts";
 import { aiboxModel } from "../_lib/aiboxModel.ts";
 import type { SupabaseClient } from "@schornio/aibox-package-database/_shared/_types";
@@ -15,11 +15,11 @@ export async function getChatModel(
   },
 ) {
   if (!identifier.startsWith("external:")) {
-    let metadata: ReturnType<typeof getAIModelByIdentifier> | undefined;
+    let metadata: ReturnType<typeof getAIModelByOllamaIdentifier> | undefined;
     return withContextCompression(
       aiboxModel(identifier, context),
       async () => {
-        metadata ??= getAIModelByIdentifier(identifier, {
+        metadata ??= getAIModelByOllamaIdentifier(identifier, {
           supabase: context.supabaseServiceRole,
           abortSignal: context.abortSignal,
         });

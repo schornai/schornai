@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für Modellwechsel: ein bereitgestelltes Sprachmodell."
   status: "verfügbar"
-  last_verified: "2026-10-16"
+  last_verified: "2026-11-12"
   source_files:
     [
       "apps/web/app/(main)/agent/_components/AgentEditorSettings.tsx",
@@ -44,10 +44,20 @@ Eine abweichende Einstellung der gewählten Agentenrolle hat Vorrang vor der all
 
 ## Zusätzliche Funktionen
 
-Der Editor zeigt Schalter für **Dateien hochladen** und **Stapelverarbeitung** sowie die Auswahl eines **Transcribers**. Ein zugeordneter Transkriptor ermöglicht die automatische Verarbeitung hochgeladener Audio- und Videodateien und die Aufnahmefunktion im Chat.
+**Dateien hochladen** steuert die Dateianhänge und Drag-and-drop in der Chat-Eingabe. **Stapelverarbeitung** steuert den Stapel-Button und das gemeinsame Starten mehrerer Entwürfe. Bereits vorhandene Anhänge und Entwürfe bleiben erhalten.
 
-Die Schalter für Dateiupload und Stapelverarbeitung wirken derzeit nicht auf die Chat-Eingabe: Beide Funktionen bleiben dort auch bei ausgeschaltetem Schalter verfügbar.
+Für **Selbstlöschende Chats** stehen drei Einstellungen zur Wahl:
 
-**Ziel verfolgen**, **Selbstlöschende Chats** und **Nachtschicht** sind derzeit nicht verfügbar.
+- **Nicht verfügbar:** Neue Chats bieten keinen Schalter zum Einschalten.
+- **Standardmäßig aus:** Im Chat kann die Funktion eingeschaltet werden.
+- **Standardmäßig an:** Neue Chats erhalten beim Anlegen eine Löschfrist von 12 Stunden. Benutzer:innen können sie im Chat ausschalten.
+
+Die Voreinstellung verändert bestehende Chats nicht. Ein bereits aktiver Timer lässt sich auch nach dem Deaktivieren der Agentenfunktion ausschalten. Jeder neue Einschaltvorgang startet eine feste Frist von 12 Stunden; neue Nachrichten verlängern sie nicht.
+
+Ein zugeordneter **Transcriber** ermöglicht die Verarbeitung von Audio- und Videodateien und die Aufnahmefunktion im Chat. **Ziel verfolgen** und **Nachtschicht** sind derzeit nicht verfügbar.
 
 Weiter: [Chat bedienen](../chat/index.md) · [Transkriptor konfigurieren](../../app/transcribe/edit.md)
+
+## Zugehörige MCP-Werkzeuge
+
+`platform_agent_get` liest die Konfiguration ab Stufe **Benutzer** mit Zugriff auf den Agenten. `platform_agent_update` speichert die Zusatzfunktionen ab Stufe **Arbeitsplatzadministrator** mit Verwaltungsrechten im betroffenen Arbeitsplatz. `additionalFunctions.fileUpload` und `batch` sind boolesch; `disappearingChats` verwendet `false` (nicht verfügbar), `true` (standardmäßig aus) oder `"default-on"` (standardmäßig an). `platform_chat_expiration_set` schaltet die Frist für tatsächliche Chat-Teilnehmer:innen ab Stufe **Benutzer** mit `seconds: 43200` ein und mit `null` aus; Einschalten erfordert die aktivierte Agentenfunktion. Die Browserdarstellung der Stapelverwaltung ist kein eigenes MCP-Werkzeug; `platform_chat_send` sendet einzelne Nachrichten.

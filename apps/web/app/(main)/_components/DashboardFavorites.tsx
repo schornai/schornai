@@ -1,3 +1,4 @@
+import { AutomationCard } from "../app/automation/_components/AutomationCard";
 import {
   Empty,
   EmptyDescription,
@@ -43,6 +44,9 @@ export default async function DashboardFavorites() {
     getT("common", { keyPrefix: "main._components.DashboardFavorites" }),
   ]);
 
+  const automationMap = new Map(
+    favorites.automations?.map((item) => [item.id, item]),
+  );
   const agentMap = new Map(favorites.agents?.map((agent) => [agent.id, agent]));
   const transcriberMap = new Map([
     ...transcribers.map<[string, Transcriber_new]>((transcriber) => [
@@ -89,6 +93,13 @@ export default async function DashboardFavorites() {
         <ContainerMain className="flex flex-wrap justify-center gap-3">
           {favorites.favorites.map((favorite) => (
             <Fragment key={`${favorite.type}:${favorite.id}`}>
+              {favorite.type === "automation" &&
+                automationMap.has(favorite.id) && (
+                  <AutomationCard
+                    automation={automationMap.get(favorite.id)!}
+                    favorites={favorites}
+                  />
+                )}
               {favorite.type === "workspace" &&
               hasPermission({
                 claim: workspaceMap.get(favorite.id)?.claim,

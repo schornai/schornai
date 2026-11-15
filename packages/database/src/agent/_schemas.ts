@@ -142,7 +142,10 @@ export const webAccessConfigSchema = z
 export const agentConfigSchema = z.object({
   additionalFunctions: z.object({
     batch: z._default(z.boolean(), true),
-    disappearingChats: z._default(z.boolean(), true),
+    disappearingChats: z._default(
+      z.union([z.boolean(), z.literal("default-on")]),
+      true,
+    ),
     fileUpload: z._default(z.boolean(), true),
     nightshift: z._default(z.boolean(), true),
     pursueGoal: z._default(z.boolean(), true),

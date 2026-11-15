@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Pencil } from "lucide-react";
 import {
   SidebarFavoriteItemAgent,
+  SidebarFavoriteItemAutomation,
   SidebarFavoriteItemDocumentRepository,
   SidebarFavoriteItemTranscriber,
   SidebarFavoriteItemWorkspace,
@@ -22,7 +23,14 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 
 export async function SidebarFavorites() {
   const [
-    { agents, documentRepositories, favorites, transcribers, showInSidebar },
+    {
+      agents,
+      automations,
+      documentRepositories,
+      favorites,
+      transcribers,
+      showInSidebar,
+    },
     { t },
     { claims },
   ] = await Promise.all([
@@ -43,6 +51,7 @@ export async function SidebarFavorites() {
       .map((workspace) => [workspace.id, workspace]),
   );
 
+  const automationMap = new Map(automations?.map((item) => [item.id, item]));
   const agentsMap = new Map(agents?.map((agent) => [agent.id, agent]));
   const transcribersMap = new Map(
     transcribers?.map((transcriber) => [transcriber.id, transcriber]),
@@ -78,6 +87,11 @@ export async function SidebarFavorites() {
           ) : undefined}
           {favorites?.map((favorite) => (
             <Fragment key={`${favorite.type}:${favorite.id}`}>
+              {favorite.type === "automation" && (
+                <SidebarFavoriteItemAutomation
+                  automation={automationMap.get(favorite.id)}
+                />
+              )}
               {favorite.type === "workspace" ? (
                 <SidebarFavoriteItemWorkspace
                   workspace={workspaceMap.get(favorite.id)}

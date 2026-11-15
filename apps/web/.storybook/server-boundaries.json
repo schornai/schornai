@@ -358,5 +358,21 @@
   [
     "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts",
     "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/retryChatGeneration.ts"
+  ],
+  [
+    "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts"
+  ],
+  [
+    "apps/web/app/(main)/app/automation/_actions/saveAutomation.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/app/automation/_actions/saveAutomation.ts"
+  ],
+  [
+    "apps/web/app/(main)/app/automation/_actions/deleteAutomation.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/app/automation/_actions/deleteAutomation.ts"
+  ],
+  [
+    "apps/web/app/(main)/app/automation/_actions/runAutomationNow.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/app/automation/_actions/runAutomationNow.ts"
   ]
 ]

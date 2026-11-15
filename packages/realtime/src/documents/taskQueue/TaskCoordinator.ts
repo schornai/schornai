@@ -1,3 +1,5 @@
+import { deleteTask } from "./deleteTask.ts";
+import { getTaskChatDocumentName } from "./getTaskChatDocumentName.ts";
 import type { Doc } from "yjs";
 import type { Task } from "./_types.ts";
 import type {
@@ -74,6 +76,7 @@ export class TaskCoordinator {
         claimed.claimToken,
         encodeTaskValue(claimed),
         this.options,
+        getTaskChatDocumentName(task),
       );
       await this.apply(record, task);
       if (
@@ -140,6 +143,16 @@ export class TaskCoordinator {
     return true;
   }
   async apply(record: TaskClaim, fallback?: Task) {
+    // A purged chat payload must not be rebuilt from a stale queue replica.
+    if (
+      record.chat_document_name &&
+      record.state !== "claimed" &&
+      !record.snapshot &&
+      !record.recovery_pending
+    ) {
+      deleteTask(this.document, record.task_id);
+      return;
+    }
     const original = record.snapshot
       ? decodeTaskValue<Task>(record.snapshot)
       : fallback;

@@ -200,6 +200,61 @@ differ: see [development behavior tests](../tests/service-development.test.ts),
 [service README](../packages/service/README.md) for artifact synchronization and
 deployment details.
 
+## Follow scheduled work
+
+The realtime server starts the [scheduler](../apps/realtime/src/scheduler/startScheduler.ts)
+and registers `artifacts.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
+claims durable jobs through [database operations](../packages/database/src/scheduler);
+Postgres owns due times, lease tokens, retries and interval rescheduling.
+Read the [delivery decision](adr/0005-scheduled-job-delivery.md) when adding a
+handler with external side effects, and the [runtime guide](../apps/realtime/README.md#durable-scheduler)
+for registration, cancellation and failure recovery. Tests cover
+[worker behavior](../tests/scheduler.test.ts) and
+[SQL ownership and privileges](../supabase/tests/scheduled_jobs.sql).
+
+Chat expiry uses [atomic deadline updates](../packages/database/src/chat/setChatExpiration.ts),
+[cleanup](../apps/realtime/src/scheduler/expireChat.ts), and a
+[realtime guard](../packages/realtime/src/server/createChatExpirationExtension.ts).
+The web action and platform tools share the same membership-checked database
+operation. Read the [tombstone decision](adr/0006-disappearing-chat-tombstones.md)
+when changing deletion, replay protection or task snapshot retention. Tests cover [cleanup and fencing](../tests/chat-expiration.test.ts)
+and [SQL deadlines and tombstones](../supabase/tests/chat_expiration.sql).
+
+## Automations
+
+The list shares filter and display preferences through [AutomationListProvider](../apps/web/app/%28main%29/app/automation/_components/AutomationListProvider.tsx). Header options, cards and table consume that state. Creation and editing use dedicated routes with the shared `TabsMain` editor pattern; [AutomationInfo](../apps/web/app/%28main%29/app/automation/_components/AutomationInfo.tsx) also renders the live draft preview. [AutomationScheduleFields](../apps/web/app/%28main%29/app/automation/_components/AutomationScheduleFields.tsx) maps the daily calendar UI to weekly rules with all days selected; hourly rules start at the next full UTC hour and retain their interval from the previous due time, avoiding dispatcher drift; legacy day intervals retain elapsed-time semantics. Card appearance uses the shared app color/icon schemas. Favorites share the global favorites configuration, dashboard, sidebar and RLS-scoped [favorite loader](../packages/database/src/automation/getAutomationsByIds.ts). Saving a copy uses the same create operation without an ID and starts paused. Storage selection uses one [StoragePickerDialog](../apps/web/app/_components/StoragePickerDialog.tsx) for repository and folder together.
+
+The [automation app](../apps/web/app/%28main%29/app/automation/page.tsx) and
+[platform tools](../packages/realtime/src/platform/automationTools.ts) share the
+owner-scoped [database operations](../packages/database/src/automation).
+The scheduler dispatches time occurrences and runs storage events captured by
+[the migration](../supabase/migrations/20261114154753_personal_automations.sql).
+[runAutomation](../apps/realtime/src/scheduler/runAutomation.ts) resolves current
+roles and invokes [sendChatMessage](../packages/realtime/src/platform/sendChatMessage.ts),
+also used by platform chat submission. Read the [submission decision](adr/0007-automation-chat-submission.md)
+when changing retries or durability. Behavior checks cover
+[calendar rules](../tests/automation.test.ts) and
+[ownership/outbox/fencing](../supabase/tests/automations.sql).
+
+The [scheduler hardening migration](../supabase/migrations/20261115091351_automation_scheduler_hardening.sql)
+ignores storage bookkeeping updates and lets recurring maintenance recover after
+retry exhaustion. Automation submissions use a separate sequential worker from
+maintenance and deletion. Their cancellation signal reaches attachment transfers
+and the queue publication; see [submission cancellation tests](../tests/automation-chat-submission.test.ts).
+[getAutomationOwner](../packages/database/src/automation/getAutomationOwner.ts)
+applies the execution ceiling before constructing a user client, including file
+readiness checks. Manual and captured events share
+[folder validation](../packages/database/src/automation/validateAutomationFilePath.ts).
+The platform registry always requires human approval when a native agent saves
+or runs an automation, because the target agent has its own tool policy; see
+[approval tests](../tests/platform-agent-policy.test.ts).
+
+Run history uses [AutomationRunsLive](../apps/web/app/%28main%29/app/automation/_components/AutomationRunsLive.tsx)
+to observe a read-only Yjs document on the existing Hocuspocus connection.
+The automation worker updates that document when an execution changes state.
+The browser reloads its authorized server snapshot on changes and reconnects,
+preserving search and grouping. No additional realtime service is required.
+
 ## Follow XRAG publication
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a
