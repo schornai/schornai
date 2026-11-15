@@ -181,6 +181,7 @@ export class MCPOAuthProvider implements OAuthClientProvider {
     if (this.data.redirectUrl !== options.redirectUrl) {
       this.data.client = undefined;
       this.data.authorizationServer = undefined;
+      this.data.tokens = undefined;
     }
     this.session.state = null;
     this.session.state_expires_at = null;
@@ -188,7 +189,8 @@ export class MCPOAuthProvider implements OAuthClientProvider {
       ...this.data,
       ...options,
       clientVersion: this.configuredClient?.version,
-      tokens: undefined,
+      // Keep credentials bound to the unchanged client so auth can refresh
+      // them, and callbacks without a new refresh token retain the old one.
       verifier: undefined,
     };
     await this.save();
