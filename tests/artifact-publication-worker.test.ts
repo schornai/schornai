@@ -19,20 +19,27 @@ afterEach(async () => {
   for (const root of roots.splice(0))
     await rm(root, { recursive: true, force: true });
 });
-async function fixture() {
+async function fixture(collection = false) {
   const root = await mkdtemp(join(tmpdir(), "artifact-publication-"));
   roots.push(root);
-  const xrag = {
-    xrag_version: 1,
-    xrag_type: "files",
-    targets: ["service"],
-    name: "data",
-  };
+  const xrag = collection
+    ? {
+        xrag_version: 2,
+        xrag_type: "collection",
+        entries: [{ sha256: "a".repeat(64), size: 7 }],
+      }
+    : {
+        xrag_version: 1,
+        xrag_type: "files",
+        targets: ["service"],
+        name: "data",
+      };
   await writeFile(join(root, "xrag.json"), JSON.stringify(xrag));
-  await writeFile(join(root, "data"), "payload");
+  const payload = collection ? `${"a".repeat(64)}.xrag.tar` : "data";
+  await writeFile(join(root, payload), "payload");
   await c({ file: join(root, "archive.tar"), cwd: root }, [
     "xrag.json",
-    "data",
+    payload,
   ]);
   const bytes = await readFile(join(root, "archive.tar"));
   const id = createHash("sha256").update(bytes).digest("hex");
@@ -92,6 +99,15 @@ it("records oversized input as a terminal failure without publishing", async () 
     expect.objectContaining({ p_retryable: false }),
   );
   expect(mocks.register).not.toHaveBeenCalled();
+});
+it("rejects collections before registering models or publishing machine artifacts", async () => {
+  const { run, rpc } = await fixture(true);
+  await expect(run()).resolves.toEqual({ worked: true });
+  expect(mocks.register).not.toHaveBeenCalled();
+  expect(rpc).toHaveBeenLastCalledWith(
+    "fail_artifact_publication",
+    expect.objectContaining({ p_retryable: false }),
+  );
 });
 it("retries transport failures through the durable job, not a live browser request", async () => {
   const { run, rpc } = await fixture();

@@ -66,6 +66,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Cards: Story = {};
+export const WorkspaceAdmin: Story = {
+  args: {
+    models: models.map(({ baseUrl, provider, modelId, ...model }) => model),
+    readOnly: true,
+  },
+  play: async ({ canvasElement }) => {
+    await expect(
+      canvasElement.querySelector('a[href="/models/local-chat"]'),
+    ).toBeVisible();
+    await expect(
+      canvasElement.querySelector('a[href*="view=settings"]'),
+    ).toBeNull();
+  },
+};
 export const Empty: Story = { args: { models: [] } };
 export const Table: Story = {
   parameters: { nextjs: { navigation: { query: { view: "table" } } } },

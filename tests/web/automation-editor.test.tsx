@@ -409,8 +409,16 @@ it("asks for a file before manually testing a storage attachment", async () => {
 
 it("shows saved details and draft placeholders with section-specific edit links", () => {
   const result = render(
-    <AutomationInfo automation={automation} agents={agents} editable />,
+    <AutomationInfo
+      automation={automation}
+      agents={agents}
+      workspace={{ claim: "workspace-admin" } as any}
+      showXRAGActions
+      editable
+    />,
   );
+  expect(screen.getByRole("button", { name: "labelExport" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "labelAdd" })).toBeTruthy();
   expect(screen.getByText(/09:00 \(Europe\/Vienna\)/)).toBeTruthy();
   expect(
     screen
@@ -437,8 +445,11 @@ it("shows saved details and draft placeholders with section-specific edit links"
       }}
       editable
       preview
+      workspace={{ claim: "workspace-admin" } as any}
     />,
   );
+  expect(screen.queryByRole("button", { name: "labelExport" })).toBeNull();
+  expect(screen.queryByRole("button", { name: "labelAdd" })).toBeNull();
   fireEvent.click(screen.getByRole("button", { name: "labelMessage" }));
   expect(screen.getAllByText("labelNotConfigured")).toHaveLength(3);
   expect(screen.queryByText("descriptionPaused")).toBeNull();

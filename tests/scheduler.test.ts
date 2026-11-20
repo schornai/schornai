@@ -7,6 +7,18 @@ import { finishJob } from "../packages/database/src/scheduler/finishJob.ts";
 import { claimJob } from "../packages/database/src/scheduler/claimJob.ts";
 import { startScheduler } from "../apps/realtime/src/scheduler/startScheduler.ts";
 
+const xragRecovery = vi.hoisted(() => vi.fn());
+const xragProcessing = vi.hoisted(() => vi.fn());
+vi.mock("../packages/database/src/xrag/recoverXRAGImports.ts", () => ({
+  recoverXRAGImports: xragRecovery,
+}));
+vi.mock("../packages/realtime/src/platform/processXRAGImportFiles.ts", () => ({
+  processXRAGImportFiles: xragProcessing,
+}));
+const transferCleanup = vi.hoisted(() => vi.fn());
+vi.mock("../packages/database/src/xrag/cleanupXRAGTransfers.ts", () => ({
+  cleanupXRAGTransfers: transferCleanup,
+}));
 const cleanup = vi.hoisted(() => vi.fn());
 const automation = vi.hoisted(() => vi.fn());
 vi.mock("../apps/realtime/src/scheduler/runAutomation.ts", () => ({
@@ -220,7 +232,11 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   let claimed = false;
   f.rpc.mockImplementation(async (name, ...args: unknown[]) => {
     if (name === "claim_scheduled_job") {
-      if ((args[0] as { p_kinds: string[] }).p_kinds.includes("automation.run"))
+      if (
+        !(args[0] as { p_kinds: string[] }).p_kinds.includes(
+          "artifacts.cleanup",
+        )
+      )
         return { data: [], error: null } as any;
       if (!claimed) {
         claimed = true;
@@ -247,6 +263,9 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   expect(cleanup).toHaveBeenCalledWith(
     expect.objectContaining({ supabase: f.supabase }),
   );
+  expect(transferCleanup).toHaveBeenCalledWith(
+    expect.objectContaining({ supabase: f.supabase }),
+  );
 });
 
 it("continues maintenance while an automation is blocked on external work", async () => {
@@ -270,6 +289,7 @@ it("continues maintenance while an automation is blocked on external work", asyn
           { id: "automation", kind: "automation.run", lease_token: "token" },
         ],
       };
+    if (!args.p_kinds?.includes("artifacts.cleanup")) return { data: [] };
     await running;
     if (claimedMaintenance) {
       stop.abort();
@@ -331,3 +351,52 @@ it("sanitizes RPC failures", async () => {
     "SCHEDULER_FINISH_FAILED",
   );
 });
+
+it.each(["xrag.import.recover", "xrag.import.process"])(
+  "dispatches %s on its dedicated scheduler lane",
+  async (kind) => {
+    const f = fixture(undefined, { kind, payload: { importId: "import-id" } });
+    const upsert = vi.fn().mockResolvedValue({ error: null });
+    f.supabase.from = vi.fn(() => ({ upsert }));
+    let claimed = false;
+    f.rpc.mockImplementation(async (name, args: any) => {
+      if (name !== "claim_scheduled_job")
+        return { data: true, error: null } as any;
+      if (!args.p_kinds.includes(kind)) return { data: [], error: null } as any;
+      if (claimed) {
+        f.stop.abort();
+        return { data: [], error: null } as any;
+      }
+      claimed = true;
+      return { data: [f.job], error: null } as any;
+    });
+    await startScheduler({
+      serverToken: "Worker test",
+      supabase: f.supabase,
+      signal: f.stop.signal,
+      instance: {} as any,
+    });
+    if (kind === "xrag.import.recover")
+      expect(xragRecovery).toHaveBeenCalledWith(
+        expect.objectContaining({
+          supabase: f.supabase,
+          signal: expect.any(AbortSignal),
+        }),
+      );
+    else
+      expect(xragProcessing).toHaveBeenCalledWith(
+        "import-id",
+        expect.objectContaining({
+          supabase: f.supabase,
+          serverToken: "Worker test",
+        }),
+      );
+    expect(upsert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: "system:xrag.import.recover",
+        interval_seconds: 30,
+      }),
+      expect.anything(),
+    );
+  },
+);

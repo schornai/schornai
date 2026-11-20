@@ -6,6 +6,7 @@ const meta = {
   title: "Web/(main)/agent/AgentInfo",
   component: AgentInfo,
   args: {
+    showXRAGActions: true,
     agent: {
       description: "Eine Beschreibung für Storybook.",
       id: "11111111-1111-4111-8111-111111111111",

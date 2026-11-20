@@ -112,7 +112,7 @@ it("binds authorized update and copy operations to the saved source workspace", 
   );
   await createAgent({ agent, copyFromAgentId: "source" });
   expect(state.service.rpc).toHaveBeenLastCalledWith(
-    "save_agent_with_mcp_credentials",
+    "create_agent_with_identity",
     expect.objectContaining({
       p_copy_agent_id: "source",
       p_copy_workspace_id: "source-workspace",
@@ -123,7 +123,7 @@ it("allows global administrators and creates new agents without inferring a copy
   state.claims = "admin";
   await createAgent({ agent });
   expect(state.service.rpc).toHaveBeenLastCalledWith(
-    "save_agent_with_mcp_credentials",
+    "create_agent_with_identity",
     expect.objectContaining({ p_copy_agent_id: undefined }),
   );
 });

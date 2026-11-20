@@ -10,6 +10,9 @@ export function query(response: Response = { data: [], error: null }) {
   const builder: Record<string, any> = {};
   for (const name of [
     "select",
+    "gt",
+    "gte",
+    "lt",
     "insert",
     "update",
     "upsert",

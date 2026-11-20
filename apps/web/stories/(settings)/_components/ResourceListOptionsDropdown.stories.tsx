@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn, expect, userEvent, within } from "storybook/test";
-import { ResourceListOptionsDropdown } from "../../../app/(settings)/_components/ResourceListOptionsDropdown";
+import { ResourceListOptionsDropdown } from "../../../app/_components/ResourceListOptionsDropdown";
 const meta = {
   title: "Web/(settings)/ResourceListOptionsDropdown",
   component: ResourceListOptionsDropdown,

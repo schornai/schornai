@@ -129,6 +129,65 @@ function editor(mode = "update", value = agent, customRelations = relations) {
 }
 
 describe("agent editing flows", () => {
+  it("keeps the global ID in the creation draft until the editor submits it", () => {
+    client.params = new URLSearchParams("view=settings");
+    editor("create");
+    const id = screen.getByLabelText("labelGlobalId") as HTMLInputElement;
+    const title = screen.getByDisplayValue("Agent");
+    const create = screen.getByRole("button", {
+      name: "btnCreate",
+    }) as HTMLButtonElement;
+    expect(screen.queryByRole("button", { name: "labelSaveId" })).toBeNull();
+    expect(id.value).toBe("agent");
+    fireEvent.change(title, { target: { value: "Grüner Agent" } });
+    expect(id.value).toBe("gruner-agent");
+    fireEvent.change(id, { target: { value: "NOT VALID" } });
+    expect(create.disabled).toBe(true);
+    fireEvent.change(id, { target: { value: "team/gruen" } });
+    fireEvent.change(title, { target: { value: "Hilfe" } });
+    expect(id.value).toBe("team/gruen");
+    expect(client.execute).not.toHaveBeenCalled();
+    fireEvent.click(create);
+    expect(client.execute).toHaveBeenLastCalledWith({
+      agent: { ...agent, name: "Hilfe" },
+      globalId: "team/gruen",
+    });
+    fireEvent.change(id, { target: { value: "" } });
+    fireEvent.blur(id);
+    expect(id.value).toBe("hilfe");
+    fireEvent.click(create);
+    expect(client.execute).toHaveBeenLastCalledWith({
+      agent: { ...agent, name: "Hilfe" },
+    });
+  });
+  it.each(["create", "update"])(
+    "keeps XRAG actions off the %s draft even for administrators",
+    (mode) => {
+      editor(mode, agent, {
+        ...relations,
+        workspaces: [{ ...workspace, claim: "workspace-admin" }],
+      });
+      expect(screen.queryByRole("button", { name: "labelExport" })).toBeNull();
+      expect(screen.queryByRole("button", { name: "labelAdd" })).toBeNull();
+    },
+  );
+  it.each(["workspace-admin", "editor"])(
+    "offers the saved agent's XRAG actions according to the %s claim",
+    (claim) => {
+      render(
+        <AgentInfo
+          showXRAGActions
+          agent={agent}
+          documentRepositoryMap={new Map()}
+          workspace={{ ...workspace, claim }}
+        />,
+      );
+      for (const name of ["labelExport", "labelAdd"])
+        expect(!!screen.queryByRole("button", { name })).toBe(
+          claim === "workspace-admin",
+        );
+    },
+  );
   it("disables saving unchanged agents and renders overview details", () => {
     editor();
     expect(

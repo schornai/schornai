@@ -5,7 +5,13 @@ import { savedAutomation, agents, repositories } from "./fixtures";
 const meta = {
   title: "Web/(main)/app/automation/AutomationInfo",
   component: AutomationInfo,
-  args: { automation: savedAutomation, agents, repositories, editable: true },
+  args: {
+    showXRAGActions: true,
+    automation: savedAutomation,
+    agents,
+    repositories,
+    editable: true,
+  },
 } satisfies Meta<typeof AutomationInfo>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -47,6 +53,7 @@ export const Expanded: Story = {
 export const Changed: Story = {
   args: {
     preview: true,
+    showXRAGActions: false,
     editDefaultAutomation: savedAutomation,
     automation: {
       ...savedAutomation,

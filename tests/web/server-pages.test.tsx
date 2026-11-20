@@ -291,6 +291,7 @@ describe("server catalog pages", () => {
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace).toBe(state.workspaces[0]);
       expect(props.editable).toBe(true);
+      expect(props.showXRAGActions).toBe(true);
       state.entity = undefined;
       await expect(page(params())).rejects.toThrow("NOT_FOUND");
     },
@@ -381,6 +382,7 @@ describe("server activity and file pages", () => {
       const props = component(await page(request), info).props;
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace.id).toBe("workspace");
+      expect(props.showXRAGActions).toBe(true);
       state.entity = undefined;
       await expect(page(request)).rejects.toThrow("NOT_FOUND");
     },
@@ -856,7 +858,15 @@ it.each([
       "/settings/theme",
     ],
   ],
-  [appsIndex, ["/app/documents", "/app/transcribe", "/app/automation"]],
+  [
+    appsIndex,
+    [
+      "/app/documents",
+      "/app/transcribe",
+      "/app/automation",
+      "/app/xrag/import",
+    ],
+  ],
   [ClusterOverview, ["/service", "/tasks", "/artifacts"]],
 ] as const)(
   "passes navigation destinations to index cards in %s",
@@ -875,6 +885,7 @@ import publicWorkspacePage from "../../apps/web/app/(main)/workspace/[workspaceI
 it.each([true, false, undefined])(
   "shows admin settings only to global admins (%s)",
   async (isAdmin) => {
+    state.workspaces = [];
     state.profile = isAdmin === undefined ? undefined : { isAdmin };
     const cards = elements(await settingsIndex()).filter(
       (element) => element.type?.name === "ContainerStyled",
@@ -1083,6 +1094,7 @@ import { SidebarFooter } from "../../apps/web/app/_components/SidebarFooter";
 it.each([true, false, undefined])(
   "shows the system dropdown group and its separator only to admins (%s)",
   async (isAdmin) => {
+    state.workspaces = [];
     state.profile = isAdmin === undefined ? undefined : { isAdmin };
     const result = await SidebarFooter();
     const paths = elements(result)
@@ -1279,12 +1291,64 @@ it.each([
 
 import modelsPage from "../../apps/web/app/(settings)/models/page";
 import modelDetailPage from "../../apps/web/app/(settings)/models/[modelId]/page";
-it("protects model routes from non-admin users", async () => {
+it.each(["user", "editor", undefined])(
+  "protects model routes for %s",
+  async (claim) => {
+    state.profile = { isAdmin: false };
+    state.workspaces = [{ id: "workspace", name: "Team", claim }];
+    await expect(modelsPage()).rejects.toThrow("NOT_FOUND");
+    await expect(
+      modelDetailPage({ params: Promise.resolve({ modelId: "any" }) }),
+    ).rejects.toThrow("NOT_FOUND");
+  },
+);
+it("opens all readable model details for workspace admins without sending connection data", async () => {
   state.profile = { isAdmin: false };
-  await expect(modelsPage()).rejects.toThrow("NOT_FOUND");
-  await expect(
-    modelDetailPage({ params: Promise.resolve({ modelId: "any" }) }),
-  ).rejects.toThrow("NOT_FOUND");
+  state.models = [
+    { id: "local", name: "Local chat", type: "ollama_llm_v1", config: {} },
+    {
+      id: "external",
+      name: "External chat",
+      type: "external_llm_v1",
+      config: {
+        provider: "openai",
+        baseUrl: "https://models.test",
+        region: "eu-west-1",
+        modelId: "deployment",
+      },
+    },
+  ];
+  const catalog = await modelsPage();
+  expect(catalog.props.readOnly).toBe(true);
+  expect(catalog.props.models.map(({ id }) => id)).toEqual([
+    "local",
+    "external",
+  ]);
+  const details = await modelDetailPage({
+    params: Promise.resolve({ modelId: "local" }),
+  });
+  expect(details.props.readOnly).toBe(true);
+  expect(details.props.model.id).toBe("local");
+  const externalParams = { params: Promise.resolve({ modelId: "external" }) };
+  const external = await modelDetailPage(externalParams);
+  expect(external.props.readOnly).toBe(true);
+  expect(external.props.model).toEqual(catalog.props.models[1]);
+  for (const key of Object.keys(state.models[1].config)) {
+    expect(external.props.model).not.toHaveProperty(key);
+  }
+  for (const page of [await SettingsSidebar(), await SidebarFooter()]) {
+    const links = elements(page).map(
+      (element) => element.props.render?.props.href,
+    );
+    expect(links).toContain("/models");
+    expect(links).not.toContain("/settings");
+    expect(links).not.toContain("/cluster");
+  }
+  state.profile = { isAdmin: true };
+  expect((await modelsPage()).props.models).toHaveLength(2);
+  const editable = await modelDetailPage(externalParams);
+  expect(editable.props.readOnly).toBe(false);
+  expect(editable.props.model).toMatchObject(state.models[1].config);
 });
 it("returns not found for an unknown model", async () => {
   state.profile = { isAdmin: true };

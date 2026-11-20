@@ -229,3 +229,20 @@ it("seed resources work with the unchanged realtime ID validation", async () => 
   }
   expect(sql).not.toMatch(/['"]seed-[a-z-]+['"]/);
 });
+
+it("seeds an owned XRAG package with valid source resources", () => {
+  const sql = readFileSync(
+    new URL("../../supabase/seed.sql", import.meta.url),
+    "utf8",
+  );
+  expect(sql).toContain("INSERT INTO public.xrag_packages(id,owner_id,name)");
+  for (const [kind, suffix] of [
+    ["agent", "016"],
+    ["documentRepository", "015"],
+    ["transcriber", "014"],
+  ]) {
+    const id = `a1b00000-0000-4000-8000-000000000${suffix}`;
+    expect(sql).toContain(`'${kind}','${id}'`);
+    expect(sql).toContain(`VALUES ('${id}'`);
+  }
+});

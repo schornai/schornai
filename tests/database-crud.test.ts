@@ -139,9 +139,11 @@ describe("agent credential transactions", () => {
     });
     expect(created).toEqual({ agentId: expect.any(String) });
     expect(supabase.rpc).toHaveBeenLastCalledWith(
-      "save_agent_with_mcp_credentials",
+      "create_agent_with_identity",
       expect.objectContaining({
         p_agent_id: created.agentId,
+        p_global_id: "name",
+        p_fallback_global_id: expect.stringMatching(/^name-[0-9a-f]{8}$/),
         p_workspace_id: "workspace",
         p_copy_agent_id: "source",
         p_copy_workspace_id: "source-workspace",

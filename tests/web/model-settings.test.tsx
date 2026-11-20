@@ -16,6 +16,7 @@ import { ExternalModelForm } from "../../apps/web/app/(settings)/models/_compone
 import { SidebarProvider } from "@schornio/aibox-package-ui/components/sidebar";
 import { ModelsOverview } from "../../apps/web/app/(settings)/models/_components/ModelsOverview";
 import { ModelDetails } from "../../apps/web/app/(settings)/models/_components/ModelDetails";
+import { ModelEditor } from "../../apps/web/app/(settings)/models/_components/ModelEditor";
 import { toModelSummary } from "../../apps/web/app/(settings)/models/modelSummary";
 import { discoverModels } from "../../apps/web/app/(settings)/models/_actions/discoverModels";
 import userEvent from "@testing-library/user-event";
@@ -77,7 +78,9 @@ it("copies only public model metadata into a client summary", () => {
     config,
     credentials: "private-top-level",
   };
-  expect(toModelSummary(model as any)).toEqual({
+  expect(
+    toModelSummary(model as any, { includeConnectionDetails: true }),
+  ).toEqual({
     id: model.id,
     name: model.name,
     description: model.description,
@@ -137,15 +140,24 @@ it.each([
 ])(
   "shows appropriate $type properties, connection settings and documentation",
   ({ type, config, description }) => {
-    const model = toModelSummary({
-      id: "model",
-      name: "Example",
-      identifier: "model-identifier",
-      type,
-      config,
-      description,
-    } as any);
+    const model = toModelSummary(
+      {
+        id: "model",
+        name: "Example",
+        identifier: "model-identifier",
+        type,
+        config,
+        description,
+      } as any,
+      { includeConnectionDetails: true },
+    );
     const { container } = render(<ModelDetails model={model} />);
+    expect(!!screen.queryByRole("button", { name: "labelExport" })).toBe(
+      type !== "external_llm_v1",
+    );
+    expect(!!screen.queryByRole("button", { name: "labelAdd" })).toBe(
+      type !== "external_llm_v1",
+    );
     fireEvent.click(
       screen.getByRole("button", { name: "labelModelProperties" }),
     );
@@ -437,6 +449,50 @@ const mixedModels = [
     description: null,
   },
 ] as any;
+it("keeps the model export and bundle actions available in a read-only detail view", () => {
+  client.params = new URLSearchParams({ view: "settings" });
+  const { container } = render(
+    <SidebarProvider>
+      <ModelEditor model={mixedModels[0]} readOnly />
+    </SidebarProvider>,
+  );
+  expect(screen.getByRole("button", { name: "labelExport" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "labelAdd" })).toBeTruthy();
+  expect(container.querySelector('a[href*="view=settings"]')).toBeNull();
+  expect(screen.queryByRole("button", { name: "tabMetadata" })).toBeNull();
+  expect(container.querySelector("form")).toBeNull();
+});
+
+it("shows an external model's public details without connection or XRAG actions to workspace admins", () => {
+  render(
+    <SidebarProvider>
+      <ModelEditor model={mixedModels[1]} readOnly />
+    </SidebarProvider>,
+  );
+  expect(
+    screen.getByRole("button", { name: "labelModelProperties" }),
+  ).toBeTruthy();
+  expect(screen.queryByRole("button", { name: "labelConnection" })).toBeNull();
+  expect(screen.queryByRole("button", { name: "labelExport" })).toBeNull();
+  expect(screen.queryByRole("button", { name: "labelAdd" })).toBeNull();
+});
+
+it("shows a read-only model catalog with a working details link", () => {
+  const { container, rerender } = render(
+    <SidebarProvider>
+      <ModelsOverview models={[mixedModels[0]]} readOnly />
+    </SidebarProvider>,
+  );
+  expect(container.querySelector('a[href="/models/local"]')).toBeTruthy();
+  expect(container.querySelector('a[href*="view=settings"]')).toBeNull();
+  expect(screen.queryByText("schorn.ai Cloud")).toBeNull();
+  rerender(
+    <SidebarProvider>
+      <ModelsOverview models={[]} readOnly />
+    </SidebarProvider>,
+  );
+  expect(screen.getByText("descriptionNoRegisteredModels")).toBeTruthy();
+});
 it.each(["cards", "table"])(
   "shows local and external models together in %s view",
   (view) => {
