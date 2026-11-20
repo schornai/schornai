@@ -15,6 +15,7 @@ export async function createClientWithClaims(
       supabaseUrl: "SUPABASE_URL",
     },
   },
+  refreshToken = false,
 ): Promise<SupabaseClient> {
   const supabaseJWTSecret = getEnvSafe(
     config.environmentKeys.supabaseJWTSecret,
@@ -23,21 +24,21 @@ export async function createClientWithClaims(
   const supabaseUrl = getEnvSafe(config.environmentKeys.supabaseUrl);
 
   const secret = new TextEncoder().encode(supabaseJWTSecret);
-  const token = await new SignJWT({
-    organization_roles: claims,
-    role: "authenticated",
-  })
-    .setProtectedHeader({ alg: "HS256" })
-    .setExpirationTime("1h")
-    .setSubject(userId)
-    .sign(secret);
+  const sign = () =>
+    new SignJWT({
+      organization_roles: claims,
+      role: "authenticated",
+    })
+      .setProtectedHeader({ alg: "HS256" })
+      .setExpirationTime("1h")
+      .setSubject(userId)
+      .sign(secret);
 
+  const token = refreshToken ? undefined : await sign();
   return createClientCore<Database>(supabaseUrl, supabaseKey, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    ...(refreshToken
+      ? { accessToken: sign }
+      : { global: { headers: { Authorization: `Bearer ${token}` } } }),
   });
 }
 

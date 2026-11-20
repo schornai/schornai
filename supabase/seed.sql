@@ -96,4 +96,11 @@ INSERT INTO public.automations(id,user_id,agent_id,name,message,enabled,trigger,
 VALUES ('a1b00000-0000-4000-8000-000000000040','a1b00000-0000-4000-8000-000000000001','a1b00000-0000-4000-8000-000000000016','Wochenbericht','Erstelle einen kurzen Wochenbericht.',false,
 $automation${"type":"time","schedule":{"kind":"weekly","weekdays":[1],"time":"09:00","timezone":"Europe/Vienna"}}$automation$::jsonb,'Fasst die Woche für das Team zusammen.','{"type":"color-oklch-hue","oklchHue":290}','{"type":"icon-lucide","iconName":"calendar-clock"}');
 
+-- A personal selection that can be downloaded without requiring model archives.
+INSERT INTO public.xrag_packages(id,owner_id,name)
+VALUES ('a1b00000-0000-4000-8000-000000000018','a1b00000-0000-4000-8000-000000000001','Lokales XRAG-Paket');
+INSERT INTO public.xrag_package_items(package_id,kind,resource_id,name) VALUES
+('a1b00000-0000-4000-8000-000000000018','agent','a1b00000-0000-4000-8000-000000000016','Lokaler Testagent'),
+('a1b00000-0000-4000-8000-000000000018','documentRepository','a1b00000-0000-4000-8000-000000000015','Lokale Testdokumente'),
+('a1b00000-0000-4000-8000-000000000018','transcriber','a1b00000-0000-4000-8000-000000000014','Lokale Transkription');
 COMMIT;

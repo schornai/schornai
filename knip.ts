@@ -17,12 +17,11 @@ const config: KnipConfig = {
       ],
     },
     "apps/realtime": {
-      // AI SDK dynamic loading; the Dockerfile verifies it in the runtime image.
-      ignoreDependencies: ["undici"],
+      // AI SDK dynamic loading and Rollup-externalized XRAG transport. The
+      // Dockerfile verifies both in the app-only runtime dependency install.
+      ignoreDependencies: ["undici", "tus-js-client"],
     },
     "apps/web": {
-      // next.config.ts traces this dynamic AI SDK dependency into the standalone image.
-      ignoreDependencies: ["undici"],
       // Vite resolves these replacements from the same manifest at runtime.
       entry: boundaries.map(([, mock]) => mock.replace("apps/web/", "")),
     },

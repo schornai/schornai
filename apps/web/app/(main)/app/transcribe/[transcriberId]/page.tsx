@@ -52,6 +52,7 @@ export default async function Page(
       </HeaderMain>
 
       <TranscriberInfo
+        showXRAGActions
         favorites={favorites}
         editTranscriberPathname={`/app/transcribe/${transcriber.id}/edit`}
         editDefaultTranscriber={transcriber}

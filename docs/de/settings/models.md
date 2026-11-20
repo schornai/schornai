@@ -5,17 +5,21 @@ lang: de
 meta:
   app_urls:
     ["/models", "/models/[modelId]", "/models/new", "/models/new/[provider]"]
-  required_role: "Administrator:in (admin), global."
+  required_role: "Arbeitsplatzadministrator:in für Modellinformationen und den XRAG-Export lokaler Modelle. Globale Administrator:in für die Verbindungsverwaltung und Änderungen."
   role_scope: "Gesamte Instanz"
   prerequisites: "Registrierte lokale Modelle oder Zugangsdaten für einen unterstützten externen Anbieter."
   status: "verfügbar; schorn.ai Cloud angekündigt"
-  last_verified: "2026-11-12"
+  last_verified: "2026-11-19"
   source_files:
     - "apps/web/app/(settings)/_components/Sidebar.tsx"
+    - "apps/web/app/_components/SidebarFooter.tsx"
     - "apps/web/app/(settings)/models/page.tsx"
     - "apps/web/app/(settings)/models/[modelId]/page.tsx"
+    - "apps/web/app/_models/getModelCatalog.ts"
     - "apps/web/app/(settings)/models/_components/ModelsOverview.tsx"
     - "apps/web/app/(settings)/models/_components/ModelDetails.tsx"
+    - "apps/web/app/_components/xrag/XRAGObjectActions.tsx"
+    - "packages/realtime/src/platform/xragTools.ts"
     - "apps/web/app/(settings)/models/_components/ModelCard.tsx"
     - "apps/web/app/(settings)/models/_components/ModelEditor.tsx"
     - "apps/web/app/(settings)/models/_components/AddExternalModel.tsx"
@@ -43,13 +47,13 @@ meta:
 
 # Modelle verwalten
 
-Öffne **Modelle** in der Verwaltungsnavigation unter **Cluster** und seinen Unterpunkten oder im Kontomenü links unten. Die Verwaltung ist nur für globale Administrator:innen zugänglich.
+Öffne **Modelle** in der Seitenleiste der Einstellungen oder im Kontomenü links unten. Als Arbeitsplatzadministrator:in siehst du dort die registrierten lokalen und externen Modelle mit ihren öffentlichen Eigenschaften. Lokale Modelle kannst du als XRAG exportieren. Verbindungseinstellungen, Anlegen, Bearbeiten und Löschen sind der globalen Administration vorbehalten.
 
 ## Gemeinsame Übersicht
 
 ![Gemeinsame Modellübersicht als Karten](../assets/modelle-lokal.png)
 
-Die Übersicht zeigt lokale und externe Modelle gemeinsam. Unter **Optionen** wechselst du zwischen Karten- und Tabellenansicht, sortierst nach Name und gruppierst nach Modelltyp, intern/extern oder Anfangsbuchstabe. Die Gruppierung nach Modelltyp fasst lokale und externe Sprachmodelle zusammen. Ohne Gruppierung erscheinen alle Modelle in einer Liste. Mit der Suche findest du Modelle anhand von Name, Beschreibung oder Kennung. Eine angepasste Ansicht lässt sich über **Ansicht speichern** als persönliche Voreinstellung sichern. Ein Klick auf die Modellkarte öffnet eine eigene Modellseite mit Kennung und den hinterlegten Eigenschaften, beispielsweise Kontextgröße, Werkzeugunterstützung oder Vektordimensionen.
+Unter **Optionen** wechselst du zwischen Karten- und Tabellenansicht, sortierst nach Name und gruppierst nach Modelltyp, intern/extern oder Anfangsbuchstabe. Ohne Gruppierung erscheinen alle für dich sichtbaren Modelle in einer Liste. Mit der Suche findest du Modelle anhand von Name, Beschreibung oder Kennung. Eine angepasste Ansicht lässt sich über **Ansicht speichern** als persönliche Voreinstellung sichern. Ein Klick auf die Modellkarte öffnet eine eigene Modellseite mit Kennung und den hinterlegten Eigenschaften, beispielsweise Kontextgröße, Werkzeugunterstützung oder Vektordimensionen.
 
 Die Liste enthält die registrierten Modelle. Wenn ein gelistetes lokales Modell im Chat nicht antwortet, lass die Betriebsadministration den Modelldienst und die installierten Modelldateien prüfen. Installation und Aktualisierung erfolgen über [XRAG](xrag.md).
 
@@ -91,11 +95,13 @@ Teste das gespeicherte Modell in einem neuen Chat. Wird der Aufruf abgelehnt, pr
 
 ## Modelldetails
 
-Die Modelldetailseite verwendet die Reiter **Übersicht**, **Verbindung** (bei externen Modellen) und **Name und Dokumentation**. Die Übersicht zeigt wie der Agenten-Editor links die Modellkarte und rechts aufklappbare Infobereiche für Eigenschaften, Verbindung und Dokumentation. Die Stift-Schaltflächen öffnen den passenden Bearbeitungsreiter. Die Modellkarte ist in Übersicht und Detailansicht identisch; ihr Stift öffnet direkt Name und Dokumentation. Unter Verbindung aktualisierst du den Modellkatalog und bearbeitest die Anbindung. Name und Dokumentation enthält den Editor und die Löschfunktion. Die Markdown-Vorschau lässt sich wie im Agenten-Editor neben dem Eingabefeld aufklappen; auf kleinen Bildschirmen erscheint sie darunter.
+Die Übersicht zeigt links die Modellkarte und rechts aufklappbare Infobereiche für Eigenschaften und Dokumentation. Bei einem lokalen Modell lädt **XRAG exportieren** das ursprüngliche Modellarchiv herunter. Es muss noch im Dateikatalog der Instanz verfügbar sein. Mit **Zu XRAG-Paket hinzufügen** nimmst du das Modell in eine persönliche Auswahl auf. Unter **Apps → XRAG Import und Export → Export** kannst du diese Modelle und weitere Ressourcen gemeinsam als eine Datei herunterladen. [Anleitung zum Paketdownload](xrag.md#mehrere-objekte-als-ein-paket-herunterladen).
+
+Als globale Administrator:in siehst du zusätzlich die Bearbeitungsreiter **Verbindung** (bei externen Modellen) und **Name und Dokumentation**. Die Stift-Schaltflächen öffnen den passenden Reiter. Unter **Verbindung** aktualisierst du den Modellkatalog und bearbeitest die Anbindung. **Name und Dokumentation** enthält den Editor und die Löschfunktion. Die Markdown-Vorschau lässt sich neben dem Eingabefeld aufklappen. Auf kleinen Bildschirmen erscheint sie darunter.
 
 ## Namen und Dokumentation bearbeiten
 
-Auf der Detailseite jedes Modells — lokal oder extern — kannst du den **Anzeigenamen** und die **Dokumentation** bearbeiten. Die Dokumentation unterstützt Markdown; **Markdown-Vorschau** zeigt die formatierte Fassung. **Speichern** übernimmt beide Felder. Die Dokumentation verwendet das vorhandene Beschreibungsfeld des Modells und erscheint im aufgeklappten Modell-Infobereich, zum Beispiel beim Agenten. Die technische Modellkennung bleibt durch eine Namensänderung unverändert.
+Als globale Administrator:in kannst du auf der Detailseite jedes Modells den **Anzeigenamen** und die **Dokumentation** bearbeiten. Die Dokumentation unterstützt Markdown; **Markdown-Vorschau** zeigt die formatierte Fassung. **Speichern** übernimmt beide Felder. Die Dokumentation verwendet das vorhandene Beschreibungsfeld des Modells und erscheint im aufgeklappten Modell-Infobereich, zum Beispiel beim Agenten. Die technische Modellkennung bleibt durch eine Namensänderung unverändert.
 
 ## Modelle löschen
 
@@ -103,6 +109,9 @@ Auf der Detailseite jedes Modells — lokal oder extern — kannst du den **Anze
 
 ## Zugehörige MCP-Werkzeuge
 
+- `platform_models_list` liefert ab Stufe **Benutzer** die lesbaren Modellmetadaten einschließlich der Modell-ID. `includeConnectionDetails: true` ergänzt die Verbindungseinstellungen externer Modelle und erfordert globale Administratorrechte und die Stufe **Globaler Administrator**. Direkte MCP-Clients mit dieser Freigabe erhalten die Verbindungsdetails standardmäßig. API-Schlüssel und HTTP-Header bleiben privat.
+- `platform_xrag_export` liefert für `kind: "model"` und die Modell-ID einen zehn Minuten gültigen Downloadlink. `platform_xrag_saved_package_add` nimmt dieselbe Auswahl in ein eigenes Paket auf. Beide Werkzeuge erfordern mindestens **Workspace-Administrator** und Zugriff auf das lokale Modell. Zum Export muss das Originalarchiv verfügbar sein.
+- `platform_xrag_saved_package_export` startet ab Stufe **Workspace-Administrator** einen Hintergrundauftrag für das eigene Paket. Mit `platform_xrag_export_jobs` prüfst du den Fortschritt, mit `platform_xrag_export_download` erhältst du einen Link zum fertigen Gesamtarchiv. Der Download setzt weiterhin Zugriff auf die enthaltenen Ressourcen voraus.
 - `platform_models_discover`: Verfügbare Modelle eines Providers ermitteln. Mindeststufe: **Globaler Administrator**.
 - `platform_model_create`: Externes Modell registrieren. Mindeststufe: **Globaler Administrator**.
 - `platform_model_connection_update`: Modellverbindung ändern. Mindeststufe: **Globaler Administrator**.

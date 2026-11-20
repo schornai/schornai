@@ -1,4 +1,6 @@
 "use client";
+import { hasPermission } from "@/lib/hasPermission";
+import { XRAGObjectActions } from "../../../../../_components/xrag/XRAGObjectActions";
 
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
@@ -13,6 +15,7 @@ import type { Transcriber_new } from "@schornio/aibox-package-database/transcrib
 import type { WorkspaceClaim } from "../../../../../_models/getWorkspaceClaims";
 
 export function DocumentRepositoryInfo({
+  showXRAGActions = false,
   preview = false,
   editDocumentRepositoryPathname,
   editDefaultDocumentRepository,
@@ -23,6 +26,7 @@ export function DocumentRepositoryInfo({
   transcriberMap,
   workspace,
 }: {
+  showXRAGActions?: boolean;
   preview?: boolean;
   editDocumentRepositoryPathname?: string;
   editDefaultDocumentRepository?: Partial<DocumentRepository>;
@@ -94,6 +98,17 @@ export function DocumentRepositoryInfo({
           workspace={workspace}
         />
       </div>
+      {showXRAGActions &&
+        documentRepository?.id &&
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && (
+          <XRAGObjectActions
+            kind="documentRepository"
+            id={documentRepository.id}
+          />
+        )}
     </ContainerMain>
   );
 }

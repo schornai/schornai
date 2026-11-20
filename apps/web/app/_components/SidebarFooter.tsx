@@ -27,9 +27,10 @@ import { SidebarUserSignOut } from "./SidebarUserSignOut";
 import { getCurrentUserProfile } from "../_models/getCurrentUserProfile";
 import { getT } from "next-i18next/server";
 import { getWorkspaceClaims } from "../_models/getWorkspaceClaims";
+import { canAdministerWorkspaces } from "../_models/canAdministerWorkspaces";
 
 export async function SidebarFooter() {
-  const [userProfile, { isAdmin }, { t }] = await Promise.all([
+  const [userProfile, access, { t }] = await Promise.all([
     getCurrentUserProfile(),
     getWorkspaceClaims(),
     getT("common", { keyPrefix: "_components.SidebarFooter" }),
@@ -62,18 +63,20 @@ export async function SidebarFooter() {
               }}
             />
             <DropdownMenuContent>
-              {isAdmin ? (
+              {canAdministerWorkspaces(access) && (
                 <>
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>{t("labelSystem")}</DropdownMenuLabel>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      render={
-                        <Link href="/cluster">
-                          <GraphStar /> {t("labelCluster")}
-                        </Link>
-                      }
-                    />
+                    {access.isAdmin && (
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        render={
+                          <Link href="/cluster">
+                            <GraphStar /> {t("labelCluster")}
+                          </Link>
+                        }
+                      />
+                    )}
                     <DropdownMenuItem
                       className="cursor-pointer"
                       render={
@@ -83,18 +86,20 @@ export async function SidebarFooter() {
                         </Link>
                       }
                     />
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      render={
-                        <Link href="/settings">
-                          <Settings /> {t("labelSettings")}
-                        </Link>
-                      }
-                    />
+                    {access.isAdmin && (
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        render={
+                          <Link href="/settings">
+                            <Settings /> {t("labelSettings")}
+                          </Link>
+                        }
+                      />
+                    )}
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                 </>
-              ) : undefined}
+              )}
               <DropdownMenuGroup>
                 <DropdownMenuLabel>{t("labelMyAccount")}</DropdownMenuLabel>
                 <DropdownMenuItem

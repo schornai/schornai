@@ -88,9 +88,7 @@ export function useGroupSortView<
 
   const defaultGroup = userPreferences?.group ?? defaultPreferences?.group;
   const group = (searchParams.get(searchParamNameGroup) ?? defaultGroup) as
-    | TGroup
-    | (string & {})
-    | undefined;
+    TGroup | (string & {}) | undefined;
 
   const defaultSort = userPreferences?.sort ?? defaultPreferences?.sort;
   const [sort, sortDirection] = ((
@@ -105,7 +103,7 @@ export function useGroupSortView<
 
   const preferences = {
     group,
-    sort: `${sort}:${sortDirection ?? "asc"}`,
+    sort: sort ? `${sort}:${sortDirection ?? "asc"}` : undefined,
     view,
   };
 

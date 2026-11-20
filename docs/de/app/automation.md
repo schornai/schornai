@@ -15,7 +15,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Ein zugänglicher Agent mit einsatzbereitem Modell und laufendem Realtime-Dienst. Für Dateitrigger Zugriff auf den Speicherort."
   status: "verfügbar"
-  last_verified: "2026-11-15"
+  last_verified: "2026-11-19"
   source_files:
     - "apps/web/app/(main)/app/automation/_components/AutomationNextRun.tsx"
     - "apps/web/app/(main)/app/automation/_components/AutomationRuns.tsx"
@@ -28,6 +28,8 @@ meta:
     - "apps/web/app/_models/currentUserConfigFavorites.ts"
     - "apps/web/app/(main)/app/automation/_components/AutomationListOptionsDropdown.tsx"
     - "apps/web/app/(main)/app/automation/_components/AutomationInfo.tsx"
+    - "apps/web/app/_components/xrag/XRAGObjectActions.tsx"
+    - "packages/realtime/src/platform/xragTools.ts"
     - "apps/web/app/_components/StoragePickerDialog.tsx"
     - "apps/web/app/_components/ResourceSlot.tsx"
     - "packages/ui/src/components/choice-cards.tsx"
@@ -113,6 +115,10 @@ Fehlerhafte Eingaben werden nach einem Speicherversuch direkt am betroffenen Fel
 
 Die Ausführungsliste erhält Änderungen über die bestehende WebSocket-Verbindung. Neue Ausführungen und Statusänderungen werden ohne manuelles Neuladen angezeigt; nach einer Wiederverbindung wird der aktuelle Stand erneut geladen. Suche und Gruppierung bleiben dabei erhalten. **Chat gestartet** bestätigt, dass die Nachricht an den Chat übergeben wurde; es bedeutet nicht, dass die Antwort des Agenten bereits fertig ist.
 
+## Automation als XRAG übertragen
+
+Wenn du den Arbeitsplatz des Agenten administrierst, kannst du eine eigene gespeicherte Automation unter **Info → XRAG exportieren** einzeln herunterladen. Mit **Zu XRAG-Paket hinzufügen** kannst du den Agenten, die verwendete Dokumentenablage und weitere verbundene Objekte für denselben Download auswählen. Am Ziel müssen die erforderlichen Ressourcen mitimportiert werden oder bereits unter ihrer globalen ID existieren. Dateiauslöser, die an eine einzelne Chat- oder Transkriptionssitzung gebunden sind, lassen sich nicht übertragen. [XRAG-Pakete erstellen und importieren](../settings/xrag.md#mehrere-objekte-als-ein-paket-herunterladen).
+
 ## Plattform-MCP und Agentenwerkzeuge
 
 Alle Werkzeuge sind am gemeinsamen Endpunkt `/mcp` verfügbar. Die Automationswerkzeuge benötigen mindestens **editor**. Die MCP-Freigabe ersetzt weder Eigentümerschaft noch Arbeitsplatz- und Dateirechte. Beim Speichern über MCP bleibt dessen Zugriffsstufe auch für spätere Chat-Ausführungen die Obergrenze.
@@ -133,3 +139,5 @@ Für schorn.ai-Agenten verlangen `platform_automation_save` und `platform_automa
 `platform_agent_get` liest die Konfiguration eines zugänglichen Agenten einschließlich `recommendedMessages` (Mindeststufe **user**, Benutzerzugriff im Arbeitsplatz erforderlich). Ein Vorschlag kann bearbeitet und als `message` an `platform_automation_save` übergeben werden; dafür ist weiterhin **editor** erforderlich. Gespeichert wird der Nachrichtentext, keine dauerhafte Verknüpfung zum Vorschlag.
 
 `platform_favorites_get` und `platform_favorites_update` lesen bzw. ersetzen die eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit (Mindeststufe **user**). Für Automationen lautet der Eintragstyp `automation`. Favoriten gewähren keine Zugriffsrechte: Ihre Anzeige und Nutzung erfordern weiterhin Eigentümerschaft und Editorzugriff.
+
+`platform_xrag_export` exportiert eine eigene Automation mit `kind: "automation"`. `platform_xrag_related_objects` ermittelt die verbundenen Ressourcen und `platform_xrag_saved_package_add` speichert die Auswahl im eigenen Paket. Alle drei benötigen mindestens **Workspace-Administrator** sowie Administratorrechte im Arbeitsplatz des Agenten. Für weitere Ressourcen im Paket müssen die entsprechenden Exportrechte vorliegen.

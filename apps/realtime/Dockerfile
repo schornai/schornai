@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY ./apps/realtime/dist/rollup/appRealtime.js ./apps/realtime/appRealtime.js
 
 # The bundled AI SDK resolves its HTTP client from the emitted entry point.
-RUN node -e "require('node:module').createRequire('/app/apps/realtime/appRealtime.js')('undici')"
+RUN node -e "const load = require('node:module').createRequire('/app/apps/realtime/appRealtime.js'); load('undici'); if (load('tus-js-client').defaultOptions.httpStack.getName() !== 'NodeHttpStack') throw new Error('XRAG requires Node TUS transport')"
 
 USER node
 

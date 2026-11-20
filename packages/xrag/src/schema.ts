@@ -1,3 +1,4 @@
+import { globalIdentifierSchema } from "./identifier.ts";
 import { z } from "zod/v4";
 
 export const safeSegment = z
@@ -19,15 +20,6 @@ export const xragSchemaSetup = xragMetaSchema.extend({
   xrag_type: z.literal("setup"),
   platform: z.enum(["darwin", "linux"]).optional(),
   arch: z.enum(["arm64", "x64"]).optional(),
-});
-
-export const xragSchemaCertificate = xragMetaSchema.extend({
-  xrag_type: z.literal("certificate"),
-});
-
-export const xragSchemaSiteURL = xragMetaSchema.extend({
-  siteUrl: z.string(),
-  xrag_type: z.literal("site_url"),
 });
 
 export const xragSchemaOllamaModel = xragMetaSchema.extend({
@@ -67,11 +59,9 @@ export const xragSchemaMLXWhisperModel = xragMetaSchema.extend({
   xrag_type: z.literal("mlxWhisperModel"),
 });
 
-export const xragSchema = z.union([
+export const distributionSchema = z.union([
   xragSchemaSetup,
-  xragSchemaCertificate,
   xragSchemaMLXWhisperModel,
-  xragSchemaSiteURL,
   xragSchemaOllamaModel,
   xragMetaSchema.extend({
     xrag_type: z.literal("files"),
@@ -79,6 +69,81 @@ export const xragSchema = z.union([
     targets: z.array(safeSegment).min(1),
     name: safeSegment,
   }),
+]);
+
+export const collectionSchema = z
+  .object({
+    xrag_version: z.literal(2),
+    xrag_type: z.literal("collection"),
+    entries: z
+      .array(
+        z.object({
+          sha256: z.string().regex(/^[a-f0-9]{64}$/),
+          size: z.number().int().positive(),
+        }),
+      )
+      .min(1)
+      .max(1000),
+  })
+  .superRefine(({ entries }, context) => {
+    if (new Set(entries.map((entry) => entry.sha256)).size !== entries.length)
+      context.addIssue({
+        code: "custom",
+        message: "Duplicate XRAG collection entry",
+      });
+  });
+
+export const resourceKindSchema = z.enum([
+  "agent",
+  "transcriber",
+  "documentRepository",
+  "automation",
+]);
+
+export const resourceSchema = z.object({
+  xrag_version: z.literal(2),
+  xrag_type: z.literal("resource"),
+  resourceType: resourceKindSchema,
+  id: globalIdentifierSchema,
+  // The database package validates this using the existing domain schemas.
+  data: z.record(z.string(), z.unknown()),
+  references: z
+    .array(
+      z.object({
+        kind: z.enum(["model", "agent", "transcriber", "documentRepository"]),
+        id: globalIdentifierSchema,
+        identifier: z.string().min(1),
+        externalModel: z
+          .object({
+            provider: z.string().min(1).max(100),
+            modelId: z.string().min(1).max(500),
+          })
+          .strict()
+          .optional(),
+      }),
+    )
+    .max(1000),
+});
+export type XRAGResource = z.infer<typeof resourceSchema>;
+
+export const resourceFileManifestSchema = z
+  .array(
+    z.object({
+      path: z.string().min(1).max(2048),
+      contentType: z
+        .string()
+        .min(1)
+        .max(200)
+        .regex(/^[^\r\n]+$/),
+      size: z.number().int().nonnegative(),
+    }),
+  )
+  .max(100_000);
+
+export const xragSchema = z.union([
+  distributionSchema,
+  collectionSchema,
+  resourceSchema,
 ]);
 
 export type XRAG = z.infer<typeof xragSchema>;
@@ -118,11 +183,10 @@ export function artifactTargets(metadata: unknown): string[] {
       return ["transcriber-mlx"];
     case "ollamaModel":
       return ["ollama"];
-    case "certificate":
-      return ["core", "supabase"];
-    case "site_url":
-      return ["core", "supabase"];
     case "files":
       return xrag.targets;
+    case "collection":
+    case "resource":
+      return [];
   }
 }

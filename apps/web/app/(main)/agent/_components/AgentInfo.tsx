@@ -1,4 +1,6 @@
 "use client";
+import { hasPermission } from "@/lib/hasPermission";
+import { XRAGObjectActions } from "../../../_components/xrag/XRAGObjectActions";
 
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import type { Agent } from "@schornio/aibox-package-database/agent/_types";
@@ -19,6 +21,7 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { useT } from "next-i18next/client";
 
 export function AgentInfo({
+  showXRAGActions = false,
   preview = false,
   agent,
   documentRepositoryMap,
@@ -29,6 +32,7 @@ export function AgentInfo({
   modelMap,
   workspace,
 }: {
+  showXRAGActions?: boolean;
   preview?: boolean;
   agent?: Partial<Agent>;
   documentRepositoryMap: Map<string | symbol, DocumentRepository>;
@@ -120,6 +124,12 @@ export function AgentInfo({
           editAgentPathname={editAgentPathname}
         />
       </div>
+      {showXRAGActions &&
+        agent?.id &&
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && <XRAGObjectActions kind="agent" id={agent.id} />}
     </ContainerMain>
   );
 }

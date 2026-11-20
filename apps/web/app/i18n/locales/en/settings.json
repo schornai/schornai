@@ -434,6 +434,7 @@
     "labelNoModels": "No models found",
     "descriptionNoResults": "Adjust your search to find models.",
     "descriptionNoModels": "Local and external models appear here. Add an external model to get started.",
+    "descriptionNoRegisteredModels": "No models are registered on this instance.",
     "labelChooseProvider": "Choose a provider",
     "descriptionChooseProvider": "Connect an external language model with its provider.",
     "labelConfigure": "Configure",

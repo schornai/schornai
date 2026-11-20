@@ -3,6 +3,7 @@ import {
   appIconSchema,
   imageSchema,
 } from "../_shared/_schema.ts";
+import { globalIdentifierSchema } from "xrag/identifier";
 import { z } from "zod/mini";
 import { normalizeWebDomain } from "./webAccess.ts";
 
@@ -239,6 +240,12 @@ export const agentSchema = z.intersection(
   }),
   agentConfigSchema,
 );
+
+export const createAgentInputSchema = z.object({
+  agent: agentSchema,
+  copyFromAgentId: z.optional(z.string().check(z.minLength(1))),
+  globalId: z.optional(globalIdentifierSchema),
+});
 
 export const agentConfigSchemaWithLegacySupport = z.union([
   agentConfigSchema,

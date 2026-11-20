@@ -19,7 +19,9 @@
     "@schornio/aibox-package-utils": "*",
     "ai": "7.0.170",
     "jose": "^6.2.12",
-    "xrag": "*"
+    "xrag": "*",
+    "tus-js-client": "^4.3.1",
+    "undici": "^8.0.0"
   },
   "license": "AGPL-3.0-only",
   "repository": {

@@ -78,6 +78,8 @@ export async function processArtifactPublication({
       processingSignal,
     );
     clearTimeout(idleTimer);
+    if (xrag.xrag_type === "collection" || xrag.xrag_type === "resource")
+      throw new Error("XRAG_COLLECTION_REQUIRES_IMPORT");
     const fileSystemIdentifier = await registerArtifactModel(xrag, metadata, {
       supabase,
     });

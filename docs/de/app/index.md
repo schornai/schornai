@@ -1,6 +1,6 @@
 ---
 title: "Apps"
-description: "Dokumentenablagen, Transkription und Automationen öffnen."
+description: "Dokumentenablagen, Transkription, Automationen und XRAG öffnen."
 lang: de
 meta:
   app_urls: ["/app"]
@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-11-14"
+  last_verified: "2026-11-15"
   source_files: ["apps/web/app/(main)/app/page.tsx"]
 ---
 
@@ -29,6 +29,8 @@ Eine Dokumentenablage speichert gemeinsame Dateien. Ein Transkriptor definiert, 
 Die Verfügbarkeit richtet sich nach deinen Arbeitsplätzen. Wenn ein benötigtes Werkzeug fehlt, prüfe deine [Berechtigungen](../me/permissions.md) oder frage die Arbeitsplatzadministration.
 
 Persönliche Chats nach Zeitplan oder Dateiereignis startest du mit [Automationen](automation.md), verfügbar ab Editor-Rolle.
+
+Als Workspace-Administrator:in oder globaler Administrator siehst du zusätzlich **XRAG** zum [Importieren und Exportieren von Paketen](../settings/xrag.md).
 
 ## Plattform-MCP und Agentenwerkzeuge
 

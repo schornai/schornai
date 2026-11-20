@@ -77,28 +77,30 @@ export function ResourceListOptionsDropdown({
       <DropdownMenuContent className="w-fit">
         <DropdownMenuGroup>
           <DropdownMenuLabel>{t("labelView")}</DropdownMenuLabel>
-          {controls.map((control) => (
-            <DropdownMenuSub key={control.label}>
-              <DropdownMenuSubTrigger>{control.label}</DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup
-                    value={control.value ?? ""}
-                    onValueChange={(value) => control.change(String(value))}
-                  >
-                    {control.items.map((item) => (
-                      <DropdownMenuRadioItem
-                        key={item.value}
-                        value={item.value}
-                      >
-                        {item.label}
-                      </DropdownMenuRadioItem>
-                    ))}
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-          ))}
+          {controls
+            .filter((control) => control.items.length > 0)
+            .map((control) => (
+              <DropdownMenuSub key={control.label}>
+                <DropdownMenuSubTrigger>{control.label}</DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuRadioGroup
+                      value={control.value ?? ""}
+                      onValueChange={(value) => control.change(String(value))}
+                    >
+                      {control.items.map((item) => (
+                        <DropdownMenuRadioItem
+                          key={item.value}
+                          value={item.value}
+                        >
+                          {item.label}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            ))}
           {!list.isUserPreferences && (
             <div className="flex flex-col gap-1 py-1">
               <ButtonAction

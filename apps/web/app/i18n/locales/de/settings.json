@@ -434,6 +434,7 @@
     "labelNoModels": "Keine Modelle gefunden",
     "descriptionNoResults": "Passe deine Suche an, um Modelle zu finden.",
     "descriptionNoModels": "Hier erscheinen lokale und externe Modelle. Füge ein externes Modell hinzu, um loszulegen.",
+    "descriptionNoRegisteredModels": "Auf dieser Instanz sind keine Modelle registriert.",
     "labelChooseProvider": "Anbieter auswählen",
     "descriptionChooseProvider": "Verbinde ein externes Sprachmodell mit dem passenden Anbieter.",
     "labelConfigure": "Einrichten",

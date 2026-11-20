@@ -52,8 +52,17 @@ export function platformInvocationLevel(
 ): PlatformAccessLevel {
   const value =
     input && typeof input === "object"
-      ? (input as { kind?: unknown; userId?: unknown })
+      ? (input as {
+          kind?: unknown;
+          userId?: unknown;
+          includeConnectionDetails?: unknown;
+        })
       : {};
+  if (
+    name === "platform_models_list" &&
+    value.includeConnectionDetails === true
+  )
+    return "admin";
   if (
     (name === "platform_asset_upload" ||
       name === "platform_asset_upload_url") &&

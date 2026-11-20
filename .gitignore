@@ -32,3 +32,5 @@ test-results/
 playwright-report/
 
 .supervisor-dev/
+
+.postgres-upgrade-test-pinSWZ

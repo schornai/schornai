@@ -1,7 +1,9 @@
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 
-// Only explicitly public metadata crosses the server/client boundary.
-export function toModelSummary(model: AIModel) {
+export function toModelSummary(
+  model: AIModel,
+  { includeConnectionDetails = false } = {},
+) {
   return {
     id: model.id,
     name: model.name,
@@ -26,10 +28,12 @@ export function toModelSummary(model: AIModel) {
       "fileSystemIdentifier" in model.config
         ? model.config.fileSystemIdentifier
         : undefined,
-    provider: "provider" in model.config ? model.config.provider : undefined,
-    baseUrl: "baseUrl" in model.config ? model.config.baseUrl : undefined,
-    ...("region" in model.config ? { region: model.config.region } : {}),
-    modelId: "modelId" in model.config ? model.config.modelId : undefined,
+    ...(includeConnectionDetails && {
+      provider: "provider" in model.config ? model.config.provider : undefined,
+      baseUrl: "baseUrl" in model.config ? model.config.baseUrl : undefined,
+      ...("region" in model.config ? { region: model.config.region } : {}),
+      modelId: "modelId" in model.config ? model.config.modelId : undefined,
+    }),
   };
 }
 export type ModelSummary = ReturnType<typeof toModelSummary>;

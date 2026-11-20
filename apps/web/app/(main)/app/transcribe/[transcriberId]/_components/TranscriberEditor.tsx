@@ -373,7 +373,7 @@ export function TranscriberEditor({
         <TranscriberEditorPrompt />
       </TabsMainContent>
       <TabsMainContent view="settings">
-        <TranscriberEditorSettings />
+        <TranscriberEditorSettings mode={mode} />
       </TabsMainContent>
     </transcriberEditorContext.Provider>
   );

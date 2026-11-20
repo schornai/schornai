@@ -1,7 +1,12 @@
+export function attachmentDisposition(filename: string) {
+  return `attachment; filename*=UTF-8''${encodeURIComponent(filename).replace(/['()*]/g, (char) => `%${char.charCodeAt(0).toString(16)}`)}`;
+}
+
 /** Relay Storage's range response without buffering the complete media file. */
 export async function storageDownloadResponse(
   request: Request,
   signedUrl: string,
+  fetchDownload: (url: string, init: RequestInit) => Promise<Response> = fetch,
 ): Promise<Response> {
   const headers = new Headers({ "Accept-Encoding": "identity" });
   for (const name of ["range", "if-range"]) {
@@ -10,7 +15,7 @@ export async function storageDownloadResponse(
   }
   let upstream: Response;
   try {
-    upstream = await fetch(signedUrl, {
+    upstream = await fetchDownload(signedUrl, {
       headers,
       signal: request.signal,
       cache: "no-store",

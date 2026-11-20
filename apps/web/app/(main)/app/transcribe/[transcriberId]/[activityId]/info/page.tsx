@@ -50,6 +50,7 @@ export default async function Page(
       />
 
       <TranscriberInfo
+        showXRAGActions
         editDefaultTranscriber={transcriber}
         editTranscriberPathname={`/app/transcribe/${transcriberId}/edit`}
         editable

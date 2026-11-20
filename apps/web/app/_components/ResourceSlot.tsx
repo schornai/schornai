@@ -4,7 +4,6 @@ import { useId, useState } from "react";
 import {
   AudioLines,
   BotMessageSquare,
-  Check,
   FolderOpen,
   Plus,
   Search,
@@ -17,6 +16,7 @@ import type { DocumentRepository } from "@schornio/aibox-package-database/docume
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import type { WorkspaceClaim } from "../_models/getWorkspaceClaims";
+import { SelectableResourceCard } from "./SelectableResourceCard";
 import { AgentCard } from "../(main)/agent/_components/AgentCard";
 import { DocumentRepositoryCard } from "../(main)/app/documents/_components/DocumentRepositoryCard";
 import { TranscriberCard } from "../(main)/app/transcribe/_components/TranscriberCard";
@@ -239,31 +239,18 @@ export function ResourceSlot(props: ResourceSlotProps) {
           </InputGroup>
           <div className="grid max-h-[60vh] justify-items-center gap-4 overflow-y-auto p-1 sm:grid-cols-2">
             {filteredData.map((resource) => (
-              <div
+              <SelectableResourceCard
                 key={resource.id}
-                className="flex w-full max-w-80 flex-col gap-2 [&>div]:max-w-full"
+                name={resource.name}
+                selected={resource.id === props.value}
+                disabled={props.disabled}
+                onSelect={() => {
+                  props.onChange(resource.id);
+                  setOpen(false);
+                }}
               >
                 {card(resource.id)}
-                <Button
-                  type="button"
-                  variant={
-                    resource.id === props.value ? "secondary" : "outline"
-                  }
-                  disabled={props.disabled}
-                  aria-label={t("labelSelectNamed", { name: resource.name })}
-                  onClick={() => {
-                    props.onChange(resource.id);
-                    setOpen(false);
-                  }}
-                >
-                  <Check />
-                  {t(
-                    resource.id === props.value
-                      ? "labelSelected"
-                      : "labelSelect",
-                  )}
-                </Button>
-              </div>
+              </SelectableResourceCard>
             ))}
             {!filteredData.length && (
               <Empty className="sm:col-span-2">

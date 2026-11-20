@@ -17,6 +17,9 @@ import type { ServerRealtimeWebsocketProvider } from "../server/ServerRealtimeWe
 
 export type PlatformContext = {
   getSsoConfig?: () => import("@schornio/aibox-database/sso/_types").ServiceRoleConfig;
+  /** HTTP clients reach private Storage downloads through the public app origin. */
+  xragUploadUrl?: (path: string, token: string) => string;
+  xragDownloadUrl?: (signedUrl: string) => string;
   approvals?: PlatformApprovalPolicy;
   userId: string;
   claims: UserClaims;
@@ -75,6 +78,8 @@ export function platformRegistry(context: PlatformContext) {
             if (
               mode !== "off" &&
               (name === "platform_automation_save" ||
+                name === "platform_xrag_import" ||
+                name === "platform_xrag_import_admin" ||
                 name === "platform_automation_run" ||
                 (name === "platform_chat_tool_approval" &&
                   input &&

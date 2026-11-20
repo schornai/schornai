@@ -13,7 +13,7 @@ import { join, posix } from "node:path";
 import { Transform } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import { Parser, x } from "tar";
-import { xragSchema } from "./schema.ts";
+import { xragSchema, resourceFileManifestSchema } from "./schema.ts";
 
 export function archivePath(value: string) {
   if (
@@ -95,6 +95,7 @@ export async function inspectArchive(
   const metadata = new Map<string, Buffer>();
   const selected = new Set([
     "xrag.json",
+    "files.json",
     "description.md",
     "image.png",
     "image.jpg",
@@ -103,7 +104,7 @@ export async function inspectArchive(
   ]);
   const names = new Set<string>();
   const links = new Map<string, ArchiveLink>();
-  const files = new Set<string>();
+  const files = new Map<string, number>();
   let invalid: Error | undefined;
   const parser = new Parser({
     strict: true,
@@ -143,11 +144,16 @@ export async function inspectArchive(
           throw new Error("XRAG_UNSUPPORTED_ENTRY");
         }
         if (["File", "OldFile", "ContiguousFile"].includes(entry.type))
-          files.add(name);
+          files.set(name, entry.size);
         if (selected.has(name)) {
           if (
             entry.type !== "File" ||
-            entry.size > (name.startsWith("image.") ? 5_000_000 : 256_000)
+            entry.size >
+              (name === "files.json"
+                ? 16_000_000
+                : name.startsWith("image.")
+                  ? 5_000_000
+                  : 256_000)
           )
             throw new Error("XRAG_INVALID_METADATA");
           const chunks: Buffer[] = [];
@@ -193,11 +199,61 @@ export async function inspectArchive(
         ? ["config.json", "weights.npz"]
         : xrag.xrag_type === "ollamaModel"
           ? ["manifest.json"]
-          : xrag.xrag_type === "certificate"
-            ? ["privkey.pem", "fullkey.pem"]
-            : [];
+          : [];
   if (required.some((name) => !files.has(name)))
     throw new Error("XRAG_MISSING_PAYLOAD");
+  if (xrag.xrag_type === "collection") {
+    const expected = new Set([
+      "xrag.json",
+      ...xrag.entries.map((entry) => `${entry.sha256}.xrag.tar`),
+    ]);
+    if (
+      links.size ||
+      files.size !== expected.size ||
+      [...expected].some((name) => !files.has(name))
+    )
+      throw new Error("XRAG_INVALID_COLLECTION");
+  }
+  let resourceFiles: ReturnType<typeof resourceFileManifestSchema.parse> = [];
+  if (xrag.xrag_type === "resource") {
+    if (
+      links.size ||
+      [...files.keys()].some(
+        (name) =>
+          name !== "xrag.json" &&
+          name !== "files.json" &&
+          !(
+            xrag.resourceType === "documentRepository" &&
+            name.startsWith("files/")
+          ),
+      )
+    )
+      throw new Error("XRAG_INVALID_RESOURCE_PAYLOAD");
+    const manifest = metadata.has("files.json")
+      ? resourceFileManifestSchema.parse(
+          JSON.parse(metadata.get("files.json")!.toString("utf8")),
+        )
+      : [];
+    const expected = new Set([
+      "xrag.json",
+      ...(metadata.has("files.json") ? ["files.json"] : []),
+    ]);
+    resourceFiles = manifest;
+    for (const item of manifest) {
+      if (
+        xrag.resourceType !== "documentRepository" ||
+        archivePath(item.path) !== item.path ||
+        item.path === "."
+      )
+        throw new Error("XRAG_INVALID_RESOURCE_PAYLOAD");
+      const path = `files/${item.path}`;
+      if (expected.has(path) || files.get(path) !== item.size)
+        throw new Error("XRAG_INVALID_RESOURCE_PAYLOAD");
+      expected.add(path);
+    }
+    if (files.size !== expected.size)
+      throw new Error("XRAG_INVALID_RESOURCE_PAYLOAD");
+  }
   return {
     id: hash.digest("hex"),
     size,
@@ -206,6 +262,7 @@ export async function inspectArchive(
     links,
     extractedBytes,
     entryCount,
+    resourceFiles,
   };
 }
 

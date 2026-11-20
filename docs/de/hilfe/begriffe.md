@@ -59,6 +59,7 @@ meta:
 | **Service**                       | Prozess pro Maschine, der ausgewählte Dienste startet, überwacht und passende Artefakte installiert.               |
 | **Core**                          | Dienstgruppe aus Web-App, Realtime-Server und HTTPS-Proxy.                                                         |
 | **Artefakt**                      | Im privaten Dateikatalog veröffentlichtes XRAG-Paket, das passende Service-Instanzen beziehen können.              |
+| **Persönliches XRAG-Paket**       | Gespeicherte Auswahl von Ressourcen und lokalen Modellen für den gemeinsamen Export als XRAG-Datei.                |
 | **XRAG**                          | Paketformat zur Installation von Modellen, Ressourcen und Softwareupdates.                                         |
 | **Aufgabenstapel**                | Administrative Übersicht der Hintergrundverarbeitung; kein persönlicher Verlauf.                                   |
 

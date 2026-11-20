@@ -68,9 +68,11 @@ import {
 
 export function ModelsOverview({
   models,
+  readOnly,
   userPreferences,
 }: {
   models: ModelSummary[];
+  readOnly?: boolean;
   userPreferences?: Preferences;
 }) {
   const { t } = useT("settings", { keyPrefix: "models" });
@@ -213,12 +215,16 @@ export function ModelsOverview({
                   </div>
                 )}
               </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem render={<Link href="/models/new" />}>
-                  <CirclePlus /> {t("labelAdd")}
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
+              {!readOnly && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem render={<Link href="/models/new" />}>
+                      <CirclePlus /> {t("labelAdd")}
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </HeaderMainAsideContent>
@@ -245,7 +251,9 @@ export function ModelsOverview({
                 {t(
                   models.length
                     ? "descriptionNoResults"
-                    : "descriptionNoModels",
+                    : readOnly
+                      ? "descriptionNoRegisteredModels"
+                      : "descriptionNoModels",
                 )}
               </EmptyDescription>
             </EmptyHeader>
@@ -317,31 +325,33 @@ export function ModelsOverview({
                   </h2>
                 )}
                 {items.map((model) => (
-                  <ModelCard key={model.id} model={model} />
+                  <ModelCard key={model.id} model={model} readOnly={readOnly} />
                 ))}
               </Fragment>
             ))}
           </div>
         </ContainerMain>
       )}
-      <ContainerMain className="mt-10 flex flex-col items-center gap-4">
-        <section
-          aria-label="schorn.ai Cloud"
-          className="bg-background shadow-primary/25 w-full max-w-xl rounded-xl border p-6 shadow-[0_0_32px_-8px]"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="flex items-center gap-2 font-semibold">
-              <Cloud aria-hidden="true" className="text-primary size-5" />
-              schorn.ai Cloud
-            </h2>
-            <Badge variant="secondary">{t("labelComingSoon")}</Badge>
-          </div>
-          <p className="text-muted-foreground mt-3 text-sm">
-            {t("descriptionCloud")}
-          </p>
-        </section>
-        <AddExternalModel />
-      </ContainerMain>
+      {!readOnly && (
+        <ContainerMain className="mt-10 flex flex-col items-center gap-4">
+          <section
+            aria-label="schorn.ai Cloud"
+            className="bg-background shadow-primary/25 w-full max-w-xl rounded-xl border p-6 shadow-[0_0_32px_-8px]"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="flex items-center gap-2 font-semibold">
+                <Cloud aria-hidden="true" className="text-primary size-5" />
+                schorn.ai Cloud
+              </h2>
+              <Badge variant="secondary">{t("labelComingSoon")}</Badge>
+            </div>
+            <p className="text-muted-foreground mt-3 text-sm">
+              {t("descriptionCloud")}
+            </p>
+          </section>
+          <AddExternalModel />
+        </ContainerMain>
+      )}
     </>
   );
 }

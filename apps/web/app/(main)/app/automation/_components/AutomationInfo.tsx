@@ -1,4 +1,7 @@
 "use client";
+import { hasPermission } from "@/lib/hasPermission";
+import { XRAGObjectActions } from "../../../../_components/xrag/XRAGObjectActions";
+import type { WorkspaceClaim } from "../../../../_models/getWorkspaceClaims";
 import type { SettingFavorites } from "../../../../_models/currentUserConfigFavorites";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -34,7 +37,9 @@ import { InfoActions } from "../../../../_components/InfoActions";
 import { AutomationNextRun, type AutomationDisplay } from "./AutomationNextRun";
 import { AutomationCard } from "./AutomationCard";
 export function AutomationInfo({
+  showXRAGActions = false,
   automation,
+  workspace,
   editDefaultAutomation,
   favorites,
   agents = [],
@@ -42,7 +47,9 @@ export function AutomationInfo({
   editable = false,
   preview = false,
 }: {
+  showXRAGActions?: boolean;
   automation: AutomationDisplay;
+  workspace?: WorkspaceClaim;
   editDefaultAutomation?: AutomationInput;
   favorites?: SettingFavorites;
   agents?: Agent[];
@@ -191,6 +198,12 @@ export function AutomationInfo({
           </pre>
         </InfoSection>
       </div>
+      {showXRAGActions &&
+        automation.id &&
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && <XRAGObjectActions kind="automation" id={automation.id} />}
     </ContainerMain>
   );
 }
