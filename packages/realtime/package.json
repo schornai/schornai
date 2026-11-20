@@ -9,14 +9,14 @@
     "eslint": "^10.14.0"
   },
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "5.0.143",
+    "@ai-sdk/amazon-bedrock": "5.0.144",
     "@ai-sdk/anthropic": "4.0.106",
-    "@ai-sdk/azure": "4.0.127",
+    "@ai-sdk/azure": "4.0.128",
     "@ai-sdk/google": "4.0.122",
     "@ai-sdk/huggingface": "2.0.94",
     "@ai-sdk/mcp": "2.0.100",
     "@ai-sdk/mistral": "4.0.88",
-    "@ai-sdk/openai": "4.0.119",
+    "@ai-sdk/openai": "4.0.120",
     "@ai-sdk/openai-compatible": "3.0.93",
     "@ai-sdk/provider-utils": "5.0.82",
     "@hocuspocus/extension-database": "^4.7.1",
@@ -25,7 +25,7 @@
     "@schornio/aibox-database": "file:../database",
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.174",
+    "ai": "7.0.175",
     "mathjs": "15.2.0",
     "xrag": "*",
     "yjs": "^13.6.33"

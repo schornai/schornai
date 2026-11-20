@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@ai-sdk/mcp": "2.0.100",
-    "@ai-sdk/openai": "4.0.119",
+    "@ai-sdk/openai": "4.0.120",
     "@ai-sdk/provider-utils": "5.0.82",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
@@ -61,7 +61,7 @@
     "@testing-library/user-event": "^14.6.8",
     "@types/node": "^26.6.5",
     "@vitest/coverage-v8": "^5.1.0",
-    "ai": "7.0.174",
+    "ai": "7.0.175",
     "i18next": "^27.0.0",
     "jose": "^6.2.12",
     "jsdom": "^31.0.0",

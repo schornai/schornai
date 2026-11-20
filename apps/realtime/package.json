@@ -13,7 +13,7 @@
     "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*",
     "@supabase/supabase-js": "2.119.0",
-    "ai": "7.0.174",
+    "ai": "7.0.175",
     "ai-sdk-ollama": "^4.5.1",
     "undici": "^8.0.0"
   },
