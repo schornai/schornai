@@ -198,5 +198,14 @@
   },
   "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts": {
     "tools": ["platform_chat_expiration_set"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/saveAutomation.ts": {
+    "tools": ["platform_automation_save"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/deleteAutomation.ts": {
+    "tools": ["platform_automation_delete"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/runAutomationNow.ts": {
+    "tools": ["platform_automation_run"]
   }
 }

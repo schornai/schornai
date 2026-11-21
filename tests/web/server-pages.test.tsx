@@ -856,7 +856,7 @@ it.each([
       "/settings/theme",
     ],
   ],
-  [appsIndex, ["/app/documents", "/app/transcribe"]],
+  [appsIndex, ["/app/documents", "/app/transcribe", "/app/automation"]],
   [ClusterOverview, ["/service", "/tasks", "/artifacts"]],
 ] as const)(
   "passes navigation destinations to index cards in %s",
@@ -1317,4 +1317,33 @@ it("hides sidebar favorites without removing dashboard favorites", async () => {
   expect(
     component(await DashboardFavorites(), "WorkspaceCard").props.workspace,
   ).toBe(state.workspaces[0]);
+});
+
+it("shows owned automation favorites on dashboard and sidebar while omitting unavailable definitions", async () => {
+  const automation = {
+    id: "automation",
+    name: "Briefing",
+    enabled: false,
+    trigger: { type: "time", schedule: { kind: "hours", every: 1 } },
+  };
+  state.favorites = {
+    showInSidebar: true,
+    favorites: [{ type: "automation", id: "automation" }],
+    automations: [automation],
+  };
+  expect(
+    component(await DashboardFavorites(), "AutomationCard").props.automation,
+  ).toEqual(automation);
+  expect(
+    component(await SidebarFavorites(), "SidebarFavoriteItemAutomation").props
+      .automation,
+  ).toEqual(automation);
+  state.favorites.automations = [];
+  expect(
+    component(await DashboardFavorites(), "AutomationCard"),
+  ).toBeUndefined();
+  expect(
+    component(await SidebarFavorites(), "SidebarFavoriteItemAutomation").props
+      .automation,
+  ).toBeUndefined();
 });

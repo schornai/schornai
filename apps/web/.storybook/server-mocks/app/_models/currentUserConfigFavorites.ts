@@ -1,20 +1,5 @@
 import { getServiceFixture } from "../../../service-fixtures";
-import { z } from "zod/mini";
-export const settingFavoritesSchema = z.object({
-  favorites: z.array(
-    z.object({
-      id: z.string(),
-      type: z.union([
-        z.literal("agent"),
-        z.literal("transcriber"),
-        z.literal("documentRepository"),
-        z.literal("workspace"),
-      ]),
-    }),
-  ),
-  showInSidebar: z._default(z.boolean(), true),
-  version: z.literal("favorites-v2"),
-});
+export { settingFavoritesSchema } from "@schornio/aibox-package-database/config/favoritesSchema";
 export const getCurrentUserConfigFavorites = async () =>
   getServiceFixture("getCurrentUserConfigFavorites", {
     favorites: [{ id: "11111111-1111-4111-8111-111111111111", type: "agent" }],

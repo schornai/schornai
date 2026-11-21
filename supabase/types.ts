@@ -225,6 +225,126 @@ export type Database = {
           },
         ];
       };
+      automation_runs: {
+        Row: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          activity_id?: string;
+          automation_id: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence: string;
+          revision: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Update: {
+          activity_id?: string;
+          automation_id?: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence?: string;
+          revision?: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automation_runs_automation_id_fkey";
+            columns: ["automation_id"];
+            isOneToOne: false;
+            referencedRelation: "automations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      automations: {
+        Row: {
+          access_level: string;
+          agent_id: string;
+          color: Json | null;
+          created_at: string;
+          description: string;
+          enabled: boolean;
+          icon: Json | null;
+          id: string;
+          message: string;
+          name: string;
+          next_run_at: string | null;
+          revision: string;
+          storage_bucket: string | null;
+          storage_prefix: string | null;
+          trigger: NonNullable<Json>;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_level?: string;
+          agent_id: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message: string;
+          name: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger: NonNullable<Json>;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          access_level?: string;
+          agent_id?: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message?: string;
+          name?: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger?: NonNullable<Json>;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automations_agent_id_fkey";
+            columns: ["agent_id"];
+            isOneToOne: false;
+            referencedRelation: "chatbots";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       box_runtime_states: {
         Row: {
           box_id: string;
@@ -1493,6 +1613,28 @@ export type Database = {
             };
             Returns: boolean;
           };
+      begin_automation_run: {
+        Args: { p_id: string; p_token: string };
+        Returns: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "automation_runs";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       begin_chat_expiration: {
         Args: { p_document_name: string; p_token: string };
         Returns: {
@@ -1611,6 +1753,25 @@ export type Database = {
       custom_access_token_hook: { Args: { event: Json }; Returns: Json };
       decrement_current_streams: {
         Args: { p_box_id: string; p_model_identifier: string };
+        Returns: undefined;
+      };
+      enqueue_automation_manual: {
+        Args: {
+          p_event: Json;
+          p_id: string;
+          p_request_id: string;
+          p_revision: string;
+          p_user_id: string;
+        };
+        Returns: string;
+      };
+      enqueue_automation_time: {
+        Args: {
+          p_due: string;
+          p_id: string;
+          p_next: string;
+          p_revision: string;
+        };
         Returns: undefined;
       };
       ensure_realtime_document: {

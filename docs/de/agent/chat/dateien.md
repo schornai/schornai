@@ -77,7 +77,7 @@ Beim Kopieren oder Verschieben durch den Agenten muss der Zielpfad den Dateiname
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mindeststufe: **Benutzer**.
+- `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mit `attachmentMode: copy` wird auch eine eingebundene Datei kopiert; `reference` verlangt eine passende Agenteneinbindung. Mindeststufe: **Benutzer**; Zugriff auf Chat und Quelldatei erforderlich.
 - `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer**.
 - `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer**.
 - `platform_activity_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Benutzer**.

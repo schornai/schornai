@@ -135,3 +135,33 @@ describe("realtime document authorization", () => {
     expect(supabase.from).not.toHaveBeenCalled();
   });
 });
+
+it("only permits read-only automation updates for the owner when RLS grants editor access", async () => {
+  const { supabase, query } = client({ id: activityId });
+  await expect(
+    getRealtimeDocumentPermission(`automation_runs___${activityId}`, {
+      userId,
+      supabase,
+    }),
+  ).resolves.toBe("read");
+  expect(supabase.from).toHaveBeenCalledWith("automations");
+  expect(query.eq).toHaveBeenCalledWith("id", activityId);
+  expect(query.eq).toHaveBeenCalledWith("user_id", userId);
+  for (const result of [client(), client(null, new Error("denied"))]) {
+    await expect(
+      getRealtimeDocumentPermission(`automation_runs___${activityId}`, {
+        userId,
+        supabase: result.supabase,
+        isAdmin: true,
+      }),
+    ).resolves.toBeUndefined();
+  }
+  const denied = client();
+  await expect(
+    getRealtimeDocumentPermission("automation_runs___invalid", {
+      userId,
+      supabase: denied.supabase,
+    }),
+  ).resolves.toBeUndefined();
+  expect(denied.supabase.from).not.toHaveBeenCalled();
+});

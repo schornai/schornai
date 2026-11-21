@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto, berechtigte Workspaces oder ganze Instanz."
   prerequisites: "Aktuelle Datenbankmigrationen und SUPABASE_JWT_SECRET im Webserver; für Chats und Dateioperationen ein erreichbarer Realtime-Dienst und passende Worker. Externe Clients benötigen Streamable HTTP und OAuth mit PKCE (S256)."
   status: "verfügbar"
-  last_verified: "2026-11-07"
+  last_verified: "2026-11-15"
   source_files:
     - "apps/web/app/(main)/agent/_components/AgentEditorRolePlatformAccess.tsx"
     - "apps/web/app/(main)/agent/_components/AgentEditorRoleTools.tsx"
@@ -60,6 +60,8 @@ Die Voreinstellung für neu hinzugefügten Plattformzugriff ist:
 Die Regeln gelten pro Stufe unabhängig und auch für lesende Aktionen. **Automatisch** führt erlaubte Aufrufe ohne Rückfrage aus, einschließlich schreibender und löschender Aktionen. **Freigabe erforderlich** wartet auf deine Entscheidung. **Aus** entfernt die Werkzeuge dieser Stufe; eine Freigabe kann sie nicht wieder einschalten. Das Erteilen einer Werkzeugfreigabe über `platform_chat_tool_approval` benötigt auch bei automatischen Benutzeraktionen eine Bestätigung, damit ein Agent Freigaben nicht selbst umgehen kann. Ablehnungen dürfen automatisch erfolgen. Kombinierte Werkzeuge richten sich nach der tatsächlich angeforderten Aktion: Ein Theme-Upload benötigt zum Beispiel die Admin-Regel, ein eigenes Profilbild die Benutzer-Regel.
 
 Bestehende Agenten ohne diese Regeln behalten ihre bisherige Zugriffsgrenze; die bisher verfügbaren Stufen verlangen eine Freigabe. Es werden keine zusätzlichen automatischen Schreibrechte vergeben. Die Regeln kannst du jederzeit im Plattformzugriff-Tab anpassen.
+
+Das Speichern und Starten von Automationen über `platform_automation_save` und `platform_automation_run` benötigt bei schorn.ai-Agenten immer deine Bestätigung, auch bei automatischen Editoraktionen. Diese Werkzeuge delegieren spätere Ausführungen an den Zielagenten mit dessen eigenen Werkzeugregeln. Die Bestätigung hebt keine deaktivierte Stufe auf. Für externe MCP-Clients gilt ihre OAuth-Freigabe.
 
 Es gelten immer zusätzlich die Berechtigungen der ausführenden Person für die konkrete Ressource. Eine Einstellung oder Freigabe verleiht keine neuen Rechte. Die unabhängigen Regeln im Agenten ändern nicht die kumulativen externen MCP-Endpunkte.
 
@@ -231,3 +233,7 @@ Die Werkzeuge `platform_agent_create` und `platform_agent_update` speichern die 
 ### Rechnen und aktuelle Uhrzeit
 
 `platform_calculate` berechnet numerische Ausdrücke mit demselben begrenzten mathjs-Parser wie das Rollenwerkzeug. `platform_current_date_time` liefert den aktuellen Zeitpunkt in UTC oder einer angegebenen IANA-Zeitzone. Beide sind ab Stufe **User** verfügbar und benötigen keine zusätzlichen Ressourcenrechte. Ausdrucksgrenzen, Funktionen und Zeitverhalten stehen unter [Chat Support und Taschenrechner](rollen.md#taschenrechner).
+
+### Automationen
+
+Ab Zugriffsstufe **editor** stehen `platform_automations_list`, `platform_automation_save`, `platform_automation_delete`, `platform_automation_runs` und `platform_automation_run` bereit. Sie verwalten ausschließlich eigene Automationen; Speichern verlangt Editor-Rechte beim Zielagenten und Lesezugriff auf den Speicherort. Die gewählte MCP-Zugriffsstufe bleibt bei späteren Ausführungen die Obergrenze. Zeitpläne, Dateianhänge und Grenzen beschreibt [Automationen](../../app/automation.md).

@@ -1,3 +1,4 @@
+import { savedAutomation } from "../app/automation/fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import DashboardFavorites from "../../../app/(main)/_components/DashboardFavorites";
 
@@ -36,6 +37,17 @@ export const DocumentRepository: Story = {
             type: "documentRepository",
           },
         ],
+      },
+    },
+  },
+};
+
+export const Automation: Story = {
+  parameters: {
+    serviceFixtures: {
+      getCurrentUserConfigFavorites: {
+        favorites: [{ id: savedAutomation.id, type: "automation" }],
+        automations: [savedAutomation],
       },
     },
   },

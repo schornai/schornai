@@ -48,6 +48,8 @@ meta:
 
 ## Apps
 
+- [Automationen](app/automation.md)
+
 - [Apps](app/index.md)
 - [Dokumentenablagen](app/documents/index.md)
 - [Eine Dokumentenablage erstellen](app/documents/new.md)

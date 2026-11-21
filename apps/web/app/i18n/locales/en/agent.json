@@ -725,7 +725,12 @@
         "platform_calculate": "Calculate expression",
         "platform_current_date_time": "Current date and time",
         "platform_chat_expiration_get": "Read chat deletion timer",
-        "platform_chat_expiration_set": "Change chat deletion timer"
+        "platform_chat_expiration_set": "Change chat deletion timer",
+        "platform_automations_list": "List automations",
+        "platform_automation_save": "Save automation",
+        "platform_automation_delete": "Delete automation",
+        "platform_automation_runs": "View executions",
+        "platform_automation_run": "Run automation now"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",

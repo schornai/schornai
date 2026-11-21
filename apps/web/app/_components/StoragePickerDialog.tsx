@@ -36,6 +36,8 @@ export function StoragePickerDialog({
   open,
   onOpenChange,
   currentStorage,
+  currentStorageLabel,
+  initialPath = "",
   mode,
   title,
   description,
@@ -44,6 +46,8 @@ export function StoragePickerDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
   currentStorage?: Storage;
+  currentStorageLabel?: string;
+  initialPath?: string;
   mode: "file" | "folder";
   title?: string;
   description?: string;
@@ -107,7 +111,7 @@ export function StoragePickerDialog({
           ? [
               {
                 key: key(currentStorage),
-                label: t("labelCurrentStorage"),
+                label: currentStorageLabel ?? t("labelCurrentStorage"),
                 storage: currentStorage,
               },
             ]
@@ -128,7 +132,8 @@ export function StoragePickerDialog({
       ];
       if (sequence !== request.current) return;
       setOptions(next);
-      if (next[0]) await browse(next[0].storage, "");
+      if (next[0])
+        await browse(next[0].storage, currentStorage ? initialPath : "");
       else setLoading(false);
     } catch {
       if (sequence === request.current) {

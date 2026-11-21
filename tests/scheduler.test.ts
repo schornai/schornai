@@ -8,6 +8,10 @@ import { claimJob } from "../packages/database/src/scheduler/claimJob.ts";
 import { startScheduler } from "../apps/realtime/src/scheduler/startScheduler.ts";
 
 const cleanup = vi.hoisted(() => vi.fn());
+const automation = vi.hoisted(() => vi.fn());
+vi.mock("../apps/realtime/src/scheduler/runAutomation.ts", () => ({
+  runAutomation: automation,
+}));
 vi.mock("../packages/database/src/xrag/cleanupArtifactPublications.ts", () => ({
   cleanupArtifactPublications: cleanup,
 }));
@@ -213,7 +217,22 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   const f = fixture(undefined, { kind: "artifacts.cleanup" });
   const upsert = vi.fn().mockResolvedValue({ error: null });
   f.supabase.from = vi.fn(() => ({ upsert }));
+  let claimed = false;
+  f.rpc.mockImplementation(async (name, ...args: unknown[]) => {
+    if (name === "claim_scheduled_job") {
+      if ((args[0] as { p_kinds: string[] }).p_kinds.includes("automation.run"))
+        return { data: [], error: null } as any;
+      if (!claimed) {
+        claimed = true;
+        return { data: [f.job], error: null } as any;
+      }
+      f.stop.abort();
+      return { data: [], error: null } as any;
+    }
+    return { data: true, error: null } as any;
+  });
   await startScheduler({
+    serverToken: "Worker test",
     supabase: f.supabase,
     signal: f.stop.signal,
     instance: {} as any,
@@ -228,6 +247,54 @@ it("registers recurring cleanup once and runs it through the scheduler", async (
   expect(cleanup).toHaveBeenCalledWith(
     expect.objectContaining({ supabase: f.supabase }),
   );
+});
+
+it("continues maintenance while an automation is blocked on external work", async () => {
+  const stop = new AbortController();
+  let started!: () => void;
+  const running = new Promise<void>((resolve) => {
+    started = resolve;
+  });
+  automation.mockImplementationOnce(async (_job, signal: AbortSignal) => {
+    started();
+    await new Promise<void>((resolve) =>
+      signal.addEventListener("abort", () => resolve(), { once: true }),
+    );
+  });
+  let claimedMaintenance = false;
+  const rpc = vi.fn(async (name: string, args: { p_kinds?: string[] }) => {
+    if (name !== "claim_scheduled_job") return { data: true };
+    if (args.p_kinds?.includes("automation.run"))
+      return {
+        data: [
+          { id: "automation", kind: "automation.run", lease_token: "token" },
+        ],
+      };
+    await running;
+    if (claimedMaintenance) {
+      stop.abort();
+      return { data: [] };
+    }
+    claimedMaintenance = true;
+    return {
+      data: [
+        { id: "cleanup", kind: "artifacts.cleanup", lease_token: "token" },
+      ],
+    };
+  });
+  const supabase = { rpc, from: () => ({ upsert: async () => ({}) }) } as any;
+  await startScheduler({
+    serverToken: "Worker test",
+    supabase,
+    signal: stop.signal,
+    instance: {} as any,
+  });
+  expect(cleanup).toHaveBeenCalledWith(expect.objectContaining({ supabase }));
+  expect(rpc).toHaveBeenCalledWith("finish_scheduled_job", {
+    p_id: "cleanup",
+    p_token: "token",
+    p_success: true,
+  });
 });
 it("cancels by ID and sanitizes mutation errors", async () => {
   const eq = vi.fn().mockResolvedValue({ error: null });

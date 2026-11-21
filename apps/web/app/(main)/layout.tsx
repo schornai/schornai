@@ -13,7 +13,7 @@ export default function Layout(props: LayoutProps<"/">) {
           <SidebarProviderPersistent>
             <Sidebar />
             <div className="flex w-full min-w-0 flex-col">
-              <main className="flex w-full min-w-0 flex-1 flex-col max-lg:min-h-screen">
+              <main className="flex w-full min-w-0 flex-1 flex-col max-lg:min-h-screen max-lg:has-data-[slot=chat-container]:min-h-dvh max-lg:has-data-[slot=chat-container]:[&+footer]:hidden">
                 {props.children}
               </main>
               <Footer />
