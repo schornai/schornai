@@ -99,98 +99,23 @@ export async function importXRAGTransfer(
       artifacts: [],
       processing: [],
     };
-    const uploads = new Map<string, ImportDocumentFile>();
-    for (const resource of resources) {
-      if (
-        resource.xrag.xrag_type !== "resource" ||
-        resource.xrag.resourceType !== "documentRepository"
-      )
-        continue;
-      const originId = resource.xrag.id;
-      const entry = entries.find((e) => e.originId === originId)!;
-      const manifest = await readPreparedResource(resource, directory, options);
-      const storage = {
-        type: "documentRepository" as const,
-        documentRepositoryId: entry.localId,
-        workspaceId: target!.workspaceId,
-      };
-      const groups = new Map<string, typeof manifest>();
-      for (const file of manifest) {
-        const normalized = resolvePath(file.path);
-        const suffix = [MDC_FILE_EXTENSION, TRANSCRIPT_FILE_EXTENSION].find(
-          (s) => normalized.endsWith(s),
-        );
-        const base = suffix ? normalized.slice(0, -suffix.length) : normalized;
-        groups.set(base, [...(groups.get(base) ?? []), file]);
-      }
-      for (const [base, files] of groups) {
-        const original = files.some((f) => resolvePath(f.path) === base);
-        const desired: ImportDocumentFile[] = [...files];
-        // A replacement must never reuse a previous version's extracted content.
-        if (original && !base.endsWith(EMPTY_FOLDER_PLACEHOLDER)) {
-          for (const suffix of [
-            MDC_FILE_EXTENSION,
-            TRANSCRIPT_FILE_EXTENSION,
-          ]) {
-            if (!files.some((f) => resolvePath(f.path) === base + suffix))
-              desired.push({
-                path: base + suffix,
-                size: 0,
-                contentType: "application/octet-stream",
-              });
-          }
-          plan.processing.push({
-            id: crypto.randomUUID(),
-            storage,
-            path: base,
-            useSavedContent: files.some((f) => resolvePath(f.path) !== base),
-          });
-        }
-        for (const file of desired) {
-          const number = plan.files.length;
-          const remove = !files.includes(file);
-          plan.files.push({
-            path: StorageSession.getStoragePath(file.path, storage).storagePath,
-            basePath: StorageSession.getStoragePath(base, storage).storagePath,
-            backup: `${id}/old/${number}`,
-            hadOriginal: false,
-            remove,
-          });
-          if (!remove)
-            uploads.set(
-              StorageSession.getStoragePath(file.path, storage).storagePath,
-              file,
-            );
-        }
-      }
-    }
-    for (const archive of archives.filter(
-      (a) => a.xrag.xrag_type !== "resource",
-    )) {
-      if (!archive.source) throw new Error("XRAG_TRANSFER_UNAVAILABLE");
-      const path = importedArtifactPath(
-        archive.source.bucket,
-        archive.source.path,
-      );
-      plan.artifacts.push({ path, name: `${archive.id}.xrag.tar` });
-    }
     const supabase = options.supabaseServiceRole;
-    reserved = true; // Recovery owns cleanup once begin may have reached the database.
-    const begin = await supabase.rpc("begin_xrag_import", {
+    // A lost reservation response leaves cleanup with the recovery worker.
+    reserved = true;
+    const reservation = await supabase.rpc("reserve_xrag_import", {
       p_id: id,
       p_token: token,
       p_user_id: userId,
       p_plan: json(plan),
     });
-    // A lost begin response cannot leave changed target data: begin only reserves.
     if (
-      begin.error?.code === "23505" &&
-      begin.error.message.includes("xrag_import_once_per_upload")
+      reservation.error?.code === "23505" &&
+      reservation.error.message.includes("xrag_import_once_per_upload")
     )
       throw new Error("XRAG_IMPORT_ALREADY_STARTED");
-    if (begin.error || !begin.data)
-      throw new Error("XRAG_IMPORT_PREPARE_FAILED");
-    const prepared = importPlanSchema.parse(begin.data);
+    if (reservation.error?.message === "XRAG_TRANSFER_EXPIRED")
+      throw new Error("XRAG_TRANSFER_EXPIRED");
+    if (reservation.error) throw new Error("XRAG_IMPORT_PREPARE_FAILED");
     try {
       const result = await withImportLease(
         id,
@@ -198,6 +123,101 @@ export async function importXRAGTransfer(
         supabase,
         options.signal,
         async (signal) => {
+          const uploads = new Map<string, ImportDocumentFile>();
+          for (const resource of resources) {
+            if (
+              resource.xrag.xrag_type !== "resource" ||
+              resource.xrag.resourceType !== "documentRepository"
+            )
+              continue;
+            const originId = resource.xrag.id;
+            const entry = entries.find((e) => e.originId === originId)!;
+            const manifest = await readPreparedResource(resource, directory, {
+              ...options,
+              signal,
+            });
+            const storage = {
+              type: "documentRepository" as const,
+              documentRepositoryId: entry.localId,
+              workspaceId: target!.workspaceId,
+            };
+            const groups = new Map<string, typeof manifest>();
+            for (const file of manifest) {
+              const normalized = resolvePath(file.path);
+              const suffix = [
+                MDC_FILE_EXTENSION,
+                TRANSCRIPT_FILE_EXTENSION,
+              ].find((s) => normalized.endsWith(s));
+              const base = suffix
+                ? normalized.slice(0, -suffix.length)
+                : normalized;
+              groups.set(base, [...(groups.get(base) ?? []), file]);
+            }
+            for (const [base, files] of groups) {
+              const original = files.some((f) => resolvePath(f.path) === base);
+              const desired: ImportDocumentFile[] = [...files];
+              // A replacement must never reuse a previous version's extracted content.
+              if (original && !base.endsWith(EMPTY_FOLDER_PLACEHOLDER)) {
+                for (const suffix of [
+                  MDC_FILE_EXTENSION,
+                  TRANSCRIPT_FILE_EXTENSION,
+                ]) {
+                  if (!files.some((f) => resolvePath(f.path) === base + suffix))
+                    desired.push({
+                      path: base + suffix,
+                      size: 0,
+                      contentType: "application/octet-stream",
+                    });
+                }
+                plan.processing.push({
+                  id: crypto.randomUUID(),
+                  storage,
+                  path: base,
+                  useSavedContent: files.some(
+                    (f) => resolvePath(f.path) !== base,
+                  ),
+                });
+              }
+              for (const file of desired) {
+                const number = plan.files.length;
+                const remove = !files.includes(file);
+                plan.files.push({
+                  path: StorageSession.getStoragePath(file.path, storage)
+                    .storagePath,
+                  basePath: StorageSession.getStoragePath(base, storage)
+                    .storagePath,
+                  backup: `${id}/old/${number}`,
+                  hadOriginal: false,
+                  remove,
+                });
+                if (!remove)
+                  uploads.set(
+                    StorageSession.getStoragePath(file.path, storage)
+                      .storagePath,
+                    file,
+                  );
+              }
+            }
+          }
+          for (const archive of archives.filter(
+            (a) => a.xrag.xrag_type !== "resource",
+          )) {
+            if (!archive.source) throw new Error("XRAG_TRANSFER_UNAVAILABLE");
+            const path = importedArtifactPath(
+              archive.source.bucket,
+              archive.source.path,
+            );
+            plan.artifacts.push({ path, name: `${archive.id}.xrag.tar` });
+          }
+          signal.throwIfAborted();
+          const planned = await supabase.rpc("set_xrag_import_plan", {
+            p_id: id,
+            p_token: token,
+            p_plan: json(plan),
+          });
+          if (planned.error || !planned.data)
+            throw new Error("XRAG_IMPORT_PREPARE_FAILED");
+          const prepared = importPlanSchema.parse(planned.data);
           const storage = createImportStorageClient(id, token).storage;
           for (const file of prepared.files) {
             signal.throwIfAborted();

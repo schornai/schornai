@@ -2,6 +2,7 @@ import { expect, it, vi } from "vitest";
 import { query } from "./helpers/supabase.ts";
 import { nativeResourceId } from "../packages/xrag/src/identity.ts";
 import { getModelExport } from "../packages/database/src/xrag/getModelExport.ts";
+import { getModelExportSource } from "../packages/database/src/xrag/getModelExportSource.ts";
 
 const stream = vi.hoisted(() =>
   vi.fn(async () => new Response("model bytes").body),
@@ -98,6 +99,19 @@ it("does not let a reader reach the private artifact catalog", async () => {
   );
   expect(options.supabaseServiceRole.from).not.toHaveBeenCalled();
   expect(stream).not.toHaveBeenCalled();
+});
+
+it("resumes the selected publication even when a newer version exists for the same model", async () => {
+  const { options, artifact } = fixture();
+  const digest = "a".repeat(64);
+  const source = await getModelExportSource("model", options as any, digest);
+  expect(artifact.eq).toHaveBeenCalledWith("id", digest);
+  expect(artifact.eq).toHaveBeenCalledWith(
+    "metadata->xrag->>xrag_type",
+    "ollamaModel",
+  );
+  expect(artifact.order).not.toHaveBeenCalled();
+  expect(source.id).toBe(digest);
 });
 
 it("never exports a platform update through the model export path", async () => {

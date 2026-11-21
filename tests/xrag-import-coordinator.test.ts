@@ -176,7 +176,7 @@ it("previews conflicts and imports separately identified resources with preserve
     ]),
   );
   const call = f.service.rpc.mock.calls.find(
-    ([name]) => name === "begin_xrag_import",
+    ([name]) => name === "reserve_xrag_import",
   ) as any;
   expect(
     call[1].p_plan.entries.find(
@@ -190,6 +190,32 @@ it("previews conflicts and imports separately identified resources with preserve
       ?.toString(),
   ).toBe("file bytes");
 });
+it("keeps a confirmed selection reserved while fetching files past the selection deadline", async () => {
+  const f = await fixture({ distribution: true });
+  await inspectXRAGTransfer({ source: f.input.source }, f.options as any);
+  const fetchFile = vi.mocked(fetch).getMockImplementation()!;
+  let checked = false;
+  vi.mocked(fetch).mockImplementation(async (...args) => {
+    if (
+      new URL(String(args[0])).searchParams.get("bucket") === "xrag-prepared"
+    ) {
+      const [inventory] = f.backend.prepared.values();
+      inventory.created_at = new Date(Date.now() - 3600_001).toISOString();
+      const [job] = f.backend.jobs.values();
+      expect(job).toMatchObject({
+        state: "preparing",
+        plan: { source: { path }, files: [] },
+      });
+      checked = true;
+    }
+    return fetchFile(...args);
+  });
+  await expect(
+    importXRAGTransfer(f.input, f.options as any),
+  ).resolves.toMatchObject({ documentFileCount: 1 });
+  expect(checked).toBe(true);
+});
+
 it("imports new resources without replacement confirmation", async () => {
   const f = await fixture({
     claims: [{ organization_id: "workspace", role: "workspace-admin" }],
@@ -250,7 +276,7 @@ it("creates a new workspace even for a distribution-only import", async () => {
     f.options as any,
   );
   expect(f.service.rpc).toHaveBeenCalledWith(
-    "begin_xrag_import",
+    "reserve_xrag_import",
     expect.objectContaining({
       p_plan: expect.objectContaining({
         target: {
@@ -674,7 +700,7 @@ it("preserves prepared contents when a concurrent request already reserved the u
   await inspectXRAGTransfer({ source: f.input.source }, f.options as any);
   const rpc = f.service.rpc.getMockImplementation()!;
   f.service.rpc.mockImplementation((name, args) =>
-    name === "begin_xrag_import"
+    name === "reserve_xrag_import"
       ? Promise.resolve({
           data: null,
           error: { code: "23505", message: "xrag_import_once_per_upload" },

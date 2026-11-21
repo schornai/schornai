@@ -8,7 +8,7 @@ import {
 } from "./authentication.ts";
 import { requirePlatformAccess } from "../mcp/platformAccess.ts";
 import { getAuthorizedResource } from "./getAuthorizedResource.ts";
-import { getModelExportSource } from "./getModelExportSource.ts";
+import { getXRAGPackageModel } from "./getXRAGPackageModel.ts";
 export async function getXRAGExportDownload(
   input: { jobId: string },
   options: XRAGOptions,
@@ -32,7 +32,7 @@ export async function getXRAGExportDownload(
     .array(packageObjectSchema.strip())
     .parse(result.data.selections)) {
     if (selection.kind === "model")
-      await getModelExportSource(selection.id, options);
+      await getXRAGPackageModel(selection.id, options);
     else await getAuthorizedResource(selection.kind, selection.id, options);
   }
   const { data, error } = await options.supabaseServiceRole.storage

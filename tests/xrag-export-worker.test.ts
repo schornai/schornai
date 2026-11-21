@@ -19,8 +19,8 @@ vi.mock("../packages/database/src/xrag/uploadExportStream.ts", () => ({
 vi.mock("../packages/database/src/xrag/getAuthorizedResource.ts", () => ({
   getAuthorizedResource: state.authorize,
 }));
-vi.mock("../packages/database/src/xrag/getModelExportSource.ts", () => ({
-  getModelExportSource: state.model,
+vi.mock("../packages/database/src/xrag/getXRAGPackageModel.ts", () => ({
+  getXRAGPackageModel: state.model,
 }));
 beforeEach(() => vi.resetAllMocks());
 afterEach(() => vi.useRealTimers());
@@ -62,9 +62,11 @@ function fixture() {
 }
 it("only publishes verified bytes after a fresh permission check", async () => {
   const f = fixture();
+  f.job.selections.push({ kind: "model", id: "model" });
   expect(await processXRAGExport(f.options)).toEqual({ worked: true });
   expect(state.options).toHaveBeenCalledTimes(2);
   expect(state.authorize).toHaveBeenCalledWith("agent", "agent", {});
+  expect(state.model).toHaveBeenCalledWith("model", {});
   const finish = f.rpc.mock.calls.find(
     ([, args]) => args.p_state === "finished",
   )![1];

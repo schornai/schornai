@@ -8,8 +8,8 @@ const auth = vi.hoisted(() => ({ resource: vi.fn(), model: vi.fn() }));
 vi.mock("../packages/database/src/xrag/getAuthorizedResource.ts", () => ({
   getAuthorizedResource: auth.resource,
 }));
-vi.mock("../packages/database/src/xrag/getModelExportSource.ts", () => ({
-  getModelExportSource: auth.model,
+vi.mock("../packages/database/src/xrag/getXRAGPackageModel.ts", () => ({
+  getXRAGPackageModel: auth.model,
 }));
 const jobId = "11111111-1111-4111-8111-111111111111";
 beforeEach(() => vi.resetAllMocks());

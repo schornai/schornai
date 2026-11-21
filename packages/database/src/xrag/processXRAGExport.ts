@@ -4,7 +4,7 @@ import type { SupabaseClient } from "../_shared/_types.ts";
 import { packageObjectSchema } from "./packageSchema.ts";
 import { getXRAGWorkerOptions } from "./getXRAGWorkerOptions.ts";
 import { getAuthorizedResource } from "./getAuthorizedResource.ts";
-import { getModelExportSource } from "./getModelExportSource.ts";
+import { getXRAGPackageModel } from "./getXRAGPackageModel.ts";
 import { streamPackageExport } from "./streamPackageExport.ts";
 import { uploadExportStream } from "./uploadExportStream.ts";
 
@@ -98,7 +98,7 @@ export async function processXRAGExport({
     );
     for (const selection of selections) {
       if (selection.kind === "model")
-        await getModelExportSource(selection.id, current);
+        await getXRAGPackageModel(selection.id, current);
       else await getAuthorizedResource(selection.kind, selection.id, current);
     }
     clearInterval(timer);

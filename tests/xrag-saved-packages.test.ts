@@ -9,7 +9,6 @@ import { createXRAGPackage } from "../packages/database/src/xrag/createXRAGPacka
 import { addXRAGPackageItem } from "../packages/database/src/xrag/addXRAGPackageItem.ts";
 import { removeXRAGPackageItem } from "../packages/database/src/xrag/removeXRAGPackageItem.ts";
 import { deleteXRAGPackage } from "../packages/database/src/xrag/deleteXRAGPackage.ts";
-import { exportXRAGPackage } from "../packages/database/src/xrag/exportXRAGPackage.ts";
 const resource = vi.hoisted(() => vi.fn());
 vi.mock("../packages/database/src/xrag/getAuthorizedResource.ts", () => ({
   getAuthorizedResource: resource,
@@ -90,19 +89,17 @@ it("checks exact resource access before adding a deduplicated selection", async 
   ).rejects.toThrow("NOT_AUTHORIZED");
   expect(denied.mutation.upsert).not.toHaveBeenCalled();
 });
-it.each([
-  addXRAGPackageItem,
-  removeXRAGPackageItem,
-  deleteXRAGPackage,
-  exportXRAGPackage,
-])("rejects an unavailable package before mutation", async (operation) => {
-  const f = setup({ packages: [] });
-  await expect(operation(input, f.options as any)).rejects.toThrow(
-    "NOT_AUTHORIZED",
-  );
-  expect(f.mutation.delete).not.toHaveBeenCalled();
-  expect(f.mutation.upsert).not.toHaveBeenCalled();
-});
+it.each([addXRAGPackageItem, removeXRAGPackageItem, deleteXRAGPackage])(
+  "rejects an unavailable package before mutation",
+  async (operation) => {
+    const f = setup({ packages: [] });
+    await expect(operation(input, f.options as any)).rejects.toThrow(
+      "NOT_AUTHORIZED",
+    );
+    expect(f.mutation.delete).not.toHaveBeenCalled();
+    expect(f.mutation.upsert).not.toHaveBeenCalled();
+  },
+);
 it("removes only the selected item and deletes only owned package metadata", async () => {
   const f = setup();
   await removeXRAGPackageItem(input, f.options as any);
@@ -131,12 +128,6 @@ it.each([
       ? operation(f.options as any)
       : (operation as any)({ ...input, name: "Demo" }, f.options);
   await expect(promise).rejects.not.toThrow("secret");
-});
-it("rejects empty packages before writing archives", async () => {
-  const f = setup();
-  await expect(exportXRAGPackage(input, f.options as any)).rejects.toThrow(
-    "XRAG_PACKAGE_SIZE",
-  );
 });
 
 it.each([

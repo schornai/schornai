@@ -34,6 +34,7 @@ meta:
       "apps/web/app/api/xrag/upload/[...path]/route.ts",
       "apps/web/app/api/storage/upload/resumable/[[...path]]/route.ts",
       "apps/web/lib/xrag/downloadUrl.ts",
+      "apps/web/lib/resumeUpload.ts",
       "packages/database/src/xrag/getModelExportSource.ts",
       "packages/database/src/xrag/installedModelArchive.ts",
       "packages/database/src/xrag/getRepositoryExportFiles.ts",
@@ -51,6 +52,7 @@ meta:
       "packages/database/src/xrag/getXRAGImportStatus.ts",
       "packages/database/src/xrag/queueXRAGPreparation.ts",
       "supabase/migrations/20261121135207_retain_xrag_import_originals.sql",
+      "supabase/migrations/20261121171026_reserve_xrag_import_before_file_planning.sql",
       "packages/database/src/xrag/deletePreparedXRAGTransfer.ts",
       "supabase/migrations/20261115133603_xrag_import_export.sql",
       "packages/realtime/src/platform/processXRAGImportFiles.ts",
@@ -148,7 +150,9 @@ ID.
    **eine `.xrag.tar`-Datei** herunter. Das Ergebnis ist 72 Stunden verfügbar. Über **Export löschen** entfernst du fertige, fehlgeschlagene oder abgebrochene Exporte sofort. Dabei wird auch die zugehörige Archivdatei gelöscht. Dein gespeichertes Paket bleibt erhalten.
 
 Der Export verwendet den aktuellen Stand der Objekte und prüft die Zugriffsrechte
-beim Erstellen und beim Abrufen des Downloadlinks. Fehlt eine referenzierte Ressource wie ein Transkriptor, bleibt ihr Verweis im Archiv erhalten. Ist ihre ursprüngliche globale ID unbekannt, erhält der Verweis eine aus dem vorhandenen Bezeichner abgeleitete ID. Auf der Zielinstanz kann dann eine neue Zuordnung nötig sein. Wartende und laufende Aufträge
+beim Erstellen und beim Abrufen des Downloadlinks. Wenn die Datenbank nur einen Teil der Paketeinträge zurückgibt, bricht der Export ab. Für ein fertiges Paket genügen die weiterhin bestehenden Zugriffsrechte auf die ausgewählten Objekte. Die Modelldateien sind bereits im Paket enthalten.
+
+Fehlt eine referenzierte Ressource wie ein Transkriptor, bleibt ihr Verweis im Archiv erhalten. Ist ihre ursprüngliche globale ID unbekannt, erhält der Verweis eine aus dem vorhandenen Bezeichner abgeleitete ID. Auf der Zielinstanz kann dann eine neue Zuordnung nötig sein. Wartende und laufende Aufträge
 kannst du abbrechen. Bei einem Fehler kannst du einen neuen Export des Pakets starten.
 Einträge oder ein persönliches Paket zu löschen wirkt sich nur auf die gespeicherte Auswahl aus.
 
@@ -178,6 +182,7 @@ Im Import-Tab:
 
 1. Ziehe eine `.xrag.tar`-Datei in den Uploadbereich oder klicke **Datei auswählen**.
    Während der Übertragung siehst du den Dateinamen und den Upload-Fortschritt. Nach dem Upload öffnet sich die Auswahl unter `/app/xrag/import/[id]`. Während **Inhalt wird geladen …** prüft der Server die Datei im Hintergrund. Du kannst die Adresse später wieder öffnen. Der Reiter **Export** führt zu `/app/xrag/export`.
+   Bricht der Upload ab, wähle im selben Browser und Benutzerkonto dieselbe Datei erneut aus. Der Browser kann eine noch gültige Übertragung innerhalb von 24 Stunden fortsetzen.
 2. Bei einem XRAG-Paket sind zunächst alle enthaltenen Objekte ausgewählt.
    Sobald die enthaltenen Objekte angezeigt werden, wechselst du oben rechts unter **Optionen → Ansicht** zwischen Kacheln und Tabelle. Unter jeder Karte zeigt der Auswahlbutton ihren Zustand. Die Karten übernehmen die im Paket gespeicherte Objektfarbe. In der Tabelle wählst du über die erste Spalte aus. **Keine auswählen** leert die Auswahl, **Alle auswählen** übernimmt das gesamte Paket. Die Auswahl bleibt beim Ansichtswechsel erhalten. Auch bei einem einzelnen Modell oder Plattformupdate startest du den Import mit **Importieren**.
 3. Sind Agenten, Dokumentenablagen, Transkriptoren oder Automatisierungen ausgewählt, erscheint eine
@@ -195,7 +200,7 @@ wird gelöscht. Einzelne Ressourcen werden bereits entpackt bereitgehalten.
 Wenn du die Seite während des Imports neu lädst, zeigt sie den gespeicherten Stand. Die Veröffentlichung und die Installation auf den Geräten laufen nach dem Import weiter.
 Nach einem erfolgreichen Import oder einer Fehlermeldung öffnest du mit **Weiterer XRAG Upload** die Dateiauswahl.
 Bei einer ungültigen Vorschauauswahl kannst du die Auswahl korrigieren und die Vorschau erneut öffnen. Offene Auswahlen sind ab Fertigstellung der Vorbereitung eine Stunde gültig und werden anschließend vom
-Scheduler gelöscht. Innerhalb dieser Frist kannst du die Adresse als hochladende Person erneut öffnen. Die Objektauswahl beginnt wieder mit allen Einträgen.
+Scheduler gelöscht. Innerhalb dieser Frist kannst du die Adresse als hochladende Person erneut öffnen. Die Objektauswahl beginnt wieder mit allen Einträgen. Bestätigst du den Import innerhalb dieser Frist, bleiben die Archive auch während einer längeren Verarbeitung verfügbar.
 
 Nach erfolgreichem Import werden die verbrauchten Ressourcendateien, alle abgewählten Objekte und die Sicherungskopien bereinigt. Ausgewählte Modelle und Plattformupdates werden aus der bereits geprüften Datei veröffentlicht. Für diese Veröffentlichung fällt keine zweite Archivkopie an. Bei einer
 vorübergehenden Speicherstörung holt der Scheduler die Bereinigung nach.

@@ -1768,6 +1768,7 @@ export type Database = {
         Row: {
           created_at: string;
           digest: string;
+          discarding: boolean;
           entries: NonNullable<Json>;
           id: string;
           name: string;
@@ -1780,6 +1781,7 @@ export type Database = {
         Insert: {
           created_at?: string;
           digest: string;
+          discarding?: boolean;
           entries: NonNullable<Json>;
           id: string;
           name: string;
@@ -1791,6 +1793,7 @@ export type Database = {
         Update: {
           created_at?: string;
           digest?: string;
+          discarding?: boolean;
           entries?: NonNullable<Json>;
           id?: string;
           name?: string;
@@ -2373,6 +2376,15 @@ export type Database = {
         };
         Returns: undefined;
       };
+      reserve_xrag_import: {
+        Args: {
+          p_id: string;
+          p_plan: Json;
+          p_token: string;
+          p_user_id: string;
+        };
+        Returns: undefined;
+      };
       revoke_platform_mcp_grant: {
         Args: { p_client_id: string; p_token_hash: string };
         Returns: undefined;
@@ -2393,6 +2405,10 @@ export type Database = {
       set_chat_expiration: {
         Args: { p_document_name: string; p_seconds: number; p_user_id: string };
         Returns: string;
+      };
+      set_xrag_import_plan: {
+        Args: { p_id: string; p_plan: Json; p_token: string };
+        Returns: Json;
       };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };
       update_external_ai_model: {

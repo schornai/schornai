@@ -267,7 +267,11 @@ it("carries preview candidates and explicit model choices through the shared UI/
   calls.client = backend.client;
   const original = opts.supabaseServiceRole.rpc.getMockImplementation()!;
   opts.supabaseServiceRole.rpc.mockImplementation((name: string, args: any) =>
-    ["begin_xrag_import", "commit_xrag_import"].includes(name)
+    [
+      "reserve_xrag_import",
+      "set_xrag_import_plan",
+      "commit_xrag_import",
+    ].includes(name)
       ? backend.client.rpc(name, args)
       : original(name, args),
   );

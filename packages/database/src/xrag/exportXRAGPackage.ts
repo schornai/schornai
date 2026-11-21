@@ -5,7 +5,7 @@ import {
   getXRAGUserId,
   type XRAGOptions,
 } from "./authentication.ts";
-import { listXRAGPackages } from "./listXRAGPackages.ts";
+import { requirePlatformAccess } from "../mcp/platformAccess.ts";
 import { getAuthorizedResource } from "./getAuthorizedResource.ts";
 import { getModelExportSource } from "./getModelExportSource.ts";
 
@@ -15,24 +15,36 @@ export async function exportXRAGPackage(
   options: XRAGOptions,
 ) {
   const { packageId } = packageIdSchema.parse(input);
-  const xragPackage = (await listXRAGPackages(options)).find(
-    (b) => b.id === packageId,
-  );
+  const claims = await getXRAGClaims(options);
+  requirePlatformAccess(claims, "admin", "workspace");
+  const userId = await getXRAGUserId(options);
+  const { data: xragPackage, error } = await options.supabase
+    .from("xrag_packages")
+    .select("name")
+    .eq("id", packageId)
+    .eq("owner_id", userId)
+    .maybeSingle();
+  if (error) throw new Error("XRAG_PACKAGE_READ_FAILED");
   if (!xragPackage) throw new Error("NOT_AUTHORIZED");
-  const selections = xragPackage.xrag_package_items.map((item) =>
+  // PostgREST can cap the returned rows below the actual selection size.
+  const items = await options.supabase
+    .from("xrag_package_items")
+    .select("kind,resource_id", { count: "exact" })
+    .eq("package_id", packageId);
+  if (items.error) throw new Error("XRAG_PACKAGE_READ_FAILED");
+  if (!items.count || items.count > 1000 || items.count !== items.data.length)
+    throw new Error("XRAG_PACKAGE_SIZE");
+  const selections = items.data.map((item) =>
     packageObjectSchema.parse({
       kind: item.kind,
       id: item.resource_id,
     }),
   );
-  if (!selections.length || selections.length > 1000)
-    throw new Error("XRAG_PACKAGE_SIZE");
   for (const selection of selections) {
     if (selection.kind === "model")
       await getModelExportSource(selection.id, options);
     else await getAuthorizedResource(selection.kind, selection.id, options);
   }
-  const userId = await getXRAGUserId(options);
   const jobs = options.supabaseServiceRole.from("xrag_export_jobs");
   const active = await jobs
     .select("id")
@@ -48,7 +60,7 @@ export async function exportXRAGPackage(
       package_id: packageId,
       name: `${identifierFromTitle(xragPackage.name)}.xrag.tar`,
       selections,
-      claims: await getXRAGClaims(options),
+      claims,
     })
     .select("id")
     .single();

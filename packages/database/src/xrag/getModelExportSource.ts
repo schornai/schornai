@@ -52,15 +52,20 @@ export async function getModelExportSource(
     )
       throw error;
   }
-  const result = await supabaseServiceRole
+  const publications = supabaseServiceRole
     .from("artifact_catalog")
     .select("*")
     .eq("metadata->xrag->meta->>identifier", row.identifier)
-    .in("metadata->xrag->>xrag_type", ["ollamaModel", "mlxWhisperModel"])
-    .is("deleted_at", null)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+    .eq(
+      "metadata->xrag->>xrag_type",
+      model.type === "mlx_whisper_v1" ? "mlxWhisperModel" : "ollamaModel",
+    )
+    .is("deleted_at", null);
+  const result = await (
+    pinnedVersion
+      ? publications.eq("id", pinnedVersion)
+      : publications.order("created_at", { ascending: false }).limit(1)
+  ).maybeSingle();
   if (result.error || !result.data)
     throw new Error("XRAG_MODEL_ARCHIVE_UNAVAILABLE");
   const artifact = mapArtifact(result.data);

@@ -130,23 +130,29 @@ export function importBackend() {
           error: null,
         };
       }
-      if (name === "begin_xrag_import") {
-        const plan = structuredClone(args.p_plan);
-        plan.files.forEach((f: any) => {
-          f.hadOriginal = objects.has(`database_files/${f.path}`);
-        });
+      if (name === "begin_xrag_import" || name === "reserve_xrag_import") {
         jobs.set(args.p_id, {
           id: args.p_id,
           token: args.p_token,
           user_id: args.p_user_id,
           state: "preparing",
           files_applied: false,
-          plan,
+          plan: structuredClone(args.p_plan),
           cleaned_at: null,
         });
-        return { data: plan, error: null as unknown };
+        if (name === "reserve_xrag_import") return { data: null, error: null };
       }
       const job = jobs.get(args.p_id);
+      if (name === "begin_xrag_import" || name === "set_xrag_import_plan") {
+        if (!job || job.token !== args.p_token || job.state !== "preparing")
+          return { data: null, error: new Error("XRAG_IMPORT_LEASE_LOST") };
+        const plan = structuredClone(args.p_plan);
+        plan.files.forEach((f: any) => {
+          f.hadOriginal = objects.has(`database_files/${f.path}`);
+        });
+        job.plan = plan;
+        return { data: plan, error: null as unknown };
+      }
       if (name === "commit_xrag_import") {
         if (commitFailure === "before")
           return { data: null, error: new Error("commit failed") };

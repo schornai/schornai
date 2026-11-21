@@ -264,34 +264,42 @@ describe("resumable file uploads", () => {
   );
 });
 
-it("resumes immutable XRAG uploads after remount and reports their original object path", async () => {
-  state.token = `header.${btoa(JSON.stringify({ sub: "admin" }))}.signature`;
-  const originalPath = "uploads/12345678-1234-1234-1234-123456789abc/model.tar";
-  const payload = file("model.tar");
-  state.previous = [
-    {
-      size: payload.size,
-      creationTime: new Date().toISOString(),
-      metadata: { bucketName: "box-action-files", objectName: originalPath },
-      uploadUrl: "/api/storage/upload/resumable/resumed",
-    },
-  ];
-  const success = vi.fn();
-  const hook = mount({
-    resumable: true,
-    upsert: false,
-    bucketName: "box-action-files",
-    onFileUploadSuccess: success,
-  });
-  await queue(hook, [payload]);
-  await waitFor(() => expect(state.uploads[0].started).toBe(true));
-  expect(state.uploads[0].options.resumed).toBe(state.previous[0]);
-  expect(state.uploads[0].options.headers["x-upsert"]).toBe("false");
-  await act(async () => state.uploads[0].options.onSuccess());
-  expect(success).toHaveBeenCalledWith(
-    expect.objectContaining({ objectName: originalPath }),
-  );
-});
+it.each([
+  ["box-action-files", "uploads"],
+  ["xrag-transfers", "c4672fe3-c1e8-4e0c-a3c1-46b182177287"],
+])(
+  "resumes immutable uploads to %s after remount and reports their original object path",
+  async (bucketName, prefix) => {
+    state.token = `header.${btoa(JSON.stringify({ sub: "c4672fe3-c1e8-4e0c-a3c1-46b182177287" }))}.signature`;
+    const originalPath = `${prefix}/12345678-1234-1234-1234-123456789abc/model.tar`;
+    const payload = file("model.tar");
+    state.previous = [
+      {
+        size: payload.size,
+        creationTime: new Date().toISOString(),
+        metadata: { bucketName, objectName: originalPath },
+        uploadUrl: "/api/storage/upload/resumable/resumed",
+      },
+    ];
+    const success = vi.fn();
+    const hook = mount({
+      resumable: true,
+      upsert: false,
+      bucketName,
+      basePath: "/",
+      bucketPath: () => `${prefix}/${crypto.randomUUID()}`,
+      onFileUploadSuccess: success,
+    });
+    await queue(hook, [payload]);
+    await waitFor(() => expect(state.uploads[0].started).toBe(true));
+    expect(state.uploads[0].options.resumed).toBe(state.previous[0]);
+    expect(state.uploads[0].options.headers["x-upsert"]).toBe("false");
+    await act(async () => state.uploads[0].options.onSuccess());
+    expect(success).toHaveBeenCalledWith(
+      expect.objectContaining({ objectName: originalPath }),
+    );
+  },
+);
 it("uses the refreshed session token for later chunks of a long upload", async () => {
   const hook = mount();
   await queue(hook, [file()]);
