@@ -70,12 +70,15 @@
       "labelPursueGoal": "Pursue goal",
       "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
       "labelDisappearingChats": "Disappearing chats",
-      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "descriptionDisappearingChats": "Chats are deleted 12 hours after enabling. The default applies to new chats; users can toggle it in the chat.",
       "labelNightshift": "Night shift",
       "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day.",
       "labelTranscriber": "Transcriber",
       "labelNoTranscriber": "No automatic transcription",
-      "descriptionTranscriber": "Automatically transcribe uploaded audio and video files with this transcriber."
+      "descriptionTranscriber": "Automatically transcribe uploaded audio and video files with this transcriber.",
+      "labelDisappearingDisabled": "Unavailable",
+      "labelDisappearingDefaultOff": "Off by default",
+      "labelDisappearingDefaultOn": "On by default"
     },
     "AgentInfoAdditionalFunctions": {
       "labelTitle": "Additional Functions",
@@ -86,7 +89,7 @@
       "labelPursueGoal": "Pursue goal",
       "descriptionPursueGoal": "Users can define a goal and the agent will run in a loop until the goal is met.",
       "labelDisappearingChats": "Disappearing chats",
-      "descriptionDisappearingChats": "Chats can automatically delete themselves after 12 hours. Must be set by the user.",
+      "descriptionDisappearingChats": "Can be toggled in the chat. Enabled chats are deleted after 12 hours.",
       "labelNightshift": "Night shift",
       "descriptionNightshift": "Long-running agents can be moved to the night shift to save resources during the day."
     },
@@ -720,7 +723,9 @@
         "platform_artifact_publication_get": "Read XRAG publication status",
         "platform_chat_retry": "Retry chat",
         "platform_calculate": "Calculate expression",
-        "platform_current_date_time": "Current date and time"
+        "platform_current_date_time": "Current date and time",
+        "platform_chat_expiration_get": "Read chat deletion timer",
+        "platform_chat_expiration_set": "Change chat deletion timer"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",
@@ -775,6 +780,12 @@
       "labelRemove": "Remove tool",
       "descriptionRemove": "This removes the tool from this role. Save the agent to apply the change.",
       "labelCancel": "Cancel"
+    },
+    "ChatExpirationSettings": {
+      "labelEnable": "Enable disappearing chats (12 hours)",
+      "labelDisable": "Disable disappearing chats (12 hours)",
+      "errorSave": "Could not save the setting.",
+      "descriptionScheduled": "Deletes on {{date}}. Click to turn off."
     },
     "ChatMessagePartContextCompression": {
       "labelPending": "Summarizing context…",

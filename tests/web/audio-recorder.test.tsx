@@ -435,6 +435,7 @@ it("makes the orb respond to real sample levels with a soft release and resets i
   const view = render(<AudioRecorder />);
   expect(meter.createSource).not.toHaveBeenCalled();
   await start();
+  await waitFor(() => expect(meter.createSource).toHaveBeenCalledOnce());
   const orb = view.container.querySelector<HTMLElement>(
     '[data-slot="recording-orb"]',
   )!;

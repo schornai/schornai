@@ -1,4 +1,4 @@
-import { userEvent, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 import { openDisclosure } from "../../../../../../.storybook/interaction-helpers";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChatComposeMessageSelected } from "../../../../../../app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageSelected";
@@ -192,5 +192,38 @@ export const ExistingFilePicker: Story = {
       }),
     );
     await within(document.body).findByRole("button", { name: "Projekte" });
+  },
+};
+
+export const AdditionalFunctionsDisabled: Story = {
+  parameters: {
+    contextFixtures: {
+      useChatComposeMessage: {
+        additionalFunctions: {
+          fileUpload: false,
+          batch: false,
+          disappearingChats: false,
+        },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.queryByRole("button", { name: "Dateien anhängen" }),
+    ).not.toBeInTheDocument();
+    await expect(
+      canvas.queryByRole("button", { name: /Selbstlöschende Chats/ }),
+    ).not.toBeInTheDocument();
+    await expect(canvasElement.querySelector("svg.lucide-layers")).toBeNull();
+  },
+};
+export const DisappearingChatsOn: Story = {
+  parameters: {
+    contextFixtures: {
+      useChatComposeMessage: {
+        expiration: { seconds: 43200, expiresAt: "2030-01-02T12:00:00Z" },
+      },
+    },
   },
 };

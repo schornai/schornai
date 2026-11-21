@@ -76,12 +76,15 @@
       "labelPursueGoal": "Ziel verfolgen",
       "descriptionPursueGoal": "Benutzer:innen können ein Ziel definieren und der Agent läuft in einer Schleife bis das Ziel erfüllt wurde.",
       "labelDisappearingChats": "Selbstlöschende Chats",
-      "descriptionDisappearingChats": "Chats können sich vorzeitig nach 12 Stunden von selbst löschen. Muss von dem:der Benutzer:in eingestellt werden.",
+      "descriptionDisappearingChats": "Chats werden nach dem Einschalten nach 12 Stunden gelöscht. Die Voreinstellung gilt für neue Chats; im Chat lässt sich die Funktion ein- und ausschalten.",
       "labelNightshift": "Nachtschicht",
       "descriptionNightshift": "Benutzer:innen lang laufende Agenten können in die Nachtschicht verschoben werden um Ressourcen unter Tags zu sparen.",
       "labelTranscriber": "Transcriber",
       "labelNoTranscriber": "Keine automatische Transkription",
-      "descriptionTranscriber": "Hochgeladene Audio- und Videodateien mit diesem Transcriber automatisch transkribieren."
+      "descriptionTranscriber": "Hochgeladene Audio- und Videodateien mit diesem Transcriber automatisch transkribieren.",
+      "labelDisappearingDisabled": "Nicht verfügbar",
+      "labelDisappearingDefaultOff": "Standardmäßig aus",
+      "labelDisappearingDefaultOn": "Standardmäßig an"
     },
     "AgentInfoAdditionalFunctions": {
       "labelTitle": "Zusätzliche Funktionen",
@@ -92,7 +95,7 @@
       "labelPursueGoal": "Ziel verfolgen",
       "descriptionPursueGoal": "Benutzer:innen können ein Ziel definieren und der Agent läuft in einer Schleife bis das Ziel erfüllt wurde.",
       "labelDisappearingChats": "Selbstlöschende Chats",
-      "descriptionDisappearingChats": "Chats können sich vorzeitig nach 12 Stunden von selbst löschen. Muss von dem:der Benutzer:in eingestellt werden.",
+      "descriptionDisappearingChats": "Im Chat ein- und ausschaltbar. Eingeschaltete Chats werden nach 12 Stunden gelöscht.",
       "labelNightshift": "Nachtschicht",
       "descriptionNightshift": "Benutzer:innen lang laufende Agenten können in die Nachtschicht verschoben werden um Ressourcen unter Tags zu sparen."
     },
@@ -720,7 +723,9 @@
         "platform_artifact_publication_get": "XRAG-Veröffentlichungsstatus lesen",
         "platform_chat_retry": "Chat erneut versuchen",
         "platform_calculate": "Berechnung ausführen",
-        "platform_current_date_time": "Aktuelles Datum und Uhrzeit"
+        "platform_current_date_time": "Aktuelles Datum und Uhrzeit",
+        "platform_chat_expiration_get": "Chat-Löschfrist lesen",
+        "platform_chat_expiration_set": "Chat-Löschfrist ändern"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -775,6 +780,12 @@
       "labelRemove": "Werkzeug entfernen",
       "descriptionRemove": "Das Werkzeug wird aus dieser Rolle entfernt. Speichere den Agenten, um die Änderung zu übernehmen.",
       "labelCancel": "Abbrechen"
+    },
+    "ChatExpirationSettings": {
+      "labelEnable": "Selbstlöschende Chats einschalten (12 Stunden)",
+      "labelDisable": "Selbstlöschende Chats ausschalten (12 Stunden)",
+      "errorSave": "Die Einstellung konnte nicht gespeichert werden.",
+      "descriptionScheduled": "Wird am {{date}} gelöscht. Zum Ausschalten klicken."
     },
     "ChatMessagePartContextCompression": {
       "labelPending": "Kontext wird zusammengefasst …",

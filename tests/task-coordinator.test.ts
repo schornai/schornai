@@ -133,22 +133,33 @@ it("recovers orphan claims after restart and retries failed document recovery", 
   restarted.destroy();
 });
 it("finishes queued cancellation without a capable worker and fences late completion", async () => {
-  addTask(document, task());
+  const chat = { activityId: "activity", agentId: "agent" };
+  addTask(document, { ...task(), chat });
   requestTaskAbort(document, "task");
   await coordinator.reconcile();
+  expect(store.records.get("task")?.chat_document_name).toBe(
+    "activity_chat___activity_agent",
+  );
   expect(getTaskQueue(document).tasks.get(0).state).toBe("aborted");
   expect(await claim()).toBeUndefined();
   expect(recover).toHaveBeenCalledOnce();
 });
 it("marks legacy claimed tasks interrupted rather than granting a new owner", async () => {
-  addTask(document, task());
-  replaceTask(document, {
+  const original = {
     ...task(),
+    chat: { activityId: "activity", agentId: "agent" },
+  };
+  addTask(document, original);
+  replaceTask(document, {
+    ...original,
     state: "claimed",
     claimedBy: "old-worker",
     claimedAtISO: new Date().toISOString(),
   });
   await coordinator.reconcile();
+  expect(store.records.get("task")?.chat_document_name).toBe(
+    "activity_chat___activity_agent",
+  );
   expect(getTaskQueue(document).tasks.get(0)).toMatchObject({
     state: "error",
     error: "TASK_WORKER_LOST",
@@ -199,4 +210,27 @@ it("retains the Yjs wire value types in transport snapshots", () => {
     bytes: new Uint8Array([1, 2, 3]),
     nested: [null, undefined, true],
   });
+});
+
+it("does not restore purged chat prompts from a stale queue replica", async () => {
+  const original = {
+    ...task(),
+    chat: { activityId: "activity", agentId: "agent" },
+  };
+  addTask(document, original);
+  await coordinator.apply(
+    {
+      task_id: original.id,
+      owner_token: "old",
+      state: "error",
+      snapshot: null,
+      recovery_pending: false,
+      completed_at: new Date().toISOString(),
+      expires_at: new Date().toISOString(),
+      chat_document_name: "activity_chat___activity_agent",
+    },
+    original,
+  );
+  expect(getTaskQueue(document).tasks.length).toBe(0);
+  expect(recover).not.toHaveBeenCalled();
 });

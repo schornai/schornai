@@ -141,3 +141,15 @@ describe("distributed model adapters", () => {
     expect(state.disposed).toHaveBeenCalledTimes(2);
   });
 });
+
+it("carries chat ownership outside model prompts for later snapshot deletion", async () => {
+  const chat = { agentId: "agent", activityId: "activity" };
+  state.run.mockResolvedValue({ content: [] });
+  const model = aiboxModel("model", { ...context, chat });
+  await model.doGenerate({ prompt: [] } as any);
+  expect(state.run.mock.lastCall![3].chat).toEqual(chat);
+  expect(state.run.mock.lastCall![1]).not.toHaveProperty("chat");
+  const { stream } = await model.doStream({ prompt: [] } as any);
+  expect(state.run.mock.lastCall![3].chat).toEqual(chat);
+  await stream.cancel();
+});

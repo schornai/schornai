@@ -163,6 +163,11 @@ it("provides a valid Trello example without shared credentials", () => {
   const agent = agentConfigSchema.parse(
     JSON.parse(sql.match(/\$trello\$([\s\S]*?)\$trello\$/)![1]),
   );
+  expect(agent.additionalFunctions).toMatchObject({
+    fileUpload: false,
+    batch: false,
+    disappearingChats: "default-on",
+  });
   expect(agent.roles[0].mcps?.[0]).toMatchObject({
     url: "https://mcp.trello.com/v1",
     headers: {},
