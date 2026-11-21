@@ -55,6 +55,14 @@ describe("automation schedules", () => {
       )?.toISOString(),
     ).toBe("2026-03-31T07:00:00.000Z");
   });
+  it("skips short months on either side of a missing monthly wall time", () => {
+    expect(
+      nextAutomationTime(
+        { kind: "monthly", day: 31, time: "02:30", timezone: "Europe/Vienna" },
+        new Date("2030-01-31T01:30:00Z"),
+      )?.toISOString(),
+    ).toBe("2030-05-31T00:30:00.000Z");
+  });
   it("rejects invalid schedule configuration", () => {
     const base = {
       name: "Test",

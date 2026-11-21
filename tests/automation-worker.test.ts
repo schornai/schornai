@@ -14,9 +14,12 @@ const io = vi.hoisted(() => ({
   access: vi.fn(),
   send: vi.fn(),
 }));
-vi.mock("@schornio/aibox-database/automation/automationFileIsReady", () => ({
-  automationFileIsReady: io.ready,
-}));
+vi.mock(
+  "@schornio/aibox-database/automation/getAutomationRunReadiness",
+  () => ({
+    getAutomationRunReadiness: io.ready,
+  }),
+);
 vi.mock("@schornio/aibox-database/automation/beginAutomationRun", () => ({
   beginAutomationRun: io.begin,
 }));
@@ -86,7 +89,7 @@ beforeEach(() => {
   vi.resetAllMocks();
   for (const doc of documents.values()) doc.destroy();
   documents.clear();
-  io.ready.mockResolvedValue(true);
+  io.ready.mockResolvedValue({ automationId: id, ready: true });
   io.begin.mockResolvedValue(run);
   io.definition.mockResolvedValue(definition);
   io.owner.mockResolvedValue([
@@ -157,10 +160,10 @@ it("submits a new personal chat under current permissions and the saved MCP ceil
   expect(io.finish).toHaveBeenCalledWith(id, "queued", options);
 });
 it("retries file readiness before the durable fence and never replays an already started run", async () => {
-  io.ready.mockResolvedValue(false);
+  io.ready.mockResolvedValue({ automationId: id, ready: false });
   await expect(execute()).rejects.toThrow("AUTOMATION_FILE_PENDING");
   expect(io.begin).not.toHaveBeenCalled();
-  io.ready.mockResolvedValue(true);
+  io.ready.mockResolvedValue({ automationId: id, ready: true });
   io.begin.mockResolvedValue(null);
   await execute();
   expect(io.send).not.toHaveBeenCalled();
@@ -231,11 +234,16 @@ it("does not start work after cancellation and records exhausted readiness failu
     runAutomation(job, controller.signal, options),
   ).rejects.toThrow();
   expect(io.begin).not.toHaveBeenCalled();
-  io.ready.mockRejectedValue(new Error("authorization failure"));
+  io.ready.mockRejectedValueOnce(new Error("run read failure"));
+  await expect(execute()).rejects.toThrow("run read failure");
+  expect(io.begin).not.toHaveBeenCalled();
+  io.ready.mockResolvedValueOnce(null);
+  await execute();
+  expect(io.begin).not.toHaveBeenCalled();
   io.owner.mockRejectedValue(new Error("revoked"));
   await execute();
   expect(io.finish).toHaveBeenLastCalledWith(id, "failed", options);
-  io.ready.mockResolvedValue(false);
+  io.ready.mockResolvedValue({ automationId: id, ready: false });
   await runAutomation(
     { ...job, attempts: 100 },
     new AbortController().signal,
@@ -267,7 +275,10 @@ it("pushes run changes through the existing Yjs document after committed state t
   const document = new Doc();
   const unrelated = new Doc();
   documents.set(getAutomationRunsDocumentName(id), document);
-  documents.set("services", unrelated);
+  documents.set(
+    getAutomationRunsDocumentName("aae00000-0000-4000-8000-000000000002"),
+    unrelated,
+  );
   const states: string[] = [];
   let state = "pending";
   getAutomationRunsUpdates(document).observe(() => states.push(state));

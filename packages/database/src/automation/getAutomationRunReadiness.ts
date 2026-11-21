@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "../_shared/_types.ts";
+import type { SupabaseClient, SupabaseDatabase } from "../_shared/_types.ts";
 import { automationTriggerSchema } from "./_schemas.ts";
 import { getAutomationOwner } from "./getAutomationOwner.ts";
 import { createClientWithClaims } from "../auth/createClientWithClaims.ts";
@@ -13,7 +13,7 @@ import { platformAccessLevels } from "../mcp/platformAccess.ts";
 
 /** Internal scheduler preflight. Delay uploaded attachments until processing
  * finishes, without crossing the non-replayable chat-submission fence. */
-export async function automationFileIsReady(
+export async function getAutomationRunReadiness(
   id: string,
   { supabase }: { supabase: SupabaseClient },
 ) {
@@ -23,7 +23,20 @@ export async function automationFileIsReady(
     .eq("id", id)
     .maybeSingle();
   if (error) throw new Error("AUTOMATION_READ_FAILED");
-  if (!run || run.state !== "pending" || !run.event) return true;
+  if (!run) return null;
+  // Authorization and attachment read failures are recorded by the fenced run.
+  const ready = await automationFileIsReady(run, supabase).catch(() => true);
+  return { automationId: run.automation_id, ready };
+}
+
+async function automationFileIsReady(
+  run: Pick<
+    SupabaseDatabase["public"]["Tables"]["automation_runs"]["Row"],
+    "automation_id" | "revision" | "occurrence" | "event" | "state"
+  >,
+  supabase: SupabaseClient,
+) {
+  if (run.state !== "pending" || !run.event) return true;
   const { data: a, error: readError } = await supabase
     .from("automations")
     .select("user_id, revision, enabled, access_level, trigger")

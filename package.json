@@ -42,9 +42,9 @@
     "test:sql": "node scripts/test-sql.mjs"
   },
   "devDependencies": {
-    "@ai-sdk/mcp": "2.0.97",
-    "@ai-sdk/openai": "4.0.115",
-    "@ai-sdk/provider-utils": "5.0.79",
+    "@ai-sdk/mcp": "2.0.101",
+    "@ai-sdk/openai": "4.0.121",
+    "@ai-sdk/provider-utils": "5.0.82",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/provider-react": "^4.7.1",
@@ -61,7 +61,7 @@
     "@testing-library/user-event": "^14.6.8",
     "@types/node": "^26.6.5",
     "@vitest/coverage-v8": "^5.1.0",
-    "ai": "7.0.170",
+    "ai": "7.0.176",
     "i18next": "^27.0.0",
     "jose": "^6.2.12",
     "jsdom": "^31.0.0",
@@ -88,7 +88,7 @@
       "katex": "0.19.1"
     },
     "@tailwindcss/typography": {
-      "postcss-selector-parser": "7.2.0"
+      "postcss-selector-parser": "7.2.1"
     }
   },
   "license": "AGPL-3.0-only",

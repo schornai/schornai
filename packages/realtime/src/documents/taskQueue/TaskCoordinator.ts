@@ -237,8 +237,9 @@ export class TaskCoordinator {
             token,
             encodeTaskValue(claimed),
             this.options,
+            getTaskChatDocumentName(task),
           );
-          if (saved.owner_token === token)
+          if (saved.owner_token === token && saved.state === "claimed")
             await this.finish(task.id, token, undefined);
           else await this.apply(saved, task);
         } else if (task.state !== "pending") {
@@ -250,8 +251,9 @@ export class TaskCoordinator {
             token,
             encodeTaskValue(task),
             this.options,
+            getTaskChatDocumentName(task),
           );
-          if (saved.owner_token === token) {
+          if (saved.owner_token === token && saved.state === "claimed") {
             const failed = {
               ...task,
               state: "error",

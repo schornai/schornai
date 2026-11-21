@@ -9,7 +9,7 @@ import { beginAutomationRun } from "../packages/database/src/automation/beginAut
 import { finishAutomationRun } from "../packages/database/src/automation/finishAutomationRun.ts";
 import { getAutomationForRun } from "../packages/database/src/automation/getAutomationForRun.ts";
 import { getAutomationOwner } from "../packages/database/src/automation/getAutomationOwner.ts";
-import { automationFileIsReady } from "../packages/database/src/automation/automationFileIsReady.ts";
+import { getAutomationRunReadiness } from "../packages/database/src/automation/getAutomationRunReadiness.ts";
 const mocks = vi.hoisted(() => ({
   agent: vi.fn(),
   access: vi.fn(),
@@ -292,6 +292,15 @@ it("refreshes permissions from trusted app metadata and rejects banned or absent
     );
   }
 });
+it("retries failed run reads and skips deleted runs without notifying a room", async () => {
+  const f = fixture({ data: null, error: {} });
+  await expect(getAutomationRunReadiness(id, f.options)).rejects.toThrow(
+    "AUTOMATION_READ_FAILED",
+  );
+  expect(
+    await getAutomationRunReadiness(id, fixture({ data: null }).options),
+  ).toBeNull();
+});
 it("waits for uploaded file content but not for deleted, missing or unselected attachments", async () => {
   const f = fixture();
   const pending = {
@@ -317,17 +326,32 @@ it("waits for uploaded file content but not for deleted, missing or unselected a
       );
   };
   prepare();
-  expect(await automationFileIsReady(id, f.options)).toBe(false);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: false,
+  });
   mocks.content.mockResolvedValue("Extracted");
   prepare();
-  expect(await automationFileIsReady(id, f.options)).toBe(true);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: true,
+  });
   mocks.inspect.mockResolvedValue(undefined);
   prepare();
-  expect(await automationFileIsReady(id, f.options)).toBe(true);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: true,
+  });
   prepare({ ...pending, event: { type: "deleted", path: "file.pdf" } });
-  expect(await automationFileIsReady(id, f.options)).toBe(true);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: true,
+  });
   prepare(pending, { ...storageTrigger, attachment: "none" });
-  expect(await automationFileIsReady(id, f.options)).toBe(true);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: true,
+  });
 });
 
 it("limits fresh administrative and workspace roles before any automated attachment read", async () => {
@@ -375,7 +399,10 @@ it.each([
           data: { ...definition, user_id: id, trigger: storageTrigger },
         }),
       );
-    expect(await automationFileIsReady(id, f.options)).toBe(true);
+    expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+      automationId: id,
+      ready: true,
+    });
     expect(mocks.client).not.toHaveBeenCalled();
     expect(mocks.content).not.toHaveBeenCalled();
   },
@@ -411,7 +438,10 @@ it("uses a manual run's narrower ceiling during readiness checks for paused auto
         },
       }),
     );
-  expect(await automationFileIsReady(id, f.options)).toBe(false);
+  expect(await getAutomationRunReadiness(id, f.options)).toEqual({
+    automationId: id,
+    ready: false,
+  });
   expect(mocks.client).toHaveBeenCalledWith(id, [
     { organization_id: "workspace", role: "editor" },
   ]);
