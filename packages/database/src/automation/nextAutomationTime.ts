@@ -56,9 +56,9 @@ export function nextAutomationTime(
   const [hour, minute] = schedule.time.split(":").map(Number);
   const dayMs = 86400000;
   const startDay = Math.floor(after.getTime() / dayMs) * dayMs - dayMs;
-  // Local dates may lead/lag UTC. Sixty-four days include the next day 31 even
-  // when the intervening month lacks it. Only inspect matching calendar dates.
-  for (let day = startDay; day <= startDay + 64 * dayMs; day += dayMs) {
+  // A short month and a DST gap can both skip the selected monthly date.
+  // Search a full calendar year, checking offsets only for matching dates.
+  for (let day = startDay; day <= startDay + 366 * dayMs; day += dayMs) {
     const calendar = new Date(day);
     if (
       schedule.kind === "monthly"

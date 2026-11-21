@@ -1,9 +1,9 @@
 import { randomUUID } from "node:crypto";
 import type { Hocuspocus } from "@hocuspocus/server";
-import { parseAutomationRunsDocumentName } from "@schornio/aibox-database/automation/_realtime";
+import { getAutomationRunsDocumentName } from "@schornio/aibox-database/automation/_realtime";
 import { getAutomationRunsUpdates } from "@schornio/aibox-realtime/documents/automationRuns/_schema";
 import { z } from "zod";
-import { automationFileIsReady } from "@schornio/aibox-database/automation/automationFileIsReady";
+import { getAutomationRunReadiness } from "@schornio/aibox-database/automation/getAutomationRunReadiness";
 import { beginAutomationRun } from "@schornio/aibox-database/automation/beginAutomationRun";
 import { finishAutomationRun } from "@schornio/aibox-database/automation/finishAutomationRun";
 import { getAutomationForRun } from "@schornio/aibox-database/automation/getAutomationForRun";
@@ -32,29 +32,20 @@ export async function runAutomation(
   signal = AbortSignal.any([signal, AbortSignal.timeout(120_000)]);
   const { runId } = z.object({ runId: z.uuid() }).parse(job.payload);
   signal.throwIfAborted();
-  let automationId: string | undefined;
+  const preflight = await getAutomationRunReadiness(runId, options);
+  if (!preflight) return;
+  const name = getAutomationRunsDocumentName(preflight.automationId);
   const notify = () => {
-    for (const [name, document] of options.instance.documents) {
-      const id = parseAutomationRunsDocumentName(name);
-      if (id && (!automationId || id === automationId))
-        getAutomationRunsUpdates(document).set("revision", randomUUID());
-    }
+    const document = options.instance.documents.get(name);
+    if (document)
+      getAutomationRunsUpdates(document).set("revision", randomUUID());
   };
-  // Use the scheduler's existing Yjs server. Only loaded, authorized run-history
-  // rooms receive invalidations; no database payload or new transport is needed.
   notify();
   try {
-    let ready = true;
-    try {
-      ready = await automationFileIsReady(runId, options);
-    } catch {
-      /* The fenced execution below records authorization/read failures. */
-    }
-    if (!ready && job.attempts < job.max_attempts)
+    if (!preflight.ready && job.attempts < job.max_attempts)
       throw new Error("AUTOMATION_FILE_PENDING");
     const run = await beginAutomationRun(runId, job.lease_token!, options);
     if (!run) return;
-    automationId = run.automation_id;
     notify();
     try {
       const manual = run.occurrence?.startsWith("manual:") === true;
