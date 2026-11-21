@@ -7,8 +7,8 @@ const state = vi.hoisted(() => ({
   authorize: vi.fn(),
   model: vi.fn(),
 }));
-vi.mock("../packages/database/src/xrag/getExportWorkerOptions.ts", () => ({
-  getExportWorkerOptions: state.options,
+vi.mock("../packages/database/src/xrag/getXRAGWorkerOptions.ts", () => ({
+  getXRAGWorkerOptions: state.options,
 }));
 vi.mock("../packages/database/src/xrag/streamPackageExport.ts", () => ({
   streamPackageExport: state.pack,

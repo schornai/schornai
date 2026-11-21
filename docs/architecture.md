@@ -288,7 +288,7 @@ of web requests. [Imported-file processing](../packages/realtime/src/platform/pr
 is delivered through a SQL outbox to the ordinary storage task queue. Read
 [ADR 0010](adr/0010-recoverable-xrag-imports.md) before changing file reservations,
 Storage attempt credentials, atomic metadata publication or recovery. The transfer bucket stores immutable caller-owned
-uploads and downloads. The scheduler’s `xrag.transfer.cleanup` handler expires prepared imports after one hour and background export downloads after 72 hours.
+uploads and downloads. The web app [queues upload inspection](../packages/database/src/xrag/queueXRAGPreparation.ts) on the scheduler. Publication retains the selected Storage original through the [artifact reference](../packages/database/src/xrag/artifactObject.ts). The scheduler’s `xrag.transfer.cleanup` handler expires prepared imports after one hour and background export downloads after 72 hours.
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a
 publication after the global-admin entry point authorizes the caller. The

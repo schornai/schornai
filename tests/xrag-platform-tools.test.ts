@@ -282,3 +282,55 @@ it("requires agent consent for both import tools even when workspace and admin a
   for (const name of ["platform_xrag_inspect", "platform_xrag_preview"])
     expect(tools.find((tool) => tool.name === name)?.readOnly).toBe(false);
 });
+
+it("reports the caller's import status without reading or copying the archive", async () => {
+  const rpc = vi.fn().mockResolvedValue({ data: "committed", error: null });
+  const tool = catalog("admin", "workspace", undefined, {
+    supabase: { rpc },
+  }).find((t) => t.name === "platform_xrag_import_status")!;
+  const uploadId = input.source.path.split("/")[1]!;
+  expect(tool.readOnly).toBe(true);
+  await expect(tool.execute({ uploadId })).resolves.toBe("committed");
+  expect(rpc).toHaveBeenCalledWith("get_xrag_import_status", {
+    p_upload_id: uploadId,
+  });
+});
+
+it("queues large uploads once through the owner-scoped background inspection entry point", async () => {
+  const rpc = vi.fn().mockResolvedValue({ data: null, error: null });
+  const info = vi.fn().mockResolvedValue({
+    data: { createdAt: new Date().toISOString() },
+    error: null,
+  });
+  const upsert = vi.fn().mockResolvedValue({ error: null });
+  const tools = catalog("admin", "admin", undefined, {
+    supabase: { rpc, storage: { from: () => ({ info }) } },
+    supabaseServiceRole: { from: () => ({ upsert }) },
+  });
+  const tool = tools.find((t) => t.name === "platform_xrag_inspect")!;
+  const uploadId = input.source.path.split("/")[1]!;
+  await expect(
+    tool.execute({ source: input.source, background: true }),
+  ).resolves.toEqual({ uploadId });
+  expect(upsert).toHaveBeenCalledWith(
+    expect.objectContaining({
+      kind: "xrag.import.prepare",
+      payload: expect.objectContaining({ source: input.source }),
+    }),
+    { onConflict: "id", ignoreDuplicates: true },
+  );
+  rpc.mockResolvedValue({ data: "inspecting", error: null });
+  await expect(
+    tool.execute({ source: input.source, background: true }),
+  ).resolves.toEqual({ uploadId });
+  expect(upsert).toHaveBeenCalledTimes(1);
+  expect(info).toHaveBeenCalledTimes(1);
+  await expect(
+    tool.execute({
+      source: {
+        path: input.source.path.replace(/^.{36}/, crypto.randomUUID()),
+      },
+      background: true,
+    }),
+  ).rejects.toThrow("NOT_AUTHORIZED");
+});

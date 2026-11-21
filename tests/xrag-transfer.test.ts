@@ -5,6 +5,7 @@ import {
   rm,
   writeFile,
   access,
+  readdir,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -77,7 +78,7 @@ async function setup(role = "workspace-admin") {
       }),
     },
     from: vi.fn(() => query({ data: null, error: null })),
-    rpc: vi.fn(),
+    rpc: vi.fn(async () => ({ data: null, error: null })),
   };
   const service = {
     storage: { from: vi.fn(() => bucket) },
@@ -107,20 +108,22 @@ async function setup(role = "workspace-admin") {
     },
   };
 }
-it("snapshots verified caller-owned archives and removes local work after completion", async () => {
+it("streams a single distribution archive in one pass with no local snapshot", async () => {
   const test = await setup();
   let local = "";
   const result = await withTransferArchives(
     { path },
     test.options as any,
-    async ({ archives, digest }) => {
-      local = archives[0]!.path;
-      expect(await readFile(local)).toEqual(test.bytes);
+    async ({ archives, digest, directory }) => {
+      local = directory;
+      expect(archives[0]!.path).toBeUndefined();
+      expect(await readdir(directory)).toEqual([]);
       expect(digest).toBe(archives[0]!.id);
       return archives[0]!.xrag.xrag_type;
     },
   );
   expect(result).toBe("files");
+  expect(test.fetchMock).toHaveBeenCalledTimes(1);
   await expect(access(local)).rejects.toThrow();
   expect(test.options.supabase.auth.getClaims).not.toHaveBeenCalled();
 });
@@ -164,7 +167,7 @@ it("reads an uploaded collection as unchanged child archives", async () => {
     { path },
     test.options as any,
     async ({ archives }) =>
-      Promise.all(archives.map((archive) => readFile(archive.path))),
+      Promise.all(archives.map((archive) => readFile(archive.path!))),
   );
   expect(contents).toEqual([test.bytes]);
   expect(test.bucket.upload).not.toHaveBeenCalled();

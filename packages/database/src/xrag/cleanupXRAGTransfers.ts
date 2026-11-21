@@ -26,10 +26,18 @@ export async function cleanupXRAGTransfers({
       .remove(expired.data.map((file) => file.name));
     if (removed.error) throw new Error("XRAG_TRANSFER_CLEANUP_FAILED");
   }
+  const cutoff = new Date(Date.now() - 72 * 3600_000).toISOString();
+  const inspections = await supabase
+    .from("scheduled_jobs")
+    .delete()
+    .eq("kind", "xrag.import.prepare")
+    .in("state", ["completed", "failed"])
+    .lt("updated_at", cutoff);
+  if (inspections.error) throw new Error("XRAG_TRANSFER_CLEANUP_FAILED");
   const removed = await supabase
     .from("xrag_export_jobs")
     .delete()
     .in("state", ["finished", "error", "cancelled"])
-    .lt("updated_at", new Date(Date.now() - 72 * 3600_000).toISOString());
+    .lt("updated_at", cutoff);
   if (removed.error) throw new Error("XRAG_TRANSFER_CLEANUP_FAILED");
 }

@@ -1,3 +1,5 @@
+import { queueXRAGPreparation } from "@schornio/aibox-database/xrag/queueXRAGPreparation";
+import { getXRAGImportStatus } from "@schornio/aibox-database/xrag/getXRAGImportStatus";
 import { listXRAGExportJobs } from "@schornio/aibox-database/xrag/listXRAGExportJobs";
 import {
   cancelXRAGExport,
@@ -86,6 +88,14 @@ export function addXRAGTools(
     async () => listXRAGTransfers(await options()),
   );
   add(
+    "platform_xrag_import_status",
+    "Read the preparation or import state of your own upload by uploadId. Ready means inspection has finished. Returns null before processing starts or after its status expires. Publication and installation run separately.",
+    "workspace",
+    true,
+    z.object({ uploadId: z.uuid() }),
+    async ({ uploadId }) => getXRAGImportStatus(uploadId, context),
+  );
+  add(
     "platform_xrag_transfer_delete",
     "Delete an owned temporary XRAG archive. Does not delete imported objects or published artifacts.",
     "workspace",
@@ -134,11 +144,14 @@ export function addXRAGTools(
   );
   add(
     "platform_xrag_inspect",
-    "Inspect an entire upload before choosing a workspace. Returns sanitized display entries with immutable archiveId, digest and needsWorkspace. Entire-package permissions apply even to deselected entries.",
+    "Inspect an entire upload before choosing a workspace. Returns sanitized display entries with immutable archiveId, digest and needsWorkspace. Entire-package permissions apply even to deselected entries. Set background to true for large uploads to queue inspection and return an uploadId. Poll platform_xrag_import_status until ready, then inspect for the contents.",
     "workspace",
     false,
-    inspectXRAGTransferSchema,
-    async (input) => inspectXRAGTransfer(input, await options()),
+    inspectXRAGTransferSchema.extend({ background: z.boolean().optional() }),
+    async ({ source, background }) =>
+      background
+        ? queueXRAGPreparation(source, await options())
+        : inspectXRAGTransfer({ source }, await options()),
   );
   add(
     "platform_xrag_preview",
@@ -158,7 +171,7 @@ export function addXRAGTools(
   );
   add(
     "platform_xrag_import_admin",
-    "Import resources and/or model/platform packages after preview, optionally creating a workspace. Requires global administrator access. Supply the preview digest, selectedEntries and explicitly confirmed revisions. Omit target for model/platform-only imports. Pass modelSelections as sourceIdentifier -> chosen destination identifier from preview.externalModels. Existing destination credentials are reused; ambiguous or stale selections fail; missing models remain unresolved. Files are installed directly with durable undo for overwritten files before committing metadata, artifact publication jobs and document-processing jobs together. Failed transfers are restored automatically; during Storage outages recovery remains pending. Successful import deletes the entire prepared upload, including unselected contents; only model/platform packages remain as artifacts. Returns documentFileCount. Model/platform installation and document processing remain asynchronous.",
+    "Import resources and/or model/platform packages after preview, optionally creating a workspace. Requires global administrator access. Supply the preview digest, selectedEntries and explicitly confirmed revisions. Omit target for model/platform-only imports. Pass modelSelections as sourceIdentifier -> chosen destination identifier from preview.externalModels. Existing destination credentials are reused; ambiguous or stale selections fail; missing models remain unresolved. Files are installed directly with durable undo for overwritten files before committing metadata, artifact publication jobs and document-processing jobs together. Failed transfers are restored automatically; during Storage outages recovery remains pending. Selected model/platform packages are published from their existing Storage objects. The import consumes the selection and removes unselected contents. Returns documentFileCount. Model/platform installation and document processing remain asynchronous.",
     "admin",
     false,
     importTransferInputSchema,

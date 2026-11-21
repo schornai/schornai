@@ -1,5 +1,5 @@
 import { beforeEach, expect, it, vi } from "vitest";
-import { getExportWorkerOptions } from "../packages/database/src/xrag/getExportWorkerOptions.ts";
+import { getXRAGWorkerOptions } from "../packages/database/src/xrag/getXRAGWorkerOptions.ts";
 const state = vi.hoisted(() => ({ claims: vi.fn(), client: vi.fn() }));
 vi.mock("../packages/database/src/user/buildAccessToken.ts", () => ({
   buildAccessToken: state.claims,
@@ -25,7 +25,7 @@ const supabase = (user: any = { id: "user", app_metadata: {} }) =>
   }) as any;
 it("intersects current permissions with the saved ceiling and refreshes worker tokens", async () => {
   state.claims.mockResolvedValue("admin");
-  const result = await getExportWorkerOptions(
+  const result = await getXRAGWorkerOptions(
     "user",
     [role("workspace-admin")],
     supabase(),
@@ -41,7 +41,7 @@ it("intersects current permissions with the saved ceiling and refreshes worker t
 it("uses current workspace roles when a global administrator was demoted", async () => {
   state.claims.mockResolvedValue([role("workspace-admin")]);
   expect(
-    (await getExportWorkerOptions("user", "admin", supabase())).authenticated
+    (await getXRAGWorkerOptions("user", "admin", supabase())).authenticated
       ?.claims,
   ).toEqual([role("workspace-admin")]);
 });
@@ -49,7 +49,7 @@ it.each([null, { banned_until: "2099-01-01T00:00:00Z" }])(
   "rejects deleted or banned owners",
   async (user) => {
     await expect(
-      getExportWorkerOptions("user", "admin", supabase(user)),
+      getXRAGWorkerOptions("user", "admin", supabase(user)),
     ).rejects.toThrow("NOT_AUTHORIZED");
     expect(state.client).not.toHaveBeenCalled();
   },
@@ -60,7 +60,7 @@ it("rejects revoked admin membership and never widens the saved scope", async ()
     role("workspace-admin", "other"),
   ]);
   await expect(
-    getExportWorkerOptions("user", [role("workspace-admin")], supabase()),
+    getXRAGWorkerOptions("user", [role("workspace-admin")], supabase()),
   ).rejects.toThrow("NOT_AUTHORIZED");
 });
 
@@ -71,7 +71,7 @@ it("omits lost workspaces and keeps the lesser role in every remaining workspace
     role("workspace-admin", "promoted"),
     role("workspace-admin", "new"),
   ]);
-  const { authenticated } = await getExportWorkerOptions(
+  const { authenticated } = await getXRAGWorkerOptions(
     "user",
     [
       role("workspace-admin", "retained"),

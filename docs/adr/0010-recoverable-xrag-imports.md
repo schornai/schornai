@@ -34,13 +34,20 @@ retry cannot execute a task again after its Yjs history has been pruned.
 
 Upload preparation discards the outer collection once its individual archives
 are safely stored. Single resources retain extracted files and metadata only.
-The owner-scoped inventory holds the pending selection without retaining the
-original archive or adding a preparation job state machine. The UI has no archive
-list and reload starts a new upload.
-Successful import consumes all prepared contents, including unselected children,
-and immediately removes undo copies. Cleanup failures retry through the existing
-scheduler. Failed imports also discard the selection after rollback; retry requires
-a new upload. Only model/platform packages enter artifact publication; pending
-selections expire after one hour, enforced both by preparation and maintenance.
+The web upload queues inspection on the scheduler with one stable job ID per owner
+and upload. Large archives can finish validation after the web request ends.
+A single model or platform package is validated directly from its Storage stream.
+Resources and collections use a local snapshot for extraction, verified against the
+stream digest. The owner explicitly submits the prepared selection. Reopening an
+upload reads its status. An indexed upload ID prevents concurrent import attempts.
+
+The import commit pins each selected model or platform archive to its publication
+through a foreign key to its Storage object. The artifact catalog can address an
+original transfer or a prepared collection member. Existing artifact paths still
+resolve in the original catalog bucket. Withdrawal and duplicate/error cleanup
+release pins before removing bytes through Storage. The scheduler retries cleanup
+of selections, unselected children and undo copies. Open selections expire after
+one hour. See the [retention migration](../../supabase/migrations/20261121135207_retain_xrag_import_originals.sql)
+and [SQL regression](../../supabase/tests/xrag_retained_artifacts.sql).
 See [preparation](../../packages/database/src/xrag/prepareXRAGTransfer.ts) and
 [upload lifecycle](../../supabase/migrations/20261115133603_xrag_import_export.sql).

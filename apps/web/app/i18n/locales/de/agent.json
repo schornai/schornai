@@ -733,6 +733,7 @@
         "platform_automation_run": "Automation jetzt ausführen",
         "platform_xrag_upload_url": "XRAG-Uploadadresse erstellen",
         "platform_xrag_export": "XRAG exportieren",
+        "platform_xrag_import_status": "XRAG-Importstatus anzeigen",
         "platform_xrag_inspect": "XRAG-Inhalt anzeigen",
         "platform_xrag_preview": "XRAG-Import prüfen",
         "platform_xrag_import": "XRAG-Ressourcen importieren",

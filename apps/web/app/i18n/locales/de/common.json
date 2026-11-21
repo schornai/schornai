@@ -332,6 +332,7 @@
       "labelUploadTitle": "XRAG importieren",
       "descriptionDrop": "Ziehe eine XRAG-Datei hierher oder wähle eine Datei aus.",
       "descriptionUploading": "Datei wird hochgeladen …",
+      "descriptionImporting": "Import läuft …",
       "descriptionInspecting": "Inhalt wird geladen …",
       "labelContent": "Enthaltene Objekte",
       "labelSelectAll": "Alle auswählen",

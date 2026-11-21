@@ -5,7 +5,9 @@ import type { Json } from "../_shared/_supabase.ts";
 
 export const IMPORT_STAGING_BUCKET = "xrag-import-staging";
 export const importPlanSchema = z.object({
-  source: z.object({ path: z.string() }).optional(),
+  source: z
+    .object({ path: z.string(), uploadId: z.uuid().optional() })
+    .optional(),
   entries: z.array(z.json()),
   target: z
     .object({

@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "../_shared/_types.ts";
-import { XRAG_BUCKET } from "./_schema.ts";
+import { removeArtifactObject } from "./artifactObject.ts";
 import { deleteArtifact } from "./deleteArtifact.ts";
 import { listAllArtifacts } from "./listAllArtifacts.ts";
 import { currentSetupIds } from "xrag/setup";
@@ -31,9 +31,7 @@ export async function cleanupArtifactPublications({
     if (error) throw new Error("ARTIFACT_CLEANUP_FAILED");
     if (adopted?.deleted_at) await deleteArtifact(adopted.id, { supabase });
     if (!adopted) {
-      const removed = await supabase.storage
-        .from(XRAG_BUCKET)
-        .remove([job.upload_path]);
+      const removed = await removeArtifactObject(job.upload_path, supabase);
       if (removed.error) throw new Error("ARTIFACT_CLEANUP_FAILED");
     }
     const saved = await supabase

@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import type { SupabaseClient } from "../_shared/_types.ts";
 import { packageObjectSchema } from "./packageSchema.ts";
-import { getExportWorkerOptions } from "./getExportWorkerOptions.ts";
+import { getXRAGWorkerOptions } from "./getXRAGWorkerOptions.ts";
 import { getAuthorizedResource } from "./getAuthorizedResource.ts";
 import { getModelExportSource } from "./getModelExportSource.ts";
 import { streamPackageExport } from "./streamPackageExport.ts";
@@ -63,7 +63,7 @@ export async function processXRAGExport({
       .min(1)
       .max(1000)
       .parse(job.selections);
-    const options = await getExportWorkerOptions(
+    const options = await getXRAGWorkerOptions(
       job.user_id,
       job.claims,
       supabase,
@@ -90,7 +90,7 @@ export async function processXRAGExport({
     if (info.error || info.data?.size !== total)
       throw new Error("XRAG_UPLOAD_FAILED");
     // Recheck current permissions after a potentially multi-hour transfer.
-    const current = await getExportWorkerOptions(
+    const current = await getXRAGWorkerOptions(
       job.user_id,
       job.claims,
       supabase,

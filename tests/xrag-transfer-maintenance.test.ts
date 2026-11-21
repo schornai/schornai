@@ -72,11 +72,13 @@ it("cleans expired prepared inventories as well as orphaned child objects", asyn
   const supabase = {
     from: vi.fn(() => query({ data: null, error: null })),
     storage: { from: vi.fn(() => ({ remove })) },
-    rpc: vi.fn(async (name: string) => ({
+    rpc: vi.fn(async (name: string, args?: { p_paths: string[] }) => ({
       data:
-        name === "expired_xrag_prepared_uploads"
-          ? [{ source_path: "expired/upload.tar" }]
-          : [],
+        name === "removable_xrag_objects"
+          ? args!.p_paths
+          : name === "expired_xrag_prepared_uploads"
+            ? [{ source_path: "expired/upload.tar" }]
+            : [],
       error: null,
     })),
   };

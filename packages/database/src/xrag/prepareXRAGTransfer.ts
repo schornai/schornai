@@ -14,6 +14,7 @@ import {
   transferSourceSchema,
   XRAG_TRANSFER_BUCKET,
 } from "./transferSchema.ts";
+import { getXRAGImportStatus } from "./getXRAGImportStatus.ts";
 import { withTransferArchives } from "./withTransferArchives.ts";
 import { requireXRAGArchiveAccess } from "./requireImportAccess.ts";
 import {
@@ -29,7 +30,7 @@ import { json } from "./importTransaction.ts";
  * extracted configuration and files. The outer archive is then discarded. */
 export async function prepareXRAGTransfer(
   input: { path: string; digest?: string },
-  options: XRAGOptions,
+  options: XRAGOptions & { queuedAt?: number },
 ) {
   // Leave ample time for a large snapshot while bounding the lifetime of unpublished children.
   const deadline = AbortSignal.timeout(24 * 3600_000);
@@ -59,6 +60,14 @@ export async function prepareXRAGTransfer(
     Date.now() - Date.parse(existing.data.created_at) >= 3600_000
   )
     throw new Error("XRAG_TRANSFER_EXPIRED");
+  const id = source.path.split("/")[1]!;
+  if (!existing.data) {
+    const status = await getXRAGImportStatus(id, options);
+    if (status === "inspecting" && !options.queuedAt)
+      throw new Error("XRAG_PREPARATION_IN_PROGRESS");
+    if (status && status !== "inspecting" && status !== "ready")
+      throw new Error("XRAG_IMPORT_ALREADY_STARTED");
+  }
   const result =
     existing.data ??
     (await withTransferArchives(
@@ -69,7 +78,6 @@ export async function prepareXRAGTransfer(
           archives.map((a) => a.xrag),
           claims,
         );
-        const id = source.path.split("/")[1]!;
         const prefix = `${id}/${crypto.randomUUID()}`;
         const entries: PreparedArchive[] = [];
         const stored: string[] = [];
@@ -118,7 +126,7 @@ export async function prepareXRAGTransfer(
               const destination = join(directory, "resource");
               await mkdir(destination);
               const extracted = await extractArchive(
-                archive.path,
+                archive.path!,
                 destination,
                 archive.id,
                 options.signal,
@@ -151,7 +159,7 @@ export async function prepareXRAGTransfer(
             } else {
               entry.source = await upload(
                 `${prefix}/${archive.id}.xrag.tar`,
-                archive.path,
+                archive.path!,
                 archive.size,
                 "application/x-tar",
               );

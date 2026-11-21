@@ -7,7 +7,7 @@ import type { XRAGOptions } from "./authentication.ts";
 
 /** Worker-only. Intersect current roles with the creator's authorized ceiling;
  * deletion, bans and revoked workspace roles take effect before publication. */
-export async function getExportWorkerOptions(
+export async function getXRAGWorkerOptions(
   userId: string,
   savedClaims: unknown,
   supabase: SupabaseClient,

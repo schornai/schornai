@@ -48,6 +48,9 @@ meta:
       "apps/web/app/(main)/app/xrag/_actions/prepareXRAGUpload.ts",
       "packages/database/src/xrag/prepareXRAGTransfer.ts",
       "packages/database/src/xrag/getPreparedXRAGImport.ts",
+      "packages/database/src/xrag/getXRAGImportStatus.ts",
+      "packages/database/src/xrag/queueXRAGPreparation.ts",
+      "supabase/migrations/20261121135207_retain_xrag_import_originals.sql",
       "packages/database/src/xrag/deletePreparedXRAGTransfer.ts",
       "supabase/migrations/20261115133603_xrag_import_export.sql",
       "packages/realtime/src/platform/processXRAGImportFiles.ts",
@@ -174,10 +177,9 @@ Zeitpläne müssen vor dem Export geändert oder deaktiviert werden.
 Im Import-Tab:
 
 1. Ziehe eine `.xrag.tar`-Datei in den Uploadbereich oder klicke **Datei auswählen**.
-   Während der Übertragung siehst du den Dateinamen und den Upload-Fortschritt. Danach bleibt der Dateiname mit **Inhalt wird geladen …** sichtbar, bis sich die Auswahl unter `/app/xrag/import/[id]` öffnet. Der Reiter **Export** führt zu `/app/xrag/export`.
+   Während der Übertragung siehst du den Dateinamen und den Upload-Fortschritt. Nach dem Upload öffnet sich die Auswahl unter `/app/xrag/import/[id]`. Während **Inhalt wird geladen …** prüft der Server die Datei im Hintergrund. Du kannst die Adresse später wieder öffnen. Der Reiter **Export** führt zu `/app/xrag/export`.
 2. Bei einem XRAG-Paket sind zunächst alle enthaltenen Objekte ausgewählt.
-   Sobald die enthaltenen Objekte angezeigt werden, wechselst du oben rechts unter **Optionen → Ansicht** zwischen Kacheln und Tabelle. Unter jeder Karte zeigt der Auswahlbutton ihren Zustand. Die Karten übernehmen die im Paket gespeicherte Objektfarbe. In der Tabelle wählst du über die erste Spalte aus. **Keine auswählen** leert die Auswahl, **Alle auswählen** übernimmt das gesamte Paket. Die Auswahl bleibt beim Ansichtswechsel erhalten. Einzelne Modell- und Updatepakete werden
-   nach erfolgreicher Prüfung direkt importiert.
+   Sobald die enthaltenen Objekte angezeigt werden, wechselst du oben rechts unter **Optionen → Ansicht** zwischen Kacheln und Tabelle. Unter jeder Karte zeigt der Auswahlbutton ihren Zustand. Die Karten übernehmen die im Paket gespeicherte Objektfarbe. In der Tabelle wählst du über die erste Spalte aus. **Keine auswählen** leert die Auswahl, **Alle auswählen** übernimmt das gesamte Paket. Die Auswahl bleibt beim Ansichtswechsel erhalten. Auch bei einem einzelnen Modell oder Plattformupdate startest du den Import mit **Importieren**.
 3. Sind Agenten, Dokumentenablagen, Transkriptoren oder Automatisierungen ausgewählt, erscheint eine
    gemeinsame **Arbeitsplatz**-Auswahl. Sie gilt für alle ausgewählten Ressourcen.
    Globale Administrator:innen können einen neuen Arbeitsplatz anlegen.
@@ -190,12 +192,12 @@ Im Import-Tab:
 Nach dem Hochladen wird die Datei geprüft und entpackt. Bei einem XRAG-Paket
 bleiben die enthaltenen Einzelarchive für die Auswahl erhalten; das äußere Archiv
 wird gelöscht. Einzelne Ressourcen werden bereits entpackt bereitgehalten.
+Wenn du die Seite während des Imports neu lädst, zeigt sie den gespeicherten Stand. Die Veröffentlichung und die Installation auf den Geräten laufen nach dem Import weiter.
 Nach einem erfolgreichen Import oder einer Fehlermeldung öffnest du mit **Weiterer XRAG Upload** die Dateiauswahl.
 Bei einer ungültigen Vorschauauswahl kannst du die Auswahl korrigieren und die Vorschau erneut öffnen. Offene Auswahlen sind ab Fertigstellung der Vorbereitung eine Stunde gültig und werden anschließend vom
 Scheduler gelöscht. Innerhalb dieser Frist kannst du die Adresse als hochladende Person erneut öffnen. Die Objektauswahl beginnt wieder mit allen Einträgen.
 
-Nach erfolgreichem Import werden die vorbereiteten Inhalte einschließlich aller
-nicht ausgewählten Objekte sowie die Sicherungskopien sofort gelöscht. Bei einer
+Nach erfolgreichem Import werden die verbrauchten Ressourcendateien, alle abgewählten Objekte und die Sicherungskopien bereinigt. Ausgewählte Modelle und Plattformupdates werden aus der bereits geprüften Datei veröffentlicht. Für diese Veröffentlichung fällt keine zweite Archivkopie an. Bei einer
 vorübergehenden Speicherstörung holt der Scheduler die Bereinigung nach.
 Installierte Agenten, Transkriptoren, Dokumentenablagen und Automatisierungen brauchen kein
 XRAG-Archiv mehr. Nur Modelle und Update-/Setup-Pakete bleiben als Artefakte
@@ -396,7 +398,7 @@ Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 - `platform_xrag_upload_url` erstellt eine Uploadadresse für eine eigene XRAG-Datei. Mindeststufe **Workspace-Administrator**. Für Dateien über 6 MiB übergibst du `resumable` an einen TUS-Client. Es enthält den Endpunkt, die Blockgröße von 6 MiB, den Signatur-Header und die Objektmetadaten. Bei einer Unterbrechung setzt der Client den Upload an der zuletzt bestätigten Position fort. Läuft die Signatur ab, rufe das Werkzeug mit demselben `path` auf und verwende die neue Signatur für die bestehende TUS-Sitzung. Bis einschließlich 6 MiB kannst du die Datei auch per HTTP PUT an `url` senden. Verwende den zurückgegebenen `path` für die Importvorschau.
 - `platform_xrag_preview`: Gesamtes Paket und Ziel prüfen; liefert Prüfsumme und Revisionen bestehender Objekte. Mindeststufe: **Workspace-Administrator**; neue Workspaces und Plattforminhalte erfordern globale Rechte und entsprechende Zugriffsstufe.
 - `platform_xrag_import`: Ressourcen in einen administrierten bestehenden Workspace importieren. Mindeststufe: **Workspace-Administrator**. Modelle und Plattforminhalte werden vollständig abgewiesen, auch bei globalen Administrator:innen.
-- `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Workspace anlegen. Mindeststufe: **Globaler Administrator**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Erfolgreiche oder endgültig fehlgeschlagene Importe löschen den gesamten Upload einschließlich abgewählter Inhalte; nur Modell-/Plattformpakete bleiben als Artefakte erhalten.
+- `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Workspace anlegen. Mindeststufe: **Globaler Administrator**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Die Bereinigung entfernt abgewählte Inhalte. Erfolgreich importierte Modell- und Plattformpakete bleiben am bisherigen Speicherort als Artefakte erhalten.
 - `platform_xrag_export` exportiert ein Objekt. Mit `includeModels: true` enthält der Download auch direkt verwendete lokale Modellarchive. Externe Modelle bleiben Verweise auf Anbieter und Modellkennung. Mindeststufe **Workspace-Administrator** mit Administratorrechten im Workspace des Objekts. Für lokale Modelle genügen die installierten Dateien auf dem Core-Host. Alternativ kann der Export ein veröffentlichtes Archiv verwenden.
 - `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globale Ressourcen-ID lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**, Administratorrechte im Workspace des Objekts. Gilt für Agenten, Transkriptoren, Dokumentenablagen und eigene Automatisierungen, nicht für Modelle.
 
@@ -423,8 +425,9 @@ Die Werkzeuge `platform_xrag_preview`, `platform_xrag_import` und `platform_xrag
 
 `platform_xrag_preview`, `platform_xrag_import` und `platform_xrag_import_admin` akzeptieren `selectedEntries` mit diesen Archiv-IDs. Ohne Angabe wird das gesamte Paket verarbeitet. Für ausgewählte Ressourcen ist `target` erforderlich; bei reinen Modell-/Plattformimporten kann es entfallen. Die bisherigen Zugriffsstufen gelten auch für abgewählte Paketinhalte.
 
+- `platform_xrag_import_status` zeigt den Prüf- und Importstatus einer eigenen Upload-ID. Mindeststufe **Workspace-Administrator**. Bei `platform_xrag_inspect` reiht `background: true` die Prüfung ein. Sobald der Status `ready` lautet, liefert der normale Prüfaufruf die Objektauswahl. Der Status `committed` bestätigt die Übernahme des Imports. Die Geräteinstallation hat einen eigenen Status.
 - `platform_xrag_transfer_list`: Eigene temporäre XRAG-Dateien aus aktuellen und früheren Besuchen mit Upload-ID und Dateigröße in Byte (oder `null`, wenn unbekannt) auflisten. Mindeststufe: **Workspace-Administrator**, nur eigene Dateien.
-- `platform_xrag_transfer_delete`: Eine eigene temporäre XRAG-Datei löschen. Mindeststufe: **Workspace-Administrator**, genaue Eigentümerprüfung. Bereits importierte Objekte und veröffentlichte Pakete bleiben erhalten.
+- `platform_xrag_transfer_delete`: Eine eigene temporäre XRAG-Datei löschen. Mindeststufe: **Workspace-Administrator**, genaue Eigentümerprüfung. Solange die Prüfung oder der Import läuft, bleibt der Upload bis zum Abschluss reserviert. Bereits importierte Objekte und veröffentlichte Pakete bleiben erhalten.
 
 - `platform_xrag_export_jobs`: Eigene Exportaufträge und Upload-Fortschritt auflisten. Mindeststufe: **Workspace-Administrator**. Fertige Ergebnisse und Auftragsverlauf sind 72 Stunden verfügbar.
 - `platform_xrag_export_delete` löscht einen eigenen fertigen, fehlgeschlagenen oder abgebrochenen Export samt vorhandener Archivdatei. Mindeststufe **Workspace-Administrator** mit aktuellen Administratorrechten in mindestens einem Arbeitsplatz.

@@ -1,3 +1,4 @@
+import { prepareXRAGJob } from "@schornio/aibox-database/xrag/prepareXRAGJob";
 import { recoverXRAGImports } from "@schornio/aibox-database/xrag/recoverXRAGImports";
 import { processXRAGImportFiles } from "@schornio/aibox-realtime/platform/processXRAGImportFiles";
 import type { Hocuspocus } from "@hocuspocus/server";
@@ -82,6 +83,16 @@ export async function startScheduler(
   // system maintenance. Each lane still claims only one job at a time.
   await Promise.all([
     schedulerWorker({ ...options, handlers }),
+    schedulerWorker({
+      ...options,
+      handlers: new Map([
+        [
+          "xrag.import.prepare",
+          (job, signal) =>
+            prepareXRAGJob(job.payload, options.supabase, signal),
+        ],
+      ]),
+    }),
     schedulerWorker({
       ...options,
       handlers: new Map([

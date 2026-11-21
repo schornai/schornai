@@ -3,6 +3,8 @@ import { useEffect, useEffectEvent, useId, useRef, useState } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { useT } from "next-i18next/client";
 import { Paperclip } from "lucide-react";
+import type { XRAGImportStatus } from "@schornio/aibox-package-database/xrag/getXRAGImportStatus";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { XRAGImportExport } from "./XRAGImportExport";
 import { ResourceListOptionsDropdown } from "../../../../_components/ResourceListOptionsDropdown";
@@ -41,11 +43,13 @@ export function XRAGTransfer({
   preferences,
   uploadId,
   prepared,
+  status,
   isAdmin,
   workspaces,
 }: {
   preferences?: Preferences;
   uploadId: string;
+  status?: XRAGImportStatus;
   prepared?: Awaited<ReturnType<typeof getPreparedXRAGImport>>;
   isAdmin: boolean;
   workspaces: { id: string; name: string }[];
@@ -70,10 +74,12 @@ export function XRAGTransfer({
   const inspection = useAction(inspectXRAGTransfer, {
     onSuccess: ({ data }) => {
       if (left.current) return;
-      if (!data) return;
+      if (!data) {
+        router.refresh();
+        return;
+      }
       const selectedEntries = data.entries.map((entry) => entry.archiveId);
       setSelected(selectedEntries);
-      previewSingleton(data, selectedEntries);
     },
   });
   const preview = useAction(previewXRAGImport, {
@@ -100,36 +106,32 @@ export function XRAGTransfer({
       }
     },
   });
-  const commit = useAction(importXRAG);
+  const commit = useAction(importXRAG, {
+    onError: () => {
+      if (!left.current) router.refresh();
+    },
+  });
   const busy =
     inspection.isPending ||
     preview.isPending ||
     commit.isPending ||
     commit.hasSucceeded ||
     commit.hasErrored;
-  function previewSingleton(
-    data: NonNullable<typeof prepared>,
-    selectedEntries: string[],
-  ) {
-    if (
-      !data.isCollection &&
-      data.entries.length === 1 &&
-      !data.entries[0]!.needsWorkspace
-    )
-      preview.execute({
-        source: { path: data.source.path, digest: data.digest },
-        selectedEntries,
-      });
-  }
+  const router = useRouter();
+  const active =
+    status === "inspecting" ||
+    status === "preparing" ||
+    status === "applying" ||
+    status === "rolling_back";
+  useEffect(() => {
+    if (!active) return;
+    const timer = setInterval(() => router.refresh(), 5000);
+    return () => clearInterval(timer);
+  }, [active, router]);
   const inspect = useEffectEvent(() => {
-    if (started.current) return;
+    if (started.current || initial || status) return;
     started.current = true;
-    if (initial)
-      previewSingleton(
-        initial,
-        initial.entries.map((entry) => entry.archiveId),
-      );
-    else inspection.execute({ uploadId });
+    inspection.execute({ uploadId });
   });
   useEffect(() => {
     left.current = false;
@@ -139,7 +141,8 @@ export function XRAGTransfer({
     };
   }, [uploadId]);
   const contents = initial ?? inspection.result.data;
-  const entries = commit.hasSucceeded ? [] : (contents?.entries ?? []);
+  const entries =
+    status || commit.hasSucceeded ? [] : (contents?.entries ?? []);
   const { t: listLabel } = useT("settings", { keyPrefix: "resourceList" });
   const list = useGroupSortView(
     "/app/xrag/import",
@@ -177,8 +180,10 @@ export function XRAGTransfer({
     setConfirmed({});
     setModelSelections({});
   }
-  const error =
-    inspection.hasErrored || preview.hasErrored || commit.hasErrored;
+  const succeeded = status === "committed" || commit.hasSucceeded;
+  const error = status
+    ? status === "rolled_back" || status === "inspection_failed"
+    : inspection.hasErrored || preview.hasErrored || commit.hasErrored;
   return (
     <XRAGImportExport
       tab="import"
@@ -202,7 +207,16 @@ export function XRAGTransfer({
             {contents.source.name}
           </h2>
         )}
-        {inspection.isPending && (
+        {active && (
+          <p role="status">
+            {t(
+              status === "inspecting"
+                ? "descriptionInspecting"
+                : "descriptionImporting",
+            )}
+          </p>
+        )}
+        {!status && inspection.isPending && (
           <p role="status">{t("descriptionInspecting")}</p>
         )}
         {showContents && (
@@ -277,7 +291,8 @@ export function XRAGTransfer({
             )}
           </>
         )}
-        {!commit.hasSucceeded &&
+        {!status &&
+        !commit.hasSucceeded &&
         preview.result.data &&
         (conflicts.length > 0 ||
           externalModels.some((model) => model.candidates.length > 1)) ? (
@@ -438,7 +453,7 @@ export function XRAGTransfer({
             </ButtonAction>
           )
         )}
-        {commit.hasSucceeded && (
+        {succeeded && (
           <Alert>
             <AlertDescription>
               {t("descriptionImported")}
@@ -453,7 +468,7 @@ export function XRAGTransfer({
             <AlertDescription>{t("errorAction")}</AlertDescription>
           </Alert>
         )}
-        {(error || commit.hasSucceeded) && (
+        {(error || succeeded) && (
           <Button
             variant="outline"
             nativeButton={false}

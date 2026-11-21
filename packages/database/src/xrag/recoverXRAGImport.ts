@@ -92,10 +92,13 @@ export async function recoverXRAGImport(
       .remove(paths.slice(index, index + 100));
     if (removed.error) throw new Error("XRAG_IMPORT_CLEANUP_FAILED");
   }
-  if (job.state === "rolled_back" && job.plan.artifacts.length) {
+  const stagedArtifacts = job.plan.artifacts.filter(
+    (a) => !a.path.startsWith("imported/"),
+  );
+  if (job.state === "rolled_back" && stagedArtifacts.length) {
     const removed = await supabase.storage
       .from(XRAG_BUCKET)
-      .remove(job.plan.artifacts.map((a) => a.path));
+      .remove(stagedArtifacts.map((a) => a.path));
     if (removed.error) throw new Error("XRAG_IMPORT_CLEANUP_FAILED");
   }
   if (job.plan.source)

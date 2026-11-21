@@ -37,6 +37,10 @@ function options() {
         storage: { from: vi.fn(() => ({ list })) },
       },
       supabaseServiceRole: {
+        rpc: vi.fn(async (_name, { p_paths }) => ({
+          data: p_paths,
+          error: null,
+        })),
         from: vi.fn(() => query({ data: null, error: null })),
         storage: { from: vi.fn(() => ({ remove })) },
       },

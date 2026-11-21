@@ -23,7 +23,7 @@ const state = vi.hoisted(() => ({
   params: new URLSearchParams(),
 }));
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ replace: vi.fn() }),
+  useRouter: () => ({ replace: vi.fn(), refresh: vi.fn() }),
   useSearchParams: () => state.params,
   usePathname: () => "/app/xrag",
 }));
@@ -392,30 +392,48 @@ it("only mounts header options for inspected contents and preserves selection wh
   view.rerender(renderTransfer());
   expect(screen.queryByRole("button", { name: "labelOptions" })).toBeNull();
 });
-it("automatically imports a single platform package but waits for a package selection", () => {
-  render(<XRAGTransfer {...props} />, { wrapper: SidebarProvider });
-  const input = { source: source };
-  const data = {
+it("starts a single platform import only on click, including after refresh", () => {
+  const prepared = {
     source,
     digest: "digest",
     isCollection: false,
-    entries: [entries[1]],
+    entries: [{ ...entries[1]!, kind: "setup" as const, size: 4498595328 }],
   };
-  act(() => state.actions.inspect.callbacks.onSuccess({ data, input }));
-  expect(state.actions.preview.execute).toHaveBeenCalledWith({
-    source: { path: input.source.path, digest: "digest" },
+  const mount = () =>
+    render(<XRAGTransfer {...props} prepared={prepared} />, {
+      wrapper: SidebarProvider,
+    });
+  mount().unmount();
+  mount();
+  expect(state.actions.preview.execute).not.toHaveBeenCalled();
+  expect(state.actions.import.execute).not.toHaveBeenCalled();
+  fireEvent.click(button("labelImport"));
+  expect(state.actions.preview.execute).toHaveBeenCalledExactlyOnceWith({
+    source: { path: source.path, digest: "digest" },
+    target: undefined,
     selectedEntries: [entries[1]!.archiveId],
   });
-  state.actions.preview.execute.mockClear();
-  act(() =>
-    state.actions.inspect.callbacks.onSuccess({
-      data: { ...data, isCollection: true },
-      input,
-    }),
-  );
-  expect(state.actions.preview.execute).not.toHaveBeenCalled();
 });
 
+it.each([
+  ["inspecting", "descriptionInspecting"],
+  ["inspection_failed", "errorAction"],
+  ["applying", "descriptionImporting"],
+  ["committed", "descriptionImported"],
+  ["rolled_back", "errorAction"],
+] as const)(
+  "restores %s without inspecting or submitting another import",
+  (status, message) => {
+    render(<XRAGTransfer {...props} status={status} />, {
+      wrapper: SidebarProvider,
+    });
+    expect(screen.getByText(message)).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "labelImport" })).toBeNull();
+    expect(state.actions.inspect.execute).not.toHaveBeenCalled();
+    expect(state.actions.preview.execute).not.toHaveBeenCalled();
+    expect(state.actions.import.execute).not.toHaveBeenCalled();
+  },
+);
 it("does not start a single-package import if inspection finishes after leaving", () => {
   const view = render(<XRAGTransfer {...props} />, {
     wrapper: SidebarProvider,

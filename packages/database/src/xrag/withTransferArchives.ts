@@ -1,4 +1,5 @@
-import { createReadStream, createWriteStream } from "node:fs";
+import { createWriteStream } from "node:fs";
+import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -21,17 +22,17 @@ import { parseResource } from "./resource.ts";
 import { validateRepositoryFiles } from "./validateRepositoryFiles.ts";
 
 type TransferArchive = {
-  path: string;
+  path?: string;
   id: string;
   size: number;
   xrag: XRAG;
 };
 
-/** Authorize each owned upload, snapshot it locally and validate every child.
+/** Validate immutable uploads as streams. Only resources and collections need a local archive for extraction.
  * The callback is never invoked for a partially validated collection. */
 export async function withTransferArchives<T>(
   input: { path: string; digest?: string },
-  options: XRAGOptions,
+  options: XRAGOptions & { queuedAt?: number },
   operation: (input: {
     archives: TransferArchive[];
     digest: string;
@@ -47,58 +48,75 @@ export async function withTransferArchives<T>(
   const bucket = options.supabaseServiceRole.storage.from(XRAG_TRANSFER_BUCKET);
   const info = await bucket.info(source.path);
   if (info.error || !info.data) throw new Error("XRAG_TRANSFER_UNAVAILABLE");
-  if (!(Date.parse(info.data.createdAt) > Date.now() - 3600_000))
+  if (
+    !(
+      Date.parse(info.data.createdAt) >
+      (options.queuedAt ?? Date.now()) - 3600_000
+    )
+  )
     throw new Error("XRAG_TRANSFER_EXPIRED");
   const directory = await mkdtemp(join(tmpdir(), "xrag-transfer-"));
   const archives: TransferArchive[] = [];
-  let bytes = 0;
   let extracted = 0;
   let entries = 0;
   try {
     options.signal?.throwIfAborted();
-    const signed = await bucket.createSignedUrl(source.path, 3600);
-    if (signed.error || !signed.data)
-      throw new Error("XRAG_TRANSFER_UNAVAILABLE");
-    const response = await fetch(signed.data.signedUrl, {
-      signal: options.signal,
-      cache: "no-store",
-    });
-    if (!response.ok || !response.body) {
-      await response.body?.cancel().catch(() => {});
-      throw new Error("XRAG_TRANSFER_UNAVAILABLE");
-    }
-    const file = join(directory, "source.xrag.tar");
-    const bound = new Transform({
-      transform(chunk: Buffer, _encoding, callback) {
-        bytes += chunk.length;
-        callback(
-          bytes > 200 * 1024 ** 3 ? new Error("XRAG_ARCHIVE_LIMIT") : null,
-          chunk,
-        );
-      },
-    });
-    await pipeline(
-      Readable.fromWeb(
+    async function* readOriginal() {
+      const signed = await bucket.createSignedUrl(source.path, 3600);
+      if (signed.error || !signed.data)
+        throw new Error("XRAG_TRANSFER_UNAVAILABLE");
+      const response = await fetch(signed.data.signedUrl, {
+        signal: options.signal,
+        cache: "no-store",
+      });
+      if (!response.ok || !response.body) {
+        await response.body?.cancel().catch(() => {});
+        throw new Error("XRAG_TRANSFER_UNAVAILABLE");
+      }
+      let bytes = 0;
+      for await (const chunk of Readable.fromWeb(
         response.body as import("node:stream/web").ReadableStream,
-      ),
-      bound,
-      createWriteStream(file, { flags: "wx" }),
-      { signal: options.signal },
-    );
-    const inspected = await inspectArchive(
-      createReadStream(file),
-      options.signal,
-    );
+      )) {
+        bytes += chunk.length;
+        if (bytes > 200 * 1024 ** 3) throw new Error("XRAG_ARCHIVE_LIMIT");
+        yield chunk as Buffer;
+      }
+    }
+    const inspected = await inspectArchive(readOriginal(), options.signal);
     if (source.digest && source.digest !== inspected.id)
       throw new Error("XRAG_CHECKSUM_MISMATCH");
-    let children;
-    if (inspected.xrag.xrag_type === "collection") {
-      const destination = join(directory, "collection");
-      await mkdir(destination);
-      children = await unpackCollection(file, destination, {
-        signal: options.signal,
+    let children: (Pick<
+      typeof inspected,
+      "id" | "size" | "xrag" | "extractedBytes" | "entryCount" | "resourceFiles"
+    > & { path?: string })[] = [inspected];
+    if (
+      inspected.xrag.xrag_type === "collection" ||
+      inspected.xrag.xrag_type === "resource"
+    ) {
+      const file = join(directory, "source.xrag.tar");
+      const hash = createHash("sha256");
+      const verify = new Transform({
+        transform(chunk, _encoding, callback) {
+          hash.update(chunk);
+          callback(null, chunk);
+        },
       });
-    } else children = [{ path: file, ...inspected }];
+      await pipeline(
+        readOriginal(),
+        verify,
+        createWriteStream(file, { flags: "wx" }),
+        { signal: options.signal },
+      );
+      if (hash.digest("hex") !== inspected.id)
+        throw new Error("XRAG_CHECKSUM_MISMATCH");
+      if (inspected.xrag.xrag_type === "collection") {
+        const destination = join(directory, "collection");
+        await mkdir(destination);
+        children = await unpackCollection(file, destination, {
+          signal: options.signal,
+        });
+      } else children = [{ ...inspected, path: file }];
+    }
     for (const child of children) {
       if (child.xrag.xrag_type === "resource") {
         parseResource(child.xrag);

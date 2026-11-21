@@ -6,10 +6,10 @@ Erzeugt mit `npm run test:coverage` und `node scripts/test-report.mjs`.
 
 | Metrik     | Abgedeckt / gesamt | Coverage |
 | ---------- | -----------------: | -------: |
-| lines      |        15358/16214 |   94.72% |
-| statements |        16283/17388 |   93.64% |
-| functions  |          4173/4561 |   91.49% |
-| branches   |        11840/13077 |   90.54% |
+| lines      |        15412/16284 |   94.64% |
+| statements |        16343/17468 |   93.55% |
+| functions  |          4181/4573 |   91.42% |
+| branches   |        11910/13161 |   90.49% |
 
 Python-Transcriber: **100.00%** kombinierte Zeilen-/Zweigabdeckung.
 
@@ -21,12 +21,12 @@ Die Zeilen-Grenze von 90% gilt zusätzlich für jeden Workspace. Statements, Fun
 | --------------------------- | -----------------: | -------: |
 | apps/admin-mac              |            136/140 |   97.14% |
 | apps/cli                    |              22/23 |   95.65% |
-| apps/realtime               |            861/891 |   96.63% |
+| apps/realtime               |            861/892 |   96.52% |
 | apps/transcriber-mac        |            158/160 |   98.75% |
-| apps/web                    |          6709/7283 |   92.12% |
-| packages/database           |          2834/2921 |   97.02% |
+| apps/web                    |          6711/7291 |   92.04% |
+| packages/database           |          2883/2980 |   96.74% |
 | packages/markdown-changelog |              92/92 |  100.00% |
-| packages/realtime           |          2076/2153 |   96.42% |
+| packages/realtime           |          2079/2155 |   96.47% |
 | packages/service            |          1217/1264 |   96.28% |
 | packages/ui                 |            605/625 |   96.80% |
 | packages/utils              |            132/132 |  100.00% |
@@ -34,6 +34,6 @@ Die Zeilen-Grenze von 90% gilt zusätzlich für jeden Workspace. Statements, Fun
 
 Proxy und Tika haben Konfigurationstests, aber keine instrumentierbaren JavaScript-Anweisungen.
 
-Importanalyse: 1203 Quelldateien im Umfang; 80 Package-Dateien ohne eingehenden Produktionsimport; 112 Package-Dateien außerhalb des App-Graphen.
+Importanalyse: 1207 Quelldateien im Umfang; 80 Package-Dateien ohne eingehenden Produktionsimport; 112 Package-Dateien außerhalb des App-Graphen.
 
 Die Liste ist in [unused-package-files.md](unused-package-files.md) dokumentiert. Externe Dienste sind an ihren Schnittstellen ersetzt; der Realtime-Persistenztest verwendet einen lokalen WebSocket-Server.

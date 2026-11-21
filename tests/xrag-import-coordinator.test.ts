@@ -133,7 +133,7 @@ async function fixture({
   operations.client = service;
   const uploads = backend.upload;
   const options = {
-    supabase: {},
+    supabase: { rpc: (name: string, args: any) => rpc(name, args) },
     supabaseServiceRole: service,
     authenticated: { userId, claims },
   };
@@ -229,12 +229,13 @@ it("publishes distribution contents only after all resource checks pass", async 
   expect(preview.entries.map((entry) => entry.kind)).toContain("files");
   const result = await importXRAGTransfer(f.input, f.options as any);
   expect(result.publications).toEqual(["publication-id"]);
-  expect(f.backend.copy).toHaveBeenCalledWith(
-    "xrag-prepared",
-    expect.any(String),
-    expect.stringMatching(/^uploads\//),
-    "box-action-files",
-  );
+  const [job] = f.backend.jobs.values();
+  expect(job.plan.artifacts[0].path).toMatch(/^imported\/xrag-prepared\//);
+  expect(
+    f.backend.copy.mock.calls.some(
+      ([, , , destination]) => destination === "box-action-files",
+    ),
+  ).toBe(false);
 });
 it("creates a new workspace even for a distribution-only import", async () => {
   const f = await fixture({ onlyDistribution: true });
@@ -362,7 +363,11 @@ it("rejects unknown, duplicate and empty selections without writes", async () =>
       importXRAGTransfer({ ...f.input, selectedEntries }, f.options as any),
     ).rejects.toThrow();
   }
-  expect(f.service.rpc).not.toHaveBeenCalled();
+  expect(
+    f.service.rpc.mock.calls.every(
+      ([name]) => name === "removable_xrag_objects",
+    ),
+  ).toBe(true);
   expect(
     f.uploads.mock.calls.filter(([bucket]) => bucket !== "xrag-prepared"),
   ).toHaveLength(0);
@@ -542,16 +547,24 @@ it("keeps only selected distribution artifacts and consumes unselected contents"
     .map((entry) => entry.archiveId);
   await importXRAGTransfer({ ...f.input, selectedEntries }, f.options as any);
   expect([...f.backend.objects.keys()]).toHaveLength(1);
-  expect([...f.backend.objects.keys()][0]).toMatch(/^box-action-files\//);
+  expect([...f.backend.objects.keys()][0]).toMatch(/^xrag-prepared\//);
   expect(f.backend.prepared.size).toBe(0);
 });
-it("retains a single distribution archive until its artifact copy is committed", async () => {
+it("adopts a single original without copying or downloading it again on retry", async () => {
   const f = await fixture({ single: true, onlyDistribution: true });
   await inspectXRAGTransfer({ source: f.input.source }, f.options as any);
   expect([...f.backend.objects.keys()]).toEqual([`xrag-transfers/${path}`]);
   await importXRAGTransfer(f.input, f.options as any);
   expect([...f.backend.objects.keys()]).toHaveLength(1);
-  expect([...f.backend.objects.keys()][0]).toMatch(/^box-action-files\//);
+  expect([...f.backend.objects.keys()]).toEqual([`xrag-transfers/${path}`]);
+  expect(f.backend.copy).not.toHaveBeenCalled();
+  expect(f.backend.upload).not.toHaveBeenCalled();
+  const reads = vi.mocked(fetch).mock.calls.length;
+  await expect(importXRAGTransfer(f.input, f.options as any)).rejects.toThrow(
+    "XRAG_IMPORT_ALREADY_STARTED",
+  );
+  expect(vi.mocked(fetch).mock.calls.length).toBe(reads);
+  expect(f.backend.jobs.size).toBe(1);
 });
 it("retries failed post-commit cleanup without undoing the installed resources", async () => {
   const f = await fixture({ single: true });
@@ -654,4 +667,23 @@ it("expires selections after one hour even before the cleanup sweep runs", async
     "XRAG_TRANSFER_EXPIRED",
   );
   expect(f.backend.prepared.size).toBe(1); // The scheduler owns expiration cleanup.
+});
+
+it("preserves prepared contents when a concurrent request already reserved the upload", async () => {
+  const f = await fixture({ single: true, onlyDistribution: true });
+  await inspectXRAGTransfer({ source: f.input.source }, f.options as any);
+  const rpc = f.service.rpc.getMockImplementation()!;
+  f.service.rpc.mockImplementation((name, args) =>
+    name === "begin_xrag_import"
+      ? Promise.resolve({
+          data: null,
+          error: { code: "23505", message: "xrag_import_once_per_upload" },
+        })
+      : rpc(name, args),
+  );
+  await expect(importXRAGTransfer(f.input, f.options as any)).rejects.toThrow(
+    "XRAG_IMPORT_ALREADY_STARTED",
+  );
+  expect(f.backend.prepared.size).toBe(1);
+  expect(f.backend.objects.has(`xrag-transfers/${path}`)).toBe(true);
 });

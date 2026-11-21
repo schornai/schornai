@@ -1,3 +1,4 @@
+import { getXRAGImportStatus } from "@schornio/aibox-package-database/xrag/getXRAGImportStatus";
 import { getPreparedXRAGImport } from "@schornio/aibox-package-database/xrag/getPreparedXRAGImport";
 import { getCurrentUser } from "@schornio/aibox-package-database/user/getCurrentUser";
 import { notFound } from "next/navigation";
@@ -21,18 +22,24 @@ export default async function Page({
     getCurrentUser({ supabaseAuth: supabase.auth }),
   ]);
   requirePlatformAccess(claims, "admin", "workspace");
-  const [workspaces, preferences, prepared] = await Promise.all([
+  const [workspaces, preferences, status, prepared] = await Promise.all([
     getWorkspaceClaims(),
     getGroupSortViewPreferences("/app/xrag/import"),
+    getXRAGImportStatus(id, { supabase }),
     getPreparedXRAGImport(id, {
       supabase,
       authenticated: { userId: user.id, claims },
     }),
   ]);
+  // Mount a fresh selection when inspection finishes, including when a legacy
+  // upload URL queues its first inspection after the page has already mounted.
+  const waitingForContents =
+    status === "inspecting" || (!prepared && (!status || status === "ready"));
   return (
     <XRAGTransfer
-      key={id}
+      key={waitingForContents ? id + "-inspecting" : id}
       uploadId={id}
+      status={status === "ready" ? null : status}
       prepared={prepared}
       preferences={preferences}
       isAdmin={workspaces.isAdmin}

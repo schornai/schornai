@@ -1,7 +1,7 @@
 import { getTaskClaims } from "@schornio/aibox-database/task/getTaskClaims";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
 import { readImport } from "@schornio/aibox-database/xrag/importTransaction";
-import { getExportWorkerOptions } from "@schornio/aibox-database/xrag/getExportWorkerOptions";
+import { getXRAGWorkerOptions } from "@schornio/aibox-database/xrag/getXRAGWorkerOptions";
 import { ServerRealtimeProvider } from "../server/ServerRealtimeProvider.ts";
 import { ServerRealtimeWebsocketProvider } from "../server/ServerRealtimeWebsocketProvider.ts";
 import { getTaskQueueDocumentName } from "../documents/taskQueue/_utils.ts";
@@ -25,7 +25,7 @@ export async function processXRAGImportFiles(
 ) {
   const job = await readImport(id, supabase);
   if (job.state !== "committed") throw new Error("XRAG_IMPORT_NOT_COMMITTED");
-  const options = await getExportWorkerOptions(
+  const options = await getXRAGWorkerOptions(
     job.user_id,
     job.plan.claims,
     supabase,

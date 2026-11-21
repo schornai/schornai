@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "../_shared/_types.ts";
-import { XRAG_BUCKET } from "./_schema.ts";
+import { removeArtifactObject } from "./artifactObject.ts";
 import { getArtifact } from "./getArtifact.ts";
 
 /** Server-only: caller MUST authorize a global admin. Withdrawal serializes with
@@ -9,7 +9,8 @@ export async function deleteArtifact(
   id: string,
   { supabase }: { supabase: SupabaseClient },
 ) {
-  await getArtifact(id, { supabase });
+  const artifact = await getArtifact(id, { supabase });
+  if (artifact.purgedAt) return artifact;
   const withdrawn = await supabase
     .from("artifact_catalog")
     .update({ deleted_at: new Date().toISOString() })
@@ -22,9 +23,7 @@ export async function deleteArtifact(
     .eq("id", id)
     .single();
   if (error || !data) throw new Error("ARTIFACT_DELETE_FAILED");
-  const removed = await supabase.storage
-    .from(XRAG_BUCKET)
-    .remove([data.object_path]);
+  const removed = await removeArtifactObject(data.object_path, supabase);
   if (removed.error) throw new Error("ARTIFACT_DELETE_FAILED");
   const purged = await supabase
     .from("artifact_catalog")

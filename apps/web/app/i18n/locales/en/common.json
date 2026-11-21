@@ -332,6 +332,7 @@
       "labelUploadTitle": "Import XRAG",
       "descriptionDrop": "Drop an XRAG file here or choose a file.",
       "descriptionUploading": "Uploading file …",
+      "descriptionImporting": "Import in progress …",
       "descriptionInspecting": "Loading contents …",
       "labelContent": "Included objects",
       "labelSelectAll": "Select all",

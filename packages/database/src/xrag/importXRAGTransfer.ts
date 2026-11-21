@@ -20,7 +20,7 @@ import {
 import { getXRAGUserId } from "./authentication.ts";
 import { prepareConfirmedResourceImport } from "./prepareConfirmedResourceImport.ts";
 import { importTransferInputSchema } from "./transferSchema.ts";
-import { XRAG_BUCKET } from "./_schema.ts";
+import { importedArtifactPath } from "./artifactObject.ts";
 import { StorageSession } from "../storage/_utils/StorageSession.ts";
 import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
 import {
@@ -57,6 +57,7 @@ export async function importXRAGTransfer(
   const { entries: allArchives } = await prepareXRAGTransfer(source, options);
   const userId = await getXRAGUserId(options);
   const directory = await mkdtemp(join(tmpdir(), "xrag-install-"));
+  let reserved = false;
   try {
     const claims = await getXRAGClaims(options);
     requireXRAGArchiveAccess(
@@ -87,7 +88,10 @@ export async function importXRAGTransfer(
     const id = crypto.randomUUID();
     const token = crypto.randomUUID();
     const plan: ImportPlan = {
-      source: { path: source.path },
+      source: {
+        path: source.path,
+        uploadId: source.path.split("/")[1]!.toLowerCase(),
+      },
       entries: JSON.parse(JSON.stringify(entries)),
       target,
       claims,
@@ -163,10 +167,15 @@ export async function importXRAGTransfer(
     for (const archive of archives.filter(
       (a) => a.xrag.xrag_type !== "resource",
     )) {
-      const path = `uploads/${id}/${archive.id}.xrag.tar`;
+      if (!archive.source) throw new Error("XRAG_TRANSFER_UNAVAILABLE");
+      const path = importedArtifactPath(
+        archive.source.bucket,
+        archive.source.path,
+      );
       plan.artifacts.push({ path, name: `${archive.id}.xrag.tar` });
     }
     const supabase = options.supabaseServiceRole;
+    reserved = true; // Recovery owns cleanup once begin may have reached the database.
     const begin = await supabase.rpc("begin_xrag_import", {
       p_id: id,
       p_token: token,
@@ -174,6 +183,11 @@ export async function importXRAGTransfer(
       p_plan: json(plan),
     });
     // A lost begin response cannot leave changed target data: begin only reserves.
+    if (
+      begin.error?.code === "23505" &&
+      begin.error.message.includes("xrag_import_once_per_upload")
+    )
+      throw new Error("XRAG_IMPORT_ALREADY_STARTED");
     if (begin.error || !begin.data)
       throw new Error("XRAG_IMPORT_PREPARE_FAILED");
     const prepared = importPlanSchema.parse(begin.data);
@@ -185,23 +199,6 @@ export async function importXRAGTransfer(
         options.signal,
         async (signal) => {
           const storage = createImportStorageClient(id, token).storage;
-          // Models and updates become artifact originals. Resources never do.
-          for (const archive of archives.filter(
-            (a) => a.xrag.xrag_type !== "resource",
-          )) {
-            signal.throwIfAborted();
-            if (!archive.source) throw new Error("XRAG_TRANSFER_UNAVAILABLE");
-            const path = `uploads/${id}/${archive.id}.xrag.tar`;
-            const copied = await storage
-              .from(archive.source.bucket)
-              .copy(archive.source.path, path, {
-                destinationBucket: XRAG_BUCKET,
-              });
-            if (copied.error) throw new Error("XRAG_FILE_IMPORT_FAILED");
-            const info = await storage.from(XRAG_BUCKET).info(path);
-            if (info.error || info.data?.size !== archive.size)
-              throw new Error("XRAG_FILE_IMPORT_FAILED");
-          }
           for (const file of prepared.files) {
             signal.throwIfAborted();
             if (!file.hadOriginal) continue;
@@ -290,7 +287,7 @@ export async function importXRAGTransfer(
         "XRAG_MODEL_SELECTION_REQUIRED",
         "XRAG_MODEL_SELECTION_INVALID",
       ].includes(error.message);
-    if (!pendingDecision)
+    if (!reserved && !pendingDecision)
       await deletePreparedXRAGTransfer(source.path, {
         supabase: options.supabaseServiceRole,
       }).catch(() => {});

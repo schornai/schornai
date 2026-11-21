@@ -16,8 +16,8 @@ vi.mock("@schornio/aibox-database/task/getTaskClaims", () => ({
 vi.mock("@schornio/aibox-database/xrag/importTransaction", () => ({
   readImport: state.read,
 }));
-vi.mock("@schornio/aibox-database/xrag/getExportWorkerOptions", () => ({
-  getExportWorkerOptions: state.options,
+vi.mock("@schornio/aibox-database/xrag/getXRAGWorkerOptions", () => ({
+  getXRAGWorkerOptions: state.options,
 }));
 vi.mock("../packages/realtime/src/server/ServerRealtimeProvider.ts", () => ({
   ServerRealtimeProvider: class {

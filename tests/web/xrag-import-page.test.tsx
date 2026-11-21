@@ -1,8 +1,15 @@
 import { expect, it, vi } from "vitest";
 vi.mock("@schornio/aibox-package-database/xrag/getPreparedXRAGImport", () => ({
-  getPreparedXRAGImport: async () => ({ digest: "prepared" }),
+  getPreparedXRAGImport: () => state.prepared(),
+}));
+vi.mock("@schornio/aibox-package-database/xrag/getXRAGImportStatus", () => ({
+  getXRAGImportStatus: () => state.status(),
 }));
 const state = vi.hoisted(() => ({
+  prepared: vi.fn<() => { digest: string } | null>(() => ({
+    digest: "prepared",
+  })),
+  status: vi.fn<() => string | null>(() => "applying"),
   packages: vi.fn(() => []),
   jobs: vi.fn(() => []),
   authorize: vi.fn(),
@@ -84,9 +91,22 @@ it("validates upload IDs and passes only administrable workspaces to the selecti
   const page = await Selection({ params: Promise.resolve({ id }) });
   expect(page.props).toMatchObject({
     uploadId: id,
+    status: "applying",
     prepared: { digest: "prepared" },
     preferences: { view: "table" },
     workspaces: [{ id: "a", name: "One" }],
   });
   expect(state.authorize).toHaveBeenCalledWith([], "admin", "workspace");
+});
+
+it("mounts a fresh selection when background inspection completes before the first refresh", async () => {
+  const id = "11111111-1111-4111-8111-111111111111";
+  const params = Promise.resolve({ id });
+  state.prepared.mockReturnValueOnce(null);
+  state.status.mockReturnValueOnce(null);
+  const pending = await Selection({ params });
+  state.status.mockReturnValueOnce("ready");
+  const ready = await Selection({ params });
+  expect(pending.key).not.toBe(ready.key);
+  expect(ready.props.prepared).toEqual({ digest: "prepared" });
 });

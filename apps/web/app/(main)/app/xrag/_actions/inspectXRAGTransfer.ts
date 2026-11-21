@@ -4,7 +4,8 @@ import { serverActionClient } from "@/lib/serverActionClient";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import { getXRAGContext } from "@/lib/xrag/getXRAGContext";
 import { listXRAGTransfers } from "@schornio/aibox-package-database/xrag/listXRAGTransfers";
-import { inspectXRAGTransfer as inspect } from "@schornio/aibox-package-database/xrag/inspectXRAGTransfer";
+import { queueXRAGPreparation } from "@schornio/aibox-package-database/xrag/queueXRAGPreparation";
+import { getPreparedXRAGImport } from "@schornio/aibox-package-database/xrag/getPreparedXRAGImport";
 export const inspectXRAGTransfer = serverActionClient
   .inputSchema(z.object({ uploadId: z.uuid() }))
   .action(async ({ parsedInput: { uploadId } }) => {
@@ -13,8 +14,11 @@ export const inspectXRAGTransfer = serverActionClient
       uploadId,
     );
     if (files.length !== 1) throw new Error("XRAG_TRANSFER_NOT_FOUND");
-    const { path, name } = files[0]!;
+    const { path } = files[0]!;
     const source = { path };
-    const result = await inspect({ source }, await getXRAGContext({ source }));
-    return { ...result, source: { path, name } };
+    const context = await getXRAGContext({ source });
+    const prepared = await getPreparedXRAGImport(uploadId, context);
+    if (prepared) return prepared;
+    await queueXRAGPreparation(source, context);
+    return null;
   });

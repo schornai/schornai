@@ -108,6 +108,28 @@ export function importBackend() {
       return q;
     }),
     rpc: vi.fn(async (name: string, args: any = {}) => {
+      if (name === "get_xrag_import_status")
+        return {
+          data:
+            [...jobs.values()].find(
+              (job) => job.plan.source.uploadId === args.p_upload_id,
+            )?.state ?? null,
+          error: null,
+        };
+      if (name === "removable_xrag_objects") {
+        const retained = [...jobs.values()]
+          .filter((job) => job.state === "committed")
+          .flatMap((job) =>
+            job.plan.artifacts.map((a: { path: string }) => a.path),
+          );
+        return {
+          data: args.p_paths.filter(
+            (path: string) =>
+              !retained.includes(`imported/${args.p_bucket}/${path}`),
+          ),
+          error: null,
+        };
+      }
       if (name === "begin_xrag_import") {
         const plan = structuredClone(args.p_plan);
         plan.files.forEach((f: any) => {

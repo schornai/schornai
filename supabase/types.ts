@@ -177,6 +177,7 @@ export type Database = {
           lease_until: string | null;
           name: string;
           owner_token: string | null;
+          retained_object_id: string | null;
           retry_at: string;
           state: string;
           updated_at: string;
@@ -194,6 +195,7 @@ export type Database = {
           lease_until?: string | null;
           name: string;
           owner_token?: string | null;
+          retained_object_id?: string | null;
           retry_at?: string;
           state?: string;
           updated_at?: string;
@@ -210,6 +212,7 @@ export type Database = {
           lease_until?: string | null;
           name?: string;
           owner_token?: string | null;
+          retained_object_id?: string | null;
           retry_at?: string;
           state?: string;
           updated_at?: string;
@@ -1962,6 +1965,7 @@ export type Database = {
           lease_until: string | null;
           name: string;
           owner_token: string | null;
+          retained_object_id: string | null;
           retry_at: string;
           state: string;
           updated_at: string;
@@ -2221,6 +2225,10 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      get_xrag_import_status: {
+        Args: { p_upload_id: string };
+        Returns: string;
+      };
       import_xrag_resources: {
         Args: {
           p_entries: Json;
@@ -2337,6 +2345,10 @@ export type Database = {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: undefined;
       };
+      removable_xrag_objects: {
+        Args: { p_bucket: string; p_paths: string[]; p_source_path: string };
+        Returns: string[];
+      };
       renew_artifact_publication: {
         Args: { p_id: string; p_owner_token: string };
         Returns: boolean;
@@ -2411,6 +2423,10 @@ export type Database = {
         Returns: undefined;
       };
       xrag_import_base_path: { Args: { p_path: string }; Returns: string };
+      xrag_object_is_retained: {
+        Args: { p_object_id: string };
+        Returns: boolean;
+      };
       xrag_resource_revision: {
         Args: { p_id: string; p_kind: string; p_workspace_id: string };
         Returns: string;
