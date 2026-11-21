@@ -23,7 +23,7 @@
     "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*",
     "@supabase/ssr": "0.12.7",
-    "@supabase/supabase-js": "2.119.0",
+    "@supabase/supabase-js": "2.119.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "fuse.js": "^7.5.0",
     "i18next": "^27.0.0",
