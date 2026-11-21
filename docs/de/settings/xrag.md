@@ -12,6 +12,7 @@ meta:
       "/app/xrag/import/[id]",
       "/api/xrag/download/[...path]",
       "/api/xrag/upload/[...path]",
+      "/api/storage/upload/resumable/[[...path]]",
       "/api/service/artifacts",
       "/api/service/artifacts/[id]",
     ]
@@ -31,6 +32,7 @@ meta:
       "apps/web/app/_components/xrag/XRAGExportButton.tsx",
       "apps/web/app/api/xrag/download/[...path]/route.ts",
       "apps/web/app/api/xrag/upload/[...path]/route.ts",
+      "apps/web/app/api/storage/upload/resumable/[[...path]]/route.ts",
       "apps/web/lib/xrag/downloadUrl.ts",
       "packages/database/src/xrag/getModelExportSource.ts",
       "packages/database/src/xrag/installedModelArchive.ts",
@@ -391,7 +393,7 @@ Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_xrag_upload_url`: Eigene unveränderbare Uploadadresse erstellen. Mindeststufe: **Workspace-Administrator**. Die Datei per HTTP PUT an die zurückgegebene öffentliche URL senden und den zurückgegebenen Pfad verwenden.
+- `platform_xrag_upload_url` erstellt eine Uploadadresse für eine eigene XRAG-Datei. Mindeststufe **Workspace-Administrator**. Für Dateien über 6 MiB übergibst du `resumable` an einen TUS-Client. Es enthält den Endpunkt, die Blockgröße von 6 MiB, den Signatur-Header und die Objektmetadaten. Bei einer Unterbrechung setzt der Client den Upload an der zuletzt bestätigten Position fort. Läuft die Signatur ab, rufe das Werkzeug mit demselben `path` auf und verwende die neue Signatur für die bestehende TUS-Sitzung. Bis einschließlich 6 MiB kannst du die Datei auch per HTTP PUT an `url` senden. Verwende den zurückgegebenen `path` für die Importvorschau.
 - `platform_xrag_preview`: Gesamtes Paket und Ziel prüfen; liefert Prüfsumme und Revisionen bestehender Objekte. Mindeststufe: **Workspace-Administrator**; neue Workspaces und Plattforminhalte erfordern globale Rechte und entsprechende Zugriffsstufe.
 - `platform_xrag_import`: Ressourcen in einen administrierten bestehenden Workspace importieren. Mindeststufe: **Workspace-Administrator**. Modelle und Plattforminhalte werden vollständig abgewiesen, auch bei globalen Administrator:innen.
 - `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Workspace anlegen. Mindeststufe: **Globaler Administrator**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Erfolgreiche oder endgültig fehlgeschlagene Importe löschen den gesamten Upload einschließlich abgewählter Inhalte; nur Modell-/Plattformpakete bleiben als Artefakte erhalten.

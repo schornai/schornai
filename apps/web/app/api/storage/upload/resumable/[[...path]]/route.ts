@@ -5,11 +5,14 @@ const SUPABASE_PUBLIC_ANON_KEY = getEnvSafe("SUPABASE_PUBLIC_ANON_KEY");
 const PUBLIC_PREFIX = "/api/storage/upload/resumable";
 const UPSTREAM_PREFIX = "/storage/v1/upload/resumable";
 
-function copyRequestHeaders(request: Request) {
+function copyRequestHeaders(
+  request: Request,
+  credential: "authorization" | "x-signature",
+) {
   const headers = new Headers({ apikey: SUPABASE_PUBLIC_ANON_KEY });
   // Never forward application cookies, proxy routing headers or arbitrary keys.
   for (const name of [
-    "authorization",
+    credential,
     "content-type",
     "tus-resumable",
     "upload-length",
@@ -40,10 +43,15 @@ async function proxyTus(
   context: RouteContext<"/api/storage/upload/resumable/[[...path]]">,
   method: "POST" | "HEAD" | "PATCH" | "DELETE",
 ) {
-  if (!/^Bearer [^\s]+$/i.test(request.headers.get("authorization") ?? "")) {
+  const { path } = await context.params;
+  const signed = path?.[0] === "sign";
+  if (
+    signed
+      ? !request.headers.get("x-signature")
+      : !/^Bearer [^\s]+$/i.test(request.headers.get("authorization") ?? "")
+  ) {
     return new Response(null, { status: 401 });
   }
-  const { path } = await context.params;
   // URL parsers normalize dot segments, even after encodeURIComponent().
   if (
     path?.some(
@@ -62,7 +70,10 @@ async function proxyTus(
   try {
     upstream = await fetch(`${SUPABASE_URL}${UPSTREAM_PREFIX}${suffix}`, {
       body: method === "HEAD" ? undefined : request.body,
-      headers: copyRequestHeaders(request),
+      headers: copyRequestHeaders(
+        request,
+        signed ? "x-signature" : "authorization",
+      ),
       method,
       redirect: "error",
       cache: "no-store",

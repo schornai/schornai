@@ -41,6 +41,8 @@ function catalog(
   approvals?: PlatformContext["approvals"],
   overrides: {
     supabase?: object;
+    supabaseServiceRole?: object;
+    xragUploadUrls?: PlatformContext["xragUploadUrls"];
     xragDownloadUrl?: PlatformContext["xragDownloadUrl"];
   } = {},
 ) {
@@ -60,6 +62,49 @@ function catalog(
   return registry.tools;
 }
 beforeEach(() => vi.clearAllMocks());
+it.each([true, false])(
+  "supplies signed TUS settings for public or internal XRAG clients (public=%s)",
+  async (external) => {
+    const path = input.source.path.replace("archive.tar", "upload.xrag.tar");
+    const token = "signed";
+    const direct = "http://storage.test/storage/v1";
+    const publicUrls = {
+      url: "https://app.test/put",
+      resumableEndpoint: "https://app.test/api/storage/upload/resumable/sign",
+    };
+    const bucket = {
+      createSignedUploadUrl: vi
+        .fn()
+        .mockResolvedValue({ data: { signedUrl: direct + "/put", token } }),
+    };
+    const tool = catalog("admin", "admin", undefined, {
+      supabaseServiceRole: { storage: { from: () => bucket } },
+      xragUploadUrls: external ? () => publicUrls : undefined,
+    }).find((tool) => tool.name === "platform_xrag_upload_url")!;
+    vi.stubEnv("SUPABASE_URL", "http://storage.test");
+    try {
+      expect(await tool.execute({ path })).toEqual({
+        path,
+        token,
+        url: external ? publicUrls.url : direct + "/put",
+        resumable: {
+          endpoint: external
+            ? publicUrls.resumableEndpoint
+            : direct + "/upload/resumable/sign",
+          chunkSize: 6291456,
+          headers: { "x-signature": token },
+          metadata: {
+            bucketName: "xrag-transfers",
+            objectName: path,
+            contentType: "application/x-tar",
+          },
+        },
+      });
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  },
+);
 it("offers XRAG operations only to workspace administrators and above", () => {
   expect(
     catalog([{ organization_id: "workspace", role: "editor" }], "editor"),

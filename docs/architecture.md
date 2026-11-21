@@ -203,7 +203,7 @@ deployment details.
 ## Follow scheduled work
 
 The realtime server starts the [scheduler](../apps/realtime/src/scheduler/startScheduler.ts)
-and registers `artifacts.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
+and handles jobs including `artifacts.cleanup`, `xrag.transfer.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
 claims durable jobs through [database operations](../packages/database/src/scheduler);
 Postgres owns due times, lease tokens, retries and interval rescheduling.
 Read the [delivery decision](adr/0005-scheduled-job-delivery.md) when adding a
@@ -288,7 +288,7 @@ of web requests. [Imported-file processing](../packages/realtime/src/platform/pr
 is delivered through a SQL outbox to the ordinary storage task queue. Read
 [ADR 0010](adr/0010-recoverable-xrag-imports.md) before changing file reservations,
 Storage attempt credentials, atomic metadata publication or recovery. The transfer bucket stores immutable caller-owned
-uploads and downloads; the scheduler’s `artifacts.cleanup` handler expires pending imports after one hour and background export downloads after 72 hours.
+uploads and downloads. The scheduler’s `xrag.transfer.cleanup` handler expires prepared imports after one hour and background export downloads after 72 hours.
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a
 publication after the global-admin entry point authorizes the caller. The

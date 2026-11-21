@@ -43,14 +43,20 @@ export function platformMcpHandler() {
       return new Response(null, { status: 405, headers: { Allow: "POST" } });
     const tools = createPlatformTools({
       ...context,
-      xragUploadUrl: (path, token) => {
+      xragUploadUrls: (path, token) => {
         const url = new URL(
           "/api/xrag/upload/" +
             path.split("/").map(encodeURIComponent).join("/"),
           origin,
         );
         url.searchParams.set("token", token);
-        return url.href;
+        return {
+          url: url.href,
+          resumableEndpoint: new URL(
+            "/api/storage/upload/resumable/sign",
+            origin,
+          ).href,
+        };
       },
       xragDownloadUrl: (signedUrl) =>
         new URL(xragFileDownloadUrl(signedUrl), origin).href,

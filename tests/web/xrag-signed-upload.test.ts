@@ -28,14 +28,33 @@ it("streams a public signed PUT to the fixed transfer bucket without forwarding 
         "?token=a%2Bb",
     ),
     expect.objectContaining({
-      body: req.body,
       method: "PUT",
       redirect: "error",
     }),
   );
   const [, init] = upstream.mock.calls[0]!;
+  expect(await new Response(init.body).text()).toBe("archive");
   expect(new Headers(init?.headers).has("authorization")).toBe(false);
 });
+it.each([true, false])(
+  "limits a signed PUT to 6 MiB with declared length %s",
+  async (declareLength) => {
+    vi.stubEnv("SUPABASE_URL", "http://kong:8000");
+    vi.stubEnv("SUPABASE_PUBLIC_ANON_KEY", "anon");
+    const size = 6 * 1024 ** 2 + 1;
+    upstream.mockImplementation(async (_url, init) => {
+      await new Response(init.body).arrayBuffer();
+      return new Response();
+    });
+    const request = new Request("https://app.test/?token=signed", {
+      method: "PUT",
+      body: new Uint8Array(size),
+      headers: declareLength ? { "content-length": String(size) } : {},
+    });
+    expect((await PUT(request, context)).status).toBe(413);
+    expect(upstream).toHaveBeenCalledTimes(declareLength ? 0 : 1);
+  },
+);
 it("rejects missing upload capabilities before contacting Storage", async () => {
   expect((await PUT(new Request("https://app.test/"), context)).status).toBe(
     400,

@@ -75,9 +75,11 @@ payloads, not total historical metadata or the number of active tasks.
 
 [`startScheduler.ts`](src/scheduler/startScheduler.ts) registers trusted handlers
 and recurring system jobs; [`worker.ts`](src/scheduler/worker.ts) executes them.
-Apply `20261108212843_scheduled_jobs.sql` before deploying this server. The first
-handler, `artifacts.cleanup`, replaces the artifact worker's cleanup timer and removes XRAG transfer files after 72 hours. It
-runs immediately after initial registration, then 60 seconds after each success.
+Apply `20261108212843_scheduled_jobs.sql` before deploying this server.
+`artifacts.cleanup` cleans up artifact publications. A separate worker runs
+`xrag.transfer.cleanup` to expire prepared imports and remove temporary XRAG
+files and downloads. Each job runs on initial registration and 60 seconds after
+its own successful completion. Each has its own lease and retry schedule.
 Registration is idempotent across restarts and servers.
 
 Server-side callers use `scheduleJob` and `cancelJob` in

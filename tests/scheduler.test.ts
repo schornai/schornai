@@ -225,48 +225,51 @@ it("returns immediately without registered handlers", async () => {
   });
   expect(f.rpc).not.toHaveBeenCalled();
 });
-it("registers recurring cleanup once and runs it through the scheduler", async () => {
-  const f = fixture(undefined, { kind: "artifacts.cleanup" });
-  const upsert = vi.fn().mockResolvedValue({ error: null });
-  f.supabase.from = vi.fn(() => ({ upsert }));
-  let claimed = false;
-  f.rpc.mockImplementation(async (name, ...args: unknown[]) => {
-    if (name === "claim_scheduled_job") {
-      if (
-        !(args[0] as { p_kinds: string[] }).p_kinds.includes(
-          "artifacts.cleanup",
-        )
-      )
+it.each([
+  ["artifacts.cleanup", cleanup, transferCleanup],
+  ["xrag.transfer.cleanup", transferCleanup, cleanup],
+] as const)(
+  "registers and executes %s independently",
+  async (kind, handler, otherHandler) => {
+    cleanup.mockClear();
+    transferCleanup.mockClear();
+    const f = fixture(undefined, { kind });
+    const upsert = vi.fn().mockResolvedValue({ error: null });
+    f.supabase.from = vi.fn(() => ({ upsert }));
+    let claimed = false;
+    f.rpc.mockImplementation(async (name, ...args: unknown[]) => {
+      if (name === "claim_scheduled_job") {
+        if (!(args[0] as { p_kinds: string[] }).p_kinds.includes(kind))
+          return { data: [], error: null } as any;
+        if (!claimed) {
+          claimed = true;
+          return { data: [f.job], error: null } as any;
+        }
+        f.stop.abort();
         return { data: [], error: null } as any;
-      if (!claimed) {
-        claimed = true;
-        return { data: [f.job], error: null } as any;
       }
-      f.stop.abort();
-      return { data: [], error: null } as any;
-    }
-    return { data: true, error: null } as any;
-  });
-  await startScheduler({
-    serverToken: "Worker test",
-    supabase: f.supabase,
-    signal: f.stop.signal,
-    instance: {} as any,
-  });
-  expect(upsert).toHaveBeenCalledWith(
-    expect.objectContaining({
-      id: "system:artifacts.cleanup",
-      interval_seconds: 60,
-    }),
-    { onConflict: "id", ignoreDuplicates: true },
-  );
-  expect(cleanup).toHaveBeenCalledWith(
-    expect.objectContaining({ supabase: f.supabase }),
-  );
-  expect(transferCleanup).toHaveBeenCalledWith(
-    expect.objectContaining({ supabase: f.supabase }),
-  );
-});
+      return { data: true, error: null } as any;
+    });
+    await startScheduler({
+      serverToken: "Worker test",
+      supabase: f.supabase,
+      signal: f.stop.signal,
+      instance: {} as any,
+    });
+    expect(upsert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: `system:${kind}`,
+        kind,
+        interval_seconds: 60,
+      }),
+      { onConflict: "id", ignoreDuplicates: true },
+    );
+    expect(handler).toHaveBeenCalledWith(
+      expect.objectContaining({ supabase: f.supabase }),
+    );
+    expect(otherHandler).not.toHaveBeenCalled();
+  },
+);
 
 it("continues maintenance while an automation is blocked on external work", async () => {
   const stop = new AbortController();

@@ -197,6 +197,16 @@ it("creates immutable upload tokens only for the verified caller", async () => {
   expect(test.bucket.createSignedUploadUrl).toHaveBeenCalledWith(upload.path, {
     upsert: false,
   });
+  expect(
+    (await createTransferUpload(test.options as any, upload.path)).path,
+  ).toBe(upload.path);
+  await expect(
+    createTransferUpload(
+      test.options as any,
+      upload.path.replace(userId, crypto.randomUUID()),
+    ),
+  ).rejects.toThrow("NOT_AUTHORIZED");
+  expect(test.bucket.createSignedUploadUrl).toHaveBeenCalledTimes(2);
   const denied = await setup("editor");
   await expect(createTransferUpload(denied.options as any)).rejects.toThrow(
     "NOT_AUTHORIZED",

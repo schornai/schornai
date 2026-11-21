@@ -1,6 +1,9 @@
 import { fetch as upload } from "undici";
 import { getEnvSafe } from "@schornio/aibox-package-utils/getEnvSafe";
-import { transferPathSchema } from "@schornio/aibox-package-database/xrag/transferSchema";
+import {
+  transferPathSchema,
+  XRAG_UPLOAD_CHUNK_BYTES,
+} from "@schornio/aibox-package-database/xrag/transferSchema";
 
 // The signed token grants a single immutable upload. Storage verifies it.
 export async function PUT(
@@ -26,20 +29,38 @@ export async function PUT(
     "content-type": request.headers.get("content-type") ?? "application/x-tar",
   });
   const length = request.headers.get("content-length");
+  if (length && Number(length) > XRAG_UPLOAD_CHUNK_BYTES)
+    return new Response(null, { status: 413 });
   if (length) headers.set("content-length", length);
-  const response = await upload(url, {
-    method: "PUT",
-    body: request.body as
-      import("node:stream/web").ReadableStream<Uint8Array> | null,
-    headers: Object.fromEntries(headers),
-    signal: request.signal,
-    duplex: "half",
-    redirect: "error",
-    cache: "no-store",
-  });
-  await response.body?.cancel();
-  return new Response(null, {
-    status: response.status,
-    headers: { "Cache-Control": "no-store" },
-  });
+  let received = 0;
+  const body = request.body?.pipeThrough(
+    new TransformStream<Uint8Array, Uint8Array>({
+      transform(chunk, controller) {
+        received += chunk.byteLength;
+        if (received > XRAG_UPLOAD_CHUNK_BYTES)
+          throw new Error("XRAG_UPLOAD_TOO_LARGE");
+        controller.enqueue(chunk);
+      },
+    }),
+  );
+  try {
+    const response = await upload(url, {
+      method: "PUT",
+      body: body as import("node:stream/web").ReadableStream<Uint8Array> | null,
+      headers: Object.fromEntries(headers),
+      signal: request.signal,
+      duplex: "half",
+      redirect: "error",
+      cache: "no-store",
+    });
+    await response.body?.cancel();
+    return new Response(null, {
+      status: response.status,
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (error) {
+    if (received > XRAG_UPLOAD_CHUNK_BYTES)
+      return new Response(null, { status: 413 });
+    throw error;
+  }
 }

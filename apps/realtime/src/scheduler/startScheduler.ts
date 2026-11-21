@@ -30,10 +30,7 @@ export async function startScheduler(
       "artifacts.cleanup",
       async (_job, signal) => {
         signal.throwIfAborted();
-        await Promise.all([
-          cleanupArtifactPublications(options),
-          cleanupXRAGTransfers(options),
-        ]);
+        await cleanupArtifactPublications(options);
       },
     ],
   ]);
@@ -61,6 +58,17 @@ export async function startScheduler(
   );
   await scheduleJob(
     {
+      id: "system:xrag.transfer.cleanup",
+      kind: "xrag.transfer.cleanup",
+      payload: {},
+      runAt: new Date(),
+      intervalSeconds: 60,
+      maxAttempts: 100,
+    },
+    options,
+  );
+  await scheduleJob(
+    {
       id: "system:xrag.import.recover",
       kind: "xrag.import.recover",
       payload: {},
@@ -74,6 +82,18 @@ export async function startScheduler(
   // system maintenance. Each lane still claims only one job at a time.
   await Promise.all([
     schedulerWorker({ ...options, handlers }),
+    schedulerWorker({
+      ...options,
+      handlers: new Map([
+        [
+          "xrag.transfer.cleanup",
+          async (_job, signal) => {
+            signal.throwIfAborted();
+            await cleanupXRAGTransfers(options);
+          },
+        ],
+      ]),
+    }),
     schedulerWorker({
       ...options,
       handlers: new Map([

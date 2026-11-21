@@ -2,6 +2,7 @@ import { globalIdentifierSchema } from "xrag/identifier";
 import { z } from "zod";
 
 export const XRAG_TRANSFER_BUCKET = "xrag-transfers";
+export const XRAG_UPLOAD_CHUNK_BYTES = 6 * 1024 ** 2;
 export const transferPathSchema = z
   .string()
   .max(310)

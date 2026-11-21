@@ -30,6 +30,7 @@ import { removeXRAGPackageItem } from "@schornio/aibox-database/xrag/removeXRAGP
 import { deleteXRAGPackage } from "@schornio/aibox-database/xrag/deleteXRAGPackage";
 import { exportXRAGPackage } from "@schornio/aibox-database/xrag/exportXRAGPackage";
 import { z } from "zod";
+import { getEnvSafe } from "@schornio/aibox-package-utils/getEnvSafe";
 import { resourceKindSchema } from "xrag/schema";
 import { limitPlatformClaims } from "@schornio/aibox-database/mcp/platformAccess";
 import { getWorkspaces } from "@schornio/aibox-database/workspace/getWorkspaces";
@@ -45,6 +46,9 @@ import {
 import {
   importPreviewInputSchema,
   importTransferInputSchema,
+  transferPathSchema,
+  XRAG_TRANSFER_BUCKET,
+  XRAG_UPLOAD_CHUNK_BYTES,
 } from "@schornio/aibox-database/xrag/transferSchema";
 import { importXRAGTransfer as importXRAG } from "@schornio/aibox-database/xrag/importXRAGTransfer";
 import type { platformRegistry, PlatformContext } from "./registry.ts";
@@ -91,15 +95,32 @@ export function addXRAGTools(
   );
   add(
     "platform_xrag_upload_url",
-    "Create an immutable XRAG upload URL owned by the caller. Upload the tar archive, then pass its path to the inspect, preview or import tools.",
+    "Create an immutable XRAG upload owned by the caller. For files larger than 6 MiB use the returned resumable TUS settings. Smaller files up to 6 MiB also support PUT to url. If the token expires, pass the same path to renew it and resume the TUS session. After the upload, use path to inspect, preview or import.",
     "workspace",
     false,
-    z.object({}),
-    async () => {
-      const upload = await createTransferUpload(await options());
+    z.object({ path: transferPathSchema.optional() }),
+    async ({ path }) => {
+      const upload = await createTransferUpload(await options(), path);
+      const urls = context.xragUploadUrls?.(upload.path, upload.token) ?? {
+        url: upload.url,
+        resumableEndpoint:
+          getEnvSafe("SUPABASE_URL").replace(/\/+$/, "") +
+          "/storage/v1/upload/resumable/sign",
+      };
       return {
-        ...upload,
-        url: context.xragUploadUrl?.(upload.path, upload.token) ?? upload.url,
+        path: upload.path,
+        token: upload.token,
+        url: urls.url,
+        resumable: {
+          endpoint: urls.resumableEndpoint,
+          chunkSize: XRAG_UPLOAD_CHUNK_BYTES,
+          headers: { "x-signature": upload.token },
+          metadata: {
+            bucketName: XRAG_TRANSFER_BUCKET,
+            objectName: upload.path,
+            contentType: "application/x-tar",
+          },
+        },
       };
     },
   );

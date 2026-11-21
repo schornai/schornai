@@ -4,7 +4,10 @@ import { Readable } from "node:stream";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import type { SupabaseClient } from "../_shared/_types.ts";
-import { XRAG_TRANSFER_BUCKET } from "./transferSchema.ts";
+import {
+  XRAG_TRANSFER_BUCKET,
+  XRAG_UPLOAD_CHUNK_BYTES,
+} from "./transferSchema.ts";
 
 /** Internal: use only after authorizing all source objects/uploads. userId comes
  * from verified authentication. The source can be streamed directly into Storage. */
@@ -20,7 +23,7 @@ export async function saveTransferExport(
   const bucket = supabase.storage.from(XRAG_TRANSFER_BUCKET);
   const body = typeof file === "string" ? createReadStream(file) : file.stream;
   try {
-    if (size >= 6 * 1024 ** 2) {
+    if (size >= XRAG_UPLOAD_CHUNK_BYTES) {
       await uploadExportStream(body, size, path, {
         endpoint: `${getEnvSafe("SUPABASE_URL").replace(/\/$/, "")}/storage/v1/upload/resumable`,
         token: getEnvSafe("SUPABASE_SERVICE_ROLE_KEY"),

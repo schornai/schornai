@@ -18,7 +18,10 @@ import type { ServerRealtimeWebsocketProvider } from "../server/ServerRealtimeWe
 export type PlatformContext = {
   getSsoConfig?: () => import("@schornio/aibox-database/sso/_types").ServiceRoleConfig;
   /** HTTP clients reach private Storage downloads through the public app origin. */
-  xragUploadUrl?: (path: string, token: string) => string;
+  xragUploadUrls?: (
+    path: string,
+    token: string,
+  ) => { url: string; resumableEndpoint: string };
   xragDownloadUrl?: (signedUrl: string) => string;
   approvals?: PlatformApprovalPolicy;
   userId: string;

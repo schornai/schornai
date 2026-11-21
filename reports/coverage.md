@@ -6,10 +6,10 @@ Erzeugt mit `npm run test:coverage` und `node scripts/test-report.mjs`.
 
 | Metrik     | Abgedeckt / gesamt | Coverage |
 | ---------- | -----------------: | -------: |
-| lines      |        15337/16194 |    94.7% |
-| statements |        16262/17368 |   93.63% |
-| functions  |          4170/4559 |   91.46% |
-| branches   |        11820/13059 |   90.51% |
+| lines      |        15358/16214 |   94.72% |
+| statements |        16283/17388 |   93.64% |
+| functions  |          4173/4561 |   91.49% |
+| branches   |        11840/13077 |   90.54% |
 
 Python-Transcriber: **100.00%** kombinierte Zeilen-/Zweigabdeckung.
 
@@ -21,12 +21,12 @@ Die Zeilen-Grenze von 90% gilt zusätzlich für jeden Workspace. Statements, Fun
 | --------------------------- | -----------------: | -------: |
 | apps/admin-mac              |            136/140 |   97.14% |
 | apps/cli                    |              22/23 |   95.65% |
-| apps/realtime               |            858/888 |   96.62% |
+| apps/realtime               |            861/891 |   96.63% |
 | apps/transcriber-mac        |            158/160 |   98.75% |
-| apps/web                    |          6697/7270 |   92.12% |
-| packages/database           |          2831/2918 |   97.02% |
+| apps/web                    |          6709/7283 |   92.12% |
+| packages/database           |          2834/2921 |   97.02% |
 | packages/markdown-changelog |              92/92 |  100.00% |
-| packages/realtime           |          2073/2152 |   96.33% |
+| packages/realtime           |          2076/2153 |   96.42% |
 | packages/service            |          1217/1264 |   96.28% |
 | packages/ui                 |            605/625 |   96.80% |
 | packages/utils              |            132/132 |  100.00% |

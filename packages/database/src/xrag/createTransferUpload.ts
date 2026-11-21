@@ -4,13 +4,21 @@ import {
   type XRAGOptions,
 } from "./authentication.ts";
 import { requirePlatformAccess } from "../mcp/platformAccess.ts";
-import { XRAG_TRANSFER_BUCKET } from "./transferSchema.ts";
+import { transferPathSchema, XRAG_TRANSFER_BUCKET } from "./transferSchema.ts";
 
 /** Authorize the owner before minting an immutable, single-path upload token. */
-export async function createTransferUpload(options: XRAGOptions) {
+export async function createTransferUpload(
+  options: XRAGOptions,
+  resumePath?: string,
+) {
   requirePlatformAccess(await getXRAGClaims(options), "admin", "workspace");
   const userId = await getXRAGUserId(options);
-  const path = `${userId}/${crypto.randomUUID()}/upload.xrag.tar`;
+  const path =
+    resumePath === undefined
+      ? `${userId}/${crypto.randomUUID()}/upload.xrag.tar`
+      : transferPathSchema.parse(resumePath);
+  if (!path.startsWith(`${userId}/`) || !path.endsWith("/upload.xrag.tar"))
+    throw new Error("NOT_AUTHORIZED");
   const { data, error } = await options.supabaseServiceRole.storage
     .from(XRAG_TRANSFER_BUCKET)
     .createSignedUploadUrl(path, { upsert: false });

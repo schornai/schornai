@@ -1,5 +1,6 @@
 import { Upload } from "tus-js-client";
 import type { Readable } from "node:stream";
+import { XRAG_UPLOAD_CHUNK_BYTES } from "./transferSchema.ts";
 
 /** Server-only Node HTTP transport: bypasses Next's fetch cache completely.
  * TUS retains at most a chunk for retry; never converts the archive to a Blob.
@@ -37,7 +38,7 @@ export async function uploadExportStream(
     const upload = new Upload(stream, {
       endpoint: options.endpoint,
       uploadSize: size,
-      chunkSize: 6 * 1024 * 1024,
+      chunkSize: XRAG_UPLOAD_CHUNK_BYTES,
       retryDelays: [0, 1000, 3000, 5000, 10000, 30000],
       headers: {
         apikey: options.token,
