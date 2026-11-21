@@ -243,3 +243,17 @@ it("leaves cleanup retryable when durable persistence fails", async () => {
   await f.run();
   expect(f.revoke.delete).toHaveBeenCalled();
 });
+
+it("continues file and history cleanup after the queue wait timeout", async () => {
+  const f = fixture();
+  const waitTimeout = new AbortController();
+  vi.spyOn(AbortSignal, "timeout").mockReturnValue(waitTimeout.signal);
+  mocks.remove.mockImplementationOnce(async (_path, session, options) => {
+    waitTimeout.abort();
+    session.abortSignal.throwIfAborted();
+    options.beforeRemove("file");
+  });
+  await f.run();
+  expect(getActivities(f.history).activities.has(input.activityId)).toBe(false);
+  expect(f.revoke.delete).toHaveBeenCalled();
+});

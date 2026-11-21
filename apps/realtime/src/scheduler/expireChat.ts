@@ -38,7 +38,6 @@ export async function expireChat(
     documentName,
   )!;
   const userIds = await getAllowedUserIdsByDocumentName(documentName, options);
-  const syncSignal = AbortSignal.any([signal, AbortSignal.timeout(45_000)]);
   const queue = await options.instance.openDirectConnection(
     getTaskQueueDocumentName(),
   );
@@ -59,9 +58,10 @@ export async function expireChat(
     // Wait until owners acknowledge cancellation (or coordinator recovery does).
     // A retry is preferable to deleting files still being used by a live worker.
     await new Promise<void>((resolve, reject) => {
+      const waitSignal = AbortSignal.any([signal, AbortSignal.timeout(45_000)]);
       const cleanup = () => {
         tasks.unobserve(check);
-        syncSignal.removeEventListener("abort", abort);
+        waitSignal.removeEventListener("abort", abort);
       };
       const check = () => {
         if (!active().length) {
@@ -71,24 +71,24 @@ export async function expireChat(
       };
       const abort = () => {
         cleanup();
-        reject(syncSignal.reason);
+        reject(waitSignal.reason);
       };
       tasks.observe(check);
-      syncSignal.addEventListener("abort", abort, { once: true });
-      if (syncSignal.aborted) abort();
+      waitSignal.addEventListener("abort", abort, { once: true });
+      if (waitSignal.aborted) abort();
       else check();
     });
     const storage = new StorageSession({
       storage: { type: "activity", activityId: activityId!, agentId: agentId! },
       supabaseStorage: options.supabase.storage,
-      abortSignal: syncSignal,
+      abortSignal: signal,
     });
     await remove("", Object.assign(storage, { logAction() {} }), {
       ...options,
-      beforeRemove: () => syncSignal.throwIfAborted(),
+      beforeRemove: () => signal.throwIfAborted(),
     });
     for (const userId of userIds) {
-      syncSignal.throwIfAborted();
+      signal.throwIfAborted();
       const history = await options.instance.openDirectConnection(
         getActivitiesDocumentName({ userId }),
       );
