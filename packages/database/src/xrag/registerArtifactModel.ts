@@ -1,3 +1,4 @@
+import { importedOllamaLocation } from "xrag/ollamaModelLocation";
 import { createHash } from "node:crypto";
 import type { SupabaseClient } from "../_shared/_types.ts";
 import type { XRAG } from "./_schema.ts";
@@ -30,7 +31,7 @@ export async function registerArtifactModel(
       ? { fileSystemIdentifier }
       : {
           contextSize: xrag.meta.contextSize,
-          ollamaIdentifier: `local_registry.schorn.ai/library/${xrag.modelName}:${xrag.modelTag}`,
+          ollamaIdentifier: importedOllamaLocation(xrag).identifier,
           ...(xrag.meta.type === "ollama_llm_v1"
             ? {
                 featureThinking: xrag.meta.featureThinking,

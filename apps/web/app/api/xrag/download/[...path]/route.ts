@@ -1,3 +1,4 @@
+import { installedModelDownload } from "@/lib/xrag/installedModelDownload";
 import { z } from "zod";
 import { streamResourceArchive } from "xrag/resourceArchive";
 import { identifierFileName } from "xrag/identifier";
@@ -14,13 +15,18 @@ import {
 import { signedExportSource } from "@/lib/xrag/downloadUrl";
 import { getXRAGContext } from "@/lib/xrag/getXRAGContext";
 
-async function modelSource(path: string[]) {
+async function modelSource(request: Request, path: string[]) {
   const [, id, digest] = z
     .tuple([z.literal("model"), z.string().min(1).max(200), z.hash("sha256")])
     .parse(path);
   const options = await getXRAGContext({ selection: { kind: "model", id } });
-  const model = await getModelExportSource(id, options);
+  const model = await getModelExportSource(id, options, digest);
   // Keep resumed requests bound to the archive chosen in the model info.
+  if (model.installed) {
+    if (model.installed.version !== digest)
+      throw new Error("XRAG_SOURCE_CHANGED");
+    return installedModelDownload(request, model.installed, model.name);
+  }
   if (model.id !== digest) throw new Error("XRAG_MODEL_ARCHIVE_UNAVAILABLE");
   return {
     url: await getArtifactDownloadUrl(model.path, {
@@ -79,12 +85,13 @@ export async function GET(
     if (path[0] === "resource") return await resourceDownload(request, path);
     const file =
       path[0] === "model"
-        ? await modelSource(path)
+        ? await modelSource(request, path)
         : signedExportSource(
             path,
             new URL(request.url).searchParams.get("token"),
             getEnvSafe("SUPABASE_URL"),
           );
+    if (file instanceof Response) return file;
     const response = await storageDownloadResponse(
       request,
       file.url,

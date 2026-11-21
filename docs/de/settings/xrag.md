@@ -19,7 +19,7 @@ meta:
   role_scope: "Jeweiliger Workspace für Ressourcen; gesamte Instanz für Modelle und Plattformupdates."
   prerequisites: "Vertrauenswürdiges XRAG-Paket; Service mit passender Dienstkonfiguration und Freigabetoken."
   status: "verfügbar"
-  last_verified: "2026-11-19"
+  last_verified: "2026-11-21"
   source_files:
     [
       "apps/web/app/(main)/app/xrag/page.tsx",
@@ -33,6 +33,7 @@ meta:
       "apps/web/app/api/xrag/upload/[...path]/route.ts",
       "apps/web/lib/xrag/downloadUrl.ts",
       "packages/database/src/xrag/getModelExportSource.ts",
+      "packages/database/src/xrag/installedModelArchive.ts",
       "packages/database/src/xrag/getRepositoryExportFiles.ts",
       "packages/xrag/src/resourceArchive.ts",
       "apps/web/app/_components/xrag/XRAGObjectActions.tsx",
@@ -100,9 +101,7 @@ befindliche Maschinen können die Dateien nach ihrer Wiederverbindung beziehen.
 Automation. Speichere einen neuen oder geänderten Entwurf, bevor du die Infoansicht für den Export oder zum Hinzufügen zu einem Paket öffnest. Für ein lokales Modell öffnest du in den Einstellungen **Modelle** und wählst die Modellkarte.
 **XRAG exportieren** lädt das gewählte Objekt als eine `.xrag.tar` herunter.
 Bei einer Dokumentenablage enthält die Datei die Konfiguration und alle Dateien,
-einschließlich vorhandener Text- und Transkriptdateien. Bei einem Modell erhältst
-du das ursprüngliche Ollama- oder MLX-Whisper-Archiv. Es muss im Dateikatalog
-der Instanz verfügbar sein.
+einschließlich vorhandener Text- und Transkriptdateien. Für Whisper liest der Export die installierten Gewichte und die Konfiguration auf dem Core-Host. Für Ollama liest er das Manifest und die darin genannten Blobs. Beide werden beim Herunterladen zu einem XRAG gestreamt. Läuft das Modell ausschließlich auf einem anderen Rechner, kann der Core-Host ein veröffentlichtes Modellarchiv aus dem Dateikatalog verwenden.
 
 Externe Modelle werden über **Anbieter und Modellkennung** mit bereits
 eingerichteten Modellen auf der Zielinstanz verbunden. Ein eindeutiger Treffer
@@ -149,8 +148,7 @@ kannst du abbrechen. Bei einem Fehler kannst du einen neuen Export des Pakets st
 Einträge oder ein persönliches Paket zu löschen wirkt sich nur auf die gespeicherte Auswahl aus.
 
 Große XRAG-Pakete bis 200 GiB werden in begrenzten Speicherblöcken übertragen.
-Modelle werden direkt aus dem unveränderlichen Originalarchiv gelesen; das gesamte
-Paket wird weder im RAM noch als zusätzliche lokale Datei aufgebaut.
+Bei installierten Modellen liest der Worker die Dateien einmal für die Prüfsumme im Paketverzeichnis und erneut beim Upload. Er streamt die Daten direkt in das angeforderte Paket. Zusätzlicher dauerhafter Speicher für ein gepacktes Quellmodell ist dafür nicht erforderlich.
 Dokumentenablagen benötigen temporären Plattenplatz für ihre Einzelarchive,
 damit deren Prüfsummen vor dem Paketupload feststehen. Dieser Platz muss auf
 dem Realtime-Host verfügbar sein. Nach Verbindungsabbrüchen setzt der Upload
@@ -247,7 +245,7 @@ Ablagen-Konfiguration neu aufgebaut. Fehlende Modelle oder Fehler bei dieser
 anschließenden Verarbeitung rollen den bereits abgeschlossenen Import nicht
 zurück; die Datei bleibt in der Ablage und ist gegebenenfalls noch nicht durchsuchbar.
 
-Einzelne Agenten, Transkriptoren, Dokumentenablagen und Automationen werden beim Herunterladen als Archiv erzeugt. Bricht der Download ab, starte ihn in der Infoansicht erneut. Bei lokalen Modellen liefert die App das veröffentlichte Originalarchiv. Unterstützt dein Browser Teilabrufe, kann er unterbrochene Modelldownloads fortsetzen, solange du Zugriff hast und dieselbe Modellversion verfügbar ist.
+Einzelne Agenten, Transkriptoren, Dokumentenablagen und Automationen werden beim Herunterladen als Archiv erzeugt. Bricht der Download ab, starte ihn in der Infoansicht erneut. Bei lokalen Modellen liefert die App ein Archiv aus der Installation oder aus dem Dateikatalog. Unterstützt dein Browser Teilabrufe, kann er unterbrochene Modelldownloads fortsetzen, solange du Zugriff hast und dieselbe Modellversion verfügbar ist.
 
 Downloadlinks für fertige Pakete und für MCP-Einzelexporte gelten zehn Minuten. Offene Importauswahlen verfallen nach einer
 Stunde. Fertige Hintergrundexporte werden nach 72 Stunden bereinigt. Eine Sammeldatei enthält höchstens 1.000 Einzelarchive. Zugangsdaten
@@ -397,7 +395,7 @@ Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 - `platform_xrag_preview`: Gesamtes Paket und Ziel prüfen; liefert Prüfsumme und Revisionen bestehender Objekte. Mindeststufe: **Workspace-Administrator**; neue Workspaces und Plattforminhalte erfordern globale Rechte und entsprechende Zugriffsstufe.
 - `platform_xrag_import`: Ressourcen in einen administrierten bestehenden Workspace importieren. Mindeststufe: **Workspace-Administrator**. Modelle und Plattforminhalte werden vollständig abgewiesen, auch bei globalen Administrator:innen.
 - `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Workspace anlegen. Mindeststufe: **Globaler Administrator**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Erfolgreiche oder endgültig fehlgeschlagene Importe löschen den gesamten Upload einschließlich abgewählter Inhalte; nur Modell-/Plattformpakete bleiben als Artefakte erhalten.
-- `platform_xrag_export` exportiert ein Objekt. Mit `includeModels: true` enthält der Download auch direkt verwendete lokale Modellarchive. Externe Modelle bleiben Verweise auf Anbieter und Modellkennung. Mindeststufe **Workspace-Administrator** mit Administratorrechten im Workspace des Objekts. Für lokale Modelle muss das Originalarchiv verfügbar sein.
+- `platform_xrag_export` exportiert ein Objekt. Mit `includeModels: true` enthält der Download auch direkt verwendete lokale Modellarchive. Externe Modelle bleiben Verweise auf Anbieter und Modellkennung. Mindeststufe **Workspace-Administrator** mit Administratorrechten im Workspace des Objekts. Für lokale Modelle genügen die installierten Dateien auf dem Core-Host. Alternativ kann der Export ein veröffentlichtes Archiv verwenden.
 - `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globale Ressourcen-ID lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**, Administratorrechte im Workspace des Objekts. Gilt für Agenten, Transkriptoren, Dokumentenablagen und eigene Automatisierungen, nicht für Modelle.
 
 - `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
@@ -413,7 +411,7 @@ besondere Grenzen und der vollständige Werkzeugkatalog stehen unter
 - `platform_xrag_saved_package_list`, `platform_xrag_saved_package_create`: Eigene gespeicherte XRAG-Pakete auflisten bzw. anlegen. Mindeststufe: **Workspace-Administrator**.
 - `platform_xrag_saved_package_add`, `platform_xrag_saved_package_remove`: Ein Objekt samt ausdrücklich ausgewählten verbundenen Objekten atomar zur eigenen Auswahl hinzufügen bzw. einen Eintrag daraus entfernen. Mindeststufe: **Workspace-Administrator**; Hinzufügen erfordert Zugriff auf das Modell bzw. Administratorrechte im Objekt-Workspace.
 - `platform_xrag_saved_package_delete`: Eigenes XRAG-Paket löschen, ohne Quellobjekte zu löschen. Mindeststufe: **Workspace-Administrator**.
-- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Workspace-Administrator**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; ursprüngliche Modellarchive müssen verfügbar sein.
+- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Workspace-Administrator**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
 
 - `platform_xrag_related_objects`: Verbundene Agenten, Dokumentenablagen, Transkriptoren und Modelle einschließlich weiterer Verknüpfungen auflisten. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Quell-Workspace und in jedem angebotenen Ressourcen-Workspace. Externe API-Modelle werden nicht angeboten; höchstens 999 verbundene Objekte. Beim Hinzufügen werden Verbindung und Berechtigung erneut geprüft.
 

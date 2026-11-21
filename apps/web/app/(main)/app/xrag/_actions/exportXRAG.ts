@@ -13,7 +13,12 @@ export const exportXRAG = serverActionClient
     const options = await getXRAGContext({ selection: parsedInput });
     if (parsedInput.kind === "model") {
       const source = await getModelExportSource(parsedInput.id, options);
-      return { url: xragModelDownloadUrl(parsedInput.id, source.id) };
+      return {
+        url: xragModelDownloadUrl(
+          parsedInput.id,
+          source.id ?? source.installed.version,
+        ),
+      };
     }
     return { url: xragResourceDownloadUrl(parsedInput.kind, parsedInput.id) };
   });

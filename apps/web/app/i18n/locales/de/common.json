@@ -308,7 +308,7 @@
       "errorGlobalIdTaken": "Diese globale ID ist im gewählten Arbeitsplatz bereits vergeben.",
       "errorGlobalId": "Die Vorgabe wird aus dem Titel in kebab-case erzeugt. Verwende für die globale ID 1 bis 200 Zeichen aus a–z, 0–9, Bindestrich (-), Schrägstrich (/) und Unterstrich (_).",
       "labelSaveId": "Globale ID speichern",
-      "errorAction": "Der Vorgang ist fehlgeschlagen. Prüfe die Berechtigungen, die globale ID und die Verfügbarkeit der Modellarchive."
+      "errorAction": "Der Vorgang ist fehlgeschlagen. Prüfe die Berechtigungen, die globale ID und die Verfügbarkeit der Modelldateien."
     },
     "XRAGTransfer": {
       "labelTitle": "XRAG Import und Export",

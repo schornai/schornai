@@ -1,3 +1,5 @@
+import { uploadExportStream } from "./uploadExportStream.ts";
+import { getEnvSafe } from "@schornio/aibox-package-utils/getEnvSafe";
 import { Readable } from "node:stream";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
@@ -5,30 +7,41 @@ import type { SupabaseClient } from "../_shared/_types.ts";
 import { XRAG_TRANSFER_BUCKET } from "./transferSchema.ts";
 
 /** Internal: use only after authorizing all source objects/uploads. userId comes
- * from verified authentication; file is a private, validated local XRAG snapshot. */
+ * from verified authentication. The source can be streamed directly into Storage. */
 export async function saveTransferExport(
-  file: string,
+  file: string | { stream: Readable; size: number },
   name: string,
   userId: string,
-  { supabase }: { supabase: SupabaseClient },
+  { supabase, signal }: { supabase: SupabaseClient; signal?: AbortSignal },
 ) {
-  const size = (await stat(file)).size;
+  const size = typeof file === "string" ? (await stat(file)).size : file.size;
   if (size === 0) throw new Error("XRAG_EXPORT_FAILED");
   const path = `${userId}/${crypto.randomUUID()}/${name}`;
   const bucket = supabase.storage.from(XRAG_TRANSFER_BUCKET);
-  // Next.js instruments fetch bodies; pass a Web Stream so the file is
-  // forwarded correctly instead of becoming an empty request body.
-  const body = createReadStream(file);
-  // Node and DOM declare different BYOB reader types for the same Web API.
-  const stream = Readable.toWeb(body) as unknown as ReadableStream<Uint8Array>;
+  const body = typeof file === "string" ? createReadStream(file) : file.stream;
   try {
-    const uploaded = await bucket.upload(path, stream, {
-      contentType: "application/x-tar",
-      upsert: false,
-      headers: { "Content-Length": String(size) },
-      duplex: "half",
-    });
-    if (uploaded.error) throw new Error("XRAG_EXPORT_FAILED");
+    if (size >= 6 * 1024 ** 2) {
+      await uploadExportStream(body, size, path, {
+        endpoint: `${getEnvSafe("SUPABASE_URL").replace(/\/$/, "")}/storage/v1/upload/resumable`,
+        token: getEnvSafe("SUPABASE_SERVICE_ROLE_KEY"),
+        signal: signal ?? new AbortController().signal,
+        bucketName: XRAG_TRANSFER_BUCKET,
+      });
+    } else {
+      const stream = Readable.toWeb(
+        body,
+      ) as unknown as ReadableStream<Uint8Array>;
+      const uploaded = await bucket.upload(path, stream, {
+        contentType: "application/x-tar",
+        upsert: false,
+        headers: { "Content-Length": String(size) },
+        duplex: "half",
+      });
+      if (uploaded.error) throw new Error("XRAG_EXPORT_FAILED");
+    }
+  } catch (error) {
+    await bucket.remove([path]);
+    throw error;
   } finally {
     body.destroy();
   }
@@ -40,7 +53,10 @@ export async function saveTransferExport(
     throw new Error("XRAG_EXPORT_FAILED");
   }
   const signed = await bucket.createSignedUrl(path, 600, { download: name });
-  if (signed.error || !signed.data) throw new Error("XRAG_EXPORT_FAILED");
+  if (signed.error || !signed.data) {
+    await bucket.remove([path]);
+    throw new Error("XRAG_EXPORT_FAILED");
+  }
   return {
     path,
     name,

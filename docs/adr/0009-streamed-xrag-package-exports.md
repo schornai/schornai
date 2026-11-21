@@ -12,8 +12,14 @@ This differs deliberately from non-replayable chat tasks in ADR 0003. The saved
 selection is a snapshot of object IDs, not a snapshot of every object's contents.
 A reclaimed export resolves current content and permissions again.
 
-The worker resolves immutable model archives and streams their bytes straight
-into a deterministic tar, verifying their digest. Resources are streamed once
+The worker reads [installed model files](../../packages/database/src/xrag/installedModelArchive.ts)
+through read-only mounts on the core host. A collection needs every child's SHA-256
+in its leading manifest, so the worker hashes each generated model archive before
+streaming the same files into the upload and verifies the digest during that second
+pass. This trades sequential reads for bounded memory and zero model spool space.
+A published archive can supply a model installed only on another machine.
+Single downloads seek directly to the requested range in the TAR headers and
+payload files. File identity and modification checks fence replaced files. Resources are streamed once
 into private temporary single-object archives because the collection manifest
 needs their digests and sizes before any child entry. No enclosing collection is
 written locally. Unknown-size resource inputs retain a one-file spool fallback;

@@ -308,7 +308,7 @@
       "errorGlobalIdTaken": "This global ID is already in use in the selected workspace.",
       "errorGlobalId": "The default ID is generated from the title in kebab-case. Use 1 to 200 characters from a–z, 0–9, hyphens (-), slashes (/), and underscores (_).",
       "labelSaveId": "Save global ID",
-      "errorAction": "The operation failed. Check your permissions, the global ID and the availability of model archives."
+      "errorAction": "The operation failed. Check your permissions, the global ID and the availability of model files."
     },
     "XRAGTransfer": {
       "labelTitle": "XRAG import and export",

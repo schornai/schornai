@@ -113,6 +113,7 @@ it("streams the selected immutable model archive with range support and no expor
   expect(state.source).toHaveBeenCalledWith(
     "large-model",
     await state.context.mock.results[0]!.value,
+    digest,
   );
   expect(state.sign).toHaveBeenCalledWith("private/model", 3600);
   expect(response.status).toBe(206);
@@ -294,4 +295,28 @@ it("keeps Storage failures out of otherwise authorized downloads", async () => {
   const rangeError = await download(url);
   expect(rangeError.status).toBe(416);
   expect(rangeError.headers.get("content-range")).toBe(`bytes */${size}`);
+});
+
+it("downloads the pinned installation via the regular model action and route without Storage", async () => {
+  const bytes = Buffer.from("model archive");
+  const installed = {
+    size: bytes.length,
+    version: digest,
+    async *read(start: number, end: number) {
+      yield bytes.subarray(start, end);
+    },
+  };
+  state.source.mockResolvedValue({
+    installed,
+    size: bytes.length,
+    name: "model.xrag.tar",
+  });
+  const { url } = await exportXRAG({ kind: "model", id: "installed" });
+  expect(url).toBe(xragModelDownloadUrl("installed", digest));
+  const response = await download(url);
+  expect(response.status).toBe(200);
+  expect(await response.text()).toBe("model archive");
+  installed.version = "b".repeat(64);
+  expect((await download(url)).status).toBe(404);
+  expect(state.sign).not.toHaveBeenCalled();
 });

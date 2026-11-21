@@ -25,6 +25,8 @@ Consequently the relative bind mount `../ollama/models` resolves to
 `~/.aibox/ollama/models` on the host. Inside the realtime container it is mounted
 read-only at `/ollama/models`, and `OLLAMA_MODELS` points there. When starting
 Compose manually, use the same project directory or adapt the host mount path.
+Web and realtime also mount `../mlx/whisper/models` read-only. Both processes use
+`MLX_WHISPER_MODELS` and `OLLAMA_MODELS` for on-demand XRAG exports.
 
 A recursive filesystem watcher publishes a change event after manifest changes
 settle for 250 ms. Queues reload their capabilities at startup and on those

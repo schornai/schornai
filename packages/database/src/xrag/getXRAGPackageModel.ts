@@ -1,7 +1,7 @@
 import { getAIModelById } from "../aiModel/getAIModelById.ts";
 import type { XRAGOptions } from "./authentication.ts";
 
-/** Resolve a caller-readable local model for selection. The export checks its original archive. */
+/** Resolve a caller-readable local model for selection. The export resolves its installed files or published archive. */
 export async function getXRAGPackageModel(
   id: string,
   options: Pick<XRAGOptions, "supabase">,

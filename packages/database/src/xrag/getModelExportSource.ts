@@ -1,3 +1,4 @@
+import { installedModelArchive } from "./installedModelArchive.ts";
 import { nativeResourceId } from "xrag/identity";
 import { identifierFromTitle } from "xrag/identifier";
 import { xragSchema } from "xrag/schema";
@@ -6,12 +7,22 @@ import { mapAIModel } from "../aiModel/_mappers.ts";
 import { requirePlatformAccess } from "../mcp/platformAccess.ts";
 import { mapArtifact } from "./_mappers.ts";
 
-/** Workspace administrators may export a readable model's original archive,
+type ModelExportSource = { resourceId: string; name: string; size: number } & (
+  | {
+      installed: Awaited<ReturnType<typeof installedModelArchive>>;
+      id?: never;
+      path?: never;
+    }
+  | { installed?: never; id: string; path: string }
+);
+
+/** Workspace administrators may export a readable model,
  * never arbitrary privileged artifacts. Import authorization remains separate. */
 export async function getModelExportSource(
   modelId: string,
   { supabase, supabaseServiceRole, authenticated }: XRAGOptions,
-) {
+  pinnedVersion?: string,
+): Promise<ModelExportSource> {
   const claims = await getXRAGClaims({ supabase, authenticated });
   requirePlatformAccess(claims, "admin", "workspace");
   const { data: row } = await supabase
@@ -23,6 +34,24 @@ export async function getModelExportSource(
   const model = mapAIModel(row);
   if (model.type === "external_llm_v1")
     throw new Error("XRAG_MODEL_ARCHIVE_UNAVAILABLE");
+  const identity = {
+    resourceId: nativeResourceId("model", model.identifier),
+    name: `model-${identifierFromTitle(model.name)}.xrag.tar`,
+  };
+  try {
+    const installed = await installedModelArchive(model, row.identifier);
+    if (!pinnedVersion || pinnedVersion === installed.version)
+      return { ...identity, installed, size: installed.size };
+  } catch (error) {
+    // A core host may depend on models installed on another machine. Its
+    // published archive remains exportable even without a locally readable copy.
+    if (
+      !["ENOENT", "ENOTDIR", "EACCES"].includes(
+        (error as NodeJS.ErrnoException).code ?? "",
+      )
+    )
+      throw error;
+  }
   const result = await supabaseServiceRole
     .from("artifact_catalog")
     .select("*")
@@ -44,12 +73,10 @@ export async function getModelExportSource(
       (metadata.xrag_type === "mlxWhisperModel")
   )
     throw new Error("XRAG_MODEL_ARCHIVE_UNAVAILABLE");
-  const resourceId = nativeResourceId("model", model.identifier);
   return {
     path: result.data.object_path,
     id: artifact.id,
     size: artifact.size,
-    resourceId,
-    name: `model-${identifierFromTitle(model.name)}.xrag.tar`,
+    ...identity,
   };
 }

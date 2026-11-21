@@ -21,15 +21,19 @@ const state = vi.hoisted(() => ({
   resource: vi.fn(),
   model: vi.fn(),
   models: vi.fn(),
+  open: vi.fn(),
 }));
 vi.mock("../packages/database/src/xrag/exportResource.ts", () => ({
   exportResource: state.resource,
 }));
-vi.mock("../packages/database/src/xrag/getModelExport.ts", () => ({
-  getModelExport: state.model,
+vi.mock("../packages/database/src/xrag/getModelExportSource.ts", () => ({
+  getModelExportSource: state.model,
 }));
 vi.mock("../packages/database/src/aiModel/getAIModels.ts", () => ({
   getAIModels: state.models,
+}));
+vi.mock("../packages/database/src/xrag/getArtifactStream.ts", () => ({
+  getArtifactStream: state.open,
 }));
 const roots: string[] = [];
 afterEach(async () => {
@@ -60,8 +64,10 @@ async function fixture() {
   state.model.mockImplementation(async () => ({
     id: model.id,
     resourceId: nativeResourceId("model", "runtime-model"),
-    stream: new Response(bytes).body,
+    path: "published",
+    size: bytes.length,
   }));
+  state.open.mockImplementation(async () => new Response(bytes).body);
   state.models.mockResolvedValue([
     { id: "model", identifier: "runtime-model" },
   ]);
@@ -84,8 +90,12 @@ async function fixture() {
         },
       ],
     };
-    await createResourceArchive(resource, (async function* () {})(), file);
-    return { resourceId: resource.id };
+    const archive = await createResourceArchive(
+      resource,
+      (async function* () {})(),
+      file,
+    );
+    return { ...archive, resourceId: resource.id };
   });
   const uploaded = new Map<string, Buffer>();
   const bucket = {
@@ -162,7 +172,7 @@ it("packages a local role model while preserving the agent's external connection
     externalModel: { provider: "openai", modelId: "agent" },
   };
   state.resource.mockImplementationOnce(async (_kind, _id, output) => {
-    await createResourceArchive(
+    const archive = await createResourceArchive(
       {
         xrag_version: 2,
         xrag_type: "resource",
@@ -184,7 +194,7 @@ it("packages a local role model while preserving the agent's external connection
       [],
       output,
     );
-    return { resourceId: "agent" };
+    return { ...archive, resourceId: "agent" };
   });
   const result = await exportXRAG(
     { kind: "agent", id: "agent", includeModels: true },
@@ -203,6 +213,7 @@ it("packages a local role model while preserving the agent's external connection
 });
 it("fails without producing a partial export when referenced model archives are unavailable", async () => {
   const f = await fixture();
+  state.open.mockImplementation(async () => new Response(bytes).body);
   state.models.mockResolvedValue([]);
   await expect(
     exportXRAG(
@@ -212,23 +223,25 @@ it("fails without producing a partial export when referenced model archives are 
   ).rejects.toThrow("XRAG_MODEL_ARCHIVE_UNAVAILABLE");
   expect(f.bucket.upload).not.toHaveBeenCalled();
 });
-it("detects a changed model download before saving an export", async () => {
+it("discards a changed model stream before issuing a download link", async () => {
   const f = await fixture();
   state.model.mockResolvedValue({
     id: "0".repeat(64),
     resourceId: nativeResourceId("model", "runtime-model"),
-    stream: new Response(f.bytes).body,
+    path: "published",
+    size: f.bytes.length,
   });
   await expect(
     exportXRAG({ kind: "model", id: "model" }, f.options as any),
   ).rejects.toThrow("XRAG_CHECKSUM_MISMATCH");
-  expect(f.bucket.upload).not.toHaveBeenCalled();
+  expect(f.bucket.remove).toHaveBeenCalledOnce();
+  expect(f.bucket.createSignedUrl).not.toHaveBeenCalled();
 });
 it("rejects a non-resource returned by the object exporter", async () => {
   const f = await fixture();
   state.resource.mockImplementation(async (_kind, _id, file) => {
     await copyFile(f.file, file);
-    return { resourceId: "id" };
+    return { id: f.model.id, size: f.bytes.length, resourceId: "id" };
   });
   await expect(
     exportXRAG(

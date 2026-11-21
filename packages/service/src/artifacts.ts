@@ -1,3 +1,4 @@
+import { importedOllamaLocation } from "xrag/ollamaModelLocation";
 import {
   cp,
   mkdir,
@@ -7,7 +8,7 @@ import {
   rename,
   rm,
 } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import {
   distributionSchema,
@@ -84,6 +85,11 @@ async function install(
       return true;
     }
     case "ollamaModel": {
+      const manifest = join(
+        root,
+        "ollama/models",
+        ...importedOllamaLocation(xrag).manifest,
+      );
       const models = join(root, "ollama/models");
       await mkdir(join(models, "blobs"), { recursive: true });
       const blobs = await readdir(join(directory, "blobs"), {
@@ -98,15 +104,11 @@ async function install(
           join(directory, "blobs", blob.name),
           join(models, "blobs", blob.name),
         );
-      const manifests = join(
-        models,
-        "manifests/local_registry.schorn.ai/library",
-        xrag.modelName,
-      );
+      const manifests = dirname(manifest);
       await mkdir(manifests, { recursive: true });
       const temporary = join(manifests, `.${xrag.modelTag}.tmp`);
       await cp(join(directory, "manifest.json"), temporary);
-      await rename(temporary, join(manifests, xrag.modelTag));
+      await rename(temporary, manifest);
       return false;
     }
     case "files": {

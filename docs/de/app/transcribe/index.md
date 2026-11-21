@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für die Verarbeitung: ein verfügbares Transkriptionsmodell."
   status: "verfügbar"
-  last_verified: "2026-11-19"
+  last_verified: "2026-11-21"
   source_files:
     [
       "apps/web/app/(main)/app/transcribe/_components/TranscriberInfo.tsx",
@@ -52,7 +52,7 @@ Unter [XRAG Import und Export](../../settings/xrag.md) findest du die Schritte z
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_xrag_export`: Ein Objekt mit `kind: "transcriber"` exportieren, optional mit Modellarchiven. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Workspace des Objekts. Downloadlink zehn Minuten gültig; Modellarchive müssen im Katalog vorhanden sein.
+- `platform_xrag_export`: Ein Objekt mit `kind: "transcriber"` exportieren, optional mit Modellarchiven. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Workspace des Objekts. Downloadlink zehn Minuten gültig; Die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
 - `platform_xrag_related_objects` und `platform_xrag_saved_package_add` ermitteln die verbundenen Ressourcen und übernehmen die gewählte Auswahl in ein eigenes Paket. Mindeststufe **Workspace-Administrator** mit Exportrechten für jedes ausgewählte Objekt.
 - `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globalen Identifier lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**; Administratorrechte im betroffenen Workspace. Bereits exportierte Archive bleiben unverändert.
 

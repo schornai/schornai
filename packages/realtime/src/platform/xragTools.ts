@@ -105,7 +105,7 @@ export function addXRAGTools(
   );
   add(
     "platform_xrag_export",
-    "Export one authorized agent, transcriber, document repository (including files), personal automation, or archived model. Automation triggers tied to activity sessions cannot be transferred. Optionally include directly referenced local models. External API models remain references to a provider and model ID. Returns a download URL valid for ten minutes.",
+    "Export one authorized agent, transcriber, document repository (including files), personal automation, or local model from its installed files or a published archive. Automation triggers tied to activity sessions cannot be transferred. Optionally include directly referenced local models. External API models remain references to a provider and model ID. Returns a download URL valid for ten minutes.",
     "workspace",
     false,
     xragSelectionSchema,
@@ -212,7 +212,7 @@ export function addXRAGTools(
   );
   add(
     "platform_xrag_saved_package_export",
-    "Queue the selected resources and original local model archives as one downloadable .xrag.tar (up to 200 GiB). Returns jobId immediately. Use platform_xrag_export_jobs to check progress and platform_xrag_export_download when finished. Permissions are checked again at execution and download.",
+    "Queue the selected resources and local models from installed files or published archives as one downloadable .xrag.tar (up to 200 GiB). Returns jobId immediately. Use platform_xrag_export_jobs to check progress and platform_xrag_export_download when finished. Permissions are checked again at execution and download.",
     "workspace",
     false,
     packageIdSchema,

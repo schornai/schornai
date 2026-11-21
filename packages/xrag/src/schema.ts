@@ -46,6 +46,7 @@ export const xragSchemaOllamaModel = xragMetaSchema.extend({
       type: z.literal("ollama_embedding_v1"),
     }),
   ]),
+  ollamaIdentifier: z.string().min(1).max(500).optional(),
   modelName,
   modelTag: safeSegment,
   xrag_type: z.literal("ollamaModel"),

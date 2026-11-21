@@ -7,7 +7,12 @@ services:
     restart: on-failure
     ports:
       - 127.0.0.1:3001:3000
+    volumes:
+      - ../ollama/models:/ollama/models:ro
+      - ../mlx/whisper/models:/mlx/whisper/models:ro
     environment:
+      OLLAMA_MODELS: /ollama/models
+      MLX_WHISPER_MODELS: /mlx/whisper/models
       REALTIME_SERVER_URL: ${REALTIME_SERVER_URL:-http://realtimeyjs:9000/v2/realtime}
       REALTIME_SERVER_SECRET: ${REALTIME_SERVER_SECRET:?Realtime server secret is required}
       SUPABASE_AUTH_HOOK_SECRET: ${SUPABASE_AUTH_HOOK_SECRET:?Auth hook signing secret is required}
@@ -33,7 +38,9 @@ services:
         condition: service_started
     volumes:
       - ../ollama/models:/ollama/models:ro
+      - ../mlx/whisper/models:/mlx/whisper/models:ro
     environment:
+      MLX_WHISPER_MODELS: /mlx/whisper/models
       OLLAMA_MODELS: /ollama/models
       DOCUMENT_EXTRACTOR_URL: ${DOCUMENT_EXTRACTOR_URL:-http://document-extractor:9998}
       OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}

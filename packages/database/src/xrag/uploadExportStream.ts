@@ -1,7 +1,7 @@
 import { Upload } from "tus-js-client";
 import type { Readable } from "node:stream";
 
-/** Worker-only Node HTTP transport: bypasses Next's fetch cache completely.
+/** Server-only Node HTTP transport: bypasses Next's fetch cache completely.
  * TUS retains at most a chunk for retry; never converts the archive to a Blob.
  * A process restart rebuilds under a fresh attempt path, never resumes changed bytes. */
 export async function uploadExportStream(
@@ -12,7 +12,8 @@ export async function uploadExportStream(
     endpoint: string;
     token: string;
     signal: AbortSignal;
-    onProgress: (bytes: number) => void;
+    bucketName?: "xrag-exports" | "xrag-transfers";
+    onProgress?: (bytes: number) => void;
   },
 ) {
   options.signal.throwIfAborted();
@@ -46,7 +47,7 @@ export async function uploadExportStream(
           : { Authorization: `Bearer ${options.token}` }),
       },
       metadata: {
-        bucketName: "xrag-exports",
+        bucketName: options.bucketName ?? "xrag-exports",
         objectName: path,
         contentType: "application/x-tar",
         cacheControl: "3600",
@@ -74,7 +75,7 @@ export async function uploadExportStream(
         ).toString();
       },
       onAfterResponse: touch,
-      onChunkComplete: (_chunk, bytes) => options.onProgress(bytes),
+      onChunkComplete: (_chunk, bytes) => options.onProgress?.(bytes),
       onError: () => failed(new Error("XRAG_UPLOAD_FAILED")),
       onSuccess: () => done(),
     });

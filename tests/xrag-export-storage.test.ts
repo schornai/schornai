@@ -92,3 +92,55 @@ it.each([65536, 1, null])(
     expect(bucket.remove).toHaveBeenCalledOnce();
   },
 );
+
+it("uploads a large MCP transfer through TUS to the transfer bucket in bounded requests", async () => {
+  const { createServer } = await import("node:http");
+  const { Readable } = await import("node:stream");
+  const size = 6 * 1024 ** 2 + 17;
+  const lengths: number[] = [];
+  let offset = 0,
+    metadata = "";
+  const server = createServer(async (req, res) => {
+    res.setHeader("Tus-Resumable", "1.0.0");
+    if (req.method === "POST") {
+      metadata = String(req.headers["upload-metadata"]);
+      res.writeHead(201, { Location: "/storage/v1/upload/resumable/id" }).end();
+    } else {
+      let length = 0;
+      for await (const chunk of req) length += chunk.length;
+      lengths.push(length);
+      offset += length;
+      res.writeHead(204, { "Upload-Offset": String(offset) }).end();
+    }
+  });
+  await new Promise<void>((resolve, reject) =>
+    server.once("error", reject).listen(0, "127.0.0.1", resolve),
+  );
+  const address = server.address() as { port: number };
+  vi.stubEnv("SUPABASE_URL", `http://127.0.0.1:${address.port}`);
+  vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "test-token");
+  const bucket = {
+    info: async () => ({ data: { size: offset } }),
+    createSignedUrl: async () => ({ data: { signedUrl: "download" } }),
+  };
+  try {
+    const result = await saveTransferExport(
+      {
+        stream: Readable.from([Buffer.alloc(size)], { objectMode: false }),
+        size,
+      },
+      "model.xrag.tar",
+      "owner",
+      { supabase: { storage: { from: () => bucket } } as any },
+    );
+    expect(result.size).toBe(size);
+    expect(lengths).toEqual([6 * 1024 ** 2, 17]);
+    expect(metadata).toContain(
+      "bucketName " + Buffer.from("xrag-transfers").toString("base64"),
+    );
+  } finally {
+    vi.unstubAllEnvs();
+    server.closeAllConnections();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+  }
+});

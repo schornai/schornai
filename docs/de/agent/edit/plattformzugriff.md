@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto, berechtigte Workspaces oder ganze Instanz."
   prerequisites: "Aktuelle Datenbankmigrationen und SUPABASE_JWT_SECRET im Webserver; für Chats und Dateioperationen ein erreichbarer Realtime-Dienst und passende Worker. Externe Clients benötigen Streamable HTTP und OAuth mit PKCE (S256)."
   status: "verfügbar"
-  last_verified: "2026-11-19"
+  last_verified: "2026-11-21"
   source_files:
     - "apps/web/app/(main)/agent/_components/AgentEditorRolePlatformAccess.tsx"
     - "apps/web/app/(main)/agent/_components/AgentEditorRoleTools.tsx"
@@ -222,7 +222,7 @@ Die folgenden Namen sind die tatsächlichen MCP-Werkzeugnamen. Jede höhere Stuf
 | `platform_workspace_users`                       | Globaler Administrator  | Benutzerverzeichnis mit Workspace-Rollen lesen                                           | Globale Administratorrechte                                                                                                                                                      |
 | `platform_user_get`                              | Globaler Administrator  | Profil, globale Administratorrolle und Workspace-Mitgliedschaften einer Person lesen     | Globale Administratorrechte                                                                                                                                                      |
 | `platform_xrag_upload_url`                       | Workspace-Administrator | Eigene XRAG-Uploadadresse erstellen                                                      | Unveränderbarer Upload; Pfad gehört zum aufrufenden Konto                                                                                                                        |
-| `platform_xrag_export`                           | Workspace-Administrator | Ein Objekt mit optionalen Modellarchiven exportieren                                     | Administrator im Objekt-Workspace; Modellarchive müssen vorhanden sein; Downloadlink zehn Minuten                                                                                |
+| `platform_xrag_export`                           | Workspace-Administrator | Ein Objekt mit optionalen Modellarchiven exportieren                                     | Administrator im Objekt-Workspace; Installierte Modelldateien oder veröffentlichtes Archiv erforderlich; Downloadlink zehn Minuten                                               |
 | `platform_xrag_preview`                          | Workspace-Administrator | Paket und Konflikte vor Import prüfen                                                    | Administrator im Ziel-Workspace; Plattforminhalte/neuer Workspace nur mit globalen Rechten und Zugriffsstufe                                                                     |
 | `platform_xrag_import`                           | Workspace-Administrator | Ressourcen nach Vorschau importieren                                                     | Bestehender administrierter Workspace; keine Modelle/Plattforminhalte; explizite Ersetzungsrevisionen                                                                            |
 | `platform_xrag_import_admin`                     | Globaler Administrator  | Auch Plattforminhalte importieren und Workspace anlegen                                  | Globale Rechte; explizite Ersetzungsrevisionen; Dateiübernahme mit dauerhafter Wiederherstellung; Verarbeitung nach erfolgreichem Abschluss                                      |
@@ -254,7 +254,7 @@ Für ein lokales Modell verwendest du dessen `id` aus `platform_models_list`. Mi
 - `platform_xrag_saved_package_list`, `platform_xrag_saved_package_create`: Eigene gespeicherte XRAG-Pakete auflisten bzw. anlegen. Mindeststufe: **Workspace-Administrator**.
 - `platform_xrag_saved_package_add`, `platform_xrag_saved_package_remove`: Ein Objekt samt ausdrücklich ausgewählten verbundenen Objekten atomar zur eigenen Auswahl hinzufügen bzw. einen Eintrag daraus entfernen. Mindeststufe: **Workspace-Administrator**; Hinzufügen erfordert Zugriff auf das Modell bzw. Administratorrechte im Objekt-Workspace.
 - `platform_xrag_saved_package_delete`: Eigenes XRAG-Paket löschen, ohne Quellobjekte zu löschen. Mindeststufe: **Workspace-Administrator**.
-- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Workspace-Administrator**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; ursprüngliche Modellarchive müssen verfügbar sein.
+- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Workspace-Administrator**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
 
 - `platform_xrag_related_objects`: Verbundene Dokumenten-Ablagen, Transkriptoren und Modelle einschließlich weiterer Verknüpfungen auflisten. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Quell-Workspace und in jedem angebotenen Ressourcen-Workspace. Externe API-Modelle werden nicht angeboten; höchstens 999 verbundene Objekte. Beim Hinzufügen werden Verbindung und Berechtigung erneut geprüft.
 
