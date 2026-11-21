@@ -171,8 +171,8 @@ export function serviceCommands(context: Context) {
       };
       for (const [key, value] of Object.entries(aliases))
         if (value !== undefined) appEnv[key] = value;
-      if (app === "realtime")
-        appEnv.OLLAMA_MODELS = join(root, "ollama/models");
+      appEnv.MLX_WHISPER_MODELS = join(root, "mlx/whisper/models");
+      appEnv.OLLAMA_MODELS = join(root, "ollama/models");
       native.push(developmentCommand(app, app, appEnv));
     }
     const proxyEnvironment = { ...env } as NodeJS.ProcessEnv;

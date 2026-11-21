@@ -6,6 +6,7 @@ const meta = {
   title: "Web/(main)/app/transcribe/TranscriberInfo",
   component: TranscriberInfo,
   args: {
+    showXRAGActions: true,
     editTranscriberPathname: "/",
     editDefaultTranscriber: {
       id: "11111111-1111-4111-8111-111111111111",

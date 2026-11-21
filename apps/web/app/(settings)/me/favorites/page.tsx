@@ -17,6 +17,10 @@ export default async function Page() {
     getT("me", { keyPrefix: "favorites" }),
   ]);
   const appearances = Object.fromEntries([
+    ...(config.automations ?? []).map((item) => [
+      `automation:${item.id}`,
+      { name: item.name, color: item.color, icon: item.icon },
+    ]),
     ...(config.agents ?? []).map((item) => [
       `agent:${item.id}`,
       { name: item.name, color: item.color, icon: item.icon },

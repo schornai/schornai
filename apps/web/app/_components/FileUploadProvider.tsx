@@ -346,8 +346,12 @@ export function useFileUpload() {
       try {
         if (resumeUser)
           objectName =
-            (await resumeUpload(tusUpload, bucketName, fileUpload.file)) ??
-            objectName;
+            (await resumeUpload(
+              tusUpload,
+              bucketName,
+              fileUpload.file,
+              resumeUser,
+            )) ?? objectName;
         tusUpload.start();
       } catch (error) {
         // Storage-disabled browsers still support a fresh streamed upload.

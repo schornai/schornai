@@ -59,10 +59,14 @@ export class Services {
       );
       // The realtime container watches this directory through a read-only bind
       // mount, including on web-only hosts with a remote Ollama service.
-      if (this.context.config.services.includes("core"))
+      if (this.context.config.services.includes("core")) {
+        await mkdir(join(this.context.root, "mlx/whisper/models"), {
+          recursive: true,
+        });
         await mkdir(join(this.context.root, "ollama/models/manifests"), {
           recursive: true,
         });
+      }
       if (compose.length || localSupabase)
         this.colima =
           (await ensureDocker(this.context, env, this.log, signal)) ??

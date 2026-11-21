@@ -15,10 +15,14 @@ vi.mock("@/lib/supabase/createSupabaseServerClient", () => ({
     storage: { from: () => ({ createSignedUrl: state.signed }) },
   }),
 }));
-vi.mock("@/lib/storageDownloadResponse", () => ({
-  storageDownloadResponse: state.relay,
-  storageFileResponse: async (response: Response) => response,
-}));
+vi.mock(
+  import("../../apps/web/lib/storageDownloadResponse"),
+  async (original) => ({
+    ...(await original()),
+    storageDownloadResponse: state.relay,
+    storageFileResponse: async (response: Response) => response,
+  }),
+);
 vi.mock(
   "@schornio/aibox-package-database/storage/requireStorageAccess",
   () => ({ requireStorageAccess: state.access }),

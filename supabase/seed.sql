@@ -91,4 +91,16 @@ INSERT INTO public.system_settings (key, value) VALUES
 ('defaultModel', '{"version":"default-model-v2","modelIdentifier":"qwen3:0.6b"}'),
 ('signIn', '{"password":"visible","sso":"hidden"}'),
 ('welcomeMessage', '{"localized":{"de":"# Lokale Testumgebung\n\nDiese Aibox enthält ausschließlich Beispieldaten für Entwicklung und Tests.\n\n**E-Mail:** demo@aibox.test\n\n**Passwort:** Aibox-local-demo-2026!\n\nDer Demo-Zugang hat Administratorrechte. Mit npm run seed:reset werden die lokalen Daten gelöscht und die Beispieldaten wiederhergestellt.","en":"# Local test environment\n\nThis Aibox contains example data for development and testing only.\n\n**Email:** demo@aibox.test\n\n**Password:** Aibox-local-demo-2026!\n\nThe demo account has administrator access. Running npm run seed:reset deletes local data and restores the examples."}}');
+-- Personal automations are paused so resetting examples never starts model work.
+INSERT INTO public.automations(id,user_id,agent_id,name,message,enabled,trigger,description,color,icon)
+VALUES ('a1b00000-0000-4000-8000-000000000040','a1b00000-0000-4000-8000-000000000001','a1b00000-0000-4000-8000-000000000016','Wochenbericht','Erstelle einen kurzen Wochenbericht.',false,
+$automation${"type":"time","schedule":{"kind":"weekly","weekdays":[1],"time":"09:00","timezone":"Europe/Vienna"}}$automation$::jsonb,'Fasst die Woche für das Team zusammen.','{"type":"color-oklch-hue","oklchHue":290}','{"type":"icon-lucide","iconName":"calendar-clock"}');
+
+-- A personal selection that can be downloaded without requiring model archives.
+INSERT INTO public.xrag_packages(id,owner_id,name)
+VALUES ('a1b00000-0000-4000-8000-000000000018','a1b00000-0000-4000-8000-000000000001','Lokales XRAG-Paket');
+INSERT INTO public.xrag_package_items(package_id,kind,resource_id,name) VALUES
+('a1b00000-0000-4000-8000-000000000018','agent','a1b00000-0000-4000-8000-000000000016','Lokaler Testagent'),
+('a1b00000-0000-4000-8000-000000000018','documentRepository','a1b00000-0000-4000-8000-000000000015','Lokale Testdokumente'),
+('a1b00000-0000-4000-8000-000000000018','transcriber','a1b00000-0000-4000-8000-000000000014','Lokale Transkription');
 COMMIT;

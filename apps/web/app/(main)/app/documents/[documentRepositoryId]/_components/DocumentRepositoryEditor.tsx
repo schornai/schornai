@@ -400,7 +400,7 @@ export function DocumentRepositoryEditor({
         <DocumentRepositoryEditorFeatures />
       </TabsMainContent>
       <TabsMainContent view="settings">
-        <DocumentRepositoryEditorSettings />
+        <DocumentRepositoryEditorSettings mode={mode} />
       </TabsMainContent>
     </documentRepositoryEditorContext.Provider>
   );

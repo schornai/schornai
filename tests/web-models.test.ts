@@ -18,10 +18,15 @@ const mocks = vi.hoisted(() => ({
   user: vi.fn(),
   model: vi.fn(),
   agents: vi.fn(),
+  automations: vi.fn(),
   repositories: vi.fn(),
   transcribers: vi.fn(),
   cacheTag: vi.fn(),
 }));
+vi.mock(
+  "@schornio/aibox-package-database/automation/getAutomationsByIds",
+  () => ({ getAutomationsByIds: mocks.automations }),
+);
 vi.mock("next/cache", () => ({ cacheTag: mocks.cacheTag }));
 vi.mock("@/lib/supabase/createSupabaseAnonClient", () => ({
   createSupabaseAnonClient: () => ({}),
@@ -59,6 +64,7 @@ beforeEach(() => {
   });
   mocks.user.mockReset().mockImplementation(async (key) => mocks.configs[key]);
   mocks.model.mockReset().mockResolvedValue({ identifier: "legacy-model" });
+  mocks.automations.mockReset().mockResolvedValue([]);
   mocks.agents.mockReset().mockResolvedValue([{ id: "agent" }]);
   mocks.repositories.mockReset().mockResolvedValue([{ id: "repo" }]);
   mocks.transcribers.mockReset().mockResolvedValue([{ id: "transcriber" }]);
@@ -257,5 +263,33 @@ describe("navigation and permissions", () => {
       start_url: "/",
       name: "schorn.ai App",
     });
+  });
+});
+
+it("resolves only automation favorite IDs through the RLS-scoped loader", async () => {
+  const id = "aae00000-0000-4000-8000-000000000010";
+  const automation = {
+    id,
+    name: "Daily report",
+    description: "Briefing",
+    enabled: false,
+  };
+  mocks.configs.favorites = {
+    version: "favorites-v2",
+    showInSidebar: true,
+    favorites: [
+      { id, type: "automation" },
+      { id: "agent", type: "agent" },
+    ],
+  };
+  mocks.automations.mockResolvedValue([automation]);
+  expect(await getCurrentUserConfigFavorites()).toMatchObject({
+    automations: [automation],
+    favorites: mocks.configs.favorites.favorites,
+  });
+  expect(mocks.automations).toHaveBeenCalledWith([id], { supabase: {} });
+  mocks.automations.mockResolvedValue([]);
+  expect(await getCurrentUserConfigFavorites()).toMatchObject({
+    automations: [],
   });
 });

@@ -198,5 +198,65 @@
   },
   "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/setChatExpiration.ts": {
     "tools": ["platform_chat_expiration_set"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/saveAutomation.ts": {
+    "tools": ["platform_automation_save"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/deleteAutomation.ts": {
+    "tools": ["platform_automation_delete"]
+  },
+  "apps/web/app/(main)/app/automation/_actions/runAutomationNow.ts": {
+    "tools": ["platform_automation_run"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/exportXRAG.ts": {
+    "tools": ["platform_xrag_export"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/getResourceIdentity.ts": {
+    "tools": ["platform_xrag_identity_get"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/importXRAG.ts": {
+    "tools": ["platform_xrag_import", "platform_xrag_import_admin"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/prepareXRAGUpload.ts": {
+    "tools": ["platform_xrag_inspect"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/inspectXRAGTransfer.ts": {
+    "tools": ["platform_xrag_inspect"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/previewXRAGImport.ts": {
+    "tools": ["platform_xrag_preview"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/setResourceIdentity.ts": {
+    "tools": ["platform_xrag_identity_set"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/createXRAGPackage.ts": {
+    "tools": ["platform_xrag_saved_package_create"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/addXRAGPackageItem.ts": {
+    "tools": ["platform_xrag_saved_package_add"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/removeXRAGPackageItem.ts": {
+    "tools": ["platform_xrag_saved_package_remove"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/deleteXRAGPackage.ts": {
+    "tools": ["platform_xrag_saved_package_delete"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/exportXRAGPackage.ts": {
+    "tools": ["platform_xrag_saved_package_export"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/getXRAGPackageOptions.ts": {
+    "tools": [
+      "platform_xrag_saved_package_list",
+      "platform_xrag_related_objects"
+    ]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/deleteXRAGExport.ts": {
+    "tools": ["platform_xrag_export_delete"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/cancelXRAGExport.ts": {
+    "tools": ["platform_xrag_export_cancel"]
+  },
+  "apps/web/app/(main)/app/xrag/_actions/getXRAGExportDownload.ts": {
+    "tools": ["platform_xrag_export_download"]
   }
 }

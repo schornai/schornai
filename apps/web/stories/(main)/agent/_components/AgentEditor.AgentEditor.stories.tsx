@@ -4,6 +4,7 @@ import {
   openDeleteDialog,
 } from "../../../../.storybook/interaction-helpers";
 import { repeatFixtures } from "../../../../.storybook/repeat-fixtures";
+import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AgentEditor } from "../../../../app/(main)/agent/_components/AgentEditor";
 
@@ -160,13 +161,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const Mode_create: Story = { args: {} };
+export const CreateSettings: Story = {
+  parameters: { nextjs: { navigation: { query: { view: "settings" } } } },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByLabelText("Globale ID")).toHaveValue("beispiel");
+  },
+};
 export const Mode_update: Story = { args: { mode: "update" } };
 export const Agent_missing: Story = { args: { agent: undefined } };
 export const Favorites_missing: Story = { args: { favorites: undefined } };
 export const Empty: Story = { parameters: { scenario: "empty" } };
 export const Pending: Story = { parameters: { scenario: "pending" } };
 export const Error: Story = { parameters: { scenario: "error" } };
-export const Success: Story = { parameters: { scenario: "success" } };
+export const Success: Story = {
+  parameters: { scenario: "success", serviceFixtures: { actionResult: [] } },
+};
 export const AgentRecommendedMessagesEmpty: Story = {
   args: { agent: { ...meta.args["agent"], recommendedMessages: [] } },
 };

@@ -37,6 +37,25 @@ begin
  assert public.finish_scheduled_job(j.id, j.lease_token, true);
  assert (select state = 'completed' from public.scheduled_jobs where id = j.id);
 end $$;
+insert into public.scheduled_jobs(id, kind, interval_seconds, max_attempts) values ('test:maintenance', 'maintenance', 60, 1);
+do $$
+declare j public.scheduled_jobs; old_token uuid;
+begin
+ select * into j from public.claim_scheduled_job(array['maintenance']);
+ assert public.finish_scheduled_job(j.id,j.lease_token,false);
+ assert (select state='pending' and attempts=0 and run_at >= now()+interval '1 hour' from public.scheduled_jobs where id=j.id), 'Recurring maintenance must recover after exhaustion';
+ update public.scheduled_jobs set run_at=now() where id=j.id;
+ select * into j from public.claim_scheduled_job(array['maintenance']);
+ old_token := j.lease_token;
+ update public.scheduled_jobs set lease_until=now()-interval '1 second' where id=j.id;
+ assert not exists(select from public.claim_scheduled_job(array['maintenance']));
+ assert (select state='pending' and attempts=0 and run_at >= now()+interval '1 hour' from public.scheduled_jobs where id=j.id), 'A final-attempt crash must not strand maintenance';
+ assert not public.finish_scheduled_job(j.id,old_token,true);
+ update public.scheduled_jobs set run_at=now() where id=j.id;
+ select * into j from public.claim_scheduled_job(array['maintenance']);
+ assert j.lease_token <> old_token;
+ assert public.finish_scheduled_job(j.id,j.lease_token,true);
+end $$;
 insert into public.scheduled_jobs(id, kind, max_attempts) values ('test:crash', 'crash', 1);
 do $$
 declare j public.scheduled_jobs;

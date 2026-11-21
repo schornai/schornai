@@ -14,7 +14,7 @@ meta:
     - "apps/web/app/(settings)/artifacts/_components/ArtifactContext.tsx"
     - "apps/web/app/(settings)/artifacts/_components/ArtifactDashboard.tsx"
     - "apps/web/app/(settings)/artifacts/_actions/deleteArtifact.ts"
-    - "apps/web/app/(settings)/_components/ResourceListOptionsDropdown.tsx"
+    - "apps/web/app/_components/ResourceListOptionsDropdown.tsx"
     - "packages/database/src/xrag/deleteArtifact.ts"
 ---
 

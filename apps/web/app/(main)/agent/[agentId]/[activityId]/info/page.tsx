@@ -62,6 +62,7 @@ export default async function Page(
       />
 
       <AgentInfo
+        showXRAGActions
         agent={agent}
         documentRepositoryMap={documentRepositoryMap}
         favorites={favorites}

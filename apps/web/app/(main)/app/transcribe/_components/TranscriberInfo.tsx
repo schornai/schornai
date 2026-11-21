@@ -1,4 +1,6 @@
 "use client";
+import { hasPermission } from "@/lib/hasPermission";
+import { XRAGObjectActions } from "../../../../_components/xrag/XRAGObjectActions";
 
 import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
@@ -11,6 +13,7 @@ import type { Transcriber_new } from "@schornio/aibox-package-database/transcrib
 import type { WorkspaceClaim } from "../../../../_models/getWorkspaceClaims";
 
 export function TranscriberInfo({
+  showXRAGActions = false,
   editTranscriberPathname,
   editDefaultTranscriber,
   editable,
@@ -19,6 +22,7 @@ export function TranscriberInfo({
   transcriber,
   workspace,
 }: {
+  showXRAGActions?: boolean;
   editTranscriberPathname?: string;
   editDefaultTranscriber?: Partial<Transcriber_new>;
   editable?: boolean;
@@ -66,6 +70,12 @@ export function TranscriberInfo({
           workspace={workspace}
         />
       </div>
+      {showXRAGActions &&
+        transcriber?.id &&
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && <XRAGObjectActions kind="transcriber" id={transcriber.id} />}
     </ContainerMain>
   );
 }

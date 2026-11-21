@@ -1,6 +1,6 @@
 "use server";
 
-import { agentSchema } from "@schornio/aibox-package-database/agent/_schemas";
+import { createAgentInputSchema } from "@schornio/aibox-package-database/agent/_schemas";
 import { createAgent as createAgentDatabase } from "@schornio/aibox-package-database/agent/createAgent";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import { getAgentById } from "@schornio/aibox-package-database/agent/getAgentById";
@@ -9,13 +9,11 @@ import { getWorkspaceAdminContext } from "@/lib/supabase/getWorkspaceAdminContex
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { serverActionClient } from "@/lib/serverActionClient";
-import { z } from "zod/mini";
+import { returnValidationErrors } from "next-safe-action";
 
 export const createAgent = serverActionClient
-  .inputSchema(
-    z.object({ agent: agentSchema, copyFromAgentId: z.optional(z.string()) }),
-  )
-  .action(async ({ parsedInput: { agent, copyFromAgentId } }) => {
+  .inputSchema(createAgentInputSchema)
+  .action(async ({ parsedInput: { agent, copyFromAgentId, globalId } }) => {
     const supabase = await createSupabaseServerClient();
     let copyFrom;
     if (copyFromAgentId) {
@@ -29,6 +27,13 @@ export const createAgent = serverActionClient
     const { agentId } = await createAgentDatabase(agent, {
       supabaseServiceRole,
       copyFrom,
+      globalId,
+    }).catch((error: unknown) => {
+      if (error instanceof Error && error.message === "XRAG_IDENTITY_EXISTS")
+        returnValidationErrors(createAgentInputSchema, {
+          globalId: { _errors: ["XRAG_IDENTITY_EXISTS"] },
+        });
+      throw error;
     });
     revalidatePath("/");
     redirect(`/agent/${agentId}`);

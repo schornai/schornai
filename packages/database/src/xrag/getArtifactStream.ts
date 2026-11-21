@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "../_shared/_types.ts";
-import { XRAG_BUCKET } from "./_schema.ts";
+import { getArtifactDownloadUrl } from "./getArtifactDownloadUrl.ts";
 
 /** Server-only; never send this signed Storage URL or credentials to the browser. */
 export async function getArtifactStream(
@@ -24,11 +24,8 @@ export async function getArtifactStream(
       range.end >= range.size)
   )
     throw new Error("ARTIFACT_INVALID_RANGE");
-  const { data, error } = await supabase.storage
-    .from(XRAG_BUCKET)
-    .createSignedUrl(path, 3600);
-  if (error || !data) throw new Error("ARTIFACT_UNAVAILABLE");
-  const response = await fetch(data.signedUrl, {
+  const url = await getArtifactDownloadUrl(path, { supabase });
+  const response = await fetch(url, {
     signal,
     cache: "no-store",
     ...(range

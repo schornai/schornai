@@ -286,6 +286,45 @@ describe("authentication callbacks", () => {
   });
 });
 describe("resumable upload proxy", () => {
+  it.each(["POST", "PATCH", "HEAD", "DELETE"] as const)(
+    "forwards signed TUS %s with only the path-scoped token",
+    async (method) => {
+      const endpoint = "/api/storage/upload/resumable/sign";
+      const path = method === "POST" ? ["sign"] : ["sign", "upload-id"];
+      const fetch = vi.fn().mockResolvedValue(
+        new Response(null, {
+          status: 204,
+          headers: {
+            location: "http://storage:5000/upload/resumable/sign/upload-id",
+            "upload-offset": "6291456",
+          },
+        }),
+      );
+      vi.stubGlobal("fetch", fetch);
+      const request = new Request("https://app.test" + endpoint, {
+        method,
+        headers: {
+          "x-signature": "scoped-token",
+          authorization: "Bearer unrelated",
+          cookie: "private",
+        },
+      });
+      const params = { params: Promise.resolve({ path }) };
+      const result = await tus[method](request, params);
+      expect(fetch.mock.calls[0]![0]).toBe(
+        "http://supabase.test/storage/v1/upload/resumable/" + path.join("/"),
+      );
+      const forwarded = fetch.mock.calls[0]![1].headers;
+      expect(forwarded.get("x-signature")).toBe("scoped-token");
+      expect(forwarded.has("authorization")).toBe(false);
+      expect(forwarded.has("cookie")).toBe(false);
+      expect(result.headers.get("location")).toBe(endpoint + "/upload-id");
+      expect(result.headers.get("upload-offset")).toBe("6291456");
+      request.headers.delete("x-signature");
+      expect((await tus[method](request, params)).status).toBe(401);
+      expect(fetch).toHaveBeenCalledTimes(1);
+    },
+  );
   it.each(["POST", "PATCH", "DELETE", "HEAD"] as const)(
     "forwards %s with authorization and rewrites the upload location",
     async (method) => {

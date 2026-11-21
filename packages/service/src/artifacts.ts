@@ -1,3 +1,4 @@
+import { importedOllamaLocation } from "xrag/ollamaModelLocation";
 import {
   cp,
   mkdir,
@@ -6,11 +7,11 @@ import {
   readdir,
   rename,
   rm,
-  writeFile,
 } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import {
+  distributionSchema,
   artifactTargets,
   artifactSchema,
   catalogSchema,
@@ -18,10 +19,8 @@ import {
   type Artifact,
 } from "xrag/schema";
 import { extractArchive } from "xrag/archive";
-import { validateSiteUrl } from "xrag/validateSiteUrl";
 import { latestSetupFor, setupMatches, compareSetupReleases } from "xrag/setup";
 import type { Context } from "./config.ts";
-import { resolveFrom } from "./config.ts";
 import { writeJson } from "./files.ts";
 import type { Log } from "./log.ts";
 import { run } from "./process.ts";
@@ -50,8 +49,8 @@ async function install(
   log: Log,
   signal: AbortSignal,
 ) {
-  const { root, config } = context;
-  const xrag = xragSchema.parse(artifact.xrag);
+  const { root } = context;
+  const xrag = distributionSchema.parse(artifact.xrag);
   switch (xrag.xrag_type) {
     case "setup":
       await run(
@@ -86,6 +85,11 @@ async function install(
       return true;
     }
     case "ollamaModel": {
+      const manifest = join(
+        root,
+        "ollama/models",
+        ...importedOllamaLocation(xrag).manifest,
+      );
       const models = join(root, "ollama/models");
       await mkdir(join(models, "blobs"), { recursive: true });
       const blobs = await readdir(join(directory, "blobs"), {
@@ -100,47 +104,12 @@ async function install(
           join(directory, "blobs", blob.name),
           join(models, "blobs", blob.name),
         );
-      const manifests = join(
-        models,
-        "manifests/local_registry.schorn.ai/library",
-        xrag.modelName,
-      );
+      const manifests = dirname(manifest);
       await mkdir(manifests, { recursive: true });
       const temporary = join(manifests, `.${xrag.modelTag}.tmp`);
       await cp(join(directory, "manifest.json"), temporary);
-      await rename(temporary, join(manifests, xrag.modelTag));
+      await rename(temporary, manifest);
       return false;
-    }
-    case "certificate": {
-      const target = join(root, "docker/volumes/api/cert");
-      await mkdir(target, { recursive: true, mode: 0o700 });
-      for (const file of ["privkey.pem", "fullkey.pem"])
-        await writeFile(
-          join(target, file),
-          await readFile(join(directory, file)),
-          { mode: 0o600 },
-        );
-      return true;
-    }
-    case "site_url": {
-      const origin = validateSiteUrl(xrag.siteUrl);
-      const envPath = resolveFrom(root, config.envFile);
-      const source = await readFile(envPath, "utf8");
-      let updated = source;
-      for (const [key, value] of Object.entries({
-        SITE_URL: origin,
-        API_EXTERNAL_URL: `${origin}/auth/v1`,
-      })) {
-        const assignment = new RegExp(
-          `^[ \\t]*(?:export[ \\t]+)?${key}[ \\t]*=.*$`,
-          "gm",
-        );
-        updated = assignment.test(updated)
-          ? updated.replace(assignment, () => `${key}=${value}`)
-          : `${updated}\n${key}=${value}\n`;
-      }
-      await writeFile(envPath, updated, { mode: 0o600 });
-      return true;
     }
     case "files": {
       const target = join(root, "assets", xrag.name, artifact.id);
@@ -263,12 +232,9 @@ export async function syncArtifacts(
         release = releaseSchema.parse(artifact);
         await writeJson(releaseFile, release);
       }
-      const disruptive = [
-        "setup",
-        "mlxWhisperModel",
-        "certificate",
-        "site_url",
-      ].includes(artifact.xrag.xrag_type);
+      const disruptive = ["setup", "mlxWhisperModel"].includes(
+        artifact.xrag.xrag_type,
+      );
       if (disruptive) {
         await hooks.beforeInstall();
         paused = true;

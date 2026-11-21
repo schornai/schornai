@@ -59,6 +59,7 @@ import type { Theme } from "../../../_models/systemConfigTheme";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import type { ValidationErrors } from "next-safe-action";
 import type { WorkspaceClaims } from "../../../_models/getWorkspaceClaims";
+import { globalIdentifierSchema, identifierFromTitle } from "xrag/identifier";
 import { agentSchema } from "@schornio/aibox-package-database/agent/_schemas";
 import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { composite } from "@schornio/aibox-package-utils/composite";
@@ -140,6 +141,11 @@ export function AgentEditor({
   relations: AgentEditorRelations;
 }) {
   const [agent, setAgent] = useState(defaultAgent);
+  const [globalId, setGlobalId] = useState<string>();
+  const suggestedId = agent?.name ? identifierFromTitle(agent.name) : "";
+  const invalidId = Boolean(
+    globalId && !globalIdentifierSchema.safeParse(globalId).success,
+  );
   const { t } = useT("agent", { keyPrefix: "_components.AgentEditor" });
 
   // <AlertDialogTrigger /> gets selected on drop-down. Therefore this workaround
@@ -148,6 +154,7 @@ export function AgentEditor({
   const { actionUtils, hasErrored, hasSucceeded } = useDecayActionState();
   const {
     execute,
+    input: submitted,
     isPending,
     result: { validationErrors: defaultValidationErrors },
   } = useAction(mode === "create" ? createAgent : updateAgent, {
@@ -208,7 +215,23 @@ export function AgentEditor({
     return true;
   };
 
-  const agentChanged = composite(defaultAgent) !== composite(agent);
+  const agentChanged =
+    composite(defaultAgent) !== composite(agent) || Boolean(globalId);
+  const globalIdTaken = Boolean(
+    defaultValidationErrors &&
+    "globalId" in defaultValidationErrors &&
+    submitted &&
+    "globalId" in submitted &&
+    globalId === submitted.globalId &&
+    agent?.workspaceId === submitted.agent.workspaceId,
+  );
+  const saveAgent = () =>
+    execute({
+      agent: (agent ?? {}) as Agent,
+      ...(mode === "create" && globalId && { globalId }),
+    });
+  const saveDisabled =
+    isPending || (mode === "create" ? invalidId : !agentChanged);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -261,14 +284,11 @@ export function AgentEditor({
               <DropdownMenuGroup>
                 <DropdownMenuLabel>{t("labelAgent")}</DropdownMenuLabel>
                 <DropdownMenuItemAction
-                  disabled={
-                    mode === "update" &&
-                    composite(defaultAgent) === composite(agent)
-                  }
+                  disabled={saveDisabled}
                   hasErrored={hasErrored}
                   hasSucceeded={hasSucceeded}
                   isPending={isPending}
-                  onClick={() => execute({ agent: (agent ?? {}) as Agent })}
+                  onClick={saveAgent}
                 >
                   {mode === "create" ? (
                     <>
@@ -364,20 +384,20 @@ export function AgentEditor({
           className={cn({
             "text-destructive":
               Boolean(validationErrors?.agent?.modelIdentifier) ||
-              Boolean(validationErrors?.agent?.workspaceId),
+              Boolean(validationErrors?.agent?.workspaceId) ||
+              invalidId ||
+              globalIdTaken,
           })}
           view="settings"
         >
           <Settings2 /> {t("tabSettings")}
         </TabsMainTrigger>
         <ButtonAction
-          disabled={
-            mode === "update" && composite(defaultAgent) === composite(agent)
-          }
+          disabled={saveDisabled}
           hasErrored={hasErrored}
           hasSucceeded={hasSucceeded}
           isPending={isPending}
-          onClick={() => execute({ agent: (agent ?? {}) as Agent })}
+          onClick={saveAgent}
           size="sm"
         >
           {mode === "create" ? (
@@ -403,7 +423,22 @@ export function AgentEditor({
         <AgentEditorDocs />
       </TabsMainContent>
       <TabsMainContent view="settings">
-        <AgentEditorSettings />
+        <AgentEditorSettings
+          draftIdentity={
+            mode === "create"
+              ? {
+                  value: globalId ?? suggestedId,
+                  suggestion: suggestedId,
+                  onChange: setGlobalId,
+                  error: invalidId
+                    ? "errorGlobalId"
+                    : globalIdTaken
+                      ? "errorGlobalIdTaken"
+                      : undefined,
+                }
+              : undefined
+          }
+        />
       </TabsMainContent>
     </agentEditorContext.Provider>
   );

@@ -1,3 +1,4 @@
+import { parseAutomationRunsDocumentName } from "@schornio/aibox-database/automation/_realtime";
 import { saveRealtimeDocument } from "@schornio/aibox-database/realtime/saveRealtimeDocument";
 import { Database } from "@hocuspocus/extension-database";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
@@ -22,6 +23,7 @@ export function createSupabaseExtension({
       // jetzt nur mal für storage ... hardcoded
       // (black,statt whitelist)
       if (
+        parseAutomationRunsDocumentName(documentName) ||
         documentName.startsWith("storage___") ||
         documentName.startsWith("model_do_stream__") ||
         documentName.startsWith("embeddings__")
@@ -54,6 +56,7 @@ export function createSupabaseExtension({
       // jetzt nur mal für storage hardcoded
       // (black,statt whitelist)
       if (
+        parseAutomationRunsDocumentName(documentName) ||
         documentName.startsWith("storage___") ||
         documentName.startsWith("model_do_stream__") ||
         documentName.startsWith("embeddings__")

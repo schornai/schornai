@@ -1,4 +1,5 @@
 "use client";
+import { AutomationAvatar } from "../../../../(main)/app/automation/_components/AutomationAvatar";
 
 import { useId, useRef, useState } from "react";
 import { DragDropProvider } from "@dnd-kit/react";
@@ -61,20 +62,25 @@ function FavoriteRow({
       >
         <Grip />
       </Button>
-      <AvatarApp
-        fallback={name}
-        icon={
-          appearance?.icon ?? {
-            type: "icon-lucide",
-            iconName: {
-              agent: "bot-message-square",
-              workspace: "library",
-              transcriber: "audio-lines",
-              documentRepository: "folder-open",
-            }[type],
+      {type === "automation" ? (
+        <AutomationAvatar icon={appearance?.icon} fallback={name} />
+      ) : (
+        <AvatarApp
+          fallback={name}
+          icon={
+            appearance?.icon ?? {
+              type: "icon-lucide",
+              iconName: {
+                agent: "bot-message-square",
+                automation: "timer",
+                workspace: "library",
+                transcriber: "audio-lines",
+                documentRepository: "folder-open",
+              }[type],
+            }
           }
-        }
-      />
+        />
+      )}
       <div className="min-w-0 flex-1">
         <div className="truncate">{name}</div>
         <div className="text-muted-foreground text-sm">

@@ -1,4 +1,5 @@
 import { SidebarProvider } from "@schornio/aibox-package-ui/components/sidebar";
+import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ModelEditor } from "../../../../app/(settings)/models/_components/ModelEditor";
 import type { ModelSummary } from "../../../../app/(settings)/models/modelSummary";
@@ -48,5 +49,20 @@ export const Local: Story = {
       type: "ollama_llm_v1",
       identifier: "qwen3",
     } as ModelSummary,
+  },
+};
+export const WorkspaceAdmin: Story = {
+  args: { ...Local.args, readOnly: true },
+  parameters: { nextjs: { navigation: { query: { view: "settings" } } } },
+  play: async ({ canvas, canvasElement }) => {
+    await expect(
+      canvas.getByRole("button", { name: /XRAG exportieren/ }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("button", { name: /Paket hinzufügen/ }),
+    ).toBeVisible();
+    await expect(
+      canvasElement.querySelector('a[href*="view=settings"]'),
+    ).toBeNull();
   },
 };

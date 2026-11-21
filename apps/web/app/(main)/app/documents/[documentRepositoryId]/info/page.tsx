@@ -65,6 +65,7 @@ export default async function Page(
       />
 
       <DocumentRepositoryInfo
+        showXRAGActions
         editDefaultDocumentRepository={documentRepository}
         editDocumentRepositoryPathname={`/app/documents/${documentRepositoryId}/edit`}
         editable

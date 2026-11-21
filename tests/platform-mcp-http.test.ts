@@ -187,6 +187,25 @@ it("provides preflight headers for external MCP clients", () => {
     "POST",
   );
 });
+it("uses the public application origin for XRAG downloads", async () => {
+  const req = request("tools/list");
+  req.headers.set("X-Forwarded-Host", "box.example.org:3000");
+  req.headers.set("X-Forwarded-Proto", "https");
+  await handler(req);
+  const { xragDownloadUrl, xragUploadUrls } = mocks.context.mock.calls[0][0];
+  const path =
+    "xrag-exports/11111111-1111-4111-8111-111111111111/22222222-2222-4222-8222-222222222222/bundle.xrag.tar";
+  expect(xragUploadUrls("owner/upload/archive.tar", "a+b")).toEqual({
+    url: "https://box.example.org:3000/api/xrag/upload/owner/upload/archive.tar?token=a%2Bb",
+    resumableEndpoint:
+      "https://box.example.org:3000/api/storage/upload/resumable/sign",
+  });
+  expect(
+    xragDownloadUrl(
+      `http://storage:8000/storage/v1/object/sign/${path}?token=signed`,
+    ),
+  ).toBe(`https://box.example.org:3000/api/xrag/download/${path}?token=signed`);
+});
 it("only supplies server SSO credentials when configured", async () => {
   await handler(request("tools/list"));
   const { getSsoConfig } = mocks.context.mock.calls[0][0];

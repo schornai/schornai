@@ -1,17 +1,17 @@
 import { ModelEditor } from "../_components/ModelEditor";
 import { notFound } from "next/navigation";
-import { getWorkspaceClaims } from "../../../_models/getWorkspaceClaims";
-import { getAIModels } from "../../../_models/getAIModels";
-import { toModelSummary } from "../modelSummary";
+import { getModelCatalog } from "../../../_models/getModelCatalog";
 
 export default async function Page({
   params,
 }: {
   params: Promise<{ modelId: string }>;
 }) {
-  if (!(await getWorkspaceClaims()).isAdmin) notFound();
-  const { modelId } = await params;
-  const model = (await getAIModels()).find((item) => item.id === modelId);
+  const [{ modelId }, { models, readOnly }] = await Promise.all([
+    params,
+    getModelCatalog(),
+  ]);
+  const model = models.find((item) => item.id === modelId);
   if (!model) notFound();
-  return <ModelEditor model={toModelSummary(model)} />;
+  return <ModelEditor model={model} readOnly={readOnly} />;
 }

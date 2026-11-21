@@ -1,3 +1,4 @@
+import { xragExportWorker } from "./src/xrag/worker.ts";
 import { createChatExpirationExtension } from "@schornio/aibox-realtime/server/createChatExpirationExtension";
 import { startScheduler } from "./src/scheduler/startScheduler.ts";
 import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
@@ -74,9 +75,14 @@ try {
   process.once("SIGTERM", () => schedulerAbort.abort());
   process.once("SIGINT", () => schedulerAbort.abort());
   void startScheduler({
+    serverToken: `Worker ${token}`,
     supabase: supabaseServiceRole,
     signal: schedulerAbort.signal,
     instance: realtimeServer.hocuspocus,
+  }).catch(fatal);
+  void xragExportWorker({
+    supabase: supabaseServiceRole,
+    signal: schedulerAbort.signal,
   }).catch(fatal);
   void artifactPublicationWorker({
     supabase: supabaseServiceRole,

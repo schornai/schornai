@@ -6,13 +6,11 @@ import {
   rm,
   symlink,
   readlink,
-  stat,
 } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { c } from "tar";
 import { createHash } from "node:crypto";
-import { parseEnv } from "node:util";
 import { afterEach, expect, it, vi } from "vitest";
 import { syncArtifacts } from "../packages/service/src/artifacts.ts";
 import { configSchema } from "../packages/service/src/config.ts";
@@ -28,7 +26,7 @@ it.each([
   "KEEP_ME=unchanged\n",
   "KEEP_ME=unchanged\n export SITE_URL = https://old.example\n API_EXTERNAL_URL = https://old.example/auth/v1\n",
 ])(
-  "applies a site URL to minimal or hand-written environment files: %s",
+  "ignores removed site URL packages without modifying environment files: %s",
   async (sourceEnv) => {
     const root = await mkdtemp(join(tmpdir(), "service-site-url-"));
     directories.push(root);
@@ -81,12 +79,9 @@ it.each([
       new AbortController().signal,
       hooks,
     );
-    expect(parseEnv(await readFile(join(root, "docker.env"), "utf8"))).toEqual({
-      KEEP_ME: "unchanged",
-      SITE_URL: "https://new.example",
-      API_EXTERNAL_URL: "https://new.example/auth/v1",
-    });
-    expect(hooks.afterInstall).toHaveBeenCalledWith(false);
+    expect(await readFile(join(root, "docker.env"), "utf8")).toBe(sourceEnv);
+    expect(hooks.beforeInstall).not.toHaveBeenCalled();
+    expect(hooks.afterInstall).not.toHaveBeenCalled();
   },
 );
 it("runs a setup without freezing docker.env values into the replacement process environment", async () => {
@@ -538,39 +533,31 @@ it.each(["http", "body", "metadata", "identifier"])(
   },
 );
 
-it.each(["certificate", "ollamaModel"])(
+it.each(["ollamaModel"])(
   "installs %s payloads at their consumer paths",
   async (type) => {
     const { context, sync, hooks } = await syncFixture();
     const source = join(context.root, "source");
     await mkdir(source);
-    const xrag =
-      type === "certificate"
-        ? { xrag_version: 1, xrag_type: type }
-        : {
-            xrag_version: 1,
-            xrag_type: type,
-            modelName: "test-model",
-            modelTag: "latest",
-            meta: {
-              type: "ollama_llm_v1",
-              name: "Test",
-              identifier: "test",
-              contextSize: 4096,
-              featureThinking: false,
-              featureVision: false,
-              featureTools: false,
-            },
-          };
+    const xrag = {
+      xrag_version: 1,
+      xrag_type: type,
+      modelName: "test-model",
+      modelTag: "latest",
+      meta: {
+        type: "ollama_llm_v1",
+        name: "Test",
+        identifier: "test",
+        contextSize: 4096,
+        featureThinking: false,
+        featureVision: false,
+        featureTools: false,
+      },
+    };
     await writeFile(join(source, "xrag.json"), JSON.stringify(xrag));
-    if (type === "certificate") {
-      await writeFile(join(source, "privkey.pem"), "private fixture");
-      await writeFile(join(source, "fullkey.pem"), "public fixture");
-    } else {
-      await mkdir(join(source, "blobs"));
-      await writeFile(join(source, "blobs/model"), "model weights");
-      await writeFile(join(source, "manifest.json"), "{}");
-    }
+    await mkdir(join(source, "blobs"));
+    await writeFile(join(source, "blobs/model"), "model weights");
+    await writeFile(join(source, "manifest.json"), "{}");
     const file = join(context.root, "archive.tar");
     await c({ cwd: source, file }, ["."]);
     const bytes = await readFile(file),
@@ -592,26 +579,19 @@ it.each(["certificate", "ollamaModel"])(
           }),
     );
     await expect(sync()).resolves.toEqual({ failed: 0 });
-    if (type === "certificate") {
-      const path = join(context.root, "docker/volumes/api/cert/privkey.pem");
-      expect(await readFile(path, "utf8")).toBe("private fixture");
-      expect((await stat(path)).mode & 0o777).toBe(0o600);
-      expect(hooks.afterInstall).toHaveBeenCalledWith(false);
-    } else {
-      expect(
-        await readFile(
-          join(
-            context.root,
-            "ollama/models/manifests/local_registry.schorn.ai/library/test-model/latest",
-          ),
-          "utf8",
+    expect(
+      await readFile(
+        join(
+          context.root,
+          "ollama/models/manifests/local_registry.schorn.ai/library/test-model/latest",
         ),
-      ).toBe("{}");
-      expect(
-        await readFile(join(context.root, "ollama/models/blobs/model"), "utf8"),
-      ).toBe("model weights");
-      expect(hooks.beforeInstall).not.toHaveBeenCalled();
-    }
+        "utf8",
+      ),
+    ).toBe("{}");
+    expect(
+      await readFile(join(context.root, "ollama/models/blobs/model"), "utf8"),
+    ).toBe("model weights");
+    expect(hooks.beforeInstall).not.toHaveBeenCalled();
   },
 );
 

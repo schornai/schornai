@@ -1,3 +1,4 @@
+import { addXRAGTools } from "./xragTools.ts";
 import {
   calculate,
   calculatorInputSchema,
@@ -5,6 +6,7 @@ import {
 } from "../tools/calculate.ts";
 import { currentDateTime } from "../tools/currentDateTime.ts";
 import { addMonitoringTools } from "./monitoringTools.ts";
+import { addAutomationTools } from "./automationTools.ts";
 import { addWorkflowTools } from "./workflowTools.ts";
 import { addProfileTools } from "./profileTools.ts";
 import { addSettingsTools } from "./settingsTools.ts";
@@ -18,7 +20,10 @@ import { getAgentById } from "@schornio/aibox-database/agent/getAgentById";
 import { createAgent } from "@schornio/aibox-database/agent/createAgent";
 import { updateAgent } from "@schornio/aibox-database/agent/updateAgent";
 import { deleteAgent } from "@schornio/aibox-database/agent/deleteAgent";
-import { agentSchema } from "@schornio/aibox-database/agent/_schemas";
+import {
+  agentSchema,
+  createAgentInputSchema,
+} from "@schornio/aibox-database/agent/_schemas";
 import { getDocumentRepositories } from "@schornio/aibox-database/documentRepositories/getDocumentRepositories";
 import { getDocumentRepositoryById } from "@schornio/aibox-database/documentRepositories/getDocumentRepositoryById";
 import { createDocumentRepository } from "@schornio/aibox-database/documentRepositories/createDocumentRepository";
@@ -41,6 +46,8 @@ import { addStorageTools } from "./storageTools.ts";
 
 export function createPlatformTools(context: PlatformContext) {
   const registry = platformRegistry(context);
+  addAutomationTools(context, registry);
+  addXRAGTools(context, registry);
   const { add, workspace } = registry;
   const { supabase, supabaseServiceRole } = context;
   const id = z.object({ id: z.string().min(1) });
@@ -87,23 +94,38 @@ export function createPlatformTools(context: PlatformContext) {
   );
   add(
     "platform_models_list",
-    "List model metadata, without credentials.",
+    "List public model metadata. Global administrators may request external connection settings with includeConnectionDetails. Direct admin clients receive these by default. Credentials and HTTP headers are never returned.",
     "user",
     true,
-    empty,
-    () => getAIModels({ supabase }),
+    z.object({ includeConnectionDetails: z.boolean().optional() }),
+    async ({ includeConnectionDetails }) => {
+      const showConnection =
+        includeConnectionDetails ??
+        (context.claims === "admin" &&
+          context.level === "admin" &&
+          (!context.approvals || context.approvals.admin === "auto"));
+      return (await getAIModels({ supabase })).map((model) => {
+        if (model.type !== "external_llm_v1") return model;
+        const { contextSize, provider, modelId, baseUrl, region } =
+          model.config;
+        return {
+          ...model,
+          config: {
+            contextSize,
+            ...(showConnection && { provider, modelId, baseUrl, region }),
+          },
+        };
+      });
+    },
   );
 
   add(
     "platform_agent_create",
-    "Create an agent, optionally cloning retained MCP credentials with copyFromAgentId. Keep source role/MCP IDs and URLs unchanged for credential copying; null header values retain secrets server-side. Requires workspace administrator access to both source and target.",
+    "Create an agent with an optional workspace-unique globalId (defaults to its title), optionally cloning retained MCP credentials with copyFromAgentId. Keep source role/MCP IDs and URLs unchanged for credential copying; null header values retain secrets server-side. Requires workspace administrator access to both source and target.",
     "workspace",
     false,
-    z.object({
-      agent: agentSchema,
-      copyFromAgentId: z.string().min(1).optional(),
-    }),
-    async ({ agent, copyFromAgentId }) => {
+    createAgentInputSchema,
+    async ({ agent, copyFromAgentId, globalId }) => {
       workspace("workspace", agent.workspaceId);
       let copyFrom;
       if (copyFromAgentId) {
@@ -111,7 +133,7 @@ export function createPlatformTools(context: PlatformContext) {
         workspace("workspace", source.workspaceId);
         copyFrom = { agentId: source.id, workspaceId: source.workspaceId };
       }
-      return createAgent(agent, { supabaseServiceRole, copyFrom });
+      return createAgent(agent, { supabaseServiceRole, copyFrom, globalId });
     },
   );
   add(

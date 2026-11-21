@@ -49,9 +49,10 @@ server {
         proxy_redirect ${WEB_ENV_URL} /;
     }
 
-    # TUS chunks and artifact downloads pass through without temporary disk files.
+    # Limit each upload request to one Storage TUS chunk. Downloads stream at any size.
     # These are inactivity limits, not limits on the complete transfer duration.
-    location ~ ^/api/(storage/upload/resumable|service/artifacts)(/|$) {
+    location ~ ^/api/(storage/upload/resumable|service/artifacts|xrag/upload|xrag/download)(/|$) {
+        client_max_body_size 6m;
         proxy_request_buffering off;
         proxy_buffering off;
         proxy_max_temp_file_size 0;

@@ -21,6 +21,15 @@ it("routes browser pages, realtime and authentication to their configured upstre
   for (const route of ["/auth", "/sso"])
     expect(location(route)).toContain("proxy_pass http://supabase:54321");
 });
+it("streams bounded upload requests and XRAG downloads through nginx", () => {
+  const block = location(
+    "~ ^/api/(storage/upload/resumable|service/artifacts|xrag/upload|xrag/download)(/|$)",
+  );
+  expect(block).toContain("client_max_body_size 6m;");
+  expect(block).toContain("proxy_request_buffering off;");
+  expect(block).toContain("proxy_buffering off;");
+  expect(block).toContain("proxy_max_temp_file_size 0;");
+});
 it.each(["/v2/realtime", "/_next/hmr"])(
   "supports long-lived websocket upgrades on %s",
   (route) => {

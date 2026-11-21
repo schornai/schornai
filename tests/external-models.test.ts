@@ -78,14 +78,17 @@ describe("external model input and public metadata", () => {
     ).toBe(false);
   });
   it("does not serialize credentials to model cards or detail pages", () => {
-    const summary = toModelSummary({
-      ...external,
-      config: {
-        ...external.config,
-        headers: { Authorization: "secret" },
-        apiKey: "secret",
-      },
-    } as any);
+    const summary = toModelSummary(
+      {
+        ...external,
+        config: {
+          ...external.config,
+          headers: { Authorization: "secret" },
+          apiKey: "secret",
+        },
+      } as any,
+      { includeConnectionDetails: true },
+    );
     expect(JSON.stringify(summary)).not.toContain("secret");
     expect(summary.modelId).toBe("provider/chat");
   });

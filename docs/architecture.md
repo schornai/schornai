@@ -203,7 +203,7 @@ deployment details.
 ## Follow scheduled work
 
 The realtime server starts the [scheduler](../apps/realtime/src/scheduler/startScheduler.ts)
-and registers `artifacts.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
+and handles jobs including `artifacts.cleanup`, `xrag.transfer.cleanup` and `chat.expire`. The [worker](../apps/realtime/src/scheduler/worker.ts)
 claims durable jobs through [database operations](../packages/database/src/scheduler);
 Postgres owns due times, lease tokens, retries and interval rescheduling.
 Read the [delivery decision](adr/0005-scheduled-job-delivery.md) when adding a
@@ -220,7 +220,75 @@ operation. Read the [tombstone decision](adr/0006-disappearing-chat-tombstones.m
 when changing deletion, replay protection or task snapshot retention. Tests cover [cleanup and fencing](../tests/chat-expiration.test.ts)
 and [SQL deadlines and tombstones](../supabase/tests/chat_expiration.sql).
 
+## Automations
+
+The list shares filter and display preferences through [AutomationListProvider](../apps/web/app/%28main%29/app/automation/_components/AutomationListProvider.tsx). Header options, cards and table consume that state. Creation and editing use dedicated routes with the shared `TabsMain` editor pattern; [AutomationInfo](../apps/web/app/%28main%29/app/automation/_components/AutomationInfo.tsx) also renders the live draft preview. [AutomationScheduleFields](../apps/web/app/%28main%29/app/automation/_components/AutomationScheduleFields.tsx) maps the daily calendar UI to weekly rules with all days selected; hourly rules start at the next full UTC hour and retain their interval from the previous due time, avoiding dispatcher drift; legacy day intervals retain elapsed-time semantics. Card appearance uses the shared app color/icon schemas. Favorites share the global favorites configuration, dashboard, sidebar and RLS-scoped [favorite loader](../packages/database/src/automation/getAutomationsByIds.ts). Saving a copy uses the same create operation without an ID and starts paused. Storage selection uses one [StoragePickerDialog](../apps/web/app/_components/StoragePickerDialog.tsx) for repository and folder together.
+
+The [automation app](../apps/web/app/%28main%29/app/automation/page.tsx) and
+[platform tools](../packages/realtime/src/platform/automationTools.ts) share the
+owner-scoped [database operations](../packages/database/src/automation).
+The scheduler dispatches time occurrences and runs storage events captured by
+[the migration](../supabase/migrations/20261114154753_personal_automations.sql).
+[runAutomation](../apps/realtime/src/scheduler/runAutomation.ts) resolves current
+roles and invokes [sendChatMessage](../packages/realtime/src/platform/sendChatMessage.ts),
+also used by platform chat submission. Read the [submission decision](adr/0007-automation-chat-submission.md)
+when changing retries or durability. Behavior checks cover
+[calendar rules](../tests/automation.test.ts) and
+[ownership/outbox/fencing](../supabase/tests/automations.sql).
+
+The [scheduler hardening migration](../supabase/migrations/20261115091351_automation_scheduler_hardening.sql)
+ignores storage bookkeeping updates and lets recurring maintenance recover after
+retry exhaustion. Automation submissions use a separate sequential worker from
+maintenance and deletion. Their cancellation signal reaches attachment transfers
+and the queue publication; see [submission cancellation tests](../tests/automation-chat-submission.test.ts).
+[getAutomationOwner](../packages/database/src/automation/getAutomationOwner.ts)
+applies the execution ceiling before constructing a user client, including file
+readiness checks. Manual and captured events share
+[folder validation](../packages/database/src/automation/validateAutomationFilePath.ts).
+The platform registry always requires human approval when a native agent saves
+or runs an automation, because the target agent has its own tool policy; see
+[approval tests](../tests/platform-agent-policy.test.ts).
+
+Run history uses [AutomationRunsLive](../apps/web/app/%28main%29/app/automation/_components/AutomationRunsLive.tsx)
+to observe a read-only Yjs document on the existing Hocuspocus connection.
+The automation worker updates that document when an execution changes state.
+The browser reloads its authorized server snapshot on changes and reconnects,
+preserving search and grouping. No additional realtime service is required.
+
 ## Follow XRAG publication
+
+[`collection.ts`](../packages/xrag/src/collection.ts) owns the version-2 collection
+container: a flat tar containing `xrag.json` and unchanged individual `.xrag.tar`
+files named by their SHA-256 digest. It flattens existing collections and validates
+all children, checksums and aggregate extraction limits before returning import
+candidates. Collections are not machine artifacts and cannot be published through
+the artifact worker. See [collection tests](../tests/xrag-collection.test.ts).
+
+Workspace object archive construction lives in
+[`resourceArchive.ts`](../packages/xrag/src/resourceArchive.ts).
+The [database resource adapter](../packages/database/src/xrag/resource.ts) reuses
+the agent, transcriber, document repository and automation schemas, removes credentials from
+exports and validates the complete reference map. The
+[export operation](../packages/database/src/xrag/exportResource.ts) authorizes the
+saved workspace before reading files. The
+[import preparation](../packages/database/src/xrag/prepareResourceImport.ts) and
+[confirmation preparation](../packages/database/src/xrag/prepareConfirmedResourceImport.ts) separate
+preview from confirmed writes. Read the
+[identity decision](adr/0008-xrag-resource-identities.md) when changing delayed
+references, repeated imports or target workspace identity.
+
+The [XRAG app](<../apps/web/app/(main)/app/xrag>) and
+[platform tools](../packages/realtime/src/platform/xragTools.ts) share
+[transfer validation](../packages/database/src/xrag/withTransferArchives.ts),
+[the import coordinator](../packages/database/src/xrag/importXRAGTransfer.ts), and
+[export packaging](../packages/database/src/xrag/exportXRAG.ts).
+[Import recovery](../packages/database/src/xrag/recoverXRAGImport.ts) restores staged
+file changes from durable undo records; the scheduler runs recovery independently
+of web requests. [Imported-file processing](../packages/realtime/src/platform/processXRAGImportFiles.ts)
+is delivered through a SQL outbox to the ordinary storage task queue. Read
+[ADR 0010](adr/0010-recoverable-xrag-imports.md) before changing file reservations,
+Storage attempt credentials, atomic metadata publication or recovery. The transfer bucket stores immutable caller-owned
+uploads and downloads. The web app [queues upload inspection](../packages/database/src/xrag/queueXRAGPreparation.ts) on the scheduler. Publication retains the selected Storage original through the [artifact reference](../packages/database/src/xrag/artifactObject.ts). The scheduler’s `xrag.transfer.cleanup` handler expires prepared imports after one hour and background export downloads after 72 hours.
 
 [`publishArtifact`](../packages/database/src/xrag/publishArtifact.ts) queues a
 publication after the global-admin entry point authorizes the caller. The
@@ -348,3 +416,26 @@ The shared registry enforces disabled levels, including privileged variants of u
 [`PlatformToolPreview`](../apps/web/app/%28main%29/agent/%5BagentId%5D/%5BactivityId%5D/_components/PlatformToolPreview.tsx)
 uses read-only snapshots of the existing agent and repository info layouts for approvals and results.
 Policy regressions are covered by [`platform-agent-policy.test.ts`](../tests/platform-agent-policy.test.ts).
+
+Connected-object choices are resolved and authorized by [getXRAGRelatedObjects](../packages/database/src/xrag/getXRAGRelatedObjects.ts), shared by the app and platform MCP. Selected dependencies become independent entries in one atomic upsert. Personal XRAG selections live in [package operations](../packages/database/src/xrag/listXRAGPackages.ts) and the [package tables](../supabase/migrations/20261115133603_xrag_import_export.sql).
+
+The [model catalog](../apps/web/app/_models/getModelCatalog.ts) exposes read-only public model details to workspace administrators. Global administrators can also manage model connections and metadata. Individual model downloads authorize the model and pin the selected archive version through [getModelExportSource](../packages/database/src/xrag/getModelExportSource.ts). The [web download route](../apps/web/app/api/xrag/download/%5B...path%5D/route.ts) serves byte ranges from the [installed model files](../packages/database/src/xrag/installedModelArchive.ts) or a published archive when the files are unavailable on the core host. For a resource, the route streams a freshly generated [resource archive](../packages/xrag/src/resourceArchive.ts) to the browser. MCP single exports use [exportXRAG](../packages/database/src/xrag/exportXRAG.ts) to create a temporary transfer. The HTTP MCP transport returns transfer metadata and a public application URL for single exports and a public download URL for completed package jobs. The `includeModels` option resolves [referenced local models](../packages/database/src/xrag/getReferencedXRAGModelIds.ts) for single exports. Saved packages include the model entries selected by the caller.
+
+XRAG external model references carry only provider and model ID. [resolveExternalXRAGModels](../packages/database/src/xrag/resolveExternalXRAGModels.ts) shares destination matching between import preview and commit: one match is automatic, ambiguous matches require explicit selection, missing matches remain unresolved. UI and platform MCP use the same coordinator; credentials stay on the destination.
+
+The web upload calls [prepareXRAGUpload](<../apps/web/app/(main)/app/xrag/_actions/prepareXRAGUpload.ts>) before opening the selection. The selection page reads the prepared display data with [getPreparedXRAGImport](../packages/database/src/xrag/getPreparedXRAGImport.ts). [inspectXRAGTransfer](../packages/database/src/xrag/inspectXRAGTransfer.ts) also supports direct links to unprepared uploads and platform tools. [selectXRAGImportEntries](../packages/database/src/xrag/selectXRAGImportEntries.ts) validates immutable child archive digests shared by preview and commit; whole-package access is checked before filtering. Only selected resources require a workspace. The app separates import and export tabs.
+
+[prepareXRAGTransfer](../packages/database/src/xrag/prepareXRAGTransfer.ts) deletes outer archives after preparing an immutable, owner-scoped selection inventory. Successful and terminally failed imports consume the entire selection, including unselected children; only model/platform archives become artifacts. Existing destination files alone get undo copies. The [upload page](<../apps/web/app/(main)/app/xrag/import/page.tsx>) opens an owner-scoped [import selection](<../apps/web/app/(main)/app/xrag/import/[id]/page.tsx>) by upload ID. The [export page](<../apps/web/app/(main)/app/xrag/export/page.tsx>) loads packages and jobs independently. Model/setup singletons import automatically; packages default to all entries selected. Workspace and replacement decisions remain inline. [deleteXRAGTransfer](../packages/database/src/xrag/deleteXRAGTransfer.ts) authorizes exact ownership before abandoning a selection. The scheduler expires inventories one hour after publication and reclaims orphaned preparation files after 72 hours; preparation also enforces that deadline. Active rollback keeps its backups until restoration completes.
+
+Saved XRAG package exports are queued by [exportXRAGPackage](../packages/database/src/xrag/exportXRAGPackage.ts).
+The [XRAG export worker](../apps/realtime/src/xrag/worker.ts) claims durable jobs
+through [processXRAGExport](../packages/database/src/xrag/processXRAGExport.ts),
+streams installed model weights or published archives and necessary resource snapshots with
+[streamPackageExport](../packages/database/src/xrag/streamPackageExport.ts), and
+uploads bounded TUS chunks. [XRAGExportJobs](<../apps/web/app/(main)/app/xrag/_components/XRAGExportJobs.tsx>)
+restores progress from SQL after navigation. Read [ADR 0009](adr/0009-streamed-xrag-package-exports.md)
+when changing retry, snapshot, authorization, or spool semantics. Checks:
+[lease SQL](../supabase/tests/xrag_export_jobs.sql),
+[worker behavior](../tests/xrag-export-worker.test.ts),
+[transport retries](../tests/xrag-upload-stream.test.ts), and
+[large archive backpressure](../tests/xrag-stream-archive.test.ts).

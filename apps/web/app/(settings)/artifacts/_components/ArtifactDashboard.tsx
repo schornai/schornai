@@ -14,7 +14,7 @@ import {
 } from "@/lib/groupSortView/hook";
 import type { Preferences } from "@/lib/groupSortView/types";
 import { useFilter } from "@/lib/useFilter";
-import { ResourceListOptionsDropdown } from "../../_components/ResourceListOptionsDropdown";
+import { ResourceListOptionsDropdown } from "../../../_components/ResourceListOptionsDropdown";
 import {
   HeaderMain,
   HeaderMainContent,

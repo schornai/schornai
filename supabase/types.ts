@@ -177,6 +177,7 @@ export type Database = {
           lease_until: string | null;
           name: string;
           owner_token: string | null;
+          retained_object_id: string | null;
           retry_at: string;
           state: string;
           updated_at: string;
@@ -194,6 +195,7 @@ export type Database = {
           lease_until?: string | null;
           name: string;
           owner_token?: string | null;
+          retained_object_id?: string | null;
           retry_at?: string;
           state?: string;
           updated_at?: string;
@@ -210,6 +212,7 @@ export type Database = {
           lease_until?: string | null;
           name?: string;
           owner_token?: string | null;
+          retained_object_id?: string | null;
           retry_at?: string;
           state?: string;
           updated_at?: string;
@@ -221,6 +224,126 @@ export type Database = {
             columns: ["artifact_id"];
             isOneToOne: false;
             referencedRelation: "artifact_catalog";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      automation_runs: {
+        Row: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          activity_id?: string;
+          automation_id: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence: string;
+          revision: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Update: {
+          activity_id?: string;
+          automation_id?: string;
+          created_at?: string;
+          error_code?: string | null;
+          event?: Json | null;
+          finished_at?: string | null;
+          id?: string;
+          occurrence?: string;
+          revision?: string;
+          started_at?: string | null;
+          state?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automation_runs_automation_id_fkey";
+            columns: ["automation_id"];
+            isOneToOne: false;
+            referencedRelation: "automations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      automations: {
+        Row: {
+          access_level: string;
+          agent_id: string;
+          color: Json | null;
+          created_at: string;
+          description: string;
+          enabled: boolean;
+          icon: Json | null;
+          id: string;
+          message: string;
+          name: string;
+          next_run_at: string | null;
+          revision: string;
+          storage_bucket: string | null;
+          storage_prefix: string | null;
+          trigger: NonNullable<Json>;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_level?: string;
+          agent_id: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message: string;
+          name: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger: NonNullable<Json>;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          access_level?: string;
+          agent_id?: string;
+          color?: Json | null;
+          created_at?: string;
+          description?: string;
+          enabled?: boolean;
+          icon?: Json | null;
+          id?: string;
+          message?: string;
+          name?: string;
+          next_run_at?: string | null;
+          revision?: string;
+          storage_bucket?: string | null;
+          storage_prefix?: string | null;
+          trigger?: NonNullable<Json>;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "automations_agent_id_fkey";
+            columns: ["agent_id"];
+            isOneToOne: false;
+            referencedRelation: "chatbots";
             referencedColumns: ["id"];
           },
         ];
@@ -1435,6 +1558,282 @@ export type Database = {
           },
         ];
       };
+      xrag_export_jobs: {
+        Row: {
+          attempts: number;
+          bytes_uploaded: number;
+          claims: NonNullable<Json>;
+          created_at: string;
+          id: string;
+          lease_until: string | null;
+          name: string;
+          object_path: string | null;
+          owner_token: string | null;
+          package_id: string | null;
+          retry_at: string;
+          selections: NonNullable<Json>;
+          state: string;
+          total_bytes: number | null;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          attempts?: number;
+          bytes_uploaded?: number;
+          claims: NonNullable<Json>;
+          created_at?: string;
+          id?: string;
+          lease_until?: string | null;
+          name: string;
+          object_path?: string | null;
+          owner_token?: string | null;
+          package_id?: string | null;
+          retry_at?: string;
+          selections: NonNullable<Json>;
+          state?: string;
+          total_bytes?: number | null;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          attempts?: number;
+          bytes_uploaded?: number;
+          claims?: NonNullable<Json>;
+          created_at?: string;
+          id?: string;
+          lease_until?: string | null;
+          name?: string;
+          object_path?: string | null;
+          owner_token?: string | null;
+          package_id?: string | null;
+          retry_at?: string;
+          selections?: NonNullable<Json>;
+          state?: string;
+          total_bytes?: number | null;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "xrag_export_jobs_package_id_fkey";
+            columns: ["package_id"];
+            isOneToOne: false;
+            referencedRelation: "xrag_packages";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      xrag_import_reservations: {
+        Row: {
+          import_id: string;
+          path: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          import_id: string;
+          path: string;
+        };
+        Update: {
+          import_id?: string;
+          path?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "xrag_import_reservations_import_id_fkey";
+            columns: ["import_id"];
+            isOneToOne: false;
+            referencedRelation: "xrag_import_transactions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      xrag_import_storage_tokens: {
+        Row: {
+          import_id: string;
+          token: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          import_id: string;
+          token: string;
+        };
+        Update: {
+          import_id?: string;
+          token?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "xrag_import_storage_tokens_import_id_fkey";
+            columns: ["import_id"];
+            isOneToOne: false;
+            referencedRelation: "xrag_import_transactions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      xrag_import_transactions: {
+        Row: {
+          cleaned_at: string | null;
+          created_at: string;
+          expires_at: string;
+          files_applied: boolean;
+          id: string;
+          plan: NonNullable<Json>;
+          result: Json | null;
+          state: string;
+          token: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          cleaned_at?: string | null;
+          created_at?: string;
+          expires_at?: string;
+          files_applied?: boolean;
+          id: string;
+          plan: NonNullable<Json>;
+          result?: Json | null;
+          state?: string;
+          token: string;
+          user_id: string;
+        };
+        Update: {
+          cleaned_at?: string | null;
+          created_at?: string;
+          expires_at?: string;
+          files_applied?: boolean;
+          id?: string;
+          plan?: NonNullable<Json>;
+          result?: Json | null;
+          state?: string;
+          token?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      xrag_package_items: {
+        Row: {
+          kind: string;
+          name: string;
+          package_id: string;
+          resource_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          kind: string;
+          name: string;
+          package_id: string;
+          resource_id: string;
+        };
+        Update: {
+          kind?: string;
+          name?: string;
+          package_id?: string;
+          resource_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "xrag_package_items_package_id_fkey";
+            columns: ["package_id"];
+            isOneToOne: false;
+            referencedRelation: "xrag_packages";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      xrag_packages: {
+        Row: {
+          created_at: string;
+          id: string;
+          name: string;
+          owner_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          name: string;
+          owner_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          name?: string;
+          owner_id?: string;
+        };
+        Relationships: [];
+      };
+      xrag_prepared_uploads: {
+        Row: {
+          created_at: string;
+          digest: string;
+          discarding: boolean;
+          entries: NonNullable<Json>;
+          id: string;
+          name: string;
+          prefix: string;
+          size: number;
+          source_path: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          digest: string;
+          discarding?: boolean;
+          entries: NonNullable<Json>;
+          id: string;
+          name: string;
+          prefix: string;
+          size: number;
+          source_path: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          digest?: string;
+          discarding?: boolean;
+          entries?: NonNullable<Json>;
+          id?: string;
+          name?: string;
+          prefix?: string;
+          size?: number;
+          source_path?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      xrag_resource_origins: {
+        Row: {
+          kind: string;
+          local_id: string;
+          origin_id: string;
+          workspace_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          kind: string;
+          local_id: string;
+          origin_id: string;
+          workspace_id: string;
+        };
+        Update: {
+          kind?: string;
+          local_id?: string;
+          origin_id?: string;
+          workspace_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "xrag_resource_origins_workspace_id_fkey";
+            columns: ["workspace_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       text_searches_with_sources: {
@@ -1493,6 +1892,28 @@ export type Database = {
             };
             Returns: boolean;
           };
+      begin_automation_run: {
+        Args: { p_id: string; p_token: string };
+        Returns: {
+          activity_id: string;
+          automation_id: string;
+          created_at: string;
+          error_code: string | null;
+          event: Json | null;
+          finished_at: string | null;
+          id: string;
+          occurrence: string;
+          revision: string;
+          started_at: string | null;
+          state: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "automation_runs";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       begin_chat_expiration: {
         Args: { p_document_name: string; p_token: string };
         Returns: {
@@ -1511,6 +1932,15 @@ export type Database = {
           isOneToOne: false;
           isSetofReturn: true;
         };
+      };
+      begin_xrag_import: {
+        Args: {
+          p_id: string;
+          p_plan: Json;
+          p_token: string;
+          p_user_id: string;
+        };
+        Returns: Json;
       };
       can_access: {
         Args: {
@@ -1538,6 +1968,7 @@ export type Database = {
           lease_until: string | null;
           name: string;
           owner_token: string | null;
+          retained_object_id: string | null;
           retry_at: string;
           state: string;
           updated_at: string;
@@ -1596,6 +2027,51 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      claim_xrag_export: {
+        Args: { p_owner_token: string };
+        Returns: {
+          attempts: number;
+          bytes_uploaded: number;
+          claims: NonNullable<Json>;
+          created_at: string;
+          id: string;
+          lease_until: string | null;
+          name: string;
+          object_path: string | null;
+          owner_token: string | null;
+          package_id: string | null;
+          retry_at: string;
+          selections: NonNullable<Json>;
+          state: string;
+          total_bytes: number | null;
+          updated_at: string;
+          user_id: string;
+        }[];
+        SetofOptions: {
+          from: "*";
+          to: "xrag_export_jobs";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
+      commit_xrag_import: {
+        Args: { p_id: string; p_token: string };
+        Returns: Json;
+      };
+      create_agent_with_identity: {
+        Args: {
+          p_agent_id: string;
+          p_config: Json;
+          p_copy_agent_id?: string;
+          p_copy_workspace_id?: string;
+          p_description: string;
+          p_fallback_global_id?: string;
+          p_global_id: string;
+          p_name: string;
+          p_workspace_id: string;
+        };
+        Returns: undefined;
+      };
       create_external_ai_model: {
         Args: {
           api_key: string;
@@ -1611,6 +2087,29 @@ export type Database = {
       custom_access_token_hook: { Args: { event: Json }; Returns: Json };
       decrement_current_streams: {
         Args: { p_box_id: string; p_model_identifier: string };
+        Returns: undefined;
+      };
+      enqueue_automation_manual: {
+        Args: {
+          p_event: Json;
+          p_id: string;
+          p_request_id: string;
+          p_revision: string;
+          p_user_id: string;
+        };
+        Returns: string;
+      };
+      enqueue_automation_storage_event: {
+        Args: { bucket: string; event_name: string; object_name: string };
+        Returns: undefined;
+      };
+      enqueue_automation_time: {
+        Args: {
+          p_due: string;
+          p_id: string;
+          p_next: string;
+          p_revision: string;
+        };
         Returns: undefined;
       };
       ensure_realtime_document: {
@@ -1663,6 +2162,30 @@ export type Database = {
           isSetofReturn: true;
         };
       };
+      expired_xrag_exports: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          name: string;
+        }[];
+      };
+      expired_xrag_prepared_objects: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          name: string;
+        }[];
+      };
+      expired_xrag_prepared_uploads: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          source_path: string;
+        }[];
+      };
+      expired_xrag_transfers: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          name: string;
+        }[];
+      };
       fail_artifact_publication: {
         Args: { p_id: string; p_owner_token: string; p_retryable: boolean };
         Returns: boolean;
@@ -1684,6 +2207,10 @@ export type Database = {
         Args: { p_id: string; p_success: boolean; p_token: string };
         Returns: boolean;
       };
+      finish_xrag_import_rollback: {
+        Args: { p_id: string; p_token: string };
+        Returns: undefined;
+      };
       generate_custom_id: { Args: Record<PropertyKey, never>; Returns: string };
       get_parent_folders: {
         Args: { folder_id: string };
@@ -1700,6 +2227,18 @@ export type Database = {
           isOneToOne: false;
           isSetofReturn: true;
         };
+      };
+      get_xrag_import_status: {
+        Args: { p_upload_id: string };
+        Returns: string;
+      };
+      import_xrag_resources: {
+        Args: {
+          p_entries: Json;
+          p_new_workspace_name?: string;
+          p_workspace_id: string;
+        };
+        Returns: undefined;
       };
       is_chat_deleted: { Args: { p_document_name: string }; Returns: boolean };
       match_embeddings_1024: {
@@ -1782,6 +2321,10 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: number;
       };
+      prune_xrag_import_transactions: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
+      };
       purge_chat_task_snapshots: {
         Args: { p_document_name: string };
         Returns: undefined;
@@ -1804,6 +2347,10 @@ export type Database = {
       release_storage_file_lock: {
         Args: { p_bucket: string; p_path: string; p_token: string };
         Returns: undefined;
+      };
+      removable_xrag_objects: {
+        Args: { p_bucket: string; p_paths: string[]; p_source_path: string };
+        Returns: string[];
       };
       renew_artifact_publication: {
         Args: { p_id: string; p_owner_token: string };
@@ -1829,6 +2376,15 @@ export type Database = {
         };
         Returns: undefined;
       };
+      reserve_xrag_import: {
+        Args: {
+          p_id: string;
+          p_plan: Json;
+          p_token: string;
+          p_user_id: string;
+        };
+        Returns: undefined;
+      };
       revoke_platform_mcp_grant: {
         Args: { p_client_id: string; p_token_hash: string };
         Returns: undefined;
@@ -1850,6 +2406,10 @@ export type Database = {
         Args: { p_document_name: string; p_seconds: number; p_user_id: string };
         Returns: string;
       };
+      set_xrag_import_plan: {
+        Args: { p_id: string; p_plan: Json; p_token: string };
+        Returns: Json;
+      };
       supabase_url: { Args: Record<PropertyKey, never>; Returns: string };
       update_external_ai_model: {
         Args: {
@@ -1863,9 +2423,29 @@ export type Database = {
         };
         Returns: undefined;
       };
+      update_xrag_export: {
+        Args: {
+          p_bytes?: number;
+          p_id: string;
+          p_owner_token: string;
+          p_path?: string;
+          p_state?: string;
+          p_total?: number;
+        };
+        Returns: boolean;
+      };
       upsert_current_streams: {
         Args: { p_box_id: string; p_model_identifier: string };
         Returns: undefined;
+      };
+      xrag_import_base_path: { Args: { p_path: string }; Returns: string };
+      xrag_object_is_retained: {
+        Args: { p_object_id: string };
+        Returns: boolean;
+      };
+      xrag_resource_revision: {
+        Args: { p_id: string; p_kind: string; p_workspace_id: string };
+        Returns: string;
       };
     };
     Enums: {

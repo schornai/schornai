@@ -1,3 +1,5 @@
+import type { Automation } from "@schornio/aibox-package-database/automation/_types";
+import { getAutomationsByIds } from "@schornio/aibox-package-database/automation/getAutomationsByIds";
 import type { Agent } from "@schornio/aibox-package-database/agent/_types";
 import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
@@ -40,6 +42,7 @@ export const getCurrentUserConfigFavorites = cache(
   async (): Promise<
     SettingFavorites & {
       agents?: Agent[];
+      automations?: Automation[];
       documentRepositories?: DocumentRepository[];
       transcribers?: Transcriber_new[];
     }
@@ -75,14 +78,22 @@ export const getCurrentUserConfigFavorites = cache(
 
     const favoriteIds = favorites?.map((favorite) => favorite.id);
 
-    const [agents, documentRepositories, transcribers] = await Promise.all([
-      getAgentsByIds(favoriteIds, { supabase }),
-      getDocumentRepositoriesByIds(favoriteIds, { supabase }),
-      getTranscribersByIds(favoriteIds, { supabase }),
-    ]);
+    const [agents, documentRepositories, transcribers, automations] =
+      await Promise.all([
+        getAgentsByIds(favoriteIds, { supabase }),
+        getDocumentRepositoriesByIds(favoriteIds, { supabase }),
+        getTranscribersByIds(favoriteIds, { supabase }),
+        getAutomationsByIds(
+          favorites
+            .filter(({ type }) => type === "automation")
+            .map(({ id }) => id),
+          { supabase },
+        ),
+      ]);
 
     return {
       agents,
+      automations,
       documentRepositories,
       favorites,
       showInSidebar,

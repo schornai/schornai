@@ -1,5 +1,6 @@
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import {
+  attachmentDisposition,
   storageDownloadResponse,
   storageFileResponse,
 } from "@/lib/storageDownloadResponse";
@@ -60,7 +61,7 @@ export async function GET(request: Request) {
     response.headers.set("Cache-Control", "private, no-store");
     response.headers.set(
       "Content-Disposition",
-      `attachment; filename*=UTF-8''${encodeURIComponent(filename).replace(/['()*]/g, (char) => `%${char.charCodeAt(0).toString(16)}`)}`,
+      attachmentDisposition(filename),
     );
     return response;
   } catch {

@@ -1,6 +1,6 @@
 ---
 title: "Apps"
-description: "Dokumentenablagen und Transkription als ergänzende Werkzeuge öffnen."
+description: "Dokumentenablagen, Transkription, Automationen und XRAG öffnen."
 lang: de
 meta:
   app_urls: ["/app"]
@@ -8,13 +8,13 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-15"
   source_files: ["apps/web/app/(main)/app/page.tsx"]
 ---
 
 # Apps
 
-Unter **Apps** findest du die beiden Anwendungsbereiche **Dokumentenablagen** und **Transkription**. Beide ergänzen die Arbeit mit Agenten.
+Unter **Apps** findest du **Dokumentenablagen**, **Transkription** und **Automationen**. Sie ergänzen die Arbeit mit Agenten.
 
 | Dein Vorhaben                                           | Passender Bereich                                     |
 | ------------------------------------------------------- | ----------------------------------------------------- |
@@ -27,3 +27,11 @@ Unter **Apps** findest du die beiden Anwendungsbereiche **Dokumentenablagen** un
 Eine Dokumentenablage speichert gemeinsame Dateien. Ein Transkriptor definiert, mit welchem Modell und welchen Fachbegriffen Medien verschriftlicht werden. Ein Transkriptor kann auch einer Ablage oder einem Agenten zugeordnet werden; dann werden passende Uploads dort automatisch transkribiert.
 
 Die Verfügbarkeit richtet sich nach deinen Arbeitsplätzen. Wenn ein benötigtes Werkzeug fehlt, prüfe deine [Berechtigungen](../me/permissions.md) oder frage die Arbeitsplatzadministration.
+
+Persönliche Chats nach Zeitplan oder Dateiereignis startest du mit [Automationen](automation.md), verfügbar ab Editor-Rolle.
+
+Als Workspace-Administrator:in oder globaler Administrator siehst du zusätzlich **XRAG** zum [Importieren und Exportieren von Paketen](../settings/xrag.md).
+
+## Plattform-MCP und Agentenwerkzeuge
+
+Die Apps-Übersicht ist eine Navigation ohne eigenes Werkzeug. Die [Automationswerkzeuge](automation.md#plattform-mcp-und-agentenwerkzeuge) erlauben persönliche Verwaltung ab Zugriffsstufe `editor`; die jeweiligen Anleitungen beschreiben weitere Voraussetzungen.

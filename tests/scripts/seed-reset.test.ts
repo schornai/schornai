@@ -1,3 +1,4 @@
+import { automationTriggerSchema } from "../../packages/database/src/automation/_schemas";
 import { getRealtimeDocumentPermission } from "../../packages/database/src/realtime/getRealtimeDocumentPermission";
 import { describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
@@ -88,6 +89,17 @@ describe("seed matches application schemas", () => {
   const configs = [...sql.matchAll(/'(\{[^']*\})'/g)].map((match) =>
     JSON.parse(match[1]),
   );
+  it("has a valid paused automation example", () => {
+    const trigger = automationTriggerSchema.parse(
+      JSON.parse(sql.match(/\$automation\$([\s\S]*?)\$automation\$/)![1]),
+    );
+    expect(trigger.type).toBe("time");
+    expect(sql).toContain("Fasst die Woche für das Team zusammen.");
+    expect(sql).toContain('"iconName":"calendar-clock"');
+    expect(sql).toContain(
+      "'Wochenbericht','Erstelle einen kurzen Wochenbericht.',false",
+    );
+  });
   it("has a current agent with a valid repository mount", () => {
     const agent = agentConfigSchema.parse(
       JSON.parse(sql.match(/\$agent\$([\s\S]*?)\$agent\$/)![1]),
@@ -216,4 +228,21 @@ it("seed resources work with the unchanged realtime ID validation", async () => 
     expect(supabase.from).toHaveBeenCalled();
   }
   expect(sql).not.toMatch(/['"]seed-[a-z-]+['"]/);
+});
+
+it("seeds an owned XRAG package with valid source resources", () => {
+  const sql = readFileSync(
+    new URL("../../supabase/seed.sql", import.meta.url),
+    "utf8",
+  );
+  expect(sql).toContain("INSERT INTO public.xrag_packages(id,owner_id,name)");
+  for (const [kind, suffix] of [
+    ["agent", "016"],
+    ["documentRepository", "015"],
+    ["transcriber", "014"],
+  ]) {
+    const id = `a1b00000-0000-4000-8000-000000000${suffix}`;
+    expect(sql).toContain(`'${kind}','${id}'`);
+    expect(sql).toContain(`VALUES ('${id}'`);
+  }
 });

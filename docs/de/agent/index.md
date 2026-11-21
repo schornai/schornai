@@ -8,9 +8,10 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-21"
   source_files:
     [
+      "apps/web/app/(main)/agent/_components/AgentInfo.tsx",
       "apps/web/app/(main)/agent/page.tsx",
       "apps/web/app/(main)/agent/_components/AgentList.tsx",
       "apps/web/app/(main)/agent/_components/AgentIconGroupActions.tsx",
@@ -48,3 +49,17 @@ Unter **Optionen** stehen Kacheln und Tabelle sowie Sortierung nach Namen zur Ve
 Bei einer leeren Übersicht prüfe die Suche und deine [Berechtigungen](../me/permissions.md). Ein **Unbekanntes Modell** oder eine **Unbekannte Dokumentenablage** weist auf eine nicht verfügbare oder nicht zugängliche Zuordnung hin; die Arbeitsplatzadministration sollte sie prüfen.
 
 Weiter: [Chat führen](chat/index.md) · [Neuen Agenten anlegen](new.md)
+
+## Als XRAG exportieren
+
+Workspace-Administrator:innen können das Objekt unter **Info → XRAG exportieren** einzeln herunterladen. Für einen gemeinsamen Download mit weiteren Ressourcen wählst du **Zu XRAG-Paket hinzufügen** und bestätigst die gewünschten verbundenen Objekte. Chats und deren Dateien gehören nicht zum Agentenexport. Unter **Bearbeiten → Einstellungen** kannst du den lesbaren globalen Identifier ändern. Er wird aus dem Titel in kebab-case erzeugt. Die globale ID bleibt bei Import und erneutem Export erhalten, sodass getrennt übertragene Objekte wieder verbunden werden können.
+
+Unter [XRAG Import und Export](../settings/xrag.md) findest du die Schritte zum Importieren, zur Bestätigung vorhandener Objekte und zum Erstellen oder Entpacken von Sammelarchiven.
+
+## Zugehörige MCP-Werkzeuge
+
+- `platform_xrag_export`: Ein Objekt mit `kind: "agent"` exportieren, optional mit Modellarchiven. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Workspace des Objekts. Downloadlink zehn Minuten gültig; Die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
+- `platform_xrag_related_objects` und `platform_xrag_saved_package_add` ermitteln die verbundenen Ressourcen und übernehmen die gewählte Auswahl in ein eigenes Paket. Mindeststufe **Workspace-Administrator** mit Exportrechten für jedes ausgewählte Objekt.
+- `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globalen Identifier lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**; Administratorrechte im betroffenen Workspace. Bereits exportierte Archive bleiben unverändert.
+
+Import- und Sammelwerkzeuge sowie ihre Grenzen sind unter [XRAG](../settings/xrag.md#zugehörige-mcp-werkzeuge) dokumentiert.

@@ -315,7 +315,6 @@ describe("platform management operations", () => {
     ],
     ["platform_repositories_list", "getDocumentRepositories", [], { supabase }],
     ["platform_transcribers_list", "getTranscribers", [], { supabase }],
-    ["platform_models_list", "getAIModels", [], { supabase }],
     ["platform_users_list", "getUsers", [], { supabaseServiceRole: service }],
     ["platform_connections_list", "listConnections", [], { supabase: service }],
     [
@@ -358,6 +357,71 @@ describe("platform management operations", () => {
       expect(io[operation]).toHaveBeenCalledExactlyOnceWith(...args, options);
     },
   );
+  it("lists public model data and retains connection metadata only for administrative access", async () => {
+    const local = {
+      id: "local",
+      type: "ollama_llm_v1",
+      config: { ollamaIdentifier: "local" },
+    };
+    const connection = {
+      provider: "openai-compatible",
+      modelId: "llm",
+      baseUrl: "https://provider.test",
+      region: "eu",
+    };
+    const external = {
+      id: "remote",
+      type: "external_llm_v1",
+      config: {
+        contextSize: 8192,
+        ...connection,
+        headers: { Authorization: "secret" },
+      },
+    };
+    io.getAIModels.mockResolvedValue([local, external]);
+    const publicModels = [
+      local,
+      { ...external, config: { contextSize: 8192 } },
+    ];
+    const adminModels = [
+      local,
+      { ...external, config: { contextSize: 8192, ...connection } },
+    ];
+    const list = "platform_models_list";
+    const restricted = context({ level: "workspace" });
+    expect(await execute(list, {}, restricted)).toEqual(publicModels);
+    await expect(
+      execute(list, { includeConnectionDetails: true }, restricted),
+    ).rejects.toThrow("NOT_AUTHORIZED");
+    const workspaceAdmin = context({
+      claims: [{ organization_id: workspaceId, role: "workspace-admin" }],
+    });
+    expect(await execute(list, {}, workspaceAdmin)).toEqual(publicModels);
+    await expect(
+      execute(list, { includeConnectionDetails: true }, workspaceAdmin),
+    ).rejects.toThrow("NOT_AUTHORIZED");
+    expect(await execute(list)).toEqual(adminModels);
+    expect(await execute(list, { includeConnectionDetails: false })).toEqual(
+      publicModels,
+    );
+    const approval = context({
+      approvals: {
+        user: "auto",
+        editor: "ask",
+        workspace: "ask",
+        admin: "ask",
+      },
+    });
+    expect(await execute(list, {}, approval)).toEqual(publicModels);
+    const tool = createPlatformTools(approval).find(
+      (tool) => tool.name === list,
+    )!;
+    expect(tool.approval!({ includeConnectionDetails: true })).toBe("ask");
+    expect(await tool.execute({ includeConnectionDetails: true })).toEqual(
+      adminModels,
+    );
+    expect(io.getAIModels).toHaveBeenCalledWith({ supabase });
+  });
   it.each([
     ["agent", agent, "updateAgent", "deleteAgent"],
     [

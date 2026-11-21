@@ -56,3 +56,38 @@ it("reports missing configuration without exposing values or mutating input", ()
   );
   expect(environment).not.toHaveProperty("SUPABASE_JWT_SECRET");
 });
+
+it("refreshes short-lived worker credentials after an hour without changing claims", async () => {
+  vi.useFakeTimers();
+  for (const [key, value] of Object.entries(
+    prepareTranscriberEnvironment(environment),
+  ))
+    vi.stubEnv(key, value);
+  const fetch = vi.fn(async () => Response.json([]));
+  vi.stubGlobal("fetch", fetch);
+  const claims = [
+    { organization_id: "workspace", role: "workspace-admin" as const },
+  ];
+  const client = await createClientWithClaims(
+    "worker-user",
+    claims,
+    undefined,
+    true,
+  );
+  await client.from("ai_models").select("id");
+  const first = new Headers(fetch.mock.calls[0]![1]!.headers)
+    .get("Authorization")!
+    .slice(7);
+  vi.setSystemTime(Date.now() + 2 * 3600_000);
+  await client.from("ai_models").select("id");
+  const second = new Headers(fetch.mock.calls[1]![1]!.headers)
+    .get("Authorization")!
+    .slice(7);
+  expect(first).not.toBe(second);
+  const { payload } = await jwtVerify(
+    second,
+    new TextEncoder().encode(environment.JWT_SECRET),
+  );
+  expect(payload.organization_roles).toEqual(claims);
+  expect(payload.exp! * 1000).toBeGreaterThan(Date.now());
+});

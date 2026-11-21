@@ -26,16 +26,31 @@ export function uploadFingerprint(user: string, bucket: string, file: File) {
 }
 /** Restore the original immutable destination. Limit local resume attempts to
  * 24 hours; the upload protocol handles an earlier server-side expiration. */
-export async function resumeUpload(upload: Upload, bucket: string, file: File) {
-  const previous = (await upload.findPreviousUploads()).find(
-    (candidate) =>
+export async function resumeUpload(
+  upload: Upload,
+  bucket: string,
+  file: File,
+  user: string,
+) {
+  const namespace = bucket === "xrag-transfers" ? user : "uploads";
+  const relativePath = upload.options.metadata?.objectName
+    ?.split("/")
+    .slice(2)
+    .join("/");
+  if (!relativePath || relativePath.split("/").includes("..")) return undefined;
+  const previous = (await upload.findPreviousUploads()).find((candidate) => {
+    const [owner, uploadId, ...path] =
+      candidate.metadata.objectName?.split("/") ?? [];
+    return (
       candidate.size === file.size &&
       candidate.metadata.bucketName === bucket &&
-      /^uploads\/[0-9a-f-]{36}\/.+/.test(candidate.metadata.objectName ?? "") &&
-      !candidate.metadata.objectName!.split("/").includes("..") &&
+      owner === namespace &&
+      /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(uploadId ?? "") &&
+      path.join("/") === relativePath &&
       Date.now() - Date.parse(candidate.creationTime) < 24 * 60 * 60 * 1000 &&
-      Date.parse(candidate.creationTime) <= Date.now(),
-  );
+      Date.parse(candidate.creationTime) <= Date.now()
+    );
+  });
   if (!previous) return undefined;
   const url = new URL(previous.uploadUrl ?? "", window.location.origin);
   // Local resume records must never send a session token to another origin.

@@ -176,6 +176,17 @@ describe.each(editors)("%s editor", (_name, Component, key, entity, tabs) => {
     render(<Component {...({ [key]: value, relations, mode } as any)} />, {
       wrapper: SidebarProvider,
     });
+  it.each(["create", "update"])(
+    "only edits a saved XRAG identity in %s mode",
+    (mode) => {
+      client.params = new URLSearchParams("view=settings");
+      mount(mode);
+      expect(Boolean(screen.queryByLabelText("labelGlobalId"))).toBe(
+        mode === "update",
+      );
+    },
+  );
+
   it("disables saving an unchanged draft and creates a new entity", () => {
     const view = mount("update");
     expect(
@@ -187,6 +198,14 @@ describe.each(editors)("%s editor", (_name, Component, key, entity, tabs) => {
     fireEvent.click(screen.getByRole("button", { name: "btnCreate" }));
     expect(client.execute).toHaveBeenCalledWith({ [key]: entity });
   });
+  it.each(["create", "update"])(
+    "keeps XRAG actions off the %s draft for its workspace administrator",
+    (mode) => {
+      mount(mode);
+      expect(screen.queryByRole("button", { name: "labelExport" })).toBeNull();
+      expect(screen.queryByRole("button", { name: "labelAdd" })).toBeNull();
+    },
+  );
   it.each(tabs)("renders the %s tab and its controls", (tab) => {
     client.params = new URLSearchParams(`view=${tab}`);
     const view = mount("update");
@@ -239,6 +258,7 @@ it("rejects editor hooks outside their providers", () => {
 it("renders repository and transcriber information with populated and missing relations", () => {
   const view = render(
     <DocumentRepositoryInfo
+      showXRAGActions
       documentRepository={repository}
       workspace={workspace as any}
       modelMap={new Map([["embedding", model as any]])}
@@ -249,10 +269,13 @@ it("renders repository and transcriber information with populated and missing re
   );
   expect(view.container.textContent).toContain("Repository");
   expect(view.container.textContent).toContain("Embedding");
+  expect(screen.getByRole("button", { name: "labelExport" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "labelAdd" })).toBeTruthy();
   view.rerender(<DocumentRepositoryInfo />);
   expect(view.container.querySelector("div")).not.toBeNull();
   view.rerender(
     <TranscriberInfo
+      showXRAGActions
       transcriber={transcriber}
       modelMap={new Map([["whisper", whisper as any]])}
       workspace={workspace as any}
@@ -261,6 +284,8 @@ it("renders repository and transcriber information with populated and missing re
     />,
   );
   expect(view.container.textContent).toContain("Transcriber");
+  expect(screen.getByRole("button", { name: "labelExport" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "labelAdd" })).toBeTruthy();
   view.rerender(<TranscriberInfo />);
   expect(view.container.querySelector("div")).not.toBeNull();
 });

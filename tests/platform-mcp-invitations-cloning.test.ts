@@ -75,7 +75,7 @@ it("clones retained credentials server-side with authorized source and target an
       { organization_id: "target", role: "workspace-admin" },
     ],
     "workspace",
-  ).execute({ agent, copyFromAgentId: "source" });
+  ).execute({ agent, copyFromAgentId: "source", globalId: "kopie" });
   expect(result).toEqual({ agentId: "clone" });
   expect(io.get).toHaveBeenCalledWith("source", { supabase: {} });
   expect(io.create).toHaveBeenCalledWith(
@@ -94,6 +94,7 @@ it("clones retained credentials server-side with authorized source and target an
     }),
     {
       supabaseServiceRole: {},
+      globalId: "kopie",
       copyFrom: { agentId: "source", workspaceId: "source-workspace" },
     },
   );

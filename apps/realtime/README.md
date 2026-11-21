@@ -25,6 +25,8 @@ Consequently the relative bind mount `../ollama/models` resolves to
 `~/.aibox/ollama/models` on the host. Inside the realtime container it is mounted
 read-only at `/ollama/models`, and `OLLAMA_MODELS` points there. When starting
 Compose manually, use the same project directory or adapt the host mount path.
+Web and realtime also mount `../mlx/whisper/models` read-only. Both processes use
+`MLX_WHISPER_MODELS` and `OLLAMA_MODELS` for on-demand XRAG exports.
 
 A recursive filesystem watcher publishes a change event after manifest changes
 settle for 250 ms. Queues reload their capabilities at startup and on those
@@ -73,9 +75,11 @@ payloads, not total historical metadata or the number of active tasks.
 
 [`startScheduler.ts`](src/scheduler/startScheduler.ts) registers trusted handlers
 and recurring system jobs; [`worker.ts`](src/scheduler/worker.ts) executes them.
-Apply `20261108212843_scheduled_jobs.sql` before deploying this server. The first
-handler, `artifacts.cleanup`, replaces the artifact worker's cleanup timer. It
-runs immediately after initial registration, then 60 seconds after each success.
+Apply `20261108212843_scheduled_jobs.sql` before deploying this server.
+`artifacts.cleanup` cleans up artifact publications. A separate worker runs
+`xrag.transfer.cleanup` to expire prepared imports and remove temporary XRAG
+files and downloads. Each job runs on initial registration and 60 seconds after
+its own successful completion. Each has its own lease and retry schedule.
 Registration is idempotent across restarts and servers.
 
 Server-side callers use `scheduleJob` and `cancelJob` in
@@ -87,8 +91,10 @@ resource authorization belong to that handler and its authorized entry point.
 Only service-role clients can access jobs. This is infrastructure, with no UI,
 MCP tool, arbitrary script execution or user-supplied handler names exposed.
 
-Jobs survive restarts. Each server claims one job at a time, polling every second
-while idle. Unknown kinds remain queued until a supporting worker is deployed.
+Jobs survive restarts. Each server runs separate sequential workers for
+automation chat submission and system maintenance, polling every second while
+idle. Slow attachments cannot occupy the worker responsible for chat deletion,
+time dispatch and artifact cleanup. Unknown kinds remain queued until a supporting worker is deployed.
 Postgres atomically claims due work using `SKIP LOCKED`. Leases last 90 seconds
 and renew every 20 seconds. Lease loss, shutdown or cancellation aborts the
 handler's signal. Handlers must honor that signal and avoid unbounded operations;
@@ -103,8 +109,11 @@ interactive task recovery; see [the decision](../../docs/adr/0005-scheduled-job-
 An old lease cannot complete or renew a newly claimed job.
 
 Failed executions retry with exponential delays from 5 seconds up to one hour.
-Expired leases also consume an attempt. Exhaustion sets `failed`; recurring jobs
-also stop on exhaustion (cleanup allows 100 attempts). Inspect `scheduled_jobs`
+Expired leases also consume an attempt. Exhaustion sets one-off jobs to `failed`.
+Recurring jobs restart their attempt budget after a cooldown of at least one
+hour (or their interval, if longer), including after a final-attempt crash.
+Apply `20261115091351_automation_scheduler_hardening.sql` for this behavior; it
+also revives previously failed recurring jobs. Inspect `scheduled_jobs`
 and the sanitized `SCHEDULER_*` logs through operator database/log access. To
 retry a terminal job, cancel its ID and schedule it again after resolving the
 cause. Completed and failed records are retained for inspection and deduplication
@@ -113,7 +122,7 @@ until explicitly cancelled; avoid storing secrets or large data in payloads.
 Intervals use completion time, so missed occurrences coalesce into one execution
 after downtime and slow handlers do not create a backlog. Dates are absolute
 instants; calendar cron expressions and time zones are not supported. The `chat.expire` handler implements per-chat fixed deletion deadlines. Scheduled
-chat generation remains a future handler.
+chat generation is handled by `automation.run` in the independent worker.
 
 Behavior tests: [`scheduler.test.ts`](../../tests/scheduler.test.ts) and
 [`scheduled_jobs.sql`](../../supabase/tests/scheduled_jobs.sql).

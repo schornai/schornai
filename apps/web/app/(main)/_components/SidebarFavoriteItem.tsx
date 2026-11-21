@@ -1,4 +1,7 @@
 "use client";
+import { AutomationAvatar } from "../app/automation/_components/AutomationAvatar";
+import { CircleChevronsRight } from "@/lib/icons/circle-chevrons-right";
+import type { Automation } from "@schornio/aibox-package-database/automation/_types";
 
 import type {
   AppColor,
@@ -28,6 +31,7 @@ import { useRouter } from "next/navigation";
 
 function SidebarFavoriteItem({
   aside,
+  avatar,
   color,
   link,
   icon,
@@ -36,6 +40,7 @@ function SidebarFavoriteItem({
   onClick,
 }: {
   aside?: ReactNode;
+  avatar?: ReactNode;
   color?: AppColor;
   icon?: AppIcon;
   image?: Image;
@@ -56,12 +61,14 @@ function SidebarFavoriteItem({
             size="lg"
             tooltip={{ children: name, side: "inline-end" }}
           >
-            <AvatarApp
-              className="group-data-[collapsible=icon]:-ms-0.5"
-              fallback={name}
-              icon={icon}
-              image={image}
-            />
+            {avatar ?? (
+              <AvatarApp
+                className="group-data-[collapsible=icon]:-ms-0.5"
+                fallback={name}
+                icon={icon}
+                image={image}
+              />
+            )}
             {name}
             {aside ? <div className="ms-auto">{aside}</div> : undefined}
           </SidebarMenuButton>
@@ -161,6 +168,34 @@ export function SidebarFavoriteItemWorkspace({
       aside={<Library className="size-4" />}
       link={`/workspace/${workspace.id}`}
       name={workspace.name}
+    />
+  );
+}
+
+export function SidebarFavoriteItemAutomation({
+  automation,
+}: {
+  automation?: Automation;
+}) {
+  if (!automation) return null;
+  return (
+    <SidebarFavoriteItem
+      avatar={
+        <AutomationAvatar
+          className="group-data-[collapsible=icon]:-ms-0.5"
+          icon={automation.icon}
+          fallback={automation.name}
+        />
+      }
+      aside={
+        <Button disabled size="icon-sm" variant="ghost">
+          <CircleChevronsRight />
+        </Button>
+      }
+      color={automation.color}
+      icon={automation.icon}
+      name={automation.name}
+      link={`/app/automation/${automation.id}/info`}
     />
   );
 }

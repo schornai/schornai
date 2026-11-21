@@ -5,6 +5,7 @@ UNION ALL SELECT 'Agenten', count(*) FROM public.chatbots
 UNION ALL SELECT 'Modelle', count(*) FROM public.ai_models
 UNION ALL SELECT 'Dokumentenablagen', count(*) FROM public.databases
 UNION ALL SELECT 'Transkriptoren', count(*) FROM public.transcribers
+UNION ALL SELECT 'XRAG-Pakete', count(*) FROM public.xrag_packages
 UNION ALL SELECT 'Aktivitäten', count(*) FROM public.activities
 UNION ALL SELECT 'Transkriptionen', count(*) FROM public.transcriptions
 UNION ALL SELECT 'Storage-Dateien', count(*) FROM storage.objects;

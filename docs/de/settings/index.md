@@ -8,7 +8,7 @@ meta:
   role_scope: "Gesamte Instanz"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-10-25"
+  last_verified: "2026-11-21"
   source_files:
     [
       "apps/web/app/(settings)/settings/workspace/[workspaceId]/page.tsx",
@@ -40,8 +40,12 @@ Die Kachelübersicht enthält auch **Verbindungen** für die zentralen OAuth-App
 4. Einen [Transkriptor](../app/transcribe/new.md), eine [Dokumentenablage](../app/documents/new.md) und/oder einen [Agenten](../agent/new.md) nach Bedarf bereitstellen.
 5. Den Ablauf mit einem Konto der tatsächlich vorgesehenen Benutzerrolle prüfen.
 
-Unter [Modelle](models.md) in der Verwaltungsnavigation oder im Kontomenü siehst du lokale Modellinformationen und richtest externe Sprachmodelle ein. Lokale Modelle und Softwareupdates stellt die Betriebsadministration über [XRAG](xrag.md) bereit.
+Unter **Modelle** in der Verwaltungsnavigation oder im Kontomenü sehen Arbeitsplatzadministrator:innen und globale Administrator:innen lokale und externe Modelle. In der Modellinfo lassen sich lokale Modellarchive einzeln herunterladen oder einem XRAG-Paket hinzufügen. Die Verbindungseinstellungen externer Modelle verwaltet die globale Administration. [Modelle](models.md) · [XRAG-Import und -Export](xrag.md).
 
 Die Begleitprogramme [Desktop-App](../desktop/index.md) und [Service und Mac-App](../box-admin/index.md) sind separat beschrieben. Hinweise für Wartung und Konfiguration findest du unter [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 
 Unter [Cluster](../cluster/index.md) findest du eine Kachelübersicht zu [Service](../service/index.md), [Aufgabenstapel](../tasks/index.md) und [Artefakten](../artifacts/index.md). Dieselben Ziele stehen als Unterpunkte in der Navigation.
+
+## Zugehörige MCP-Werkzeuge für Modelle
+
+`platform_models_list` zeigt ab Stufe **Benutzer** lesbare Modellmetadaten. `platform_xrag_export` liefert ein lokales Modellarchiv und `platform_xrag_saved_package_add` nimmt ein lokales Modell in das eigene Paket auf. Beide benötigen mindestens **Workspace-Administrator** und Zugriff auf das Modell. Der Export nutzt die Modelldateien auf dem Core-Host oder ein veröffentlichtes Archiv. [Werkzeuge der Modellverwaltung](models.md#zugehörige-mcp-werkzeuge).

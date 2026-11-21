@@ -9,6 +9,7 @@ import { createPlatformTools } from "@schornio/aibox-realtime/platform/tools";
 import { getRealtimeServerToken } from "@schornio/aibox-realtime/server/getRealtimeServerToken";
 import { ServerRealtimeWebsocketProvider } from "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider";
 import { mcpRequestOrigin } from "@/lib/mcp/requestOrigin";
+import { xragFileDownloadUrl } from "@/lib/xrag/downloadUrl";
 import { authenticatePlatformMcp } from "./authenticate";
 
 export function platformMcpHandler() {
@@ -42,6 +43,23 @@ export function platformMcpHandler() {
       return new Response(null, { status: 405, headers: { Allow: "POST" } });
     const tools = createPlatformTools({
       ...context,
+      xragUploadUrls: (path, token) => {
+        const url = new URL(
+          "/api/xrag/upload/" +
+            path.split("/").map(encodeURIComponent).join("/"),
+          origin,
+        );
+        url.searchParams.set("token", token);
+        return {
+          url: url.href,
+          resumableEndpoint: new URL(
+            "/api/storage/upload/resumable/sign",
+            origin,
+          ).href,
+        };
+      },
+      xragDownloadUrl: (signedUrl) =>
+        new URL(xragFileDownloadUrl(signedUrl), origin).href,
       getSsoConfig: () => {
         const supabaseUrl = process.env.SUPABASE_URL;
         const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

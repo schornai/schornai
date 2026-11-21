@@ -28,6 +28,8 @@ _Avoid_: Database or unqualified repository when referring to this resource.
 including its model, prompt, and retry level.
 _Avoid_: Transcriber worker when referring to the saved configuration.
 
+**Personal XRAG package**: A saved selection of resources and local models that a person can export together as one XRAG archive.
+
 ## Conversations and background work
 
 **Activity**: A history entry for a work session, such as a chat or transcription,

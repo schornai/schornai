@@ -9,6 +9,7 @@ export function getServiceFixture<T>(name: string, base: T): T {
   const value = adaptFixture(base, scenarioState.current);
   const override = overrides[name];
   if (override === undefined) return value;
+  if (Array.isArray(override)) return override as T;
   return value && typeof value === "object" && !Array.isArray(value)
     ? ({ ...value, ...(override as object) } as T)
     : (override as T);

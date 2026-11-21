@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto und jeweiliger Arbeitsplatz"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-10-24"
+  last_verified: "2026-11-19"
   source_files:
     [
       "apps/web/app/(settings)/_components/Sidebar.tsx",
@@ -42,6 +42,8 @@ Unter **Profil → Berechtigungen** findest du deine Rolle je Arbeitsplatz. Eine
 Bei den Rollenangaben in den Metadaten dieser Dokumentation sind höhere Rollen eingeschlossen, sofern kein anderer Geltungsbereich angegeben ist. Eigene Chatdateien benötigen beispielsweise keine Bearbeiterrolle für eine gemeinsame Ablage.
 
 Als Arbeitsplatzadministrator:in öffnest du über **Arbeitsplätze → dein Arbeitsplatz → Bearbeiten** dessen Verwaltung. Dort kannst du Name, Beschreibung und Dokumentation ändern. **Mitgliederverwaltung:** Lokale Rollen, automatischer Beitritt und SSO-Zuweisungen werden ausschließlich von globalen Administrator:innen verwaltet.
+
+Arbeitsplatzadministrator:innen dürfen XRAG-Ressourcen ihrer Arbeitsplätze importieren und exportieren, globale Ressourcen-IDs ändern und persönliche Pakete zusammenstellen. Unter **Modelle** sehen sie öffentliche Informationen zu lokalen und externen Modellen. Lokale Modellarchive können sie einzeln oder zusammen mit weiteren Ressourcen herunterladen. Für neue Arbeitsplätze und jeden Import mit Modell- oder Plattforminhalten sind globale Administratorrechte erforderlich. [Modelle](../settings/models.md) · [XRAG-Import und -Export](../settings/xrag.md).
 
 ## Drei verschiedene Bedeutungen von „Rolle“ und „Freigabe“
 

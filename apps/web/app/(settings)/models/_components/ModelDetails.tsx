@@ -1,4 +1,5 @@
 "use client";
+import { XRAGObjectActions } from "../../../_components/xrag/XRAGObjectActions";
 import { ModelContextSize } from "../../../_components/ModelContextSize";
 import { Brain, Book, Settings2, ChevronsUpDown, Pencil } from "lucide-react";
 import Link from "next/link";
@@ -20,7 +21,13 @@ import { providers } from "../providers";
 import { ModelCard } from "./ModelCard";
 import type { ModelSummary } from "../modelSummary";
 
-export function ModelDetails({ model }: { model: ModelSummary }) {
+export function ModelDetails({
+  model,
+  readOnly,
+}: {
+  model: ModelSummary;
+  readOnly?: boolean;
+}) {
   const { t } = useT("settings", { keyPrefix: "models" });
   const external = model.type === "external_llm_v1";
   const details = [
@@ -62,7 +69,7 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
         </dl>
       ),
     },
-    ...(external
+    ...(external && !readOnly
       ? [
           {
             title: t("labelConnection"),
@@ -103,7 +110,7 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
   ];
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <ModelCard model={model} />
+      <ModelCard model={model} readOnly={readOnly} />
       <div className="flex min-w-0 flex-col gap-1">
         {sections.map(({ title, icon: Icon, summary, content, edit }) => (
           <Alert key={title}>
@@ -114,7 +121,7 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
                   {title}
                 </CollapsibleTrigger>
                 <InfoActions>
-                  {edit && (
+                  {edit && !readOnly && (
                     <Button
                       nativeButton={false}
                       render={<Link href={`?view=${edit}`} />}
@@ -148,6 +155,7 @@ export function ModelDetails({ model }: { model: ModelSummary }) {
           </Alert>
         ))}
       </div>
+      {!external && <XRAGObjectActions kind="model" id={model.id} />}
     </div>
   );
 }

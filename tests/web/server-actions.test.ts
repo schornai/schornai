@@ -409,15 +409,33 @@ describe("agent server actions", () => {
   it("creates through the credential transaction and redirects to the persisted ID", async () => {
     const { createAgent } =
       await import("../../apps/web/app/(main)/agent/_actions/createAgent");
-    await createAgent({ agent });
+    await createAgent({ agent, globalId: "team/help" });
     const [operation, args] = state.service.rpc.mock.lastCall;
-    expect(operation).toBe("save_agent_with_mcp_credentials");
+    expect(operation).toBe("create_agent_with_identity");
     expect(args).toMatchObject({
       p_name: agent.name,
+      p_global_id: "team/help",
+      p_fallback_global_id: undefined,
       p_workspace_id: "workspace",
     });
     expect(redirect).toHaveBeenCalledWith(`/agent/${args.p_agent_id}`);
     expect(revalidatePath).toHaveBeenCalledWith("/");
+  });
+  it("reports a taken global ID on the creation field and keeps the editor open", async () => {
+    const { createAgent } =
+      await import("../../apps/web/app/(main)/agent/_actions/createAgent");
+    state.service.rpc.mockResolvedValueOnce({
+      error: { message: "XRAG_IDENTITY_EXISTS" },
+    });
+    await expect(
+      createAgent({ agent, globalId: "team/help" }),
+    ).rejects.toMatchObject({
+      digest: expect.stringContaining(
+        '"globalId":{"_errors":["XRAG_IDENTITY_EXISTS"]}',
+      ),
+    });
+    expect(redirect).not.toHaveBeenCalled();
+    expect(revalidatePath).not.toHaveBeenCalled();
   });
   it("updates the authorized agent and validates before writing", async () => {
     const { updateAgent } =
