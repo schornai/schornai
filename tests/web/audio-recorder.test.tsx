@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
-import "./client-setup";
+import { client } from "./client-setup";
+import { ChatVoiceRecorder } from "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder";
 import {
   act,
   cleanup,
@@ -18,6 +19,7 @@ import { fileNeedsProcessing } from "../../packages/utils/src/getFileTypeLabel";
 
 const mocks = vi.hoisted(() => ({ upload: vi.fn() }));
 vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
+  FileUploadProvider: ({ children }: any) => children,
   useFileUpload: () => ({ queueFileUploadsByFiles: mocks.upload }),
 }));
 const trackStop = vi.fn();
@@ -656,4 +658,44 @@ it("keeps a failed upload open for retry, then closes and reopens with a clean r
   expect(screen.queryByLabelText("labelPreview")).toBeNull();
   fireEvent.click(screen.getByRole("button", { name: "labelClose" }));
   expect(screen.queryByRole("dialog")).toBeNull();
+});
+
+it("stops a chat recording at five minutes and retries queue submission without uploading twice", async () => {
+  const close = vi.fn();
+  client.execute
+    .mockReset()
+    .mockResolvedValueOnce({ serverError: "busy" })
+    .mockResolvedValueOnce({ data: { queued: true } });
+  mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+  render(
+    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
+  );
+  vi.useFakeTimers();
+  try {
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelRecord" })),
+    );
+    expect(screen.getByRole("button", { name: "labelStop" })).toBeTruthy();
+    await act(async () => vi.advanceTimersByTime(300_000));
+    expect(instances[0]?.stop).toHaveBeenCalledOnce();
+    expect(screen.getByRole("button", { name: "labelPlay" })).toBeTruthy();
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    expect(close).not.toHaveBeenCalled();
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    expect(client.execute).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        agentId: "agent",
+        activityId: "activity",
+        voice: { duration: 300, peaks: [], path: "clip.webm" },
+      }),
+    );
+    expect(mocks.upload).toHaveBeenCalledOnce();
+    expect(close).toHaveBeenCalledWith(true);
+  } finally {
+    vi.useRealTimers();
+  }
 });

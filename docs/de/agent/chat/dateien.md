@@ -61,7 +61,7 @@ Hänge eine über den Reiter **Dateien** hochgeladene Datei anschließend über 
 
 Für Fragen zu Bildinhalten braucht der Agent ein Modell mit Bildunterstützung. Prüfe diese Eigenschaft unter **Info → Modell**; die Arbeitsplatzadministration kann ein anderes Modell zuweisen.
 
-Ist dem Agenten ein Transkriptor zugeordnet, werden Audio- und Videodateien automatisch transkribiert. Dann steht auch das Mikrofon für eine [direkte Aufnahme](../../app/transcribe/aufnahme.md) zur Verfügung.
+Ist dem Agenten ein Transkriptor zugeordnet, werden Audio- und Videodateien automatisch transkribiert. In der Dateiansicht kannst du eine [Aufnahme als Datei speichern](../../app/transcribe/aufnahme.md). Das Mikrofon in der Chat-Eingabe öffnet die [Sprachnachricht mit automatischem Versand](index.md#sprachnachricht-senden).
 
 ## Unterschied zur Dokumentenablage
 

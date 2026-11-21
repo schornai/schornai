@@ -12,6 +12,8 @@ import { ButtonAction } from "@schornio/aibox-package-ui/components/button-actio
 import { retryChatGeneration } from "../_actions/retryChatGeneration";
 
 const errorTranslationKeys = new Map<string, string>([
+  ["VOICE_TRANSCRIPTION_FAILED", "errorVoiceTranscription"],
+  ["VOICE_NO_SPEECH", "errorVoiceEmpty"],
   ["CONTEXT_BUDGET_EXCEEDED", "errorContextBudget"],
   ["CONTEXT_COMPRESSION_FAILED", "errorContextCompression"],
   ["TASK_WORKER_LOST", "errorWorkerLost"],

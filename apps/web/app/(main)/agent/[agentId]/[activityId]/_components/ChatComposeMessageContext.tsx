@@ -1,7 +1,6 @@
 "use client";
 import type { ChatExpiration } from "@schornio/aibox-package-database/chat/expirationSchema";
 import type { StorageRealtimeObject } from "@schornio/aibox-realtime/documents/storage/_types";
-import type { AudioRecordingConfig } from "../../../../../_components/AudioRecorderModal";
 
 import type { Dispatch, ReactNode, SetStateAction } from "react";
 import { createContext, useContext } from "react";
@@ -43,6 +42,7 @@ const context = createContext<
       // chatGenerationAbort: () => void;
       // chatGenerationPause: () => void;
       // chatGenerationStart: () => void;
+      voiceEnabled?: boolean;
       defaultThinking: boolean;
       interaction: ChatInteraction;
       approvalSubmitted: boolean;
@@ -72,7 +72,7 @@ function ChatComposeMessageContextProvider({
   modelThinking,
   additionalFunctions,
   expiration,
-  audioRecording,
+  voiceEnabled,
   children,
 }: {
   activityId: string;
@@ -80,7 +80,7 @@ function ChatComposeMessageContextProvider({
   modelThinking?: Agent["modelThinking"];
   additionalFunctions?: Agent["additionalFunctions"];
   expiration?: ChatExpiration;
-  audioRecording?: AudioRecordingConfig;
+  voiceEnabled?: boolean;
   children: ReactNode;
 }) {
   const [selectedCurrentMessageId, setSelectedCurrentMessageId] = useState<
@@ -260,6 +260,7 @@ function ChatComposeMessageContextProvider({
         additionalFunctions,
         expiration,
         approvalSubmitted,
+        voiceEnabled,
         defaultThinking:
           modelThinking === "mandatory-on" || modelThinking === "optional-on",
         interaction,
@@ -281,7 +282,6 @@ function ChatComposeMessageContextProvider({
       }}
     >
       <StorageContext
-        audioRecording={audioRecording}
         applyNewFiles="ignore"
         basePathApp={`/agent/${agentId}/${activityId}/files`}
         basePathStorage="/"
@@ -312,7 +312,7 @@ export function ChatComposeMessageContext({
   modelThinking,
   additionalFunctions,
   expiration,
-  audioRecording,
+  voiceEnabled,
   children,
 }: {
   activityId: string;
@@ -320,7 +320,7 @@ export function ChatComposeMessageContext({
   modelThinking?: Agent["modelThinking"];
   additionalFunctions?: Agent["additionalFunctions"];
   expiration?: ChatExpiration;
-  audioRecording?: AudioRecordingConfig;
+  voiceEnabled?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -333,7 +333,7 @@ export function ChatComposeMessageContext({
         modelThinking={modelThinking}
         additionalFunctions={additionalFunctions}
         expiration={expiration}
-        audioRecording={audioRecording}
+        voiceEnabled={voiceEnabled}
       >
         {children}
       </ChatComposeMessageContextProvider>

@@ -2,6 +2,7 @@
 
 import {
   Brain,
+  Mic,
   File,
   Upload,
   Layers,
@@ -26,7 +27,9 @@ import {
   DropdownMenuItem,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { AudioRecorderButton } from "../../../../../_components/AudioRecorderModal";
+import { useDecayState } from "@schornio/aibox-package-ui/hooks/use-decay-state";
+import { ChatVoiceRecorder } from "./ChatVoiceRecorder";
+import { useCanSendMessage } from "./ChatContext";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ChatExpirationSettings } from "./ChatExpirationSettings";
@@ -54,6 +57,12 @@ export function ChatComposeMessageSelected({
   const { t } = useT("agent", {
     keyPrefix: "_components.ChatComposeMessageSelected",
   });
+  const { t: voiceLabel } = useT("agent", {
+    keyPrefix: "_components.VoiceMessage",
+  });
+  const [voiceOpen, setVoiceOpen] = useState(false);
+  const [voiceSent, setVoiceSent] = useDecayState(false);
+  const canSend = useCanSendMessage();
   const formRef = useRef<HTMLFormElement>(null);
   const fallbackTextareaRef = useRef<HTMLTextAreaElement>(null);
   const textareaRef = inputRef ?? fallbackTextareaRef;
@@ -66,6 +75,7 @@ export function ChatComposeMessageSelected({
 
   const {
     additionalFunctions,
+    voiceEnabled,
     expiration,
     activity,
     addSelectedFiles,
@@ -119,6 +129,37 @@ export function ChatComposeMessageSelected({
     uploads.some(
       (upload) => upload.state === "queued" || upload.state === "uploading",
     ) || pendingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
+
+  useEffect(() => {
+    if (!voiceEnabled) return;
+    const openFromHash = () => {
+      if (window.location.hash === "#record") {
+        setVoiceOpen(true);
+        window.history.replaceState(
+          window.history.state,
+          "",
+          window.location.pathname + window.location.search,
+        );
+      }
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [voiceEnabled]);
+
+  if (voiceEnabled && voiceOpen)
+    return (
+      <ChatVoiceRecorder
+        key={activityId}
+        agentId={agentId}
+        activityId={activityId}
+        thinking={selectedCurrentMessage?.content.thinking ?? defaultThinking}
+        onClose={(sent) => {
+          setVoiceSent(sent);
+          setVoiceOpen(false);
+        }}
+      />
+    );
 
   return (
     <form
@@ -189,6 +230,11 @@ export function ChatComposeMessageSelected({
           </AttachmentGroup>
         </div>
       ) : undefined}
+      {voiceSent && (
+        <p role="status" className="text-muted-foreground px-3 pt-2 text-xs">
+          {voiceLabel("descriptionQueued")}
+        </p>
+      )}
       <Textarea
         className="max-h-[40vh] min-h-[2ch] resize-none border-none bg-transparent! focus-visible:ring-0"
         disabled={selectedCurrentMessage?.state === "submitted"}
@@ -334,10 +380,19 @@ export function ChatComposeMessageSelected({
           />
         ) : null}
 
-        <AudioRecorderButton
-          iconOnly
-          disabled={selectedCurrentMessage?.state === "submitted"}
-        />
+        {voiceEnabled && (
+          <Button
+            type="button"
+            size="icon-sm"
+            variant="ghost"
+            aria-label={voiceLabel("labelTitle")}
+            title={voiceLabel("labelTitle")}
+            disabled={!canSend || isSubmitted}
+            onClick={() => setVoiceOpen(true)}
+          >
+            <Mic />
+          </Button>
+        )}
 
         <div className="ml-auto flex items-center gap-0.5">
           <ChatCancelGeneration />

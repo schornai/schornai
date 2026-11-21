@@ -126,3 +126,23 @@ export const MessagePartsMultiple: Story = {
     },
   },
 };
+
+export const VoiceMessage: Story = {
+  args: {
+    message: {
+      id: "recorded-message",
+      role: "user",
+      parts: [
+        {
+          type: "data-voice",
+          data: {
+            path: "meeting.webm",
+            duration: 14,
+            peaks: [0.1, 0.4, 0.7, 0.3, 0.2, 0.8, 0.6, 0.3],
+          },
+        },
+        { type: "text", text: "Welche Termine stehen diese Woche an?" },
+      ],
+    },
+  },
+};

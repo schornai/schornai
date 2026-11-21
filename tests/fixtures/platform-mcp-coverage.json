@@ -11,6 +11,9 @@
   "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/abortChatGeneration.ts": {
     "tools": ["platform_chat_abort"]
   },
+  "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/submitVoiceMessage.ts": {
+    "tools": ["platform_chat_voice_send"]
+  },
   "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/submitCurrentMessage.ts": {
     "tools": [
       "platform_chat_send",

@@ -85,9 +85,7 @@ export default async function Page(
         modelThinking={agent.modelThinking}
         additionalFunctions={agent.additionalFunctions}
         expiration={expiration}
-        audioRecording={
-          agent.transcriberIdentifier ? { appColor: agent.color } : undefined
-        }
+        voiceEnabled={Boolean(agent.transcriberIdentifier)}
       >
         <ContainerChat>
           <HeaderAgent agentId={agentId} />

@@ -752,7 +752,8 @@
         "platform_xrag_export_jobs": "XRAG-Exporte anzeigen",
         "platform_xrag_export_delete": "XRAG-Export löschen",
         "platform_xrag_export_cancel": "XRAG-Export abbrechen",
-        "platform_xrag_export_download": "XRAG-Export herunterladen"
+        "platform_xrag_export_download": "XRAG-Export herunterladen",
+        "platform_chat_voice_send": "Sprachnachricht senden"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -784,7 +785,9 @@
       "errorApprovalRoleNotFound": "Die Rolle zur offenen Werkzeugfreigabe ist nicht mehr verfügbar. Prüfe die Rollen des Agenten und starte einen neuen Chat.",
       "errorApprovalRolesMismatch": "Die offenen Werkzeugfreigaben gehören zu unterschiedlichen Rollen und können nicht gemeinsam fortgesetzt werden. Starte einen neuen Chat.",
       "errorModelApiKey": "Für das Sprachmodell fehlt der API-Schlüssel. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
-      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen."
+      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
+      "errorVoiceTranscription": "Die Aufnahme konnte nicht transkribiert werden. Prüfe den Transkriptor und versuche es erneut.",
+      "errorVoiceEmpty": "In der Aufnahme wurde keine Sprache erkannt."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",
@@ -819,6 +822,25 @@
       "labelCompleted": "Kontext zusammengefasst",
       "labelFailed": "Kontext konnte nicht zusammengefasst werden",
       "labelInterrupted": "Zusammenfassung des Kontexts abgebrochen"
+    },
+    "VoiceMessage": {
+      "labelTitle": "Sprachnachricht",
+      "labelRecord": "Aufnahme starten",
+      "labelStop": "Aufnahme stoppen",
+      "labelRecording": "Aufnahme läuft",
+      "labelPlay": "Abspielen",
+      "labelPause": "Pausieren",
+      "labelRestart": "Von Anfang an abspielen",
+      "descriptionStart": "Nimm bis zu fünf Minuten auf.",
+      "descriptionPreview": "Höre deine Aufnahme an oder sende sie an den Chat.",
+      "labelSend": "Sprachnachricht senden",
+      "labelUploading": "Wird hochgeladen und zum Versand übergeben …",
+      "labelDiscard": "Aufnahme verwerfen",
+      "labelCancel": "Abbrechen",
+      "labelAwaitingTranscript": "Noch kein Transkript",
+      "errorPlayback": "Die Aufnahme konnte nicht abgespielt werden.",
+      "errorSend": "Der Versand konnte nicht gestartet werden. Prüfe die Verbindung und versuche es erneut, sobald der Chat frei ist.",
+      "descriptionQueued": "Aufnahme hochgeladen. Du kannst dieses Fenster jetzt schließen."
     }
   },
   "page": {

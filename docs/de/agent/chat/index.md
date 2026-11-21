@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-12"
+  last_verified: "2026-11-21"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -18,6 +18,9 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessage.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartToolSupport.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessagePartContextCompression.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder.tsx",
+      "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/VoiceMessagePlayer.tsx",
+      "apps/realtime/src/chat/transcribeVoiceMessage.ts",
       "apps/realtime/src/chat/worker.ts",
       "packages/realtime/src/documents/chat/getResponseSuggestions.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
@@ -93,6 +96,14 @@ Beim Senden wartet der Server pro Synchronisationsschritt höchstens 30 Sekunden
 auf den Realtime-Dienst. Eine abgelehnte Anmeldung oder eine geschlossene Verbindung
 beendet das Warten früher mit einem Fehler. Prüfe bei einem Sendefehler den
 Gesprächsverlauf, bevor du die Nachricht erneut sendest.
+
+## Sprachnachricht senden
+
+Wenn dem Agenten ein Transkriptor zugeordnet ist, öffnet das Mikrofon in der Chat-Eingabe die Sprachnachricht. Wähle **Aufnahme starten** und erlaube den Mikrofonzugriff. Während der Aufnahme siehst du die Wellenform und die Laufzeit. Nach fünf Minuten stoppt die Aufnahme automatisch. Du kannst sie auch früher stoppen, anhören, pausieren, von vorne abspielen oder verwerfen.
+
+Mit **Sprachnachricht senden** lädst du die Aufnahme hoch. Sobald die Aufnahmeansicht automatisch schließt, kannst du auch den Browser-Tab schließen. Der Server transkribiert die Aufnahme und sendet den erkannten Text direkt an den Agenten. Die Aufnahme bleibt mit Wellenform, Player und Transkript im Chatverlauf. Ein angefangener Textentwurf bleibt verfügbar. Bei einem Transkriptionsfehler kannst du im Chat **Erneut versuchen** wählen. Wenn der Transkriptor innerhalb von zehn Minuten kein Ergebnis liefert, endet der Versuch mit einem Fehler.
+
+![Sprachnachricht im Chatverlauf mit Wiedergabe, Wellenform und Transkript](../../assets/chat-sprachnachricht.png)
 
 ## Antwort lesen und weiterverwenden
 
@@ -199,3 +210,5 @@ Kontextkomprimierung läuft ebenfalls bei `platform_chat_send` (Mindestzugriff *
 Berechtigung für Agent und Gespräch) automatisch. Es gibt kein separates Komprimierungswerkzeug;
 die Prüfung erfolgt zwingend vor jedem betroffenen Modellaufruf. Die Modellgrenze verwalten
 globale Administrator:innen mit den Modellwerkzeugen (Mindestzugriff **admin**).
+
+`platform_chat_voice_send` (Mindeststufe **Benutzer**) verarbeitet eine bereits hochgeladene Audiodatei des konkreten Chats. Erforderlich sind Zugriff auf den Arbeitsplatz und das Gespräch, ein zugeordneter Transkriptor sowie ein freier Chat ohne offene Werkzeugfreigabe. Übergib den Dateipfad, die Dauer in Sekunden (bis 300) und bis zu 48 normalisierte Wellenformwerte. `platform_chat_read` liefert Aufnahmeverweis und Transkript. Mikrofonaufnahme und Wiedergabe benötigen den Browser und sind keine MCP-Werkzeuge.

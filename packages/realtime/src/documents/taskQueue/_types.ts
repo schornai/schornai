@@ -1,3 +1,4 @@
+import type { VoiceMessage } from "@schornio/aibox-database/chat/voiceMessage";
 import type { LanguageModelCallOptions, ModelMessage } from "ai";
 import type {
   LanguageModelV4DoGenerateResult,
@@ -72,6 +73,8 @@ export type TaskTypeChat = {
     activityId: string;
     agentId: string;
     retry?: boolean;
+    voice?: VoiceMessage;
+    thinking?: boolean;
     userClaims: UserClaims;
     userId: string;
   };

@@ -1,3 +1,6 @@
+import { getActivities } from "@schornio/aibox-realtime/documents/activity/getActivities";
+import { setActivityLabel } from "@schornio/aibox-realtime/documents/activity/setActivityLabel";
+import { transcribeVoiceMessage } from "./transcribeVoiceMessage.ts";
 import { getDocumentRepositories } from "@schornio/aibox-database/documentRepositories/getDocumentRepositories";
 import { requireStorageAccess } from "@schornio/aibox-database/storage/requireStorageAccess";
 import { storageToAgentPath } from "@schornio/aibox-database/storage/_utils/storageToAgentPath";
@@ -134,13 +137,36 @@ export async function chatWorker({
         });
       };
       assertGenerationActive();
-      // Retry continues the stored history without consuming or duplicating a draft.
+      const lastMessage = getChat(chat.document).messages?.toArray().at(-1);
+      // A failed transcription is retried against the same history entry.
+      const unfinishedVoice =
+        claimedTask.parameters.retry &&
+        lastMessage?.role === "user" &&
+        !lastMessage.parts.some((part) => part.type === "text")
+          ? lastMessage.parts.find((part) => part.type === "data-voice")?.data
+          : undefined;
+      const voice = claimedTask.parameters.voice ?? unfinishedVoice;
+      const voiceMessage: ChatMessage | undefined = voice
+        ? {
+            id:
+              unfinishedVoice && lastMessage ? lastMessage.id : claimedTask.id,
+            role: "user",
+            parts: [{ type: "data-voice", data: voice }],
+            metadata: {
+              thinking: unfinishedVoice
+                ? lastMessage?.metadata?.thinking
+                : claimedTask.parameters.thinking,
+            },
+          }
+        : undefined;
+
       let claimedCurrentChatMessage:
         | ReturnType<typeof claimNextInput>
-        | { content: { type: "retry"; thinking?: boolean } } = claimedTask
-        .parameters.retry
-        ? { content: { type: "retry" } }
-        : claimNextInput();
+        | { content: { type: "retry"; thinking?: boolean } } = voice
+        ? undefined
+        : claimedTask.parameters.retry
+          ? { content: { type: "retry" } }
+          : claimNextInput();
 
       setChatState(chat.document, {
         generationId: claimedTask.id,
@@ -159,9 +185,37 @@ export async function chatWorker({
           labelOnInsert:
             claimedCurrentChatMessage?.content.type === "text"
               ? claimedCurrentChatMessage.content.text
-              : undefined,
+              : voice?.path,
         },
       );
+
+      if (voice && voiceMessage) {
+        updateChatMessage(chat.document, voiceMessage);
+        await chat.waitForSynced({ abortSignal });
+        const text = await transcribeVoiceMessage(
+          voice.path,
+          claimedTask.parameters,
+          { supabase, serverToken, websocketProvider, abortSignal },
+        );
+        assertGenerationActive();
+        // Replace only the provisional title of a conversation started by this recording.
+        for (const doc of activites.documents) {
+          const activity = getActivities(doc).activities.get(
+            claimedTask.parameters.activityId,
+          );
+          if (activity?.label === voice.path)
+            setActivityLabel(doc, activity.id, text.slice(0, 500), true);
+        }
+        claimedCurrentChatMessage = {
+          id: voiceMessage.id,
+          state: "claimed",
+          content: {
+            type: "text",
+            text,
+            thinking: voiceMessage.metadata?.thinking,
+          },
+        };
+      }
 
       while (claimedCurrentChatMessage) {
         abortSignal.throwIfAborted();
@@ -191,7 +245,12 @@ export async function chatWorker({
             role: "user",
           };
 
-          addChatMessage(chat.document, chatMessage);
+          if (voiceMessage) {
+            updateChatMessage(chat.document, {
+              ...voiceMessage,
+              parts: [...voiceMessage.parts, ...chatMessage.parts],
+            });
+          } else addChatMessage(chat.document, chatMessage);
         }
 
         if (messageContent.type === "tool-approval") {
@@ -207,12 +266,18 @@ export async function chatWorker({
         }
 
         const { messages: yMessages } = getChat(chat.document);
-        const messages = (yMessages?.toArray() ?? []).map((message) => {
-          const finalized = finalizeInterruptedToolInputs(message);
-          if (finalized !== message)
-            updateChatMessage(chat.document, finalized);
-          return finalized;
-        });
+        const messages = (yMessages?.toArray() ?? [])
+          .filter(
+            (message) =>
+              !message.parts.some((part) => part.type === "data-voice") ||
+              message.parts.some((part) => part.type === "text"),
+          )
+          .map((message) => {
+            const finalized = finalizeInterruptedToolInputs(message);
+            if (finalized !== message)
+              updateChatMessage(chat.document, finalized);
+            return finalized;
+          });
 
         const agent = await getAgentById(claimedTask.parameters.agentId, {
           abortSignal,
@@ -480,9 +545,8 @@ export async function chatWorker({
         //   }
         // }
         await currentChatMessage.waitForSynced();
-        claimedCurrentChatMessage = claimedTask.parameters.retry
-          ? undefined
-          : claimNextInput();
+        claimedCurrentChatMessage =
+          voice || claimedTask.parameters.retry ? undefined : claimNextInput();
       }
 
       assertGenerationActive();

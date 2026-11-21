@@ -1,5 +1,5 @@
 import type { ServerRealtimeProvider } from "@schornio/aibox-realtime/server/ServerRealtimeProvider";
-import type { UserClaims } from "@schornio/aibox-package-database/auth/_types";
+import type { TaskTypeChat } from "../taskQueue/_types.ts";
 import { getTaskQueue } from "@schornio/aibox-realtime/documents/taskQueue/getTaskQueue";
 import { addTask } from "@schornio/aibox-realtime/documents/taskQueue/addTask";
 import { setChatState } from "@schornio/aibox-realtime/documents/chat/setChatState";
@@ -32,13 +32,7 @@ export function assertChatIdle(
 }
 
 export async function queueChat(
-  parameters: {
-    agentId: string;
-    activityId: string;
-    userId: string;
-    userClaims: UserClaims;
-    retry?: boolean;
-  },
+  parameters: TaskTypeChat["parameters"],
   {
     chat,
     taskQueue,

@@ -9,6 +9,9 @@ const mocks = vi.hoisted(() => ({
   docs: [] as any[],
   activityDocs: [] as any[],
   stream: vi.fn(),
+  processingTask: vi.fn(),
+  runTranscription: vi.fn(),
+  content: vi.fn(),
   dispose: vi.fn(),
   load: vi.fn(),
   select: vi.fn(),
@@ -24,6 +27,16 @@ const mocks = vi.hoisted(() => ({
   repositories: vi.fn(),
   storageAccess: vi.fn(),
   roles: [] as any[],
+}));
+vi.mock(
+  "@schornio/aibox-realtime/documents/storage/createStorageProcessingTask",
+  () => ({ createStorageProcessingTask: mocks.processingTask }),
+);
+vi.mock("@schornio/aibox-realtime/documents/taskQueue/runTask", () => ({
+  runTask: mocks.runTranscription,
+}));
+vi.mock("@schornio/aibox-database/storage/getDocumentContent", () => ({
+  getDocumentContent: mocks.content,
 }));
 vi.mock("@schornio/aibox-realtime/documents/taskQueue/TaskQueue", () => ({
   TaskQueue: class {
@@ -152,13 +165,16 @@ function queue(content: any) {
     { id: crypto.randomUUID(), state: "queued", content },
   ]);
 }
-function run(abortSignal = new AbortController().signal) {
+function run(
+  abortSignal = new AbortController().signal,
+  parameters = task.parameters,
+) {
   chatWorker({
     supabaseServiceRole: {} as any,
     token: "token",
     workerIdentifier: "worker",
   });
-  return mocks.handler(task, abortSignal);
+  return mocks.handler({ ...task, parameters }, abortSignal);
 }
 function activity() {
   return getActivities(activities).activities?.get("activity");
@@ -852,3 +868,99 @@ it.each([
     expect(getChat(chat).state!.get("error")).toBe(expected);
   },
 );
+
+describe("background voice messages", () => {
+  const voice = { path: "clip.webm", duration: 21, peaks: [0.2, 1] };
+  function send(signal = new AbortController().signal) {
+    const parameters = { ...task.parameters, voice, thinking: true };
+    return run(signal, parameters);
+  }
+  beforeEach(() => {
+    mocks.processingTask.mockResolvedValue({
+      type: "transcribe",
+      parameters: { path: voice.path },
+      requiredCapabilities: ["transcriber:model"],
+    });
+    mocks.content.mockResolvedValue({
+      type: "transcript",
+      textOverride: "My question",
+      segments: [],
+    });
+  });
+  it("publishes a playable recording before transcription, then sends its text without consuming another draft", async () => {
+    const deferred = Promise.withResolvers<void>();
+    mocks.runTranscription.mockReturnValue(deferred.promise);
+    queue({ type: "text", text: "Keep my draft" });
+    const finished = send();
+    await vi.waitFor(() => expect(mocks.runTranscription).toHaveBeenCalled());
+    expect(getChat(chat).messages?.toArray()[0]?.parts).toEqual([
+      { type: "data-voice", data: voice },
+    ]);
+    expect(mocks.stream).not.toHaveBeenCalled();
+    deferred.resolve();
+    await finished;
+    expect(getChat(chat).messages?.toArray()[0]?.parts).toEqual([
+      { type: "data-voice", data: voice },
+      { type: "text", text: "My question" },
+    ]);
+    expect(getChatCurrentMessageBatch(current).length).toBe(1);
+    expect(mocks.runTranscription).toHaveBeenCalledWith(
+      "transcribe",
+      { path: voice.path },
+      ["transcriber:model"],
+      expect.objectContaining({
+        chat: { agentId: "agent", activityId: "activity" },
+      }),
+    );
+    expect(mocks.stream).toHaveBeenCalledTimes(1);
+  });
+  it.each([
+    "missing transcriber",
+    "worker failure",
+    "missing transcript",
+    "silence",
+  ])(
+    "preserves the recording and retries %s without a second message",
+    async (kind) => {
+      if (kind === "missing transcriber")
+        mocks.processingTask.mockResolvedValueOnce(undefined);
+      if (kind === "worker failure")
+        mocks.runTranscription.mockRejectedValueOnce(new Error("failed"));
+      if (kind === "missing transcript")
+        mocks.content.mockResolvedValueOnce(undefined);
+      if (kind === "silence")
+        mocks.content.mockResolvedValueOnce({
+          type: "transcript",
+          segments: [],
+        });
+      await expect(send()).rejects.toThrow(
+        kind === "silence" ? "VOICE_NO_SPEECH" : "VOICE_TRANSCRIPTION_FAILED",
+      );
+      expect(mocks.stream).not.toHaveBeenCalled();
+      expect(getChat(chat).messages?.length).toBe(1);
+      mocks.docs = [chat, current];
+      task.parameters.retry = true;
+      chat.getMap("state").set("type", "queued");
+      await run();
+      expect(
+        getChat(chat)
+          .messages?.toArray()
+          .filter((m) => m.role === "user"),
+      ).toHaveLength(1);
+      expect(getChat(chat).messages?.toArray()[0]?.parts.at(-1)).toEqual({
+        type: "text",
+        text: "My question",
+      });
+    },
+  );
+  it("honors cancellation before a late transcript is sent", async () => {
+    const controller = new AbortController();
+    mocks.runTranscription.mockImplementationOnce(() => {
+      controller.abort();
+      throw controller.signal.reason;
+    });
+    await send(controller.signal);
+    expect(mocks.stream).not.toHaveBeenCalled();
+    expect(getChat(chat).messages?.toArray()[0]?.parts).toHaveLength(1);
+  });
+});

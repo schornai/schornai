@@ -1,3 +1,7 @@
+import {
+  submitVoiceMessage,
+  submitVoiceMessageSchema,
+} from "../documents/chat/submitVoiceMessage.ts";
 import { sendChatMessage } from "./sendChatMessage.ts";
 import { chatExpirationSchema } from "@schornio/aibox-database/chat/expirationSchema";
 import { setChatExpiration } from "@schornio/aibox-database/chat/setChatExpiration";
@@ -115,6 +119,24 @@ export function addChatTools(
         .default([]),
     }),
     (input) => sendChatMessage(input, context),
+  );
+  add(
+    "platform_chat_voice_send",
+    "Transcribe an uploaded audio recording from this chat and send the transcript to the agent in the background. Requires a configured transcriber and an idle chat. Supply duration in seconds (up to 300) and normalized waveform peaks (or an empty array). Poll platform_chat_read for the transcript and response.",
+    "user",
+    false,
+    submitVoiceMessageSchema,
+    async (input) => {
+      const userClaims = limitPlatformClaims(
+        context.claims,
+        context.level,
+        context.claims === "admin" && context.level !== "admin"
+          ? (await getWorkspaces({ supabase })).map((workspace) => workspace.id)
+          : [],
+      );
+      await submitVoiceMessage(input, { ...context, userClaims });
+      return { activityId: input.activityId, status: "accepted" };
+    },
   );
   add(
     "platform_activity_update",
