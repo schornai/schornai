@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@schornio/aibox-eslint-config": "*",
-    "@supabase/supabase-js": "2.119.0",
+    "@supabase/supabase-js": "2.119.1",
     "@types/node": "^26.6.5",
     "eslint": "^10.14.0",
     "typescript": "^7.0.2"
