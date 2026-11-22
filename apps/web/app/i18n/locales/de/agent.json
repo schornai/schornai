@@ -356,8 +356,6 @@
       "buttonPause": "Pausieren",
       "buttonStartBatch": "Stapelverarbeitung starten",
       "buttonSend": "Senden",
-      "descriptionFilesPending": "Dateien werden hochgeladen oder verarbeitet …",
-      "descriptionFilesProcessing": "Die Anhänge werden verarbeitet. Du kannst die Nachricht schon senden.",
       "labelAttachFiles": "Dateien anhängen",
       "labelUploadFiles": "Dateien hochladen",
       "labelSelectFile": "Vorhandene Datei auswählen"

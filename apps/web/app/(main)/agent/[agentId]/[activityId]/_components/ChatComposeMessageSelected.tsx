@@ -108,7 +108,6 @@ export function ChatComposeMessageSelected({
     storage,
     itemGroups,
     uploadingFilePaths = [],
-    pendingFilePaths = [],
   } = useStorageView();
 
   const voiceEnabled = voiceStatus === "ready";
@@ -143,10 +142,6 @@ export function ChatComposeMessageSelected({
       (upload) => upload.state === "queued" || upload.state === "uploading",
     ) ||
     uploadingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
-
-  const filesProcessing = pendingFilePaths.some((path) =>
-    attachedPaths.has(resolvePath(path)),
-  );
 
   const nextHasContent = hasMessageContent(messageBatch[0]);
   const showMicrophone =
@@ -282,15 +277,6 @@ export function ChatComposeMessageSelected({
         value={selectedCurrentMessage?.content.text ?? ""}
       />
 
-      {filesUploading || filesProcessing ? (
-        <p role="status" className="text-muted-foreground px-3 pb-1 text-xs">
-          {t(
-            sendDisabled
-              ? "descriptionFilesPending"
-              : "descriptionFilesProcessing",
-          )}
-        </p>
-      ) : null}
       <div className="flex items-center gap-0.5 p-1">
         <Tooltip>
           <TooltipTrigger

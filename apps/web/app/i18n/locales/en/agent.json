@@ -383,8 +383,6 @@
       "buttonPause": "Pause",
       "buttonStartBatch": "Start batch",
       "buttonSend": "Send",
-      "descriptionFilesPending": "Files are uploading or being processed …",
-      "descriptionFilesProcessing": "Your attachments are being processed. You can send the message now.",
       "labelAttachFiles": "Attach files",
       "labelUploadFiles": "Upload files",
       "labelSelectFile": "Choose an existing file"

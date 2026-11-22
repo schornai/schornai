@@ -506,7 +506,7 @@ it.each(["buttonSend", "Enter", "buttonStartBatch"])(
     mocks.context.messageBatch = [message, { ...message, id: "other" }];
     mocks.pendingFilePaths = ["nested/file.pdf"];
     compose();
-    expect(screen.getByText("descriptionFilesProcessing")).toBeTruthy();
+    expect(screen.queryByRole("status")).toBeNull();
     if (submit === "Enter")
       fireEvent.keyDown(screen.getByRole("textbox"), { key: "Enter" });
     else fireEvent.click(screen.getByRole("button", { name: submit }));
@@ -856,8 +856,9 @@ it("allows a document submission when the agent's voice transcriber is unavailab
   mocks.context.selectedCurrentMessage = draft;
   mocks.pendingFilePaths = ["doc.pdf"];
   compose();
-  expect(screen.getByText("errorTranscriberNotFound")).toBeTruthy();
-  expect(screen.getByText("descriptionFilesProcessing")).toBeTruthy();
+  expect(screen.getByRole("status").textContent).toContain(
+    "errorTranscriberNotFound",
+  );
   fireEvent.click(screen.getByRole("button", { name: "buttonSend" }));
   await waitFor(() => expect(client.execute).toHaveBeenCalledOnce());
 });

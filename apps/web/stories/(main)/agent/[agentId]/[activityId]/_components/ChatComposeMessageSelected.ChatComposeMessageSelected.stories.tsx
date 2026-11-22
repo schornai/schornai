@@ -218,9 +218,9 @@ export const ProcessingAttachment: Story = {
       canvas.getByRole("button", { name: /^(Senden|Send)$/ }),
     ).toBeEnabled();
     await expect(canvas.getByRole("textbox")).toHaveValue("");
-    await expect(canvas.getByRole("status")).toHaveTextContent(
-      /schon senden|send the message now/,
-    );
+    await expect(
+      canvas.getByText(/Datei wird verarbeitet|File is being processed/i),
+    ).toBeVisible();
   },
 };
 
