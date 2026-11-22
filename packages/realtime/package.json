@@ -26,6 +26,7 @@
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
     "ai": "7.0.177",
+    "guarded-fetch": "0.3.0",
     "mathjs": "15.2.0",
     "xrag": "*",
     "yjs": "^13.6.33"

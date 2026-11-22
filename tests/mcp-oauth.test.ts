@@ -1,17 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { auth, createMCPClient } from "@ai-sdk/mcp";
+import { Response as UndiciResponse } from "undici";
 import {
   MCPOAuthProvider,
   MCPAuthorizationRequired,
 } from "../packages/realtime/src/mcp/MCPOAuthProvider";
 import type { MCPOAuthSession } from "../packages/database/src/mcp/_types";
-import { fetchWithValidatedEndpoint } from "@ai-sdk/provider-utils";
-
-vi.mock("@ai-sdk/provider-utils", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@ai-sdk/provider-utils")>()),
-  fetchWithValidatedEndpoint: vi.fn(async ({ url, init }) =>
-    globalThis.fetch(url, init),
-  ),
+const guardedFetch = vi.hoisted(() => vi.fn<typeof fetch>());
+vi.mock("guarded-fetch", () => ({
+  createGuardedFetch: () => guardedFetch,
 }));
 const configured = vi.hoisted(() => ({ value: null as any }));
 vi.mock("@schornio/aibox-package-database/mcp/getMCPOAuthClient", () => ({
@@ -43,6 +40,7 @@ const login = {
 beforeEach(() => {
   store.clear();
   configured.value = null;
+  guardedFetch.mockReset();
 });
 
 it.each([
@@ -75,6 +73,7 @@ it.each([
     await provider.fetch(new URL(serverUrl));
     expect(provider.authorizationOptions).toEqual({
       serverUrl,
+      fetchFn: provider.fetch,
       resourceMetadataUrl: metadata,
       scope,
     });
@@ -91,43 +90,51 @@ it.each([undefined, "request body"])(
       "fetch",
       vi.fn().mockResolvedValue(new Response(null, { status: 200 })),
     );
-    const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
-    const request = new Request(serverUrl, {
+    const privateServerUrl = "http://127.0.0.1:3000/mcp";
+    const provider = await MCPOAuthProvider.load(
+      "alice",
+      privateServerUrl,
+      options,
+    );
+    const request = new Request(privateServerUrl, {
       method: body ? "POST" : "GET",
       body,
       headers: { "x-test": "value" },
       redirect: "manual",
     });
     await provider.fetch(request);
-    const sent = vi.mocked(fetchWithValidatedEndpoint).mock.calls.at(-1)![0];
+    const [url, sent] = vi.mocked(fetch).mock.calls.at(-1)!;
+    expect(url).toBe(privateServerUrl);
+    expect(guardedFetch).not.toHaveBeenCalled();
     expect(sent).toMatchObject({
-      url: serverUrl,
-      trustedOrigin: "https://mcp.example.test",
       redirect: "manual",
-      init: { method: body ? "POST" : "GET" },
+      method: body ? "POST" : "GET",
     });
-    expect(new Headers(sent.init?.headers).get("x-test")).toBe("value");
+    expect(new Headers(sent?.headers).get("x-test")).toBe("value");
     expect(
-      sent.init?.body
-        ? new TextDecoder().decode(sent.init.body as ArrayBuffer)
+      sent?.body
+        ? new TextDecoder().decode(sent.body as ArrayBuffer)
         : undefined,
     ).toBe(body);
     expect(store.size).toBe(0);
   },
 );
 
-it("does not persist another endpoint's unauthorized challenge", async () => {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn().mockResolvedValue(
-      new Response(null, {
+it("returns OAuth errors as native responses without saving another endpoint's challenge", async () => {
+  guardedFetch.mockResolvedValue(
+    UndiciResponse.json(
+      { error: "invalid_grant" },
+      {
         status: 401,
         headers: { "www-authenticate": 'Bearer scope="unrelated"' },
-      }),
-    ),
+      },
+    ) as unknown as Response,
   );
   const provider = await MCPOAuthProvider.load("alice", serverUrl, options);
-  await provider.fetch("https://auth.example.test/token");
+  const response = await provider.fetch("https://auth.example.test/token");
+  expect(response).toBeInstanceOf(Response);
+  expect(response.status).toBe(401);
+  expect(await response.json()).toEqual({ error: "invalid_grant" });
   expect(provider.authorizationOptions.scope).toBeUndefined();
   expect(store.size).toBe(0);
 });
@@ -434,9 +441,11 @@ it("uses a registered confidential client for PKCE exchange and refresh without 
     },
   );
   const provider = await MCPOAuthProvider.load("alice", serverUrl, opts);
+  vi.stubGlobal("fetch", fetchFn);
+  guardedFetch.mockImplementation(fetchFn);
   await provider.prepareLogin(login);
   expect(provider.isClientInformationDynamicallyRegistered()).toBe(false);
-  expect(await auth(provider, { serverUrl, fetchFn })).toBe("REDIRECT");
+  expect(await auth(provider, provider.authorizationOptions)).toBe("REDIRECT");
   expect(provider.authorizationUrl!.searchParams.get("client_id")).toBe(
     "registered-app",
   );
@@ -447,8 +456,7 @@ it("uses a registered confidential client for PKCE exchange and refresh without 
   await callback.useConfiguredClient("agent-1", "mcp-1");
   expect(
     await auth(callback, {
-      serverUrl,
-      fetchFn,
+      ...callback.authorizationOptions,
       authorizationCode: "code",
       callbackState: saved.state!,
       callbackIssuer: "https://auth.example.test",
@@ -458,7 +466,13 @@ it("uses a registered confidential client for PKCE exchange and refresh without 
     ...opts,
     interactive: false,
   });
-  expect(await auth(worker, { serverUrl, fetchFn })).toBe("AUTHORIZED");
+  expect(await auth(worker, worker.authorizationOptions)).toBe("AUTHORIZED");
+  expect(guardedFetch.mock.calls.map(([url]) => String(url))).toContain(
+    "https://auth.example.test/.well-known/oauth-authorization-server",
+  );
+  expect(
+    guardedFetch.mock.calls.filter(([url]) => String(url).endsWith("/token")),
+  ).toHaveLength(2);
   expect(requests[0]!.get("code_verifier")).toBeTruthy();
   expect(requests[1]!.get("grant_type")).toBe("refresh_token");
   configured.value = { ...configured.value, version: "v2" };
@@ -556,6 +570,7 @@ it("pauses a protected tool after public discovery and resumes its exact call on
   vi.stubGlobal("fetch", (input: RequestInfo | URL, init?: RequestInit) =>
     fetchFn(input, init),
   );
+  guardedFetch.mockImplementation(fetchFn);
   const servers = [
     {
       id: "mcp-1",
@@ -594,9 +609,9 @@ it("pauses a protected tool after public discovery and resumes its exact call on
     activityId: "chat",
     approvalId: "approval",
   });
-  expect(
-    await auth(interactive, { ...interactive.authorizationOptions, fetchFn }),
-  ).toBe("REDIRECT");
+  expect(await auth(interactive, interactive.authorizationOptions)).toBe(
+    "REDIRECT",
+  );
   expect(interactive.authorizationUrl?.searchParams.get("scope")).toBe(
     "gmail.readonly",
   );
@@ -606,7 +621,6 @@ it("pauses a protected tool after public discovery and resumes its exact call on
   expect(
     await auth(callback, {
       ...callback.authorizationOptions,
-      fetchFn,
       authorizationCode: "code",
       callbackState: saved.state!,
       callbackIssuer: "https://auth.example.test",
