@@ -844,8 +844,7 @@
       "errorTranscriberModel": "Dem Transkriptor fehlt ein verfügbares Spracherkennungsmodell. Bitte die Arbeitsplatzverwaltung, in den Transkriptoreinstellungen ein Whisper-Modell auszuwählen.",
       "errorTranscriberCheck": "Der Transkriptor konnte nicht geprüft werden. Lade den Chat erneut.",
       "errorPlayback": "Die Aufnahme konnte nicht abgespielt werden.",
-      "errorSend": "Der Versand konnte nicht gestartet werden. Prüfe die Verbindung und versuche es erneut, sobald der Chat frei ist.",
-      "descriptionQueued": "Aufnahme hochgeladen. Du kannst dieses Fenster jetzt schließen."
+      "errorSend": "Der Versand konnte nicht gestartet werden. Prüfe die Verbindung und versuche es erneut, sobald der Chat frei ist."
     }
   },
   "page": {

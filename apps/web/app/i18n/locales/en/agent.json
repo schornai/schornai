@@ -844,8 +844,7 @@
       "errorTranscriberModel": "The transcriber has no available speech recognition model. Ask a workspace administrator to select a Whisper model in the transcriber settings.",
       "errorTranscriberCheck": "Could not check the transcriber. Reload the chat to try again.",
       "errorPlayback": "The recording could not be played.",
-      "errorSend": "Could not queue the message. Check your connection and try again when the chat is available.",
-      "descriptionQueued": "Recording uploaded. You can close this window now."
+      "errorSend": "Could not queue the message. Check your connection and try again when the chat is available."
     }
   },
   "page": {

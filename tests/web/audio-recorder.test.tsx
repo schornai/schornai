@@ -697,7 +697,7 @@ it("stops a chat recording at five minutes and retries queue submission without 
       }),
     );
     expect(mocks.upload).toHaveBeenCalledOnce();
-    expect(close).toHaveBeenCalledWith(true);
+    expect(close).toHaveBeenCalledOnce();
   } finally {
     vi.useRealTimers();
   }
@@ -719,7 +719,7 @@ it("starts on open and submits the final microphone chunk with one click", async
   expect(trackStop).toHaveBeenCalledOnce();
   expect(mocks.upload.mock.calls[0]?.[0][0].size).toBe(5);
   expect(client.execute).toHaveBeenCalledOnce();
-  expect(close).toHaveBeenCalledWith(true);
+  expect(close).toHaveBeenCalledOnce();
 });
 
 it("discards a chat recording without uploading", async () => {
@@ -729,7 +729,7 @@ it("discards a chat recording without uploading", async () => {
   );
   await screen.findByText("labelRecording");
   fireEvent.click(screen.getByRole("button", { name: "labelDiscard" }));
-  expect(close).toHaveBeenCalledWith(false);
+  expect(close).toHaveBeenCalledOnce();
   view.unmount();
   expect(trackStop).toHaveBeenCalledOnce();
   expect(mocks.upload).not.toHaveBeenCalled();

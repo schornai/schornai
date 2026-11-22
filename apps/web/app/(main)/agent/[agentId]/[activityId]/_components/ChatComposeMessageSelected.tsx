@@ -28,7 +28,6 @@ import {
   DropdownMenuItem,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { useDecayState } from "@schornio/aibox-package-ui/hooks/use-decay-state";
 import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
 import { ChatVoiceRecorder } from "./ChatVoiceRecorder";
 import { useCanSendMessage } from "./ChatContext";
@@ -74,7 +73,6 @@ export function ChatComposeMessageSelected({
     keyPrefix: "_components.VoiceMessage",
   });
   const [voiceOpen, setVoiceOpen] = useState<"record" | "prompt" | null>(null);
-  const [voiceSent, setVoiceSent] = useDecayState(false);
   const canSend = useCanSendMessage();
   const formRef = useRef<HTMLFormElement>(null);
   const fallbackTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -177,10 +175,7 @@ export function ChatComposeMessageSelected({
         agentId={agentId}
         activityId={activityId}
         thinking={selectedCurrentMessage?.content.thinking ?? defaultThinking}
-        onClose={(sent) => {
-          setVoiceSent(sent);
-          setVoiceOpen(null);
-        }}
+        onClose={() => setVoiceOpen(null)}
       />
     );
 
@@ -260,11 +255,6 @@ export function ChatComposeMessageSelected({
         >
           <MicOff aria-hidden="true" className="size-4 shrink-0" />
           {voiceLabel(voiceTranscriberErrorKeys[voiceStatus])}
-        </p>
-      )}
-      {voiceSent && (
-        <p role="status" className="text-muted-foreground px-3 pt-2 text-xs">
-          {voiceLabel("descriptionQueued")}
         </p>
       )}
       <Textarea

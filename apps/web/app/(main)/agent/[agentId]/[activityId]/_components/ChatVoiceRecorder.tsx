@@ -23,7 +23,7 @@ type Props = {
   thinking?: boolean;
   agentColor?: AppColor;
   autoStart?: boolean;
-  onClose: (sent: boolean) => void;
+  onClose: () => void;
 };
 export function ChatVoiceRecorder(props: Props) {
   const storage = {
@@ -62,7 +62,7 @@ function Recorder({
   const uploaded = useRef<{ file: File; path: string }>(null);
   const recording = useAudioRecording({
     maxSeconds: maxVoiceSeconds,
-    onFinished: () => onClose(true),
+    onFinished: onClose,
     onSave: async (file, duration, peaks) => {
       if (uploaded.current?.file !== file) {
         const [upload] = await queueFileUploadsByFiles([file]);
@@ -112,7 +112,7 @@ function Recorder({
           disabled={submitting}
           aria-label={t("labelDiscard")}
           title={t("labelDiscard")}
-          onClick={() => onClose(false)}
+          onClick={onClose}
         >
           <X />
         </Button>
