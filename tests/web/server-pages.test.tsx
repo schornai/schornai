@@ -291,7 +291,7 @@ describe("server catalog pages", () => {
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace).toBe(state.workspaces[0]);
       expect(props.editable).toBe(true);
-      expect(props.showXRAGActions).toBe(true);
+      expect(props.showResourceActions).toBe(true);
       state.entity = undefined;
       await expect(page(params())).rejects.toThrow("NOT_FOUND");
     },
@@ -382,7 +382,7 @@ describe("server activity and file pages", () => {
       const props = component(await page(request), info).props;
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace.id).toBe("workspace");
-      expect(props.showXRAGActions).toBe(true);
+      expect(props.showResourceActions).toBe(true);
       state.entity = undefined;
       await expect(page(request)).rejects.toThrow("NOT_FOUND");
     },

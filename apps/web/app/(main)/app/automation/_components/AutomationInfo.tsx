@@ -1,4 +1,7 @@
 "use client";
+import { AutomationRemove } from "./AutomationRemove";
+import { ResourceInfoLayout } from "../../../../_components/ResourceInfoLayout";
+import { AutomationIconGroupActions } from "./AutomationIconGroupActions";
 import { hasPermission } from "@/lib/hasPermission";
 import { XRAGObjectActions } from "../../../../_components/xrag/XRAGObjectActions";
 import type { WorkspaceClaim } from "../../../../_models/getWorkspaceClaims";
@@ -37,7 +40,7 @@ import { InfoActions } from "../../../../_components/InfoActions";
 import { AutomationNextRun, type AutomationDisplay } from "./AutomationNextRun";
 import { AutomationCard } from "./AutomationCard";
 export function AutomationInfo({
-  showXRAGActions = false,
+  showResourceActions = false,
   automation,
   workspace,
   editDefaultAutomation,
@@ -47,7 +50,7 @@ export function AutomationInfo({
   editable = false,
   preview = false,
 }: {
-  showXRAGActions?: boolean;
+  showResourceActions?: boolean;
   automation: AutomationDisplay;
   workspace?: WorkspaceClaim;
   editDefaultAutomation?: AutomationInput;
@@ -99,14 +102,38 @@ export function AutomationInfo({
                 timezone: schedule.timezone,
               })
             : `${schedule.weekdays.map((day) => new Intl.DateTimeFormat(i18n.resolvedLanguage ?? "de", { weekday: "short", timeZone: "UTC" }).format(new Date(Date.UTC(2026, 10, 15 + day)))).join(", ")} · ${schedule.time} (${schedule.timezone})`;
+  const canManage = hasPermission({
+    claim: workspace?.claim,
+    permission: "workspace-admin",
+  });
   return (
-    <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <AutomationCard
-        automation={automation}
-        preview={preview}
-        favorites={favorites}
-      />
-      <div className="flex min-w-0 flex-col gap-1">
+    <ContainerMain>
+      <ResourceInfoLayout
+        card={
+          <AutomationCard
+            automation={automation}
+            preview={preview}
+            favorites={favorites}
+          />
+        }
+        actions={
+          showResourceActions &&
+          !preview &&
+          automation?.id && (
+            <AutomationIconGroupActions
+              display="buttons"
+              favorites={favorites}
+              automation={automation}
+              packageActions={
+                canManage && (
+                  <XRAGObjectActions kind="automation" id={automation.id} />
+                )
+              }
+              remove={<AutomationRemove id={automation.id} labeled />}
+            />
+          )
+        }
+      >
         {!preview && (
           <InfoSection
             icon={Power}
@@ -197,13 +224,7 @@ export function AutomationInfo({
             {automation.message || t("labelNotConfigured")}
           </pre>
         </InfoSection>
-      </div>
-      {showXRAGActions &&
-        automation.id &&
-        hasPermission({
-          claim: workspace?.claim,
-          permission: "workspace-admin",
-        }) && <XRAGObjectActions kind="automation" id={automation.id} />}
+      </ResourceInfoLayout>
     </ContainerMain>
   );
 }

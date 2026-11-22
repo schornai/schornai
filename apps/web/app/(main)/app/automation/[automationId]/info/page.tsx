@@ -12,7 +12,7 @@ export default async function Page({
     <>
       <AutomationDetailHeader automation={data.automation!} view="info" />
       <AutomationInfo
-        showXRAGActions
+        showResourceActions
         automation={data.automation!}
         favorites={data.favorites}
         agents={data.agents}

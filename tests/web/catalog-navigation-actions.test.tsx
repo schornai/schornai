@@ -28,7 +28,7 @@ const cases = [
     destinations: {
       tooltipEdit: "/app/documents/entity/edit",
       tooltipInfo: "/app/documents/entity/info",
-      Hauptverzeichnis: "/app/documents/entity/files",
+      tooltipFiles: "/app/documents/entity/files",
     },
   },
   {

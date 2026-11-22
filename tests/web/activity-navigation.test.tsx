@@ -199,6 +199,34 @@ describe("activity navigation and repository mount details", () => {
     );
     expect(view.container.textContent).toBe("");
   });
+  it("opens favorite actions independently and removes only the selected favorite", async () => {
+    const other = { id: "entity", type: "workspace" } as const;
+    render(
+      <SidebarProvider>
+        <SidebarFavoriteItemAgent
+          agent={{ id: "entity", name: "Agent" } as any}
+          workspace={{ claim: "user" } as any}
+          favorites={{
+            version: "favorites-v2",
+            showInSidebar: true,
+            favorites: [{ id: "entity", type: "agent" }, other],
+          }}
+        />
+      </SidebarProvider>,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "labelActions" }));
+    const remove = await screen.findByRole("menuitem", {
+      name: "tooltipRemoveFavorite",
+    });
+    expect(screen.queryByRole("menuitem", { name: "tooltipEdit" })).toBeNull();
+    fireEvent.click(remove);
+    expect(client.execute).toHaveBeenCalledWith({
+      version: "favorites-v2",
+      showInSidebar: true,
+      favorites: [other],
+    });
+    expect(client.push).not.toHaveBeenCalled();
+  });
   it("sorts and expands repository mounts with missing repositories and every permission", () => {
     const mounts = [
       {

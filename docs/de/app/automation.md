@@ -15,7 +15,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Ein zugänglicher Agent mit einsatzbereitem Modell und laufendem Realtime-Dienst. Für Dateitrigger Zugriff auf den Speicherort."
   status: "verfügbar"
-  last_verified: "2026-11-19"
+  last_verified: "2026-11-22"
   source_files:
     - "apps/web/app/(main)/app/automation/_components/AutomationNextRun.tsx"
     - "apps/web/app/(main)/app/automation/_components/AutomationRuns.tsx"
@@ -94,6 +94,8 @@ Nach dem Start öffnet sich der Ausführungsverlauf. Der Eintrag kann zunächst 
 Die Suche steht zentriert oberhalb der Liste. Über **Optionen** rechts im Seitenkopf wechselst du zwischen **Karten** und **Tabelle**, sortierst nach Namen und gruppierst nach Anfangsbuchstabe, Auslöser oder Status. Unter **Ansicht speichern** behältst du deine Einstellung; **Zurücksetzen** stellt deine gespeicherte Ansicht wieder her; ohne gespeicherte Einstellung gilt die Standardansicht.
 
 Unter **Einstellungen** vergibst du einen Namen und eine eigene Beschreibung für die App-Karte. Die Beschreibung ist unabhängig von der Nachricht. Im Abschnitt **Darstellung** wählst du Farbe und Symbol aus der gemeinsamen Palette bzw. dem Symboldialog.
+
+In der Infoansicht stehen unter der Karte die Aktionen für deine gespeicherte Automation. Hier kannst du sie ausführen, als Favorit markieren, bearbeiten oder nach Bestätigung löschen. Wenn du den Arbeitsplatz ihres Agenten administrierst, findest du dort auch die beiden XRAG-Aktionen.
 
 Über den Stern in Karte oder Tabelle fügst du eine Automation zu deinen Favoriten hinzu. Sie erscheint auch auf der Startseite und – wenn eingeschaltet – in der Seitenleiste. Unter **Meine Favoriten** kannst du sie wie andere Favoriten sortieren oder entfernen. Die Liste lässt sich nach Favoriten gruppieren. Favoriten erweitern keine Berechtigungen.
 

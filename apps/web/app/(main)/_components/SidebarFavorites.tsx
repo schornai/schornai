@@ -1,3 +1,4 @@
+import type { SettingFavorites } from "../../_models/currentUserConfigFavorites";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import {
@@ -51,6 +52,11 @@ export async function SidebarFavorites() {
       .map((workspace) => [workspace.id, workspace]),
   );
 
+  const favoriteSettings: SettingFavorites = {
+    version: "favorites-v2",
+    favorites,
+    showInSidebar,
+  };
   const automationMap = new Map(automations?.map((item) => [item.id, item]));
   const agentsMap = new Map(agents?.map((agent) => [agent.id, agent]));
   const transcribersMap = new Map(
@@ -89,24 +95,40 @@ export async function SidebarFavorites() {
             <Fragment key={`${favorite.type}:${favorite.id}`}>
               {favorite.type === "automation" && (
                 <SidebarFavoriteItemAutomation
+                  favorites={favoriteSettings}
                   automation={automationMap.get(favorite.id)}
                 />
               )}
               {favorite.type === "workspace" ? (
                 <SidebarFavoriteItemWorkspace
+                  favorites={favoriteSettings}
                   workspace={workspaceMap.get(favorite.id)}
                 />
               ) : undefined}
               {favorite.type === "agent" ? (
-                <SidebarFavoriteItemAgent agent={agentsMap.get(favorite.id)} />
+                <SidebarFavoriteItemAgent
+                  favorites={favoriteSettings}
+                  workspace={workspaceMap.get(
+                    agentsMap.get(favorite.id)?.workspaceId ?? "",
+                  )}
+                  agent={agentsMap.get(favorite.id)}
+                />
               ) : undefined}
               {favorite.type === "transcriber" ? (
                 <SidebarFavoriteItemTranscriber
+                  favorites={favoriteSettings}
+                  workspace={workspaceMap.get(
+                    transcribersMap.get(favorite.id)?.workspaceId ?? "",
+                  )}
                   transcriber={transcribersMap.get(favorite.id)}
                 />
               ) : undefined}
               {favorite.type === "documentRepository" ? (
                 <SidebarFavoriteItemDocumentRepository
+                  favorites={favoriteSettings}
+                  workspace={workspaceMap.get(
+                    documentRepositoriesMap.get(favorite.id)?.workspaceId ?? "",
+                  )}
                   documentRepository={documentRepositoriesMap.get(favorite.id)}
                 />
               ) : undefined}

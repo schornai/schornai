@@ -9,7 +9,7 @@ meta:
   role_scope: "Gesamte Instanz"
   prerequisites: "Registrierte lokale Modelle oder Zugangsdaten für einen unterstützten externen Anbieter."
   status: "verfügbar; schorn.ai Cloud angekündigt"
-  last_verified: "2026-11-21"
+  last_verified: "2026-11-22"
   source_files:
     - "apps/web/app/(settings)/_components/Sidebar.tsx"
     - "apps/web/app/_components/SidebarFooter.tsx"
@@ -94,6 +94,8 @@ Nach dem Speichern erscheint das Modell in der gemeinsamen Übersicht. Es kann a
 Teste das gespeicherte Modell in einem neuen Chat. Wird der Aufruf abgelehnt, prüfe beim Anbieter, ob der Schlüssel für die gewählte Modellkennung freigeschaltet ist. Trage bei einer Weiterleitungsantwort die endgültige HTTPS-API-Adresse ein; die App folgt keinen HTTP-Weiterleitungen. Diese Verwaltung unterstützt externe Sprachmodelle; Embedding- und Transkriptionsmodelle werden lokal bereitgestellt.
 
 ## Modelldetails
+
+Unter der Modellkarte findest du die für das Modell verfügbaren Aktionen. Bei lokalen Modellen kannst du den XRAG-Export und die Paketauswahl öffnen. Mit globalen Administratorrechten kannst du hier auch die Metadaten bearbeiten oder das Modell nach Bestätigung löschen.
 
 Die Übersicht zeigt links die Modellkarte und rechts aufklappbare Infobereiche für Eigenschaften und Dokumentation. Bei einem lokalen Modell erstellt **XRAG exportieren** den Download aus den installierten Modelldateien auf dem Core-Host. Sind die Dateien dort nicht lesbar, kann die Instanz ein veröffentlichtes Modellarchiv aus dem Dateikatalog verwenden. Mit **Zu XRAG-Paket hinzufügen** nimmst du das Modell in eine persönliche Auswahl auf. Unter **Apps → XRAG Import und Export → Export** kannst du diese Modelle und weitere Ressourcen gemeinsam als eine Datei herunterladen. [Anleitung zum Paketdownload](xrag.md#mehrere-objekte-als-ein-paket-herunterladen).
 

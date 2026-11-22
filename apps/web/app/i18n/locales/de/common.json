@@ -9,6 +9,7 @@
         "history": "Verlauf"
       },
       "SidebarFavorites": {
+        "labelActions": "Aktionen für {{name}}",
         "label": "Favoriten",
         "empty": "Keine Favoriten hinzugefügt.",
         "labelEdit": "Favoriten bearbeiten"

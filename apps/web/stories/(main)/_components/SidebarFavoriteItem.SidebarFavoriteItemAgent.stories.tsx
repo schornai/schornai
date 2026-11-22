@@ -1,3 +1,4 @@
+import { expect, userEvent, within } from "storybook/test";
 import { repeatFixtures } from "../../../.storybook/repeat-fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SidebarFavoriteItemAgent } from "../../../app/(main)/_components/SidebarFavoriteItem";
@@ -6,6 +7,21 @@ const meta = {
   title: "Web/(main)/SidebarFavoriteItemAgent",
   component: SidebarFavoriteItemAgent,
   args: {
+    workspace: {
+      id: "11111111-1111-4111-8111-111111111111",
+      name: "Team",
+      claim: "workspace-admin",
+      createdAt: new Date("2026-01-15"),
+      autoJoin: false,
+      description: "",
+    },
+    favorites: {
+      version: "favorites-v2",
+      showInSidebar: true,
+      favorites: [
+        { type: "agent", id: "11111111-1111-4111-8111-111111111111" },
+      ],
+    },
     agent: {
       description: "Eine Beschreibung für Storybook.",
       id: "11111111-1111-4111-8111-111111111111",
@@ -107,5 +123,22 @@ export const AgentRolesMultiple: Story = {
       ...meta.args["agent"],
       roles: repeatFixtures(meta.args["agent"]["roles"]),
     },
+  },
+};
+
+export const Actions: Story = {
+  play: async ({ canvas, canvasElement }) => {
+    const menuButton = canvas.getByRole("button", {
+      name: "Aktionen für Beispiel",
+    });
+    await userEvent.click(menuButton);
+    const menu = await within(canvasElement.ownerDocument.body).findByRole(
+      "menu",
+    );
+    await expect(
+      within(menu)
+        .getAllByRole("menuitem")
+        .map((item) => item.textContent),
+    ).toEqual(["Neuer Chat", "Favorit entfernen", "Infos", "Bearbeiten"]);
   },
 };

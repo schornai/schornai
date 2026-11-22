@@ -2,9 +2,11 @@
 
 import { File, Info, Pencil } from "lucide-react";
 import {
-  IconGroup,
-  IconGroupButton,
-} from "@schornio/aibox-package-ui/components/icon-group";
+  ResourceActions,
+  ResourceActionButton,
+  type ResourceActionDisplay,
+} from "../../../_components/ResourceActions";
+import type { ReactNode } from "react";
 import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
 import { DocumentRepositoryIconGroupActionFavorite } from "./DocumentRepositoryIconGroupActionFavorite";
 import type { SettingFavorites } from "../../../../_models/currentUserConfigFavorites";
@@ -16,9 +18,15 @@ import { useT } from "next-i18next/client";
 export function DocumentRepositoryIconGroupActions({
   documentRepository,
   favorites,
+  display = "icons",
+  packageActions,
+  remove,
   workspace,
 }: {
   documentRepository?: Partial<DocumentRepository>;
+  display?: ResourceActionDisplay;
+  packageActions?: ReactNode;
+  remove?: ReactNode;
   favorites?: SettingFavorites;
   workspace?: WorkspaceClaim;
 }) {
@@ -28,43 +36,58 @@ export function DocumentRepositoryIconGroupActions({
   });
 
   return (
-    <IconGroup>
-      {hasPermission({
-        claim: workspace?.claim,
-        permission: "workspace-admin",
-      }) ? (
-        <IconGroupButton
+    <ResourceActions
+      display={display}
+      primary={
+        <ResourceActionButton
+          display={display}
           disabled={!documentRepository?.id}
           onClick={() =>
-            router.push(`/app/documents/${documentRepository?.id}/edit`)
+            router.push(`/app/documents/${documentRepository?.id}/files`)
           }
-          tooltip={t("tooltipEdit")}
+          label={t("tooltipFiles")}
         >
-          <Pencil />
-        </IconGroupButton>
-      ) : undefined}
-      <IconGroupButton
-        disabled={!documentRepository?.id}
-        onClick={() =>
-          router.push(`/app/documents/${documentRepository?.id}/info`)
-        }
-        tooltip={t("tooltipInfo")}
-      >
-        <Info />
-      </IconGroupButton>
-      <DocumentRepositoryIconGroupActionFavorite
-        documentRepository={documentRepository}
-        favorites={favorites}
-      />
-      <IconGroupButton
-        disabled={!documentRepository?.id}
-        onClick={() =>
-          router.push(`/app/documents/${documentRepository?.id}/files`)
-        }
-        tooltip={"Hauptverzeichnis"}
-      >
-        <File />
-      </IconGroupButton>
-    </IconGroup>
+          <File />
+        </ResourceActionButton>
+      }
+      favorite={
+        <DocumentRepositoryIconGroupActionFavorite
+          display={display}
+          documentRepository={documentRepository}
+          favorites={favorites}
+        />
+      }
+      info={
+        <ResourceActionButton
+          display={display}
+          disabled={!documentRepository?.id}
+          onClick={() =>
+            router.push(`/app/documents/${documentRepository?.id}/info`)
+          }
+          label={t("tooltipInfo")}
+        >
+          <Info />
+        </ResourceActionButton>
+      }
+      edit={
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && (
+          <ResourceActionButton
+            display={display}
+            disabled={!documentRepository?.id}
+            onClick={() =>
+              router.push(`/app/documents/${documentRepository?.id}/edit`)
+            }
+            label={t("tooltipEdit")}
+          >
+            <Pencil />
+          </ResourceActionButton>
+        )
+      }
+      packageActions={packageActions}
+      remove={remove}
+    />
   );
 }

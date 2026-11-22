@@ -8,7 +8,7 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für einen neuen Chat: ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-12"
+  last_verified: "2026-11-22"
   source_files:
     [
       "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
@@ -22,6 +22,8 @@ meta:
 # Fähigkeiten eines Agenten ansehen
 
 Über **Infos** öffnest du die Übersicht eines Agenten. Sie hilft dir zu beurteilen, ob der Agent für deine Aufgabe geeignet ist und auf welche Daten er zugreifen kann.
+
+Unter der Agentenkarte startest du einen neuen Chat oder änderst die Favoritenmarkierung. Wenn du den Arbeitsplatz administrierst, kannst du den Agenten hier als XRAG exportieren, einem XRAG-Paket hinzufügen, bearbeiten oder nach Bestätigung löschen.
 
 ## Was die Übersicht erklärt
 

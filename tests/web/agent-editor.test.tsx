@@ -176,7 +176,7 @@ describe("agent editing flows", () => {
     (claim) => {
       render(
         <AgentInfo
-          showXRAGActions
+          showResourceActions
           agent={agent}
           documentRepositoryMap={new Map()}
           workspace={{ ...workspace, claim }}

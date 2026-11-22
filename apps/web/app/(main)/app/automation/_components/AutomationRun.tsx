@@ -14,9 +14,11 @@ import { runAutomationNow } from "../_actions/runAutomationNow";
 
 export function AutomationRun({
   automation,
+  className,
   compact = false,
   menu = false,
 }: {
+  className?: string;
   compact?: boolean;
   menu?: boolean;
   automation: Pick<Automation, "id" | "trigger">;
@@ -55,6 +57,7 @@ export function AutomationRun({
         </DropdownMenuItemAction>
       ) : (
         <Action
+          className={className}
           tooltip={t("labelRunNow")}
           aria-label={t("labelRunNow")}
           indicator={compact ? "replace" : "after"}

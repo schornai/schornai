@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Für Passwortänderungen: ein lokales Konto; SSO-Passwörter verwaltet der Identitätsanbieter."
   status: "verfügbar"
-  last_verified: "2026-10-30"
+  last_verified: "2026-11-22"
   source_files:
     [
       "apps/web/app/(settings)/me/(main)/page.tsx",
@@ -55,6 +55,8 @@ Daneben wählst du **Hell**, **Dunkel** oder die Einstellung des Betriebssystems
 ![Favorisierter Agent auf dem Dashboard](../assets/favoriten.png)
 
 Markiere Agenten, Dokumentenablagen, Transkriptoren, Automationen oder Arbeitsplätze über das Sternsymbol als Favorit. Die markierten Inhalte findest du auf dem Dashboard und in der Favoriten-Navigation, solange du Zugriff darauf hast.
+
+In der geöffneten Seitenleiste rufst du über das Typsymbol rechts neben einem Favoriten dessen Aktionen auf. Bei einem Agenten kannst du einen Chat starten, den Favoriten entfernen oder die Infos öffnen. Wer den Arbeitsplatz administriert, kann hier auch den Agenten bearbeiten. Ein Klick auf den Namen startet direkt einen Chat.
 
 Über den Bearbeiten-Button neben **Favoriten** in der Seitenleiste oder unter **Profil → Favoriten** (`/me/favorites`) verschiebst du Einträge am Griff per Drag-and-drop. Über das **Favorit-entfernen-Symbol** entfernst du die Markierung direkt aus dem Entwurf, nicht den Inhalt. Bis zum Speichern kannst du sie mit **Zurücksetzen** wiederherstellen. Auch nicht mehr verfügbare Einträge kannst du entfernen. Der Schalter **In der Seitenleiste anzeigen** blendet die gesamte Favoritengruppe ein oder aus; die Dashboard-Favoriten bleiben sichtbar. Mit **Speichern** übernimmst du alle Änderungen, mit **Zurücksetzen** verwirfst du den Entwurf.
 

@@ -1,9 +1,11 @@
 "use client";
 
 import {
-  IconGroup,
-  IconGroupButton,
-} from "@schornio/aibox-package-ui/components/icon-group";
+  ResourceActions,
+  ResourceActionButton,
+  type ResourceActionDisplay,
+} from "../../_components/ResourceActions";
+import type { ReactNode } from "react";
 import { Info, MessageSquarePlus, Pencil } from "lucide-react";
 import type { Agent } from "@schornio/aibox-package-database/agent/_types";
 import { AgentIconGroupActionFavorite } from "./AgentIconGroupActionFavorite";
@@ -16,9 +18,15 @@ import { useT } from "next-i18next/client";
 export function AgentIconGroupActions({
   agent,
   favorites,
+  display = "icons",
+  packageActions,
+  remove,
   workspace,
 }: {
   agent?: Partial<Agent>;
+  display?: ResourceActionDisplay;
+  packageActions?: ReactNode;
+  remove?: ReactNode;
   favorites?: SettingFavorites;
   workspace?: WorkspaceClaim;
 }) {
@@ -28,39 +36,57 @@ export function AgentIconGroupActions({
   });
 
   return (
-    <IconGroup>
-      {hasPermission({
-        claim: workspace?.claim,
-        permission: "workspace-admin",
-      }) ? (
-        <IconGroupButton
-          disabled={!agent?.id}
-          onClick={() => router.push(`/agent/${agent?.id}/edit`)}
-          tooltip={t("tooltipEdit")}
+    <ResourceActions
+      display={display}
+      primary={
+        <ResourceActionButton
+          display={display}
+          disabled={
+            !agent?.id ||
+            !hasPermission({ claim: workspace?.claim, permission: "user" })
+          }
+          onClick={() =>
+            router.push(`/agent/${agent?.id}/${crypto.randomUUID()}`)
+          }
+          label={t("tooltipNewChat")}
         >
-          <Pencil />
-        </IconGroupButton>
-      ) : undefined}
-      <IconGroupButton
-        disabled={!agent?.id}
-        onClick={() => router.push(`/agent/${agent?.id}`)}
-        tooltip={t("tooltipInfo")}
-      >
-        <Info />
-      </IconGroupButton>
-      <AgentIconGroupActionFavorite agent={agent} favorites={favorites} />
-      <IconGroupButton
-        disabled={
-          !agent?.id ||
-          !hasPermission({ claim: workspace?.claim, permission: "user" })
-        }
-        onClick={() =>
-          router.push(`/agent/${agent?.id}/${crypto.randomUUID()}`)
-        }
-        tooltip={t("tooltipNewChat")}
-      >
-        <MessageSquarePlus />
-      </IconGroupButton>
-    </IconGroup>
+          <MessageSquarePlus />
+        </ResourceActionButton>
+      }
+      favorite={
+        <AgentIconGroupActionFavorite
+          display={display}
+          agent={agent}
+          favorites={favorites}
+        />
+      }
+      info={
+        <ResourceActionButton
+          display={display}
+          disabled={!agent?.id}
+          onClick={() => router.push(`/agent/${agent?.id}`)}
+          label={t("tooltipInfo")}
+        >
+          <Info />
+        </ResourceActionButton>
+      }
+      edit={
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && (
+          <ResourceActionButton
+            display={display}
+            disabled={!agent?.id}
+            onClick={() => router.push(`/agent/${agent?.id}/edit`)}
+            label={t("tooltipEdit")}
+          >
+            <Pencil />
+          </ResourceActionButton>
+        )
+      }
+      packageActions={packageActions}
+      remove={remove}
+    />
   );
 }

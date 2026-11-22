@@ -1,4 +1,10 @@
 "use client";
+import { ResourceRemovalDialog } from "../../../../../_components/ResourceRemovalDialog";
+import { deleteDocumentRepository } from "../../_actions/deleteDocumentRepository";
+import { useAction } from "next-safe-action/hooks";
+import { useT } from "next-i18next/client";
+import { ResourceInfoLayout } from "../../../../../_components/ResourceInfoLayout";
+import { DocumentRepositoryIconGroupActions } from "../../_components/DocumentRepositoryIconGroupActions";
 import { hasPermission } from "@/lib/hasPermission";
 import { XRAGObjectActions } from "../../../../../_components/xrag/XRAGObjectActions";
 
@@ -15,7 +21,7 @@ import type { Transcriber_new } from "@schornio/aibox-package-database/transcrib
 import type { WorkspaceClaim } from "../../../../../_models/getWorkspaceClaims";
 
 export function DocumentRepositoryInfo({
-  showXRAGActions = false,
+  showResourceActions = false,
   preview = false,
   editDocumentRepositoryPathname,
   editDefaultDocumentRepository,
@@ -26,7 +32,7 @@ export function DocumentRepositoryInfo({
   transcriberMap,
   workspace,
 }: {
-  showXRAGActions?: boolean;
+  showResourceActions?: boolean;
   preview?: boolean;
   editDocumentRepositoryPathname?: string;
   editDefaultDocumentRepository?: Partial<DocumentRepository>;
@@ -45,17 +51,64 @@ export function DocumentRepositoryInfo({
     documentRepository?.transcriberIdentifier ?? "",
   );
 
+  const { t: editorText } = useT("documentRepository", {
+    keyPrefix: "_components.DocumentRepositoryEditor",
+  });
+  const remove = useAction(deleteDocumentRepository);
+  const id = documentRepository?.id;
+  const canManage = hasPermission({
+    claim: workspace?.claim,
+    permission: "workspace-admin",
+  });
   return (
-    <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <DocumentRepositoryCard
-        preview={preview}
-        favorites={favorites}
-        documentRepository={documentRepository}
-        embeddingModel={embeddingModel}
-        transcriber={transcriber}
-        workspace={workspace}
-      />
-      <div className="flex flex-col gap-1">
+    <ContainerMain>
+      <ResourceInfoLayout
+        card={
+          <DocumentRepositoryCard
+            preview={preview}
+            favorites={favorites}
+            documentRepository={documentRepository}
+            embeddingModel={embeddingModel}
+            transcriber={transcriber}
+            workspace={workspace}
+          />
+        }
+        actions={
+          showResourceActions &&
+          !preview &&
+          id && (
+            <DocumentRepositoryIconGroupActions
+              display="buttons"
+              favorites={favorites}
+              workspace={workspace}
+              documentRepository={documentRepository}
+              packageActions={
+                canManage && (
+                  <XRAGObjectActions kind="documentRepository" id={id} />
+                )
+              }
+              remove={
+                canManage && (
+                  <ResourceRemovalDialog
+                    label={editorText("labelDeleteDocumentRepository")}
+                    title={editorText("confirmDeleteTitle")}
+                    description={editorText("confirmDeleteDescription", {
+                      name: documentRepository?.name,
+                    })}
+                    cancel={editorText("labelCancel")}
+                    onOpen={remove.reset}
+                    isPending={remove.isPending}
+                    hasErrored={remove.hasErrored}
+                    onConfirm={() =>
+                      remove.execute({ documentRepositoryId: id })
+                    }
+                  />
+                )
+              }
+            />
+          )
+        }
+      >
         {documentRepository?.index?.keyword?.active ? (
           <DocumentRepositoryInfoIndexKeyword
             editPathname={editDocumentRepositoryPathname}
@@ -97,18 +150,7 @@ export function DocumentRepositoryInfo({
           editable={editable}
           workspace={workspace}
         />
-      </div>
-      {showXRAGActions &&
-        documentRepository?.id &&
-        hasPermission({
-          claim: workspace?.claim,
-          permission: "workspace-admin",
-        }) && (
-          <XRAGObjectActions
-            kind="documentRepository"
-            id={documentRepository.id}
-          />
-        )}
+      </ResourceInfoLayout>
     </ContainerMain>
   );
 }

@@ -3,7 +3,7 @@ import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAction } from "next-safe-action/hooks";
 import { useT } from "next-i18next/client";
-import { Trash2, Type } from "lucide-react";
+import { Type } from "lucide-react";
 import { ButtonAction } from "@schornio/aibox-package-ui/components/button-action";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
@@ -25,18 +25,8 @@ import {
   Alert,
   AlertDescription,
 } from "@schornio/aibox-package-ui/components/alert";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-} from "@schornio/aibox-package-ui/components/alert-dialog";
+import { ModelRemove } from "./ModelRemove";
 import { updateModelMetadata } from "../_actions/updateModelMetadata";
-import { deleteModel } from "../_actions/deleteModel";
 
 export function ModelMetadataForm({
   model,
@@ -50,11 +40,8 @@ export function ModelMetadataForm({
   const [description, setDescription] = useState(model.description ?? "");
   const [error, setError] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [deleteError, setDeleteError] = useState(false);
   const save = useAction(updateModelMetadata);
-  const remove = useAction(deleteModel);
-  const pending = save.isPending || remove.isPending;
+  const pending = save.isPending;
   return (
     <>
       <ContainerMain>
@@ -168,71 +155,9 @@ export function ModelMetadataForm({
           <p className="text-muted-foreground text-sm">
             {t("descriptionDeleteAgentsTip")}
           </p>
-          <AlertDialog
-            open={deleteOpen}
-            onOpenChange={(open) => {
-              if (!remove.isPending) {
-                setDeleteOpen(open);
-                setDeleteError(false);
-              }
-            }}
-          >
-            <AlertDialogTrigger
-              render={
-                <Button
-                  className="self-start"
-                  variant="destructive"
-                  disabled={pending}
-                />
-              }
-            >
-              <Trash2 data-icon="inline-start" />
-              {t("labelDelete")}
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>
-                  {t("labelDeleteConfirm", { name: model.name })}
-                </AlertDialogTitle>
-                <AlertDialogDescription>
-                  {t(
-                    model.type === "external_llm_v1"
-                      ? "descriptionDeleteExternal"
-                      : "descriptionDeleteLocal",
-                  )}
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              {deleteError && (
-                <Alert variant="destructive">
-                  <AlertDescription>{t("errorDelete")}</AlertDescription>
-                </Alert>
-              )}
-              <AlertDialogFooter>
-                <AlertDialogCancel disabled={remove.isPending}>
-                  {t("labelCancel")}
-                </AlertDialogCancel>
-                <Button
-                  variant="destructive"
-                  disabled={pending}
-                  onClick={async () => {
-                    setDeleteError(false);
-                    try {
-                      const result = await remove.executeAsync({
-                        id: model.id,
-                      });
-                      if (!result?.data?.id) throw new Error();
-                      router.push("/models");
-                      router.refresh();
-                    } catch {
-                      setDeleteError(true);
-                    }
-                  }}
-                >
-                  {t("labelDelete")}
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <div>
+            <ModelRemove model={model} disabled={pending} />
+          </div>
         </section>
       </ContainerMain>
     </>

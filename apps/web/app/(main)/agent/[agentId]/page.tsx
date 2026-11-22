@@ -53,7 +53,7 @@ export default async function Page(params: PageProps<"/agent/[agentId]">) {
       </HeaderMain>
 
       <AgentInfo
-        showXRAGActions
+        showResourceActions
         agent={agent}
         documentRepositoryMap={documentRepositoryMap}
         favorites={favorites}

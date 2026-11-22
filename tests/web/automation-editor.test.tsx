@@ -413,7 +413,7 @@ it("shows saved details and draft placeholders with section-specific edit links"
       automation={automation}
       agents={agents}
       workspace={{ claim: "workspace-admin" } as any}
-      showXRAGActions
+      showResourceActions
       editable
     />,
   );
