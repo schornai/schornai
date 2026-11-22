@@ -209,3 +209,46 @@ it("names referenced images with the verified mount path", async () => {
     filename: "knowledge/photo.png",
   });
 });
+
+it("waits only for current, authorized files, including a file already in the history", async () => {
+  const prepareCurrentFile = vi.fn().mockResolvedValue(true);
+  state.content.mockResolvedValue({ type: "mdc", current: "text" });
+  const current = attachment("shared.pdf", "application/pdf");
+  const denied = {
+    ...current,
+    data: {
+      ...current.data,
+      attachment: { storage: {}, agentPath: "forbidden" },
+    },
+  };
+  await loadMessageFiles(
+    [
+      {
+        role: "user",
+        parts: [attachment("old.pdf", "application/pdf"), current],
+      },
+      { role: "user", parts: [current, current, denied] },
+    ] as any,
+    session,
+    { prepareCurrentFile },
+  );
+  expect(prepareCurrentFile).toHaveBeenCalledExactlyOnceWith(
+    current.data,
+    session,
+  );
+});
+
+it.each([
+  ["report.pdf", "application/pdf", false],
+  ["image.png", "image/png", false],
+  ["audio.wav", "audio/wav", true],
+])("reports missing current content for %s", async (path, type, processed) => {
+  const messages = [
+    { role: "user", parts: [attachment(path as string, type as string)] },
+  ] as any;
+  await expect(
+    loadMessageFiles(messages, session, {
+      prepareCurrentFile: async () => Boolean(processed),
+    }),
+  ).rejects.toThrow("CHAT_FILE_PROCESSING_FAILED");
+});

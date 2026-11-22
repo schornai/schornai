@@ -149,7 +149,7 @@ vi.mock("ai", async (importOriginal) => {
     },
   };
 });
-let chat: Doc, current: Doc, activities: Doc;
+let chat: Doc, current: Doc, activities: Doc, taskQueue: Doc;
 const task = {
   id: "generation",
   claimedAtISO: "2026-01-01",
@@ -175,7 +175,7 @@ function run(
     token: "token",
     workerIdentifier: "worker",
   });
-  return mocks.handler({ ...task, parameters }, abortSignal);
+  return mocks.handler({ ...task, parameters }, abortSignal, taskQueue);
 }
 function activity() {
   return getActivities(activities).activities?.get("activity");
@@ -185,6 +185,7 @@ beforeEach(() => {
     if (vi.isMockFunction(mock)) mock.mockReset();
   task.parameters.retry = false;
   chat = new Doc();
+  taskQueue = new Doc();
   current = new Doc();
   activities = new Doc();
   mocks.docs = [chat, current];
@@ -969,5 +970,134 @@ describe("background voice messages", () => {
     await send(controller.signal);
     expect(mocks.stream).not.toHaveBeenCalled();
     expect(getChat(chat).messages?.toArray()[0]?.parts).toHaveLength(1);
+  });
+});
+
+describe("attachments still processing at submission", () => {
+  const storage = {
+    type: "activity",
+    agentId: "agent",
+    activityId: "activity",
+  } as const;
+  const job = (path: string, state = "pending") => ({
+    id: path,
+    type: path.endsWith(".wav") ? "transcribe" : "process-file",
+    state,
+    parameters: { storage, path },
+  });
+  beforeEach(async () => {
+    const { loadMessageFiles } = await vi.importActual<
+      typeof import("../packages/database/src/chat/loadMessageFiles")
+    >("../packages/database/src/chat/loadMessageFiles");
+    mocks.load.mockImplementation(loadMessageFiles);
+    const files = ["nested/report.pdf", "audio.wav"].map((path) => ({
+      file: true,
+      path,
+      name: path,
+      type: path.endsWith(".pdf") ? "application/pdf" : "audio/wav",
+    }));
+    queue({ type: "text", text: "", files });
+    taskQueue.getArray("tasks").push(files.map((file) => job(file.path)));
+    mocks.content.mockImplementation(async (path) => ({
+      type: "mdc",
+      current: "from " + path,
+    }));
+  });
+  it("publishes the message, waits for every attachment and reads its finished content exactly once", async () => {
+    const jobs = taskQueue.getArray("tasks");
+    jobs.push([
+      job("unrelated.pdf"),
+      {
+        ...job("nested/report.pdf", "error"),
+        parameters: {
+          storage: { ...storage, activityId: "other" },
+          path: "nested/report.pdf",
+        },
+      },
+    ]);
+    const running = run();
+    await vi.waitFor(() => expect(mocks.load).toHaveBeenCalledOnce());
+    expect(
+      getChat(chat)
+        .messages!.toArray()[0]
+        ?.parts.filter((part) => part.type === "data-file"),
+    ).toHaveLength(2);
+    expect(mocks.content).not.toHaveBeenCalled();
+    taskQueue.transact(() => {
+      jobs.delete(0);
+      jobs.insert(0, [job("nested/report.pdf", "finished")]);
+    });
+    await vi.waitFor(() => expect(mocks.content).toHaveBeenCalledTimes(1));
+    expect(mocks.convert).not.toHaveBeenCalled();
+    taskQueue.transact(() => {
+      jobs.delete(1);
+      jobs.insert(1, [job("audio.wav", "finished")]);
+    });
+    await running;
+    expect(mocks.convert.mock.calls[0]?.[0][0].parts).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          text: expect.stringContaining("from nested/report.pdf"),
+        }),
+        expect.objectContaining({
+          text: expect.stringContaining("from audio.wav"),
+        }),
+      ]),
+    );
+    expect(mocks.stream).toHaveBeenCalledOnce();
+  });
+  it("keeps a failed message for retry and does not generate an answer without the attachment", async () => {
+    const jobs = taskQueue.getArray("tasks");
+    const running = run();
+    await vi.waitFor(() => expect(mocks.load).toHaveBeenCalledOnce());
+    taskQueue.transact(() => {
+      jobs.delete(0, 2);
+      jobs.push([
+        job("nested/report.pdf", "error"),
+        job("audio.wav", "finished"),
+      ]);
+    });
+    await expect(running).rejects.toThrow("CHAT_FILE_PROCESSING_FAILED");
+    expect(mocks.stream).not.toHaveBeenCalled();
+    jobs.push([job("nested/report.pdf", "finished")]);
+    mocks.docs = [chat, current];
+    task.parameters.retry = true;
+    chat.getMap("state").set("type", "queued");
+    await run();
+    expect(
+      getChat(chat)
+        .messages!.toArray()
+        .filter((message) => message.role === "user"),
+    ).toHaveLength(1);
+    expect(mocks.stream).toHaveBeenCalledOnce();
+  });
+  it("reports a timeout even when an attachment starts waiting after the deadline", async () => {
+    const { waitForFileProcessing } =
+      await import("../packages/realtime/src/documents/storage/waitForFileProcessing");
+    const controller = new AbortController();
+    const waiting = waitForFileProcessing(
+      taskQueue,
+      storage,
+      "audio.wav",
+      controller.signal,
+    );
+    controller.abort(new DOMException("Timeout", "TimeoutError"));
+    await expect(waiting).rejects.toThrow("CHAT_FILE_PROCESSING_TIMEOUT");
+    await expect(
+      waitForFileProcessing(taskQueue, storage, "audio.wav", controller.signal),
+    ).rejects.toThrow("CHAT_FILE_PROCESSING_TIMEOUT");
+    expect(taskQueue.getArray("tasks").length).toBe(2);
+  });
+  it("stops waiting when the chat is cancelled and leaves both upload jobs pending", async () => {
+    const controller = new AbortController();
+    const running = run(controller.signal);
+    await vi.waitFor(() => expect(mocks.load).toHaveBeenCalledOnce());
+    controller.abort();
+    await running;
+    expect(mocks.stream).not.toHaveBeenCalled();
+    expect(taskQueue.getArray("tasks").toArray()).toEqual([
+      job("nested/report.pdf"),
+      job("audio.wav"),
+    ]);
   });
 });

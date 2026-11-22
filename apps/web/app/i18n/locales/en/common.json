@@ -259,7 +259,7 @@
       "labelTargetFolder": "Choose destination folder",
       "labelSelectFile": "Choose an existing file",
       "descriptionFolder": "Choose an existing folder. One file will be transferred; existing names are never overwritten.",
-      "descriptionFile": "Choose a file from this chat or an accessible repository. Documents and recordings must already be processed.",
+      "descriptionFile": "Choose a file from this chat or an accessible repository. You can attach a file directly while it is being processed. Copying requires processing to finish.",
       "labelStorage": "Storage",
       "labelCurrentStorage": "Current storage",
       "labelUp": "Parent folder",

@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-22"
+  last_verified: "2026-11-23"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -86,7 +86,7 @@ es wird kein übergroßer Folgeaufruf gesendet.
 
 1. Beschreibe dein Ziel im Feld **Nachricht…**. Nenne relevante Daten und das gewünschte Format.
 2. Hänge bei Bedarf [Dateien](dateien.md) an.
-3. Warte, bis Uploads und Dateiverarbeitung abgeschlossen sind.
+3. Sobald die Anhänge hochgeladen sind, kannst du die Nachricht auch während der Dateiverarbeitung absenden.
 4. Wähle **Senden** oder drücke `Enter`. Mit `Shift` + `Enter` fügst du einen Zeilenumbruch ein.
 5. Warte auf die Antwort. Wenn eine Werkzeugaktion freigegeben werden muss, erscheint stattdessen eine [Rückfrage](freigaben.md).
 
@@ -195,7 +195,7 @@ Wiederherstellung erhalten.
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet eine Nachricht in einen vorhandenen, zugänglichen Chat. Bei direkt angehängten Dateien kann die Verarbeitung beim Absenden noch laufen. Der Agent wartet auf die Anhänge der Nachricht, bevor er antwortet. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
 
 `platform_calculate` und `platform_current_date_time` bieten dieselbe Berechnung und Uhrzeitfunktion ab Stufe **User**, ohne zusätzliche Ressourcenrechte. `platform_activity_update` benennt eigene Aktivitäten um. `platform_chat_read` enthält auch die Ergebnisse des rolleninternen Tools `chat-response-suggestions`; `platform_chat_send` kann eine ausgewählte Antwort senden. Die rolleninternen Tools `calculator`, `chat-set-label`, `chat-current-date-time` und `chat-response-suggestions` stehen nur bei entsprechender Aktivierung in der ausgewählten Rolle zur Verfügung.
 

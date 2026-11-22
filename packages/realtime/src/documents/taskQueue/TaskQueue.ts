@@ -1,5 +1,6 @@
 import { ServerRealtimeProvider } from "../../server/ServerRealtimeProvider.ts";
 import { ServerRealtimeWebsocketProvider } from "../../server/ServerRealtimeWebsocketProvider.ts";
+import type { Doc } from "yjs";
 import type { Task } from "./_types.ts";
 import { requestTaskCoordinator } from "./requestTaskCoordinator.ts";
 import { decodeTaskValue } from "./_taskCodec.ts";
@@ -53,6 +54,7 @@ export class TaskQueue<
     handler: (
       claimedTask: Extract<TTask, { state: "claimed" }>,
       abortSignal: AbortSignal,
+      queueDocument: Doc,
     ) => Promise<TTask["result"] extends undefined ? void : TTask["result"]>,
     { abortSignal }: { abortSignal?: AbortSignal } = {},
   ) {
@@ -108,7 +110,11 @@ export class TaskQueue<
               this.#realtimeProvider.provider,
               claimedTask,
               (task, signal) =>
-                handler(task as Extract<TTask, { state: "claimed" }>, signal),
+                handler(
+                  task as Extract<TTask, { state: "claimed" }>,
+                  signal,
+                  this.#realtimeProvider.document,
+                ),
               workerSignal,
             );
             continue;

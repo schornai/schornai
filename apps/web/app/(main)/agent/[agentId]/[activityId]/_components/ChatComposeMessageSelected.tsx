@@ -107,6 +107,7 @@ export function ChatComposeMessageSelected({
     basePathApp,
     storage,
     itemGroups,
+    uploadingFilePaths = [],
     pendingFilePaths = [],
   } = useStorageView();
 
@@ -137,18 +138,23 @@ export function ChatComposeMessageSelected({
           .map((file) => resolvePath(file.path)) ?? [],
     ),
   );
-  const filesPending =
+  const filesUploading =
     uploads.some(
       (upload) => upload.state === "queued" || upload.state === "uploading",
-    ) || pendingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
+    ) ||
+    uploadingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
+
+  const filesProcessing = pendingFilePaths.some((path) =>
+    attachedPaths.has(resolvePath(path)),
+  );
 
   const nextHasContent = hasMessageContent(messageBatch[0]);
   const showMicrophone =
     voiceEnabled &&
-    !filesPending &&
+    !filesUploading &&
     !nextHasContent &&
     !hasMessageContent(selectedCurrentMessage);
-  const sendDisabled = isSubmitted || filesPending || !nextHasContent;
+  const sendDisabled = isSubmitted || filesUploading || !nextHasContent;
   useEffect(() => {
     if (!voiceEnabled || !canSend || isSubmitted) return;
     const openFromHash = () => {
@@ -276,9 +282,13 @@ export function ChatComposeMessageSelected({
         value={selectedCurrentMessage?.content.text ?? ""}
       />
 
-      {filesPending ? (
+      {filesUploading || filesProcessing ? (
         <p role="status" className="text-muted-foreground px-3 pb-1 text-xs">
-          {t("descriptionFilesPending")}
+          {t(
+            sendDisabled
+              ? "descriptionFilesPending"
+              : "descriptionFilesProcessing",
+          )}
         </p>
       ) : null}
       <div className="flex items-center gap-0.5 p-1">

@@ -259,7 +259,7 @@
       "labelTargetFolder": "Zielordner auswählen",
       "labelSelectFile": "Vorhandene Datei auswählen",
       "descriptionFolder": "Wähle einen vorhandenen Ordner. Es wird eine einzelne Datei übertragen; vorhandene Namen werden nicht überschrieben.",
-      "descriptionFile": "Wähle eine Datei aus diesem Chat oder einer zugänglichen Ablage. Dokumente und Aufnahmen müssen bereits verarbeitet sein.",
+      "descriptionFile": "Wähle eine Datei aus diesem Chat oder einer zugänglichen Ablage. Laufende Verarbeitung ist bei direkt verknüpften Dateien möglich. Zum Kopieren muss sie abgeschlossen sein.",
       "labelStorage": "Ablage",
       "labelCurrentStorage": "Aktueller Bereich",
       "labelUp": "Übergeordneter Ordner",

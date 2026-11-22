@@ -1,5 +1,8 @@
 import { fileNeedsProcessing } from "@schornio/aibox-package-utils/getFileTypeLabel";
 import { getDocumentContent } from "@schornio/aibox-database/storage/getDocumentContent";
+import { ServerRealtimeProvider } from "../../server/ServerRealtimeProvider.ts";
+import { getTaskQueueDocumentName } from "../taskQueue/_utils.ts";
+import { findActiveFileTask } from "./findActiveFileTask.ts";
 import { z } from "zod/mini";
 import { getAgentById } from "@schornio/aibox-database/agent/getAgentById";
 import { getDocumentRepositories } from "@schornio/aibox-database/documentRepositories/getDocumentRepositories";
@@ -45,42 +48,49 @@ export async function selectChatFile(
   const agent = await getAgentById(input.agentId, { supabase });
   await requireStorageAccess(destination, "write", { supabase });
   await requireStorageAccess(input.storage, "read", { supabase });
-  const file = await inspect(
-    path,
-    new StorageSession({
-      storage: input.storage,
-      supabaseStorage: supabase.storage,
-      abortSignal,
-    }),
-  );
+  const session = new StorageSession({
+    storage: input.storage,
+    supabaseStorage: supabase.storage,
+    abortSignal,
+  });
+  const file = await inspect(path, session);
   if (!file?.file) throw new Error("FILE_NOT_FOUND");
-  if (
-    fileNeedsProcessing(path) &&
-    !(await getDocumentContent(
-      path,
-      new StorageSession({
-        storage: input.storage,
-        supabaseStorage: supabase.storage,
-        abortSignal,
-      }),
-    ))
-  )
-    return { error: "FILE_NOT_PROCESSED" };
-  if (
+  const inConversation =
     input.storage.type === "activity" &&
     input.storage.activityId === input.activityId &&
-    input.storage.agentId === input.agentId
-  )
+    input.storage.agentId === input.agentId;
+  const agentPath = inConversation
+    ? undefined
+    : storageToAgentPath({
+        storage: input.storage,
+        path,
+        roles: agent.roles,
+        repositories: await getDocumentRepositories({ supabase }),
+        agentId: input.agentId,
+        activityId: input.activityId,
+      });
+  const reference = agentPath !== undefined && input.attachmentMode !== "copy";
+  if (!inConversation && !reference && input.attachmentMode === "reference")
+    throw new Error("FILE_REFERENCE_NOT_MOUNTED");
+  if (fileNeedsProcessing(path) && !(await getDocumentContent(path, session))) {
+    // A transfer needs a stable source. A direct attachment can join its running job.
+    if (!inConversation && !reference) return { error: "FILE_NOT_PROCESSED" };
+    await using queue = new ServerRealtimeProvider({
+      documentName: getTaskQueueDocumentName(),
+      serverToken,
+      websocketProvider,
+      disposalAbortSignal: abortSignal,
+    });
+    await queue.waitForSynced(abortSignal ? { abortSignal } : undefined);
+    if (
+      !findActiveFileTask(queue.document, input.storage, path) &&
+      !(await getDocumentContent(path, session))
+    )
+      return { error: "FILE_NOT_PROCESSED" };
+  }
+  if (inConversation)
     return { file: file as StorageRealtimeObject, copied: false };
-  const agentPath = storageToAgentPath({
-    storage: input.storage,
-    path,
-    roles: agent.roles,
-    repositories: await getDocumentRepositories({ supabase }),
-    agentId: input.agentId,
-    activityId: input.activityId,
-  });
-  if (agentPath && input.attachmentMode !== "copy")
+  if (reference)
     return {
       file: {
         ...file,
@@ -88,8 +98,6 @@ export async function selectChatFile(
       } satisfies StorageRealtimeObject,
       copied: false,
     };
-  if (input.attachmentMode === "reference")
-    throw new Error("FILE_REFERENCE_NOT_MOUNTED");
   const extension =
     file.name.lastIndexOf(".") > 0
       ? file.name.slice(file.name.lastIndexOf("."))

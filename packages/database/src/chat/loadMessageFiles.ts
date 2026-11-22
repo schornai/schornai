@@ -12,7 +12,13 @@ export async function loadMessageFiles(
   storageSession: StorageSession,
   {
     resolveReference,
+    prepareCurrentFile,
   }: {
+    /** Returns true when processing was required and completed for this attachment. */
+    prepareCurrentFile?: (
+      file: ChatFileData,
+      session: StorageSession,
+    ) => Promise<boolean>;
     resolveReference?: (
       file: ChatFileData,
     ) => Promise<
@@ -22,6 +28,14 @@ export async function loadMessageFiles(
 ): Promise<ChatMessage[]> {
   const key = (file: ChatFileData) =>
     JSON.stringify([file.attachment?.storage ?? null, file.url]);
+  const current = messages.at(-1);
+  const currentFiles = new Set(
+    current?.role === "user"
+      ? current.parts.flatMap((part) =>
+          part.type === "data-file" ? [key(part.data)] : [],
+        )
+      : [],
+  );
   const loaded = new Map<
     string,
     Promise<{ image?: string; content?: string; agentPath: string }>
@@ -42,17 +56,29 @@ export async function loadMessageFiles(
                 "Attachment unavailable: access or agent mounts changed. Please select the file again.",
             };
           const session = reference?.storageSession ?? storageSession;
+          const prepare = currentFiles.has(key(part.data))
+            ? prepareCurrentFile
+            : undefined;
+          const processed = await prepare?.(part.data, session);
           const agentPath =
             reference?.agentPath ??
             `${THIS_CONVERSATION_MOUNT}/${part.data.url}`;
           if (part.data.type.startsWith("image/")) {
             const blob = await getDocumentBlob(part.data.url, session);
+            if (prepare && !blob)
+              throw new Error("CHAT_FILE_PROCESSING_FAILED");
             return {
               agentPath,
               image: blob ? await blobToDataURL(blob) : undefined,
             };
           }
           const content = await getDocumentContent(part.data.url, session);
+          if (
+            prepare &&
+            !content &&
+            (processed || fileNeedsProcessing(part.data.url) === "text")
+          )
+            throw new Error("CHAT_FILE_PROCESSING_FAILED");
           return {
             agentPath,
             content:

@@ -19,7 +19,6 @@ import { storageCreateFolders } from "../_actions/storageCreateFolders";
 import { storageQueueProcessFiles } from "../_actions/storageQueueProcessFiles";
 import { useHocuspocusProvider } from "@hocuspocus/provider-react";
 import { useRealtimeArray } from "@/lib/useRealtimeArray";
-import { useState } from "react";
 
 function StorageContextProvider({
   applyNewFiles,
@@ -32,7 +31,6 @@ function StorageContextProvider({
   >["newFiles"];
   beforeUpload?: (fileUploads: FileUpload[]) => void;
 }) {
-  const [sessionId, setSessionId] = useState(crypto.randomUUID());
   const provider = useHocuspocusProvider();
 
   const storageLogYArray = getStorageLog(provider.document);
@@ -45,10 +43,18 @@ function StorageContextProvider({
     { newFiles: applyNewFiles },
   );
 
+  const fileStates = [
+    ...new Map(
+      storageLog.map(
+        (entry) => [resolvePath(entry.target.path), entry.state] as const,
+      ),
+    ),
+  ];
+
   const logFileUpload = (upload: FileUpload) => {
     const action = fileUploadToStorageObjectAction(upload);
     if (action) {
-      StorageRealtimeSession.logAction(action, provider.document, sessionId);
+      StorageRealtimeSession.logAction(action, provider.document, upload.id);
     }
   };
 
@@ -63,19 +69,26 @@ function StorageContextProvider({
             filePaths: successful.map((upload) => upload.path),
             storage: viewProviderProps.storage,
           });
-          if (result?.serverError || result?.validationErrors) {
+          if (!result?.data || result.serverError || result.validationErrors) {
             throw new Error("Could not queue file processing");
           }
+          // Release chat submission only after the processing job is visible to workers.
           for (const upload of successful) {
-            if (result?.data?.skippedPaths.includes(upload.path))
-              logFileUpload(upload);
+            const action = fileUploadToStorageObjectAction(upload);
+            if (action)
+              StorageRealtimeSession.logAction(
+                result.data.skippedPaths.includes(upload.path)
+                  ? action
+                  : { state: "processing", target: action.target },
+                provider.document,
+                upload.id,
+              );
           }
         } catch (error) {
           for (const upload of successful)
             logFileUpload({ ...upload, state: "error" });
           logError("StorageContextProvider", error);
         }
-        setSessionId(crypto.randomUUID());
         if (fileUploads.every(($) => $.state === "success")) clearFinished();
       }}
       basePath={viewProviderProps.basePathStorage}
@@ -103,27 +116,17 @@ function StorageContextProvider({
       }
       onFileUploadError={logFileUpload}
       onFileUploadProgress={logFileUpload}
-      onFileUploadSuccess={(upload) => {
-        const action = fileUploadToStorageObjectAction(upload);
-        if (action)
-          StorageRealtimeSession.logAction(
-            { target: action.target, state: "processing" },
-            provider.document,
-            sessionId,
-          );
-      }}
+      onFileUploadSuccess={(upload) =>
+        logFileUpload({ ...upload, state: "uploading" })
+      }
     >
       <StorageViewProvider
         {...viewProviderProps}
         storageObjects={appliedStorageObjects}
-        pendingFilePaths={[
-          ...new Map(
-            storageLog.map((entry) => [
-              resolvePath(entry.target.path),
-              entry.state,
-            ]),
-          ).entries(),
-        ]
+        uploadingFilePaths={fileStates
+          .filter(([, state]) => state === "uploading")
+          .map(([path]) => path)}
+        pendingFilePaths={fileStates
           .filter(
             ([, state]) => state === "uploading" || state === "processing",
           )

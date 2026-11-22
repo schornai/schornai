@@ -135,6 +135,7 @@ const storageViewContext = createContext<
       basePathStorage: string;
       storage: Storage;
       pendingFilePaths: string[];
+      uploadingFilePaths: string[];
       canWrite: boolean;
       columnFolders?: StorageColumnFolder[];
     })
@@ -152,6 +153,7 @@ export function StorageViewProvider({
   userPreferences,
   audioRecording,
   pendingFilePaths = [],
+  uploadingFilePaths = [],
   canWrite = true,
 }: {
   basePathApp: string;
@@ -164,6 +166,7 @@ export function StorageViewProvider({
   userPreferences: Preferences;
   audioRecording?: AudioRecordingConfig;
   pendingFilePaths?: string[];
+  uploadingFilePaths?: string[];
   canWrite?: boolean;
 }) {
   const valueFilter = useFilter(storageObjects, {
@@ -190,6 +193,7 @@ export function StorageViewProvider({
         basePathStorage,
         storage,
         pendingFilePaths,
+        uploadingFilePaths,
         canWrite,
         columnFolders,
         ...valueFilter,

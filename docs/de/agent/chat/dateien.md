@@ -12,12 +12,13 @@ meta:
   role_scope: "Gespräch beziehungsweise Zielablage"
   prerequisites: "Für Audio- und Videoinhalte: ein in der Agentenrolle zugeordneter Transkriptor."
   status: "verfügbar"
-  last_verified: "2026-11-05"
+  last_verified: "2026-11-23"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/files/_components/Folder.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageContext.tsx",
       "packages/realtime/src/documents/storage/createStorageProcessingTask.ts",
+      "packages/realtime/src/documents/storage/waitForFileProcessing.ts",
       "apps/web/app/_actions/storageSelectChatFile.ts",
       "packages/database/src/storage/_utils/storageToAgentPath.ts",
       "apps/realtime/src/chat/tools/documentRepository/storageWriteFile.ts",
@@ -36,14 +37,14 @@ Du kannst Unterlagen an eine Nachricht anhängen, damit der Agent sie bei der Be
 
 1. Öffne das Büroklammermenü **Dateien anhängen** und wähle **Dateien hochladen**.
 2. Wähle eine oder mehrere Dateien aus.
-3. Kontrolliere die angezeigten Anhänge und warte auf das Ende der Verarbeitung.
-4. Formuliere die Aufgabe zu diesen Dateien und wähle **Senden**.
+3. Formuliere deine Aufgabe und kontrolliere die angezeigten Anhänge.
+4. Wähle nach dem Upload **Senden**. Das funktioniert auch mit einer Datei ohne Begleittext.
 
-Solange **Dateien werden hochgeladen oder verarbeitet …** angezeigt wird, ist das Senden blockiert. Die App extrahiert dabei den Text aus Dokumenten beziehungsweise transkribiert Audio und Video.
+Die Nachricht erscheint mit ihren Anhängen im Chat. Läuft die Textextraktion oder Transkription noch, wartet der Agent vor seiner Antwort auf die Dateien dieser Nachricht. Du kannst währenddessen den Chat verlassen. Brichst du die Antwort ab, läuft die Dateiverarbeitung weiter. Meldet der Chat einen Verarbeitungsfehler, prüfe die betroffene Datei im Reiter **Dateien**. Dort kannst du sie erneut verarbeiten und anschließend die Antwort im Chat wiederholen.
 
 ## Eine vorhandene Datei auswählen
 
-Wähle im Büroklammermenü **Vorhandene Datei auswählen**. Der Dialog zeigt die Dateien des bestehenden Gesprächs und zugängliche Dokumentenablagen. Wähle eine Ablage, öffne bei Bedarf einen Ordner und bestätige eine einzelne Datei. PDF-, Office-, Audio- und Videodateien müssen bereits erfolgreich verarbeitet sein.
+Wähle im Büroklammermenü **Vorhandene Datei auswählen**. Der Dialog zeigt die Dateien des bestehenden Gesprächs und zugängliche Dokumentenablagen. Wähle eine Ablage, öffne bei Bedarf einen Ordner und bestätige eine einzelne Datei. Dateien aus diesem Gespräch und direkt verknüpfte Ablagedateien kannst du schon während der Verarbeitung auswählen. Muss die App eine PDF-, Office- oder Mediendatei in das Gespräch kopieren, warte zuerst auf das Ende ihrer Verarbeitung.
 
 Ist eine Ablagedatei in allen Rollen des Agenten über denselben eindeutigen Pfad erreichbar, wird sie direkt referenziert. Der Agent erhält den tatsächlich eingebundenen Pfad; es entsteht keine zusätzliche Datei. Fehlt eine solche gemeinsame Verbindung, wird eine Kopie mit eindeutigem Namen in den Gesprächsdateien angelegt. Die Quelldatei bleibt unverändert. Dateien dieses Gesprächs können unmittelbar ausgewählt werden.
 
@@ -77,6 +78,7 @@ Beim Kopieren oder Verschieben durch den Agenten muss der Zielpfad den Dateiname
 
 ## Zugehörige MCP-Werkzeuge
 
+- `platform_chat_send`: Eine Nachricht mit Anhängen absenden. Der Agent wartet vor seiner Antwort auf die laufende Verarbeitung direkt angehängter Dateien. Mindeststufe: **Benutzer**; Zugriff auf Agent, Gespräch und Quelldateien erforderlich. Für eine Kopie muss die Verarbeitung der Quelle abgeschlossen sein.
 - `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mit `attachmentMode: copy` wird auch eine eingebundene Datei kopiert; `reference` verlangt eine passende Agenteneinbindung. Mindeststufe: **Benutzer**; Zugriff auf Chat und Quelldatei erforderlich.
 - `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer**.
 - `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer**.

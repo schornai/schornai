@@ -1,5 +1,6 @@
 import { getActivities } from "@schornio/aibox-realtime/documents/activity/getActivities";
 import { setActivityLabel } from "@schornio/aibox-realtime/documents/activity/setActivityLabel";
+import { waitForFileProcessing } from "@schornio/aibox-realtime/documents/storage/waitForFileProcessing";
 import { transcribeVoiceMessage } from "./transcribeVoiceMessage.ts";
 import { getDocumentRepositories } from "@schornio/aibox-database/documentRepositories/getDocumentRepositories";
 import { requireStorageAccess } from "@schornio/aibox-database/storage/requireStorageAccess";
@@ -63,7 +64,7 @@ export async function chatWorker({
     workerIdentifier,
   });
 
-  await taskQueue.handleTask(async (claimedTask, abortSignal) => {
+  await taskQueue.handleTask(async (claimedTask, abortSignal, queue) => {
     const chatDocumentName = getChatDocumentName({
       activityId: claimedTask.parameters.activityId,
       agentId: claimedTask.parameters.agentId,
@@ -290,6 +291,12 @@ export async function chatWorker({
         )
           ? await getDocumentRepositories({ supabase })
           : [];
+        const fileWait = new AbortController();
+        const fileSignal = AbortSignal.any([
+          abortSignal,
+          fileWait.signal,
+          AbortSignal.timeout(10 * 60_000),
+        ]);
         const loadedMessages = await loadMessageFiles(
           messages,
           new StorageSession({
@@ -302,6 +309,13 @@ export async function chatWorker({
             supabaseStorage: supabase.storage,
           }),
           {
+            prepareCurrentFile: (file, session) =>
+              waitForFileProcessing(
+                queue,
+                session.storage,
+                file.url,
+                fileSignal,
+              ),
             resolveReference: async (file) => {
               if (!file.attachment) return undefined;
               try {
@@ -330,7 +344,8 @@ export async function chatWorker({
               }
             },
           },
-        );
+        ).finally(() => fileWait.abort());
+        assertGenerationActive();
         const modelMessages = await convertToModelMessages(loadedMessages);
 
         const previousMetadata = messages.at(-1)?.metadata;
