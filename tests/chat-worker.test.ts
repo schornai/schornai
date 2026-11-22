@@ -1,3 +1,4 @@
+import { TranscriberConfigurationError } from "../packages/database/src/transcriber/requireTranscriber";
 import { Doc } from "yjs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { chatWorker } from "../apps/realtime/src/chat/worker";
@@ -923,7 +924,9 @@ describe("background voice messages", () => {
     "preserves the recording and retries %s without a second message",
     async (kind) => {
       if (kind === "missing transcriber")
-        mocks.processingTask.mockResolvedValueOnce(undefined);
+        mocks.processingTask.mockRejectedValueOnce(
+          new TranscriberConfigurationError("TRANSCRIBER_NOT_FOUND"),
+        );
       if (kind === "worker failure")
         mocks.runTranscription.mockRejectedValueOnce(new Error("failed"));
       if (kind === "missing transcript")
@@ -934,7 +937,11 @@ describe("background voice messages", () => {
           segments: [],
         });
       await expect(send()).rejects.toThrow(
-        kind === "silence" ? "VOICE_NO_SPEECH" : "VOICE_TRANSCRIPTION_FAILED",
+        kind === "missing transcriber"
+          ? "TRANSCRIBER_NOT_FOUND"
+          : kind === "silence"
+            ? "VOICE_NO_SPEECH"
+            : "VOICE_TRANSCRIPTION_FAILED",
       );
       expect(mocks.stream).not.toHaveBeenCalled();
       expect(getChat(chat).messages?.length).toBe(1);

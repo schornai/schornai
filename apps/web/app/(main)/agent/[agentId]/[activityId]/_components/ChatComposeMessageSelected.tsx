@@ -3,6 +3,7 @@
 import {
   Brain,
   Mic,
+  MicOff,
   File,
   Upload,
   Layers,
@@ -28,6 +29,7 @@ import {
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useDecayState } from "@schornio/aibox-package-ui/hooks/use-decay-state";
+import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
 import { ChatVoiceRecorder } from "./ChatVoiceRecorder";
 import { useCanSendMessage } from "./ChatContext";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
@@ -75,7 +77,7 @@ export function ChatComposeMessageSelected({
 
   const {
     additionalFunctions,
-    voiceEnabled,
+    voiceStatus,
     expiration,
     activity,
     addSelectedFiles,
@@ -99,6 +101,7 @@ export function ChatComposeMessageSelected({
     pendingFilePaths = [],
   } = useStorageView();
 
+  const voiceEnabled = voiceStatus === "ready";
   const { executeAsync, hasErrored } = useAction(submitCurrentMessage);
 
   useEffect(() => {
@@ -230,6 +233,15 @@ export function ChatComposeMessageSelected({
           </AttachmentGroup>
         </div>
       ) : undefined}
+      {voiceStatus && voiceStatus !== "ready" && (
+        <p
+          role="status"
+          className="text-muted-foreground flex items-start gap-2 px-3 pt-2 text-xs"
+        >
+          <MicOff aria-hidden="true" className="size-4 shrink-0" />
+          {voiceLabel(voiceTranscriberErrorKeys[voiceStatus])}
+        </p>
+      )}
       {voiceSent && (
         <p role="status" className="text-muted-foreground px-3 pt-2 text-xs">
           {voiceLabel("descriptionQueued")}

@@ -487,7 +487,7 @@ export function configureContextFixtures(
         },
         activityId: "11111111-1111-4111-8111-111111111111",
         agentId: "11111111-1111-4111-8111-111111111111",
-        voiceEnabled: false,
+        voiceStatus: undefined,
         defaultThinking: false,
         additionalFunctions: {
           fileUpload: true,

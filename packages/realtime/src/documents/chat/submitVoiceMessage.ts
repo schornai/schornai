@@ -1,3 +1,4 @@
+import { requireTranscriber } from "@schornio/aibox-database/transcriber/requireTranscriber";
 import { fileNeedsProcessing } from "@schornio/aibox-package-utils/getFileTypeLabel";
 import { z } from "zod";
 import type { SupabaseClient } from "@schornio/aibox-database/_shared/_types";
@@ -52,7 +53,6 @@ export async function submitVoiceMessage(
   const agent = await getAgentById(agentId, { supabase });
   requirePlatformAccess(userClaims, "user", "user", agent.workspaceId);
   await requireStorageAccess(storage, "write", { supabase });
-  if (!agent.transcriberIdentifier) throw new Error("TRANSCRIBER_REQUIRED");
   const file = await inspect(
     path,
     new StorageSession({ storage, supabaseStorage: supabase.storage }),
@@ -97,6 +97,7 @@ export async function submitVoiceMessage(
   assertChatIdle(ids, { chat, taskQueue });
   if (getChatInteraction(messages).type === "tool-approval")
     throw new Error("TOOL_APPROVAL_REQUIRED");
+  await requireTranscriber(agent.transcriberIdentifier, { supabase });
   await queueChat(
     { ...ids, userId, userClaims, voice: { ...voice, path }, thinking },
     { chat, taskQueue },

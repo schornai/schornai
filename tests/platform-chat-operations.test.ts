@@ -1,3 +1,4 @@
+import { TranscriberConfigurationError } from "../packages/database/src/transcriber/requireTranscriber";
 import { Doc } from "yjs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 const io = vi.hoisted(() => ({
@@ -6,6 +7,7 @@ const io = vi.hoisted(() => ({
   ensure: vi.fn(),
   select: vi.fn(),
   inspect: vi.fn(),
+  transcriber: vi.fn(),
   storageAccess: vi.fn(),
   abort: vi.fn(),
   remove: vi.fn(),
@@ -43,6 +45,15 @@ vi.mock("@schornio/aibox-database/agent/getAgentById", () => ({
     transcriberIdentifier: "whisper",
   }),
 }));
+vi.mock(
+  "@schornio/aibox-database/transcriber/requireTranscriber",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/database/src/transcriber/requireTranscriber")
+    >()),
+    requireTranscriber: io.transcriber,
+  }),
+);
 vi.mock("@schornio/aibox-database/transcriber/getTranscriberById", () => ({
   getTranscriberById: async () => ({ workspaceId: "workspace" }),
 }));
@@ -482,6 +493,16 @@ describe("voice submission", () => {
   beforeEach(() =>
     io.inspect.mockResolvedValue({ file: true, type: "audio/webm" }),
   );
+  it("rejects a stale transcriber before adding a chat task", async () => {
+    io.transcriber.mockRejectedValueOnce(
+      new TranscriberConfigurationError("TRANSCRIBER_NOT_FOUND"),
+    );
+    await expect(submit()).resolves.toEqual({
+      status: "unavailable",
+      reason: "TRANSCRIBER_NOT_FOUND",
+    });
+    expect(getTaskQueue(io.docs.get("taskQueue")).tasks.length).toBe(0);
+  });
   it("queues once after upload and acknowledges a repeated request after the recording enters history", async () => {
     await submit();
     await submit();
@@ -526,21 +547,19 @@ describe("voice submission", () => {
     chat.getMap("state").set("type", "generating");
     await expect(submit()).rejects.toThrow("CHAT_BUSY");
     chat.getMap("state").set("type", "idle");
-    chat
-      .getArray("messages")
-      .push([
-        {
-          role: "assistant",
-          id: "a",
-          parts: [
-            {
-              type: "tool-mcp",
-              state: "approval-requested",
-              approval: { id: "permission" },
-            },
-          ],
-        },
-      ]);
+    chat.getArray("messages").push([
+      {
+        role: "assistant",
+        id: "a",
+        parts: [
+          {
+            type: "tool-mcp",
+            state: "approval-requested",
+            approval: { id: "permission" },
+          },
+        ],
+      },
+    ]);
     await expect(submit()).rejects.toThrow("TOOL_APPROVAL_REQUIRED");
   });
 });

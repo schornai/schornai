@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { fn } from "storybook/test";
+import { expect, fn, spyOn } from "storybook/test";
 import { ChatVoiceRecorder } from "../../../../../../app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder";
 const meta = {
   title: "Web/Chat/ChatVoiceRecorder",
@@ -20,3 +20,22 @@ const meta = {
 } satisfies Meta<typeof ChatVoiceRecorder>;
 export default meta;
 export const Ready: StoryObj<typeof meta> = {};
+
+export const WaitingForMicrophone: StoryObj<typeof meta> = {
+  beforeEach: () => {
+    const request = spyOn(
+      navigator.mediaDevices,
+      "getUserMedia",
+    ).mockImplementation(() => new Promise<MediaStream>(() => {}));
+    return () => request.mockRestore();
+  },
+  play: async ({ canvas, userEvent }) => {
+    const button = canvas.getByRole("button", {
+      name: /Aufnahme starten|Start recording/i,
+    });
+    await userEvent.click(button);
+    await expect(button).toBeDisabled();
+    await expect(button.querySelectorAll("svg")).toHaveLength(1);
+    await expect(button.querySelector("svg")).toHaveClass("animate-spin");
+  },
+};

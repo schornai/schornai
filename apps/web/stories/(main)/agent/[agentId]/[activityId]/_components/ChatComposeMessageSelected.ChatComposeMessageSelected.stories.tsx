@@ -227,3 +227,23 @@ export const DisappearingChatsOn: Story = {
     },
   },
 };
+
+export const MissingTranscriber: Story = {
+  parameters: {
+    contextFixtures: {
+      useChatComposeMessage: { voiceStatus: "TRANSCRIBER_NOT_FOUND" },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText(
+        /Der zugeordnete Transkriptor fehlt|The assigned transcriber is missing/,
+      ),
+    ).toBeVisible();
+    await expect(
+      canvas.queryByRole("button", { name: /Sprachnachricht|Voice message/i }),
+    ).not.toBeInTheDocument();
+    await expect(canvas.getByRole("textbox")).toBeEnabled();
+  },
+};

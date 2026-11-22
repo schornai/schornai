@@ -1,4 +1,5 @@
 "use server";
+import { TranscriberConfigurationError } from "@schornio/aibox-package-database/transcriber/requireTranscriber";
 import { revalidatePath } from "next/cache";
 import { serverActionClient } from "@/lib/serverActionClient";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
@@ -19,13 +20,19 @@ export const submitVoiceMessage = serverActionClient
       getCurrentUser({ supabaseAuth: supabase.auth }),
       getCurrentUserClaims({ supabaseAuth: supabase.auth }),
     ]);
-    await submit(parsedInput, {
-      supabase,
-      userId: user.id,
-      userClaims,
-      serverToken: getRealtimeServerToken(),
-      websocketProvider: new ServerRealtimeWebsocketProvider(),
-    });
+    try {
+      await submit(parsedInput, {
+        supabase,
+        userId: user.id,
+        userClaims,
+        serverToken: getRealtimeServerToken(),
+        websocketProvider: new ServerRealtimeWebsocketProvider(),
+      });
+    } catch (error) {
+      if (error instanceof TranscriberConfigurationError)
+        return { queued: false as const, issue: error.code };
+      throw error;
+    }
     revalidatePath(`/agent/${parsedInput.agentId}/${parsedInput.activityId}`);
-    return { queued: true };
+    return { queued: true as const };
   });

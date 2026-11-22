@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-21"
+  last_verified: "2026-11-22"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -99,7 +99,9 @@ Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 
 ## Sprachnachricht senden
 
-Wenn dem Agenten ein Transkriptor zugeordnet ist, öffnet das Mikrofon in der Chat-Eingabe die Sprachnachricht. Wähle **Aufnahme starten** und erlaube den Mikrofonzugriff. Während der Aufnahme siehst du die Wellenform und die Laufzeit. Nach fünf Minuten stoppt die Aufnahme automatisch. Du kannst sie auch früher stoppen, anhören, pausieren, von vorne abspielen oder verwerfen.
+Wenn du Zugriff auf den zugeordneten Transkriptor hast und ein Whisper-Modell eingerichtet ist, öffnet das Mikrofon in der Chat-Eingabe die Sprachnachricht. Wähle **Aufnahme starten** und erlaube den Mikrofonzugriff. Während der Aufnahme siehst du die Wellenform und die Laufzeit. Nach fünf Minuten stoppt die Aufnahme automatisch. Du kannst sie auch früher stoppen, anhören, pausieren, von vorne abspielen oder verwerfen.
+
+Fehlt die Zuordnung, der Zugriff auf den Transkriptor oder sein Modell, erscheint der Grund direkt im Eingabefeld. Die Arbeitsplatzverwaltung kann die Zuordnung in den Agenteneinstellungen ändern. Bei einer bereits hochgeladenen Aufnahme verwendet **Erneut versuchen** die aktuelle Zuordnung und dieselbe Audiodatei.
 
 Mit **Sprachnachricht senden** lädst du die Aufnahme hoch. Sobald die Aufnahmeansicht automatisch schließt, kannst du auch den Browser-Tab schließen. Der Server transkribiert die Aufnahme und sendet den erkannten Text direkt an den Agenten. Die Aufnahme bleibt mit Wellenform, Player und Transkript im Chatverlauf. Ein angefangener Textentwurf bleibt verfügbar. Bei einem Transkriptionsfehler kannst du im Chat **Erneut versuchen** wählen. Wenn der Transkriptor innerhalb von zehn Minuten kein Ergebnis liefert, endet der Versuch mit einem Fehler.
 
@@ -211,4 +213,4 @@ Berechtigung für Agent und Gespräch) automatisch. Es gibt kein separates Kompr
 die Prüfung erfolgt zwingend vor jedem betroffenen Modellaufruf. Die Modellgrenze verwalten
 globale Administrator:innen mit den Modellwerkzeugen (Mindestzugriff **admin**).
 
-`platform_chat_voice_send` (Mindeststufe **Benutzer**) verarbeitet eine bereits hochgeladene Audiodatei des konkreten Chats. Erforderlich sind Zugriff auf den Arbeitsplatz und das Gespräch, ein zugeordneter Transkriptor sowie ein freier Chat ohne offene Werkzeugfreigabe. Übergib den Dateipfad, die Dauer in Sekunden (bis 300) und bis zu 48 normalisierte Wellenformwerte. `platform_chat_read` liefert Aufnahmeverweis und Transkript. Mikrofonaufnahme und Wiedergabe benötigen den Browser und sind keine MCP-Werkzeuge.
+`platform_chat_voice_send` (Mindeststufe **Benutzer**) verarbeitet eine bereits hochgeladene Audiodatei des konkreten Chats. Erforderlich sind Zugriff auf den Arbeitsplatz und das Gespräch, ein zugänglicher Transkriptor mit eingerichtetem Whisper-Modell sowie ein freier Chat ohne offene Werkzeugfreigabe. Übergib den Dateipfad, die Dauer in Sekunden (bis 300) und bis zu 48 normalisierte Wellenformwerte. Bei fehlender Zuordnung, unzugänglichem Transkriptor oder fehlendem Modell liefert das Werkzeug den Status `unavailable` mit dem jeweiligen Grund. `platform_chat_read` liefert Aufnahmeverweis und Transkript. Mikrofonaufnahme und Wiedergabe benötigen den Browser und sind keine MCP-Werkzeuge.

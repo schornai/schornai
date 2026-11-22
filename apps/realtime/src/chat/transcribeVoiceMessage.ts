@@ -1,3 +1,4 @@
+import { TranscriberConfigurationError } from "@schornio/aibox-database/transcriber/requireTranscriber";
 import type { TaskTypeChat } from "@schornio/aibox-realtime/documents/taskQueue/_types";
 import { createStorageProcessingTask } from "@schornio/aibox-realtime/documents/storage/createStorageProcessingTask";
 import { runTask } from "@schornio/aibox-realtime/documents/taskQueue/runTask";
@@ -22,7 +23,7 @@ export async function transcribeVoiceMessage(
   const loadTranscript = async () => {
     const task = await createStorageProcessingTask(
       { path, storage, userId, userClaims },
-      { supabase },
+      { supabase, requireTranscription: true },
     );
     if (task?.type !== "transcribe") return;
     await runTask(task.type, task.parameters, task.requiredCapabilities, {
@@ -39,8 +40,10 @@ export async function transcribeVoiceMessage(
       }),
     );
   };
-  const result = await loadTranscript().catch(() => {
+  const result = await loadTranscript().catch((error: unknown) => {
     worker.abortSignal?.throwIfAborted();
+    if (error instanceof TranscriberConfigurationError) throw error;
+    if (timeout.aborted) throw new Error("VOICE_TRANSCRIPTION_TIMEOUT");
     throw new Error("VOICE_TRANSCRIPTION_FAILED");
   });
   if (result?.type !== "transcript")

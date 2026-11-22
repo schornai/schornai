@@ -1,4 +1,5 @@
 "use client";
+import type { VoiceTranscriberStatus } from "@/lib/voiceTranscriberStatus";
 import type { ChatExpiration } from "@schornio/aibox-package-database/chat/expirationSchema";
 import type { StorageRealtimeObject } from "@schornio/aibox-realtime/documents/storage/_types";
 
@@ -42,7 +43,7 @@ const context = createContext<
       // chatGenerationAbort: () => void;
       // chatGenerationPause: () => void;
       // chatGenerationStart: () => void;
-      voiceEnabled?: boolean;
+      voiceStatus?: VoiceTranscriberStatus;
       defaultThinking: boolean;
       interaction: ChatInteraction;
       approvalSubmitted: boolean;
@@ -72,7 +73,7 @@ function ChatComposeMessageContextProvider({
   modelThinking,
   additionalFunctions,
   expiration,
-  voiceEnabled,
+  voiceStatus,
   children,
 }: {
   activityId: string;
@@ -80,7 +81,7 @@ function ChatComposeMessageContextProvider({
   modelThinking?: Agent["modelThinking"];
   additionalFunctions?: Agent["additionalFunctions"];
   expiration?: ChatExpiration;
-  voiceEnabled?: boolean;
+  voiceStatus?: VoiceTranscriberStatus;
   children: ReactNode;
 }) {
   const [selectedCurrentMessageId, setSelectedCurrentMessageId] = useState<
@@ -260,7 +261,7 @@ function ChatComposeMessageContextProvider({
         additionalFunctions,
         expiration,
         approvalSubmitted,
-        voiceEnabled,
+        voiceStatus,
         defaultThinking:
           modelThinking === "mandatory-on" || modelThinking === "optional-on",
         interaction,
@@ -312,7 +313,7 @@ export function ChatComposeMessageContext({
   modelThinking,
   additionalFunctions,
   expiration,
-  voiceEnabled,
+  voiceStatus,
   children,
 }: {
   activityId: string;
@@ -320,7 +321,7 @@ export function ChatComposeMessageContext({
   modelThinking?: Agent["modelThinking"];
   additionalFunctions?: Agent["additionalFunctions"];
   expiration?: ChatExpiration;
-  voiceEnabled?: boolean;
+  voiceStatus?: VoiceTranscriberStatus;
   children?: ReactNode;
 }) {
   return (
@@ -333,7 +334,7 @@ export function ChatComposeMessageContext({
         modelThinking={modelThinking}
         additionalFunctions={additionalFunctions}
         expiration={expiration}
-        voiceEnabled={voiceEnabled}
+        voiceStatus={voiceStatus}
       >
         {children}
       </ChatComposeMessageContextProvider>

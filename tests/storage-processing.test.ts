@@ -9,7 +9,7 @@ import { fileNeedsProcessing } from "../packages/utils/src/getFileTypeLabel";
 const mocks = vi.hoisted(() => ({
   agent: vi.fn(),
   repository: vi.fn(),
-  transcribers: vi.fn(),
+
   transcriber: vi.fn(),
 }));
 vi.mock("@schornio/aibox-database/agent/getAgentById", () => ({
@@ -19,13 +19,41 @@ vi.mock(
   "@schornio/aibox-database/documentRepositories/getDocumentRepositoryById",
   () => ({ getDocumentRepositoryById: mocks.repository }),
 );
-vi.mock("@schornio/aibox-database/transcriber/getTranscribers", () => ({
-  getTranscribers: mocks.transcribers,
-}));
 vi.mock("@schornio/aibox-database/transcriber/getTranscriberById", () => ({
   getTranscriberById: mocks.transcriber,
 }));
-const context = { supabase: {} } as any;
+const model = vi.fn();
+const row = {
+  id: "legacy-id",
+  prompt: "Transcribe",
+  config: {
+    identifier: "whisper",
+    modelIdentifier: "whisper-model",
+    retryLevel: "balanced",
+  },
+};
+const lookup = vi.fn();
+const context = {
+  supabase: {
+    from: (table: string) => {
+      let column: string, value: string;
+      const query = {
+        select: () => query,
+        eq: (key: string, filter: string) => {
+          column = key;
+          value = filter;
+          return query;
+        },
+        order: () => query,
+        limit: () => query,
+        maybeSingle: () => query,
+        throwOnError: () =>
+          table === "ai_models" ? model() : lookup(column, value),
+      };
+      return query;
+    },
+  },
+} as any;
 const parameters = {
   path: "file.pdf",
   storage: { type: "activity", activityId: "chat", agentId: "agent" },
@@ -33,16 +61,18 @@ const parameters = {
   userClaims: [],
 } as const;
 beforeEach(() => {
+  model
+    .mockReset()
+    .mockResolvedValue({ data: { identifier: "whisper-model" } });
   mocks.agent.mockReset().mockResolvedValue({});
   mocks.repository.mockReset().mockResolvedValue({});
-  mocks.transcribers.mockReset().mockResolvedValue([
-    {
-      identifier: "whisper",
-      modelIdentifier: "whisper-model",
-      prompt: "Transcribe",
-      retryLevel: "balanced",
-    },
-  ]);
+  lookup.mockReset().mockImplementation((column, value) => ({
+    data:
+      (column === "config->>identifier" ? row.config.identifier : row.id) ===
+      value
+        ? row
+        : null,
+  }));
 });
 describe("shared storage processing", () => {
   it.each([
@@ -97,6 +127,56 @@ describe("shared storage processing", () => {
         },
       });
     }
+  });
+  it("reports the unavailable dependency before queuing a required transcription", async () => {
+    const resolve = () =>
+      createStorageProcessingTask(
+        { ...parameters, path: "voice.webm", userClaims: [] },
+        { ...context, requireTranscription: true },
+      );
+    await expect(resolve()).rejects.toThrow("TRANSCRIBER_REQUIRED");
+    mocks.agent.mockResolvedValue({ transcriberIdentifier: "deleted" });
+    await expect(resolve()).rejects.toThrow("TRANSCRIBER_NOT_FOUND");
+    mocks.agent.mockResolvedValue({ transcriberIdentifier: "whisper" });
+    model.mockResolvedValue({ data: null });
+    await expect(resolve()).rejects.toThrow("TRANSCRIBER_MODEL_MISSING");
+    lookup.mockReturnValue({
+      data: { ...row, config: { identifier: "whisper" } },
+    });
+    await expect(resolve()).rejects.toThrow("TRANSCRIBER_MODEL_MISSING");
+  });
+  it("resolves older configurations by row ID and respects a renamed identifier", async () => {
+    mocks.agent.mockResolvedValue({ transcriberIdentifier: "legacy-id" });
+    await expect(
+      getStorageTranscriber(parameters.storage, context),
+    ).rejects.toThrow("TRANSCRIBER_NOT_FOUND");
+    lookup.mockImplementation((column) => ({
+      data:
+        column === "id"
+          ? { ...row, config: { modelIdentifier: "whisper-model" } }
+          : null,
+    }));
+    await expect(
+      getStorageTranscriber(parameters.storage, context),
+    ).resolves.toMatchObject({
+      identifier: "legacy-id",
+      modelIdentifier: "whisper-model",
+    });
+  });
+  it("reads a legacy model reference without rewriting its transcriber", async () => {
+    mocks.agent.mockResolvedValue({ transcriberIdentifier: "legacy-id" });
+    lookup.mockImplementation((column) => ({
+      data:
+        column === "id"
+          ? { ...row, config: null, ai_model_id: "old-model-id" }
+          : null,
+    }));
+    await expect(
+      getStorageTranscriber(parameters.storage, context),
+    ).resolves.toMatchObject({
+      identifier: "legacy-id",
+      modelIdentifier: "whisper-model",
+    });
   });
   it("leaves unsupported files and unconfigured media stored without inventing a processor", async () => {
     for (const path of ["archive.zip", "audio.mp3"])

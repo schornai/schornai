@@ -787,6 +787,7 @@
       "errorModelApiKey": "The language model’s API key is missing. Ask someone with access to model management to check its configuration.",
       "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration.",
       "errorVoiceTranscription": "Could not transcribe the recording. Check the transcriber and try again.",
+      "errorVoiceTimeout": "The transcription service did not return a result within ten minutes. Check whether a worker with the selected Whisper model is running and try again.",
       "errorVoiceEmpty": "No speech was detected in the recording."
     },
     "AgentEditorRoleSupport": {
@@ -838,6 +839,10 @@
       "labelDiscard": "Discard recording",
       "labelCancel": "Cancel",
       "labelAwaitingTranscript": "No transcript yet",
+      "errorTranscriberRequired": "Voice messages are off because this agent has no transcriber assigned.",
+      "errorTranscriberNotFound": "The assigned transcriber is missing or you do not have access to it. Ask a workspace administrator to select an available transcriber under Additional Functions in the agent settings.",
+      "errorTranscriberModel": "The transcriber has no available speech recognition model. Ask a workspace administrator to select a Whisper model in the transcriber settings.",
+      "errorTranscriberCheck": "Could not check the transcriber. Reload the chat to try again.",
       "errorPlayback": "The recording could not be played.",
       "errorSend": "Could not queue the message. Check your connection and try again when the chat is available.",
       "descriptionQueued": "Recording uploaded. You can close this window now."

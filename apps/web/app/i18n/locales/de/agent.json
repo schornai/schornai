@@ -787,6 +787,7 @@
       "errorModelApiKey": "Für das Sprachmodell fehlt der API-Schlüssel. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
       "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
       "errorVoiceTranscription": "Die Aufnahme konnte nicht transkribiert werden. Prüfe den Transkriptor und versuche es erneut.",
+      "errorVoiceTimeout": "Der Transkriptionsdienst hat innerhalb von zehn Minuten kein Ergebnis geliefert. Prüfe, ob ein Worker mit dem ausgewählten Whisper-Modell läuft, und versuche es erneut.",
       "errorVoiceEmpty": "In der Aufnahme wurde keine Sprache erkannt."
     },
     "AgentEditorRoleSupport": {
@@ -838,6 +839,10 @@
       "labelDiscard": "Aufnahme verwerfen",
       "labelCancel": "Abbrechen",
       "labelAwaitingTranscript": "Noch kein Transkript",
+      "errorTranscriberRequired": "Sprachnachrichten sind aus, weil diesem Agenten kein Transkriptor zugeordnet ist.",
+      "errorTranscriberNotFound": "Der zugeordnete Transkriptor fehlt oder du hast keinen Zugriff darauf. Bitte die Arbeitsplatzverwaltung, in den Agenteneinstellungen unter „Zusätzliche Funktionen“ einen verfügbaren Transkriptor auszuwählen.",
+      "errorTranscriberModel": "Dem Transkriptor fehlt ein verfügbares Spracherkennungsmodell. Bitte die Arbeitsplatzverwaltung, in den Transkriptoreinstellungen ein Whisper-Modell auszuwählen.",
+      "errorTranscriberCheck": "Der Transkriptor konnte nicht geprüft werden. Lade den Chat erneut.",
       "errorPlayback": "Die Aufnahme konnte nicht abgespielt werden.",
       "errorSend": "Der Versand konnte nicht gestartet werden. Prüfe die Verbindung und versuche es erneut, sobald der Chat frei ist.",
       "descriptionQueued": "Aufnahme hochgeladen. Du kannst dieses Fenster jetzt schließen."

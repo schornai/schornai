@@ -1,5 +1,6 @@
 "use client";
 import { Mic, SendHorizontal, Square, X } from "lucide-react";
+import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
 import { useRef } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { useT } from "next-i18next/client";
@@ -43,7 +44,11 @@ export function ChatVoiceRecorder(props: Props) {
 function Recorder({ agentId, activityId, thinking, onClose }: Props) {
   const { t } = useT("agent", { keyPrefix: "_components.VoiceMessage" });
   const { queueFileUploadsByFiles } = useFileUpload();
-  const { executeAsync, hasErrored } = useAction(submitVoiceMessage);
+  const {
+    executeAsync,
+    hasErrored,
+    result: submission,
+  } = useAction(submitVoiceMessage);
   const uploaded = useRef<{ file: File; path: string }>(null);
   const recording = useAudioRecording({
     maxSeconds: maxVoiceSeconds,
@@ -88,6 +93,7 @@ function Recorder({ agentId, activityId, thinking, onClose }: Props) {
             <ButtonAction
               type="button"
               size="icon-sm"
+              indicator="replace"
               variant={active ? "destructive" : "default"}
               aria-label={t(active ? "labelStop" : "labelRecord")}
               title={t(active ? "labelStop" : "labelRecord")}
@@ -103,7 +109,11 @@ function Recorder({ agentId, activityId, thinking, onClose }: Props) {
       />
       {recording.error && (
         <p className="text-destructive text-xs" role="alert">
-          {hasErrored ? t("errorSend") : recording.error}
+          {submission.data?.issue
+            ? t(voiceTranscriberErrorKeys[submission.data.issue])
+            : hasErrored
+              ? t("errorSend")
+              : recording.error}
         </p>
       )}
       <div className="flex items-center justify-end gap-1">

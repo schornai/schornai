@@ -17,7 +17,10 @@ export async function createStorageProcessingTask(
     userId: string;
     userClaims: UserClaims;
   },
-  { supabase }: { supabase: SupabaseClient },
+  {
+    supabase,
+    requireTranscription,
+  }: { supabase: SupabaseClient; requireTranscription?: boolean },
 ): Promise<
   | Extract<Task, { state: "pending"; type: "process-file" | "transcribe" }>
   | undefined
@@ -33,6 +36,7 @@ export async function createStorageProcessingTask(
   if (processing === "transcript") {
     const transcriber = await getStorageTranscriber(parameters.storage, {
       supabase,
+      required: requireTranscription,
     });
     if (!transcriber?.modelIdentifier) return undefined;
     return {

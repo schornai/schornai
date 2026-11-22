@@ -1,3 +1,8 @@
+import {
+  requireTranscriber,
+  TranscriberConfigurationError,
+} from "@schornio/aibox-package-database/transcriber/requireTranscriber";
+import type { VoiceTranscriberStatus } from "@/lib/voiceTranscriberStatus";
 import { getChatExpiration } from "@schornio/aibox-package-database/chat/getChatExpiration";
 import { isChatDeleted } from "@schornio/aibox-package-database/chat/isChatDeleted";
 import { getChatDocumentName } from "@schornio/aibox-realtime/documents/chat/_utils";
@@ -57,7 +62,18 @@ export default async function Page(
     getAgentById(agentId, { supabase }),
   );
   if (!agent) notFound();
-  const user = await getCurrentUser({ supabaseAuth: supabase.auth });
+  const [user, voiceStatus] = await Promise.all([
+    getCurrentUser({ supabaseAuth: supabase.auth }),
+    agent.transcriberIdentifier
+      ? requireTranscriber(agent.transcriberIdentifier, { supabase })
+          .then(() => "ready" as const)
+          .catch((error: unknown): VoiceTranscriberStatus =>
+            error instanceof TranscriberConfigurationError
+              ? error.code
+              : "TRANSCRIBER_CHECK_FAILED",
+          )
+      : ("TRANSCRIBER_REQUIRED" as const),
+  ]);
   const expiration = await (async () => {
     try {
       await ensureActivity(
@@ -85,7 +101,7 @@ export default async function Page(
         modelThinking={agent.modelThinking}
         additionalFunctions={agent.additionalFunctions}
         expiration={expiration}
-        voiceEnabled={Boolean(agent.transcriberIdentifier)}
+        voiceStatus={voiceStatus}
       >
         <ContainerChat>
           <HeaderAgent agentId={agentId} />
