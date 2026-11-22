@@ -4,7 +4,7 @@ import {
   openDeleteDialog,
 } from "../../../../.storybook/interaction-helpers";
 import { repeatFixtures } from "../../../../.storybook/repeat-fixtures";
-import { expect } from "storybook/test";
+import { expect, within } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AgentEditor } from "../../../../app/(main)/agent/_components/AgentEditor";
 
@@ -79,13 +79,6 @@ const meta = {
         },
       ],
       version: "agent-config-version-4",
-    },
-    favorites: {
-      favorites: [
-        { id: "11111111-1111-4111-8111-111111111111", type: "workspace" },
-      ],
-      showInSidebar: false,
-      version: "favorites-v2",
     },
     mode: "create",
     relations: {
@@ -169,7 +162,6 @@ export const CreateSettings: Story = {
 };
 export const Mode_update: Story = { args: { mode: "update" } };
 export const Agent_missing: Story = { args: { agent: undefined } };
-export const Favorites_missing: Story = { args: { favorites: undefined } };
 export const Empty: Story = { parameters: { scenario: "empty" } };
 export const Pending: Story = { parameters: { scenario: "pending" } };
 export const Error: Story = { parameters: { scenario: "error" } };
@@ -189,26 +181,40 @@ export const AgentRecommendedMessagesMultiple: Story = {
     },
   },
 };
+const emptyRolesAgent = { ...meta.args.agent, roles: [] };
 export const AgentRolesEmpty: Story = {
-  args: { agent: { ...meta.args["agent"], roles: [] } },
-};
-export const AgentRolesMultiple: Story = {
-  args: {
-    agent: {
-      ...meta.args["agent"],
-      roles: repeatFixtures(meta.args["agent"]["roles"]),
+  args: { agent: emptyRolesAgent },
+  parameters: {
+    contextFixtures: {
+      useAgentEditor: { agent: emptyRolesAgent, defaultAgent: emptyRolesAgent },
     },
   },
 };
-export const FavoritesFavoritesEmpty: Story = {
-  args: { favorites: { ...meta.args["favorites"], favorites: [] } },
+const multipleRolesAgent = {
+  ...meta.args.agent,
+  roles: repeatFixtures(meta.args.agent.roles).map((role, index) => ({
+    ...role,
+    name: index === 0 ? "Belegabgleich" : "Sortierung",
+  })),
 };
-export const FavoritesFavoritesMultiple: Story = {
-  args: {
-    favorites: {
-      ...meta.args["favorites"],
-      favorites: repeatFixtures(meta.args["favorites"]["favorites"]),
+export const AgentRolesMultiple: Story = {
+  args: { agent: multipleRolesAgent },
+  parameters: {
+    contextFixtures: {
+      useAgentEditor: {
+        agent: multipleRolesAgent,
+        defaultAgent: multipleRolesAgent,
+      },
     },
+  },
+  play: async ({ canvas }) => {
+    const roles = within(canvas.getByRole("region", { name: "Rollen" }));
+    await expect(
+      roles.getByRole("heading", { name: "Belegabgleich" }),
+    ).toBeVisible();
+    await expect(
+      roles.getByRole("heading", { name: "Sortierung" }),
+    ).toBeVisible();
   },
 };
 export const RelationsDocumentRepositoriesEmpty: Story = {

@@ -86,12 +86,7 @@ function editor(initial: AutomationInput | undefined, view: string) {
         />,
       );
     },
-    submit: () =>
-      fireEvent.submit(
-        screen
-          .getByRole("button", { name: initial ? "labelSave" : "labelCreate" })
-          .closest("form")!,
-      ),
+    submit: () => fireEvent.submit(result.container.querySelector("form")!),
   };
 }
 it("keeps the draft across editor tabs and requires an explicit agent before creating", async () => {
@@ -1071,6 +1066,20 @@ it("shows stored day intervals as equivalent hours and saves hour edits", () => 
     expect.objectContaining({
       trigger: { type: "time", schedule: { kind: "hours", every: 48 } },
     }),
+  );
+});
+
+it("runs the saved automation and saves the edited draft as a paused copy from the overview", () => {
+  editor(automation, "default");
+  fireEvent.click(screen.getByRole("switch", { name: "labelEnabled" }));
+  fireEvent.click(screen.getByRole("button", { name: "labelRunNow" }));
+  expect(client.execute).toHaveBeenLastCalledWith({
+    id: automation.id,
+    requestId: expect.any(String),
+  });
+  fireEvent.click(screen.getByRole("button", { name: "labelSaveCopy" }));
+  expect(client.execute).toHaveBeenLastCalledWith(
+    expect.objectContaining({ id: undefined, enabled: false }),
   );
 });
 

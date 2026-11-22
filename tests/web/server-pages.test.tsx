@@ -271,7 +271,6 @@ describe("server catalog pages", () => {
       const props = component(await page(params()), editor).props;
       expect(props[property]).toBe(state.entity);
       expect(props.mode).toBe("update");
-      expect(props.favorites).toBe(state.favorites);
       expect(props.relations.workspaces).toBe(state.workspaces);
       if (editor === "AgentEditor")
         expect(props.relations.transcribers).toBe(state.transcribers);

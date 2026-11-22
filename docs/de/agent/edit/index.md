@@ -8,9 +8,10 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für Modellwechsel: ein bereitgestelltes Sprachmodell; für externe Dienste deren URL und Zugangsdaten."
   status: "verfügbar"
-  last_verified: "2026-11-05"
+  last_verified: "2026-11-22"
   source_files:
     [
+      "apps/web/app/(main)/agent/_components/AgentEditorOverview.tsx",
       "apps/web/app/(main)/agent/_components/AgentEditor.tsx",
       "apps/web/app/(main)/agent/_components/AgentEditorDiscardAllChanges.tsx",
       "apps/web/app/(main)/agent/_actions/deleteAgent.ts",
@@ -24,6 +25,8 @@ meta:
 Öffne einen Agenten über das Stiftsymbol **Bearbeiten**. Du bearbeitest damit die gemeinsame Konfiguration dieses Agenten im Arbeitsplatz.
 
 ![Agenteneditor mit Übersicht, Rollen, Unterstützung und Einstellungen](../../assets/agent-editor.png)
+
+In der **Übersicht** findest du die Angaben zu Rollen, Unterstützung und Einstellungen in eigenen Abschnitten. Über Titel, Symbol oder Hilfetext öffnest du den jeweiligen Reiter. Rollennamen erscheinen, wenn mehrere Rollen angelegt sind. Am Ende der Übersicht findest du die Aktionen aus dem Agentenmenü zum Speichern, Kopieren und Löschen.
 
 ## Bereiche des Editors
 
@@ -42,11 +45,11 @@ Rücksetzsymbole an Feldern verwerfen die jeweilige Änderung. **Änderungen ver
 
 ## Als neuen Agenten speichern
 
-Im Agentenmenü kannst du **Als neuen Agenten speichern** verwenden. So entsteht eine eigenständige Kopie der Konfiguration. Gespeicherte [MCP-Header](mcp.md) werden dabei übernommen, ohne ihre Werte anzuzeigen. Für das Kopieren oder Verschieben in einen anderen Arbeitsplatz benötigst du Administrationsrechte für Quell- und Ziel-Arbeitsplatz. Vergib einen unterscheidbaren Namen und prüfe Arbeitsplatz, Rollen und Datenzugriffe. Verknüpfte Dokumentenablagen und Dienste werden dadurch nicht als eigene Ressourcen dupliziert; die Konfiguration kann weiterhin auf dieselben Quellen verweisen.
+Wähle **Als neuen Agenten speichern**. So entsteht eine eigenständige Kopie der Konfiguration. Gespeicherte [MCP-Header](mcp.md) werden dabei übernommen, ohne ihre Werte anzuzeigen. Für das Kopieren oder Verschieben in einen anderen Arbeitsplatz benötigst du Administrationsrechte für Quell- und Ziel-Arbeitsplatz. Vergib einen unterscheidbaren Namen und prüfe Arbeitsplatz, Rollen und Datenzugriffe. Verknüpfte Dokumentenablagen und Dienste werden dadurch nicht als eigene Ressourcen dupliziert; die Konfiguration kann weiterhin auf dieselben Quellen verweisen.
 
 ## Löschen
 
-Wähle im Menü **Agent löschen** und bestätige den Dialog. Das Löschen des Agenten lässt sich in der Oberfläche nicht rückgängig machen. Informiere Personen, die den Agenten verwenden, vor dem Löschen. Soll auch der gespeicherte Gesprächs- und Dateibestand entfernt werden, beauftrage die Betriebsadministration mit dessen Bereinigung.
+Wähle **Agent löschen** und bestätige den Dialog. Das Löschen des Agenten lässt sich in der Oberfläche nicht rückgängig machen. Informiere Personen, die den Agenten verwenden, vor dem Löschen. Soll auch der gespeicherte Gesprächs- und Dateibestand entfernt werden, beauftrage die Betriebsadministration mit dessen Bereinigung.
 
 Teste nach dem Speichern einen neuen Chat mit einer typischen Frage und den benötigten Werkzeugen.
 

@@ -27,7 +27,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import {
@@ -49,8 +48,10 @@ import { DocumentRepositoryEditorDiscardAllChanges } from "./DocumentRepositoryE
 import { DocumentRepositoryEditorFeatures } from "./DocumentRepositoryEditorFeatures";
 import { DocumentRepositoryEditorOverview } from "./DocumentRepositoryEditorOverview";
 import { DocumentRepositoryEditorSettings } from "./DocumentRepositoryEditorSettings";
-import { DropdownMenuItemAction } from "@schornio/aibox-package-ui/components/dropdown-menu-item-action";
-import type { SettingFavorites } from "../../../../../_models/currentUserConfigFavorites";
+import {
+  EditorActions,
+  type EditorAction,
+} from "../../../../../_components/EditorActions";
 import type { Theme } from "../../../../../_models/systemConfigTheme";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import type { ValidationErrors } from "next-safe-action";
@@ -102,12 +103,10 @@ export function useDocumentRepositoryEditor() {
 }
 
 export function DocumentRepositoryEditor({
-  favorites,
   mode,
   relations,
   documentRepository: defaultDocumentRepository,
 }: {
-  favorites?: SettingFavorites;
   mode: "create" | "update";
   relations: DocumentRepositoryEditorRelations;
   documentRepository?: Partial<DocumentRepository>;
@@ -176,6 +175,49 @@ export function DocumentRepositoryEditor({
   const documentRepositoryChanged =
     composite(defaultDocumentRepository) !== composite(documentRepository);
 
+  const input = {
+    documentRepository: (documentRepository
+      ? { ...documentRepository, type: "database-v2" }
+      : {}) as DocumentRepository,
+  };
+  const saveProps = {
+    disabled: mode === "update" && !documentRepositoryChanged,
+    hasErrored,
+    hasSucceeded,
+    isPending,
+    onClick: () => execute(input),
+  };
+  const actions: EditorAction[] = [
+    {
+      ...saveProps,
+      label: t(
+        mode === "create"
+          ? "labelCreateDocumentRepository"
+          : "labelSaveDocumentRepository",
+      ),
+      icon: mode === "create" ? CirclePlus : ArrowDownToLine,
+    },
+  ];
+  if (mode === "update") {
+    actions.push(
+      {
+        label: t("labelCloneDocumentRepository"),
+        icon: CirclePlus,
+        disabled: !documentRepositoryChanged,
+        hasErrored: createCloneHasErrored,
+        hasSucceeded: createCloneHasSucceeded,
+        isPending: createCloneIsPending,
+        onClick: () => createCloneExecute(input),
+      },
+      {
+        label: t("labelDeleteDocumentRepository"),
+        icon: CircleX,
+        destructive: true,
+        onClick: () => setDeleteDialogOpen(true),
+      },
+    );
+  }
+
   useEffect(() => {
     const handler = (event: Event) => {
       if (documentRepositoryChanged) {
@@ -228,70 +270,7 @@ export function DocumentRepositoryEditor({
                 <DropdownMenuLabel>
                   {t("labelDocumentRepositoryDropdown")}
                 </DropdownMenuLabel>
-                <DropdownMenuItemAction
-                  disabled={
-                    mode === "update" &&
-                    composite(defaultDocumentRepository) ===
-                      composite(documentRepository)
-                  }
-                  hasErrored={hasErrored}
-                  hasSucceeded={hasSucceeded}
-                  isPending={isPending}
-                  onClick={() =>
-                    execute({
-                      documentRepository: (documentRepository
-                        ? {
-                            ...documentRepository,
-                            type: "database-v2",
-                          }
-                        : {}) as DocumentRepository,
-                    })
-                  }
-                >
-                  {mode === "create" ? (
-                    <>
-                      <CirclePlus /> {t("labelCreateDocumentRepository")}
-                    </>
-                  ) : undefined}
-                  {mode === "update" ? (
-                    <>
-                      <ArrowDownToLine /> {t("labelSaveDocumentRepository")}
-                    </>
-                  ) : undefined}
-                </DropdownMenuItemAction>
-                {mode === "update" ? (
-                  <>
-                    <DropdownMenuItemAction
-                      disabled={
-                        mode === "update" &&
-                        composite(defaultDocumentRepository) ===
-                          composite(documentRepository)
-                      }
-                      hasErrored={createCloneHasErrored}
-                      hasSucceeded={createCloneHasSucceeded}
-                      isPending={createCloneIsPending}
-                      onClick={() =>
-                        createCloneExecute({
-                          documentRepository: (documentRepository
-                            ? {
-                                ...documentRepository,
-                                type: "database-v2",
-                              }
-                            : {}) as DocumentRepository,
-                        })
-                      }
-                    >
-                      <CirclePlus /> {t("labelCloneDocumentRepository")}
-                    </DropdownMenuItemAction>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItemAction
-                      onClick={() => setDeleteDialogOpen(true)}
-                      variant="destructive"
-                    >
-                      <CircleX /> {t("labelDeleteDocumentRepository")}
-                    </DropdownMenuItemAction>
-                  </>
-                ) : undefined}
+                <EditorActions display="menu" actions={actions} />
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -351,42 +330,15 @@ export function DocumentRepositoryEditor({
         >
           <Settings2 /> {t("tabSettings")}
         </TabsMainTrigger>
-        <ButtonAction
-          disabled={
-            mode === "update" &&
-            composite(defaultDocumentRepository) ===
-              composite(documentRepository)
-          }
-          hasErrored={hasErrored}
-          hasSucceeded={hasSucceeded}
-          isPending={isPending}
-          onClick={() =>
-            execute({
-              documentRepository: (documentRepository
-                ? {
-                    ...documentRepository,
-                    type: "database-v2",
-                  }
-                : {}) as DocumentRepository,
-            })
-          }
-          size="sm"
-        >
-          {mode === "create" ? (
-            <>
-              <CirclePlus /> {t("btnCreate")}
-            </>
-          ) : undefined}
-          {mode === "update" ? (
-            <>
-              <ArrowDownToLine /> {t("btnSave")}
-            </>
-          ) : undefined}
+        <ButtonAction {...saveProps} size="sm">
+          {mode === "create" ? <CirclePlus /> : <ArrowDownToLine />}
+          {t(mode === "create" ? "btnCreate" : "btnSave")}
         </ButtonAction>
       </TabsMainList>
 
       <TabsMainContent view="default">
-        <DocumentRepositoryEditorOverview favorites={favorites} mode={mode} />
+        <DocumentRepositoryEditorOverview mode={mode} />
+        <EditorActions display="overview" actions={actions} />
       </TabsMainContent>
       <TabsMainContent view="features">
         <DocumentRepositoryEditorFeatures />

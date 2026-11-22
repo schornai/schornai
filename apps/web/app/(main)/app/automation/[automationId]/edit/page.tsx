@@ -6,19 +6,11 @@ export default async function Page({
   params: Promise<{ automationId: string }>;
 }) {
   const { automationId } = await params;
-  const {
-    automation,
-    agents,
-    repositories,
-    models,
-    workspaces,
-    favorites,
-    theme,
-  } = await getAutomationPageData(automationId);
+  const { automation, agents, repositories, models, workspaces, theme } =
+    await getAutomationPageData(automationId);
   return (
     <AutomationEditor
       initial={automation}
-      favorites={favorites}
       theme={theme}
       agents={agents}
       repositories={repositories}

@@ -27,7 +27,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import {
@@ -44,8 +43,10 @@ import type { AIModel } from "@schornio/aibox-package-database/aiModel/_types";
 import { AlertDialogMediaDestructive } from "@schornio/aibox-package-ui/components/alert-dialog-media-destructive";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ButtonAction } from "@schornio/aibox-package-ui/components/button-action";
-import { DropdownMenuItemAction } from "@schornio/aibox-package-ui/components/dropdown-menu-item-action";
-import type { SettingFavorites } from "../../../../../_models/currentUserConfigFavorites";
+import {
+  EditorActions,
+  type EditorAction,
+} from "../../../../../_components/EditorActions";
 import type { Theme } from "../../../../../_models/systemConfigTheme";
 import { TranscriberEditorDiscardAllChanges } from "./TranscriberEditorDiscardAllChanges";
 import { TranscriberEditorOverview } from "./TranscriberEditorOverview";
@@ -99,12 +100,10 @@ export function useTranscriberEditor() {
 }
 
 export function TranscriberEditor({
-  favorites,
   mode,
   relations,
   transcriber: defaultTranscriber,
 }: {
-  favorites?: SettingFavorites;
   mode: "create" | "update";
   relations: TranscriberEditorRelations;
   transcriber?: Partial<Transcriber_new>;
@@ -168,6 +167,50 @@ export function TranscriberEditor({
   const transcriberChanged =
     composite(defaultTranscriber) !== composite(transcriber);
 
+  const saveProps = {
+    disabled: mode === "update" && !transcriberChanged,
+    hasErrored,
+    hasSucceeded,
+    isPending,
+    onClick: () =>
+      execute({ transcriber: (transcriber ?? {}) as Transcriber_new }),
+  };
+  const actions: EditorAction[] = [
+    {
+      ...saveProps,
+      label: t(
+        mode === "create" ? "labelCreateTranscriber" : "labelSaveTranscriber",
+      ),
+      icon: mode === "create" ? CirclePlus : ArrowDownToLine,
+    },
+  ];
+  if (mode === "update") {
+    actions.push(
+      {
+        label: t("labelCloneTranscriber"),
+        icon: CirclePlus,
+        disabled: !transcriberChanged,
+        hasErrored: createCloneHasErrored,
+        hasSucceeded: createCloneHasSucceeded,
+        isPending: createCloneIsPending,
+        onClick: () =>
+          createCloneExecute({
+            transcriber: {
+              ...transcriber,
+              id: crypto.randomUUID(),
+              identifier: crypto.randomUUID(),
+            } as Transcriber_new,
+          }),
+      },
+      {
+        label: t("labelDeleteTranscriber"),
+        icon: CircleX,
+        destructive: true,
+        onClick: () => setDeleteDialogOpen(true),
+      },
+    );
+  }
+
   useEffect(() => {
     const handler = (event: Event) => {
       if (transcriberChanged) {
@@ -217,62 +260,7 @@ export function TranscriberEditor({
             <DropdownMenuContent className="w-auto">
               <DropdownMenuGroup>
                 <DropdownMenuLabel>{t("labelTranscriber")}</DropdownMenuLabel>
-                <DropdownMenuItemAction
-                  disabled={
-                    mode === "update" &&
-                    composite(defaultTranscriber) === composite(transcriber)
-                  }
-                  hasErrored={hasErrored}
-                  hasSucceeded={hasSucceeded}
-                  isPending={isPending}
-                  onClick={() =>
-                    execute({
-                      transcriber: (transcriber ?? {}) as Transcriber_new,
-                    })
-                  }
-                >
-                  {mode === "create" ? (
-                    <>
-                      <CirclePlus /> {t("labelCreateTranscriber")}
-                    </>
-                  ) : undefined}
-                  {mode === "update" ? (
-                    <>
-                      <ArrowDownToLine /> {t("labelSaveTranscriber")}
-                    </>
-                  ) : undefined}
-                </DropdownMenuItemAction>
-                {mode === "update" ? (
-                  <>
-                    <DropdownMenuItemAction
-                      disabled={
-                        mode === "update" &&
-                        composite(defaultTranscriber) === composite(transcriber)
-                      }
-                      hasErrored={createCloneHasErrored}
-                      hasSucceeded={createCloneHasSucceeded}
-                      isPending={createCloneIsPending}
-                      onClick={() =>
-                        createCloneExecute({
-                          transcriber: {
-                            ...transcriber,
-                            id: crypto.randomUUID(),
-                            identifier: crypto.randomUUID(),
-                          } as Transcriber_new,
-                        })
-                      }
-                    >
-                      <CirclePlus /> {t("labelCloneTranscriber")}
-                    </DropdownMenuItemAction>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItemAction
-                      onClick={() => setDeleteDialogOpen(true)}
-                      variant="destructive"
-                    >
-                      <CircleX /> {t("labelDeleteTranscriber")}
-                    </DropdownMenuItemAction>
-                  </>
-                ) : undefined}
+                <EditorActions display="menu" actions={actions} />
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -336,34 +324,15 @@ export function TranscriberEditor({
         >
           <Settings2 /> {t("tabSettings")}
         </TabsMainTrigger>
-        <ButtonAction
-          disabled={
-            mode === "update" &&
-            composite(defaultTranscriber) === composite(transcriber)
-          }
-          hasErrored={hasErrored}
-          hasSucceeded={hasSucceeded}
-          isPending={isPending}
-          onClick={() =>
-            execute({ transcriber: (transcriber ?? {}) as Transcriber_new })
-          }
-          size="sm"
-        >
-          {mode === "create" ? (
-            <>
-              <CirclePlus /> {t("btnCreate")}
-            </>
-          ) : undefined}
-          {mode === "update" ? (
-            <>
-              <ArrowDownToLine /> {t("btnSave")}
-            </>
-          ) : undefined}
+        <ButtonAction {...saveProps} size="sm">
+          {mode === "create" ? <CirclePlus /> : <ArrowDownToLine />}
+          {t(mode === "create" ? "btnCreate" : "btnSave")}
         </ButtonAction>
       </TabsMainList>
 
       <TabsMainContent view="default">
-        <TranscriberEditorOverview favorites={favorites} mode={mode} />
+        <TranscriberEditorOverview mode={mode} />
+        <EditorActions display="overview" actions={actions} />
       </TabsMainContent>
       <TabsMainContent view="prompt">
         <TranscriberEditorPrompt />

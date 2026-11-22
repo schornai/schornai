@@ -196,6 +196,71 @@ describe("agent editing flows", () => {
     ).toBe(true);
     expect(screen.getAllByText("Agent").length).toBeGreaterThan(0);
   });
+  it("groups agent details under links to their editor tabs and reserves the checklist for creation", () => {
+    const rendered = editor();
+    for (const [label, view] of [
+      ["tabRoles", "roles"],
+      ["tabDocs", "docs"],
+      ["tabSettings", "settings"],
+    ]) {
+      const section = within(screen.getByRole("region", { name: label }));
+      expect(
+        section.getByRole("link", { name: label }).getAttribute("href"),
+      ).toBe("?view=" + view);
+    }
+    const roles = within(screen.getByRole("region", { name: "tabRoles" }));
+    expect(roles.getByText("labelPrompt")).toBeTruthy();
+    expect(roles.queryByText("Writer")).toBeNull();
+    expect(
+      within(screen.getByRole("region", { name: "tabSettings" })).getByText(
+        "Workspace",
+      ),
+    ).toBeTruthy();
+    expect(screen.queryByText("labelDefinePrompt")).toBeNull();
+    rendered.unmount();
+    editor("create");
+    expect(screen.getByText("labelDefinePrompt")).toBeTruthy();
+  });
+  it("offers the menu actions on the overview and confirms deletion before executing", async () => {
+    const rendered = editor();
+    expect(
+      (
+        screen.getByRole("button", {
+          name: "labelSaveAgent",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
+    expect(
+      (
+        screen.getByRole("button", {
+          name: "labelCloneAgent",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "labelDeleteAgent" }));
+    const dialog = within(await screen.findByRole("alertdialog"));
+    expect(client.execute).not.toHaveBeenCalled();
+    fireEvent.click(dialog.getByRole("button", { name: "labelDeleteAgent" }));
+    expect(client.execute).toHaveBeenCalledWith({ agentId: agent.id });
+    rendered.unmount();
+    editor("create");
+    expect(
+      screen.queryByRole("button", { name: "labelCloneAgent" }),
+    ).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "labelDeleteAgent" }),
+    ).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "labelCreateAgent" }));
+    expect(client.execute).toHaveBeenLastCalledWith({ agent });
+  });
+  it("labels each role when the overview contains multiple roles", () => {
+    const secondRole = { ...agent.roles[0], id: "review", name: "Reviewer" };
+    editor("update", { ...agent, roles: [...agent.roles, secondRole] });
+    const roles = within(screen.getByRole("region", { name: "tabRoles" }));
+    expect(roles.getByRole("heading", { name: "Writer" })).toBeTruthy();
+    expect(roles.getByRole("heading", { name: "Reviewer" })).toBeTruthy();
+    expect(roles.getAllByText("labelPrompt")).toHaveLength(2);
+  });
   it("creates an agent and sends the complete draft to the action", () => {
     editor("create");
     fireEvent.click(screen.getByRole("button", { name: "btnCreate" }));

@@ -3,7 +3,6 @@ import { AgentEditor } from "../../_components/AgentEditor";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import { getAIModels } from "../../../../_models/getAIModels";
 import { getAgentById } from "@schornio/aibox-package-database/agent/getAgentById";
-import { getCurrentUserConfigFavorites } from "../../../../_models/currentUserConfigFavorites";
 import { getDocumentRepositories } from "../../../../_models/getDocumentRepositories";
 import { getSystemConfigTheme } from "../../../../_models/systemConfigTheme";
 import { getWorkspaceClaims } from "../../../../_models/getWorkspaceClaims";
@@ -18,7 +17,6 @@ export default async function Page(params: PageProps<"/agent/[agentId]/edit">) {
   ]);
   const [
     { data: agent },
-    favorites,
     connections,
     documentRepositories,
     models,
@@ -27,7 +25,6 @@ export default async function Page(params: PageProps<"/agent/[agentId]/edit">) {
     { claims: workspaces },
   ] = await Promise.all([
     tryAsync(() => getAgentById(agentId, { supabase })),
-    getCurrentUserConfigFavorites(),
     getAgentConnections(),
     getDocumentRepositories(),
     getAIModels(),
@@ -44,7 +41,6 @@ export default async function Page(params: PageProps<"/agent/[agentId]/edit">) {
     <AgentEditor
       agent={agent}
       mode="update"
-      favorites={favorites}
       relations={{
         connections,
         documentRepositories,

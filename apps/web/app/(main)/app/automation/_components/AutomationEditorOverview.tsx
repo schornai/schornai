@@ -1,8 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
-import { Info, Clock, MessageSquare } from "lucide-react";
-import type { ComponentProps } from "react";
+import { Zap, Settings2, MessageSquare } from "lucide-react";
+import type { Agent } from "@schornio/aibox-package-database/agent/_types";
+import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
+import type { AutomationInput } from "@schornio/aibox-package-database/automation/_schemas";
+import type { AutomationDisplay } from "./AutomationNextRun";
 import {
   Checklist,
   ChecklistItem,
@@ -18,33 +21,41 @@ import {
   EmptyDescription,
 } from "@schornio/aibox-package-ui/components/empty";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
-import {
-  Alert,
-  AlertDescription,
-} from "@schornio/aibox-package-ui/components/alert";
 import { automationTriggerSchema } from "@schornio/aibox-package-database/automation/_schemas";
 import { CircleChevronsRight } from "@/lib/icons/circle-chevrons-right";
-import { AutomationInfo } from "./AutomationInfo";
+import {
+  AutomationInfoChat,
+  AutomationInfoTrigger,
+} from "./AutomationInfoDetails";
+import { EditorOverviewSection } from "../../../../_components/EditorOverviewSection";
 export function AutomationEditorOverview({
   creating,
-  ...props
-}: ComponentProps<typeof AutomationInfo> & { creating: boolean }) {
+  automation,
+  agents,
+  repositories,
+  editDefaultAutomation,
+}: {
+  creating: boolean;
+  automation: AutomationDisplay;
+  agents?: Agent[];
+  repositories?: DocumentRepository[];
+  editDefaultAutomation?: AutomationInput;
+}) {
   const { t } = useT("automation");
   const router = useRouter();
-  const value = props.automation;
   const triggerValid =
-    automationTriggerSchema.safeParse(value.trigger).success &&
+    automationTriggerSchema.safeParse(automation.trigger).success &&
     !(
-      value.trigger.type === "storage" &&
-      value.trigger.storage.type === "documentRepository" &&
-      !value.trigger.storage.documentRepositoryId
+      automation.trigger.type === "storage" &&
+      automation.trigger.storage.type === "documentRepository" &&
+      !automation.trigger.storage.documentRepositoryId
     );
   const steps = [
     {
       view: "settings",
       label: "labelDefineName",
       description: "descriptionDefineName",
-      done: Boolean(value.name.trim()),
+      done: Boolean(automation.name.trim()),
     },
     {
       view: "trigger",
@@ -56,7 +67,7 @@ export function AutomationEditorOverview({
       view: "chat",
       label: "labelDefineChat",
       description: "descriptionDefineChat",
-      done: Boolean(value.agentId && value.message.trim()),
+      done: Boolean(automation.agentId && automation.message.trim()),
     },
   ];
   return (
@@ -97,20 +108,38 @@ export function AutomationEditorOverview({
           <hr className="my-10" />
         </>
       )}
-      <AutomationInfo {...props} editable preview />
-      <hr className="my-10" />
-      <ContainerMain className="flex flex-col gap-3" size="narrow">
-        <h2 title={t("labelHelp")}>
-          <Info className="mx-auto" size={40} />
-        </h2>
-        <Alert>
-          <Clock />
-          <AlertDescription>{t("descriptionTrigger")}</AlertDescription>
-        </Alert>
-        <Alert>
-          <MessageSquare />
-          <AlertDescription>{t("descriptionStartChat")}</AlertDescription>
-        </Alert>
+      <ContainerMain className="flex flex-col gap-4">
+        <EditorOverviewSection
+          view="trigger"
+          icon={Zap}
+          title={t("labelTrigger")}
+          description={t("descriptionTrigger")}
+        >
+          <AutomationInfoTrigger
+            automation={automation}
+            original={editDefaultAutomation}
+            repositories={repositories}
+            editHref="?view=trigger"
+          />
+        </EditorOverviewSection>
+        <EditorOverviewSection
+          view="chat"
+          icon={MessageSquare}
+          title={t("labelStartChat")}
+          description={t("descriptionStartChat")}
+        >
+          <AutomationInfoChat
+            automation={automation}
+            original={editDefaultAutomation}
+            agents={agents}
+            editHref="?view=chat"
+          />
+        </EditorOverviewSection>
+        <EditorOverviewSection
+          view="settings"
+          icon={Settings2}
+          title={t("labelSettings")}
+        />
       </ContainerMain>
     </>
   );
