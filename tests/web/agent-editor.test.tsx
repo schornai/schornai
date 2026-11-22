@@ -308,6 +308,30 @@ describe("agent editing flows", () => {
     expect(() => render(<Outside />)).toThrow("outside provider");
     consoleError.mockRestore();
   });
+  it("keeps the role name out of the calculator and platform access rows", () => {
+    const role = {
+      ...agent.roles[0],
+      toolCalculator: { active: true },
+      toolPlatformAccess: { active: true, level: "user" },
+    };
+    render(
+      <AgentInfo
+        agent={{ ...agent, roles: [role] }}
+        documentRepositoryMap={new Map()}
+        editable
+      />,
+    );
+    const toolLinks = screen
+      .getAllByRole("button", { name: "labelEdit" })
+      .map((button) => button.getAttribute("href"));
+    expect(toolLinks).toEqual(
+      expect.arrayContaining([
+        `?view=roles&role-${role.id}=tool-calculator#role-${role.id}`,
+        `?view=roles&role-${role.id}=tool-platform#role-${role.id}`,
+      ]),
+    );
+    expect(screen.queryByText(role.name)).toBeNull();
+  });
   it("renders populated and empty info with optional models and workspaces", () => {
     const view = render(
       <AgentInfo
