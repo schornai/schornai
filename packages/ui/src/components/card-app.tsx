@@ -62,7 +62,12 @@ export function CardAppAvatar({
 }
 
 export function CardAppName({ className, ...props }: ComponentProps<"h2">) {
-  return <h2 className={cn("text-md font-semibold", className)} {...props} />;
+  return (
+    <h2
+      className={cn("text-md truncate font-semibold", className)}
+      {...props}
+    />
+  );
 }
 
 export function CardAppDescription({
