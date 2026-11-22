@@ -53,9 +53,11 @@ function groupMessageParts(parts: ChatMessagePart[]) {
 
 export function ChatMessage({
   agentColor,
+  generationPending,
   message,
 }: {
   agentColor?: AppColor;
+  generationPending?: boolean;
   message: ChatMessageType;
 }) {
   return (
@@ -63,7 +65,11 @@ export function ChatMessage({
       <Message align={message.role === "user" ? "end" : undefined}>
         <MessageContent>
           {message.role === "user" ? (
-            <ChatMessageUser message={message} />
+            <ChatMessageUser
+              message={message}
+              agentColor={agentColor}
+              generationPending={generationPending}
+            />
           ) : undefined}
 
           {message.role === "assistant"
@@ -84,7 +90,10 @@ export function ChatMessage({
               )
             : undefined}
 
-          <ChatMessageFooter message={message} />
+          {!(
+            message.role === "user" &&
+            message.parts.some((part) => part.type === "data-voice")
+          ) && <ChatMessageFooter message={message} />}
         </MessageContent>
       </Message>
     </MessageScrollerItem>

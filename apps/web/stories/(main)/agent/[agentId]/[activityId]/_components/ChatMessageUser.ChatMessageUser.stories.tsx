@@ -1,3 +1,4 @@
+import { voiceMessageFixture } from "../../../../../../.storybook/voice-message-fixture";
 import { repeatFixtures } from "../../../../../../.storybook/repeat-fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChatMessageUser } from "../../../../../../app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageUser";
@@ -128,18 +129,22 @@ export const MessagePartsMultiple: Story = {
 };
 
 export const VoiceMessage: Story = {
+  parameters: {
+    contextFixtures: {
+      useStorageView: {
+        storage: { type: "activity", activityId: "chat", agentId: "agent" },
+      },
+    },
+  },
   args: {
+    agentColor: { type: "color-oklch-hue", oklchHue: 284 },
     message: {
       id: "recorded-message",
       role: "user",
       parts: [
         {
           type: "data-voice",
-          data: {
-            path: "meeting.webm",
-            duration: 14,
-            peaks: [0.1, 0.4, 0.7, 0.3, 0.2, 0.8, 0.6, 0.3],
-          },
+          data: voiceMessageFixture,
         },
         { type: "text", text: "Welche Termine stehen diese Woche an?" },
       ],

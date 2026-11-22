@@ -14,6 +14,8 @@ function summarizeWaveform(readings: number[]) {
     return Math.round(peak * 100) / 100;
   });
 }
+type Clip = { file: File; url: string; duration: number; peaks: number[] };
+
 type Phase =
   | "idle"
   | "requesting"
@@ -47,11 +49,9 @@ export function useAudioRecording({
     );
   }, [phase, onCloseBlockedChange]);
   const [error, setError] = useState<string>();
-  const [clip, setClip] = useState<{
-    file: File;
-    url: string;
-    duration: number;
-  }>();
+  const [clip, setClip] = useState<Clip>();
+  const sendOnStop = useRef<((clip: Clip) => Promise<void>) | null>(null);
+  const saving = useRef(false);
   const [seconds, setSeconds] = useState(0);
   const recorder = useRef<MediaRecorder>(null);
   const stream = useRef<MediaStream>(null);
@@ -60,7 +60,7 @@ export function useAudioRecording({
   const phaseBeforeRequest = useRef<Phase>("idle");
   const mounted = useRef(false);
   const samplesByTime = useRef<number[]>([]);
-  const [peaks, setPeaks] = useState<number[]>([]);
+  const [spectrum, setSpectrum] = useState<number[]>([]);
   const startedAt = useRef(0);
   const orb = useRef<HTMLDivElement>(null);
 
@@ -136,11 +136,17 @@ export function useAudioRecording({
       context = new AudioContextClass();
       source = context.createMediaStreamSource(stream.current);
       analyser = context.createAnalyser();
-      analyser.fftSize = 512;
+      analyser.fftSize = maxSeconds ? 2048 : 512;
       source.connect(analyser);
       void context.resume().catch(() => {});
       const samples = new Float32Array(analyser.fftSize);
       const meter = analyser;
+      // Log-spaced frequency bands give the speech range room on the live display.
+      const bins = new Uint8Array(meter.frequencyBinCount);
+      const edges = Array.from({ length: voiceWaveformBars + 1 }, (_, i) =>
+        Math.round(Math.pow(bins.length, i / voiceWaveformBars)),
+      );
+      let previousSpectrumTime = -Infinity;
       let level = 0;
       let previousTime = performance.now();
       const draw = (time: number) => {
@@ -154,15 +160,26 @@ export function useAudioRecording({
           Math.pow(Math.max(0, rms - 0.008) * 5, 0.65),
         );
         if (maxSeconds) {
-          // One peak per 100 ms, reduced to the same bars for preview and history.
+          // Keep loudness over time for the saved message, independently of the live spectrum.
           const index = Math.min(
             maxSeconds * 10 - 1,
             Math.floor((Date.now() - startedAt.current) / 100),
           );
           const readings = samplesByTime.current;
-          const isNew = index >= readings.length;
           readings[index] = Math.max(readings[index] ?? 0, target);
-          if (isNew) setPeaks(summarizeWaveform(readings));
+          if (time - previousSpectrumTime >= 50) {
+            previousSpectrumTime = time;
+            meter.getByteFrequencyData(bins);
+            setSpectrum(
+              edges.slice(0, -1).map((start, band) => {
+                const end = Math.max(start + 1, edges[band + 1]!);
+                let peak = 0;
+                for (let bin = start; bin < end; bin++)
+                  peak = Math.max(peak, bins[bin] ?? 0);
+                return peak / 255;
+              }),
+            );
+          }
         }
         // Fast attack and soft release for the file recorder’s level meter.
         const elapsed = Math.max(0, Math.min(time - previousTime, 100));
@@ -191,6 +208,25 @@ export function useAudioRecording({
     window.addEventListener("beforeunload", beforeUnload);
     return () => window.removeEventListener("beforeunload", beforeUnload);
   }, [clip, phase]);
+
+  const saveClip = async (clip: Clip) => {
+    if (saving.current) return;
+    saving.current = true;
+    setPhase("uploading");
+    setError(undefined);
+    try {
+      await onSave(clip.file, clip.duration, clip.peaks);
+      if (!mounted.current) return;
+      setPhase("saved");
+      onFinished?.();
+    } catch {
+      if (!mounted.current) return;
+      setError(t("errorUpload"));
+      setPhase("ready");
+    } finally {
+      saving.current = false;
+    }
+  };
 
   const start = async () => {
     if (phase !== "ready" && phase !== "idle" && phase !== "saved") return;
@@ -266,14 +302,21 @@ export function useAudioRecording({
           (Date.now() - startedAt.current) / 1000,
         );
         const duration = Math.min(elapsed, maxSeconds ?? Infinity);
-        if (maxSeconds) setPeaks(summarizeWaveform(samplesByTime.current));
+        const finished = {
+          file,
+          url,
+          duration,
+          peaks: summarizeWaveform(samplesByTime.current),
+        };
         setSeconds(Math.floor(duration));
-        setClip({ file, url, duration });
-        setPhase("ready");
+        setClip(finished);
+        if (sendOnStop.current) void sendOnStop.current(finished);
+        else setPhase("ready");
       };
       recording.start(1000);
       samplesByTime.current = [];
-      setPeaks([]);
+      sendOnStop.current = null;
+      setSpectrum([]);
       clearPreview();
       startedAt.current = Date.now();
       setSeconds(0);
@@ -309,19 +352,12 @@ export function useAudioRecording({
     setPhase("idle");
     onFinished?.();
   };
-  const upload = async () => {
-    if (!clip || phase !== "ready") return;
-    setPhase("uploading");
-    setError(undefined);
-    try {
-      await onSave(clip.file, clip.duration, peaks);
-      if (!mounted.current) return;
-      setPhase("saved");
-      onFinished?.();
-    } catch {
-      if (!mounted.current) return;
-      setError(t("errorUpload"));
-      setPhase("ready");
+  const upload = () => {
+    if (phase === "recording" && recorder.current?.state === "recording") {
+      sendOnStop.current = saveClip;
+      stop();
+    } else if (phase === "ready" && clip) {
+      void saveClip(clip);
     }
   };
   const duration = `${Math.floor(seconds / 60)
@@ -333,7 +369,7 @@ export function useAudioRecording({
     error,
     clip,
     seconds,
-    peaks,
+    spectrum,
     orb,
     duration,
     start,

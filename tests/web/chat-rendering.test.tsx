@@ -331,6 +331,7 @@ vi.mock(
   () => ({
     useMessages: () => mocks.messages,
     useChatError: () => mocks.error,
+    useChatStatus: () => (mocks.error ? "error" : "idle"),
   }),
 );
 it.each([undefined, "idle", "running", "error"])(
@@ -452,3 +453,38 @@ it.each([
     );
   },
 );
+
+it("reveals the live transcription and keeps playback controls independent of the disclosure", async () => {
+  const voice = {
+    type: "data-voice" as const,
+    data: { path: "clip.webm", duration: 9, peaks: [0.2, 0.9] },
+  };
+  const message = { id: "voice", role: "user" as const, parts: [voice] };
+  const view = render(<ChatMessage message={message} generationPending />);
+  const toggle = screen.getByRole("button", { name: "labelToggleTranscript" });
+  expect(toggle.getAttribute("aria-expanded")).toBe("false");
+  expect(screen.queryByText("labelTranscribing")).toBeNull();
+  fireEvent.click(toggle);
+  expect(screen.getByText("labelTranscribing")).toBeTruthy();
+  view.rerender(
+    <ChatMessage
+      message={{ ...message, parts: [voice, { type: "text", text: "Hallo!" }] }}
+    />,
+  );
+  expect(screen.getByText("Hallo!")).toBeTruthy();
+  expect(screen.queryByText("labelTranscribing")).toBeNull();
+  fireEvent.click(toggle);
+  expect(toggle.getAttribute("aria-expanded")).toBe("false");
+  const audio = view.container.querySelector("audio")!;
+  const play = vi.spyOn(audio, "play").mockResolvedValue(undefined);
+  const pause = vi.spyOn(audio, "pause").mockImplementation(() => {});
+  fireEvent.click(screen.getByRole("button", { name: "labelPlay" }));
+  fireEvent.play(audio);
+  fireEvent.click(screen.getByRole("button", { name: "labelPause" }));
+  expect(pause).toHaveBeenCalledOnce();
+  audio.currentTime = 4;
+  fireEvent.click(screen.getByRole("button", { name: "labelRestart" }));
+  expect(audio.currentTime).toBe(0);
+  expect(play).toHaveBeenCalledTimes(2);
+  expect(toggle.getAttribute("aria-expanded")).toBe("false");
+});

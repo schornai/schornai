@@ -180,11 +180,14 @@ function ChatMessageBatchInput({
         open={additionalFunctions?.batch !== false && batchViewOpen}
         onOpenChange={setBatchViewOpen}
       >
-        <div className="bg-muted rounded-lg border">
+        <div className="has-[form]:bg-muted rounded-lg has-[form]:border has-data-[slot=chat-voice-recorder]:[&>[data-slot=collapsible-content]]:hidden">
           <CollapsibleContent>
             <ChatComposeMessageBatch />
           </CollapsibleContent>
-          <ChatComposeMessageSelected inputRef={textareaRef} />
+          <ChatComposeMessageSelected
+            agentColor={agentColor}
+            inputRef={textareaRef}
+          />
         </div>
       </Collapsible>
     </>

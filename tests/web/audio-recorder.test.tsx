@@ -667,18 +667,21 @@ it("stops a chat recording at five minutes and retries queue submission without 
     .mockResolvedValueOnce({ serverError: "busy" })
     .mockResolvedValueOnce({ data: { queued: true } });
   mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
-  render(
-    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
-  );
   vi.useFakeTimers();
   try {
-    await act(async () =>
-      fireEvent.click(screen.getByRole("button", { name: "labelRecord" })),
-    );
-    expect(screen.getByRole("button", { name: "labelStop" })).toBeTruthy();
+    await act(async () => {
+      render(
+        <ChatVoiceRecorder
+          agentId="agent"
+          activityId="activity"
+          onClose={close}
+        />,
+      );
+    });
+    expect(instances[0]?.state).toBe("recording");
     await act(async () => vi.advanceTimersByTime(300_000));
     expect(instances[0]?.stop).toHaveBeenCalledOnce();
-    expect(screen.getByRole("button", { name: "labelPlay" })).toBeTruthy();
+    expect(mocks.upload).not.toHaveBeenCalled();
     await act(async () =>
       fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
     );
@@ -698,4 +701,36 @@ it("stops a chat recording at five minutes and retries queue submission without 
   } finally {
     vi.useRealTimers();
   }
+});
+
+it("starts on open and submits the final microphone chunk with one click", async () => {
+  const close = vi.fn();
+  client.execute.mockReset().mockResolvedValue({ data: { queued: true } });
+  mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+  render(
+    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
+    { reactStrictMode: true },
+  );
+  await screen.findByText("labelRecording");
+  expect(getUserMedia).toHaveBeenCalledOnce();
+  await act(async () =>
+    fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+  );
+  expect(trackStop).toHaveBeenCalledOnce();
+  expect(mocks.upload.mock.calls[0]?.[0][0].size).toBe(5);
+  expect(client.execute).toHaveBeenCalledOnce();
+  expect(close).toHaveBeenCalledWith(true);
+});
+
+it("discards a chat recording without uploading", async () => {
+  const close = vi.fn();
+  const view = render(
+    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
+  );
+  await screen.findByText("labelRecording");
+  fireEvent.click(screen.getByRole("button", { name: "labelDiscard" }));
+  expect(close).toHaveBeenCalledWith(false);
+  view.unmount();
+  expect(trackStop).toHaveBeenCalledOnce();
+  expect(mocks.upload).not.toHaveBeenCalled();
 });

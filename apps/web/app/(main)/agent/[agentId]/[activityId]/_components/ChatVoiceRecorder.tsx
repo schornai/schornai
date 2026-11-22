@@ -1,7 +1,7 @@
 "use client";
-import { Mic, SendHorizontal, Square, X } from "lucide-react";
+import { Mic, SendHorizontal, X } from "lucide-react";
 import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
-import { useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { useT } from "next-i18next/client";
 import { Button } from "@schornio/aibox-package-ui/components/button";
@@ -13,13 +13,16 @@ import {
   FileUploadProvider,
   useFileUpload,
 } from "../../../../../_components/FileUploadProvider";
-import { VoiceMessagePlayer } from "./VoiceMessagePlayer";
+import { VoiceWaveform } from "./VoiceWaveform";
+import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
 import { submitVoiceMessage } from "../_actions/submitVoiceMessage";
 
 type Props = {
   agentId: string;
   activityId: string;
   thinking?: boolean;
+  agentColor?: AppColor;
+  autoStart?: boolean;
   onClose: (sent: boolean) => void;
 };
 export function ChatVoiceRecorder(props: Props) {
@@ -41,7 +44,14 @@ export function ChatVoiceRecorder(props: Props) {
   );
 }
 
-function Recorder({ agentId, activityId, thinking, onClose }: Props) {
+function Recorder({
+  agentId,
+  activityId,
+  thinking,
+  onClose,
+  agentColor,
+  autoStart = true,
+}: Props) {
   const { t } = useT("agent", { keyPrefix: "_components.VoiceMessage" });
   const { queueFileUploadsByFiles } = useFileUpload();
   const {
@@ -68,47 +78,71 @@ function Recorder({ agentId, activityId, thinking, onClose }: Props) {
       if (!result?.data?.queued) throw new Error("SUBMISSION_FAILED");
     },
   });
+  const startRecording = useEffectEvent(recording.start);
+  useEffect(() => {
+    if (!autoStart) return;
+    // Skip the discarded mount when React checks effects in Strict Mode.
+    let active = true;
+    queueMicrotask(() => {
+      if (active) void startRecording();
+    });
+    return () => {
+      active = false;
+    };
+  }, [autoStart]);
   const { phase, clip } = recording;
-  const active = phase === "recording";
-  const busy = phase === "uploading" || phase === "stopping";
+  const canStart = phase === "idle";
+  const submitting = phase === "uploading" || phase === "stopping";
+  const actionLabel = t(canStart ? "labelRecord" : "labelSend");
   return (
-    <section className="bg-background flex flex-col gap-3 rounded-lg p-3">
-      <VoiceMessagePlayer
-        key={clip?.url ?? "recorder"}
-        src={clip?.url}
-        duration={clip?.duration ?? recording.seconds}
-        peaks={recording.peaks}
-        live={!clip}
-        status={t(
-          active
-            ? "labelRecording"
-            : phase === "uploading"
-              ? "labelUploading"
-              : clip
-                ? "descriptionPreview"
-                : "descriptionStart",
-        )}
-        control={
-          !clip && (
-            <ButtonAction
-              type="button"
-              size="icon-sm"
-              indicator="replace"
-              variant={active ? "destructive" : "default"}
-              aria-label={t(active ? "labelStop" : "labelRecord")}
-              title={t(active ? "labelStop" : "labelRecord")}
-              isPending={phase === "requesting" || busy}
-              onClick={() =>
-                active ? recording.stop() : void recording.start()
-              }
-            >
-              {active ? <Square /> : <Mic />}
-            </ButtonAction>
-          )
-        }
-      />
+    <section
+      data-slot="chat-voice-recorder"
+      aria-label={t("labelTitle")}
+      className="bg-muted rounded-[1.75rem] p-1.5"
+    >
+      <div className="flex min-w-0 items-center gap-1.5">
+        <div className="min-w-0 flex-1 px-3">
+          <VoiceWaveform agentColor={agentColor} samples={recording.spectrum} />
+        </div>
+        <Button
+          type="button"
+          variant="destructive"
+          size="icon-lg"
+          className="size-11 rounded-full"
+          disabled={submitting}
+          aria-label={t("labelDiscard")}
+          title={t("labelDiscard")}
+          onClick={() => onClose(false)}
+        >
+          <X />
+        </Button>
+        <ButtonAction
+          type="button"
+          size="icon-lg"
+          className="size-11 rounded-full"
+          indicator="replace"
+          aria-label={actionLabel}
+          title={actionLabel}
+          disabled={phase === "saved"}
+          isPending={phase === "requesting" || submitting}
+          onClick={() =>
+            canStart ? void recording.start() : void recording.upload()
+          }
+        >
+          {canStart ? <Mic /> : <SendHorizontal />}
+        </ButtonAction>
+      </div>
+      <span role="status" className="sr-only">
+        {phase === "recording"
+          ? t("labelRecording")
+          : phase === "uploading"
+            ? t("labelUploading")
+            : clip
+              ? t("labelRecorded")
+              : null}
+      </span>
       {recording.error && (
-        <p className="text-destructive text-xs" role="alert">
+        <p className="text-destructive px-4 pb-2 text-xs" role="alert">
           {submission.data?.issue
             ? t(voiceTranscriberErrorKeys[submission.data.issue])
             : hasErrored
@@ -116,29 +150,6 @@ function Recorder({ agentId, activityId, thinking, onClose }: Props) {
               : recording.error}
         </p>
       )}
-      <div className="flex items-center justify-end gap-1">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          disabled={busy}
-          onClick={() => onClose(false)}
-        >
-          <X />
-          {t(clip || active ? "labelDiscard" : "labelCancel")}
-        </Button>
-        {clip && (
-          <ButtonAction
-            type="button"
-            size="sm"
-            isPending={busy}
-            onClick={() => void recording.upload()}
-          >
-            <SendHorizontal />
-            {t("labelSend")}
-          </ButtonAction>
-        )}
-      </div>
     </section>
   );
 }

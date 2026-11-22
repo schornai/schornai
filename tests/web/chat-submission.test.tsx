@@ -719,3 +719,41 @@ it("closes an open batch drawer when the agent disables batch management", async
     "Draft",
   );
 });
+
+it("switches the send slot between recording and sending as text, attachments and uploads change", () => {
+  mocks.context.voiceStatus = "ready";
+  const draft = mocks.context.messageBatch[0];
+  mocks.context.selectedCurrentMessage = draft;
+  draft.content.text = "   ";
+  const view = compose();
+  const refresh = () =>
+    view.rerender(
+      <Collapsible>
+        <ChatComposeMessageSelected />
+      </Collapsible>,
+    );
+  const mic = () => screen.queryByRole("button", { name: "buttonRecord" });
+  const send = () => screen.getByRole("button", { name: "buttonSend" });
+  expect(mic()).toBeTruthy();
+  fireEvent.keyDown(screen.getByRole("textbox"), { key: "Enter" });
+  expect(mocks.first).not.toHaveBeenCalled();
+  draft.content.text = "Hallo";
+  refresh();
+  expect(mic()).toBeNull();
+  expect(send().hasAttribute("disabled")).toBe(false);
+  draft.content.text = "";
+  draft.content.files = [{ path: "/note.txt" }];
+  refresh();
+  expect(send().hasAttribute("disabled")).toBe(false);
+  draft.content.files = [];
+  mocks.uploads = [{ state: "uploading" }];
+  refresh();
+  expect(send().hasAttribute("disabled")).toBe(true);
+  mocks.uploads = [];
+  refresh();
+  expect(mic()).toBeTruthy();
+  mocks.context.voiceStatus = "TRANSCRIBER_REQUIRED";
+  refresh();
+  expect(mic()).toBeNull();
+  expect(send().hasAttribute("disabled")).toBe(true);
+});

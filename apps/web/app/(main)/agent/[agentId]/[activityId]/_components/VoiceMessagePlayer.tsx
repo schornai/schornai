@@ -1,35 +1,30 @@
 "use client";
-import { AudioLines, Pause, Play, RotateCcw } from "lucide-react";
-import { useRef, useState, type ReactNode } from "react";
+import { Pause, Play, RotateCcw } from "lucide-react";
+import { useRef, useState } from "react";
 import { Button } from "@schornio/aibox-package-ui/components/button";
-import { cn } from "@schornio/aibox-package-ui/lib/utils";
-import { useT } from "next-i18next/client";
 import {
-  maxVoiceSeconds,
-  voiceWaveformBars,
-} from "@schornio/aibox-package-database/chat/voiceMessage";
-
-function clock(seconds: number) {
-  const whole = Math.floor(seconds);
-  return Math.floor(whole / 60) + ":" + String(whole % 60).padStart(2, "0");
-}
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@schornio/aibox-package-ui/components/collapsible";
+import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
+import { useT } from "next-i18next/client";
+import { VoiceWaveform } from "./VoiceWaveform";
 
 export function VoiceMessagePlayer({
   src,
   duration,
   peaks,
-  control,
-  status,
   transcript,
-  live = false,
+  transcribing = false,
+  agentColor,
 }: {
-  src?: string;
+  src: string;
   duration: number;
   peaks: number[];
-  control?: ReactNode;
-  status?: string;
   transcript?: string;
-  live?: boolean;
+  transcribing?: boolean;
+  agentColor?: AppColor;
 }) {
   const { t } = useT("agent", { keyPrefix: "_components.VoiceMessage" });
   const audio = useRef<HTMLAudioElement>(null);
@@ -44,101 +39,73 @@ export function VoiceMessagePlayer({
     });
   };
   return (
-    <div
-      className="flex w-full min-w-0 flex-col gap-2"
+    <Collapsible
+      className="bg-muted w-full min-w-0 rounded-[1.75rem] p-1.5"
       aria-label={t("labelTitle")}
     >
-      <div className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium">
-        <AudioLines className="size-3.5" aria-hidden />
-        {t("labelTitle")}
-      </div>
-      <div className="flex min-w-0 items-center gap-2">
-        {control}
-        {src && (
-          <>
-            <audio
-              ref={audio}
-              src={src}
-              preload="none"
-              onPlay={() => setPlaying(true)}
-              onPause={() => setPlaying(false)}
-              onEnded={() => {
-                setPlaying(false);
-                setPosition(0);
-              }}
-              onTimeUpdate={() => setPosition(audio.current?.currentTime ?? 0)}
-              onError={() => setError(true)}
-            />
-            <Button
-              type="button"
-              size="icon-sm"
-              variant="secondary"
-              aria-label={t(playing ? "labelPause" : "labelPlay")}
-              title={t(playing ? "labelPause" : "labelPlay")}
-              onClick={() => (playing ? audio.current?.pause() : play())}
-            >
-              {playing ? <Pause /> : <Play />}
-            </Button>
-          </>
-        )}
-        <div
-          className="flex h-9 min-w-0 flex-1 items-center gap-px"
-          aria-hidden="true"
+      <audio
+        ref={audio}
+        src={src}
+        preload="none"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => {
+          setPlaying(false);
+          setPosition(0);
+        }}
+        onTimeUpdate={() => setPosition(audio.current?.currentTime ?? 0)}
+        onError={() => setError(true)}
+      />
+      <div className="flex items-center gap-1.5">
+        <CollapsibleTrigger
+          className="focus-visible:ring-ring min-w-0 flex-1 cursor-pointer rounded-full px-3 outline-none focus-visible:ring-2"
+          aria-label={t("labelToggleTranscript")}
+          title={t("labelToggleTranscript")}
         >
-          {Array.from({ length: voiceWaveformBars }, (_, i) => {
-            const sample = live
-              ? peaks[i]
-              : peaks[Math.floor((i * peaks.length) / voiceWaveformBars)];
-            const active = live
-              ? sample !== undefined
-              : duration > 0 && i / voiceWaveformBars < position / duration;
-            return (
-              <span
-                key={i}
-                className={cn(
-                  "bg-muted-foreground/40 min-w-0 flex-1 rounded-full",
-                  active && "bg-primary",
-                )}
-                style={{ height: 2 + (sample ?? 0) * 32 + "px" }}
-              />
-            );
-          })}
-        </div>
-        <span className="shrink-0 font-mono text-xs tabular-nums">
-          {clock(playing || position > 0 ? position : duration)}
-          {live ? " / " + clock(maxVoiceSeconds) : ""}
-        </span>
-        {src && (
-          <Button
-            type="button"
-            size="icon-xs"
-            variant="ghost"
-            title={t("labelRestart")}
-            aria-label={t("labelRestart")}
-            onClick={() => {
-              if (audio.current) audio.current.currentTime = 0;
-              play();
-            }}
-          >
-            <RotateCcw />
-          </Button>
-        )}
+          <VoiceWaveform
+            agentColor={agentColor}
+            samples={peaks}
+            transcribing={transcribing}
+            progress={duration > 0 ? position / duration : 0}
+          />
+        </CollapsibleTrigger>
+        <Button
+          type="button"
+          size="icon-lg"
+          className="size-11 rounded-full"
+          variant="outline"
+          title={t("labelRestart")}
+          aria-label={t("labelRestart")}
+          onClick={() => {
+            if (audio.current) audio.current.currentTime = 0;
+            play();
+          }}
+        >
+          <RotateCcw />
+        </Button>
+        <Button
+          type="button"
+          size="icon-lg"
+          className="size-11 rounded-full"
+          aria-label={t(playing ? "labelPause" : "labelPlay")}
+          title={t(playing ? "labelPause" : "labelPlay")}
+          onClick={() => (playing ? audio.current?.pause() : play())}
+        >
+          {playing ? <Pause /> : <Play />}
+        </Button>
       </div>
-      {status && (
-        <p role="status" className="text-muted-foreground text-xs">
-          {status}
-        </p>
-      )}
-      {transcript && (
-        <p className="border-border border-t pt-2 text-sm whitespace-pre-wrap">
-          {transcript}
-        </p>
-      )}
+      <CollapsibleContent className="px-4 pt-1 pb-2 text-sm wrap-anywhere whitespace-pre-wrap">
+        {transcript || (
+          <span role="status" className="text-muted-foreground">
+            {t(transcribing ? "labelTranscribing" : "labelAwaitingTranscript")}
+          </span>
+        )}
+      </CollapsibleContent>
       {error && (
-        <p role="alert" className="text-destructive text-xs">
+        <p role="alert" className="text-destructive px-4 pb-2 text-xs">
           {t("errorPlayback")}
         </p>
       )}
-    </div>
+    </Collapsible>
   );
 }

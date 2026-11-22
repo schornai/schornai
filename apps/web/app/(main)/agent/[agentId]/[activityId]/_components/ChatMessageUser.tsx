@@ -1,12 +1,9 @@
 "use client";
 
 import { VoiceMessagePlayer } from "./VoiceMessagePlayer";
-import { useT } from "next-i18next/client";
+import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
 import { StorageSession } from "@schornio/aibox-package-database/storage/_utils/StorageSession";
-import {
-  Bubble,
-  BubbleContent,
-} from "@schornio/aibox-package-ui/components/bubble";
+import { Bubble } from "@schornio/aibox-package-ui/components/bubble";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
 import { ChatMessagePartUserText } from "./ChatMessagePartUserText";
 import type { ChatMessage as ChatMessageType } from "@schornio/aibox-package-database/chat/_types";
@@ -17,10 +14,17 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { getFileCategory } from "@schornio/aibox-package-utils/getFileTypeLabel";
 import { useStorageView } from "../../../../../_components/StorageViewProvider";
 
-export function ChatMessageUser({ message }: { message: ChatMessageType }) {
+export function ChatMessageUser({
+  message,
+  agentColor,
+  generationPending,
+}: {
+  message: ChatMessageType;
+  agentColor?: AppColor;
+  generationPending?: boolean;
+}) {
   const { basePathApp, storage } = useStorageView();
 
-  const { t } = useT("agent", { keyPrefix: "_components.VoiceMessage" });
   const voice = message.parts.find((part) => part.type === "data-voice")?.data;
   const textParts = message.parts.filter((part) => part.type === "text");
   const fileParts = message.parts.filter((part) => part.type === "data-file");
@@ -36,17 +40,14 @@ export function ChatMessageUser({ message }: { message: ChatMessageType }) {
       "/" +
       storagePath.split("/").map(encodeURIComponent).join("/");
     return (
-      <Bubble variant="muted" align="end">
-        <BubbleContent className="w-80">
-          <VoiceMessagePlayer
-            src={src}
-            {...voice}
-            transcript={textParts.map((part) => part.text).join("\n")}
-            status={
-              !textParts.length ? t("labelAwaitingTranscript") : undefined
-            }
-          />
-        </BubbleContent>
+      <Bubble variant="muted" align="end" className="w-80">
+        <VoiceMessagePlayer
+          src={src}
+          {...voice}
+          transcript={textParts.map((part) => part.text).join("\n")}
+          transcribing={!textParts.length && generationPending}
+          agentColor={agentColor}
+        />
       </Bubble>
     );
   }

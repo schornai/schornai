@@ -99,13 +99,15 @@ Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 
 ## Sprachnachricht senden
 
-Wenn du Zugriff auf den zugeordneten Transkriptor hast und ein Whisper-Modell eingerichtet ist, öffnet das Mikrofon in der Chat-Eingabe die Sprachnachricht. Wähle **Aufnahme starten** und erlaube den Mikrofonzugriff. Während der Aufnahme siehst du die Wellenform und die Laufzeit. Nach fünf Minuten stoppt die Aufnahme automatisch. Du kannst sie auch früher stoppen, anhören, pausieren, von vorne abspielen oder verwerfen.
+Ist der Entwurf leer, erscheint rechts in der Eingabe **Aufnehmen** mit einem Mikrofon. Dafür brauchst du Zugriff auf den zugeordneten Transkriptor und ein eingerichtetes Whisper-Modell. Sobald du Text eingibst oder eine Datei anhängst, erscheint an dieser Stelle **Senden**. Entfernst du den Inhalt wieder, kehrt das Mikrofon zurück. Fehlen die Voraussetzungen für Sprachnachrichten, zeigt die Eingabe den Grund an und **Senden** bleibt beim leeren Entwurf deaktiviert.
 
-Fehlt die Zuordnung, der Zugriff auf den Transkriptor oder sein Modell, erscheint der Grund direkt im Eingabefeld. Die Arbeitsplatzverwaltung kann die Zuordnung in den Agenteneinstellungen ändern. Bei einer bereits hochgeladenen Aufnahme verwendet **Erneut versuchen** die aktuelle Zuordnung und dieselbe Audiodatei.
+Tippe auf **Aufnehmen** und erlaube bei Bedarf den Mikrofonzugriff. Die Aufnahme startet sofort. Die Balken zeigen tiefe bis hohe Frequenzen in der Farbe des Agenten. Mit dem Kreuz verwirfst du die Aufnahme. Der Sendepfeil beendet sie und lädt sie hoch. Nach fünf Minuten stoppt die Aufnahme automatisch. Auch dann entscheidest du, ob du sie sendest oder verwirfst.
 
-Mit **Sprachnachricht senden** lädst du die Aufnahme hoch. Sobald die Aufnahmeansicht automatisch schließt, kannst du auch den Browser-Tab schließen. Der Server transkribiert die Aufnahme und sendet den erkannten Text direkt an den Agenten. Die Aufnahme bleibt mit Wellenform, Player und Transkript im Chatverlauf. Ein angefangener Textentwurf bleibt verfügbar. Bei einem Transkriptionsfehler kannst du im Chat **Erneut versuchen** wählen. Wenn der Transkriptor innerhalb von zehn Minuten kein Ergebnis liefert, endet der Versuch mit einem Fehler.
+Sobald die Aufnahmeansicht nach dem Senden schließt, kannst du den Browser-Tab schließen. Der Server transkribiert die Aufnahme und sendet den erkannten Text an den Agenten. Im Verlauf zeigt die Wellenform die Lautstärke von Anfang bis Ende. Tippe darauf, um das Transkript zu öffnen oder zu schließen. Während der Transkription schimmern die Balken grau und aufgeklappt erscheint **Wird transkribiert …**. Danach trägt die Wellenform die Agentenfarbe. Die beiden runden Tasten starten die Wiedergabe von vorne bzw. spielen sie ab und pausieren sie.
 
-![Sprachnachricht im Chatverlauf mit Wiedergabe, Wellenform und Transkript](../../assets/chat-sprachnachricht.png)
+![Sprachnachricht im Verlauf mit aufgeklapptem Transkript](../../assets/chat-sprachnachricht.png)
+
+Bei einem Transkriptionsfehler kannst du im Chat **Erneut versuchen** wählen. Dabei verwendet der Server dieselbe Audiodatei und die aktuelle Transkriptor-Zuordnung. Die Arbeitsplatzverwaltung kann diese Zuordnung in den Agenteneinstellungen ändern. Nach zehn Minuten ohne Ergebnis endet ein Transkriptionsversuch mit einem Fehler.
 
 ## Antwort lesen und weiterverwenden
 
