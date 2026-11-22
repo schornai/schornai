@@ -839,7 +839,7 @@
       "labelTranscribing": "Wird transkribiert …",
       "labelRecorded": "Aufnahme bereit zum Senden",
       "labelAwaitingTranscript": "Noch kein Transkript",
-      "errorTranscriberRequired": "Sprachnachrichten sind aus, weil diesem Agenten kein Transkriptor zugeordnet ist.",
+      "errorTranscriberRequired": "Sprachnachricht nicht verfügbar.",
       "errorTranscriberNotFound": "Der zugeordnete Transkriptor fehlt oder du hast keinen Zugriff darauf. Bitte die Arbeitsplatzverwaltung, in den Agenteneinstellungen unter „Zusätzliche Funktionen“ einen verfügbaren Transkriptor auszuwählen.",
       "errorTranscriberModel": "Dem Transkriptor fehlt ein verfügbares Spracherkennungsmodell. Bitte die Arbeitsplatzverwaltung, in den Transkriptoreinstellungen ein Whisper-Modell auszuwählen.",
       "errorTranscriberCheck": "Der Transkriptor konnte nicht geprüft werden. Lade den Chat erneut.",

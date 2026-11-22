@@ -839,7 +839,7 @@
       "labelTranscribing": "Transcribing …",
       "labelRecorded": "Recording ready to send",
       "labelAwaitingTranscript": "No transcript yet",
-      "errorTranscriberRequired": "Voice messages are off because this agent has no transcriber assigned.",
+      "errorTranscriberRequired": "Voice message unavailable.",
       "errorTranscriberNotFound": "The assigned transcriber is missing or you do not have access to it. Ask a workspace administrator to select an available transcriber under Additional Functions in the agent settings.",
       "errorTranscriberModel": "The transcriber has no available speech recognition model. Ask a workspace administrator to select a Whisper model in the transcriber settings.",
       "errorTranscriberCheck": "Could not check the transcriber. Reload the chat to try again.",

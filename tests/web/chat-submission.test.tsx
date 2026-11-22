@@ -755,5 +755,10 @@ it("switches the send slot between recording and sending as text, attachments an
   mocks.context.voiceStatus = "TRANSCRIBER_REQUIRED";
   refresh();
   expect(mic()).toBeNull();
+  expect(screen.queryByRole("status")).toBeNull();
   expect(send().hasAttribute("disabled")).toBe(true);
+  draft.content.text = "Hallo";
+  refresh();
+  expect(send().hasAttribute("disabled")).toBe(false);
+  expect(screen.queryByRole("status")).toBeNull();
 });

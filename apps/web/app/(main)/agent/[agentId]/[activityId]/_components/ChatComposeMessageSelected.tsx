@@ -248,15 +248,17 @@ export function ChatComposeMessageSelected({
           </AttachmentGroup>
         </div>
       ) : undefined}
-      {voiceStatus && voiceStatus !== "ready" && (
-        <p
-          role="status"
-          className="text-muted-foreground flex items-start gap-2 px-3 pt-2 text-xs"
-        >
-          <MicOff aria-hidden="true" className="size-4 shrink-0" />
-          {voiceLabel(voiceTranscriberErrorKeys[voiceStatus])}
-        </p>
-      )}
+      {voiceStatus &&
+        voiceStatus !== "ready" &&
+        voiceStatus !== "TRANSCRIBER_REQUIRED" && (
+          <p
+            role="status"
+            className="text-muted-foreground flex items-start gap-2 px-3 pt-2 text-xs"
+          >
+            <MicOff aria-hidden="true" className="size-4 shrink-0" />
+            {voiceLabel(voiceTranscriberErrorKeys[voiceStatus])}
+          </p>
+        )}
       <Textarea
         className="max-h-[40vh] min-h-[2ch] resize-none border-none bg-transparent! focus-visible:ring-0"
         disabled={selectedCurrentMessage?.state === "submitted"}

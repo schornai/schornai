@@ -99,7 +99,7 @@ Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 
 ## Sprachnachricht senden
 
-Ist der Entwurf leer, erscheint rechts in der Eingabe **Aufnehmen** mit einem Mikrofon. Dafür brauchst du Zugriff auf den zugeordneten Transkriptor und ein eingerichtetes Whisper-Modell. Sobald du Text eingibst oder eine Datei anhängst, erscheint an dieser Stelle **Senden**. Entfernst du den Inhalt wieder, kehrt das Mikrofon zurück. Fehlen die Voraussetzungen für Sprachnachrichten, zeigt die Eingabe den Grund an und **Senden** bleibt beim leeren Entwurf deaktiviert.
+Ist der Entwurf leer, erscheint rechts in der Eingabe **Aufnehmen** mit einem Mikrofon. Dafür brauchst du Zugriff auf den zugeordneten Transkriptor und ein eingerichtetes Whisper-Modell. Sobald du Text eingibst oder eine Datei anhängst, erscheint an dieser Stelle **Senden**. Entfernst du den Inhalt wieder, kehrt das Mikrofon zurück. Ohne zugeordneten Transkriptor siehst du die normale Texteingabe. Ist ein zugeordneter Transkriptor nicht einsatzbereit, zeigt die Eingabe den Grund an.
 
 Tippe auf **Aufnehmen** und erlaube bei Bedarf den Mikrofonzugriff. Die Aufnahme startet sofort. Die Balken zeigen tiefe bis hohe Frequenzen in der Farbe des Agenten. Mit dem Kreuz verwirfst du die Aufnahme. Der Sendepfeil beendet sie und lädt sie hoch. Nach fünf Minuten stoppt die Aufnahme automatisch. Auch dann entscheidest du, ob du sie sendest oder verwirfst.
 
