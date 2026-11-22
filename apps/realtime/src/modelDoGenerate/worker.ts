@@ -6,10 +6,12 @@ import { getEnvSafe } from "@schornio/aibox-package-utils/getEnvSafe";
 import { getOllamaModelIdentifiers } from "../_utils/getOllamaModelIdentifiers.ts";
 
 export async function modelDoGenerateWorker({
+  concurrency,
   token,
   workerIdentifier,
   capabilitiesChanged,
 }: {
+  concurrency?: number;
   token: string;
   workerIdentifier: string;
   capabilitiesChanged?: EventTarget;
@@ -18,6 +20,7 @@ export async function modelDoGenerateWorker({
   const serverToken = ServerRealtimeProvider.getServerToken(token);
 
   const taskQueue = new TaskQueue("model-do-generate", {
+    concurrency,
     capabilitiesChanged,
     capabilities: async (abortSignal) => [
       ...(await getOllamaModelIdentifiers(

@@ -5,6 +5,7 @@ import { requestTaskCoordinator } from "./requestTaskCoordinator.ts";
 import { decodeTaskValue } from "./_taskCodec.ts";
 import { handleClaimedTask } from "./handleClaimedTask.ts";
 import { setTimeout as delay } from "node:timers/promises";
+import { once } from "node:events";
 import { getTaskQueue } from "./getTaskQueue.ts";
 import { getTaskQueueDocumentName } from "./_utils.ts";
 import type { ServerRealtimeProviderToken } from "../../_lib/PermissionManager.ts";
@@ -16,6 +17,7 @@ export class TaskQueue<
   #capabilities: string[];
   #getCapabilities?: (abortSignal: AbortSignal) => Promise<string[]>;
   #capabilitiesChanged?: EventTarget;
+  #concurrency: number;
   #realtimeProvider: ServerRealtimeProvider;
   #taskType: TTaskType;
   #workerIdentifier: string;
@@ -26,11 +28,15 @@ export class TaskQueue<
       capabilities:
         string[] | ((abortSignal: AbortSignal) => Promise<string[]>);
       capabilitiesChanged?: EventTarget;
+      concurrency?: number;
       serverToken: ServerRealtimeProviderToken;
       websocketProvider?: ServerRealtimeWebsocketProvider;
       workerIdentifier: string;
     },
   ) {
+    this.#concurrency = config.concurrency ?? 1;
+    if (!Number.isSafeInteger(this.#concurrency) || this.#concurrency < 1)
+      throw new RangeError("Task concurrency must be a positive integer");
     this.#capabilities = Array.isArray(config.capabilities)
       ? config.capabilities
       : [];
@@ -62,10 +68,48 @@ export class TaskQueue<
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
     let retryDelay = 1_000;
     let wake: (() => void) | undefined;
+    const running = new Set<Promise<void>>();
+    const completions = new EventTarget();
+    const retryCoordinator = () =>
+      delay(1000, undefined, { signal: workerSignal }).catch(() => {});
     const changed = () => {
       capabilitiesDirty = true;
       wake?.();
     };
+    const nextPendingTask = () =>
+      tasks
+        .toArray()
+        .find(
+          (task) =>
+            task.type === this.#taskType &&
+            task.state === "pending" &&
+            task.requiredCapabilities.every((capability) =>
+              this.#capabilities.includes(capability),
+            ),
+        );
+    const waitForWork = () =>
+      new Promise<void>((resolve) => {
+        let retryClaim: ReturnType<typeof setTimeout> | undefined;
+        const resume = () => {
+          clearTimeout(retryClaim);
+          wake = undefined;
+          tasks.unobserve(onTasksChanged);
+          workerSignal.removeEventListener("abort", resume);
+          resolve();
+        };
+        const onTasksChanged = () => {
+          if (nextPendingTask()) resume();
+        };
+        tasks.observe(onTasksChanged);
+        wake = resume;
+        workerSignal.addEventListener("abort", resume, { once: true });
+        if (
+          workerSignal.aborted ||
+          (capabilitiesDirty && this.#getCapabilities)
+        )
+          resume();
+        else if (nextPendingTask()) retryClaim = setTimeout(resume, 1000);
+      });
     this.#capabilitiesChanged?.addEventListener("change", changed);
     try {
       while (!abortSignal?.aborted) {
@@ -89,6 +133,30 @@ export class TaskQueue<
           await this.#realtimeProvider.waitForSynced({
             abortSignal: workerSignal,
           });
+          if (running.size > 0) {
+            const candidate = nextPendingTask();
+            if (!candidate) {
+              await waitForWork();
+              continue;
+            }
+            // Give less loaded peers a head start on each new claim. Start
+            // the delay when work is queued and reconsider it if our load falls.
+            const waitSignal = AbortSignal.any([
+              workerSignal,
+              AbortSignal.timeout(running.size * 250),
+            ]);
+            try {
+              await once(completions, "finish", { signal: waitSignal });
+              continue;
+            } catch {
+              if (workerSignal.aborted) break;
+            }
+            if (
+              (capabilitiesDirty && this.#getCapabilities) ||
+              nextPendingTask()?.id !== candidate.id
+            )
+              continue;
+          }
           const response = await requestTaskCoordinator(
             this.#realtimeProvider.provider,
             {
@@ -103,81 +171,38 @@ export class TaskQueue<
             const claimedTask = decodeTaskValue<
               Extract<TTask, { state: "claimed" }>
             >(response.task);
-            await handleClaimedTask(
+            const work = handleClaimedTask(
               this.#realtimeProvider.document,
               this.#realtimeProvider.provider,
               claimedTask,
               (task, signal) =>
                 handler(task as Extract<TTask, { state: "claimed" }>, signal),
               workerSignal,
-            );
+            )
+              .catch(retryCoordinator)
+              .finally(() => {
+                running.delete(work);
+                completions.dispatchEvent(new Event("finish"));
+              });
+            running.add(work);
+            if (running.size === this.#concurrency)
+              await once(completions, "finish");
             continue;
           }
         } catch {
           if (workerSignal.aborted) break;
           // Reconnect or retry a failed coordinator/database request. No handler
           // starts without a durable ownership acknowledgement.
-          await delay(1000, undefined, { signal: workerSignal }).catch(
-            () => {},
-          );
+          await retryCoordinator();
           continue;
         }
 
-        await new Promise<void>((resolve) => {
-          let retryClaim: ReturnType<typeof setTimeout> | undefined;
-          const cleanup = () => {
-            clearTimeout(retryClaim);
-            wake = undefined;
-            tasks.unobserve(handler);
-            abortSignal?.removeEventListener("abort", onAbort);
-          };
-          const onAbort = () => {
-            cleanup();
-            resolve();
-          };
-          const handler = () => {
-            if (
-              tasks
-                .toArray()
-                .some(
-                  (task) =>
-                    task.type === this.#taskType &&
-                    task.state === "pending" &&
-                    task.requiredCapabilities.every((capability) =>
-                      this.#capabilities.includes(capability),
-                    ),
-                )
-            ) {
-              resolve();
-              cleanup();
-            }
-          };
-          tasks.observe(handler);
-          wake = onAbort;
-          abortSignal?.addEventListener("abort", onAbort, { once: true });
-          if (
-            abortSignal?.aborted ||
-            (capabilitiesDirty && this.#getCapabilities)
-          )
-            onAbort();
-          else if (
-            tasks
-              .toArray()
-              .some(
-                (task) =>
-                  task.type === this.#taskType &&
-                  task.state === "pending" &&
-                  task.requiredCapabilities.every((capability) =>
-                    this.#capabilities.includes(capability),
-                  ),
-              )
-          )
-            retryClaim = setTimeout(onAbort, 1000);
-        });
+        await waitForWork();
       }
     } finally {
       clearTimeout(retryTimer);
       this.#capabilitiesChanged?.removeEventListener("change", changed);
+      await Promise.all(running);
       this.#realtimeProvider.provider.destroy();
       this.#realtimeProvider.document.destroy();
     }
