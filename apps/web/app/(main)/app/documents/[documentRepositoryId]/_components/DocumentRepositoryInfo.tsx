@@ -14,7 +14,7 @@ import type { DocumentRepository } from "@schornio/aibox-package-database/docume
 import { DocumentRepositoryCard } from "../../_components/DocumentRepositoryCard";
 import { DocumentRepositoryInfoIndexEmbedding } from "./DocumentRepositoryInfoIndexEmbedding";
 import { DocumentRepositoryInfoIndexKeyword } from "./DocumentRepositoryInfoIndexKeyword";
-import { DocumentRepositoryInfoTranscriber } from "./DocumentRepositoryInfoTranscriber";
+import { InfoTranscriber } from "../../../../../_components/InfoTranscriber";
 import { InfoWorkspace } from "../../../../../_components/InfoWorkspace";
 import type { SettingFavorites } from "../../../../../_models/currentUserConfigFavorites";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
@@ -133,12 +133,15 @@ export function DocumentRepositoryInfo({
         ) : undefined}
 
         {documentRepository?.transcriberIdentifier ? (
-          <DocumentRepositoryInfoTranscriber
+          <InfoTranscriber
             editDefaultTranscriberIdentifier={
               editDefaultDocumentRepository?.transcriberIdentifier
             }
-            editPathname={editDocumentRepositoryPathname}
-            editable={editable}
+            editHref={
+              editable
+                ? `${editDocumentRepositoryPathname ?? ""}?view=features#transcribe`
+                : undefined
+            }
             transcriber={transcriber}
             transcriberIdentifier={documentRepository.transcriberIdentifier}
           />

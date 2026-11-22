@@ -167,6 +167,9 @@ export function AgentEditorOverview({
         favorites={favorites}
         editDefaultAgent={defaultAgent}
         editable={true}
+        transcriber={relations.transcribers?.find(
+          (item) => item.identifier === agent?.transcriberIdentifier,
+        )}
         modelMap={modelMap}
         workspace={workspace}
       />

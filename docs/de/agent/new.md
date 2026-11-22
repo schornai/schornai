@@ -57,4 +57,4 @@ Weiter: [Editor und Speichern](edit/index.md) · [Modelle und zusätzliche Funkt
 
 ## Zugehöriges MCP-Werkzeug
 
-Mit `platform_agent_create` können Workspace-Administratoren Agenten im verwalteten Arbeitsplatz erstellen. Das optionale Feld `globalId` legt die globale ID fest. Ohne Angabe wird sie aus dem Namen erzeugt. Eine bereits vergebene Wunsch-ID verhindert das Erstellen.
+Mit `platform_agent_create` können Arbeitsplatzadministrator:innen Agenten im verwalteten Arbeitsplatz erstellen. Das optionale Feld `globalId` legt die globale ID fest. Ohne Angabe wird sie aus dem Namen erzeugt. Eine bereits vergebene Wunsch-ID verhindert das Erstellen.

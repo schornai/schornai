@@ -66,12 +66,12 @@ Für Zugriffsfragen öffne [Berechtigungen](permissions.md). Ein Passwort änder
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer**; nur eigenes Konto.
-- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte. Automationen bleiben auf ihre Eigentümer mit Editorzugriff beschränkt.
-- `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer**.
-- `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer**.
-- `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer**.
-- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer**.
-- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
+- `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer:in**; nur eigenes Konto.
+- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer:in**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte. Automationen bleiben auf ihre Eigentümer mit Editorzugriff beschränkt.
+- `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer:in**.
+- `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer:in**.
+- `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer:in**.
+- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer:in**.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

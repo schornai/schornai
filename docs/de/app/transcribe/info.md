@@ -37,6 +37,6 @@ Zum Ändern öffnest du mit entsprechenden Rechten [Bearbeiten](edit.md).
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_transcribers_list` liest die zugänglichen Konfigurationen ab der Stufe **Benutzer**. Mit `platform_favorites_update` änderst du auf derselben Stufe die Favoriten deines eigenen Kontos.
-- `platform_transcriber_update` und `platform_transcriber_delete` ändern oder löschen die Konfiguration. Dafür brauchst du mindestens die Stufe **Workspace-Administrator** und Administratorrechte im betroffenen Arbeitsplatz.
-- `platform_xrag_export` exportiert das Objekt, `platform_xrag_saved_package_add` fügt es deiner persönlichen Paketauswahl hinzu. Beide benötigen mindestens die Stufe **Workspace-Administrator** und Exportrechte für die ausgewählten Objekte.
+- `platform_transcribers_list` liest die zugänglichen Konfigurationen ab der Stufe **Benutzer:in**. Mit `platform_favorites_update` änderst du auf derselben Stufe die Favoriten deines eigenen Kontos.
+- `platform_transcriber_update` und `platform_transcriber_delete` ändern oder löschen die Konfiguration. Dafür brauchst du mindestens die Stufe **Arbeitsplatzadministrator:in** und Administratorrechte im betroffenen Arbeitsplatz.
+- `platform_xrag_export` exportiert das Objekt, `platform_xrag_saved_package_add` fügt es deiner persönlichen Paketauswahl hinzu. Beide benötigen mindestens die Stufe **Arbeitsplatzadministrator:in** und Exportrechte für die ausgewählten Objekte.

@@ -48,14 +48,14 @@ Bei fehlenden Ablagen prüfe deine [Berechtigungen](../../me/permissions.md). Be
 
 ## Als XRAG exportieren
 
-Workspace-Administrator:innen können das Objekt unter **Info → XRAG exportieren** einzeln herunterladen. Für einen gemeinsamen Download mit weiteren Ressourcen wählst du **Zu XRAG-Paket hinzufügen** und bestätigst die gewünschten verbundenen Objekte. Der Export enthält die Konfiguration und alle Dateien der Ablage. Unter **Bearbeiten → Einstellungen** kannst du den lesbaren globalen Identifier ändern. Er wird aus dem Titel in kebab-case erzeugt. Die globale ID bleibt bei Import und erneutem Export erhalten, sodass getrennt übertragene Objekte wieder verbunden werden können.
+Arbeitsplatzadministrator:innen können das Objekt unter **Info → XRAG exportieren** einzeln herunterladen. Für einen gemeinsamen Download mit weiteren Ressourcen wählst du **Zu XRAG-Paket hinzufügen** und bestätigst die gewünschten verbundenen Objekte. Der Export enthält die Konfiguration und alle Dateien der Ablage. Unter **Bearbeiten → Einstellungen** kannst du den lesbaren globalen Identifier ändern. Er wird aus dem Titel in kebab-case erzeugt. Die globale ID bleibt bei Import und erneutem Export erhalten, sodass getrennt übertragene Objekte wieder verbunden werden können.
 
 Unter [XRAG Import und Export](../../settings/xrag.md) findest du die Schritte zum Importieren, zur Bestätigung vorhandener Objekte und zum Erstellen oder Entpacken von Sammelarchiven.
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_xrag_export`: Ein Objekt mit `kind: "documentRepository"` exportieren, optional mit Modellarchiven. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Workspace des Objekts. Downloadlink zehn Minuten gültig; Die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
-- `platform_xrag_related_objects` und `platform_xrag_saved_package_add` ermitteln die verbundenen Ressourcen und übernehmen die gewählte Auswahl in ein eigenes Paket. Mindeststufe **Workspace-Administrator** mit Exportrechten für jedes ausgewählte Objekt.
-- `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globalen Identifier lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**; Administratorrechte im betroffenen Workspace. Bereits exportierte Archive bleiben unverändert.
+- `platform_xrag_export`: Ein Objekt mit `kind: "documentRepository"` exportieren, optional mit Modellarchiven. Mindeststufe: **Arbeitsplatzadministrator:in**; Administratorrechte im Arbeitsplatz des Objekts. Downloadlink zehn Minuten gültig; Die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
+- `platform_xrag_related_objects` und `platform_xrag_saved_package_add` ermitteln die verbundenen Ressourcen und übernehmen die gewählte Auswahl in ein eigenes Paket. Mindeststufe **Arbeitsplatzadministrator:in** mit Exportrechten für jedes ausgewählte Objekt.
+- `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globalen Identifier lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Arbeitsplatzadministrator:in**; Administratorrechte im betroffenen Arbeitsplatz. Bereits exportierte Archive bleiben unverändert.
 
 Import- und Sammelwerkzeuge sowie ihre Grenzen sind unter [XRAG](../../settings/xrag.md#zugehörige-mcp-werkzeuge) dokumentiert.

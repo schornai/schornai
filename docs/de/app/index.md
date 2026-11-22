@@ -30,7 +30,7 @@ Die Verfügbarkeit richtet sich nach deinen Arbeitsplätzen. Wenn ein benötigte
 
 Persönliche Chats nach Zeitplan oder Dateiereignis startest du mit [Automationen](automation.md), verfügbar ab Editor-Rolle.
 
-Als Workspace-Administrator:in oder globaler Administrator siehst du zusätzlich **XRAG** zum [Importieren und Exportieren von Paketen](../settings/xrag.md).
+Als Arbeitsplatzadministrator:in oder globale:r Administrator:in siehst du zusätzlich **XRAG** zum [Importieren und Exportieren von Paketen](../settings/xrag.md).
 
 ## Plattform-MCP und Agentenwerkzeuge
 

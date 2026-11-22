@@ -54,6 +54,6 @@ Für die Konfiguration brauchst du Arbeitsplatzadministratorrechte oder globale 
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Workspace-Administrator. `platform_transcribers_list` liest zugängliche Konfigurationen ab Benutzerstufe. `platform_transcriber_create`, `platform_transcriber_update` und `platform_transcriber_delete` verwalten Transkriptoren im berechtigten Workspace.
+**Mindeststufe:** Arbeitsplatzadministrator:in. `platform_transcribers_list` liest zugängliche Konfigurationen ab Benutzerstufe. `platform_transcriber_create`, `platform_transcriber_update` und `platform_transcriber_delete` verwalten Transkriptoren im berechtigten Arbeitsplatz.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

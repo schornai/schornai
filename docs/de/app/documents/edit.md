@@ -45,6 +45,6 @@ Rücksetzsymbole verwerfen einzelne Änderungen. **Änderungen verwerfen** setzt
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Workspace-Administrator. `platform_repositories_list` liest zugängliche Ablagen ab Benutzerstufe. `platform_repository_create`, `platform_repository_update` und `platform_repository_delete` verwalten Ablagen; Änderungen prüfen Quell- und Ziel-Workspace.
+**Mindeststufe:** Arbeitsplatzadministrator:in. `platform_repositories_list` liest zugängliche Ablagen ab Benutzerstufe. `platform_repository_create`, `platform_repository_update` und `platform_repository_delete` verwalten Ablagen; Änderungen prüfen Quell- und Zielarbeitsplatz.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

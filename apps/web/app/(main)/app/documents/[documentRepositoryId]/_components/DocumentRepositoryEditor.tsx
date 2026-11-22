@@ -1,5 +1,6 @@
 "use client";
 
+import { EditorHeaderTitle } from "../../../../../_components/EditorHeaderTitle";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,7 +33,6 @@ import {
 import {
   HeaderMain,
   HeaderMainAsideContent,
-  HeaderMainContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import {
   TabsMainContent,
@@ -202,28 +202,20 @@ export function DocumentRepositoryEditor({
       }}
     >
       <HeaderMain appColor={documentRepository?.color}>
-        <HeaderMainContent>
-          <FolderOpen />
-          <div className="flex flex-col text-center">
-            {mode === "create" ? (
-              <span className="text-nowrap">
-                {t("labelNewDocumentRepository")}
-              </span>
-            ) : undefined}
-            {mode === "update" ? (
-              <span className="text-nowrap">
-                {t("labelDocumentRepository")}
-              </span>
-            ) : undefined}
-            <span className="text-xs text-nowrap">
-              {documentRepository?.name}
-            </span>
-          </div>
+        <EditorHeaderTitle
+          icon={<FolderOpen />}
+          title={
+            mode === "create"
+              ? t("labelNewDocumentRepository")
+              : t("labelDocumentRepository")
+          }
+          name={documentRepository?.name}
+        >
           {mode === "create" ? <CirclePlus /> : undefined}
           {mode === "update" ? (
             <DocumentRepositoryEditorDiscardAllChanges />
           ) : undefined}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger

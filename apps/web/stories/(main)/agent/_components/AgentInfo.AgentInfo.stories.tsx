@@ -1,3 +1,4 @@
+import { expect } from "storybook/test";
 import { repeatFixtures } from "../../../../.storybook/repeat-fixtures";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AgentInfo } from "../../../../app/(main)/agent/_components/AgentInfo";
@@ -247,5 +248,32 @@ export const FavoritesFavoritesMultiple: Story = {
       ...meta.args["favorites"],
       favorites: repeatFixtures(meta.args["favorites"]["favorites"]),
     },
+  },
+};
+
+export const Transcriber: Story = {
+  args: {
+    agent: {
+      ...meta.args.agent,
+      transcriberIdentifier: "sitzungsnotizen",
+      additionalFunctions: {
+        ...meta.args.agent.additionalFunctions,
+        fileUpload: true,
+      },
+    },
+    transcriber: {
+      id: "11111111-1111-4111-8111-111111111112",
+      name: "Sitzungsnotizen",
+      description: "Transkribiert Besprechungen.",
+    },
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Transkriptor" }));
+    await expect(
+      await canvas.findByRole("button", { name: "Zum Transkriptor" }),
+    ).toHaveAttribute(
+      "href",
+      "/app/transcribe/11111111-1111-4111-8111-111111111112",
+    );
   },
 };

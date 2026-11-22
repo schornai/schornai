@@ -1,5 +1,6 @@
 "use client";
 
+import { EditorHeaderTitle } from "../../../../../_components/EditorHeaderTitle";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,7 +33,6 @@ import {
 import {
   HeaderMain,
   HeaderMainAsideContent,
-  HeaderMainContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import {
   TabsMainContent,
@@ -195,22 +195,18 @@ export function TranscriberEditor({
       }}
     >
       <HeaderMain appColor={transcriber?.color}>
-        <HeaderMainContent>
-          <AudioLines />
-          <div className="flex flex-col text-center">
-            {mode === "create" ? (
-              <span className="text-nowrap">{t("labelNewTranscriber")}</span>
-            ) : undefined}
-            {mode === "update" ? (
-              <span className="text-nowrap">{t("labelTranscriber")}</span>
-            ) : undefined}
-            <span className="text-xs text-nowrap">{transcriber?.name}</span>
-          </div>
+        <EditorHeaderTitle
+          icon={<AudioLines />}
+          title={
+            mode === "create" ? t("labelNewTranscriber") : t("labelTranscriber")
+          }
+          name={transcriber?.name}
+        >
           {mode === "create" ? <CirclePlus /> : undefined}
           {mode === "update" ? (
             <TranscriberEditorDiscardAllChanges />
           ) : undefined}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger

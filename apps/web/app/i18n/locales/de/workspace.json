@@ -35,13 +35,13 @@
       "labelInactive": "Automatisch Benutzer:in deaktiviert"
     },
     "WorkspaceCreator": {
-      "labelTitle": "Neuer Workspace",
+      "labelTitle": "Neuer Arbeitsplatz",
       "descriptionWorkspace": "Wähle einen Namen und optional eine Beschreibung. Weitere Einstellungen kannst du nach dem Anlegen bearbeiten.",
       "labelName": "Name",
       "labelDescription": "Beschreibung",
-      "labelCreate": "Workspace anlegen",
+      "labelCreate": "Arbeitsplatz anlegen",
       "labelCancel": "Abbrechen",
-      "errorCreate": "Der Workspace konnte nicht angelegt werden. Bitte versuche es erneut."
+      "errorCreate": "Der Arbeitsplatz konnte nicht angelegt werden. Bitte versuche es erneut."
     },
     "WorkspaceCard": {
       "labelType": "Arbeitsplatz"
@@ -85,7 +85,7 @@
   },
   "new": {
     "page": {
-      "labelTitle": "Workspace anlegen"
+      "labelTitle": "Arbeitsplatz anlegen"
     }
   },
   "page": {

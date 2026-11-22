@@ -270,3 +270,32 @@ export const ConfirmationOpened: Story = {
   args: { mode: "update" },
   play: openDeleteDialog,
 };
+
+export const MobileUnsavedName: Story = {
+  decorators: [
+    (Story) => (
+      <div className="w-[393px] max-w-full">
+        <Story />
+      </div>
+    ),
+  ],
+  args: { mode: "update", agent: { ...meta.args.agent, name: "Suchmaschine" } },
+  parameters: {
+    nextjs: { navigation: { query: { view: "settings" } } },
+    contextFixtures: {
+      useAgentEditor: {
+        agent: { ...meta.args.agent, name: "Suchmaschine" },
+        defaultAgent: meta.args.agent,
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    const heading = canvas.getByRole("heading", { name: /Agent Suchmaschine/ });
+    const header = heading.parentElement!.getBoundingClientRect();
+    const action = heading.querySelector("button")!;
+    await expect(action).toBeVisible();
+    const bounds = action.getBoundingClientRect();
+    await expect(bounds.top).toBeGreaterThanOrEqual(header.top);
+    await expect(bounds.bottom).toBeLessThanOrEqual(header.bottom);
+  },
+};

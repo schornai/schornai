@@ -12,24 +12,22 @@ import {
 } from "@schornio/aibox-package-ui/components/collapsible";
 import { Badge } from "@schornio/aibox-package-ui/components/badge";
 import { Button } from "@schornio/aibox-package-ui/components/button";
-import { InfoActions } from "../../../../../_components/InfoActions";
-import { InfoTitle } from "../../../../../_components/InfoTitle";
+import { InfoActions } from "./InfoActions";
+import { InfoTitle } from "./InfoTitle";
 import Link from "next/link";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { useT } from "next-i18next/client";
 
-export function DocumentRepositoryInfoTranscriber({
-  editPathname,
+export function InfoTranscriber({
+  editHref,
   editDefaultTranscriberIdentifier,
-  editable,
   transcriber,
   transcriberIdentifier,
 }: {
-  editPathname?: string;
+  editHref?: string;
   editDefaultTranscriberIdentifier?: string;
-  editable?: boolean;
-  transcriber?: Transcriber_new;
+  transcriber?: Pick<Transcriber_new, "id" | "name" | "description">;
   transcriberIdentifier?: string;
 }) {
   const { t } = useT("agent", {
@@ -37,7 +35,7 @@ export function DocumentRepositoryInfoTranscriber({
   });
 
   const changed =
-    editable &&
+    editHref &&
     (editDefaultTranscriberIdentifier ?? false) !==
       (transcriberIdentifier ?? false);
 
@@ -52,14 +50,10 @@ export function DocumentRepositoryInfoTranscriber({
           <InfoActions>
             {changed ? <Badge>{t("labelChanged")}</Badge> : undefined}
 
-            {editable ? (
+            {editHref ? (
               <Button
                 nativeButton={false}
-                render={
-                  <Link
-                    href={`${editPathname ?? ""}?view=features#transcribe`}
-                  />
-                }
+                render={<Link href={editHref} />}
                 size="icon-xs"
                 variant="ghost"
               >
@@ -83,15 +77,17 @@ export function DocumentRepositoryInfoTranscriber({
           <CollapsibleContent>
             <AlertDescription>
               <p>{transcriber?.description}</p>
-              <Button
-                className="no-underline!"
-                nativeButton={false}
-                render={<Link href={`/app/transcribe/${transcriber?.id}`} />}
-                size="xs"
-                variant="outline"
-              >
-                <AudioLines /> {t("labelGoToTranscriber")}
-              </Button>
+              {transcriber && (
+                <Button
+                  className="no-underline!"
+                  nativeButton={false}
+                  render={<Link href={`/app/transcribe/${transcriber.id}`} />}
+                  size="xs"
+                  variant="outline"
+                >
+                  <AudioLines /> {t("labelGoToTranscriber")}
+                </Button>
+              )}
             </AlertDescription>
           </CollapsibleContent>
         </AlertDescription>

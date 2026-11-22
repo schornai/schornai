@@ -366,6 +366,33 @@ describe("server activity and file pages", () => {
       await expect(page(request)).rejects.toThrow("NOT_FOUND");
     },
   );
+  it.each([infoAgent, chatInfo])(
+    "resolves the accessible transcriber by identifier for %s",
+    async (page) => {
+      state.entity.transcriberIdentifier = "meeting-notes";
+      state.transcribers = [
+        {
+          id: "transcriber-id",
+          identifier: "meeting-notes",
+          name: "Meeting notes",
+          description: "Transcribes meetings",
+          prompt: "internal configuration",
+        },
+      ];
+      const request = {
+        params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+      } as any;
+      const info = async () =>
+        component(await page(request), "AgentInfo").props;
+      expect((await info()).transcriber).toEqual({
+        id: "transcriber-id",
+        name: "Meeting notes",
+        description: "Transcribes meetings",
+      });
+      state.transcribers = [];
+      expect((await info()).transcriber).toBeUndefined();
+    },
+  );
   it.each([
     [chatInfo, "AgentInfo"],
     [transcriptionInfo, "TranscriberInfo"],

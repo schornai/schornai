@@ -87,6 +87,6 @@ Start, nach einer Wiederverbindung und bei Yjs-Änderungen. Es gibt kein Katalog
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_services_status`: Maschinen, Dienstzustand und Auslastung lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_services_status`: Maschinen, Dienstzustand und Auslastung lesen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

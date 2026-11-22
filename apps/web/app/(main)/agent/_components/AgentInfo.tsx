@@ -18,6 +18,8 @@ import { AgentInfoRole } from "./AgentInfoRole";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
 import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
 import { Fragment } from "react/jsx-runtime";
+import { InfoTranscriber } from "../../../_components/InfoTranscriber";
+import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import { InfoWorkspace } from "../../../_components/InfoWorkspace";
 import type { SettingFavorites } from "../../../_models/currentUserConfigFavorites";
 import { Shapes } from "lucide-react";
@@ -35,6 +37,7 @@ export function AgentInfo({
   editable,
   favorites,
   modelMap,
+  transcriber,
   workspace,
 }: {
   showResourceActions?: boolean;
@@ -46,6 +49,7 @@ export function AgentInfo({
   editable?: boolean;
   favorites?: SettingFavorites;
   modelMap?: Map<string | symbol, AIModel>;
+  transcriber?: Pick<Transcriber_new, "id" | "name" | "description">;
   workspace?: WorkspaceClaim;
 }) {
   const model = agent?.modelIdentifier
@@ -166,6 +170,20 @@ export function AgentInfo({
           editable={editable}
           workspace={workspace}
         />
+        {agent?.transcriberIdentifier && (
+          <InfoTranscriber
+            transcriberIdentifier={agent.transcriberIdentifier}
+            editDefaultTranscriberIdentifier={
+              editDefaultAgent?.transcriberIdentifier
+            }
+            editHref={
+              editable && (!showResourceActions || canManage)
+                ? `${editAgentPathname ?? ""}?view=settings#additionalFunctions`
+                : undefined
+            }
+            transcriber={transcriber}
+          />
+        )}
         <AgentInfoAdditionalFunctions
           agent={agent}
           editable={editable}

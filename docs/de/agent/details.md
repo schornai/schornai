@@ -13,6 +13,7 @@ meta:
     [
       "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
       "apps/web/app/_components/ModelContextSize.tsx",
+      "apps/web/app/_components/InfoTranscriber.tsx",
       "apps/web/app/(main)/agent/[agentId]/page.tsx",
       "apps/web/app/(main)/agent/_components/AgentInfo.tsx",
       "apps/web/app/(main)/agent/_components/AgentRecommendedMessage.tsx",
@@ -33,6 +34,7 @@ Unter der Agentenkarte startest du einen neuen Chat oder änderst die Favoritenm
 - **Externe Werkzeuge (MCP)** und **Web-Zugriff:** angebundene Dienste und aktivierte Internetfunktionen.
 - **Modell:** das verwendete KI-Modell, gegebenenfalls Kontextgröße und Bildfähigkeiten.
 - **Dokumentation** und **Vorschläge:** Hinweise und Beispielnachrichten für die Benutzung.
+- **Transkriptor:** Ist ein Transkriptor eingerichtet, siehst du seinen Namen oberhalb der zusätzlichen Funktionen. Klappe den Bereich auf und wähle **Zum Transkriptor**, um seine Infos zu öffnen. Der Link ist nur bei Zugriff auf den Transkriptor verfügbar.
 - **Arbeitsplatz:** der organisatorische Bereich, zu dem der Agent gehört.
 
 Klappe die Informationsbereiche auf, um die eingerichteten Verbindungen zu sehen. Wird eine Ablage als unbekannt angezeigt, lass die Arbeitsplatzadministration die Zuordnung und deine Leserechte an dieser Ablage prüfen.
@@ -57,4 +59,5 @@ Zum Ändern der Konfiguration brauchst du die Rolle Arbeitsplatzadministrator:in
 `platform_agent_get` liest die Agentenkonfiguration (Mindestzugriff **user**, Zugriff auf
 den jeweiligen Agenten erforderlich). `platform_models_list` liefert öffentliche
 Modellmetadaten einschließlich einer hinterlegten Kontextgröße (Mindestzugriff **user**).
+`platform_transcribers_list` listet mit derselben Mindeststufe die für dich zugänglichen Transkriptoren auf.
 Die Kontextanzeige selbst ist eine Browserfunktion und benötigt kein eigenes Werkzeug.

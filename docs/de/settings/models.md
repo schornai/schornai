@@ -111,19 +111,19 @@ Als globale Administrator:in kannst du auf der Detailseite jedes Modells den **A
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_models_list` liefert ab Stufe **Benutzer** die lesbaren Modellmetadaten einschließlich der Modell-ID. `includeConnectionDetails: true` ergänzt die Verbindungseinstellungen externer Modelle und erfordert globale Administratorrechte und die Stufe **Globaler Administrator**. Direkte MCP-Clients mit dieser Freigabe erhalten die Verbindungsdetails standardmäßig. API-Schlüssel und HTTP-Header bleiben privat.
-- `platform_xrag_export` liefert für `kind: "model"` und die Modell-ID einen zehn Minuten gültigen Downloadlink. `platform_xrag_saved_package_add` nimmt dieselbe Auswahl in ein eigenes Paket auf. Beide Werkzeuge erfordern mindestens **Workspace-Administrator** und Zugriff auf das lokale Modell. Der Export nutzt installierte Modelldateien auf dem Core-Host oder ein veröffentlichtes Modellarchiv.
-- `platform_xrag_saved_package_export` startet ab Stufe **Workspace-Administrator** einen Hintergrundauftrag für das eigene Paket. Mit `platform_xrag_export_jobs` prüfst du den Fortschritt, mit `platform_xrag_export_download` erhältst du einen Link zum fertigen Gesamtarchiv. Der Download setzt weiterhin Zugriff auf die enthaltenen Ressourcen voraus.
-- `platform_models_discover`: Verfügbare Modelle eines Providers ermitteln. Mindeststufe: **Globaler Administrator**.
-- `platform_model_create`: Externes Modell registrieren. Mindeststufe: **Globaler Administrator**.
-- `platform_model_connection_update`: Modellverbindung ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_model_metadata_update`: Modellname und Beschreibung ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_model_delete`: Modellregistrierung löschen. Mindeststufe: **Globaler Administrator**.
+- `platform_models_list` liefert ab Stufe **Benutzer:in** die lesbaren Modellmetadaten einschließlich der Modell-ID. `includeConnectionDetails: true` ergänzt die Verbindungseinstellungen externer Modelle und erfordert globale Administratorrechte und die Stufe **Globale:r Administrator:in**. Direkte MCP-Clients mit dieser Freigabe erhalten die Verbindungsdetails standardmäßig. API-Schlüssel und HTTP-Header bleiben privat.
+- `platform_xrag_export` liefert für `kind: "model"` und die Modell-ID einen zehn Minuten gültigen Downloadlink. `platform_xrag_saved_package_add` nimmt dieselbe Auswahl in ein eigenes Paket auf. Beide Werkzeuge erfordern mindestens **Arbeitsplatzadministrator:in** und Zugriff auf das lokale Modell. Der Export nutzt installierte Modelldateien auf dem Core-Host oder ein veröffentlichtes Modellarchiv.
+- `platform_xrag_saved_package_export` startet ab Stufe **Arbeitsplatzadministrator:in** einen Hintergrundauftrag für das eigene Paket. Mit `platform_xrag_export_jobs` prüfst du den Fortschritt, mit `platform_xrag_export_download` erhältst du einen Link zum fertigen Gesamtarchiv. Der Download setzt weiterhin Zugriff auf die enthaltenen Ressourcen voraus.
+- `platform_models_discover`: Verfügbare Modelle eines Providers ermitteln. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_model_create`: Externes Modell registrieren. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_model_connection_update`: Modellverbindung ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_model_metadata_update`: Modellname und Beschreibung ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_model_delete`: Modellregistrierung löschen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
 
 Die Modellwerkzeuge zum Anlegen und Bearbeiten akzeptieren das optionale Feld
 `contextSize` (positive ganze Tokenzahl; `null` entfernt die Grenze). Der Mindestzugriff
-bleibt **admin** mit globaler Administratorberechtigung. `platform_models_discover`
+bleibt **admin** mit globale:r Administrator:inberechtigung. `platform_models_discover`
 liefert zusätzlich verfügbare Kontextgrenzen; der Abruf allein ändert kein gespeichertes
 Modell. Die automatische Komprimierung benötigt kein eigenes Werkzeug.

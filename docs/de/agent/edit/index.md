@@ -52,8 +52,8 @@ Teste nach dem Speichern einen neuen Chat mit einer typischen Frage und den ben�
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Workspace-Administrator. `platform_agent_create`, `platform_agent_update` und `platform_agent_delete` erstellen, ändern und löschen Agenten. `platform_agent_get` und `platform_agents_list` lesen zugängliche Konfigurationen bereits ab Benutzerstufe. Beim Verschieben werden Quell- und Ziel-Workspace geprüft.
+**Mindeststufe:** Arbeitsplatzadministrator:in. `platform_agent_create`, `platform_agent_update` und `platform_agent_delete` erstellen, ändern und löschen Agenten. `platform_agent_get` und `platform_agents_list` lesen zugängliche Konfigurationen bereits ab Benutzerstufe. Beim Verschieben werden Quell- und Zielarbeitsplatz geprüft.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).
 
-Mit `platform_agent_create` und `copyFromAgentId` können Workspace-Administratoren Agenten einschließlich gespeicherter MCP-Zugangsdaten kopieren. Quelle und Ziel erfordern jeweils Administratorrechte im Workspace. Rollen- und MCP-IDs sowie URLs müssen für die Übernahme unverändert bleiben; Geheimnisse werden nicht ausgegeben.
+Mit `platform_agent_create` und `copyFromAgentId` können Arbeitsplatzadministrator:innen Agenten einschließlich gespeicherter MCP-Zugangsdaten kopieren. Quelle und Ziel erfordern jeweils Administratorrechte im Arbeitsplatz. Rollen- und MCP-IDs sowie URLs müssen für die Übernahme unverändert bleiben; Geheimnisse werden nicht ausgegeben.

@@ -1,4 +1,5 @@
 "use client";
+import { EditorHeaderTitle } from "../../../../_components/EditorHeaderTitle";
 import { DropdownMenuItemAction } from "@schornio/aibox-package-ui/components/dropdown-menu-item-action";
 import { AgentRecommendedMessage } from "../../../agent/_components/AgentRecommendedMessage";
 import { AutomationScheduleFields } from "./AutomationScheduleFields";
@@ -35,7 +36,6 @@ import {
 import { CircleChevronsRight } from "@/lib/icons/circle-chevrons-right";
 import {
   HeaderMain,
-  HeaderMainContent,
   HeaderMainAsideContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
@@ -272,14 +272,11 @@ export function AutomationEditor({
       }}
     >
       <HeaderMain appColor={value.color}>
-        <HeaderMainContent>
-          <CircleChevronsRight />
-          <div className="flex flex-col text-center">
-            <span className="text-nowrap">
-              {initial ? t("labelAutomation") : t("labelNew")}
-            </span>
-            <span className="text-xs text-nowrap">{value.name}</span>
-          </div>
+        <EditorHeaderTitle
+          icon={<CircleChevronsRight />}
+          title={initial ? t("labelAutomation") : t("labelNew")}
+          name={value.name}
+        >
           {initial && (
             <AutomationEditorDiscard
               initial={initial}
@@ -291,7 +288,7 @@ export function AutomationEditor({
               }}
             />
           )}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button variant="ghost" />}>

@@ -1,4 +1,5 @@
 "use client";
+import { EditorHeaderTitle } from "../../../_components/EditorHeaderTitle";
 import type { ConnectionMetadata } from "@schornio/aibox-package-database/connections/_types";
 
 import {
@@ -34,7 +35,6 @@ import {
 import {
   HeaderMain,
   HeaderMainAsideContent,
-  HeaderMainContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import {
   TabsMainContent,
@@ -259,20 +259,14 @@ export function AgentEditor({
       }}
     >
       <HeaderMain appColor={agent?.color}>
-        <HeaderMainContent>
-          <BotMessageSquare />
-          <div className="flex flex-col text-center">
-            {mode === "create" ? (
-              <span className="text-nowrap">{t("labelNewAgent")}</span>
-            ) : undefined}
-            {mode === "update" ? (
-              <span className="text-nowrap">{t("labelAgent")}</span>
-            ) : undefined}
-            <span className="text-xs text-nowrap">{agent?.name}</span>
-          </div>
+        <EditorHeaderTitle
+          icon={<BotMessageSquare />}
+          title={mode === "create" ? t("labelNewAgent") : t("labelAgent")}
+          name={agent?.name}
+        >
           {mode === "create" ? <CirclePlus /> : undefined}
           {mode === "update" ? <AgentEditorDiscardAllChanges /> : undefined}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger
