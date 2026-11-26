@@ -17,7 +17,7 @@
   "dependencies": {
     "@schornio/aibox-package-markdown-changelog": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.179",
+    "ai": "7.0.181",
     "jose": "^6.2.12",
     "xrag": "*",
     "tus-js-client": "^4.3.1",
