@@ -95,20 +95,20 @@ export class TaskQueue<
       backlogSince = pending ? (backlogSince ?? performance.now()) : undefined;
       return pending;
     };
+    const onTasksChanged = () => {
+      // A backlog can drain while a busy worker waits for a slot or a claim reply.
+      if ((wake || backlogSince !== undefined) && nextPendingTask()) wake?.();
+    };
+    tasks.observe(onTasksChanged);
     const waitForWork = () =>
       new Promise<void>((resolve) => {
         let retryClaim: ReturnType<typeof setTimeout> | undefined;
         const resume = () => {
           clearTimeout(retryClaim);
           wake = undefined;
-          tasks.unobserve(onTasksChanged);
           workerSignal.removeEventListener("abort", resume);
           resolve();
         };
-        const onTasksChanged = () => {
-          if (nextPendingTask()) resume();
-        };
-        tasks.observe(onTasksChanged);
         wake = resume;
         workerSignal.addEventListener("abort", resume, { once: true });
         if (
@@ -227,6 +227,7 @@ export class TaskQueue<
         await waitForWork();
       }
     } finally {
+      tasks.unobserve(onTasksChanged);
       clearTimeout(retryTimer);
       this.#capabilitiesChanged?.removeEventListener("change", changed);
       await Promise.all(running);
