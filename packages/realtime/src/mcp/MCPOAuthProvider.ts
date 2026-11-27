@@ -1,4 +1,5 @@
 import { fetchWithValidatedEndpoint } from "@ai-sdk/provider-utils";
+import { createGuardedFetch } from "guarded-fetch";
 import { getMCPOAuthClient } from "@schornio/aibox-package-database/mcp/getMCPOAuthClient";
 import type {
   OAuthClientProvider,
@@ -13,6 +14,9 @@ import type {
 import type { MCPOAuthSession } from "@schornio/aibox-package-database/mcp/_types";
 import { getMCPOAuthSession } from "@schornio/aibox-package-database/mcp/getMCPOAuthSession";
 import { saveMCPOAuthSession } from "@schornio/aibox-package-database/mcp/saveMCPOAuthSession";
+
+// Share the public endpoint connection pool across OAuth sessions.
+const fetchPublicEndpoint = createGuardedFetch();
 
 type ConfiguredClient = NonNullable<
   Awaited<ReturnType<typeof getMCPOAuthClient>>
@@ -130,12 +134,15 @@ export class MCPOAuthProvider implements OAuthClientProvider {
             ...init,
           }
         : init;
-    // Preserve the SDK's DNS-pinned fetch for discovered OAuth endpoints.
     // Only the explicitly configured MCP origin may target private hosts.
+    const trustedOrigin = new URL(this.session.server_url).origin;
+    const sameOrigin = new URL(url).origin === trustedOrigin;
     const response = await fetchWithValidatedEndpoint({
       url,
       init: requestInit,
-      trustedOrigin: new URL(this.session.server_url).origin,
+      trustedOrigin,
+      fetch: sameOrigin ? undefined : fetchPublicEndpoint,
+      requireDnsValidation: true,
       redirect: requestInit?.redirect === "manual" ? "manual" : "error",
     });
     if (url === this.session.server_url && response.status === 401) {
@@ -157,12 +164,16 @@ export class MCPOAuthProvider implements OAuthClientProvider {
       this.data.clientVersion = this.configuredClient?.version;
       await this.save();
     }
+    // The SDK recognizes OAuth error bodies via the global Response constructor.
+    if (!sameOrigin && !response.ok)
+      return new Response(response.body, response);
     return response;
   };
 
   get authorizationOptions() {
     return {
       serverUrl: this.session.server_url,
+      fetchFn: this.fetch,
       resourceMetadataUrl: this.data.challenge?.resourceMetadataUrl
         ? new URL(this.data.challenge.resourceMetadataUrl)
         : undefined,

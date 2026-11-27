@@ -75,14 +75,13 @@ export function AgentInfoRole({
       )}
       {role.toolCalculator?.active && (
         <AgentInfoToolCalculator
-          agentRole={role}
           editAgentPathname={editAgentPathname}
           editRoleId={editable ? role.id : undefined}
         />
       )}
       {role.toolPlatformAccess?.active && (
         <AgentInfoToolPlatformAccess
-          agentRole={role}
+          access={role.toolPlatformAccess}
           editAgentPathname={editAgentPathname}
           editRoleId={editable ? role.id : undefined}
         />

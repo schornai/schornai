@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Unbekannter Arbeitsplatz"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Hauptverzeichnis",
       "tooltipEdit": "Bearbeiten",
       "tooltipInfo": "Infos"
     },

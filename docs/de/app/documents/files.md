@@ -131,11 +131,11 @@ Die hier beschriebenen Dateiaktionen beziehen sich jeweils auf eine einzelne Dat
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_files_list`: Dateien und Ordner auflisten. Mindeststufe: **Benutzer**.
-- `platform_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Editor**.
-- `platform_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Editor**.
-- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
-- `platform_file_delete`: Datei oder Ordner einschließlich Index löschen. Mindeststufe: **Editor**.
-- `platform_file_transfer`: Datei kopieren, verschieben oder umbenennen. Mindeststufe: **Editor**.
+- `platform_files_list`: Dateien und Ordner auflisten. Mindeststufe: **Benutzer:in**.
+- `platform_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Bearbeiter:in**.
+- `platform_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Bearbeiter:in**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer:in**.
+- `platform_file_delete`: Datei oder Ordner einschließlich Index löschen. Mindeststufe: **Bearbeiter:in**.
+- `platform_file_transfer`: Datei kopieren, verschieben oder umbenennen. Mindeststufe: **Bearbeiter:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  Alert,
-  AlertDescription,
-} from "@schornio/aibox-package-ui/components/alert";
-import { BotMessageSquare, FileHeadphone, Info } from "lucide-react";
+import { AlertDescription } from "@schornio/aibox-package-ui/components/alert";
+import { BotMessageSquare, FileHeadphone, Settings2 } from "lucide-react";
 import {
   Checklist,
   ChecklistItem,
@@ -19,17 +16,17 @@ import {
   EmptyTitle,
 } from "@schornio/aibox-package-ui/components/empty";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
-import type { SettingFavorites } from "../../../../../_models/currentUserConfigFavorites";
-import { TranscriberInfo } from "../../_components/TranscriberInfo";
+import { TranscriberInfoPrompt } from "../../_components/TranscriberInfoPrompt";
+import { InfoWorkspace } from "../../../../../_components/InfoWorkspace";
+import { InfoModel } from "../../../../../_components/InfoModel";
+import { EditorOverviewSection } from "../../../../../_components/EditorOverviewSection";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
 import { useTranscriberEditor } from "./TranscriberEditor";
 
 export function TranscriberEditorOverview({
-  favorites,
   mode,
 }: {
-  favorites?: SettingFavorites;
   mode: "create" | "update";
 }) {
   const router = useRouter();
@@ -38,14 +35,16 @@ export function TranscriberEditorOverview({
   });
   const { transcriber, defaultTranscriber, relations } = useTranscriberEditor();
 
-  const modelMap = new Map(
-    relations.models.map((model) => [model.identifier, model]),
-  );
-
   const workspace = relations.workspaces.find(
     (workspace) => workspace.id === transcriber?.workspaceId,
   );
 
+  const { t: tab } = useT("transcriber", {
+    keyPrefix: "_components.TranscriberEditor",
+  });
+  const model = relations.models.find(
+    (item) => item.identifier === transcriber?.modelIdentifier,
+  );
   return (
     <>
       {mode === "create" ? (
@@ -89,26 +88,40 @@ export function TranscriberEditorOverview({
         </>
       ) : undefined}
 
-      <TranscriberInfo
-        favorites={favorites}
-        editDefaultTranscriber={defaultTranscriber}
-        editable={true}
-        modelMap={modelMap}
-        transcriber={transcriber}
-        workspace={workspace}
-      />
-
-      <hr className="my-10" />
-
-      <ContainerMain className="flex flex-col gap-3" size="narrow">
-        <h2 title={t("helpTitle")}>
-          <Info className="mx-auto" size={40} />
-        </h2>
-
-        <Alert>
-          <FileHeadphone />
-          <AlertDescription>{t("helpPromptDescription")}</AlertDescription>
-        </Alert>
+      <ContainerMain className="flex flex-col gap-4">
+        <EditorOverviewSection
+          view="prompt"
+          icon={FileHeadphone}
+          title={tab("tabPrompt")}
+          description={t("helpPromptDescription")}
+        >
+          {transcriber?.prompt && (
+            <TranscriberInfoPrompt
+              prompt={transcriber?.prompt}
+              editDefaultPrompt={defaultTranscriber?.prompt}
+              editTranscriberId={transcriber?.id}
+            />
+          )}
+        </EditorOverviewSection>
+        <EditorOverviewSection
+          view="settings"
+          icon={Settings2}
+          title={tab("tabSettings")}
+        >
+          {transcriber?.modelIdentifier && (
+            <InfoModel
+              modelIdentifier={transcriber.modelIdentifier}
+              model={model}
+              editDefaultModelIdentifier={defaultTranscriber?.modelIdentifier}
+              editable
+            />
+          )}
+          <InfoWorkspace
+            workspace={workspace}
+            editDefaultWorkspaceId={defaultTranscriber?.workspaceId}
+            editable
+          />
+        </EditorOverviewSection>
       </ContainerMain>
     </>
   );

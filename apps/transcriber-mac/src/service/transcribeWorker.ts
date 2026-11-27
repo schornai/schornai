@@ -8,6 +8,7 @@ import { createClientWithClaims } from "@schornio/aibox-database/auth/createClie
 import { createDocumentTranscription } from "@schornio/aibox-database/storage/createDocumentTranscription";
 import { getAIModelByIdentifier } from "@schornio/aibox-database/aiModel/getAIModelByIdentifier";
 import { getDocumentBlob } from "@schornio/aibox-database/storage/getDocumentBlob";
+import { getDocumentContent } from "@schornio/aibox-database/storage/getDocumentContent";
 import { inspect } from "@schornio/aibox-database/storage/inspect";
 import { createIndex } from "@schornio/aibox-database/storage/createIndex";
 import { transcriptionToText } from "@schornio/aibox-database/storage/transcriptionToText";
@@ -103,9 +104,19 @@ export async function transcribeWorker({
             console.log("Start transcription");
             console.time("Transcription finished");
 
+            // Read under the file lease so a voice send preserves corrections
+            // committed while its transcription job was waiting.
+            const saved = claimedTask.parameters.voiceMessage
+              ? await getDocumentContent(target.path, storageSession)
+              : undefined;
             const transcription = await transcriber.transcribe({
               abortSignal,
               file,
+              voiceMode: claimedTask.parameters.voiceMessage
+                ? saved?.type === "transcript"
+                  ? "validate"
+                  : "transcribe"
+                : undefined,
               modelIdentifier: model.config.fileSystemIdentifier,
               modelPrompt: claimedTask.parameters.modelPrompt,
               retryLevel: claimedTask.parameters.retryLevel,
@@ -113,6 +124,14 @@ export async function transcribeWorker({
 
             console.timeEnd("Transcription finished");
 
+            if (saved?.type === "transcript") {
+              storageSession.logAction({
+                state: "created",
+                target,
+                content: saved,
+              });
+              return;
+            }
             await createDocumentTranscription(
               target,
               transcription,

@@ -7,7 +7,7 @@ const meta = {
     "Web/(main)/app/documents/[documentRepositoryId]/DocumentRepositoryInfo",
   component: DocumentRepositoryInfo,
   args: {
-    showXRAGActions: true,
+    showResourceActions: true,
     editDocumentRepositoryPathname: "/",
     editDefaultDocumentRepository: {
       type: "database-v2",

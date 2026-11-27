@@ -362,6 +362,8 @@
       "description": "When searching for precise expressions and sentences. (Names, designations, etc.)"
     },
     "DocumentRepositoryInfoTranscriber": {
+      "labelEdit": "Edit transcriber assignment",
+      "labelToggleDetails": "Toggle transcriber details",
       "labelTitle": "Transcriber",
       "labelChanged": "Changed",
       "labelUnknownTranscriber": "Unknown transcriber",
@@ -837,6 +839,9 @@
       "labelSend": "Send voice message",
       "labelUploading": "Uploading and queuing your message…",
       "labelDiscard": "Discard recording",
+      "labelClose": "Close recorder",
+      "errorDiscard": "Could not remove the recording from the chat files. Try again.",
+      "errorUnconfirmed": "Delivery was not confirmed. You can retry sending. Closing the recorder keeps the recording in the chat files.",
       "labelToggleTranscript": "Expand or collapse transcript",
       "labelTranscribing": "Transcribing …",
       "labelRecorded": "Recording ready to send",

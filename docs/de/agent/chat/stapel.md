@@ -45,9 +45,9 @@ Wenn eine Nachricht eine Werkzeugfreigabe auslöst, benötigt der Chat zunächst
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_chat_drafts`: Nachrichtenstapel lesen. Mindeststufe: **Benutzer**.
-- `platform_chat_draft_update`: Pausierten Entwurf anlegen, ändern oder entfernen. Mindeststufe: **Benutzer**.
-- `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer**.
-- `platform_chat_submit_batch`: Pausierte Nachrichten als Stapel absenden, auch während die Anhänge verarbeitet werden. Mindeststufe: **Benutzer**.
+- `platform_chat_drafts`: Nachrichtenstapel lesen. Mindeststufe: **Benutzer:in**.
+- `platform_chat_draft_update`: Pausierten Entwurf anlegen, ändern oder entfernen. Mindeststufe: **Benutzer:in**.
+- `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer:in**.
+- `platform_chat_submit_batch`: Pausierte Nachrichten als Stapel absenden, auch während die Anhänge verarbeitet werden. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

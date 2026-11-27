@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Für Passwortänderungen: ein lokales Konto; SSO-Passwörter verwaltet der Identitätsanbieter."
   status: "verfügbar"
-  last_verified: "2026-10-30"
+  last_verified: "2026-11-22"
   source_files:
     [
       "apps/web/app/(settings)/me/(main)/page.tsx",
@@ -56,6 +56,8 @@ Daneben wählst du **Hell**, **Dunkel** oder die Einstellung des Betriebssystems
 
 Markiere Agenten, Dokumentenablagen, Transkriptoren, Automationen oder Arbeitsplätze über das Sternsymbol als Favorit. Die markierten Inhalte findest du auf dem Dashboard und in der Favoriten-Navigation, solange du Zugriff darauf hast.
 
+In der geöffneten Seitenleiste rufst du über das Typsymbol rechts neben einem Favoriten dessen Aktionen auf. Bei einem Agenten kannst du einen Chat starten, den Favoriten entfernen oder die Infos öffnen. Wer den Arbeitsplatz administriert, kann hier auch den Agenten bearbeiten. Ein Klick auf den Namen startet direkt einen Chat.
+
 Über den Bearbeiten-Button neben **Favoriten** in der Seitenleiste oder unter **Profil → Favoriten** (`/me/favorites`) verschiebst du Einträge am Griff per Drag-and-drop. Über das **Favorit-entfernen-Symbol** entfernst du die Markierung direkt aus dem Entwurf, nicht den Inhalt. Bis zum Speichern kannst du sie mit **Zurücksetzen** wiederherstellen. Auch nicht mehr verfügbare Einträge kannst du entfernen. Der Schalter **In der Seitenleiste anzeigen** blendet die gesamte Favoritengruppe ein oder aus; die Dashboard-Favoriten bleiben sichtbar. Mit **Speichern** übernimmst du alle Änderungen, mit **Zurücksetzen** verwirfst du den Entwurf.
 
 In Listen passt du über **Optionen** die Sortierung, Gruppierung und Ansicht an. **Ansicht speichern** speichert die Auswahl für die jeweilige Übersicht.
@@ -64,12 +66,12 @@ Für Zugriffsfragen öffne [Berechtigungen](permissions.md). Ein Passwort änder
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer**; nur eigenes Konto.
-- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte. Automationen bleiben auf ihre Eigentümer mit Editorzugriff beschränkt.
-- `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer**.
-- `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer**.
-- `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer**.
-- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer**.
-- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
+- `platform_favorites_get`: Eigene Favoriten und Sidebar-Sichtbarkeit lesen. Mindeststufe: **Benutzer:in**; nur eigenes Konto.
+- `platform_favorites_update`: Eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit ersetzen; Einträge durch Weglassen entfernen. Mindeststufe: **Benutzer:in**; nur eigenes Konto. Gewährt keinen Zugriff auf die referenzierten Inhalte. Automationen bleiben auf ihre Eigentümer mit Editorzugriff beschränkt.
+- `platform_profile_get`: Eigenes Profil und Anmeldemethode lesen. Mindeststufe: **Benutzer:in**.
+- `platform_profile_name_update`: Eigenen Profilnamen ändern. Mindeststufe: **Benutzer:in**.
+- `platform_profile_avatar_update`: Eigenes Profilbild setzen oder zurücksetzen. Mindeststufe: **Benutzer:in**.
+- `platform_profile_password_reset`: Eigenes Passwort mit gültigem Reset-Schlüssel setzen. Mindeststufe: **Benutzer:in**.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

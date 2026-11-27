@@ -14,6 +14,8 @@ import {
 } from "../documents/taskQueue/_taskCodec.ts";
 import type { Task } from "../documents/taskQueue/_types.ts";
 import { recoverTaskDocuments } from "./recoverTaskDocuments.ts";
+import { admitChatTask } from "../documents/chat/admitChatTask.ts";
+import { getChatDocumentName } from "../documents/chat/_utils.ts";
 
 export function createTaskCoordinatorExtension(
   options: TaskClaimOptions,
@@ -57,13 +59,8 @@ export function createTaskCoordinatorExtension(
       if (documentName === getTaskQueueDocumentName() && type !== 0)
         validateQueueUpdate(document, payload);
     },
-    async onStateless({ connection, documentName, payload }) {
-      if (
-        documentName !== getTaskQueueDocumentName() ||
-        !connection.context?.authorization?.worker ||
-        !coordinator
-      )
-        return;
+    async onStateless({ connection, documentName, document, payload }) {
+      if (!connection.context?.authorization?.worker || !coordinator) return;
       let request;
       try {
         request = taskCoordinatorRequestSchema.safeParse(JSON.parse(payload));
@@ -72,12 +69,18 @@ export function createTaskCoordinatorExtension(
       }
       if (!request.success) return;
       const command = request.data;
+      const target =
+        command.action === "enqueue-chat"
+          ? getChatDocumentName(command.parameters)
+          : getTaskQueueDocumentName();
+      if (documentName !== target) return;
       const response: {
         protocol: typeof taskCoordinatorProtocol;
         requestId: string;
         ok: boolean;
         task?: string;
         accepted?: boolean;
+        admission?: ReturnType<typeof admitChatTask>;
       } = {
         protocol: taskCoordinatorProtocol,
         requestId: command.requestId,
@@ -94,7 +97,12 @@ export function createTaskCoordinatorExtension(
           );
         else
           await current.run(async () => {
-            if (command.action === "claim") {
+            if (command.action === "enqueue-chat") {
+              response.admission = admitChatTask(command.parameters, {
+                chat: { document },
+                taskQueue: current,
+              });
+            } else if (command.action === "claim") {
               const task = await current.claim(
                 command.type,
                 command.capabilities,

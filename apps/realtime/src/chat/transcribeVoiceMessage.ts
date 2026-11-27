@@ -26,11 +26,16 @@ export async function transcribeVoiceMessage(
       { supabase, requireTranscription: true },
     );
     if (task?.type !== "transcribe") return;
-    await runTask(task.type, task.parameters, task.requiredCapabilities, {
-      ...worker,
-      abortSignal,
-      chat: { agentId, activityId },
-    });
+    await runTask(
+      task.type,
+      { ...task.parameters, voiceMessage: true },
+      task.requiredCapabilities,
+      {
+        ...worker,
+        abortSignal,
+        chat: { agentId, activityId },
+      },
+    );
     return getDocumentContent(
       path,
       new StorageSession({

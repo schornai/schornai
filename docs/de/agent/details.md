@@ -8,11 +8,12 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für einen neuen Chat: ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-12"
+  last_verified: "2026-11-27"
   source_files:
     [
       "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
       "apps/web/app/_components/ModelContextSize.tsx",
+      "apps/web/app/_components/InfoTranscriber.tsx",
       "apps/web/app/(main)/agent/[agentId]/page.tsx",
       "apps/web/app/(main)/agent/_components/AgentInfo.tsx",
       "apps/web/app/(main)/agent/_components/AgentRecommendedMessage.tsx",
@@ -23,6 +24,8 @@ meta:
 
 Über **Infos** öffnest du die Übersicht eines Agenten. Sie hilft dir zu beurteilen, ob der Agent für deine Aufgabe geeignet ist und auf welche Daten er zugreifen kann.
 
+Auf der Infoseite zeigt die Agentenkarte die vollständige Beschreibung. Unter der Karte startest du einen neuen Chat oder änderst die Favoritenmarkierung. Wenn du den Arbeitsplatz administrierst, kannst du den Agenten hier als XRAG exportieren, einem XRAG-Paket hinzufügen, bearbeiten oder nach Bestätigung löschen. Scheitert das Löschen, bleibt der Dialog mit einer Fehlermeldung geöffnet.
+
 ## Was die Übersicht erklärt
 
 - **Prompt:** die Anweisungen, nach denen der Agent arbeitet.
@@ -31,6 +34,7 @@ meta:
 - **Externe Werkzeuge (MCP)** und **Web-Zugriff:** angebundene Dienste und aktivierte Internetfunktionen.
 - **Modell:** das verwendete KI-Modell, gegebenenfalls Kontextgröße und Bildfähigkeiten.
 - **Dokumentation** und **Vorschläge:** Hinweise und Beispielnachrichten für die Benutzung.
+- **Transkriptor:** Ist ein Transkriptor eingerichtet, siehst du seinen Namen oberhalb der zusätzlichen Funktionen. Klappe den Bereich auf und wähle **Zum Transkriptor**, um seine Infos zu öffnen. Der Link ist nur bei Zugriff auf den Transkriptor verfügbar.
 - **Arbeitsplatz:** der organisatorische Bereich, zu dem der Agent gehört.
 
 Klappe die Informationsbereiche auf, um die eingerichteten Verbindungen zu sehen. Wird eine Ablage als unbekannt angezeigt, lass die Arbeitsplatzadministration die Zuordnung und deine Leserechte an dieser Ablage prüfen.
@@ -55,4 +59,5 @@ Zum Ändern der Konfiguration brauchst du die Rolle Arbeitsplatzadministrator:in
 `platform_agent_get` liest die Agentenkonfiguration (Mindestzugriff **user**, Zugriff auf
 den jeweiligen Agenten erforderlich). `platform_models_list` liefert öffentliche
 Modellmetadaten einschließlich einer hinterlegten Kontextgröße (Mindestzugriff **user**).
+`platform_transcribers_list` listet mit derselben Mindeststufe die für dich zugänglichen Transkriptoren auf.
 Die Kontextanzeige selbst ist eine Browserfunktion und benötigt kein eigenes Werkzeug.

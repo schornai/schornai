@@ -75,13 +75,13 @@ kannst du gespeicherte OAuth-Verbindungen ansehen und trennen.
 
 HTTPS-MCP-Endpunkte können automatische Client-Registrierung oder eine vorab registrierte OAuth-App verwenden. Für GitHub ist eine registrierte App erforderlich:
 
-1. Eine globale Administrator:in legt unter [Einstellungen → Verbindungen](../../settings/connections.md) eine **OAuth-App** an: mit Name, Client-ID, Client Secret und der exakten **Issuer-URL** des OAuth-Anbieters. Die angezeigte Callback-URL muss bei der registrierten GitHub-App eingetragen sein.
+1. Die globale Administration legt unter [Einstellungen → Verbindungen](../../settings/connections.md) eine **OAuth-App** an: mit Name, Client-ID, Client Secret und der exakten **Issuer-URL** des OAuth-Anbieters. Die angezeigte Callback-URL muss bei der registrierten GitHub-App eingetragen sein.
 2. Trage im Agenten die MCP-URL ein, für GitHub beispielsweise `https://api.githubcopilot.com/mcp/`. Klicke neben **HTTP Header hinzufügen** auf **OAuth-App**, um die Auswahl zu öffnen, und wähle die registrierte App. Die URL bleibt unabhängig editierbar. Die Auswahl ist auch bei neuen, noch nicht gespeicherten MCP-Konfigurationen möglich.
 3. Speichere den Agenten, starte einen MCP-Aufruf und verbinde dein persönliches Konto.
 
 Das Dropdown zeigt alle zentralen OAuth-Verbindungen. Bei **Ohne hinterlegte OAuth-App** wird keine zentrale App verwendet. Diese Option bleibt für Anbieter mit dynamischer Client-Registrierung verfügbar. GitHub benötigt eine registrierte App samt Secret; bei fehlenden Angaben erklärt die Anmeldung die nötige Konfiguration.
 
-Im Agenten werden die Verbindungs-ID und die unabhängig konfigurierte MCP-Adresse gespeichert, keine Zugangsdaten. Ein Klon kann dieselbe zentrale Verbindung nutzen, ohne Secrets zu kopieren. Client-ID, Client Secret und ein bereits gesetzter Aussteller einer angelegten OAuth-App sind nicht bearbeitbar. Bei älteren Apps ohne Aussteller muss ein globaler Administrator diese Angabe unter Einstellungen → Verbindungen einmalig nachtragen; anschließend ist eine erneute persönliche Anmeldung erforderlich. Ein abweichender Aussteller in der MCP-Antwort wird abgelehnt. Für neue Zugangsdaten wird eine neue App angelegt und hier ausgewählt; dabei kann eine neue persönliche Anmeldung erforderlich werden. Gelöschte Verbindungen werden als nicht verfügbar angezeigt. Bereits ausgewählte Apps werden beim Öffnen des Editors direkt angezeigt. Der Button **OAuth-App** klappt die Auswahl ein oder aus, ohne die Auswahl zu ändern.
+Im Agenten werden die Verbindungs-ID und die unabhängig konfigurierte MCP-Adresse gespeichert, keine Zugangsdaten. Ein Klon kann dieselbe zentrale Verbindung nutzen, ohne Secrets zu kopieren. Client-ID, Client Secret und ein bereits gesetzter Aussteller einer angelegten OAuth-App sind nicht bearbeitbar. Bei älteren Apps ohne Aussteller muss die globale Administration diese Angabe unter Einstellungen → Verbindungen einmalig nachtragen; anschließend ist eine erneute persönliche Anmeldung erforderlich. Ein abweichender Aussteller in der MCP-Antwort wird abgelehnt. Für neue Zugangsdaten wird eine neue App angelegt und hier ausgewählt; dabei kann eine neue persönliche Anmeldung erforderlich werden. Gelöschte Verbindungen werden als nicht verfügbar angezeigt. Bereits ausgewählte Apps werden beim Öffnen des Editors direkt angezeigt. Der Button **OAuth-App** klappt die Auswahl ein oder aus, ohne die Auswahl zu ändern.
 
 Der Anbieter muss die Rückrufadresse
 `<Adresse deiner Box>/api/mcp/oauth/callback` akzeptieren und dein Browser muss
@@ -106,7 +106,7 @@ Eine OAuth-App kann für mehrere MCP-Endpunkte wiederverwendet werden, sofern de
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_connection_save`: Zentrale OAuth-App einschließlich `issuer` anlegen oder einen fehlenden Aussteller einmalig ergänzen. Mindeststufe und erforderliche Berechtigung: globaler Administrator. Bereits gesetzte OAuth-Identitäten bleiben unveränderlich.
-- `platform_agent_create` und `platform_agent_update`: MCP-Endpunkte und Referenzen auf zentrale OAuth-Apps in Agentenrollen speichern. Mindeststufe: Workspace-Administrator; Administratorrechte im betroffenen Arbeitsplatz erforderlich. Die Referenz gewährt keine zusätzlichen Rechte beim Anbieter.
+- `platform_connection_save`: Zentrale OAuth-App einschließlich `issuer` anlegen oder einen fehlenden Aussteller einmalig ergänzen. Mindeststufe und erforderliche Berechtigung: globale:r Administrator:in. Bereits gesetzte OAuth-Identitäten bleiben unveränderlich.
+- `platform_agent_create` und `platform_agent_update`: MCP-Endpunkte und Referenzen auf zentrale OAuth-Apps in Agentenrollen speichern. Mindeststufe: Arbeitsplatzadministrator:in; Administratorrechte im betroffenen Arbeitsplatz erforderlich. Die Referenz gewährt keine zusätzlichen Rechte beim Anbieter.
 
 Die persönliche Anmeldung und Zustimmung beim OAuth-Anbieter erfordern den Browser und werden nicht durch ein MCP-Werkzeug ersetzt.

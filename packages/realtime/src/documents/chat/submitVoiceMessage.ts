@@ -13,7 +13,7 @@ import { StorageSession } from "@schornio/aibox-database/storage/_utils/StorageS
 import { ServerRealtimeProvider } from "../../server/ServerRealtimeProvider.ts";
 import type { ServerRealtimeWebsocketProvider } from "../../server/ServerRealtimeWebsocketProvider.ts";
 import { getTaskQueueDocumentName } from "../taskQueue/_utils.ts";
-import { getTaskQueue } from "../taskQueue/getTaskQueue.ts";
+import { hasSubmittedVoice } from "./admitChatTask.ts";
 import { getChatDocumentName } from "./_utils.ts";
 import { getChat } from "./getChat.ts";
 import { getChatInteraction } from "./getChatInteraction.ts";
@@ -76,24 +76,7 @@ export async function submitVoiceMessage(
   await Promise.all([chat.waitForSynced(), taskQueue.waitForSynced()]);
   const messages = getChat(chat.document).messages?.toArray() ?? [];
   // Retrying an upload acknowledgement must not send the same recording twice.
-  if (
-    messages.some((message) =>
-      message.parts.some(
-        (part) => part.type === "data-voice" && part.data.path === path,
-      ),
-    ) ||
-    getTaskQueue(taskQueue.document)
-      .tasks.toArray()
-      .some(
-        (task) =>
-          task.type === "chat" &&
-          task.parameters.agentId === agentId &&
-          task.parameters.activityId === activityId &&
-          task.parameters.voice?.path === path &&
-          ["pending", "claimed"].includes(task.state),
-      )
-  )
-    return;
+  if (hasSubmittedVoice(ids, path, { chat, taskQueue })) return;
   assertChatIdle(ids, { chat, taskQueue });
   if (getChatInteraction(messages).type === "tool-approval")
     throw new Error("TOOL_APPROVAL_REQUIRED");

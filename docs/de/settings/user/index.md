@@ -46,7 +46,7 @@ Für bestehende lokale Konten kannst du auf der [Detailseite unter Passwort zur�
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_users_list`: Benutzerverzeichnis lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_user_create`: E-Mail-Konto mit einmaligem Einrichtungsschlüssel anlegen. Mindeststufe: **Globaler Administrator**.
+- `platform_users_list`: Benutzerverzeichnis lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_user_create`: E-Mail-Konto mit einmaligem Einrichtungsschlüssel anlegen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -127,9 +127,9 @@ meta:
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_favorites_get`: Eigene Favoriten lesen. Mindeststufe: **Benutzer**.
-- `platform_favorites_update`: Favoriten und Sidebar-Sichtbarkeit speichern. Mindeststufe: **Benutzer**.
-- `platform_view_preferences_get`: Gruppierung, Sortierung und Ansicht lesen. Mindeststufe: **Benutzer**.
-- `platform_view_preferences_update`: Gruppierung, Sortierung und Ansicht speichern. Mindeststufe: **Benutzer**.
+- `platform_favorites_get`: Eigene Favoriten lesen. Mindeststufe: **Benutzer:in**.
+- `platform_favorites_update`: Favoriten und Sidebar-Sichtbarkeit speichern. Mindeststufe: **Benutzer:in**.
+- `platform_view_preferences_get`: Gruppierung, Sortierung und Ansicht lesen. Mindeststufe: **Benutzer:in**.
+- `platform_view_preferences_update`: Gruppierung, Sortierung und Ansicht speichern. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](agent/edit/plattformzugriff.md).

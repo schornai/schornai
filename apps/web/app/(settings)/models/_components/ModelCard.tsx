@@ -37,7 +37,7 @@ export function ModelCard({
         render={<Link href={`/models/${encodeURIComponent(model.id)}`} />}
       >
         <CardAppAvatar icon={{ type: "icon-lucide", iconName: "brain" }} />
-        <CardAppContent className="min-w-0 pr-3">
+        <CardAppContent>
           <CardAppName className="break-words">{model.name}</CardAppName>
           <CardAppDescription className="break-all">
             {model.modelId || model.identifier}

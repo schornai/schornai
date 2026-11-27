@@ -89,10 +89,10 @@
     "labelDeny": "Ablehnen",
     "errorAuthorization": "Die Freigabe ist ungültig oder Ihre Berechtigungen reichen nicht aus.",
     "level": {
-      "user": "Benutzer",
-      "editor": "Editor",
-      "workspace": "Workspace-Administrator",
-      "admin": "Globaler Administrator"
+      "user": "Benutzer:in",
+      "editor": "Bearbeiter:in",
+      "workspace": "Arbeitsplatzadministrator:in",
+      "admin": "Globale:r Administrator:in"
     },
     "labelConnectTitle": "Deine Werkzeuge. Deine Freigabe.",
     "descriptionConnect": "Verbinde eine KI-Anwendung mit schorn.ai und entscheide, welchen Zugriff du ihr erlaubst.",

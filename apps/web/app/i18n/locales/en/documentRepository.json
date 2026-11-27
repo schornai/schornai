@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Unknown workspace"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Root folder",
       "tooltipEdit": "Edit",
       "tooltipInfo": "Info"
     },

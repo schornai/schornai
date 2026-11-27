@@ -31,6 +31,13 @@ export const submitVoiceMessage = serverActionClient
     } catch (error) {
       if (error instanceof TranscriberConfigurationError)
         return { queued: false as const, issue: error.code };
+      if (
+        error instanceof Error &&
+        ["CHAT_BUSY", "TOOL_APPROVAL_REQUIRED", "AUDIO_FILE_REQUIRED"].includes(
+          error.message,
+        )
+      )
+        return { queued: false as const, issue: undefined };
       throw error;
     }
     revalidatePath(`/agent/${parsedInput.agentId}/${parsedInput.activityId}`);

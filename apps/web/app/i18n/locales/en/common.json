@@ -9,6 +9,7 @@
         "history": "History"
       },
       "SidebarFavorites": {
+        "labelActions": "Actions for {{name}}",
         "label": "Favorites",
         "empty": "No favorites added yet.",
         "labelEdit": "Edit favorites"
@@ -117,6 +118,9 @@
       "labelProcessing": "Processing file…",
       "labelUploading": "Uploading file · {{progress}}%",
       "labelUnprocessed": "Not yet processed"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Could not delete this item. Please try again."
     },
     "StorageDialogRemove": {
       "labelTitle": "Remove",

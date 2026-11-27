@@ -722,6 +722,45 @@ it("starts on open and submits the final microphone chunk with one click", async
   expect(close).toHaveBeenCalledOnce();
 });
 
+it.each([true, false])(
+  "discards the uploaded clip only after a confirmed rejection (%s)",
+  async (rejected) => {
+    const close = vi.fn();
+    client.execute
+      .mockReset()
+      .mockResolvedValueOnce(
+        rejected ? { data: { queued: false } } : { serverError: "unknown" },
+      );
+    mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+    render(
+      <ChatVoiceRecorder
+        agentId="agent"
+        activityId="activity"
+        onClose={close}
+      />,
+    );
+    await screen.findByText("labelRecording");
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: rejected ? "labelDiscard" : "labelClose",
+      }),
+    );
+    if (rejected) {
+      expect(client.execute).toHaveBeenLastCalledWith({
+        path: "clip.webm",
+        storage: { type: "activity", agentId: "agent", activityId: "activity" },
+      });
+      expect(close).not.toHaveBeenCalled();
+    } else {
+      expect(client.execute).toHaveBeenCalledOnce();
+      expect(close).toHaveBeenCalledOnce();
+    }
+  },
+);
+
 it("discards a chat recording without uploading", async () => {
   const close = vi.fn();
   const view = render(
