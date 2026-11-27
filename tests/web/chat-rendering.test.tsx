@@ -419,6 +419,9 @@ it.each([undefined, "Short", "x".repeat(181)])(
 );
 
 it.each([
+  ["CHAT_FILE_PROCESSING_FAILED", "errorFileProcessing"],
+  ["CHAT_FILE_PROCESSING_TIMEOUT", "errorFileTimeout"],
+  ["TRANSCRIBER_NOT_FOUND", "errorTranscriberNotFound"],
   ["CONTEXT_BUDGET_EXCEEDED", "errorContextBudget"],
   ["CONTEXT_COMPRESSION_FAILED", "errorContextCompression"],
   ["TASK_WORKER_LOST", "errorWorkerLost"],

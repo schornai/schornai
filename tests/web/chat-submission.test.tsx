@@ -20,6 +20,7 @@ const mocks = vi.hoisted(() => ({
   chatStatus: "idle",
   uploads: [] as any[],
   pendingFilePaths: [] as string[],
+  unconfirmedFilePaths: [] as string[],
   upload: vi.fn(),
   state: vi.fn(),
   batchState: vi.fn(),
@@ -45,6 +46,24 @@ vi.mock(
     useChatStatus: () => mocks.chatStatus,
   }),
 );
+vi.mock(
+  "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder",
+  () => ({
+    ChatVoiceRecorder: ({
+      onClose,
+      autoStart,
+      thinking,
+    }: {
+      onClose: () => void;
+      autoStart: boolean;
+      thinking: boolean;
+    }) => (
+      <button onClick={onClose} data-start={autoStart} data-thinking={thinking}>
+        Close recorder
+      </button>
+    ),
+  }),
+);
 vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
   useFileUpload: () => ({
     uploads: mocks.uploads,
@@ -55,6 +74,7 @@ vi.mock("../../apps/web/app/_components/StorageViewProvider", () => ({
   useStorageView: () => ({
     itemGroups: [["files", mocks.files]],
     pendingFilePaths: mocks.pendingFilePaths,
+    unconfirmedFilePaths: mocks.unconfirmedFilePaths,
     storage: { type: "activity", agentId: "agent", activityId: "activity" },
     basePathApp: "/files",
   }),
@@ -103,6 +123,7 @@ beforeEach(() => {
   mocks.canSend = true;
   mocks.chatStatus = "idle";
   mocks.uploads = [];
+  mocks.unconfirmedFilePaths = [];
   mocks.pendingFilePaths = [];
   mocks.files = [];
   for (const mock of Object.values(mocks))
@@ -421,7 +442,7 @@ describe("web tool approvals", () => {
   );
 });
 
-it.each(["queued", "uploading", "processing"])(
+it.each(["queued", "uploading", "registering"])(
   "blocks send, Enter and batch submission while a file is %s",
   (state) => {
     mocks.context.messageBatch.push({
@@ -433,7 +454,8 @@ it.each(["queued", "uploading", "processing"])(
         files: [{ path: "/nested/file.pdf" }],
       },
     });
-    if (state === "processing") mocks.pendingFilePaths = ["/nested/file.pdf"];
+    if (state === "registering")
+      mocks.unconfirmedFilePaths = ["/nested/file.pdf"];
     else mocks.uploads = [{ state }];
     const view = compose();
     expect(
@@ -453,7 +475,7 @@ it.each(["queued", "uploading", "processing"])(
     expect(client.execute).not.toHaveBeenCalled();
 
     mocks.uploads = [];
-    mocks.pendingFilePaths = [];
+    mocks.unconfirmedFilePaths = [];
     view.rerender(
       <Collapsible>
         <ChatComposeMessageSelected />
@@ -469,6 +491,29 @@ it.each(["queued", "uploading", "processing"])(
         .getByRole("button", { name: "buttonStartBatch" })
         .hasAttribute("disabled"),
     ).toBe(false);
+  },
+);
+
+it.each(["buttonSend", "Enter", "buttonStartBatch"])(
+  "submits a file-only message via %s while its file is processing",
+  async (submit) => {
+    const message = {
+      id: "message",
+      state: "paused",
+      content: { type: "text", text: "", files: [{ path: "nested/file.pdf" }] },
+    };
+    mocks.context.selectedCurrentMessage = message;
+    mocks.context.messageBatch = [message, { ...message, id: "other" }];
+    mocks.pendingFilePaths = ["nested/file.pdf"];
+    compose();
+    expect(screen.queryByRole("status")).toBeNull();
+    if (submit === "Enter")
+      fireEvent.keyDown(screen.getByRole("textbox"), { key: "Enter" });
+    else fireEvent.click(screen.getByRole("button", { name: submit }));
+    await waitFor(() => expect(client.execute).toHaveBeenCalledOnce());
+    expect(mocks.batchState).toHaveBeenCalledTimes(
+      submit === "buttonStartBatch" ? 1 : 0,
+    );
   },
 );
 
@@ -761,4 +806,59 @@ it("switches the send slot between recording and sending as text, attachments an
   refresh();
   expect(send().hasAttribute("disabled")).toBe(false);
   expect(screen.queryByRole("status")).toBeNull();
+});
+
+it("returns from recording to the draft and sends its processing attachment", async () => {
+  mocks.context.voiceStatus = "ready";
+  mocks.context.defaultThinking = true;
+  mocks.context.selectedCurrentMessage = undefined;
+  mocks.context.messageBatch = [];
+  const view = compose();
+  fireEvent.click(screen.getByRole("button", { name: "buttonRecord" }));
+  const recorder = screen.getByRole("button", { name: "Close recorder" });
+  expect(recorder.getAttribute("data-start")).toBe("true");
+  expect(recorder.getAttribute("data-thinking")).toBe("true");
+  fireEvent.click(recorder);
+  const draft = {
+    id: "first",
+    state: "paused",
+    content: {
+      type: "text",
+      text: "",
+      thinking: false,
+      files: [{ path: "report.pdf" }],
+    },
+  };
+  mocks.context.selectedCurrentMessage = draft;
+  mocks.context.messageBatch = [draft];
+  mocks.pendingFilePaths = ["report.pdf"];
+  view.rerender(
+    <Collapsible>
+      <ChatComposeMessageSelected />
+    </Collapsible>,
+  );
+  act(() => {
+    window.history.replaceState(null, "", "#record");
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  });
+  const prompt = screen.getByRole("button", { name: "Close recorder" });
+  expect(prompt.getAttribute("data-start")).toBe("false");
+  expect(prompt.getAttribute("data-thinking")).toBe("false");
+  expect(window.location.hash).toBe("");
+  fireEvent.click(prompt);
+  fireEvent.click(screen.getByRole("button", { name: "buttonSend" }));
+  await waitFor(() => expect(client.execute).toHaveBeenCalledOnce());
+});
+it("allows a document submission when the agent's voice transcriber is unavailable", async () => {
+  mocks.context.voiceStatus = "TRANSCRIBER_NOT_FOUND";
+  const draft = mocks.context.messageBatch[0];
+  draft.content.files = [{ path: "doc.pdf" }];
+  mocks.context.selectedCurrentMessage = draft;
+  mocks.pendingFilePaths = ["doc.pdf"];
+  compose();
+  expect(screen.getByRole("status").textContent).toContain(
+    "errorTranscriberNotFound",
+  );
+  fireEvent.click(screen.getByRole("button", { name: "buttonSend" }));
+  await waitFor(() => expect(client.execute).toHaveBeenCalledOnce());
 });

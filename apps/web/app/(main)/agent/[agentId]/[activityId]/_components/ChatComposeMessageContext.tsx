@@ -1,5 +1,6 @@
 "use client";
 import type { VoiceTranscriberStatus } from "@/lib/voiceTranscriberStatus";
+import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
 import type { ChatExpiration } from "@schornio/aibox-package-database/chat/expirationSchema";
 import type { StorageRealtimeObject } from "@schornio/aibox-realtime/documents/storage/_types";
 
@@ -60,6 +61,7 @@ const context = createContext<
       setSelectedCurrentMessageId: Dispatch<SetStateAction<string | undefined>>;
       setFirstCurrentMessageSubmitted: () => string;
       addSelectedFiles: (files: StorageRealtimeObject[]) => void;
+      removeFailedUpload: (path: string) => void;
       setSelectedCurrentMessageText: (text: string) => void;
       setSelectedCurrentMessageThinking: (thinking?: boolean) => void;
       waitForSubmittedChanges: () => Promise<void>;
@@ -256,6 +258,21 @@ function ChatComposeMessageContextProvider({
       value={{
         activity,
         addSelectedFiles,
+        removeFailedUpload: (path) => {
+          const draft = messageBatchYArray
+            .toArray()
+            .map(normalizeChatCurrentMessage)
+            .find((message) => message.id === selectedCurrentMessage?.id);
+          if (draft?.content.type !== "text" || draft.state === "claimed")
+            return;
+          patchChatCurrentMessage(provider.document, draft.id, {
+            type: "text",
+            files: draft.content.files?.filter(
+              (file) =>
+                file.attachment || resolvePath(file.path) !== resolvePath(path),
+            ),
+          });
+        },
         activityId,
         agentId,
         additionalFunctions,

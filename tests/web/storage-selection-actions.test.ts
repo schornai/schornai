@@ -1,5 +1,8 @@
+import { selectChatFile } from "../../packages/realtime/src/documents/storage/selectChatFile";
+import { Doc } from "yjs";
 import { beforeEach, expect, it, vi } from "vitest";
 const state = vi.hoisted(() => ({
+  queue: undefined as unknown as Doc,
   access: vi.fn(),
   prepare: vi.fn(),
   agent: vi.fn(),
@@ -60,6 +63,13 @@ vi.mock(
   "@schornio/aibox-realtime/server/ServerRealtimeWebsocketProvider",
   () => ({ ServerRealtimeWebsocketProvider: class {} }),
 );
+vi.mock("../../packages/realtime/src/server/ServerRealtimeProvider", () => ({
+  ServerRealtimeProvider: class {
+    document = state.queue;
+    async waitForSynced() {}
+    async [Symbol.asyncDispose]() {}
+  },
+}));
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
 import { storageBrowse } from "../../apps/web/app/_actions/storageBrowse";
 import { storageSelectChatFile } from "../../apps/web/app/_actions/storageSelectChatFile";
@@ -85,6 +95,7 @@ const input = {
 };
 beforeEach(() => {
   vi.clearAllMocks();
+  state.queue = new Doc();
   state.access.mockReset();
   state.prepare.mockReset();
   state.repositories.mockResolvedValue([
@@ -239,4 +250,92 @@ it("forces a copy even for mounted files and rejects unmounted references", asyn
   });
   expect(result.copied).toBe(true);
   expect(state.transfer).toHaveBeenCalledOnce();
+});
+
+it("selects a document from this chat during its existing processing job", async () => {
+  const storage = {
+    type: "activity",
+    agentId: "a",
+    activityId: "activity",
+  } as const;
+  const pdf = {
+    ...file,
+    name: "file.pdf",
+    path: "file.pdf",
+    type: "application/pdf",
+  };
+  state.inspect.mockResolvedValue(pdf);
+  state.content.mockResolvedValue(undefined);
+  const selection = { ...input, path: pdf.path, storage };
+  expect(await storageSelectChatFile(selection)).toEqual({
+    error: "FILE_NOT_PROCESSED",
+  });
+  state.queue.getArray("tasks").push([
+    {
+      type: "process-file",
+      state: "claimed",
+      parameters: { storage, path: pdf.path },
+    },
+  ]);
+  expect(await storageSelectChatFile(selection)).toEqual({
+    file: pdf,
+    copied: false,
+  });
+  expect(state.transfer).not.toHaveBeenCalled();
+});
+
+it("rejects missing files and preserves extensionless file names when making a chat copy", async () => {
+  const selection = { ...input, path: "README" };
+  state.inspect.mockResolvedValueOnce(undefined);
+  await expect(storageSelectChatFile(selection)).rejects.toThrow(
+    "FILE_NOT_FOUND",
+  );
+  state.inspect.mockResolvedValue({ ...file, path: "README", name: "README" });
+  const result = await storageSelectChatFile(selection);
+  expect(result.file?.path).toMatch(/^attachment-[a-f0-9-]+-README$/);
+});
+it("accepts a mounted document whose processing finishes during selection", async () => {
+  const pdf = { ...file, path: "report.pdf", name: "report.pdf" };
+  state.inspect.mockResolvedValue(pdf);
+  state.agent.mockResolvedValue({
+    roles: [
+      {
+        documentRepositoryMounts: [
+          {
+            id: "mount",
+            documentRepositoryIdentifier: "repo",
+            mount: "docs",
+            pathRepository: "",
+            permission: "read-only",
+          },
+        ],
+      },
+    ],
+  });
+  state.content.mockResolvedValueOnce(undefined);
+  const result = await selectChatFile(
+    { ...input, path: pdf.path },
+    {
+      supabase: state.supabase as any,
+      serverToken: "Worker test",
+      websocketProvider: {} as any,
+      abortSignal: new AbortController().signal,
+    },
+  );
+  expect(result.file?.attachment?.agentPath).toBe("docs/report.pdf");
+  expect(state.content).toHaveBeenCalledTimes(2);
+  expect(state.transfer).not.toHaveBeenCalled();
+  state.content.mockResolvedValue(undefined);
+  state.queue.getArray("tasks").push([
+    {
+      type: "process-file",
+      state: "claimed",
+      parameters: { storage, path: pdf.path },
+    },
+  ]);
+  const pending = await storageSelectChatFile({ ...input, path: pdf.path });
+  expect(pending.file).toMatchObject({
+    attachment: { storage, agentPath: "docs/report.pdf" },
+    currentAction: { state: "processing", target: pdf },
+  });
 });

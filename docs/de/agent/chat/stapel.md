@@ -8,7 +8,7 @@ meta:
   role_scope: "Zugängliches Gespräch"
   prerequisites: "Eine Aufgabenliste, die im selben Chat nacheinander bearbeitet werden soll."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-23"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatComposeMessageBatch.tsx",
@@ -29,8 +29,7 @@ Der **Nachrichtenstapel** hilft dir, mehrere Aufgaben in einem Gespräch vorzube
 2. Wähle **Neue Nachricht** für jeden weiteren Eintrag.
 3. Wähle einen Eintrag und bearbeite seinen Text, gegebenenfalls seine Anhänge und Nachdenken-Option.
 4. Prüfe die Nummerierung. Die Darstellung zeigt neue Einträge oben; die Nummer hilft dir, die vorgesehene Reihenfolge zu erkennen.
-5. Warte auf die Verarbeitung aller angehängten Dateien.
-6. Bei mehreren vorbereiteten Nachrichten wähle **Stapelverarbeitung starten**.
+5. Wähle nach dem Hochladen der Anhänge **Stapelverarbeitung starten**. Der Agent wartet bei jedem Eintrag auf die Verarbeitung der zugehörigen Dateien.
 
 Beispiel: erst eine Zusammenfassung erstellen lassen, dann aus dem Ergebnis offene Fragen sammeln und anschließend einen Maßnahmenentwurf formulieren lassen.
 
@@ -49,6 +48,6 @@ Wenn eine Nachricht eine Werkzeugfreigabe auslöst, benötigt der Chat zunächst
 - `platform_chat_drafts`: Nachrichtenstapel lesen. Mindeststufe: **Benutzer:in**.
 - `platform_chat_draft_update`: Pausierten Entwurf anlegen, ändern oder entfernen. Mindeststufe: **Benutzer:in**.
 - `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer:in**.
-- `platform_chat_submit_batch`: Pausierte Nachrichten als Stapel absenden. Mindeststufe: **Benutzer:in**.
+- `platform_chat_submit_batch`: Pausierte Nachrichten als Stapel absenden, auch während die Anhänge verarbeitet werden. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -385,8 +385,8 @@
       "buttonPause": "Pause",
       "buttonStartBatch": "Start batch",
       "buttonSend": "Send",
-      "descriptionFilesPending": "Files are uploading or being processed …",
       "labelAttachFiles": "Attach files",
+      "labelRemoveFailedUpload": "Remove failed attachment {{name}}",
       "labelUploadFiles": "Upload files",
       "labelSelectFile": "Choose an existing file"
     },
@@ -788,6 +788,8 @@
       "errorApprovalRolesMismatch": "The pending tool approvals belong to different roles and cannot be resumed together. Start a new chat.",
       "errorModelApiKey": "The language model’s API key is missing. Ask someone with access to model management to check its configuration.",
       "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration.",
+      "errorFileTimeout": "The attachment is taking longer than expected to process. Once it is ready, you can retry the response.",
+      "errorFileProcessing": "An attachment could not be processed. Check the file and restart its processing if needed.",
       "errorVoiceTranscription": "Could not transcribe the recording. Check the transcriber and try again.",
       "errorVoiceTimeout": "The transcription service did not return a result within ten minutes. Check whether a worker with the selected Whisper model is running and try again.",
       "errorVoiceEmpty": "No speech was detected in the recording."

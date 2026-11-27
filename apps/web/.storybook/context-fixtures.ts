@@ -387,6 +387,7 @@ export function configureContextFixtures(
           basePathApp: "/files",
           basePathStorage: "/",
           pendingFilePaths: [],
+          unconfirmedFilePaths: [],
           storage: {
             activityId: "11111111-1111-4111-8111-111111111111",
             agentId: "11111111-1111-4111-8111-111111111111",
@@ -583,6 +584,7 @@ export function configureContextFixtures(
         setSelectedCurrentMessageText: fn(),
         setSelectedCurrentMessageThinking: fn(),
         addSelectedFiles: fn(),
+        removeFailedUpload: fn(),
         waitForSubmittedChanges: fn(async () => {}),
       },
       scenario,

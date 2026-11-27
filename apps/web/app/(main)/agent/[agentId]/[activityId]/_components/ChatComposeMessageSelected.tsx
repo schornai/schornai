@@ -6,6 +6,7 @@ import {
   MicOff,
   File,
   Upload,
+  X,
   Layers,
   Paperclip,
   Pause,
@@ -90,6 +91,7 @@ export function ChatComposeMessageSelected({
     expiration,
     activity,
     addSelectedFiles,
+    removeFailedUpload,
     activityId,
     agentId,
     defaultThinking,
@@ -107,7 +109,7 @@ export function ChatComposeMessageSelected({
     basePathApp,
     storage,
     itemGroups,
-    pendingFilePaths = [],
+    unconfirmedFilePaths = [],
   } = useStorageView();
 
   const voiceEnabled = voiceStatus === "ready";
@@ -137,18 +139,19 @@ export function ChatComposeMessageSelected({
           .map((file) => resolvePath(file.path)) ?? [],
     ),
   );
-  const filesPending =
+  const filesUploading =
     uploads.some(
       (upload) => upload.state === "queued" || upload.state === "uploading",
-    ) || pendingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
+    ) ||
+    unconfirmedFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
 
   const nextHasContent = hasMessageContent(messageBatch[0]);
   const showMicrophone =
     voiceEnabled &&
-    !filesPending &&
+    !filesUploading &&
     !nextHasContent &&
     !hasMessageContent(selectedCurrentMessage);
-  const sendDisabled = isSubmitted || filesPending || !nextHasContent;
+  const sendDisabled = isSubmitted || filesUploading || !nextHasContent;
   useEffect(() => {
     if (!voiceEnabled || !canSend || isSubmitted) return;
     const openFromHash = () => {
@@ -233,6 +236,24 @@ export function ChatComposeMessageSelected({
           <AttachmentGroup>
             {itemGroups[0]?.[1]?.map((file) => (
               <StorageObjectTile
+                actions={
+                  !file.attachment &&
+                  file.currentAction?.state === "error" &&
+                  canSend &&
+                  !isSubmitted ? (
+                    <Button
+                      type="button"
+                      size="icon-xs"
+                      variant="ghost"
+                      aria-label={t("labelRemoveFailedUpload", {
+                        name: file.name,
+                      })}
+                      onClick={() => removeFailedUpload(file.path)}
+                    >
+                      <X />
+                    </Button>
+                  ) : undefined
+                }
                 basePathApp={
                   file.attachment
                     ? storageToAppBasePath(file.attachment.storage)
@@ -276,11 +297,6 @@ export function ChatComposeMessageSelected({
         value={selectedCurrentMessage?.content.text ?? ""}
       />
 
-      {filesPending ? (
-        <p role="status" className="text-muted-foreground px-3 pb-1 text-xs">
-          {t("descriptionFilesPending")}
-        </p>
-      ) : null}
       <div className="flex items-center gap-0.5 p-1">
         <Tooltip>
           <TooltipTrigger

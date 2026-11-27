@@ -1,5 +1,15 @@
 // @vitest-environment jsdom
 import "./client-setup";
+import { Doc } from "yjs";
+import { act } from "@testing-library/react";
+const referenceLog = new Doc();
+vi.mock("@/lib/RealtimeRoom", () => ({
+  RealtimeRoom: ({ children }: any) => children,
+}));
+vi.mock("@hocuspocus/provider-react", async (original) => ({
+  ...(await original<object>()),
+  useHocuspocusProvider: () => ({ document: referenceLog }),
+}));
 import {
   cleanup,
   fireEvent,
@@ -239,6 +249,32 @@ describe("storage browser", () => {
   });
 });
 describe("storage tiles and drop zones", () => {
+  it("announces processing and completion from the referenced repository", () => {
+    const target = { ...objects[1], file: true, path: "source/report.pdf" };
+    render(
+      <StorageObjectTile
+        variant="tiles-small"
+        storageObject={
+          {
+            ...target,
+            attachment: { storage, agentPath: "mount/report.pdf" },
+            currentAction: { state: "processing", target },
+          } as any
+        }
+      />,
+    );
+    expect(screen.getByRole("status").textContent).toContain("labelProcessing");
+    act(() =>
+      referenceLog.getArray("log").push([
+        {
+          target,
+          state: "created",
+          content: { type: "mdc", current: "Completed" },
+        },
+      ]),
+    );
+    expect(screen.getByRole("status").textContent).toContain("labelReady");
+  });
   it.each([undefined, "created", "error", "uploading", "processing"])(
     "renders image previews with state %s",
     (state) => {
@@ -278,7 +314,9 @@ describe("storage tiles and drop zones", () => {
         variant="tiles-large"
       />,
     );
-    expect(screen.getByText("Noch nicht verarbeitet")).toBeTruthy();
+    expect(screen.getByRole("status").textContent).toContain(
+      "labelUnprocessed",
+    );
     expect(screen.queryByRole("link")).toBeNull();
     cleanup();
     uploads.progress = 0.5;

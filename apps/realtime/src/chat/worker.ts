@@ -1,5 +1,6 @@
 import { getActivities } from "@schornio/aibox-realtime/documents/activity/getActivities";
 import { setActivityLabel } from "@schornio/aibox-realtime/documents/activity/setActivityLabel";
+import { waitForFileProcessing } from "@schornio/aibox-realtime/documents/storage/waitForFileProcessing";
 import { transcribeVoiceMessage } from "./transcribeVoiceMessage.ts";
 import { getDocumentRepositories } from "@schornio/aibox-database/documentRepositories/getDocumentRepositories";
 import { requireStorageAccess } from "@schornio/aibox-database/storage/requireStorageAccess";
@@ -67,547 +68,583 @@ export async function chatWorker({
     workerIdentifier,
   });
 
-  await taskQueue.handleTask(async (claimedTask, abortSignal) => {
-    const chatDocumentName = getChatDocumentName({
-      activityId: claimedTask.parameters.activityId,
-      agentId: claimedTask.parameters.agentId,
-    });
-
-    await using chat = new ServerRealtimeProvider({
-      documentName: chatDocumentName,
-      serverToken,
-      websocketProvider,
-    });
-
-    await using currentChatMessage = new ServerRealtimeProvider({
-      documentName: getChatCurrentMessageDocumentName({
+  await taskQueue.handleTask(
+    async (claimedTask, abortSignal, queue, whileWaiting) => {
+      const chatDocumentName = getChatDocumentName({
         activityId: claimedTask.parameters.activityId,
         agentId: claimedTask.parameters.agentId,
-      }),
-      serverToken,
-      websocketProvider,
-    });
-
-    const allowedUserIds = await getAllowedUserIdsByDocumentName(
-      chatDocumentName,
-      { abortSignal, supabase: supabaseServiceRole },
-    );
-
-    await using activites = new ServerBatchRealtimeProvider({
-      documentNames: allowedUserIds.map((userId) =>
-        getActivitiesDocumentName({ userId }),
-      ),
-      serverToken,
-      websocketProvider,
-    });
-
-    const [supabase] = await Promise.all([
-      createClientWithClaims(
-        claimedTask.parameters.userId,
-        claimedTask.parameters.userClaims,
-      ),
-      chat.waitForSynced({ abortSignal }),
-      currentChatMessage.waitForSynced({ abortSignal }),
-      activites.waitForSynced({ abortSignal }),
-    ]);
-
-    try {
-      const activityContent: Activity["content"] = {
-        chatbotId: claimedTask.parameters.agentId,
-        type: "chat",
-      };
-
-      const assertGenerationActive = (allowFinalPartialAnswer = false) => {
-        if (
-          !allowFinalPartialAnswer ||
-          (abortSignal.reason instanceof Error &&
-            abortSignal.reason.message === "TASK_LEASE_LOST")
-        )
-          abortSignal.throwIfAborted();
-        const state = chat.document.getMap("state");
-        if (
-          (state.has("generationId") &&
-            state.get("generationId") !== claimedTask.id) ||
-          ["idle", "error"].includes(String(state.get("type")))
-        )
-          throw new DOMException("Generation no longer active", "AbortError");
-      };
-      const claimNextInput = () => {
-        assertGenerationActive();
-        return claimNextChatCurrentMessage(currentChatMessage.document, {
-          awaitingApproval:
-            getChatInteraction(getChat(chat.document).messages?.toArray() ?? [])
-              .type === "tool-approval",
-        });
-      };
-      assertGenerationActive();
-      const lastMessage = getChat(chat.document).messages?.toArray().at(-1);
-      // A failed transcription is retried against the same history entry.
-      const unfinishedVoice =
-        claimedTask.parameters.retry &&
-        lastMessage?.role === "user" &&
-        !lastMessage.parts.some((part) => part.type === "text")
-          ? lastMessage.parts.find((part) => part.type === "data-voice")?.data
-          : undefined;
-      const voice = claimedTask.parameters.voice ?? unfinishedVoice;
-      const voiceMessage: ChatMessage | undefined = voice
-        ? {
-            id:
-              unfinishedVoice && lastMessage ? lastMessage.id : claimedTask.id,
-            role: "user",
-            parts: [{ type: "data-voice", data: voice }],
-            metadata: {
-              thinking: unfinishedVoice
-                ? lastMessage?.metadata?.thinking
-                : claimedTask.parameters.thinking,
-            },
-          }
-        : undefined;
-
-      let claimedCurrentChatMessage:
-        | ReturnType<typeof claimNextInput>
-        | { content: { type: "retry"; thinking?: boolean } } = voice
-        ? undefined
-        : claimedTask.parameters.retry
-          ? { content: { type: "retry" } }
-          : claimNextInput();
-
-      setChatState(chat.document, {
-        generationId: claimedTask.id,
-        claimedAtISO: claimedTask.claimedAtISO,
-        claimedWorkerId: workerIdentifier,
-        type: "generating",
       });
-      activites.batch(
-        upsertActivity,
-        {
-          content: activityContent,
-          id: claimedTask.parameters.activityId,
-          state: "running",
-        },
-        {
-          labelOnInsert:
-            claimedCurrentChatMessage?.content.type === "text"
-              ? claimedCurrentChatMessage.content.text
-              : voice?.path,
-        },
+
+      await using chat = new ServerRealtimeProvider({
+        documentName: chatDocumentName,
+        serverToken,
+        websocketProvider,
+      });
+
+      await using currentChatMessage = new ServerRealtimeProvider({
+        documentName: getChatCurrentMessageDocumentName({
+          activityId: claimedTask.parameters.activityId,
+          agentId: claimedTask.parameters.agentId,
+        }),
+        serverToken,
+        websocketProvider,
+      });
+
+      const allowedUserIds = await getAllowedUserIdsByDocumentName(
+        chatDocumentName,
+        { abortSignal, supabase: supabaseServiceRole },
       );
 
-      if (voice && voiceMessage) {
-        updateChatMessage(chat.document, voiceMessage);
-        await chat.waitForSynced({ abortSignal });
-        const text = await transcribeVoiceMessage(
-          voice.path,
-          claimedTask.parameters,
-          { supabase, serverToken, websocketProvider, abortSignal },
-        );
-        assertGenerationActive();
-        // Replace only the provisional title of a conversation started by this recording.
-        for (const doc of activites.documents) {
-          const activity = getActivities(doc).activities.get(
-            claimedTask.parameters.activityId,
-          );
-          if (activity?.label === voice.path)
-            setActivityLabel(doc, activity.id, text.slice(0, 500), true);
-        }
-        claimedCurrentChatMessage = {
-          id: voiceMessage.id,
-          state: "claimed",
-          content: {
-            type: "text",
-            text,
-            thinking: voiceMessage.metadata?.thinking,
-          },
+      await using activites = new ServerBatchRealtimeProvider({
+        documentNames: allowedUserIds.map((userId) =>
+          getActivitiesDocumentName({ userId }),
+        ),
+        serverToken,
+        websocketProvider,
+      });
+
+      const [supabase] = await Promise.all([
+        createClientWithClaims(
+          claimedTask.parameters.userId,
+          claimedTask.parameters.userClaims,
+        ),
+        chat.waitForSynced({ abortSignal }),
+        currentChatMessage.waitForSynced({ abortSignal }),
+        activites.waitForSynced({ abortSignal }),
+      ]);
+
+      try {
+        const activityContent: Activity["content"] = {
+          chatbotId: claimedTask.parameters.agentId,
+          type: "chat",
         };
-      }
 
-      while (claimedCurrentChatMessage) {
-        abortSignal.throwIfAborted();
-        const { content: messageContent } = claimedCurrentChatMessage;
-
-        if (messageContent.type === "text") {
-          const { text: message, files } = messageContent;
-
-          const chatMessage: ChatMessage = {
-            id: crypto.randomUUID(),
-            parts: [
-              {
-                text: message?.toString() ?? "",
-                type: "text",
-              },
-              ...(files?.map((file) => ({
-                data: {
-                  id: file.path,
-                  name: file.name,
-                  type: file.file ? file.type : "application/octet-stream",
-                  url: file.path,
-                  attachment: file.attachment,
-                },
-                type: "data-file" as const,
-              })) ?? []),
-            ],
-            role: "user",
-          };
-
-          if (voiceMessage) {
-            updateChatMessage(chat.document, {
-              ...voiceMessage,
-              parts: [...voiceMessage.parts, ...chatMessage.parts],
-            });
-          } else addChatMessage(chat.document, chatMessage);
-        }
-
-        if (messageContent.type === "tool-approval") {
-          respondToToolApproval(chat.document, messageContent);
+        const assertGenerationActive = (allowFinalPartialAnswer = false) => {
           if (
-            getChatInteraction(getChat(chat.document).messages?.toArray() ?? [])
-              .type === "tool-approval"
-          ) {
-            await currentChatMessage.waitForSynced();
-            claimedCurrentChatMessage = claimNextInput();
-            continue;
-          }
-        }
-
-        const { messages: yMessages } = getChat(chat.document);
-        const messages = (yMessages?.toArray() ?? [])
-          .filter(
-            (message) =>
-              !message.parts.some((part) => part.type === "data-voice") ||
-              message.parts.some((part) => part.type === "text"),
+            !allowFinalPartialAnswer ||
+            (abortSignal.reason instanceof Error &&
+              abortSignal.reason.message === "TASK_LEASE_LOST")
           )
-          .map((message) => {
-            const finalized = finalizeInterruptedToolInputs(message);
-            if (finalized !== message)
-              updateChatMessage(chat.document, finalized);
-            return finalized;
-          });
-
-        const agent = await getAgentById(claimedTask.parameters.agentId, {
-          abortSignal,
-          supabase,
-        });
-        const repositories = messages.some((message) =>
-          message.parts.some(
-            (part) => part.type === "data-file" && part.data.attachment,
-          ),
-        )
-          ? await getDocumentRepositories({ supabase })
-          : [];
-        const loadedMessages = await loadMessageFiles(
-          messages,
-          new StorageSession({
-            abortSignal,
-            storage: {
-              activityId: claimedTask.parameters.activityId,
-              agentId: claimedTask.parameters.agentId,
-              type: "activity",
-            },
-            supabaseStorage: supabase.storage,
-          }),
-          {
-            resolveReference: async (file) => {
-              if (!file.attachment) return undefined;
-              try {
-                const agentPath = storageToAgentPath({
-                  storage: file.attachment.storage,
-                  path: file.url,
-                  roles: agent.roles,
-                  repositories,
-                  agentId: agent.id,
-                  activityId: claimedTask.parameters.activityId,
-                });
-                if (!agentPath) return undefined;
-                await requireStorageAccess(file.attachment.storage, "read", {
-                  supabase,
-                });
-                return {
-                  agentPath,
-                  storageSession: new StorageSession({
-                    storage: file.attachment.storage,
-                    supabaseStorage: supabase.storage,
-                    abortSignal,
-                  }),
-                };
-              } catch {
-                return undefined;
-              }
-            },
-          },
-        );
-        const modelMessages = await convertToModelMessages(loadedMessages);
-
-        const previousMetadata = messages.at(-1)?.metadata;
-        const thinking =
-          messageContent.thinking ??
-          (messageContent.type !== "text"
-            ? previousMetadata?.thinking
-            : false) ??
-          false;
-        const resumedRole =
-          messageContent.type !== "text" && previousMetadata?.roleId
-            ? agent.roles.find((role) => role.id === previousMetadata.roleId)
-            : undefined;
-        if (
-          messageContent.type !== "text" &&
-          previousMetadata?.roleId &&
-          !resumedRole
-        )
-          throw new Error("Agent role no longer available");
-        const lastMessage = messages.at(-1);
-        const timingStart = performance.now();
-        let timingFirstResponse: number | undefined;
-        let usage: LanguageModelUsage | undefined;
-        let streamFailure: { error: unknown } | undefined;
-        const responseStream = createUIMessageStream<ChatMessage>({
-          originalMessages: messages,
-          generateId: () => crypto.randomUUID(),
-          onError: (error) => {
-            streamFailure = { error };
-            return error instanceof Error ? error.message : String(error);
-          },
-          execute: async ({ writer }) => {
-            writer.write({ type: "start" });
-            const onCompression: ContextCompressionListener = ({
-              id,
-              state,
-            }) => {
-              writer.write({
-                type: "data-contextCompression",
-                id,
-                data: { state },
-              });
-            };
-            const selectedRole =
-              resumedRole ??
-              (await selectRole(
-                agent,
-                modelMessages,
-                {
-                  model: await getChatModel(agent.modelIdentifier, {
-                    onCompression,
-                    chat: {
-                      activityId: claimedTask.parameters.activityId,
-                      agentId: claimedTask.parameters.agentId,
-                    },
-                    supabaseServiceRole,
-                    abortSignal,
-                    serverToken,
-                    websocketProvider,
-                  }),
-                  thinking,
-                },
-                {
-                  abortSignal,
-                  chatMessages: messages,
-                },
-              ));
-
-            const selectedRoleModelIdentifier =
-              selectedRole.modelIdentifierOverride ?? agent.modelIdentifier;
-
-            await using toolSession = new AgentToolSession(
-              claimedTask.parameters.activityId,
-              claimedTask.parameters.agentId,
-              selectedRole,
-              {
-                supabaseServiceRole,
-                userId: claimedTask.parameters.userId,
-                userClaims: claimedTask.parameters.userClaims,
-                abortSignal,
-                serverToken,
-                supabase,
-                websocketProvider,
-              },
-            );
-
-            writer.write({
-              type: "message-metadata",
-              messageMetadata: {
-                roleId: selectedRole.id,
-                roleName: selectedRole.name,
-                thinking,
-              },
-            });
-
-            const result = await streamText({
-              abortSignal,
-              instructions: selectedRole?.prompt,
-              messages: modelMessages,
-              model: await getChatModel(selectedRoleModelIdentifier, {
-                onCompression,
-                chat: {
-                  activityId: claimedTask.parameters.activityId,
-                  agentId: claimedTask.parameters.agentId,
-                },
-                supabaseServiceRole,
-                abortSignal,
-                serverToken,
-                websocketProvider,
-              }),
-              reasoning: getReasoning(
-                selectedRole?.modelThinkingOverride ?? agent.modelThinking,
-                thinking,
-              ),
-              stopWhen: isStepCount(20),
-              toolApproval: await toolSession.toolApproval(),
-              tools: await toolSession.tools(),
-            });
-
-            writer.merge(
-              toUIMessageStream({
-                stream: result.stream,
-                originalMessages: messages,
-                sendStart: false,
-                onError: (error) => {
-                  // Expose only known application codes; keep provider errors sanitized.
-                  if (
-                    error instanceof Error &&
-                    [
-                      "CONTEXT_COMPRESSION_FAILED",
-                      "CONTEXT_BUDGET_EXCEEDED",
-                    ].includes(error.message)
-                  )
-                    return error.message;
-                  return "An error occurred.";
-                },
-              }),
-            );
-            usage = await result.usage;
-          },
-        });
-
-        let latestChatMessage: ChatMessage | undefined = undefined;
-        try {
-          for await (const uiMessage of readUIMessageStream<ChatMessage>({
-            // The SDK mutates its continuation state. Yjs-owned messages may
-            // be frozen and must never be edited outside a document transaction.
-            message:
-              lastMessage?.role === "assistant"
-                ? structuredClone(lastMessage)
-                : undefined,
-            stream: responseStream,
-            terminateOnError: true,
-          })) {
-            assertGenerationActive(true);
-            if (!timingFirstResponse) {
-              timingFirstResponse = performance.now();
-            }
-
-            latestChatMessage = uiMessage;
-            updateChatMessage(chat.document, latestChatMessage);
-          }
-        } catch (error) {
-          throw streamFailure ? streamFailure.error : error;
-        }
-
-        if (latestChatMessage) {
-          const finalized = finalizeInterruptedToolInputs(latestChatMessage);
-          if (finalized !== latestChatMessage) {
-            assertGenerationActive();
-            updateChatMessage(chat.document, finalized);
-            throw new Error("TOOL_INPUT_INTERRUPTED");
-          }
-          const timingEnd = performance.now();
-          const inputDuration = timingFirstResponse
-            ? timingFirstResponse - timingStart
-            : undefined;
-          const outputDuration = timingFirstResponse
-            ? timingEnd - timingFirstResponse
-            : undefined;
-
+            abortSignal.throwIfAborted();
+          const state = chat.document.getMap("state");
+          if (
+            (state.has("generationId") &&
+              state.get("generationId") !== claimedTask.id) ||
+            ["idle", "error"].includes(String(state.get("type")))
+          )
+            throw new DOMException("Generation no longer active", "AbortError");
+        };
+        const claimNextInput = () => {
           assertGenerationActive();
-
-          updateChatMessage(chat.document, {
-            ...latestChatMessage,
-            metadata: {
-              ...latestChatMessage.metadata,
-              timing:
-                inputDuration && outputDuration
-                  ? {
-                      inputDuration,
-                      outputDuration,
-                      totalDuration: timingEnd - timingStart,
-                    }
-                  : undefined,
-              usage,
-            },
+          return claimNextChatCurrentMessage(currentChatMessage.document, {
+            awaitingApproval:
+              getChatInteraction(
+                getChat(chat.document).messages?.toArray() ?? [],
+              ).type === "tool-approval",
           });
-        }
+        };
+        assertGenerationActive();
+        const lastMessage = getChat(chat.document).messages?.toArray().at(-1);
+        // A failed transcription is retried against the same history entry.
+        const unfinishedVoice =
+          claimedTask.parameters.retry &&
+          lastMessage?.role === "user" &&
+          !lastMessage.parts.some((part) => part.type === "text")
+            ? lastMessage.parts.find((part) => part.type === "data-voice")?.data
+            : undefined;
+        const voice = claimedTask.parameters.voice ?? unfinishedVoice;
+        const voiceMessage: ChatMessage | undefined = voice
+          ? {
+              id:
+                unfinishedVoice && lastMessage
+                  ? lastMessage.id
+                  : claimedTask.id,
+              role: "user",
+              parts: [{ type: "data-voice", data: voice }],
+              metadata: {
+                thinking: unfinishedVoice
+                  ? lastMessage?.metadata?.thinking
+                  : claimedTask.parameters.thinking,
+              },
+            }
+          : undefined;
 
-        // const generateLabel =
+        let claimedCurrentChatMessage:
+          | ReturnType<typeof claimNextInput>
+          | { content: { type: "retry"; thinking?: boolean } } = voice
+          ? undefined
+          : claimedTask.parameters.retry
+            ? { content: { type: "retry" } }
+            : claimNextInput();
 
-        // for (const activityDocument of activites.documents) {
-        //   const thisActivityId = claimedTask.content.activityId;
-        //   const thisActivity = getActivities(activityDocument)
-        //     .activities?.toArray()
-        //     .find((activity) => activity.id === thisActivityId);
-
-        //   if (
-        //     thisActivity?.label === labelOnInsert &&
-        //     !thisActivity.labelUserInput
-        //   ) {
-        //   }
-        // }
-        await currentChatMessage.waitForSynced();
-        claimedCurrentChatMessage =
-          voice || claimedTask.parameters.retry ? undefined : claimNextInput();
-      }
-
-      assertGenerationActive();
-      setChatState(chat.document, {
-        type: "idle",
-      });
-      activites.batch(upsertActivity, {
-        id: claimedTask.parameters.activityId,
-        state:
-          getChatInteraction(getChat(chat.document).messages?.toArray() ?? [])
-            .type === "tool-approval"
-            ? "idle"
-            : "success",
-      });
-    } catch (error) {
-      const state = chat.document.getMap("state");
-      // Recovery owns a lost lease. A late worker must not re-block the chat or
-      // replace the state of a generation submitted after recovery.
-      if (
-        state.get("generationId") !== claimedTask.id ||
-        !["queued", "generating", "aborting"].includes(
-          String(state.get("type")),
-        ) ||
-        (abortSignal.aborted &&
-          abortSignal.reason instanceof Error &&
-          abortSignal.reason.message === "TASK_LEASE_LOST")
-      )
-        return;
-      for (const message of getChat(chat.document).messages?.toArray() ?? []) {
-        const finalized = finalizeInterruptedToolInputs(message);
-        if (finalized !== message) updateChatMessage(chat.document, finalized);
-      }
-      if (error instanceof Error && error.name === "AbortError") {
-        // The Stop action releases the UI only after TaskQueue acknowledges
-        // completion, which happens after these providers have been disposed.
         setChatState(chat.document, {
           generationId: claimedTask.id,
-          type: abortSignal.aborted ? "aborting" : "idle",
+          claimedAtISO: claimedTask.claimedAtISO,
+          claimedWorkerId: workerIdentifier,
+          type: "generating",
         });
-        if (!abortSignal.aborted)
-          activites.batch(upsertActivity, {
+        activites.batch(
+          upsertActivity,
+          {
+            content: activityContent,
             id: claimedTask.parameters.activityId,
-            state: "idle",
+            state: "running",
+          },
+          {
+            labelOnInsert:
+              claimedCurrentChatMessage?.content.type === "text"
+                ? claimedCurrentChatMessage.content.text
+                : voice?.path,
+          },
+        );
+
+        if (voice && voiceMessage) {
+          updateChatMessage(chat.document, voiceMessage);
+          await chat.waitForSynced({ abortSignal });
+          const text = await transcribeVoiceMessage(
+            voice.path,
+            claimedTask.parameters,
+            { supabase, serverToken, websocketProvider, abortSignal },
+          );
+          assertGenerationActive();
+          // Replace only the provisional title of a conversation started by this recording.
+          for (const doc of activites.documents) {
+            const activity = getActivities(doc).activities.get(
+              claimedTask.parameters.activityId,
+            );
+            if (activity?.label === voice.path)
+              setActivityLabel(doc, activity.id, text.slice(0, 500), true);
+          }
+          claimedCurrentChatMessage = {
+            id: voiceMessage.id,
+            state: "claimed",
+            content: {
+              type: "text",
+              text,
+              thinking: voiceMessage.metadata?.thinking,
+            },
+          };
+        }
+
+        while (claimedCurrentChatMessage) {
+          abortSignal.throwIfAborted();
+          const { content: messageContent } = claimedCurrentChatMessage;
+
+          if (messageContent.type === "text") {
+            const { text: message, files } = messageContent;
+
+            const chatMessage: ChatMessage = {
+              id: crypto.randomUUID(),
+              parts: [
+                {
+                  text: message?.toString() ?? "",
+                  type: "text",
+                },
+                ...(files?.map((file) => ({
+                  data: {
+                    id: file.path,
+                    name: file.name,
+                    type: file.file ? file.type : "application/octet-stream",
+                    url: file.path,
+                    attachment: file.attachment,
+                  },
+                  type: "data-file" as const,
+                })) ?? []),
+              ],
+              role: "user",
+            };
+
+            if (voiceMessage) {
+              updateChatMessage(chat.document, {
+                ...voiceMessage,
+                parts: [...voiceMessage.parts, ...chatMessage.parts],
+              });
+            } else addChatMessage(chat.document, chatMessage);
+          }
+
+          if (messageContent.type === "tool-approval") {
+            respondToToolApproval(chat.document, messageContent);
+            if (
+              getChatInteraction(
+                getChat(chat.document).messages?.toArray() ?? [],
+              ).type === "tool-approval"
+            ) {
+              await currentChatMessage.waitForSynced();
+              claimedCurrentChatMessage = claimNextInput();
+              continue;
+            }
+          }
+
+          const { messages: yMessages } = getChat(chat.document);
+          const messages = (yMessages?.toArray() ?? [])
+            .filter(
+              (message) =>
+                !message.parts.some((part) => part.type === "data-voice") ||
+                message.parts.some((part) => part.type === "text"),
+            )
+            .map((message) => {
+              const finalized = finalizeInterruptedToolInputs(message);
+              if (finalized !== message)
+                updateChatMessage(chat.document, finalized);
+              return finalized;
+            });
+
+          const agent = await getAgentById(claimedTask.parameters.agentId, {
+            abortSignal,
+            supabase,
           });
-      } else {
+          const repositories = messages.some((message) =>
+            message.parts.some(
+              (part) => part.type === "data-file" && part.data.attachment,
+            ),
+          )
+            ? await getDocumentRepositories({ supabase })
+            : [];
+          const fileWait = new AbortController();
+          const fileSignal = AbortSignal.any([
+            abortSignal,
+            fileWait.signal,
+            AbortSignal.timeout(10 * 60_000),
+          ]);
+          const loadFiles = () =>
+            loadMessageFiles(
+              messages,
+              new StorageSession({
+                abortSignal,
+                storage: {
+                  activityId: claimedTask.parameters.activityId,
+                  agentId: claimedTask.parameters.agentId,
+                  type: "activity",
+                },
+                supabaseStorage: supabase.storage,
+              }),
+              {
+                prepareCurrentFile: (file, session) =>
+                  waitForFileProcessing(
+                    queue,
+                    session.storage,
+                    file.url,
+                    fileSignal,
+                  ),
+                resolveReference: async (file) => {
+                  if (!file.attachment) return undefined;
+                  try {
+                    const agentPath = storageToAgentPath({
+                      storage: file.attachment.storage,
+                      path: file.url,
+                      roles: agent.roles,
+                      repositories,
+                      agentId: agent.id,
+                      activityId: claimedTask.parameters.activityId,
+                    });
+                    if (!agentPath) return undefined;
+                    await requireStorageAccess(
+                      file.attachment.storage,
+                      "read",
+                      {
+                        supabase,
+                      },
+                    );
+                    return {
+                      agentPath,
+                      storageSession: new StorageSession({
+                        storage: file.attachment.storage,
+                        supabaseStorage: supabase.storage,
+                        abortSignal,
+                      }),
+                    };
+                  } catch {
+                    return undefined;
+                  }
+                },
+              },
+            );
+          const current = messages.at(-1);
+          const withAttachments =
+            current?.role === "user" &&
+            current.parts.some((part) => part.type === "data-file");
+          const loadedMessages = await (
+            withAttachments ? whileWaiting(loadFiles) : loadFiles()
+          ).finally(() => fileWait.abort());
+          assertGenerationActive();
+          const modelMessages = await convertToModelMessages(loadedMessages);
+
+          const previousMetadata = messages.at(-1)?.metadata;
+          const thinking =
+            messageContent.thinking ??
+            (messageContent.type !== "text"
+              ? previousMetadata?.thinking
+              : false) ??
+            false;
+          const resumedRole =
+            messageContent.type !== "text" && previousMetadata?.roleId
+              ? agent.roles.find((role) => role.id === previousMetadata.roleId)
+              : undefined;
+          if (
+            messageContent.type !== "text" &&
+            previousMetadata?.roleId &&
+            !resumedRole
+          )
+            throw new Error("Agent role no longer available");
+          const lastMessage = messages.at(-1);
+          const timingStart = performance.now();
+          let timingFirstResponse: number | undefined;
+          let usage: LanguageModelUsage | undefined;
+          let streamFailure: { error: unknown } | undefined;
+          const responseStream = createUIMessageStream<ChatMessage>({
+            originalMessages: messages,
+            generateId: () => crypto.randomUUID(),
+            onError: (error) => {
+              streamFailure = { error };
+              return error instanceof Error ? error.message : String(error);
+            },
+            execute: async ({ writer }) => {
+              writer.write({ type: "start" });
+              const onCompression: ContextCompressionListener = ({
+                id,
+                state,
+              }) => {
+                writer.write({
+                  type: "data-contextCompression",
+                  id,
+                  data: { state },
+                });
+              };
+              const selectedRole =
+                resumedRole ??
+                (await selectRole(
+                  agent,
+                  modelMessages,
+                  {
+                    model: await getChatModel(agent.modelIdentifier, {
+                      onCompression,
+                      chat: {
+                        activityId: claimedTask.parameters.activityId,
+                        agentId: claimedTask.parameters.agentId,
+                      },
+                      supabaseServiceRole,
+                      abortSignal,
+                      serverToken,
+                      websocketProvider,
+                    }),
+                    thinking,
+                  },
+                  {
+                    abortSignal,
+                    chatMessages: messages,
+                  },
+                ));
+
+              const selectedRoleModelIdentifier =
+                selectedRole.modelIdentifierOverride ?? agent.modelIdentifier;
+
+              await using toolSession = new AgentToolSession(
+                claimedTask.parameters.activityId,
+                claimedTask.parameters.agentId,
+                selectedRole,
+                {
+                  supabaseServiceRole,
+                  userId: claimedTask.parameters.userId,
+                  userClaims: claimedTask.parameters.userClaims,
+                  abortSignal,
+                  serverToken,
+                  supabase,
+                  websocketProvider,
+                },
+              );
+
+              writer.write({
+                type: "message-metadata",
+                messageMetadata: {
+                  roleId: selectedRole.id,
+                  roleName: selectedRole.name,
+                  thinking,
+                },
+              });
+
+              const result = await streamText({
+                abortSignal,
+                instructions: selectedRole?.prompt,
+                messages: modelMessages,
+                model: await getChatModel(selectedRoleModelIdentifier, {
+                  onCompression,
+                  chat: {
+                    activityId: claimedTask.parameters.activityId,
+                    agentId: claimedTask.parameters.agentId,
+                  },
+                  supabaseServiceRole,
+                  abortSignal,
+                  serverToken,
+                  websocketProvider,
+                }),
+                reasoning: getReasoning(
+                  selectedRole?.modelThinkingOverride ?? agent.modelThinking,
+                  thinking,
+                ),
+                stopWhen: isStepCount(20),
+                toolApproval: await toolSession.toolApproval(),
+                tools: await toolSession.tools(),
+              });
+
+              writer.merge(
+                toUIMessageStream({
+                  stream: result.stream,
+                  originalMessages: messages,
+                  sendStart: false,
+                  onError: (error) => {
+                    // Expose only known application codes; keep provider errors sanitized.
+                    if (
+                      error instanceof Error &&
+                      [
+                        "CONTEXT_COMPRESSION_FAILED",
+                        "CONTEXT_BUDGET_EXCEEDED",
+                      ].includes(error.message)
+                    )
+                      return error.message;
+                    return "An error occurred.";
+                  },
+                }),
+              );
+              usage = await result.usage;
+            },
+          });
+
+          let latestChatMessage: ChatMessage | undefined = undefined;
+          try {
+            for await (const uiMessage of readUIMessageStream<ChatMessage>({
+              // The SDK mutates its continuation state. Yjs-owned messages may
+              // be frozen and must never be edited outside a document transaction.
+              message:
+                lastMessage?.role === "assistant"
+                  ? structuredClone(lastMessage)
+                  : undefined,
+              stream: responseStream,
+              terminateOnError: true,
+            })) {
+              assertGenerationActive(true);
+              if (!timingFirstResponse) {
+                timingFirstResponse = performance.now();
+              }
+
+              latestChatMessage = uiMessage;
+              updateChatMessage(chat.document, latestChatMessage);
+            }
+          } catch (error) {
+            throw streamFailure ? streamFailure.error : error;
+          }
+
+          if (latestChatMessage) {
+            const finalized = finalizeInterruptedToolInputs(latestChatMessage);
+            if (finalized !== latestChatMessage) {
+              assertGenerationActive();
+              updateChatMessage(chat.document, finalized);
+              throw new Error("TOOL_INPUT_INTERRUPTED");
+            }
+            const timingEnd = performance.now();
+            const inputDuration = timingFirstResponse
+              ? timingFirstResponse - timingStart
+              : undefined;
+            const outputDuration = timingFirstResponse
+              ? timingEnd - timingFirstResponse
+              : undefined;
+
+            assertGenerationActive();
+
+            updateChatMessage(chat.document, {
+              ...latestChatMessage,
+              metadata: {
+                ...latestChatMessage.metadata,
+                timing:
+                  inputDuration && outputDuration
+                    ? {
+                        inputDuration,
+                        outputDuration,
+                        totalDuration: timingEnd - timingStart,
+                      }
+                    : undefined,
+                usage,
+              },
+            });
+          }
+
+          // const generateLabel =
+
+          // for (const activityDocument of activites.documents) {
+          //   const thisActivityId = claimedTask.content.activityId;
+          //   const thisActivity = getActivities(activityDocument)
+          //     .activities?.toArray()
+          //     .find((activity) => activity.id === thisActivityId);
+
+          //   if (
+          //     thisActivity?.label === labelOnInsert &&
+          //     !thisActivity.labelUserInput
+          //   ) {
+          //   }
+          // }
+          await currentChatMessage.waitForSynced();
+          claimedCurrentChatMessage =
+            voice || claimedTask.parameters.retry
+              ? undefined
+              : claimNextInput();
+        }
+
+        assertGenerationActive();
         setChatState(chat.document, {
-          error: error instanceof Error ? error.message : String(error),
-          type: "error",
+          type: "idle",
         });
         activites.batch(upsertActivity, {
           id: claimedTask.parameters.activityId,
-          state: "error",
+          state:
+            getChatInteraction(getChat(chat.document).messages?.toArray() ?? [])
+              .type === "tool-approval"
+              ? "idle"
+              : "success",
         });
+      } catch (error) {
+        const state = chat.document.getMap("state");
+        // Recovery owns a lost lease. A late worker must not re-block the chat or
+        // replace the state of a generation submitted after recovery.
+        if (
+          state.get("generationId") !== claimedTask.id ||
+          !["queued", "generating", "aborting"].includes(
+            String(state.get("type")),
+          ) ||
+          (abortSignal.aborted &&
+            abortSignal.reason instanceof Error &&
+            abortSignal.reason.message === "TASK_LEASE_LOST")
+        )
+          return;
+        for (const message of getChat(chat.document).messages?.toArray() ??
+          []) {
+          const finalized = finalizeInterruptedToolInputs(message);
+          if (finalized !== message)
+            updateChatMessage(chat.document, finalized);
+        }
+        if (error instanceof Error && error.name === "AbortError") {
+          // The Stop action releases the UI only after TaskQueue acknowledges
+          // completion, which happens after these providers have been disposed.
+          setChatState(chat.document, {
+            generationId: claimedTask.id,
+            type: abortSignal.aborted ? "aborting" : "idle",
+          });
+          if (!abortSignal.aborted)
+            activites.batch(upsertActivity, {
+              id: claimedTask.parameters.activityId,
+              state: "idle",
+            });
+        } else {
+          setChatState(chat.document, {
+            error: error instanceof Error ? error.message : String(error),
+            type: "error",
+          });
+          activites.batch(upsertActivity, {
+            id: claimedTask.parameters.activityId,
+            state: "error",
+          });
 
-        throw error;
+          throw error;
+        }
       }
-    }
-  });
+    },
+  );
 }

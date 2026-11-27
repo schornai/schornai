@@ -1,11 +1,13 @@
 import { ServerRealtimeProvider } from "../../server/ServerRealtimeProvider.ts";
 import { ServerRealtimeWebsocketProvider } from "../../server/ServerRealtimeWebsocketProvider.ts";
+import type { Doc } from "yjs";
 import type { Task } from "./_types.ts";
 import { requestTaskCoordinator } from "./requestTaskCoordinator.ts";
 import { decodeTaskValue } from "./_taskCodec.ts";
 import { handleClaimedTask } from "./handleClaimedTask.ts";
 import { setTimeout as delay } from "node:timers/promises";
 import { once } from "node:events";
+import { WorkerSlots } from "./WorkerSlots.ts";
 import { getTaskQueue } from "./getTaskQueue.ts";
 import { getTaskQueueDocumentName } from "./_utils.ts";
 import type { ServerRealtimeProviderToken } from "../../_lib/PermissionManager.ts";
@@ -59,6 +61,8 @@ export class TaskQueue<
     handler: (
       claimedTask: Extract<TTask, { state: "claimed" }>,
       abortSignal: AbortSignal,
+      queueDocument: Doc,
+      whileWaiting: WorkerSlots["whileWaiting"],
     ) => Promise<TTask["result"] extends undefined ? void : TTask["result"]>,
     { abortSignal }: { abortSignal?: AbortSignal } = {},
   ) {
@@ -70,7 +74,7 @@ export class TaskQueue<
     let wake: (() => void) | undefined;
     let backlogSince: number | undefined;
     const running = new Set<Promise<void>>();
-    const completions = new EventTarget();
+    const slots = new WorkerSlots(this.#concurrency);
     const retryCoordinator = () =>
       delay(1000, undefined, { signal: workerSignal }).catch(() => {});
     const changed = () => {
@@ -137,7 +141,11 @@ export class TaskQueue<
           await this.#realtimeProvider.waitForSynced({
             abortSignal: workerSignal,
           });
-          if (running.size > 0) {
+          if (slots.occupied === slots.capacity) {
+            await once(slots, "release");
+            continue;
+          }
+          if (slots.occupied > 0) {
             const candidate = nextPendingTask();
             if (!candidate) {
               await waitForWork();
@@ -146,7 +154,7 @@ export class TaskQueue<
             // Give less loaded peers a head start once per backlog. Short
             // completions must not restart the wait for already queued work.
             const remaining = Math.ceil(
-              backlogSince! + running.size * 250 - performance.now(),
+              backlogSince! + slots.occupied * 250 - performance.now(),
             );
             if (remaining > 0) {
               const waitSignal = AbortSignal.any([
@@ -154,7 +162,7 @@ export class TaskQueue<
                 AbortSignal.timeout(remaining),
               ]);
               try {
-                await once(completions, "finish", { signal: waitSignal });
+                await once(slots, "release", { signal: waitSignal });
                 continue;
               } catch {
                 if (workerSignal.aborted) break;
@@ -166,37 +174,47 @@ export class TaskQueue<
             )
               continue;
           }
-          const response = await requestTaskCoordinator(
-            this.#realtimeProvider.provider,
-            {
-              action: "claim",
-              type: this.#taskType,
-              capabilities: this.#capabilities,
-              worker: this.#workerIdentifier,
-            },
-            workerSignal,
-          );
-          if (response.task) {
-            const claimedTask = decodeTaskValue<
-              Extract<TTask, { state: "claimed" }>
-            >(response.task);
-            const work = handleClaimedTask(
-              this.#realtimeProvider.document,
+          if (!slots.tryAcquire()) continue;
+          let handedToHandler = false;
+          try {
+            const response = await requestTaskCoordinator(
               this.#realtimeProvider.provider,
-              claimedTask,
-              (task, signal) =>
-                handler(task as Extract<TTask, { state: "claimed" }>, signal),
+              {
+                action: "claim",
+                type: this.#taskType,
+                capabilities: this.#capabilities,
+                worker: this.#workerIdentifier,
+              },
               workerSignal,
-            )
-              .catch(retryCoordinator)
-              .finally(() => {
-                running.delete(work);
-                completions.dispatchEvent(new Event("finish"));
-              });
-            running.add(work);
-            if (running.size === this.#concurrency)
-              await once(completions, "finish");
-            continue;
+            );
+            if (response.task) {
+              const claimedTask = decodeTaskValue<
+                Extract<TTask, { state: "claimed" }>
+              >(response.task);
+              const work = handleClaimedTask(
+                this.#realtimeProvider.document,
+                this.#realtimeProvider.provider,
+                claimedTask,
+                (task, signal) =>
+                  handler(
+                    task as Extract<TTask, { state: "claimed" }>,
+                    signal,
+                    this.#realtimeProvider.document,
+                    (operation) => slots.whileWaiting(operation),
+                  ),
+                workerSignal,
+              )
+                .catch(retryCoordinator)
+                .finally(() => {
+                  running.delete(work);
+                  slots.release();
+                });
+              running.add(work);
+              handedToHandler = true;
+              continue;
+            }
+          } finally {
+            if (!handedToHandler) slots.release();
           }
         } catch {
           if (workerSignal.aborted) break;

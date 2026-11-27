@@ -173,6 +173,57 @@ export const RetryApproval: Story = {
   },
 };
 
+const report = {
+  file: true,
+  name: "Bericht.pdf",
+  path: "Bericht.pdf",
+  type: "application/pdf",
+  size: 2048,
+  createdAtISO: "2026-01-15T12:00:00Z",
+  updatedAtISO: "2026-01-15T12:00:00Z",
+} as const;
+const fileMessage = {
+  id: "file-message",
+  state: "paused",
+  content: { type: "text", text: "", files: [report] },
+} as const;
+export const ProcessingAttachment: Story = {
+  parameters: {
+    contextFixtures: {
+      useFileUpload: { uploads: [] },
+      useChatComposeMessage: {
+        activity: undefined,
+        selectedCurrentMessage: fileMessage,
+        messageBatch: [fileMessage],
+      },
+      useStorageView: {
+        pendingFilePaths: [report.path],
+        unconfirmedFilePaths: [],
+        itemGroups: [
+          [
+            "files",
+            [
+              {
+                ...report,
+                currentAction: { state: "processing", target: report },
+              },
+            ],
+          ],
+        ],
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("button", { name: /^(Senden|Send)$/ }),
+    ).toBeEnabled();
+    await expect(canvas.getByRole("textbox")).toHaveValue("");
+    await expect(
+      canvas.getByText(/Datei wird verarbeitet|File is being processed/i),
+    ).toBeVisible();
+  },
+};
+
 export const AttachmentMenu: Story = {
   play: async ({ canvasElement }) => {
     await userEvent.click(

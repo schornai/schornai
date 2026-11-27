@@ -345,6 +345,56 @@ it("does not accept worker commands from a user-authorized document connection",
   ).toBe(false);
 });
 
+it("releases a single chat slot while waiting for a file and reacquires it before continuing", async () => {
+  const server = await start(taskClaimStore());
+  const source = await producer(server);
+  const [withFile, textOnly] = enqueueChats(source, 2);
+  const stop = new AbortController();
+  const fileReady = Promise.withResolvers<void>();
+  const textStarted = Promise.withResolvers<void>();
+  const finishText = Promise.withResolvers<void>();
+  const order: string[] = [];
+  const run = new TaskQueue("chat", {
+    capabilities: [],
+    serverToken: token,
+    websocketProvider: socket(server),
+    workerIdentifier: "single",
+  }).handleTask(
+    async (task, _signal, _doc, whileWaiting) => {
+      if (task.id === withFile) {
+        await whileWaiting(() => fileReady.promise);
+        order.push("file");
+      } else {
+        expect(task.id).toBe(textOnly);
+        textStarted.resolve();
+        await finishText.promise;
+        order.push("text");
+      }
+    },
+    { abortSignal: stop.signal },
+  );
+  try {
+    await vi.waitFor(() =>
+      expect(
+        getTaskQueue(source.document)
+          .tasks.toArray()
+          .filter((task) => task.state === "claimed"),
+      ).toHaveLength(2),
+    );
+    await textStarted.promise;
+    fileReady.resolve();
+    await new Promise((resolve) => setTimeout(resolve, 25));
+    expect(order).toEqual([]);
+    finishText.resolve();
+    await vi.waitFor(() => expect(order).toEqual(["text", "file"]));
+  } finally {
+    fileReady.resolve();
+    finishText.resolve();
+    stop.abort();
+    await run;
+  }
+});
+
 it("admits one concurrent recording and acknowledges a retry without changing its generation", async () => {
   const server = await start(taskClaimStore());
   const taskQueue = await producer(server);
