@@ -55,3 +55,7 @@ export const Narrow: Story = {
     ),
   ],
 };
+
+export const MissingTranscriber: Story = {
+  args: { error: "TRANSCRIBER_NOT_FOUND" },
+};

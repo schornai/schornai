@@ -14,6 +14,8 @@ import { requestTaskCoordinator } from "../packages/realtime/src/documents/taskQ
 import { decodeTaskValue } from "../packages/realtime/src/documents/taskQueue/_taskCodec";
 import type { Task } from "../packages/realtime/src/documents/taskQueue/_types";
 import { taskClaimStore } from "./helpers/task-claims";
+import { getChatDocumentName } from "../packages/realtime/src/documents/chat/_utils";
+import { queueChat } from "../packages/realtime/src/documents/chat/queueChat";
 const secret = "task-coordinator-test-secret-32-characters";
 const token = `Worker ${secret}` as const;
 const servers: Server[] = [];
@@ -341,4 +343,49 @@ it("does not accept worker commands from a user-authorized document connection",
       ([name]) => name === "claim_background_task",
     ),
   ).toBe(false);
+});
+
+it("admits one concurrent recording and acknowledges a retry without changing its generation", async () => {
+  const server = await start(taskClaimStore());
+  const taskQueue = await producer(server);
+  const parameters = {
+    agentId: "agent",
+    activityId: crypto.randomUUID(),
+    userId: "user",
+    userClaims: [],
+    voice: { path: "a.webm", duration: 1, peaks: [] },
+  };
+  const chats = [0, 1].map(
+    () =>
+      new ServerRealtimeProvider({
+        documentName: getChatDocumentName(parameters),
+        serverToken: token,
+        websocketProvider: socket(server),
+      }),
+  );
+  providers.push(...chats);
+  await Promise.all(chats.map((chat) => chat.waitForSynced()));
+  const send = (i: number, path: string) =>
+    queueChat(
+      { ...parameters, voice: { ...parameters.voice, path } },
+      { chat: chats[i]!, taskQueue },
+    );
+  const results = await Promise.allSettled([
+    send(0, "a.webm"),
+    send(1, "b.webm"),
+  ]);
+  expect(
+    results.filter((result) => result.status === "fulfilled"),
+  ).toHaveLength(1);
+  expect(results.find((result) => result.status === "rejected")).toMatchObject({
+    reason: new Error("CHAT_BUSY"),
+  });
+  await send(1, results[0]!.status === "fulfilled" ? "a.webm" : "b.webm");
+  await vi.waitFor(() => {
+    const tasks = getTaskQueue(taskQueue.document).tasks.toArray();
+    expect(tasks).toHaveLength(1);
+    expect(chats[0]!.document.getMap("state").get("generationId")).toBe(
+      tasks[0]!.id,
+    );
+  });
 });

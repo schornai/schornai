@@ -1,3 +1,12 @@
+vi.mock(
+  "../../packages/realtime/src/documents/chat/queueChat.ts",
+  async (original) => ({
+    ...(await original<
+      typeof import("../../packages/realtime/src/documents/chat/queueChat")
+    >()),
+    queueChat: (await import("../helpers/chat-admission")).queueChatInMemory,
+  }),
+);
 vi.mock("server-only", () => ({}));
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
 import { revalidatePath } from "next/cache";
@@ -67,9 +76,29 @@ vi.mock(
   "@schornio/aibox-package-database/transcriber/getTranscriberById",
   () => ({ getTranscriberById: async () => mocks.transcriber }),
 );
-vi.mock("@schornio/aibox-package-database/transcriber/getTranscribers", () => ({
-  getTranscribers: async () => (mocks.transcriber ? [mocks.transcriber] : []),
-}));
+vi.mock(
+  "@schornio/aibox-package-database/transcriber/requireTranscriber",
+  async (original) => {
+    const actual =
+      await original<
+        typeof import("../../packages/database/src/transcriber/requireTranscriber")
+      >();
+    return {
+      ...actual,
+      requireTranscriber: async (identifier?: string) => {
+        if (!identifier)
+          throw new actual.TranscriberConfigurationError(
+            "TRANSCRIBER_REQUIRED",
+          );
+        if (mocks.transcriber?.identifier !== identifier)
+          throw new actual.TranscriberConfigurationError(
+            "TRANSCRIBER_NOT_FOUND",
+          );
+        return mocks.transcriber;
+      },
+    };
+  },
+);
 vi.mock("@schornio/aibox-package-database/agent/getAgentById", () => ({
   getAgentById: async () => mocks.agent,
 }));
@@ -151,7 +180,7 @@ describe("realtime server actions", () => {
         activityId: "activity",
       },
     });
-    expect(mocks.sync).toHaveBeenCalledTimes(4);
+    expect(mocks.sync).toHaveBeenCalledTimes(3);
     expect(mocks.dispose).toHaveBeenCalledTimes(2);
   });
   it.each([

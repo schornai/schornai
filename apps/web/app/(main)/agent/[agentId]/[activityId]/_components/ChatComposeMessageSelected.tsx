@@ -2,6 +2,8 @@
 
 import {
   Brain,
+  Mic,
+  MicOff,
   File,
   Upload,
   Layers,
@@ -26,7 +28,9 @@ import {
   DropdownMenuItem,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { AudioRecorderButton } from "../../../../../_components/AudioRecorderModal";
+import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
+import { ChatVoiceRecorder } from "./ChatVoiceRecorder";
+import { useCanSendMessage } from "./ChatContext";
 import { AttachmentGroup } from "@schornio/aibox-package-ui/components/attachment";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ChatExpirationSettings } from "./ChatExpirationSettings";
@@ -44,16 +48,32 @@ import { useStorageView } from "../../../../../_components/StorageViewProvider";
 import { resolvePath } from "@schornio/aibox-package-utils/resolvePath";
 import { useT } from "next-i18next/client";
 
+import type { AppColor } from "@schornio/aibox-package-database/_shared/_types";
+import type { TextMessage } from "@schornio/aibox-realtime/documents/chatCurrentMessage/_types";
+
+function hasMessageContent(message?: TextMessage) {
+  return Boolean(
+    message?.content.text?.trim() || message?.content.files?.length,
+  );
+}
+
 export function ChatComposeMessageSelected({
+  agentColor,
   className,
   inputRef,
 }: {
   className?: string;
+  agentColor?: AppColor;
   inputRef?: RefObject<HTMLTextAreaElement | null>;
 }) {
   const { t } = useT("agent", {
     keyPrefix: "_components.ChatComposeMessageSelected",
   });
+  const { t: voiceLabel } = useT("agent", {
+    keyPrefix: "_components.VoiceMessage",
+  });
+  const [voiceOpen, setVoiceOpen] = useState<"record" | "prompt" | null>(null);
+  const canSend = useCanSendMessage();
   const formRef = useRef<HTMLFormElement>(null);
   const fallbackTextareaRef = useRef<HTMLTextAreaElement>(null);
   const textareaRef = inputRef ?? fallbackTextareaRef;
@@ -66,6 +86,7 @@ export function ChatComposeMessageSelected({
 
   const {
     additionalFunctions,
+    voiceStatus,
     expiration,
     activity,
     addSelectedFiles,
@@ -89,6 +110,7 @@ export function ChatComposeMessageSelected({
     pendingFilePaths = [],
   } = useStorageView();
 
+  const voiceEnabled = voiceStatus === "ready";
   const { executeAsync, hasErrored } = useAction(submitCurrentMessage);
 
   useEffect(() => {
@@ -120,6 +142,43 @@ export function ChatComposeMessageSelected({
       (upload) => upload.state === "queued" || upload.state === "uploading",
     ) || pendingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
 
+  const nextHasContent = hasMessageContent(messageBatch[0]);
+  const showMicrophone =
+    voiceEnabled &&
+    !filesPending &&
+    !nextHasContent &&
+    !hasMessageContent(selectedCurrentMessage);
+  const sendDisabled = isSubmitted || filesPending || !nextHasContent;
+  useEffect(() => {
+    if (!voiceEnabled || !canSend || isSubmitted) return;
+    const openFromHash = () => {
+      if (window.location.hash === "#record") {
+        setVoiceOpen("prompt");
+        window.history.replaceState(
+          window.history.state,
+          "",
+          window.location.pathname + window.location.search,
+        );
+      }
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [voiceEnabled, canSend, isSubmitted]);
+
+  if (voiceEnabled && voiceOpen)
+    return (
+      <ChatVoiceRecorder
+        key={activityId}
+        autoStart={voiceOpen === "record"}
+        agentColor={agentColor}
+        agentId={agentId}
+        activityId={activityId}
+        thinking={selectedCurrentMessage?.content.thinking ?? defaultThinking}
+        onClose={() => setVoiceOpen(null)}
+      />
+    );
+
   return (
     <form
       className={cn(
@@ -131,7 +190,7 @@ export function ChatComposeMessageSelected({
       )}
       onSubmit={(event) => {
         event.preventDefault();
-        if (submittingRef.current || isSubmitted || filesPending) return;
+        if (submittingRef.current || sendDisabled) return;
         submittingRef.current = true;
         setSyncError(false);
         const previousStates = messageBatch.map(({ id, state }) => ({
@@ -189,6 +248,17 @@ export function ChatComposeMessageSelected({
           </AttachmentGroup>
         </div>
       ) : undefined}
+      {voiceStatus &&
+        voiceStatus !== "ready" &&
+        voiceStatus !== "TRANSCRIBER_REQUIRED" && (
+          <p
+            role="status"
+            className="text-muted-foreground flex items-start gap-2 px-3 pt-2 text-xs"
+          >
+            <MicOff aria-hidden="true" className="size-4 shrink-0" />
+            {voiceLabel(voiceTranscriberErrorKeys[voiceStatus])}
+          </p>
+        )}
       <Textarea
         className="max-h-[40vh] min-h-[2ch] resize-none border-none bg-transparent! focus-visible:ring-0"
         disabled={selectedCurrentMessage?.state === "submitted"}
@@ -334,11 +404,6 @@ export function ChatComposeMessageSelected({
           />
         ) : null}
 
-        <AudioRecorderButton
-          iconOnly
-          disabled={selectedCurrentMessage?.state === "submitted"}
-        />
-
         <div className="ml-auto flex items-center gap-0.5">
           <ChatCancelGeneration />
 
@@ -358,7 +423,7 @@ export function ChatComposeMessageSelected({
           !isSubmitted &&
           messageBatchPaused.length > 1 ? (
             <Button
-              disabled={filesPending}
+              disabled={sendDisabled}
               name="batch"
               size="sm"
               type="submit"
@@ -367,16 +432,28 @@ export function ChatComposeMessageSelected({
               {t("buttonStartBatch")} <Play />
             </Button>
           ) : undefined}
-
-          <Button
-            disabled={isSubmitted || filesPending}
-            name="next"
-            size="sm"
-            type="submit"
-            variant="ghost"
-          >
-            {t("buttonSend")} <SendHorizonal />
-          </Button>
+          {showMicrophone ? (
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              title={voiceLabel("labelRecord")}
+              disabled={!canSend || isSubmitted}
+              onClick={() => setVoiceOpen("record")}
+            >
+              {voiceLabel("buttonRecord")} <Mic />
+            </Button>
+          ) : (
+            <Button
+              disabled={sendDisabled}
+              name="next"
+              size="sm"
+              type="submit"
+              variant="ghost"
+            >
+              {t("buttonSend")} <SendHorizonal />
+            </Button>
+          )}
         </div>
       </div>
     </form>

@@ -5,6 +5,15 @@ const mocks = vi.hoisted(() => ({
   docs: new Map<string, any>(),
   user: { id: "alice" } as { id: string } | null,
 }));
+vi.mock(
+  "../packages/realtime/src/documents/chat/queueChat.ts",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/realtime/src/documents/chat/queueChat")
+    >()),
+    queueChat: (await import("./helpers/chat-admission")).queueChatInMemory,
+  }),
+);
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/createSupabaseServerClient", () => ({
   createSupabaseServerClient: async () => ({

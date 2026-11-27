@@ -3,11 +3,17 @@ import type { SupabaseClient } from "../_shared/_types.ts";
 import { getAgentById } from "../agent/getAgentById.ts";
 import { getDocumentRepositoryById } from "../documentRepositories/getDocumentRepositoryById.ts";
 import { getTranscriberById } from "../transcriber/getTranscriberById.ts";
-import { getTranscribers } from "../transcriber/getTranscribers.ts";
+import {
+  requireTranscriber,
+  TranscriberConfigurationError,
+} from "../transcriber/requireTranscriber.ts";
 
 export async function getStorageTranscriber(
   storage: Storage,
-  { supabase }: { supabase: SupabaseClient },
+  {
+    supabase,
+    required = false,
+  }: { supabase: SupabaseClient; required?: boolean },
 ) {
   if (storage.type === "activity-transcription")
     return getTranscriberById(storage.transcriberId, { supabase });
@@ -20,11 +26,18 @@ export async function getStorageTranscriber(
   // The transcriber integration adds this optional setting to both owners.
   const identifier =
     "transcriberIdentifier" in owner ? owner.transcriberIdentifier : undefined;
-  if (typeof identifier !== "string" || !identifier) return undefined;
-  const transcribers = await getTranscribers({ supabase });
-  const transcriber = transcribers.find(
-    (item) => item.identifier === identifier,
-  );
-  if (!transcriber) throw new Error("TRANSCRIBER_NOT_FOUND");
-  return transcriber;
+  try {
+    return await requireTranscriber(
+      typeof identifier === "string" ? identifier : undefined,
+      { supabase },
+    );
+  } catch (error) {
+    if (
+      !required &&
+      error instanceof TranscriberConfigurationError &&
+      error.code !== "TRANSCRIBER_NOT_FOUND"
+    )
+      return undefined;
+    throw error;
+  }
 }

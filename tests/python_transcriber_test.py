@@ -9,6 +9,7 @@ import sys
 import tempfile
 import types
 import unittest
+import wave
 from unittest.mock import patch, Mock
 
 SOURCE = Path(__file__).resolve().parents[1] / 'apps/transcriber-mac/src/core/transcribe.py'
@@ -30,6 +31,27 @@ class AudioInput:
 
 
 class TranscriberTest(unittest.TestCase):
+    def test_voice_limit_uses_decoded_frames_before_recognition_or_transcript_reuse(self):
+        request = {"audioPath": "recording.webm", "modelIdentifier": "model",
+                   "maxVoiceSeconds": 300, "voiceMode": "transcribe"}
+        for mode, frames in [("validate", 4800000), ("transcribe", 4800000),
+                             ("transcribe", 4800001), ("validate", 4800001)]:
+            with self.subTest(mode=mode, frames=frames):
+                mlx.transcribe.reset_mock()
+                def decode(command, **kwargs):
+                    self.assertEqual(command[command.index("-t") + 1], "301")
+                    with wave.open(command[-1], "wb") as audio:
+                        audio.setparams((1, 2, 16000, 0, "NONE", ""))
+                        audio.writeframes(bytes(frames * 2))
+                with patch.object(transcription.subprocess, "run", side_effect=decode):
+                    if frames > 4800000:
+                        with self.assertRaises(ValueError):
+                            transcription.process_request({**request, "voiceMode": mode})
+                        mlx.transcribe.assert_not_called()
+                    else:
+                        transcription.process_request({**request, "voiceMode": mode})
+                        self.assertEqual(mlx.transcribe.call_count, int(mode == "transcribe"))
+
     def invoke(self, arguments=None, terminal=False, as_script=False):
         output, errors = io.StringIO(), io.StringIO()
         with patch.object(sys, 'argv', [str(SOURCE), '--fileSystemIdentifier', 'model'] + (arguments or [])), \

@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
-import "./client-setup";
+import { client } from "./client-setup";
+import { ChatVoiceRecorder } from "../../apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder";
 import {
   act,
   cleanup,
@@ -18,6 +19,7 @@ import { fileNeedsProcessing } from "../../packages/utils/src/getFileTypeLabel";
 
 const mocks = vi.hoisted(() => ({ upload: vi.fn() }));
 vi.mock("../../apps/web/app/_components/FileUploadProvider", () => ({
+  FileUploadProvider: ({ children }: any) => children,
   useFileUpload: () => ({ queueFileUploadsByFiles: mocks.upload }),
 }));
 const trackStop = vi.fn();
@@ -656,4 +658,118 @@ it("keeps a failed upload open for retry, then closes and reopens with a clean r
   expect(screen.queryByLabelText("labelPreview")).toBeNull();
   fireEvent.click(screen.getByRole("button", { name: "labelClose" }));
   expect(screen.queryByRole("dialog")).toBeNull();
+});
+
+it("stops a chat recording at five minutes and retries queue submission without uploading twice", async () => {
+  const close = vi.fn();
+  client.execute
+    .mockReset()
+    .mockResolvedValueOnce({ serverError: "busy" })
+    .mockResolvedValueOnce({ data: { queued: true } });
+  mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+  vi.useFakeTimers();
+  try {
+    await act(async () => {
+      render(
+        <ChatVoiceRecorder
+          agentId="agent"
+          activityId="activity"
+          onClose={close}
+        />,
+      );
+    });
+    expect(instances[0]?.state).toBe("recording");
+    await act(async () => vi.advanceTimersByTime(300_000));
+    expect(instances[0]?.stop).toHaveBeenCalledOnce();
+    expect(mocks.upload).not.toHaveBeenCalled();
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    expect(close).not.toHaveBeenCalled();
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    expect(client.execute).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        agentId: "agent",
+        activityId: "activity",
+        voice: { duration: 300, peaks: [], path: "clip.webm" },
+      }),
+    );
+    expect(mocks.upload).toHaveBeenCalledOnce();
+    expect(close).toHaveBeenCalledOnce();
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+it("starts on open and submits the final microphone chunk with one click", async () => {
+  const close = vi.fn();
+  client.execute.mockReset().mockResolvedValue({ data: { queued: true } });
+  mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+  render(
+    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
+    { reactStrictMode: true },
+  );
+  await screen.findByText("labelRecording");
+  expect(getUserMedia).toHaveBeenCalledOnce();
+  await act(async () =>
+    fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+  );
+  expect(trackStop).toHaveBeenCalledOnce();
+  expect(mocks.upload.mock.calls[0]?.[0][0].size).toBe(5);
+  expect(client.execute).toHaveBeenCalledOnce();
+  expect(close).toHaveBeenCalledOnce();
+});
+
+it.each([true, false])(
+  "discards the uploaded clip only after a confirmed rejection (%s)",
+  async (rejected) => {
+    const close = vi.fn();
+    client.execute
+      .mockReset()
+      .mockResolvedValueOnce(
+        rejected ? { data: { queued: false } } : { serverError: "unknown" },
+      );
+    mocks.upload.mockResolvedValue([{ state: "success", path: "clip.webm" }]);
+    render(
+      <ChatVoiceRecorder
+        agentId="agent"
+        activityId="activity"
+        onClose={close}
+      />,
+    );
+    await screen.findByText("labelRecording");
+    await act(async () =>
+      fireEvent.click(screen.getByRole("button", { name: "labelSend" })),
+    );
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: rejected ? "labelDiscard" : "labelClose",
+      }),
+    );
+    if (rejected) {
+      expect(client.execute).toHaveBeenLastCalledWith({
+        path: "clip.webm",
+        storage: { type: "activity", agentId: "agent", activityId: "activity" },
+      });
+      expect(close).not.toHaveBeenCalled();
+    } else {
+      expect(client.execute).toHaveBeenCalledOnce();
+      expect(close).toHaveBeenCalledOnce();
+    }
+  },
+);
+
+it("discards a chat recording without uploading", async () => {
+  const close = vi.fn();
+  const view = render(
+    <ChatVoiceRecorder agentId="agent" activityId="activity" onClose={close} />,
+  );
+  await screen.findByText("labelRecording");
+  fireEvent.click(screen.getByRole("button", { name: "labelDiscard" }));
+  expect(close).toHaveBeenCalledOnce();
+  view.unmount();
+  expect(trackStop).toHaveBeenCalledOnce();
+  expect(mocks.upload).not.toHaveBeenCalled();
 });

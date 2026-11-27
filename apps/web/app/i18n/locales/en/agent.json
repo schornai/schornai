@@ -754,7 +754,8 @@
         "platform_xrag_export_jobs": "List XRAG exports",
         "platform_xrag_export_delete": "Delete XRAG export",
         "platform_xrag_export_cancel": "Cancel XRAG export",
-        "platform_xrag_export_download": "Download XRAG export"
+        "platform_xrag_export_download": "Download XRAG export",
+        "platform_chat_voice_send": "Send voice message"
       },
       "labelClose": "Close",
       "labelOpenFile": "Open document",
@@ -786,7 +787,10 @@
       "errorApprovalRoleNotFound": "The role for the pending tool approval is no longer available. Check the agent’s roles and start a new chat.",
       "errorApprovalRolesMismatch": "The pending tool approvals belong to different roles and cannot be resumed together. Start a new chat.",
       "errorModelApiKey": "The language model’s API key is missing. Ask someone with access to model management to check its configuration.",
-      "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration."
+      "errorModelRegion": "The language model’s region is missing. Ask someone with access to model management to check its configuration.",
+      "errorVoiceTranscription": "Could not transcribe the recording. Check the transcriber and try again.",
+      "errorVoiceTimeout": "The transcription service did not return a result within ten minutes. Check whether a worker with the selected Whisper model is running and try again.",
+      "errorVoiceEmpty": "No speech was detected in the recording."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Calculator",
@@ -821,6 +825,31 @@
       "labelCompleted": "Context summarized",
       "labelFailed": "Context could not be summarized",
       "labelInterrupted": "Context summarization interrupted"
+    },
+    "VoiceMessage": {
+      "labelTitle": "Voice message",
+      "buttonRecord": "Record",
+      "labelRecord": "Start recording",
+      "labelRecording": "Recording",
+      "labelPlay": "Play",
+      "labelPause": "Pause",
+      "labelRestart": "Play from the beginning",
+      "labelSend": "Send voice message",
+      "labelUploading": "Uploading and queuing your message…",
+      "labelDiscard": "Discard recording",
+      "labelClose": "Close recorder",
+      "errorDiscard": "Could not remove the recording from the chat files. Try again.",
+      "errorUnconfirmed": "Delivery was not confirmed. You can retry sending. Closing the recorder keeps the recording in the chat files.",
+      "labelToggleTranscript": "Expand or collapse transcript",
+      "labelTranscribing": "Transcribing …",
+      "labelRecorded": "Recording ready to send",
+      "labelAwaitingTranscript": "No transcript yet",
+      "errorTranscriberRequired": "Voice message unavailable.",
+      "errorTranscriberNotFound": "The assigned transcriber is missing or you do not have access to it. Ask a workspace administrator to select an available transcriber under Additional Functions in the agent settings.",
+      "errorTranscriberModel": "The transcriber has no available speech recognition model. Ask a workspace administrator to select a Whisper model in the transcriber settings.",
+      "errorTranscriberCheck": "Could not check the transcriber. Reload the chat to try again.",
+      "errorPlayback": "The recording could not be played.",
+      "errorSend": "Could not queue the message. Check your connection and try again when the chat is available."
     }
   },
   "page": {

@@ -1,3 +1,4 @@
+import { TranscriberConfigurationError } from "../packages/database/src/transcriber/requireTranscriber";
 import { Doc } from "yjs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 const io = vi.hoisted(() => ({
@@ -5,6 +6,9 @@ const io = vi.hoisted(() => ({
   permission: vi.fn(),
   ensure: vi.fn(),
   select: vi.fn(),
+  inspect: vi.fn(),
+  transcriber: vi.fn(),
+  storageAccess: vi.fn(),
   abort: vi.fn(),
   remove: vi.fn(),
   users: vi.fn(),
@@ -12,6 +16,15 @@ const io = vi.hoisted(() => ({
   admin: vi.fn(),
   memberships: vi.fn(),
 }));
+vi.mock(
+  "../packages/realtime/src/documents/chat/queueChat.ts",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/realtime/src/documents/chat/queueChat")
+    >()),
+    queueChat: (await import("./helpers/chat-admission")).queueChatInMemory,
+  }),
+);
 vi.mock(
   "../packages/realtime/src/server/ServerRealtimeProvider.ts",
   async () => {
@@ -29,9 +42,27 @@ vi.mock(
     };
   },
 );
-vi.mock("@schornio/aibox-database/agent/getAgentById", () => ({
-  getAgentById: async () => ({ workspaceId: "workspace" }),
+vi.mock("@schornio/aibox-database/storage/inspect", () => ({
+  inspect: io.inspect,
 }));
+vi.mock("@schornio/aibox-database/storage/requireStorageAccess", () => ({
+  requireStorageAccess: io.storageAccess,
+}));
+vi.mock("@schornio/aibox-database/agent/getAgentById", () => ({
+  getAgentById: async () => ({
+    workspaceId: "workspace",
+    transcriberIdentifier: "whisper",
+  }),
+}));
+vi.mock(
+  "@schornio/aibox-database/transcriber/requireTranscriber",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/database/src/transcriber/requireTranscriber")
+    >()),
+    requireTranscriber: io.transcriber,
+  }),
+);
 vi.mock("@schornio/aibox-database/transcriber/getTranscriberById", () => ({
   getTranscriberById: async () => ({ workspaceId: "workspace" }),
 }));
@@ -460,5 +491,84 @@ describe("platform chat and monitoring integration", () => {
       isAdmin: true,
       workspaces: ["workspace"],
     });
+  });
+});
+
+describe("voice submission", () => {
+  const voice = { path: "clip.webm", duration: 14, peaks: [0.1, 0.6] };
+  const context = { ...c, supabase: { storage: { from: vi.fn() } } as any };
+  const submit = (value = voice) =>
+    execute("platform_chat_voice_send", { ...input, voice: value }, context);
+  beforeEach(() =>
+    io.inspect.mockResolvedValue({ file: true, type: "audio/webm" }),
+  );
+  it("rejects a stale transcriber before adding a chat task", async () => {
+    io.transcriber.mockRejectedValueOnce(
+      new TranscriberConfigurationError("TRANSCRIBER_NOT_FOUND"),
+    );
+    await expect(submit()).resolves.toEqual({
+      status: "unavailable",
+      reason: "TRANSCRIBER_NOT_FOUND",
+    });
+    expect(getTaskQueue(io.docs.get("taskQueue")).tasks.length).toBe(0);
+  });
+  it("queues once after upload and acknowledges a repeated request after the recording enters history", async () => {
+    await submit();
+    await submit();
+    const tasks = getTaskQueue(io.docs.get("taskQueue")).tasks;
+    expect(tasks.toArray()).toMatchObject([
+      { type: "chat", parameters: { ...input, voice, userId } },
+    ]);
+    tasks.delete(0, 1);
+    io.docs
+      .get(getChatDocumentName(input))
+      .getArray("messages")
+      .push([
+        {
+          id: "voice",
+          role: "user",
+          parts: [{ type: "data-voice", data: voice }],
+        },
+      ]);
+    await submit();
+    expect(tasks.length).toBe(0);
+    expect(io.storageAccess).toHaveBeenCalledWith(
+      { type: "activity", ...input },
+      "write",
+      { supabase: context.supabase },
+    );
+  });
+  it("requires access, a supported audio file and bounded metadata", async () => {
+    await expect(submit({ ...voice, duration: 301 })).rejects.toThrow();
+    await expect(submit({ ...voice, path: "../clip.webm" })).rejects.toThrow(
+      "INVALID_FILE_PATH",
+    );
+    io.storageAccess.mockRejectedValueOnce(new Error("STORAGE_NOT_AUTHORIZED"));
+    await expect(submit()).rejects.toThrow("STORAGE_NOT_AUTHORIZED");
+    expect(io.inspect).not.toHaveBeenCalled();
+    io.inspect.mockResolvedValueOnce({ file: true, type: "text/plain" });
+    await expect(submit()).rejects.toThrow("AUDIO_FILE_REQUIRED");
+    expect(io.docs.size).toBe(0);
+  });
+  it("rejects a busy or approval-blocked chat", async () => {
+    const chat = new Doc();
+    io.docs.set(getChatDocumentName(input), chat);
+    chat.getMap("state").set("type", "generating");
+    await expect(submit()).rejects.toThrow("CHAT_BUSY");
+    chat.getMap("state").set("type", "idle");
+    chat.getArray("messages").push([
+      {
+        role: "assistant",
+        id: "a",
+        parts: [
+          {
+            type: "tool-mcp",
+            state: "approval-requested",
+            approval: { id: "permission" },
+          },
+        ],
+      },
+    ]);
+    await expect(submit()).rejects.toThrow("TOOL_APPROVAL_REQUIRED");
   });
 });

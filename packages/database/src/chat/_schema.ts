@@ -1,3 +1,4 @@
+import { voiceMessageSchema } from "./voiceMessage.ts";
 import type { ToolMCP } from "./_types.ts";
 import { storageSchema } from "../storage/_schemas.ts";
 import type { LanguageModelUsage, UIMessage } from "ai";
@@ -43,6 +44,7 @@ export const chatContextCompressionSchema = z.object({
 });
 
 const dataSchemas = {
+  voice: voiceMessageSchema,
   contextCompression: chatContextCompressionSchema,
   file: chatFileDataSchema,
   role: chatRoleDataSchema,

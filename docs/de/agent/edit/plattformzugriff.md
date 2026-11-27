@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto, berechtigte Arbeitsplätze oder ganze Instanz."
   prerequisites: "Aktuelle Datenbankmigrationen und SUPABASE_JWT_SECRET im Webserver; für Chats und Dateioperationen ein erreichbarer Realtime-Dienst und passende Worker. Externe Clients benötigen Streamable HTTP und OAuth mit PKCE (S256)."
   status: "verfügbar"
-  last_verified: "2026-11-21"
+  last_verified: "2026-11-27"
   source_files:
     - "apps/web/app/(main)/agent/_components/AgentEditorRolePlatformAccess.tsx"
     - "apps/web/app/(main)/agent/_components/AgentEditorRoleTools.tsx"
@@ -145,6 +145,7 @@ Die folgenden Namen sind die tatsächlichen MCP-Werkzeugnamen. Jede höhere Stuf
 | `platform_chat_read`                             | Benutzer:in                  | Chatnachrichten und Zustand lesen                                                        | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                                                                          |
 | `platform_chat_expiration_get`                   | Benutzer:in                  | Chat-Löschfrist lesen                                                                    | Arbeitsplatz- und Chat-Zugriff                                                                                                                                                   |
 | `platform_chat_expiration_set`                   | Benutzer:in                  | Chat-Löschfrist setzen oder ausschalten                                                  | Arbeitsplatz-Zugriff und tatsächliche Chat-Teilnahme; aktivierte Agentenfunktion; feste 12 Stunden ab Einschalten; gilt für alle Beteiligten; begonnene Löschung nicht umkehrbar |
+| `platform_chat_voice_send`                       | Benutzer:in                  | Sprachnachricht mit vorhandenem oder neuem Transkript senden                             | Zugriff auf Arbeitsplatz und Chat, konfigurierter Transkriptor, freier Chat ohne offene Freigabe, serverseitig geprüfte Höchstdauer von fünf Minuten                             |
 | `platform_chat_send`                             | Benutzer:in                  | Nachricht mit Anhängen und optionalem Nachdenken senden                                  | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                                                                          |
 | `platform_chat_submit_batch`                     | Benutzer:in                  | Pausierte Nachrichten als Stapel absenden                                                | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                                                                          |
 | `platform_chat_tool_approval`                    | Benutzer:in                  | Exakte offene Werkzeuganfrage freigeben oder ablehnen                                    | Eigenes Konto bzw. Zugriff auf die betroffene Ressource                                                                                                                          |

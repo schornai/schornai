@@ -227,3 +227,56 @@ export const DisappearingChatsOn: Story = {
     },
   },
 };
+
+export const MissingTranscriber: Story = {
+  parameters: {
+    contextFixtures: {
+      useFileUpload: { uploads: [] },
+      useChatComposeMessage: {
+        activity: undefined,
+        voiceStatus: "TRANSCRIBER_NOT_FOUND",
+        selectedCurrentMessage: undefined,
+        messageBatch: [],
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText(
+        /Der zugeordnete Transkriptor fehlt|The assigned transcriber is missing/,
+      ),
+    ).toBeVisible();
+    await expect(
+      canvas.queryByRole("button", {
+        name: /^(Aufnehmen|Record)$/i,
+      }),
+    ).not.toBeInTheDocument();
+    await expect(canvas.getByRole("textbox")).toBeEnabled();
+    await expect(
+      canvas.getByRole("button", { name: /^(Senden|Send)$/i }),
+    ).toBeDisabled();
+  },
+};
+
+export const EmptyWithMicrophone: Story = {
+  parameters: {
+    contextFixtures: {
+      useFileUpload: { uploads: [] },
+      useChatComposeMessage: {
+        activity: undefined,
+        voiceStatus: "ready",
+        selectedCurrentMessage: undefined,
+        messageBatch: [],
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("button", { name: /^(Aufnehmen|Record)$/i }),
+    ).toBeEnabled();
+    await expect(
+      canvas.queryByRole("button", { name: /^(Senden|Send)$/i }),
+    ).toBeNull();
+  },
+};

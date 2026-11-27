@@ -754,7 +754,8 @@
         "platform_xrag_export_jobs": "XRAG-Exporte anzeigen",
         "platform_xrag_export_delete": "XRAG-Export löschen",
         "platform_xrag_export_cancel": "XRAG-Export abbrechen",
-        "platform_xrag_export_download": "XRAG-Export herunterladen"
+        "platform_xrag_export_download": "XRAG-Export herunterladen",
+        "platform_chat_voice_send": "Sprachnachricht senden"
       },
       "labelClose": "Schließen",
       "labelOpenFile": "Zum Dokument",
@@ -786,7 +787,10 @@
       "errorApprovalRoleNotFound": "Die Rolle zur offenen Werkzeugfreigabe ist nicht mehr verfügbar. Prüfe die Rollen des Agenten und starte einen neuen Chat.",
       "errorApprovalRolesMismatch": "Die offenen Werkzeugfreigaben gehören zu unterschiedlichen Rollen und können nicht gemeinsam fortgesetzt werden. Starte einen neuen Chat.",
       "errorModelApiKey": "Für das Sprachmodell fehlt der API-Schlüssel. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
-      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen."
+      "errorModelRegion": "Für das Sprachmodell fehlt die Region. Bitte eine Person mit Zugriff auf die Modellverwaltung, die Konfiguration zu prüfen.",
+      "errorVoiceTranscription": "Die Aufnahme konnte nicht transkribiert werden. Prüfe den Transkriptor und versuche es erneut.",
+      "errorVoiceTimeout": "Der Transkriptionsdienst hat innerhalb von zehn Minuten kein Ergebnis geliefert. Prüfe, ob ein Worker mit dem ausgewählten Whisper-Modell läuft, und versuche es erneut.",
+      "errorVoiceEmpty": "In der Aufnahme wurde keine Sprache erkannt."
     },
     "AgentEditorRoleSupport": {
       "labelCalculator": "Taschenrechner",
@@ -821,6 +825,31 @@
       "labelCompleted": "Kontext zusammengefasst",
       "labelFailed": "Kontext konnte nicht zusammengefasst werden",
       "labelInterrupted": "Zusammenfassung des Kontexts abgebrochen"
+    },
+    "VoiceMessage": {
+      "labelTitle": "Sprachnachricht",
+      "buttonRecord": "Aufnehmen",
+      "labelRecord": "Aufnahme starten",
+      "labelRecording": "Aufnahme läuft",
+      "labelPlay": "Abspielen",
+      "labelPause": "Pausieren",
+      "labelRestart": "Von Anfang an abspielen",
+      "labelSend": "Sprachnachricht senden",
+      "labelUploading": "Wird hochgeladen und zum Versand übergeben …",
+      "labelDiscard": "Aufnahme verwerfen",
+      "labelClose": "Recorder schließen",
+      "errorDiscard": "Die Aufnahme konnte nicht aus den Chatdateien entfernt werden. Versuche es erneut.",
+      "errorUnconfirmed": "Der Versand wurde nicht bestätigt. Du kannst erneut senden. Beim Schließen bleibt die Aufnahme in den Chatdateien.",
+      "labelToggleTranscript": "Transkript ein- oder ausklappen",
+      "labelTranscribing": "Wird transkribiert …",
+      "labelRecorded": "Aufnahme bereit zum Senden",
+      "labelAwaitingTranscript": "Noch kein Transkript",
+      "errorTranscriberRequired": "Sprachnachricht nicht verfügbar.",
+      "errorTranscriberNotFound": "Der zugeordnete Transkriptor fehlt oder du hast keinen Zugriff darauf. Bitte die Arbeitsplatzverwaltung, in den Agenteneinstellungen unter „Zusätzliche Funktionen“ einen verfügbaren Transkriptor auszuwählen.",
+      "errorTranscriberModel": "Dem Transkriptor fehlt ein verfügbares Spracherkennungsmodell. Bitte die Arbeitsplatzverwaltung, in den Transkriptoreinstellungen ein Whisper-Modell auszuwählen.",
+      "errorTranscriberCheck": "Der Transkriptor konnte nicht geprüft werden. Lade den Chat erneut.",
+      "errorPlayback": "Die Aufnahme konnte nicht abgespielt werden.",
+      "errorSend": "Der Versand konnte nicht gestartet werden. Prüfe die Verbindung und versuche es erneut, sobald der Chat frei ist."
     }
   },
   "page": {

@@ -16,7 +16,7 @@ import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { useT } from "next-i18next/client";
 import { ChatMessage } from "./ChatMessage";
 import { useActivites } from "../../../../_components/ActivityContextProvider";
-import { useChatError, useMessages } from "./ChatContext";
+import { useChatError, useChatStatus, useMessages } from "./ChatContext";
 
 export function ChatMessageItems({
   activityId,
@@ -35,6 +35,7 @@ export function ChatMessageItems({
 
   const messages = useMessages();
   const error = useChatError();
+  const status = useChatStatus();
 
   if ((!messages || messages.length === 0) && error === undefined) {
     return (
@@ -55,11 +56,15 @@ export function ChatMessageItems({
 
   return (
     <>
-      {messages?.map((message) => (
+      {messages?.map((message, index) => (
         <ChatMessage
           agentColor={agentColor}
           key={message.id}
           message={message}
+          generationPending={
+            index === messages.length - 1 &&
+            (status === "queued" || status === "generating")
+          }
         />
       ))}
 

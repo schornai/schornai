@@ -525,6 +525,23 @@ it("reports authorization initialization failures without leaking the original e
   );
   expect(mocks.transcribe).not.toHaveBeenCalled();
 });
+it("validates a voice recording while preserving its corrected transcript under the file lock", async () => {
+  const saved = { type: "transcript", textOverride: "Corrected", segments: [] };
+  mocks.savedContent.mockResolvedValue(saved);
+  transcribeWorker(config);
+  await mocks.handler(
+    { ...task, parameters: { ...task.parameters, voiceMessage: true } },
+    signal,
+  );
+  expect(mocks.transcribe).toHaveBeenCalledWith(
+    expect.objectContaining({ voiceMode: "validate" }),
+  );
+  expect(mocks.saveTranscription).not.toHaveBeenCalled();
+  expect(mocks.log).toHaveBeenLastCalledWith(
+    expect.objectContaining({ state: "created", content: saved }),
+  );
+});
+
 it("passes the selected retry level and preserves user authorization through saving", async () => {
   vi.stubEnv("SUPABASE_JWT_SECRET", undefined);
   vi.stubEnv("JWT_SECRET", "legacy-test-signing-secret");

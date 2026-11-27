@@ -36,6 +36,10 @@
     "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/submitCurrentMessage.ts"
   ],
   [
+    "apps/web/app/(main)/agent/[agentId]/[activityId]/_actions/submitVoiceMessage.ts",
+    "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/[activityId]/_actions/submitVoiceMessage.ts"
+  ],
+  [
     "apps/web/app/(main)/agent/[agentId]/_models/getAgentById.ts",
     "apps/web/.storybook/server-mocks/app/(main)/agent/[agentId]/_models/getAgentById.ts"
   ],

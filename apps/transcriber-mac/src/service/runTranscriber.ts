@@ -9,6 +9,7 @@ import type { StorageTranscription } from "@schornio/aibox-database/storage/_typ
 import type { TranscriptionRetryLevel } from "@schornio/aibox-database/transcriber/_types";
 import type { TranscriptionResult } from "./TranscriptionResult.ts";
 import { mapTranscription } from "./mapTranscription.ts";
+import { maxVoiceSeconds } from "@schornio/aibox-database/chat/voiceMessage";
 
 /** One sequential Python process per queue worker; MLX retains its last model.
  * Only audio/model options cross this boundary, never Supabase credentials or claims.
@@ -120,12 +121,14 @@ export class TranscriberProcess {
   async transcribe({
     abortSignal,
     file,
+    voiceMode,
     modelIdentifier,
     modelPrompt,
     retryLevel = "thorough",
   }: {
     abortSignal?: AbortSignal;
     file: Blob;
+    voiceMode?: "validate" | "transcribe";
     modelIdentifier: string;
     modelPrompt?: string;
     retryLevel?: TranscriptionRetryLevel;
@@ -157,6 +160,8 @@ export class TranscriberProcess {
         JSON.stringify({
           id,
           audioPath,
+          voiceMode,
+          maxVoiceSeconds: voiceMode ? maxVoiceSeconds : undefined,
           modelIdentifier,
           modelPrompt,
           retryLevel,

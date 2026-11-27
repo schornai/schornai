@@ -6,17 +6,18 @@ meta:
   app_urls:
     [
       "/app/transcribe/[transcriberId]/[activityId]/files",
-      "/agent/[agentId]/[activityId]",
+      "/agent/[agentId]/[activityId]/files",
       "/app/documents/[documentRepositoryId]/files",
     ]
   required_role: "Benutzer:in (user) für eigene Aktivitäten; Bearbeiter:in (editor) oder höher für eine gemeinsame Ablage."
   role_scope: "Eigene Aktivität oder gemeinsame Zielablage"
   prerequisites: "Mikrofon, Browserberechtigung, HTTPS/localhost und zugeordneter Transkriptor."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-21"
   source_files:
     [
       "apps/web/app/_components/AudioRecorder.tsx",
+      "apps/web/app/_components/useAudioRecording.ts",
       "apps/web/app/_components/AudioRecorderModal.tsx",
       "apps/web/app/_components/useRecordingWakeLock.ts",
     ]
@@ -30,7 +31,9 @@ Für die Mikrofonaufnahme brauchst du einen Browser mit freigegebenem Mikrofonzu
 
 - Am Transkriptor: **Audio aufnehmen** startet eine neue Aktivität und öffnet den Recorder.
 - In einer Transkriptionsaktivität: Verwende das Mikrofon oder **Optionen → Neu → Neue Aufnahme**.
-- In einem Chat oder einer Dokumentenablage: Die Aufnahme wird angeboten, wenn ein Transkriptor zugeordnet ist.
+- In der Dateiansicht eines Chats oder in einer Dokumentenablage: Die Aufnahme wird angeboten, wenn ein Transkriptor zugeordnet ist.
+
+Das Mikrofon direkt in der Chat-Eingabe öffnet die [Sprachnachricht](../../agent/chat/index.md#sprachnachricht-senden).
 
 ## Aufnehmen und speichern
 

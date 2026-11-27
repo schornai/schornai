@@ -2,6 +2,7 @@
 
 import { AlertCircle, ChevronDown, RotateCcw } from "lucide-react";
 import { useT } from "next-i18next/client";
+import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
 import { useAction } from "next-safe-action/hooks";
 import {
   Collapsible,
@@ -12,6 +13,9 @@ import { ButtonAction } from "@schornio/aibox-package-ui/components/button-actio
 import { retryChatGeneration } from "../_actions/retryChatGeneration";
 
 const errorTranslationKeys = new Map<string, string>([
+  ["VOICE_TRANSCRIPTION_FAILED", "errorVoiceTranscription"],
+  ["VOICE_TRANSCRIPTION_TIMEOUT", "errorVoiceTimeout"],
+  ["VOICE_NO_SPEECH", "errorVoiceEmpty"],
   ["CONTEXT_BUDGET_EXCEEDED", "errorContextBudget"],
   ["CONTEXT_COMPRESSION_FAILED", "errorContextCompression"],
   ["TASK_WORKER_LOST", "errorWorkerLost"],
@@ -35,6 +39,10 @@ function getErrorSummary(error: string, t: (key: string) => string) {
   return firstLine;
 }
 
+const transcriberKeys = new Map<string, string>(
+  Object.entries(voiceTranscriberErrorKeys),
+);
+
 export function ChatError({
   error,
   agentId,
@@ -48,7 +56,11 @@ export function ChatError({
   const { execute, isPending, hasErrored, hasSucceeded } =
     useAction(retryChatGeneration);
   const details = error.trim() || t("descriptionNoDetails");
-  const summary = getErrorSummary(error, t);
+  const { t: voiceLabel } = useT("agent", {
+    keyPrefix: "_components.VoiceMessage",
+  });
+  const configKey = transcriberKeys.get(error.trim());
+  const summary = configKey ? voiceLabel(configKey) : getErrorSummary(error, t);
 
   return (
     <Collapsible className="text-destructive border-destructive/20 bg-destructive/5 min-w-0 rounded-xl border p-3">
