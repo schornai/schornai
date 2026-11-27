@@ -345,6 +345,14 @@ describe("chat worker orchestration", () => {
     });
     expect(mocks.dispose).toHaveBeenCalledTimes(4);
   });
+  it("allows tool use past five steps and stops at twenty", async () => {
+    queue({ type: "text", text: "Use the tools" });
+    await run();
+    const { stopWhen } = mocks.stream.mock.lastCall![0];
+    for (let count = 1; count <= 20; count++) {
+      expect(await stopWhen({ steps: Array(count) })).toBe(count === 20);
+    }
+  });
   it("finishes an empty queue without contacting a model", async () => {
     await run();
     expect(mocks.stream).not.toHaveBeenCalled();

@@ -1,4 +1,4 @@
-import { afterEach, expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { Server } from "@hocuspocus/server";
 import { HocuspocusProviderWebsocket } from "@hocuspocus/provider";
 import { Database } from "@hocuspocus/extension-database";
@@ -6,6 +6,7 @@ import { createRealtimeAuthentication } from "../packages/realtime/src/server/cr
 import { createTaskCoordinatorExtension } from "../packages/realtime/src/server/createTaskCoordinatorExtension";
 import { ServerRealtimeProvider } from "../packages/realtime/src/server/ServerRealtimeProvider";
 import { TaskQueue } from "../packages/realtime/src/documents/taskQueue/TaskQueue";
+import { TaskCoordinator } from "../packages/realtime/src/documents/taskQueue/TaskCoordinator";
 import { getTaskQueueDocumentName } from "../packages/realtime/src/documents/taskQueue/_utils";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
 import { addTask } from "../packages/realtime/src/documents/taskQueue/addTask";
@@ -120,6 +121,147 @@ it("starts only one handler when two real worker connections race", async () => 
     await Promise.all(runs);
   }
   expect([...store.records.values()][0]?.state).toBe("finished");
+});
+function enqueueChats(source: ServerRealtimeProvider, count: number): string[] {
+  const ids = Array.from({ length: count }, () => crypto.randomUUID());
+  const agentId = crypto.randomUUID();
+  const userId = crypto.randomUUID();
+  for (const id of ids) {
+    addTask(source.document, {
+      id,
+      state: "pending",
+      type: "chat",
+      parameters: { agentId, activityId: id, userId, userClaims: [] },
+      requiredCapabilities: [],
+    });
+  }
+  return ids;
+}
+function chatQueue(server: Server, workerIdentifier: string) {
+  return new TaskQueue("chat", {
+    capabilities: [],
+    concurrency: 4,
+    serverToken: token,
+    websocketProvider: socket(server),
+    workerIdentifier,
+  });
+}
+it("processes four chats on one worker and claims the fifth when a slot opens", async () => {
+  const server = await start(taskClaimStore());
+  const source = await producer(server);
+  const ids = enqueueChats(source, 5);
+  const stop = new AbortController();
+  const finishFirst = Promise.withResolvers<void>();
+  const finishOthers = Promise.withResolvers<void>();
+  const started: string[] = [];
+  const run = chatQueue(server, "worker").handleTask(
+    async (task) => {
+      started.push(task.id);
+      await (task.id === ids[0] ? finishFirst : finishOthers).promise;
+    },
+    { abortSignal: stop.signal },
+  );
+  try {
+    await vi.waitFor(
+      () => {
+        expect(started).toHaveLength(4);
+        const pending = getTaskQueue(source.document)
+          .tasks.toArray()
+          .filter((task) => task.state === "pending");
+        expect(pending.map((task) => task.id)).toEqual(ids.slice(4));
+      },
+      { timeout: 5000 },
+    );
+    finishFirst.resolve();
+    await vi.waitFor(() => expect(started.toSorted()).toEqual(ids.toSorted()), {
+      timeout: 5000,
+    });
+  } finally {
+    finishFirst.resolve();
+    finishOthers.resolve();
+    stop.abort();
+    await run;
+  }
+});
+it("shares a burst between two workers and favors the less loaded one on new arrivals", async () => {
+  const store = taskClaimStore();
+  const server = await start(store);
+  const source = await producer(server);
+  let initial: string[] = [];
+  const claim = vi.spyOn(TaskCoordinator.prototype, "claim");
+  const stop = new AbortController();
+  const releaseA = Promise.withResolvers<void>();
+  const finish = Promise.withResolvers<void>();
+  const started = { a: [] as string[], b: [] as string[] };
+  const runs = (["a", "b"] as const).map((worker) =>
+    chatQueue(server, worker).handleTask(
+      async (task) => {
+        started[worker].push(task.id);
+        await (worker === "a" && initial.includes(task.id) ? releaseA : finish)
+          .promise;
+      },
+      { abortSignal: stop.signal },
+    ),
+  );
+  try {
+    await vi.waitFor(() =>
+      expect(claim.mock.calls.map(([, , worker]) => worker)).toEqual(
+        expect.arrayContaining(["a", "b"]),
+      ),
+    );
+    initial = enqueueChats(source, 4);
+    await vi.waitFor(
+      () => {
+        expect(started.a).toHaveLength(2);
+        expect(started.b).toHaveLength(2);
+      },
+      { timeout: 5000 },
+    );
+    releaseA.resolve();
+    await vi.waitFor(() =>
+      expect(
+        started.a.every((id) => store.records.get(id)?.state === "finished"),
+      ).toBe(true),
+    );
+    const next = enqueueChats(source, 2);
+    await vi.waitFor(() => expect(started.a.slice(2)).toEqual(next), {
+      timeout: 5000,
+    });
+    expect(started.b).toHaveLength(2);
+  } finally {
+    releaseA.resolve();
+    finish.resolve();
+    stop.abort();
+    await Promise.all(runs);
+    claim.mockRestore();
+  }
+});
+it("fills available slots when a backlog contains short jobs", async () => {
+  const server = await start(taskClaimStore());
+  const source = await producer(server);
+  const ids = enqueueChats(source, 50);
+  const stop = new AbortController();
+  let active = 0;
+  let peak = 0;
+  let completed = 0;
+  const run = chatQueue(server, "short-jobs").handleTask(
+    async () => {
+      peak = Math.max(peak, ++active);
+      await new Promise((resolve) => setTimeout(resolve, 70));
+      active--;
+      completed++;
+    },
+    { abortSignal: stop.signal },
+  );
+  try {
+    await vi.waitFor(() => expect(completed).toBe(ids.length), {
+      timeout: 8000,
+    });
+    expect(peak).toBe(4);
+  } finally {
+    stop.abort();
+    await run;
+  }
 });
 it("restores a crashed owner's claim after a real server restart without executing it again", async () => {
   const store = taskClaimStore();

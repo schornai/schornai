@@ -7,6 +7,7 @@ import {
 } from "@schornio/aibox-realtime/server/ServerRealtimeProvider";
 import {
   createUIMessageStream,
+  isStepCount,
   readUIMessageStream,
   toUIMessageStream,
 } from "ai";
@@ -42,10 +43,12 @@ import { finalizeInterruptedToolInputs } from "@schornio/aibox-realtime/document
 import { upsertActivity } from "@schornio/aibox-realtime/documents/activity/upsertActivity";
 
 export async function chatWorker({
+  concurrency,
   supabaseServiceRole,
   token,
   workerIdentifier,
 }: {
+  concurrency?: number;
   supabaseServiceRole: SupabaseClient;
   token: string;
   workerIdentifier: string;
@@ -54,6 +57,7 @@ export async function chatWorker({
   const serverToken = ServerRealtimeProvider.getServerToken(token);
 
   const taskQueue = new TaskQueue("chat", {
+    concurrency,
     capabilities: [],
     serverToken,
     websocketProvider,
@@ -380,6 +384,7 @@ export async function chatWorker({
                 selectedRole?.modelThinkingOverride ?? agent.modelThinking,
                 thinking,
               ),
+              stopWhen: isStepCount(20),
               toolApproval: await toolSession.toolApproval(),
               tools: await toolSession.tools(),
             });
