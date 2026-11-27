@@ -160,11 +160,12 @@ describe("task queue worker lifecycle", () => {
     expect(getTaskQueue(state.doc).tasks.get(0).state).toBe("pending");
     state.doc.destroy();
   });
-  it("claims work, returns results and removes per-task observers", async () => {
+  it("claims work, returns results and removes the worker and task observers", async () => {
     addTask(state.doc, task());
     const queue = new TaskQueue("model-do-generate", config);
     const controller = new AbortController();
     const { tasks } = getTaskQueue(state.doc);
+    const observe = vi.spyOn(tasks, "observe");
     const unobserve = vi.spyOn(tasks, "unobserve");
     const handler = vi.fn(async (claimed: any) => {
       expect(claimed).toMatchObject({ state: "claimed", claimedBy: "worker" });
@@ -176,7 +177,10 @@ describe("task queue worker lifecycle", () => {
       state: "finished",
       result: { output: "done" },
     });
-    expect(unobserve).toHaveBeenCalledOnce();
+    expect(observe).toHaveBeenCalledTimes(2);
+    expect(unobserve).toHaveBeenCalledTimes(2);
+    for (const [listener] of observe.mock.calls)
+      expect(unobserve).toHaveBeenCalledWith(listener);
     state.doc.destroy();
   });
   it("records handler errors and cleans subscriptions", async () => {
