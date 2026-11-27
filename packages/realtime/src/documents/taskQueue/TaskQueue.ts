@@ -68,6 +68,7 @@ export class TaskQueue<
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
     let retryDelay = 1_000;
     let wake: (() => void) | undefined;
+    let backlogSince: number | undefined;
     const running = new Set<Promise<void>>();
     const completions = new EventTarget();
     const retryCoordinator = () =>
@@ -76,8 +77,8 @@ export class TaskQueue<
       capabilitiesDirty = true;
       wake?.();
     };
-    const nextPendingTask = () =>
-      tasks
+    const nextPendingTask = () => {
+      const pending = tasks
         .toArray()
         .find(
           (task) =>
@@ -87,6 +88,9 @@ export class TaskQueue<
               this.#capabilities.includes(capability),
             ),
         );
+      backlogSince = pending ? (backlogSince ?? performance.now()) : undefined;
+      return pending;
+    };
     const waitForWork = () =>
       new Promise<void>((resolve) => {
         let retryClaim: ReturnType<typeof setTimeout> | undefined;
@@ -139,17 +143,22 @@ export class TaskQueue<
               await waitForWork();
               continue;
             }
-            // Give less loaded peers a head start on each new claim. Start
-            // the delay when work is queued and reconsider it if our load falls.
-            const waitSignal = AbortSignal.any([
-              workerSignal,
-              AbortSignal.timeout(running.size * 250),
-            ]);
-            try {
-              await once(completions, "finish", { signal: waitSignal });
-              continue;
-            } catch {
-              if (workerSignal.aborted) break;
+            // Give less loaded peers a head start once per backlog. Short
+            // completions must not restart the wait for already queued work.
+            const remaining = Math.ceil(
+              backlogSince! + running.size * 250 - performance.now(),
+            );
+            if (remaining > 0) {
+              const waitSignal = AbortSignal.any([
+                workerSignal,
+                AbortSignal.timeout(remaining),
+              ]);
+              try {
+                await once(completions, "finish", { signal: waitSignal });
+                continue;
+              } catch {
+                if (workerSignal.aborted) break;
+              }
             }
             if (
               (capabilitiesDirty && this.#getCapabilities) ||

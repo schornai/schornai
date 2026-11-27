@@ -6,6 +6,7 @@ import { createRealtimeAuthentication } from "../packages/realtime/src/server/cr
 import { createTaskCoordinatorExtension } from "../packages/realtime/src/server/createTaskCoordinatorExtension";
 import { ServerRealtimeProvider } from "../packages/realtime/src/server/ServerRealtimeProvider";
 import { TaskQueue } from "../packages/realtime/src/documents/taskQueue/TaskQueue";
+import { TaskCoordinator } from "../packages/realtime/src/documents/taskQueue/TaskCoordinator";
 import { getTaskQueueDocumentName } from "../packages/realtime/src/documents/taskQueue/_utils";
 import { getTaskQueue } from "../packages/realtime/src/documents/taskQueue/getTaskQueue";
 import { addTask } from "../packages/realtime/src/documents/taskQueue/addTask";
@@ -186,7 +187,8 @@ it("shares a burst between two workers and favors the less loaded one on new arr
   const store = taskClaimStore();
   const server = await start(store);
   const source = await producer(server);
-  const initial = enqueueChats(source, 4);
+  let initial: string[] = [];
+  const claim = vi.spyOn(TaskCoordinator.prototype, "claim");
   const stop = new AbortController();
   const releaseA = Promise.withResolvers<void>();
   const finish = Promise.withResolvers<void>();
@@ -202,6 +204,12 @@ it("shares a burst between two workers and favors the less loaded one on new arr
     ),
   );
   try {
+    await vi.waitFor(() =>
+      expect(claim.mock.calls.map(([, , worker]) => worker)).toEqual(
+        expect.arrayContaining(["a", "b"]),
+      ),
+    );
+    initial = enqueueChats(source, 4);
     await vi.waitFor(
       () => {
         expect(started.a).toHaveLength(2);
@@ -225,6 +233,34 @@ it("shares a burst between two workers and favors the less loaded one on new arr
     finish.resolve();
     stop.abort();
     await Promise.all(runs);
+    claim.mockRestore();
+  }
+});
+it("fills available slots when a backlog contains short jobs", async () => {
+  const server = await start(taskClaimStore());
+  const source = await producer(server);
+  const ids = enqueueChats(source, 50);
+  const stop = new AbortController();
+  let active = 0;
+  let peak = 0;
+  let completed = 0;
+  const run = chatQueue(server, "short-jobs").handleTask(
+    async () => {
+      peak = Math.max(peak, ++active);
+      await new Promise((resolve) => setTimeout(resolve, 70));
+      active--;
+      completed++;
+    },
+    { abortSignal: stop.signal },
+  );
+  try {
+    await vi.waitFor(() => expect(completed).toBe(ids.length), {
+      timeout: 8000,
+    });
+    expect(peak).toBe(4);
+  } finally {
+    stop.abort();
+    await run;
   }
 });
 it("restores a crashed owner's claim after a real server restart without executing it again", async () => {

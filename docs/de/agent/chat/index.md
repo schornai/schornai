@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-22"
+  last_verified: "2026-11-27"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -89,7 +89,7 @@ es wird kein übergroßer Folgeaufruf gesendet.
 4. Wähle **Senden** oder drücke `Enter`. Mit `Shift` + `Enter` fügst du einen Zeilenumbruch ein.
 5. Warte auf die Antwort. Wenn eine Werkzeugaktion freigegeben werden muss, erscheint stattdessen eine [Rückfrage](freigaben.md).
 
-Jeder Realtime-Worker kann bis zu vier verschiedene Chats gleichzeitig bearbeiten. Wenn mehrere Worker bereitstehen, übernehmen freie oder weniger ausgelastete Worker neue Chats bevorzugt. Sind alle Plätze belegt, warten weitere Chats im Aufgabenstapel. Innerhalb eines Gesprächs werden Nachrichten weiterhin der Reihe nach verarbeitet. Wie viele Antworten gleichzeitig Text liefern, hängt auch vom Modellserver ab.
+Jeder Realtime-Worker kann bis zu vier verschiedene Chats gleichzeitig bearbeiten. Wenn mehrere Worker bereitstehen, übernehmen freie oder weniger ausgelastete Worker neue Chats bevorzugt. Bleiben Chats im Aufgabenstapel, nutzt auch ein einzelner Worker seine weiteren Plätze für kurze Aufträge. Sind alle Plätze belegt, warten weitere Chats im Aufgabenstapel. Innerhalb eines Gesprächs werden Nachrichten weiterhin der Reihe nach verarbeitet. Wie viele Antworten gleichzeitig Text liefern, hängt auch vom Modellserver ab.
 
 Frage konkret nach, wenn dir eine Antwort unklar ist. Beispiel: „Welche Aussagen stammen aus der Datei? Nenne die passende Fundstelle und kennzeichne Vermutungen.“
 
