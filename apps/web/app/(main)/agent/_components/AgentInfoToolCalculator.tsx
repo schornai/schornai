@@ -10,7 +10,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@schornio/aibox-package-ui/components/collapsible";
-import type { Agent } from "@schornio/aibox-package-database/agent/_types";
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { InfoActions } from "../../../_components/InfoActions";
 import { InfoTitle } from "../../../_components/InfoTitle";
@@ -18,11 +17,9 @@ import Link from "next/link";
 import { useT } from "next-i18next/client";
 
 export function AgentInfoToolCalculator({
-  agentRole,
   editAgentPathname,
   editRoleId,
 }: {
-  agentRole?: Partial<Agent["roles"][number]>;
   editAgentPathname?: string;
   editRoleId?: string;
 }) {
@@ -39,7 +36,6 @@ export function AgentInfoToolCalculator({
             {t("labelTitle")}
           </CollapsibleTrigger>
           <InfoActions>
-            <strong>{agentRole?.name}</strong>
             {editRoleId && (
               <Button
                 aria-label={t("labelEdit")}

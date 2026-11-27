@@ -3,6 +3,13 @@ import { XRAGObjectActions } from "../../../../../app/_components/xrag/XRAGObjec
 const meta = {
   title: "Web/(main)/app/xrag/XRAGObjectActions",
   component: XRAGObjectActions,
+  decorators: [
+    (Story) => (
+      <div className="mx-auto flex w-80 max-w-full flex-col gap-2">
+        <Story />
+      </div>
+    ),
+  ],
   args: { kind: "agent", id: "example-agent" },
 } satisfies Meta<typeof XRAGObjectActions>;
 export default meta;

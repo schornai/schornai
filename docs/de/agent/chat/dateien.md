@@ -77,10 +77,10 @@ Beim Kopieren oder Verschieben durch den Agenten muss der Zielpfad den Dateiname
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mit `attachmentMode: copy` wird auch eine eingebundene Datei kopiert; `reference` verlangt eine passende Agenteneinbindung. Mindeststufe: **Benutzer**; Zugriff auf Chat und Quelldatei erforderlich.
-- `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer**.
-- `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer**.
-- `platform_activity_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Benutzer**.
-- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+- `platform_chat_file_select`: Datei für einen Chat auswählen oder in den Chat kopieren. Mit `attachmentMode: copy` wird auch eine eingebundene Datei kopiert; `reference` verlangt eine passende Agenteneinbindung. Mindeststufe: **Benutzer:in**; Zugriff auf Chat und Quelldatei erforderlich.
+- `platform_chat_draft_files`: Anhänge eines pausierten Entwurfs ersetzen. Mindeststufe: **Benutzer:in**.
+- `platform_activity_file_upload`: Datei bis 1 MiB als Base64 hochladen und verarbeiten. Mindeststufe: **Benutzer:in**.
+- `platform_activity_file_upload_url`: Uploadadresse für größere Dateien erhalten. Mindeststufe: **Benutzer:in**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -55,9 +55,9 @@ Verlaufseinträge lassen sich nur einzeln entfernen; eine automatische Löschfri
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_activities_list`: Eigenen Verlauf lesen. Mindeststufe: **Benutzer**.
-- `platform_activity_create`: Chat- oder Transkriptionsaktivität anlegen. Mindeststufe: **Benutzer**.
-- `platform_activity_update`: Aktivität umbenennen oder anheften. Mindeststufe: **Benutzer**.
-- `platform_activity_delete`: Aktivität aus dem Verlauf entfernen. Mindeststufe: **Benutzer**.
+- `platform_activities_list`: Eigenen Verlauf lesen. Mindeststufe: **Benutzer:in**.
+- `platform_activity_create`: Chat- oder Transkriptionsaktivität anlegen. Mindeststufe: **Benutzer:in**.
+- `platform_activity_update`: Aktivität umbenennen oder anheften. Mindeststufe: **Benutzer:in**.
+- `platform_activity_delete`: Aktivität aus dem Verlauf entfernen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

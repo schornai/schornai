@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { database } from "./helpers/supabase";
+import { database, query } from "./helpers/supabase";
+import { getAgentInfoTranscriber } from "../apps/web/app/_models/getAgentInfoTranscriber";
 import { createAgent } from "../packages/database/src/agent/createAgent";
 import { updateAgent } from "../packages/database/src/agent/updateAgent";
 import { deleteAgent } from "../packages/database/src/agent/deleteAgent";
@@ -24,6 +25,35 @@ const item = {
 } as any;
 
 describe("entity writes", () => {
+  it.each([false, true])(
+    "reads one assigned transcriber's public details (legacy: %s)",
+    async (legacy) => {
+      const row = { id: "row", name: "Visible", description: null };
+      const current = query({ data: legacy ? null : row });
+      const fallback = query({ data: row });
+      const supabase = {
+        from: vi
+          .fn()
+          .mockReturnValueOnce(current)
+          .mockReturnValueOnce(fallback),
+      };
+      expect(
+        await getAgentInfoTranscriber(undefined, supabase as any),
+      ).toBeUndefined();
+      expect(
+        await getAgentInfoTranscriber("assigned", supabase as any),
+      ).toEqual({ ...row, description: undefined });
+      expect(current.select).toHaveBeenCalledWith("id,name,description");
+      expect(current.eq).toHaveBeenCalledWith(
+        "config->>identifier",
+        "assigned",
+      );
+      expect(supabase.from).toHaveBeenCalledTimes(legacy ? 2 : 1);
+      if (legacy) expect(fallback.eq).toHaveBeenCalledWith("id", "assigned");
+      expect(current.update).not.toHaveBeenCalled();
+      expect(fallback.update).not.toHaveBeenCalled();
+    },
+  );
   it.each([
     [
       "databases",

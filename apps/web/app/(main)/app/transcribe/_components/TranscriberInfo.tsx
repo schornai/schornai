@@ -1,4 +1,10 @@
 "use client";
+import { ResourceRemovalDialog } from "../../../../_components/ResourceRemovalDialog";
+import { deleteTranscriber } from "../_actions/deleteTranscriber";
+import { useAction } from "next-safe-action/hooks";
+import { useT } from "next-i18next/client";
+import { ResourceInfoLayout } from "../../../../_components/ResourceInfoLayout";
+import { TranscriberIconGroupActions } from "./TranscriberIconGroupActions";
 import { hasPermission } from "@/lib/hasPermission";
 import { XRAGObjectActions } from "../../../../_components/xrag/XRAGObjectActions";
 
@@ -13,7 +19,7 @@ import type { Transcriber_new } from "@schornio/aibox-package-database/transcrib
 import type { WorkspaceClaim } from "../../../../_models/getWorkspaceClaims";
 
 export function TranscriberInfo({
-  showXRAGActions = false,
+  showResourceActions = false,
   editTranscriberPathname,
   editDefaultTranscriber,
   editable,
@@ -22,7 +28,7 @@ export function TranscriberInfo({
   transcriber,
   workspace,
 }: {
-  showXRAGActions?: boolean;
+  showResourceActions?: boolean;
   editTranscriberPathname?: string;
   editDefaultTranscriber?: Partial<Transcriber_new>;
   editable?: boolean;
@@ -35,15 +41,57 @@ export function TranscriberInfo({
     ? modelMap?.get(transcriber?.modelIdentifier)
     : undefined;
 
+  const { t: editorText } = useT("transcriber", {
+    keyPrefix: "_components.TranscriberEditor",
+  });
+  const remove = useAction(deleteTranscriber);
+  const id = transcriber?.id;
+  const canManage = hasPermission({
+    claim: workspace?.claim,
+    permission: "workspace-admin",
+  });
   return (
-    <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <TranscriberCard
-        favorites={favorites}
-        model={model}
-        transcriber={transcriber}
-        workspace={workspace}
-      />
-      <div className="flex flex-col gap-1">
+    <ContainerMain>
+      <ResourceInfoLayout
+        card={
+          <TranscriberCard
+            favorites={favorites}
+            model={model}
+            transcriber={transcriber}
+            workspace={workspace}
+          />
+        }
+        actions={
+          showResourceActions &&
+          id && (
+            <TranscriberIconGroupActions
+              display="buttons"
+              favorites={favorites}
+              workspace={workspace}
+              transcriber={transcriber}
+              packageActions={
+                canManage && <XRAGObjectActions kind="transcriber" id={id} />
+              }
+              remove={
+                canManage && (
+                  <ResourceRemovalDialog
+                    label={editorText("labelDeleteTranscriber")}
+                    title={editorText("confirmDeleteTitle")}
+                    description={editorText("confirmDeleteDescription", {
+                      name: transcriber?.name,
+                    })}
+                    cancel={editorText("labelCancel")}
+                    onOpen={remove.reset}
+                    isPending={remove.isPending}
+                    hasErrored={remove.hasErrored}
+                    onConfirm={() => remove.execute({ transcriberId: id })}
+                  />
+                )
+              }
+            />
+          )
+        }
+      >
         {transcriber?.prompt ? (
           <TranscriberInfoPrompt
             editDefaultPrompt={transcriber.prompt}
@@ -69,13 +117,7 @@ export function TranscriberInfo({
           editable={editable}
           workspace={workspace}
         />
-      </div>
-      {showXRAGActions &&
-        transcriber?.id &&
-        hasPermission({
-          claim: workspace?.claim,
-          permission: "workspace-admin",
-        }) && <XRAGObjectActions kind="transcriber" id={transcriber.id} />}
+      </ResourceInfoLayout>
     </ContainerMain>
   );
 }

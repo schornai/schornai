@@ -48,4 +48,4 @@ Unter [Cluster](../cluster/index.md) findest du eine Kachelübersicht zu [Servic
 
 ## Zugehörige MCP-Werkzeuge für Modelle
 
-`platform_models_list` zeigt ab Stufe **Benutzer** lesbare Modellmetadaten. `platform_xrag_export` liefert ein lokales Modellarchiv und `platform_xrag_saved_package_add` nimmt ein lokales Modell in das eigene Paket auf. Beide benötigen mindestens **Workspace-Administrator** und Zugriff auf das Modell. Der Export nutzt die Modelldateien auf dem Core-Host oder ein veröffentlichtes Archiv. [Werkzeuge der Modellverwaltung](models.md#zugehörige-mcp-werkzeuge).
+`platform_models_list` zeigt ab Stufe **Benutzer:in** lesbare Modellmetadaten. `platform_xrag_export` liefert ein lokales Modellarchiv und `platform_xrag_saved_package_add` nimmt ein lokales Modell in das eigene Paket auf. Beide benötigen mindestens **Arbeitsplatzadministrator:in** und Zugriff auf das Modell. Der Export nutzt die Modelldateien auf dem Core-Host oder ein veröffentlichtes Archiv. [Werkzeuge der Modellverwaltung](models.md#zugehörige-mcp-werkzeuge).

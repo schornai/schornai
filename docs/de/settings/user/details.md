@@ -56,14 +56,14 @@ Bei SSO zeigt der Berechtigungsreiter den Hinweis **Die Rechte werden vom SSO An
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_user_get`: Profil und sämtliche Berechtigungen einer Person lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_user_get`: Profil und sämtliche Berechtigungen einer Person lesen. Mindeststufe: **Globale:r Administrator:in**.
 
-- `platform_user_name_update`: Profilnamen einer Person ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_user_avatar_update`: Profilbild einer anderen Person ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_user_admin_update`: Globale Administratorrolle ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_user_permission_update`: Workspace-Mitgliedschaft ändern. Mindeststufe: **Globaler Administrator**.
-- `platform_user_reset_key`: Einmaligen Reset-Schlüssel neu ausstellen. Mindeststufe: **Globaler Administrator**.
+- `platform_user_name_update`: Profilnamen einer Person ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_user_avatar_update`: Profilbild einer anderen Person ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_user_admin_update`: Globale Administratorrolle ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_user_permission_update`: Arbeitsplatzmitgliedschaft ändern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_user_reset_key`: Einmaligen Reset-Schlüssel neu ausstellen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).
 
-`platform_user_access_message` erzeugt für globale Administratoren die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.
+`platform_user_access_message` erzeugt für globale Administrator:innen die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.

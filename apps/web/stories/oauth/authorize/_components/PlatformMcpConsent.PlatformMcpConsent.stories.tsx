@@ -40,12 +40,12 @@ export const Workspace: Story = {
     const select = canvas.getByRole("combobox", { name: "Zugriffsstufe" });
     await userEvent.click(select);
     expect(
-      body.queryByRole("option", { name: "Globaler Administrator" }),
+      body.queryByRole("option", { name: "Globale:r Administrator:in" }),
     ).not.toBeInTheDocument();
     await userEvent.click(
-      await body.findByRole("option", { name: "Workspace-Administrator" }),
+      await body.findByRole("option", { name: "Arbeitsplatzadministrator:in" }),
     );
-    await expect(select).toHaveTextContent("Workspace-Administrator");
+    await expect(select).toHaveTextContent("Arbeitsplatzadministrator:in");
   },
   args: {
     clientName: "schorn.ai",

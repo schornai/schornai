@@ -8,9 +8,10 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Ein verfügbares Transkriptionsmodell; optional Namen und Fachbegriffe für den Prompt."
   status: "verfügbar"
-  last_verified: "2026-10-30"
+  last_verified: "2026-11-22"
   source_files:
     [
+      "apps/web/app/(main)/app/transcribe/[transcriberId]/_components/TranscriberEditorOverview.tsx",
       "apps/web/app/_actions/storageQueueProcessFiles.ts",
       "apps/web/app/(main)/app/transcribe/[transcriberId]/_components/TranscriberEditor.tsx",
       "apps/web/app/(main)/app/transcribe/[transcriberId]/_components/TranscriberEditorSettingsRetries.tsx",
@@ -23,6 +24,8 @@ meta:
 # Transkriptoren bearbeiten, kopieren und löschen
 
 Wähle **Bearbeiten** am Transkriptor. Im Editor findest du **Übersicht**, **Prompt** und **Einstellungen**.
+
+Die **Übersicht** zeigt den Prompt und die Einstellungen in eigenen Abschnitten. Über den jeweiligen Titel oder Hilfetext öffnest du den Reiter. Am Ende der Übersicht kannst du den Transkriptor speichern, als neuen Transkriptor speichern oder löschen. Beim Anlegen steht dort **Transkriptor erstellen**.
 
 ![Prompt-Feld eines Transkriptors für Fachbegriffe und Namen](../../assets/transkriptor-prompt.png)
 
@@ -54,6 +57,6 @@ Für die Konfiguration brauchst du Arbeitsplatzadministratorrechte oder globale 
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Workspace-Administrator. `platform_transcribers_list` liest zugängliche Konfigurationen ab Benutzerstufe. `platform_transcriber_create`, `platform_transcriber_update` und `platform_transcriber_delete` verwalten Transkriptoren im berechtigten Workspace.
+**Mindeststufe:** Arbeitsplatzadministrator:in. `platform_transcribers_list` liest zugängliche Konfigurationen ab Benutzerstufe. `platform_transcriber_create`, `platform_transcriber_update` und `platform_transcriber_delete` verwalten Transkriptoren im berechtigten Arbeitsplatz.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

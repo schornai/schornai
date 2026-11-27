@@ -1,16 +1,7 @@
 "use client";
 
-import {
-  Alert,
-  AlertDescription,
-} from "@schornio/aibox-package-ui/components/alert";
-import {
-  BotMessageSquare,
-  Info,
-  Lightbulb,
-  Settings2,
-  Shapes,
-} from "lucide-react";
+import { AlertDescription } from "@schornio/aibox-package-ui/components/alert";
+import { BotMessageSquare, Lightbulb, Settings2, Shapes } from "lucide-react";
 import {
   Checklist,
   ChecklistItem,
@@ -24,20 +15,20 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@schornio/aibox-package-ui/components/empty";
-import { AgentInfo } from "./AgentInfo";
+import { AgentInfoRole } from "./AgentInfoRole";
+import { AgentInfoDocs } from "./AgentInfoDocs";
+import { AgentInfoRecommendedMessages } from "./AgentInfoRecommendedMessages";
+import { AgentInfoAdditionalFunctions } from "./AgentInfoAdditionalFunctions";
+import { AgentInfoModel } from "./AgentInfoModel";
+import { InfoWorkspace } from "../../../_components/InfoWorkspace";
+import { InfoTranscriber } from "../../../_components/InfoTranscriber";
+import { EditorOverviewSection } from "../../../_components/EditorOverviewSection";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
-import type { SettingFavorites } from "../../../_models/currentUserConfigFavorites";
 import { useAgentEditor } from "./AgentEditor";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
 
-export function AgentEditorOverview({
-  favorites,
-  mode,
-}: {
-  favorites?: SettingFavorites;
-  mode: "create" | "update";
-}) {
+export function AgentEditorOverview({ mode }: { mode: "create" | "update" }) {
   const router = useRouter();
   const { t } = useT("agent", {
     keyPrefix: "_components.AgentEditorOverview",
@@ -56,6 +47,10 @@ export function AgentEditorOverview({
     (workspace) => workspace.id === agent?.workspaceId,
   );
 
+  const { t: tab } = useT("agent", { keyPrefix: "_components.AgentEditor" });
+  const model = agent?.modelIdentifier
+    ? modelMap.get(agent.modelIdentifier)
+    : undefined;
   return (
     <>
       {mode === "create" ? (
@@ -161,37 +156,86 @@ export function AgentEditorOverview({
         </>
       ) : undefined}
 
-      <AgentInfo
-        agent={agent}
-        documentRepositoryMap={documentRepositoryMap}
-        favorites={favorites}
-        editDefaultAgent={defaultAgent}
-        editable={true}
-        modelMap={modelMap}
-        workspace={workspace}
-      />
-
-      <hr className="my-10" />
-
-      <ContainerMain className="flex flex-col gap-3" size="narrow">
-        <h2 title="Help">
-          <Info className="mx-auto" size={40} />
-        </h2>
-
-        <Alert>
-          <Shapes />
-          <AlertDescription>{t("infoRoleDefinition")}</AlertDescription>
-        </Alert>
-
-        <Alert>
-          <Lightbulb />
-          <AlertDescription>{t("infoDocsDescription")}</AlertDescription>
-        </Alert>
-
-        <Alert>
-          <Settings2 />
-          <AlertDescription>{t("infoAppearanceDescription")}</AlertDescription>
-        </Alert>
+      <ContainerMain className="flex flex-col gap-4">
+        <EditorOverviewSection
+          view="roles"
+          icon={Shapes}
+          title={tab("tabRoles")}
+          description={t("infoRoleDefinition")}
+        >
+          {agent?.roles?.map((role) => (
+            <div key={role.id} className="flex min-w-0 flex-col gap-1">
+              {(agent?.roles?.length ?? 0) > 1 && (
+                <h3 className="truncate text-sm font-medium">{role.name}</h3>
+              )}
+              <AgentInfoRole
+                role={role}
+                documentRepositoryMap={documentRepositoryMap}
+                modelMap={modelMap}
+                editDefaultRole={defaultAgent?.roles?.find(
+                  (item) => item.id === role.id,
+                )}
+                editable
+              />
+            </div>
+          ))}
+        </EditorOverviewSection>
+        <EditorOverviewSection
+          view="docs"
+          icon={Lightbulb}
+          title={tab("tabDocs")}
+          description={t("infoDocsDescription")}
+        >
+          {agent?.documentation && (
+            <AgentInfoDocs
+              docs={agent.documentation}
+              editDefaultDocs={defaultAgent?.documentation}
+              editable
+            />
+          )}
+          {Boolean(agent?.recommendedMessages?.length) && (
+            <AgentInfoRecommendedMessages
+              agent={agent}
+              editDefaultAgent={defaultAgent}
+              editable
+            />
+          )}
+        </EditorOverviewSection>
+        <EditorOverviewSection
+          view="settings"
+          icon={Settings2}
+          title={tab("tabSettings")}
+          description={t("infoAppearanceDescription")}
+        >
+          {agent?.modelIdentifier && (
+            <AgentInfoModel
+              model={model}
+              modelIdentifier={agent.modelIdentifier}
+              modelThinking={agent.modelThinking}
+              editDefaultModelIdentifier={defaultAgent?.modelIdentifier}
+              editDefaultModelThinking={defaultAgent?.modelThinking}
+              editable
+            />
+          )}
+          <InfoWorkspace
+            workspace={workspace}
+            editDefaultWorkspaceId={defaultAgent?.workspaceId}
+            editable
+          />
+          {agent?.transcriberIdentifier && (
+            <InfoTranscriber
+              transcriberIdentifier={agent.transcriberIdentifier}
+              editDefaultTranscriberIdentifier={
+                defaultAgent?.transcriberIdentifier
+              }
+              editHref="?view=settings#additionalFunctions"
+              transcriber={relations.transcribers?.find(
+                (item) => item.identifier === agent.transcriberIdentifier,
+              )}
+            />
+          )}
+          <AgentInfoAdditionalFunctions agent={agent} editable />
+        </EditorOverviewSection>
       </ContainerMain>
     </>
   );

@@ -8,9 +8,10 @@ meta:
   role_scope: "Betroffener Arbeitsplatz"
   prerequisites: "Für semantische Suche: ein Embedding-Modell; für Audio und Video: ein Transkriptor."
   status: "verfügbar"
-  last_verified: "2026-10-18"
+  last_verified: "2026-11-22"
   source_files:
     [
+      "apps/web/app/(main)/app/documents/[documentRepositoryId]/_components/DocumentRepositoryEditorOverview.tsx",
       "apps/web/app/_actions/storageQueueProcessFiles.ts",
       "apps/web/app/(main)/app/documents/_actions/updateDocumentRepository.ts",
       "apps/web/app/(main)/app/documents/[documentRepositoryId]/_components/DocumentRepositoryEditor.tsx",
@@ -22,6 +23,8 @@ meta:
 # Eine Dokumentenablage konfigurieren
 
 Öffne **Bearbeiten** an einer Dokumentenablage. Der Editor gliedert sich in **Übersicht**, **Funktionen** und **Einstellungen**. Änderungen übernimmst du mit **Speichern** beziehungsweise **Dokumentenablage speichern**.
+
+Die **Übersicht** gruppiert Suche und Transkriptor unter **Funktionen**, den Arbeitsplatz unter **Einstellungen**. Über den Titel oder Hilfetext einer Gruppe öffnest du den zugehörigen Reiter. Am Ende der Übersicht kannst du die Dokumentenablage speichern, als neue Ablage speichern oder löschen. Beim Anlegen steht dort **Dokumentenablage erstellen**.
 
 ## Funktionen ändern
 
@@ -45,6 +48,6 @@ Rücksetzsymbole verwerfen einzelne Änderungen. **Änderungen verwerfen** setzt
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Workspace-Administrator. `platform_repositories_list` liest zugängliche Ablagen ab Benutzerstufe. `platform_repository_create`, `platform_repository_update` und `platform_repository_delete` verwalten Ablagen; Änderungen prüfen Quell- und Ziel-Workspace.
+**Mindeststufe:** Arbeitsplatzadministrator:in. `platform_repositories_list` liest zugängliche Ablagen ab Benutzerstufe. `platform_repository_create`, `platform_repository_update` und `platform_repository_delete` verwalten Ablagen; Änderungen prüfen Quell- und Zielarbeitsplatz.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

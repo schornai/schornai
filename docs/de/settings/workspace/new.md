@@ -27,7 +27,7 @@ Ein Arbeitsplatz bildet den Rahmen für zusammengehörige Agenten, Dokumentenabl
 1. Öffne **Einstellungen → Arbeitsplätze** und wähle **Arbeitsplatz erstellen**.
 2. Trage einen **Namen** ein, zum Beispiel „Personalabteilung“.
 3. Ergänze optional eine **Beschreibung**, zum Beispiel Zweck und zuständiges Team.
-4. Wähle **Workspace anlegen**.
+4. Wähle **Arbeitsplatz anlegen**.
 5. Nach erfolgreicher Anlage öffnet sich die Verwaltungsseite des neuen Arbeitsplatzes.
 
 Mit **Abbrechen** kehrst du zur Übersicht zurück.
@@ -40,6 +40,6 @@ Prüfe mit einem vorgesehenen Mitglied unter **Profil → Berechtigungen** die R
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Globaler Administrator. `platform_workspace_create` legt einen Workspace mit Name und Beschreibung an. Die neue Kennung wird zurückgegeben.
+**Mindeststufe:** Globale:r Administrator:in. `platform_workspace_create` legt einen Arbeitsplatz mit Name und Beschreibung an. Die neue Kennung wird zurückgegeben.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).

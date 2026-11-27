@@ -573,8 +573,7 @@ it("saves the name and Markdown documentation for a local model", async () => {
   );
 });
 it("confirms registry-only local deletion and preserves the dialog on failure", async () => {
-  client.execute.mockResolvedValue({ serverError: "failed" });
-  render(
+  const form = (
     <ModelMetadataForm
       model={{
         id: "local",
@@ -582,13 +581,18 @@ it("confirms registry-only local deletion and preserves the dialog on failure", 
         description: "",
         type: "ollama_llm_v1",
       }}
-    />,
+    />
   );
+  const view = render(form);
   fireEvent.click(screen.getByRole("button", { name: "labelDelete" }));
   expect(screen.getByText("descriptionDeleteLocal")).toBeTruthy();
   const dialog = screen.getByRole("alertdialog");
   fireEvent.click(within(dialog).getByRole("button", { name: "labelDelete" }));
-  await waitFor(() => expect(screen.getByText("errorDelete")).toBeTruthy());
+  expect(client.execute).toHaveBeenCalledWith({ id: "local" });
+  client.actionErrored = true;
+  view.rerender(<ModelMetadataForm {...form.props} />);
+  expect(screen.getByText("errorDelete")).toBeTruthy();
+  client.actionErrored = false;
   expect(screen.getByRole("alertdialog")).toBeTruthy();
 });
 

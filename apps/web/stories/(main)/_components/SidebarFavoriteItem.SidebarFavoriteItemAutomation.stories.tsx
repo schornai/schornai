@@ -30,7 +30,11 @@ export const Expanded: Story = {
   play: async ({ canvasElement }) => {
     const item = canvasElement.querySelector('a[href$="/info"]')!;
     await expect(
-      item.querySelector("button svg.lucide-circle-chevrons-right"),
+      item
+        .closest("li")
+        ?.querySelector(
+          'button[aria-haspopup="menu"] svg.lucide-circle-chevrons-right',
+        ),
     ).toBeVisible();
   },
 };

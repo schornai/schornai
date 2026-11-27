@@ -29,7 +29,7 @@ Ein Agent kann Werkzeuge einsetzen, um Dateien zu lesen oder zu schreiben, im We
 
 Plattformwerkzeuge zeigen statt JSON eine Vorschau: Agenten und Dokumentenablagen mit ihrer Info-Ansicht, Dateien mit den üblichen Dateikacheln und der bestehenden Datei-/Transkriptvorschau sowie andere Daten als beschriftete Felder. Die aufklappbare Ergebniskarte unterscheidet Abschluss, Ablehnung und Fehler und besitzt wie die Storage-Werkzeuge einen Schließen-Button. Mehrere Plattformaufrufe teilen sich in der Schrittübersicht ein Plattform-Symbol. Die Vorschau bildet die angeforderte beziehungsweise ausgeführte Aktion ab; sie ist keine nachgeladene Live-Ansicht.
 
-Ob eine Rückfrage erscheint, legt die Agentenrolle je Stufe fest: **Automatisch**, **Freigabe erforderlich** oder **Aus**. Neu hinzugefügter Plattformzugriff führt Benutzer- und Editoraktionen automatisch aus, verlangt für Workspace-Administratoraktionen eine Freigabe und deaktiviert globale Administratoraktionen. Das gilt auch für lesende Aufrufe. Details und das Verhalten bestehender Agenten stehen unter [Plattformzugriff](../edit/plattformzugriff.md).
+Ob eine Rückfrage erscheint, legt die Agentenrolle je Stufe fest: **Automatisch**, **Freigabe erforderlich** oder **Aus**. Richtest du den Plattformzugriff neu ein, laufen Aktionen der Stufen **Benutzer:in** und **Bearbeiter:in** automatisch. Aktionen der Stufe **Arbeitsplatzadministrator:in** erfordern eine Freigabe. Die Stufe **Globale:r Administrator:in** ist zunächst ausgeschaltet. Das gilt auch für lesende Aufrufe. Details und das Verhalten bestehender Agenten stehen unter [Plattformzugriff](../edit/plattformzugriff.md).
 
 ## Eine Rückfrage beantworten
 
@@ -70,7 +70,7 @@ Die einzelne Freigabe ändert keine Arbeitsplatzrechte. Bei automatisch erlaubte
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_chat_tool_approval`: Exakte offene Werkzeuganfrage freigeben oder ablehnen. Mindeststufe: **Benutzer**.
-- `platform_chat_read`: Chatnachrichten und Zustand lesen. Mindeststufe: **Benutzer**.
+- `platform_chat_tool_approval`: Exakte offene Werkzeuganfrage freigeben oder ablehnen. Mindeststufe: **Benutzer:in**.
+- `platform_chat_read`: Chatnachrichten und Zustand lesen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -47,7 +47,7 @@ example.com
 ## Web Search einschalten
 
 1. Aktiviere **Web Search einschalten**.
-2. Wähle eine **Suchverbindung** aus dem Dropdown. Eine globale Administrator:in legt Staan-/Brave-Zugänge unter [Einstellungen → Verbindungen](../../settings/connections.md) an.
+2. Wähle eine **Suchverbindung** aus dem Dropdown. Die globale Administration legt Staan-/Brave-Zugänge unter [Einstellungen → Verbindungen](../../settings/connections.md) an.
 3. Sprache und Region für Staan werden ebenfalls zentral festgelegt; ohne Angabe gilt `en-us`.
 4. Entscheide, ob vor jeder Websuche nachgefragt werden soll.
 5. Speichere den Agenten.

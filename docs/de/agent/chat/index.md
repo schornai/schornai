@@ -203,16 +203,16 @@ Wiederherstellung erhalten.
 
 ## Zugehörige MCP-Werkzeuge
 
-**Mindeststufe:** Benutzer. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
+**Mindeststufe:** Benutzer:in. `platform_chat_send` startet einen Chat oder sendet Text in einen vorhandenen, zugänglichen Chat. `platform_chat_read` liefert Nachrichten und Zustand einschließlich Fehlerdetails. `platform_chat_retry` setzt einen fehlgeschlagenen Chat aus dem vorhandenen Verlauf fort. Es benötigt mindestens Benutzerzugriff im Arbeitsplatz und Zugriff auf das Gespräch; es setzt einen Fehlerzustand ohne offene Werkzeugfreigabe voraus, weist beschäftigte Chats ab und sendet keine wartenden Entwürfe. `platform_agent_get` liest die aktuelle Agentenkonfiguration einschließlich der Dokumentation; dafür ist Zugriff auf den Agenten erforderlich. `platform_chat_abort` beendet die laufende Generierung eines Chats mit entsprechender Schreibberechtigung. Die Verarbeitung erfolgt asynchron; beschäftigte Chats werden abgewiesen.
 
-`platform_calculate` und `platform_current_date_time` bieten dieselbe Berechnung und Uhrzeitfunktion ab Stufe **User**, ohne zusätzliche Ressourcenrechte. `platform_activity_update` benennt eigene Aktivitäten um. `platform_chat_read` enthält auch die Ergebnisse des rolleninternen Tools `chat-response-suggestions`; `platform_chat_send` kann eine ausgewählte Antwort senden. Die rolleninternen Tools `calculator`, `chat-set-label`, `chat-current-date-time` und `chat-response-suggestions` stehen nur bei entsprechender Aktivierung in der ausgewählten Rolle zur Verfügung.
+`platform_calculate` und `platform_current_date_time` bieten dieselbe Berechnung und Uhrzeitfunktion ab Stufe **Benutzer:in**, ohne zusätzliche Ressourcenrechte. `platform_activity_update` benennt eigene Aktivitäten um. `platform_chat_read` enthält auch die Ergebnisse des rolleninternen Tools `chat-response-suggestions`; `platform_chat_send` kann eine ausgewählte Antwort senden. Die rolleninternen Tools `calculator`, `chat-set-label`, `chat-current-date-time` und `chat-response-suggestions` stehen nur bei entsprechender Aktivierung in der ausgewählten Rolle zur Verfügung.
 
 Das Vorbefüllen und Fokussieren des Eingabefelds ist eine reine Browserfunktion und wird nicht als MCP-Werkzeug angeboten. MCP-Clients können den gewünschten Text mit `platform_chat_send` senden.
 
 Verbindung und gemeinsame Berechtigungsregeln: [Plattformzugriff](../../agent/edit/plattformzugriff.md).
 
 `platform_chat_expiration_get` liest die Frist; `platform_chat_expiration_set`
-setzt oder deaktiviert sie. Mindeststufe ist **Benutzer** mit Zugriff auf den
+setzt oder deaktiviert sie. Mindeststufe ist **Benutzer:in** mit Zugriff auf den
 Arbeitsplatz des Agenten und den konkreten Chat. Änderungen setzen tatsächliche
 Teilnahme am Chat voraus; ein höheres Tool-Level ersetzt diese Prüfung nicht.
 `seconds` muss 43.200 (12 Stunden) sein; `null`

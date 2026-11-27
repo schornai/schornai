@@ -8,7 +8,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Die Adresse deiner schorn.ai-Instanz und ein eingerichteter Zugang."
   status: "verfügbar"
-  last_verified: "2026-10-15"
+  last_verified: "2026-11-22"
   source_files:
     [
       "apps/web/app/(settings)/_components/Sidebar.tsx",
@@ -37,7 +37,9 @@ Beispiel: „Fasse diesen Text in fünf Stichpunkten zusammen. Nenne anschließe
 
 Die Startseite `/` zeigt eine Begrüßung, gegebenenfalls einen Willkommenstext deiner Organisation und deine Favoriten. Über **Alle Agenten** und **Zu den Apps** gelangst du zu den vollständigen Übersichten. Die Seitenleiste führt außerdem zu Arbeitsplätzen und Verlauf. Über das Kontomenü erreichst du dein Profil und die Abmeldung.
 
-![Seitenleiste mit Navigation und Verlauf](assets/navigation.png)
+Auf dem Smartphone schließt sich die Seitenleiste, sobald du zu einer anderen Seite wechselst.
+
+![Seitenleiste mit geöffnetem Aktionsmenü eines favorisierten Agenten](assets/navigation.png)
 
 Die Abbildungen verwenden Beispieldaten. Suche in deiner Instanz nach den in der Anleitung **fett hervorgehobenen Aktionen** und wähle deine eigenen Agenten, Dateien und Arbeitsplätze aus.
 

@@ -72,7 +72,7 @@ dasselbe Ziel.
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_artifacts_list`: Veröffentlichte Artefakte lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_artifact_delete`: Artefakt und Katalogeintrag entfernen. Mindeststufe: **Globaler Administrator**.
+- `platform_artifacts_list`: Veröffentlichte Artefakte lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_artifact_delete`: Artefakt und Katalogeintrag entfernen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

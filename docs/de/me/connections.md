@@ -35,7 +35,7 @@ Hier stehen Anwendungen, denen du über `/mcp` Zugriff in deinem Namen erteilt h
 
 Über das **X** und die Bestätigung **Zugriff widerrufen** entfernst du die jeweilige Freigabe. Alle zugehörigen Zugriffs- und Refresh-Tokens werden ungültig. Bereits laufende Aufrufe können noch abschließen. Die Anwendung muss beim nächsten Zugriff erneut deine Freigabe einholen. Andere Freigaben, Anwendungen und Benutzerkonten bleiben unverändert. Bei einem Fehler bleibt die Bestätigung offen und du kannst es erneut versuchen.
 
-Du siehst und widerrufst ausschließlich deine eigenen Freigaben, auch als globale Administratorin oder globaler Administrator. Tokens, Token-Hashes und andere Zugangsdaten werden nicht angezeigt. Die Freigabe verwalten zu können erfordert nur ein angemeldetes Konto; eine zwischenzeitlich entzogene Workspace-Mitgliedschaft verhindert den Widerruf nicht.
+Du siehst und widerrufst ausschließlich deine eigenen Freigaben, auch als globale:r Administrator:in. Tokens, Token-Hashes und andere Zugangsdaten werden nicht angezeigt. Die Freigabe verwalten zu können erfordert nur ein angemeldetes Konto; eine zwischenzeitlich entzogene Arbeitsplatzmitgliedschaft verhindert den Widerruf nicht.
 
 ## Verbindungen zu externen Diensten
 
@@ -53,9 +53,9 @@ Details zu Voraussetzungen und unterstützten Anbietern stehen unter [Externe We
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_personal_mcp_grants`: Eigene eingehende Plattformfreigaben mit Stufe und Ablaufdatum auflisten, ohne Zugangsdaten. Mindeststufe: **Benutzer**.
-- `platform_personal_mcp_revoke`: Eine eigene eingehende Freigabe anhand ihrer `grantId` einschließlich aller Tokens widerrufen. Mindeststufe: **Benutzer**. Ein Client kann damit auch seinen eigenen Zugang beenden.
-- `platform_personal_mcp_connections`: Eigene externe OAuth-Verbindungen auflisten. Mindeststufe: **Benutzer**.
-- `platform_personal_mcp_disconnect`: Eigene externe OAuth-Verbindung trennen. Mindeststufe: **Benutzer**.
+- `platform_personal_mcp_grants`: Eigene eingehende Plattformfreigaben mit Stufe und Ablaufdatum auflisten, ohne Zugangsdaten. Mindeststufe: **Benutzer:in**.
+- `platform_personal_mcp_revoke`: Eine eigene eingehende Freigabe anhand ihrer `grantId` einschließlich aller Tokens widerrufen. Mindeststufe: **Benutzer:in**. Ein Client kann damit auch seinen eigenen Zugang beenden.
+- `platform_personal_mcp_connections`: Eigene externe OAuth-Verbindungen auflisten. Mindeststufe: **Benutzer:in**.
+- `platform_personal_mcp_disconnect`: Eigene externe OAuth-Verbindung trennen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

@@ -362,6 +362,8 @@
       "description": "When searching for precise expressions and sentences. (Names, designations, etc.)"
     },
     "DocumentRepositoryInfoTranscriber": {
+      "labelEdit": "Edit transcriber assignment",
+      "labelToggleDetails": "Toggle transcriber details",
       "labelTitle": "Transcriber",
       "labelChanged": "Changed",
       "labelUnknownTranscriber": "Unknown transcriber",

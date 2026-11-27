@@ -511,6 +511,8 @@
       "description": "Wenn nach präzisen Ausdrücken und Sätzen gesucht werden soll. (Namen, Bezeichnungen, etc.)"
     },
     "DocumentRepositoryInfoTranscriber": {
+      "labelEdit": "Transkriptor-Zuordnung bearbeiten",
+      "labelToggleDetails": "Transkriptor-Details ein- oder ausblenden",
       "labelTitle": "Transkriptor",
       "labelChanged": "Geändert",
       "labelUnknownTranscriber": "Unbekannter Transkriptor",
@@ -518,28 +520,28 @@
     },
     "AgentEditorRolePlatformAccess": {
       "labelLevel": "Zugriffsstufe",
-      "description": "Die Einstellungen begrenzen die verfügbaren Aktionen. Es gelten immer zusätzlich deine eigenen Berechtigungen im jeweiligen Workspace; eine Freigabe erteilt keine zusätzlichen Rechte.",
+      "description": "Die Einstellungen begrenzen die verfügbaren Aktionen. Es gelten immer zusätzlich deine eigenen Berechtigungen im jeweiligen Arbeitsplatz; eine Freigabe erteilt keine zusätzlichen Rechte.",
       "level": {
-        "user": "Benutzer",
-        "editor": "Editor",
-        "workspace": "Workspace-Administrator",
-        "admin": "Globaler Administrator"
+        "user": "Benutzer:in",
+        "editor": "Bearbeiter:in",
+        "workspace": "Arbeitsplatzadministrator:in",
+        "admin": "Globale:r Administrator:in"
       },
       "mode": {
         "auto": "Automatisch",
         "ask": "Freigabe erforderlich",
         "off": "Aus"
       },
-      "descriptionModes": "Die Regeln gelten für jede Stufe unabhängig, auch für lesende Aktionen. Ausgeschaltete Aktionen sind nicht verfügbar. Standard: Benutzer und Editor automatisch, Workspace-Administrator mit Freigabe, globaler Administrator aus. Das Erteilen einer Werkzeugfreigabe in einem anderen Chat benötigt immer eine Bestätigung."
+      "descriptionModes": "Die Regeln gelten für jede Stufe unabhängig, auch für lesende Aktionen. Ausgeschaltete Aktionen sind nicht verfügbar. Standardmäßig laufen Aktionen für Benutzer:innen und Bearbeiter:innen automatisch. Für Arbeitsplatzadministrator:innen ist eine Freigabe erforderlich. Aktionen für globale Administrator:innen sind ausgeschaltet. Das Erteilen einer Werkzeugfreigabe in einem anderen Chat benötigt immer eine Bestätigung."
     },
     "AgentInfoToolPlatformAccess": {
       "labelTitle": "Plattformzugriff",
       "description": "Zugriffsstufe: {{level}}. Es gelten die Berechtigungen der ausführenden Person.",
       "level": {
-        "user": "Benutzer",
-        "editor": "Editor",
-        "workspace": "Workspace-Administrator",
-        "admin": "Globaler Administrator"
+        "user": "Benutzer:in",
+        "editor": "Bearbeiter:in",
+        "workspace": "Arbeitsplatzadministrator:in",
+        "admin": "Globale:r Administrator:in"
       },
       "mode": {
         "auto": "Automatisch",
@@ -571,7 +573,7 @@
         "id": "Kennung",
         "agent": "Agent",
         "repository": "Dokumentenablage",
-        "workspaceId": "Workspace",
+        "workspaceId": "Arbeitsplatz",
         "repositoryId": "Dokumentenablage",
         "agentId": "Agent",
         "documentRepositoryId": "Dokumentenablage",
@@ -622,7 +624,7 @@
         "apiKey": "API-Schlüssel"
       },
       "tools": {
-        "platform_workspaces_list": "Workspaces auflisten",
+        "platform_workspaces_list": "Arbeitsplätze auflisten",
         "platform_agents_list": "Agenten auflisten",
         "platform_agent_get": "Agent anzeigen",
         "platform_repositories_list": "Dokumentenablagen auflisten",
@@ -637,9 +639,9 @@
         "platform_transcriber_create": "Transkriptor anlegen",
         "platform_transcriber_update": "Transkriptor ändern",
         "platform_transcriber_delete": "Transkriptor löschen",
-        "platform_workspace_update": "Workspace ändern",
-        "platform_workspace_documentation_update": "Workspace-Dokumentation ändern",
-        "platform_workspace_create": "Workspace anlegen",
+        "platform_workspace_update": "Arbeitsplatz ändern",
+        "platform_workspace_documentation_update": "Arbeitsplatzdokumentation ändern",
+        "platform_workspace_create": "Arbeitsplatz anlegen",
         "platform_users_list": "Benutzer auflisten",
         "platform_user_permission_update": "Benutzerberechtigungen ändern",
         "platform_files_list": "Dateien auflisten",
@@ -671,8 +673,8 @@
         "platform_model_connection_update": "Modellverbindung ändern",
         "platform_model_metadata_update": "Modellinformationen ändern",
         "platform_model_delete": "Modell löschen",
-        "platform_workspace_autojoin_update": "Automatischen Workspace-Beitritt ändern",
-        "platform_workspace_sso_mapping_update": "SSO-Zuordnung des Workspace ändern",
+        "platform_workspace_autojoin_update": "Automatischen Beitritt zum Arbeitsplatz ändern",
+        "platform_workspace_sso_mapping_update": "SSO-Zuordnung des Arbeitsplatzes ändern",
         "platform_user_admin_update": "Administratorrechte ändern",
         "platform_user_name_update": "Benutzernamen ändern",
         "platform_connections_list": "Verbindungen auflisten",
@@ -715,7 +717,7 @@
         "platform_chat_draft_files": "Dateianhänge festlegen",
         "platform_services_status": "Dienstzustand anzeigen",
         "platform_tasks_list": "Aufgaben auflisten",
-        "platform_workspace_users": "Workspace-Mitglieder anzeigen",
+        "platform_workspace_users": "Arbeitsplatzmitglieder anzeigen",
         "platform_permissions_get": "Eigene Berechtigungen anzeigen",
         "platform_user_get": "Benutzer anzeigen",
         "platform_personal_mcp_grants": "Eigene Plattformfreigaben anzeigen",

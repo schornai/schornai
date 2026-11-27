@@ -69,6 +69,6 @@ Wird eine Aktion trotz passender angezeigter Rolle abgelehnt, notiere die betrof
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_permissions_get`: Eigene Berechtigungen und Werkzeugstufe lesen. Mindeststufe: **Benutzer**.
+- `platform_permissions_get`: Eigene Berechtigungen und Werkzeugstufe lesen. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

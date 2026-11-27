@@ -9,6 +9,11 @@ import {
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import * as sidebar from "../packages/ui/src/components/sidebar";
+const navigation = vi.hoisted(() => ({ pathname: "/agent", query: "" }));
+vi.mock("next/navigation", () => ({
+  usePathname: () => navigation.pathname,
+  useSearchParams: () => new URLSearchParams(navigation.query),
+}));
 const mobile = vi.hoisted(() => ({ value: false }));
 vi.mock("../packages/ui/src/hooks/use-mobile", () => ({
   useIsMobile: () => mobile.value,
@@ -189,3 +194,36 @@ describe("sidebar layout and navigation", () => {
     },
   );
 });
+
+it.each([
+  { pathname: "/workspace", query: "" },
+  { pathname: "/agent", query: "view=table" },
+])(
+  "closes the mobile panel after navigating to $pathname?$query and preserves its desktop preference",
+  async (destination) => {
+    mobile.value = true;
+    const { SidebarPanel } =
+      await import("../apps/web/app/_components/SidebarPanel");
+    Object.assign(navigation, { pathname: "/agent", query: "" });
+    const layout = () => (
+      <sidebar.SidebarProvider defaultOpen={false}>
+        <SidebarPanel>Mobile navigation</SidebarPanel>
+        <sidebar.SidebarTrigger />
+      </sidebar.SidebarProvider>
+    );
+    const view = render(layout());
+    fireEvent.click(screen.getByRole("button", { name: "Toggle Sidebar" }));
+    expect(screen.getByRole("dialog")).toBeTruthy();
+    Object.assign(navigation, destination);
+    view.rerender(layout());
+    await screen.findByRole("button", { name: "Toggle Sidebar" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+    mobile.value = false;
+    view.rerender(layout());
+    expect(
+      view.container
+        .querySelector("[data-slot=sidebar]")
+        ?.getAttribute("data-state"),
+    ).toBe("collapsed");
+  },
+);

@@ -16,8 +16,8 @@ meta:
       "/api/service/artifacts",
       "/api/service/artifacts/[id]",
     ]
-  required_role: "Workspace-Administrator:in für Objektexporte und Ressourcenimporte; globale Administrator:in für Modell- und Plattformimporte."
-  role_scope: "Jeweiliger Workspace für Ressourcen; gesamte Instanz für Modelle und Plattformupdates."
+  required_role: "Arbeitsplatzadministrator:in für Objektexporte und Ressourcenimporte; globale Administrator:in für Modell- und Plattformimporte."
+  role_scope: "Jeweiliger Arbeitsplatz für Ressourcen; gesamte Instanz für Modelle und Plattformupdates."
   prerequisites: "Vertrauenswürdiges XRAG-Paket; Service mit passender Dienstkonfiguration und Freigabetoken."
   status: "verfügbar"
   last_verified: "2026-11-21"
@@ -214,7 +214,7 @@ Nicht ausgewählte Objekte und deren Dateien werden nicht importiert. Verweise a
 nicht mitimportierte Ressourcen bleiben für einen späteren Import erhalten.
 Die Berechtigungsprüfung gilt weiterhin für das gesamte Paket, auch für abgewählte Inhalte.
 
-Workspace-Administrator:innen dürfen Modelle exportieren und zu Sammelarchiven
+Arbeitsplatzadministrator:innen dürfen Modelle exportieren und zu Sammelarchiven
 zusammenfügen, aber nicht importieren. Enthält ein Import auch nur ein Modell,
 Update oder anderes Plattformpaket, wird ihr gesamter Import vor Änderungen
 abgewiesen. Globale Administrator:innen dürfen diese Pakete importieren; ihre
@@ -222,7 +222,7 @@ Veröffentlichung und Installation laufen anschließend über die vorhandenen Di
 
 Die globale ID verbindet Ressourcen über getrennte Importe hinweg: Importierst
 du zuerst die Dokumenten-Ablage und später einen darauf verweisenden Agenten in
-denselben Workspace, wird die vorhandene Ablage zugeordnet. Konfigurationsänderungen seit der
+denselben Arbeitsplatz, wird die vorhandene Ablage zugeordnet. Konfigurationsänderungen seit der
 Importvorschau erfordern eine erneute Prüfung und Bestätigung.
 
 Bei bestätigter Ersetzung bleiben zusätzliche Dateien einer bestehenden Ablage
@@ -264,7 +264,7 @@ konfiguriere benötigte Verbindungen auf der Zielinstanz neu.
 ## Paket veröffentlichen
 
 1. Prüfe Quelle, Zielversion und benötigte Dienste des Pakets. Setup-Pakete können Programme auf den Maschinen ausführen.
-2. Öffne **Einstellungen → XRAG hochladen** als globale Administratorin oder globaler Administrator.
+2. Öffne **Einstellungen → XRAG hochladen** als globale:r Administrator:in.
 3. Ziehe die `.xrag.tar`-Datei in den Uploadbereich oder wähle **Hochladen**. Du kannst mehrere Dateien auswählen; sie werden nacheinander übertragen.
 4. Warte auf den Veröffentlichungsstatus. Nach der Übertragung wird das Paket geprüft. Dafür muss das Browserfenster nicht geöffnet bleiben.
 5. Prüfe die Installation auf den betreffenden Maschinen mit `npx schornai service logs --follow` oder in der Mac-App.
@@ -400,47 +400,47 @@ Updates. Siehe [Sicherheit und Betrieb](../hilfe/sicherheit-und-betrieb.md).
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_xrag_upload_url` erstellt eine Uploadadresse für eine eigene XRAG-Datei. Mindeststufe **Workspace-Administrator**. Für Dateien über 6 MiB übergibst du `resumable` an einen TUS-Client. Es enthält den Endpunkt, die Blockgröße von 6 MiB, den Signatur-Header und die Objektmetadaten. Bei einer Unterbrechung setzt der Client den Upload an der zuletzt bestätigten Position fort. Läuft die Signatur ab, rufe das Werkzeug mit demselben `path` auf und verwende die neue Signatur für die bestehende TUS-Sitzung. Bis einschließlich 6 MiB kannst du die Datei auch per HTTP PUT an `url` senden. Verwende den zurückgegebenen `path` für die Importvorschau.
-- `platform_xrag_preview`: Gesamtes Paket und Ziel prüfen; liefert Prüfsumme und Revisionen bestehender Objekte. Mindeststufe: **Workspace-Administrator**; neue Workspaces und Plattforminhalte erfordern globale Rechte und entsprechende Zugriffsstufe.
-- `platform_xrag_import`: Ressourcen in einen administrierten bestehenden Workspace importieren. Mindeststufe: **Workspace-Administrator**. Modelle und Plattforminhalte werden vollständig abgewiesen, auch bei globalen Administrator:innen.
-- `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Workspace anlegen. Mindeststufe: **Globaler Administrator**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Die Bereinigung entfernt abgewählte Inhalte. Erfolgreich importierte Modell- und Plattformpakete bleiben am bisherigen Speicherort als Artefakte erhalten.
-- `platform_xrag_export` exportiert ein Objekt. Mit `includeModels: true` enthält der Download auch direkt verwendete lokale Modellarchive. Externe Modelle bleiben Verweise auf Anbieter und Modellkennung. Mindeststufe **Workspace-Administrator** mit Administratorrechten im Workspace des Objekts. Für lokale Modelle genügen die installierten Dateien auf dem Core-Host. Alternativ kann der Export ein veröffentlichtes Archiv verwenden.
-- `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globale Ressourcen-ID lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Workspace-Administrator**, Administratorrechte im Workspace des Objekts. Gilt für Agenten, Transkriptoren, Dokumentenablagen und eigene Automatisierungen, nicht für Modelle.
+- `platform_xrag_upload_url` erstellt eine Uploadadresse für eine eigene XRAG-Datei. Mindeststufe **Arbeitsplatzadministrator:in**. Für Dateien über 6 MiB übergibst du `resumable` an einen TUS-Client. Es enthält den Endpunkt, die Blockgröße von 6 MiB, den Signatur-Header und die Objektmetadaten. Bei einer Unterbrechung setzt der Client den Upload an der zuletzt bestätigten Position fort. Läuft die Signatur ab, rufe das Werkzeug mit demselben `path` auf und verwende die neue Signatur für die bestehende TUS-Sitzung. Bis einschließlich 6 MiB kannst du die Datei auch per HTTP PUT an `url` senden. Verwende den zurückgegebenen `path` für die Importvorschau.
+- `platform_xrag_preview`: Gesamtes Paket und Ziel prüfen; liefert Prüfsumme und Revisionen bestehender Objekte. Mindeststufe: **Arbeitsplatzadministrator:in**; neue Arbeitsplätze und Plattforminhalte erfordern globale Rechte und entsprechende Zugriffsstufe.
+- `platform_xrag_import`: Ressourcen in einen administrierten bestehenden Arbeitsplatz importieren. Mindeststufe: **Arbeitsplatzadministrator:in**. Modelle und Plattforminhalte werden vollständig abgewiesen, auch bei globalen Administrator:innen.
+- `platform_xrag_import_admin`: Auch Modell-/Plattforminhalte importieren und optional einen Arbeitsplatz anlegen. Mindeststufe: **Globale:r Administrator:in**. Schorn.ai-Agenten benötigen für beide Importwerkzeuge eine Bestätigung, da Pakete aktive Automationen enthalten können. Beide Importwerkzeuge benötigen die Prüfsumme der Vorschau und ausdrücklich bestätigte Revisionen für Ersetzungen; Dateien werden vor dem gemeinsamen Abschluss mit dauerhafter Wiederherstellung übernommen; die Dokumentverarbeitung bleibt asynchron. Der Rückgabewert `documentFileCount` kennzeichnet importierte Dokumentdateien. Die Bereinigung entfernt abgewählte Inhalte. Erfolgreich importierte Modell- und Plattformpakete bleiben am bisherigen Speicherort als Artefakte erhalten.
+- `platform_xrag_export` exportiert ein Objekt. Mit `includeModels: true` enthält der Download auch direkt verwendete lokale Modellarchive. Externe Modelle bleiben Verweise auf Anbieter und Modellkennung. Mindeststufe **Arbeitsplatzadministrator:in** mit Administratorrechten im Arbeitsplatz des Objekts. Für lokale Modelle genügen die installierten Dateien auf dem Core-Host. Alternativ kann der Export ein veröffentlichtes Archiv verwenden.
+- `platform_xrag_identity_get` / `platform_xrag_identity_set`: Globale Ressourcen-ID lesen bzw. initialisieren oder mit Prüfung der bisherigen ID ändern. Mindeststufe: **Arbeitsplatzadministrator:in**, Administratorrechte im Arbeitsplatz des Objekts. Gilt für Agenten, Transkriptoren, Dokumentenablagen und eigene Automatisierungen, nicht für Modelle.
 
-- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
-- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer**.
-- `platform_artifact_publish`: Veröffentlichung eines hochgeladenen XRAG-Pakets einreihen; liefert eine Auftrags-ID. Mindeststufe: **Globaler Administrator**.
-- `platform_artifact_publication_get`: Mit dieser Auftrags-ID den Status (`queued`, `processing`, `published`, `error`) und nach Veröffentlichung die Artefakt-Prüfsumme abfragen. Mindeststufe: **Globaler Administrator**. Bestätigt keine Installation auf Maschinen.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer:in**.
+- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer:in**.
+- `platform_artifact_publish`: Veröffentlichung eines hochgeladenen XRAG-Pakets einreihen; liefert eine Auftrags-ID. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_artifact_publication_get`: Mit dieser Auftrags-ID den Status (`queued`, `processing`, `published`, `error`) und nach Veröffentlichung die Artefakt-Prüfsumme abfragen. Mindeststufe: **Globale:r Administrator:in**. Bestätigt keine Installation auf Maschinen.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die
 betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen,
 besondere Grenzen und der vollständige Werkzeugkatalog stehen unter
 [Plattformzugriff](../agent/edit/plattformzugriff.md).
 
-- `platform_xrag_saved_package_list`, `platform_xrag_saved_package_create`: Eigene gespeicherte XRAG-Pakete auflisten bzw. anlegen. Mindeststufe: **Workspace-Administrator**.
-- `platform_xrag_saved_package_add`, `platform_xrag_saved_package_remove`: Ein Objekt samt ausdrücklich ausgewählten verbundenen Objekten atomar zur eigenen Auswahl hinzufügen bzw. einen Eintrag daraus entfernen. Mindeststufe: **Workspace-Administrator**; Hinzufügen erfordert Zugriff auf das Modell bzw. Administratorrechte im Objekt-Workspace.
-- `platform_xrag_saved_package_delete`: Eigenes XRAG-Paket löschen, ohne Quellobjekte zu löschen. Mindeststufe: **Workspace-Administrator**.
-- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Workspace-Administrator**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
+- `platform_xrag_saved_package_list`, `platform_xrag_saved_package_create`: Eigene gespeicherte XRAG-Pakete auflisten bzw. anlegen. Mindeststufe: **Arbeitsplatzadministrator:in**.
+- `platform_xrag_saved_package_add`, `platform_xrag_saved_package_remove`: Ein Objekt samt ausdrücklich ausgewählten verbundenen Objekten atomar zur eigenen Auswahl hinzufügen bzw. einen Eintrag daraus entfernen. Mindeststufe: **Arbeitsplatzadministrator:in**; Hinzufügen erfordert Zugriff auf das Modell bzw. Administratorrechte im Arbeitsplatz des Objekts.
+- `platform_xrag_saved_package_delete`: Eigenes XRAG-Paket löschen, ohne Quellobjekte zu löschen. Mindeststufe: **Arbeitsplatzadministrator:in**.
+- `platform_xrag_saved_package_export`: Eigenes XRAG-Paket als dauerhaften Hintergrundexport starten; liefert die Auftrags-ID. Mindeststufe: **Arbeitsplatzadministrator:in**, aktuelle Berechtigungen für jedes enthaltene Objekt erforderlich. Maximal 1000 Einträge und 200 GiB Gesamtarchiv; die Modelldateien müssen auf dem Core-Host lesbar sein oder als veröffentlichtes Archiv vorliegen.
 
-- `platform_xrag_related_objects`: Verbundene Agenten, Dokumentenablagen, Transkriptoren und Modelle einschließlich weiterer Verknüpfungen auflisten. Mindeststufe: **Workspace-Administrator**; Administratorrechte im Quell-Workspace und in jedem angebotenen Ressourcen-Workspace. Externe API-Modelle werden nicht angeboten; höchstens 999 verbundene Objekte. Beim Hinzufügen werden Verbindung und Berechtigung erneut geprüft.
+- `platform_xrag_related_objects`: Verbundene Agenten, Dokumentenablagen, Transkriptoren und Modelle einschließlich weiterer Verknüpfungen auflisten. Mindeststufe: **Arbeitsplatzadministrator:in**; Administratorrechte im Quellarbeitsplatz und in jedem angebotenen Ressourcenarbeitsplatz. Externe API-Modelle werden nicht angeboten; höchstens 999 verbundene Objekte. Beim Hinzufügen werden Verbindung und Berechtigung erneut geprüft.
 
-Die Werkzeuge `platform_xrag_preview`, `platform_xrag_import` und `platform_xrag_import_admin` verwenden dieselbe externe Modellzuordnung. Die Vorschau liefert `externalModels` mit möglichen Zielmodellen. Bei mehreren Treffern muss die Auswahl ausdrücklich erfolgen und als `modelSelections` (Quell-Identifier → Ziel-Identifier) übergeben werden. Ein fehlendes Modell blockiert den Import nicht; ungültige oder inzwischen veränderte Auswahlen werden abgewiesen. Die erforderlichen Zugriffsstufen und Workspace-Berechtigungen bleiben unverändert.
+Die Werkzeuge `platform_xrag_preview`, `platform_xrag_import` und `platform_xrag_import_admin` verwenden dieselbe externe Modellzuordnung. Die Vorschau liefert `externalModels` mit möglichen Zielmodellen. Bei mehreren Treffern muss die Auswahl ausdrücklich erfolgen und als `modelSelections` (Quell-Identifier → Ziel-Identifier) übergeben werden. Ein fehlendes Modell blockiert den Import nicht; ungültige oder inzwischen veränderte Auswahlen werden abgewiesen. Die erforderlichen Zugriffsstufen und Arbeitsplatzberechtigungen bleiben unverändert.
 
-- `platform_xrag_inspect`: Paketinhalt vor Auswahl eines Arbeitsplatzes anzeigen. Mindeststufe: **Workspace-Administrator**; Zugriff auf den eigenen Upload und Berechtigung für den gesamten Paketinhalt. Liefert `isCollection`, Namen, Typen, hinterlegte Farben und Symbole, Größen, `needsWorkspace` und unveränderliche `archiveId`-Werte, keine vollständigen Konfigurationen.
+- `platform_xrag_inspect`: Paketinhalt vor Auswahl eines Arbeitsplatzes anzeigen. Mindeststufe: **Arbeitsplatzadministrator:in**; Zugriff auf den eigenen Upload und Berechtigung für den gesamten Paketinhalt. Liefert `isCollection`, Namen, Typen, hinterlegte Farben und Symbole, Größen, `needsWorkspace` und unveränderliche `archiveId`-Werte, keine vollständigen Konfigurationen.
 
 `platform_xrag_preview`, `platform_xrag_import` und `platform_xrag_import_admin` akzeptieren `selectedEntries` mit diesen Archiv-IDs. Ohne Angabe wird das gesamte Paket verarbeitet. Für ausgewählte Ressourcen ist `target` erforderlich; bei reinen Modell-/Plattformimporten kann es entfallen. Die bisherigen Zugriffsstufen gelten auch für abgewählte Paketinhalte.
 
-- `platform_xrag_import_status` zeigt den Prüf- und Importstatus einer eigenen Upload-ID. Mindeststufe **Workspace-Administrator**. Bei `platform_xrag_inspect` reiht `background: true` die Prüfung ein. Sobald der Status `ready` lautet, liefert der normale Prüfaufruf die Objektauswahl. Der Status `committed` bestätigt die Übernahme des Imports. Die Geräteinstallation hat einen eigenen Status.
-- `platform_xrag_transfer_list`: Eigene temporäre XRAG-Dateien aus aktuellen und früheren Besuchen mit Upload-ID und Dateigröße in Byte (oder `null`, wenn unbekannt) auflisten. Mindeststufe: **Workspace-Administrator**, nur eigene Dateien.
-- `platform_xrag_transfer_delete`: Eine eigene temporäre XRAG-Datei löschen. Mindeststufe: **Workspace-Administrator**, genaue Eigentümerprüfung. Solange die Prüfung oder der Import läuft, bleibt der Upload bis zum Abschluss reserviert. Bereits importierte Objekte und veröffentlichte Pakete bleiben erhalten.
+- `platform_xrag_import_status` zeigt den Prüf- und Importstatus einer eigenen Upload-ID. Mindeststufe **Arbeitsplatzadministrator:in**. Bei `platform_xrag_inspect` reiht `background: true` die Prüfung ein. Sobald der Status `ready` lautet, liefert der normale Prüfaufruf die Objektauswahl. Der Status `committed` bestätigt die Übernahme des Imports. Die Geräteinstallation hat einen eigenen Status.
+- `platform_xrag_transfer_list`: Eigene temporäre XRAG-Dateien aus aktuellen und früheren Besuchen mit Upload-ID und Dateigröße in Byte (oder `null`, wenn unbekannt) auflisten. Mindeststufe: **Arbeitsplatzadministrator:in**, nur eigene Dateien.
+- `platform_xrag_transfer_delete`: Eine eigene temporäre XRAG-Datei löschen. Mindeststufe: **Arbeitsplatzadministrator:in**, genaue Eigentümerprüfung. Solange die Prüfung oder der Import läuft, bleibt der Upload bis zum Abschluss reserviert. Bereits importierte Objekte und veröffentlichte Pakete bleiben erhalten.
 
-- `platform_xrag_export_jobs`: Eigene Exportaufträge und Upload-Fortschritt auflisten. Mindeststufe: **Workspace-Administrator**. Fertige Ergebnisse und Auftragsverlauf sind 72 Stunden verfügbar.
-- `platform_xrag_export_delete` löscht einen eigenen fertigen, fehlgeschlagenen oder abgebrochenen Export samt vorhandener Archivdatei. Mindeststufe **Workspace-Administrator** mit aktuellen Administratorrechten in mindestens einem Arbeitsplatz.
-- `platform_xrag_export_cancel`: Eigenen wartenden oder laufenden Export abbrechen. Mindeststufe: **Workspace-Administrator**. Der Worker stoppt spätestens bei der nächsten Besitzprüfung; Quellobjekte bleiben erhalten.
-- `platform_xrag_export_download`: Frischen Downloadlink für einen eigenen fertigen Export abrufen. Mindeststufe: **Workspace-Administrator** und weiterhin Exportberechtigung für die Quellen. Link gilt zehn Minuten; abgelaufene oder fehlgeschlagene Exporte sind nicht verfügbar.
+- `platform_xrag_export_jobs`: Eigene Exportaufträge und Upload-Fortschritt auflisten. Mindeststufe: **Arbeitsplatzadministrator:in**. Fertige Ergebnisse und Auftragsverlauf sind 72 Stunden verfügbar.
+- `platform_xrag_export_delete` löscht einen eigenen fertigen, fehlgeschlagenen oder abgebrochenen Export samt vorhandener Archivdatei. Mindeststufe **Arbeitsplatzadministrator:in** mit aktuellen Administratorrechten in mindestens einem Arbeitsplatz.
+- `platform_xrag_export_cancel`: Eigenen wartenden oder laufenden Export abbrechen. Mindeststufe: **Arbeitsplatzadministrator:in**. Der Worker stoppt spätestens bei der nächsten Besitzprüfung; Quellobjekte bleiben erhalten.
+- `platform_xrag_export_download`: Frischen Downloadlink für einen eigenen fertigen Export abrufen. Mindeststufe: **Arbeitsplatzadministrator:in** und weiterhin Exportberechtigung für die Quellen. Link gilt zehn Minuten; abgelaufene oder fehlgeschlagene Exporte sind nicht verfügbar.
 
 `platform_xrag_export`, `platform_xrag_related_objects` und
 `platform_xrag_saved_package_add` unterstützen auch `kind: "automation"`. Es gelten
-dieselben Workspace-Administratorrechte; exportiert werden ausschließlich eigene
+dieselben Arbeitsplatzadministratorrechte; exportiert werden ausschließlich eigene
 Automatisierungen. Die Importwerkzeuge übernehmen sie atomar mit den übrigen
 Objekten und verhindern beim Überschreiben die Übernahme fremder Automatisierungen.
