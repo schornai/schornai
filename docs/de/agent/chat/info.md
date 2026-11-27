@@ -5,8 +5,6 @@ lang: de
 meta:
   app_urls:
     [
-      "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
-      "apps/web/app/_components/ModelContextSize.tsx",
       "/agent/[agentId]/[activityId]/info",
       "/agent/[agentId]/[activityId]/documentation",
     ]
@@ -14,9 +12,12 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-11-12"
+  last_verified: "2026-11-27"
   source_files:
     [
+      "apps/web/app/_components/InfoTranscriber.tsx",
+      "apps/web/app/(main)/agent/_components/AgentInfoModel.tsx",
+      "apps/web/app/_components/ModelContextSize.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/info/page.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/documentation/page.tsx",
       "packages/realtime/src/platform/tools.ts",
@@ -26,9 +27,9 @@ meta:
 
 # Agenteninformationen im Gespräch
 
-Wähle im Gespräch den Reiter **Info**, wenn du wissen möchtest, mit welchem Agenten du arbeitest. Dort findest du seine aktuelle Übersicht und die hinterlegte Dokumentation.
+Wähle im Gespräch den Reiter **Info**, wenn du wissen möchtest, mit welchem Agenten du arbeitest. Dort findest du die vollständige Agentenbeschreibung, die aktuelle Übersicht und die hinterlegte Dokumentation.
 
-Klappe die Informationsbereiche auf, um Modell, Prompt, Rollen, angebundene Ablagen und Werkzeuge zu prüfen. Die [Agentenübersicht](../details.md) erklärt die einzelnen Angaben.
+Klappe die Informationsbereiche auf, um Modell, Prompt, Rollen, angebundene Ablagen und Werkzeuge zu prüfen. Ist ein Transkriptor eingerichtet und für dich zugänglich, führt **Zum Transkriptor** im aufgeklappten Bereich zu seinen Infos. Die [Agentenübersicht](../details.md) erklärt die einzelnen Angaben.
 
 **Dokumentation** steht zwischen **Dateien** und **Info**, wenn beim Agenten ein Dokumentationstext hinterlegt ist. Der Reiter zeigt den vollständigen Text mit Markdown-Formatierung. Bei fehlender oder nur aus Leerraum bestehender Dokumentation erscheint er nicht; die direkte Dokumentationsadresse liefert dann „Nicht gefunden“.
 
@@ -43,4 +44,4 @@ Die Grenze verwalten globale Administrator:innen unter **Modelle**.
 
 ## Zugehörige MCP-Werkzeuge
 
-`platform_agent_get` liest die aktuelle Konfiguration einschließlich `documentation` eines zugänglichen Agenten. Mindeststufe: **Benutzer**; erforderlich ist Zugriff auf den Agenten im jeweiligen Arbeitsplatz. Die Dokumentation gehört zum Agenten und ist keine historische Kopie für das Gespräch. Die Navigation zwischen Reitern ist eine Browserfunktion und benötigt kein eigenes Werkzeug.
+`platform_agent_get` liest die aktuelle Konfiguration einschließlich `documentation` eines zugänglichen Agenten. Mindeststufe: **Benutzer:in**; erforderlich ist Zugriff auf den Agenten im jeweiligen Arbeitsplatz. Die Dokumentation gehört zum Agenten und ist keine historische Kopie für das Gespräch. Die Navigation zwischen Reitern ist eine Browserfunktion und benötigt kein eigenes Werkzeug.

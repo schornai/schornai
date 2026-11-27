@@ -34,8 +34,8 @@ XRAG-Dateien lädst du weiterhin unter [Einstellungen → XRAG hochladen](../set
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_services_status`: Maschinen, Dienstzustand und Auslastung lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_tasks_list`: Aufgabentypen und Zustände lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_artifacts_list`: Veröffentlichte Artefakte lesen. Mindeststufe: **Globaler Administrator**.
+- `platform_services_status`: Maschinen, Dienstzustand und Auslastung lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_tasks_list`: Aufgabentypen und Zustände lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_artifacts_list`: Veröffentlichte Artefakte lesen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

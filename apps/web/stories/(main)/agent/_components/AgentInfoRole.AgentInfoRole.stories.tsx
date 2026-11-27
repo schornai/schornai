@@ -342,6 +342,7 @@ export const SupportTools: Story = {
     editable: true,
     role: {
       id: "support-role",
+      name: "Belegabgleich und Sortierung",
       prompt: "Hilf bei der Planung.",
       documentRepositoryMounts: [],
       toolPlatformAccess: { active: true, level: "workspace" },
@@ -355,6 +356,7 @@ export const SupportTools: Story = {
     },
   },
   play: async ({ canvas }) => {
+    await expect(canvas.queryByText("Belegabgleich und Sortierung")).toBeNull();
     const platform = canvas.getByText(/^Plattformzugriff$|^Platform access$/);
     const chat = canvas.getByText(
       /Werkzeug: Chat Erweiterungen|Tool: Chat Extensions/,

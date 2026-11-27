@@ -1,4 +1,9 @@
 "use client";
+import { ResourceRemovalDialog } from "../../../_components/ResourceRemovalDialog";
+import { deleteAgent } from "../_actions/deleteAgent";
+import { useAction } from "next-safe-action/hooks";
+import { ResourceInfoLayout } from "../../../_components/ResourceInfoLayout";
+import { AgentIconGroupActions } from "./AgentIconGroupActions";
 import { hasPermission } from "@/lib/hasPermission";
 import { XRAGObjectActions } from "../../../_components/xrag/XRAGObjectActions";
 
@@ -13,6 +18,8 @@ import { AgentInfoRole } from "./AgentInfoRole";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
 import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
 import { Fragment } from "react/jsx-runtime";
+import { InfoTranscriber } from "../../../_components/InfoTranscriber";
+import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import { InfoWorkspace } from "../../../_components/InfoWorkspace";
 import type { SettingFavorites } from "../../../_models/currentUserConfigFavorites";
 import { Shapes } from "lucide-react";
@@ -21,7 +28,7 @@ import { cn } from "@schornio/aibox-package-ui/lib/utils";
 import { useT } from "next-i18next/client";
 
 export function AgentInfo({
-  showXRAGActions = false,
+  showResourceActions = false,
   preview = false,
   agent,
   documentRepositoryMap,
@@ -30,9 +37,10 @@ export function AgentInfo({
   editable,
   favorites,
   modelMap,
+  transcriber,
   workspace,
 }: {
-  showXRAGActions?: boolean;
+  showResourceActions?: boolean;
   preview?: boolean;
   agent?: Partial<Agent>;
   documentRepositoryMap: Map<string | symbol, DocumentRepository>;
@@ -41,6 +49,7 @@ export function AgentInfo({
   editable?: boolean;
   favorites?: SettingFavorites;
   modelMap?: Map<string | symbol, AIModel>;
+  transcriber?: Pick<Transcriber_new, "id" | "name" | "description">;
   workspace?: WorkspaceClaim;
 }) {
   const model = agent?.modelIdentifier
@@ -51,17 +60,61 @@ export function AgentInfo({
     keyPrefix: "_components.AgentInfo",
   });
 
+  const { t: editorText } = useT("agent", {
+    keyPrefix: "_components.AgentEditor",
+  });
+  const remove = useAction(deleteAgent);
+  const id = agent?.id;
+  const canManage = hasPermission({
+    claim: workspace?.claim,
+    permission: "workspace-admin",
+  });
   return (
-    <ContainerMain className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <AgentCard
-        preview={preview}
-        documentRepositoryMap={documentRepositoryMap}
-        agent={agent}
-        favorites={favorites}
-        model={model}
-        workspace={workspace}
-      />
-      <div className="flex flex-col gap-1">
+    <ContainerMain>
+      <ResourceInfoLayout
+        card={
+          <AgentCard
+            fullDescription
+            preview={preview}
+            documentRepositoryMap={documentRepositoryMap}
+            agent={agent}
+            favorites={favorites}
+            model={model}
+            workspace={workspace}
+          />
+        }
+        actions={
+          showResourceActions &&
+          !preview &&
+          id && (
+            <AgentIconGroupActions
+              display="buttons"
+              favorites={favorites}
+              workspace={workspace}
+              agent={agent}
+              packageActions={
+                canManage && <XRAGObjectActions kind="agent" id={id} />
+              }
+              remove={
+                canManage && (
+                  <ResourceRemovalDialog
+                    label={editorText("labelDeleteAgent")}
+                    title={editorText("confirmDeleteTitle")}
+                    description={editorText("confirmDeleteDescription", {
+                      name: agent?.name,
+                    })}
+                    cancel={editorText("labelCancel")}
+                    onOpen={remove.reset}
+                    isPending={remove.isPending}
+                    hasErrored={remove.hasErrored}
+                    onConfirm={() => remove.execute({ agentId: id })}
+                  />
+                )
+              }
+            />
+          )
+        }
+      >
         {agent?.roles?.map((role) => (
           <Fragment key={role.id}>
             {(agent?.roles?.length ?? 0) > 1 ? (
@@ -118,18 +171,26 @@ export function AgentInfo({
           editable={editable}
           workspace={workspace}
         />
+        {agent?.transcriberIdentifier && (
+          <InfoTranscriber
+            transcriberIdentifier={agent.transcriberIdentifier}
+            editDefaultTranscriberIdentifier={
+              editDefaultAgent?.transcriberIdentifier
+            }
+            editHref={
+              editable && (!showResourceActions || canManage)
+                ? `${editAgentPathname ?? ""}?view=settings#additionalFunctions`
+                : undefined
+            }
+            transcriber={transcriber}
+          />
+        )}
         <AgentInfoAdditionalFunctions
           agent={agent}
           editable={editable}
           editAgentPathname={editAgentPathname}
         />
-      </div>
-      {showXRAGActions &&
-        agent?.id &&
-        hasPermission({
-          claim: workspace?.claim,
-          permission: "workspace-admin",
-        }) && <XRAGObjectActions kind="agent" id={agent.id} />}
+      </ResourceInfoLayout>
     </ContainerMain>
   );
 }

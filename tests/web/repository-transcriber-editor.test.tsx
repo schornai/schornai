@@ -258,7 +258,7 @@ it("rejects editor hooks outside their providers", () => {
 it("renders repository and transcriber information with populated and missing relations", () => {
   const view = render(
     <DocumentRepositoryInfo
-      showXRAGActions
+      showResourceActions
       documentRepository={repository}
       workspace={workspace as any}
       modelMap={new Map([["embedding", model as any]])}
@@ -275,7 +275,7 @@ it("renders repository and transcriber information with populated and missing re
   expect(view.container.querySelector("div")).not.toBeNull();
   view.rerender(
     <TranscriberInfo
-      showXRAGActions
+      showResourceActions
       transcriber={transcriber}
       modelMap={new Map([["whisper", whisper as any]])}
       workspace={workspace as any}

@@ -9,6 +9,7 @@ import { getAIModels } from "../../../_models/getAIModels";
 import { getAgentById } from "@schornio/aibox-package-database/agent/getAgentById";
 import { getCurrentUserConfigFavorites } from "../../../_models/currentUserConfigFavorites";
 import { getDocumentRepositories } from "../../../_models/getDocumentRepositories";
+import { getAgentInfoTranscriber } from "../../../_models/getAgentInfoTranscriber";
 import { getWorkspaceClaims } from "../../../_models/getWorkspaceClaims";
 import { notFound } from "next/navigation";
 import { tryAsync } from "@schornio/aibox-package-utils/tryAsync";
@@ -36,6 +37,10 @@ export default async function Page(params: PageProps<"/agent/[agentId]">) {
     notFound();
   }
 
+  const transcriber = await getAgentInfoTranscriber(
+    agent.transcriberIdentifier,
+    supabase,
+  );
   const documentRepositoryMap = new Map(
     documentRepositories.map((repo) => [repo.identifier, repo]),
   );
@@ -53,13 +58,14 @@ export default async function Page(params: PageProps<"/agent/[agentId]">) {
       </HeaderMain>
 
       <AgentInfo
-        showXRAGActions
+        showResourceActions
         agent={agent}
         documentRepositoryMap={documentRepositoryMap}
         favorites={favorites}
         editAgentPathname={`/agent/${agent.id}/edit`}
         editDefaultAgent={agent}
         editable={true}
+        transcriber={transcriber}
         modelMap={modelMap}
         workspace={workspace}
       />

@@ -1,4 +1,5 @@
 "use client";
+import { EditorHeaderTitle } from "../../../_components/EditorHeaderTitle";
 import type { ConnectionMetadata } from "@schornio/aibox-package-database/connections/_types";
 
 import {
@@ -28,13 +29,11 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import {
   HeaderMain,
   HeaderMainAsideContent,
-  HeaderMainContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import {
   TabsMainContent,
@@ -53,8 +52,10 @@ import { AlertDialogMediaDestructive } from "@schornio/aibox-package-ui/componen
 import { Button } from "@schornio/aibox-package-ui/components/button";
 import { ButtonAction } from "@schornio/aibox-package-ui/components/button-action";
 import type { DocumentRepository } from "@schornio/aibox-package-database/documentRepositories/_types";
-import { DropdownMenuItemAction } from "@schornio/aibox-package-ui/components/dropdown-menu-item-action";
-import type { SettingFavorites } from "../../../_models/currentUserConfigFavorites";
+import {
+  EditorActions,
+  type EditorAction,
+} from "../../../_components/EditorActions";
 import type { Theme } from "../../../_models/systemConfigTheme";
 import type { Transcriber_new } from "@schornio/aibox-package-database/transcriber/_types";
 import type { ValidationErrors } from "next-safe-action";
@@ -132,11 +133,9 @@ export function useAgentEditor() {
 export function AgentEditor({
   agent: defaultAgent,
   mode,
-  favorites,
   relations,
 }: {
   agent?: Partial<Agent>;
-  favorites?: SettingFavorites;
   mode: "create" | "update";
   relations: AgentEditorRelations;
 }) {
@@ -230,8 +229,43 @@ export function AgentEditor({
       agent: (agent ?? {}) as Agent,
       ...(mode === "create" && globalId && { globalId }),
     });
-  const saveDisabled =
-    isPending || (mode === "create" ? invalidId : !agentChanged);
+  const saveProps = {
+    disabled: isPending || (mode === "create" ? invalidId : !agentChanged),
+    hasErrored,
+    hasSucceeded,
+    isPending,
+    onClick: saveAgent,
+  };
+  const actions: EditorAction[] = [
+    {
+      ...saveProps,
+      label: t(mode === "create" ? "labelCreateAgent" : "labelSaveAgent"),
+      icon: mode === "create" ? CirclePlus : ArrowDownToLine,
+    },
+  ];
+  if (mode === "update") {
+    actions.push(
+      {
+        label: t("labelCloneAgent"),
+        icon: CirclePlus,
+        disabled: !agentChanged,
+        hasErrored: createCloneHasErrored,
+        hasSucceeded: createCloneHasSucceeded,
+        isPending: createCloneIsPending,
+        onClick: () =>
+          createCloneExecute({
+            agent: (agent ?? {}) as Agent,
+            copyFromAgentId: defaultAgent?.id,
+          }),
+      },
+      {
+        label: t("labelDeleteAgent"),
+        icon: CircleX,
+        destructive: true,
+        onClick: () => setDeleteDialogOpen(true),
+      },
+    );
+  }
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -259,20 +293,14 @@ export function AgentEditor({
       }}
     >
       <HeaderMain appColor={agent?.color}>
-        <HeaderMainContent>
-          <BotMessageSquare />
-          <div className="flex flex-col text-center">
-            {mode === "create" ? (
-              <span className="text-nowrap">{t("labelNewAgent")}</span>
-            ) : undefined}
-            {mode === "update" ? (
-              <span className="text-nowrap">{t("labelAgent")}</span>
-            ) : undefined}
-            <span className="text-xs text-nowrap">{agent?.name}</span>
-          </div>
+        <EditorHeaderTitle
+          icon={<BotMessageSquare />}
+          title={mode === "create" ? t("labelNewAgent") : t("labelAgent")}
+          name={agent?.name}
+        >
           {mode === "create" ? <CirclePlus /> : undefined}
           {mode === "update" ? <AgentEditorDiscardAllChanges /> : undefined}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -283,52 +311,7 @@ export function AgentEditor({
             <DropdownMenuContent className="w-auto">
               <DropdownMenuGroup>
                 <DropdownMenuLabel>{t("labelAgent")}</DropdownMenuLabel>
-                <DropdownMenuItemAction
-                  disabled={saveDisabled}
-                  hasErrored={hasErrored}
-                  hasSucceeded={hasSucceeded}
-                  isPending={isPending}
-                  onClick={saveAgent}
-                >
-                  {mode === "create" ? (
-                    <>
-                      <CirclePlus /> {t("labelCreateAgent")}
-                    </>
-                  ) : undefined}
-                  {mode === "update" ? (
-                    <>
-                      <ArrowDownToLine /> {t("labelSaveAgent")}
-                    </>
-                  ) : undefined}
-                </DropdownMenuItemAction>
-                {mode === "update" ? (
-                  <>
-                    <DropdownMenuItemAction
-                      disabled={
-                        mode === "update" &&
-                        composite(defaultAgent) === composite(agent)
-                      }
-                      hasErrored={createCloneHasErrored}
-                      hasSucceeded={createCloneHasSucceeded}
-                      isPending={createCloneIsPending}
-                      onClick={() =>
-                        createCloneExecute({
-                          agent: (agent ?? {}) as Agent,
-                          copyFromAgentId: defaultAgent?.id,
-                        })
-                      }
-                    >
-                      <CirclePlus /> {t("labelCloneAgent")}
-                    </DropdownMenuItemAction>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItemAction
-                      onClick={() => setDeleteDialogOpen(true)}
-                      variant="destructive"
-                    >
-                      <CircleX /> {t("labelDeleteAgent")}
-                    </DropdownMenuItemAction>
-                  </>
-                ) : undefined}
+                <EditorActions display="menu" actions={actions} />
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -392,29 +375,15 @@ export function AgentEditor({
         >
           <Settings2 /> {t("tabSettings")}
         </TabsMainTrigger>
-        <ButtonAction
-          disabled={saveDisabled}
-          hasErrored={hasErrored}
-          hasSucceeded={hasSucceeded}
-          isPending={isPending}
-          onClick={saveAgent}
-          size="sm"
-        >
-          {mode === "create" ? (
-            <>
-              <CirclePlus /> {t("btnCreate")}
-            </>
-          ) : undefined}
-          {mode === "update" ? (
-            <>
-              <ArrowDownToLine /> {t("btnSave")}
-            </>
-          ) : undefined}
+        <ButtonAction {...saveProps} size="sm">
+          {mode === "create" ? <CirclePlus /> : <ArrowDownToLine />}
+          {t(mode === "create" ? "btnCreate" : "btnSave")}
         </ButtonAction>
       </TabsMainList>
 
       <TabsMainContent view="default">
-        <AgentEditorOverview favorites={favorites} mode={mode} />
+        <AgentEditorOverview mode={mode} />
+        <EditorActions display="overview" actions={actions} />
       </TabsMainContent>
       <TabsMainContent view="roles">
         <AgentEditorRoles />

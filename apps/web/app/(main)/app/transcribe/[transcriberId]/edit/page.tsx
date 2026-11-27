@@ -1,7 +1,6 @@
 import { TranscriberEditor } from "../_components/TranscriberEditor";
 import { createSupabaseServerClient } from "@/lib/supabase/createSupabaseServerClient";
 import { getAIModels } from "../../../../../_models/getAIModels";
-import { getCurrentUserConfigFavorites } from "../../../../../_models/currentUserConfigFavorites";
 import { getSystemConfigTheme } from "../../../../../_models/systemConfigTheme";
 import { getTranscriberById } from "@schornio/aibox-package-database/transcriber/getTranscriberById";
 import { getWorkspaceClaims } from "../../../../../_models/getWorkspaceClaims";
@@ -17,19 +16,13 @@ export default async function Page(
     createSupabaseServerClient(),
   ]);
 
-  const [
-    { data: transcriber },
-    favorites,
-    models,
-    theme,
-    { claims: workspaces },
-  ] = await Promise.all([
-    tryAsync(() => getTranscriberById(transcriberId, { supabase })),
-    getCurrentUserConfigFavorites(),
-    getAIModels(),
-    getSystemConfigTheme(),
-    getWorkspaceClaims(),
-  ]);
+  const [{ data: transcriber }, models, theme, { claims: workspaces }] =
+    await Promise.all([
+      tryAsync(() => getTranscriberById(transcriberId, { supabase })),
+      getAIModels(),
+      getSystemConfigTheme(),
+      getWorkspaceClaims(),
+    ]);
 
   if (
     !transcriber ||
@@ -47,7 +40,6 @@ export default async function Page(
 
   return (
     <TranscriberEditor
-      favorites={favorites}
       mode="update"
       transcriber={transcriber}
       relations={{ models, theme, workspaces }}

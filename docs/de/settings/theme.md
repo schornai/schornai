@@ -72,11 +72,11 @@ Die Vorlage ist reiner Text. Bedingungen, Schleifen und HTML werden nicht ausgew
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_theme_get`: Gespeicherte Farben, Logos und Nachrichtenvorlagen lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_theme_update`: Theme, Begrüßung und Zugangsvorlagen gemeinsam speichern. Mindeststufe: **Globaler Administrator**.
-- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer**.
-- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer**.
+- `platform_theme_get`: Gespeicherte Farben, Logos und Nachrichtenvorlagen lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_theme_update`: Theme, Begrüßung und Zugangsvorlagen gemeinsam speichern. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_asset_upload`: Profilbild, Logo oder XRAG-Paket bis 10 MiB hochladen. Mindeststufe: **Benutzer:in**.
+- `platform_asset_upload_url`: Uploadadresse für Profilbild, Logo oder XRAG-Paket erhalten. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).
 
-`platform_user_access_message` erzeugt für globale Administratoren die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.
+`platform_user_access_message` erzeugt für globale Administrator:innen die konfigurierte Zugangsmail einschließlich Platzhaltern und Sprach-Fallback. Erforderlich sind Empfängerdaten, Reset-Key, Ablaufzeit und öffentliche Anwendungs-URL; Sprache und Zeitzone sind wählbar. Das Ergebnis ist ein vertraulicher Entwurf ohne Mailversand.

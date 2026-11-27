@@ -11,7 +11,7 @@ export function CardApp({
   return (
     <ContainerStyled
       className={cn(
-        "flex aspect-video w-80 flex-col rounded-xl p-1",
+        "flex aspect-video w-80 max-w-full flex-col rounded-xl p-1",
         className,
       )}
       variant="card"
@@ -30,7 +30,7 @@ export function CardAppMain({
     render,
     props: mergeProps<"div">(
       {
-        className: cn("flex flex-1 items-center text-left", className),
+        className: cn("flex flex-1 items-center text-start", className),
       },
       props,
     ),
@@ -39,7 +39,7 @@ export function CardAppMain({
 }
 
 export function CardAppContent({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("flex-1", className)} {...props} />;
+  return <div className={cn("min-w-0 flex-1 pe-3", className)} {...props} />;
 }
 
 export function CardAppHeader({ className, ...props }: ComponentProps<"div">) {
@@ -62,14 +62,24 @@ export function CardAppAvatar({
 }
 
 export function CardAppName({ className, ...props }: ComponentProps<"h2">) {
-  return <h2 className={cn("text-md font-semibold", className)} {...props} />;
+  return (
+    <h2
+      className={cn("text-md truncate font-semibold", className)}
+      {...props}
+    />
+  );
 }
 
 export function CardAppDescription({
   className,
   ...props
 }: ComponentProps<"div">) {
-  return <div className={cn("text-xs", className)} {...props} />;
+  return (
+    <div
+      className={cn("line-clamp-4 text-xs wrap-anywhere", className)}
+      {...props}
+    />
+  );
 }
 
 export function CardAppFooter({ className, ...props }: ComponentProps<"div">) {

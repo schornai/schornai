@@ -69,10 +69,10 @@ Passwortprobleme eines SSO-Kontos werden beim Anmeldeanbieter gelöst, nicht üb
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_sso_get`: SAML-Anbieter und Attributzuordnung lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_sso_create`: SAML-Anbieter aus Metadaten anlegen. Mindeststufe: **Globaler Administrator**.
-- `platform_sso_delete`: SAML-Anbieter entfernen. Mindeststufe: **Globaler Administrator**.
-- `platform_sso_mapping_update`: SAML-Attribute zuordnen. Mindeststufe: **Globaler Administrator**.
-- `platform_sso_metadata`: Service-Provider-Metadaten als XML abrufen. Mindeststufe: **Globaler Administrator**.
+- `platform_sso_get`: SAML-Anbieter und Attributzuordnung lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_sso_create`: SAML-Anbieter aus Metadaten anlegen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_sso_delete`: SAML-Anbieter entfernen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_sso_mapping_update`: SAML-Attribute zuordnen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_sso_metadata`: Service-Provider-Metadaten als XML abrufen. Mindeststufe: **Globale:r Administrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../agent/edit/plattformzugriff.md).

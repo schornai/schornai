@@ -117,6 +117,20 @@ vi.mock("@schornio/aibox-package-database/transcriber/getTranscribers", () => ({
   getTranscribers: vi.fn(async () => state.transcribers),
 }));
 vi.mock(
+  "@schornio/aibox-package-database/transcriber/getTranscriberInfoByIdentifier",
+  () => ({
+    getTranscriberInfoByIdentifier: async (identifier: string) => {
+      const match = state.transcribers.find((t) => t.identifier === identifier);
+      if (match)
+        return {
+          id: match.id,
+          name: match.name,
+          description: match.description,
+        };
+    },
+  }),
+);
+vi.mock(
   "@schornio/aibox-package-database/transcriber/getTranscriberById",
   () => ({ getTranscriberById: vi.fn(async () => state.entity) }),
 );
@@ -271,7 +285,6 @@ describe("server catalog pages", () => {
       const props = component(await page(params()), editor).props;
       expect(props[property]).toBe(state.entity);
       expect(props.mode).toBe("update");
-      expect(props.favorites).toBe(state.favorites);
       expect(props.relations.workspaces).toBe(state.workspaces);
       if (editor === "AgentEditor")
         expect(props.relations.transcribers).toBe(state.transcribers);
@@ -291,7 +304,7 @@ describe("server catalog pages", () => {
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace).toBe(state.workspaces[0]);
       expect(props.editable).toBe(true);
-      expect(props.showXRAGActions).toBe(true);
+      expect(props.showResourceActions).toBe(true);
       state.entity = undefined;
       await expect(page(params())).rejects.toThrow("NOT_FOUND");
     },
@@ -366,6 +379,33 @@ describe("server activity and file pages", () => {
       await expect(page(request)).rejects.toThrow("NOT_FOUND");
     },
   );
+  it.each([infoAgent, chatInfo])(
+    "resolves the accessible transcriber by identifier for %s",
+    async (page) => {
+      state.entity.transcriberIdentifier = "meeting-notes";
+      state.transcribers = [
+        {
+          id: "transcriber-id",
+          identifier: "meeting-notes",
+          name: "Meeting notes",
+          description: "Transcribes meetings",
+          prompt: "internal configuration",
+        },
+      ];
+      const request = {
+        params: Promise.resolve({ agentId: "agent", activityId: "activity" }),
+      } as any;
+      const info = async () =>
+        component(await page(request), "AgentInfo").props;
+      expect((await info()).transcriber).toEqual({
+        id: "transcriber-id",
+        name: "Meeting notes",
+        description: "Transcribes meetings",
+      });
+      state.transcribers = [];
+      expect((await info()).transcriber).toBeUndefined();
+    },
+  );
   it.each([
     [chatInfo, "AgentInfo"],
     [transcriptionInfo, "TranscriberInfo"],
@@ -382,7 +422,7 @@ describe("server activity and file pages", () => {
       const props = component(await page(request), info).props;
       expect(props.modelMap.get("model")).toBe(state.models[0]);
       expect(props.workspace.id).toBe("workspace");
-      expect(props.showXRAGActions).toBe(true);
+      expect(props.showResourceActions).toBe(true);
       state.entity = undefined;
       await expect(page(request)).rejects.toThrow("NOT_FOUND");
     },

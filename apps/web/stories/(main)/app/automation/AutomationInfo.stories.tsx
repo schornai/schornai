@@ -6,7 +6,7 @@ const meta = {
   title: "Web/(main)/app/automation/AutomationInfo",
   component: AutomationInfo,
   args: {
-    showXRAGActions: true,
+    showResourceActions: true,
     automation: savedAutomation,
     agents,
     repositories,
@@ -53,7 +53,7 @@ export const Expanded: Story = {
 export const Changed: Story = {
   args: {
     preview: true,
-    showXRAGActions: false,
+    showResourceActions: false,
     editDefaultAutomation: savedAutomation,
     automation: {
       ...savedAutomation,

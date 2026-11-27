@@ -83,16 +83,13 @@ it("preserves legacy consent requirements when editing an old ceiling", async ()
   });
 });
 
-it.each([
-  undefined,
-  { name: "Writer", toolPlatformAccess: { active: true, level: "user" } },
-])(
-  "shows expanded policy details for optional and legacy roles",
-  async (agentRole) => {
+it.each([undefined, { active: true, level: "user" }] as const)(
+  "shows expanded policy details for default and legacy access settings",
+  async (access) => {
     const user = userEvent.setup();
-    render(<AgentInfoToolPlatformAccess agentRole={agentRole as any} />);
+    render(<AgentInfoToolPlatformAccess access={access} />);
     await user.click(screen.getByRole("button", { name: "labelTitle" }));
     expect(screen.getByText("descriptionPermissions")).toBeTruthy();
-    expect(screen.getAllByText("mode.off")).toHaveLength(agentRole ? 3 : 1);
+    expect(screen.getAllByText("mode.off")).toHaveLength(access ? 3 : 1);
   },
 );

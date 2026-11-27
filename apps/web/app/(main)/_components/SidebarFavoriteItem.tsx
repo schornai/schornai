@@ -26,11 +26,30 @@ import type { DocumentRepository } from "@schornio/aibox-package-database/docume
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Transcriber_new as Transcriber } from "@schornio/aibox-package-database/transcriber/_types";
-import type { Workspace } from "@schornio/aibox-package-database/workspace/_types";
+import type { WorkspaceClaim } from "../../_models/getWorkspaceClaims";
+import type { SettingFavorites } from "../../_models/currentUserConfigFavorites";
+import { useT } from "next-i18next/client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@schornio/aibox-package-ui/components/dropdown-menu";
 import { useRouter } from "next/navigation";
 
+import { AgentIconGroupActions } from "../agent/_components/AgentIconGroupActions";
+import { TranscriberIconGroupActions } from "../app/transcribe/_components/TranscriberIconGroupActions";
+import { DocumentRepositoryIconGroupActions } from "../app/documents/_components/DocumentRepositoryIconGroupActions";
+import { WorkspaceIconGroupActions } from "../workspace/_components/WorkspaceIconGroupActions";
+import { AutomationIconGroupActions } from "../app/automation/_components/AutomationIconGroupActions";
+
+type FavoriteItemProps = {
+  favorites?: SettingFavorites;
+  workspace?: WorkspaceClaim;
+};
+
 function SidebarFavoriteItem({
-  aside,
+  typeIcon,
+  actions,
   avatar,
   color,
   link,
@@ -39,7 +58,8 @@ function SidebarFavoriteItem({
   name,
   onClick,
 }: {
-  aside?: ReactNode;
+  typeIcon: ReactNode;
+  actions: ReactNode;
   avatar?: ReactNode;
   color?: AppColor;
   icon?: AppIcon;
@@ -48,6 +68,9 @@ function SidebarFavoriteItem({
   name?: string;
   onClick?: () => void;
 }) {
+  const { t } = useT("common", {
+    keyPrefix: "main._components.SidebarFavorites",
+  });
   return (
     <SidebarMenuItem className="flex items-center">
       <ContainerStyled
@@ -56,8 +79,9 @@ function SidebarFavoriteItem({
         className="border-2 border-transparent"
         render={
           <SidebarMenuButton
+            className="pe-10"
             onClick={onClick}
-            render={link ? <Link href={link} /> : <div />}
+            render={link ? <Link href={link} /> : <button type="button" />}
             size="lg"
             tooltip={{ children: name, side: "inline-end" }}
           >
@@ -69,16 +93,31 @@ function SidebarFavoriteItem({
                 image={image}
               />
             )}
-            {name}
-            {aside ? <div className="ms-auto">{aside}</div> : undefined}
+            <span className="truncate">{name}</span>
           </SidebarMenuButton>
         }
       />
+      <DropdownMenu>
+        <Button
+          render={<DropdownMenuTrigger />}
+          className="absolute end-2 group-data-[collapsible=icon]:hidden"
+          variant="ghost"
+          size="icon-sm"
+          aria-label={t("labelActions", { name })}
+        >
+          {typeIcon}
+        </Button>
+        <DropdownMenuContent align="end">{actions}</DropdownMenuContent>
+      </DropdownMenu>
     </SidebarMenuItem>
   );
 }
 
-export function SidebarFavoriteItemAgent({ agent }: { agent?: Agent }) {
+export function SidebarFavoriteItemAgent({
+  agent,
+  workspace,
+  favorites,
+}: FavoriteItemProps & { agent?: Agent }) {
   const router = useRouter();
 
   if (!agent) {
@@ -87,11 +126,14 @@ export function SidebarFavoriteItemAgent({ agent }: { agent?: Agent }) {
 
   return (
     <SidebarFavoriteItem
-      aside={
-        <Button disabled size="icon-sm" variant="ghost">
-          {/* TODO: dropdown für favoriten */}
-          <BotMessageSquare />
-        </Button>
+      typeIcon={<BotMessageSquare />}
+      actions={
+        <AgentIconGroupActions
+          display="menu"
+          favorites={favorites}
+          workspace={workspace}
+          agent={agent}
+        />
       }
       color={agent.color}
       icon={agent.icon}
@@ -103,9 +145,9 @@ export function SidebarFavoriteItemAgent({ agent }: { agent?: Agent }) {
 
 export function SidebarFavoriteItemTranscriber({
   transcriber,
-}: {
-  transcriber?: Transcriber;
-}) {
+  workspace,
+  favorites,
+}: FavoriteItemProps & { transcriber?: Transcriber }) {
   const router = useRouter();
 
   if (!transcriber) {
@@ -114,11 +156,14 @@ export function SidebarFavoriteItemTranscriber({
 
   return (
     <SidebarFavoriteItem
-      aside={
-        <Button disabled size="icon-sm" variant="ghost">
-          {/* TODO: dropdown für favoriten */}
-          <AudioLines />
-        </Button>
+      typeIcon={<AudioLines />}
+      actions={
+        <TranscriberIconGroupActions
+          display="menu"
+          favorites={favorites}
+          workspace={workspace}
+          transcriber={transcriber}
+        />
       }
       color={transcriber.color}
       icon={transcriber.icon}
@@ -134,20 +179,23 @@ export function SidebarFavoriteItemTranscriber({
 
 export function SidebarFavoriteItemDocumentRepository({
   documentRepository,
-}: {
-  documentRepository?: DocumentRepository;
-}) {
+  workspace,
+  favorites,
+}: FavoriteItemProps & { documentRepository?: DocumentRepository }) {
   if (!documentRepository) {
     return undefined;
   }
 
   return (
     <SidebarFavoriteItem
-      aside={
-        <Button disabled size="icon-sm" variant="ghost">
-          {/* TODO: dropdown für favoriten */}
-          <FolderOpen />
-        </Button>
+      typeIcon={<FolderOpen />}
+      actions={
+        <DocumentRepositoryIconGroupActions
+          display="menu"
+          favorites={favorites}
+          workspace={workspace}
+          documentRepository={documentRepository}
+        />
       }
       color={documentRepository.color}
       icon={documentRepository.icon}
@@ -159,13 +207,19 @@ export function SidebarFavoriteItemDocumentRepository({
 
 export function SidebarFavoriteItemWorkspace({
   workspace,
-}: {
-  workspace?: Workspace;
-}) {
+  favorites,
+}: FavoriteItemProps) {
   if (!workspace) return undefined;
   return (
     <SidebarFavoriteItem
-      aside={<Library className="size-4" />}
+      typeIcon={<Library />}
+      actions={
+        <WorkspaceIconGroupActions
+          display="menu"
+          favorites={favorites}
+          workspace={workspace}
+        />
+      }
       link={`/workspace/${workspace.id}`}
       name={workspace.name}
     />
@@ -174,9 +228,8 @@ export function SidebarFavoriteItemWorkspace({
 
 export function SidebarFavoriteItemAutomation({
   automation,
-}: {
-  automation?: Automation;
-}) {
+  favorites,
+}: FavoriteItemProps & { automation?: Automation }) {
   if (!automation) return null;
   return (
     <SidebarFavoriteItem
@@ -187,10 +240,13 @@ export function SidebarFavoriteItemAutomation({
           fallback={automation.name}
         />
       }
-      aside={
-        <Button disabled size="icon-sm" variant="ghost">
-          <CircleChevronsRight />
-        </Button>
+      typeIcon={<CircleChevronsRight />}
+      actions={
+        <AutomationIconGroupActions
+          display="menu"
+          favorites={favorites}
+          automation={automation}
+        />
       }
       color={automation.color}
       icon={automation.icon}

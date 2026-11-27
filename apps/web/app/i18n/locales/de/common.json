@@ -9,6 +9,7 @@
         "history": "Verlauf"
       },
       "SidebarFavorites": {
+        "labelActions": "Aktionen für {{name}}",
         "label": "Favoriten",
         "empty": "Keine Favoriten hinzugefügt.",
         "labelEdit": "Favoriten bearbeiten"
@@ -110,6 +111,9 @@
       "placeholderFolderName": "Name des Ordners...",
       "labelCancel": "Abbrechen",
       "labelCreate": "Erstellen"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Das Löschen ist fehlgeschlagen. Bitte versuche es erneut."
     },
     "StorageDialogRemove": {
       "labelTitle": "Entfernen",

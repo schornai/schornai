@@ -1,9 +1,11 @@
 "use client";
 
 import {
-  IconGroup,
-  IconGroupButton,
-} from "@schornio/aibox-package-ui/components/icon-group";
+  ResourceActions,
+  ResourceActionButton,
+  type ResourceActionDisplay,
+} from "../../../_components/ResourceActions";
+import type { ReactNode } from "react";
 import { Info, Mic, Paperclip, Pencil } from "lucide-react";
 import type { SettingFavorites } from "../../../../_models/currentUserConfigFavorites";
 import { TranscriberIconGroupActionFavorite } from "./TranscriberIconGroupActionFavorite";
@@ -16,9 +18,15 @@ import { useT } from "next-i18next/client";
 export function TranscriberIconGroupActions({
   transcriber,
   favorites,
+  display = "icons",
+  packageActions,
+  remove,
   workspace,
 }: {
   transcriber?: Partial<Transcriber_new>;
+  display?: ResourceActionDisplay;
+  packageActions?: ReactNode;
+  remove?: ReactNode;
   favorites?: SettingFavorites;
   workspace?: WorkspaceClaim;
 }) {
@@ -28,52 +36,74 @@ export function TranscriberIconGroupActions({
   });
 
   return (
-    <IconGroup>
-      {hasPermission({
-        claim: workspace?.claim,
-        permission: "workspace-admin",
-      }) ? (
-        <IconGroupButton
+    <ResourceActions
+      display={display}
+      primary={
+        <>
+          <ResourceActionButton
+            display={display}
+            disabled={!transcriber?.id}
+            onClick={() =>
+              router.push(
+                `/app/transcribe/${transcriber?.id}/${crypto.randomUUID()}/files`,
+              )
+            }
+            label={t("tooltipNewTranscription")}
+          >
+            <Paperclip />
+          </ResourceActionButton>
+          {display !== "buttons" && (
+            <ResourceActionButton
+              display={display}
+              disabled={!transcriber?.id}
+              onClick={() =>
+                router.push(
+                  `/app/transcribe/${transcriber?.id}/${crypto.randomUUID()}/files#record`,
+                )
+              }
+              label={t("tooltipRecord")}
+            >
+              <Mic />
+            </ResourceActionButton>
+          )}
+        </>
+      }
+      favorite={
+        <TranscriberIconGroupActionFavorite
+          display={display}
+          transcriber={transcriber}
+          favorites={favorites}
+        />
+      }
+      info={
+        <ResourceActionButton
+          display={display}
           disabled={!transcriber?.id}
-          onClick={() => router.push(`/app/transcribe/${transcriber?.id}/edit`)}
-          tooltip={t("tooltipEdit")}
+          onClick={() => router.push(`/app/transcribe/${transcriber?.id}`)}
+          label={t("tooltipInfo")}
         >
-          <Pencil />
-        </IconGroupButton>
-      ) : undefined}
-      <IconGroupButton
-        disabled={!transcriber?.id}
-        onClick={() => router.push(`/app/transcribe/${transcriber?.id}`)}
-        tooltip={t("tooltipInfo")}
-      >
-        <Info />
-      </IconGroupButton>
-      <TranscriberIconGroupActionFavorite
-        transcriber={transcriber}
-        favorites={favorites}
-      />
-      <IconGroupButton
-        disabled={!transcriber?.id}
-        onClick={() =>
-          router.push(
-            `/app/transcribe/${transcriber?.id}/${crypto.randomUUID()}/files`,
-          )
-        }
-        tooltip={t("tooltipNewTranscription")}
-      >
-        <Paperclip />
-      </IconGroupButton>
-      <IconGroupButton
-        disabled={!transcriber?.id}
-        onClick={() =>
-          router.push(
-            `/app/transcribe/${transcriber?.id}/${crypto.randomUUID()}/files#record`,
-          )
-        }
-        tooltip={t("tooltipRecord")}
-      >
-        <Mic />
-      </IconGroupButton>
-    </IconGroup>
+          <Info />
+        </ResourceActionButton>
+      }
+      edit={
+        hasPermission({
+          claim: workspace?.claim,
+          permission: "workspace-admin",
+        }) && (
+          <ResourceActionButton
+            display={display}
+            disabled={!transcriber?.id}
+            onClick={() =>
+              router.push(`/app/transcribe/${transcriber?.id}/edit`)
+            }
+            label={t("tooltipEdit")}
+          >
+            <Pencil />
+          </ResourceActionButton>
+        )
+      }
+      packageActions={packageActions}
+      remove={remove}
+    />
   );
 }

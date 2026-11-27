@@ -67,9 +67,9 @@ Der Export enthält den gespeicherten Text einschließlich Korrekturen und die v
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Editor**.
-- `platform_activity_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Benutzer**.
-- `platform_file_read`: Extrahierten Inhalt, Textversionen und Transkript lesen. Mindeststufe: **Benutzer**.
-- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer**.
+- `platform_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Bearbeiter:in**.
+- `platform_activity_transcription_segment_update`: Transkriptsegment korrigieren oder prüfen. Mindeststufe: **Benutzer:in**.
+- `platform_file_read`: Extrahierten Inhalt, Textversionen und Transkript lesen. Mindeststufe: **Benutzer:in**.
+- `platform_file_download`: Kurzlebige Downloadadresse für Originaldatei erhalten. Mindeststufe: **Benutzer:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

@@ -15,7 +15,7 @@ meta:
   role_scope: "Eigenes Konto"
   prerequisites: "Ein zugänglicher Agent mit einsatzbereitem Modell und laufendem Realtime-Dienst. Für Dateitrigger Zugriff auf den Speicherort."
   status: "verfügbar"
-  last_verified: "2026-11-19"
+  last_verified: "2026-11-22"
   source_files:
     - "apps/web/app/(main)/app/automation/_components/AutomationNextRun.tsx"
     - "apps/web/app/(main)/app/automation/_components/AutomationRuns.tsx"
@@ -47,6 +47,8 @@ meta:
 # Automationen
 
 Öffne **Apps → Automationen**. Über **Neue Automation** unter der Liste oder im Menü **Optionen** legst du eine Automation an. Der Editor hat die Reiter **Übersicht**, **Auslöser**, **Chat starten** und **Einstellungen**. Wähle unter **Chat starten** den Agenten und formuliere die Nachricht; den Namen findest du unter **Einstellungen**. In **Übersicht** steht der Aktiv-Schalter über der Vorschau deiner Eingaben. Die Info-Kacheln lassen sich für Details aufklappen und markieren ungespeicherte Änderungen. Mit **Erstellen** bzw. **Speichern** in der festen Reiterleiste übernimmst du die Änderungen. Jede Ausführung eröffnet einen neuen persönlichen Chat. Andere Personen können deine Automationen nicht verwalten, auch nicht mit Arbeitsplatzadministratorrechten.
+
+In der **Übersicht** stehen Auslöser und nächster Lauf unter **Auslöser**, Agent und Nachricht unter **Chat starten**. Über Titel oder Hilfetext öffnest du den passenden Reiter. Beim Anlegen führt dich zusätzlich eine Checkliste durch die Einrichtung. Am Ende der Übersicht kannst du eine neue Automation erstellen. Bei gespeicherten Automationen findest du dort wie im Optionen-Menü **Speichern**, **Jetzt ausführen**, **Als Kopie speichern** und **Automation löschen**.
 
 Der Agent wird über einen leeren Auswahlplatz eingesetzt. Ein Klick öffnet einen durchsuchbaren Dialog mit den vorhandenen App-Karten. Nach der Auswahl bleibt die Karte sichtbar; über **Wechseln** oder **Entfernen** kannst du die Auswahl ändern.
 
@@ -95,6 +97,8 @@ Die Suche steht zentriert oberhalb der Liste. Über **Optionen** rechts im Seite
 
 Unter **Einstellungen** vergibst du einen Namen und eine eigene Beschreibung für die App-Karte. Die Beschreibung ist unabhängig von der Nachricht. Im Abschnitt **Darstellung** wählst du Farbe und Symbol aus der gemeinsamen Palette bzw. dem Symboldialog.
 
+In der Infoansicht stehen unter der Karte die Aktionen für deine gespeicherte Automation. Hier kannst du sie ausführen, als Favorit markieren, bearbeiten oder nach Bestätigung löschen. Wenn du den Arbeitsplatz ihres Agenten administrierst, findest du dort auch die beiden XRAG-Aktionen.
+
 Über den Stern in Karte oder Tabelle fügst du eine Automation zu deinen Favoriten hinzu. Sie erscheint auch auf der Startseite und – wenn eingeschaltet – in der Seitenleiste. Unter **Meine Favoriten** kannst du sie wie andere Favoriten sortieren oder entfernen. Die Liste lässt sich nach Favoriten gruppieren. Favoriten erweitern keine Berechtigungen.
 
 Die Karte oder der Name in der Tabelle öffnet **Info**. Dort siehst du Status, Auslöser, Agent und Nachricht. Die Bearbeiten-Symbole führen direkt zum passenden Editor-Reiter. **Ausführungen** hat einen eigenen Reiter. Alte Links mit `?edit=` oder `?runs=` werden auf die neuen Seiten weitergeleitet.
@@ -123,7 +127,7 @@ Wenn du den Arbeitsplatz des Agenten administrierst, kannst du eine eigene gespe
 
 Alle Werkzeuge sind am gemeinsamen Endpunkt `/mcp` verfügbar. Die Automationswerkzeuge benötigen mindestens **editor**. Die MCP-Freigabe ersetzt weder Eigentümerschaft noch Arbeitsplatz- und Dateirechte. Beim Speichern über MCP bleibt dessen Zugriffsstufe auch für spätere Chat-Ausführungen die Obergrenze.
 
-Für schorn.ai-Agenten verlangen `platform_automation_save` und `platform_automation_run` immer deine Bestätigung, auch bei automatischen Editoraktionen. So kann ein Agent spätere Ausführungen unter den Werkzeugregeln eines anderen Agenten nicht unbemerkt beauftragen. Eine deaktivierte Editorstufe bleibt gesperrt. Externe MCP-Clients verwenden weiterhin ihre erteilte OAuth-Freigabe. Bei einem manuellen Lauf gilt zusätzlich die niedrigere Stufe aus gespeicherter Automation und aktuellem MCP-Aufruf; diese Grenze greift bereits beim Prüfen und Lesen von Dateianhängen.
+Für schorn.ai-Agenten verlangen `platform_automation_save` und `platform_automation_run` immer deine Bestätigung, auch bei automatischen Aktionen der Stufe **Bearbeiter:in**. So kann ein Agent spätere Ausführungen unter den Werkzeugregeln eines anderen Agenten nicht unbemerkt beauftragen. Die deaktivierte Stufe **Bearbeiter:in** bleibt gesperrt. Externe MCP-Clients verwenden weiterhin ihre erteilte OAuth-Freigabe. Bei einem manuellen Lauf gilt zusätzlich die niedrigere Stufe aus gespeicherter Automation und aktuellem MCP-Aufruf; diese Grenze greift bereits beim Prüfen und Lesen von Dateianhängen.
 
 | Werkzeug                     | Zweck und Einschränkungen                                                                                                                                                           |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -140,4 +144,4 @@ Für schorn.ai-Agenten verlangen `platform_automation_save` und `platform_automa
 
 `platform_favorites_get` und `platform_favorites_update` lesen bzw. ersetzen die eigene Favoritenliste einschließlich Reihenfolge und Sidebar-Sichtbarkeit (Mindeststufe **user**). Für Automationen lautet der Eintragstyp `automation`. Favoriten gewähren keine Zugriffsrechte: Ihre Anzeige und Nutzung erfordern weiterhin Eigentümerschaft und Editorzugriff.
 
-`platform_xrag_export` exportiert eine eigene Automation mit `kind: "automation"`. `platform_xrag_related_objects` ermittelt die verbundenen Ressourcen und `platform_xrag_saved_package_add` speichert die Auswahl im eigenen Paket. Alle drei benötigen mindestens **Workspace-Administrator** sowie Administratorrechte im Arbeitsplatz des Agenten. Für weitere Ressourcen im Paket müssen die entsprechenden Exportrechte vorliegen.
+`platform_xrag_export` exportiert eine eigene Automation mit `kind: "automation"`. `platform_xrag_related_objects` ermittelt die verbundenen Ressourcen und `platform_xrag_saved_package_add` speichert die Auswahl im eigenen Paket. Alle drei benötigen mindestens **Arbeitsplatzadministrator:in** sowie Administratorrechte im Arbeitsplatz des Agenten. Für weitere Ressourcen im Paket müssen die entsprechenden Exportrechte vorliegen.

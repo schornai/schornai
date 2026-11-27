@@ -57,10 +57,10 @@ Auch nach dem Entfernen einer direkten lokalen Rolle kann über **Automatisch Be
 
 ## Zugehörige MCP-Werkzeuge
 
-- `platform_workspace_users`: Benutzerverzeichnis mit Workspace-Rollen lesen. Mindeststufe: **Globaler Administrator**.
-- `platform_workspace_update`: Workspace-Name und Beschreibung ändern. Mindeststufe: **Workspace-Administrator**.
-- `platform_workspace_autojoin_update`: Automatischen Workspace-Beitritt einstellen. Mindeststufe: **Globaler Administrator**.
-- `platform_workspace_sso_mapping_update`: SAML-Gruppen auf Workspace-Rollen abbilden. Mindeststufe: **Globaler Administrator**.
-- `platform_workspace_documentation_update`: Workspace-Dokumentation ändern. Mindeststufe: **Workspace-Administrator**.
+- `platform_workspace_users`: Benutzerverzeichnis mit Arbeitsplatzrollen lesen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_workspace_update`: Arbeitsplatzname und Beschreibung ändern. Mindeststufe: **Arbeitsplatzadministrator:in**.
+- `platform_workspace_autojoin_update`: Automatischen Beitritt zum Arbeitsplatz einstellen. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_workspace_sso_mapping_update`: SAML-Gruppen auf Arbeitsplatzrollen abbilden. Mindeststufe: **Globale:r Administrator:in**.
+- `platform_workspace_documentation_update`: Arbeitsplatzdokumentation ändern. Mindeststufe: **Arbeitsplatzadministrator:in**.
 
 Jeder Aufruf prüft zusätzlich die Berechtigung für das eigene Konto bzw. die betroffene Ressource. Die Zugriffsstufe verleiht keine Rechte. Voraussetzungen, besondere Grenzen und der vollständige Werkzeugkatalog stehen unter [Plattformzugriff](../../agent/edit/plattformzugriff.md).

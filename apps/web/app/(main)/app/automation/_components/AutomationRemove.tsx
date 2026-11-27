@@ -23,11 +23,13 @@ export function AutomationRemove({
   open: controlledOpen,
   onOpenChange,
   hideTrigger = false,
+  labeled = false,
 }: {
   id: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   hideTrigger?: boolean;
+  labeled?: boolean;
 }) {
   const { t } = useT("automation");
   const router = useRouter();
@@ -49,10 +51,11 @@ export function AutomationRemove({
           render={
             <Button
               variant="destructive"
-              size="icon"
+              size={labeled ? "default" : "icon"}
               aria-label={t("labelDelete")}
             >
               <X />
+              {labeled && t("labelDelete")}
             </Button>
           }
         />

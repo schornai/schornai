@@ -18,6 +18,8 @@ import { InfoTitle } from "../../../_components/InfoTitle";
 import { InfoActions } from "../../../_components/InfoActions";
 import { useT } from "next-i18next/client";
 import { providers } from "../providers";
+import { ModelRemove } from "./ModelRemove";
+import { ResourceInfoLayout } from "../../../_components/ResourceInfoLayout";
 import { ModelCard } from "./ModelCard";
 import type { ModelSummary } from "../modelSummary";
 
@@ -109,53 +111,69 @@ export function ModelDetails({
     },
   ];
   return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-[auto_1fr]">
-      <ModelCard model={model} readOnly={readOnly} />
-      <div className="flex min-w-0 flex-col gap-1">
-        {sections.map(({ title, icon: Icon, summary, content, edit }) => (
-          <Alert key={title}>
-            <Icon />
-            <Collapsible>
-              <InfoTitle>
-                <CollapsibleTrigger className="flex-1 text-left">
-                  {title}
-                </CollapsibleTrigger>
-                <InfoActions>
-                  {edit && !readOnly && (
+    <ResourceInfoLayout
+      card={<ModelCard model={model} readOnly={readOnly} />}
+      actions={
+        <>
+          {!external && <XRAGObjectActions kind="model" id={model.id} />}
+          {!readOnly && (
+            <>
+              <Button
+                nativeButton={false}
+                render={<Link href="?view=settings" />}
+                variant="outline"
+              >
+                <Pencil />
+                {t("tabMetadata")}
+              </Button>
+              <ModelRemove model={model} />
+            </>
+          )}
+        </>
+      }
+    >
+      {sections.map(({ title, icon: Icon, summary, content, edit }) => (
+        <Alert key={title}>
+          <Icon />
+          <Collapsible>
+            <InfoTitle>
+              <CollapsibleTrigger className="flex-1 text-left">
+                {title}
+              </CollapsibleTrigger>
+              <InfoActions>
+                {edit && !readOnly && (
+                  <Button
+                    nativeButton={false}
+                    render={<Link href={`?view=${edit}`} />}
+                    size="icon-xs"
+                    variant="ghost"
+                    aria-label={t("labelEditSection", { section: title })}
+                  >
+                    <Pencil />
+                  </Button>
+                )}
+                <CollapsibleTrigger
+                  render={
                     <Button
-                      nativeButton={false}
-                      render={<Link href={`?view=${edit}`} />}
                       size="icon-xs"
                       variant="ghost"
-                      aria-label={t("labelEditSection", { section: title })}
+                      aria-label={t("labelToggleSection", { section: title })}
                     >
-                      <Pencil />
+                      <ChevronsUpDown />
                     </Button>
-                  )}
-                  <CollapsibleTrigger
-                    render={
-                      <Button
-                        size="icon-xs"
-                        variant="ghost"
-                        aria-label={t("labelToggleSection", { section: title })}
-                      >
-                        <ChevronsUpDown />
-                      </Button>
-                    }
-                  />
-                </InfoActions>
-              </InfoTitle>
-              <AlertDescription>
-                {summary && <strong className="break-all">{summary}</strong>}
-                <CollapsibleContent>
-                  <div className="pt-3">{content}</div>
-                </CollapsibleContent>
-              </AlertDescription>
-            </Collapsible>
-          </Alert>
-        ))}
-      </div>
-      {!external && <XRAGObjectActions kind="model" id={model.id} />}
-    </div>
+                  }
+                />
+              </InfoActions>
+            </InfoTitle>
+            <AlertDescription>
+              {summary && <strong className="break-all">{summary}</strong>}
+              <CollapsibleContent>
+                <div className="pt-3">{content}</div>
+              </CollapsibleContent>
+            </AlertDescription>
+          </Collapsible>
+        </Alert>
+      ))}
+    </ResourceInfoLayout>
   );
 }

@@ -8,7 +8,7 @@ meta:
   role_scope: "Dokumentation"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-10-25"
+  last_verified: "2026-11-22"
   source_files:
     [
       "tests/visual/storybook.visual.spec.mjs",
@@ -54,7 +54,7 @@ Anzeigen wie „Beispiel“, ein unbekanntes Modell oder ein vorgegebener Upload
 | [farbvorschau.png](../assets/farbvorschau.png)                     | `web-settings-settings-theme-colorpickerhueslider--default`                                  | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |
 | [favoriten.png](../assets/favoriten.png)                           | `web-main-dashboardfavorites--default`                                                       | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |
 | [feedback.png](../assets/feedback.png)                             | `web-feedback-errorlogs--populated`                                                          | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |
-| [navigation.png](../assets/navigation.png)                         | `web-main-sidebar--default`                                                                  | Neue kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                 |
+| [navigation.png](../assets/navigation.png)                         | `web-main-sidebar--default`                                                                  | Geöffnetes Favoritenmenü im lokalen Storybook, hell, Deutsch (22. November 2026).                            |
 | [passwort-zuruecksetzen.png](../assets/passwort-zuruecksetzen.png) | `web-signin-resetpassword--default`                                                          | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |
 | [profil.png](../assets/profil.png)                                 | `web-settings-editoravatar--default`                                                         | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |
 | [sso-anbieter.png](../assets/sso-anbieter.png)                     | `web-settings-settings-sso-addssoprovider--dialog-opened`                                    | Kompakte Aufnahme aus lokalem Storybook, hell, Deutsch.                                                      |

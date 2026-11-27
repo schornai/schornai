@@ -1,10 +1,13 @@
 "use client";
-import { DropdownMenuItemAction } from "@schornio/aibox-package-ui/components/dropdown-menu-item-action";
+import { EditorHeaderTitle } from "../../../../_components/EditorHeaderTitle";
+import {
+  EditorActions,
+  type EditorAction,
+} from "../../../../_components/EditorActions";
 import { AgentRecommendedMessage } from "../../../agent/_components/AgentRecommendedMessage";
 import { AutomationScheduleFields } from "./AutomationScheduleFields";
 import { AutomationEditorAppearance } from "./AutomationEditorAppearance";
 import { AutomationEditorDiscard } from "./AutomationEditorDiscard";
-import type { SettingFavorites } from "../../../../_models/currentUserConfigFavorites";
 import type { Theme } from "../../../../_models/systemConfigTheme";
 
 import { useEffect, useId, useRef, useState } from "react";
@@ -27,6 +30,7 @@ import {
   Minus,
   MessageSquare,
   Power,
+  Play,
   Zap,
   Settings2,
   Ellipsis,
@@ -35,7 +39,6 @@ import {
 import { CircleChevronsRight } from "@/lib/icons/circle-chevrons-right";
 import {
   HeaderMain,
-  HeaderMainContent,
   HeaderMainAsideContent,
 } from "@schornio/aibox-package-ui/components/header-main";
 import { ContainerMain } from "@schornio/aibox-package-ui/components/container-main";
@@ -44,7 +47,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuSeparator,
 } from "@schornio/aibox-package-ui/components/dropdown-menu";
 import {
   TabsMainList,
@@ -52,7 +54,7 @@ import {
   TabsMainContent,
 } from "../../../../_components/TabsMain";
 import { AutomationEditorOverview } from "./AutomationEditorOverview";
-import { AutomationRun } from "./AutomationRun";
+import { useAutomationRun } from "./AutomationRun";
 import { AutomationRemove } from "./AutomationRemove";
 import { ChoiceCards } from "@schornio/aibox-package-ui/components/choice-cards";
 import { ContainerStyled } from "@schornio/aibox-package-ui/components/container-styled";
@@ -102,13 +104,11 @@ export function AutomationEditor({
   initial,
   agents,
   repositories = [],
-  favorites,
   theme,
   models,
   workspaces,
 }: {
   initial?: AutomationInput & { nextRunAt?: string | null };
-  favorites?: SettingFavorites;
   theme?: Theme;
   agents: Agent[];
   repositories?: DocumentRepository[];
@@ -263,6 +263,44 @@ export function AutomationEditor({
       router.push(`?view=${section}`);
     }
   };
+  const run = useAutomationRun(initial);
+  const saveProps = {
+    disabled: pending || (Boolean(initial) && !changed),
+    isPending: save.isPending,
+    hasErrored: save.hasErrored,
+  };
+  const actions: EditorAction[] = [
+    {
+      ...saveProps,
+      icon: initial ? ArrowDownToLine : CirclePlus,
+      label: t(initial ? "labelSave" : "labelCreate"),
+      onClick: () => submit(),
+    },
+  ];
+  if (initial?.id) {
+    actions.push(
+      {
+        ...run.buttonProps,
+        icon: Play,
+        label: t("labelRunNow"),
+        closeOnClick: false,
+      },
+      {
+        icon: CirclePlus,
+        label: t("labelSaveCopy"),
+        disabled: pending,
+        isPending: saveCopy.isPending,
+        hasErrored: saveCopy.hasErrored,
+        onClick: () => submit(true),
+      },
+      {
+        icon: X,
+        label: t("labelDelete"),
+        destructive: true,
+        onClick: () => setDeleteOpen(true),
+      },
+    );
+  }
   return (
     <form
       noValidate
@@ -272,14 +310,11 @@ export function AutomationEditor({
       }}
     >
       <HeaderMain appColor={value.color}>
-        <HeaderMainContent>
-          <CircleChevronsRight />
-          <div className="flex flex-col text-center">
-            <span className="text-nowrap">
-              {initial ? t("labelAutomation") : t("labelNew")}
-            </span>
-            <span className="text-xs text-nowrap">{value.name}</span>
-          </div>
+        <EditorHeaderTitle
+          icon={<CircleChevronsRight />}
+          title={initial ? t("labelAutomation") : t("labelNew")}
+          name={value.name}
+        >
           {initial && (
             <AutomationEditorDiscard
               initial={initial}
@@ -291,7 +326,7 @@ export function AutomationEditor({
               }}
             />
           )}
-        </HeaderMainContent>
+        </EditorHeaderTitle>
         <HeaderMainAsideContent>
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button variant="ghost" />}>
@@ -305,45 +340,13 @@ export function AutomationEditor({
               align="end"
             >
               <DropdownMenuGroup>
-                <DropdownMenuItemAction
-                  disabled={pending || (Boolean(initial) && !changed)}
-                  isPending={save.isPending}
-                  hasErrored={save.hasErrored}
-                  onClick={() => submit()}
-                >
-                  {initial ? <ArrowDownToLine /> : <CirclePlus />}
-                  {t(initial ? "labelSave" : "labelCreate")}
-                </DropdownMenuItemAction>
-                {initial?.id && (
-                  <>
-                    <AutomationRun
-                      automation={{ ...initial, id: initial.id }}
-                      menu
-                    />
-                    <DropdownMenuItemAction
-                      disabled={pending}
-                      isPending={saveCopy.isPending}
-                      hasErrored={saveCopy.hasErrored}
-                      onClick={() => submit(true)}
-                    >
-                      <CirclePlus />
-                      {t("labelSaveCopy")}
-                    </DropdownMenuItemAction>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItemAction
-                      variant="destructive"
-                      onClick={() => setDeleteOpen(true)}
-                    >
-                      <X />
-                      {t("labelDelete")}
-                    </DropdownMenuItemAction>
-                  </>
-                )}
+                <EditorActions display="menu" actions={actions} />
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </HeaderMainAsideContent>
       </HeaderMain>
+      {run.feedback}
       {initial?.id && (
         <AutomationRemove
           id={initial.id}
@@ -381,9 +384,8 @@ export function AutomationEditor({
         <ButtonAction
           size="sm"
           type="submit"
-          isPending={save.isPending}
-          hasErrored={save.hasErrored}
-          disabled={!agents.length || (Boolean(initial) && !changed)}
+          {...saveProps}
+          disabled={saveProps.disabled || !agents.length}
         >
           {initial ? <ArrowDownToLine /> : <CirclePlus />}
           {t(initial ? "labelSave" : "labelCreate")}
@@ -456,8 +458,8 @@ export function AutomationEditor({
           }}
           agents={agents}
           repositories={repositories}
-          favorites={favorites}
         />
+        <EditorActions display="overview" actions={actions} />
       </TabsMainContent>
       <TabsMainContent view="trigger">
         <ContainerMain>

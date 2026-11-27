@@ -20,11 +20,11 @@ import Link from "next/link";
 import { useT } from "next-i18next/client";
 
 export function AgentInfoToolPlatformAccess({
-  agentRole,
+  access,
   editAgentPathname,
   editRoleId,
 }: {
-  agentRole?: Partial<Agent["roles"][number]>;
+  access?: Agent["roles"][number]["toolPlatformAccess"];
   editAgentPathname?: string;
   editRoleId?: string;
 }) {
@@ -32,6 +32,7 @@ export function AgentInfoToolPlatformAccess({
     keyPrefix: "_components.AgentInfoToolPlatformAccess",
   });
 
+  const approvals = getPlatformApprovals(access);
   return (
     <Alert>
       <DraftingCompass />
@@ -41,7 +42,6 @@ export function AgentInfoToolPlatformAccess({
             {t("labelTitle")}
           </CollapsibleTrigger>
           <InfoActions>
-            <strong>{agentRole?.name}</strong>
             {editRoleId && (
               <Button
                 aria-label={t("labelEdit")}
@@ -73,11 +73,7 @@ export function AgentInfoToolPlatformAccess({
                 {platformAccessLevels.map((level) => (
                   <div className="contents" key={level}>
                     <dt>{t(`level.${level}`)}</dt>
-                    <dd>
-                      {t(
-                        `mode.${getPlatformApprovals(agentRole?.toolPlatformAccess)[level]}`,
-                      )}
-                    </dd>
+                    <dd>{t(`mode.${approvals[level]}`)}</dd>
                   </div>
                 ))}
               </dl>
