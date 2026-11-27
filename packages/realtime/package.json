@@ -25,13 +25,13 @@
     "@schornio/aibox-database": "file:../database",
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.176",
+    "ai": "7.0.177",
     "mathjs": "15.2.0",
     "xrag": "*",
     "yjs": "^13.6.33"
   },
   "peerDependencies": {
-    "@supabase/supabase-js": "2.119.0"
+    "@supabase/supabase-js": "2.119.2"
   },
   "license": "AGPL-3.0-only",
   "repository": {

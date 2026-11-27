@@ -384,6 +384,7 @@
       "buttonStartBatch": "Start batch",
       "buttonSend": "Send",
       "labelAttachFiles": "Attach files",
+      "labelRemoveFailedUpload": "Remove failed attachment {{name}}",
       "labelUploadFiles": "Upload files",
       "labelSelectFile": "Choose an existing file"
     },

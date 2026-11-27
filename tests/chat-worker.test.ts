@@ -175,7 +175,12 @@ function run(
     token: "token",
     workerIdentifier: "worker",
   });
-  return mocks.handler({ ...task, parameters }, abortSignal, taskQueue);
+  return mocks.handler(
+    { ...task, parameters },
+    abortSignal,
+    taskQueue,
+    (operation: () => Promise<unknown>) => operation(),
+  );
 }
 function activity() {
   return getActivities(activities).activities?.get("activity");
@@ -362,6 +367,14 @@ describe("chat worker orchestration", () => {
       label: "Question",
     });
     expect(mocks.dispose).toHaveBeenCalledTimes(4);
+  });
+  it("allows tool use past five steps and stops at twenty", async () => {
+    queue({ type: "text", text: "Use the tools" });
+    await run();
+    const { stopWhen } = mocks.stream.mock.lastCall![0];
+    for (let count = 1; count <= 20; count++) {
+      expect(await stopWhen({ steps: Array(count) })).toBe(count === 20);
+    }
   });
   it("finishes an empty queue without contacting a model", async () => {
     await run();

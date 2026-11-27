@@ -89,16 +89,22 @@ describe("application startup and Python packaging", () => {
         signal: expect.any(AbortSignal),
         instance: undefined,
       });
-      for (const worker of [
-        mocks.chat,
-        mocks.generate,
-        mocks.stream,
-        mocks.embed,
-        mocks.files,
-      ])
-        expect(worker).toHaveBeenCalledWith(
-          expect.objectContaining({ workerIdentifier: expect.any(String) }),
+      for (const [worker, type, concurrency] of [
+        [mocks.chat, "chat", 4],
+        [mocks.generate, "model-do-generate", 4],
+        [mocks.stream, "model-do-stream", 4],
+        [mocks.embed, "model-do-embed", 1],
+        [mocks.files, "process-file", 1],
+      ] as const) {
+        expect(worker).toHaveBeenCalledExactlyOnceWith(
+          expect.objectContaining({
+            concurrency,
+            workerIdentifier: expect.stringMatching(
+              new RegExp(`:${process.pid}:${type}$`),
+            ),
+          }),
         );
+      }
     },
   );
   it.each([undefined, "/mounted/ollama/models"])(

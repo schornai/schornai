@@ -72,6 +72,7 @@ export async function selectChatFile(
   const reference = agentPath !== undefined && input.attachmentMode !== "copy";
   if (!inConversation && !reference && input.attachmentMode === "reference")
     throw new Error("FILE_REFERENCE_NOT_MOUNTED");
+  let processing = false;
   if (fileNeedsProcessing(path) && !(await getDocumentContent(path, session))) {
     // A transfer needs a stable source. A direct attachment can join its running job.
     if (!inConversation && !reference) return { error: "FILE_NOT_PROCESSED" };
@@ -82,10 +83,10 @@ export async function selectChatFile(
       disposalAbortSignal: abortSignal,
     });
     await queue.waitForSynced(abortSignal ? { abortSignal } : undefined);
-    if (
-      !findActiveFileTask(queue.document, input.storage, path) &&
-      !(await getDocumentContent(path, session))
-    )
+    processing = Boolean(
+      findActiveFileTask(queue.document, input.storage, path),
+    );
+    if (!processing && !(await getDocumentContent(path, session)))
       return { error: "FILE_NOT_PROCESSED" };
   }
   if (inConversation)
@@ -94,6 +95,9 @@ export async function selectChatFile(
     return {
       file: {
         ...file,
+        ...(processing && {
+          currentAction: { state: "processing" as const, target: file },
+        }),
         attachment: { storage: input.storage, agentPath },
       } satisfies StorageRealtimeObject,
       copied: false,

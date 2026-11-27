@@ -12,7 +12,7 @@ meta:
   role_scope: "Gespräch beziehungsweise Zielablage"
   prerequisites: "Für Audio- und Videoinhalte: ein in der Agentenrolle zugeordneter Transkriptor."
   status: "verfügbar"
-  last_verified: "2026-11-23"
+  last_verified: "2026-11-27"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/files/_components/Folder.tsx",
@@ -39,6 +39,8 @@ Du kannst Unterlagen an eine Nachricht anhängen, damit der Agent sie bei der Be
 2. Wähle eine oder mehrere Dateien aus.
 3. Formuliere deine Aufgabe und kontrolliere die angezeigten Anhänge.
 4. Wähle nach dem Upload **Senden**. Das funktioniert auch mit einer Datei ohne Begleittext.
+
+Schlägt der Upload oder die Übergabe zur Verarbeitung fehl, bleibt **Senden** gesperrt. Entferne den fehlgeschlagenen Anhang über das Kreuz an seiner Kachel und lade ihn bei Bedarf erneut hoch. Bei einer direkt verknüpften Datei zeigt die Kachel den Verarbeitungsstand der Quellablage. Während ein Chat auf seine Anhänge wartet, können andere Chats weiterlaufen.
 
 Die Nachricht erscheint mit ihren Anhängen im Chat. Läuft die Textextraktion oder Transkription noch, wartet der Agent vor seiner Antwort auf die Dateien dieser Nachricht. Du kannst währenddessen den Chat verlassen. Brichst du die Antwort ab, läuft die Dateiverarbeitung weiter. Meldet der Chat einen Verarbeitungsfehler, prüfe die betroffene Datei im Reiter **Dateien**. Dort kannst du sie erneut verarbeiten und anschließend die Antwort im Chat wiederholen.
 

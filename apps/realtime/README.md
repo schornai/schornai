@@ -43,6 +43,13 @@ with a nonzero exit code; the bundled Compose service uses `restart: on-failure`
 
 ## Task ownership and recovery
 
+Each realtime instance can process up to four chats, four local model generation
+tasks and four local model streams concurrently. Each queue claims one task at a
+time. An idle worker claims immediately. A busy worker waits 250 ms per active
+task of that type before claiming another, giving less loaded eligible peers
+time to take it. A single worker can still fill all four places. This is a
+preference, so distribution can vary with connection latency.
+
 The coordinator records claims in Postgres. Workers renew every 20 seconds; a
 claim expires after 90 seconds without renewal. Recovery runs on queue load and
 every 10 seconds while that document is loaded. Database or document-persistence

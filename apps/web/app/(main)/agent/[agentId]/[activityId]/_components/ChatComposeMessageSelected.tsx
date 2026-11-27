@@ -6,6 +6,7 @@ import {
   MicOff,
   File,
   Upload,
+  X,
   Layers,
   Paperclip,
   Pause,
@@ -90,6 +91,7 @@ export function ChatComposeMessageSelected({
     expiration,
     activity,
     addSelectedFiles,
+    removeFailedUpload,
     activityId,
     agentId,
     defaultThinking,
@@ -107,7 +109,7 @@ export function ChatComposeMessageSelected({
     basePathApp,
     storage,
     itemGroups,
-    uploadingFilePaths = [],
+    unconfirmedFilePaths = [],
   } = useStorageView();
 
   const voiceEnabled = voiceStatus === "ready";
@@ -141,7 +143,7 @@ export function ChatComposeMessageSelected({
     uploads.some(
       (upload) => upload.state === "queued" || upload.state === "uploading",
     ) ||
-    uploadingFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
+    unconfirmedFilePaths.some((path) => attachedPaths.has(resolvePath(path)));
 
   const nextHasContent = hasMessageContent(messageBatch[0]);
   const showMicrophone =
@@ -234,6 +236,24 @@ export function ChatComposeMessageSelected({
           <AttachmentGroup>
             {itemGroups[0]?.[1]?.map((file) => (
               <StorageObjectTile
+                actions={
+                  !file.attachment &&
+                  file.currentAction?.state === "error" &&
+                  canSend &&
+                  !isSubmitted ? (
+                    <Button
+                      type="button"
+                      size="icon-xs"
+                      variant="ghost"
+                      aria-label={t("labelRemoveFailedUpload", {
+                        name: file.name,
+                      })}
+                      onClick={() => removeFailedUpload(file.path)}
+                    >
+                      <X />
+                    </Button>
+                  ) : undefined
+                }
                 basePathApp={
                   file.attachment
                     ? storageToAppBasePath(file.attachment.storage)

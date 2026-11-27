@@ -198,7 +198,7 @@ export const ProcessingAttachment: Story = {
       },
       useStorageView: {
         pendingFilePaths: [report.path],
-        uploadingFilePaths: [],
+        unconfirmedFilePaths: [],
         itemGroups: [
           [
             "files",

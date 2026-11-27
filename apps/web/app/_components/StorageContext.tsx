@@ -123,8 +123,8 @@ function StorageContextProvider({
       <StorageViewProvider
         {...viewProviderProps}
         storageObjects={appliedStorageObjects}
-        uploadingFilePaths={fileStates
-          .filter(([, state]) => state === "uploading")
+        unconfirmedFilePaths={fileStates
+          .filter(([, state]) => state === "uploading" || state === "error")
           .map(([path]) => path)}
         pendingFilePaths={fileStates
           .filter(

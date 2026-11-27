@@ -111,6 +111,13 @@
       "labelCancel": "Cancel",
       "labelCreate": "Create"
     },
+    "StorageObjectTile": {
+      "labelReady": "File ready",
+      "errorFile": "File error",
+      "labelProcessing": "Processing file…",
+      "labelUploading": "Uploading file · {{progress}}%",
+      "labelUnprocessed": "Not yet processed"
+    },
     "StorageDialogRemove": {
       "labelTitle": "Remove",
       "labelDescription": "Are you sure you want to remove \"{{name}}\"? This cannot be undone.",

@@ -12,8 +12,8 @@
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
     "@schornio/aibox-realtime": "*",
-    "@supabase/supabase-js": "2.119.0",
-    "ai": "7.0.176",
+    "@supabase/supabase-js": "2.119.2",
+    "ai": "7.0.177",
     "ai-sdk-ollama": "^4.5.1",
     "undici": "^8.0.0",
     "tus-js-client": "^4.3.1"

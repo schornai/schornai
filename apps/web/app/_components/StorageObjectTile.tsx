@@ -9,7 +9,12 @@ import {
   AttachmentTitle,
   AttachmentTrigger,
 } from "@schornio/aibox-package-ui/components/attachment";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
+import { RealtimeRoom } from "@/lib/RealtimeRoom";
+import { useRealtimeArray } from "@/lib/useRealtimeArray";
+import { useHocuspocusProvider } from "@hocuspocus/provider-react";
+import { getStorageDocumentName } from "@schornio/aibox-realtime/documents/storage/_utils";
+import { getStorageLog } from "@schornio/aibox-realtime/documents/storage/getStorageLog";
 import { Folder, LoaderCircle } from "lucide-react";
 import {
   fileNeedsProcessing,
@@ -22,7 +27,7 @@ import type { Storage } from "@schornio/aibox-package-database/storage/_types";
 import type { StorageRealtimeObject } from "@schornio/aibox-realtime/documents/storage/_types";
 import { StorageSession } from "@schornio/aibox-package-database/storage/_utils/StorageSession";
 import { cn } from "@schornio/aibox-package-ui/lib/utils";
-// import { useT } from "next-i18next/client";
+import { useT } from "next-i18next/client";
 
 export type StorageObjectTileVariant =
   "tiles-small" | "tiles-medium" | "tiles-large";
@@ -48,7 +53,37 @@ function getAttachmentState(storageObject: StorageRealtimeObject) {
   return undefined;
 }
 
-export function StorageObjectTile({
+export function StorageObjectTile(props: ComponentProps<typeof Tile>) {
+  const { storageObject } = props;
+  if (
+    storageObject.attachment &&
+    storageObject.currentAction?.state === "processing"
+  )
+    return (
+      <RealtimeRoom
+        name={getStorageDocumentName(storageObject.attachment.storage)}
+      >
+        <ReferencedTile {...props} />
+      </RealtimeRoom>
+    );
+  return <Tile {...props} />;
+}
+
+function ReferencedTile(props: ComponentProps<typeof Tile>) {
+  const provider = useHocuspocusProvider();
+  const entries = useRealtimeArray(getStorageLog(provider.document));
+  const file = props.storageObject;
+  const latest = entries.findLast((entry) => entry.target.path === file.path);
+  const currentAction =
+    latest?.state === "removed"
+      ? { state: "error" as const, target: file }
+      : latest?.state === "created" && !latest.content
+        ? file.currentAction
+        : (latest ?? file.currentAction);
+  return <Tile {...props} storageObject={{ ...file, currentAction }} />;
+}
+
+function Tile({
   actions,
   basePathApp,
   className,
@@ -63,9 +98,7 @@ export function StorageObjectTile({
   storageObject: StorageRealtimeObject;
   variant: StorageObjectTileVariant | (string & {});
 }) {
-  // const { t } = useT("common", {
-  //   keyPrefix: "_components.StorageObjectTile",
-  // });
+  const { t } = useT("common", { keyPrefix: "_components.StorageObjectTile" });
 
   const attachmentState = getAttachmentState(storageObject);
 
@@ -120,28 +153,27 @@ export function StorageObjectTile({
 
       <AttachmentContent>
         <AttachmentTitle>{storageObject.name}</AttachmentTitle>
-        <AttachmentDescription>
-          {attachmentState === "error" ? "Fehler" : undefined}
+        <AttachmentDescription role="status" aria-atomic="true">
+          {attachmentState === "error" ? t("errorFile") : undefined}
 
-          {attachmentState === "processing"
-            ? "Datei wird verarbeitet..."
+          {attachmentState === "processing" ? t("labelProcessing") : undefined}
+
+          {attachmentState === "uploading"
+            ? t("labelUploading", {
+                progress:
+                  storageObject.currentAction?.state === "uploading"
+                    ? Math.floor(storageObject.currentAction.progress * 100)
+                    : 0,
+              })
             : undefined}
 
-          {attachmentState === "uploading" ? (
-            <>
-              Datei wird hochgeladen ·{" "}
-              {storageObject.currentAction?.state === "uploading"
-                ? Math.floor(storageObject.currentAction.progress * 100)
-                : undefined}{" "}
-              %
-            </>
-          ) : undefined}
-
-          {/* diesen string gibts auch in storage file preview mdc "Noch nicht verarbeitet" */}
-          {attachmentState === "idle" ? "Noch nicht verarbeitet" : undefined}
+          {attachmentState === "idle" ? t("labelUnprocessed") : undefined}
 
           {!attachmentState ? (
             <>
+              {storageObject.currentAction?.state === "created" && (
+                <span className="sr-only">{t("labelReady")}</span>
+              )}
               {storageObject.file ? (
                 <FileLabel path={storageObject.path} />
               ) : undefined}

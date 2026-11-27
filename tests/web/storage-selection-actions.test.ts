@@ -325,4 +325,17 @@ it("accepts a mounted document whose processing finishes during selection", asyn
   expect(result.file?.attachment?.agentPath).toBe("docs/report.pdf");
   expect(state.content).toHaveBeenCalledTimes(2);
   expect(state.transfer).not.toHaveBeenCalled();
+  state.content.mockResolvedValue(undefined);
+  state.queue.getArray("tasks").push([
+    {
+      type: "process-file",
+      state: "claimed",
+      parameters: { storage, path: pdf.path },
+    },
+  ]);
+  const pending = await storageSelectChatFile({ ...input, path: pdf.path });
+  expect(pending.file).toMatchObject({
+    attachment: { storage, agentPath: "docs/report.pdf" },
+    currentAction: { state: "processing", target: pdf },
+  });
 });

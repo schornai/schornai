@@ -144,12 +144,12 @@ describe("upload orchestration contexts", () => {
       />,
     );
     act(() => mocks.upload.onFileUploadSuccess(upload));
-    expect(mocks.view.uploadingFilePaths).toEqual(["folder/file.txt"]);
+    expect(mocks.view.unconfirmedFilePaths).toEqual(["folder/file.txt"]);
     expect(mocks.view.pendingFilePaths).toEqual(["folder/file.txt"]);
     await act(async () =>
       mocks.upload.afterUpload([upload], { clearFinished: vi.fn() }),
     );
-    expect(mocks.view.uploadingFilePaths).toEqual([]);
+    expect(mocks.view.unconfirmedFilePaths).toEqual([]);
     expect(mocks.view.pendingFilePaths).toEqual(["folder/file.txt"]);
     mocks.process.mockResolvedValueOnce({
       data: { skippedPaths: [upload.path] },
@@ -164,6 +164,7 @@ describe("upload orchestration contexts", () => {
       mocks.upload.afterUpload([upload], { clearFinished: vi.fn() }),
     );
     expect(mocks.view.pendingFilePaths).toEqual([]);
+    expect(mocks.view.unconfirmedFilePaths).toEqual(["folder/file.txt"]);
   });
   it.each([undefined, "target"])(
     "restricts avatars to a single image and uploads for target %s",

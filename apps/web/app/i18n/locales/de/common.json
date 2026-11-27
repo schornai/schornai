@@ -111,6 +111,13 @@
       "labelCancel": "Abbrechen",
       "labelCreate": "Erstellen"
     },
+    "StorageObjectTile": {
+      "labelReady": "Datei bereit",
+      "errorFile": "Fehler",
+      "labelProcessing": "Datei wird verarbeitet...",
+      "labelUploading": "Datei wird hochgeladen · {{progress}} %",
+      "labelUnprocessed": "Noch nicht verarbeitet"
+    },
     "StorageDialogRemove": {
       "labelTitle": "Entfernen",
       "labelDescription": "Möchten Sie \"{{name}}\" wirklich entfernen? Dies kann nicht rückgängig gemacht werden.",

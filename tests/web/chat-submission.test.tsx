@@ -20,7 +20,7 @@ const mocks = vi.hoisted(() => ({
   chatStatus: "idle",
   uploads: [] as any[],
   pendingFilePaths: [] as string[],
-  uploadingFilePaths: [] as string[],
+  unconfirmedFilePaths: [] as string[],
   upload: vi.fn(),
   state: vi.fn(),
   batchState: vi.fn(),
@@ -74,7 +74,7 @@ vi.mock("../../apps/web/app/_components/StorageViewProvider", () => ({
   useStorageView: () => ({
     itemGroups: [["files", mocks.files]],
     pendingFilePaths: mocks.pendingFilePaths,
-    uploadingFilePaths: mocks.uploadingFilePaths,
+    unconfirmedFilePaths: mocks.unconfirmedFilePaths,
     storage: { type: "activity", agentId: "agent", activityId: "activity" },
     basePathApp: "/files",
   }),
@@ -123,7 +123,7 @@ beforeEach(() => {
   mocks.canSend = true;
   mocks.chatStatus = "idle";
   mocks.uploads = [];
-  mocks.uploadingFilePaths = [];
+  mocks.unconfirmedFilePaths = [];
   mocks.pendingFilePaths = [];
   mocks.files = [];
   for (const mock of Object.values(mocks))
@@ -455,7 +455,7 @@ it.each(["queued", "uploading", "registering"])(
       },
     });
     if (state === "registering")
-      mocks.uploadingFilePaths = ["/nested/file.pdf"];
+      mocks.unconfirmedFilePaths = ["/nested/file.pdf"];
     else mocks.uploads = [{ state }];
     const view = compose();
     expect(
@@ -475,7 +475,7 @@ it.each(["queued", "uploading", "registering"])(
     expect(client.execute).not.toHaveBeenCalled();
 
     mocks.uploads = [];
-    mocks.uploadingFilePaths = [];
+    mocks.unconfirmedFilePaths = [];
     view.rerender(
       <Collapsible>
         <ChatComposeMessageSelected />

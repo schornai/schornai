@@ -10,10 +10,12 @@ import { setModelDoStreamDone } from "@schornio/aibox-realtime/documents/modelDo
 import { setModelDoStreamError } from "@schornio/aibox-realtime/documents/modelDoStream/setModelDoStreamError";
 
 export async function modelDoStreamWorker({
+  concurrency,
   token,
   workerIdentifier,
   capabilitiesChanged,
 }: {
+  concurrency?: number;
   token: string;
   workerIdentifier: string;
   capabilitiesChanged?: EventTarget;
@@ -22,6 +24,7 @@ export async function modelDoStreamWorker({
   const serverToken = ServerRealtimeProvider.getServerToken(token);
 
   const taskQueue = new TaskQueue("model-do-stream", {
+    concurrency,
     capabilitiesChanged,
     capabilities: async (abortSignal) => [
       ...(await getOllamaModelIdentifiers(

@@ -357,6 +357,7 @@
       "buttonStartBatch": "Stapelverarbeitung starten",
       "buttonSend": "Senden",
       "labelAttachFiles": "Dateien anhängen",
+      "labelRemoveFailedUpload": "Fehlgeschlagenen Anhang {{name}} entfernen",
       "labelUploadFiles": "Dateien hochladen",
       "labelSelectFile": "Vorhandene Datei auswählen"
     },
