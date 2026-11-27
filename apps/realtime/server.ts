@@ -2,7 +2,7 @@ import { xragExportWorker } from "./src/xrag/worker.ts";
 import { createChatExpirationExtension } from "@schornio/aibox-realtime/server/createChatExpirationExtension";
 import { startScheduler } from "./src/scheduler/startScheduler.ts";
 import { artifactPublicationWorker } from "./src/artifacts/worker.ts";
-import { homedir } from "node:os";
+import { homedir, hostname } from "node:os";
 import { join } from "node:path";
 import { watchOllamaModels } from "./src/_utils/watchOllamaModels.ts";
 import { Server } from "@hocuspocus/server";
@@ -63,6 +63,8 @@ const realtimeServer = new Server({
 });
 
 const capabilitiesChanged = new EventTarget();
+const chatConcurrency = 4;
+const workerInstance = `${process.env.SERVICE_ID ?? hostname()}:${process.pid}`;
 const token = secret;
 
 function fatal(error: unknown) {
@@ -95,22 +97,24 @@ try {
     abortSignal: new AbortController().signal,
   }).catch(fatal);
 
-  for (const [id, worker] of [
-    ["process-file", processFileWorker],
-    ["model-do-generate", modelDoGenerateWorker],
-    ["model-do-stream", modelDoStreamWorker],
-    ["model-do-embed", modelDoEmbedWorker],
+  for (const [id, worker, concurrency] of [
+    ["process-file", processFileWorker, 1],
+    ["model-do-generate", modelDoGenerateWorker, chatConcurrency],
+    ["model-do-stream", modelDoStreamWorker, chatConcurrency],
+    ["model-do-embed", modelDoEmbedWorker, 1],
   ] as const) {
     void worker({
       capabilitiesChanged,
+      concurrency,
       token,
-      workerIdentifier: `${id}-handler-1`,
+      workerIdentifier: `${workerInstance}:${id}`,
     }).catch(fatal);
   }
   void chatWorker({
+    concurrency: chatConcurrency,
     supabaseServiceRole,
     token,
-    workerIdentifier: "chat-handler-1",
+    workerIdentifier: `${workerInstance}:chat`,
   }).catch(fatal);
 } catch (error) {
   fatal(error);

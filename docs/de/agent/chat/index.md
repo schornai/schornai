@@ -21,11 +21,13 @@ meta:
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatVoiceRecorder.tsx",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/VoiceMessagePlayer.tsx",
       "apps/realtime/src/chat/transcribeVoiceMessage.ts",
+      "apps/realtime/server.ts",
       "apps/realtime/src/chat/worker.ts",
       "packages/realtime/src/documents/chat/getResponseSuggestions.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatMessageFooter.tsx",
       "packages/realtime/src/_lib/waitForProviderSynced.ts",
       "packages/realtime/src/documents/chat/queueChat.ts",
+      "packages/realtime/src/documents/taskQueue/TaskQueue.ts",
       "packages/realtime/src/documents/chat/retryChatGeneration.ts",
       "apps/web/app/(main)/agent/[agentId]/[activityId]/_components/ChatError.tsx",
       "packages/realtime/src/documents/chat/finalizeInterruptedToolInputs.ts",
@@ -90,6 +92,8 @@ es wird kein übergroßer Folgeaufruf gesendet.
 4. Wähle **Senden** oder drücke `Enter`. Mit `Shift` + `Enter` fügst du einen Zeilenumbruch ein.
 5. Warte auf die Antwort. Wenn eine Werkzeugaktion freigegeben werden muss, erscheint stattdessen eine [Rückfrage](freigaben.md).
 
+Jeder Realtime-Worker kann bis zu vier verschiedene Chats gleichzeitig bearbeiten. Wenn mehrere Worker bereitstehen, übernehmen freie oder weniger ausgelastete Worker neue Chats bevorzugt. Bleiben Chats im Aufgabenstapel, nutzt auch ein einzelner Worker seine weiteren Plätze für kurze Aufträge. Sind alle Plätze belegt, warten weitere Chats im Aufgabenstapel. Innerhalb eines Gesprächs werden Nachrichten weiterhin der Reihe nach verarbeitet. Wie viele Antworten gleichzeitig Text liefern, hängt auch vom Modellserver ab.
+
 Frage konkret nach, wenn dir eine Antwort unklar ist. Beispiel: „Welche Aussagen stammen aus der Datei? Nenne die passende Fundstelle und kennzeichne Vermutungen.“
 
 Beim Senden wartet der Server pro Synchronisationsschritt höchstens 30 Sekunden
@@ -114,6 +118,8 @@ Bei einem Transkriptionsfehler kannst du im Chat **Erneut versuchen** wählen. D
 ## Antwort lesen und weiterverwenden
 
 Während der Antwort zeigt der Chat auch Nachdenkabschnitte und Werkzeugergebnisse. Warte nach einer Websuche oder einem Dateiabruf auf den abschließenden Antworttext.
+
+Für einen Durchlauf mit Werkzeugen hat das Modell bis zu 20 Schritte. In einem Schritt kann es mehrere Werkzeuge aufrufen. Nach einer Werkzeugfreigabe beginnt ein neuer Durchlauf.
 
 Über **Nachricht kopieren** kopierst du den Text einer Antwort in die Zwischenablage. Wenn Nutzungsdaten verfügbar sind, zeigt **Statistik** Eingabe- und Ausgabe-Tokens sowie die Ausgabegeschwindigkeit. Ein Token entspricht je nach Text einem Wort, Wortteil oder Satzzeichen.
 

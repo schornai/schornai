@@ -9,29 +9,30 @@
     "eslint": "^10.14.0"
   },
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "5.0.145",
-    "@ai-sdk/anthropic": "4.0.106",
-    "@ai-sdk/azure": "4.0.129",
-    "@ai-sdk/google": "4.0.122",
-    "@ai-sdk/huggingface": "2.0.94",
-    "@ai-sdk/mcp": "2.0.101",
-    "@ai-sdk/mistral": "4.0.88",
-    "@ai-sdk/openai": "4.0.121",
-    "@ai-sdk/openai-compatible": "3.0.93",
-    "@ai-sdk/provider-utils": "5.0.82",
+    "@ai-sdk/amazon-bedrock": "5.0.146",
+    "@ai-sdk/anthropic": "4.0.107",
+    "@ai-sdk/azure": "4.0.130",
+    "@ai-sdk/google": "4.0.125",
+    "@ai-sdk/huggingface": "2.0.95",
+    "@ai-sdk/mcp": "2.0.104",
+    "@ai-sdk/mistral": "4.0.89",
+    "@ai-sdk/openai": "4.0.122",
+    "@ai-sdk/openai-compatible": "3.0.94",
+    "@ai-sdk/provider-utils": "5.0.83",
     "@hocuspocus/extension-database": "^4.7.1",
     "@hocuspocus/provider": "^4.7.1",
     "@hocuspocus/server": "^4.7.1",
     "@schornio/aibox-database": "file:../database",
     "@schornio/aibox-package-database": "*",
     "@schornio/aibox-package-utils": "*",
-    "ai": "7.0.176",
-    "mathjs": "15.2.0",
+    "ai": "7.0.181",
+    "guarded-fetch": "0.3.0",
+    "mathjs": "15.3.0",
     "xrag": "*",
     "yjs": "^13.6.33"
   },
   "peerDependencies": {
-    "@supabase/supabase-js": "2.119.0"
+    "@supabase/supabase-js": "2.119.2"
   },
   "license": "AGPL-3.0-only",
   "repository": {
