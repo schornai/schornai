@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-i üleslaadimine",
-      "description": "Lohista XRAG-fail siia, et see üles laadida ja selle sisu installida.",
+      "description": "Triga XRAG faili siia, et selle sisu üles laadida ja installida. Kui ühend katkestatakse, valige fail uuesti, et laadimisprotsessi jätkata.",
       "buttonUpload": "Laadi üles",
       "errorUpload": "Viga XRAG-faili „{{name}}“ üleslaadimisel.",
-      "successUpload": "XRAG „{{name}}“ laaditi edukalt üles. Olenevalt üleslaaditud sisu suurusest ja tüübist võib muudatuste jõustumiseks kuluda mõni minut.",
-      "buttonHide": "Peida"
+      "successUpload": "{{name}}: Laadimine lõppenud. Publikatsioon kontrollitakse eraldi.",
+      "buttonHide": "Peida",
+      "labelProcessing": "{{name}}: Valida ja avaldada.",
+      "labelPublished": "{{name}}: Avaldatud ja saadaval vastiväärsete teenustega.",
+      "errorPublication": "{{name}}: avaldamine ebaõnnestus. Kontrolli paketti ja laadi see uuesti üles.",
+      "errorPublicationStatus": "{{name}}: olek pole ajutiselt saadaval. Proovitakse uuesti."
     },
     "TaskTable": {
       "tableColumnType": "Tüüp",
@@ -330,7 +334,9 @@
     "cardXragLabel": "Laadi XRAG üles",
     "cardXragDescription": "Installi XRAG-paketiga agente, dokumente või mudeleid või uuenda kogu boxi.",
     "cardAppearanceLabel": "Välimus",
-    "cardAppearanceDescription": "Kohanda boxi värve ja välimust oma maitse järgi."
+    "cardAppearanceDescription": "Kohanda boxi värve ja välimust oma maitse järgi.",
+    "cardConnectionsLabel": "Ühendused",
+    "cardConnectionsDescription": "Halli OAuth-i rakendusi ja otsi seoseid kesiselt."
   },
   "users.page": {
     "labelTitle": "Kasutajad"
@@ -428,6 +434,7 @@
     "labelNoModels": "Mudeleid ei leitud",
     "descriptionNoResults": "Mudelite leidmiseks muuda otsingut.",
     "descriptionNoModels": "Siin kuvatakse kohalikud ja välised mudelid. Alustamiseks lisa väline mudel.",
+    "descriptionNoRegisteredModels": "Ei ole registreeritud mingeid malle selles instantsis.",
     "labelChooseProvider": "Vali teenusepakkuja",
     "descriptionChooseProvider": "Ühenda väline keelemudel selle teenusepakkuja kaudu.",
     "labelConfigure": "Seadista",
@@ -463,7 +470,11 @@
     "labelEditSection": "Muuda jaotist {{section}}",
     "labelToggleSection": "Laienda/ahenda jaotist {{section}}",
     "descriptionDeleteAgents": "Seda mudelit kasutavad agendid säilitatakse. Neid ei saa aga kasutada enne, kui määrad neile teise saadaoleva mudeli.",
-    "descriptionDeleteAgentsTip": "Vihje: Ava agentide ülevaates „Valikud“ ja rühmita mudeli järgi. Mõjutatud agendid kuvatakse rühmades „Tundmatu mudel“."
+    "descriptionDeleteAgentsTip": "Vihje: Ava agentide ülevaates „Valikud“ ja rühmita mudeli järgi. Mõjutatud agendid kuvatakse rühmades „Tundmatu mudel“.",
+    "labelContextUnknown": "Ei ole konteksti suurus.",
+    "descriptionCompressionDisabled": "Automaatset konteksti kokku surumist ei ole lubatud, kui konteksti suurus pole määratud.",
+    "descriptionContextSize": "Valik, tokenites. Jätka tühi, et automaatselt ei kokku sura konteksti.",
+    "labelContextTokens": "{{size}} tokenid"
   },
   "connections": {
     "labelTitle": "Ühendused",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Salvestatakse ainult serverisse ja pärast loomist ei saa seda muuta.",
     "labelCopyCallback": "Kopeeri tagasikutse URL",
     "labelCallbackCopied": "Tagasikutse URL kopeeritud",
-    "errorCopyCallback": "Tagasikutse URL-i ei õnnestunud kopeerida"
+    "errorCopyCallback": "Tagasikutse URL-i ei õnnestunud kopeerida",
+    "labelIssuer": "OAuth andja",
+    "descriptionIssuer": "Ei saa muuta pärast loomist."
   },
   "service": {
     "errorUnauthorized": "Teenuse autoriseerimine ebaõnnestus.",

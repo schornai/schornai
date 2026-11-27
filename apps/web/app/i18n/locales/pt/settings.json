@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Carregamento XRAG",
-      "description": "Arraste um ficheiro XRAG para aqui para o carregar e instalar o seu conteúdo.",
+      "description": "Arraste um ficheiro XRAG aqui para enviar e instalar o conteúdo. Se houver interrupção, selecione o mesmo ficheiro novamente para continuar o envio.",
       "buttonUpload": "Carregar",
       "errorUpload": "Erro ao carregar o ficheiro XRAG «{{name}}».",
-      "successUpload": "XRAG «{{name}}» carregado com sucesso. Consoante o tamanho e o tipo de carregamento, pode demorar alguns minutos até as alterações entrarem em vigor.",
-      "buttonHide": "Ocultar"
+      "successUpload": "{{name}}: Envio concluído. Publicação é verificada separadamente.",
+      "buttonHide": "Ocultar",
+      "labelProcessing": "{{name}}: Validação e publicação.",
+      "labelPublished": "{{name}}: Publicado e disponível para serviços de correspondência.",
+      "errorPublication": "{{name}}: Publicação falhou. Verifique o pacote e envie novamente.",
+      "errorPublicationStatus": "{{name}}: Status temporariamente indisponível. Tentando novamente."
     },
     "TaskTable": {
       "tableColumnType": "Tipo",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Carregar XRAG",
     "cardXragDescription": "Instale agentes, documentos e modelos ou atualize todo o sistema através de um pacote XRAG.",
     "cardAppearanceLabel": "Aspeto",
-    "cardAppearanceDescription": "Personalize as cores e o aspeto do sistema ao seu gosto."
+    "cardAppearanceDescription": "Personalize as cores e o aspeto do sistema ao seu gosto.",
+    "cardConnectionsLabel": "Ligações",
+    "cardConnectionsDescription": "Gerir aplicações OAuth e ligações de pesquisa num só local."
   },
   "users.page": {
     "labelTitle": "Utilizadores"
@@ -429,6 +435,7 @@
     "labelNoModels": "Não foram encontrados modelos",
     "descriptionNoResults": "Ajuste a pesquisa para encontrar modelos.",
     "descriptionNoModels": "Os modelos locais e externos aparecem aqui. Adicione um modelo externo para começar.",
+    "descriptionNoRegisteredModels": "Nenhum modelo registrado nesta instância.",
     "labelChooseProvider": "Escolha um fornecedor",
     "descriptionChooseProvider": "Ligue um modelo de linguagem externo através do respetivo fornecedor.",
     "labelConfigure": "Configurar",
@@ -464,7 +471,11 @@
     "labelEditSection": "Editar {{section}}",
     "labelToggleSection": "Expandir/recolher {{section}}",
     "descriptionDeleteAgents": "Os agentes que utilizam este modelo são mantidos. No entanto, só poderão voltar a ser utilizados quando lhes atribuir outro modelo disponível.",
-    "descriptionDeleteAgentsTip": "Sugestão: na visão geral dos agentes, abra «Opções» e agrupe por «Modelo». Os agentes afetados aparecem nos grupos «Modelo desconhecido»."
+    "descriptionDeleteAgentsTip": "Sugestão: na visão geral dos agentes, abra «Opções» e agrupe por «Modelo». Os agentes afetados aparecem nos grupos «Modelo desconhecido».",
+    "labelContextUnknown": "Sem tamanho de contexto.",
+    "descriptionCompressionDisabled": "Compressão automática de contexto desativada sem tamanho de contexto.",
+    "descriptionContextSize": "Opcional, em tokens. Deixe em branco para desativar a compressão automática de contexto.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Ligações",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Guardado apenas no servidor e não pode ser alterado após a criação.",
     "labelCopyCallback": "Copiar URL de retorno",
     "labelCallbackCopied": "URL de retorno copiado",
-    "errorCopyCallback": "Não foi possível copiar o URL de retorno"
+    "errorCopyCallback": "Não foi possível copiar o URL de retorno",
+    "labelIssuer": "Emissor OAuth",
+    "descriptionIssuer": "Não pode ser alterado após a criação."
   },
   "service": {
     "errorUnauthorized": "A autorização do serviço falhou.",

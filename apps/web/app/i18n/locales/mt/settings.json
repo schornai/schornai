@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Tlugħ ta’ XRAG",
-      "description": "Ġib fajl XRAG hawn biex ittellgħu u tinstalla l-kontenut tiegħu.",
+      "description": "Iddreggja fajl XRAG hawn biex ittellgħu u tinstalla l-kontenut tiegħu. Jekk it-tlugħ jieqaf, agħżel l-istess fajl mill-ġdid biex tkompli.",
       "buttonUpload": "Tella’",
       "errorUpload": "Żball waqt it-tlugħ tal-fajl XRAG \"{{name}}\".",
-      "successUpload": "XRAG \"{{name}}\" ittella’ b’suċċess. Skont id-daqs u t-tip tat-tlugħ, jista’ jieħu ftit minuti qabel ma l-bidliet jidħlu fis-seħħ.",
-      "buttonHide": "Aħbi"
+      "successUpload": "{{name}}: It-tlugħ lest. Il-pubblikazzjoni tiġi vverifikata separatament.",
+      "buttonHide": "Aħbi",
+      "labelProcessing": "{{name}}: Għaddejjin il-verifika u l-pubblikazzjoni.",
+      "labelPublished": "{{name}}: Ippubblikat u disponibbli għas-servizzi kompatibbli.",
+      "errorPublication": "{{name}}: Il-pubblikazzjoni ma rnexxietx. Iċċekkja l-pakkett u erġa’ tellgħu.",
+      "errorPublicationStatus": "{{name}}: L-istat bħalissa mhuwiex disponibbli. Qed nerġgħu nippruvaw."
     },
     "TaskTable": {
       "tableColumnType": "Tip",
@@ -333,7 +337,9 @@
     "cardXragLabel": "Tella’ XRAG",
     "cardXragDescription": "Installa aġenti, dokumenti, mudelli jew aġġorna l-box kollu permezz ta’ pakkett XRAG.",
     "cardAppearanceLabel": "Dehra",
-    "cardAppearanceDescription": "Ippersonalizza l-kuluri u d-dehra tal-box kif tixtieq."
+    "cardAppearanceDescription": "Ippersonalizza l-kuluri u d-dehra tal-box kif tixtieq.",
+    "cardConnectionsLabel": "Konnessjonijiet",
+    "cardConnectionsDescription": "Immaniġġja l-apps OAuth u l-konnessjonijiet tat-tiftix minn post wieħed."
   },
   "users.page": {
     "labelTitle": "Utenti"
@@ -431,6 +437,7 @@
     "labelNoModels": "Ma nstab ebda mudell",
     "descriptionNoResults": "Aġġusta t-tfittxija tiegħek biex issib mudelli.",
     "descriptionNoModels": "Il-mudelli lokali u esterni jidhru hawn. Żid mudell estern biex tibda.",
+    "descriptionNoRegisteredModels": "M’hemm ebda mudell irreġistrat fuq din l-istanza.",
     "labelChooseProvider": "Agħżel fornitur",
     "descriptionChooseProvider": "Qabbad mudell lingwistiku estern permezz tal-fornitur tiegħu.",
     "labelConfigure": "Ikkonfigura",
@@ -466,7 +473,11 @@
     "labelEditSection": "Editja {{section}}",
     "labelToggleSection": "Espandi/iċkien {{section}}",
     "descriptionDeleteAgents": "L-aġenti li jużaw dan il-mudell jinżammu. Madankollu, ma jistgħux jerġgħu jintużaw sakemm tassenjalhom mudell ieħor disponibbli.",
-    "descriptionDeleteAgentsTip": "Ħjiel: Fil-ħarsa ġenerali tal-aġenti, iftaħ \"Għażliet\" u iġbor skont \"Mudell\". L-aġenti affettwati jidhru fil-gruppi \"Mudell mhux magħruf\"."
+    "descriptionDeleteAgentsTip": "Ħjiel: Fil-ħarsa ġenerali tal-aġenti, iftaħ \"Għażliet\" u iġbor skont \"Mudell\". L-aġenti affettwati jidhru fil-gruppi \"Mudell mhux magħruf\".",
+    "labelContextUnknown": "Ebda daqs tal-kuntest",
+    "descriptionCompressionDisabled": "Il-kompressjoni awtomatika tal-kuntest tkun diżattivata meta d-daqs tal-kuntest ma jkunx issettjat.",
+    "descriptionContextSize": "Fakoltattiv, f’tokens. Ħallih vojt biex tiddiżattiva l-kompressjoni awtomatika tal-kuntest.",
+    "labelContextTokens": "{{size}} token"
   },
   "connections": {
     "labelTitle": "Konnessjonijiet",
@@ -515,7 +526,9 @@
     "descriptionOAuthSecret": "Maħżun biss fuq is-server u ma jistax jinbidel wara l-ħolqien.",
     "labelCopyCallback": "Ikkopja l-URL ta’ callback",
     "labelCallbackCopied": "Il-URL ta’ callback ġie kkupjat",
-    "errorCopyCallback": "Il-URL ta’ callback ma setax jiġi kkupjat"
+    "errorCopyCallback": "Il-URL ta’ callback ma setax jiġi kkupjat",
+    "labelIssuer": "Emittent OAuth",
+    "descriptionIssuer": "Ma jistax jinbidel wara l-ħolqien."
   },
   "service": {
     "errorUnauthorized": "L-awtorizzazzjoni tas-servizz falliet.",

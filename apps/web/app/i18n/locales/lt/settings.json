@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG įkėlimas",
-      "description": "Nutempkite XRAG failą čia, kad jį įkeltumėte ir įdiegtumėte jo turinį.",
+      "description": "Patelekite XRAG failą čia, kad įdėtų turinį. Jei nutrūksite, vėl pasirinkite tą patį failą, kad toliau įdėtų.",
       "buttonUpload": "Įkelti",
       "errorUpload": "Klaida įkeliant XRAG failą „{{name}}“.",
-      "successUpload": "XRAG „{{name}}“ sėkmingai įkeltas. Priklausomai nuo įkelto turinio dydžio ir tipo, gali praeiti kelios minutės, kol pakeitimai įsigalios.",
-      "buttonHide": "Slėpti"
+      "successUpload": "{{name}}: Įkėlimas baigtas. Publikacija patikrinama atskirai.",
+      "buttonHide": "Slėpti",
+      "labelProcessing": "{{name}}: Patvirtinimas ir publikacija.",
+      "labelPublished": "{{name}}: Publikuota ir prieinama paieškojams.",
+      "errorPublication": "{{name}}: paskelbti nepavyko. Patikrinkite paketą ir įkelkite jį dar kartą.",
+      "errorPublicationStatus": "{{name}}: būsena laikinai nepasiekiama. Bandoma dar kartą."
     },
     "TaskTable": {
       "tableColumnType": "Tipas",
@@ -332,7 +336,9 @@
     "cardXragLabel": "Įkelti XRAG",
     "cardXragDescription": "Įdiekite agentus, dokumentus ar modelius arba atnaujinkite visą box naudodami XRAG paketą.",
     "cardAppearanceLabel": "Išvaizda",
-    "cardAppearanceDescription": "Pritaikykite box spalvas ir išvaizdą pagal savo poreikius."
+    "cardAppearanceDescription": "Pritaikykite box spalvas ir išvaizdą pagal savo poreikius.",
+    "cardConnectionsLabel": "Ryšiai",
+    "cardConnectionsDescription": "Valdykite OAuth programas ir paieškokite ryšių centralizuotai."
   },
   "users.page": {
     "labelTitle": "Naudotojai"
@@ -430,6 +436,7 @@
     "labelNoModels": "Modelių nerasta",
     "descriptionNoResults": "Pakeiskite paiešką, kad rastumėte modelius.",
     "descriptionNoModels": "Čia rodomi vietiniai ir išoriniai modeliai. Norėdami pradėti, pridėkite išorinį modelį.",
+    "descriptionNoRegisteredModels": "Nėra užregistruotų modelių šiame serveryje.",
     "labelChooseProvider": "Pasirinkite paslaugos teikėją",
     "descriptionChooseProvider": "Prijunkite išorinį kalbos modelį per jo paslaugos teikėją.",
     "labelConfigure": "Nustatyti",
@@ -465,7 +472,11 @@
     "labelEditSection": "Redaguoti {{section}}",
     "labelToggleSection": "Išskleisti / sutraukti {{section}}",
     "descriptionDeleteAgents": "Šį modelį naudojantys agentai išsaugomi. Tačiau jų negalėsite naudoti, kol nepriskirsite kito prieinamo modelio.",
-    "descriptionDeleteAgentsTip": "Patarimas: Agentų apžvalgoje atverkite „Parinktys“ ir grupuokite pagal „Modelis“. Susiję agentai bus rodomi grupėse „Nežinomas modelis“."
+    "descriptionDeleteAgentsTip": "Patarimas: Agentų apžvalgoje atverkite „Parinktys“ ir grupuokite pagal „Modelis“. Susiję agentai bus rodomi grupėse „Nežinomas modelis“.",
+    "labelContextUnknown": "Nėra kontekso dydžio.",
+    "descriptionCompressionDisabled": "Automatinis kontekso susukimas išjungtas, jei nėra kontekso dydžio.",
+    "descriptionContextSize": "Neprivaloma, vien etuose. Palikite tuščia, kad išjungtumėte automatinį kontekso susukimą.",
+    "labelContextTokens": "{{size}} tokenai"
   },
   "connections": {
     "labelTitle": "Ryšiai",
@@ -514,7 +525,9 @@
     "descriptionOAuthSecret": "Saugomas tik serveryje ir po sukūrimo negali būti pakeistas.",
     "labelCopyCallback": "Kopijuoti grįžtamojo iškvietimo URL",
     "labelCallbackCopied": "Grįžtamojo iškvietimo URL nukopijuotas",
-    "errorCopyCallback": "Nepavyko nukopijuoti grįžtamojo iškvietimo URL"
+    "errorCopyCallback": "Nepavyko nukopijuoti grįžtamojo iškvietimo URL",
+    "labelIssuer": "OAuth išdavimas",
+    "descriptionIssuer": "Negalima keisti po sukūrimo."
   },
   "service": {
     "errorUnauthorized": "Paslaugos autorizacija nepavyko.",

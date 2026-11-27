@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Nalaganje XRAG",
-      "description": "Povlecite datoteko XRAG sem, da jo naložite in namestite njeno vsebino.",
+      "description": "Povlecite datoteko XRAG tukaj, da jo naložite in namestite. Po prekinitvi, izberite isto datoteko, da nadaljujete.",
       "buttonUpload": "Naloži",
       "errorUpload": "Napaka pri nalaganju datoteke XRAG »{{name}}«.",
-      "successUpload": "XRAG »{{name}}« je uspešno naložen. Glede na velikost in vrsto naložene vsebine lahko traja nekaj minut, preden spremembe začnejo veljati.",
-      "buttonHide": "Skrij"
+      "successUpload": "{{name}}: Naloženo. Objava se preverja ločeno.",
+      "buttonHide": "Skrij",
+      "labelProcessing": "{{name}}: Validacija in objava.",
+      "labelPublished": "{{name}}:  Objavljeno in dostopno za ustrezne storitve.",
+      "errorPublication": "{{name}}:  Objava ni uspela. Preverite paket in ga ponovite.",
+      "errorPublicationStatus": "{{name}}:  Status je trenutno nedostopen. Poskušam ponovno."
     },
     "TaskTable": {
       "tableColumnType": "Vrsta",
@@ -332,7 +336,9 @@
     "cardXragLabel": "Naloži XRAG",
     "cardXragDescription": "Namestite agente, dokumente ali modele oziroma posodobite celoten box s paketom XRAG.",
     "cardAppearanceLabel": "Videz",
-    "cardAppearanceDescription": "Prilagodite barve in videz boxa po svojih željah."
+    "cardAppearanceDescription": "Prilagodite barve in videz boxa po svojih željah.",
+    "cardConnectionsLabel": "Povezave",
+    "cardConnectionsDescription": "Uporabite in upravljajte aplikacije OAuth ter poiščite povezave."
   },
   "users.page": {
     "labelTitle": "Uporabniki"
@@ -430,6 +436,7 @@
     "labelNoModels": "Ni najdenih modelov",
     "descriptionNoResults": "Prilagodite iskanje, da najdete modele.",
     "descriptionNoModels": "Tukaj se prikazujejo lokalni in zunanji modeli. Za začetek dodajte zunanji model.",
+    "descriptionNoRegisteredModels": "Na tej napravi niso registrirani modeli.",
     "labelChooseProvider": "Izberite ponudnika",
     "descriptionChooseProvider": "Povežite zunanji jezikovni model prek njegovega ponudnika.",
     "labelConfigure": "Nastavi",
@@ -465,7 +472,11 @@
     "labelEditSection": "Uredi {{section}}",
     "labelToggleSection": "Razširi/strni {{section}}",
     "descriptionDeleteAgents": "Agenti, ki uporabljajo ta model, se ohranijo. Vendar jih ne bo mogoče uporabljati, dokler jim ne dodelite drugega razpoložljivega modela.",
-    "descriptionDeleteAgentsTip": "Namig: V pregledu agentov odprite »Možnosti« in združite po »Model«. Zadevni agenti se prikažejo v skupinah »Neznan model«."
+    "descriptionDeleteAgentsTip": "Namig: V pregledu agentov odprite »Možnosti« in združite po »Model«. Zadevni agenti se prikažejo v skupinah »Neznan model«.",
+    "labelContextUnknown": "Želeno območje konteksta.",
+    "descriptionCompressionDisabled": "Samodejno kompresiranje konteksta je onemogočeno brez določenega območja konteksta.",
+    "descriptionContextSize": "Neobvezno, v tokenih. Pustite prazno za onemogočanje samodejnega kompresiranja konteksta.",
+    "labelContextTokens": "{{size}} tokenov"
   },
   "connections": {
     "labelTitle": "Povezave",
@@ -514,7 +525,9 @@
     "descriptionOAuthSecret": "Shranjen je samo na strežniku in ga po ustvarjanju ni mogoče spremeniti.",
     "labelCopyCallback": "Kopiraj URL za povratni klic",
     "labelCallbackCopied": "URL za povratni klic je kopiran",
-    "errorCopyCallback": "URL-ja za povratni klic ni bilo mogoče kopirati"
+    "errorCopyCallback": "URL-ja za povratni klic ni bilo mogoče kopirati",
+    "labelIssuer": "Izdajnik OAuth",
+    "descriptionIssuer": "Ne more biti spremenjeno po ustvarjanju."
   },
   "service": {
     "errorUnauthorized": "Avtorizacija storitve ni uspela.",

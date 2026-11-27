@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG augšupielāde",
-      "description": "Ievelciet XRAG failu šeit, lai to augšupielādētu un instalētu tā saturu.",
+      "description": "Velk XRAG failu šeit, lai augstlādētu un instalētu. Pēc pārtraukuma, velk to atpakaļ, lai turpinātu.",
       "buttonUpload": "Augšupielādēt",
       "errorUpload": "Kļūda, augšupielādējot XRAG failu “{{name}}”.",
-      "successUpload": "XRAG “{{name}}” ir veiksmīgi augšupielādēts. Atkarībā no augšupielādes lieluma un veida var paiet dažas minūtes, līdz izmaiņas stājas spēkā.",
-      "buttonHide": "Paslēpt"
+      "successUpload": "{{name}}: Augstlādēšana beigta. Publiskot – atsevišķi.",
+      "buttonHide": "Paslēpt",
+      "labelProcessing": "{{name}}: Pierakstīšana un publicēšana.",
+      "labelPublished": "{{name}}: Publicēts un pieejams sadarbības pakalpojumiem.",
+      "errorPublication": "{{name}}: Publicēšana neizdevās. Pārbaudiet iepakojumu un augstāk.",
+      "errorPublicationStatus": "{{name}}: Statuss pagaidu laikā nav pieejams. Atjaunojot."
     },
     "TaskTable": {
       "tableColumnType": "Tips",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Augšupielādēt XRAG",
     "cardXragDescription": "Instalējiet aģentus, dokumentus vai modeļus vai atjauniniet visu box ar XRAG pakotni.",
     "cardAppearanceLabel": "Izskats",
-    "cardAppearanceDescription": "Pielāgojiet box krāsas un izskatu savai gaumei."
+    "cardAppearanceDescription": "Pielāgojiet box krāsas un izskatu savai gaumei.",
+    "cardConnectionsLabel": "Savienojumi",
+    "cardConnectionsDescription": "Pārvaldīt OAuth programmas un centrālā sadarbības meklēšana."
   },
   "users.page": {
     "labelTitle": "Lietotāji"
@@ -429,6 +435,7 @@
     "labelNoModels": "Modeļi nav atrasti",
     "descriptionNoResults": "Mainiet meklēšanu, lai atrastu modeļus.",
     "descriptionNoModels": "Šeit tiek rādīti lokālie un ārējie modeļi. Lai sāktu, pievienojiet ārēju modeli.",
+    "descriptionNoRegisteredModels": "Uz šajā instancē nav reģistrēti modeļi.",
     "labelChooseProvider": "Izvēlieties pakalpojuma sniedzēju",
     "descriptionChooseProvider": "Pievienojiet ārēju valodas modeli ar tā pakalpojuma sniedzēja starpniecību.",
     "labelConfigure": "Konfigurēt",
@@ -464,7 +471,11 @@
     "labelEditSection": "Rediģēt {{section}}",
     "labelToggleSection": "Izvērst/sakļaut {{section}}",
     "descriptionDeleteAgents": "Aģenti, kas izmanto šo modeli, tiek saglabāti. Tomēr tos nevarēs izmantot, līdz piešķirsiet tiem citu pieejamu modeli.",
-    "descriptionDeleteAgentsTip": "Padoms: Aģentu pārskatā atveriet “Opcijas” un grupējiet pēc “Modelis”. Ietekmētie aģenti parādīsies grupās “Nezināms modelis”."
+    "descriptionDeleteAgentsTip": "Padoms: Aģentu pārskatā atveriet “Opcijas” un grupējiet pēc “Modelis”. Ietekmētie aģenti parādīsies grupās “Nezināms modelis”.",
+    "labelContextUnknown": "Nav norādīts konteksta izmērs.",
+    "descriptionCompressionDisabled": "Automātiskā konteksta samazināšana ir izslēgta, ja nav norādīts konteksta izmērs.",
+    "descriptionContextSize": "Piekārt, skaitlos. Atstāj vaku, lai izslēgtu automātisko konteksta samazināšanu.",
+    "labelContextTokens": "{{size}} tekstvienības"
   },
   "connections": {
     "labelTitle": "Savienojumi",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Tiek glabāts tikai serverī, un pēc izveides to nevar mainīt.",
     "labelCopyCallback": "Kopēt atgriezeniskā izsaukuma URL",
     "labelCallbackCopied": "Atgriezeniskā izsaukuma URL nokopēts",
-    "errorCopyCallback": "Neizdevās kopēt atgriezeniskā izsaukuma URL"
+    "errorCopyCallback": "Neizdevās kopēt atgriezeniskā izsaukuma URL",
+    "labelIssuer": "OAuth izdevējs",
+    "descriptionIssuer": "Nevar mainīt pēc ievirzes."
   },
   "service": {
     "errorUnauthorized": "Pakalpojuma autorizācija neizdevās.",

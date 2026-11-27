@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Onbekende werkruimte"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Hoofdmap",
       "tooltipEdit": "Bewerken",
       "tooltipInfo": "Informatie"
     },

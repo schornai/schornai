@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Încărcare XRAG",
-      "description": "Trage aici un fișier XRAG pentru a-l încărca și a-i instala conținutul.",
+      "description": "Trage un fișier XRAG aici pentru a-l încărca și a instala conținutul. După o întrerupere, selectează din nou fișierul pentru a relua încărcarea.",
       "buttonUpload": "Încarcă",
       "errorUpload": "Eroare la încărcarea fișierului XRAG „{{name}}”.",
-      "successUpload": "XRAG „{{name}}” a fost încărcat cu succes. În funcție de dimensiunea și tipul încărcării, poate dura câteva minute până când modificările intră în vigoare.",
-      "buttonHide": "Ascunde"
+      "successUpload": "{{name}}: Încărcare finalizată. Publicarea este verificată separat.",
+      "buttonHide": "Ascunde",
+      "labelProcessing": "{{name}}: Validare și publicare.",
+      "labelPublished": "{{name}}: Publicat și disponibil pentru servicii de potrivire.",
+      "errorPublication": "{{name}}: Publicarea a eșuat. Verificați pachetul și încărcați-l din nou.",
+      "errorPublicationStatus": "{{name}}: Statul este temporar indisponibil. Reîncerc."
     },
     "TaskTable": {
       "tableColumnType": "Tip",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Încarcă XRAG",
     "cardXragDescription": "Instalează agenți, documente și modele sau actualizează întregul sistem printr-un pachet XRAG.",
     "cardAppearanceLabel": "Aspect",
-    "cardAppearanceDescription": "Personalizează culorile și aspectul sistemului după preferințe."
+    "cardAppearanceDescription": "Personalizează culorile și aspectul sistemului după preferințe.",
+    "cardConnectionsLabel": "Conexiuni",
+    "cardConnectionsDescription": "Gestionați aplicațiile OAuth și căutați conexiuni centralizat."
   },
   "users.page": {
     "labelTitle": "Utilizatori"
@@ -429,6 +435,7 @@
     "labelNoModels": "Nu s-au găsit modele",
     "descriptionNoResults": "Modifică interogarea pentru a găsi modele.",
     "descriptionNoModels": "Modelele locale și externe apar aici. Adaugă un model extern pentru a începe.",
+    "descriptionNoRegisteredModels": "Niciun model nu este înregistrat pe această instanță.",
     "labelChooseProvider": "Alege un furnizor",
     "descriptionChooseProvider": "Conectează un model lingvistic extern prin furnizorul său.",
     "labelConfigure": "Configurează",
@@ -464,7 +471,11 @@
     "labelEditSection": "Editează {{section}}",
     "labelToggleSection": "Extinde/restrânge {{section}}",
     "descriptionDeleteAgents": "Agenții care folosesc acest model sunt păstrați. Totuși, nu vor putea fi folosiți până când nu le atribui alt model disponibil.",
-    "descriptionDeleteAgentsTip": "Sfat: în prezentarea generală a agenților, deschide „Opțiuni” și grupează după „Model”. Agenții afectați apar în grupurile „Model necunoscut”."
+    "descriptionDeleteAgentsTip": "Sfat: în prezentarea generală a agenților, deschide „Opțiuni” și grupează după „Model”. Agenții afectați apar în grupurile „Model necunoscut”.",
+    "labelContextUnknown": "Fără dimensiune a contextului.",
+    "descriptionCompressionDisabled": "Compresia automată a contextului este dezactivată fără o dimensiune a contextului.",
+    "descriptionContextSize": "Opțional, în tokeni. Lăsați gol pentru a dezactiva compresia automată a contextului.",
+    "labelContextTokens": "{{size}} token-uri"
   },
   "connections": {
     "labelTitle": "Conexiuni",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Stocat doar pe server și nu poate fi modificat după creare.",
     "labelCopyCallback": "Copiază URL-ul de retur",
     "labelCallbackCopied": "URL de retur copiat",
-    "errorCopyCallback": "URL-ul de retur nu a putut fi copiat"
+    "errorCopyCallback": "URL-ul de retur nu a putut fi copiat",
+    "labelIssuer": "Emitent OAuth",
+    "descriptionIssuer": "Nu se poate modifica după crearea sa."
   },
   "service": {
     "errorUnauthorized": "Autorizarea serviciului a eșuat.",

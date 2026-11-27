@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Subida de XRAG",
-      "description": "Arrastra aquí un archivo XRAG para subirlo e instalar su contenido.",
+      "description": "Arrastra un archivo XRAG aquí para subirlo e instalar su contenido. Si la carga se interrumpe, selecciona el mismo archivo nuevamente para continuar.",
       "buttonUpload": "Subir",
       "errorUpload": "Error al subir el archivo XRAG «{{name}}».",
-      "successUpload": "El XRAG «{{name}}» se ha subido correctamente. Según su tamaño y tipo, los cambios pueden tardar unos minutos en aplicarse.",
-      "buttonHide": "Ocultar"
+      "successUpload": "{{name}}: Carga completada. La publicación se verifica por separado.",
+      "buttonHide": "Ocultar",
+      "labelProcessing": "{{name}}: Validando y publicando.",
+      "labelPublished": "{{name}}: Publicado y disponible para coincidencias.",
+      "errorPublication": "{{name}}: Publicación fallida. Comprueba el paquete y súbelo de nuevo.",
+      "errorPublicationStatus": "{{name}}: Estado temporalmente indisponible. Volviendo a intentarlo."
     },
     "TaskTable": {
       "tableColumnType": "Tipo",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Subir XRAG",
     "cardXragDescription": "Instala agentes, documentos y modelos, o actualiza toda la box mediante un paquete XRAG.",
     "cardAppearanceLabel": "Apariencia",
-    "cardAppearanceDescription": "Personaliza los colores y la apariencia de la box a tu gusto."
+    "cardAppearanceDescription": "Personaliza los colores y la apariencia de la box a tu gusto.",
+    "cardConnectionsLabel": "Conexiones",
+    "cardConnectionsDescription": "Gestiona las aplicaciones OAuth y busca conexiones de forma centralizada."
   },
   "users.page": {
     "labelTitle": "Usuarios"
@@ -429,6 +435,7 @@
     "labelNoModels": "No se han encontrado modelos",
     "descriptionNoResults": "Ajusta la búsqueda para encontrar modelos.",
     "descriptionNoModels": "Aquí aparecen los modelos locales y externos. Añade un modelo externo para empezar.",
+    "descriptionNoRegisteredModels": "No hay modelos registrados en esta instancia.",
     "labelChooseProvider": "Elegir proveedor",
     "descriptionChooseProvider": "Conecta un modelo de lenguaje externo con su proveedor.",
     "labelConfigure": "Configurar",
@@ -464,7 +471,11 @@
     "labelEditSection": "Editar {{section}}",
     "labelToggleSection": "Expandir/contraer {{section}}",
     "descriptionDeleteAgents": "Los agentes que utilizan este modelo se conservan, pero no podrán volver a utilizarse hasta que les asignes otro modelo disponible.",
-    "descriptionDeleteAgentsTip": "Consejo: en la lista de agentes, abre «Opciones» y agrupa por «Modelo». Los agentes afectados aparecerán en los grupos «Modelo desconocido»."
+    "descriptionDeleteAgentsTip": "Consejo: en la lista de agentes, abre «Opciones» y agrupa por «Modelo». Los agentes afectados aparecerán en los grupos «Modelo desconocido».",
+    "labelContextUnknown": "Sin tamaño de contexto.",
+    "descriptionCompressionDisabled": "La compresión automática del contexto está desactivada sin un tamaño de contexto.",
+    "descriptionContextSize": "Opcional, en tokens. Deja en blanco para desactivar la compresión automática del contexto.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Conexiones",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Se guarda solo en el servidor y no se puede cambiar después de la creación.",
     "labelCopyCallback": "Copiar URL de retorno",
     "labelCallbackCopied": "URL de retorno copiada",
-    "errorCopyCallback": "No se ha podido copiar la URL de retorno"
+    "errorCopyCallback": "No se ha podido copiar la URL de retorno",
+    "labelIssuer": "Emisor OAuth",
+    "descriptionIssuer": "No se puede modificar después de la creación."
   },
   "service": {
     "errorUnauthorized": "La autorización del servicio falló.",

@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Spazju tax-xogħol mhux magħruf"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Fowlder tal-għerq",
       "tooltipEdit": "Editja",
       "tooltipInfo": "Informazzjoni"
     },

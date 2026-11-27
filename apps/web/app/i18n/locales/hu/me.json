@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Személyre szabás",
-    "infoPersonalizeDescription": "Itt feltöltheti a profilképét és módosíthatja a nevét."
+    "infoPersonalizeDescription": "Itt feltöltheti a profilképét és módosíthatja a nevét.",
+    "cardFavoritesLabel": "Kedvencek",
+    "cardFavoritesDescription": "Rendeld, szürj ki és jeleníts meg kedvenceket a bal oldali ablaktól.",
+    "cardPermissionsLabel": "Jogosultságok",
+    "cardPermissionsDescription": "Nézd meg a szereid és az engedélyeid.",
+    "cardConnectionsLabel": "Kapcsolatok",
+    "cardConnectionsDescription": "Kezeld meg a személyes kapcsolataidat."
   },
   "resetPasswordSuccess.page": {
     "title": "Új jelszó beállítva",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Kapcsolatok",
-      "descriptionConnections": "Az Ön személyes OAuth-kapcsolatai MCP-kiszolgálókhoz. A kapcsolat bontásával az itt tárolt hitelesítési adatok törlődnek. A már futó hívások még befejeződhetnek; a szolgáltatói jogosultságokat közvetlenül a szolgáltatónál vonja vissza.",
       "labelDisconnect": "Kapcsolat bontása",
-      "descriptionEmpty": "Kapcsolja össze a fiókját a beszélgetésben, amikor egy MCP-eszköz bejelentkezést igényel.",
       "labelEmpty": "Még nincsenek kapcsolatok",
-      "labelInfo": "A kapcsolatokról",
-      "errorDisconnect": "A kapcsolatot nem sikerült bontani. Próbálja újra."
+      "errorDisconnect": "A kapcsolatot nem sikerült bontani. Próbálja újra.",
+      "labelOutgoing": "Kapcsolatok külső szolgáltatásokkal.",
+      "descriptionOutgoing": "A schorn.ai ezekkel a fiókkal hívja meg a külső MCP szolgáltatásokat nevében.",
+      "labelServer": "MCP szerver",
+      "labelCancel": "Mégse",
+      "labelDisconnectNamed": "Kilépés a {{serverUrl}}-ról.",
+      "descriptionDisconnect": "Bontja a kapcsolatot ezzel a kiszolgálóval: {{serverUrl}}? Az itt tárolt hitelesítő adatok törlődnek. A már folyamatban lévő kérések még befejeződhetnek. Az engedélyeket közvetlenül a szolgáltatónál is visszavonhatja."
+    },
+    "incoming": {
+      "labelTitle": "Hozzáférés a schorn.ai szolgáltatáshoz",
+      "description": "Ezek az alkalmazások az Ön nevében, MCP használatával érhetik el a schorn.ai szolgáltatást. A felhatalmazás nem bővíti az Ön jogosultságait.",
+      "labelCreated": "Engedélyezve",
+      "labelExpires": "Lejárig",
+      "labelExpired": "Lejárta",
+      "labelRevoke": "Engedély visszavonása",
+      "labelRevokeNamed": "Engedély visszavonása {{name}}-nek",
+      "descriptionRevoke": "Visszavonja a(z) „{{name}}” hozzáférését? A felhatalmazás összes hozzáférési és frissítési tokenje érvénytelenné válik. A már folyamatban lévő kérések még befejeződhetnek. Az újbóli csatlakozáshoz ismét az Ön engedélye szükséges.",
+      "labelCancel": "Mégse",
+      "errorRevoke": "Nem sikerült lemondani az hozzáférést. Próbálja meg újra.",
+      "labelApplication": "Alkalmazás",
+      "labelLevel": "Hozzáférés"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "{{client}} engedélyezése",
+    "description": "Ez az alkalmazás nevében léphet el. Nézze át az információkat, és csak olyan alkalmazásokat engedélyezzen, amelyekre bizton van.",
+    "labelLevel": "Hozzáférés",
+    "labelResource": "MCP végpont",
+    "labelRedirect": "Útvonalba irányító cím",
+    "labelApprove": "Engedélyezze",
+    "labelDeny": "Elutasítás",
+    "errorAuthorization": "Az engedélyezési kérelem érvénytelen, vagy a jogosultsatai nem elegendőek.",
+    "level": {
+      "user": "Felhasználó",
+      "editor": "Szerkesztő",
+      "workspace": "Munkaterület-rendszergazda",
+      "admin": "Globális adminisztrátor"
+    },
+    "labelConnectTitle": "Az eszközöid. Az engedélyeid.",
+    "descriptionConnect": "Kapcsold össze egy AI alkalmazást a schorn.ai-vel, és döntsd el, hogy milyen hozzáférést engedélyezhetsz.",
+    "descriptionPermissions": "A meglévő jogosultságai továbbra is érvényesek. Egy alkalmazás engedélyezése nem bővíti a jogosultságait.",
+    "descriptionExpiry": "Az engedélyek 30 napig érvényesek. Azok az alkalmazások, amelyek frissítő tokeneket támogatnak, automatikusan, hátteren frissítik az engedélyeket.",
+    "labelPlatformAccess": "Platformhoz való hozzáférés",
+    "descriptionLevel": "Válassza ki a legmagasabb hozzáférési szintet, amelyet engedélyezni kíván az alkalmazásnak. Csak a jelenlegi jogosultságain belüli szintek érhetők el.",
+    "descriptionNoAccess": "Az fiókod jelenleg nem rendelkezik engedéllyel a platformhoz való hozzáférésre."
+  },
+  "favorites": {
+    "labelTitle": "Kedvencek",
+    "description": "A kedvenceket a húzófogantyújuknál fogva mozgathatja. Mentéssel alkalmazhatja a sorrendet, az eltávolításokat és a láthatósági beállításokat.",
+    "labelMove": "{{name}} átrendezése",
+    "labelRemoveNamed": "Távolítsd el a {{name}}-et a kedvencekből",
+    "labelSave": "Mentés",
+    "labelReset": "Visszaállítás",
+    "labelEmpty": "Nincsenek kedvenceid még.",
+    "labelUnavailable": "Már nem érhető el",
+    "labelShowInSidebar": "Megjelenítés az oldalsávon",
+    "errorSave": "Nem sikerült a kedvencek mentése. Próbáld meg újra.",
+    "types": {
+      "agent": "Ügynök",
+      "workspace": "Munkaterület",
+      "transcriber": "Átíró",
+      "documentRepository": "Dokumentumtár",
+      "automation": "Automatikus beállítások"
     }
   }
 }

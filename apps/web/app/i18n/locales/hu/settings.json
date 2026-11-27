@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-feltöltés",
-      "description": "Húzzon ide egy XRAG-fájlt a feltöltéshez és a tartalmának telepítéséhez.",
+      "description": "Húzgasd ide egy XRAG fájlt, hogy feltöltöd és telepítsd. Ha az upload közben megszakad, kattints újra ugyanarra a fájlt, hogy folytasd.",
       "buttonUpload": "Feltöltés",
       "errorUpload": "Hiba a(z) „{{name}}” XRAG-fájl feltöltésekor.",
-      "successUpload": "A(z) „{{name}}” XRAG feltöltése sikeres. A feltöltés méretétől és típusától függően néhány percbe telhet, amíg a módosítások életbe lépnek.",
-      "buttonHide": "Elrejtés"
+      "successUpload": "{{name}}: Feltöltés befejeződött. A publikálás külön ellenőrzővel.",
+      "buttonHide": "Elrejtés",
+      "labelProcessing": "{{name}}: Ellenőrzés és publikálás.",
+      "labelPublished": "{{name}}: Megjelent, és elérhető a párosítási szolgáltatások számára.",
+      "errorPublication": "{{name}}: A publikálás sikertelen. Ellenőrizze a csomagot, és próbálja meg újra feltölteni.",
+      "errorPublicationStatus": "{{name}}: Állandóan nem elérhető. Megpróbál újra."
     },
     "TaskTable": {
       "tableColumnType": "Típus",
@@ -330,7 +334,9 @@
     "cardXragLabel": "XRAG feltöltése",
     "cardXragDescription": "Telepítsen ügynököket, dokumentumokat, modelleket, vagy frissítse az egész boxot egy XRAG-csomaggal.",
     "cardAppearanceLabel": "Megjelenés",
-    "cardAppearanceDescription": "Szabja személyre a box színeit és megjelenését."
+    "cardAppearanceDescription": "Szabja személyre a box színeit és megjelenését.",
+    "cardConnectionsLabel": "Kapcsolatok",
+    "cardConnectionsDescription": "Kezelje az OAuth alkalmazásokat és a kapcsolati lehetőségeket központosan."
   },
   "users.page": {
     "labelTitle": "Felhasználók"
@@ -428,6 +434,7 @@
     "labelNoModels": "Nem találhatók modellek",
     "descriptionNoResults": "Módosítsa a keresést a modellek megtalálásához.",
     "descriptionNoModels": "A helyi és külső modellek itt jelennek meg. A kezdéshez adjon hozzá egy külső modellt.",
+    "descriptionNoRegisteredModels": "Nincsenek regisztrált modellek ezen az példán.",
     "labelChooseProvider": "Szolgáltató kiválasztása",
     "descriptionChooseProvider": "Csatlakoztasson egy külső nyelvi modellt a szolgáltatóján keresztül.",
     "labelConfigure": "Beállítás",
@@ -463,7 +470,11 @@
     "labelEditSection": "{{section}} szerkesztése",
     "labelToggleSection": "{{section}} kibontása/összecsukása",
     "descriptionDeleteAgents": "Az ezt a modellt használó ügynökök megmaradnak. Azonban addig nem használhatók újra, amíg egy másik elérhető modellt nem rendel hozzájuk.",
-    "descriptionDeleteAgentsTip": "Tipp: Az ügynökök áttekintésében nyissa meg a „Beállítások” menüt, és csoportosítson „Modell” szerint. Az érintett ügynökök az „Ismeretlen modell” csoportokban jelennek meg."
+    "descriptionDeleteAgentsTip": "Tipp: Az ügynökök áttekintésében nyissa meg a „Beállítások” menüt, és csoportosítson „Modell” szerint. Az érintett ügynökök az „Ismeretlen modell” csoportokban jelennek meg.",
+    "labelContextUnknown": "Nincs kontextus méret.",
+    "descriptionCompressionDisabled": "Az automatikus kontextus kompresszió nincs bekapcsolva, ha nincs kontextus méret.",
+    "descriptionContextSize": "Összetévesztés, tokenekben. Hagyja üresen, hogy az automatikus kontextus kompressziót lekapcsolja.",
+    "labelContextTokens": "{{size}} token"
   },
   "connections": {
     "labelTitle": "Kapcsolatok",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Csak a kiszolgálón tárolódik, és létrehozás után nem módosítható.",
     "labelCopyCallback": "Visszahívási URL-cím másolása",
     "labelCallbackCopied": "Visszahívási URL-cím másolva",
-    "errorCopyCallback": "A visszahívási URL-címet nem sikerült másolni"
+    "errorCopyCallback": "A visszahívási URL-címet nem sikerült másolni",
+    "labelIssuer": "OAuth kiadó",
+    "descriptionIssuer": "Nem változtatható a létrehozás után."
   },
   "service": {
     "errorUnauthorized": "A szolgáltatás jogosultság-ellenőrzése sikertelen.",

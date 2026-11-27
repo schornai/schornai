@@ -9,8 +9,10 @@
         "history": "Istoric"
       },
       "SidebarFavorites": {
+        "labelActions": "Acțiuni pentru {{name}}",
         "label": "Favorite",
-        "empty": "Nu ai adăugat încă favorite."
+        "empty": "Nu ai adăugat încă favorite.",
+        "labelEdit": "Modificare favorite"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Nicio favorită",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Numele dosarului...",
       "labelCancel": "Anulează",
       "labelCreate": "Creează"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fișier gata.",
+      "errorFile": "Eroare fișier.",
+      "labelProcessing": "Procesarea fișierului…",
+      "labelUploading": "Se încarcă fișierul · {{progress}}%",
+      "labelUnprocessed": "Nu a fost procesat încă."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nu s-a putut șterge acest element. Încercați din nou."
     },
     "StorageDialogRemove": {
       "labelTitle": "Elimină",
@@ -246,6 +258,7 @@
       "labelDelete": "Șterge dosarul"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Salvarea a fost întreruptă. Versiunea anterioară este disponibilă. Propunerea dumneavoastră este păstrată aici; încercați să salvați din nou pentru a finaliza recuperarea.",
       "labelContent": "Conținut",
       "labelSave": "Salvează",
       "labelCancel": "Anulează",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Alege dosarul de destinație",
       "labelSelectFile": "Alege un fișier existent",
       "descriptionFolder": "Alege un dosar existent. Va fi transferat un singur fișier; numele existente nu sunt niciodată suprascrise.",
-      "descriptionFile": "Alege un fișier din această conversație sau dintr-un depozit accesibil. Documentele și înregistrările trebuie să fie deja procesate.",
+      "descriptionFile": "Selectați un fișier din această conversație sau dintr-un depozit accesibil. Puteți atașa un fișier direct în timp ce procesarea este în curs. Copierea necesită finalizarea procesării.",
       "labelStorage": "Stocare",
       "labelCurrentStorage": "Stocare curentă",
       "labelUp": "Dosar părinte",
@@ -279,6 +292,129 @@
       "errorCleanup": "Copierea a eșuat. Sursa a fost păstrată, dar la destinație pot rămâne fișiere incomplete. Verifică destinația înainte de a încerca din nou.",
       "errorAction": "Operația a eșuat. Verifică permisiunile, numele fișierelor și ambele locații înainte de a încerca din nou.",
       "errorNotProcessed": "Acest fișier nu a fost încă procesat. Procesează-l mai întâi, apoi selectează-l din nou."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Depozit de documente",
+        "transcriber": "Transcriptor"
+      },
+      "labelSelected": "Selectat",
+      "labelChangeResource": "Schimbă {{resource}}",
+      "labelChange": "Modificare",
+      "labelClearResource": "Elimină {{resource}}",
+      "labelChooseResource": "Selectează {{resource}}",
+      "descriptionUnavailable": "Ultima selecție nu mai este disponibilă. Alege o nouă intrare.",
+      "descriptionEmpty": "Selecția ta va apărea aici. Apasă pentru a adăuga un element.",
+      "descriptionDialog": "Alege cardul pe care dorești să-l folosești aici.",
+      "labelSearch": "Caută…",
+      "labelSelectNamed": "Selectează {{name}}",
+      "labelSelect": "Selectează",
+      "labelNoResults": "Nicio intrare potrivită",
+      "descriptionNoResults": "Ajustați-vă căutarea sau creați o intrare mai întâi."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Exportează XRAG",
+      "labelGlobalId": "ID global",
+      "errorGlobalIdTaken": "Acest ID global este deja utilizat în spațiul de lucru selectat.",
+      "errorGlobalId": "ID-ul implicit se generează din titlu în format kebab-case. Folosește între 1 și 200 de caractere dintre a–z, 0–9, cratimă (-), bară oblică (/) și liniuță de subliniere (_).",
+      "labelSaveId": "Salvează ID global",
+      "errorAction": "Operația a eșuat. Verificați permisiunile, ID-ul global și disponibilitatea fișierelor model."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Import și export XRAG",
+      "description": "Importați fișiere XRAG sau selectați obiecte pentru export.",
+      "labelUpload": "Alege fișier.",
+      "errorUpload": "Nu s-a putut încărca fișierul. Selectați-l din nou pentru a relua transferul.",
+      "labelWorkspace": "Spațiu de lucru",
+      "labelNewWorkspace": "Creează spațiu de lucru",
+      "labelName": "Nume spațiu de lucru.",
+      "descriptionConfirm": "Verificați obiectele incluse. Confirmați fiecare obiect existent pe care doriți să îl înlocuiți. În depozitele de fișiere, fișierele cu nume similar sunt înlocuite; celelalte fișiere existente sunt păstrate.",
+      "labelReplace": "Înlocuiește \"{{name}}\"",
+      "labelImport": "Importă",
+      "descriptionImported": "Import finalizat.",
+      "errorAction": "Operația a eșuat. Verificați dacă fișierul XRAG este complet și valid, și dacă aveți permisiunile necesare. Revizuiți importul dacă obiectele au fost modificate.",
+      "labelChooseExternalModel": "Selectați un model existent.",
+      "descriptionChooseExternalModel": "Mai multe modele se potrivesc. Selectați conexiunea de utilizat pe această instanță.",
+      "descriptionModelMatched": "Va utiliza “{{name}}” cu credențialele sale existente.",
+      "descriptionModelMissing": "Nu există un model corespunzător disponibil. Obiectul va fi importat totuși. Selectați un model ulterior.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Export",
+      "labelUploadTitle": "Importă XRAG",
+      "descriptionDrop": "Trasează un fișier XRAG aici sau alege unul.",
+      "descriptionUploading": "Se încarcă fișierul…",
+      "descriptionImporting": "Importare în curs…",
+      "descriptionInspecting": "Încarcă conținutul…",
+      "labelContent": "Obiecte incluse",
+      "labelSelectAll": "Selectează tot",
+      "labelSelectNone": "Anulează selectare",
+      "labelSelectObject": "Importare {{name}}",
+      "labelChooseWorkspace": "Selectează spațiul de lucru",
+      "descriptionWorkspace": "Acest spațiu de lucru se aplică tuturor obiectelor selectate.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Depozit de documente",
+        "transcriber": "Transcriptor",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Model de transcriere",
+        "setup": "Actualizare platformă",
+        "files": "Pachet fișier",
+        "automation": "Automatizare"
+      },
+      "labelAnotherUpload": "Încarcă un alt fișier XRAG",
+      "labelSelection": "Selectare",
+      "labelObjectName": "Nume",
+      "labelObjectKind": "Tip",
+      "labelObjectDescription": "Descriere",
+      "descriptionFilesProcessing": "Fișierele sunt pregătite pentru a fi căutate în fundal."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Anulează",
+      "labelTitle": "Pachetele mele XRAG.",
+      "description": "Adaugă resurse și modele locale din detaliile lor. Exportă un pachet pentru a descărca toate elementele sale într-un fișier XRAG.",
+      "labelName": "Numele pachetului XRAG.",
+      "labelCreate": "Creează un pachet XRAG",
+      "labelAdd": "Adaugă la pachetul XRAG.",
+      "labelPackage": "Pachet XRAG.",
+      "labelChoose": "Selectează pachetul XRAG.",
+      "labelExport": "Începe exportul.",
+      "labelDelete": "Șterge pachetul XRAG",
+      "labelRemove": "Elimină din pachetul XRAG",
+      "labelConfirm": "Elimină",
+      "descriptionEmpty": "Adaugă obiecte din vizualizarea lor.",
+      "labelLoading": "Îcarcă pachete XRAG…",
+      "errorLoad": "Nu s-au putut încărca pachetele XRAG și obiectele conectate.",
+      "labelRetry": "Reîncearcă",
+      "descriptionNoPackages": "Nu ai încă niciun pachet XRAG.",
+      "labelRelated": "Adaugă obiecte conectate",
+      "descriptionRelated": "Selectează obiectele conectate pentru a le adăuga ca intrări separate în pachetul XRAG.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Depozit de documente",
+        "transcriber": "Transcriptor",
+        "model": "Model",
+        "automation": "Automatizare"
+      },
+      "labelOpenPackage": "Deschide pachet",
+      "errorCreate": "Pachetul nu a putut fi creat. Încearcă din nou.",
+      "errorAdd": "Selecția nu a putut fi adăugată în pachet. Verifică permisiunile și încearcă din nou."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exporturi",
+      "description": "Fișierele completate sunt șterse automat după 72 de ore.",
+      "state_queued": "În așteptare pentru a fi împachetat",
+      "state_retrying": "Reîncearcă programat",
+      "state_processing": "Creează pachet",
+      "state_finished": "Pregătit",
+      "state_error": "Eșuat",
+      "state_cancelled": "Anulat",
+      "labelCancel": "Anulează exportul",
+      "labelDownload": "Descarcă",
+      "labelProgress": "Progres încărcare",
+      "state_uploading": "Încărcare arhivă",
+      "labelDelete": "Șterge exportul",
+      "descriptionDelete": "Elimini „{{name}}” din lista de exporturi? Dacă există o arhivă asociată, și aceasta va fi ștearsă.",
+      "labelDismiss": "Anulează"
     }
   },
   "_welcomeMessage": "Bun venit la\n\n# schorn.ai in a Box\n\n",

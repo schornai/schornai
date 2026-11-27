@@ -9,8 +9,10 @@
         "history": "Storja"
       },
       "SidebarFavorites": {
+        "labelActions": "Azzjonijiet għal {{name}}",
         "label": "Favoriti",
-        "empty": "Għadu ma żdied ebda favorit."
+        "empty": "Għadu ma żdied ebda favorit.",
+        "labelEdit": "Editja l-favoriti"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Ebda favorit",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Isem il-folder...",
       "labelCancel": "Ikkanċella",
       "labelCreate": "Oħloq"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Il-fajl lest",
+      "errorFile": "Żball fil-fajl",
+      "labelProcessing": "Il-fajl qed jiġi pproċessat…",
+      "labelUploading": "Il-fajl qed jittella’ · {{progress}}%",
+      "labelUnprocessed": "Għadu ma ġiex ipproċessat"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Dan l-element ma setax jitħassar. Erġa’ pprova."
     },
     "StorageDialogRemove": {
       "labelTitle": "Neħħi",
@@ -246,6 +258,7 @@
       "labelDelete": "Ħassar folder"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Il-proċess tal-issejvjar ġie interrott. Il-verżjoni preċedenti għadha disponibbli u l-abbozz tiegħek inżamm hawn. Erġa’ ssejvja biex tlesti l-irkupru.",
       "labelContent": "Kontenut",
       "labelSave": "Issejvja",
       "labelCancel": "Ikkanċella",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Agħżel il-folder tad-destinazzjoni",
       "labelSelectFile": "Agħżel fajl eżistenti",
       "descriptionFolder": "Agħżel folder eżistenti. Fajl wieħed se jiġi ttrasferit; l-ismijiet eżistenti qatt ma jinkitbu fuqhom.",
-      "descriptionFile": "Agħżel fajl minn din il-konversazzjoni jew minn repożitorju aċċessibbli. Id-dokumenti u r-reġistrazzjonijiet iridu jkunu diġà pproċessati.",
+      "descriptionFile": "Agħżel fajl minn din il-konversazzjoni jew minn repożitorju li għandek aċċess għalih. Tista’ tehmeż il-fajl direttament waqt l-ipproċessar. Biex tikkopjah, stenna sakemm l-ipproċessar ikun lest.",
       "labelStorage": "Ħażna",
       "labelCurrentStorage": "Ħażna attwali",
       "labelUp": "Folder ġenitur",
@@ -279,6 +292,129 @@
       "errorCleanup": "L-ikkupjar falla. Is-sors inżamm, iżda jistgħu jibqgħu fajls mhux kompluti fid-destinazzjoni. Iċċekkjaha qabel terġa’ tipprova.",
       "errorAction": "L-operazzjoni falliet. Iċċekkja l-permessi, l-ismijiet tal-fajls u ż-żewġ postijiet qabel terġa’ tipprova.",
       "errorNotProcessed": "Dan il-fajl għadu ma ġiex ipproċessat. Ipproċessah l-ewwel, imbagħad erġa’ agħżlu."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Aġent",
+        "documentRepository": "Repożitorju tad-dokumenti",
+        "transcriber": "Traskrittur"
+      },
+      "labelSelected": "Magħżul",
+      "labelChangeResource": "Ibdel {{resource}}",
+      "labelChange": "Ibdel",
+      "labelClearResource": "Neħħi {{resource}}",
+      "labelChooseResource": "Agħżel {{resource}}",
+      "descriptionUnavailable": "L-għażla preċedenti tiegħek m’għadhiex disponibbli. Agħżel element ieħor.",
+      "descriptionEmpty": "L-għażla tiegħek tidher hawn. Ikklikkja biex iżżid element.",
+      "descriptionDialog": "Agħżel il-karta li tixtieq tuża hawn.",
+      "labelSearch": "Fittex …",
+      "labelSelectNamed": "Agħżel {{name}}",
+      "labelSelect": "Agħżel",
+      "labelNoResults": "Ebda riżultat li jaqbel",
+      "descriptionNoResults": "Ibdel it-tfittxija jew oħloq element l-ewwel."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Esporta XRAG",
+      "labelGlobalId": "ID globali",
+      "errorGlobalIdTaken": "Dan l-ID globali diġà qed jintuża fl-ispazju tax-xogħol magħżul.",
+      "errorGlobalId": "L-ID predefinit jinħoloq mit-titlu fil-format kebab-case. Uża bejn 1 u 200 karattru minn a–z, 0–9, singijiet (-), linji mmejla (/) u linji taħt (_).",
+      "labelSaveId": "Issejvja l-ID globali",
+      "errorAction": "L-operazzjoni ma rnexxietx. Iċċekkja l-permessi tiegħek, l-ID globali u jekk il-fajls tal-mudell humiex disponibbli."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Importazzjoni u esportazzjoni ta’ XRAG",
+      "description": "Importa fajls XRAG jew agħżel l-oġġetti li trid tesporta.",
+      "labelUpload": "Agħżel fajl",
+      "errorUpload": "Fajl ma setax jittella’. Erġa’ agħżlu biex tkompli t-trasferiment.",
+      "labelWorkspace": "Spazju tax-xogħol",
+      "labelNewWorkspace": "Oħloq spazju tax-xogħol",
+      "labelName": "Isem l-ispazju tax-xogħol",
+      "descriptionConfirm": "Irrevedi l-oġġetti inklużi. Ikkonferma kull oġġett eżistenti li trid tissostitwixxi. Fir-repożitorji tad-dokumenti, il-fajls bl-istess isem jiġu sostitwiti u l-bqija jinżammu.",
+      "labelReplace": "Issostitwixxi “{{name}}”",
+      "labelImport": "Importa",
+      "descriptionImported": "L-importazzjoni lesta.",
+      "errorAction": "L-operazzjoni ma rnexxietx. Iċċekkja li l-fajl XRAG huwa komplut u validu u li għandek il-permessi meħtieġa. Jekk xi oġġett inbidel, erġa’ ara l-previżjoni tal-importazzjoni.",
+      "labelChooseExternalModel": "Agħżel mudell eżistenti",
+      "descriptionChooseExternalModel": "Jaqbel aktar minn mudell wieħed. Agħżel il-konnessjoni li trid tuża fuq din l-istanza.",
+      "descriptionModelMatched": "Se jintuża “{{name}}” bil-kredenzjali eżistenti tiegħu.",
+      "descriptionModelMissing": "Ebda mudell li jaqbel mhu disponibbli. L-oġġett xorta se jiġi importat. Agħżel mudell wara.",
+      "labelTabImport": "Importazzjoni",
+      "labelTabExport": "Esportazzjoni",
+      "labelUploadTitle": "Importa XRAG",
+      "descriptionDrop": "Qiegħed fajl XRAG hawn jew agħżel fajl.",
+      "descriptionUploading": "Il-fajl qed jittella’ …",
+      "descriptionImporting": "L-importazzjoni għaddejja …",
+      "descriptionInspecting": "Il-kontenut qed jitgħabba …",
+      "labelContent": "Oġġetti inklużi",
+      "labelSelectAll": "Agħżel kollox",
+      "labelSelectNone": "Neħħi l-għażliet kollha",
+      "labelSelectObject": "Importa {{name}}",
+      "labelChooseWorkspace": "Agħżel spazju tax-xogħol",
+      "descriptionWorkspace": "Dan l-ispazju tax-xogħol japplika għall-oġġetti kollha magħżula.",
+      "kind": {
+        "agent": "Aġent",
+        "documentRepository": "Repożitorju tad-dokumenti",
+        "transcriber": "Traskrittur",
+        "ollamaModel": "Mudell",
+        "mlxWhisperModel": "Mudell ta’ traskrizzjoni",
+        "setup": "Aġġornament tal-pjattaforma",
+        "files": "Pakkett ta’ fajls",
+        "automation": "Awtomazzjoni"
+      },
+      "labelAnotherUpload": "Tella’ fajl XRAG ieħor",
+      "labelSelection": "Għażla",
+      "labelObjectName": "Isem",
+      "labelObjectKind": "Tip",
+      "labelObjectDescription": "Deskrizzjoni",
+      "descriptionFilesProcessing": "Il-fajls tad-dokumenti qed jitħejjew għat-tiftix fl-isfond."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Ikkanċella",
+      "labelTitle": "Il-pakketti XRAG tiegħi",
+      "description": "Żid riżorsi u mudelli lokali mid-dettalji tagħhom. Esporta pakkett biex tniżżel l-elementi kollha tiegħu f’fajl XRAG wieħed.",
+      "labelName": "Isem il-pakkett XRAG",
+      "labelCreate": "Oħloq pakkett XRAG",
+      "labelAdd": "Żid ma’ pakkett XRAG",
+      "labelPackage": "Pakkett XRAG",
+      "labelChoose": "Agħżel pakkett XRAG",
+      "labelExport": "Ibda l-esportazzjoni",
+      "labelDelete": "Ħassar il-pakkett XRAG",
+      "labelRemove": "Neħħi mill-pakkett XRAG",
+      "labelConfirm": "Neħħi",
+      "descriptionEmpty": "Żid l-oġġetti mill-paġna tal-informazzjoni tagħhom.",
+      "labelLoading": "Il-pakketti XRAG qed jitgħabbew …",
+      "errorLoad": "Il-pakketti XRAG u l-oġġetti marbuta magħhom ma setgħux jitgħabbew.",
+      "labelRetry": "Erġa’ pprova",
+      "descriptionNoPackages": "Għad m’għandek ebda pakkett XRAG.",
+      "labelRelated": "Żid oġġetti marbuta",
+      "descriptionRelated": "Agħżel l-oġġetti marbuta li tixtieq iżżid separatament fil-pakkett XRAG.",
+      "kind": {
+        "agent": "Aġent",
+        "documentRepository": "Repożitorju tad-dokumenti",
+        "transcriber": "Traskrittur",
+        "model": "Mudell",
+        "automation": "Awtomazzjoni"
+      },
+      "labelOpenPackage": "Iftaħ il-pakkett",
+      "errorCreate": "Il-pakkett ma setax jinħoloq. Erġa’ pprova.",
+      "errorAdd": "L-elementi magħżula ma setgħux jiżdiedu mal-pakkett. Iċċekkja l-permessi tiegħek u erġa’ pprova."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Esportazzjonijiet",
+      "description": "Il-fajls lesti jitħassru awtomatikament wara 72 siegħa.",
+      "state_queued": "Fil-kju għall-ippakkjar",
+      "state_retrying": "Skedat tentattiv ieħor",
+      "state_processing": "Il-pakkett qed jinħoloq",
+      "state_finished": "Lest",
+      "state_error": "Ma rnexxiex",
+      "state_cancelled": "Ikkanċellat",
+      "labelCancel": "Ikkanċella l-esportazzjoni",
+      "labelDownload": "Niżżel",
+      "labelProgress": "Progress tat-tlugħ",
+      "state_uploading": "L-arkivju qed jittella’",
+      "labelDelete": "Ħassar l-esportazzjoni",
+      "descriptionDelete": "Trid tneħħi “{{name}}” mill-esportazzjonijiet tiegħek? Jekk hemm arkivju, jitħassar ukoll.",
+      "labelDismiss": "Ikkanċella"
     }
   },
   "_welcomeMessage": "Merħba f’\n\n# schorn.ai in a Box\n\n",

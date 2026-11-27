@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-uppladdning",
-      "description": "Dra en XRAG-fil hit för att ladda upp den och installera innehållet.",
+      "description": "Dra en XRAG-fil här för att ladda upp och installera innehållet. Starta om uppladdningen genom att välja samma fil efter avbrott.",
       "buttonUpload": "Ladda upp",
       "errorUpload": "Fel vid uppladdning av XRAG-filen ”{{name}}”.",
-      "successUpload": "XRAG ”{{name}}” har laddats upp. Beroende på uppladdningens storlek och typ kan det dröja några minuter innan ändringarna börjar gälla.",
-      "buttonHide": "Dölj"
+      "successUpload": "{{name}}: Uppladdning klar. Publicering kontrolleras separat.",
+      "buttonHide": "Dölj",
+      "labelProcessing": "{{name}}: Validering och publicering.",
+      "labelPublished": "{{name}}: Publicerad och tillgänglig för matchning.",
+      "errorPublication": "{{name}}: Publicering misslyckades. Kontrollera paketet och ladda upp igen.",
+      "errorPublicationStatus": "{{name}}: Status är tillfälligt otillgänglig. Försöker igen."
     },
     "TaskTable": {
       "tableColumnType": "Typ",
@@ -330,7 +334,9 @@
     "cardXragLabel": "Ladda upp XRAG",
     "cardXragDescription": "Installera agenter, dokument och modeller eller uppdatera hela systemet via ett XRAG-paket.",
     "cardAppearanceLabel": "Utseende",
-    "cardAppearanceDescription": "Anpassa systemets färger och utseende efter dina önskemål."
+    "cardAppearanceDescription": "Anpassa systemets färger och utseende efter dina önskemål.",
+    "cardConnectionsLabel": "Anslutningar",
+    "cardConnectionsDescription": "Hantera OAuth-appar och sök efter anslutningar centralt."
   },
   "users.page": {
     "labelTitle": "Användare"
@@ -428,6 +434,7 @@
     "labelNoModels": "Inga modeller hittades",
     "descriptionNoResults": "Ändra din sökning för att hitta modeller.",
     "descriptionNoModels": "Lokala och externa modeller visas här. Lägg till en extern modell för att komma igång.",
+    "descriptionNoRegisteredModels": "Inga modeller är registrerade på denna instans.",
     "labelChooseProvider": "Välj en leverantör",
     "descriptionChooseProvider": "Anslut en extern språkmodell via dess leverantör.",
     "labelConfigure": "Konfigurera",
@@ -463,7 +470,11 @@
     "labelEditSection": "Redigera {{section}}",
     "labelToggleSection": "Expandera/fäll ihop {{section}}",
     "descriptionDeleteAgents": "Agenter som använder modellen finns kvar. De kan dock inte användas igen förrän du har tilldelat dem en annan tillgänglig modell.",
-    "descriptionDeleteAgentsTip": "Tips: öppna ”Alternativ” i agentöversikten och gruppera efter ”Modell”. Berörda agenter visas i grupperna ”Okänd modell”."
+    "descriptionDeleteAgentsTip": "Tips: öppna ”Alternativ” i agentöversikten och gruppera efter ”Modell”. Berörda agenter visas i grupperna ”Okänd modell”.",
+    "labelContextUnknown": "Ingen kontextstorlek",
+    "descriptionCompressionDisabled": "Automatisk kontextkomprimering är avstängd utan en kontextstorlek.",
+    "descriptionContextSize": "Valfritt, i tokens. Lämna tomt för att inaktivera automatisk kontextkomprimering.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Anslutningar",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Lagras bara på servern och kan inte ändras efter att den har skapats.",
     "labelCopyCallback": "Kopiera callback-URL",
     "labelCallbackCopied": "Callback-URL kopierad",
-    "errorCopyCallback": "Callback-URL kunde inte kopieras"
+    "errorCopyCallback": "Callback-URL kunde inte kopieras",
+    "labelIssuer": "OAuth-utgivare",
+    "descriptionIssuer": "Kan inte ändras efter skapande."
   },
   "service": {
     "errorUnauthorized": "Auktoriseringen för tjänsten misslyckades.",

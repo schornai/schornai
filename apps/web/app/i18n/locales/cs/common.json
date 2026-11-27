@@ -9,8 +9,10 @@
         "history": "Historie"
       },
       "SidebarFavorites": {
+        "labelActions": "Akce pro {{name}}",
         "label": "Oblíbené",
-        "empty": "Zatím nebyly přidány žádné oblíbené položky."
+        "empty": "Zatím nebyly přidány žádné oblíbené položky.",
+        "labelEdit": "Upravit oblíbené"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Žádné oblíbené položky",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Název složky...",
       "labelCancel": "Zrušit",
       "labelCreate": "Vytvořit"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Soubor připraven",
+      "errorFile": "Chyba souboru",
+      "labelProcessing": "Zpracovávám soubor…",
+      "labelUploading": "Nahrávání souboru · {{progress}} %",
+      "labelUnprocessed": "Stále se zpracovává"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nelze smazat. Zkuste to znovu."
     },
     "StorageDialogRemove": {
       "labelTitle": "Odebrat",
@@ -246,6 +258,7 @@
       "labelDelete": "Smazat složku"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Uložení bylo přerušeno. Předchozí verze je stále k dispozici. Váš návrh je uložen – zkuste uložit znovu, abyste jej dokonale obnovili.",
       "labelContent": "Obsah",
       "labelSave": "Uložit",
       "labelCancel": "Zrušit",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Vybrat cílovou složku",
       "labelSelectFile": "Vybrat existující soubor",
       "descriptionFolder": "Vyberte existující složku. Bude přenesen jeden soubor; existující názvy nebudou nikdy přepsány.",
-      "descriptionFile": "Vyberte soubor z tohoto chatu nebo z dostupného úložiště. Dokumenty a nahrávky musí být již zpracované.",
+      "descriptionFile": "Vybrat soubor z tohoto chatu nebo z dostupného úložiště. Můžete připojit soubor přímo během zpracování. Kopírování vyžaduje dokončení zpracování.",
       "labelStorage": "Úložiště",
       "labelCurrentStorage": "Aktuální úložiště",
       "labelUp": "Nadřazená složka",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopírování selhalo. Zdroj zůstal zachován, ale v cílovém umístění mohou být neúplné soubory. Před dalším pokusem jej zkontrolujte.",
       "errorAction": "Operace selhala. Před dalším pokusem zkontrolujte oprávnění, názvy souborů a obě umístění.",
       "errorNotProcessed": "Tento soubor ještě nebyl zpracován. Nejprve jej zpracujte a poté znovu vyberte."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Úložiště dokumentů",
+        "transcriber": "Přepisovač"
+      },
+      "labelSelected": "Vybráno",
+      "labelChangeResource": "Změnit {{resource}}",
+      "labelChange": "Změnit",
+      "labelClearResource": "Odebrat {{resource}}",
+      "labelChooseResource": "Vybrat {{resource}}",
+      "descriptionUnavailable": "Vaše předchozí volba již není dostupná. Vyberte nové položky.",
+      "descriptionEmpty": "Zde se zobrazí vaše volba. Kliknutím přidáte položku.",
+      "descriptionDialog": "Vyberte kartu, kterou chcete použít.",
+      "labelSearch": "Vyhledat…",
+      "labelSelectNamed": "Vybrat {{name}}",
+      "labelSelect": "Vybrat",
+      "labelNoResults": "Žádné odpovídající položky",
+      "descriptionNoResults": "Upravte své vyhledávání nebo nejprve vytvořte položku."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Exportovat XRAG",
+      "labelGlobalId": "Globální ID",
+      "errorGlobalIdTaken": "Toto globální ID již používá vybraný pracovní prostor.",
+      "errorGlobalId": "Výchozí ID se vytvoří z názvu ve formátu kebab-case. Použijte 1 až 200 znaků. Povolena jsou písmena a–z, číslice 0–9, spojovníky (-), lomítka (/) a podtržítka (_).",
+      "labelSaveId": "Uložte globální ID",
+      "errorAction": "Operace selhala. Zkontrolujte svá oprávnění, globální ID a dostupnost souborů modelu."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Import a export XRAG",
+      "description": "Načíst soubory XRAG nebo vybrat objekty pro export.",
+      "labelUpload": "Vybrat soubor",
+      "errorUpload": "Nelze nahrát soubor. Zkuste ho znovu načíst, abyste obnovili přenos.",
+      "labelWorkspace": "Pracovní prostor",
+      "labelNewWorkspace": "Vytvořit pracovní prostor",
+      "labelName": "Název pracovního prostoru",
+      "descriptionConfirm": "Prohlédnout zahrnuté objekty. Potvrďte každý existující objekt, který chcete nahradit. V repozitářích souborů jsou soubory se stejným názvem nahrazeny; ostatní existující soubory jsou zachovány.",
+      "labelReplace": "Nahradit “{{name}}”",
+      "labelImport": "Importovat",
+      "descriptionImported": "Import dokončeno.",
+      "errorAction": "Operace selhala. Zkontrolujte, zda je soubor XRAG kompletní a platný, a zda máte potřebná práva. Znovu si prohlédněte import, pokud se objekty změnily.",
+      "labelChooseExternalModel": "Vybrat existující model",
+      "descriptionChooseExternalModel": "Najdete více modelů. Vyberte připojení, které chcete použít na této instanci.",
+      "descriptionModelMatched": "Bude použito “{{name}}” s existujícími přihlašovacími údaji.",
+      "descriptionModelMissing": "Neexistující model. Objekt bude importován. Vyberte model později.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Export",
+      "labelUploadTitle": "Načíst XRAG",
+      "descriptionDrop": "Přetáhněte XRAG soubor sem nebo vyberte soubor.",
+      "descriptionUploading": "Načítání souboru…",
+      "descriptionImporting": "Probíhá import …",
+      "descriptionInspecting": "Načítání obsahu…",
+      "labelContent": "Obsah",
+      "labelSelectAll": "Vybrat vše",
+      "labelSelectNone": "Vybrat nic",
+      "labelSelectObject": "Načíst {{name}}",
+      "labelChooseWorkspace": "Vybrat pracovní prostor",
+      "descriptionWorkspace": "Tento pracovní prostor platí pro všechny vybrané objekty.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Úložiště dokumentů",
+        "transcriber": "Přepisovač",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Model pro přepis",
+        "setup": "Aktualizace platformy",
+        "files": "Balíček souborů",
+        "automation": "Automatizace"
+      },
+      "labelAnotherUpload": "Načíst další XRAG soubor",
+      "labelSelection": "Výběr",
+      "labelObjectName": "Název",
+      "labelObjectKind": "Typ",
+      "labelObjectDescription": "Popis",
+      "descriptionFilesProcessing": "Dokumenty jsou připravovány pro vyhledávání na pozadí."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Zrušit",
+      "labelTitle": "Mé XRAG balíčky",
+      "description": "Přidat zdroje a lokální modely z jejich detailů. Exportovat balíček pro stažení všech jeho položek v jednom XRAG souboru.",
+      "labelName": "Název XRAG balíčku",
+      "labelCreate": "Vytvořit XRAG balíček",
+      "labelAdd": "Přidat do XRAG balíčku",
+      "labelPackage": "XRAG balíček",
+      "labelChoose": "Vybrat XRAG balíček",
+      "labelExport": "Spustit export",
+      "labelDelete": "Smazat balíček XRAG",
+      "labelRemove": "Odstranit z balíku XRAG",
+      "labelConfirm": "Odebrat",
+      "descriptionEmpty": "Přidat objekty z jejich zobrazení.",
+      "labelLoading": "Načítání balíků XRAG…",
+      "errorLoad": "Nelze načíst balíky XRAG a propojené objekty.",
+      "labelRetry": "Zkusit znovu",
+      "descriptionNoPackages": "Nemáte žádné balíky XRAG.",
+      "labelRelated": "Přidat propojené objekty",
+      "descriptionRelated": "Vybrat propojené objekty pro přidání jako samostatné položky do balíku XRAG.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Úložiště dokumentů",
+        "transcriber": "Přepisovač",
+        "model": "Model",
+        "automation": "Automatizace"
+      },
+      "labelOpenPackage": "Otevřít balíček",
+      "errorCreate": "Balíček nebyl vytvořen. Zkuste znovu.",
+      "errorAdd": "Výběr nelze přidat do balíčku. Zkontrolujte svá práva a zkuste znovu."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exporty",
+      "description": "Dokončené soubory jsou automaticky smazány po 72 hodinách.",
+      "state_queued": "Čeká na balení",
+      "state_retrying": "Naplánováno pro opětovné pokus",
+      "state_processing": "Vytváření balíčku",
+      "state_finished": "Připraveno",
+      "state_error": "Selhalo",
+      "state_cancelled": "Zrušeno",
+      "labelCancel": "Zrušit export",
+      "labelDownload": "Stáhnout",
+      "labelProgress": "Průběh nahrávání",
+      "state_uploading": "Nahrávání archivu",
+      "labelDelete": "Smazat export",
+      "descriptionDelete": "Odebrat „{{name}}“ z vašich exportů? Pokud k němu existuje archiv, bude také smazán.",
+      "labelDismiss": "Zrušit"
     }
   },
   "_welcomeMessage": "Vítejte v\n\n# schorn.ai in a Box\n\n",

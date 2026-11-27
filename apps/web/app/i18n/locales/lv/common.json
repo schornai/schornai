@@ -9,8 +9,10 @@
         "history": "Vēsture"
       },
       "SidebarFavorites": {
+        "labelActions": "Darbības ar {{name}}",
         "label": "Izlase",
-        "empty": "Izlasei vēl nekas nav pievienots."
+        "empty": "Izlasei vēl nekas nav pievienots.",
+        "labelEdit": "Ierakstītie favorītie"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Izlase ir tukša",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Mapes nosaukums...",
       "labelCancel": "Atcelt",
       "labelCreate": "Izveidot"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fails ir gatavs.",
+      "errorFile": "Faila kļūla.",
+      "labelProcessing": "Faila apstrāde…",
+      "labelUploading": "Augšupielādē failu · {{progress}} %",
+      "labelUnprocessed": "Vēl nav apstrādāts."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nevarēja dzēst šo elementu. Lūdzu, mēģini vēlreiz."
     },
     "StorageDialogRemove": {
       "labelTitle": "Noņemt",
@@ -246,6 +258,7 @@
       "labelDelete": "Dzēst mapi"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Saglabāšana tika pārtraukta. Iepriekšējā versija joprojām ir pieejama, un melnraksts ir saglabāts šeit. Lai pabeigtu atkopšanu, mēģiniet saglabāt vēlreiz.",
       "labelContent": "Saturs",
       "labelSave": "Saglabāt",
       "labelCancel": "Atcelt",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Izvēlēties galamērķa mapi",
       "labelSelectFile": "Izvēlēties esošu failu",
       "descriptionFolder": "Izvēlieties esošu mapi. Tiks pārsūtīts viens fails; esošie nosaukumi nekad netiek pārrakstīti.",
-      "descriptionFile": "Izvēlieties failu no šīs sarunas vai pieejamas krātuves. Dokumentiem un ierakstiem jau jābūt apstrādātiem.",
+      "descriptionFile": "Izvēlies failu no šīs sarunas vai pieejamā glabātnes. Var pievienot failu tieši, kam ir jāizstrādā. Kopēšana prasa, lai izstrāde beigties.",
       "labelStorage": "Krātuve",
       "labelCurrentStorage": "Pašreizējā krātuve",
       "labelUp": "Vecākmape",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopēšana neizdevās. Avots tika saglabāts, taču galamērķī var palikt nepilnīgi faili. Pārbaudiet to pirms atkārtota mēģinājuma.",
       "errorAction": "Darbība neizdevās. Pirms atkārtota mēģinājuma pārbaudiet atļaujas, failu nosaukumus un abas vietas.",
       "errorNotProcessed": "Šis fails vēl nav apstrādāts. Vispirms apstrādājiet to un pēc tam izvēlieties vēlreiz."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Aģents",
+        "documentRepository": "Dokumentu krātuve",
+        "transcriber": "Transkribētājs"
+      },
+      "labelSelected": "Izvēlēts",
+      "labelChangeResource": "Mainīt [{{resource}}].",
+      "labelChange": "Mainīt",
+      "labelClearResource": "Noņemt {{resource}}",
+      "labelChooseResource": "Atlasīt {{resource}}",
+      "descriptionUnavailable": "Jūsu iepriekšējā izvēle vairs nav pieejama. Izvēlieties jaunu ierakstu.",
+      "descriptionEmpty": "Šeit būs redzama jūsu izvēle. Noklikšķiniet, lai pievienotu vienumu.",
+      "descriptionDialog": "Izvēlieties kartes, ko vēlaties izmantot šeit.",
+      "labelSearch": "Meklē…",
+      "labelSelectNamed": "Izvēlies {{name}}",
+      "labelSelect": "Izvēlēties",
+      "labelNoResults": "Nav atrasti rezultāti",
+      "descriptionNoResults": "Ieriet meklēšanu vai pirms veidošanas."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Eksportēt XRAG",
+      "labelGlobalId": "Globāls ID",
+      "errorGlobalIdTaken": "Šis globālais ID jau ir izmantots izvēlētā darbietā.",
+      "errorGlobalId": "Noklusējuma ID izveido no nosaukuma formātā kebab-case. Izmantojiet no 1 līdz 200 rakstzīmēm. Atļauti burti a–z, cipari 0–9, defises (-), slīpsvītras (/) un pasvītrojuma zīmes (_).",
+      "labelSaveId": "Saglabāt globālo ID",
+      "errorAction": "Operācija neizdevās. Pārbaudiet tiesības, globālo ID un modelu failu pieejamību."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG importēšana un eksportēšana",
+      "description": "Ievadīt XRAG failus vai izvēlēt objektus eksportēšanai.",
+      "labelUpload": "Izvēlēties failu.",
+      "errorUpload": "Fails nevarēja augšupaukt. Izvēlieties to atkal, lai turpinātu pārliecināšanu.",
+      "labelWorkspace": "Darbvieta",
+      "labelNewWorkspace": "Izveidot darbvietu",
+      "labelName": "Darbvietas nosaukums.",
+      "descriptionConfirm": "Pārbaudiet iekļautos objektus. Apstipriniet katru esošo objektu, ko vēlaties aizstāt. Dokumentu krātuvē, faili ar vienādu nosaukumu tiek aizstāti; citas esošās faili tiek saglabāti.",
+      "labelReplace": "aizstāj \"{{name}}\"",
+      "labelImport": "Importēt",
+      "descriptionImported": "Importēšana pabeigta.",
+      "errorAction": "Operācija neizdevās. Pārliecinieties, ka XRAG fails ir pilnīgs un derīgs, un ka jums ir nepieciešamas atļautas. Ja objekti ir mainīti, pārklausiet importu.",
+      "labelChooseExternalModel": "Izvēlies esošu modeli",
+      "descriptionChooseExternalModel": "Atrodas vairāki modeli. Izvēlies, ko izmantot šajā instancē.",
+      "descriptionModelMatched": "Izmantos “{{name}}” ar esošajiem paroles.",
+      "descriptionModelMissing": "Nav atrast nevišķu modeli. Objekts tiks importēts. Izvēlies modeli vēlāk.",
+      "labelTabImport": "Imports",
+      "labelTabExport": "Eksports",
+      "labelUploadTitle": "Importēt XRAG",
+      "descriptionDrop": "Ievelciet šeit XRAG failu vai izvēlieties failu.",
+      "descriptionUploading": "Notiek faila augšupielāde…",
+      "descriptionImporting": "Notiek importēšana…",
+      "descriptionInspecting": "Ielādē saturu…",
+      "labelContent": "Iekļautās objektu",
+      "labelSelectAll": "Izvēlēt visu",
+      "labelSelectNone": "Izvēlēt neko",
+      "labelSelectObject": "Importēt {{name}}",
+      "labelChooseWorkspace": "Izvēlēt darbvieti",
+      "descriptionWorkspace": "Šī darbvieta attiecas uz visiem izvēlētajiem objektiem.",
+      "kind": {
+        "agent": "Aģents",
+        "documentRepository": "Dokumentu krātuve",
+        "transcriber": "Transkribētājs",
+        "ollamaModel": "Modelis",
+        "mlxWhisperModel": "Transkribēšanas modelis",
+        "setup": "Platformas atjauninājums",
+        "files": "Failu komplekts",
+        "automation": "Automātika"
+      },
+      "labelAnotherUpload": "Augšupielādēt citu XRAG failu",
+      "labelSelection": "Izvēle",
+      "labelObjectName": "Nosaukums",
+      "labelObjectKind": "Tips",
+      "labelObjectDescription": "Apraksts",
+      "descriptionFilesProcessing": "Dokumenti tiek sagatavoti meklējumiem fons."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Atcelt",
+      "labelTitle": "Manas XRAG pakas.",
+      "description": "Pievienot resursus un vietas modeļus no to detalēm. Eksportēt paketi, lai iegūtu visus tās iekšējo datus vienā XRAG failā.",
+      "labelName": "XRAG pakas nosaukums.",
+      "labelCreate": "Izveidot XRAG iepakojumu",
+      "labelAdd": "Pievienot XRAG pakai.",
+      "labelPackage": "XRAG pakas.",
+      "labelChoose": "Izvēlies XRAG pakas.",
+      "labelExport": "Sākt eksportu.",
+      "labelDelete": "Dzēst XRAG iepakojumu",
+      "labelRemove": "Noņemt no XRAG paketes",
+      "labelConfirm": "Noņemt",
+      "descriptionEmpty": "Pievienot objektus no to ievades.",
+      "labelLoading": "Ievākot XRAG paketes…",
+      "errorLoad": "Nevar ielādēt XRAG paketes un objektus.",
+      "labelRetry": "Atkārtot",
+      "descriptionNoPackages": "Jums vēl nav XRAG paketes.",
+      "labelRelated": "Pievienot objektus",
+      "descriptionRelated": "Izvēlēties objektus, lai pievienotu kā atsevišķas XRAG paketes.",
+      "kind": {
+        "agent": "Aģents",
+        "documentRepository": "Dokumentu krātuve",
+        "transcriber": "Transkribētājs",
+        "model": "Modelis",
+        "automation": "Automātika"
+      },
+      "labelOpenPackage": "Atvērt iepakojumu",
+      "errorCreate": "Nevarēja izveidot iepakojumu. Mēģini vēlreiz.",
+      "errorAdd": "Izvēli nevarēja pievienot iepakojumam. Pārbaudiet savus pilnvaras un mēģini vēlreiz."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Eksportētie faili",
+      "description": "Pabeigtie faili pēc 72 stundām tiek automātiski dzēsti.",
+      "state_queued": "Gaida iepakojamšanu",
+      "state_retrying": "Plānots atkārtot",
+      "state_processing": "Veidot iepakojumu",
+      "state_finished": "Gatavs",
+      "state_error": "Neizdevās",
+      "state_cancelled": "Atcelts",
+      "labelCancel": "Atcelt eksportēšanu",
+      "labelDownload": "Lejuplādēt",
+      "labelProgress": "Augšupielādes gaita",
+      "state_uploading": "Augāmlādē ar arhīvu",
+      "labelDelete": "Dzēst eksportu",
+      "descriptionDelete": "Vai no jūsu eksporta saraksta noņemt “{{name}}”? Ja tam ir arhīvs, arī tas tiks dzēsts.",
+      "labelDismiss": "Atcelt"
     }
   },
   "_welcomeMessage": "Laipni lūdzam\n\n# schorn.ai in a Box\n\n",

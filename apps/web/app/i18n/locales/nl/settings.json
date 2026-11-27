@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-upload",
-      "description": "Sleep een XRAG-bestand hierheen om het te uploaden en de inhoud te installeren.",
+      "description": "Sleep een XRAG-bestand hier om te uploaden en de inhoud te installeren. Na een onderbreking, selecteer hetzelfde bestand opnieuw om de upload te hervatten.",
       "buttonUpload": "Uploaden",
       "errorUpload": "Fout bij het uploaden van XRAG-bestand ‘{{name}}’.",
-      "successUpload": "XRAG ‘{{name}}’ is geüpload. Afhankelijk van de grootte en het type upload kan het enkele minuten duren voordat de wijzigingen zichtbaar zijn.",
-      "buttonHide": "Verbergen"
+      "successUpload": "{{name}}: Upload voltooid. Publicatie wordt apart gecontroleerd.",
+      "buttonHide": "Verbergen",
+      "labelProcessing": "{{name}}: Validatie en publicatie.",
+      "labelPublished": "{{name}}: Geplaatst en beschikbaar voor matching.",
+      "errorPublication": "{{name}}: Geplaatst is mislukt. Controleer het pakket en upload het opnieuw.",
+      "errorPublicationStatus": "{{name}}: Status tijdelijk niet beschikbaar. Proberen opnieuw."
     },
     "TaskTable": {
       "tableColumnType": "Type",
@@ -330,7 +334,9 @@
     "cardXragLabel": "XRAG uploaden",
     "cardXragDescription": "Installeer agenten, documenten en modellen of werk het hele systeem bij via een XRAG-pakket.",
     "cardAppearanceLabel": "Uiterlijk",
-    "cardAppearanceDescription": "Pas de kleuren en het uiterlijk van het systeem naar wens aan."
+    "cardAppearanceDescription": "Pas de kleuren en het uiterlijk van het systeem naar wens aan.",
+    "cardConnectionsLabel": "Verbindingen",
+    "cardConnectionsDescription": "Beheer OAuth-apps en zoek verbindingen centraal."
   },
   "users.page": {
     "labelTitle": "Gebruikers"
@@ -428,6 +434,7 @@
     "labelNoModels": "Geen modellen gevonden",
     "descriptionNoResults": "Pas je zoekopdracht aan om modellen te vinden.",
     "descriptionNoModels": "Lokale en externe modellen verschijnen hier. Voeg een extern model toe om te beginnen.",
+    "descriptionNoRegisteredModels": "Geen modellen geregistreerd op deze instantie.",
     "labelChooseProvider": "Kies een aanbieder",
     "descriptionChooseProvider": "Koppel een extern taalmodel via de aanbieder.",
     "labelConfigure": "Configureren",
@@ -463,7 +470,11 @@
     "labelEditSection": "{{section}} bewerken",
     "labelToggleSection": "{{section}} uitvouwen/inklappen",
     "descriptionDeleteAgents": "Agenten die dit model gebruiken, blijven behouden. Ze kunnen echter pas weer worden gebruikt nadat je een ander beschikbaar model hebt toegewezen.",
-    "descriptionDeleteAgentsTip": "Tip: open ‘Opties’ in het agentenoverzicht en groepeer op ‘Model’. De betrokken agenten verschijnen in de groepen ‘Onbekend model’."
+    "descriptionDeleteAgentsTip": "Tip: open ‘Opties’ in het agentenoverzicht en groepeer op ‘Model’. De betrokken agenten verschijnen in de groepen ‘Onbekend model’.",
+    "labelContextUnknown": "Geen contextgrootte",
+    "descriptionCompressionDisabled": "Automatische contextcompressie is uit, tenzij er een contextgrootte is.",
+    "descriptionContextSize": "Optioneel, in tokens. Laat leeg voor het uitschakelen van automatische contextcompressie.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Verbindingen",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Wordt alleen op de server opgeslagen en kan na het aanmaken niet meer worden gewijzigd.",
     "labelCopyCallback": "Callback-URL kopiëren",
     "labelCallbackCopied": "Callback-URL gekopieerd",
-    "errorCopyCallback": "Callback-URL kon niet worden gekopieerd"
+    "errorCopyCallback": "Callback-URL kon niet worden gekopieerd",
+    "labelIssuer": "OAuth uitgever",
+    "descriptionIssuer": "Kan niet na creatie worden gewijzigd."
   },
   "service": {
     "errorUnauthorized": "Autorisatie voor de service is mislukt.",

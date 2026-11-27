@@ -9,8 +9,10 @@
         "history": "Historik"
       },
       "SidebarFavorites": {
+        "labelActions": "Handlinger for {{name}}",
         "label": "Favoritter",
-        "empty": "Der er endnu ikke tilføjet favoritter."
+        "empty": "Der er endnu ikke tilføjet favoritter.",
+        "labelEdit": "Rediger favorit"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Ingen favoritter",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Mappenavn...",
       "labelCancel": "Annuller",
       "labelCreate": "Opret"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fil klar",
+      "errorFile": "Filfejl",
+      "labelProcessing": "Behandler fil…",
+      "labelUploading": "Uploader fil · {{progress}} %",
+      "labelUnprocessed": "Ikke behandlet endnu"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Kunne ikke slette dette element. Prøv igen."
     },
     "StorageDialogRemove": {
       "labelTitle": "Fjern",
@@ -246,6 +258,7 @@
       "labelDelete": "Slet mappe"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Gemning blev afbrudt. Den tidligere version er stadig tilgængelig. Dit udkast er gemt her – prøv at gemme igen for at fuldføre gendannelsen.",
       "labelContent": "Indhold",
       "labelSave": "Gem",
       "labelCancel": "Annuller",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Vælg destinationsmappe",
       "labelSelectFile": "Vælg en eksisterende fil",
       "descriptionFolder": "Vælg en eksisterende mappe. Én fil bliver overført; eksisterende navne overskrives aldrig.",
-      "descriptionFile": "Vælg en fil fra denne chat eller et tilgængeligt arkiv. Dokumenter og optagelser skal allerede være behandlet.",
+      "descriptionFile": "Vælg en fil fra denne chat eller et tilgængeligt lager. Du kan tilføje en fil direkte, mens behandlingen er i gang. Kopiering kræver, at behandlingen er færdig.",
       "labelStorage": "Lager",
       "labelCurrentStorage": "Aktuelt lager",
       "labelUp": "Overordnet mappe",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopieringen mislykkedes. Kilden blev bevaret, men der kan være ufuldstændige filer på destinationen. Kontrollér den, før du prøver igen.",
       "errorAction": "Handlingen mislykkedes. Kontrollér rettigheder, filnavne og begge placeringer, før du prøver igen.",
       "errorNotProcessed": "Denne fil er endnu ikke behandlet. Behandl den først, og vælg den derefter igen."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transskriberingsværktøj"
+      },
+      "labelSelected": "Valgt",
+      "labelChangeResource": "Ændr {{resource}}",
+      "labelChange": "Ændr",
+      "labelClearResource": "Fjern {{resource}}",
+      "labelChooseResource": "Vælg {{resource}}",
+      "descriptionUnavailable": "Din tidligere valgte er ikke længere tilgængelig. Vælg en ny.",
+      "descriptionEmpty": "Her, hvor din valgte skal være. Klik for at tilføje et element.",
+      "descriptionDialog": "Vælg det kort, du ønsker at bruge her.",
+      "labelSearch": "Søg…",
+      "labelSelectNamed": "Velg {{name}}",
+      "labelSelect": "Vælg",
+      "labelNoResults": "Ingen matchende resultater",
+      "descriptionNoResults": "Juster din søgning eller opret en ny."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Eksporter XRAG",
+      "labelGlobalId": "Globalt id",
+      "errorGlobalIdTaken": "Dette globale ID er allerede i brug i det valgte arbejdsområde.",
+      "errorGlobalId": "Standard-id’et dannes ud fra titlen i kebab-case. Brug 1 til 200 tegn. Du kan bruge a–z, 0–9, bindestreg (-), skråstreg (/) og understregningstegn (_).",
+      "labelSaveId": "Gem global ID",
+      "errorAction": "Operationen mislykkedes. Tjek dine rettigheder, det globale ID og tilgængeligheden af model filer."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG import og eksport",
+      "description": "Importer XRAG-filer eller vælg objekter til eksport.",
+      "labelUpload": "Vælg fil",
+      "errorUpload": "Filen kunne ikke uploades. Vælg den igen for at fortsætte overførslen.",
+      "labelWorkspace": "Arbejdsområde",
+      "labelNewWorkspace": "Opret arbejdsområde",
+      "labelName": "Navn på arbejdsområde",
+      "descriptionConfirm": "Gennemgå de inkluderede objekter. Bekræft hvert eksisterende objekt, du ønsker at erstatte. I filarkiver erstattes filer med samme navn; andre eksisterende filer bevares.",
+      "labelReplace": "Erstat \"{{name}}\"",
+      "labelImport": "Importer",
+      "descriptionImported": "Importer færdig.",
+      "errorAction": "Operationen mislykkedes. Kontroller, at XRAG-filen er fuldstændig og gyldig, og at du har de nødvendige tilladelser. Gennemse importen igen, hvis objekterne er ændret.",
+      "labelChooseExternalModel": "Vælg en eksisterende model",
+      "descriptionChooseExternalModel": "Flere modeller matcher. Vælg den forbindelse, du vil bruge på denne instans.",
+      "descriptionModelMatched": "Bruger \"{{name}}\" med eksisterende legitimationsoplysninger.",
+      "descriptionModelMissing": "Ingen matchende model er tilgængelig. Objektet vil stadig blive importeret. Vælg en model bagefter.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Eksport",
+      "labelUploadTitle": "Importer XRAG",
+      "descriptionDrop": "Upload en XRAG-fil eller vælg en fil.",
+      "descriptionUploading": "Upload af fil…",
+      "descriptionImporting": "Importering i gang…",
+      "descriptionInspecting": "Indlæser indhold…",
+      "labelContent": "Inkluderede objekter",
+      "labelSelectAll": "Vælg alle",
+      "labelSelectNone": "Vælg ingen",
+      "labelSelectObject": "Importer {{name}}",
+      "labelChooseWorkspace": "Vælg arbejdsområde",
+      "descriptionWorkspace": "Dette arbejdsområde gælder for alle valgte objekter.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transskriberingsværktøj",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Transskriptionsmodel",
+        "setup": "Platformopdatering",
+        "files": "Filpakke",
+        "automation": "Automatisering"
+      },
+      "labelAnotherUpload": "Upload en anden XRAG-fil",
+      "labelSelection": "Valg",
+      "labelObjectName": "Navn",
+      "labelObjectKind": "Type",
+      "labelObjectDescription": "Beskrivelse",
+      "descriptionFilesProcessing": "Dokumenter forberedes til søgning i baggrunden."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Annuller",
+      "labelTitle": "Mine XRAG pakker",
+      "description": "Tilføj ressourcer og lokale modeller fra deres detaljer. Eksporter en pakke for at downloade alle dens elementer i én XRAG-fil.",
+      "labelName": "XRAG pakkenavn",
+      "labelCreate": "Opret XRAG-pakke",
+      "labelAdd": "Tilføj til XRAG pakke",
+      "labelPackage": "XRAG pakke",
+      "labelChoose": "Vælg XRAG pakke",
+      "labelExport": "Start eksport",
+      "labelDelete": "Slet XRAG-pakke",
+      "labelRemove": "Fjern fra XRAG-pakken",
+      "labelConfirm": "Fjern",
+      "descriptionEmpty": "Tilføj objekter fra deres visning.",
+      "labelLoading": "Indlæser XRAG-pakker…",
+      "errorLoad": "Kunne ikke indlæse XRAG-pakker og tilkoblede objekter.",
+      "labelRetry": "Prøv igen",
+      "descriptionNoPackages": "Du har ingen XRAG-pakker endnu.",
+      "labelRelated": "Tilføj tilkoblede objekter",
+      "descriptionRelated": "Vælg objekter til at tilføje som separate elementer i XRAG-pakken.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transskriberingsværktøj",
+        "model": "Model",
+        "automation": "Automatisering"
+      },
+      "labelOpenPackage": "Åbn pakke",
+      "errorCreate": "Pakken kunne ikke oprettes. Prøv igen.",
+      "errorAdd": "Vælg kunne ikke tilføjes til pakken. Tjek dine rettigheder og prøv igen."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Eksporter",
+      "description": "Færdige filer slettes automatisk efter 72 timer.",
+      "state_queued": "I kø til pakning",
+      "state_retrying": "Planlagt til forsøg igen",
+      "state_processing": "Opret pakke",
+      "state_finished": "Klar",
+      "state_error": "Fejl",
+      "state_cancelled": "Annulleret",
+      "labelCancel": "Annuller eksport",
+      "labelDownload": "Download",
+      "labelProgress": "Upload fremskridt",
+      "state_uploading": "Upload af arkiv",
+      "labelDelete": "Slet eksport",
+      "descriptionDelete": "Vil du fjerne »{{name}}« fra dine eksporter? Et eventuelt tilhørende arkiv bliver også slettet.",
+      "labelDismiss": "Annuller"
     }
   },
   "_welcomeMessage": "Velkommen til\n\n# schorn.ai in a Box\n\n",

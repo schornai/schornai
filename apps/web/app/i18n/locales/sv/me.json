@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Anpassa",
-    "infoPersonalizeDescription": "Här kan du ladda upp din profilbild och ändra ditt namn."
+    "infoPersonalizeDescription": "Här kan du ladda upp din profilbild och ändra ditt namn.",
+    "cardFavoritesLabel": "Favoriter",
+    "cardFavoritesDescription": "Visa, ta bort och organisera favoriter i sidopanelen.",
+    "cardPermissionsLabel": "Behörigheter",
+    "cardPermissionsDescription": "Visa dina roller och behörigheter.",
+    "cardConnectionsLabel": "Anslutningar",
+    "cardConnectionsDescription": "Hantera dina kontakter."
   },
   "resetPasswordSuccess.page": {
     "title": "Nytt lösenord har angetts",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Anslutningar",
-      "descriptionConnections": "Dina personliga OAuth-anslutningar till MCP-servrar. När du kopplar från tas inloggningsuppgifterna som lagras här bort. Pågående anrop kan slutföras; återkalla behörigheter direkt hos leverantören.",
       "labelDisconnect": "Koppla från",
-      "descriptionEmpty": "Anslut ditt konto i chatten när ett MCP-verktyg kräver inloggning.",
       "labelEmpty": "Inga anslutningar ännu",
-      "labelInfo": "Om anslutningar",
-      "errorDisconnect": "Det gick inte att koppla från anslutningen. Försök igen."
+      "errorDisconnect": "Det gick inte att koppla från anslutningen. Försök igen.",
+      "labelOutgoing": "Anslutningar till externa tjänster.",
+      "descriptionOutgoing": "schorn.ai använder dessa konton för att anropa externa MCP-tjänster åt dig.",
+      "labelServer": "MCP-server",
+      "labelCancel": "Avbryt",
+      "labelDisconnectNamed": "Koppla från {{serverUrl}}",
+      "descriptionDisconnect": "Koppla från {{serverUrl}}? De inloggningsuppgifter som sparats här tas bort. Pågående begäranden kan fortfarande slutföras. Du kan återkalla behörigheterna direkt hos leverantören."
+    },
+    "incoming": {
+      "labelTitle": "Åtkomst till schorn.ai",
+      "description": "Dessa appar kan använda schorn.ai via MCP för din räkning. Godkännandet utökar inte dina egna behörigheter.",
+      "labelCreated": "Godkänt för",
+      "labelExpires": "Gäller till",
+      "labelExpired": "Utgångna",
+      "labelRevoke": "Ta tillbaka åtkomst",
+      "labelRevokeNamed": "Återkalla åtkomst för {{name}}",
+      "descriptionRevoke": "Återkalla åtkomsten för ”{{name}}”? Alla åtkomst- och förnyelsetoken för godkännandet blir ogiltiga. Pågående begäranden kan fortfarande slutföras. Du måste godkänna en ny anslutning.",
+      "labelCancel": "Avbryt",
+      "errorRevoke": "Åtkomst kunde inte återkallas. Försök igen.",
+      "labelApplication": "Applikation",
+      "labelLevel": "Åtkomstnivå"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Auktorisera {{client}}",
+    "description": "Denna applikation kan agera åt ditt vägn. Granska detaljerna och auktorisera endast applikationer du litar på.",
+    "labelLevel": "Åtkomstnivå",
+    "labelResource": "MCP-slutpunkt",
+    "labelRedirect": "Återdirigeringsadress",
+    "labelApprove": "Auktorisera",
+    "labelDeny": "Neka",
+    "errorAuthorization": "Auktoriseringsförfrågan är ogiltig eller dina behörigheter är otillräckliga.",
+    "level": {
+      "user": "Användare",
+      "editor": "Redaktör",
+      "workspace": "Arbetsyteadministratör",
+      "admin": "Global administratör"
+    },
+    "labelConnectTitle": "Dina verktyg. Dina behörigheter.",
+    "descriptionConnect": "Koppla ett AI-program till schorn.ai och bestäm vilka behörigheter du vill ge.",
+    "descriptionPermissions": "Dina befintliga behörigheter gäller fortfarande. Att godkänna en applikation utökar inte dina rättigheter.",
+    "descriptionExpiry": "Godkännandet gäller i upp till 30 dagar. Program som använder förnyelse-tokens förnyar åtkomsten automatiskt i bakgrunden.",
+    "labelPlatformAccess": "Åtkomst till plattform",
+    "descriptionLevel": "Välj den högsta åtkomstnivå du vill ge appen. Du kan bara välja nivåer som ryms inom dina nuvarande behörigheter.",
+    "descriptionNoAccess": "Ditt konto har för närvarande inga behörigheter att komma åt plattformen."
+  },
+  "favorites": {
+    "labelTitle": "Favoriter",
+    "description": "Dra i favoriternas handtag för att flytta dem. Spara för att tillämpa ordning, borttagningar och synlighet.",
+    "labelMove": "Ändra ordning på {{name}}",
+    "labelRemoveNamed": "Ta bort {{name}} från favoriterna",
+    "labelSave": "Spara",
+    "labelReset": "Återställ",
+    "labelEmpty": "Inga favoriterna ännu.",
+    "labelUnavailable": "Inte längre tillgängligt",
+    "labelShowInSidebar": "Visa i sidopanelen",
+    "errorSave": "Kunde inte spara favoriterna. Försök igen.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Arbetsyta",
+      "transcriber": "Transkriberare",
+      "documentRepository": "Dokumentarkiv",
+      "automation": "Automatisering"
     }
   }
 }

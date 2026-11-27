@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Neznámý pracovní prostor"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Kořenový adresář",
       "tooltipEdit": "Upravit",
       "tooltipInfo": "Informace"
     },

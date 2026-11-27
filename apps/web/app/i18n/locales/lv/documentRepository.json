@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Nezināma darbvieta"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Galvenais katalogs",
       "tooltipEdit": "Rediģēt",
       "tooltipInfo": "Informācija"
     },

@@ -9,8 +9,10 @@
         "history": "Historia"
       },
       "SidebarFavorites": {
+        "labelActions": "Kohteen {{name}} toiminnot",
         "label": "Suosikit",
-        "empty": "Suosikkeja ei ole vielä lisätty."
+        "empty": "Suosikkeja ei ole vielä lisätty.",
+        "labelEdit": "Lisää suosikkeja"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Ei suosikkeja",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Kansion nimi...",
       "labelCancel": "Peruuta",
       "labelCreate": "Luo"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Tiedosto valmis",
+      "errorFile": "Tiedostovirhe",
+      "labelProcessing": "Tiedoston käsittely…",
+      "labelUploading": "Lähetetään tiedostoa · {{progress}} %",
+      "labelUnprocessed": "Ei vielä käsitelty"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Ei voitu poistaa tätä kohdetta. Yritä uudelleen."
     },
     "StorageDialogRemove": {
       "labelTitle": "Poista",
@@ -246,6 +258,7 @@
       "labelDelete": "Poista kansio"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Tallennus keskeytettiin. Edellinen versio on edelleen saatavilla. Muisti on tallennettu tähän; yritä tallentaa uudelleen, jotta saat täydellisen palautuksen.",
       "labelContent": "Sisältö",
       "labelSave": "Tallenna",
       "labelCancel": "Peruuta",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Valitse kohdekansio",
       "labelSelectFile": "Valitse olemassa oleva tiedosto",
       "descriptionFolder": "Valitse olemassa oleva kansio. Yksi tiedosto siirretään; olemassa olevia nimiä ei koskaan korvata.",
-      "descriptionFile": "Valitse tiedosto tästä keskustelusta tai käytettävissä olevasta varastosta. Asiakirjojen ja tallenteiden on oltava valmiiksi käsiteltyjä.",
+      "descriptionFile": "Valitse tiedosto tästä keskustelusta tai muusta saatavilla olevasta arkistosta. Voit liittää tiedoston suoraan, kun tiedon käsittely on käynnissä. Kopiointi vaatii käsittelyn valmistumisen.",
       "labelStorage": "Tallennustila",
       "labelCurrentStorage": "Nykyinen tallennustila",
       "labelUp": "Yläkansio",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopiointi epäonnistui. Lähde säilytettiin, mutta kohteeseen saattaa jäädä keskeneräisiä tiedostoja. Tarkista kohde ennen uutta yritystä.",
       "errorAction": "Toiminto epäonnistui. Tarkista oikeudet, tiedostonimet ja molemmat sijainnit ennen uutta yritystä.",
       "errorNotProcessed": "Tätä tiedostoa ei ole vielä käsitelty. Käsittele se ensin ja valitse sitten uudelleen."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agentti",
+        "documentRepository": "Asiakirjavarasto",
+        "transcriber": "Litteroija"
+      },
+      "labelSelected": "Valittu",
+      "labelChangeResource": "Vaihda {{resource}}",
+      "labelChange": "Muuta",
+      "labelClearResource": "Poista {{resource}}",
+      "labelChooseResource": "Valitse {{resource}}",
+      "descriptionUnavailable": "Edellinen valinta ei ole enää käytettävissä. Valitse uusi.",
+      "descriptionEmpty": "Valintasi näkyy tässä. Lisää kohde napsauttamalla.",
+      "descriptionDialog": "Valitse kortti, jota haluat käyttää täällä.",
+      "labelSearch": "Hae …",
+      "labelSelectNamed": "Valitse {{name}}",
+      "labelSelect": "Valitse",
+      "labelNoResults": "Ei löydetty vastaavia",
+      "descriptionNoResults": "Säädä hakua tai luo uusi merkintä ensin."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Vie XRAG",
+      "labelGlobalId": "Globaali ID",
+      "errorGlobalIdTaken": "Tämä globaali ID on jo käytössä valitussa työtilassa.",
+      "errorGlobalId": "Oletustunnus muodostetaan otsikosta kebab-case-muodossa. Käytä 1–200 merkkiä. Sallitut merkit ovat a–z, 0–9, yhdysmerkki (-), vinoviiva (/) ja alaviiva (_).",
+      "labelSaveId": "Tallenna globaali ID",
+      "errorAction": "Operaatio epäonnistui. Tarkista oikeutesi, globaali ID ja mallitiedostojen saatavuus."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG tuonti ja vienti",
+      "description": "Tuo XRAG-tiedostoja tai valitse tiedostoja vientiin.",
+      "labelUpload": "Valitse tiedosto",
+      "errorUpload": "Tiedoston lataus ei onnistunut. Valitse tiedosto uudelleen, jotta lataus jatkuu.",
+      "labelWorkspace": "Työtila",
+      "labelNewWorkspace": "Luo työtila",
+      "labelName": "Työtilan nimi",
+      "descriptionConfirm": "Tarkista sisältyvät objektit. Vahvista jokainen olemassa oleva objekti, jonka haluat korvata. Tiedostovarastoissa samannimiset tiedostot korvataan; muut olemassa olevat tiedostot säilytetään.",
+      "labelReplace": "Korvaa \"{{name}}\"",
+      "labelImport": "Tuo",
+      "descriptionImported": "Tuonti valmis.",
+      "errorAction": "Operaatio epäonnistui. Tarkista, että XRAG-tiedosto on kokonainen ja kelvollinen, sekä että sinulla on tarvittavat oikeudet. Tarkista tuonti uudelleen, jos kohteita on muutettu.",
+      "labelChooseExternalModel": "Valitse olemassa oleva malli",
+      "descriptionChooseExternalModel": "Useita malleja löytyi. Valitse käytettävä yhteys tälle instanssille.",
+      "descriptionModelMatched": "Käytetään \"{{name}}\" olemassa olevilla tunnuksilla.",
+      "descriptionModelMissing": "Olemassa olevaa mallia ei löytynyt. Kohteita tuodaan silti. Valitse malli sen jälkeen.",
+      "labelTabImport": "Tuonti",
+      "labelTabExport": "Vienti",
+      "labelUploadTitle": "Tuo XRAG",
+      "descriptionDrop": "Lataa XRAG-tiedoston tai valitse tiedosto.",
+      "descriptionUploading": "Lähetetään tiedostoa…",
+      "descriptionImporting": "Tuonti käynnissä…",
+      "descriptionInspecting": "Sisältö latautuu…",
+      "labelContent": "Sisältyvät objektit",
+      "labelSelectAll": "Valitse kaikki",
+      "labelSelectNone": "Valitse ei yhtään",
+      "labelSelectObject": "Tuo {{name}}",
+      "labelChooseWorkspace": "Valitse työtila",
+      "descriptionWorkspace": "Tämä työtila koskee kaikkia valittuja objekteja.",
+      "kind": {
+        "agent": "Agentti",
+        "documentRepository": "Asiakirjavarasto",
+        "transcriber": "Litteroija",
+        "ollamaModel": "Malli",
+        "mlxWhisperModel": "Litterointimalli",
+        "setup": "Alustan päivitys",
+        "files": "Tiedoston paketti",
+        "automation": "Automatisoi"
+      },
+      "labelAnotherUpload": "Lataa uusi XRAG-tiedosto",
+      "labelSelection": "Valinta",
+      "labelObjectName": "Nimi",
+      "labelObjectKind": "Tyyppi",
+      "labelObjectDescription": "Kuvaus",
+      "descriptionFilesProcessing": "Dokumentit valmistellaan hakua varten taustalla."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Peruuta",
+      "labelTitle": "Minut XRAG-paketit",
+      "description": "Lisää resursseja ja paikallisia malleja niiden tiedoista. Vie paketti, jotta kaikki sen sisällöt ovat yhdessä XRAG-tiedostossa.",
+      "labelName": "XRAG-paketin nimi",
+      "labelCreate": "Luo XRAG-paketti",
+      "labelAdd": "Lisää XRAG-pakettiin",
+      "labelPackage": "XRAG-paketti",
+      "labelChoose": "Valitse XRAG-paketti",
+      "labelExport": "Aloita vienti",
+      "labelDelete": "Poista XRAG-paketti",
+      "labelRemove": "Poista XRAG-paketista",
+      "labelConfirm": "Poista",
+      "descriptionEmpty": "Lisää kohteet niiden tiedotiedostosta.",
+      "labelLoading": "XRAG-paketit latautuvat…",
+      "errorLoad": "XRAG-paketit ja yhdistetyt kohteet eivät lataudu.",
+      "labelRetry": "Yritä uudelleen",
+      "descriptionNoPackages": "Sinulla ei ole vielä yhtään XRAG-pakettia.",
+      "labelRelated": "Lisää yhdistetyt kohteet",
+      "descriptionRelated": "Valitse kohteet, jotka lisätään erillisinä XRAG-paketissa.",
+      "kind": {
+        "agent": "Agentti",
+        "documentRepository": "Asiakirjavarasto",
+        "transcriber": "Litteroija",
+        "model": "Malli",
+        "automation": "Automatisoi"
+      },
+      "labelOpenPackage": "Avaa paketti",
+      "errorCreate": "Paketin luonti ei onnistunut. Yritä uudelleen.",
+      "errorAdd": "Valinta ei voitu lisätä pakettiin. Tarkista käyttöoikeutesi ja yritä uudelleen."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Viennit",
+      "description": "Valmiit tiedostot poistetaan automaattisesti 72 tunnin kuluttua.",
+      "state_queued": "Odottamaan pakkausta",
+      "state_retrying": "Uudelleen pakkaus ajoitettu",
+      "state_processing": "Luo paketti",
+      "state_finished": "Valmis",
+      "state_error": "Epäonninen",
+      "state_cancelled": "Peruutettu",
+      "labelCancel": "Peruuta vienti",
+      "labelDownload": "Lataa",
+      "labelProgress": "Lähetyksen edistyminen",
+      "state_uploading": "Arkistoa lähetetään",
+      "labelDelete": "Poista vienti",
+      "descriptionDelete": "Poistetaanko ”{{name}}” vienneistäsi? Myös siihen liittyvä arkisto poistetaan, jos sellainen on olemassa.",
+      "labelDismiss": "Peruuta"
     }
   },
   "_welcomeMessage": "Tervetuloa\n\n# schorn.ai in a Box\n\n",

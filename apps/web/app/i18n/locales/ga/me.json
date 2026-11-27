@@ -38,7 +38,13 @@
   "page": {
     "title": "Próifíl",
     "infoPersonalize": "Pearsantaigh",
-    "infoPersonalizeDescription": "Is féidir leat do phictiúr próifíle a uaslódáil agus d’ainm a shaincheapadh anseo."
+    "infoPersonalizeDescription": "Is féidir leat do phictiúr próifíle a uaslódáil agus d’ainm a shaincheapadh anseo.",
+    "cardFavoritesLabel": "Ceanáin",
+    "cardFavoritesDescription": "Sórtáil nó bain ceanáin agus socraigh cé acu a thaispeánfar sa bharra taoibh.",
+    "cardPermissionsLabel": "Ceadanna",
+    "cardPermissionsDescription": "Féach ar do róil agus ar do cheadanna rochtana.",
+    "cardConnectionsLabel": "Naisc",
+    "cardConnectionsDescription": "Bainistigh do naisc phearsanta."
   },
   "resetPasswordSuccess.page": {
     "title": "Pasfhocal nua socraithe",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Naisc",
-      "descriptionConnections": "Do naisc phearsanta OAuth le freastalaithe MCP. Má dhícheanglaíonn tú, bainfear na dintiúir atá stóráilte anseo. D’fhéadfadh glaonna atá ar siúl cheana críochnú; cúlghair ceadanna an tsoláthraí go díreach leis an soláthraí.",
       "labelDisconnect": "Dícheangail",
-      "descriptionEmpty": "Ceangail do chuntas sa chomhrá nuair a éilíonn uirlis MCP ort síniú isteach.",
       "labelEmpty": "Níl aon nasc ann fós",
-      "labelInfo": "Maidir le naisc",
-      "errorDisconnect": "Níorbh fhéidir an nasc a dhícheangal. Bain triail eile as."
+      "errorDisconnect": "Níorbh fhéidir an nasc a dhícheangal. Bain triail eile as.",
+      "labelOutgoing": "Naisc le seirbhísí seachtracha",
+      "descriptionOutgoing": "Úsáideann schorn.ai na cuntais seo chun seirbhísí seachtracha MCP a úsáid ar do shon.",
+      "labelServer": "Freastalaí MCP",
+      "labelCancel": "Cealaigh",
+      "labelDisconnectNamed": "Dícheangail ó {{serverUrl}}",
+      "descriptionDisconnect": "An bhfuil fonn ort dícheangal ó {{serverUrl}}? Bainfear na dintiúir atá stóráilte anseo. D’fhéadfadh iarratais atá ar siúl cheana críochnú fós. Is féidir leat ceadanna a chealú go díreach leis an soláthraí."
+    },
+    "incoming": {
+      "labelTitle": "Rochtain ar schorn.ai",
+      "description": "Is féidir leis na feidhmchláir seo schorn.ai a úsáid ar do shon trí MCP. Ní thugann údarú ceadanna breise duit.",
+      "labelCreated": "Dáta an údaraithe",
+      "labelExpires": "Bailí go dtí",
+      "labelExpired": "Imithe in éag",
+      "labelRevoke": "Cealaigh rochtain",
+      "labelRevokeNamed": "Cealaigh rochtain {{name}}",
+      "descriptionRevoke": "An bhfuil fonn ort rochtain “{{name}}” a chealú? Beidh gach comhartha rochtana agus athnuachana don údarú seo neamhbhailí. D’fhéadfadh iarratais atá ar siúl cheana críochnú fós. Beidh d’údarú de dhíth le ceangal arís.",
+      "labelCancel": "Cealaigh",
+      "errorRevoke": "Níorbh fhéidir an rochtain a chealú. Bain triail eile as.",
+      "labelApplication": "Feidhmchlár",
+      "labelLevel": "Leibhéal rochtana"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Údaraigh {{client}}",
+    "description": "Is féidir leis an bhfeidhmchlár seo gníomhú ar do shon. Léigh na sonraí agus ná tabhair údarú ach d’fheidhmchláir a bhfuil muinín agat astu.",
+    "labelLevel": "Leibhéal rochtana",
+    "labelResource": "Críochphointe MCP",
+    "labelRedirect": "Seoladh atreoraithe",
+    "labelApprove": "Údaraigh",
+    "labelDeny": "Diúltaigh",
+    "errorAuthorization": "Tá an t-iarratas ar údarú neamhbhailí nó níl na ceadanna riachtanacha agat.",
+    "level": {
+      "user": "Úsáideoir",
+      "editor": "Eagarthóir",
+      "workspace": "Riarthóir spáis oibre",
+      "admin": "Riarthóir domhanda"
+    },
+    "labelConnectTitle": "Do chuid uirlisí. Do chead féin.",
+    "descriptionConnect": "Ceangail feidhmchlár IS le schorn.ai agus roghnaigh an rochtain a cheadóidh tú.",
+    "descriptionPermissions": "Fanann na ceadanna atá agat i bhfeidhm. Ní thugann údarú feidhmchláir cearta breise duit.",
+    "descriptionExpiry": "Maireann údarú suas le 30 lá. Déanann feidhmchláir a thacaíonn le comharthaí athnuachana an rochtain a athnuachan go huathoibríoch sa chúlra.",
+    "labelPlatformAccess": "Rochtain ar an ardán",
+    "descriptionLevel": "Roghnaigh an leibhéal rochtana is airde is mian leat a cheadú don fheidhmchlár seo. Níl ar fáil ach leibhéil laistigh de do cheadanna reatha.",
+    "descriptionNoAccess": "Níl cead ag do chuntas an t-ardán a úsáid faoi láthair."
+  },
+  "favorites": {
+    "labelTitle": "Ceanáin",
+    "description": "Tarraing na ceanáin lena hanlaí. Sábháil chun an t-ord, na míreanna bainte agus na socruithe infheictheachta a chur i bhfeidhm.",
+    "labelMove": "Athordaigh {{name}}",
+    "labelRemoveNamed": "Bain {{name}} de na ceanáin",
+    "labelSave": "Sábháil",
+    "labelReset": "Athshocraigh",
+    "labelEmpty": "Níl aon cheanán agat fós.",
+    "labelUnavailable": "Níl ar fáil a thuilleadh",
+    "labelShowInSidebar": "Taispeáin sa bharra taoibh",
+    "errorSave": "Níorbh fhéidir na ceanáin a shábháil. Bain triail eile as.",
+    "types": {
+      "agent": "Gníomhaire",
+      "workspace": "Spás oibre",
+      "transcriber": "Tras-scríobhaí",
+      "documentRepository": "Stór doiciméad",
+      "automation": "Uathoibriú"
     }
   }
 }

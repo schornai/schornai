@@ -38,7 +38,13 @@
   "page": {
     "title": "الملف الشخصي",
     "infoPersonalize": "تخصيص",
-    "infoPersonalizeDescription": "يمكنك هنا رفع صورة ملفك الشخصي وتعديل اسمك."
+    "infoPersonalizeDescription": "يمكنك هنا رفع صورة ملفك الشخصي وتعديل اسمك.",
+    "cardFavoritesLabel": "المفضلة",
+    "cardFavoritesDescription": "قم بفرز وإزالة وعرض المفضلات في الشريط الجانبي.",
+    "cardPermissionsLabel": "الأذونات",
+    "cardPermissionsDescription": "راجع أدوارك وإمكانيات الوصول.",
+    "cardConnectionsLabel": "الاتصالات",
+    "cardConnectionsDescription": "إدارة الاتصالات الشخصية."
   },
   "resetPasswordSuccess.page": {
     "title": "تم تعيين كلمة مرور جديدة",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "الاتصالات",
-      "descriptionConnections": "اتصالات OAuth الشخصية بخوادم MCP. يؤدي قطع الاتصال إلى إزالة بيانات الاعتماد المخزنة هنا. قد تكتمل الاستدعاءات الجارية؛ اسحب أذونات الموفر من موقعه مباشرة.",
       "labelDisconnect": "قطع الاتصال",
-      "descriptionEmpty": "اربط حسابك في المحادثة عندما تطلب أداة MCP تسجيل الدخول.",
       "labelEmpty": "لا توجد اتصالات بعد",
-      "labelInfo": "حول الاتصالات",
-      "errorDisconnect": "تعذر قطع الاتصال. يُرجى المحاولة مجددًا."
+      "errorDisconnect": "تعذر قطع الاتصال. يُرجى المحاولة مجددًا.",
+      "labelOutgoing": "الاتصالات مع الخدمات الخارجية.",
+      "descriptionOutgoing": "يستخدم schorn.ai هذه الحسابات لاستدعاء خدمات MCP نيابة عنك.",
+      "labelServer": "خادم MCP.",
+      "labelCancel": "إلغاء",
+      "labelDisconnectNamed": "قطع الاتصال بـ {{serverUrl}}.",
+      "descriptionDisconnect": "هل تريد قطع الاتصال بـ {{serverUrl}}؟ ستُحذف بيانات الاعتماد المحفوظة هنا. قد تكتمل الطلبات التي بدأ تنفيذها بالفعل. يمكنك إلغاء الصلاحيات مباشرة لدى مزوّد الخدمة."
+    },
+    "incoming": {
+      "labelTitle": "الوصول إلى schorn.ai",
+      "description": "يمكن لهذه التطبيقات الوصول إلى schorn.ai نيابةً عنك عبر MCP. لا يوسّع التفويض صلاحياتك الخاصة.",
+      "labelCreated": "تم التحقق",
+      "labelExpires": "صالح حتى",
+      "labelExpired": "منتهي الصلاحية",
+      "labelRevoke": "إلغاء الوصول",
+      "labelRevokeNamed": "إلغاء الوصول لـ {{name}}",
+      "descriptionRevoke": "هل تريد إلغاء وصول «{{name}}»؟ ستفقد جميع رموز الوصول والتحديث لهذا التفويض صلاحيتها. قد تكتمل الطلبات الجارية بالفعل. يتطلب الاتصال مجددًا تفويضك.",
+      "labelCancel": "إلغاء",
+      "errorRevoke": "لم يتمكن من إلغاء الوصول. يرجى المحاولة مرة أخرى.",
+      "labelApplication": "التطبيق",
+      "labelLevel": "مستوى الوصول"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "الموافقة على {{client}}",
+    "description": "يمكن لهذا التطبيق التصرف نيابة عنك. راجع التفاصيل والموافِق فقط على التطبيقات التي تثق بها.",
+    "labelLevel": "مستوى الوصول",
+    "labelResource": "نقطة نهاية MCP",
+    "labelRedirect": "عنوان إعادة التوجيه",
+    "labelApprove": "الموافقة",
+    "labelDeny": "رفض",
+    "errorAuthorization": "الطلب غير صالح أو صلاحياتك غير كافية.",
+    "level": {
+      "user": "مستخدم",
+      "editor": "محرر",
+      "workspace": "مسؤول مساحة العمل",
+      "admin": "مسؤول/ة عالمي/ة"
+    },
+    "labelConnectTitle": "أدواتك. صلاحياتك.",
+    "descriptionConnect": "قم بتوصيل تطبيق الذكاء الاصطناعي بـ schorn.ai، وحدد الصلاحيات المسموح بها.",
+    "descriptionPermissions": "تبقى صلاحياتك الحالية سارية. تفويض تطبيق لا يمنحك صلاحيات إضافية.",
+    "descriptionExpiry": "تستمر الصلاحية لمدة تصل إلى 30 يومًا. التطبيقات التي تدعم رموز التحديث تجدد الوصول تلقائيًا في الخلفية.",
+    "labelPlatformAccess": "الوصول إلى المنصة",
+    "descriptionLevel": "اختر أعلى مستوى وصول تريد السماح به لهذا التطبيق. لا تتوفر إلا المستويات التي تندرج ضمن صلاحياتك الحالية.",
+    "descriptionNoAccess": "حسابك لا يملك حاليًا أي صلاحية للوصول إلى المنصة."
+  },
+  "favorites": {
+    "labelTitle": "المفضلة",
+    "description": "اسحب العناصر المفضلة من مقبض السحب. احفظ لتطبيق الترتيب وإزالة العناصر المحددة وتحديث إعدادات الظهور.",
+    "labelMove": "إعادة ترتيب {{name}}",
+    "labelRemoveNamed": "حذف {{name}} من المفضلات",
+    "labelSave": "حفظ",
+    "labelReset": "إعادة تعيين",
+    "labelEmpty": "لا توجد مفضلات حتى الآن.",
+    "labelUnavailable": "لم يعد متاحًا",
+    "labelShowInSidebar": "عرض في الشريط الجانبي",
+    "errorSave": "فشل حفظ المفضلات. حاول مرة أخرى.",
+    "types": {
+      "agent": "الوكيل",
+      "workspace": "مساحة العمل",
+      "transcriber": "أداة التفريغ الصوتي",
+      "documentRepository": "مستودع المستندات",
+      "automation": "الأتمتة"
     }
   }
 }

@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "رفع XRAG",
-      "description": "اسحب ملف XRAG إلى هنا لرفعه وتثبيت محتواه.",
+      "description": "قم بسحب ملف XRAG هنا لتحميله وتثبيت محتواه. بعد انقطاع، حدد نفس الملف مرة أخرى لاستئناف التحميل.",
       "buttonUpload": "رفع",
       "errorUpload": "حدث خطأ أثناء رفع ملف XRAG المسمى «{{name}}».",
-      "successUpload": "رُفع XRAG المسمى «{{name}}» بنجاح. قد يستغرق تطبيق التغييرات بضع دقائق حسب حجم الملف المرفوع ونوعه.",
-      "buttonHide": "إخفاء"
+      "successUpload": "{{name}}: التحميل اكتمل. يتم التحقق من النشر بشكل منفصل.",
+      "buttonHide": "إخفاء",
+      "labelProcessing": "{{name}}: التحقق من الصحة والنشر.",
+      "labelPublished": "{{name}}: تم النشر وجاهز للمطابقة.",
+      "errorPublication": "{{name}}: فشل النشر. تحقق من الحزمة وأعد تحميلها.",
+      "errorPublicationStatus": "{{name}}: الحالة غير متوفرة مؤقتًا. محاولة أخرى."
     },
     "TaskTable": {
       "tableColumnType": "النوع",
@@ -334,7 +338,9 @@
     "cardXragLabel": "رفع XRAG",
     "cardXragDescription": "ثبّت وكلاء أو مستندات أو نماذج، أو حدّث النظام بالكامل عبر حزمة XRAG.",
     "cardAppearanceLabel": "المظهر",
-    "cardAppearanceDescription": "خصص ألوان النظام ومظهره كما تريد."
+    "cardAppearanceDescription": "خصص ألوان النظام ومظهره كما تريد.",
+    "cardConnectionsLabel": "الاتصالات",
+    "cardConnectionsDescription": "إدارة تطبيقات OAuth والبحث عن الاتصالات مركزيًا."
   },
   "users.page": {
     "labelTitle": "المستخدمون"
@@ -432,6 +438,7 @@
     "labelNoModels": "لم يُعثر على نماذج",
     "descriptionNoResults": "عدّل بحثك للعثور على نماذج.",
     "descriptionNoModels": "تظهر هنا النماذج المحلية والخارجية. أضف نموذجًا خارجيًا للبدء.",
+    "descriptionNoRegisteredModels": "لا توجد نماذج مسجلة في هذه المثيلة.",
     "labelChooseProvider": "اختر موفرًا",
     "descriptionChooseProvider": "اربط نموذجًا لغويًا خارجيًا بموفره.",
     "labelConfigure": "إعداد",
@@ -467,7 +474,11 @@
     "labelEditSection": "تعديل {{section}}",
     "labelToggleSection": "توسيع/طي {{section}}",
     "descriptionDeleteAgents": "سيُحتفظ بالوكلاء الذين يستخدمون هذا النموذج. لكن لن يمكن استخدامهم مجددًا حتى تعيّن لهم نموذجًا آخر متاحًا.",
-    "descriptionDeleteAgentsTip": "نصيحة: افتح «الخيارات» في نظرة عامة على الوكلاء، ثم جمّع حسب «النموذج». ستظهر الوكلاء المتأثرة ضمن مجموعات «نموذج غير معروف»."
+    "descriptionDeleteAgentsTip": "نصيحة: افتح «الخيارات» في نظرة عامة على الوكلاء، ثم جمّع حسب «النموذج». ستظهر الوكلاء المتأثرة ضمن مجموعات «نموذج غير معروف».",
+    "labelContextUnknown": "لا يوجد حجم سياق.",
+    "descriptionCompressionDisabled": "تم تعطيل ضغط السياق التلقائي بدون تحديد حجم سياق.",
+    "descriptionContextSize": "اختياري، بوحدة الرموز. اتركها فارغة لتعطيل ضغط السياق التلقائي.",
+    "labelContextTokens": "{{size}} رموز"
   },
   "connections": {
     "labelTitle": "الاتصالات",
@@ -516,7 +527,9 @@
     "descriptionOAuthSecret": "يُخزن على الخادم فقط ولا يمكن تغييره بعد الإنشاء.",
     "labelCopyCallback": "نسخ عنوان URL لرد الاتصال",
     "labelCallbackCopied": "تم نسخ عنوان URL لرد الاتصال",
-    "errorCopyCallback": "تعذر نسخ عنوان URL لرد الاتصال"
+    "errorCopyCallback": "تعذر نسخ عنوان URL لرد الاتصال",
+    "labelIssuer": "جهة إصدار OAuth",
+    "descriptionIssuer": "لا يمكن تغييرها بعد الإنشاء."
   },
   "service": {
     "errorUnauthorized": "فشل تفويض الخدمة.",

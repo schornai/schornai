@@ -38,7 +38,13 @@
   "page": {
     "title": "Profiel",
     "infoPersonalize": "Personaliseren",
-    "infoPersonalizeDescription": "Hier kun je je profielfoto uploaden en je naam aanpassen."
+    "infoPersonalizeDescription": "Hier kun je je profielfoto uploaden en je naam aanpassen.",
+    "cardFavoritesLabel": "Favorieten",
+    "cardFavoritesDescription": "Sorteer, verwijder en bekijk favorieten in de zijbalk.",
+    "cardPermissionsLabel": "Rechten",
+    "cardPermissionsDescription": "Bekijk uw rollen en toegangsrechten.",
+    "cardConnectionsLabel": "Verbindingen",
+    "cardConnectionsDescription": "Beheer uw persoonlijke connecties."
   },
   "resetPasswordSuccess.page": {
     "title": "Nieuw wachtwoord ingesteld",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Verbindingen",
-      "descriptionConnections": "Je persoonlijke OAuth-verbindingen met MCP-servers. Bij het verbreken van een verbinding worden de hier opgeslagen inloggegevens verwijderd. Lopende aanroepen kunnen nog worden voltooid; trek rechten rechtstreeks bij de aanbieder in.",
       "labelDisconnect": "Verbinding verbreken",
-      "descriptionEmpty": "Koppel je account in de chat wanneer een MCP-tool vraagt om je aan te melden.",
       "labelEmpty": "Nog geen verbindingen",
-      "labelInfo": "Over verbindingen",
-      "errorDisconnect": "De verbinding kon niet worden verbroken. Probeer het opnieuw."
+      "errorDisconnect": "De verbinding kon niet worden verbroken. Probeer het opnieuw.",
+      "labelOutgoing": "Connecties met externe diensten.",
+      "descriptionOutgoing": "schorn.ai gebruikt deze accounts om externe MCP-diensten namens u aan te roepen.",
+      "labelServer": "MCP-server",
+      "labelCancel": "Annuleren",
+      "labelDisconnectNamed": "Verbinding verbreken met {{serverUrl}}.",
+      "descriptionDisconnect": "De verbinding met {{serverUrl}} verbreken? De hier opgeslagen inloggegevens worden verwijderd. Lopende verzoeken kunnen nog worden afgerond. Je kunt de machtigingen rechtstreeks bij de aanbieder intrekken."
+    },
+    "incoming": {
+      "labelTitle": "Toegang tot schorn.ai",
+      "description": "Deze toepassingen kunnen via MCP namens jou toegang krijgen tot schorn.ai. De machtiging breidt je eigen rechten niet uit.",
+      "labelCreated": "Geautoriseerd op",
+      "labelExpires": "Geldig tot",
+      "labelExpired": "Verstreken",
+      "labelRevoke": "Toegang intrekken",
+      "labelRevokeNamed": "Toegang intrekken voor {{name}}",
+      "descriptionRevoke": "De toegang voor ‘{{name}}’ intrekken? Alle toegangs- en vernieuwingstokens voor deze machtiging worden ongeldig. Lopende verzoeken kunnen nog worden afgerond. Voor een nieuwe verbinding moet je opnieuw toestemming geven.",
+      "labelCancel": "Annuleren",
+      "errorRevoke": "Toegang kon niet worden ingetrokken. Probeer het opnieuw.",
+      "labelApplication": "Toepassing",
+      "labelLevel": "Toegangsniveau"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Autorise {{client}}",
+    "description": "Deze toepassing kan namens u handelen. Bekijk de details en autoriseer alleen toepassingen die u vertrouwt.",
+    "labelLevel": "Toegangsniveau",
+    "labelResource": "MCP-endpoint",
+    "labelRedirect": "Herdirectingsadres",
+    "labelApprove": "Verificeren",
+    "labelDeny": "Weigeren",
+    "errorAuthorization": "De verificatieverzoek is ongeldig of uw rechten zijn onvoldoende.",
+    "level": {
+      "user": "Gebruiker",
+      "editor": "Bewerker",
+      "workspace": "Werkruimtebeheerder",
+      "admin": "Globaal beheerder"
+    },
+    "labelConnectTitle": "Jouw tools. Jouw toestemming.",
+    "descriptionConnect": "Verbind een AI-applicatie met schorn.ai en bepaal welke toegang je wilt verlenen.",
+    "descriptionPermissions": "Je bestaande rechten blijven gelden. Een toepassing machtigen geeft je geen extra rechten.",
+    "descriptionExpiry": "Autorisatie is geldig voor maximaal 30 dagen. Applicaties die refresh tokens ondersteunen, vernieuwen de toegang automatisch in de achtergrond.",
+    "labelPlatformAccess": "Toegang tot platform",
+    "descriptionLevel": "Kies het hoogste toegangsniveau dat je deze toepassing wilt toestaan. Je kunt alleen niveaus kiezen die binnen je huidige rechten vallen.",
+    "descriptionNoAccess": "Je account heeft momenteel geen toestemming om toegang te krijgen tot de platform."
+  },
+  "favorites": {
+    "labelTitle": "Favorieten",
+    "description": "Versleep favorieten met de sleepgreep. Sla op om de volgorde, verwijderingen en zichtbaarheid toe te passen.",
+    "labelMove": "Volgorde van {{name}} wijzigen",
+    "labelRemoveNamed": "{{name}} verwijderen uit favorieten",
+    "labelSave": "Opslaan",
+    "labelReset": "Resetten",
+    "labelEmpty": "Nog geen favorieten.",
+    "labelUnavailable": "Niet meer beschikbaar",
+    "labelShowInSidebar": "In zijbalk tonen",
+    "errorSave": "Favorieten konden niet worden opgeslagen. Probeer het opnieuw.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Werkruimte",
+      "transcriber": "Transcriptor",
+      "documentRepository": "Documentopslagplaats",
+      "automation": "Automatisering"
     }
   }
 }

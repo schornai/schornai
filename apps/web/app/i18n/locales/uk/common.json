@@ -9,8 +9,10 @@
         "history": "Історія"
       },
       "SidebarFavorites": {
+        "labelActions": "Дії для {{name}}",
         "label": "Обране",
-        "empty": "Ви ще нічого не додали до обраного."
+        "empty": "Ви ще нічого не додали до обраного.",
+        "labelEdit": "Редагувати улюблені"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Обране порожнє",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Назва папки...",
       "labelCancel": "Скасувати",
       "labelCreate": "Створити"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Файл готовий.",
+      "errorFile": "Помилка з файлом.",
+      "labelProcessing": "Обробка файлу…",
+      "labelUploading": "Вивантаження файлу · {{progress}}%",
+      "labelUnprocessed": "Обробка ще не завершена."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Не вдалося видалити цей елемент. Спробуйте ще раз."
     },
     "StorageDialogRemove": {
       "labelTitle": "Видалити",
@@ -246,6 +258,7 @@
       "labelDelete": "Видалити папку"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Збереження було призупинено. Попередня версія залишається доступною. Ваш чернетка зберігається тут; спробуйте зберегти ще раз, щоб повністю відновити.",
       "labelContent": "Вміст",
       "labelSave": "Зберегти",
       "labelCancel": "Скасувати",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Виберіть папку призначення",
       "labelSelectFile": "Виберіть наявний файл",
       "descriptionFolder": "Виберіть наявну папку. Буде перенесено один файл; наявні імена ніколи не перезаписуються.",
-      "descriptionFile": "Виберіть файл із цього чату або доступного сховища. Документи й записи мають бути вже оброблені.",
+      "descriptionFile": "Виберіть файл з цього чату або доступного сховища. Ви можете додати файл безпосередньо під час обробки. Копіювання потребує завершення обробки.",
       "labelStorage": "Сховище",
       "labelCurrentStorage": "Поточне сховище",
       "labelUp": "Батьківська папка",
@@ -279,6 +292,129 @@
       "errorCleanup": "Помилка копіювання. Оригінал збережено, але в місці призначення могли залишитися неповні файли. Перевірте його перед повторною спробою.",
       "errorAction": "Операція завершилася помилкою. Перевірте дозволи, імена файлів і обидва місця перед повторною спробою.",
       "errorNotProcessed": "Цей файл ще не оброблено. Спочатку обробіть його, а потім виберіть знову."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Агент",
+        "documentRepository": "Сховище документів",
+        "transcriber": "Транскрибатор"
+      },
+      "labelSelected": "Обрано",
+      "labelChangeResource": "Змінити {{resource}}",
+      "labelChange": "Змінити",
+      "labelClearResource": "Вилучити {{resource}}",
+      "labelChooseResource": "Вибрати {{resource}}",
+      "descriptionUnavailable": "Ваша попередня вибір більше недоступний. Виберіть новий елемент.",
+      "descriptionEmpty": "Ваш вибір тут. Натисніть, щоб додати елемент.",
+      "descriptionDialog": "Виберіть картку, яку ви хочете використати тут.",
+      "labelSearch": "Пошук…",
+      "labelSelectNamed": "Вибрати {{name}}",
+      "labelSelect": "Вибрати",
+      "labelNoResults": "Не знайдено відповідностей",
+      "descriptionNoResults": "Налаштуйте пошук або створіть запис спочатку."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Експортувати XRAG",
+      "labelGlobalId": "Унікальний ідентифікатор",
+      "errorGlobalIdTaken": "Цей унікальний ідентифікатор вже використовується у вибраному робочому просторі.",
+      "errorGlobalId": "Типовий ідентифікатор утворюється з назви у форматі kebab-case. Використовуйте від 1 до 200 символів. Дозволено літери a–z, цифри 0–9, дефіс (-), скісну риску (/) та підкреслення (_).",
+      "labelSaveId": "Зберегти унікальний ідентифікатор",
+      "errorAction": "Операція не вдалася. Перевірте свої права доступу, унікальний ідентифікатор та наявність файлів моделі."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Імпорт та експорт XRAG",
+      "description": "Імпортувати файли XRAG або вибрати об'єкти для експорту.",
+      "labelUpload": "Вибрати файл",
+      "errorUpload": "Не вдалося завантажити файл. Знову виберіть його, щоб продовжити передачу.",
+      "labelWorkspace": "Робочий простір",
+      "labelNewWorkspace": "Створити робочий простір",
+      "labelName": "Назва робочого простору",
+      "descriptionConfirm": "Переглянути вибрані об'єкти. Підтвердити кожен об'єкт, який ви хочете замінити. У сховищах файлів, файли з однаковими назвами замінюються; інші існуючі файли зберігаються.",
+      "labelReplace": "Замінити \"{{name}}\"",
+      "labelImport": "Імпортувати",
+      "descriptionImported": "Імпортовано.",
+      "errorAction": "Операція не вдалася. Перевірте, чи файл XRAG повний і дійсний, та чи у вас є необхідні дозволи. Повторно перегляньте імпорт, якщо об'єкти були змінені.",
+      "labelChooseExternalModel": "Вибрати існуючу модель",
+      "descriptionChooseExternalModel": "Знайдено декілька моделей. Виберіть з'єднання для цього інстансу.",
+      "descriptionModelMatched": "Використовувати “{{name}}” з існуючими обліковими даними.",
+      "descriptionModelMissing": "Немає доступних моделей. Об'єкт все одно буде імпортовано. Виберіть модель після цього.",
+      "labelTabImport": "Імпорт",
+      "labelTabExport": "Експорт",
+      "labelUploadTitle": "Імпортувати XRAG",
+      "descriptionDrop": "Завантажити XRAG-файл або обрати файл.",
+      "descriptionUploading": "Завантаження файлу…",
+      "descriptionImporting": "Імпорт у процесі…",
+      "descriptionInspecting": "Завантаження вмісту…",
+      "labelContent": "Включені об'єкти",
+      "labelSelectAll": "Вибрати все",
+      "labelSelectNone": "Вибрати нічого",
+      "labelSelectObject": "Імпортувати {{name}}",
+      "labelChooseWorkspace": "Вибрати робочий простір",
+      "descriptionWorkspace": "Цей робочий простір застосовується до всіх вибраних об'єктів.",
+      "kind": {
+        "agent": "Агент",
+        "documentRepository": "Сховище документів",
+        "transcriber": "Транскрибатор",
+        "ollamaModel": "Модель",
+        "mlxWhisperModel": "Модель транскрипції",
+        "setup": "Оновити платформу",
+        "files": "Архів файлів",
+        "automation": "Автоматизація"
+      },
+      "labelAnotherUpload": "Завантажити ще один файл XRAG",
+      "labelSelection": "Вибрано",
+      "labelObjectName": "Ім’я",
+      "labelObjectKind": "Тип",
+      "labelObjectDescription": "Опис",
+      "descriptionFilesProcessing": "Файли документів підготуються для пошуку у фоновому режимі."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Скасувати",
+      "labelTitle": "Мої XRAG пакети.",
+      "description": "Додайте ресурси та локальні моделі з деталей. Експортуйте пакет для завантаження всіх його елементів у один XRAG файл.",
+      "labelName": "Назва XRAG пакету.",
+      "labelCreate": "Створити пакет XRAG",
+      "labelAdd": "Додати до XRAG пакету.",
+      "labelPackage": "XRAG пакет.",
+      "labelChoose": "Вибрати XRAG пакет.",
+      "labelExport": "Почати експорт.",
+      "labelDelete": "Видалити пакет XRAG",
+      "labelRemove": "Видалити з XRAG пакету",
+      "labelConfirm": "Видалити",
+      "descriptionEmpty": "Додати об'єкти з їхнього перегляду.",
+      "labelLoading": "Завантаження XRAG пакетів…",
+      "errorLoad": "Не вдалося завантажити XRAG пакети та підключені об'єкти.",
+      "labelRetry": "Спробувати",
+      "descriptionNoPackages": "У вас ще немає XRAG пакетів.",
+      "labelRelated": "Додати підключені об'єкти",
+      "descriptionRelated": "Вибрати об'єкти для додавання як окремі записи в XRAG пакеті.",
+      "kind": {
+        "agent": "Агент",
+        "documentRepository": "Сховище документів",
+        "transcriber": "Транскрибатор",
+        "model": "Модель",
+        "automation": "Автоматизація"
+      },
+      "labelOpenPackage": "Відкрити пакет",
+      "errorCreate": "Не вдалося створити пакет. Спробуйте ще раз.",
+      "errorAdd": "Не вдалося додати вибір до пакету. Перевірте свої дозволи та спробуйте ще раз."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Експорти",
+      "description": "Файли, що завершено, автоматично видаляються через 72 години.",
+      "state_queued": "Очікує на пакетування",
+      "state_retrying": "Сплановано повторити",
+      "state_processing": "Створення пакету",
+      "state_finished": "Готово",
+      "state_error": "Не вдалося",
+      "state_cancelled": "Скасовано",
+      "labelCancel": "Скасувати експорт",
+      "labelDownload": "Завантажити",
+      "labelProgress": "Прогрес завантаження",
+      "state_uploading": "Завантаження архіву",
+      "labelDelete": "Видалити експорт",
+      "descriptionDelete": "Вилучити «{{name}}» зі списку експортів? Якщо існує пов’язаний архів, його також буде видалено.",
+      "labelDismiss": "Скасувати"
     }
   },
   "_welcomeMessage": "Ласкаво просимо до\n\n# schorn.ai in a Box\n\n",

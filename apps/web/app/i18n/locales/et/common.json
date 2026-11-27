@@ -9,8 +9,10 @@
         "history": "Ajalugu"
       },
       "SidebarFavorites": {
+        "labelActions": "Toimingud failiga {{name}}",
         "label": "Lemmikud",
-        "empty": "Lemmikuid pole veel lisatud."
+        "empty": "Lemmikuid pole veel lisatud.",
+        "labelEdit": "Lisadele"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Lemmikuid pole",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Kausta nimi...",
       "labelCancel": "Tühista",
       "labelCreate": "Loo"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fail valmis",
+      "errorFile": "Faili viga",
+      "labelProcessing": "Faili töödeldakse…",
+      "labelUploading": "Faili üleslaadimine · {{progress}}%",
+      "labelUnprocessed": "Veel töötlemata"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Ei suutnud seda elementi kustutada. Palun proovi uuesti."
     },
     "StorageDialogRemove": {
       "labelTitle": "Eemalda",
@@ -246,6 +258,7 @@
       "labelDelete": "Kustuta kaust"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Salvestamine katkes. Eelmine versioon on endiselt saadaval ja sinu mustand on siin alles. Taastamise lõpuleviimiseks proovi uuesti salvestada.",
       "labelContent": "Sisu",
       "labelSave": "Salvesta",
       "labelCancel": "Tühista",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Vali sihtkaust",
       "labelSelectFile": "Vali olemasolev fail",
       "descriptionFolder": "Vali olemasolev kaust. Edastatakse üks fail; olemasolevaid nimesid ei kirjutata kunagi üle.",
-      "descriptionFile": "Vali fail sellest vestlusest või juurdepääsetavast hoidlast. Dokumendid ja salvestised peavad olema juba töödeldud.",
+      "descriptionFile": "Vali fail selle vestlusest või saadavalest kohast. Sa saad lisada faili otse, kui töö on käigus. Koopia nõuab tööd.",
       "labelStorage": "Salvestusruum",
       "labelCurrentStorage": "Praegune salvestusruum",
       "labelUp": "Ülemkaust",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopeerimine ebaõnnestus. Lähtefail säilitati, kuid sihtkohta võivad jääda mittetäielikud failid. Kontrolli sihtkohta enne uut katset.",
       "errorAction": "Toiming ebaõnnestus. Kontrolli õigusi, failinimesid ja mõlemat asukohta enne uut katset.",
       "errorNotProcessed": "Seda faili pole veel töödeldud. Töötle see kõigepealt ja vali seejärel uuesti."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Dokumendihoidla",
+        "transcriber": "Transkribeerija"
+      },
+      "labelSelected": "Valitud",
+      "labelChangeResource": "Muuda valikut {{resource}}",
+      "labelChange": "Muuda",
+      "labelClearResource": "Eemalda {{resource}}",
+      "labelChooseResource": "Vali {{resource}}",
+      "descriptionUnavailable": "Teine valimine enam saadaval. Vali uus.",
+      "descriptionEmpty": "Siin kuvatakse sinu valik. Üksuse lisamiseks klõpsa siin.",
+      "descriptionDialog": "Vali kaardid, mida soovid siia kasutada.",
+      "labelSearch": "Otsi …",
+      "labelSelectNamed": "Vali {{name}}",
+      "labelSelect": "Vali",
+      "labelNoResults": "Ei leitud vastavaid andmeid",
+      "descriptionNoResults": "Parandage oma otsingut või looge uus andmeüksus."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Ekspordi XRAG",
+      "labelGlobalId": "Globaalne ID",
+      "errorGlobalIdTaken": "See globaalne ID on juba kasutuses valitud tööruumis.",
+      "errorGlobalId": "Vaikimisi luuakse ID pealkirjast kebab-case-vormingus. Kasuta 1 kuni 200 märki. Lubatud on tähed a–z, numbrid 0–9, sidekriips (-), kaldkriips (/) ja alakriips (_).",
+      "labelSaveId": "Salva globaalne ID",
+      "errorAction": "Operatsioon ebaõnnestus. Kontrollerid oma õigusi, globaalse ID ja mudelite failide olemasolu."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG import ja eksport",
+      "description": "Importida XRAG-failid või valige objektid eksportimiseks.",
+      "labelUpload": "Vali fail",
+      "errorUpload": "Faili ei õnnestunud laadida. Valige see uuesti, et edasi jätada.",
+      "labelWorkspace": "Tööruum",
+      "labelNewWorkspace": "Loo tööruum",
+      "labelName": "Töörüumi nimi",
+      "descriptionConfirm": "Vaata kaasas olevaid objekte. Kinnita iga olemasolev objekt, mida soovid asendada. Failides, kus on samad nimed, asendatakse failid; teised olemasolevad failid jäävad.",
+      "labelReplace": "Asenda \"{{name}}\"",
+      "labelImport": "Impordi",
+      "descriptionImported": "Import on lõpetatud.",
+      "errorAction": "Toiming ebaõnnestus. Kontrolli, et XRAG-fail oleks täielik ja kehtiv ning et sul oleksid vajalikud õigused. Kui objektid on muutunud, vaata impordi eelvaade uuesti üle.",
+      "labelChooseExternalModel": "Vali olemasolev mudel",
+      "descriptionChooseExternalModel": "Mitmeid mudeleid leitud. Vali, mida kasutada selles instances.",
+      "descriptionModelMatched": "Kasutab “{{name}}” olemasolevate andmesteenidega.",
+      "descriptionModelMissing": "Sobivat mudelit ei leitud. Objekti importimine toimub. Vali mudel hiljem.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Eksport",
+      "labelUploadTitle": "Importa XRAG",
+      "descriptionDrop": "Lae XRAG fail üles või vala faili.",
+      "descriptionUploading": "Faili üleslaadimine…",
+      "descriptionImporting": "Importimine…",
+      "descriptionInspecting": "Sisu laadimine…",
+      "labelContent": "Lisatud objektid",
+      "labelSelectAll": "Kõik valitud",
+      "labelSelectNone": "Mitte midagi valitud",
+      "labelSelectObject": "Impordi {{name}}",
+      "labelChooseWorkspace": "Vali tööruum",
+      "descriptionWorkspace": "See tööruum on aktiivne kõigi valitud objektidega.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumendihoidla",
+        "transcriber": "Transkribeerija",
+        "ollamaModel": "Mudel",
+        "mlxWhisperModel": "Transkribeerimismudel",
+        "setup": "Platvormi uuendus",
+        "files": "Failipakett",
+        "automation": "Automaat"
+      },
+      "labelAnotherUpload": "Laadi üles teine XRAG-fail",
+      "labelSelection": "Valik",
+      "labelObjectName": "Nimi",
+      "labelObjectKind": "Tüüp",
+      "labelObjectDescription": "Kirjeldus",
+      "descriptionFilesProcessing": "Failid on valmis, et otsing toimiks taustal."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Tühista",
+      "labelTitle": "Minud XRAG pakendid",
+      "description": "Lisada ressuseid ja kohalikke mudeleid nende üksuste kohta. Ekspordi pakett, et saada kõik selle sisendid üks XRAG faili.",
+      "labelName": "XRAG paketi nimi",
+      "labelCreate": "Loomi XRAG pakett",
+      "labelAdd": "Lisada XRAG paketti",
+      "labelPackage": "XRAG pakett",
+      "labelChoose": "Vali XRAG pakett",
+      "labelExport": "Alusta eksportimist",
+      "labelDelete": "XRAG paketti kustuta",
+      "labelRemove": "Eemalda XRAG pakist",
+      "labelConfirm": "Eemalda",
+      "descriptionEmpty": "Lisada objekte nende infolehest.",
+      "labelLoading": "XRAG pakke laadimisel…",
+      "errorLoad": "XRAG pakke ja seotud objekte ei saanud laadida.",
+      "labelRetry": "Uuesti proovi",
+      "descriptionNoPackages": "Sul pole veel ühtegi XRAG-paketti.",
+      "labelRelated": "Lisada seotud objekte",
+      "descriptionRelated": "Vali seotud objektid, et lisada need eraldi XRAG pakku.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumendihoidla",
+        "transcriber": "Transkribeerija",
+        "model": "Mudel",
+        "automation": "Automaat"
+      },
+      "labelOpenPackage": "Ava pakett",
+      "errorCreate": "Paketti ei saanud luua. Proovi uuesti.",
+      "errorAdd": "Valikut ei saanud lisada paketti. Kontrolli õigusi ja proovi uuesti."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Ekspordid",
+      "description": "Valmis failid kustutatakse automaatselt 72 tunni pärast.",
+      "state_queued": "Ootab paketi koostamist",
+      "state_retrying": "Uus katse on ajastatud",
+      "state_processing": "Paketi koostamine",
+      "state_finished": "Valmis",
+      "state_error": "Ebaõnnestus",
+      "state_cancelled": "Tühistatud",
+      "labelCancel": "Tühista eksport",
+      "labelDownload": "Lae alla",
+      "labelProgress": "Üleslaadimise edenemine",
+      "state_uploading": "Arhiivi üleslaadimine",
+      "labelDelete": "Kustuta eksport",
+      "descriptionDelete": "Kas eemaldada „{{name}}“ sinu eksportide hulgast? Kui ekspordil on arhiiv, kustutatakse ka see.",
+      "labelDismiss": "Tühista"
     }
   },
   "_welcomeMessage": "Tere tulemast\n\n# schorn.ai in a Box\n\n",

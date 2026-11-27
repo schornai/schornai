@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Ippersonalizza",
-    "infoPersonalizeDescription": "Tista’ ttella’ l-istampa tal-profil tiegħek u tippersonalizza ismek hawn."
+    "infoPersonalizeDescription": "Tista’ ttella’ l-istampa tal-profil tiegħek u tippersonalizza ismek hawn.",
+    "cardFavoritesLabel": "Favoriti",
+    "cardFavoritesDescription": "Issortja l-favoriti, neħħihom jew urihom fil-barra tal-ġenb.",
+    "cardPermissionsLabel": "Permessi",
+    "cardPermissionsDescription": "Ara r-rwoli u l-permessi ta’ aċċess tiegħek.",
+    "cardConnectionsLabel": "Konnessjonijiet",
+    "cardConnectionsDescription": "Immaniġġja l-konnessjonijiet personali tiegħek."
   },
   "resetPasswordSuccess.page": {
     "title": "Password ġdida ssettjata",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Konnessjonijiet",
-      "descriptionConnections": "Il-konnessjonijiet personali OAuth tiegħek mas-servers MCP. Meta tiskonnettja, jitneħħew il-kredenzjali maħżuna hawn. Is-sejħiet li diġà għaddejjin jistgħu jitlestew; irrevoka l-permessi tal-fornitur direttament għand il-fornitur.",
       "labelDisconnect": "Skonnettja",
-      "descriptionEmpty": "Qabbad il-kont tiegħek fil-konversazzjoni meta għodda MCP teħtieġ li tidħol.",
       "labelEmpty": "Għad m’hemmx konnessjonijiet",
-      "labelInfo": "Dwar il-konnessjonijiet",
-      "errorDisconnect": "Il-konnessjoni ma setgħetx tiġi skonnettjata. Erġa’ pprova."
+      "errorDisconnect": "Il-konnessjoni ma setgħetx tiġi skonnettjata. Erġa’ pprova.",
+      "labelOutgoing": "Konnessjonijiet ma’ servizzi esterni",
+      "descriptionOutgoing": "schorn.ai juża dawn il-kontijiet biex isejjaħ servizzi esterni MCP f’ismek.",
+      "labelServer": "Server MCP",
+      "labelCancel": "Ikkanċella",
+      "labelDisconnectNamed": "Skonnettja minn {{serverUrl}}",
+      "descriptionDisconnect": "Trid tiskonnettja minn {{serverUrl}}? Il-kredenzjali maħżuna hawn jitneħħew. It-talbiet li diġà bdew xorta jistgħu jitlestew. Tista’ tirrevoka l-permessi direttament mal-fornitur."
+    },
+    "incoming": {
+      "labelTitle": "Aċċess għal schorn.ai",
+      "description": "Dawn l-applikazzjonijiet jistgħu jaċċessaw schorn.ai permezz ta’ MCP f’ismek. L-awtorizzazzjoni ma tkabbarx il-permessi tiegħek.",
+      "labelCreated": "Data tal-awtorizzazzjoni",
+      "labelExpires": "Validu sa",
+      "labelExpired": "Skada",
+      "labelRevoke": "Irrevoka l-aċċess",
+      "labelRevokeNamed": "Irrevoka l-aċċess għal {{name}}",
+      "descriptionRevoke": "Trid tirrevoka l-aċċess għal “{{name}}”? It-tokens kollha ta’ aċċess u ta’ tiġdid għal din l-awtorizzazzjoni jsiru invalidi. It-talbiet li diġà bdew xorta jistgħu jitlestew. Biex terġa’ ssir konnessjoni jkun meħtieġ l-awtorizzazzjoni tiegħek.",
+      "labelCancel": "Ikkanċella",
+      "errorRevoke": "L-aċċess ma setax jiġi rrevokat. Erġa’ pprova.",
+      "labelApplication": "Applikazzjoni",
+      "labelLevel": "Livell ta’ aċċess"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Awtorizza {{client}}",
+    "description": "Din l-applikazzjoni tista’ taġixxi f’ismek. Irrevedi d-dettalji u awtorizza biss applikazzjonijiet li tafda.",
+    "labelLevel": "Livell ta’ aċċess",
+    "labelResource": "Endpoint MCP",
+    "labelRedirect": "Indirizz tar-ridirezzjoni",
+    "labelApprove": "Awtorizza",
+    "labelDeny": "Irrifjuta",
+    "errorAuthorization": "It-talba għall-awtorizzazzjoni mhix valida jew m’għandekx biżżejjed permessi.",
+    "level": {
+      "user": "Utent",
+      "editor": "Editur",
+      "workspace": "Amministratur tal-ispazju tax-xogħol",
+      "admin": "Amministratur globali"
+    },
+    "labelConnectTitle": "L-għodod tiegħek. Il-permess tiegħek.",
+    "descriptionConnect": "Qabbad applikazzjoni tal-IA ma’ schorn.ai u agħżel liema aċċess trid tippermetti.",
+    "descriptionPermissions": "Il-permessi eżistenti tiegħek jibqgħu japplikaw. L-awtorizzazzjoni ta’ applikazzjoni ma tagħtikx drittijiet oħra.",
+    "descriptionExpiry": "L-awtorizzazzjoni ddum sa 30 jum. Applikazzjonijiet li jappoġġjaw it-tokens ta’ tiġdid iġeddu l-aċċess awtomatikament fl-isfond.",
+    "labelPlatformAccess": "Aċċess għall-pjattaforma",
+    "descriptionLevel": "Agħżel l-ogħla livell ta’ aċċess li trid tippermetti għal din l-applikazzjoni. Huma disponibbli biss livelli li jaqgħu fil-permessi kurrenti tiegħek.",
+    "descriptionNoAccess": "Bħalissa l-kont tiegħek m’għandux permess jaċċessa l-pjattaforma."
+  },
+  "favorites": {
+    "labelTitle": "Favoriti",
+    "description": "Iddreggja l-favoriti mill-manki tagħhom. Issejvja biex tapplika l-ordni, it-tneħħija tal-elementi u l-viżibbiltà.",
+    "labelMove": "Ibdel l-ordni ta’ {{name}}",
+    "labelRemoveNamed": "Neħħi {{name}} mill-favoriti",
+    "labelSave": "Issejvja",
+    "labelReset": "Irrisettja",
+    "labelEmpty": "Għad m’għandekx favoriti.",
+    "labelUnavailable": "M’għadux disponibbli",
+    "labelShowInSidebar": "Uri fil-barra tal-ġenb",
+    "errorSave": "Il-favoriti ma setgħux jiġu ssejvjati. Erġa’ pprova.",
+    "types": {
+      "agent": "Aġent",
+      "workspace": "Spazju tax-xogħol",
+      "transcriber": "Traskrittur",
+      "documentRepository": "Repożitorju tad-dokumenti",
+      "automation": "Awtomazzjoni"
     }
   }
 }

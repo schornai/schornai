@@ -22,6 +22,22 @@ function entries(value, prefix = "", result = new Map()) {
   return result;
 }
 
+function expectedEntries(reference, actual, pluralCategories) {
+  if (!pluralCategories) return reference;
+  const expected = new Map(reference);
+  for (const [key, type] of reference) {
+    if (type !== "string" || !key.endsWith("_other")) continue;
+    const base = key.slice(0, -"_other".length);
+    if (reference.get(base + "_one") !== "string") continue;
+    if (!pluralCategories.includes("one")) expected.delete(base + "_one");
+    for (const category of pluralCategories)
+      expected.set(base + "_" + category, "string");
+    // i18next also accepts an explicit zero label in languages without a zero category.
+    if (actual.has(base + "_zero")) expected.set(base + "_zero", "string");
+  }
+  return expected;
+}
+
 export function checkTranslations(root = defaultRoot) {
   const errors = [];
   const warnings = [];
@@ -65,7 +81,14 @@ export function checkTranslations(root = defaultRoot) {
     return resources;
   }
 
-  function compare(reference, actual, referenceName, language, issues) {
+  function compare(
+    reference,
+    actual,
+    referenceName,
+    language,
+    issues,
+    pluralCategories,
+  ) {
     for (const file of new Set([...reference.keys(), ...actual.keys()])) {
       if (!reference.has(file)) {
         issues.push(
@@ -79,8 +102,12 @@ export function checkTranslations(root = defaultRoot) {
         );
         continue;
       }
-      const expected = reference.get(file);
       const found = actual.get(file);
+      const expected = expectedEntries(
+        reference.get(file),
+        found,
+        pluralCategories,
+      );
       for (const key of new Set([...expected.keys(), ...found.keys()])) {
         if (!found.has(key))
           issues.push(
@@ -105,7 +132,14 @@ export function checkTranslations(root = defaultRoot) {
     (language) => language !== "de" && language !== "en",
   )) {
     const translated = readLanguage(language, warnings);
-    compare(german, translated, "de/en", language, warnings);
+    let pluralCategories;
+    try {
+      pluralCategories = new Intl.PluralRules(language).resolvedOptions()
+        .pluralCategories;
+    } catch {
+      warnings.push(language + ": invalid language tag.");
+    }
+    compare(german, translated, "de/en", language, warnings, pluralCategories);
   }
   return { errors, warnings };
 }

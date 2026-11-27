@@ -9,8 +9,10 @@
         "history": "História"
       },
       "SidebarFavorites": {
+        "labelActions": "Akcie pre {{name}}",
         "label": "Obľúbené",
-        "empty": "Zatiaľ neboli pridané žiadne obľúbené položky."
+        "empty": "Zatiaľ neboli pridané žiadne obľúbené položky.",
+        "labelEdit": "Upraviť obľúbené"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Žiadne obľúbené položky",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Názov priečinka...",
       "labelCancel": "Zrušiť",
       "labelCreate": "Vytvoriť"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Súbor je pripravený.",
+      "errorFile": "Chyba so súborom.",
+      "labelProcessing": "Spracovanie súboru…",
+      "labelUploading": "Nahrávanie súboru · {{progress}} %",
+      "labelUnprocessed": "Zatiaľ nebol spracovaný."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nepodarilo sa odstrániť tento prvok. Skúste to znova."
     },
     "StorageDialogRemove": {
       "labelTitle": "Odobrať",
@@ -246,6 +258,7 @@
       "labelDelete": "Vymazať priečinok"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Ukladanie sa prerušilo. Predchádzajúca verzia je stále k dispozícii a váš koncept zostal zachovaný. Na dokončenie obnovy skúste znova uložiť zmeny.",
       "labelContent": "Obsah",
       "labelSave": "Uložiť",
       "labelCancel": "Zrušiť",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Vybrať cieľový priečinok",
       "labelSelectFile": "Vybrať existujúci súbor",
       "descriptionFolder": "Vyberte existujúci priečinok. Prenesie sa jeden súbor; existujúce názvy sa nikdy neprepíšu.",
-      "descriptionFile": "Vyberte súbor z tohto chatu alebo z dostupného úložiska. Dokumenty a nahrávky musia byť už spracované.",
+      "descriptionFile": "Vyberte súbor z tohto chatu alebo z dostupného úložiiska. Môžete priložiť súbor priamo, keď je súbor spracovávaný. Kopírovanie vyžaduje dokončenie spracovania.",
       "labelStorage": "Úložisko",
       "labelCurrentStorage": "Aktuálne úložisko",
       "labelUp": "Nadradený priečinok",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopírovanie zlyhalo. Zdroj sa zachoval, ale v cieľovom umiestnení môžu byť neúplné súbory. Pred ďalším pokusom ho skontrolujte.",
       "errorAction": "Operácia zlyhala. Pred ďalším pokusom skontrolujte oprávnenia, názvy súborov a obe umiestnenia.",
       "errorNotProcessed": "Tento súbor ešte nebol spracovaný. Najprv ho spracujte a potom znova vyberte."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Úložisko dokumentov",
+        "transcriber": "Prepisovač"
+      },
+      "labelSelected": "Vybrané",
+      "labelChangeResource": "Zmeniť {{resource}}",
+      "labelChange": "Zmeniť",
+      "labelClearResource": "Odstrániť {{resource}}",
+      "labelChooseResource": "Vybrať {{resource}}",
+      "descriptionUnavailable": "Vaša predošlá voľba nie je dostupná. Vyberte novú položku.",
+      "descriptionEmpty": "Tu sa zobrazí váš výber. Kliknutím pridáte položku.",
+      "descriptionDialog": "Vyberte kartu, ktorú chcete použiť tu.",
+      "labelSearch": "Hľadať…",
+      "labelSelectNamed": "Vyberte {{name}}",
+      "labelSelect": "Vybrať",
+      "labelNoResults": "Žiadame žiadne výsledky",
+      "descriptionNoResults": "Upravte svoj vyhľadávanie alebo najprv vytvorte záznam."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Exportovať XRAG",
+      "labelGlobalId": "Globálny ID",
+      "errorGlobalIdTaken": "Toto globálne ID už existuje v vybranej oblasti.",
+      "errorGlobalId": "Predvolené ID sa vytvorí z názvu vo formáte kebab-case. Použite 1 až 200 znakov. Povolené sú písmená a–z, číslice 0–9, spojovníky (-), lomky (/) a podčiarkovníky (_).",
+      "labelSaveId": "Uložiť globálne ID",
+      "errorAction": "Operácia nebola úspešná. Skontrolujte svoje povolenia, globálne ID a dostupnosť súborov modelu."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Import a export XRAG",
+      "description": "Načítajte súbory XRAG alebo vyberte objekty na vyexportovanie.",
+      "labelUpload": "Vybrať súbor",
+      "errorUpload": "Nepodarilo sa nahrať súbor. Vyberte ho znovu, aby ste pokračovali v prenose.",
+      "labelWorkspace": "Pracovný priestor",
+      "labelNewWorkspace": "Vytvoriť pracovný priestor",
+      "labelName": "Názov pracovného priestoru",
+      "descriptionConfirm": "Skontrolujte zahrnuté objekty. Potvrďte každý existujúci objekt, ktorý chcete nahradiť. V repozitóriach súborov sú súbory s rovnakými názvami nahradené; ostatné existujúce súbory sú zachované.",
+      "labelReplace": "Nahradiť “{{name}}”",
+      "labelImport": "Importovať",
+      "descriptionImported": "Import bol dokončený.",
+      "errorAction": "Operácia zlyhala. Skontrolujte, či je súbor XRAG úplný a platný a či máte potrebné oprávnenia. Ak sa objekty zmenili, znova skontrolujte náhľad importu.",
+      "labelChooseExternalModel": "Vybrať existujúci model",
+      "descriptionChooseExternalModel": "Nachádza sa viacero modelov. Vyberte pripojenie, ktoré chcete použiť na tejto inštancii.",
+      "descriptionModelMatched": "Použije sa „{{name}}“ s existujúcimi prihlasovacími údajmi.",
+      "descriptionModelMissing": "Žiadny zodpovedajúci model nie je k dispozícii. Objekt sa aj tak importuje. Model vyberte po importe.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Export",
+      "labelUploadTitle": "Importovať XRAG",
+      "descriptionDrop": "Sem presuňte súbor XRAG alebo vyberte súbor.",
+      "descriptionUploading": "Nahráva sa súbor…",
+      "descriptionImporting": "Prebieha import…",
+      "descriptionInspecting": "Načítanie obsahu…",
+      "labelContent": "Zahrnuté objekty",
+      "labelSelectAll": "Vybrať všetko",
+      "labelSelectNone": "Zrušiť výber všetkých položiek",
+      "labelSelectObject": "Importovať {{name}}",
+      "labelChooseWorkspace": "Vybrať pracovný priestor",
+      "descriptionWorkspace": "Tento pracovný priestor sa vzťahuje na všetky vybrané objekty.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Úložisko dokumentov",
+        "transcriber": "Prepisovač",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Model na prepis",
+        "setup": "Aktualizácia platformy",
+        "files": "Balík súborov",
+        "automation": "Automatizácia"
+      },
+      "labelAnotherUpload": "Nahrať ďalší súbor XRAG",
+      "labelSelection": "Výber",
+      "labelObjectName": "Názov",
+      "labelObjectKind": "Typ",
+      "labelObjectDescription": "Popis",
+      "descriptionFilesProcessing": "Dokumenty sa pripravujú na vyhľadávanie v pozadí."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Zrušiť",
+      "labelTitle": "Moje balíky XRAG",
+      "description": "Pridaj zdroje a lokálne modely z ich detailov. Exportuj balíček na stiahnutie všetkých jeho položiek v jednom XRAG súbore.",
+      "labelName": "Názov balíka XRAG",
+      "labelCreate": "Vytvoriť balík XRAG",
+      "labelAdd": "Pridať do balíka XRAG",
+      "labelPackage": "Balík XRAG",
+      "labelChoose": "Vybrať balík XRAG",
+      "labelExport": "Spustiť export",
+      "labelDelete": "Odstrániť balík XRAG",
+      "labelRemove": "Odstrániť z balíka XRAG",
+      "labelConfirm": "Odobrať",
+      "descriptionEmpty": "Pridať objekty z ich zobrazenia.",
+      "labelLoading": "Načítanie balíkov XRAG…",
+      "errorLoad": "Nepodarilo sa načítať balíky XRAG a pripojené objekty.",
+      "labelRetry": "Znova",
+      "descriptionNoPackages": "Nemáte žiadne balíky XRAG.",
+      "labelRelated": "Pridať pripojené objekty",
+      "descriptionRelated": "Vybrať pripojené objekty na pridanie ako samostatné položky v balíku XRAG.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Úložisko dokumentov",
+        "transcriber": "Prepisovač",
+        "model": "Model",
+        "automation": "Automatizácia"
+      },
+      "labelOpenPackage": "Otvoriť balík",
+      "errorCreate": "Balík sa nepodarilo vytvoriť. Skúste to znova.",
+      "errorAdd": "Výber sa nepodarilo pridať do balíka. Skontrolujte svoje oprávnenia a skúste to znova."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exporty",
+      "description": "Dokončené súbory sa po 72 hodinách automaticky odstránia.",
+      "state_queued": "Čaká na vytvorenie balíka",
+      "state_retrying": "Plánované opätné spustenie",
+      "state_processing": "Vytvára sa balík",
+      "state_finished": "Pripravené",
+      "state_error": "Neúspešné",
+      "state_cancelled": "Zrušené",
+      "labelCancel": "Zrušiť export",
+      "labelDownload": "Stiahnuť",
+      "labelProgress": "Priebeh nahrávania",
+      "state_uploading": "Nahráva sa archív",
+      "labelDelete": "Odstrániť export",
+      "descriptionDelete": "Odstrániť „{{name}}“ z vašich exportov? Ak k exportu existuje archív, odstráni sa tiež.",
+      "labelDismiss": "Zrušiť"
     }
   },
   "_welcomeMessage": "Vitajte v\n\n# schorn.ai in a Box\n\n",

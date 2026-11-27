@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Espacio de trabajo desconocido"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Carpeta raíz",
       "tooltipEdit": "Editar",
       "tooltipInfo": "Información"
     },

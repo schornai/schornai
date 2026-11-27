@@ -38,7 +38,13 @@
   "page": {
     "title": "Profiili",
     "infoPersonalize": "Mukauta",
-    "infoPersonalizeDescription": "Voit ladata profiilikuvasi ja muokata nimeäsi tässä."
+    "infoPersonalizeDescription": "Voit ladata profiilikuvasi ja muokata nimeäsi tässä.",
+    "cardFavoritesLabel": "Suosikit",
+    "cardFavoritesDescription": "Suodota, poista ja näytä suosikit sivupalkissa.",
+    "cardPermissionsLabel": "Oikeudet",
+    "cardPermissionsDescription": "Näytä roolisi ja käyttöoikeudet.",
+    "cardConnectionsLabel": "Yhteydet",
+    "cardConnectionsDescription": "Hallitse henkilökohtaisia yhteyksiä."
   },
   "resetPasswordSuccess.page": {
     "title": "Uusi salasana asetettu",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Yhteydet",
-      "descriptionConnections": "Henkilökohtaiset OAuth-yhteytesi MCP-palvelimiin. Yhteyden katkaisu poistaa tänne tallennetut tunnistetiedot. Jo käynnissä olevat kutsut voivat valmistua; peru palveluntarjoajan oikeudet suoraan palveluntarjoajalta.",
       "labelDisconnect": "Katkaise yhteys",
-      "descriptionEmpty": "Yhdistä tilisi keskustelussa, kun MCP-työkalu pyytää kirjautumaan sisään.",
       "labelEmpty": "Ei vielä yhteyksiä",
-      "labelInfo": "Tietoja yhteyksistä",
-      "errorDisconnect": "Yhteyttä ei voitu katkaista. Yritä uudelleen."
+      "errorDisconnect": "Yhteyttä ei voitu katkaista. Yritä uudelleen.",
+      "labelOutgoing": "Yhteydet ulkoisiin palveluihin.",
+      "descriptionOutgoing": "schorn.ai käyttää näitä tilejä ulkoisten MCP-palveluiden kutsumiseen puolestasi.",
+      "labelServer": "MCP-palvelin",
+      "labelCancel": "Peruuta",
+      "labelDisconnectNamed": "Irrottaudu osoitteesta {{serverUrl}}.",
+      "descriptionDisconnect": "Katkaistaanko yhteys palvelimeen {{serverUrl}}? Tänne tallennetut tunnistetiedot poistetaan. Jo käynnissä olevat pyynnöt voivat silti valmistua. Voit perua oikeudet suoraan palveluntarjoajan kautta."
+    },
+    "incoming": {
+      "labelTitle": "Pääsy schorn.ai:hin",
+      "description": "Nämä sovellukset voivat käyttää schorn.ai-palvelua puolestasi MCP:n kautta. Valtuutus ei laajenna omia käyttöoikeuksiasi.",
+      "labelCreated": "Valtuutettu",
+      "labelExpires": "Voimassa",
+      "labelExpired": "Vanhentunut",
+      "labelRevoke": "Peruuta pääsy",
+      "labelRevokeNamed": "Peruuta pääsy {{name}}:lle",
+      "descriptionRevoke": "Perutaanko sovelluksen ”{{name}}” käyttöoikeus? Kaikki tähän valtuutukseen liittyvät käyttö- ja päivitystunnisteet mitätöidään. Jo käynnissä olevat pyynnöt voivat valmistua. Yhteyden muodostaminen uudelleen edellyttää valtuutustasi.",
+      "labelCancel": "Peruuta",
+      "errorRevoke": "Pääsyä ei voitu peruuttaa. Yritä uudelleen.",
+      "labelApplication": "Sovellus",
+      "labelLevel": "Käyttöoikeus"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Vahvista {{client}}",
+    "description": "Tämä sovellus voi toimia puolestasi. Tarkista tiedot ja vahvista vain sovellukset, joihin luotat.",
+    "labelLevel": "Käyttöoikeus",
+    "labelResource": "MCP-pääte",
+    "labelRedirect": "Ohjaussivu",
+    "labelApprove": "Vahvista",
+    "labelDeny": "Estä",
+    "errorAuthorization": "Valtuutuspyyntö on virheellinen tai sinulla ei ole riittäviä oikeuksia.",
+    "level": {
+      "user": "Käyttäjä",
+      "editor": "Muokkaaja",
+      "workspace": "Työtilan ylläpitäjä",
+      "admin": "Globaali ylläpitäjä"
+    },
+    "labelConnectTitle": "Sinun työkalut. Sinun valtuutuksesi.",
+    "descriptionConnect": "Yhdistä AI-sovellus schorn.ai:hin ja määritä, mitä käyttöoikeuksia annetaan.",
+    "descriptionPermissions": "Nykyiset käyttöoikeutesi pysyvät voimassa. Sovelluksen valtuuttaminen ei laajenna oikeuksiasi.",
+    "descriptionExpiry": "Valtuutus on voimassa jopa 30 päivän ajan. Sovellukset, jotka tukevat virkistystunnuksia, uusiutuvat automaattisesti taustalla.",
+    "labelPlatformAccess": "Alustan pääsy",
+    "descriptionLevel": "Valitse korkein käyttöoikeustaso, jonka haluat myöntää tälle sovellukselle. Valittavissa ovat vain omiin nykyisiin oikeuksiisi sisältyvät tasot.",
+    "descriptionNoAccess": "Tililläsi ei tällä hetkellä ole käyttöoikeutta päästä alustalle."
+  },
+  "favorites": {
+    "labelTitle": "Suosikit",
+    "description": "Siirrä suosikkeja vetokahvasta. Tallenna, jotta uusi järjestys, poistot ja näkyvyysasetukset tulevat voimaan.",
+    "labelMove": "Muuta kohteen {{name}} järjestystä",
+    "labelRemoveNamed": "Poista {{name}} suosituista",
+    "labelSave": "Tallenna",
+    "labelReset": "Palauta",
+    "labelEmpty": "Ei suosikkeja vielä.",
+    "labelUnavailable": "Ei enää saatavilla",
+    "labelShowInSidebar": "Näytä sivupalkissa",
+    "errorSave": "Suosikit eivät tallentuneet. Yritä uudelleen.",
+    "types": {
+      "agent": "Agentti",
+      "workspace": "Työtila",
+      "transcriber": "Litteroija",
+      "documentRepository": "Asiakirjavarasto",
+      "automation": "Automatisointi"
     }
   }
 }

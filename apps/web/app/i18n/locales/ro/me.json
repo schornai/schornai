@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Personalizare",
-    "infoPersonalizeDescription": "Aici poți încărca imaginea de profil și modifica numele."
+    "infoPersonalizeDescription": "Aici poți încărca imaginea de profil și modifica numele.",
+    "cardFavoritesLabel": "Favorite",
+    "cardFavoritesDescription": "Sortați, eliminați și afișa favoritele în bara laterală.",
+    "cardPermissionsLabel": "Permisiuni",
+    "cardPermissionsDescription": "Vizualizați rolurile și permisiunile de acces.",
+    "cardConnectionsLabel": "Conexiuni",
+    "cardConnectionsDescription": "Gestionați conexiunile personale."
   },
   "resetPasswordSuccess.page": {
     "title": "Parolă nouă setată",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Conexiuni",
-      "descriptionConnections": "Conexiunile tale OAuth personale la servere MCP. Deconectarea elimină datele de autentificare stocate aici. Apelurile în curs se pot finaliza; revocă permisiunile direct la furnizor.",
       "labelDisconnect": "Deconectează",
-      "descriptionEmpty": "Conectează-ți contul din conversație când un instrument MCP solicită autentificarea.",
       "labelEmpty": "Încă nu există conexiuni",
-      "labelInfo": "Despre conexiuni",
-      "errorDisconnect": "Conexiunea nu a putut fi deconectată. Încearcă din nou."
+      "errorDisconnect": "Conexiunea nu a putut fi deconectată. Încearcă din nou.",
+      "labelOutgoing": "Conexiuni către servicii externe.",
+      "descriptionOutgoing": "schorn.ai utilizează aceste conturi pentru a apela servicii externe MCP în numele dumneavoastră.",
+      "labelServer": "Server MCP.",
+      "labelCancel": "Anulează",
+      "labelDisconnectNamed": "Deconectați de la {{serverUrl}}.",
+      "descriptionDisconnect": "Te deconectezi de la {{serverUrl}}? Datele de autentificare salvate aici vor fi eliminate. Solicitările deja în curs se pot finaliza. Poți revoca permisiunile direct la furnizor."
+    },
+    "incoming": {
+      "labelTitle": "Acces la schorn.ai",
+      "description": "Aceste aplicații pot accesa schorn.ai în numele tău prin MCP. Autorizarea nu îți extinde permisiunile.",
+      "labelCreated": "Autorizat pe",
+      "labelExpires": "Valabil până la",
+      "labelExpired": "Expirat",
+      "labelRevoke": "Anularea accesului",
+      "labelRevokeNamed": "Anularea accesului pentru {{name}}",
+      "descriptionRevoke": "Revoci accesul pentru „{{name}}”? Toate tokenurile de acces și de reîmprospătare pentru această autorizare vor deveni nevalide. Solicitările în curs se pot finaliza. Reconectarea va necesita autorizarea ta.",
+      "labelCancel": "Anulează",
+      "errorRevoke": "Accesul nu a putut fi revocat. Încercați din nou.",
+      "labelApplication": "Aplicație",
+      "labelLevel": "Nivel de acces"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Autorizează {{client}}",
+    "description": "Această aplicație poate acționa în numele tău. Verifică detaliile și autorizează doar aplicații în care ai încredere.",
+    "labelLevel": "Nivel de acces",
+    "labelResource": "Endpoint MCP",
+    "labelRedirect": "Adresa de redirecționare",
+    "labelApprove": "Autorizează",
+    "labelDeny": "Refuză",
+    "errorAuthorization": "Cererea de autorizare este invalidă sau permisiunile tale sunt insuficiente.",
+    "level": {
+      "user": "Utilizator",
+      "editor": "Editor",
+      "workspace": "Administrator al spațiului de lucru",
+      "admin": "Administrator global"
+    },
+    "labelConnectTitle": "Instrumentele tale. Permisiunile tale.",
+    "descriptionConnect": "Conectează o aplicație AI la schorn.ai și stabilește ce acces să autorizezi.",
+    "descriptionPermissions": "Permisiunile tale actuale se aplică în continuare. Autorizarea unei aplicații nu îți extinde drepturile.",
+    "descriptionExpiry": "Autorizarea durează până la 30 de zile. Aplicațiile care suportă token-uri de reîmprospătare își reînnoiesc accesul automat în fundal.",
+    "labelPlatformAccess": "Acces la platformă",
+    "descriptionLevel": "Alege cel mai înalt nivel de acces permis acestei aplicații. Sunt disponibile doar nivelurile incluse în permisiunile tale actuale.",
+    "descriptionNoAccess": "Contul tău nu are în prezent nicio permisiune de acces la platformă."
+  },
+  "favorites": {
+    "labelTitle": "Favorite",
+    "description": "Trage elementele favorite de mânerul de mutare. Salvează pentru a aplica ordinea, eliminările și setările de vizibilitate.",
+    "labelMove": "Reordonează {{name}}",
+    "labelRemoveNamed": "Șterge {{name}} din favorite",
+    "labelSave": "Salvează",
+    "labelReset": "Resetează",
+    "labelEmpty": "Nu ai favorite încă.",
+    "labelUnavailable": "Nu mai este disponibil",
+    "labelShowInSidebar": "Afișează în bara laterală",
+    "errorSave": "Nu s-au putut salva favoritele. Încearcă din nou.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Spațiu de lucru",
+      "transcriber": "Transcriptor",
+      "documentRepository": "Depozit de documente",
+      "automation": "Automatizări"
     }
   }
 }

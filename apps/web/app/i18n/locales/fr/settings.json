@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Importation XRAG",
-      "description": "Glissez un fichier XRAG ici pour l’importer et installer son contenu.",
+      "description": "Faites glisser un fichier XRAG ici pour le téléverser et installer son contenu. En cas d'interruption, sélectionnez à nouveau le même fichier pour reprendre le téléversement.",
       "buttonUpload": "Importer",
       "errorUpload": "Erreur lors de l’importation du fichier XRAG « {{name}} ».",
-      "successUpload": "Le XRAG « {{name}} » a été importé. Selon la taille et le type du fichier, les modifications peuvent prendre quelques minutes avant d’être appliquées.",
-      "buttonHide": "Masquer"
+      "successUpload": "{{name}}: Téléversement terminé. La publication est vérifiée séparément.",
+      "buttonHide": "Masquer",
+      "labelProcessing": "{{name}}: Validation et publication en cours.",
+      "labelPublished": "{{name}}: Publié et disponible pour les services de correspondance.",
+      "errorPublication": "{{name}}: Publication échouée. Vérifiez le paquet et téléchargez-le à nouveau.",
+      "errorPublicationStatus": "{{name}}: Statut temporairement indisponible. Tentative de reconnexion."
     },
     "TaskTable": {
       "tableColumnType": "Type",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Importer un XRAG",
     "cardXragDescription": "Installez des agents, documents ou modèles, ou mettez à jour toute la box avec un paquet XRAG.",
     "cardAppearanceLabel": "Apparence",
-    "cardAppearanceDescription": "Personnalisez les couleurs et l’apparence de la box selon vos préférences."
+    "cardAppearanceDescription": "Personnalisez les couleurs et l’apparence de la box selon vos préférences.",
+    "cardConnectionsLabel": "Connexions",
+    "cardConnectionsDescription": "Gérer les applications OAuth et rechercher les connexions."
   },
   "users.page": {
     "labelTitle": "Utilisateurs"
@@ -429,6 +435,7 @@
     "labelNoModels": "Aucun modèle trouvé",
     "descriptionNoResults": "Modifiez votre recherche pour trouver des modèles.",
     "descriptionNoModels": "Les modèles locaux et externes s’affichent ici. Ajoutez un modèle externe pour commencer.",
+    "descriptionNoRegisteredModels": "Aucun modèle n'est enregistré sur cette instance.",
     "labelChooseProvider": "Choisir un fournisseur",
     "descriptionChooseProvider": "Connectez un modèle de langage externe à son fournisseur.",
     "labelConfigure": "Configurer",
@@ -464,7 +471,11 @@
     "labelEditSection": "Modifier {{section}}",
     "labelToggleSection": "Développer/réduire {{section}}",
     "descriptionDeleteAgents": "Les agents qui utilisent ce modèle sont conservés. Ils ne pourront toutefois être réutilisés qu’après l’attribution d’un autre modèle disponible.",
-    "descriptionDeleteAgentsTip": "Conseil : dans la liste des agents, ouvrez « Options » et regroupez par « Modèle ». Les agents concernés figurent dans les groupes « Modèle inconnu »."
+    "descriptionDeleteAgentsTip": "Conseil : dans la liste des agents, ouvrez « Options » et regroupez par « Modèle ». Les agents concernés figurent dans les groupes « Modèle inconnu ».",
+    "labelContextUnknown": "Aucune taille de contexte.",
+    "descriptionCompressionDisabled": "La compression automatique du contexte est désactivée sans taille de contexte.",
+    "descriptionContextSize": "Optionnel, en tokens. Laisser vide pour désactiver la compression automatique du contexte.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Connexions",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Enregistré uniquement sur le serveur et non modifiable après la création.",
     "labelCopyCallback": "Copier l’URL de rappel",
     "labelCallbackCopied": "URL de rappel copiée",
-    "errorCopyCallback": "Impossible de copier l’URL de rappel"
+    "errorCopyCallback": "Impossible de copier l’URL de rappel",
+    "labelIssuer": "Émetteur OAuth",
+    "descriptionIssuer": "Ne peut pas être modifié après la création."
   },
   "service": {
     "errorUnauthorized": "L’autorisation du service a échoué.",

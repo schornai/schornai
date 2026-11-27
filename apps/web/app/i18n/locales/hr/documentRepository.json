@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Nepoznat radni prostor"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Glavni direktorij",
       "tooltipEdit": "Uredi",
       "tooltipInfo": "Informacije"
     },

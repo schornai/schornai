@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "مساحة عمل غير معروفة"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "مجلد الجذر",
       "tooltipEdit": "تعديل",
       "tooltipInfo": "معلومات"
     },

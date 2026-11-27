@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Neznámy pracovný priestor"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Hlavná priečinka",
       "tooltipEdit": "Upraviť",
       "tooltipInfo": "Informácie"
     },

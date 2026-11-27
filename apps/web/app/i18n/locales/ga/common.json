@@ -9,8 +9,10 @@
         "history": "Stair"
       },
       "SidebarFavorites": {
+        "labelActions": "Gníomhartha le haghaidh {{name}}",
         "label": "Ceanáin",
-        "empty": "Níor cuireadh aon cheanán leis fós."
+        "empty": "Níor cuireadh aon cheanán leis fós.",
+        "labelEdit": "Cuir na ceanáin in eagar"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Níl aon cheanán ann",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Ainm an fhillteáin...",
       "labelCancel": "Cealaigh",
       "labelCreate": "Cruthaigh"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Comhad réidh",
+      "errorFile": "Earráid sa chomhad",
+      "labelProcessing": "Comhad á phróiseáil…",
+      "labelUploading": "Comhad á uaslódáil · {{progress}}%",
+      "labelUnprocessed": "Gan phróiseáil fós"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Níorbh fhéidir an mhír seo a scriosadh. Bain triail eile as."
     },
     "StorageDialogRemove": {
       "labelTitle": "Bain",
@@ -246,6 +258,7 @@
       "labelDelete": "Scrios fillteán"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Cuireadh isteach ar an sábháil. Tá an leagan roimhe seo ar fáil fós agus tá do dhréacht coinnithe anseo. Bain triail as sábháil arís chun an t-athshlánú a chríochnú.",
       "labelContent": "Ábhar",
       "labelSave": "Sábháil",
       "labelCancel": "Cealaigh",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Roghnaigh fillteán cinn scríbe",
       "labelSelectFile": "Roghnaigh comhad atá ann cheana",
       "descriptionFolder": "Roghnaigh fillteán atá ann cheana. Aistreofar comhad amháin; ní fhorscríobhtar ainmneacha atá ann cheana riamh.",
-      "descriptionFile": "Roghnaigh comhad ón gcomhrá seo nó ó stór inrochtana. Ní mór do na doiciméid agus na taifeadtaí a bheith próiseáilte cheana.",
+      "descriptionFile": "Roghnaigh comhad ón gcomhrá seo nó ó stór doiciméad a bhfuil rochtain agat air. Is féidir comhad a cheangal go díreach agus é á phróiseáil. Fan go gcríochnóidh an phróiseáil sula ndéanann tú cóip de.",
       "labelStorage": "Stóras",
       "labelCurrentStorage": "Stóras reatha",
       "labelUp": "Máthairfhillteán",
@@ -279,6 +292,129 @@
       "errorCleanup": "Theip ar an gcóipeáil. Coinníodh an fhoinse, ach d’fhéadfadh comhaid neamhiomlána a bheith fágtha ag an gceann scríbe. Seiceáil é sula ndéanann tú iarracht eile.",
       "errorAction": "Theip ar an oibríocht. Seiceáil ceadanna, ainmneacha comhaid agus an dá shuíomh sula ndéanann tú iarracht eile.",
       "errorNotProcessed": "Níor próiseáladh an comhad seo fós. Próiseáil é ar dtús, ansin roghnaigh arís é."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Gníomhaire",
+        "documentRepository": "Stór doiciméad",
+        "transcriber": "Tras-scríobhaí"
+      },
+      "labelSelected": "Roghnaithe",
+      "labelChangeResource": "Athraigh {{resource}}",
+      "labelChange": "Athraigh",
+      "labelClearResource": "Bain {{resource}}",
+      "labelChooseResource": "Roghnaigh {{resource}}",
+      "descriptionUnavailable": "Níl an mhír a roghnaigh tú ar fáil a thuilleadh. Roghnaigh ceann eile.",
+      "descriptionEmpty": "Taispeánfar do rogha anseo. Cliceáil chun mír a chur leis.",
+      "descriptionDialog": "Roghnaigh an cárta is mian leat a úsáid anseo.",
+      "labelSearch": "Cuardaigh …",
+      "labelSelectNamed": "Roghnaigh {{name}}",
+      "labelSelect": "Roghnaigh",
+      "labelNoResults": "Níl aon iontráil a oireann don chuardach",
+      "descriptionNoResults": "Athraigh do chuardach nó cruthaigh iontráil ar dtús."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Easpórtáil XRAG",
+      "labelGlobalId": "Aitheantas domhanda",
+      "errorGlobalIdTaken": "Tá an t-aitheantas domhanda seo in úsáid sa spás oibre roghnaithe cheana féin.",
+      "errorGlobalId": "Gintear an t-aitheantas réamhshocraithe ón teideal i bhformáid kebab-case. Úsáid idir 1 agus 200 carachtar as a–z, 0–9, fleiscíní (-), slaiseanna (/) agus fostríoca (_).",
+      "labelSaveId": "Sábháil an t-aitheantas domhanda",
+      "errorAction": "Theip ar an oibríocht. Seiceáil do cheadanna, an t-aitheantas domhanda agus an bhfuil na comhaid samhla ar fáil."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Iompórtáil agus easpórtáil XRAG",
+      "description": "Iompórtáil comhaid XRAG nó roghnaigh oibiachtaí le heaspórtáil.",
+      "labelUpload": "Roghnaigh comhad",
+      "errorUpload": "Níorbh fhéidir comhad a uaslódáil. Roghnaigh arís é chun leanúint den aistriú.",
+      "labelWorkspace": "Spás oibre",
+      "labelNewWorkspace": "Cruthaigh spás oibre",
+      "labelName": "Ainm an spáis oibre",
+      "descriptionConfirm": "Athbhreithnigh na hoibiachtaí atá san áireamh. Deimhnigh gach oibiacht reatha is mian leat a athsholáthar. I stórtha doiciméad, athsholáthraítear comhaid a bhfuil an t-ainm céanna orthu agus coinnítear na comhaid eile.",
+      "labelReplace": "Cuir ceann nua in áit “{{name}}”",
+      "labelImport": "Iompórtáil",
+      "descriptionImported": "Iompórtáil críochnaithe.",
+      "errorAction": "Theip ar an oibríocht. Seiceáil go bhfuil an comhad XRAG iomlán agus bailí agus go bhfuil na ceadanna riachtanacha agat. Má athraíodh oibiachtaí, réamhamharc ar an iompórtáil arís.",
+      "labelChooseExternalModel": "Roghnaigh samhail atá ann cheana",
+      "descriptionChooseExternalModel": "Tá roinnt samhlacha ann a oireann. Roghnaigh an nasc le húsáid ar an ásc seo.",
+      "descriptionModelMatched": "Úsáidfear “{{name}}” leis na dintiúir atá aige cheana.",
+      "descriptionModelMissing": "Níl samhail chomhoiriúnach ar fáil. Iompórtálfar an oibiacht ar aon nós. Roghnaigh samhail ina dhiaidh sin.",
+      "labelTabImport": "Iompórtáil",
+      "labelTabExport": "Easpórtáil",
+      "labelUploadTitle": "Iompórtáil XRAG",
+      "descriptionDrop": "Scaoil comhad XRAG anseo nó roghnaigh comhad.",
+      "descriptionUploading": "Comhad á uaslódáil …",
+      "descriptionImporting": "Iompórtáil ar siúl …",
+      "descriptionInspecting": "An t-ábhar á lódáil …",
+      "labelContent": "Oibiachtaí san áireamh",
+      "labelSelectAll": "Roghnaigh gach ceann",
+      "labelSelectNone": "Díroghnaigh gach ceann",
+      "labelSelectObject": "Iompórtáil {{name}}",
+      "labelChooseWorkspace": "Roghnaigh spás oibre",
+      "descriptionWorkspace": "Baineann an spás oibre seo leis na hoibiachtaí roghnaithe go léir.",
+      "kind": {
+        "agent": "Gníomhaire",
+        "documentRepository": "Stór doiciméad",
+        "transcriber": "Tras-scríobhaí",
+        "ollamaModel": "Samhail",
+        "mlxWhisperModel": "Samhail tras-scríofa",
+        "setup": "Nuashonrú ardáin",
+        "files": "Pacáiste comhad",
+        "automation": "Uathoibriú"
+      },
+      "labelAnotherUpload": "Uaslódáil comhad XRAG eile",
+      "labelSelection": "Roghnú",
+      "labelObjectName": "Ainm",
+      "labelObjectKind": "Cineál",
+      "labelObjectDescription": "Cur síos",
+      "descriptionFilesProcessing": "Tá na comhaid doiciméad á n-ullmhú don chuardach sa chúlra."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Cealaigh",
+      "labelTitle": "Mo phacáistí XRAG",
+      "description": "Cuir acmhainní agus samhlacha áitiúla leis óna sonraí féin. Easpórtáil pacáiste chun a iontrálacha go léir a íoslódáil in aon chomhad XRAG amháin.",
+      "labelName": "Ainm an phacáiste XRAG",
+      "labelCreate": "Cruthaigh pacáiste XRAG",
+      "labelAdd": "Cuir le pacáiste XRAG",
+      "labelPackage": "Pacáiste XRAG",
+      "labelChoose": "Roghnaigh pacáiste XRAG",
+      "labelExport": "Tosaigh an easpórtáil",
+      "labelDelete": "Scrios pacáiste XRAG",
+      "labelRemove": "Bain den phacáiste XRAG",
+      "labelConfirm": "Bain",
+      "descriptionEmpty": "Cuir oibiachtaí leis óna leathanach faisnéise.",
+      "labelLoading": "Pacáistí XRAG á lódáil …",
+      "errorLoad": "Níorbh fhéidir na pacáistí XRAG agus na hoibiachtaí nasctha a lódáil.",
+      "labelRetry": "Bain triail eile as",
+      "descriptionNoPackages": "Níl aon phacáiste XRAG agat fós.",
+      "labelRelated": "Cuir oibiachtaí nasctha leis",
+      "descriptionRelated": "Roghnaigh na hoibiachtaí nasctha le cur leis an bpacáiste XRAG mar iontrálacha ar leith.",
+      "kind": {
+        "agent": "Gníomhaire",
+        "documentRepository": "Stór doiciméad",
+        "transcriber": "Tras-scríobhaí",
+        "model": "Samhail",
+        "automation": "Uathoibriú"
+      },
+      "labelOpenPackage": "Oscail an pacáiste",
+      "errorCreate": "Níorbh fhéidir an pacáiste a chruthú. Bain triail eile as.",
+      "errorAdd": "Níorbh fhéidir na míreanna roghnaithe a chur leis an bpacáiste. Seiceáil do cheadanna agus bain triail eile as."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Easpórtálacha",
+      "description": "Scriostar na comhaid chríochnaithe go huathoibríoch tar éis 72 uair an chloig.",
+      "state_queued": "Sa scuaine le pacáistiú",
+      "state_retrying": "Iarracht eile sceidealaithe",
+      "state_processing": "Pacáiste á chruthú",
+      "state_finished": "Réidh",
+      "state_error": "Theip air",
+      "state_cancelled": "Cealaithe",
+      "labelCancel": "Cealaigh an easpórtáil",
+      "labelDownload": "Íoslódáil",
+      "labelProgress": "Dul chun cinn na huaslódála",
+      "state_uploading": "Cartlann á huaslódáil",
+      "labelDelete": "Scrios an easpórtáil",
+      "descriptionDelete": "An bhfuil fonn ort “{{name}}” a bhaint de d’easpórtálacha? Scriosfar an chartlann freisin má tá sí ann.",
+      "labelDismiss": "Cealaigh"
     }
   },
   "_welcomeMessage": "Fáilte go\n\n# schorn.ai in a Box\n\n",
