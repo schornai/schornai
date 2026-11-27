@@ -511,6 +511,8 @@
       "description": "Wenn nach präzisen Ausdrücken und Sätzen gesucht werden soll. (Namen, Bezeichnungen, etc.)"
     },
     "DocumentRepositoryInfoTranscriber": {
+      "labelEdit": "Transkriptor-Zuordnung bearbeiten",
+      "labelToggleDetails": "Transkriptor-Details ein- oder ausblenden",
       "labelTitle": "Transkriptor",
       "labelChanged": "Geändert",
       "labelUnknownTranscriber": "Unbekannter Transkriptor",

@@ -74,6 +74,7 @@ export function AgentInfo({
       <ResourceInfoLayout
         card={
           <AgentCard
+            fullDescription
             preview={preview}
             documentRepositoryMap={documentRepositoryMap}
             agent={agent}

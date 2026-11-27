@@ -117,6 +117,20 @@ vi.mock("@schornio/aibox-package-database/transcriber/getTranscribers", () => ({
   getTranscribers: vi.fn(async () => state.transcribers),
 }));
 vi.mock(
+  "@schornio/aibox-package-database/transcriber/getTranscriberInfoByIdentifier",
+  () => ({
+    getTranscriberInfoByIdentifier: async (identifier: string) => {
+      const match = state.transcribers.find((t) => t.identifier === identifier);
+      if (match)
+        return {
+          id: match.id,
+          name: match.name,
+          description: match.description,
+        };
+    },
+  }),
+);
+vi.mock(
   "@schornio/aibox-package-database/transcriber/getTranscriberById",
   () => ({ getTranscriberById: vi.fn(async () => state.entity) }),
 );

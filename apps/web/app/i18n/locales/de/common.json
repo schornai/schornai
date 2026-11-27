@@ -112,6 +112,9 @@
       "labelCancel": "Abbrechen",
       "labelCreate": "Erstellen"
     },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Das Löschen ist fehlgeschlagen. Bitte versuche es erneut."
+    },
     "StorageDialogRemove": {
       "labelTitle": "Entfernen",
       "labelDescription": "Möchten Sie \"{{name}}\" wirklich entfernen? Dies kann nicht rückgängig gemacht werden.",

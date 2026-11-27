@@ -23,6 +23,7 @@ import { hasPermission } from "@/lib/hasPermission";
 
 export function AgentCard({
   preview = false,
+  fullDescription = false,
   agent,
   documentRepositoryMap,
   favorites,
@@ -30,6 +31,7 @@ export function AgentCard({
   workspace,
 }: {
   preview?: boolean;
+  fullDescription?: boolean;
   agent?: Partial<Agent>;
   documentRepositoryMap: Map<string | symbol, DocumentRepository>;
   favorites?: SettingFavorites;
@@ -60,7 +62,15 @@ export function AgentCard({
         <CardAppAvatar icon={agent?.icon} />
         <CardAppContent>
           <CardAppName>{agent?.name}</CardAppName>
-          <CardAppDescription>{agent?.description}</CardAppDescription>
+          <CardAppDescription
+            className={
+              fullDescription
+                ? "line-clamp-none whitespace-pre-line"
+                : undefined
+            }
+          >
+            {agent?.description}
+          </CardAppDescription>
         </CardAppContent>
       </CardAppMain>
       <CardAppFooter>

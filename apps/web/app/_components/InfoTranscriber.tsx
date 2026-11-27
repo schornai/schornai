@@ -53,6 +53,7 @@ export function InfoTranscriber({
             {editHref ? (
               <Button
                 nativeButton={false}
+                aria-label={t("labelEdit")}
                 render={<Link href={editHref} />}
                 size="icon-xs"
                 variant="ghost"
@@ -63,7 +64,11 @@ export function InfoTranscriber({
 
             <CollapsibleTrigger
               render={
-                <Button size="icon-xs" variant="ghost">
+                <Button
+                  size="icon-xs"
+                  variant="ghost"
+                  aria-label={t("labelToggleDetails")}
+                >
                   <ChevronsUpDown />
                 </Button>
               }

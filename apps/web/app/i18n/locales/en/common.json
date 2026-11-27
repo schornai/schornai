@@ -112,6 +112,9 @@
       "labelCancel": "Cancel",
       "labelCreate": "Create"
     },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Could not delete this item. Please try again."
+    },
     "StorageDialogRemove": {
       "labelTitle": "Remove",
       "labelDescription": "Are you sure you want to remove \"{{name}}\"? This cannot be undone.",

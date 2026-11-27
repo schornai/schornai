@@ -12,7 +12,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Keine."
   status: "verfügbar"
-  last_verified: "2026-11-22"
+  last_verified: "2026-11-27"
   source_files:
     [
       "apps/web/app/_components/InfoTranscriber.tsx",
@@ -27,7 +27,7 @@ meta:
 
 # Agenteninformationen im Gespräch
 
-Wähle im Gespräch den Reiter **Info**, wenn du wissen möchtest, mit welchem Agenten du arbeitest. Dort findest du seine aktuelle Übersicht und die hinterlegte Dokumentation.
+Wähle im Gespräch den Reiter **Info**, wenn du wissen möchtest, mit welchem Agenten du arbeitest. Dort findest du die vollständige Agentenbeschreibung, die aktuelle Übersicht und die hinterlegte Dokumentation.
 
 Klappe die Informationsbereiche auf, um Modell, Prompt, Rollen, angebundene Ablagen und Werkzeuge zu prüfen. Ist ein Transkriptor eingerichtet und für dich zugänglich, führt **Zum Transkriptor** im aufgeklappten Bereich zu seinen Infos. Die [Agentenübersicht](../details.md) erklärt die einzelnen Angaben.
 

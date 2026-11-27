@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "next-i18next/client";
 import {
   Alert,
   AlertDescription,
@@ -43,6 +44,9 @@ export function ResourceRemovalDialog({
   hasErrored: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const { t } = useT("common", {
+    keyPrefix: "_components.ResourceRemovalDialog",
+  });
   return (
     <AlertDialog
       open={open}
@@ -63,9 +67,11 @@ export function ResourceRemovalDialog({
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
-        {hasErrored && errorMessage && (
+        {hasErrored && (
           <Alert variant="destructive">
-            <AlertDescription>{errorMessage}</AlertDescription>
+            <AlertDescription>
+              {errorMessage ?? t("errorRemove")}
+            </AlertDescription>
           </Alert>
         )}
         <AlertDialogFooter>
