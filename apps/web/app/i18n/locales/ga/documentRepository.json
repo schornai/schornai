@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Spás oibre anaithnid"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Fréamhfhillteán",
       "tooltipEdit": "Cuir in eagar",
       "tooltipInfo": "Eolas"
     },

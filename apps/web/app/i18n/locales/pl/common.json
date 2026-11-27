@@ -9,8 +9,10 @@
         "history": "Historia"
       },
       "SidebarFavorites": {
+        "labelActions": "Działania dla {{name}}",
         "label": "Ulubione",
-        "empty": "Nie dodano jeszcze żadnych ulubionych."
+        "empty": "Nie dodano jeszcze żadnych ulubionych.",
+        "labelEdit": "Zapisy ulubione"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Brak ulubionych",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Nazwa folderu...",
       "labelCancel": "Anuluj",
       "labelCreate": "Utwórz"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Plik gotowy.",
+      "errorFile": "Błąd pliku.",
+      "labelProcessing": "Przetwarzanie pliku…",
+      "labelUploading": "Przesyłanie pliku · {{progress}}%",
+      "labelUnprocessed": "Jeszcze nie przetworzone."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nie udało się usunąć tego elementu. Spróbuj ponownie."
     },
     "StorageDialogRemove": {
       "labelTitle": "Usuń",
@@ -246,6 +258,7 @@
       "labelDelete": "Usuń folder"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Zapis zakończył się nieudane. Poprzednia wersja jest dostępna. Twój szkic jest tutaj; spróbuj zapisać ponownie, aby zakończyć odzyskiwanie.",
       "labelContent": "Zawartość",
       "labelSave": "Zapisz",
       "labelCancel": "Anuluj",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Wybierz folder docelowy",
       "labelSelectFile": "Wybierz istniejący plik",
       "descriptionFolder": "Wybierz istniejący folder. Zostanie przesłany jeden plik; istniejące nazwy nigdy nie są nadpisywane.",
-      "descriptionFile": "Wybierz plik z tego czatu lub z dostępnego repozytorium. Dokumenty i nagrania muszą być już przetworzone.",
+      "descriptionFile": "Wybierz plik z tą czatą lub dostępnym repozytorium. Możesz dodać plik bezpośrednio podczas przetwarzania. Kopiowanie wymaga zakończenia przetwarzania.",
       "labelStorage": "Magazyn",
       "labelCurrentStorage": "Bieżący magazyn",
       "labelUp": "Folder nadrzędny",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopiowanie nie powiodło się. Źródło zostało zachowane, ale w miejscu docelowym mogą pozostać niepełne pliki. Sprawdź je przed ponowną próbą.",
       "errorAction": "Operacja nie powiodła się. Sprawdź uprawnienia, nazwy plików i obie lokalizacje przed ponowną próbą.",
       "errorNotProcessed": "Ten plik nie został jeszcze przetworzony. Najpierw go przetwórz, a następnie wybierz ponownie."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Repozytorium dokumentów",
+        "transcriber": "Transkrybent"
+      },
+      "labelSelected": "Wybrane",
+      "labelChangeResource": "Zmień {{resource}}",
+      "labelChange": "Zmień",
+      "labelClearResource": "Usuń {{resource}}",
+      "labelChooseResource": "Wybierz {{resource}}",
+      "descriptionUnavailable": "Poprzedni wybór nie jest dostępny. Wybierz nowy element.",
+      "descriptionEmpty": "Tutaj umieść swój wybór. Kliknij, aby dodać element.",
+      "descriptionDialog": "Wybierz kartę, którą chcesz użyć tutaj.",
+      "labelSearch": "Wyszukaj…",
+      "labelSelectNamed": "Wybierz {{name}}",
+      "labelSelect": "Wybierz",
+      "labelNoResults": "Brak pasujących wpisów",
+      "descriptionNoResults": "Dostosuj swoje zapytanie lub utwórz wpis najpierw."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Wyeksportuj XRAG",
+      "labelGlobalId": "Unikalny identyfikator",
+      "errorGlobalIdTaken": "Ten unikalny identyfikator już istnieje w wybranym obszarze roboczym.",
+      "errorGlobalId": "Domyślny identyfikator jest tworzony z tytułu w formacie kebab-case. Użyj od 1 do 200 znaków spośród liter a–z, cyfr 0–9, łączników (-), ukośników (/) i podkreśleń (_).",
+      "labelSaveId": "Zapisz unikalny identyfikator",
+      "errorAction": "Operacja nie powiodła. Sprawdź swoje uprawnienia, unikalny identyfikator i dostępność plików modelu."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Import i eksport XRAG",
+      "description": "Zaimportuj pliki XRAG lub wybierz obiekty do eksportu.",
+      "labelUpload": "Wybierz plik",
+      "errorUpload": "Nie udało się przesłać pliku. Wybierz go ponownie, aby wznowić transfer.",
+      "labelWorkspace": "Obszar roboczy",
+      "labelNewWorkspace": "Utwórz obszar roboczy",
+      "labelName": "Nazwa obszaru roboczego",
+      "descriptionConfirm": "Przejrzyj zawarte obiekty. Potwierdź każdy istniejący obiekt, który chcesz zastąpić. W repozytoriach plików, pliki o identycznych nazwach zostaną zastąpione; pozostałe istniejące pliki zostaną zachowane.",
+      "labelReplace": "Zastąp \"{{name}}\"",
+      "labelImport": "Zaimportuj",
+      "descriptionImported": "Import zakończono.",
+      "errorAction": "Operacja nie powiodła. Sprawdź, czy plik XRAG jest kompletny i prawidłowy, oraz czy masz odpowiednie uprawnienia. Ponownie wyświetl import, jeśli obiekty uległy zmianie.",
+      "labelChooseExternalModel": "Wybierz istniejącą model.",
+      "descriptionChooseExternalModel": "Znaleziono wiele modeli. Wybierz połączenie do użycia na tej instancji.",
+      "descriptionModelMatched": "Będzie używane “{{name}}” z istniejącymi danymi.",
+      "descriptionModelMissing": "Brak dostępnych modeli. Obiekt zostanie zaimportowany. Wybierz model później.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Eksport",
+      "labelUploadTitle": "Zaimportuj XRAG",
+      "descriptionDrop": "Wgraj plik XRAG lub wybierz plik.",
+      "descriptionUploading": "Wczytywanie pliku…",
+      "descriptionImporting": "Import w toku…",
+      "descriptionInspecting": "Wczytywanie zawartości…",
+      "labelContent": "Włączone obiekty",
+      "labelSelectAll": "Zaznacz wszystko",
+      "labelSelectNone": "Usuń wszystko",
+      "labelSelectObject": "Zaimportuj {{name}}",
+      "labelChooseWorkspace": "Wybierz obszar roboczy",
+      "descriptionWorkspace": "Ten obszar roboczy dotyczy wszystkich wybranych obiektów.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Repozytorium dokumentów",
+        "transcriber": "Transkrybent",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Model transkrypcji",
+        "setup": "Aktualizacja platformy",
+        "files": "Pakiet plików",
+        "automation": "Automatyzacja"
+      },
+      "labelAnotherUpload": "Załaduj kolejny plik XRAG",
+      "labelSelection": "Wybór",
+      "labelObjectName": "Nazwa",
+      "labelObjectKind": "Typ",
+      "labelObjectDescription": "Opis",
+      "descriptionFilesProcessing": "Dokumenty są przygotowywane do wyszukiwania w tle."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Anuluj",
+      "labelTitle": "Moje pakiety XRAG",
+      "description": "Dodaj zasoby i lokalne modele z ich szczegółów. Wyeksportuj pakiet, aby pobrać wszystkie jego elementy w jednym pliku XRAG.",
+      "labelName": "Nazwa pakietu XRAG",
+      "labelCreate": "Utwórz pakiet XRAG",
+      "labelAdd": "Dodaj do pakietu XRAG",
+      "labelPackage": "Pakiet XRAG",
+      "labelChoose": "Wybierz pakiet XRAG",
+      "labelExport": "Rozpocznij eksport",
+      "labelDelete": "Usuń pakiet XRAG",
+      "labelRemove": "Usuń z pakietu XRAG",
+      "labelConfirm": "Usuń",
+      "descriptionEmpty": "Dodaj obiekty z ich widoku.",
+      "labelLoading": "Wczytywanie pakietów XRAG…",
+      "errorLoad": "Nie udało się wczytać pakietów XRAG i połączonych obiektów.",
+      "labelRetry": "Spróbuj ponownie",
+      "descriptionNoPackages": "Nie masz jeszcze żadnych pakietów XRAG.",
+      "labelRelated": "Dodaj połączone obiekty",
+      "descriptionRelated": "Wybierz połączone obiekty do dodania jako oddzielne wpisy w pakiecie XRAG.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Repozytorium dokumentów",
+        "transcriber": "Transkrybent",
+        "model": "Model",
+        "automation": "Automatyzacja"
+      },
+      "labelOpenPackage": "Otwórz pakiet",
+      "errorCreate": "Nie udało się utworzyć pakietu. Spróbuj ponownie.",
+      "errorAdd": "Nie można dodać wybranej zawartości do pakietu. Sprawdź swoje uprawnienia i spróbuj ponownie."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Eksporty",
+      "description": "Zakończone pliki są automatycznie usuwane po 72 godzinach.",
+      "state_queued": "Czekanie na pakowanie",
+      "state_retrying": "Zaplanowane ponowne próby",
+      "state_processing": "Tworzenie pakietu",
+      "state_finished": "Gotowe",
+      "state_error": "Nie udało się",
+      "state_cancelled": "Anulowano",
+      "labelCancel": "Anuluj eksport",
+      "labelDownload": "Pobierz",
+      "labelProgress": "Postęp przesyłania",
+      "state_uploading": "Przesyłanie archiwu",
+      "labelDelete": "Usuń eksport",
+      "descriptionDelete": "Usunąć „{{name}}” z listy eksportów? Jeśli istnieje powiązane archiwum, ono również zostanie usunięte.",
+      "labelDismiss": "Anuluj"
     }
   },
   "_welcomeMessage": "Witamy w\n\n# schorn.ai in a Box\n\n",

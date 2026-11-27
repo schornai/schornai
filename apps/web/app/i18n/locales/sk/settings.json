@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Nahranie XRAG",
-      "description": "Presuňte sem súbor XRAG na nahranie a inštaláciu jeho obsahu.",
+      "description": "Ťuknite a prenesť súbor XRAG tu, aby ste ho nahrali a nainštalovali. Po prerušení, vyberte ten istý súbor, aby ste pokračovali v nahladení.",
       "buttonUpload": "Nahrať",
       "errorUpload": "Chyba pri nahrávaní súboru XRAG „{{name}}“.",
-      "successUpload": "XRAG „{{name}}“ sa úspešne nahral. Podľa veľkosti a typu nahraného obsahu môže trvať niekoľko minút, kým sa zmeny prejavia.",
-      "buttonHide": "Skryť"
+      "successUpload": "{{name}}: Nahrané. Publikácia je kontrolovaná samostatne.",
+      "buttonHide": "Skryť",
+      "labelProcessing": "{{name}}: Overovanie a publikácia.",
+      "labelPublished": "{{name}}: Zvereň a dostupná pre porovnávacie služby.",
+      "errorPublication": "{{name}}: Publikácia neúspešná. Skontrolujte balík a skúste nahrať znovu.",
+      "errorPublicationStatus": "{{name}}: Stav je momentálne nedostupný. Obrazovanie."
     },
     "TaskTable": {
       "tableColumnType": "Typ",
@@ -332,7 +336,9 @@
     "cardXragLabel": "Nahrať XRAG",
     "cardXragDescription": "Pomocou balíka XRAG nainštalujte agentov, dokumenty či modely alebo aktualizujte celý box.",
     "cardAppearanceLabel": "Vzhľad",
-    "cardAppearanceDescription": "Prispôsobte si farby a vzhľad boxu podľa svojich predstáv."
+    "cardAppearanceDescription": "Prispôsobte si farby a vzhľad boxu podľa svojich predstáv.",
+    "cardConnectionsLabel": "Pripojenia",
+    "cardConnectionsDescription": "Správa OAuth aplikácií a vyhľadávanie spojení."
   },
   "users.page": {
     "labelTitle": "Používatelia"
@@ -430,6 +436,7 @@
     "labelNoModels": "Nenašli sa žiadne modely",
     "descriptionNoResults": "Upravte hľadanie, aby ste našli modely.",
     "descriptionNoModels": "Tu sa zobrazujú lokálne a externé modely. Začnite pridaním externého modelu.",
+    "descriptionNoRegisteredModels": "Žiadne modely nie sú zaregistrované na tomto konte.",
     "labelChooseProvider": "Vyberte poskytovateľa",
     "descriptionChooseProvider": "Pripojte externý jazykový model prostredníctvom jeho poskytovateľa.",
     "labelConfigure": "Nastaviť",
@@ -465,7 +472,11 @@
     "labelEditSection": "Upraviť {{section}}",
     "labelToggleSection": "Rozbaliť/zbaliť {{section}}",
     "descriptionDeleteAgents": "Agenti používajúci tento model sa zachovajú. Nebude ich však možné používať, kým im nepriradíte iný dostupný model.",
-    "descriptionDeleteAgentsTip": "Tip: V prehľade agentov otvorte „Možnosti“ a zoskupte podľa „Model“. Dotknutí agenti sa zobrazia v skupinách „Neznámy model“."
+    "descriptionDeleteAgentsTip": "Tip: V prehľade agentov otvorte „Možnosti“ a zoskupte podľa „Model“. Dotknutí agenti sa zobrazia v skupinách „Neznámy model“.",
+    "labelContextUnknown": "Žiadna veľkosť kontextu.",
+    "descriptionCompressionDisabled": "Automatická kompresia kontextu je vypnutá bez určenej veľkosti kontextu.",
+    "descriptionContextSize": "Voliteľné, v tokenoch. Nechajte prázdne, aby ste vypnúli automatickú kompresiu kontextu.",
+    "labelContextTokens": "{{size}} tokenov"
   },
   "connections": {
     "labelTitle": "Pripojenia",
@@ -514,7 +525,9 @@
     "descriptionOAuthSecret": "Ukladá sa iba na serveri a po vytvorení ho nemožno zmeniť.",
     "labelCopyCallback": "Skopírovať URL spätného volania",
     "labelCallbackCopied": "URL spätného volania skopírovaná",
-    "errorCopyCallback": "URL spätného volania sa nepodarilo skopírovať"
+    "errorCopyCallback": "URL spätného volania sa nepodarilo skopírovať",
+    "labelIssuer": "Zdroje OAuth",
+    "descriptionIssuer": "Nemôže sa zmeniť po vytvorení."
   },
   "service": {
     "errorUnauthorized": "Autorizácia služby zlyhala.",

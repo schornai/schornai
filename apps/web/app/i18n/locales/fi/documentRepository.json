@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Tuntematon työtila"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Pääkansio",
       "tooltipEdit": "Muokkaa",
       "tooltipInfo": "Tiedot"
     },

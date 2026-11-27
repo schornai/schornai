@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Nežinoma darbo sritis"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Pagrindinė folderė",
       "tooltipEdit": "Redaguoti",
       "tooltipInfo": "Informacija"
     },

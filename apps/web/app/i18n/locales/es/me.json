@@ -38,7 +38,13 @@
   "page": {
     "title": "Perfil",
     "infoPersonalize": "Personalizar",
-    "infoPersonalizeDescription": "Aquí puedes subir tu foto de perfil y personalizar tu nombre."
+    "infoPersonalizeDescription": "Aquí puedes subir tu foto de perfil y personalizar tu nombre.",
+    "cardFavoritesLabel": "Favoritos",
+    "cardFavoritesDescription": "Ordenar, eliminar y mostrar tus favoritos en la barra lateral.",
+    "cardPermissionsLabel": "Permisos",
+    "cardPermissionsDescription": "Ver tus roles y permisos de acceso.",
+    "cardConnectionsLabel": "Conexiones",
+    "cardConnectionsDescription": "Gestionar tus conexiones."
   },
   "resetPasswordSuccess.page": {
     "title": "Nueva contraseña establecida",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Conexiones",
-      "descriptionConnections": "Tus conexiones OAuth personales con servidores MCP. Al desconectar, se eliminan las credenciales guardadas aquí. Las llamadas ya iniciadas pueden terminar; revoca los permisos del proveedor directamente con él.",
       "labelDisconnect": "Desconectar",
-      "descriptionEmpty": "Conecta tu cuenta en la conversación cuando una herramienta MCP te pida iniciar sesión.",
       "labelEmpty": "Todavía no hay conexiones",
-      "labelInfo": "Acerca de las conexiones",
-      "errorDisconnect": "No se ha podido desconectar la conexión. Inténtalo de nuevo."
+      "errorDisconnect": "No se ha podido desconectar la conexión. Inténtalo de nuevo.",
+      "labelOutgoing": "Conexiones con servicios externos.",
+      "descriptionOutgoing": "schorn.ai utiliza estas cuentas para acceder a servicios MCP externos en tu nombre.",
+      "labelServer": "Servidor MCP.",
+      "labelCancel": "Cancelar",
+      "labelDisconnectNamed": "Desconectar de {{serverUrl}}.",
+      "descriptionDisconnect": "¿Desconectarse de {{serverUrl}}? Se eliminarán las credenciales guardadas aquí. Las solicitudes en curso aún pueden completarse. Puedes revocar los permisos directamente con el proveedor."
+    },
+    "incoming": {
+      "labelTitle": "Acceder a schorn.ai",
+      "description": "Estas aplicaciones pueden acceder a schorn.ai en tu nombre mediante MCP. La autorización no amplía tus propios permisos.",
+      "labelCreated": "Autorizado en",
+      "labelExpires": "Válido hasta",
+      "labelExpired": "Expirado",
+      "labelRevoke": "Revocar acceso",
+      "labelRevokeNamed": "Revocar acceso para {{name}}",
+      "descriptionRevoke": "¿Revocar el acceso de «{{name}}»? Dejarán de ser válidos todos los tokens de acceso y de actualización de esta autorización. Las solicitudes en curso aún pueden completarse. Para volver a conectarse, la aplicación necesitará tu autorización.",
+      "labelCancel": "Cancelar",
+      "errorRevoke": "No se pudo revocar el acceso. Intente de nuevo.",
+      "labelApplication": "Aplicación",
+      "labelLevel": "Nivel de acceso"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Autorizar {{client}}",
+    "description": "Esta aplicación puede actuar en tu nombre. Revise los detalles y solo autorice aplicaciones en las que confíe.",
+    "labelLevel": "Nivel de acceso",
+    "labelResource": "Endpoint MCP",
+    "labelRedirect": "Dirección de redirección",
+    "labelApprove": "Autorizar",
+    "labelDeny": "Denegar",
+    "errorAuthorization": "La solicitud de autorización es inválida o sus permisos son insuficientes.",
+    "level": {
+      "user": "Usuario",
+      "editor": "Editor",
+      "workspace": "Administrador del espacio de trabajo",
+      "admin": "Administrador global"
+    },
+    "labelConnectTitle": "Tus herramientas. Tu permiso.",
+    "descriptionConnect": "Conecta una aplicación de IA con schorn.ai y decide qué permisos otorgar.",
+    "descriptionPermissions": "Tus permisos existentes siguen aplicándose. Otorgar permisos a una aplicación no amplía tus derechos.",
+    "descriptionExpiry": "La autorización dura hasta 30 días. Las aplicaciones que utilizan tokens de actualización renovan el acceso automáticamente en segundo plano.",
+    "labelPlatformAccess": "Acceso a la plataforma",
+    "descriptionLevel": "Elige el nivel máximo de acceso que quieres conceder a esta aplicación. Solo se ofrecen los niveles que permiten tus permisos actuales.",
+    "descriptionNoAccess": "Tu cuenta actualmente no tiene permisos para acceder a la plataforma."
+  },
+  "favorites": {
+    "labelTitle": "Favoritos",
+    "description": "Arrastra los favoritos usando el control de arrastre. Guarda los cambios para aplicar el orden, las eliminaciones y la visibilidad.",
+    "labelMove": "Reordenar {{name}}",
+    "labelRemoveNamed": "Eliminar {{name}} de favoritos",
+    "labelSave": "Guardar",
+    "labelReset": "Restablecer",
+    "labelEmpty": "No tienes favoritos aún.",
+    "labelUnavailable": "Ya no está disponible",
+    "labelShowInSidebar": "Mostrar en barra lateral",
+    "errorSave": "No se pudieron guardar los favoritos. Intenta de nuevo.",
+    "types": {
+      "agent": "Agente",
+      "workspace": "Espacio de trabajo",
+      "transcriber": "Transcriptor",
+      "documentRepository": "Repositorio de documentos",
+      "automation": "Automatización"
     }
   }
 }

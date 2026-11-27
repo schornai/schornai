@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-lataus",
-      "description": "Vedä XRAG-tiedosto tähän ladataksesi sen ja asentaaksesi sen sisällön.",
+      "description": "Vedä XRAG-tiedosto tähän lataamaan ja asentamaan sen sisällön. Jos yhteys katkesi, valitse tiedosto uudelleen jatkaaksesi latausta.",
       "buttonUpload": "Lataa",
       "errorUpload": "Virhe ladattaessa XRAG-tiedostoa ”{{name}}”.",
-      "successUpload": "XRAG ”{{name}}” ladattiin onnistuneesti. Ladatun sisällön koon ja tyypin mukaan voi kestää muutamia minuutteja, ennen kuin muutokset tulevat voimaan.",
-      "buttonHide": "Piilota"
+      "successUpload": "{{name}}: Lataus valmis. Julkaisu tarkistetaan erikseen.",
+      "buttonHide": "Piilota",
+      "labelProcessing": "{{name}}: Validointi ja julkaisu.",
+      "labelPublished": "{{name}}: Julkaistu ja saatavilla.",
+      "errorPublication": "{{name}}: Julkaisu epäonnistui. Tarkista paketti ja lataa uudelleen.",
+      "errorPublicationStatus": "{{name}}: Tila ei ole tällä hetkellä saatavilla. Yritetään uudelleen."
     },
     "TaskTable": {
       "tableColumnType": "Tyyppi",
@@ -330,7 +334,9 @@
     "cardXragLabel": "Lataa XRAG",
     "cardXragDescription": "Asenna agentteja, asiakirjoja tai malleja tai päivitä koko box XRAG-paketilla.",
     "cardAppearanceLabel": "Ulkoasu",
-    "cardAppearanceDescription": "Mukauta boxin värit ja ulkoasu mieleisiksesi."
+    "cardAppearanceDescription": "Mukauta boxin värit ja ulkoasu mieleisiksesi.",
+    "cardConnectionsLabel": "Yhteydet",
+    "cardConnectionsDescription": "Hallitse OAuth-sovelluksia ja etsi yhteyksiä keskitetusti."
   },
   "users.page": {
     "labelTitle": "Käyttäjät"
@@ -428,6 +434,7 @@
     "labelNoModels": "Malleja ei löytynyt",
     "descriptionNoResults": "Muokkaa hakua löytääksesi malleja.",
     "descriptionNoModels": "Paikalliset ja ulkoiset mallit näkyvät tässä. Aloita lisäämällä ulkoinen malli.",
+    "descriptionNoRegisteredModels": "Ei malleja rekisteröity tälle instanssille.",
     "labelChooseProvider": "Valitse palveluntarjoaja",
     "descriptionChooseProvider": "Yhdistä ulkoinen kielimalli sen palveluntarjoajan kautta.",
     "labelConfigure": "Määritä",
@@ -463,7 +470,11 @@
     "labelEditSection": "Muokkaa osiota {{section}}",
     "labelToggleSection": "Laajenna/supista osio {{section}}",
     "descriptionDeleteAgents": "Tätä mallia käyttävät agentit säilytetään. Niitä ei kuitenkaan voi käyttää, ennen kuin niille määritetään toinen käytettävissä oleva malli.",
-    "descriptionDeleteAgentsTip": "Vinkki: Avaa agenttien yleiskatsauksessa ”Asetukset” ja ryhmittele mallin mukaan. Kyseiset agentit näkyvät ryhmissä ”Tuntematon malli”."
+    "descriptionDeleteAgentsTip": "Vinkki: Avaa agenttien yleiskatsauksessa ”Asetukset” ja ryhmittele mallin mukaan. Kyseiset agentit näkyvät ryhmissä ”Tuntematon malli”.",
+    "labelContextUnknown": "Ei kontekstin kokoa.",
+    "descriptionCompressionDisabled": "Automaattinen kontekstin pakkaus on poistettu käytöstä, kun kontekstin kokoa ei ole määritetty.",
+    "descriptionContextSize": "Valinnainen, tokenien määrässä. Jätä tyhjä poistaaksesi automaattisen kontekstin pakkaamisen.",
+    "labelContextTokens": "{{size}} tokenit"
   },
   "connections": {
     "labelTitle": "Yhteydet",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Tallennetaan vain palvelimelle, eikä sitä voi muuttaa luomisen jälkeen.",
     "labelCopyCallback": "Kopioi paluuosoite",
     "labelCallbackCopied": "Paluuosoite kopioitu",
-    "errorCopyCallback": "Paluuosoitetta ei voitu kopioida"
+    "errorCopyCallback": "Paluuosoitetta ei voitu kopioida",
+    "labelIssuer": "OAuth-antaja",
+    "descriptionIssuer": "Ei voi muuttaa luonnin jälkeen."
   },
   "service": {
     "errorUnauthorized": "Palvelun valtuutus epäonnistui.",

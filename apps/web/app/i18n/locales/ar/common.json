@@ -9,8 +9,10 @@
         "history": "السجل"
       },
       "SidebarFavorites": {
+        "labelActions": "إجراءات {{name}}",
         "label": "المفضلة",
-        "empty": "لم تُضف أي عناصر إلى المفضلة بعد."
+        "empty": "لم تُضف أي عناصر إلى المفضلة بعد.",
+        "labelEdit": "تعديل المفضلة"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "لا توجد مفضلة",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "اسم المجلد...",
       "labelCancel": "إلغاء",
       "labelCreate": "إنشاء"
+    },
+    "StorageObjectTile": {
+      "labelReady": "الملف جاهز",
+      "errorFile": "خطأ في الملف",
+      "labelProcessing": "معالجة الملف…",
+      "labelUploading": "جارٍ رفع الملف · {{progress}}٪",
+      "labelUnprocessed": "لم تتم المعالجة بعد"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "تعذر حذف هذا العنصر. يرجى المحاولة مرة أخرى."
     },
     "StorageDialogRemove": {
       "labelTitle": "إزالة",
@@ -246,6 +258,7 @@
       "labelDelete": "حذف المجلد"
     },
     "StorageFileEditor": {
+      "errorRecovery": "توقف حفظ البيانات. النسخة السابقة متاحة. سيتم الاحتفاظ بنسخة مسودتك هنا؛ حاول الحفظ مرة أخرى لإكمال الاستعادة.",
       "labelContent": "المحتوى",
       "labelSave": "حفظ",
       "labelCancel": "إلغاء",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "اختر مجلد الوجهة",
       "labelSelectFile": "اختر ملفًا موجودًا",
       "descriptionFolder": "اختر مجلدًا موجودًا. سيُنقل ملف واحد؛ ولا تُستبدل الأسماء الموجودة أبدًا.",
-      "descriptionFile": "اختر ملفًا من هذه المحادثة أو من مستودع يمكنك الوصول إليه. يجب أن تكون المستندات والتسجيلات قد عولجت مسبقًا.",
+      "descriptionFile": "اختر ملفًا من هذه المحادثة أو مستودع قابل للوصول. يمكنك إرفاق ملف مباشرة أثناء المعالجة. يتطلب النسخ إكمال المعالجة.",
       "labelStorage": "التخزين",
       "labelCurrentStorage": "التخزين الحالي",
       "labelUp": "المجلد الأب",
@@ -279,6 +292,129 @@
       "errorCleanup": "فشل النسخ. تم الاحتفاظ بالمصدر، لكن قد تبقى ملفات غير مكتملة في الوجهة. تحقق منها قبل المحاولة مجددًا.",
       "errorAction": "فشلت العملية. تحقق من الأذونات وأسماء الملفات والموقعين قبل المحاولة مجددًا.",
       "errorNotProcessed": "لم يُعالج هذا الملف بعد. عالجه أولًا، ثم اختره مجددًا."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "الوكيل",
+        "documentRepository": "مستودع المستندات",
+        "transcriber": "أداة التفريغ الصوتي"
+      },
+      "labelSelected": "محدد",
+      "labelChangeResource": "تغيير {{resource}}",
+      "labelChange": "تغيير",
+      "labelClearResource": "إزالة {{resource}}",
+      "labelChooseResource": "اختيار {{resource}}",
+      "descriptionUnavailable": "الاختيار السابق غير متاح. اختر إضافة جديدة.",
+      "descriptionEmpty": "هنا سيتم إضافة الاختيار. انقر لإضافة عنصر.",
+      "descriptionDialog": "اختر البطاقة التي تريد استخدامها هنا.",
+      "labelSearch": "ابحث…",
+      "labelSelectNamed": "حدد {{name}}",
+      "labelSelect": "حدد",
+      "labelNoResults": "لا توجد نتائج مطابقة",
+      "descriptionNoResults": "قم بتعديل بحثك أو قم بإنشاء إدخال أولاً."
+    },
+    "XRAGExportButton": {
+      "labelExport": "تصدير XRAG",
+      "labelGlobalId": "معرف عالمي",
+      "errorGlobalIdTaken": "هذا المعرف العالمي مستخدم بالفعل في مساحة العمل المحددة.",
+      "errorGlobalId": "يُنشأ المعرّف الافتراضي من العنوان بصيغة kebab-case. استخدم من 1 إلى 200 حرف من الأحرف a–z والأرقام 0–9 والشرطات (-) والشرطات المائلة (/) والشرطات السفلية (_).",
+      "labelSaveId": "حفظ معرف عالمي",
+      "errorAction": "فشل العملية. تحقق من صلاحياتك، والمعرف العالمي، وتوفر ملفات النموذج."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "استيراد وتصدير XRAG",
+      "description": "استيراد ملفات XRAG أو تحديد العناصر للتصدير.",
+      "labelUpload": "اختر ملفًا",
+      "errorUpload": "لم يتم تحميل الملف. اختره مرة أخرى لإعادة التحميل.",
+      "labelWorkspace": "مساحة العمل",
+      "labelNewWorkspace": "إنشاء مساحة عمل",
+      "labelName": "اسم مساحة العمل",
+      "descriptionConfirm": "مراجعة العناصر المضمنة. تأكيد كل عنصر موجود ترغب في استبداله. في مستودعات الملفات، يتم استبدال الملفات التي تحمل نفس الاسم؛ يتم الاحتفاظ بملفات أخرى موجودة.",
+      "labelReplace": "استبدال \"{{name}}\"",
+      "labelImport": "استيراد",
+      "descriptionImported": "تم الاستيراد.",
+      "errorAction": "فشل الإجراء. تأكد من أن ملف XRAG كامل وصالح، وأن لديك الأذونات اللازمة. أعد مراجعة الاستيراد إذا تغيرت الكائنات.",
+      "labelChooseExternalModel": "اختر نموذجًا موجودًا",
+      "descriptionChooseExternalModel": "عدة نماذج تطابق. اختر الاتصال الذي تريد استخدامه في هذه الحصة.",
+      "descriptionModelMatched": "سيتم استخدام “{{name}}” مع بيانات الاعتماد الخاصة به.",
+      "descriptionModelMissing": "لا يوجد نموذج مطابق. سيتم استيراد الكائن على أي حال. اختر نموذجًا لاحقًا.",
+      "labelTabImport": "استيراد",
+      "labelTabExport": "تصدير",
+      "labelUploadTitle": "استيراد XRAG",
+      "descriptionDrop": "قم بتحميل ملف XRAG هنا أو اختر ملفًا.",
+      "descriptionUploading": "تحميل الملف…",
+      "descriptionImporting": "الاستيراد قيد التنفيذ…",
+      "descriptionInspecting": "تحميل المحتوى…",
+      "labelContent": "الكائنات المضمنة",
+      "labelSelectAll": "تحديد الكل",
+      "labelSelectNone": "إلغاء تحديد الكل",
+      "labelSelectObject": "استيراد {{name}}",
+      "labelChooseWorkspace": "اختيار مساحة العمل",
+      "descriptionWorkspace": "هذه المساحة تنطبق على جميع الكائنات المحددة.",
+      "kind": {
+        "agent": "الوكيل",
+        "documentRepository": "مستودع المستندات",
+        "transcriber": "أداة التفريغ الصوتي",
+        "ollamaModel": "النموذج",
+        "mlxWhisperModel": "نموذج التفريغ الصوتي",
+        "setup": "تحديث المنصة",
+        "files": "حزمة ملفات",
+        "automation": "الأتمتة"
+      },
+      "labelAnotherUpload": "تحميل ملف XRAG آخر",
+      "labelSelection": "تحديد",
+      "labelObjectName": "الاسم",
+      "labelObjectKind": "النوع",
+      "labelObjectDescription": "الوصف",
+      "descriptionFilesProcessing": "يتم إعداد الملفات للبحث في الخلفية."
+    },
+    "XRAGPackages": {
+      "labelCancel": "إلغاء",
+      "labelTitle": "مجموعات XRAG الخاصة بي.",
+      "description": "إضافة موارد ونماذج محلية من تفاصيلها. تصدير الحزمة لإنزال جميع إدخالاتها في ملف XRAG واحد.",
+      "labelName": "اسم حزمة XRAG",
+      "labelCreate": "إنشاء حزمة XRAG",
+      "labelAdd": "إضافة إلى حزمة XRAG",
+      "labelPackage": "حزمة XRAG",
+      "labelChoose": "اختيار حزمة XRAG",
+      "labelExport": "بدء التصدير",
+      "labelDelete": "حذف حزمة XRAG",
+      "labelRemove": "إزالة من حزمة XRAG",
+      "labelConfirm": "إزالة",
+      "descriptionEmpty": "إضافة الكائنات من عرضها.",
+      "labelLoading": "تحميل حزم XRAG…",
+      "errorLoad": "فشل تحميل حزم XRAG والكائنات المتصلة.",
+      "labelRetry": "إعادة المحاولة",
+      "descriptionNoPackages": "ليس لديك أي حزم XRAG حتى الآن.",
+      "labelRelated": "إضافة كائنات متصلة",
+      "descriptionRelated": "تحديد الكائنات المتصلة لإضافتها كإدخالات منفصلة في حزمة XRAG.",
+      "kind": {
+        "agent": "الوكيل",
+        "documentRepository": "مستودع المستندات",
+        "transcriber": "أداة التفريغ الصوتي",
+        "model": "النموذج",
+        "automation": "الأتمتة"
+      },
+      "labelOpenPackage": "فتح الحزمة",
+      "errorCreate": "لم يتم إنشاء الحزمة. حاول مرة أخرى.",
+      "errorAdd": "تعذر إضافة الاختيار إلى الحزمة. تحقق من صلاحياتك وحاول مرة أخرى."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "عمليات التصدير",
+      "description": "سيتم حذف الملفات المكتملة تلقائيًا بعد 72 ساعة.",
+      "state_queued": "في قائمة التعبئة",
+      "state_retrying": "جدولة إعادة المحاولة",
+      "state_processing": "إنشاء حزمة",
+      "state_finished": "جاهز",
+      "state_error": "فشل",
+      "state_cancelled": "أُلغي",
+      "labelCancel": "إلغاء التصدير",
+      "labelDownload": "تنزيل",
+      "labelProgress": "تقدّم الرفع",
+      "state_uploading": "تحميل أرشيف",
+      "labelDelete": "حذف التصدير",
+      "descriptionDelete": "هل تريد إزالة «{{name}}» من عمليات التصدير؟ سيُحذف الأرشيف المرتبط بها أيضًا إن وُجد.",
+      "labelDismiss": "إلغاء"
     }
   },
   "_welcomeMessage": "مرحبًا بك في\n\n# schorn.ai in a Box\n\n",

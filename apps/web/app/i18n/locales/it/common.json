@@ -9,8 +9,10 @@
         "history": "Cronologia"
       },
       "SidebarFavorites": {
+        "labelActions": "Azioni per {{name}}",
         "label": "Preferiti",
-        "empty": "Non hai ancora aggiunto preferiti."
+        "empty": "Non hai ancora aggiunto preferiti.",
+        "labelEdit": "Modifica preferiti"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Nessun preferito",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Nome della cartella...",
       "labelCancel": "Annulla",
       "labelCreate": "Crea"
+    },
+    "StorageObjectTile": {
+      "labelReady": "File pronto",
+      "errorFile": "Errore file",
+      "labelProcessing": "Elaborazione file…",
+      "labelUploading": "Caricamento del file · {{progress}}%",
+      "labelUnprocessed": "Non ancora elaborato"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Impossibile eliminare questo elemento. Riprova."
     },
     "StorageDialogRemove": {
       "labelTitle": "Rimuovi",
@@ -246,6 +258,7 @@
       "labelDelete": "Elimina cartella"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Il salvataggio è stato interrotto. La versione precedente è disponibile. Il tuo progetto è stato salvato qui; riprova per completare il recupero.",
       "labelContent": "Contenuto",
       "labelSave": "Salva",
       "labelCancel": "Annulla",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Scegli cartella di destinazione",
       "labelSelectFile": "Scegli un file esistente",
       "descriptionFolder": "Scegli una cartella esistente. Verrà trasferito un file; i nomi esistenti non vengono mai sovrascritti.",
-      "descriptionFile": "Scegli un file di questa chat o di un archivio accessibile. Documenti e registrazioni devono essere già stati elaborati.",
+      "descriptionFile": "Seleziona un file da questa chat o da un archivio accessibile. Puoi allegare un file direttamente mentre è in elaborazione. La copia richiede l'elaborazione.",
       "labelStorage": "Archivio",
       "labelCurrentStorage": "Archivio corrente",
       "labelUp": "Cartella superiore",
@@ -279,6 +292,129 @@
       "errorCleanup": "Copia non riuscita. L’originale è stato conservato, ma nella destinazione potrebbero essere rimasti file incompleti. Controllala prima di riprovare.",
       "errorAction": "Operazione non riuscita. Controlla le autorizzazioni, i nomi dei file ed entrambe le posizioni prima di riprovare.",
       "errorNotProcessed": "Questo file non è stato ancora elaborato. Elaboralo prima, poi selezionalo nuovamente."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agente",
+        "documentRepository": "Archivio di documenti",
+        "transcriber": "Trascrittore"
+      },
+      "labelSelected": "Selezionato",
+      "labelChangeResource": "Modifica {{resource}}",
+      "labelChange": "Modifica",
+      "labelClearResource": "Rimuovi {{resource}}",
+      "labelChooseResource": "Seleziona {{resource}}",
+      "descriptionUnavailable": "L'ultima selezione non è più disponibile. Scegli una nuova.",
+      "descriptionEmpty": "Qui la tua selezione. Clicca per aggiungere un elemento.",
+      "descriptionDialog": "Scegli la scheda che desideri utilizzare qui.",
+      "labelSearch": "Cerca…",
+      "labelSelectNamed": "Seleziona {{name}}",
+      "labelSelect": "Seleziona",
+      "labelNoResults": "Nessun risultato",
+      "descriptionNoResults": "Modifica la tua ricerca o crea un'entrata."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Esporta XRAG",
+      "labelGlobalId": "ID globale",
+      "errorGlobalIdTaken": "Questo ID globale è già in uso nello spazio di lavoro selezionato.",
+      "errorGlobalId": "L'ID predefinito viene generato dal titolo in formato kebab-case. Utilizza da 1 a 200 caratteri da a-z, 0-9, trattini (-), barre (/), e underscore (_).",
+      "labelSaveId": "Salva ID globale",
+      "errorAction": "Operazione fallita. Controlla le tue autorizzazioni, l'ID globale e la disponibilità dei file del modello."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Importa ed esporta XRAG",
+      "description": "Importa i file XRAG o seleziona gli oggetti da esportare.",
+      "labelUpload": "Seleziona file",
+      "errorUpload": "Impossibile caricare il file. Selezionalo nuovamente per riprendere il trasferimento.",
+      "labelWorkspace": "Spazio di lavoro",
+      "labelNewWorkspace": "Crea spazio di lavoro",
+      "labelName": "Nome spazio di lavoro",
+      "descriptionConfirm": "Controlla gli oggetti inclusi. Conferma ogni oggetto esistente che desideri sostituire. Nei repository di documenti, i file con nomi corrispondenti vengono sostituiti; altri file esistenti vengono mantenuti.",
+      "labelReplace": "Sostituisci \"{{name}}\"",
+      "labelImport": "Importa",
+      "descriptionImported": "Importazione completata.",
+      "errorAction": "Operazione fallita. Verifica che il file XRAG sia completo e valido e che tu abbia le autorizzazioni necessarie. Rivedi l'importazione se gli oggetti sono stati modificati.",
+      "labelChooseExternalModel": "Seleziona un modello esistente",
+      "descriptionChooseExternalModel": "Sono disponibili più modelli. Seleziona la connessione da utilizzare su questa istanza.",
+      "descriptionModelMatched": "Utilizzeremo “{{name}}\" con le sue credenziali esistenti.",
+      "descriptionModelMissing": "Nessun modello corrispondente disponibile. L'oggetto verrà comunque importato. Seleziona un modello successivamente.",
+      "labelTabImport": "Importazione",
+      "labelTabExport": "Esportazione",
+      "labelUploadTitle": "Importa XRAG",
+      "descriptionDrop": "Carica un file XRAG oppure selezionalo.",
+      "descriptionUploading": "Caricamento del file…",
+      "descriptionImporting": "Importazione in corso…",
+      "descriptionInspecting": "Lettura del contenuto…",
+      "labelContent": "Oggetti inclusi",
+      "labelSelectAll": "Seleziona tutto",
+      "labelSelectNone": "Deseleziona tutto",
+      "labelSelectObject": "Importa {{name}}",
+      "labelChooseWorkspace": "Seleziona lo spazio di lavoro – Seleziona lo spazio di lavoro",
+      "descriptionWorkspace": "Questo spazio di lavoro si applica a tutti gli oggetti selezionati – Questo spazio di lavoro si applica a tutti gli oggetti selezionati",
+      "kind": {
+        "agent": "Agente",
+        "documentRepository": "Archivio di documenti",
+        "transcriber": "Trascrittore",
+        "ollamaModel": "Modello",
+        "mlxWhisperModel": "Modello di trascrizione",
+        "setup": "Aggiornamento piattaforma – Aggiornamento piattaforma",
+        "files": "Pacchetto file – Pacchetto file",
+        "automation": "Automazione"
+      },
+      "labelAnotherUpload": "Carica un altro file XRAG",
+      "labelSelection": "Selezione",
+      "labelObjectName": "Nome",
+      "labelObjectKind": "Tipo",
+      "labelObjectDescription": "Descrizione",
+      "descriptionFilesProcessing": "I file verranno preparati per la ricerca in background."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Annulla",
+      "labelTitle": "I miei pacchetti XRAG",
+      "description": "Aggiungi risorse e modelli locali dai dettagli. Esporta un pacchetto per scaricare tutte le sue voci in un singolo file XRAG.",
+      "labelName": "Nome pacchetto XRAG",
+      "labelCreate": "Crea pacchetto XRAG",
+      "labelAdd": "Aggiungi al pacchetto XRAG",
+      "labelPackage": "Pacchetto XRAG",
+      "labelChoose": "Seleziona pacchetto XRAG",
+      "labelExport": "Avvia esportazione",
+      "labelDelete": "Elimina pacchetto XRAG",
+      "labelRemove": "Rimuovi dal pacchetto XRAG",
+      "labelConfirm": "Rimuovi",
+      "descriptionEmpty": "Aggiungi oggetti dalla loro vista informativa.",
+      "labelLoading": "Caricamento pacchetti XRAG…",
+      "errorLoad": "Impossibile caricare i pacchetti XRAG e gli oggetti collegati.",
+      "labelRetry": "Riprova",
+      "descriptionNoPackages": "Non hai ancora pacchetti XRAG.",
+      "labelRelated": "Aggiungi oggetti collegati",
+      "descriptionRelated": "Seleziona gli oggetti collegati da aggiungere come voci separate nel pacchetto XRAG.",
+      "kind": {
+        "agent": "Agente",
+        "documentRepository": "Archivio di documenti",
+        "transcriber": "Trascrittore",
+        "model": "Modello",
+        "automation": "Automazione"
+      },
+      "labelOpenPackage": "Apri pacchetto",
+      "errorCreate": "Impossibile creare il pacchetto. Riprova.",
+      "errorAdd": "Impossibile aggiungere la selezione al pacchetto. Controlla le tue autorizzazioni e riprova."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Esportazioni",
+      "description": "I file completati vengono eliminati automaticamente dopo 72 ore.",
+      "state_queued": "In attesa di essere impacchettato",
+      "state_retrying": "Programmato per il retry",
+      "state_processing": "Creazione del pacchetto",
+      "state_finished": "Pronto",
+      "state_error": "Fallito",
+      "state_cancelled": "Annullata",
+      "labelCancel": "Annulla esportazione",
+      "labelDownload": "Scarica",
+      "labelProgress": "Progresso caricamento",
+      "state_uploading": "Caricamento archivio",
+      "labelDelete": "Elimina esportazione",
+      "descriptionDelete": "Vuoi rimuovere «{{name}}» dalle tue esportazioni? Verrà eliminato anche l’archivio associato, se presente.",
+      "labelDismiss": "Annulla"
     }
   },
   "_welcomeMessage": "Benvenuto in\n\n# schorn.ai in a Box\n\n",

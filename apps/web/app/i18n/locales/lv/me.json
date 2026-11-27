@@ -38,7 +38,13 @@
   "page": {
     "title": "Profils",
     "infoPersonalize": "Personalizēt",
-    "infoPersonalizeDescription": "Šeit varat augšupielādēt profila attēlu un mainīt savu vārdu."
+    "infoPersonalizeDescription": "Šeit varat augšupielādēt profila attēlu un mainīt savu vārdu.",
+    "cardFavoritesLabel": "Izlase",
+    "cardFavoritesDescription": "Sortē, dzēš un rādī “favorītos” sācilā.",
+    "cardPermissionsLabel": "Atļaujas",
+    "cardPermissionsDescription": "Skatī savas lomas un piekļuves tiesības.",
+    "cardConnectionsLabel": "Savienojumi",
+    "cardConnectionsDescription": "Pārvaldi savas saistības."
   },
   "resetPasswordSuccess.page": {
     "title": "Jauna parole iestatīta",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Savienojumi",
-      "descriptionConnections": "Jūsu personiskie OAuth savienojumi ar MCP serveriem. Atvienošana noņem šeit saglabātos piekļuves datus. Jau palaistie izsaukumi var tikt pabeigti; atļaujas pie pakalpojuma sniedzēja atsauciet tieši pie tā.",
       "labelDisconnect": "Atvienot",
-      "descriptionEmpty": "Pievienojiet savu kontu sarunā, kad MCP rīks pieprasa pierakstīties.",
       "labelEmpty": "Vēl nav savienojumu",
-      "labelInfo": "Par savienojumiem",
-      "errorDisconnect": "Neizdevās atvienot savienojumu. Mēģiniet vēlreiz."
+      "errorDisconnect": "Neizdevās atvienot savienojumu. Mēģiniet vēlreiz.",
+      "labelOutgoing": "Saistības ar ārvalstu pakalpojumiem.",
+      "descriptionOutgoing": "schorn.ai izmanto šos kontus, lai piesaistītos ārvalstu MCP pakalpojumiem.",
+      "labelServer": "MCP servers.",
+      "labelCancel": "Atcelt",
+      "labelDisconnectNamed": "Izjungi no {{serverUrl}}.",
+      "descriptionDisconnect": "Vai pārtraukt savienojumu ar {{serverUrl}}? Šeit saglabātie piekļuves dati tiks noņemti. Jau iesāktie pieprasījumi vēl var tikt pabeigti. Atļaujas var atsaukt tieši pie pakalpojuma sniedzēja."
+    },
+    "incoming": {
+      "labelTitle": "Piekļuve schorn.ai",
+      "description": "Šīs lietotnes var jūsu vārdā piekļūt schorn.ai, izmantojot MCP. Autorizācija nepaplašina jūsu atļaujas.",
+      "labelCreated": "Autorisēts",
+      "labelExpires": "Der derīgā līdz",
+      "labelExpired": "Izbeigts",
+      "labelRevoke": "Atcel piekļuvi",
+      "labelRevokeNamed": "Atcel piekļuvi [{{name}}]",
+      "descriptionRevoke": "Vai atsaukt piekļuvi lietotnei “{{name}}”? Visi ar šo autorizāciju saistītie piekļuves un atjaunošanas marķieri zaudēs derīgumu. Iesāktie pieprasījumi vēl var tikt pabeigti. Lai izveidotu savienojumu vēlreiz, būs vajadzīga jūsu atļauja.",
+      "labelCancel": "Atcelt",
+      "errorRevoke": "Piekšošs piekļuve nevarēja tikt atcelta. Lūdzu, mēģini vēl reizi.",
+      "labelApplication": "Programma",
+      "labelLevel": "Piekļuves līmenis"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Piekļūt {{client}}",
+    "description": "Šī programma var veikt darbības vārdā. Pārbaudiet sīkākos un atļaujiet tikai tās programmas, kas jums uzticamas.",
+    "labelLevel": "Piekļuves līmenis",
+    "labelResource": "MCP gala punkts",
+    "labelRedirect": "Rediģēšanas adrese",
+    "labelApprove": "Atļaut",
+    "labelDeny": "Noraidīt",
+    "errorAuthorization": "Autentifikācijas pieprasījums ir nederīgs vai jūsu pilnvaras nav pietiekamas.",
+    "level": {
+      "user": "Lietotājs",
+      "editor": "Redaktors",
+      "workspace": "Darbvietas administrators",
+      "admin": "Globālais administrators"
+    },
+    "labelConnectTitle": "Jūsu rīki. Jūsu atļautas.",
+    "descriptionConnect": "Pievienot AI programmu uz schorn.ai un noteikt, kādas atļaujas dot.",
+    "descriptionPermissions": "Jūsu esošās atļaujas joprojām ir spēkā. Lietotnes autorizēšana nepaplašina jūsu tiesības.",
+    "descriptionExpiry": "Atļaujas derīs līdz 30 dienām. Programmas, kas atbalsta atjaunošanas tokenus, automātiski atjaunojīs piekļuvi fons.",
+    "labelPlatformAccess": "Piekļuve platformai",
+    "descriptionLevel": "Izvēlieties augstāko piekļuves līmeni, kādu vēlaties atļaut šai lietotnei. Pieejami ir tikai līmeņi, kas atbilst jūsu pašreizējām atļaujām.",
+    "descriptionNoAccess": "Jūsu kontā pašlaik nav atļaujas piekļūt platformai."
+  },
+  "favorites": {
+    "labelTitle": "Izlase",
+    "description": "Pārvietojiet izlases elementus, velkot tos aiz vilkšanas roktura. Saglabājiet, lai lietotu secību, noņemšanu un redzamības iestatījumus.",
+    "labelMove": "Mainīt {{name}} secību",
+    "labelRemoveNamed": "Noņem {{name}} no izlases",
+    "labelSave": "Saglabāt",
+    "labelReset": "Atiestatīt",
+    "labelEmpty": "Vēl nav izveidota izlase.",
+    "labelUnavailable": "Vairs nav pieejams",
+    "labelShowInSidebar": "Rādīt sānjoslā",
+    "errorSave": "Izlasi neizdevās saglabāt. Mēģiniet vēlreiz.",
+    "types": {
+      "agent": "Aģents",
+      "workspace": "Darbvieta",
+      "transcriber": "Transkribētājs",
+      "documentRepository": "Dokumentu krātuve",
+      "automation": "Automatizēšana"
     }
   }
 }

@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Tundmatu tööruum"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Põhiloo kausta",
       "tooltipEdit": "Muuda",
       "tooltipInfo": "Teave"
     },

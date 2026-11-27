@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Невідомий робочий простір"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Основна папка",
       "tooltipEdit": "Редагувати",
       "tooltipInfo": "Інформація"
     },

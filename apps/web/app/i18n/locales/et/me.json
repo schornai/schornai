@@ -38,7 +38,13 @@
   "page": {
     "title": "Profiil",
     "infoPersonalize": "Isikupärasta",
-    "infoPersonalizeDescription": "Siin saad oma profiilipildi üles laadida ja nime muuta."
+    "infoPersonalizeDescription": "Siin saad oma profiilipildi üles laadida ja nime muuta.",
+    "cardFavoritesLabel": "Lemmikud",
+    "cardFavoritesDescription": "Järjesta ja eemalda lemmikuid ning vali, millised neist kuvatakse külgribal.",
+    "cardPermissionsLabel": "Õigused",
+    "cardPermissionsDescription": "Vaata oma rolle ja kasutusoobia.",
+    "cardConnectionsLabel": "Ühendused",
+    "cardConnectionsDescription": "Halli oma isiklikud suhtlusid."
   },
   "resetPasswordSuccess.page": {
     "title": "Uus parool määratud",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Ühendused",
-      "descriptionConnections": "Sinu isiklikud OAuthi ühendused MCP-serveritega. Ühenduse katkestamine eemaldab siia salvestatud autentimisandmed. Juba käimasolevad kutsed võivad lõpule jõuda; teenusepakkuja õigused tühista otse teenusepakkuja juures.",
       "labelDisconnect": "Katkesta ühendus",
-      "descriptionEmpty": "Ühenda oma konto vestluses, kui MCP-tööriist nõuab sisselogimist.",
       "labelEmpty": "Ühendusi veel pole",
-      "labelInfo": "Teave ühenduste kohta",
-      "errorDisconnect": "Ühendust ei õnnestunud katkestada. Proovi uuesti."
+      "errorDisconnect": "Ühendust ei õnnestunud katkestada. Proovi uuesti.",
+      "labelOutgoing": "Suhtlusid väliseid teenustega.",
+      "descriptionOutgoing": "schorn.ai kasutab neid kontakte välise MCP teenuste kutsumiseks sinimi poolt.",
+      "labelServer": "MCP server",
+      "labelCancel": "Tühista",
+      "labelDisconnectNamed": "Laen, {{serverUrl}}",
+      "descriptionDisconnect": "Kas katkestada ühendus serveriga {{serverUrl}}? Siia salvestatud autentimisandmed eemaldatakse. Juba käivitatud päringud võivad veel lõpule jõuda. Õigused saad tühistada otse teenusepakkuja juures."
+    },
+    "incoming": {
+      "labelTitle": "Juurdepääs teenusele schorn.ai",
+      "description": "Need rakendused võivad MCP kaudu sinu nimel schorn.ai teenust kasutada. Rakenduse volitamine ei laienda sinu enda õigusi.",
+      "labelCreated": "Autorend aktiivne",
+      "labelExpires": "Läbisõituus",
+      "labelExpired": "Kehtib ei",
+      "labelRevoke": "Autorend kehtamatuks tehtud",
+      "labelRevokeNamed": "Autorend kehtimatuks tehtud {{name}} jaoks",
+      "descriptionRevoke": "Kas tühistada rakenduse „{{name}}“ juurdepääs? Kõik selle volituse pääsu- ja värskendustõendid muutuvad kehtetuks. Juba käivitatud päringud võivad veel lõpule jõuda. Ühenduse taastamiseks on vaja sinu uut luba.",
+      "labelCancel": "Tühista",
+      "errorRevoke": "Võimendamist ei saanud tühendada. Palun proovi uuesti.",
+      "labelApplication": "Rakendus",
+      "labelLevel": "Juurdepääsutase"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Anna rakendusele {{client}} juurdepääs",
+    "description": "See rakendus saab tegutsema sinise nimel. Vaata üksikasju ja luba ainult need rakendused, mida sa usaldad.",
+    "labelLevel": "Juurdepääsutase",
+    "labelResource": "MCP otsekoht",
+    "labelRedirect": "Suunamisadress",
+    "labelApprove": "Lubusta",
+    "labelDeny": "Keela",
+    "errorAuthorization": "Lubamita on vigane või su õigused pole piisavad.",
+    "level": {
+      "user": "Kasutaja",
+      "editor": "Toimetaja",
+      "workspace": "Tööruumi administraator",
+      "admin": "Globaalne administraator"
+    },
+    "labelConnectTitle": "Te vahendeid. Teie lubadus.",
+    "descriptionConnect": "Ühenda AI rakendus schorn.ai-ga ja määra, millise juurdepääsu anda.",
+    "descriptionPermissions": "Sinu senised õigused jäävad kehtima. Rakendusele loa andmine ei laienda sinu õigusi.",
+    "descriptionExpiry": "Lubamine on kehtiv kuni 30 päeva. Rakendused, mis toetavad taastamisavamine, uuendavad juurdepäädu automaatselt taustal.",
+    "labelPlatformAccess": "Juurdepääs platvormile",
+    "descriptionLevel": "Vali kõrgeim juurdepääsutase, mida soovid sellele rakendusele lubada. Valikus on ainult sinu praeguste õiguste piiresse jäävad tasemed.",
+    "descriptionNoAccess": "Teie konto ei ole hetkel lubatud platvormi kasutama."
+  },
+  "favorites": {
+    "labelTitle": "Lemmikud",
+    "description": "Lohista lemmikuid lohistamispidemest. Järjestuse, eemaldamiste ja nähtavuse muudatuste rakendamiseks salvesta.",
+    "labelMove": "Muuda üksuse {{name}} järjekorda",
+    "labelRemoveNamed": "Eemalda {{name}} lemmist",
+    "labelSave": "Salvesta",
+    "labelReset": "Lähtesta",
+    "labelEmpty": "Lemmikuid veel pole.",
+    "labelUnavailable": "Pole enam saadaval",
+    "labelShowInSidebar": "Kuva külgribal",
+    "errorSave": "Lemmikute salvestamine ebaõnnestus. Palun proovi uuesti.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Tööruum",
+      "transcriber": "Transkribeerija",
+      "documentRepository": "Dokumendihoidla",
+      "automation": "Automaadid"
     }
   }
 }

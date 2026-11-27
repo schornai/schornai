@@ -99,3 +99,32 @@ it("fails when a primary language is absent", () => {
     expect.stringContaining("de: translation directory is missing"),
   );
 });
+
+it("recognizes native cardinal plurals and still reports unrelated or missing forms", () => {
+  const root = fixture();
+  const primary = { hours_one: "1", hours_other: "n" };
+  for (const language of ["de", "en", "fr"])
+    writeFileSync(join(root, language, "common.json"), JSON.stringify(primary));
+  writeFileSync(
+    join(root, "fr", "common.json"),
+    JSON.stringify({ ...primary, hours_many: "n", hours_zero: "0" }),
+  );
+  mkdirSync(join(root, "ja"));
+  writeFileSync(
+    join(root, "ja", "common.json"),
+    JSON.stringify({ hours_other: "n" }),
+  );
+  mkdirSync(join(root, "pl"));
+  writeFileSync(
+    join(root, "pl", "common.json"),
+    JSON.stringify({ ...primary, hours_few: "n", hours_two: "2" }),
+  );
+  expect(checkTranslations(root)).toEqual({
+    errors: [],
+    warnings: expect.arrayContaining([
+      "pl/common.json/hours_many: missing entry from de/en.",
+      "pl/common.json/hours_two: extra entry compared with de/en.",
+    ]),
+  });
+  expect(checkTranslations(root).warnings).toHaveLength(2);
+});

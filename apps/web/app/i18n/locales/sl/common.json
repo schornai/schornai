@@ -9,8 +9,10 @@
         "history": "Zgodovina"
       },
       "SidebarFavorites": {
+        "labelActions": "Dejanja za {{name}}",
         "label": "Priljubljeno",
-        "empty": "Med priljubljene ni še nič dodano."
+        "empty": "Med priljubljene ni še nič dodano.",
+        "labelEdit": "Uredi priljubljene"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Ni priljubljenih",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Ime mape...",
       "labelCancel": "Prekliči",
       "labelCreate": "Ustvari"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Datoteka pripravljena.",
+      "errorFile": "Napaka z datoteko.",
+      "labelProcessing": "Obdelava datoteke…",
+      "labelUploading": "Nalaganje datoteke · {{progress}} %",
+      "labelUnprocessed": "Še ni bilo obdelano."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Ni bilo mogoče izbrisati tega elementa. Poskusite znova."
     },
     "StorageDialogRemove": {
       "labelTitle": "Odstrani",
@@ -246,6 +258,7 @@
       "labelDelete": "Izbriši mapo"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Shranjevanje je bilo prekinjeno. Prejšnja različica je še vedno na voljo in vaš osnutek je ohranjen. Za dokončanje obnovitve znova poskusite shraniti spremembe.",
       "labelContent": "Vsebina",
       "labelSave": "Shrani",
       "labelCancel": "Prekliči",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Izberi ciljno mapo",
       "labelSelectFile": "Izberi obstoječo datoteko",
       "descriptionFolder": "Izberite obstoječo mapo. Prenesena bo ena datoteka; obstoječa imena se nikoli ne prepišejo.",
-      "descriptionFile": "Izberite datoteko iz tega pogovora ali dostopne shrambe. Dokumenti in posnetki morajo biti že obdelani.",
+      "descriptionFile": "Izberi datoteko iz tega pogovora ali dostopne arhiv. Lahko priključi datoteko takoj, medtem ko se obdeluje. Kopiranje zahteva zaključen obdelavo.",
       "labelStorage": "Shramba",
       "labelCurrentStorage": "Trenutna shramba",
       "labelUp": "Nadrejena mapa",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopiranje ni uspelo. Vir je ohranjen, vendar lahko na cilju ostanejo nepopolne datoteke. Preverite ga pred ponovnim poskusom.",
       "errorAction": "Dejanje ni uspelo. Pred ponovnim poskusom preverite dovoljenja, imena datotek in obe mesti.",
       "errorNotProcessed": "Ta datoteka še ni obdelana. Najprej jo obdelajte in jo nato znova izberite."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Shramba dokumentov",
+        "transcriber": "Prepisovalnik"
+      },
+      "labelSelected": "Izbrano",
+      "labelChangeResource": "Spremeni {{resource}}",
+      "labelChange": "Spremeni",
+      "labelClearResource": "Odstrani {{resource}}",
+      "labelChooseResource": "Izberi {{resource}}",
+      "descriptionUnavailable": "Vaša prejšnja izbira več ne obstaja. Izberite novo posodobitve.",
+      "descriptionEmpty": "Vaša izbira bo prikazana tukaj. Kliknite, da dodate element.",
+      "descriptionDialog": "Izberite kartico, ki jo želite uporabiti tukaj.",
+      "labelSearch": "Iskanje …",
+      "labelSelectNamed": "Izberi {{name}}",
+      "labelSelect": "Izberi",
+      "labelNoResults": "Niti eno ujemajoče vnos.",
+      "descriptionNoResults": "Ajustirajte svoj iskanje ali ustvarite vnos najprej. – Prilagodite svoj iskanje ali ustvarite vnos."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Eksportiraj XRAG",
+      "labelGlobalId": "Globalni ID",
+      "errorGlobalIdTaken": "Ta globalni ID je že v uporabi v izbranem delovnem prostoru. – Ta globalni ID je že uporabljen v izbranem delovnem prostoru.",
+      "errorGlobalId": "Privzeti ID se ustvari iz naslova v zapisu kebab-case. Uporabite od 1 do 200 znakov. Dovoljeni so črke a–z, števke 0–9, vezaji (-), poševnice (/) in podčrtaji (_).",
+      "labelSaveId": "Shranite globalni ID – Shranite globalni ID",
+      "errorAction": "Operacija je neuspešna. Preverite svoje pravice, globalni ID in na razpoložljive modele. – Operacija ni uspesna. Preverite svoje pravice, globalni ID in na razpoložljive modele."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Uvoz in izvoz XRAG",
+      "description": "Uvažirajte datoteke XRAG ali izberite objekte za izvoz.",
+      "labelUpload": "Izberi datoteko",
+      "errorUpload": "Datoteko ni bilo mogoče naločiti. Izberi jo spet, da nadaljiš prenos.",
+      "labelWorkspace": "Delovni prostor",
+      "labelNewWorkspace": "Ustvari delovni prostor",
+      "labelName": "Ime delovnega prostora",
+      "descriptionConfirm": "Preglej objekte. Potrdite vsak obstoječ objekt, ki ga želite nadomestiti. V arhivih datotek bodo datoteke z isto imenom nadomestljene; ostale datoteke bodo ohranjene.",
+      "labelReplace": "Nadomesti \"{{name}}\"",
+      "labelImport": "Uvozi",
+      "descriptionImported": "Uvoz je končan.",
+      "errorAction": "Postopek ni uspel. Preverite, ali je datoteka XRAG popolna in veljavna ter ali imate potrebna dovoljenja. Če so se predmeti spremenili, znova preverite predogled uvoza.",
+      "labelChooseExternalModel": "Izberi obstoječ model",
+      "descriptionChooseExternalModel": "Več modelov ustreka. Izberi povezavo, ki jo želite uporabiti na tem primeru.",
+      "descriptionModelMatched": "Uporabljen bo model »{{name}}« z obstoječimi poverilnicami.",
+      "descriptionModelMissing": "Ustrezen model ni na voljo. Predmet bo kljub temu uvožen. Model izberite po uvozu.",
+      "labelTabImport": "Uvoz",
+      "labelTabExport": "Izvoz",
+      "labelUploadTitle": "Uvozi XRAG",
+      "descriptionDrop": "Sem spustite datoteko XRAG ali izberite datoteko.",
+      "descriptionUploading": "Nalaganje datoteke…",
+      "descriptionImporting": "Uvoz poteka…",
+      "descriptionInspecting": "Nalaganje vsebine…",
+      "labelContent": "Vključeni objekti",
+      "labelSelectAll": "Izberi vse",
+      "labelSelectNone": "Počisti izbor",
+      "labelSelectObject": "Uvozi {{name}}",
+      "labelChooseWorkspace": "Izberi delovni prostor",
+      "descriptionWorkspace": "Ta delovni prostor se uporablja za vse izbrane objekte.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Shramba dokumentov",
+        "transcriber": "Prepisovalnik",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Model za prepisovanje",
+        "setup": "Posodaba platforme",
+        "files": "Paket datotek",
+        "automation": "Avtomatizacija"
+      },
+      "labelAnotherUpload": "Naloži drugo datoteko XRAG",
+      "labelSelection": "Izbor",
+      "labelObjectName": "Ime",
+      "labelObjectKind": "Vrsta",
+      "labelObjectDescription": "Opis",
+      "descriptionFilesProcessing": "Dokumenti se pripravljajo za iskanje v ozadju."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Prekliči",
+      "labelTitle": "Moje XRAG pakete.",
+      "description": "Dodaj vire in lokalne modele iz njihove podrobnosti. Izvoz paketa za eno XRAG datoteko, v kateri so vse vsebine.",
+      "labelName": "Imenje XRAG paketa.",
+      "labelCreate": "Ustvarite XRAG paket",
+      "labelAdd": "Dodaj v XRAG paket.",
+      "labelPackage": "XRAG paket.",
+      "labelChoose": "Izberi XRAG paket.",
+      "labelExport": "Zaženi izvoz",
+      "labelDelete": "Izbriši paket XRAG",
+      "labelRemove": "Izbrisati iz paketa XRAG",
+      "labelConfirm": "Odstrani",
+      "descriptionEmpty": "Dodati objekte iz njihovega pregleda.",
+      "labelLoading": "Naloževali pakete XRAG…",
+      "errorLoad": "Ne moremo naložiti paketov XRAG in povezanih naprav.",
+      "labelRetry": "Ponovi",
+      "descriptionNoPackages": "Nimate še nobenih paketov XRAG.",
+      "labelRelated": "Dodati povezane naprave",
+      "descriptionRelated": "Izbrati povezane naprave za dodajanje kot ločene v paketu XRAG.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Shramba dokumentov",
+        "transcriber": "Prepisovalnik",
+        "model": "Model",
+        "automation": "Avtomatizacija"
+      },
+      "labelOpenPackage": "Odpri paket",
+      "errorCreate": "Paketa ni bilo mogoče ustvariti. Poskusite znova.",
+      "errorAdd": "Izbrano ni bilo mogoče dodati v paket. Preverite svoje pravice in poskusite znova."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Izvozi datotek",
+      "description": "Dokončane datoteke se po 72 urah samodejno izbrišejo.",
+      "state_queued": "V čakalni vrsti za pripravo paketa",
+      "state_retrying": "Namenda pakiranje",
+      "state_processing": "Ustvarjanje paketa",
+      "state_finished": "Pripravljeno",
+      "state_error": "Neuspešno",
+      "state_cancelled": "Preklicano",
+      "labelCancel": "Prekliči izvoz",
+      "labelDownload": "Naloži",
+      "labelProgress": "Napredek nalaganja",
+      "state_uploading": "Naloži arhiv",
+      "labelDelete": "Izbriši izvoz",
+      "descriptionDelete": "Odstranim »{{name}}« s seznama izvozov? Če pripadajoči arhiv obstaja, bo izbrisan tudi ta.",
+      "labelDismiss": "Prekliči"
     }
   },
   "_welcomeMessage": "Dobrodošli v\n\n# schorn.ai in a Box\n\n",

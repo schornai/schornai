@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Ismeretlen munkaterület"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Gyökialapút",
       "tooltipEdit": "Szerkesztés",
       "tooltipInfo": "Információ"
     },

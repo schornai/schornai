@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Caricamento XRAG",
-      "description": "Trascina qui un file XRAG per caricarlo e installarne il contenuto.",
+      "description": "Trascina un file XRAG qui per caricarlo e installarne il contenuto. In caso di interruzione, seleziona nuovamente lo stesso file per riprendere il caricamento.",
       "buttonUpload": "Carica",
       "errorUpload": "Errore durante il caricamento del file XRAG «{{name}}».",
-      "successUpload": "XRAG «{{name}}» caricato correttamente. A seconda della dimensione e del tipo di caricamento, potrebbero essere necessari alcuni minuti prima che le modifiche abbiano effetto.",
-      "buttonHide": "Nascondi"
+      "successUpload": "{{name}}: Caricamento completato. La pubblicazione è verificata separatamente.",
+      "buttonHide": "Nascondi",
+      "labelProcessing": "{{name}}: In fase di validazione e pubblicazione.",
+      "labelPublished": "{{name}}: Pubblicato e disponibile per i servizi di corrispondenza.",
+      "errorPublication": "{{name}}: Pubblicazione fallita. Controlla il pacchetto e caricalo di nuovo.",
+      "errorPublicationStatus": "{{name}}: Stato temporaneamente non disponibile. In attesa."
     },
     "TaskTable": {
       "tableColumnType": "Tipo",
@@ -331,7 +335,9 @@
     "cardXragLabel": "Carica XRAG",
     "cardXragDescription": "Installa agenti, documenti e modelli oppure aggiorna l’intero sistema tramite un pacchetto XRAG.",
     "cardAppearanceLabel": "Aspetto",
-    "cardAppearanceDescription": "Personalizza i colori e l’aspetto del sistema come preferisci."
+    "cardAppearanceDescription": "Personalizza i colori e l’aspetto del sistema come preferisci.",
+    "cardConnectionsLabel": "Connessioni",
+    "cardConnectionsDescription": "Gestisci le app OAuth e cerca le connessioni centralmente."
   },
   "users.page": {
     "labelTitle": "Utenti"
@@ -429,6 +435,7 @@
     "labelNoModels": "Nessun modello trovato",
     "descriptionNoResults": "Modifica la ricerca per trovare modelli.",
     "descriptionNoModels": "Qui compaiono i modelli locali ed esterni. Aggiungi un modello esterno per iniziare.",
+    "descriptionNoRegisteredModels": "Nessun modello registrato su questa istanza.",
     "labelChooseProvider": "Scegli un fornitore",
     "descriptionChooseProvider": "Collega un modello linguistico esterno al suo fornitore.",
     "labelConfigure": "Configura",
@@ -464,7 +471,11 @@
     "labelEditSection": "Modifica {{section}}",
     "labelToggleSection": "Espandi/comprimi {{section}}",
     "descriptionDeleteAgents": "Gli agenti che usano questo modello vengono conservati, ma non potranno essere usati finché non verrà assegnato loro un altro modello disponibile.",
-    "descriptionDeleteAgentsTip": "Suggerimento: nella panoramica degli agenti, apri «Opzioni» e raggruppa per «Modello». Gli agenti interessati compaiono nei gruppi «Modello sconosciuto»."
+    "descriptionDeleteAgentsTip": "Suggerimento: nella panoramica degli agenti, apri «Opzioni» e raggruppa per «Modello». Gli agenti interessati compaiono nei gruppi «Modello sconosciuto».",
+    "labelContextUnknown": "Nessuna dimensione del contesto.",
+    "descriptionCompressionDisabled": "La compressione automatica del contesto è disabilitata senza una dimensione del contesto.",
+    "descriptionContextSize": "Opzionale, in token. Lascia vuoto per disabilitare la compressione automatica del contesto.",
+    "labelContextTokens": "{{size}} token"
   },
   "connections": {
     "labelTitle": "Connessioni",
@@ -513,7 +524,9 @@
     "descriptionOAuthSecret": "Memorizzato solo sul server e non modificabile dopo la creazione.",
     "labelCopyCallback": "Copia URL di callback",
     "labelCallbackCopied": "URL di callback copiato",
-    "errorCopyCallback": "Impossibile copiare l’URL di callback"
+    "errorCopyCallback": "Impossibile copiare l’URL di callback",
+    "labelIssuer": "Emittente OAuth",
+    "descriptionIssuer": "Non può essere modificato dopo la creazione."
   },
   "service": {
     "errorUnauthorized": "Autorizzazione del servizio non riuscita.",

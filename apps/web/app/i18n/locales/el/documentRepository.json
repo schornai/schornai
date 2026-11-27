@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Άγνωστος χώρος εργασίας"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Βασικός φάκελος",
       "tooltipEdit": "Επεξεργασία",
       "tooltipInfo": "Πληροφορίες"
     },

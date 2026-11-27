@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Personalizacja",
-    "infoPersonalizeDescription": "Tutaj możesz przesłać zdjęcie profilowe i zmienić swoje imię i nazwisko."
+    "infoPersonalizeDescription": "Tutaj możesz przesłać zdjęcie profilowe i zmienić swoje imię i nazwisko.",
+    "cardFavoritesLabel": "Ulubione",
+    "cardFavoritesDescription": "Sortuj, usuń i wyświetl ulubione w bocznym panelu.",
+    "cardPermissionsLabel": "Uprawnienia",
+    "cardPermissionsDescription": "Sprawdź swoje role i uprawnienia dostępu.",
+    "cardConnectionsLabel": "Połączenia",
+    "cardConnectionsDescription": "Zarządzaj swoimi połączeniami."
   },
   "resetPasswordSuccess.page": {
     "title": "Ustawiono nowe hasło",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Połączenia",
-      "descriptionConnections": "Twoje osobiste połączenia OAuth z serwerami MCP. Rozłączenie usuwa zapisane tutaj dane uwierzytelniające. Już uruchomione wywołania mogą się zakończyć; uprawnienia u dostawcy odwołaj bezpośrednio u niego.",
       "labelDisconnect": "Rozłącz",
-      "descriptionEmpty": "Połącz swoje konto w czacie, gdy narzędzie MCP wymaga zalogowania.",
       "labelEmpty": "Brak połączeń",
-      "labelInfo": "O połączeniach",
-      "errorDisconnect": "Nie udało się rozłączyć połączenia. Spróbuj ponownie."
+      "errorDisconnect": "Nie udało się rozłączyć połączenia. Spróbuj ponownie.",
+      "labelOutgoing": "Połączenia z zewnętrznymi usługami.",
+      "descriptionOutgoing": "schorn.ai używa tych kont, aby kontaktować się z zewnętrznymi usługami MCP w Twoim imieniu.",
+      "labelServer": "Serwer MCP.",
+      "labelCancel": "Anuluj",
+      "labelDisconnectNamed": "Odłącz się od {{serverUrl}}.",
+      "descriptionDisconnect": "Rozłączyć z {{serverUrl}}? Zapisane tutaj dane uwierzytelniające zostaną usunięte. Rozpoczęte żądania nadal mogą zostać ukończone. Uprawnienia możesz cofnąć bezpośrednio u dostawcy."
+    },
+    "incoming": {
+      "labelTitle": "Dostęp do schorn.ai",
+      "description": "Te aplikacje mogą korzystać z schorn.ai w Twoim imieniu przez MCP. Autoryzacja nie rozszerza Twoich uprawnień.",
+      "labelCreated": "Autoryzacja zakończona",
+      "labelExpires": "Ważne do",
+      "labelExpired": "Zbyt staro",
+      "labelRevoke": "Cofnij dostęp",
+      "labelRevokeNamed": "Cofnij dostęp dla {{name}}",
+      "descriptionRevoke": "Cofnąć dostęp aplikacji „{{name}}”? Wszystkie tokeny dostępu i odświeżania związane z tą autoryzacją stracą ważność. Rozpoczęte żądania mogą jeszcze zostać ukończone. Ponowne połączenie będzie wymagać Twojej zgody.",
+      "labelCancel": "Anuluj",
+      "errorRevoke": "Dostęp nie mógł zostać cofnięty. Spróbuj ponownie.",
+      "labelApplication": "Aplikacja",
+      "labelLevel": "Poziom dostępu"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Udostępnij dostęp dla {{client}}",
+    "description": "Ta aplikacja może działać w twoim imieniu. Przejrzyj szczegóły i zatwierdź tylko aplikacje, którym ufasz.",
+    "labelLevel": "Poziom dostępu",
+    "labelResource": "Endpoint MCP",
+    "labelRedirect": "Adres przekierowania",
+    "labelApprove": "Zatwierdź",
+    "labelDeny": "Odmów",
+    "errorAuthorization": "Żądanie autoryzacji jest nieprawidłowe lub twoje uprawnienia są niewystarczające.",
+    "level": {
+      "user": "Użytkownik",
+      "editor": "Edytor",
+      "workspace": "Administrator obszaru roboczego",
+      "admin": "Globalny administrator"
+    },
+    "labelConnectTitle": "Two narzędzia. Twoja zgoda.",
+    "descriptionConnect": "Połącz aplikację AI z schorn.ai i wybierz, jakie uprawnienia mają być przyznane.",
+    "descriptionPermissions": "Twoje dotychczasowe uprawnienia nadal obowiązują. Autoryzacja aplikacji ich nie rozszerza.",
+    "descriptionExpiry": "Uprawnienia są ważne do 30 dni. Aplikacje obsługujące tokeny odświeżania automatycznie odnawiają dostęp w tle.",
+    "labelPlatformAccess": "Dostęp do platformy",
+    "descriptionLevel": "Wybierz najwyższy poziom dostępu, na który chcesz zezwolić tej aplikacji. Dostępne są tylko poziomy mieszczące się w Twoich obecnych uprawnieniach.",
+    "descriptionNoAccess": "Twój account obecnie nie posiada uprawnień do dostępu do platformy."
+  },
+  "favorites": {
+    "labelTitle": "Ulubione",
+    "description": "Przeciągaj ulubione elementy za uchwyt. Zapisz zmiany, aby zastosować kolejność, usunięcia i ustawienia widoczności.",
+    "labelMove": "Zmień kolejność {{name}}",
+    "labelRemoveNamed": "Usuń {{name}} z ulubionych",
+    "labelSave": "Zapisz",
+    "labelReset": "Resetuj",
+    "labelEmpty": "Brak ulubionych.",
+    "labelUnavailable": "Nie jest już dostępne",
+    "labelShowInSidebar": "Pokaż w bocznym panelu",
+    "errorSave": "Nie udało się zapisać ulubionych. Spróbuj ponownie.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Obszar roboczy",
+      "transcriber": "Transkrybent",
+      "documentRepository": "Repozytorium dokumentów",
+      "automation": "Automatyzacja"
     }
   }
 }

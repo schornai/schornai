@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "XRAG-upload",
-      "description": "Træk en XRAG-fil hertil for at uploade den og installere indholdet.",
+      "description": "Træk en XRAG-fil her for at uploade den og installere indholdet. Efter afbrydelse, vælg filen igen for at fortsætte uploadd.",
       "buttonUpload": "Upload",
       "errorUpload": "Fejl ved upload af XRAG-filen »{{name}}«.",
-      "successUpload": "XRAG »{{name}}« er uploadet. Afhængigt af uploadens størrelse og type kan det tage et par minutter, før ændringerne træder i kraft.",
-      "buttonHide": "Skjul"
+      "successUpload": "{{name}}: Upload færdig. Publicering kontrolleres separat.",
+      "buttonHide": "Skjul",
+      "labelProcessing": "{{name}}: Validering og publicering.",
+      "labelPublished": "{{name}}: Public og tilgængelig for matches.",
+      "errorPublication": "{{name}}: Udsendelse mislykkedes. Tjek pakken og upload den igen.",
+      "errorPublicationStatus": "{{name}}: Status er midlertidigt utilgængelig. Forsøger igen."
     },
     "TaskTable": {
       "tableColumnType": "Type",
@@ -330,7 +334,9 @@
     "cardXragLabel": "Upload XRAG",
     "cardXragDescription": "Installer agenter, dokumenter og modeller, eller opdater hele systemet via en XRAG-pakke.",
     "cardAppearanceLabel": "Udseende",
-    "cardAppearanceDescription": "Tilpas systemets farver og udseende, som du ønsker."
+    "cardAppearanceDescription": "Tilpas systemets farver og udseende, som du ønsker.",
+    "cardConnectionsLabel": "Forbindelser",
+    "cardConnectionsDescription": "Administrer OAuth-apps og søg efter forbindelser centralt."
   },
   "users.page": {
     "labelTitle": "Brugere"
@@ -428,6 +434,7 @@
     "labelNoModels": "Ingen modeller fundet",
     "descriptionNoResults": "Tilpas din søgning for at finde modeller.",
     "descriptionNoModels": "Lokale og eksterne modeller vises her. Tilføj en ekstern model for at komme i gang.",
+    "descriptionNoRegisteredModels": "Ingen modeller er registreret på denne instans.",
     "labelChooseProvider": "Vælg en udbyder",
     "descriptionChooseProvider": "Tilslut en ekstern sprogmodel via dens udbyder.",
     "labelConfigure": "Konfigurer",
@@ -463,7 +470,11 @@
     "labelEditSection": "Rediger {{section}}",
     "labelToggleSection": "Udvid/skjul {{section}}",
     "descriptionDeleteAgents": "Agenter, der bruger modellen, bevares. De kan dog først bruges igen, når du har tildelt dem en anden tilgængelig model.",
-    "descriptionDeleteAgentsTip": "Tip: Åbn »Indstillinger« i agentoversigten, og gruppér efter »Model«. De berørte agenter vises i grupperne »Ukendt model«."
+    "descriptionDeleteAgentsTip": "Tip: Åbn »Indstillinger« i agentoversigten, og gruppér efter »Model«. De berørte agenter vises i grupperne »Ukendt model«.",
+    "labelContextUnknown": "Ingen kontekststørrelse",
+    "descriptionCompressionDisabled": "Automatisk kontekstkomprimering er deaktiveret uden en kontekststørrelse.",
+    "descriptionContextSize": "Valgfrit, i tokens. Lad feltet stå tomt for at deaktivere automatisk kontekstkomprimering.",
+    "labelContextTokens": "{{size}} tokens"
   },
   "connections": {
     "labelTitle": "Forbindelser",
@@ -512,7 +523,9 @@
     "descriptionOAuthSecret": "Gemmes kun på serveren og kan ikke ændres efter oprettelsen.",
     "labelCopyCallback": "Kopiér callback-URL",
     "labelCallbackCopied": "Callback-URL kopieret",
-    "errorCopyCallback": "Callback-URL kunne ikke kopieres"
+    "errorCopyCallback": "Callback-URL kunne ikke kopieres",
+    "labelIssuer": "OAuth-udsteder",
+    "descriptionIssuer": "Kan ikke ændres efter oprettelse."
   },
   "service": {
     "errorUnauthorized": "Godkendelse af adgang til tjenesten mislykkedes.",

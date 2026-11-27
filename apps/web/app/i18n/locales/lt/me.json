@@ -38,7 +38,13 @@
   "page": {
     "title": "Profilis",
     "infoPersonalize": "Suasmeninti",
-    "infoPersonalizeDescription": "Čia galite įkelti savo profilio paveikslėlį ir pakeisti vardą."
+    "infoPersonalizeDescription": "Čia galite įkelti savo profilio paveikslėlį ir pakeisti vardą.",
+    "cardFavoritesLabel": "Mėgstamiausi",
+    "cardFavoritesDescription": "Sortuok, pašalink ir rodyk mėgėles pusėje.",
+    "cardPermissionsLabel": "Teisės",
+    "cardPermissionsDescription": "Peržiūrėkite savo vaidmenis ir prieigą.",
+    "cardConnectionsLabel": "Ryšiai",
+    "cardConnectionsDescription": "Valdykite savo ryšius."
   },
   "resetPasswordSuccess.page": {
     "title": "Naujas slaptažodis nustatytas",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Ryšiai",
-      "descriptionConnections": "Jūsų asmeniniai OAuth ryšiai su MCP serveriais. Atjungus pašalinami čia saugomi prisijungimo duomenys. Jau vykdomi iškvietimai gali būti baigti; teises paslaugos teikėjo pusėje atšaukite tiesiogiai pas jį.",
       "labelDisconnect": "Atjungti",
-      "descriptionEmpty": "Prijunkite savo paskyrą pokalbyje, kai MCP įrankis prašo prisijungti.",
       "labelEmpty": "Ryšių dar nėra",
-      "labelInfo": "Apie ryšius",
-      "errorDisconnect": "Nepavyko atjungti ryšio. Bandykite dar kartą."
+      "errorDisconnect": "Nepavyko atjungti ryšio. Bandykite dar kartą.",
+      "labelOutgoing": "Ryšiai su išorinėmis paslaugomis.",
+      "descriptionOutgoing": "schorn.ai naudoja šiuos paskalves, kad būtų kvietiami į išorines MCP paslaugas Jūsų vardu.",
+      "labelServer": "MCP serveris.",
+      "labelCancel": "Atšaukti",
+      "labelDisconnectNamed": "Diskonuoti iš {{serverUrl}}.",
+      "descriptionDisconnect": "Atsijungti nuo {{serverUrl}}? Čia išsaugoti prisijungimo duomenys bus pašalinti. Jau pradėtos užklausos dar gali būti užbaigtos. Leidimus galite atšaukti tiesiogiai paslaugos teikėjo sistemoje."
+    },
+    "incoming": {
+      "labelTitle": "Prieiga prie schorn.ai",
+      "description": "Šios programos gali jūsų vardu pasiekti schorn.ai per MCP. Suteikus leidimą programai, jūsų pačių teisės neišplečiamos.",
+      "labelCreated": "Prisijungta",
+      "labelExpires": "Galioja iki",
+      "labelExpired": "Išsiėta",
+      "labelRevoke": "Ištraukti prieigą",
+      "labelRevokeNamed": "Ištraukti prieigą iš {{name}}",
+      "descriptionRevoke": "Atšaukti „{{name}}“ prieigą? Visi šio leidimo prieigos ir atnaujinimo raktai nebegalios. Jau pradėtos užklausos dar gali būti užbaigtos. Norint vėl prisijungti, reikės jūsų leidimo.",
+      "labelCancel": "Atšaukti",
+      "errorRevoke": "Prisijungimas negalėjo būti atsisakyta. Pabandykite dar kartą.",
+      "labelApplication": "Programėlė",
+      "labelLevel": "Prieigos lygis"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Suteikti prieigą programai {{client}}",
+    "description": "Ši programėlė gali veikti už jūsų. Peržiūrėkite detales ir patvirtinkite tik tas programėles, kuriai pasitiki.",
+    "labelLevel": "Prieigos lygis",
+    "labelResource": "MCP galas",
+    "labelRedirect": "Reduktacijos adresas",
+    "labelApprove": "Patvirtinti",
+    "labelDeny": "Atmesti",
+    "errorAuthorization": "Autoriteto reikalavimas yra netinkamas arba jūsų teisės yra nepakankamos.",
+    "level": {
+      "user": "Naudotojas",
+      "editor": "Redaktorius",
+      "workspace": "Darbo srities administratorius",
+      "admin": "Visas administratorius"
+    },
+    "labelConnectTitle": "Jūsų įrankiai. Jūsų pratybos.",
+    "descriptionConnect": "Prisijungkite prie AI programos prie schorn.ai ir nustatykite, kokį prieigą leisti.",
+    "descriptionPermissions": "Jūsų turimi leidimai tebegalioja. Suteikus prieigą programai, jūsų teisės neišplečiamos.",
+    "descriptionExpiry": "Pratybų galiojimą – iki 30 dienų. Programos, kurios naudoja atnaujinimo korteles, automatiškai atsinaujina prieigą fone.",
+    "labelPlatformAccess": "Prístojos prie platformos",
+    "descriptionLevel": "Pasirinkite aukščiausią prieigos lygį, kurį norite suteikti šiai programai. Galite rinktis tik iš lygių, kuriuos leidžia jūsų dabartinės teisės.",
+    "descriptionNoAccess": "Jūsų paskyra šiu metu neturi pratybų prieigai prie platformos."
+  },
+  "favorites": {
+    "labelTitle": "Mėgstamiausi",
+    "description": "Vilkite parankinius už vilkimo rankenėlės. Išsaugokite, kad būtų pritaikyta nauja tvarka, pašalinti pažymėti įrašai ir atnaujintas matomumas.",
+    "labelMove": "Keisti {{name}} eilės tvarką",
+    "labelRemoveNamed": "Išimti {{name}} iš mėgėtinų",
+    "labelSave": "Išsaugoti",
+    "labelReset": "Atkurti",
+    "labelEmpty": "Nėra mėgėtinų.",
+    "labelUnavailable": "Nebepasiekiama",
+    "labelShowInSidebar": "Rodyti šoninėje juostoje",
+    "errorSave": "Nepavyjo išsaugoti mėgėtinų. Pabandykite dar kartą.",
+    "types": {
+      "agent": "Agentas",
+      "workspace": "Darbo sritis",
+      "transcriber": "Transkribuotojas",
+      "documentRepository": "Dokumentų saugykla",
+      "automation": "Automatai"
     }
   }
 }

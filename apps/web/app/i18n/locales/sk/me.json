@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Prispôsobenie",
-    "infoPersonalizeDescription": "Tu môžete nahrať svoj profilový obrázok a upraviť svoje meno."
+    "infoPersonalizeDescription": "Tu môžete nahrať svoj profilový obrázok a upraviť svoje meno.",
+    "cardFavoritesLabel": "Obľúbené",
+    "cardFavoritesDescription": "Filtrovať, odstrániť a zobraziť obľúbené položky v bočnej lište.",
+    "cardPermissionsLabel": "Oprávnenia",
+    "cardPermissionsDescription": "Zobraziť vaše úlohy a oprávnenia.",
+    "cardConnectionsLabel": "Pripojenia",
+    "cardConnectionsDescription": "Správa vašich osobných kontaktov."
   },
   "resetPasswordSuccess.page": {
     "title": "Nové heslo nastavené",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Pripojenia",
-      "descriptionConnections": "Vaše osobné pripojenia OAuth k serverom MCP. Odpojením sa odstránia tu uložené prihlasovacie údaje. Už spustené volania môžu dobehnúť; oprávnenia u poskytovateľa odvolajte priamo u neho.",
       "labelDisconnect": "Odpojiť",
-      "descriptionEmpty": "Ak nástroj MCP vyžaduje prihlásenie, pripojte svoj účet v chate.",
       "labelEmpty": "Zatiaľ žiadne pripojenia",
-      "labelInfo": "O pripojeniach",
-      "errorDisconnect": "Pripojenie sa nepodarilo odpojiť. Skúste to znova."
+      "errorDisconnect": "Pripojenie sa nepodarilo odpojiť. Skúste to znova.",
+      "labelOutgoing": "Pripojenia k externým službám.",
+      "descriptionOutgoing": "schorn.ai používa tieto účty na volanie externých MCP služieb v vašom mene.",
+      "labelServer": "MCP server",
+      "labelCancel": "Zrušiť",
+      "labelDisconnectNamed": "Odpojiť od {{serverUrl}}",
+      "descriptionDisconnect": "Odpojiť sa od {{serverUrl}}? Tu uložené prihlasovacie údaje sa odstránia. Už spustené požiadavky sa ešte môžu dokončiť. Oprávnenia môžete odvolať priamo u poskytovateľa."
+    },
+    "incoming": {
+      "labelTitle": "Prístup na schorn.ai",
+      "description": "Tieto aplikácie môžu vo vašom mene pristupovať k schorn.ai cez MCP. Autorizácia nerozširuje vaše vlastné oprávnenia.",
+      "labelCreated": "Schválené",
+      "labelExpires": "Platnosť do",
+      "labelExpired": "Znehodnotené",
+      "labelRevoke": "Odopraviť prístup",
+      "labelRevokeNamed": "Odopraviť prístup pre {{name}}",
+      "descriptionRevoke": "Odobrať prístup aplikácii „{{name}}“? Všetky prístupové a obnovovacie tokeny tejto autorizácie stratia platnosť. Už spustené požiadavky sa môžu dokončiť. Opätovné pripojenie si vyžiada váš súhlas.",
+      "labelCancel": "Zrušiť",
+      "errorRevoke": "Prístup sa nepodarilo zrušiť. skúste znova.",
+      "labelApplication": "Aplikácia",
+      "labelLevel": "Úroveň prístupu"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Schváliť {{client}}",
+    "description": "Táto aplikácia môže konať v tvojej mene. Preštudujte detaily a schvália len aplikácie, ktoré dôverujete.",
+    "labelLevel": "Úroveň prístupu",
+    "labelResource": "Endpoint MCP",
+    "labelRedirect": "Adresa pre presmerovanie",
+    "labelApprove": "Schváliť",
+    "labelDeny": "Zamietnuť",
+    "errorAuthorization": "Žiadosť o autorizáciu je neplatná alebo nemáte dostatočné oprávnenia.",
+    "level": {
+      "user": "Používateľ",
+      "editor": "Editor",
+      "workspace": "Správca pracovného priestoru",
+      "admin": "Globálny administrátor"
+    },
+    "labelConnectTitle": "Vaše nástroje. Vaša kontrola.",
+    "descriptionConnect": "Spojte AI aplikáciu s schorn.ai a určte, ktoré práva umožniť.",
+    "descriptionPermissions": "Vaše doterajšie oprávnenia zostávajú v platnosti. Autorizácia aplikácie ich nerozširuje.",
+    "descriptionExpiry": "Autoritizácia platí až 30 dní. Aplikácie, ktoré používajú tokeny na obnovu, automaticky obnovujú prístup na pozadí.",
+    "labelPlatformAccess": "Prístup na platformu",
+    "descriptionLevel": "Vyberte najvyššiu úroveň prístupu, ktorú chcete aplikácii povoliť. Dostupné sú len úrovne v rozsahu vašich aktuálnych oprávnení.",
+    "descriptionNoAccess": "Vaše účty aktuálne nemajú práva na prístup k platforme."
+  },
+  "favorites": {
+    "labelTitle": "Obľúbené",
+    "description": "Obľúbené položky presúvajte potiahnutím za úchyt. Uložením použijete nové poradie, odstránenia a nastavenia viditeľnosti.",
+    "labelMove": "Zmeniť poradie {{name}}",
+    "labelRemoveNamed": "Odstrániť {{name}} z obľúbených",
+    "labelSave": "Uložiť",
+    "labelReset": "Obnoviť",
+    "labelEmpty": "Zatiaľ nemáte žiadne obľúbené položky.",
+    "labelUnavailable": "Už nie je k dispozícii",
+    "labelShowInSidebar": "Zobraziť na bočnom paneli",
+    "errorSave": "Nepodarilo sa uložiť obľúbené. Skúste znova.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Pracovný priestor",
+      "transcriber": "Prepisovač",
+      "documentRepository": "Úložisko dokumentov",
+      "automation": "Automatizácia"
     }
   }
 }

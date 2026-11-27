@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Uaslódáil XRAG",
-      "description": "Tarraing comhad XRAG anseo chun é a uaslódáil agus a ábhar a shuiteáil.",
+      "description": "Tarraing comhad XRAG anseo chun é a uaslódáil agus a bhfuil ann a shuiteáil. Má chuirtear isteach ar an uaslódáil, roghnaigh an comhad céanna arís chun leanúint ar aghaidh.",
       "buttonUpload": "Uaslódáil",
       "errorUpload": "Earráid agus an comhad XRAG \"{{name}}\" á uaslódáil.",
-      "successUpload": "Uaslódáladh XRAG \"{{name}}\" go rathúil. Ag brath ar mhéid agus cineál an uaslódála, d’fhéadfadh cúpla nóiméad a bheith i gceist sula dtiocfaidh na hathruithe i bhfeidhm.",
-      "buttonHide": "Folaigh"
+      "successUpload": "{{name}}: Uaslódáil críochnaithe. Seiceáiltear an foilsiú ar leithligh.",
+      "buttonHide": "Folaigh",
+      "labelProcessing": "{{name}}: Á bhailíochtú agus á fhoilsiú.",
+      "labelPublished": "{{name}}: Foilsithe agus ar fáil do sheirbhísí comhoiriúnacha.",
+      "errorPublication": "{{name}}: Theip ar an bhfoilsiú. Seiceáil an pacáiste agus uaslódáil arís é.",
+      "errorPublicationStatus": "{{name}}: Níl an stádas ar fáil faoi láthair. Ag iarraidh arís."
     },
     "TaskTable": {
       "tableColumnType": "Cineál",
@@ -333,7 +337,9 @@
     "cardXragLabel": "Uaslódáil XRAG",
     "cardXragDescription": "Suiteáil gníomhairí, doiciméid, samhlacha nó nuashonraigh an box ar fad trí phacáiste XRAG.",
     "cardAppearanceLabel": "Cuma",
-    "cardAppearanceDescription": "Saincheap dathanna agus cuma an box de réir do thola."
+    "cardAppearanceDescription": "Saincheap dathanna agus cuma an box de réir do thola.",
+    "cardConnectionsLabel": "Naisc",
+    "cardConnectionsDescription": "Bainistigh aipeanna OAuth agus naisc chuardaigh in aon áit amháin."
   },
   "users.page": {
     "labelTitle": "Úsáideoirí"
@@ -431,6 +437,7 @@
     "labelNoModels": "Níor aimsíodh aon samhail",
     "descriptionNoResults": "Athraigh do chuardach chun samhlacha a aimsiú.",
     "descriptionNoModels": "Taispeántar samhlacha áitiúla agus seachtracha anseo. Cuir samhail sheachtrach leis chun tosú.",
+    "descriptionNoRegisteredModels": "Níl aon samhail cláraithe ar an ásc seo.",
     "labelChooseProvider": "Roghnaigh soláthraí",
     "descriptionChooseProvider": "Ceangail samhail teanga sheachtrach trína soláthraí.",
     "labelConfigure": "Cumraigh",
@@ -466,7 +473,11 @@
     "labelEditSection": "Cuir {{section}} in eagar",
     "labelToggleSection": "Leathnaigh/laghdaigh {{section}}",
     "descriptionDeleteAgents": "Coinnítear gníomhairí a úsáideann an tsamhail seo. Ní féidir iad a úsáid arís, áfach, go dtí go sannann tú samhail eile atá ar fáil dóibh.",
-    "descriptionDeleteAgentsTip": "Leid: I bhforbhreathnú na ngníomhairí, oscail \"Roghanna\" agus grúpáil de réir \"Samhail\". Taispeántar na gníomhairí lena mbaineann sna grúpaí \"Samhail anaithnid\"."
+    "descriptionDeleteAgentsTip": "Leid: I bhforbhreathnú na ngníomhairí, oscail \"Roghanna\" agus grúpáil de réir \"Samhail\". Taispeántar na gníomhairí lena mbaineann sna grúpaí \"Samhail anaithnid\".",
+    "labelContextUnknown": "Gan mhéid comhthéacs",
+    "descriptionCompressionDisabled": "Bíonn comhbhrú uathoibríoch an chomhthéacs díchumasaithe mura socraítear méid an chomhthéacs.",
+    "descriptionContextSize": "Roghnach, ina chomharthaí. Fág folamh é chun comhbhrú uathoibríoch an chomhthéacs a dhíchumasú.",
+    "labelContextTokens": "{{size}} comhartha"
   },
   "connections": {
     "labelTitle": "Naisc",
@@ -515,7 +526,9 @@
     "descriptionOAuthSecret": "Stóráiltear ar an bhfreastalaí amháin é agus ní féidir é a athrú tar éis a chruthaithe.",
     "labelCopyCallback": "Cóipeáil an URL aisghlao",
     "labelCallbackCopied": "URL aisghlao cóipeáilte",
-    "errorCopyCallback": "Níorbh fhéidir an URL aisghlao a chóipeáil"
+    "errorCopyCallback": "Níorbh fhéidir an URL aisghlao a chóipeáil",
+    "labelIssuer": "Eisitheoir OAuth",
+    "descriptionIssuer": "Ní féidir é a athrú tar éis a chruthaithe."
   },
   "service": {
     "errorUnauthorized": "Theip ar údarú na seirbhíse.",

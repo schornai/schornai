@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Nieznany obszar roboczy"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Folder główny",
       "tooltipEdit": "Edytuj",
       "tooltipInfo": "Informacje"
     },

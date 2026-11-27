@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Tilpas",
-    "infoPersonalizeDescription": "Du kan uploade dit profilbillede og tilpasse dit navn her."
+    "infoPersonalizeDescription": "Du kan uploade dit profilbillede og tilpasse dit navn her.",
+    "cardFavoritesLabel": "Favoritter",
+    "cardFavoritesDescription": "Sortér, fjern og vis dine favoritter i sidepanelet.",
+    "cardPermissionsLabel": "Rettigheder",
+    "cardPermissionsDescription": "Se dine roller og adgangstilladelser.",
+    "cardConnectionsLabel": "Forbindelser",
+    "cardConnectionsDescription": "Administrer dine forbindelser."
   },
   "resetPasswordSuccess.page": {
     "title": "Ny adgangskode angivet",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Forbindelser",
-      "descriptionConnections": "Dine personlige OAuth-forbindelser til MCP-servere. Når du afbryder forbindelsen, fjernes de loginoplysninger, der er gemt her. Igangværende kald kan blive fuldført; tilbagekald rettigheder direkte hos udbyderen.",
       "labelDisconnect": "Afbryd forbindelse",
-      "descriptionEmpty": "Tilslut din konto i chatten, når et MCP-værktøj kræver, at du logger ind.",
       "labelEmpty": "Ingen forbindelser endnu",
-      "labelInfo": "Om forbindelser",
-      "errorDisconnect": "Forbindelsen kunne ikke afbrydes. Prøv igen."
+      "errorDisconnect": "Forbindelsen kunne ikke afbrydes. Prøv igen.",
+      "labelOutgoing": "Forbindelser til eksterne tjenester.",
+      "descriptionOutgoing": "schorn.ai bruger disse konti til at kontakte eksterne MCP-tjenester på dine vegne.",
+      "labelServer": "MCP-server",
+      "labelCancel": "Annuller",
+      "labelDisconnectNamed": "Afbryd forbindelse til {{serverUrl}}.",
+      "descriptionDisconnect": "Afbryd forbindelsen til {{serverUrl}}? De legitimationsoplysninger, der er gemt her, fjernes. Igangværende anmodninger kan stadig blive gennemført. Du kan tilbagekalde rettighederne direkte hos udbyderen."
+    },
+    "incoming": {
+      "labelTitle": "Adgang til schorn.ai",
+      "description": "Disse programmer kan få adgang til schorn.ai via MCP på dine vegne. Godkendelsen udvider ikke dine egne rettigheder.",
+      "labelCreated": "Godkendt fra",
+      "labelExpires": "Gyldig til",
+      "labelExpired": "Udløbet",
+      "labelRevoke": "Annuler adgang",
+      "labelRevokeNamed": "Annuler adgang for {{name}}",
+      "descriptionRevoke": "Tilbagekald adgangen for »{{name}}«? Alle adgangstokens og fornyelsestokens, der hører til denne godkendelse, bliver ugyldige. Igangværende anmodninger kan stadig blive gennemført. En ny forbindelse kræver din godkendelse.",
+      "labelCancel": "Annuller",
+      "errorRevoke": "Adgangen kunne ikke tilbagekaldes. Prøv igen.",
+      "labelApplication": "Applikation",
+      "labelLevel": "Adgangsniveau"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Giv {{client}} adgang",
+    "description": "Denne app kan handle på dine vegne. Gennemgå detaljerne og god kun applikationer, du stoler på.",
+    "labelLevel": "Adgangsniveau",
+    "labelResource": "MCP-endpoint",
+    "labelRedirect": "Omdirigeringsadresse",
+    "labelApprove": "Godkend",
+    "labelDeny": "Afvis",
+    "errorAuthorization": "Godkendelsesforespørgslen er ugyldig, eller dine rettigheder er ikke tilstrækkelige.",
+    "level": {
+      "user": "Bruger",
+      "editor": "Redaktør",
+      "workspace": "Arbejdsområdeadministrator",
+      "admin": "Global administrator"
+    },
+    "labelConnectTitle": "Dine værktøjer. Dine tilladelser.",
+    "descriptionConnect": "Forbind en AI-applikation til schorn.ai og vælg, hvilke tilladelser den skal have.",
+    "descriptionPermissions": "Dine nuværende rettigheder gælder stadig. Godkendelse af en app giver dig ikke flere rettigheder.",
+    "descriptionExpiry": "Godkendelse varer op til 30 dage. Applikationer, der understøtter refresh-tokens, fornyer adgangen automatisk i baggrunden.",
+    "labelPlatformAccess": "Platformadgang",
+    "descriptionLevel": "Vælg det højeste adgangsniveau, du vil tillade for dette program. Du kan kun vælge niveauer, som dine nuværende rettigheder omfatter.",
+    "descriptionNoAccess": "Dit account har i øjeblikket ingen tilladelse til at få adgang til platformen."
+  },
+  "favorites": {
+    "labelTitle": "Favoritter",
+    "description": "Træk i håndtaget på en favorit for at flytte den. Gem for at anvende rækkefølgen, fjernede poster og synligheden.",
+    "labelMove": "Omarranger {{name}}",
+    "labelRemoveNamed": "Fjern {{name}} fra favoritlisten",
+    "labelSave": "Gem",
+    "labelReset": "Nulstil",
+    "labelEmpty": "Ingen favoritliste endnu.",
+    "labelUnavailable": "Ikke længere tilgængeligt",
+    "labelShowInSidebar": "Vis i sidepanel",
+    "errorSave": "Kunne ikke gemme favoritlisten. Prøv igen.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Arbejdsområde",
+      "transcriber": "Transskriberingsværktøj",
+      "documentRepository": "Dokumentarkiv",
+      "automation": "Automatisering"
     }
   }
 }

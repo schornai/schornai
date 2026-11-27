@@ -9,8 +9,10 @@
         "history": "Istorija"
       },
       "SidebarFavorites": {
+        "labelActions": "Veiksmai su {{name}}",
         "label": "Mėgstamiausi",
-        "empty": "Mėgstamiausių dar nepridėta."
+        "empty": "Mėgstamiausių dar nepridėta.",
+        "labelEdit": "Redaguo"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Mėgstamiausių nėra",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Aplanko pavadinimas...",
       "labelCancel": "Atšaukti",
       "labelCreate": "Sukurti"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Failas pasiruošė.",
+      "errorFile": "Failo klaida.",
+      "labelProcessing": "Apdorojamas failas…",
+      "labelUploading": "Failas įkeliamas · {{progress}} %",
+      "labelUnprocessed": "Dar neapdorota."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nepavyta pašalinti šį elementą. Bandykite dar kartą."
     },
     "StorageDialogRemove": {
       "labelTitle": "Pašalinti",
@@ -246,6 +258,7 @@
       "labelDelete": "Ištrinti aplanką"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Redagavimas sustabdytas. Pirmiau išsaugota versija išlikusi. Jūsų projekto variantas išliks čia; bandykite išsaugoti dar kartą, kad būtų atkurta.",
       "labelContent": "Turinys",
       "labelSave": "Išsaugoti",
       "labelCancel": "Atšaukti",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Pasirinkti paskirties aplanką",
       "labelSelectFile": "Pasirinkti esamą failą",
       "descriptionFolder": "Pasirinkite esamą aplanką. Bus perduotas vienas failas; esami pavadinimai niekada neperrašomi.",
-      "descriptionFile": "Pasirinkite failą iš šio pokalbio arba prieinamos saugyklos. Dokumentai ir įrašai jau turi būti apdoroti.",
+      "descriptionFile": "Pasirinkti failą iš šio pokalbio arba iš prieinamo saugojimo. Galite pridedti failą, kai jis apdorojamas. Kopijuoti reikalauja, kad apdorojimas baigtų.",
       "labelStorage": "Saugykla",
       "labelCurrentStorage": "Dabartinė saugykla",
       "labelUp": "Pirminis aplankas",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopijuoti nepavyko. Šaltinis išsaugotas, bet paskirties vietoje gali likti nebaigtų failų. Patikrinkite ją prieš bandydami dar kartą.",
       "errorAction": "Veiksmas nepavyko. Prieš bandydami dar kartą patikrinkite teises, failų pavadinimus ir abi vietas.",
       "errorNotProcessed": "Šis failas dar neapdorotas. Pirmiausia jį apdorokite, tada pasirinkite dar kartą."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agentas",
+        "documentRepository": "Dokumentų saugykla",
+        "transcriber": "Transkribuotojas"
+      },
+      "labelSelected": "Išrinkta",
+      "labelChangeResource": "Keisti {{resource}}",
+      "labelChange": "Keisti",
+      "labelClearResource": "Pašalinti {{resource}}",
+      "labelChooseResource": "Pasirinkti {{resource}}",
+      "descriptionUnavailable": "Jūsų ankstesnis pasirinkimas negalioja. Pasirinkite kitą elementą.",
+      "descriptionEmpty": "Čia bus rodomas jūsų pasirinkimas. Spustelėkite norėdami pridėti elementą.",
+      "descriptionDialog": "Pasirinkite kortelę, kur ją norite naudoti.",
+      "labelSearch": "Paieška …",
+      "labelSelectNamed": "Pasirinkti {{name}}",
+      "labelSelect": "Pasirinkti",
+      "labelNoResults": "Nerandama rasti.",
+      "descriptionNoResults": "Pašiekite paieškojimą arba pirmiausiai sukurkite įrašą."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Eksportuoti XRAG",
+      "labelGlobalId": "Visas ID",
+      "errorGlobalIdTaken": "Šis visas ID jau naudojamas pasirinktoje darbo srityje.",
+      "errorGlobalId": "Numatytasis ID sukuriamas iš pavadinimo kebab-case formatu. Naudokite nuo 1 iki 200 ženklų. Leidžiamos raidės a–z, skaitmenys 0–9, brūkšneliai (-), pasvirieji brūkšniai (/) ir pabraukimo brūkšniai (_).",
+      "labelSaveId": "Išsaugoti visas ID.",
+      "errorAction": "Operacija nepavyko. Patikrinkite savo privilegijas, visas ID ir modelių failų prieinamumą."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG importas ir eksportas",
+      "description": "Importuoti XRAG failus arba pasirinkti eksportuojamus objektus.",
+      "labelUpload": "Pasirinkti failą.",
+      "errorUpload": "Failą nepavyko įdiegti. Pasirinkite jį dar kartą, kad būtų atnaujinta perdavimo.",
+      "labelWorkspace": "Darbo sritis",
+      "labelNewWorkspace": "Sukurti darbo sritį",
+      "labelName": "Darbo srities pavadinimas.",
+      "descriptionConfirm": "Peržiūrėkite pateiktus objektus. Patvirtinkite kiekvieną objektą, kurį norite pakeisti. Dokumentų saugyklose, failai su panašiais pavadinimais bus pakeisti; kiti esamieji failai išliks.",
+      "labelReplace": "Pakeisti \"{{name}}\".",
+      "labelImport": "Importuoti",
+      "descriptionImported": "Importas baigtas.",
+      "errorAction": "Operacija nepavyko. Patikrinkite, ar XRAG failas yra pilnas ir galioja, bei ar turite reikalingas privilegijas. Jei objektai yra pasikeitę, pakartotinai peržiūrėkite importą.",
+      "labelChooseExternalModel": "Pasirinkti esamą modelį",
+      "descriptionChooseExternalModel": "Rasta keli modeliai. Pasirinkite, kur naudoti šioje instancijoje.",
+      "descriptionModelMatched": "Bus naudojamas “{{name}}” su jo esamomis sąlypas.",
+      "descriptionModelMissing": "Nerandama tinkamo modelio. Objektas vis tiek bus importuojamas. Pasirinkite modelį vėliau.",
+      "labelTabImport": "Importas",
+      "labelTabExport": "Eksportas",
+      "labelUploadTitle": "Importuoti XRAG",
+      "descriptionDrop": "Kai kuri XRAG failą arba pasirinkite failą.",
+      "descriptionUploading": "Naudojamas failas…",
+      "descriptionImporting": "Importavimas…",
+      "descriptionInspecting": "Naudojamas turinys…",
+      "labelContent": "Įtraukti objektai",
+      "labelSelectAll": "Išsirink visus",
+      "labelSelectNone": "Išsirink nieko",
+      "labelSelectObject": "Importuoti {{name}}",
+      "labelChooseWorkspace": "Pasirinkti darbo sritynę",
+      "descriptionWorkspace": "Ši darbo sritis taikoma visiems pasirinktiems objektams.",
+      "kind": {
+        "agent": "Agentas",
+        "documentRepository": "Dokumentų saugykla",
+        "transcriber": "Transkribuotojas",
+        "ollamaModel": "Modelis",
+        "mlxWhisperModel": "Transkribavimo modelis",
+        "setup": "Platformos atnaujinimas",
+        "files": "Failų paketas",
+        "automation": "Automacija"
+      },
+      "labelAnotherUpload": "Įkelti dar vieną XRAG failą",
+      "labelSelection": "Pasirinkimas",
+      "labelObjectName": "Pavadinimas",
+      "labelObjectKind": "Tipas",
+      "labelObjectDescription": "Aprašymas",
+      "descriptionFilesProcessing": "Dokumentai bus paruošti paieškojimui."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Atšaukti",
+      "labelTitle": "Mano XRAG paketai.",
+      "description": "Pridėti išteklius ir vietinius modelius iš jų detalių. Eksportuoti paketą, kad galėtumėte atsisiųsti visus jo įrašus viename XRAG failuose.",
+      "labelName": "XRAG paketo pavadinimas.",
+      "labelCreate": "Sukurti XRAG paketą",
+      "labelAdd": "Pridėti prie XRAG paketo.",
+      "labelPackage": "XRAG paketas.",
+      "labelChoose": "Pasirinkti XRAG paketą.",
+      "labelExport": "Pradėti eksportą.",
+      "labelDelete": "Ištrinkti XRAG paketą",
+      "labelRemove": "Išvalyti iš XRAG paketo",
+      "labelConfirm": "Pašalinti",
+      "descriptionEmpty": "Pridėti objektus iš informacijos lango.",
+      "labelLoading": "Įkraunama XRAG paketai…",
+      "errorLoad": "Nepavyta įkrauti XRAG paketų ir prisijungusių objektų.",
+      "labelRetry": "Pabandyti",
+      "descriptionNoPackages": "Jų nėra, XRAG paketų.",
+      "labelRelated": "Pridėti prisijungusius objektus",
+      "descriptionRelated": "Pasirinkti objektus, kurie bus pridėti į XRAG paketą.",
+      "kind": {
+        "agent": "Agentas",
+        "documentRepository": "Dokumentų saugykla",
+        "transcriber": "Transkribuotojas",
+        "model": "Modelis",
+        "automation": "Automacija"
+      },
+      "labelOpenPackage": "Atidaryti paketą",
+      "errorCreate": "Nepavyko sukurti paketo. Bandykite dar kartą.",
+      "errorAdd": "Nepavyta pridėti pasirinkimą prie paketo. Patikrinkite savo privilegijas ir pabandykite dar kartą."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Eksportai",
+      "description": "Parengti failai po 72 valandų automatiškai ištrinami.",
+      "state_queued": "Laiko pakavimo procese",
+      "state_retrying": "Planuojama pasikartoti",
+      "state_processing": "Kuriamas paketas",
+      "state_finished": "Paruošta",
+      "state_error": "Neišsisekė",
+      "state_cancelled": "Atšaukta",
+      "labelCancel": "Atšaukti eksportavimą",
+      "labelDownload": "Atsisiųsti",
+      "labelProgress": "Įkėlimo eiga",
+      "state_uploading": "Naudojimosi failas",
+      "labelDelete": "Ištrinti eksportą",
+      "descriptionDelete": "Pašalinti „{{name}}“ iš jūsų eksportų? Jei yra susijęs archyvas, jis taip pat bus ištrintas.",
+      "labelDismiss": "Atšaukti"
     }
   },
   "_welcomeMessage": "Sveiki atvykę į\n\n# schorn.ai in a Box\n\n",

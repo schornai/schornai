@@ -9,8 +9,10 @@
         "history": "История"
       },
       "SidebarFavorites": {
+        "labelActions": "Действия за {{name}}",
         "label": "Любими",
-        "empty": "Все още няма добавени любими."
+        "empty": "Все още няма добавени любими.",
+        "labelEdit": "Редактиране на любими"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Няма любими",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Име на папката...",
       "labelCancel": "Отказ",
       "labelCreate": "Създаване"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Файлът е готов.",
+      "errorFile": "Грешка с файла.",
+      "labelProcessing": "Обработка на файла…",
+      "labelUploading": "Качване на файл · {{progress}}%",
+      "labelUnprocessed": "Не е обработен."
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Не успях да изтрия този елемент. Моля, опитайте отново."
     },
     "StorageDialogRemove": {
       "labelTitle": "Премахване",
@@ -246,6 +258,7 @@
       "labelDelete": "Изтриване на папка"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Запазването беше прекъснато. Предходната версия остава налична. Вашият проект е запазен тук; опитайте да запазите отново, за да възстановите.",
       "labelContent": "Съдържание",
       "labelSave": "Запазване",
       "labelCancel": "Отказ",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Избор на целева папка",
       "labelSelectFile": "Избор на съществуващ файл",
       "descriptionFolder": "Изберете съществуваща папка. Ще бъде прехвърлен един файл; съществуващите имена никога не се презаписват.",
-      "descriptionFile": "Изберете файл от този разговор или от достъпно хранилище. Документите и записите трябва вече да са обработени.",
+      "descriptionFile": "Изберете файл от този разговор или достъпен регистър. Можете да прикачите файл директно, докато обработката е в ход. Копирането изисква обработката да завърши.",
       "labelStorage": "Хранилище",
       "labelCurrentStorage": "Текущо хранилище",
       "labelUp": "Родителска папка",
@@ -279,6 +292,129 @@
       "errorCleanup": "Копирането е неуспешно. Източникът е запазен, но на местоназначението може да са останали непълни файлове. Проверете го, преди да опитате отново.",
       "errorAction": "Операцията е неуспешна. Проверете правата, имената на файловете и двете местоположения, преди да опитате отново.",
       "errorNotProcessed": "Този файл все още не е обработен. Първо го обработете, след което го изберете отново."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Агент",
+        "documentRepository": "Хранилище за документи",
+        "transcriber": "Транскрибатор"
+      },
+      "labelSelected": "Избрано",
+      "labelChangeResource": "Промени {{resource}}",
+      "labelChange": "Промени",
+      "labelClearResource": "Премахване на {{resource}}",
+      "labelChooseResource": "Избиране на {{resource}}",
+      "descriptionUnavailable": "Последната ви селекция вече не е налична. Изберете нов елемент.",
+      "descriptionEmpty": "Тук ще се покаже изборът ви. Щракнете, за да добавите елемент.",
+      "descriptionDialog": "Изберете картата, която искате да използвате тук.",
+      "labelSearch": "Търсене…",
+      "labelSelectNamed": "Създай {{name}}",
+      "labelSelect": "Избери",
+      "labelNoResults": "Няма намерени резултати",
+      "descriptionNoResults": "Настройте търсенето си или създайте запис първо."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Експортирай XRAG",
+      "labelGlobalId": "Глобален ID",
+      "errorGlobalIdTaken": "Този глобален ID вече се използва в избраното работно пространство.",
+      "errorGlobalId": "Идентификаторът по подразбиране се създава от заглавието във формат kebab-case. Използвайте от 1 до 200 знака: a–z, 0–9, тирета (-), наклонени черти (/) и долни черти (_).",
+      "labelSaveId": "Запазете глобален ID",
+      "errorAction": "Операцията не успя. Проверете вашите права, глобалния ID и наличието на файловете на модела."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Импортиране и експортиране на XRAG",
+      "description": "Импортирайте файлове XRAG или изберете обекти за експортиране.",
+      "labelUpload": "Изберете файл",
+      "errorUpload": "Файлът не можа да бъде качен. Изберете го отново, за да продължите прехвърлянето.",
+      "labelWorkspace": "Работно пространство",
+      "labelNewWorkspace": "Създаване на работно пространство",
+      "labelName": "Името на работното пространство",
+      "descriptionConfirm": "Прегледайте включените обекти. Потвърдете всеки съществуващ обект, който искате да замените. В хранилищата на файлове, файлове с еднакви имена се заменят; други съществуващи файлове се запазват.",
+      "labelReplace": "Заменете \"{{name}}\"",
+      "labelImport": "Импортирайте",
+      "descriptionImported": "Импортирано.",
+      "errorAction": "Операцията не успя. Проверете дали XRAG файлът е пълен и валиден, и че имате необходимите права. Прегледайте отново импортираните обекти, ако са променени.",
+      "labelChooseExternalModel": "Изберете съществуващ модел",
+      "descriptionChooseExternalModel": "Намерени са няколко модела. Изберете връзката, която да използвате в тази инстанция.",
+      "descriptionModelMatched": "Ще използваме “{{name}}” с вече съществуващите му данни.",
+      "descriptionModelMissing": "Няма налични съвпадащи модели. Обектът ще бъде импортиран. Изберете модел след това.",
+      "labelTabImport": "Импорт",
+      "labelTabExport": "Експорт",
+      "labelUploadTitle": "Импортирай XRAG",
+      "descriptionDrop": "Качете XRAG файл тук или изберете един.",
+      "descriptionUploading": "Качване на файл…",
+      "descriptionImporting": "Импортиране…",
+      "descriptionInspecting": "Зареждане на съдържанието…",
+      "labelContent": "Включени обекти",
+      "labelSelectAll": "Изберете всички",
+      "labelSelectNone": "Премахнете всички",
+      "labelSelectObject": "Импортирай {{name}}",
+      "labelChooseWorkspace": "Избери работно пространство",
+      "descriptionWorkspace": "Това работно пространство се прилага за всички избрани обекти.",
+      "kind": {
+        "agent": "Агент",
+        "documentRepository": "Хранилище за документи",
+        "transcriber": "Транскрибатор",
+        "ollamaModel": "Модел",
+        "mlxWhisperModel": "Модел за транскрипция",
+        "setup": "Актуализация на платформата",
+        "files": "Файл в пакет",
+        "automation": "Автоматизация"
+      },
+      "labelAnotherUpload": "Качи още един XRAG файл",
+      "labelSelection": "Избор",
+      "labelObjectName": "Име",
+      "labelObjectKind": "Тип",
+      "labelObjectDescription": "Описание",
+      "descriptionFilesProcessing": "Файловете се подготвят за търсене във фонов режим."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Отказ",
+      "labelTitle": "Моите XRAG пакети",
+      "description": "Добавете ресурси и локални модели от техните детайли. Експортирайте пакет за да изтеглите всички негови елементи в един XRAG файл.",
+      "labelName": "Името на XRAG пакета",
+      "labelCreate": "Създай XRAG пакет",
+      "labelAdd": "Добавете към XRAG пакет",
+      "labelPackage": "XRAG пакет",
+      "labelChoose": "Изберете XRAG пакет",
+      "labelExport": "Стартирай експорта",
+      "labelDelete": "Изтрий пакета XRAG",
+      "labelRemove": "Премахване от пакета XRAG",
+      "labelConfirm": "Премахване",
+      "descriptionEmpty": "Добавяне на обекти от техния информационен панел.",
+      "labelLoading": "Зареждане на пакетите XRAG…",
+      "errorLoad": "Не успях да заредя пакетите XRAG и свързаните обекти.",
+      "labelRetry": "Опитай отново",
+      "descriptionNoPackages": "Нямате никакви пакети XRAG.",
+      "labelRelated": "Добавяне на свързани обекти",
+      "descriptionRelated": "Изберете свързаните обекти, за да ги добавите като отделни елементи в пакета XRAG.",
+      "kind": {
+        "agent": "Агент",
+        "documentRepository": "Хранилище за документи",
+        "transcriber": "Транскрибатор",
+        "model": "Модел",
+        "automation": "Автоматизация"
+      },
+      "labelOpenPackage": "Отваряне на пакет",
+      "errorCreate": "Не можа да се създаде пакет. Опитайте отново.",
+      "errorAdd": "Изборът не може да бъде добавен към пакета. Проверете вашите права и опитайте отново."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Експорти",
+      "description": "Файловете, които са завършени, се изтриват автоматично след 72 часа.",
+      "state_queued": "Очаква за опаковане",
+      "state_retrying": "Планирано повторно изпълнение",
+      "state_processing": "Създаване на пакет",
+      "state_finished": "Готово",
+      "state_error": "Неуспешно",
+      "state_cancelled": "Отменено",
+      "labelCancel": "Отмяна на експортирането",
+      "labelDownload": "Изтегли",
+      "labelProgress": "Напредък на качването",
+      "state_uploading": "Качване на архив",
+      "labelDelete": "Изтриване на експорта",
+      "descriptionDelete": "Да се премахне ли „{{name}}“ от вашите експорти? Ако има съответен архив, той също ще бъде изтрит.",
+      "labelDismiss": "Отказ"
     }
   },
   "_welcomeMessage": "Добре дошли в\n\n# schorn.ai in a Box\n\n",

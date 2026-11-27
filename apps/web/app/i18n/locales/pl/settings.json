@@ -134,11 +134,15 @@
     },
     "XRAGUpload": {
       "title": "Przesyłanie XRAG",
-      "description": "Przeciągnij tutaj plik XRAG, aby go przesłać i zainstalować jego zawartość.",
+      "description": "Przeciągnij plik XRAG tutaj, aby go załadować i zainstalować. Po przerwie, wybierz ten sam plik, aby wznowić załadzanie.",
       "buttonUpload": "Prześlij",
       "errorUpload": "Błąd podczas przesyłania pliku XRAG „{{name}}”.",
-      "successUpload": "XRAG „{{name}}” został pomyślnie przesłany. W zależności od rozmiaru i rodzaju przesłanej zawartości zastosowanie zmian może potrwać kilka minut.",
-      "buttonHide": "Ukryj"
+      "successUpload": "{{name}}: Załadowanie zakończone. Publikacja sprawdzana oddzielnie.",
+      "buttonHide": "Ukryj",
+      "labelProcessing": "{{name}}: Weryfikacja i publikacja.",
+      "labelPublished": "{{name}}: Opublikowane i dostępne dla usług dopasowywania.",
+      "errorPublication": "{{name}}: Publikacja nieudana. Sprawdź pakiet i spróbuj ponownie przesłać.",
+      "errorPublicationStatus": "{{name}}: Status tymczasowo niedostępny. Próba ponownego uruchomienia."
     },
     "TaskTable": {
       "tableColumnType": "Typ",
@@ -332,7 +336,9 @@
     "cardXragLabel": "Prześlij XRAG",
     "cardXragDescription": "Zainstaluj agentów, dokumenty lub modele albo zaktualizuj całego boxa za pomocą pakietu XRAG.",
     "cardAppearanceLabel": "Wygląd",
-    "cardAppearanceDescription": "Dostosuj kolory i wygląd boxa do swoich upodobań."
+    "cardAppearanceDescription": "Dostosuj kolory i wygląd boxa do swoich upodobań.",
+    "cardConnectionsLabel": "Połączenia",
+    "cardConnectionsDescription": "Zarządzaj aplikacjami OAuth i wyszukuj połączenia centralnie."
   },
   "users.page": {
     "labelTitle": "Użytkownicy"
@@ -430,6 +436,7 @@
     "labelNoModels": "Nie znaleziono modeli",
     "descriptionNoResults": "Zmień kryteria wyszukiwania, aby znaleźć modele.",
     "descriptionNoModels": "Tutaj pojawiają się modele lokalne i zewnętrzne. Dodaj model zewnętrzny, aby rozpocząć.",
+    "descriptionNoRegisteredModels": "Żadne modele nie są zarejestrowane na tej instancji.",
     "labelChooseProvider": "Wybierz dostawcę",
     "descriptionChooseProvider": "Połącz zewnętrzny model językowy za pośrednictwem jego dostawcy.",
     "labelConfigure": "Konfiguruj",
@@ -465,7 +472,11 @@
     "labelEditSection": "Edytuj {{section}}",
     "labelToggleSection": "Rozwiń/zwiń {{section}}",
     "descriptionDeleteAgents": "Agenci korzystający z tego modelu zostaną zachowani. Nie będzie jednak można ich używać, dopóki nie przypiszesz im innego dostępnego modelu.",
-    "descriptionDeleteAgentsTip": "Wskazówka: W przeglądzie agentów otwórz „Opcje” i pogrupuj według „Model”. Agenci, których to dotyczy, pojawią się w grupach „Nieznany model”."
+    "descriptionDeleteAgentsTip": "Wskazówka: W przeglądzie agentów otwórz „Opcje” i pogrupuj według „Model”. Agenci, których to dotyczy, pojawią się w grupach „Nieznany model”.",
+    "labelContextUnknown": "Brak rozmiaru kontekstu.",
+    "descriptionCompressionDisabled": "Automatyczne ściszanie kontekstu wyłączone, jeśli nie ma określonego rozmiaru kontekstu.",
+    "descriptionContextSize": "Opcjonalne, w tokenach. Pusty znak oznacza wyłączenie automatycznego ściszania kontekstu.",
+    "labelContextTokens": "{{size}} tokenów"
   },
   "connections": {
     "labelTitle": "Połączenia",
@@ -514,7 +525,9 @@
     "descriptionOAuthSecret": "Przechowywany wyłącznie na serwerze i nie może być zmieniony po utworzeniu.",
     "labelCopyCallback": "Skopiuj URL wywołania zwrotnego",
     "labelCallbackCopied": "Skopiowano URL wywołania zwrotnego",
-    "errorCopyCallback": "Nie udało się skopiować URL wywołania zwrotnego"
+    "errorCopyCallback": "Nie udało się skopiować URL wywołania zwrotnego",
+    "labelIssuer": "Emiter OAuth",
+    "descriptionIssuer": "Nie można zmienić po utworzeniu."
   },
   "service": {
     "errorUnauthorized": "Autoryzacja usługi nie powiodła się.",

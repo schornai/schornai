@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Okänd arbetsyta"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Rotmapp",
       "tooltipEdit": "Redigera",
       "tooltipInfo": "Information"
     },

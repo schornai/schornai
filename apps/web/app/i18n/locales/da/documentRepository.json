@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Ukendt arbejdsområde"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Rodmappe",
       "tooltipEdit": "Rediger",
       "tooltipInfo": "Information"
     },

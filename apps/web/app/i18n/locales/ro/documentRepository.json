@@ -50,6 +50,7 @@
       "labelUnknownWorkspace": "Spațiu de lucru necunoscut"
     },
     "DocumentRepositoryIconGroupActions": {
+      "tooltipFiles": "Folder principal",
       "tooltipEdit": "Editează",
       "tooltipInfo": "Informații"
     },

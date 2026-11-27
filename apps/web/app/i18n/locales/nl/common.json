@@ -9,8 +9,10 @@
         "history": "Geschiedenis"
       },
       "SidebarFavorites": {
+        "labelActions": "Acties voor {{name}}",
         "label": "Favorieten",
-        "empty": "Er zijn nog geen favorieten toegevoegd."
+        "empty": "Er zijn nog geen favorieten toegevoegd.",
+        "labelEdit": "Favorieten bewerken"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Geen favorieten",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Mapnaam...",
       "labelCancel": "Annuleren",
       "labelCreate": "Aanmaken"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Bestand klaar",
+      "errorFile": "Bestand fout",
+      "labelProcessing": "Bestand verwerken…",
+      "labelUploading": "Bestand uploaden · {{progress}}%",
+      "labelUnprocessed": "Nog niet verwerkt"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Kon dit item niet verwijderen. Probeer het opnieuw."
     },
     "StorageDialogRemove": {
       "labelTitle": "Verwijderen",
@@ -246,6 +258,7 @@
       "labelDelete": "Map verwijderen"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Opslaan is onderbroken. De vorige versie is nog beschikbaar. Uw concept blijft hier; probeer opnieuw op te slaan om de herstel volledig te voltooien.",
       "labelContent": "Inhoud",
       "labelSave": "Opslaan",
       "labelCancel": "Annuleren",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Doelmap kiezen",
       "labelSelectFile": "Kies een bestaand bestand",
       "descriptionFolder": "Kies een bestaande map. Er wordt één bestand overgebracht; bestaande namen worden nooit overschreven.",
-      "descriptionFile": "Kies een bestand uit deze chat of een toegankelijke opslagplaats. Documenten en opnamen moeten al verwerkt zijn.",
+      "descriptionFile": "Kies een bestand uit deze chat of een toegankelijke repository. Je kunt een bestand direct toevoegen terwijl het wordt verwerkt. Kopiëren vereist dat de verwerking is voltooid.",
       "labelStorage": "Opslag",
       "labelCurrentStorage": "Huidige opslag",
       "labelUp": "Bovenliggende map",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopiëren mislukt. De bron is behouden, maar er kunnen onvolledige bestanden op de bestemming achterblijven. Controleer dit voordat je het opnieuw probeert.",
       "errorAction": "De bewerking is mislukt. Controleer rechten, bestandsnamen en beide locaties voordat je het opnieuw probeert.",
       "errorNotProcessed": "Dit bestand is nog niet verwerkt. Verwerk het eerst en selecteer het daarna opnieuw."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Documentopslagplaats",
+        "transcriber": "Transcriptor"
+      },
+      "labelSelected": "Geselecteerd",
+      "labelChangeResource": "{{resource}} wijzigen",
+      "labelChange": "Wijzigen",
+      "labelClearResource": "{{resource}} verwijderen",
+      "labelChooseResource": "{{resource}} selecteren",
+      "descriptionUnavailable": "Vorige selectie is niet meer beschikbaar. Kies een nieuwe.",
+      "descriptionEmpty": "Hier plaatsen. Klik om een item toe te voegen.",
+      "descriptionDialog": "Kies de kaart die je hier wilt gebruiken.",
+      "labelSearch": "Zoeken …",
+      "labelSelectNamed": "{{name}} selecteren",
+      "labelSelect": "Selecteren",
+      "labelNoResults": "Geen overeenkomstige entries",
+      "descriptionNoResults": "Pas je zoekopdracht aan of maak eerst een entry."
+    },
+    "XRAGExportButton": {
+      "labelExport": "XRAG exporteren",
+      "labelGlobalId": "Unieke ID",
+      "errorGlobalIdTaken": "Deze unieke ID wordt al in de geselecteerde Werkruimte gebruikt.",
+      "errorGlobalId": "De standaard-ID wordt in kebab-case uit de titel afgeleid. Gebruik 1 tot 200 tekens. Toegestaan zijn a–z, 0–9, koppeltekens (-), schuine strepen (/) en onderstrepingstekens (_).",
+      "labelSaveId": "Unieke ID opslaan",
+      "errorAction": "De operatie is mislukt. Controleer je rechten, de unieke ID en de beschikbaarheid van modelbestanden."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG importeren en exporteren",
+      "description": "XRAG-bestanden importeren of object selecteren om te exporteren.",
+      "labelUpload": "Bestand kiezen",
+      "errorUpload": "Het bestand kon niet worden geüpload. Selecteer het opnieuw om de overdracht te hervatten.",
+      "labelWorkspace": "Werkruimte",
+      "labelNewWorkspace": "Werkruimte aanmaken",
+      "labelName": "Naam van de werkruimte",
+      "descriptionConfirm": "Bekijk de opgenomen objecten. Bevestig elk bestaand object dat je wilt vervangen. Bestanden met dezelfde naam worden in documentarchieven vervangen; andere bestaande bestanden worden behouden.",
+      "labelReplace": "Vervang \"{{name}}\"",
+      "labelImport": "Importeren",
+      "descriptionImported": "Import voltoekt.",
+      "errorAction": "De operatie is mislukt. Controleer of het XRAG-bestand compleet en geldig is, en of u de benodigde rechten heeft. Bekijk het importeren opnieuw als de objecten zijn gewijzigd.",
+      "labelChooseExternalModel": "Kies een bestaand model",
+      "descriptionChooseExternalModel": "Meerdere modellen matchen. Selecteer de verbinding die u op deze instantie wilt gebruiken.",
+      "descriptionModelMatched": "Gebruikt “{{name}}” met de bestaande credentials.",
+      "descriptionModelMissing": "Geen overeenkomend model beschikbaar. Het object wordt nog steeds geïmporteerd. Selecteer daarna een model.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Export",
+      "labelUploadTitle": "XRAG importeren",
+      "descriptionDrop": "XRAG-bestand hier uploaden of selecteren.",
+      "descriptionUploading": "Bestand uploaden…",
+      "descriptionImporting": "Importeren…",
+      "descriptionInspecting": "Inhoud laden…",
+      "labelContent": "Ingevoegde objecten",
+      "labelSelectAll": "Alle selecteren",
+      "labelSelectNone": "Niets selecteren",
+      "labelSelectObject": "Bestand importeren {{name}}",
+      "labelChooseWorkspace": "Werkruimte selecteren",
+      "descriptionWorkspace": "Deze werkruimte geldt voor alle geselecteerde objecten.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Documentopslagplaats",
+        "transcriber": "Transcriptor",
+        "ollamaModel": "Model",
+        "mlxWhisperModel": "Transcriptiemodel",
+        "setup": "Platform update",
+        "files": "Bestandspakket",
+        "automation": "Automatisering"
+      },
+      "labelAnotherUpload": "Nog een XRAG-bestand uploaden",
+      "labelSelection": "Selectie",
+      "labelObjectName": "Naam",
+      "labelObjectKind": "Type",
+      "labelObjectDescription": "Beschrijving",
+      "descriptionFilesProcessing": "Bestanden worden voor de zoekfunctie in de achtergrond voorbereid."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Annuleren",
+      "labelTitle": "Mijn XRAG pakketten",
+      "description": "Bronnen en lokale modellen toevoegen vanuit de details. Een pakket exporteren om alle entries in één XRAG-bestand te downloaden.",
+      "labelName": "Naam XRAG pakket",
+      "labelCreate": "XRAG-pakket aanmaken",
+      "labelAdd": "Toevoegen aan XRAG pakket",
+      "labelPackage": "XRAG pakket",
+      "labelChoose": "XRAG pakket selecteren",
+      "labelExport": "Export starten",
+      "labelDelete": "XRAG pakket verwijderen",
+      "labelRemove": "Verwijderen uit XRAG pakket",
+      "labelConfirm": "Verwijderen",
+      "descriptionEmpty": "Objecten toevoegen vanuit hun info-weergave.",
+      "labelLoading": "XRAG pakketten laden…",
+      "errorLoad": "XRAG pakketten en verbonden objecten konden niet worden geladen.",
+      "labelRetry": "Proberen opnieuw",
+      "descriptionNoPackages": "Je hebt nog geen XRAG pakketten.",
+      "labelRelated": "Verbonden objecten toevoegen",
+      "descriptionRelated": "Verbonden objecten selecteren om als aparte entries in het XRAG pakket toe te voegen.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Documentopslagplaats",
+        "transcriber": "Transcriptor",
+        "model": "Model",
+        "automation": "Automatisering"
+      },
+      "labelOpenPackage": "Pakket openen",
+      "errorCreate": "Het pakket kon niet worden gemaakt. Probeer opnieuw.",
+      "errorAdd": "De selectie kon niet aan het pakket worden toegevoegd. Controleer uw rechten en probeer opnieuw."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exports",
+      "description": "Voltooide bestanden worden na 72 uur automatisch verwijderd.",
+      "state_queued": "In behandeling voor verpakken",
+      "state_retrying": "Nieuwe poging gepland",
+      "state_processing": "Pakket maken",
+      "state_finished": "Gereed",
+      "state_error": "Misgefaald",
+      "state_cancelled": "Geannuleerd",
+      "labelCancel": "Export annuleren",
+      "labelDownload": "Downloaden",
+      "labelProgress": "Upload status",
+      "state_uploading": "Archief uploaden",
+      "labelDelete": "Export verwijderen",
+      "descriptionDelete": "‘{{name}}’ uit je exports verwijderen? Als er een bijbehorend archief is, wordt dat ook verwijderd.",
+      "labelDismiss": "Annuleren"
     }
   },
   "_welcomeMessage": "Welkom bij\n\n# schorn.ai in a Box\n\n",

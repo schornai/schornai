@@ -9,8 +9,10 @@
         "history": "Előzmények"
       },
       "SidebarFavorites": {
+        "labelActions": "Műveletek: {{name}}",
         "label": "Kedvencek",
-        "empty": "Még nincsenek hozzáadott kedvencek."
+        "empty": "Még nincsenek hozzáadott kedvencek.",
+        "labelEdit": "Kedvencek szerkesztése"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Nincsenek kedvencek",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Mappa neve...",
       "labelCancel": "Mégse",
       "labelCreate": "Létrehozás"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fájl kész",
+      "errorFile": "Fájlhiba",
+      "labelProcessing": "Fájl feldolgozás…",
+      "labelUploading": "Fájl feltöltése · {{progress}}%",
+      "labelUnprocessed": "Nem lett feldolgozva"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Nem sikerült törölni ezt az elemet. Próbáld meg újra."
     },
     "StorageDialogRemove": {
       "labelTitle": "Eltávolítás",
@@ -246,6 +258,7 @@
       "labelDelete": "Mappa törlése"
     },
     "StorageFileEditor": {
+      "errorRecovery": "A mentés megszakadt. Az előző verzió elérhető. A javaszat itt tároljuk, próbáld meg újra, hogy teljes körűen helyreállítsd.",
       "labelContent": "Tartalom",
       "labelSave": "Mentés",
       "labelCancel": "Mégse",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Célmappa kiválasztása",
       "labelSelectFile": "Meglévő fájl kiválasztása",
       "descriptionFolder": "Válasszon egy meglévő mappát. Egy fájl kerül átvitelre; a meglévő nevek soha nem íródnak felül.",
-      "descriptionFile": "Válasszon fájlt ebből a beszélgetésből vagy egy elérhető tárból. A dokumentumoknak és felvételeknek már feldolgozottnak kell lenniük.",
+      "descriptionFile": "Válassz egy fájlt ebből a beszélgetésből vagy egy elérhető tárolóból. A fájl közvetlenül rögzítéséhez a feldolgozás befejezése szükséges. A másoláshoz a feldolgozás befejezése szükséges.",
       "labelStorage": "Tárhely",
       "labelCurrentStorage": "Aktuális tárhely",
       "labelUp": "Szülőmappa",
@@ -279,6 +292,129 @@
       "errorCleanup": "A másolás sikertelen. A forrás megmaradt, de hiányos fájlok maradhattak a célhelyen. Az újrapróbálkozás előtt ellenőrizze azt.",
       "errorAction": "A művelet sikertelen. Az újrapróbálkozás előtt ellenőrizze a jogosultságokat, a fájlneveket és mindkét helyet.",
       "errorNotProcessed": "Ez a fájl még nincs feldolgozva. Először dolgozza fel, majd válassza ki újra."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Ügynök",
+        "documentRepository": "Dokumentumtár",
+        "transcriber": "Átíró"
+      },
+      "labelSelected": "Kiválasztva",
+      "labelChangeResource": "{{resource}} módosítása",
+      "labelChange": "Válassz",
+      "labelClearResource": "{{resource}} eltávolítása",
+      "labelChooseResource": "{{resource}} kiválasztása",
+      "descriptionUnavailable": "Az előző kiválasztás már nem elérhető. Válassz egy új elemet.",
+      "descriptionEmpty": "Itt jelenik meg a kiválasztásod. Kattints egy elem hozzáadásához.",
+      "descriptionDialog": "Válassz ki a használni kívánt kártyát.",
+      "labelSearch": "Keress …",
+      "labelSelectNamed": "{{name}} kiválasztása",
+      "labelSelect": "Válassz",
+      "labelNoResults": "Nincsenek találatok",
+      "descriptionNoResults": "Oszd meg a keresést, vagy hozz létre egy bevitelt először."
+    },
+    "XRAGExportButton": {
+      "labelExport": "XRAG export",
+      "labelGlobalId": "Globális azonosító",
+      "errorGlobalIdTaken": "Ez a globális azonosító már használatban van a kiválasztott munkaterületen.",
+      "errorGlobalId": "Az alapértelmezett azonosító a címből jön létre kebab-case formátumban. A hossza 1 és 200 karakter között lehet. Engedélyezett karakterek: a–z, 0–9, kötőjel (-), perjel (/) és aláhúzásjel (_).",
+      "labelSaveId": "Globális azonosító mentése",
+      "errorAction": "Az művelet sikertelen. Ellenőrizze a jogosultságait, a globális azonosítót és a model fájlok elérhetőségét."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "XRAG import és export",
+      "description": "Importálja a XRAG fájlokat, vagy exportálhat objektumokat.",
+      "labelUpload": "Válassza ki a fájlt.",
+      "errorUpload": "Nem sikerült a fájlt feltölteni. Válassza meg újra, hogy folytassa a továbbítást.",
+      "labelWorkspace": "Munkaterület",
+      "labelNewWorkspace": "Munkaterület létrehozása",
+      "labelName": "Munkaterület neve",
+      "descriptionConfirm": "Nézze át azokat az objektumokat, amelyeket be szeretne foglalni. Ellenőrizze, hogy mely meglévő objektumokat kívánja felcserélni. A fájlmegtárolási adattárakban azonos nevekkel rendelkező fájlok helyettesítve lesznek; a többi meglévő fájl megmarad.",
+      "labelReplace": "Cserélje le \"{{name}}\"-t.",
+      "labelImport": "Importálja",
+      "descriptionImported": "Importálás befejeződött.",
+      "errorAction": "Az művelet sikertelen. Ellenőrizze, hogy a XRAG fájl teljes és érvényes, valamint rendelkezik a szükséges engedélyekkel. Ismét ellenőrizze az importálást, ha az objektumok megváltoztak.",
+      "labelChooseExternalModel": "Válassza ki a meglévő modellt.",
+      "descriptionChooseExternalModel": "Több modell illeszkedik. Válassza ki a használni kívánt kapcsolatot ezen az esztendőn.",
+      "descriptionModelMatched": "“{{name}}”-et fogja használni a meglévő hitellevel.",
+      "descriptionModelMissing": "Nincs elérhető megegyező modell. Az objektum mégis importálásra kerül. Válassza ki egy modellt később.",
+      "labelTabImport": "Importálás",
+      "labelTabExport": "Exportálás",
+      "labelUploadTitle": "XRAG import",
+      "descriptionDrop": "Tölts fel egy XRAG fájlt, vagy válassz egyet.",
+      "descriptionUploading": "Fájl feltöltése…",
+      "descriptionImporting": "Importálás folyamatban…",
+      "descriptionInspecting": "Tartalom betöltése…",
+      "labelContent": "Beillesztett objektumok",
+      "labelSelectAll": "Mindent kiválaszt",
+      "labelSelectNone": "Semmit",
+      "labelSelectObject": "{{name}} importálása",
+      "labelChooseWorkspace": "Munkaterület kiválasztása",
+      "descriptionWorkspace": "Ez a munkaterület minden kiválasztott objektumra vonatkozik.",
+      "kind": {
+        "agent": "Ügynök",
+        "documentRepository": "Dokumentumtár",
+        "transcriber": "Átíró",
+        "ollamaModel": "Modell",
+        "mlxWhisperModel": "Átírási modell",
+        "setup": "Platform frissítés",
+        "files": "Fájlcsomag",
+        "automation": "Automatikus"
+      },
+      "labelAnotherUpload": "További XRAG fájl feltöltése",
+      "labelSelection": "Kiválasztás",
+      "labelObjectName": "Név",
+      "labelObjectKind": "Típus",
+      "labelObjectDescription": "Leírás",
+      "descriptionFilesProcessing": "A dokumentumok a háttérben történő keresésre kerülnek előkészítésre."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Mégse",
+      "labelTitle": "Az XRAG csomagjaim",
+      "description": "Adjon hozzá erőforrásokat és helyi modelleket az adataikból. Exportálja a csomagot, hogy az összes elemet egyetlen XRAG fájlban tölthessék le.",
+      "labelName": "XRAG csomag neve",
+      "labelCreate": "XRAG csomag létrehozása",
+      "labelAdd": "Hozzáadás XRAG csomaghoz",
+      "labelPackage": "XRAG csomag",
+      "labelChoose": "Válassza ki a XRAG csomagot",
+      "labelExport": "Exportálás",
+      "labelDelete": "XRAG csomag törlése",
+      "labelRemove": "Távolítsd el az XRAG csomagból",
+      "labelConfirm": "Eltávolítás",
+      "descriptionEmpty": "Add objektumokat az info nézetből.",
+      "labelLoading": "XRAG csomagok betöltése…",
+      "errorLoad": "Nem sikerült betölteni a XRAG csomagokat és a csatlakoztatott objektumokat.",
+      "labelRetry": "Újrapróbál",
+      "descriptionNoPackages": "Nincsenek XRAG csomagok nálad.",
+      "labelRelated": "Add csatlakoztatott objektumokat",
+      "descriptionRelated": "Válassz csatlakoztatott objektumokat, hogy külön bemenetekként kerüljenek a XRAG csomagba.",
+      "kind": {
+        "agent": "Ügynök",
+        "documentRepository": "Dokumentumtár",
+        "transcriber": "Átíró",
+        "model": "Modell",
+        "automation": "Automatikus"
+      },
+      "labelOpenPackage": "Csomagot nyit",
+      "errorCreate": "Nem sikerült létrehozni a csomagot. Próbálja újra.",
+      "errorAdd": "Nem sikerült hozzáadni a kiválasztást a csomaghoz. Ellenőrizze a jogosultsait, és próbálja újra."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exportálások",
+      "description": "Az elkészült fájlok 72 óra után automatikusan törlésre kerülnek.",
+      "state_queued": "Csomagozásra üzenve",
+      "state_retrying": "Újrapróbálásra üzenve",
+      "state_processing": "Csomag létrehozása",
+      "state_finished": "Kész",
+      "state_error": "Sikertelen",
+      "state_cancelled": "Megszakítva",
+      "labelCancel": "Exportálás megszakítása",
+      "labelDownload": "Letöltés",
+      "labelProgress": "Feltöltés előrehaladása",
+      "state_uploading": "Archiv feltöltés",
+      "labelDelete": "Export törlése",
+      "descriptionDelete": "Eltávolítod az exportjaid közül ezt: „{{name}}”? Ha tartozik hozzá archívum, az is törlődik.",
+      "labelDismiss": "Mégse"
     }
   },
   "_welcomeMessage": "Üdvözöljük!\n\n# schorn.ai in a Box\n\n",

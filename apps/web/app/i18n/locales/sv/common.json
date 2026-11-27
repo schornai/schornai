@@ -9,8 +9,10 @@
         "history": "Historik"
       },
       "SidebarFavorites": {
+        "labelActions": "Åtgärder för {{name}}",
         "label": "Favoriter",
-        "empty": "Inga favoriter har lagts till ännu."
+        "empty": "Inga favoriter har lagts till ännu.",
+        "labelEdit": "Redigera favoriter"
       },
       "DashboardFavorites": {
         "labelNoFavorites": "Inga favoriter",
@@ -109,6 +111,16 @@
       "placeholderFolderName": "Mappnamn...",
       "labelCancel": "Avbryt",
       "labelCreate": "Skapa"
+    },
+    "StorageObjectTile": {
+      "labelReady": "Fil redo",
+      "errorFile": "Filfel",
+      "labelProcessing": "Bearbetar fil…",
+      "labelUploading": "Laddar upp fil · {{progress}} %",
+      "labelUnprocessed": "Inte bearbetat ännu"
+    },
+    "ResourceRemovalDialog": {
+      "errorRemove": "Kunde inte ta bort detta element. Försök igen."
     },
     "StorageDialogRemove": {
       "labelTitle": "Ta bort",
@@ -246,6 +258,7 @@
       "labelDelete": "Ta bort mapp"
     },
     "StorageFileEditor": {
+      "errorRecovery": "Sparandet avbröts. Den tidigare versionen är kvar. Ditt utkast finns här – försök att spara igen för att återställa det helt.",
       "labelContent": "Innehåll",
       "labelSave": "Spara",
       "labelCancel": "Avbryt",
@@ -257,7 +270,7 @@
       "labelTargetFolder": "Välj målmapp",
       "labelSelectFile": "Välj en befintlig fil",
       "descriptionFolder": "Välj en befintlig mapp. En fil överförs; befintliga namn skrivs aldrig över.",
-      "descriptionFile": "Välj en fil från den här chatten eller ett tillgängligt arkiv. Dokument och inspelningar måste redan vara bearbetade.",
+      "descriptionFile": "Välj en fil från den här chatten eller en tillgänglig lagring. Du kan fästa en fil direkt när bearbetningen är igång. Kopiering kräver att bearbetningen är klar.",
       "labelStorage": "Lagring",
       "labelCurrentStorage": "Aktuell lagring",
       "labelUp": "Överordnad mapp",
@@ -279,6 +292,129 @@
       "errorCleanup": "Kopieringen misslyckades. Källan behölls, men ofullständiga filer kan finnas kvar på målplatsen. Kontrollera den innan du försöker igen.",
       "errorAction": "Åtgärden misslyckades. Kontrollera behörigheter, filnamn och båda platserna innan du försöker igen.",
       "errorNotProcessed": "Filen har inte bearbetats ännu. Bearbeta den först och välj den sedan igen."
+    },
+    "ResourceSlot": {
+      "types": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transkriberare"
+      },
+      "labelSelected": "Vald",
+      "labelChangeResource": "Ändra {{resource}}",
+      "labelChange": "Ändra",
+      "labelClearResource": "Ta bort {{resource}}",
+      "labelChooseResource": "Välj {{resource}}",
+      "descriptionUnavailable": "Din tidigare val är inte längre tillgängligt. Välj ett nytt alternativ.",
+      "descriptionEmpty": "Ditt val här. Klicka för att lägga till ett element.",
+      "descriptionDialog": "Välj kortet du vill använda här.",
+      "labelSearch": "Sök…",
+      "labelSelectNamed": "Välj {{name}}",
+      "labelSelect": "Välj",
+      "labelNoResults": "Inga matchande resultat",
+      "descriptionNoResults": "Justera din sökning eller skapa ett nytt inlägg först."
+    },
+    "XRAGExportButton": {
+      "labelExport": "Exportera XRAG",
+      "labelGlobalId": "Global ID",
+      "errorGlobalIdTaken": "Detta globala ID används redan i den valda arbetsytan.",
+      "errorGlobalId": "Standard-id:t skapas utifrån rubriken i kebab-case. Använd 1 till 200 tecken. Tillåtna tecken är a–z, 0–9, bindestreck (-), snedstreck (/) och understreck (_).",
+      "labelSaveId": "Spara globalt ID",
+      "errorAction": "Operationen misslyckades. Kontrollera dina behörigheter, det globala ID:t och tillgängligheten av modellfiler."
+    },
+    "XRAGTransfer": {
+      "labelTitle": "Importera och exportera XRAG",
+      "description": "Importera XRAG-filer eller välj objekt att exportera.",
+      "labelUpload": "Välj fil",
+      "errorUpload": "Filen kunde inte laddas upp. Välj den igen för att fortsätta överföringen.",
+      "labelWorkspace": "Arbetsyta",
+      "labelNewWorkspace": "Skapa arbetsyta",
+      "labelName": "Arbetsytans namn",
+      "descriptionConfirm": "Granska de inkluderade objekten. Bekräfta varje befintligt objekt du vill ersätta. I dokumentarkiv ersätt filer med samma namn; andra befintliga filer behålls.",
+      "labelReplace": "Ersätt \"{{name}}\"",
+      "labelImport": "Importera",
+      "descriptionImported": "Importer klar.",
+      "errorAction": "Operationen misslyckades. Kontrollera att XRAG-filen är komplett och giltig, samt att du har de nödvändiga behörigheterna. Visa filen igen om objekten har ändrats.",
+      "labelChooseExternalModel": "Välj en befintlig modell",
+      "descriptionChooseExternalModel": "Flera modeller matchar. Välj anslutningen att använda på denna instans.",
+      "descriptionModelMatched": "Använder \"{{name}}\" med dess befintliga inloggningsuppgifter.",
+      "descriptionModelMissing": "Ingen matchande modell finns tillgänglig. Objekten kommer fortfarande att importeras. Välj en modell efteråt.",
+      "labelTabImport": "Import",
+      "labelTabExport": "Export",
+      "labelUploadTitle": "Importera XRAG",
+      "descriptionDrop": "Ladda upp en XRAG-fil eller välj en fil.",
+      "descriptionUploading": "Laddar upp…",
+      "descriptionImporting": "Importerar…",
+      "descriptionInspecting": "Laddar in…",
+      "labelContent": "Inkluderade objekt",
+      "labelSelectAll": "Markera alla",
+      "labelSelectNone": "Markera inget",
+      "labelSelectObject": "Importera {{name}}",
+      "labelChooseWorkspace": "Välj arbetsyta",
+      "descriptionWorkspace": "Denna arbetsyta gäller för alla valda objekt.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transkriberare",
+        "ollamaModel": "Modell",
+        "mlxWhisperModel": "Transkriptionsmodell",
+        "setup": "Plattformsuppdatering",
+        "files": "Filpaket",
+        "automation": "Automatisering"
+      },
+      "labelAnotherUpload": "Ladda upp en annan XRAG-fil",
+      "labelSelection": "Val",
+      "labelObjectName": "Namn",
+      "labelObjectKind": "Typ",
+      "labelObjectDescription": "Beskrivning",
+      "descriptionFilesProcessing": "Dokumentfiler förbereds för sökning i bakgrunden."
+    },
+    "XRAGPackages": {
+      "labelCancel": "Avbryt",
+      "labelTitle": "Mina XRAG-paket",
+      "description": "Lägg till resurser och lokala modeller från deras detaljer. Exportera ett paket för att ladda ner alla dess poster i en XRAG-fil.",
+      "labelName": "XRAG-paketets namn",
+      "labelCreate": "Skapa XRAG-paket",
+      "labelAdd": "Lägg till i XRAG-paket",
+      "labelPackage": "XRAG-paket",
+      "labelChoose": "Välj XRAG-paket",
+      "labelExport": "Starta export",
+      "labelDelete": "Ta bort XRAG-paket",
+      "labelRemove": "Ta bort från XRAG-paket",
+      "labelConfirm": "Ta bort",
+      "descriptionEmpty": "Lägg till objekt från deras visning.",
+      "labelLoading": "Laddar XRAG-paket…",
+      "errorLoad": "Kunde inte ladda XRAG-paket och anslutna objekt.",
+      "labelRetry": "Försök igen",
+      "descriptionNoPackages": "Du har inga XRAG-paket ännu.",
+      "labelRelated": "Lägg till anslutna objekt",
+      "descriptionRelated": "Välj anslutna objekt att lägga till som separata poster i XRAG-paketet.",
+      "kind": {
+        "agent": "Agent",
+        "documentRepository": "Dokumentarkiv",
+        "transcriber": "Transkriberare",
+        "model": "Modell",
+        "automation": "Automatisering"
+      },
+      "labelOpenPackage": "Öppna paket",
+      "errorCreate": "Paketet kunde inte skapas. Försök igen.",
+      "errorAdd": "Valet kunde inte läggas till i paketet. Kontrollera dina behörigheter och försök igen."
+    },
+    "XRAGExportJobs": {
+      "labelTitle": "Exporter",
+      "description": "Slutliga filer raderas automatiskt efter 72 timmar.",
+      "state_queued": "Väntar på att packas",
+      "state_retrying": "Schemalagt för återförsök",
+      "state_processing": "Skapa paket",
+      "state_finished": "Redo",
+      "state_error": "Misslyckades",
+      "state_cancelled": "Avbruten",
+      "labelCancel": "Avbryt export",
+      "labelDownload": "Ladda ner",
+      "labelProgress": "Uppladdningsstatus",
+      "state_uploading": "Ladda upp arkiv",
+      "labelDelete": "Ta bort export",
+      "descriptionDelete": "Vill du ta bort ”{{name}}” från dina exporter? Om det finns ett tillhörande arkiv tas även det bort.",
+      "labelDismiss": "Avbryt"
     }
   },
   "_welcomeMessage": "Välkommen till\n\n# schorn.ai in a Box\n\n",

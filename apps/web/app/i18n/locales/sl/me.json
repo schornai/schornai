@@ -38,7 +38,13 @@
   "page": {
     "title": "Profil",
     "infoPersonalize": "Prilagodi",
-    "infoPersonalizeDescription": "Tukaj lahko naložite profilno sliko in prilagodite svoje ime."
+    "infoPersonalizeDescription": "Tukaj lahko naložite profilno sliko in prilagodite svoje ime.",
+    "cardFavoritesLabel": "Priljubljeno",
+    "cardFavoritesDescription": "Sortirajte, odstranite in prikazujte priljubljene v bočnem oknu.",
+    "cardPermissionsLabel": "Dovoljenja",
+    "cardPermissionsDescription": "Pokažite svoje vloge in dostopne pravice.",
+    "cardConnectionsLabel": "Povezave",
+    "cardConnectionsDescription": "Uporabite svoje osebne povezave."
   },
   "resetPasswordSuccess.page": {
     "title": "Novo geslo je nastavljeno",
@@ -48,12 +54,71 @@
   "connections": {
     "page": {
       "labelTitle": "Povezave",
-      "descriptionConnections": "Vaše osebne povezave OAuth s strežniki MCP. Prekinitev povezave odstrani tukaj shranjene poverilnice. Klici, ki že potekajo, se lahko končajo; dovoljenja pri ponudniku prekličite neposredno pri njem.",
       "labelDisconnect": "Prekini povezavo",
-      "descriptionEmpty": "Povežite svoj račun v pogovoru, ko orodje MCP zahteva prijavo.",
       "labelEmpty": "Še ni povezav",
-      "labelInfo": "O povezavah",
-      "errorDisconnect": "Povezave ni bilo mogoče prekiniti. Poskusite znova."
+      "errorDisconnect": "Povezave ni bilo mogoče prekiniti. Poskusite znova.",
+      "labelOutgoing": "Povezave do zunanjih storitev.",
+      "descriptionOutgoing": "schorn.ai uporablja te račune za klic na zunanje MCP storitve vašega računa.",
+      "labelServer": "MCP strežnik.",
+      "labelCancel": "Prekliči",
+      "labelDisconnectNamed": "Odklopite se od {{serverUrl}}.",
+      "descriptionDisconnect": "Želite prekiniti povezavo s strežnikom {{serverUrl}}? Tukaj shranjeni podatki za prijavo bodo odstranjeni. Zahteve, ki se že izvajajo, se lahko še dokončajo. Dovoljenja lahko prekličete neposredno pri ponudniku."
+    },
+    "incoming": {
+      "labelTitle": "Dostop do schorn.ai",
+      "description": "Te aplikacije lahko v vašem imenu dostopajo do schorn.ai prek protokola MCP. Pooblastilo ne razširi vaših dovoljenj.",
+      "labelCreated": "Avtorizirano",
+      "labelExpires": "Veljavo do",
+      "labelExpired": "Iztečeno",
+      "labelRevoke": "Preklič dostop",
+      "labelRevokeNamed": "Preklič dostop za {{name}}",
+      "descriptionRevoke": "Želite preklicati dostop za »{{name}}«? Vsi dostopni in osvežitveni žetoni za to pooblastilo bodo postali neveljavni. Zahteve, ki se že izvajajo, se lahko še dokončajo. Za ponovno povezavo bo potrebno vaše dovoljenje.",
+      "labelCancel": "Prekliči",
+      "errorRevoke": "Dostop ni bilo mogoče preklicati. Poskusite znova.",
+      "labelApplication": "Aplikacija",
+      "labelLevel": "Stopnja dostopa"
+    }
+  },
+  "platformMcp": {
+    "labelTitle": "Potrdite {{client}}",
+    "description": "Ta aplikacija lahko v vašem imenu. Preverite podrobnosti in dovolite samo tiste aplikacije, ki jih zaupate.",
+    "labelLevel": "Stopnja dostopa",
+    "labelResource": "Končna točka MCP",
+    "labelRedirect": "Naslov za preusmeritev",
+    "labelApprove": "Potrdit",
+    "labelDeny": "Zavrni",
+    "errorAuthorization": "Zahteva za avtorizacijo je neveljavna ali nimate dovolj pravic.",
+    "level": {
+      "user": "Uporabnik",
+      "editor": "Urednik",
+      "workspace": "Skrbnik delovnega prostora",
+      "admin": "Globalni administrator"
+    },
+    "labelConnectTitle": "Vaši orodja. Vaša odobitev.",
+    "descriptionConnect": "Povežite AI aplikacijo s schorn.ai in določite, katere dostope želite dovoliti.",
+    "descriptionPermissions": "Vaša obstoječa dovoljenja ostajajo v veljavi. Z odobritvijo aplikacije ne pridobite dodatnih pravic.",
+    "descriptionExpiry": "Odobitev traja do 30 dni. Aplikacije, ki podpirajo obnovljalne tokove, samodejno obnovijo dostop v ozadju.",
+    "labelPlatformAccess": "Dostop do platforme",
+    "descriptionLevel": "Izberite najvišjo raven dostopa, ki jo želite dovoliti tej aplikaciji. Na voljo so samo ravni v okviru vaših trenutnih dovoljenj.",
+    "descriptionNoAccess": "Vaš račun trenutno nima pravic za dostop do platforme."
+  },
+  "favorites": {
+    "labelTitle": "Priljubljeno",
+    "description": "Priljubljene elemente premikajte z ročico za vlečenje. Shranite, da uveljavite vrstni red, odstranitve in nastavitve vidnosti.",
+    "labelMove": "Spremeni vrstni red za {{name}}",
+    "labelRemoveNamed": "Izbriši {{name}} iz priljubljenih",
+    "labelSave": "Shrani",
+    "labelReset": "Ponastavi",
+    "labelEmpty": "Že nimate priljubljenih.",
+    "labelUnavailable": "Ni več na voljo",
+    "labelShowInSidebar": "Prikaži v stranski vrstici",
+    "errorSave": "Ni bilo mogoče shraniti priljubljenih. Poskusite znova.",
+    "types": {
+      "agent": "Agent",
+      "workspace": "Delovni prostor",
+      "transcriber": "Prepisovalnik",
+      "documentRepository": "Shramba dokumentov",
+      "automation": "Avtomatizacija"
     }
   }
 }
