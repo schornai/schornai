@@ -4,8 +4,10 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
+import wave
 
 import mlx_whisper
 
@@ -49,17 +51,41 @@ def transcribe(audio_path, model_identifier, word_timestamps=True,
     return response
 
 
+def process_request(request):
+    def recognize(path):
+        return transcribe(path, request["modelIdentifier"],
+                          initial_prompt=request.get("modelPrompt"),
+                          retry_level=request.get("retryLevel", "thorough"))
+
+    if not request.get("voiceMode"):
+        return recognize(request["audioPath"])
+
+    # Browser recordings may have no duration header. Decode at most one
+    # second beyond the limit and pass the checked audio to Whisper.
+    limit = request["maxVoiceSeconds"]
+    with tempfile.TemporaryDirectory() as directory:
+        checked = os.path.join(directory, "voice.wav")
+        subprocess.run([
+            "ffmpeg", "-nostdin", "-v", "error", "-protocol_whitelist", "file",
+            "-format_whitelist", "matroska,webm,mov,mp3,wav,ogg,flac,aac,aiff,asf,amr,avi,mpeg,mpegts",
+            "-i", request["audioPath"], "-map", "0:a:0", "-vn", "-t", str(limit + 1),
+            "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", checked,
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=90)
+        with wave.open(checked, "rb") as audio:
+            if not 0 < audio.getnframes() <= limit * audio.getframerate():
+                raise ValueError("Invalid voice recording duration")
+        if request["voiceMode"] == "validate":
+            return {"segments": []}
+        return recognize(checked)
+
+
 def serve():
     for line in sys.stdin:
         request_id = None
         try:
             request = json.loads(line)
             request_id = request["id"]
-            result = transcribe(
-                request["audioPath"], request["modelIdentifier"],
-                initial_prompt=request.get("modelPrompt"),
-                retry_level=request.get("retryLevel", "thorough"),
-            )
+            result = process_request(request)
             response = {"id": request_id, "result": result}
         except Exception as error:
             # Never forward exception details that may contain paths or audio text.

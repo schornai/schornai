@@ -17,6 +17,15 @@ const io = vi.hoisted(() => ({
   memberships: vi.fn(),
 }));
 vi.mock(
+  "../packages/realtime/src/documents/chat/queueChat.ts",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/realtime/src/documents/chat/queueChat")
+    >()),
+    queueChat: (await import("./helpers/chat-admission")).queueChatInMemory,
+  }),
+);
+vi.mock(
   "../packages/realtime/src/server/ServerRealtimeProvider.ts",
   async () => {
     const { Doc } = await import("yjs");

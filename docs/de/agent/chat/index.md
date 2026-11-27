@@ -8,7 +8,7 @@ meta:
   role_scope: "Arbeitsplatz des Agenten und zugängliches Gespräch"
   prerequisites: "Ein verfügbares Sprachmodell in der Agentenkonfiguration."
   status: "verfügbar"
-  last_verified: "2026-11-22"
+  last_verified: "2026-11-27"
   source_files:
     [
       "apps/web/app/(main)/agent/[agentId]/[activityId]/page.tsx",
@@ -102,6 +102,8 @@ Gesprächsverlauf, bevor du die Nachricht erneut sendest.
 Ist der Entwurf leer, erscheint rechts in der Eingabe **Aufnehmen** mit einem Mikrofon. Dafür brauchst du Zugriff auf den zugeordneten Transkriptor und ein eingerichtetes Whisper-Modell. Sobald du Text eingibst oder eine Datei anhängst, erscheint an dieser Stelle **Senden**. Entfernst du den Inhalt wieder, kehrt das Mikrofon zurück. Ohne zugeordneten Transkriptor siehst du die normale Texteingabe. Ist ein zugeordneter Transkriptor nicht einsatzbereit, zeigt die Eingabe den Grund an.
 
 Tippe auf **Aufnehmen** und erlaube bei Bedarf den Mikrofonzugriff. Die Aufnahme startet sofort. Die Balken zeigen tiefe bis hohe Frequenzen in der Farbe des Agenten. Mit dem Kreuz verwirfst du die Aufnahme. Der Sendepfeil beendet sie und lädt sie hoch. Nach fünf Minuten stoppt die Aufnahme automatisch. Auch dann entscheidest du, ob du sie sendest oder verwirfst.
+
+Der Server prüft die tatsächliche Aufnahmedauer vor der Transkription. Liegt bereits ein Transkript zur Aufnahme vor, verwendet er dessen korrigierten Text. Lehnt der Server den Versand ab, entfernt **Aufnahme verwerfen** auch die hochgeladene Datei. Ist die Bestätigung wegen eines Verbindungsabbruchs ausgeblieben, kannst du erneut senden. **Recorder schließen** lässt die Datei in diesem Fall im Chat.
 
 Sobald die Aufnahmeansicht nach dem Senden schließt, kannst du den Browser-Tab schließen. Der Server transkribiert die Aufnahme und sendet den erkannten Text an den Agenten. Im Verlauf zeigt die Wellenform die Lautstärke von Anfang bis Ende. Tippe darauf, um das Transkript zu öffnen oder zu schließen. Während der Transkription schimmern die Balken grau und aufgeklappt erscheint **Wird transkribiert …**. Danach trägt die Wellenform die Agentenfarbe. Die beiden runden Tasten starten die Wiedergabe von vorne bzw. spielen sie ab und pausieren sie.
 
@@ -215,4 +217,4 @@ Berechtigung für Agent und Gespräch) automatisch. Es gibt kein separates Kompr
 die Prüfung erfolgt zwingend vor jedem betroffenen Modellaufruf. Die Modellgrenze verwalten
 globale Administrator:innen mit den Modellwerkzeugen (Mindestzugriff **admin**).
 
-`platform_chat_voice_send` (Mindeststufe **Benutzer**) verarbeitet eine bereits hochgeladene Audiodatei des konkreten Chats. Erforderlich sind Zugriff auf den Arbeitsplatz und das Gespräch, ein zugänglicher Transkriptor mit eingerichtetem Whisper-Modell sowie ein freier Chat ohne offene Werkzeugfreigabe. Übergib den Dateipfad, die Dauer in Sekunden (bis 300) und bis zu 48 normalisierte Wellenformwerte. Bei fehlender Zuordnung, unzugänglichem Transkriptor oder fehlendem Modell liefert das Werkzeug den Status `unavailable` mit dem jeweiligen Grund. `platform_chat_read` liefert Aufnahmeverweis und Transkript. Mikrofonaufnahme und Wiedergabe benötigen den Browser und sind keine MCP-Werkzeuge.
+`platform_chat_voice_send` (Mindeststufe **Benutzer**) verarbeitet eine bereits hochgeladene Audiodatei des konkreten Chats. Erforderlich sind Zugriff auf den Arbeitsplatz und das Gespräch, ein zugänglicher Transkriptor mit eingerichtetem Whisper-Modell sowie ein freier Chat ohne offene Werkzeugfreigabe. Übergib den Dateipfad, die Dauer in Sekunden (bis 300) und bis zu 48 normalisierte Wellenformwerte. Auch bei gespeicherten Transkripten überprüft der Worker die Audiodauer und übernimmt vorhandene Textkorrekturen. Bei fehlender Zuordnung, unzugänglichem Transkriptor oder fehlendem Modell liefert das Werkzeug den Status `unavailable` mit dem jeweiligen Grund. `platform_chat_read` liefert Aufnahmeverweis und Transkript. Mikrofonaufnahme und Wiedergabe benötigen den Browser und sind keine MCP-Werkzeuge.

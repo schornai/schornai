@@ -12,6 +12,15 @@ const io = vi.hoisted(() => ({
   ensure: vi.fn(),
 }));
 vi.mock(
+  "../packages/realtime/src/documents/chat/queueChat.ts",
+  async (original) => ({
+    ...(await original<
+      typeof import("../packages/realtime/src/documents/chat/queueChat")
+    >()),
+    queueChat: (await import("./helpers/chat-admission")).queueChatInMemory,
+  }),
+);
+vi.mock(
   "../packages/realtime/src/server/ServerRealtimeProvider.ts",
   async () => {
     const { Doc } = await import("yjs");
@@ -115,22 +124,20 @@ it("does not queue after lease loss during attachment selection", async () => {
   expect(tasks()).toEqual([]);
 });
 
-it("does not publish the chat task if cancellation happens while synchronizing its queued state", async () => {
+it("does not publish the chat task if the lease is lost before admission", async () => {
   const controller = new AbortController();
   const name = getChatDocumentName({
     agentId: input.agentId,
     activityId: input.newActivityId,
   });
-  io.sync.mockImplementation(async (documentName, document) => {
-    if (
-      documentName === name &&
-      document.getMap("state").get("type") === "queued"
-    )
+  let chatSyncs = 0;
+  io.sync.mockImplementation(async (documentName) => {
+    if (documentName === name && ++chatSyncs === 2)
       controller.abort(new Error("LEASE_LOST"));
   });
   await expect(
     sendChatMessage(input, { ...context, abortSignal: controller.signal }),
   ).rejects.toThrow("LEASE_LOST");
   expect(tasks()).toEqual([]);
-  expect(io.docs.get(name)!.getMap("state").get("type")).toBe("idle");
+  expect(io.docs.get(name)!.getMap("state").has("generationId")).toBe(false);
 });

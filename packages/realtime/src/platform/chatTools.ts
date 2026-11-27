@@ -123,7 +123,7 @@ export function addChatTools(
   );
   add(
     "platform_chat_voice_send",
-    "Transcribe an uploaded audio recording from this chat and send the transcript to the agent in the background. Requires an accessible transcriber with a Whisper model and an idle chat. A configuration issue returns status unavailable and its reason. Supply duration in seconds (up to 300) and normalized waveform peaks (or an empty array). Poll platform_chat_read for the transcript and response.",
+    "Transcribe an uploaded audio recording from this chat and send the transcript to the agent in the background. Requires an accessible transcriber with a Whisper model and an idle chat. A configuration issue returns status unavailable and its reason. The worker checks the actual audio duration (up to 300 seconds) and reuses any corrected transcript. Supply duration in seconds and normalized waveform peaks (or an empty array). Poll platform_chat_read for the transcript and response.",
     "user",
     false,
     submitVoiceMessageSchema,

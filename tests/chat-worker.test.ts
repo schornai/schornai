@@ -907,7 +907,7 @@ describe("background voice messages", () => {
     expect(getChatCurrentMessageBatch(current).length).toBe(1);
     expect(mocks.runTranscription).toHaveBeenCalledWith(
       "transcribe",
-      { path: voice.path },
+      { path: voice.path, voiceMessage: true },
       ["transcriber:model"],
       expect.objectContaining({
         chat: { agentId: "agent", activityId: "activity" },

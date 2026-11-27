@@ -33,9 +33,10 @@ release notes under `docs/` describe the state reviewed on their dates.
    queue providers. [`pendingMCPApproval`](../apps/web/lib/mcp/pendingApproval.ts)
    is the OAuth resumption entry point and additionally validates the exact
    pending approval and document access.
-2. Both use [`queueChat`](../packages/realtime/src/documents/chat/queueChat.ts): the caller checks
-   that the chat is idle, then queueing marks a generation as queued and adds its
-   task. Authorization stays in the entry points.
+2. Both authorize the user before calling [`queueChat`](../packages/realtime/src/documents/chat/queueChat.ts).
+   The coordinator runs [`admitChatTask`](../packages/realtime/src/documents/chat/admitChatTask.ts)
+   on its live documents to check for duplicate recordings and busy chats, reserve
+   the generation, and publish its task before processing the next request.
 3. [`TaskQueue`](../packages/realtime/src/documents/taskQueue/TaskQueue.ts)
    requests ownership by type and capabilities from the server's
    [coordinator](../packages/realtime/src/server/createTaskCoordinatorExtension.ts).

@@ -149,6 +149,7 @@ export type TaskTypeTranscribe = {
   type: "transcribe";
 
   parameters: {
+    voiceMessage?: boolean;
     modelIdentifier: string;
     modelPrompt?: string;
     retryLevel?: TranscriptionRetryLevel;

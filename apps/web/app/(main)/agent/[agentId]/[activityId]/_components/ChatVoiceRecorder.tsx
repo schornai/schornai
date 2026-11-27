@@ -4,7 +4,7 @@ import { voiceTranscriberErrorKeys } from "@/lib/voiceTranscriberStatus";
 import { useEffect, useEffectEvent, useRef } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { useT } from "next-i18next/client";
-import { Button } from "@schornio/aibox-package-ui/components/button";
+import { storageRemove } from "../../../../../_actions/storageRemove";
 import { ButtonAction } from "@schornio/aibox-package-ui/components/button-action";
 import { maxVoiceSeconds } from "@schornio/aibox-package-database/chat/voiceMessage";
 import { StorageSession } from "@schornio/aibox-package-database/storage/_utils/StorageSession";
@@ -59,7 +59,10 @@ function Recorder({
     hasErrored,
     result: submission,
   } = useAction(submitVoiceMessage);
-  const uploaded = useRef<{ file: File; path: string }>(null);
+  const uploaded = useRef<{ file: File; path: string; rejected: boolean }>(
+    null,
+  );
+  const discard = useAction(storageRemove, { onSuccess: onClose });
   const recording = useAudioRecording({
     maxSeconds: maxVoiceSeconds,
     onFinished: onClose,
@@ -67,15 +70,20 @@ function Recorder({
       if (uploaded.current?.file !== file) {
         const [upload] = await queueFileUploadsByFiles([file]);
         if (upload?.state !== "success") throw new Error("UPLOAD_FAILED");
-        uploaded.current = { file, path: upload.path };
+        uploaded.current = { file, path: upload.path, rejected: false };
       }
+      uploaded.current.rejected = false;
       const result = await executeAsync({
         agentId,
         activityId,
         thinking,
         voice: { path: uploaded.current.path, duration, peaks },
       });
-      if (!result?.data?.queued) throw new Error("SUBMISSION_FAILED");
+      if (!result?.data?.queued) {
+        uploaded.current.rejected =
+          result?.data?.queued === false || Boolean(result?.validationErrors);
+        throw new Error("SUBMISSION_FAILED");
+      }
     },
   });
   const startRecording = useEffectEvent(recording.start);
@@ -94,6 +102,10 @@ function Recorder({
   const canStart = phase === "idle";
   const submitting = phase === "uploading" || phase === "stopping";
   const actionLabel = t(canStart ? "labelRecord" : "labelSend");
+  const unconfirmed = Boolean(
+    recording.error && uploaded.current && !uploaded.current.rejected,
+  );
+  const discardLabel = t(unconfirmed ? "labelClose" : "labelDiscard");
   return (
     <section
       data-slot="chat-voice-recorder"
@@ -104,18 +116,29 @@ function Recorder({
         <div className="min-w-0 flex-1 px-3">
           <VoiceWaveform agentColor={agentColor} samples={recording.spectrum} />
         </div>
-        <Button
+        <ButtonAction
           type="button"
           variant="destructive"
           size="icon-lg"
           className="size-11 rounded-full"
           disabled={submitting}
-          aria-label={t("labelDiscard")}
-          title={t("labelDiscard")}
-          onClick={onClose}
+          isPending={discard.isPending}
+          hasErrored={discard.hasErrored}
+          indicator="replace"
+          aria-label={discardLabel}
+          title={discardLabel}
+          onClick={() => {
+            const upload = uploaded.current;
+            if (upload?.rejected) {
+              discard.execute({
+                storage: { type: "activity", agentId, activityId },
+                path: upload.path,
+              });
+            } else onClose();
+          }}
         >
           <X />
-        </Button>
+        </ButtonAction>
         <ButtonAction
           type="button"
           size="icon-lg"
@@ -123,7 +146,7 @@ function Recorder({
           indicator="replace"
           aria-label={actionLabel}
           title={actionLabel}
-          disabled={phase === "saved"}
+          disabled={phase === "saved" || discard.isPending}
           isPending={phase === "requesting" || submitting}
           onClick={() =>
             canStart ? void recording.start() : void recording.upload()
@@ -141,13 +164,20 @@ function Recorder({
               ? t("labelRecorded")
               : null}
       </span>
+      {discard.hasErrored && (
+        <p role="alert" className="text-destructive px-4 pb-2 text-xs">
+          {t("errorDiscard")}
+        </p>
+      )}
       {recording.error && (
         <p className="text-destructive px-4 pb-2 text-xs" role="alert">
           {submission.data?.issue
             ? t(voiceTranscriberErrorKeys[submission.data.issue])
-            : hasErrored
-              ? t("errorSend")
-              : recording.error}
+            : unconfirmed
+              ? t("errorUnconfirmed")
+              : hasErrored || submission.data?.queued === false
+                ? t("errorSend")
+                : recording.error}
         </p>
       )}
     </section>

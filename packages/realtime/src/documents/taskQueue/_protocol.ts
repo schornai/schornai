@@ -1,4 +1,6 @@
 import { z } from "zod/mini";
+import { userClaimsSchema } from "@schornio/aibox-database/auth/_schemas";
+import { voiceMessageSchema } from "@schornio/aibox-database/chat/voiceMessage";
 export const taskCoordinatorProtocol = "task-coordinator-v1";
 const id = z.string().check(z.minLength(1), z.maxLength(256));
 const owner = { taskId: id, token: z.uuid() };
@@ -8,6 +10,18 @@ export const taskCoordinatorRequestSchema = z.intersection(
     requestId: z.uuid(),
   }),
   z.union([
+    z.object({
+      action: z.literal("enqueue-chat"),
+      parameters: z.object({
+        agentId: id,
+        activityId: id,
+        userId: id,
+        userClaims: userClaimsSchema,
+        voice: z.optional(voiceMessageSchema),
+        thinking: z.optional(z.boolean()),
+        retry: z.optional(z.boolean()),
+      }),
+    }),
     z.object({
       action: z.literal("claim"),
       type: z.enum([
@@ -44,4 +58,7 @@ export const taskCoordinatorResponseSchema = z.object({
   ok: z.boolean(),
   task: z.optional(z.string()),
   accepted: z.optional(z.boolean()),
+  admission: z.optional(
+    z.enum(["accepted", "CHAT_BUSY", "TOOL_APPROVAL_REQUIRED"]),
+  ),
 });
